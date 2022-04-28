@@ -1,0 +1,74 @@
+//-------------------------------------------------------------------------// 
+// Imports
+//-------------------------------------------------------------------------// 
+@import url("file://{resources}/styles/base/colors.sass")
+
+
+//-------------------------------------------------------------------------// 
+// ToggleButton/Checkbox
+//-------------------------------------------------------------------------// 
+ToggleButton
+	transition-property: background-color, box-shadow, color
+	transition-duration: 0.20s
+	transition-timing-function: ease-in-out
+	width: 32px
+	border-radius: 8px
+	background-color: #666
+	margin-top: 6px // fixme: remove this after qna!! bad practice!! I feel like valve before e3
+	padding-right: 16px
+
+	.TickBox
+		width: 18px
+		height: 18px
+		position: 0px 0px 0px
+		vertical-align: center
+		background-color: #a0a0a0
+		border-radius: 50%
+		z-index: 1
+		box-shadow: #00000055 -2px -2px 2px 4px
+		transition-property: background-color, box-shadow, color, border, position
+		transition-duration: 0.20s
+		transition-timing-function: ease-in-out
+	
+	.Capsule
+		vertical-align: center
+		border-radius: 10%
+		height: 14px
+		width: 32px
+		box-shadow: inset #000000FF 0px 0px 2px 0px
+		background-color: #14202b
+		z-index: 0
+		transition-property: background-color
+		transition-duration: 0.2s
+		transition-timing-function: linear
+	
+	Label
+		position: 42px 0px 0px
+		font-size: 16px
+		color: white
+		font-weight: lighter
+		vertical-align: center
+		transition-property: color
+		transition-duration: 0.2s
+		transition-timing-function: linear
+
+	&:selected
+		background-color: #a38356
+
+		.TickBox
+			position: 16px 0px 0px
+			height: 18px
+			background-color: #FE7A02
+			box-shadow: #000000FF 0px 0px 3px 0px
+			transition-property: position, background-color
+			transition-duration: 0.2s
+			transition-timing-function: linear
+		
+		.Capsule
+			background-color: #3281ac40
+			transition-property: background-color
+			transition-duration: 0.2s
+			transition-timing-function: linear
+	
+	&:disabled
+		wash-color: disabledColor

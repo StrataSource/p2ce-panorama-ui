@@ -1,0 +1,41 @@
+//-------------------------------------------------------------------------// 
+// Carousel styles
+//-------------------------------------------------------------------------// 
+.CarouselContainer
+	vertical-align: top
+	horizontal-align: right
+	margin-top: 18px
+	margin-right: 18px
+	flow-children: right
+
+.CarouselDot
+	background-color: none
+	box-shadow:  none
+
+	Label
+		visibility: collapse
+
+	.RadioBox
+		min-height: 16px
+		min-width: 16px
+		margin: 8px
+		border: 0px
+		border-radius: 50%
+		box-shadow:  black 0px 0px 4px 0px
+		background-color: #ffffff08
+		//transition-duration: 0s
+
+.CarouselDot:selected .RadioBox
+	border: 0px
+	background-color: white
+	transition-duration: 0.16s
+	box-shadow:  black 0px 0px 4px 0px
+
+.CarouselDot:hover .RadioBox
+	box-shadow:  none 0px 0px 4px 0px
+	border: 1px solid white
+
+.CarouselDot:selected:hover .RadioBox
+
+	box-shadow:  black 0px 0px 4px 0px
+	border: 0px solid white

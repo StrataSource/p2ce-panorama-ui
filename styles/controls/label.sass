@@ -1,0 +1,60 @@
+//-------------------------------------------------------------------------// 
+// Imports
+//-------------------------------------------------------------------------// 
+@import url("file://{resources}/styles/base/colors.sass")
+@import url("file://{resources}/styles/base/fonts.sass")
+
+//-------------------------------------------------------------------------// 
+// Label Fonts                                                             
+//-------------------------------------------------------------------------// 
+	
+//Default fonts
+Label
+	font-family: notosans-regular, 'Arial Unicode MS'
+	text-overflow: clip
+
+//Default font, but with monospaced numbers for use in things like the scoreboard
+Label.MonoNumbersFont
+	font-family: Stratum2 Regular Monodigit, 'Arial Unicode MS'
+
+//-------------------------------------------------------------------------// 
+// Default Label Styles
+//-------------------------------------------------------------------------//
+Label
+	color: baseText
+	font-size: 18px
+	font-weight: lighter
+	vertical-align: middle
+	letter-spacing: 1px
+
+//Label colors
+Label.Positive
+	color: #558927
+
+Label.Blue
+	color: #3281ac
+
+Label.Disabled
+	color: #666666
+
+Label.Negative
+	color: #c21b1b
+
+Label.Warning
+	color: #b1af2d
+
+//-------------------------------------------------------------------------// 
+//  HTML styles used by labels
+//-------------------------------------------------------------------------// 
+
+a:hover
+	text-decoration: underline
+
+b, strong
+	font-weight: bold
+
+i, em
+	font-style: italics
+
+pre
+	font-family: monospaceFont

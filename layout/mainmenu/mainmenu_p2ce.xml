@@ -1,0 +1,54 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/mainmenu/mainmenu_p2ce.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/mainmenu/mainmenu_p2ce.js" />
+	</scripts>
+
+	<Panel class="MainMenuNavlistContainer">
+		<Image id="MainMenuLogoDark"
+				class="MainMenuOnly"
+				src=""
+				defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+				scaling="stretch-to-cover-preserve-aspect"/>
+		<Image id="MainMenuLogoLight"
+				class="PauseMenuOnly"
+				src=""
+				defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+				scaling="stretch-to-cover-preserve-aspect"/>
+
+		<Panel class="MainMenuNavlist">
+			<TextButton id="MainMenuNavBarCampaign"
+					class="MainMenuNavlistItem MainMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_p2ce_campaign_hub' );"
+					text="Enter Campaign Hub" />
+
+			<!-- trolled (this is actually really useful for playtesting, it will be removed later) -->
+			<TextButton id="MainMenuNavBarGoToTripleLaser"
+					class="MainMenuNavlistItem MainMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_a2_triple_laser' );"
+					text="Go To Triple Laser" />
+
+			<TextButton id="MainMenuNavBarResume"
+					class="MainMenuNavlistItem PauseMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
+					text="Resume Game" />
+
+			<TextButton id="MainMenuNavBarLoad"
+					class="MainMenuNavlistItemDisabled"
+					group="NavBar"
+					text="Load Game" />
+
+			<TextButton id="MainMenuNavBarDisconnect"
+					class="MainMenuNavlistItem PauseMenuOnly"
+					group="NavBar"
+					onactivate="GameInterfaceAPI.ConsoleCommand( 'disconnect' );"
+					text="Exit to Main Menu" />
+		</Panel>
+	</Panel>
+</root>

@@ -1,0 +1,141 @@
+//-------------------------------------------------------------------------// 
+// Imports
+//-------------------------------------------------------------------------// 
+@import url("file://{resources}/styles/base/colors.sass")
+@import url("file://{resources}/styles/base/fonts.sass")
+
+//-------------------------------------------------------------------------// 
+// SettingsSlider
+//-------------------------------------------------------------------------// 
+ChaosSettingsSlider
+	flow-children: right
+	width: 100%
+	vertical-align: center
+
+ChaosSettingsSlider #Title
+	width: fill-parent-flow(1.0)
+
+ChaosSettingsSlider #Slider
+	width: 25.5%
+	margin-right: 10px
+
+ChaosSettingsSlider #Value
+	width: 36px
+	text-align: right
+	font-size: 15px
+	color: baseText
+	margin-left: 10px
+
+//-------------------------------------------------------------------------// 
+// SettingsKeyBinder
+//-------------------------------------------------------------------------// 
+ChaosSettingsKeyBinder:selected .ActiveBindButton
+	background-color: baseText
+	animation-name: BackgroundPulse
+	animation-duration: 3s
+	animation-timing-function: linear
+	animation-iteration-count: infinite
+
+ChaosSettingsKeyBinder:selected .ActiveBindFX
+	opacity: 1
+	transition-duration: 0.1s
+
+ChaosSettingsKeyBinder #LabelFXContainer
+	background-color: #00000020
+	width: fill-parent-flow( 0.3 )
+	height: 100%
+	horizontal-align: right
+	border-radius: 2px
+
+ChaosSettingsKeyBinder .BindingRow #Value.BindingRowButton
+	color:#ffffff70 
+	font-weight: bold
+
+ChaosSettingsKeyBinder .BindingRow:hover #Value.BindingRowButton
+	color:#ffffff 
+
+ChaosSettingsKeyBinder .BindingRow:hover #LabelFXContainer
+	background-color: #00000050
+
+//controls binding label vertical position
+ChaosSettingsKeyBinder .BindingRow:hover .BindingRowLabel
+	// not used in chaos (empty)
+
+ChaosSettingsKeyBinder .BindingRow:selected #LabelFXContainer
+	// empty
+
+ChaosSettingsKeyBinder .ActiveBindFX
+	width: 100%
+	height: 100%
+	opacity: 0
+	transition-property: opacity
+	transition-duration: 0.36s
+	transition-timing-function: ease-in-out
+
+@keyframes BackgroundPulse
+	0%
+		background-color: #ffffff
+	50%
+		background-color: #ccffcc
+	100%
+		background-color: #ffffff
+
+.ControlGroupRow .BindingRowLabel
+	width: 50%
+
+.ControlGroupRow #LabelFXContainer
+	width: 47%
+	
+//-------------------------------------------------------------------------// 
+// EnumDropDown
+//-------------------------------------------------------------------------// 
+ChaosSettingsEnumDropDown
+	margin: 4px
+	height: fit-children
+	width: fit-children
+	horizontal-align: right
+	vertical-align: middle
+	brightness: 1
+	flow-children: right
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000), color-stop( 1, #00000000 ), to( #00000010 ) )
+	tooltip-position: bottom
+	box-shadow: none
+	border-radius: btnBorderRadius
+
+	transition-property: background-color, width, brightness
+	transition-duration: .3s
+	transition-timing-function: ease-in-out
+	
+ChaosSettingsEnumDropDown.PopupButton
+	horizontal-align: right
+	
+ChaosSettingsEnumDropDown.PopupButton:not(.no-hover):hover
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000), color-stop( 0, #00000070 ), to( #00000070 ) )
+	box-shadow: none
+	transition-property: background-color
+	transition-duration: 0s
+	transition-timing-function: ease-in-out
+	
+ChaosSettingsEnumDropDown.PopupButton:focus
+	box-shadow: none
+	background-color: gradient( linear, 100% 0%, 0% 0%, from( #00000000), color-stop( 0, #00000030 ), to( #00000030 ) )
+	
+ChaosSettingsEnumDropDown.PopupButton Label
+	color: white
+	horizontal-align: left
+	vertical-align: middle
+	text-align: left
+	text-transform: uppercase
+	font-weight: medium
+	font-size: 20px
+	margin: 16px 12px 12px
+	font-family: stratum2Font
+	text-overflow: shrink
+	
+ChaosSettingsEnumDropDown Image,
+ChaosSettingsEnumDropDown.PopupButton Image
+	margin-left: 8px
+	vertical-align: middle
+	
+ChaosSettingsEnumDropDown.PopupButton Label
+	padding: 0px 32px 0px 0px

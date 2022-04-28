@@ -1,0 +1,107 @@
+//-------------------------------------------------------------------------// 
+// Imports
+//-------------------------------------------------------------------------// 
+@import url("file://{resources}/styles/base/colors.sass")
+@import url("file://{resources}/styles/base/fonts.sass")
+
+
+//-------------------------------------------------------------------------// 
+// ContextMenu
+//-------------------------------------------------------------------------// 
+.ContextMenu
+	width: 100%
+	height: 100%
+	opacity: 1.0
+	transform: scaleX( 1)
+	z-index: contextmenu_zindex
+	visibility: visible
+	transition-property: opacity, transform
+	transition-duration: ContextMenuFadoutTime
+	transition-timing-function: ease-in-out
+
+.ContextMenu.Destructing
+	transform: translatex( 0px )
+	opacity: 0.0
+	transition-property: opacity, transform
+	transition-duration: ContextMenuFadoutTime
+	transition-timing-function: ease-in-out
+
+//-------------------------------------------------------------------------// 
+// SimpleContextMenu
+//-------------------------------------------------------------------------// 
+
+SimpleContextMenu .ContextMenuBody
+	padding: 8px 0px
+	flow-children: down
+	width: fit-children
+	background-color: contextMenuBackground
+	opacity: 1
+	box-shadow: shadowOffset
+	border-radius: btnBorderRadius
+
+SimpleContextMenu.Wider .ContextMenuBody
+	//empty
+
+SimpleContextMenu .ContextMenuBody Button,
+.ContextMenuItem Button
+	horizontal-align: left
+	max-width: 340px
+	padding: 16px 32px
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #00000000 ), to( #00000000 ) )
+
+SimpleContextMenu .ContextMenuBody Button.TopSeparator,
+.ContextMenuItem Button.TopSeparator
+	border-top: 1px solid rgb(68, 68, 68)
+
+SimpleContextMenu .ContextMenuBody Button.BottomSeparator,
+.ContextMenuItem Button.BottomSeparator
+	border-bottom: 1px solid rgb(68, 68, 68)
+
+SimpleContextMenu .ContextMenuBody Button.NoAction,
+.ContextMenuItem Button.NoAction
+	brightness: 0.25
+
+SimpleContextMenu .ContextMenuBody Label,
+.ContextMenuItem Label
+	horizontal-align: left
+	vertical-align: center
+	font-weight: medium
+	font-size: 16px
+	min-width: 200px
+	width: fill-parent-flow( 1.0 )
+	max-height: 24px
+	transition-property: brightness
+	transition-duration: 0.2s
+
+SimpleContextMenu .ContextMenuBody Image,
+.ContextMenuItem Image
+	height: 28px
+	width: height-percentage( 100% )
+	vertical-align: center
+	margin: 0px 6px 0px 4px
+	brightness: 0.7
+
+SimpleContextMenu .ContextMenuBody Button:not(.NoAction):enabled:hover,
+.ContextMenuItem Button:not(.NoAction):enabled:hover
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #00000080 ), to( #00000000 ) )
+	sound: "UIPanorama.submenu_rollover"
+
+SimpleContextMenu .ContextMenuBody Button:disabled Label,
+SimpleContextMenu .ContextMenuBody Button:disabled Image,
+.ContextMenuItem Button:disabled Label,
+.ContextMenuItem Button:disabled Image
+	color: #444444
+
+ContextMenuCustomLayout .ContextMenuBody,
+.ContextMenuItem
+	padding: 8px 0px
+	flow-children: down
+	background-color: gradient( linear, 0% 0%, 0% 120%, from( #CFDAE0 ), to( #88959A ))
+	border-radius: 2px
+	opacity: 1
+	box-shadow: #000000BB -4px -4px 8px 8px
+	height: fit-children
+	width: fit-children
+
+.contextmenu-label-with-image
+	margin-left: 16px

@@ -1,0 +1,9 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/hud/hudvote.sass" />
+	</styles>
+
+	<ChaosHudVote hittest="false" class="hud-vote">
+	</ChaosHudVote>
+</root>

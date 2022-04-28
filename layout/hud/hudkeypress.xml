@@ -1,0 +1,49 @@
+<root> 
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/hud/hudkeypress.sass" />
+	</styles>
+	
+	<PortalKeyPress>
+	
+		<ConVarEnabler convar="cl_draw_hud_keypress" togglevisibility="true">
+		
+			<!-- Align Left, F/B and Right keys left to right -->
+			<Panel id="LeftRightContainer">
+				<!-- Container for attack1 -->
+				<Panel class="up-down-container">
+					<Label class="hidden"/>
+					<Label id="Attack1Key" text="ATTACK1"/>
+				</Panel>
+				
+				<Label id="LeftKey" text="LEFT"/>
+				
+				<!-- Align the forward and back keys vertically -->
+				<Panel class="up-down-container">
+					<Label id="ForwardKey" text="FORWARD"/>
+					<Label id="BackKey" text="BACK"/>
+				</Panel>
+				
+				<Label id="RightKey" text="RIGHT">
+
+				</Label>
+				
+				<!-- Container for attack2 -->
+				<Panel class="up-down-container">
+					<Label class="hidden"/>
+					<Label id="Attack2Key" text="ATTACK2"/>
+				</Panel>
+			</Panel>
+			
+			<!-- Align the rest along the bottom, left to right -->
+			<Panel id="BottomContainer">
+				<Label id="JumpKey" text="JUMP"/>
+				<Label id="DuckKey" text="DUCK"/>
+				<Label id="UseKey" text="USE"/>
+				<Label id="SlowTimeKey" text="SLOWTIME"/>
+			</Panel>
+			
+		</ConVarEnabler>
+
+	</PortalKeyPress>
+</root>

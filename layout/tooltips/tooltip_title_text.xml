@@ -1,0 +1,11 @@
+<root>
+	<styles>
+    <include src="file://{resources}/styles/chaosstyles.sass" />
+    <include src="file://{resources}/styles/tooltips/tooltip_title_text.sass" />
+	</styles>
+
+	<TooltipTitleText class="TitleTextContents">
+		<Label id="TitleLabel" html="true" />
+		<Label id="TextLabel" html="true" />
+	</TooltipTitleText>
+</root>

@@ -1,0 +1,42 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/mainmenu/mainmenu_portal2.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/mainmenu/mainmenu_portal2.js" />
+	</scripts>
+
+	<Panel class="MainMenuNavlistContainer">
+		<Image id="MainMenuLogo"
+				class="MainMenuOnly"
+				src=""
+				defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+				scaling="stretch-to-cover-preserve-aspect"/>
+
+		<Panel class="MainMenuNavlist">
+			<TextButton id="MainMenuNavBarSinglePlayer"
+					class="MainMenuNavlistItem MainMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_a1_intro1' );"
+					text="Play Singleplayer" />
+
+			<TextButton id="MainMenuNavBarResume"
+					class="MainMenuNavlistItem PauseMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
+					text="Resume Game" />
+
+			<TextButton id="MainMenuNavBarLoad"
+					class="MainMenuNavlistItemDisabled"
+					group="NavBar"
+					text="Load Game" />
+
+			<TextButton id="MainMenuNavBarDisconnect"
+					class="MainMenuNavlistItem PauseMenuOnly"
+					group="NavBar"
+					onactivate="GameInterfaceAPI.ConsoleCommand( 'disconnect' );"
+					text="Exit to Main Menu" />
+		</Panel>
+	</Panel>
+</root>

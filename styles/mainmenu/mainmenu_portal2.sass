@@ -1,0 +1,55 @@
+Label
+	font-size: 25px
+	font-weight: normal
+
+#MainMenuLogo
+	margin-top: 10%
+	width: 95%
+
+.MainMenuNavlistContainer
+	width: 40%
+	height: 75%
+	margin-left: 10%
+	vertical-align: center
+	horizontal-align: left
+	flow-children: down
+
+.MainMenuNavlist
+	width: 75%
+	vertical-align: center
+	flow-children: down
+
+.MainMenuNavlistItem,
+.MainMenuNavlistItemDisabled
+	width: 100%
+	height: 48px
+	background-color: #ddddddbb
+	border-left: 8px solid #999999dd
+	transition: border-left-color 0.1s ease-in-out
+	margin-top: 12px
+
+	> Label
+		width: 100%
+		color: #222
+		margin-left: 5%
+
+.MainMenuNavlistItem
+	&:hover
+		border-left-color: #ff7d02ff
+		background-color: #aaaa
+
+.MainMenuNavlistItemDisabled
+	background-color: #ccccccbb
+
+
+.MainMenu .PauseMenuOnly
+	visibility: collapse
+
+.MainMenu .MainMenuOnly
+	visibility: visible
+
+.PauseMenu .MainMenuOnly
+	visibility: collapse
+
+.PauseMenu .PauseMenuOnly
+	visibility: visible

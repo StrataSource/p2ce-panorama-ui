@@ -1,0 +1,17 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/hud/hud.sass" />
+		<include src="file://{resources}/styles/hud/consolenotify.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/hud/consolenotify.js"/>
+	</scripts>
+	<Panel class="ConsoleNotifyFrame">
+		<ConVarEnabler convar="developer" togglevisibility="true">
+			<ConVarEnabler convar="con_drawnotify" togglevisibility="true" >
+				<NotifyConsoleMessageTarget id="ConsoleNotifyMessageTarget" />
+			</ConVarEnabler>
+		</ConVarEnabler>
+	</Panel>
+</root>

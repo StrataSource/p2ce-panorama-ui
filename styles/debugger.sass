@@ -1,0 +1,710 @@
+// Debugger styles
+
+// Variables
+
+@define backgroundgray : #383635ff
+@define foregroundgray : #A6A4A1ff
+@define platformfont: "Motiva Sans"
+@define monospacefont: "Courier New"
+
+//
+// Scroll bar styles
+//
+VerticalScrollBar
+	width: 6px
+	margin: 3px, 0px, 12px 3px
+	border-radius: 0px
+	height: 100%
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #c2c2c230 ), to( #d2d2d230 ) )
+	horizontal-align: right
+	vertical-align: center
+
+	// NOTE: The transition duration and timing function must match constants used in code:
+	// k_flScrollTransitionTime, k_flScrollTransitionFunc, so dont change without talking with a dev
+	transition-property: transform
+	transition-duration: 0.2s
+	transition-timing-function: ease-in-out
+
+	.ScrollThumb
+		background-color: #d2d2d2dd
+
+		// NOTE: The transition duration and timing function must match constants used in code:
+		// k_flScrollTransitionTime, k_flScrollTransitionFunc, so dont change without talking with a dev
+		transition-property: position
+		transition-duration: 0.2s
+		transition-timing-function: ease-in-out
+
+HorizontalScrollBar
+	height: 6px
+	margin: 3px
+	width: 100%
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #c2c2c290 ), to( #d2d2d290 ) )
+	border-radius: 4px
+	horizontal-align: left
+	vertical-align: bottom
+
+	// NOTE: The transition duration and timing function must match constants used in code:
+	// k_flScrollTransitionTime, k_flScrollTransitionFunc, so dont change without talking with a dev
+	transition-property: transform
+	transition-duration: 0.2s
+	transition-timing-function: ease-in-out
+
+	.ScrollThumb
+		background-color: #d2d2d2dd
+
+		// NOTE: The transition duration and timing function must match constants used in code:
+		// k_flScrollTransitionTime, k_flScrollTransitionFunc, so dont change without talking with a dev
+		transition-property: position
+		transition-duration: 0.2s
+		transition-timing-function: ease-in-out
+
+//
+// Dark Theme
+//
+
+// Erin: This is set via JS on the main Debugger panel, then we just
+// style each component in this, this is easier as each component
+// has its own general style it needs to follow so we can't just
+// set all panels to be dark.
+// Todo: convert all these stuff to variables so it's easier to edit
+.Debugger-Dark
+
+	.DebugToolbar
+		background-color: gradient( linear, 0% 100%, 0% 0%, from( #444A4C ), to( #252425 ) )
+
+		// ERIN HACK: So these buttons suck and I have to do this otherwise
+		// they are always highlightable. This can be removed soon but
+		// I'm too pissed with the problem to come up with an actual solution
+		#InMemoryButtons
+			Button,
+			ToggleButton
+				&:hover
+					background-color: #26312c !important
+		Button,
+		ToggleButton
+			color: white
+			background-color: #656766
+
+			&:disabled
+				background-color: #26312c
+			
+			&:hover
+				background-color: #4d4e4e
+
+			&:selected,
+			&:active
+				background-color: #2e2e2e
+
+	#DebugPanelParents
+		color: white
+		background-color: #444A4C
+
+		Button
+			&:hover
+				background-color: #2e2e2e
+		
+	DebugPanel
+		.DebugPanelToolbar
+			background-color: gradient( linear, 0% 100%, 0% 0%, from( #1F1E1F ), to( #444A4C ) )
+			color: white
+
+			Button, ToggleButton
+				color: white
+				background-color: #656766
+
+				// Erin: For some reason it doesn't inherit this from the parent
+				// but it inherits everything else...
+				&:hover
+					background-color: #4d4e4e
+
+		#DebugPanelStyle,
+		#DebugPanelComputed
+			background-color: #151415
+
+		#DebugPanelStyle Button
+			color: white
+
+		Button, ToggleButton
+			&:disabled
+				background-color: #26312c
+
+			&:hover
+				background-color: #4d4e4e
+				
+			&:selected,
+			&:active
+				background-color: #2e2e2e
+
+	DebugLayout
+		background-color: #151415
+
+		.DebugLabelPanelRow:Hover #DebugLayoutPanelOpen,
+		.DebugLabelPanelRow:Hover #DebugLayoutPanelClose
+			background-color: #26312c
+
+		.DebugLayoutPanelRowSelected
+			background-color: #26312ca8
+
+		#DebugLayoutPanelOpen,
+		#DebugLayoutPanelClose
+			color: darkgrey
+
+		.DebugLayoutElementPropName
+			color: darkgrey
+
+		.DebugLayoutElementText
+			color: white
+
+		.DebugLayoutElementPropValue
+			color: #FF0000
+
+			&:hover
+				color: darkgrey
+				text-decoration: underline
+
+	DebugStyleBlock
+		color: darkgrey
+
+		// Erin: For some reason color isn't inherited from DebugStyleBlock
+		#Selector
+			color: white
+
+		TextEntry
+			&:hover
+				background-color: #26312c
+
+			&:focus
+				background-color: #3b4440
+
+		.DebugPropertyValue
+			color: white
+
+		.DebugPropertyColon,
+		.DebugPropertySemicolon
+			color: darkgrey
+
+		.DebugPropertyRowNotUsed .DebugPropertyName,
+		.DebugPropertyRowNotUsed .DebugPropertyColon,
+		.DebugPropertyRowNotUsed .DebugPropertyValue,
+		.DebugPropertyRowNotUsed .DebugPropertySemicolon
+			color: darkgrey
+
+	DebugPanelComputed
+		#ComputedPropertiesHeader,
+		#ComputedMeasurementsHeader,
+		#ComputedMiscHeader,
+		#ComputedPaintPerfHeader,
+		.DebugComputedValue
+			color: white
+
+	.StyleLink
+		color: darkgrey
+
+		&:hover
+			text-decoration: underline
+
+	.DebugJSConsole,
+	#JSConsoleText
+		color: white
+		background-color: #151415
+
+		#JSConsoleInput
+			color: white
+			background-color: gradient( linear, 0% 0%, 0% 100%, from( #444A4C ), to( #252425 ), color-stop( 0.8, #444A4C ) )
+
+//
+// Tooltip
+// 
+DebugTextTooltip
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( white ), to( #e4e5f0 ) )
+	border-radius: 2.5px
+	border: 1px solid #767676
+	box-shadow: #80808090 0px 0px 4px 0px
+	padding: 4px
+	max-width: 600px
+	font-family: platformfont
+	font-size: 12px
+	line-height: 18px
+
+	visibility: collapse
+
+	color: #111111ff
+
+	&.TooltipVisible
+		visibility: visible
+
+	Label
+		horizontal-align: left
+		color: black
+		transform: translatex(0px)
+		padding-left: 0px
+		text-overflow: ellipsis
+
+//
+// Debugger
+//
+Debugger
+	perspective-origin: 50% 50%
+	position: 0px 0px 0px
+	width: 100%
+	height: 100%
+	visibility: visible
+	background-color: red
+
+	flow-children: down
+	font-family: Tahoma
+	color: black
+	font-size: 12
+
+	.DebugBody
+
+		flow-children: down
+		height: fill-parent-flow( 1.0 )
+		//background-color: white
+
+	.DebugBodyTop
+		height: fill-parent-flow( 0.8 )
+		flow-children: right
+		width: 100%
+
+	VerticalSplitter
+		width: 5px
+		min-height: 100%
+		background-color: gradient( linear, 0% 0%, 100% 0%, from( #d7d7d7), to( #a0a0a0 ), color-stop( 0.9, #b4b4b4 ) )
+
+	HorizontalSplitter
+		height: 5px
+		min-width: 100%
+		background-color: gradient( linear, 0% 0%, 100% 0%, from( #d7d7d7), to( #a0a0a0 ), color-stop( 0.9, #b4b4b4 ) )
+
+	.DebugJSConsole
+		height: fill-parent-flow( 0.2 )
+		min-height: 10px
+		background-color: white
+		width: 100%
+
+		flow-children: down
+
+	#JSConsoleText
+		height: fill-parent-flow( 1.0 )
+		background-color: white
+		color: #000000ff
+		font-size: 12px
+		font-family: Courier New
+		width: 100%
+
+		overflow: squish scroll
+
+	#JSConsoleText
+		margin: 0px 3px
+
+		Label
+			width: 100%
+			min-height: 100%
+
+	#JSConsoleInput
+		width: 100%
+		height: 28px
+		font-family: Courier New
+		font-size: 16px
+		background-color: gradient( linear, 0% 0%, 0% 100%, from( #aaaaaaff ), to( #dededeff ) )
+		color: #000000ff
+		padding: 3px 5px
+		white-space: nowrap
+
+//
+// Styles for anything on the toolbar
+//
+.DebugToolbar
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #F0ECEC ), to( #D0CFCF ), color-stop( 0.8, #F0ECEC ) )
+	width: 100%
+	padding: 5px
+
+	flow-children: right
+	min-width: 100%
+
+	Button, ToggleButton
+		background-color: #B9D1F4
+		padding: 5px
+		margin-right: 4px
+		&:hover
+			background-color: #9EB9DF
+		&:active
+			background-color: #5081C5
+		&:disabled
+			background-color: #686E78
+
+	ToggleButton
+		&:selected
+			background-color: #71a4ea
+
+	#InMemoryButtons
+		horizontal-align: right
+		flow-children: right
+
+//
+// Styles for layout
+//
+DebugLayout
+	background-color: white
+	width: fill-parent-flow( 0.6 )
+	height: fit-children
+	min-height: 100%
+	padding: 10px
+
+	flow-children: down
+	overflow: squish scroll
+
+	.DebugLabelPanelRow
+		width: 100%
+		flow-children: right
+
+		.StyleLink
+			horizontal-align: right
+			visibility: collapse
+
+		#Indent
+			// shouldn't 100% height work here? forcing down with some margin.. but need to fix
+			margin-top: 1px
+
+	.DebugLayoutPanelOpen
+		color: #000088
+		text-overflow: ellipsis
+		white-space: nowrap
+		width: fill-parent-flow( 1.0 )
+
+	.DebugLabelPanelRow:hover #DebugLayoutPanelOpen,
+	.DebugLabelPanelRow:hover #DebugLayoutPanelClose
+		background-color: #66CCFF
+
+	#DebugLayoutPanelClose
+		color: #000088
+
+	.DebugLayoutPanelRowSelected
+		background-color: #C6E2FF
+
+		.StyleLink
+			visibility: visible
+
+	.DebugLayoutElementText
+		color: #0000FF
+
+	.DebugLayoutElementPropName
+		color: #000088
+
+	.DebugLayoutElementPropValue
+		color: #FF0000
+		&:hover
+			color: #1111DD
+			text-decoration: underline
+
+	#DebugLabelToggle
+		margin-right: 4px
+		margin-top: 2px
+		padding: 0px
+		width: 9px
+		height: 9px
+		background-image: url("file://{images}/collapse.vtf")
+
+		vertical-align: center
+		horizontal-align: right
+
+		visibility: collapse
+
+		&:selected
+			background-image: url("file://{images}/expand.vtf")
+
+
+	.DebugLabelPanelRow.ShowChildren #DebugLabelToggle
+		visibility: visible
+
+//
+// Styles for debug parents panel
+//
+DebugPanelParents
+	width: 100%
+	padding: 5px
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #ECF2F9 ), to( #9DBCDE ) )
+	flow-children: right
+	font-size: 14
+
+	#SelectedPanelName
+		font-weight: bold
+
+	// bugbug cboyd - can turn the following two styles into one with comma sep
+	Label
+		padding: 4px
+
+	Button
+		background-color: transparent
+		padding: 4px
+
+		&:hover
+			background-color: #66CCFF
+		
+		&:active
+			background-color: #5081C5
+
+		Label
+			padding: 0px
+
+//
+// Styles for debug panel
+//
+DebugPanel
+	width: fill-parent-flow( 0.4 )
+	height: 100%
+
+	flow-children: down
+
+	.DebugPanelToolbar
+		background-color: gradient( linear, 0% 0%, 0% 100%, from( #F0ECEC ), to( #D0CFCF ), color-stop( 0.8, #F0ECEC ) )
+		width: 100%
+		padding: 5px 5px 0px 5px
+
+		flow-children: right
+
+		Button
+			background-color: #B9D1F4
+			padding: 5px
+			margin-right: 4px
+
+			&:hover
+				background-color: #9EB9DF
+
+			&:active
+				background-color: #5081C5
+
+	#DebugPanelPages
+		flow-children: down
+		height: 100%
+		width: 100%
+
+
+	#DebugPanelStyleInvalid
+		color: black
+		background-color: red
+		font-weight: bold
+		visibility: collapse
+		vertical-align: center
+		horizontal-align: right
+		padding: 2px 4px 2px 4px
+
+//
+// Styles for computed panel
+//
+DebugPanelComputed
+	background-color: white
+
+	padding: 10px
+	width: 100%
+	height: fit-children
+	min-height: 100%
+
+	flow-children: down
+	overflow: squish scroll
+
+	#ComputedMeasurementsHeader, #ComputedMiscHeader
+		margin-top: 15px
+
+	.DebugComputedRow
+		margin-left: 20px
+		margin-top: 2px
+		margin-bottom: 2px
+		flow-children: right
+
+	.DebugComputedName
+		color: #6b8e23
+		width: 170px
+
+	.DebugComputedValue
+		color: black
+
+//
+// StyleLink
+//
+.StyleLink
+	color: blue
+	vertical-align: top
+	&:hover
+		color: red
+
+//
+// Styles for individual style debug panels
+//
+DebugPanelStyle
+	background-color: white
+
+	padding: 10px 0px 10px 0px
+	width: 100%
+	height: fit-children
+	min-height: 100%
+
+	flow-children: down
+	overflow: squish scroll
+
+	DebugIndividualStyle
+		width: 100%
+		padding: 0px 10px 10px 10px
+
+		.StyleLink
+			horizontal-align: right
+
+//
+// DebugStyleAnimation
+//
+DebugStyleAnimation
+	width: 100%
+	padding: 0px 10px 10px 10px
+
+	.StyleLink
+		horizontal-align: right
+
+	.DebugKeyFrameSection
+		flow-children: down
+
+	.DebugKeyFrameRow
+		flow-children: right
+
+	.DebugFrameRow
+		flow-children: right
+
+	.DebugFrameLeftMargin
+		width: 32px
+		flow-children: right
+
+//
+// DebugStyleBlock
+//
+DebugStyleBlock
+	width: 100%
+	flow-children: down
+
+	TextEntry
+		padding: 1px 1px 1px 1px
+		min-width: 15px
+
+		&:hover
+			background-color: #97c3f0
+		
+		&:focus
+			background-color: #3399ff
+			color: white
+
+	#PropertySection Label
+		padding: 1px 0px 1px 0px
+
+	#Selector
+		color: black
+
+	.DebugPropertySection
+		flow-children: down
+
+	.DebugPropertyRow
+		flow-children: right
+		tooltip-position: bottom
+
+	.DebugPropertyLeftMargin
+		width: 46px
+		flow-children: right
+
+	.DebugPropertyErrorBox
+		background-color: red
+		width: 14px
+		height: 14px
+		horizontal-align: right
+		margin-right: 4px
+		margin-top: 4px
+		border-radius: 50%
+
+	.DebugPropRowButton
+		margin-top: 3px
+		margin-right: 2px
+		width: 12px
+		height: 12px
+
+		visibility: collapse
+
+		&:hover
+			background-color: #C6E2FF
+
+		Label
+			horizontal-align: center
+			vertical-align: top
+			line-height: 10px
+			font-size: 12px
+
+
+	.DebugPropertyRow:hover .DebugPropRowButton, .DebugFrameRow:hover #InsertFrameRowButton, .DebugFrameRow:hover #DeleteFrameRowButton
+		visibility: visible
+
+	.DebugPropertyName
+		color: #6b8e23
+
+	.DebugPropertyValue
+		color: black
+
+	.DebugPropertyColon
+		margin-right: 4px
+		color: blue
+
+	.DebugPropertySemicolon
+		color: blue
+
+	.DebugPropertyRowNotUsed .DebugPropertyName, .DebugPropertyRowNotUsed .DebugPropertyColon, .DebugPropertyRowNotUsed .DebugPropertyValue, .DebugPropertyRowNotUsed .DebugPropertySemicolon
+		color: #C0C0C0
+
+//
+// DebugAutoComplete related
+//
+DebugAutoComplete
+	background-color: white
+	padding: 4px
+	border: 1px solid #333333dd
+	
+	flow-children: down
+	color: black
+
+	Label
+		&:focus
+			background-color: #66CCFF
+
+//
+// DebugInheritedStylesHeader
+//
+DebugInheritedStylesHeader
+	width: 100%
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #ECF2F9 ), to( #9DBCDE ) )
+	padding: 4px
+	margin-bottom: 10px
+
+	flow-children: right
+
+	.StyleLink
+		margin-left: 4px
+
+//
+// DebugStyleSeparator
+// 
+DebugStyleSeparator
+	width: 100%
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #ECF2F9 ), to( #9DBCDE ) )
+	padding: 4px
+	margin-bottom: 10px
+
+//
+// HTTP styles used by labels
+//
+a
+	color: blue
+	&:hover
+		text-decoration: underline
+
+h1, h2, b, strong
+	font-weight: bold
+
+i, em
+	font-style: italics
+
+pre
+	font-family: monospacefont

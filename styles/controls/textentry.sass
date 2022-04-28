@@ -1,0 +1,142 @@
+//-------------------------------------------------------------------------// 
+// Imports
+//-------------------------------------------------------------------------// 
+@import url("file://{resources}/styles/base/colors.sass")
+@import url("file://{resources}/styles/base/fonts.sass")
+
+
+//-------------------------------------------------------------------------// 
+// Fonts
+//-------------------------------------------------------------------------// 
+
+// Default fonts
+TextEntry
+	font-family: notosans-regular, 'Arial Unicode MS'
+	text-overflow: clip
+
+// Default font, but with monospaced numbers for use in things like the scoreboard
+TextEntry.MonoNumbersFont
+	font-family: Stratum2 Regular Monodigit, 'Arial Unicode MS'
+
+
+//-------------------------------------------------------------------------// 
+// TextEntry
+//-------------------------------------------------------------------------// 
+	
+TextEntry
+	height: 36px
+	width:256px
+	vertical-align: center	
+	padding: 6px 16px 6px 6px
+	color: baseText
+	font-size: 18px
+	text-overflow: clip
+	white-space: nowrap
+	border-radius: 2px
+	border: 1px solid rgb(75, 75, 75)
+
+	&:focus
+		box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.493)
+
+	#PlaceholderText
+		transition-property: opacity
+		transition-duration: 0.2s
+		color: rgb(75, 75, 75)
+		font-size: 18px
+		horizontal-align: left
+		opacity: 1
+		transition-property: opacity
+		transition-duration: 0.2s
+
+TextEntry.HasInput #PlaceholderText
+	opacity: 0.0
+
+.TextEntryIMECandidateRow
+	flow-children: right
+	padding: 4px 10px
+
+.TextEntryIMECandidateRowPrefix
+	font-size: 14px
+	font-weight: normal
+	color: baseText
+	vertical-align: middle
+
+.TextEntryIMECandidateRowSuffix
+	font-size: 20px
+	font-weight: normal
+	color: baseText
+	vertical-align: middle
+	padding-left: 6px
+
+.TextEntryIMECandidateRow.Highlight
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #00000000), color-stop( 0, #000010 ), to( #00001005 ) )
+
+.TextEntryIMEReadingString
+	font-size: 16px
+	font-weight: normal
+	color: baseText
+	background-color: contextMenuBackground
+	margin-top: 5px
+	margin-bottom: 5px
+	padding: 5px
+
+.TextEntryIMEReadingString.NoReadingString
+	visibility: collapse
+
+.TextEntryIMECandidateList
+	color: baseText
+	background-color: contextMenuBackground
+	flow-children: down
+	border-radius: 2px
+	box-shadow: shadowOffset
+
+TextEntryIMEControls
+	flow-children: down
+
+TextEntryAutocomplete
+	width: 320px
+	flow-children: down
+	background-color: #3d4448
+	color: #e1e1e1
+	font-size: 28px
+	overflow: squish scroll
+	z-index: 0
+	opacity: 1.0
+	
+	box-shadow: fill #00000066 -3px -3px 6px 6px
+
+	Label
+		width: 100%
+		padding: 6px 0px 2px 0px
+		margin-top: 0px 0px
+		margin-right: 0px
+		margin-left: 0px
+		padding-left: 16px
+
+		color: #ffffff99
+		background-color: #3d4448
+
+		font-size: 18px
+		font-weight: normal
+		z-index: 0
+		border-top: 1px solid #00000066
+		border-bottom: 1px solid #00000066
+
+		transition-property: background-color
+		transition-duration: 0.2s
+		transition-timing-function: ease-in-out
+
+		&:hover
+			background-color: #018eec
+		
+		&:focus
+			background-color: #585e62
+
+.TextEntry-Background
+	background-color: blueColorDark
+
+.TextEntry-icon
+	background-color: blueColorDark
+
+.TextEntry-Cancel-Btn
+	background-color: blueColorDark

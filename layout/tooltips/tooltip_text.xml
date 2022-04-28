@@ -1,0 +1,17 @@
+<root>
+	<styles>
+    <include src="file://{resources}/styles/chaosstyles.sass" />
+    <include src="file://{resources}/styles/tooltips/tooltip_text.sass" />
+	</styles>
+
+  <TooltipText class="TextContents">
+		<!-- REI: this is pretty crappy, but we allowrawtext here because we don't have a good way
+		   - for the caller to tell us if they have pre-localized the text or not.
+		   -
+		   - For example, the play dialog JS hand-builds a string out of localized components
+		   - and then stuffs it in here.  We are relying on the fact that this never ends up
+		   - looking like a localization tag.
+		   -->
+    <Label id="TextLabel" class="tooltip-txt-default" html="true" allowrawtext="true" />
+  </TooltipText>
+</root>

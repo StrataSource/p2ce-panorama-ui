@@ -1,0 +1,91 @@
+.ConsoleOuter
+	width: 1024px
+	height: 768px
+	min-width: 200px // Used for resize dragging!
+	min-height: 200px // ditto
+	background-color: rgba(32, 32, 32, 0.99)
+	flow-children: down
+	border-radius: 4px
+	padding-left: 8px
+	padding-right: 8px
+	padding-bottom: 8px
+
+#ConsoleInner
+	width: 100%
+	height: fill-parent-flow(1.0)
+	flow-children: down
+
+#ConsoleTopSplitter
+	height: 2px
+	min-width: 100%
+	background-color: gradient(linear, 0% 0%, 100% 0%, from(#d7d7d73f), to(#a0a0a03f), color-stop(0.9, #b4b4b43f))
+
+#ConsoleMessageTarget
+	margin-top: 8px
+	margin-bottom: 8px
+	overflow: squish scroll
+	height: fill-parent-flow(1.0)
+	flow-children: up
+	border: 2px solid rgb(50, 50, 50)
+	border-radius: 2px
+	padding: 5px
+
+	> MultiselectLabel
+		text-shadow-fast: none
+		font-family: monospaceFont
+		font-size: 12px
+		margin-right: 16px
+
+.ConsoleMoveDragArea
+	padding-bottom: 8px
+	width: 100%
+	flow-children: right
+	padding-top: 8px
+
+#ConsoleResizeDragKnob
+	margin-top: 8px
+	margin-left: 8px
+	horizontal-align: right
+	vertical-align: bottom
+
+.ConsoleHeader
+	vertical-align: center
+	font-size: 14px
+	color: rgb(255, 123, 2)
+
+ConsoleInput
+	font-size: 16px
+	color: rgb(130, 130, 130)
+	text-overflow: clip
+	white-space: nowrap
+	background-color: rgba(22, 22, 22, 1)
+	border-radius: 1px
+	padding: 4px
+	font-family: monospaceFont
+	margin-top: 5px
+
+#ConsoleFooterQuake > Button
+	vertical-align: center
+	width: 16px
+
+#ConsoleFooterQuake
+	visibility: collapse
+
+.ConsoleQuake.ConsoleOuter
+	width: 100%
+	height: 60%
+	background-color: rgba(32, 32, 32, 0.99)
+	flow-children: down
+	border-radius: 0px
+	padding-left: 8px
+	padding-right: 8px
+	padding-bottom: 8px
+
+.ConsoleQuake
+	#ConsoleTopSplitter,
+	.ConsoleMoveDragArea
+		visibility: collapse
+	#ConsoleFooterQuake
+		visibility: visible
+	.ConsoleHeader
+		horizontal-align: right

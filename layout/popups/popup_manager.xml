@@ -1,0 +1,14 @@
+<root>
+	<styles>
+    <include src="file://{resources}/styles/chaosstyles.sass" />
+    <include src="file://{resources}/styles/popups/popup_manager.sass" />
+  </styles>
+
+  <ChaosPopupManager hittest="false">
+    <Button id="DimBackground" onactivate="PopupBackgroundClicked()" />
+	  <Button id="BlurBackground" onactivate="PopupBackgroundClicked()" />
+    
+    <!-- Popups are added here dynamically -->
+
+  </ChaosPopupManager>
+</root>

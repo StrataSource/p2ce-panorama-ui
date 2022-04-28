@@ -1,0 +1,16 @@
+browser
+fonts
+images
+layout
+node_modules
+scripts/dummy
+styles
+*.cfg
+*.json
+*.txt
+*.md
+.editorconfig
+.eslintignore
+.gitignore
+.prettierignore
+.prettierrc

@@ -1,0 +1,43 @@
+<!--
+	   Purpose: hard-coded layout file for <Console />
+	   Having a ConsoleMessageTarget StaticConsoleMessageTarget and ConsoleInput ConsoleInput is mandatory,
+	   while the resizing panels are NOT
+
+	   For performance's sake, most stuff is done in code and customization is limited, see con_ cvars.
+-->
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/console.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/console.js" />
+	</scripts>
+
+	<Panel class="ConsoleOuter" hittest="true" defaultfocus="ConsoleInput">
+		<Panel id="MoveDragArea" class="ConsoleMoveDragArea vertical-align-center" draggable="true">
+			<Label text="CONSOLE" class="text-h3 ConsoleHeader" />
+			<Button class="button button--red horizontal-align-right" onactivate="Console.toggle()">
+				<Image class="button__icon" src="file://{images}/icons/close.svg" textureheight="12" />
+			</Button>
+		</Panel>
+
+		<Panel id="ConsoleTopSplitter" />
+
+		<Panel id="ConsoleInner" acceptsfocus="true" acceptsinput="true">
+			<StaticConsoleMessageTarget id="ConsoleMessageTarget" class="full-width" />
+			<ConsoleInput id="ConsoleInput" class="textentry full-width" clearaftersubmit="true" />
+		</Panel>
+
+		<ResizeDragKnob target="Console" id="ConsoleResizeDragKnob">
+			<Image src="file://{images}/icons/resize.svg" textureheight="12" />
+		</ResizeDragKnob>
+
+		<Panel id="ConsoleFooterQuake" class="ConsoleMoveDragArea vertical-align-center">
+			<Button class="button button--red" onactivate="Console.toggle();">
+				<Image class="button__icon" src="file://{images}/icons/close.svg" textureheight="12" />
+			</Button>
+			<Label text="CONSOLE" class="text-h3 ConsoleHeader" />
+		</Panel>
+	</Panel>
+</root>

@@ -1,0 +1,52 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/loadingscreen.sass" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/loadingscreen.js" />
+	</scripts>
+
+	<Panel class="loading-root">
+		<Image id="BackgroundMapImage1"
+				class="loading-screen-background loading-screen-background-image1"
+				src=""
+				scaling="stretch"/>
+		<Image id="BackgroundMapImage2"
+				class="loading-screen-background loading-screen-background-image4"
+				src=""
+				scaling="stretch"/>
+
+		<!-- todo: set the logo dynamically -->
+		<Image id="Logo"
+				class="loadingscreen-logo"
+				src=""
+				defaultsrc="file://{images}/menu/p2ce/logo.png"
+				scaling="stretch-to-cover-preserve-aspect"/>
+
+		<Panel class="loading-screen-fade--dark"/>
+		<Panel id="LoadingScreenContents" class="loading-screen-contents">
+			<!-- jjl77: Don't think we really need this, but keeping it here for reference
+			<Panel class="loading-screen-progress-container">
+				<Label id="ProgressStatusText"
+					   class="loading-screen-progress-text"
+					   text="#SFUI_LOADING"/>
+
+				<Panel id="LoadingSecondaryProgressContainer" class="loading-screen-progress-secondary-container">
+					<Label id="ProgressSecondaryStatusText"
+						   class="loading-screen-progress-secondary-text"
+						   text="#SFUI_LOADING"/>
+
+					<ProgressBar id="ProgressBarSecondary"/>
+				</Panel>
+			</Panel-->
+		</Panel>
+
+		<Panel id="" class="full-width full-height">
+		</Panel>
+
+		<ProgressBar id="ProgressBar"/>
+
+	</Panel>
+</root>

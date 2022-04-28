@@ -1,0 +1,165 @@
+//-------------------------------------------------------------------------// 
+// Colors
+//-------------------------------------------------------------------------// 
+@define steamOnlineColor: #80a438
+@define blueColor: #3281AC
+@define blueColorDark: #0D354A
+@define disabledColor: rgba(90, 90, 90, 1)
+@define negativeColor: #c21b1b
+@define warningColor: #b1af2d
+@define positiveColor: #4caf50
+@define contentPanelBackground: rgba(20, 20, 20, 0.4)
+@define blurBackgroundColor: rgba(40, 40, 40, 0.3)
+@define tileBlurBackgroundColor: rgba(0, 0, 0, 0.5)
+@define itemBackgroundGradient: gradient( linear, 0% 0%, 0% 100%, from( #1e2a38dd ), to( #19232fdd ) )
+@define contextMenuBackground : rgba(44, 44, 44, 0.98)
+
+@define btnBorderRadius: 2px
+@define backgroundGradient: gradient( linear, 75% 100%, 0% 0%, from( #14202b ), to( #1e2d3d ) )
+@define textBlueGradient: gradient( linear, 0% 100%, 0% 0%, from( blueColor  ), to( blueColorDark ) )
+
+// Text colors
+@define baseText: #ccccccff
+@define baseBorder: #444444ff
+@define selectedTextBackgroundColor: #0D354Abb
+
+@define Chaoslevelgradient: gradient( linear, 0% 0%, 0% 100%, from( #BBCAEA ), color-stop( 0.5, #ffffff), color-stop( 0.5, #D9DFEC), to( #BBCAEA ) )
+@define Chaosplaytimegradient: gradient( linear, 0% 0%, 0% 100%, from( #3db451 ), color-stop( 0.5, #beffc7), color-stop( 0.5, #91d69a), to( #3db451 ) )
+
+//ContextMenu - used in code -- dont rename
+@define ContextMenuFadoutTime: 0.2s 
+
+//Z layers
+@define contextmenu_zindex: 10000100
+@define submenu_zindex: 10000100
+
+@define mousepanningcursorsize: 99px
+
+@define shadowOffset: fill #000000aa 0px 0px 8px 4px
+
+//anim times
+@define subMenuFadoutTime: 0.25s 
+
+// Player colors
+@define color-player-yellow: rgb(248, 246, 45)
+@define color-player-purple: rgb(161, 25, 240 )
+@define color-player-green: rgb(0, 181, 98)
+@define color-player-blue: rgb( 92, 168, 255)
+@define color-player-orange: rgb(255, 155, 37)
+
+//curves
+@define curve__ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1)
+@define curve__ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275)
+
+//-------------------------------------------------------------------------// 
+// Washed color classes
+//-------------------------------------------------------------------------// 
+.positiveColor
+	wash-color: positiveColor
+
+.negativeColor
+	wash-color: negativeColor
+
+.blueColor
+	wash-color: blueColor
+
+.warningColor
+	wash-color: warningColor	
+
+.clearWashColor
+	wash-color: none	
+
+//-------------------------------------------------------------------------// 
+// HUD Colors (Do not rename color-hud-X, they are referenced in code)
+//-------------------------------------------------------------------------// 
+
+@define color-hud-0: #e8e8e8 //white, default.  old default moved to color-hud-11.
+@define color-hud-1: #ffffff //bright white
+@define color-hud-2: #96c8ff //light blue
+@define color-hud-3: #356eff //blue
+@define color-hud-4: #c864ff //purple
+@define color-hud-5: #ff2924 //red
+@define color-hud-6: #ff7124 //orange
+@define color-hud-7: #fff724 //yellow
+@define color-hud-8: #3eff24 //green
+@define color-hud-9: #24ff90 //aqua
+@define color-hud-10: #ff7999 //pink
+@define color-hud-11: #d5e286 //army green, old scaleform default
+	
+.Chaos-hud--cl-hud-color-0  .cl-hud-color
+	color: color-hud-0
+.Chaos-hud--cl-hud-color-1  .cl-hud-color
+	color: color-hud-1
+.Chaos-hud--cl-hud-color-2  .cl-hud-color
+	color: color-hud-2
+.Chaos-hud--cl-hud-color-3  .cl-hud-color
+	color: color-hud-3
+.Chaos-hud--cl-hud-color-4  .cl-hud-color
+	color: color-hud-4
+.Chaos-hud--cl-hud-color-5  .cl-hud-color
+	color: color-hud-5
+.Chaos-hud--cl-hud-color-6  .cl-hud-color
+	color: color-hud-6
+.Chaos-hud--cl-hud-color-7  .cl-hud-color
+	color: color-hud-7
+.Chaos-hud--cl-hud-color-8  .cl-hud-color
+	color: color-hud-8
+.Chaos-hud--cl-hud-color-9  .cl-hud-color
+	color: color-hud-9
+.Chaos-hud--cl-hud-color-10 .cl-hud-color
+	color: color-hud-10
+.Chaos-hud--cl-hud-color-11 .cl-hud-color
+	color: color-hud-11
+
+.Chaos-hud--cl-hud-color-0  .cl-hud-background-color
+	background-color: color-hud-0
+.Chaos-hud--cl-hud-color-1  .cl-hud-background-color
+	background-color: color-hud-1
+.Chaos-hud--cl-hud-color-2  .cl-hud-background-color
+	background-color: color-hud-2
+.Chaos-hud--cl-hud-color-3  .cl-hud-background-color
+	background-color: color-hud-3
+.Chaos-hud--cl-hud-color-4  .cl-hud-background-color
+	background-color: color-hud-4
+.Chaos-hud--cl-hud-color-5  .cl-hud-background-color
+	background-color: color-hud-5
+.Chaos-hud--cl-hud-color-6  .cl-hud-background-color
+	background-color: color-hud-6
+.Chaos-hud--cl-hud-color-7  .cl-hud-background-color
+	background-color: color-hud-7
+.Chaos-hud--cl-hud-color-8  .cl-hud-background-color
+	background-color: color-hud-8
+.Chaos-hud--cl-hud-color-9  .cl-hud-background-color
+	background-color: color-hud-9
+.Chaos-hud--cl-hud-color-10 .cl-hud-background-color
+	background-color: color-hud-10
+.Chaos-hud--cl-hud-color-11 .cl-hud-background-color
+	background-color: color-hud-11
+
+.Chaos-hud--cl-hud-color-0  .cl-hud-wash-color
+	wash-color-fast: color-hud-0
+.Chaos-hud--cl-hud-color-1  .cl-hud-wash-color
+	wash-color-fast: color-hud-1
+.Chaos-hud--cl-hud-color-2  .cl-hud-wash-color
+	wash-color-fast: color-hud-2
+.Chaos-hud--cl-hud-color-3  .cl-hud-wash-color
+	wash-color-fast: color-hud-3
+.Chaos-hud--cl-hud-color-4  .cl-hud-wash-color
+	wash-color-fast: color-hud-4
+.Chaos-hud--cl-hud-color-5  .cl-hud-wash-color
+	wash-color-fast: color-hud-5
+.Chaos-hud--cl-hud-color-6  .cl-hud-wash-color
+	wash-color-fast: color-hud-6
+.Chaos-hud--cl-hud-color-7  .cl-hud-wash-color
+	wash-color-fast: color-hud-7
+.Chaos-hud--cl-hud-color-8  .cl-hud-wash-color
+	wash-color-fast: color-hud-8
+.Chaos-hud--cl-hud-color-9  .cl-hud-wash-color
+	wash-color-fast: color-hud-9
+.Chaos-hud--cl-hud-color-10 .cl-hud-wash-color
+	wash-color-fast: color-hud-10
+.Chaos-hud--cl-hud-color-11 .cl-hud-wash-color
+	wash-color-fast: color-hud-11
+
+.Chaos-hud--cl_hud_background_alpha
+	opacity: 0.5

@@ -1,0 +1,14 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/settings/settings_slider.sass" />
+	</styles>
+
+	<ChaosSettingsSlider>
+		<Panel class="left-right-flow vertical-align-center">
+			<Label class="" id="Title" />
+			<Slider class="HorizontalSlider" direction="horizontal" id="Slider"/>
+			<TextEntry maxchars="4" textmode="numeric" id="Value" />
+		</Panel>
+	</ChaosSettingsSlider>
+</root>

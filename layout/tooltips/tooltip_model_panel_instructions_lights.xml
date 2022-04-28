@@ -1,0 +1,38 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/tooltips/tooltip_custom_test.sass" />
+	</styles>
+
+	<!--script>
+
+		function setupTooltip()
+		{
+			var strTest = $.GetContextPanel().GetAttributeString( "test", "not-found" );
+			$( '#DynamicLabel' ).text = "Parameter 'test' had value '" + strTest + "'";
+		}
+
+	</script-->
+	
+	<!--Panel class="TestContents" ontooltiploaded="setupTooltip()"-->
+	<!-- Panel id="DebugModeTooltipsCamera" class="TestContents" -->
+
+	<Panel class="TestContents">
+		<Label text="Scene Panel - Debug Lights Mode" />
+		<Label text="" />
+		<Label text="left-click + drag - orbit cam rotate" />
+		<Label text="right-click + drag - orbit cam in/out" />
+		<Label text="" />
+		<Label text="ctrl + left-click + drag - rotate light" />
+		<Label text="ctrl + middle-click + drag - relocate flashlight pivot" />
+		<Label text="ctrl + right-click + drag - flashlight in/out" />
+		<Label text="" />
+		<Label text="a - toggle selected vs all lights" />
+		<Label text="s - stop/play light animation" />
+		<Label text="x - toggle floor, axis rendering" />
+		<Label text="" />
+		<Label text="ctrl + c - copy lights to clipboard" />
+		<Label text="('all lights' mode copies for manifest, 'selected' mode copies for JS)" />
+	</Panel>
+
+</root>

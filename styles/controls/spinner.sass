@@ -1,0 +1,30 @@
+//-------------------------------------------------------------------------// 
+// Spinner
+//-------------------------------------------------------------------------// 
+.Spinner
+	width: 32px
+	height: 32px
+	background-image: url("file://images/icons/ui/loading.svg")
+	background-repeat: no-repeat
+	background-position: 50% 50%
+	background-size: contain
+	animation-name: SpinnerRotate
+	animation-duration: 1.25s
+	animation-timing-function: linear
+	animation-iteration-count: infinite
+
+@keyframes SpinnerRotate
+	0%
+		transform: scaleX( 1 )
+		//transform: rotateZ( 360deg )
+		clip: radial(50% 50%, 0deg, 0deg)
+	49%
+		transform: scaleX( 1 )
+		clip: radial(50% 50%, 0deg, 360deg)
+	50%
+		transform: scaleX( -1 )
+		//transform: rotateZ( 180deg )
+		clip: radial(50% 50%, 0deg, 360deg)
+	100%
+		transform: scaleX( -1 )
+		clip: radial(50% 50%, 0deg, 0deg)

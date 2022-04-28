@@ -1,0 +1,99 @@
+//-------------------------------------------------------------------------// 
+// Imports
+//-------------------------------------------------------------------------// 
+@import url("file://{resources}/styles/base/colors.sass")
+
+//-------------------------------------------------------------------------// 
+// Slider
+//-------------------------------------------------------------------------// 
+
+Slider
+	//needs to be at least as wide as the thumb and, as the thumb center stops at end
+	//of track, needs to allow for 1/2 the height of the thumb on each end
+	width: 50%
+	height: 10px
+	border-radius: 32px
+
+#SliderTrack
+	height: 120px
+	width: 16px
+	align: center center
+	background-color: #cccccc20
+	border: 0px
+	z-index: 2
+
+DualSlider.HorizontalSlider .SliderNotch
+	margin-top: 4px
+	border-bottom: 2px solid #5e686966
+	border-left:2px solid #5e686966
+	border-right:2px solid #5e686966
+	background-color: #141c27
+	width: 12px
+	height: 12px
+	vertical-align: bottom
+	z-index: 3
+
+#SliderTrackProgress
+	width: 10px
+	height: 99%
+	background-color: #17212b
+	align: center center
+	z-index: 3
+
+#SliderThumb
+	background-color: gradient( radial, 50% 50%, -5% -5%, 60% 60%, from( #91a5b9 ), to( #444f52 ) )
+	border-radius: 13%
+	width: 30px
+	height: 16px
+	z-index: 4
+
+	&:hover
+		background-color: gradient( radial, 50% 50%, -5% -5%, 60% 60%, from( #b8c5d3 ), to( #444f52 ) )
+
+Slider.HorizontalSlider, 
+DualSlider.HorizontalSlider
+	width: 420px
+	height: 36px
+
+Slider.HorizontalSlider #SliderTrack, 
+DualSlider.HorizontalSlider #SliderTrack
+	width: 100%
+	height: 8px
+	padding: 10px
+
+Slider.HorizontalSlider #SliderTrackProgress, 
+DualSlider.HorizontalSlider #SliderTrackProgress
+	width: 100%
+	height: 8px
+	background-color: #cccccc80
+	border: 0px
+
+Slider.HorizontalSlider.OutOfBounds #SliderTrackProgress, 
+Slider.HorizontalSlider.OutOfBounds #SliderTrack 
+	width: 100%
+	height: 8px
+	background-color: #20202080
+	border: 0px
+
+Slider.HorizontalSlider #SliderTrackProgress:disabled, 
+DualSlider.HorizontalSlider #SliderTrackProgress:disabled
+	width: 100%
+	height: 10px
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #010101FF ), to( #333333FF ) )
+	box-shadow: inset black 0px 1px 4px 0px //flickering when sliding...bug?
+	margin-left: 1px
+
+Slider.HorizontalSlider #SliderThumb, 
+DualSlider.HorizontalSlider #SliderThumb
+	background-color: baseText
+	border-radius: 2px
+	width: 16px
+	height: 10px
+	align: center center
+
+Slider.HorizontalSlider #SliderThumb:hover, 
+DualSlider.HorizontalSlider #SliderThumb:hover
+	background-color: #fff
+
+Slider.HorizontalSlider #SliderThumb:disabled, DualSlider.HorizontalSlider #SliderThumb:disabled
+	background-color: #333333

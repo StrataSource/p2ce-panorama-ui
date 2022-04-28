@@ -1,0 +1,73 @@
+//-------------------------------------------------------------------------// 
+// Imports
+//-------------------------------------------------------------------------// 
+@import url("file://{resources}/styles/base/colors.sass")
+@import url("file://{resources}/styles/base/fonts.sass")
+
+
+//-------------------------------------------------------------------------// 
+// RadioButton
+//-------------------------------------------------------------------------// 
+RadioButton
+	background-color: none
+	flow-children: right
+	color: white
+	transition-property: background-color, box-shadow, color, brightness
+	transition-duration: 0.25s
+	transition-timing-function: ease-in-out
+
+.RadioBox
+	min-width: 20px
+	min-height: 20px
+	border-radius: 50%
+	background-color: gradient( radial, 50% 50%, 0% 0%, 10% 10%, from( #000000 ), to( #000000 ) )
+	border: 2px solid #5e686966
+	box-shadow: #00000055 -2px -2px 1px 4px
+	transition-property: background-color, box-shadow, color, border
+	transition-duration: 0.20s
+	transition-timing-function: ease-in-out
+
+
+RadioButton:selected .RadioBox
+	background-color: gradient( radial, 50% 50%, 0% 0%, 50% 50%, from( #e7f6f5 ), to( #333399 ) )
+	border: 3px solid #000000
+	box-shadow: #5b62bf77 -3px -3px 6px 6px
+	transition-property: background-color
+	transition-duration: 0.5s
+	transition-timing-function: ease-in-out
+
+
+RadioButton:hover .RadioBox
+	border: 2px solid white
+
+RadioButton:selected:hover .RadioBox
+	border: 3px solid black
+
+RadioButton Label,
+RadioButton:disabled Label
+	color: white
+	margin-left: 8px
+	font-size: 16px
+	transition-property: color
+	transition-duration: 0.2s
+	transition-timing-function: linear
+
+RadioButton:selected Label
+	color: white
+	transition-property: color
+	transition-duration: 0.2s
+	transition-timing-function: linear
+
+RadioButton:enabled:hover Label
+	color: white
+	transition-property: color
+	transition-duration: 0.2s
+	transition-timing-function: linear
+
+RadioButton:disabled .RadioBox
+	color: transparent
+	box-shadow: #33333377 -4px -4px 8px 8px
+	background-color: #00000000
+
+RadioButton:disabled:selected .RadioBox
+	background-color: gradient( radial, 50% 50%, 0% 0%, 50% 50%, from( #e7f6f533 ), to( #33339933 ) )

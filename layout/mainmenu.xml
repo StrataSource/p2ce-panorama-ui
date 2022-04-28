@@ -1,0 +1,232 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/controls/togglebutton.sass" />
+		<include src="file://{resources}/styles/mainmenu.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/mainmenu.js" />
+	</scripts>
+
+	<snippets>
+		<snippet name="MainMenuMovieSnippet">
+			<Panel>
+				<!-- Source is set in script. -->
+				<Movie
+					class="MainMenuModeOnly" 
+					id="MainMenuMovie"
+					src=""
+					sound=""
+					controls="none"
+					repeat="true"
+					hittest="false" />
+			</Panel>
+		</snippet>
+		<snippet name="MainMenuTopBarCampaignEntry">
+			<Button class="MainMenuTopBarCampaignContentListEntry"
+					group="MainMenuTopBarCampaignContent"
+					onactivate="">
+				<Image	src=""
+						defaultsrc=""
+						scaling="stretch-to-cover-preserve-aspect" />
+				<Label text="" />
+			</Button>
+		</snippet>
+	</snippets>
+
+	<ChaosMainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" useglobalcontext="true" oncancel="MainMenuController.onEscapeKeyPressed();">
+		<ChaosBackbufferImagePanel id="BackbufferImagePanel" />
+
+		<Panel id="MainMenuContainerPanel">
+
+			<!-- The actual panel with input & focus -->
+			<Panel id="MainMenuInput">
+				
+				<!-- Fills the entire screen. This is used as the backdrop -->
+				<Panel id="MainMenuCore" blurrects="ChaosLoadingScreen">
+					<Panel id="MainMenuBackground">
+
+						<!-- Background video -->
+						<Panel id="MainMenuMovieParent">
+							<!-- Movie added/removed dynamically when changing the visibility of the main menu -->
+						</Panel>
+						<Panel id="MainMenuVanityParent">
+							<!-- Vanity is not used but the engine needs this to exist -->
+						</Panel>
+					</Panel>
+
+					<Panel id="MainMenuCampaignFrameParent">
+						<!-- Fills entire screen, frame is added in code -->
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+
+		<!-- The top bar with controls -->
+		<Panel id="MainMenuTopBar" hittest="true">
+			<!-- todo: if we keep the material icons, attribute their source at https://github.com/google/material-design-icons, its the nice thing to do -->
+			<Button id="MainMenuTopBarCampaign"
+					class="MainMenuTopBarButton"
+					group="MainMenuTopBar"
+					onactivate="MainMenuController.onCampaignMenuButtonPressed();">
+				<Image  id="MainMenuTopBarCampaignIcon"
+						src=""
+						defaultsrc=""
+						scaling="stretch-to-fit-y-preserve-aspect" />
+			</Button>
+			<Button id="MainMenuTopBarAddons"
+					group="MainMenuTopBar"
+					onactivate="MainMenuController.onWorkshopMenuButtonPressed();">
+				<Image  id="MainMenuTopBarAddonsIcon"
+						src=""
+						defaultsrc="file://{images}/menu/addons.svg"
+						textureheight="64"
+						scaling="stretch-to-fit-y-preserve-aspect" />
+			</Button>
+			<Button id="MainMenuTopBarSettings"
+					group="MainMenuTopBar"
+					onactivate="MainMenuController.onSettingsMenuButtonPressed();">
+				<Image  id="MainMenuTopBarSettingsIcon"
+						src=""
+						defaultsrc="file://{images}/icons/settings.svg"
+						textureheight="64"
+						scaling="stretch-to-fit-y-preserve-aspect" />
+			</Button>
+			<Button id="MainMenuTopBarExit"
+					class="MainMenuTopBarLast"
+					group="MainMenuTopBar"
+					onactivate="MainMenuController.onQuitMenuButtonPressed();">
+				<Image  id="MainMenuTopBarQuitIcon"
+						src=""
+						defaultsrc="file://{images}/menu/quit.svg"
+						textureheight="64"
+						scaling="stretch-to-fit-y-preserve-aspect" />
+			</Button>
+		</Panel>
+		<Panel id="MainMenuTopBarCampaignContent" class="MainMenuTopBarContent" hittest="true">
+			<!-- todo: campaign picker panel -->
+			<Panel id="MainMenuTopBarCampaignContentList">
+				<!-- todo: fill campaign list dynamically -->
+				<Button class="MainMenuTopBarCampaignContentListEntry"
+						group="MainMenuTopBarCampaignContent"
+						onactivate="MainMenuController.displayStartupCampaign( 'p2ce' );">
+					<Image	src=""
+							defaultsrc="file://{images}/menu/p2ce/logo.png"
+							scaling="stretch-to-cover-preserve-aspect" />
+					<Label text="Portal 2: Community Edition" />
+				</Button>
+				<Button class="MainMenuTopBarCampaignContentListEntry"
+						group="MainMenuTopBarCampaignContent"
+						onactivate="MainMenuController.displayStartupCampaign( 'portal2' );">
+					<Image	src=""
+							defaultsrc="file://{images}/menu/portal2/logo.png"
+							scaling="stretch-to-cover-preserve-aspect" />
+					<Label text="Portal 2" />
+				</Button>
+			</Panel>
+			<Label text="Subscribe to campaigns on the Workshop, and you'll see them here!" />
+		</Panel>
+		<Panel id="MainMenuTopBarWorkshopContent" class="MainMenuTopBarContent" hittest="true">
+			<!-- todo: addons panel -->
+			<Label style="align: center center;" text="Steam workshop functionality is not currently implemented." />
+		</Panel>
+		<Panel id="MainMenuTopBarSettingsContent" class="MainMenuTopBarContent" hittest="true">
+			<!-- todo: complete settings panel -->
+			<Panel id="MainMenuTopBarSettingsCategoryList">
+				<TextButton class="MainMenuTopBarSettingsCategoryListEntry"
+						group="MainMenuTopBarSettingsCategory"
+						onactivate=""
+						text="Audio" />
+				<TextButton class="MainMenuTopBarSettingsCategoryListEntry"
+						group="MainMenuTopBarSettingsCategory"
+						onactivate=""
+						text="Graphics" />
+				<TextButton class="MainMenuTopBarSettingsCategoryListEntry"
+						group="MainMenuTopBarSettingsCategory"
+						onactivate=""
+						text="Gameplay" />
+				<TextButton class="MainMenuTopBarSettingsCategoryListEntry"
+						group="MainMenuTopBarSettingsCategory"
+						onactivate=""
+						text="Keybinds" />
+				<TextButton class="MainMenuTopBarSettingsCategoryListEntry"
+						group="MainMenuTopBarSettingsCategory"
+						onactivate=""
+						text="Interface" />
+			</Panel>
+			<Panel id="MainMenuTopBarSettingsPropertyList">
+				<Label class="MainMenuTopBarSettingsPropertyListCategoryLabel" text="Audio" style="margin-top: 0px; border-top-left-radius: 4px;" />
+				<Panel class="MainMenuTopBarSettingsPropertyListCategory">
+					<Panel class="MainMenuTopBarSettingsPropertyListLabeledProperty">
+						<Label text="Master Volume:" />
+						<ChaosSettingsSlider id="MainMenuTopBarSettingsProperty_MasterVolume" class="ChaosSettingsSlider__hidevalue MainMenuSettingsSlider" text="" max="1.0" min="0.0" invert="false" percentage="true" value100percent="1.0" convar="volume" constrainrange="true" />
+					</Panel>
+					<Panel class="MainMenuTopBarSettingsPropertyListLabeledProperty">
+						<Label text="Music Volume:" />
+						<ChaosSettingsSlider id="MainMenuTopBarSettingsProperty_MusicVolume" class="ChaosSettingsSlider__hidevalue MainMenuSettingsSlider" text="" max="1.0" min="0.0" invert="false" percentage="true" value100percent="1.0" convar="snd_volume_music" constrainrange="true" />
+					</Panel>
+					<Panel class="MainMenuTopBarSettingsPropertyListLabeledProperty">
+						<Label text="Threaded Audio:" />
+						<ToggleButton id="MainMenuTopBarSettingsProperty_ThreadedAudio" onactivate="MainMenuController.toggleCVar('snd_hrtf_async');" />
+					</Panel>
+				</Panel>
+				<Label class="MainMenuTopBarSettingsPropertyListCategoryLabel" text="Graphics" />
+				<Panel class="MainMenuTopBarSettingsPropertyListCategory">
+					<Panel class="MainMenuTopBarSettingsPropertyListLabeledProperty">
+						<Label text="Vertical Sync:" />
+						<ToggleButton id="MainMenuTopBarSettingsProperty_VerticalSync" onactivate="MainMenuController.toggleCVar('mat_vsync');" />
+					</Panel>
+				</Panel>
+				<Label class="MainMenuTopBarSettingsPropertyListCategoryLabel" text="Customization" />
+				<Panel class="MainMenuTopBarSettingsPropertyListCategory">
+					<Panel class="MainMenuTopBarSettingsPropertyListLabeledProperty">
+						<Label text="Portal 1 Crosshair:" />
+						<ToggleButton id="MainMenuTopBarSettingsProperty_PortalOneCrosshair" onactivate="MainMenuController.toggleCVar('portalgun_crosshair_mode');" />
+					</Panel>
+				</Panel>
+				<Label class="MainMenuTopBarSettingsPropertyListCategoryLabel" text="Keybinds" />
+				<Panel class="MainMenuTopBarSettingsPropertyListCategory">
+					<Panel class="MainMenuTopBarSettingsPropertyListLabeledProperty">
+						<Label text="Empty for now" />
+					</Panel>
+				</Panel>
+				<Label class="MainMenuTopBarSettingsPropertyListCategoryLabel" text="Interface" />
+				<Panel class="MainMenuTopBarSettingsPropertyListCategory">
+					<Label text="Note: currently requires a restart" />
+					<Panel class="MainMenuTopBarSettingsPropertyListLabeledProperty">
+						<Label text="Quake Console:" />
+						<ToggleButton id="MainMenuTopBarSettingsProperty_ToggleQuakeConsole" onactivate="MainMenuController.toggleStoredVar('p2ce.console.quake');" />
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="MainMenuTopBarQuitContent" class="MainMenuTopBarContent" hittest="true">
+			<Panel id="MainMenuTopBarQuitContentUpperHalf">
+				<Label text="Are you sure you want to quit?" />
+			</Panel>
+			<Panel id="MainMenuTopBarQuitContentLowerHalf">
+				<TextButton id="MainMenuTopBarQuitButtonYes"
+						group="MainMenuTopBarQuit"
+						onactivate="MainMenuController.quitButtonPressed(true);"
+						text="Yes" />
+				<TextButton id="MainMenuTopBarQuitButtonNo"
+						group="MainMenuTopBarQuit"
+						onactivate="MainMenuController.quitButtonPressed(false);"
+						text="No" />
+			</Panel>
+		</Panel>
+
+		<Panel id="MainMenuBetaDisplay">
+			<Label id="MainMenuBetaDisplayHeader" text="Beta Main Menu" />
+			<Label id="MainMenuBetaDisplaySubheader" text="Menu is not finalized and subject to change." />
+		</Panel>
+
+		<!-- Make sure these are at the bottom to get the z-order right -->
+		<ChaosPopupManager id="PopupManager" onpopupsdismissed="" />
+		<ContextMenuManager id="ContextMenuManager" />
+		<ChaosTooltipManager id="TooltipManager" hittest="false" />
+
+		<!-- Doesn't actually include the notifications, but we use its position to figure out where to show them -->
+		<Panel id="SteamNotificationsPlaceholder" hittest="false" />
+	</ChaosMainMenu>
+</root>

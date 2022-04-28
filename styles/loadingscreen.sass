@@ -1,0 +1,192 @@
+@define maxBlur: 6.0
+@define loadingScreenWidth: 1220px
+
+.loading-root
+	width: 100%
+	height: 100%
+	background-color: rgba(255, 255, 255, 0.01)
+	transform: scale3d( 1.0, 1.0, 1.0 )
+	opacity: 1
+
+.loading-root--show
+	animation-name: loading-root--show-animation
+	animation-duration: 0.65s
+	animation-timing-function: ease-in-out
+	animation-iteration-count: 1
+	animation-fill-mode: both
+
+@keyframes loading-root--show-animation
+	0%
+		opacity: 0.5
+		transform: scaleX(1.2) scaleY(1.2)
+	100%
+		opacity: 1.0
+		transform: scaleX(1.0) scaleY(1.0)
+
+.loading-root .mainmenu-content--offscreen
+	position: 0px 0px 0px
+
+	transition-property: position
+	transition-duration: 1s
+	transition-timing-function: ease-in-out
+
+.loading-screen-hint-contents
+	height: 80px
+	width: 100%
+	horizontal-align: center
+	vertical-align: center
+	flow-children: right
+
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #313131AA ), to( #31313144))
+	box-shadow: shadowOffset
+
+	margin-top: 20px
+
+.loading-screen-contents
+	margin-top: 82px
+	height: fit-children
+	max-height: 1200px
+	width: loadingScreenWidth
+	horizontal-align: center
+	vertical-align: top
+	flow-children: down
+	opacity: 1
+
+	transition-property: height, opacity
+	transition-duration: .5s
+	transition-timing-function: ease-in-out
+
+.loading-screen-contents-bottom
+	height: fit-children
+	max-height: 920px
+	width: 1330px
+	horizontal-align: center
+	vertical-align: top
+	background-color: gradient( linear, 0% 100%, 0% 0%, from( #313131AA ), to( #31313144))
+	box-shadow: shadowOffset
+	flow-children: right
+	opacity: 1
+
+	transition-property: height, opacity
+	transition-duration: .5s
+	transition-timing-function: ease-in-out
+
+.loading-screen-progress-container
+	width: loadingScreenWidth
+	height: 42px
+	vertical-align: center
+	horizontal-align: center
+	margin-top: 16px
+
+.loading-screen-progress-secondary-container
+	width: 500px
+	height: 32px
+	vertical-align: bottom
+	horizontal-align: right
+	margin-bottom: 10px
+
+.loading-root .ProgressBarLeft
+	// You can re-enable this for a fade thing
+	// background-color: gradient( linear, 0% 0%, 100% 0%, from( #ffb624 ), to( #ffd37a ) )
+	background-color: #ff9a00
+
+// Progress bar itself
+.loading-root ProgressBar
+	width: 35%
+	height: 14px
+	border-radius: 5px
+	// background-color: rgba(0, 0, 0, 0.90)
+	background-color: #00a2ff44
+	// border: 0px solid rgb(58, 58, 58)
+	vertical-align: bottom
+	margin-bottom: 48px
+	margin-right: 64px
+	horizontal-align: right
+	box-shadow: none
+
+.loading-screen-model
+	width: 720px
+	height: 100%
+	horizontal-align: center
+	vertical-align: middle
+	opacity: 1
+	ui-scale: 100%
+	margin-bottom: 128px
+
+	transition-property: position, brightness, ui-scale
+	transition-duration: .25s
+	transition-timing-function: ease-in-out
+
+.loading-screen-model--right
+	position: 440px 0px 0px
+
+.loading-screen-model--left
+	position: -440px 0px 0px
+
+.loading-screen-model--right.highlight,
+.loading-screen-model--left.highlight
+	ui-scale: 108%
+
+	transition-property: ui-scale
+	transition-duration: .25s
+	transition-timing-function: ease-in-out
+
+.loading-screen--closing
+	animation-name: loading-screen--closing-animation
+	animation-duration: 1s
+	animation-timing-function: ease-in-out
+	animation-iteration-count: 1
+	animation-fill-mode: forwards
+
+@keyframes loading-screen--closing-animation
+	0%
+		opacity: 1.0
+	100%
+		opacity: 0.0
+
+#ProgressBarSecondary
+	width: 100%
+	height: 5px
+	background-color: rgba(0, 0, 0, 0.671)
+	border: 0px solid rgb(58, 58, 58)
+	vertical-align: bottom
+	border-radius: 0px
+	margin-bottom: -20px
+	horizontal-align: center
+	box-shadow: none
+
+.loading-screen-progress-secondary-container .ProgressBarLeft
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( blueColor ), to( #006633FF ) )
+
+// p2ce logo thing
+.loadingscreen-logo
+	vertical-align: top
+	horizontal-align: right
+	width: 8%
+	margin-right: 3%
+	margin-top: 5.33%
+
+.loading-screen-background
+	width: 100%
+	height: 100%
+	z-index: -1
+	visibility: visible
+
+.loading-screen-backgroundhideanim
+	animation-name: loading-screen-background-hide-anim
+	animation-duration: 0.8s
+	animation-timing-function: linear
+	animation-iteration-count: 1
+	animation-fill-mode: forwards
+
+@keyframes loading-screen-background-hide-anim
+	0%
+		opacity: 1.0
+	100%
+		opacity: 0.0
+
+.loading-screen-background-image1
+	z-index: -1
+
+.loading-screen-background-image4
+	z-index: -2

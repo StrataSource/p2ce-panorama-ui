@@ -1,0 +1,60 @@
+Label
+	font-size: 25px
+	font-weight: normal
+
+#MainMenuLogoDark,
+#MainMenuLogoLight
+	margin-top: 5%
+	align: center center
+	width: 95%
+
+.MainMenuNavlistContainer
+	width: 40%
+	height: 50%
+	border-radius: 8px
+	margin-left: 7.5%
+	vertical-align: center
+	flow-children: down
+
+.MainMenu.MainMenuNavlistContainer
+	// todo: use a portal 2 style background
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #3338 ) )
+
+.MainMenuNavlist
+	width: 75%
+	align: center center
+	flow-children: down
+
+.MainMenuNavlistItem,
+.MainMenuNavlistItemDisabled
+	width: 100%
+	height: 48px
+	background-color: #ddddddbb
+	border-left: 8px solid #999999dd
+	transition: border-left-color 0.1s ease-in-out
+	margin-top: 12px
+
+	> Label
+		width: 100%
+		color: #222
+		margin-left: 5%
+
+.MainMenuNavlistItem:hover
+	border-left-color: #ff7d02ff
+	background-color: #aaaa
+
+.MainMenuNavlistItemDisabled
+	background-color: #ccccccbb
+
+
+.MainMenu .PauseMenuOnly
+	visibility: collapse
+
+.MainMenu .MainMenuOnly
+	visibility: visible
+
+.PauseMenu .MainMenuOnly
+	visibility: collapse
+
+.PauseMenu .PauseMenuOnly
+	visibility: visible

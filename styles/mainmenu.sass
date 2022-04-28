@@ -1,0 +1,284 @@
+@use "sass:math"
+
+//-----------------//
+//---- Globals ----//
+//-----------------//
+
+Label
+	font-size: 25px
+	font-weight: normal
+
+// It is a class instead of ChaosSettingsSlider to override the height and width
+.MainMenuSettingsSlider
+	height: 16px
+	width: 256px
+
+
+//-------------------//
+//---- Main Menu ----//
+//-------------------//
+
+#MainMenu,
+#MainMenuContainerPanel,
+#MainMenuInput,
+#MainMenuCore,
+#MainMenuBackground,
+#MainMenuMovieParent,
+#MainMenuMovie,
+#MainMenuCampaignFrameParent,
+#BackbufferImagePanel
+	width: 100%
+	height: 100%
+
+$main-menu-top-bar-height: 6.5%
+$main-menu-top-bar-width: 300px
+$main-menu-border-radius: 8px
+$main-menu-background-color: #222
+$main-menu-top-bar-button-width: math.div(1, 4)
+
+#MainMenuTopBar
+	horizontal-align: center
+	vertical-align: top
+	height: $main-menu-top-bar-height - 1%
+	width: $main-menu-top-bar-width
+	background-color: $main-menu-background-color
+	opacity-mask: url( "file://{images}/menu/menu_top_bar_mask.png" )
+	padding-left: 20px
+	padding-right: 20px
+	flow-children: right
+
+	Button,
+	TextButton
+		horizontal-align: center
+		vertical-align: center
+		padding: 4px
+		margin: 4px
+		border-radius: $main-menu-border-radius
+		width: fill-parent-flow($main-menu-top-bar-button-width)
+		height: 100%
+		&:hover
+			background-color: #555
+
+		Label
+			text-align: center
+			horizontal-align: center
+		
+		Image
+			width: 100%
+			height: 100%
+
+.MainMenuTopBarContent
+	horizontal-align: center
+	vertical-align: top
+	margin-top: $main-menu-top-bar-height
+	background-color: $main-menu-background-color
+	border-radius: $main-menu-border-radius
+
+#MainMenuTopBarCampaignContent
+	width: 35%
+	height: 75%
+	flow-children: none
+
+	#MainMenuTopBarCampaignContentList
+		width: 100%
+		height: 100%
+		overflow: scroll
+		flow-children: down
+
+		.MainMenuTopBarCampaignContentListEntry
+			width: 100%
+			flow-children: right
+			border-bottom: 2px solid #444
+			background-color: #333
+			&:hover
+				background-color: #444
+
+			Image
+				width: 116px
+				height: 116px
+				margin: 8px
+			
+			Label
+				align: left center
+				color: white
+				padding-left: 32px
+
+	> Label
+		align: center bottom
+		color: white
+		font-size: 18px
+		margin-bottom: 1.5%
+
+#MainMenuTopBarWorkshopContent
+	width: 100% - ($main-menu-top-bar-height * 0.75)
+	height: 100% - ($main-menu-top-bar-height * 1.5)
+	flow-children: down
+
+#MainMenuTopBarSettingsContent
+	$main-menu-settings-category-width: 20%
+
+	width: 100% - ($main-menu-top-bar-height * 0.75)
+	height: 100% - ($main-menu-top-bar-height * 1.5)
+	flow-children: right
+
+	#MainMenuTopBarSettingsCategoryList
+		width: $main-menu-settings-category-width
+		height: 100%
+		overflow: scroll
+		flow-children: down
+		background-color: #4442
+
+		.MainMenuTopBarSettingsCategoryListEntry
+			width: 100%
+			height: 6.5%
+			border-bottom: 2px solid #444
+			flow-children: right
+			background-color: #333
+			&:hover
+				background-color: #444
+			
+			Label
+				align: center center
+				color: white
+		
+		.MainMenuTopBarSettingsCategoryListEntryActive
+			border-right: 4px solid orange
+
+	> Label
+		align: center top
+		color: white
+		font-size: 18px
+		margin-bottom: 1.5%
+	
+	#MainMenuTopBarSettingsPropertyList
+		$settings-property-list-margin: 1%
+		$settings-property-list-padding: 16px
+		margin-left: $settings-property-list-margin
+		width: 100% - $main-menu-settings-category-width - $settings-property-list-margin
+		height: 100%
+		overflow: scroll
+		flow-children: down
+
+		.MainMenuTopBarSettingsPropertyListCategoryLabel
+			width: 100%
+			align: left top
+			margin-top: 8px
+			padding: 4px 0px 4px $settings-property-list-padding
+			border-bottom-left-radius: $main-menu-border-radius
+			border-top-left-radius: $main-menu-border-radius
+			background-color: #444
+
+		.MainMenuTopBarSettingsPropertyListCategory
+			width: 100%
+			padding-left: $settings-property-list-padding
+			padding-top: 8px
+			flow-children: down
+
+			.MainMenuTopBarSettingsPropertyListLabeledProperty
+				padding-bottom: 8px
+				flow-children: right
+
+				Label
+					align: left center
+					padding-right: 16px
+
+#MainMenuTopBarQuitContent
+	width: 30%
+	height: 14%
+
+	Label
+		color: black
+	
+	> Panel > Label
+		horizontal-align: center
+		padding-top: 45%
+		color: white
+	
+	$button-side-padding: 4%
+	TextButton
+		align: center center
+		background-color: #ddddddbb
+		border-radius: $main-menu-border-radius
+		width: 50% - ($button-side-padding * 1.5)
+		height: 50%
+		&:hover
+			background-color: #aaaa
+	TextButton#MainMenuTopBarQuitButtonYes
+		margin-left: $button-side-padding
+		margin-right: math.div($button-side-padding, 2)
+	TextButton#MainMenuTopBarQuitButtonNo
+		margin-right: $button-side-padding
+		margin-left: math.div($button-side-padding, 2)
+
+	TextButton > Label
+		align: center center
+
+	#MainMenuTopBarQuitContentUpperHalf,
+	#MainMenuTopBarQuitContentLowerHalf
+		width: 100%
+	
+	$top-bar-height: 30%
+	#MainMenuTopBarQuitContentUpperHalf
+		height: $top-bar-height
+	#MainMenuTopBarQuitContentLowerHalf
+		height: 100% - $top-bar-height
+		margin-top: $top-bar-height
+		flow-children: right
+
+
+//--------------------//
+//---- Pause Menu ----//
+//--------------------//
+
+.PauseMenuVignette
+	animation-name: pauseMenuVignette
+	animation-duration: 0.2s
+	animation-timing-function: ease-in-out
+	animation-iteration-count: 1
+	animation-fill-mode: forwards
+
+@keyframes pauseMenuVignette
+	0%
+		saturation: 1.0
+		blur: fastgaussian(0.0)
+		wash-color-fast: #00000000
+	100%
+		saturation: 0.35
+		blur: fastgaussian(6.0)
+		wash-color-fast: #000000a0
+
+.PauseMenuFade
+	animation-name: pauseMenuFade
+	animation-duration: 0.2s
+	animation-timing-function: ease-in-out
+	animation-iteration-count: 1
+	animation-fill-mode: forwards
+
+@keyframes pauseMenuFade
+	0%
+		opacity: 0.0
+	100%
+		opacity: 1.0
+
+
+//----------------------//
+//---- Beta Display ----//
+//----------------------//
+
+#MainMenuBetaDisplay
+	$main-menu-beta-display-height: 10%
+	height: $main-menu-beta-display-height
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #333F ) )
+	border-top-left-radius: $main-menu-border-radius
+	align: right bottom
+	flow-children: down
+	
+	#MainMenuBetaDisplayHeader,
+	#MainMenuBetaDisplaySubheader
+		font-size: 24px
+		padding: 0px 16px
+		horizontal-align: right
+	
+	#MainMenuBetaDisplayHeader
+		font-size: 36px
+		padding-top: 16px

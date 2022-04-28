@@ -1,0 +1,11 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/settings/settings_enum.sass" />
+	</styles>
+
+	<ChaosSettingsEnum>
+		<Label id="title" />
+		<Panel id="values" />
+	</ChaosSettingsEnum>
+</root>

@@ -1,0 +1,9 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/hud/hudhinttext.sass" />
+	</styles>
+
+	<ChaosHudHintText hittest="false" class="hud-hint">
+	</ChaosHudHintText>
+</root>
