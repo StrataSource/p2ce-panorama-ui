@@ -58,6 +58,7 @@
 
 		</Panel>
 		<Panel class="MainMenuSubContainerDisabled MainMenuNavlistContainer Disabled" id="QuitMenu">
+			<Label class="MainMenuQuitListLabel" text="Are you sure you want to quit?" />
 			<TextButton id=""
 				class="MainMenuQuitListItem"
 				group="NavBar"
