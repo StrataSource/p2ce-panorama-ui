@@ -11,7 +11,7 @@
 		<Image id="MainMenuLogo"
 				class="MainMenuOnly"
 				src=""
-				defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+				defaultsrc="file://{images}/menu/portal2/title_logo.png"
 				scaling="stretch-to-cover-preserve-aspect"/>
 
 		<Panel class="MainMenuNavlist">
@@ -19,9 +19,40 @@
 					class="MainMenuNavlistItem MainMenuOnly"
 					group="NavBar"
 					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_a1_intro1' );"
-					text="Play Singleplayer" />
+					text="PLAY SINGLE PLAYER" />
 
-			<TextButton id="MainMenuNavBarResume"
+			<TextButton id="MainMenuNavBarCooperative"
+					class="MainMenuNavlistItem MainMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayCoop', 'sp_a1_intro1' );"
+					text="PLAY COOPERATIVE GAME" />
+
+
+			<TextButton id="MainMenuNavBarPeti"
+					class="MainMenuNavlistItem MainMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayCoop', 'sp_a1_intro1' );"
+					text="COMMUNITY TEST CHAMBERS" />
+
+			<TextButton id="MainMenuNavBarOptions"
+					class="MainMenuNavlistItem"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEMainMenuSettings' );"
+					text="OPTIONS" />
+
+			<TextButton id="MainMenuNavBarExtra"
+					class="MainMenuNavlistItem MainMenuOnly"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayCoop', 'sp_a1_intro1' );"
+					text="EXTRAS" />
+
+			<TextButton id="MainMenuNavBarQuit"
+					class="MainMenuNavlistItem MainMenuOnly"
+					group="NavBar"
+					onactivate="GameInterfaceAPI.ConsoleCommand( 'quit' );"
+					text="QUIT" />
+
+			<!-- <TextButton id="MainMenuNavBarResume"
 					class="MainMenuNavlistItem PauseMenuOnly"
 					group="NavBar"
 					onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
@@ -36,7 +67,7 @@
 					class="MainMenuNavlistItem PauseMenuOnly"
 					group="NavBar"
 					onactivate="GameInterfaceAPI.ConsoleCommand( 'disconnect' );"
-					text="Exit to Main Menu" />
+					text="Exit to Main Menu" /> -->
 		</Panel>
 	</Panel>
 </root>
