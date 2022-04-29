@@ -1,30 +1,3 @@
-@keyframes Rainbow
-	0%
-		hue-rotation: 0deg
-	50%
-		hue-rotation: 180deg
-	100%
-		hue-rotation: 359deg
-	
-@keyframes FadeLeftEnabled
-	0%
-		transform: translate3d( -2%, 0px, 0px )
-		opacity: 0.0
-	100%
-		transform: translate3d( 0%, 0px, 0px )
-		opacity: 1.0
-
-@keyframes FadeLeftDisabled
-	0%
-		transform: translate3d( 0%, 0px, 0px )
-		opacity: 1.0
-	100%
-		transform: translate3d( -2%, 0px, 0px )
-		opacity: 0.0
-	
-.MainMenuModeOnly
-	animation: Rainbow 2.1s linear 0.0s infinite normal forwards
-
 Label
 	font-size: 25px
 	font-weight: normal
@@ -36,29 +9,16 @@ Label
 	width: 95%
 
 .MainMenuNavlistContainer
-	width: 100%
-	height: 100%
+	width: 40%
+	height: 50%
 	border-radius: 8px
-	margin-left: 12.5%
-	margin-top: 12.5%
+	margin-left: 7.5%
 	vertical-align: center
 	flow-children: down
 
 .MainMenu.MainMenuNavlistContainer
 	// todo: use a portal 2 style background
-	//background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #3338 ) )
-
-.Main
-	width: 100%
-	height: 100%
-	
-#MainMenuLogoDark
-	width: 40%
-	align: left center
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #3338 ) )
-	// hue-rotation: 180deg
-	//animation: Rainbow 2.1s linear 0.0s infinite normal forwards
-	// background-color: #000
 
 .MainMenuNavlist
 	width: 75%
@@ -67,19 +27,17 @@ Label
 
 .MainMenuNavlistItem,
 .MainMenuNavlistItemDisabled
-	width: 50%
-	height: 5.1%
-	background-color: #313131bb
+	width: 100%
+	height: 48px
+	background-color: #ddddddbb
 	border-left: 8px solid #999999dd
 	transition: border-left-color 0.1s ease-in-out
 	margin-top: 12px
 
 	> Label
 		width: 100%
-		font-family: "UniversLTStd"
-		color: #050505
-		margin-left: 2.5%
-
+		color: #222
+		margin-left: 5%
 
 .MainMenuNavlistItem:hover
 	border-left-color: #ff7d02ff
@@ -88,53 +46,6 @@ Label
 .MainMenuNavlistItemDisabled
 	background-color: #ccccccbb
 
-.MainMenuSubContainerEnabled,
-.MainMenuSubContainerDisabled
-	// margin-top: 57.3%
-	padding-top: 51.3%
-	height: 200%
-	// // padding-right: 0.2%
-	margin-right: -0.5%
-	// margin-top: 57.3%
-	padding-top: 51.3%
-	height: 200%
-	// // padding-right: 0.2%
-	margin-right: -0.5%
-
-.MainMenuSubContainerEnabled
-	animation: FadeLeftEnabled 0.71s linear 0.0s 1 normal forwards
-
-.MainMenuSubContainerDisabled
-	animation: FadeLeftDisabled 0.7s linear 0.0s 1 normal backwards
-
-.MainMenuQuitListItem,
-.MainMenuQuitListItemDisabled
-	width: 20%
-	height: 5.1%
-	background-color: #b5b5b5bb
-	border-left: 8px solid #adacacdd
-	transition: border-left-color 0.1s ease-in-out
-	margin-top: 12px
-	margin-left: 50%
-
-	> Label
-		width: 100%
-		font-family: "UniversLTStd"
-		color: #858585
-		margin-left: 2.5%
-
-
-.MainMenuQuitListItem:hover
-	border-left-color: #ff7d02ff
-	background-color: #aaaa
-
-.MainMenuQuitListItemDisabled
-	background-color: #ccccccbb
-
-.Enabled
-	visibility: visible
-.Disabled
-	visibility: collapse
 
 .MainMenu .PauseMenuOnly
 	visibility: collapse
