@@ -6,49 +6,68 @@
 	<scripts>
 		<include src="file://{resources}/scripts/mainmenu/mainmenu_p2ce.js" />
 	</scripts>
+	<Panel class="Main">
+		<Panel class="MainMenuNavlistContainer">
+			<Image id="MainMenuLogoDark"
+					class=""
+					src=""
+					defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+					scaling="stretch-to-cover-preserve-aspect"/>
 
-	<Panel class="MainMenuNavlistContainer">
-		<Image id="MainMenuLogoDark"
-				class="MainMenuOnly"
-				src=""
-				defaultsrc="file://{images}/menu/p2ce/logo_title.png"
-				scaling="stretch-to-cover-preserve-aspect"/>
-		<Image id="MainMenuLogoLight"
-				class="PauseMenuOnly"
-				src=""
-				defaultsrc="file://{images}/menu/p2ce/logo_title.png"
-				scaling="stretch-to-cover-preserve-aspect"/>
-
-		<Panel class="MainMenuNavlist">
-			<TextButton id="MainMenuNavBarCampaign"
+			<TextButton id=""
 					class="MainMenuNavlistItem MainMenuOnly"
 					group="NavBar"
 					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_p2ce_campaign_hub' );"
-					text="Enter Campaign Hub" />
+					text="Start New Game" />
 
-			<!-- trolled (this is actually really useful for playtesting, it will be removed later) -->
-			<TextButton id="MainMenuNavBarGoToTripleLaser"
+			<!-- trolled (this is actually really useful for playtesting, it will be removed later) removed :3 -->
+			<TextButton id=""
 					class="MainMenuNavlistItem MainMenuOnly"
 					group="NavBar"
 					onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_a2_triple_laser' );"
-					text="Go To Triple Laser" />
+					text="Load Game" />
 
-			<TextButton id="MainMenuNavBarResume"
+			<TextButton id=""
 					class="MainMenuNavlistItem PauseMenuOnly"
 					group="NavBar"
 					onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
 					text="Resume Game" />
 
-			<TextButton id="MainMenuNavBarLoad"
-					class="MainMenuNavlistItemDisabled"
+			<TextButton id=""
+					class="MainMenuNavlistItem MainMenuOnly"
 					group="NavBar"
-					text="Load Game" />
+					onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
+					text="Manage Addons" />
 
-			<TextButton id="MainMenuNavBarDisconnect"
+			<TextButton id=""
+					class="MainMenuNavlistItem"
+					group="NavBar"
+					onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
+					text="Settings" />
+
+			<TextButton id=""
 					class="MainMenuNavlistItem PauseMenuOnly"
 					group="NavBar"
 					onactivate="GameInterfaceAPI.ConsoleCommand( 'disconnect' );"
 					text="Exit to Main Menu" />
+			<TextButton id=""
+					class="MainMenuNavlistItem"
+					group="NavBar"
+					onactivate="MainMenuP2CE.hideQuitMenu(false)"
+					text="Quit" />
+
+		</Panel>
+		<Panel class="MainMenuSubContainerDisabled MainMenuNavlistContainer Disabled" id="QuitMenu">
+			<TextButton id=""
+				class="MainMenuQuitListItem"
+				group="NavBar"
+				onactivate="GameInterfaceAPI.ConsoleCommand('quit');"
+				text="Yes" />
+			<TextButton id=""
+				class="MainMenuQuitListItem"
+				group="NavBar"
+				onactivate="MainMenuP2CE.hideQuitMenu(true)"
+				text="No" />
 		</Panel>
 	</Panel>
 </root>
