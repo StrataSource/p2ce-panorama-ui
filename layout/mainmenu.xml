@@ -71,7 +71,6 @@
 											onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_p2ce_campaign_hub' );"
 											text="Start New Game" />
 
-									<!-- trolled (this is actually really useful for playtesting, it will be removed later) removed :3 -->
 									<TextButton id=""
 											class="MainMenuNavlistItem MainMenuOnly"
 											group="NavBar"
