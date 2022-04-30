@@ -26,6 +26,7 @@ Label
 #MainMenuMovieParent,
 #MainMenuMovie,
 #MainMenuCampaignFrameParent,
+#MainMenuCampaignFrame,
 #BackbufferImagePanel
 	width: 100%
 	height: 100%
@@ -282,3 +283,153 @@ $main-menu-top-bar-button-width: math.div(1, 4)
 	#MainMenuBetaDisplayHeader
 		font-size: 36px
 		padding-top: 16px
+
+
+//----------------------//
+//-- Main Menu Display -//
+//----------------------//
+@keyframes Rainbow
+	0%
+		hue-rotation: 0deg
+	50%
+		hue-rotation: 180deg
+	100%
+		hue-rotation: 359deg
+	
+@keyframes FadeLeftEnabled
+	0%
+		transform: translate3d( -2%, 0px, 0px )
+		opacity: 0.0
+	100%
+		transform: translate3d( 0%, 0px, 0px )
+		opacity: 1.0
+
+@keyframes FadeLeftDisabled
+	0%
+		transform: translate3d( 0%, 0px, 0px )
+		opacity: 1.0
+	100%
+		transform: translate3d( -2%, 0px, 0px )
+		opacity: 0.0
+	
+
+Label
+	font-size: 25px
+	font-weight: normal
+
+#MainMenuLogoDark
+	margin-top: 5%
+	align: center center
+	width: 95%
+
+.MainMenuNavlistContainer
+	width: 100%
+	height: 100%
+	border-radius: 8px
+	margin-left: 12.5%
+	margin-top: 12.5%
+	vertical-align: center
+	flow-children: down
+
+.Main
+	width: 100%
+	height: 100%
+	
+#MainMenuLogoDark
+	width: 40%
+	align: left center
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #3338 ) )
+	// hue-rotation: 180deg
+	//animation: Rainbow 2.1s linear 0.0s infinite normal forwards
+	// background-color: #000
+
+.MainMenuNavlist
+	width: 75%
+	align: center center
+	flow-children: down
+
+.MainMenuNavlistItem,
+.MainMenuNavlistItemDisabled
+	width: 50%
+	height: 5.1%
+	background-color: #313131bb
+	border-left: 8px solid #999999dd
+	transition: border-left-color 0.1s ease-in-out
+	margin-top: 12px
+
+	> Label
+		width: 100%
+		font-family: "UniversLTStd"
+		color: #050505
+		margin-left: 2.5%
+
+
+.MainMenuNavlistItem:hover
+	border-left-color: #ff7d02ff
+	background-color: #aaaa
+
+.MainMenuNavlistItemDisabled
+	background-color: #ccccccbb
+
+.MainMenuSubContainerEnabled,
+.MainMenuSubContainerDisabled
+	padding-top: 51.3%
+	height: 200%
+	margin-right: -0.5%
+	padding-top: 44.8%
+	margin-right: -0.5%
+
+.MainMenuSubContainerEnabled
+	animation: FadeLeftEnabled 0.2s linear 0.0s 1 normal forwards
+
+.MainMenuSubContainerDisabled
+	animation: FadeLeftDisabled 0.2s linear 0.0s 1 normal backwards
+
+.MainMenuQuitListItem,
+.MainMenuQuitListItemDisabled
+	width: 20%
+	height: 5.1%
+	background-color: #b5b5b5bb
+	border-left: 8px solid #adacacdd
+	transition: border-left-color 0.1s ease-in-out
+	margin-top: 12px
+	margin-left: 50%
+
+	> Label
+		width: 100%
+		font-family: "UniversLTStd"
+		color: #858585
+		margin-left: 2.5%
+
+.MainMenuQuitListLabel
+	width: 20%
+	height: 5.1%
+	color: #000
+	font-family: "UniversLTStd"
+	font-size: 24px
+	margin-top: 14px
+	margin-left: 50.5%
+
+.MainMenuQuitListItem:hover
+	border-left-color: #ff7d02ff
+	background-color: #aaaa
+
+.MainMenuQuitListItemDisabled
+	background-color: #ccccccbb
+
+.Enabled
+	visibility: visible
+.Disabled
+	visibility: collapse
+
+.MainMenu .PauseMenuOnly
+	visibility: collapse
+
+.MainMenu .MainMenuOnly
+	visibility: visible
+
+.PauseMenu .MainMenuOnly
+	visibility: collapse
+
+.PauseMenu .PauseMenuOnly
+	visibility: visible
