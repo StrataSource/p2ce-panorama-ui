@@ -93,7 +93,7 @@
 									<TextButton id=""
 											class="MainMenuNavlistItem"
 											group="NavBar"
-											onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
+											onactivate="MainMenuController.onSettingsMenuButtonPressed();"
 											text="Settings" />
 
 									<TextButton id=""
