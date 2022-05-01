@@ -5,6 +5,7 @@
 		<include src="file://{resources}/styles/mainmenu.sass" />
 	</styles>
 	<scripts>
+		<include src="file://{resources}/scripts/common/gameui.js" />
 		<include src="file://{resources}/scripts/mainmenu.js" />
 	</scripts>
 
@@ -56,76 +57,77 @@
 					</Panel>
 
 					<Panel id="MainMenuCampaignFrameParent">
-						<!-- Fills entire screen, frame is added in code -->
+						<Frame id="MainMenuCampaignFrame"> 
+							<Panel class="Main">
+								<Panel class="MainMenuNavlistContainer">
+									<Image id="MainMenuLogoDark"
+											class=""
+											src=""
+											defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+											scaling="stretch-to-cover-preserve-aspect"/>
+
+									<TextButton id=""
+											class="MainMenuNavlistItem MainMenuOnly"
+											group="NavBar"
+											onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_p2ce_campaign_hub' );"
+											text="Start New Game" />
+
+									<TextButton id=""
+											class="MainMenuNavlistItem MainMenuOnly"
+											group="NavBar"
+											onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_a2_triple_laser' );"
+											text="Load Game" />
+
+									<TextButton id=""
+											class="MainMenuNavlistItem PauseMenuOnly"
+											group="NavBar"
+											onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
+											text="Resume Game" />
+
+									<TextButton id=""
+											class="MainMenuNavlistItem MainMenuOnly"
+											group="NavBar"
+											onactivate="MainMenuController.onWorkshopMenuButtonPressed();"
+											text="Manage Addons" />
+
+									<TextButton id=""
+											class="MainMenuNavlistItem"
+											group="NavBar"
+											onactivate="MainMenuController.onSettingsMenuButtonPressed();"
+											text="Settings" />
+
+									<TextButton id=""
+											class="MainMenuNavlistItem PauseMenuOnly"
+											group="NavBar"
+											onactivate="GameInterfaceAPI.ConsoleCommand( 'disconnect' );"
+											text="Exit to Main Menu" />
+									<TextButton id=""
+											class="MainMenuNavlistItem"
+											group="NavBar"
+											onactivate="MainMenuController.hideQuitMenu(false)"
+											text="Quit" />
+
+								</Panel>
+								<Panel class="MainMenuSubContainerDisabled MainMenuNavlistContainer Disabled" id="QuitMenu">
+									<Label class="MainMenuQuitListLabel" text="Are you sure you want to quit?" />
+									<TextButton id=""
+										class="MainMenuQuitListItem"
+										group="NavBar"
+										onactivate="GameInterfaceAPI.ConsoleCommand('quit');"
+										text="Yes" />
+									<TextButton id=""
+										class="MainMenuQuitListItem"
+										group="NavBar"
+										onactivate="MainMenuController.hideQuitMenu(true)"
+										text="No" />
+								</Panel>
+							</Panel>
+						</Frame>
 					</Panel>
 				</Panel>
 			</Panel>
 		</Panel>
-
-		<!-- The top bar with controls -->
-		<Panel id="MainMenuTopBar" hittest="true">
-			<!-- todo: if we keep the material icons, attribute their source at https://github.com/google/material-design-icons, its the nice thing to do -->
-			<Button id="MainMenuTopBarCampaign"
-					class="MainMenuTopBarButton"
-					group="MainMenuTopBar"
-					onactivate="MainMenuController.onCampaignMenuButtonPressed();">
-				<Image  id="MainMenuTopBarCampaignIcon"
-						src=""
-						defaultsrc=""
-						scaling="stretch-to-fit-y-preserve-aspect" />
-			</Button>
-			<Button id="MainMenuTopBarAddons"
-					group="MainMenuTopBar"
-					onactivate="MainMenuController.onWorkshopMenuButtonPressed();">
-				<Image  id="MainMenuTopBarAddonsIcon"
-						src=""
-						defaultsrc="file://{images}/menu/addons.svg"
-						textureheight="64"
-						scaling="stretch-to-fit-y-preserve-aspect" />
-			</Button>
-			<Button id="MainMenuTopBarSettings"
-					group="MainMenuTopBar"
-					onactivate="MainMenuController.onSettingsMenuButtonPressed();">
-				<Image  id="MainMenuTopBarSettingsIcon"
-						src=""
-						defaultsrc="file://{images}/icons/settings.svg"
-						textureheight="64"
-						scaling="stretch-to-fit-y-preserve-aspect" />
-			</Button>
-			<Button id="MainMenuTopBarExit"
-					class="MainMenuTopBarLast"
-					group="MainMenuTopBar"
-					onactivate="MainMenuController.onQuitMenuButtonPressed();">
-				<Image  id="MainMenuTopBarQuitIcon"
-						src=""
-						defaultsrc="file://{images}/menu/quit.svg"
-						textureheight="64"
-						scaling="stretch-to-fit-y-preserve-aspect" />
-			</Button>
-		</Panel>
-		<Panel id="MainMenuTopBarCampaignContent" class="MainMenuTopBarContent" hittest="true">
-			<!-- todo: campaign picker panel -->
-			<Panel id="MainMenuTopBarCampaignContentList">
-				<!-- todo: fill campaign list dynamically -->
-				<Button class="MainMenuTopBarCampaignContentListEntry"
-						group="MainMenuTopBarCampaignContent"
-						onactivate="MainMenuController.displayStartupCampaign( 'p2ce' );">
-					<Image	src=""
-							defaultsrc="file://{images}/menu/p2ce/logo.png"
-							scaling="stretch-to-cover-preserve-aspect" />
-					<Label text="Portal 2: Community Edition" />
-				</Button>
-				<Button class="MainMenuTopBarCampaignContentListEntry"
-						group="MainMenuTopBarCampaignContent"
-						onactivate="MainMenuController.displayStartupCampaign( 'portal2' );">
-					<Image	src=""
-							defaultsrc="file://{images}/menu/portal2/logo.png"
-							scaling="stretch-to-cover-preserve-aspect" />
-					<Label text="Portal 2" />
-				</Button>
-			</Panel>
-			<Label text="Subscribe to campaigns on the Workshop, and you'll see them here!" />
-		</Panel>
+		
 		<Panel id="MainMenuTopBarWorkshopContent" class="MainMenuTopBarContent" hittest="true">
 			<!-- todo: addons panel -->
 			<Label style="align: center center;" text="Steam workshop functionality is not currently implemented." />
@@ -198,21 +200,6 @@
 						<ToggleButton id="MainMenuTopBarSettingsProperty_ToggleQuakeConsole" onactivate="MainMenuController.toggleStoredVar('p2ce.console.quake');" />
 					</Panel>
 				</Panel>
-			</Panel>
-		</Panel>
-		<Panel id="MainMenuTopBarQuitContent" class="MainMenuTopBarContent" hittest="true">
-			<Panel id="MainMenuTopBarQuitContentUpperHalf">
-				<Label text="Are you sure you want to quit?" />
-			</Panel>
-			<Panel id="MainMenuTopBarQuitContentLowerHalf">
-				<TextButton id="MainMenuTopBarQuitButtonYes"
-						group="MainMenuTopBarQuit"
-						onactivate="MainMenuController.quitButtonPressed(true);"
-						text="Yes" />
-				<TextButton id="MainMenuTopBarQuitButtonNo"
-						group="MainMenuTopBarQuit"
-						onactivate="MainMenuController.quitButtonPressed(false);"
-						text="No" />
 			</Panel>
 		</Panel>
 

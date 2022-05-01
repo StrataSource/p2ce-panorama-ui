@@ -10,18 +10,6 @@
 
 // eslint-disable-next-line no-var
 var MainMenuController = (function () {
-	/*
-	 * Can be in 5 states:
-	 * -1: no menu is open
-	 *  0: campaign menu is open
-	 *  1: workshop menu is open
-	 *  2: settings menu is open
-	 *  3: quit menu is open
-	 */
-	let activeSubMenu = -1;
-
-	let pauseMenuActive = false;
-	let currentMenuLayout = null;
 
 	// craftable: Currently made a variable to store this for reuse
 	// When menu gets more complex, rewrite
@@ -52,11 +40,6 @@ var MainMenuController = (function () {
 	}
 
 	function _onShowMainMenu() {
-		pauseMenuActive = false;
-		$("#MainMenuTopBarCampaign").visible = true;
-		$("#MainMenuTopBarAddons").visible = true;
-
-		_resetAllSubMenuSvgIcons(); // HACK HACK STUPID HACK
 
 		// Just in case these haven't been removed (should only be active in the pause menu)
 		$("#MainMenuContainerPanel").RemoveClass("PauseMenuFade");
@@ -75,13 +58,12 @@ var MainMenuController = (function () {
 
 		_setMenuRichPresence();
 
-		const savedCampaignLayout = $.persistentStorage.getItem("p2ce.mainmenu.currentCampaign") ?? "p2ce";
-		_displayStartupCampaign(savedCampaignLayout);
+		$.DispatchEvent("P2CEShowMainMenu");
 		// Do this after we know this ID is valid
 		$("#MainMenuCampaignFrame").AddClass("MainMenu");
 		$("#MainMenuCampaignFrame").RemoveClass("PauseMenu");
 
-		$.DispatchEvent("P2CEShowMainMenu");
+		$.DispatchEvent("P2CEMainMenuSetBackgroundMovie", "community_bg1");
 	}
 
 	function _onHideMainMenu() {
@@ -90,11 +72,6 @@ var MainMenuController = (function () {
 	}
 
 	function _onShowPauseMenu() {
-		pauseMenuActive = true;
-		$("#MainMenuTopBarCampaign").visible = false;
-		$("#MainMenuTopBarAddons").visible = false;
-
-		_resetAllSubMenuSvgIcons(); // HACK HACK STUPID HACK
 
 		$("#MainMenuContainerPanel").AddClass("PauseMenuFade");
 		$("#BackbufferImagePanel").AddClass("PauseMenuVignette");
@@ -122,73 +99,20 @@ var MainMenuController = (function () {
 	// --------------------------------------------------------------------------------------------------
 
 	function _hideAllSubMenus() {
-		$("#MainMenuTopBarCampaignContent").visible = false;
 		$("#MainMenuTopBarWorkshopContent").visible = false;
 		$("#MainMenuTopBarSettingsContent").visible = false;
-		$("#MainMenuTopBarQuitContent").visible = false;
-		activeSubMenu = -1;
-	}
-
-	function _showSubMenu(menu) {
-		if (menu === activeSubMenu) {
-			activeSubMenu = -1;
-			_hideAllSubMenus();
-			return;
-		}
-		_hideAllSubMenus();
-		switch (menu) {
-			case -1:
-				break;
-			case 0:
-				$("#MainMenuTopBarCampaignContent").visible = true;
-				break;
-			case 1:
-				$("#MainMenuTopBarWorkshopContent").visible = true;
-				break;
-			case 2:
-				$("#MainMenuTopBarSettingsContent").visible = true;
-				break;
-			case 3:
-				$("#MainMenuTopBarQuitContent").visible = true;
-				break;
-		}
-		activeSubMenu = menu;
-	}
-
-	function _resetAllSubMenuSvgIcons() {
-		$("#MainMenuTopBarAddonsIcon").SetImage("file://{images}/menu/addons.svg");
-		$("#MainMenuTopBarSettingsIcon").SetImage("file://{images}/icons/settings.svg");
-		$("#MainMenuTopBarQuitIcon").SetImage("file://{images}/menu/quit.svg");
-	}
-
-	function _onCampaignMenuButtonPressed() {
-		_showSubMenu(0);
-	}
-
-	function _onWorkshopMenuButtonPressed() {
-		_showSubMenu(1);
+		_hideQuitMenu(true);
 	}
 
 	function _onSettingsMenuButtonPressed() {
-		_showSubMenu(2);
+		_hideAllSubMenus();
+		$("#MainMenuTopBarSettingsContent").visible = true;
 	}
 
-	function _quitButtonPressed(pressed) {
-		// this panel is special, it has two buttons affecting the future of submenu-kind
-		if (pressed) {
-			_quitGame();
-		} else {
-			$("#MainMenuTopBarQuitContent").visible = false;
-			activeSubMenu = -1;
-		}
-	}
-
-	function _onQuitMenuButtonPressed() {
-		_showSubMenu(3);
-	}
-
-	function _quitGame() {
-		GameInterfaceAPI.ConsoleCommand("quit");
+	function _onWorkshopMenuButtonPressed() {
+		//currently unused, awaiting full workshop support.
+		_hideAllSubMenus();
+		$("#MainMenuTopBarWorkshopContent").visible = true;
 	}
 
 	function _playMap(map) {
@@ -198,7 +122,7 @@ var MainMenuController = (function () {
 
 	function _onEscapeKeyPressed(eSource, nRepeats, focusPanel) {
 		// Resume game (pause menu mode)
-		if (pauseMenuActive) $.DispatchEvent("ChaosMainMenuResumeGame");
+		if (GameInterfaceAPI.GetGameUIState() == GAME_UI_STATE.PAUSEMENU) $.DispatchEvent("ChaosMainMenuResumeGame");
 		_hideAllSubMenus();
 	}
 
@@ -239,46 +163,40 @@ var MainMenuController = (function () {
 		$.persistentStorage.setItem(storedVar, !($.persistentStorage.getItem(storedVar) ?? false));
 	}
 
-	function _displayStartupCampaign(layout) {
-		const newMenu = $("#MainMenuCampaignFrame") ?? $.CreatePanel("Frame", $("#MainMenuCampaignFrameParent"), "MainMenuCampaignFrame");
-
-		if (currentMenuLayout !== layout) {
-			newMenu.SetSource("file://{resources}/layout/mainmenu/mainmenu_" + layout + ".xml");
-			$.DispatchEvent("P2CEShowMainMenu");
-			currentMenuLayout = layout;
-
-			$.persistentStorage.setItem("p2ce.mainmenu.currentCampaign", layout);
-
-			$("#MainMenuTopBarCampaignIcon").SetImage("file://{images}/menu/" + layout + "/logo.png");
-			_onEscapeKeyPressed();
+	function _hideQuitMenu(bool = true) {
+		const panel = $("#QuitMenu");
+		if(!bool){
+			panel.RemoveClass("Disabled");
+			panel.AddClass("Enabled");
+			panel.RemoveClass("MainMenuSubContainerDisabled");
+			panel.AddClass("MainMenuSubContainerEnabled");
 		} else {
-			_hideAllSubMenus();
+			$.Schedule(0.2, ()=>panel.RemoveClass("Enabled"));
+			$.Schedule(0.2, ()=>panel.AddClass("Disabled"));
+			panel.RemoveClass("MainMenuSubContainerEnabled");
+			panel.AddClass("MainMenuSubContainerDisabled");
 		}
 	}
 
 	return {
 		playMap: _playMap,
 		setBackgroundMovie: _setBackgroundMovie,
-		onCampaignMenuButtonPressed: _onCampaignMenuButtonPressed,
-		onWorkshopMenuButtonPressed: _onWorkshopMenuButtonPressed,
 		onSettingsMenuButtonPressed: _onSettingsMenuButtonPressed,
-		onQuitMenuButtonPressed: _onQuitMenuButtonPressed,
-		quitButtonPressed: _quitButtonPressed,
 		onShowMainMenu: _onShowMainMenu,
+		hideQuitMenu: _hideQuitMenu,
 		onHideMainMenu: _onHideMainMenu,
 		onShowPauseMenu: _onShowPauseMenu,
 		onHidePauseMenu: _onHidePauseMenu,
+		onWorkshopMenuButtonPressed: _onWorkshopMenuButtonPressed,
 		onEscapeKeyPressed: _onEscapeKeyPressed,
 		initializeSettings: _initializeSettings,
 		toggleCVar: _onToggleCVar,
 		toggleStoredVar: _onToggleStoredVar,
-		displayStartupCampaign: _displayStartupCampaign,
 	};
 })();
 
 // Entry point called on create
 (function () {
-	$.RegisterForUnhandledEvent("OpenPlayMenu", MainMenuController.onCampaignMenuButtonPressed);
 	$.RegisterForUnhandledEvent("ChaosShowMainMenu", MainMenuController.onShowMainMenu);
 	$.RegisterForUnhandledEvent("ChaosHideMainMenu", MainMenuController.onHideMainMenu);
 	$.RegisterForUnhandledEvent("ChaosShowPauseMenu", MainMenuController.onShowPauseMenu);
