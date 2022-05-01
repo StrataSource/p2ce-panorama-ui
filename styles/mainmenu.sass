@@ -349,7 +349,9 @@ Label
 	flow-children: down
 
 .MainMenuNavlistItem,
-.MainMenuNavlistItemDisabled
+.MainMenuNavlistItemDisabled,
+.MainMenuQuitListItem,
+.MainMenuQuitListItemDisabled
 	width: 50%
 	height: 5.1%
 	background-color: #b6b6b6dd
@@ -363,13 +365,27 @@ Label
 		color: #050505
 		margin-left: 2.5%
 
+.MainMenuQuitListItem,
+.MainMenuQuitListItemDisabled
+	width: 20%
+	margin-left: 50%
+
+.MainMenuQuitListLabel
+	width: 20%
+	height: 5.1%
+	color: #000
+	font-family: "UniversLTStd"
+	font-size: 22px
+	margin-left: 50.5%
+
 
 .MainMenuNavlistItem:hover
 	border-left-color: #ff7d02ff
 	background-color: #aaaa
-
-.MainMenuNavlistItemDisabled
-	background-color: #ccccccbb
+	
+.MainMenuQuitListItem:hover
+	border-left-color: #ff7d02ff
+	background-color: #aaaa
 
 .MainMenuSubContainerEnabled,
 .MainMenuSubContainerDisabled
@@ -384,37 +400,6 @@ Label
 
 .MainMenuSubContainerDisabled
 	animation: FadeLeftDisabled 0.2s linear 0.0s 1 normal backwards
-
-.MainMenuQuitListItem,
-.MainMenuQuitListItemDisabled
-	width: 20%
-	height: 5.1%
-	background-color: #b5b5b5bb
-	border-left: 8px solid #adacacdd
-	transition: border-left-color 0.1s ease-in-out
-	margin-top: 12px
-	margin-left: 50%
-
-	> Label
-		width: 100%
-		font-family: "UniversLTStd"
-		color: #858585
-		margin-left: 2.5%
-
-.MainMenuQuitListLabel
-	width: 20%
-	height: 5.1%
-	color: #000
-	font-family: "UniversLTStd"
-	font-size: 22px
-	margin-left: 50.5%
-
-.MainMenuQuitListItem:hover
-	border-left-color: #ff7d02ff
-	background-color: #aaaa
-
-.MainMenuQuitListItemDisabled
-	background-color: #ccccccbb
 
 .Enabled
 	visibility: visible
