@@ -5,6 +5,7 @@
 		<include src="file://{resources}/styles/mainmenu.sass" />
 	</styles>
 	<scripts>
+		<include src="file://{resources}/scripts/common/gameui.js" />
 		<include src="file://{resources}/scripts/mainmenu.js" />
 	</scripts>
 
@@ -86,7 +87,7 @@
 									<TextButton id=""
 											class="MainMenuNavlistItem MainMenuOnly"
 											group="NavBar"
-											onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
+											onactivate="MainMenuController.onWorkshopMenuButtonPressed();"
 											text="Manage Addons" />
 
 									<TextButton id=""

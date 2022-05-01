@@ -122,7 +122,7 @@ var MainMenuController = (function () {
 
 	function _onEscapeKeyPressed(eSource, nRepeats, focusPanel) {
 		// Resume game (pause menu mode)
-		if (GameInterfaceAPI.GetGameUIState()) $.DispatchEvent("ChaosMainMenuResumeGame");
+		if (GameInterfaceAPI.GetGameUIState() == GAME_UI_STATE.PAUSEMENU) $.DispatchEvent("ChaosMainMenuResumeGame");
 		_hideAllSubMenus();
 	}
 
@@ -187,6 +187,7 @@ var MainMenuController = (function () {
 		onHideMainMenu: _onHideMainMenu,
 		onShowPauseMenu: _onShowPauseMenu,
 		onHidePauseMenu: _onHidePauseMenu,
+		onWorkshopMenuButtonPressed: _onWorkshopMenuButtonPressed,
 		onEscapeKeyPressed: _onEscapeKeyPressed,
 		initializeSettings: _initializeSettings,
 		toggleCVar: _onToggleCVar,
