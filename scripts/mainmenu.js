@@ -82,6 +82,26 @@ var MainMenuController = (function () {
 		$.DispatchEvent("P2CEShowPauseMenu");
 	}
 
+	function _onNewGameMenu() {
+		_enableMainMenu(false)
+		_hideElement('#NavListContainer',true);
+		let content = $("#MainMenuButtonsNewGameList");
+		let sidepanel = $('#MainMenuButtonsNewGamePanel');
+		content.RemoveAndDeleteChildren();
+		let file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
+		if(file != undefined){ //this happens if the file is both not present or if it's invalid KV.
+			for(let [MenuIdentifier,MenuContents] of Object.entries(file)){
+				let button = $.CreatePanel("Button", content, "", {class: "CampaignButtonButton MainNewGameListItem"});
+				$.CreatePanel("Label",button,"", {text: MenuContents.name, class:"CampaignButtonLabel CampaignButtonLabelPrimary"});
+				$.CreatePanel("Label",button,"", {text:"\nBy "+MenuContents.publisher, class:"CampaignButtonLabel CampaignButtonLabelSecondary"});
+				$.CreatePanel("Image",button,"", {src:MenuContents.icon, class:"CampaignButtonImage"});
+			}
+		} else {
+			$.CreatePanel("Label", content, "", { style:"align: center center;", text: "OOPS!" });
+		}
+		_hideElement("#MainMenuButtonsNewGameContent",false)
+	}
+
 	function _onHidePauseMenu() {
 		$("#MainMenuContainerPanel").RemoveClass("PauseMenuFade");
 		$("#BackbufferImagePanel").RemoveClass("PauseMenuVignette");
@@ -89,8 +109,13 @@ var MainMenuController = (function () {
 		_onHomeButtonPressed();
 	}
 
+	function _enableMainMenu(bool = true) {
+		$("#MainMenuPanel").enabled = bool;
+	}
+
 	function _onHomeButtonPressed() {
 		_hideAllSubMenus();
+		_enableMainMenu();
 		$.DispatchEvent("HideContentPanel");
 	}
 
@@ -99,20 +124,24 @@ var MainMenuController = (function () {
 	// --------------------------------------------------------------------------------------------------
 
 	function _hideAllSubMenus() {
-		$("#MainMenuTopBarWorkshopContent").visible = false;
-		$("#MainMenuTopBarSettingsContent").visible = false;
-		_hideQuitMenu(true);
+		$("#MainMenuButtonsWorkshopContent").visible = false;
+		$("#MainMenuButtonsSettingsContent").visible = false;
+		_hideElement("#QuitMenu",true);
+		_hideElement("#MainMenuButtonsNewGameContent",true)
+		// _hideElement("#QuitMenu",true);
 	}
 
 	function _onSettingsMenuButtonPressed() {
 		_hideAllSubMenus();
-		$("#MainMenuTopBarSettingsContent").visible = true;
+		_enableMainMenu(false)
+		$("#MainMenuButtonsSettingsContent").visible = true;
 	}
 
 	function _onWorkshopMenuButtonPressed() {
-		//currently unused, awaiting full workshop support.
+		//currently partially unused, awaiting full workshop support.
 		_hideAllSubMenus();
-		$("#MainMenuTopBarWorkshopContent").visible = true;
+		_enableMainMenu(false)
+		$("#MainMenuButtonsWorkshopContent").visible = true;
 	}
 
 	function _playMap(map) {
@@ -124,6 +153,8 @@ var MainMenuController = (function () {
 		// Resume game (pause menu mode)
 		if (GameInterfaceAPI.GetGameUIState() == GAME_UI_STATE.PAUSEMENU) $.DispatchEvent("ChaosMainMenuResumeGame");
 		_hideAllSubMenus();
+		_hideElement('#NavListContainer',false);
+		_enableMainMenu();
 	}
 
 	// --------------------------------------------------------------------------------------------------
@@ -141,18 +172,18 @@ var MainMenuController = (function () {
 
 	function _initializeSettings() {
 		// Audio
-		$("#MainMenuTopBarSettingsProperty_MasterVolume").value = _getNumberCVar("volume");
-		$("#MainMenuTopBarSettingsProperty_MusicVolume").value = _getNumberCVar("snd_volume_music");
-		$("#MainMenuTopBarSettingsProperty_ThreadedAudio").checked = _getBooleanCVar("snd_hrtf_async");
+		$("#MainMenuButtonsSettingsProperty_MasterVolume").value = _getNumberCVar("volume");
+		$("#MainMenuButtonsSettingsProperty_MusicVolume").value = _getNumberCVar("snd_volume_music");
+		$("#MainMenuButtonsSettingsProperty_ThreadedAudio").checked = _getBooleanCVar("snd_hrtf_async");
 
 		// Graphics
-		$("#MainMenuTopBarSettingsProperty_VerticalSync").checked = _getBooleanCVar("mat_vsync");
+		$("#MainMenuButtonsSettingsProperty_VerticalSync").checked = _getBooleanCVar("mat_vsync");
 
 		// Gameplay
-		$("#MainMenuTopBarSettingsProperty_PortalOneCrosshair").checked = _getBooleanCVar("portalgun_crosshair_mode");
+		$("#MainMenuButtonsSettingsProperty_PortalOneCrosshair").checked = _getBooleanCVar("portalgun_crosshair_mode");
 
 		// Interface
-		$("#MainMenuTopBarSettingsProperty_ToggleQuakeConsole").checked = $.persistentStorage.getItem("p2ce.console.quake") ?? false;
+		$("#MainMenuButtonsSettingsProperty_ToggleQuakeConsole").checked = $.persistentStorage.getItem("p2ce.console.quake") ?? false;
 	}
 
 	function _onToggleCVar(cvar) {
@@ -163,18 +194,30 @@ var MainMenuController = (function () {
 		$.persistentStorage.setItem(storedVar, !($.persistentStorage.getItem(storedVar) ?? false));
 	}
 
-	function _hideQuitMenu(bool = true) {
-		const panel = $("#QuitMenu");
-		if(!bool){
-			panel.RemoveClass("Disabled");
-			panel.AddClass("Enabled");
-			panel.RemoveClass("MainMenuSubContainerDisabled");
-			panel.AddClass("MainMenuSubContainerEnabled");
+
+	function _hideElement(element, bool = true) {
+		if(element != null){
+			const panel = $(element);
+			if(!bool){
+				panel.RemoveClass("Disabled");
+				panel.AddClass("Enabled");
+				panel.RemoveClass("MainMenuFadeDisabled");
+				panel.AddClass("MainMenuFadeEnabled");
+				panel.visible = true;
+				_enableMainMenu(false);
+			} else {
+				$.Schedule(0.2, ()=>{
+					panel.RemoveClass("Enabled")
+					panel.AddClass("Disabled")
+					panel.visible = false;
+				});
+				_enableMainMenu(true);
+				panel.RemoveClass("MainMenuFadeEnabled");
+				panel.AddClass("MainMenuFadeDisabled");
+				
+			}	
 		} else {
-			$.Schedule(0.2, ()=>panel.RemoveClass("Enabled"));
-			$.Schedule(0.2, ()=>panel.AddClass("Disabled"));
-			panel.RemoveClass("MainMenuSubContainerEnabled");
-			panel.AddClass("MainMenuSubContainerDisabled");
+			$.Warn("Unable to hide element: Undefined")
 		}
 	}
 
@@ -183,8 +226,11 @@ var MainMenuController = (function () {
 		setBackgroundMovie: _setBackgroundMovie,
 		onSettingsMenuButtonPressed: _onSettingsMenuButtonPressed,
 		onShowMainMenu: _onShowMainMenu,
-		hideQuitMenu: _hideQuitMenu,
+		hideElement: _hideElement,
+		onNewGameMenu: _onNewGameMenu,
+		enableMainMenu: _enableMainMenu,
 		onHideMainMenu: _onHideMainMenu,
+
 		onShowPauseMenu: _onShowPauseMenu,
 		onHidePauseMenu: _onHidePauseMenu,
 		onWorkshopMenuButtonPressed: _onWorkshopMenuButtonPressed,
@@ -215,6 +261,8 @@ var MainMenuController = (function () {
 
 	$.DefineEvent("P2CEMainMenuPlayMap", 1);
 	$.RegisterForUnhandledEvent("P2CEMainMenuPlayMap", MainMenuController.playMap);
-
+	MainMenuController.enableMainMenu();
+	MainMenuController.hideElement('#NavListContainer',false);
+	MainMenuController.hideElement('#QuitMenu',true);
 	MainMenuController.initializeSettings();
 })();
