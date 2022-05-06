@@ -1,4 +1,5 @@
 @use "sass:math"
+@use "utils/utility"
 
 //-----------------//
 //---- Globals ----//
@@ -19,6 +20,7 @@ $main-menu-buttons-button-width: math.div(1, 4)
 		saturation: 0.35
 		blur: fastgaussian(6.0)
 		wash-color-fast: #000000a0
+		
 @keyframes pauseMenuFade
 	0%
 		opacity: 0.0
@@ -34,35 +36,6 @@ $main-menu-buttons-button-width: math.div(1, 4)
 //---- Main Menu ----//
 //-------------------//
 
-Panel
-	width: 100%
-	height: 100%
-
-#MainMenu,
-#MainMenuContainerPanel,
-#MainMenuInput,
-#MainMenuCore,
-#MainMenuBackground,
-#MainMenuMovieParent,
-#MainMenuMovie,
-#MainMenuCampaignFrameParent,
-#MainMenuCampaignFrame,
-#MainMenuNavlistContainer,
-#BackbufferImagePanel,
-#MainMenuButtonsNewGameContainer
-	width: 100%
-	height: 100%
-
-.Main,
-.MainMenuNavlistContainer
-	width: 100%
-	height: 100%
-
-.NavListContainer
-	width: 100%
-	height: 100%
-	flow-children: down
-
 .MainMenuButtonsContent
 	horizontal-align: center
 	vertical-align: top
@@ -70,36 +43,6 @@ Panel
 	background-color: $main-menu-background-color
 	border-radius: $main-menu-border-radius
 
-#MainMenuButtons
-	horizontal-align: center
-	vertical-align: top
-	height: $main-menu-buttons-height - 1%
-	width: $main-menu-buttons-width
-	background-color: $main-menu-background-color
-	opacity-mask: url( "file://{images}/menu/menu_top_bar_mask.png" )
-	padding-left: 20px
-	padding-right: 20px
-	flow-children: right
-
-	Button,
-	TextButton
-		horizontal-align: center
-		vertical-align: center
-		padding: 4px
-		margin: 4px
-		border-radius: $main-menu-border-radius
-		width: fill-parent-flow($main-menu-buttons-button-width)
-		height: 100%
-		&:hover
-			background-color: #555
-
-		Label
-			text-align: center
-			horizontal-align: center
-		
-		Image
-			width: 100%
-			height: 100%
 
 #MainMenuButtonsWorkshopContent
 	width: 100% - ($main-menu-buttons-height * 0.75)
@@ -114,9 +57,6 @@ Panel
 	align: left top
 	background-color: #c6c4c4
 	flow-children: down
-
-#MainMenuButtonsNewGameContainer
-	flow-children: right
 
 #MainMenuButtonsSettingsContent
 	$main-menu-settings-category-width: 20%
@@ -185,50 +125,6 @@ Panel
 				Label
 					align: left center
 					padding-right: 16px
-
-#MainMenuButtonsQuitContent
-	width: 30%
-	height: 14%
-
-	Label
-		color: black
-	
-	> Panel > Label
-		horizontal-align: center
-		padding-top: 45%
-		color: white
-	
-	$button-side-padding: 4%
-	TextButton
-		align: center center
-		background-color: #ddddddbb
-		border-radius: $main-menu-border-radius
-		width: 50% - ($button-side-padding * 1.5)
-		height: 50%
-		&:hover
-			background-color: #aaaa
-	TextButton#MainMenuButtonsQuitButtonYes
-		margin-left: $button-side-padding
-		margin-right: math.div($button-side-padding, 2)
-	TextButton#MainMenuButtonsQuitButtonNo
-		margin-right: $button-side-padding
-		margin-left: math.div($button-side-padding, 2)
-
-	TextButton > Label
-		align: center center
-
-	#MainMenuButtonsQuitContentUpperHalf,
-	#MainMenuButtonsQuitContentLowerHalf
-		width: 100%
-	
-	$top-bar-height: 30%
-	#MainMenuButtonsQuitContentUpperHalf
-		height: $top-bar-height
-	#MainMenuButtonsQuitContentLowerHalf
-		height: 100% - $top-bar-height
-		margin-top: $top-bar-height
-		flow-children: right
-
 
 //--------------------//
 //---- Pause Menu ----//
@@ -338,22 +234,8 @@ Label
 	color: #050505
 	align: left top
 
-.MainNewGameList
-	width: 40%
-	height: 100%
-	border-top: 8px solid #999d
-	flow-children: down
-	overflow: scroll
 
-.MainNewGamePanel
-	width: 100%
-	height: 100%
-	border-top: 8px solid #999d
-	border-left: 8px solid #999d
-
-.MainMenuNavlistItem,
-.MainMenuQuitListItem,
-.MainNewGameListItem
+.ListItem
 	width: 50%
 	height: 7.5%
 	background-color: #b6b6b6dd
@@ -367,14 +249,18 @@ Label
 		color: #050505
 		margin-left: 2.5%
 
+	&:parentdisabled
+		background-color: #424242dd
+
+	&:hover
+		border-left-color: #ff7d02ff
+		background-color: #aaaa
+	
+
 .MainMenuQuitListItem
 	width: 20%
 	height: 5.1%
 	margin-left: 50%
-
-.MainMenuNavlistItem:parentdisabled,
-.MainMenuNavlistItem:parentdisabled
-	background-color: #424242dd
 
 .MainMenuQuitListLabel
 	width: 20%
@@ -383,14 +269,18 @@ Label
 	font-family: "UniversLTStd"
 	font-size: 22px
 	margin-left: 50.5%
-
-
-.MainMenuNavlistItem:hover,
-.MainNewGameListItem:hover,
-.MainMenuQuitListItem:hover
-	border-left-color: #ff7d02ff
-	background-color: #aaaa
 	
+.MainNewGameList
+	width: 40%
+	height: 100%
+	border-top: 8px solid #999d
+	flow-children: down
+	overflow: scroll
+
+.MainNewGamePanel
+	border-top: 8px solid #999d
+	border-left: 8px solid #999d
+
 .MainNewGameListItem
 	height: 18.5%
 	margin-left: 1.5%
@@ -404,9 +294,6 @@ Label
 		color: #8d8d8d
 		align: left center
 		margin-bottom: 20%
-	// > Label
-	// 	margin-left: 17.5%
-	// 	align: left top
 
 .CampaignButtonButton
 	margin-top: 2%
@@ -427,12 +314,6 @@ Label
 
 .MainMenuFadeDisabled
 	animation: FadeLeftDisabled 0.2s linear 0.0s 1 normal backwards
-
-.Enabled
-	visibility: visible
-	
-.Disabled
-	visibility: collapse
 
 .MainMenu .PauseMenuOnly
 	visibility: collapse
