@@ -216,6 +216,8 @@
 					</Panel>
 				</Panel>
 			</Panel>
+		<Panel id="MainMenuTopBarSettingsContent" class="MainMenuTopBarContent" hittest="true">
+			<Frame src="file://{resources}/layout/mainmenu/mainmenu_settings.xml"/>
 		</Panel>
 
 		<Panel id="MainMenuBetaDisplay">

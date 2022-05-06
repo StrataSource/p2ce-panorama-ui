@@ -1,0 +1,12 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/mainmenu.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/mainmenu/mainmenu_settings.js" />
+	</scripts>
+	<Panel>
+		<Frame src="file://{resources}/layout/mainmenu/settings_video.xml"/>
+	</Panel>
+</root>
