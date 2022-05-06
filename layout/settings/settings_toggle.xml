@@ -1,0 +1,12 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/settings/settings_toggle.sass" />
+	</styles>
+
+	<ChaosSettingsToggle>
+		<Label id="Title" />
+		<ToggleButton id="Toggle" />
+	</ChaosSettingsToggle>
+  
+</root>
