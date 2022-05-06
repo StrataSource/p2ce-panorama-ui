@@ -91,7 +91,7 @@ var MainMenuController = (function () {
 		let file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
 		if(file != undefined){ //this happens if the file is both not present or if it's invalid KV.
 			for(let [MenuIdentifier,MenuContents] of Object.entries(file)){
-				let button = $.CreatePanel("Button", content, "", {class: "CampaignButtonButton MainNewGameListItem"});
+				let button = $.CreatePanel("Button", content, "", {class: "CampaignButtonButton ListItem MainNewGameListItem"});
 				$.CreatePanel("Label",button,"", {text: MenuContents.name, class:"CampaignButtonLabel CampaignButtonLabelPrimary"});
 				$.CreatePanel("Label",button,"", {text:"\nBy "+MenuContents.publisher, class:"CampaignButtonLabel CampaignButtonLabelSecondary"});
 				$.CreatePanel("Image",button,"", {src:MenuContents.icon, class:"CampaignButtonImage"});
@@ -199,16 +199,16 @@ var MainMenuController = (function () {
 		if(element != null){
 			const panel = $(element);
 			if(!bool){
-				panel.RemoveClass("Disabled");
-				panel.AddClass("Enabled");
+				panel.RemoveClass("hide");
+				panel.AddClass("show");
 				panel.RemoveClass("MainMenuFadeDisabled");
 				panel.AddClass("MainMenuFadeEnabled");
 				panel.visible = true;
 				_enableMainMenu(false);
 			} else {
 				$.Schedule(0.2, ()=>{
-					panel.RemoveClass("Enabled")
-					panel.AddClass("Disabled")
+					panel.RemoveClass("show")
+					panel.AddClass("hide")
 					panel.visible = false;
 				});
 				_enableMainMenu(true);

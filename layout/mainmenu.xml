@@ -14,7 +14,7 @@
 			<Panel>
 				<!-- Source is set in script. -->
 				<Movie
-					class="MainMenuModeOnly" 
+					class="MainMenuModeOnly full" 
 					id="MainMenuMovie"
 					src=""
 					sound=""
@@ -25,20 +25,20 @@
 		</snippet>
 	</snippets>
 
-	<ChaosMainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" useglobalcontext="true" oncancel="MainMenuController.onEscapeKeyPressed();">
-		<ChaosBackbufferImagePanel id="BackbufferImagePanel" />
+	<ChaosMainMenu class="InitialDisplay MainMenuRootPanel full" hittest="false" useglobalcontext="true" oncancel="MainMenuController.onEscapeKeyPressed();">
+		<ChaosBackbufferImagePanel id="BackbufferImagePanel" class="full" />
 
-		<Panel id="MainMenuContainerPanel">
+		<Panel id="MainMenuContainerPanel" class="full">
 
 			<!-- The actual panel with input & focus -->
-			<Panel id="MainMenuInput">
+			<Panel id="MainMenuInput" class="full">
 				
 				<!-- Fills the entire screen. This is used as the backdrop -->
-				<Panel id="MainMenuCore" blurrects="ChaosLoadingScreen">
-					<Panel id="MainMenuBackground">
+				<Panel id="MainMenuCore" class="full" blurrects="ChaosLoadingScreen">
+					<Panel id="MainMenuBackground" class="full">
 
 						<!-- Background video -->
-						<Panel id="MainMenuMovieParent">
+						<Panel id="MainMenuMovieParent" class="full">
 							<!-- Movie added/removed dynamically when changing the visibility of the main menu -->
 						</Panel>
 						<Panel id="MainMenuVanityParent">
@@ -46,67 +46,67 @@
 						</Panel>
 					</Panel>
 
-					<Panel id="MainMenuCampaignFrameParent">
-						<Frame id="MainMenuCampaignFrame"> 
-							<Panel class="Main">
-								<Panel id="MainMenuPanel" class="MainMenuNavlistContainer">
+					<Panel id="MainMenuCampaignFrameParent" class="full">
+						<Frame id="MainMenuCampaignFrame" class="full"> 
+							<Panel class="full">
+								<Panel id="MainMenuPanel" class="full MainMenuNavlistContainer">
 									<Image id="MainMenuLogoDark"
 											class=""
 											src=""
 											defaultsrc="file://{images}/menu/p2ce/logo_title.png"
 											scaling="stretch-to-cover-preserve-aspect"/>
-									<Panel id="NavListContainer" class="NavListContainer" >
+									<Panel id="NavListContainer" class="full flow-down" >
 										<TextButton id=""
-												class="MainMenuNavlistItem MainMenuOnly"
+												class="ListItem MainMenuNavlistItem MainMenuOnly"
 												group="NavBar"
 												onactivate="MainMenuController.onNewGameMenu()"
 												text="Start New Game" />
 
 										<TextButton id=""
-												class="MainMenuNavlistItem MainMenuOnly"
+												class="ListItem MainMenuNavlistItem MainMenuOnly"
 												group="NavBar"
 												onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_a2_triple_laser' );"
 												text="Load Game" />
 
 										<TextButton id=""
-												class="MainMenuNavlistItem PauseMenuOnly"
+												class="ListItem MainMenuNavlistItem PauseMenuOnly"
 												group="NavBar"
 												onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
 												text="Resume Game" />
 
 										<TextButton id=""
-												class="MainMenuNavlistItem MainMenuOnly"
+												class="ListItem MainMenuNavlistItem MainMenuOnly"
 												group="NavBar"
 												onactivate="MainMenuController.onWorkshopMenuButtonPressed();"
 												text="Manage Addons" />
 
 										<TextButton id=""
-												class="MainMenuNavlistItem"
+												class="ListItem MainMenuNavlistItem"
 												group="NavBar"
 												onactivate="MainMenuController.onSettingsMenuButtonPressed();"
 												text="Settings" />
 
 										<TextButton id=""
-												class="MainMenuNavlistItem PauseMenuOnly"
+												class="ListItem MainMenuNavlistItem PauseMenuOnly"
 												group="NavBar"
 												onactivate="GameInterfaceAPI.ConsoleCommand( 'disconnect' );"
 												text="Exit to Main Menu" />
 										<TextButton id=""
-												class="MainMenuNavlistItem"
+												class="ListItem MainMenuNavlistItem"
 												group="NavBar"
 												onactivate="MainMenuController.hideElement('#QuitMenu',false);"
 												text="Quit" />
 									</Panel>
 								</Panel>
-								<Panel class="MainMenuSubContainer MainMenuNavlistContainer Disabled" id="QuitMenu">
+								<Panel class="MainMenuSubContainer MainMenuNavlistContainer hide full" id="QuitMenu">
 									<Label class="MainMenuQuitListLabel" text="Are you sure you want to quit?" />
 									<TextButton id=""
-										class="MainMenuQuitListItem"
+										class="ListItem MainMenuQuitListItem"
 										group="NavBar"
 										onactivate="GameInterfaceAPI.ConsoleCommand('quit');"
 										text="Yes" />
 									<TextButton id=""
-										class="MainMenuQuitListItem"
+										class="ListItem MainMenuQuitListItem"
 										group="NavBar"
 										onactivate="MainMenuController.hideElement('#QuitMenu',true)"
 										text="No" />
@@ -123,12 +123,12 @@
 			<Label style="align: center center;" text="Steam workshop functionality is not currently implemented." />
 		</Panel>
 		
-		<Panel id="MainMenuButtonsNewGameContent" class="MainMenuButtonsContent Disabled">
+		<Panel id="MainMenuButtonsNewGameContent" class="MainMenuButtonsContent hide">
 			<Label class="MainMenuButtonsNewGameLabel" text="Start New Game" />
-			<Panel id="MainMenuButtonsNewGameContainer">
+			<Panel class="full flow-right">
 				<Panel class="MainNewGameList" id="MainMenuButtonsNewGameList">
 				</Panel>
-				<Panel class="MainNewGamePanel" id="MainMenuButtonsNewGamePanel">
+				<Panel class="full MainNewGamePanel" id="MainMenuButtonsNewGamePanel">
 				<Label text="Chapters"/>
 				</Panel>
 			</Panel>
