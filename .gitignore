@@ -1,3 +1,6 @@
 .idea/
 .vs/
 node_modules/
+
+# Generated fonts crap for panorama 
+.uuid
