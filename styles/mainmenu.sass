@@ -4,19 +4,39 @@
 //---- Globals ----//
 //-----------------//
 
-Label
-	font-size: 25px
-	font-weight: normal
+$main-menu-buttons-height: 6.5%
+$main-menu-buttons-width: 300px
+$main-menu-border-radius: 8px
+$main-menu-background-color: #222
+$main-menu-buttons-button-width: math.div(1, 4)
+
+@keyframes pauseMenuVignette
+	0%
+		saturation: 1.0
+		blur: fastgaussian(0.0)
+		wash-color-fast: #00000000
+	100%
+		saturation: 0.35
+		blur: fastgaussian(6.0)
+		wash-color-fast: #000000a0
+@keyframes pauseMenuFade
+	0%
+		opacity: 0.0
+	100%
+		opacity: 1.0
 
 // It is a class instead of ChaosSettingsSlider to override the height and width
 .MainMenuSettingsSlider
 	height: 16px
 	width: 256px
 
-
 //-------------------//
 //---- Main Menu ----//
 //-------------------//
+
+Panel
+	width: 100%
+	height: 100%
 
 #MainMenu,
 #MainMenuContainerPanel,
@@ -42,12 +62,13 @@ Label
 	width: 100%
 	height: 100%
 	flow-children: down
-	
-$main-menu-buttons-height: 6.5%
-$main-menu-buttons-width: 300px
-$main-menu-border-radius: 8px
-$main-menu-background-color: #222
-$main-menu-buttons-button-width: math.div(1, 4)
+
+.MainMenuButtonsContent
+	horizontal-align: center
+	vertical-align: top
+	margin-top: $main-menu-buttons-height
+	background-color: $main-menu-background-color
+	border-radius: $main-menu-border-radius
 
 #MainMenuButtons
 	horizontal-align: center
@@ -79,13 +100,6 @@ $main-menu-buttons-button-width: math.div(1, 4)
 		Image
 			width: 100%
 			height: 100%
-
-.MainMenuButtonsContent
-	horizontal-align: center
-	vertical-align: top
-	margin-top: $main-menu-buttons-height
-	background-color: $main-menu-background-color
-	border-radius: $main-menu-border-radius
 
 #MainMenuButtonsWorkshopContent
 	width: 100% - ($main-menu-buttons-height * 0.75)
@@ -227,28 +241,12 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	animation-iteration-count: 1
 	animation-fill-mode: forwards
 
-@keyframes pauseMenuVignette
-	0%
-		saturation: 1.0
-		blur: fastgaussian(0.0)
-		wash-color-fast: #00000000
-	100%
-		saturation: 0.35
-		blur: fastgaussian(6.0)
-		wash-color-fast: #000000a0
-
 .PauseMenuFade
 	animation-name: pauseMenuFade
 	animation-duration: 0.2s
 	animation-timing-function: ease-in-out
 	animation-iteration-count: 1
 	animation-fill-mode: forwards
-
-@keyframes pauseMenuFade
-	0%
-		opacity: 0.0
-	100%
-		opacity: 1.0
 
 
 //----------------------//
@@ -376,7 +374,6 @@ Label
 
 .MainMenuNavlistItem:parentdisabled,
 .MainMenuNavlistItem:parentdisabled
-
 	background-color: #424242dd
 
 .MainMenuQuitListLabel
@@ -433,6 +430,7 @@ Label
 
 .Enabled
 	visibility: visible
+	
 .Disabled
 	visibility: collapse
 

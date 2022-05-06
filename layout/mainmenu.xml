@@ -129,7 +129,7 @@
 				<Panel class="MainNewGameList" id="MainMenuButtonsNewGameList">
 				</Panel>
 				<Panel class="MainNewGamePanel" id="MainMenuButtonsNewGamePanel">
-				<!-- <Label text="Chapters"/> -->
+				<Label text="Chapters"/>
 				</Panel>
 			</Panel>
 		</Panel>
