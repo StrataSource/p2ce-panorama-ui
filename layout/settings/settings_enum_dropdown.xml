@@ -1,0 +1,15 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/settings/settings_enum_dropdown.sass" />
+	</styles>
+  
+	<ChaosSettingsEnumDropDown>
+		<Panel>
+			<Label id="Title" />
+		</Panel>
+		<Panel>
+			<DropDown id="DropDown" class="dropdown" menuclass="dropdown-menu" />
+		</Panel>
+	</ChaosSettingsEnumDropDown>
+</root>
