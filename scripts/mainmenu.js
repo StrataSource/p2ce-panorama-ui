@@ -86,7 +86,7 @@ var MainMenuController = (function () {
 
 	function _onNewGameMenu() {
 		_enableMainMenu(false)
-		_hideElement('#NavListContainer',true);
+		_hideElement("#NavListContainer",true);
 		let content = $("#MainMenuButtonsNewGameList");
 		content.RemoveAndDeleteChildren();
 		let file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
@@ -104,7 +104,8 @@ var MainMenuController = (function () {
 	}
 
 	function _onNewgameSelected(maps) {
-		let content = $('#MainMenuButtonsNewGamePanel');
+		let content = $("#MainMenuButtonsNewGamePanel");
+		let contentImage = $("#MainMenuNewGameCampaignImage");
 		content.RemoveAndDeleteChildren();
 		_hideElement("#MainNewGamePanel",false)
 		for(let [MenuIdentifier,MenuContents] of Object.entries(maps)){
@@ -114,7 +115,7 @@ var MainMenuController = (function () {
 	}
 
 	function _onChapterSelected(map) {
-		let content = $('#MainMenuNewGameChapterImage');
+		let content = $("#MainMenuNewGameChapterImage");
 		let playbutton = $("#MainMenuNewGamePlayButton");
 		playbutton.enabled = true;
 		//currentSelectedMap.data().onactivate = "MainMenuController.playMap('"+map.map+"');"
@@ -156,7 +157,7 @@ var MainMenuController = (function () {
 		$("#MainMenuButtonsWorkshopContent").visible = false;
 		$("#MainMenuButtonsSettingsContent").visible = false;
 		$("#MainMenuNewGamePlayButton").enabled = false;
-		$('#MainMenuNewGameChapterImage').SetImage("");
+		$("#MainMenuNewGameChapterImage").SetImage("");
 		_hideElement("#QuitMenu",true);
 		_hideElement("#MainMenuButtonsNewGameContent",true)
 		_hideElement("#MainNewGamePanel",true)
@@ -167,7 +168,7 @@ var MainMenuController = (function () {
 		panel.RemoveClass("MainMenuFadeDisabled");
 		panel.AddClass("MainMenuFadeEnabled");
 		panel.visible = true;
-		//_hideElement('#NavListContainer',false); //assure main menu is present.
+		//assure main menu is present.
 		
 	}
 
@@ -193,7 +194,7 @@ var MainMenuController = (function () {
 		// Resume game (pause menu mode)
 		if (GameInterfaceAPI.GetGameUIState() == GAME_UI_STATE.PAUSEMENU) $.DispatchEvent("ChaosMainMenuResumeGame");
 		_hideAllSubMenus();
-		_hideElement('#NavListContainer',false);
+		_hideElement("#NavListContainer",false);
 		_enableMainMenu();
 	}
 
@@ -304,7 +305,7 @@ var MainMenuController = (function () {
 	$.DefineEvent("P2CEMainMenuPlayMap", 1);
 	$.RegisterForUnhandledEvent("P2CEMainMenuPlayMap", MainMenuController.playMap);
 	MainMenuController.enableMainMenu();
-	MainMenuController.hideElement('#NavListContainer',false);
-	MainMenuController.hideElement('#QuitMenu',true);
+	MainMenuController.hideElement("#NavListContainer",false);
+	MainMenuController.hideElement("#QuitMenu",true);
 	MainMenuController.initializeSettings();
 })();

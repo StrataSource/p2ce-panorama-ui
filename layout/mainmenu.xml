@@ -130,6 +130,7 @@
 				</Panel>
 				<Panel class="full MainNewGamePanel">
 					<Panel id="MainNewGamePanel" class="full hide">
+						<Image id="MainMenuNewGameCampaignImage"/>
 						<Label text="Chapters:"/>
 						<Panel class="full flow-right">
 							<Panel class="MainMenuNewGameContainer flow-down" id="MainMenuButtonsNewGamePanel">
@@ -137,7 +138,7 @@
 							<Image id="MainMenuNewGameChapterImage" scaling="100% 100%"/>
 						</Panel>
 						<Button disabled="true" onactivate="MainMenuController.playSelectedMap()" hittest="true" id="MainMenuNewGamePlayButton" class="ListItem MainMenuNewGamePlayChapterButton">
-							<Label text="No Bitches?"/>
+							<Label text="Start Game"/>
 						</Button>
 					</Panel>
 				</Panel>
