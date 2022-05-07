@@ -1,18 +1,9 @@
 {
 	"devDependencies": {
-		"eslint": "^8.8.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-config-standard": "^16.0.3",
-		"eslint-plugin-import": "^2.25.4",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-promise": "^5.2.0",
-		"npm-run-all": "^4.1.5",
-		"prettier": "2.5.1"
+		"eslint": "^8.15.0"
 	},
 	"scripts": {
-		"eslint": "npx eslint \"./**\" --fix",
-		"prettier-watch": "npx onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
-		"prettier-write": "npx prettier --write .",
-		"format": "npm-run-all eslint prettier-write"
+		"check": "npx eslint \"./**\"",
+		"format": "npx eslint \"./**\" --fix"
 	}
 }
