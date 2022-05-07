@@ -128,8 +128,18 @@
 			<Panel class="full flow-right">
 				<Panel class="MainNewGameList" id="MainMenuButtonsNewGameList">
 				</Panel>
-				<Panel class="full MainNewGamePanel" id="MainMenuButtonsNewGamePanel">
-				<Label text="Chapters"/>
+				<Panel class="full MainNewGamePanel">
+					<Panel id="MainNewGamePanel" class="full hide">
+						<Label text="Chapters:"/>
+						<Panel class="full flow-right">
+							<Panel class="MainMenuNewGameContainer flow-down" id="MainMenuButtonsNewGamePanel">
+							</Panel>
+							<Image id="MainMenuNewGameChapterImage" scaling="100% 100%"/>
+						</Panel>
+						<Button disabled="true" onactivate="MainMenuController.playSelectedMap()" hittest="true" id="MainMenuNewGamePlayButton" class="ListItem MainMenuNewGamePlayChapterButton">
+							<Label text="No Bitches?"/>
+						</Button>
+					</Panel>
 				</Panel>
 			</Panel>
 		</Panel>

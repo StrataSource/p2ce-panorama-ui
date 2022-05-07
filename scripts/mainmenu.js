@@ -28,6 +28,8 @@ var MainMenuController = (function () {
 		},
 	};
 
+	let currentSelectedMap = null;
+
 	function _setBackgroundMovie(movie) {
 		const videoPlayer = $("#MainMenuMovie");
 		videoPlayer.SetAttributeString("data-type", "video/webm");
@@ -86,12 +88,11 @@ var MainMenuController = (function () {
 		_enableMainMenu(false)
 		_hideElement('#NavListContainer',true);
 		let content = $("#MainMenuButtonsNewGameList");
-		let sidepanel = $('#MainMenuButtonsNewGamePanel');
 		content.RemoveAndDeleteChildren();
 		let file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
 		if(file != undefined){ //this happens if the file is both not present or if it's invalid KV.
 			for(let [MenuIdentifier,MenuContents] of Object.entries(file)){
-				let button = $.CreatePanel("Button", content, "", {class: "CampaignButtonButton ListItem MainNewGameListItem"});
+				let button = $.CreatePanel("Button", content, "", {onactivate:"MainMenuController.onNewgameSelected("+JSON.stringify(MenuContents.maps)+");",class: "CampaignButtonButton ListItem MainNewGameListItem"});
 				$.CreatePanel("Label",button,"", {text: MenuContents.name, class:"CampaignButtonLabel CampaignButtonLabelPrimary"});
 				$.CreatePanel("Label",button,"", {text:"\nBy "+MenuContents.publisher, class:"CampaignButtonLabel CampaignButtonLabelSecondary"});
 				$.CreatePanel("Image",button,"", {src:MenuContents.icon, class:"CampaignButtonImage"});
@@ -100,6 +101,34 @@ var MainMenuController = (function () {
 			$.CreatePanel("Label", content, "", { style:"align: center center;", text: "OOPS!" });
 		}
 		_hideElement("#MainMenuButtonsNewGameContent",false)
+	}
+
+	function _onNewgameSelected(maps) {
+		let content = $('#MainMenuButtonsNewGamePanel');
+		content.RemoveAndDeleteChildren();
+		_hideElement("#MainNewGamePanel",false)
+		for(let [MenuIdentifier,MenuContents] of Object.entries(maps)){
+			let button = $.CreatePanel("Button", content, "", {onactivate:"MainMenuController.onChapterSelected("+JSON.stringify(MenuContents)+");",class: "ListItem MainMenuChapterListItem"});
+			$.CreatePanel("Label",button,"", {text: MenuContents.name, class:""});
+		}
+	}
+
+	function _onChapterSelected(map) {
+		let content = $('#MainMenuNewGameChapterImage');
+		let playbutton = $("#MainMenuNewGamePlayButton");
+		playbutton.enabled = true;
+		//currentSelectedMap.data().onactivate = "MainMenuController.playMap('"+map.map+"');"
+		currentSelectedMap = map.map;
+		content.SetImage(map.image);
+		
+	}
+
+	function _playSelectedMap(){
+		if(currentSelectedMap){
+			_playMap(currentSelectedMap);
+			_hideAllSubMenus();
+			_enableMainMenu();
+		}
 	}
 
 	function _onHidePauseMenu() {
@@ -123,12 +152,23 @@ var MainMenuController = (function () {
 	// Icon buttons functions
 	// --------------------------------------------------------------------------------------------------
 
-	function _hideAllSubMenus() {
+	function _hideAllSubMenus() { //at this point, this function is a general "cleanup" function to get rid of any menu states/altered elements.
 		$("#MainMenuButtonsWorkshopContent").visible = false;
 		$("#MainMenuButtonsSettingsContent").visible = false;
+		$("#MainMenuNewGamePlayButton").enabled = false;
+		$('#MainMenuNewGameChapterImage').SetImage("");
 		_hideElement("#QuitMenu",true);
 		_hideElement("#MainMenuButtonsNewGameContent",true)
-		// _hideElement("#QuitMenu",true);
+		_hideElement("#MainNewGamePanel",true)
+		currentSelectedMap = null
+		const panel = $("#NavListContainer");
+		panel.RemoveClass("hide");
+		panel.AddClass("show");
+		panel.RemoveClass("MainMenuFadeDisabled");
+		panel.AddClass("MainMenuFadeEnabled");
+		panel.visible = true;
+		//_hideElement('#NavListContainer',false); //assure main menu is present.
+		
 	}
 
 	function _onSettingsMenuButtonPressed() {
@@ -228,9 +268,11 @@ var MainMenuController = (function () {
 		onShowMainMenu: _onShowMainMenu,
 		hideElement: _hideElement,
 		onNewGameMenu: _onNewGameMenu,
+		playSelectedMap: _playSelectedMap,
 		enableMainMenu: _enableMainMenu,
 		onHideMainMenu: _onHideMainMenu,
-
+		onNewgameSelected: _onNewgameSelected,
+		onChapterSelected:_onChapterSelected,
 		onShowPauseMenu: _onShowPauseMenu,
 		onHidePauseMenu: _onHidePauseMenu,
 		onWorkshopMenuButtonPressed: _onWorkshopMenuButtonPressed,

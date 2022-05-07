@@ -249,10 +249,10 @@ Label
 		color: #050505
 		margin-left: 2.5%
 
-	&:parentdisabled
+	&:disabled, &:parentdisabled
 		background-color: #424242dd
 
-	&:hover
+	&:hover:not(:parentdisabled):enabled
 		border-left-color: #ff7d02ff
 		background-color: #aaaa
 	
@@ -280,6 +280,20 @@ Label
 .MainNewGamePanel
 	border-top: 8px solid #999d
 	border-left: 8px solid #999d
+	> Panel
+		> Label,
+		> Button 
+			height: 10%
+			width: 41%
+			margin-left: 2%
+			color: #000
+
+.MainMenuNewGamePlayChapterButton
+	align: right bottom
+
+#MainMenuNewGameChapterImage
+	align: right bottom
+	margin-bottom: 10%
 
 .MainNewGameListItem
 	height: 18.5%
@@ -303,6 +317,21 @@ Label
 	width: 15%
 	align: left center
 	margin-left: 1.5%
+
+.MainMenuNewGameContainer
+	width: 50%
+	height: 50%
+	align: left bottom
+	background-color: #cecece
+	overflow: scroll
+
+.MainMenuChapterListItem
+	width: 95%
+	height: 25%
+	margin-left: 2%
+	> Label
+		align: left center
+		font-family: "UniversLTStd"
 
 .MainMenuSubContainer
 	height: 200%
