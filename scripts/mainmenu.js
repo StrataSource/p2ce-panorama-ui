@@ -28,8 +28,6 @@ var MainMenuController = (function () {
 		},
 	};
 
-	let currentSelectedMap = null;
-
 	function _setBackgroundMovie(movie) {
 		const videoPlayer = $("#MainMenuMovie");
 		videoPlayer.SetAttributeString("data-type", "video/webm");
@@ -128,16 +126,12 @@ var MainMenuController = (function () {
 		const content = $("#MainMenuNewGameChapterImage");
 		const playbutton = $("#MainMenuNewGamePlayButton");
 		playbutton.enabled = true;
-		currentSelectedMap = map.map;
-		content.SetImage(map.image);
-	}
-
-	function _playSelectedMap(){
-		if(currentSelectedMap){
-			_playMap(currentSelectedMap);
+		playbutton.SetPanelEvent('onactivate', () => {
+			_playMap(map.map);
 			_hideAllSubMenus();
 			_enableMainMenu();
-		}
+		});
+		content.SetImage(map.image);
 	}
 
 	function _onHidePauseMenu() {
@@ -164,12 +158,13 @@ var MainMenuController = (function () {
 	function _hideAllSubMenus() { //at this point, this function is a general "cleanup" function to get rid of any menu states/altered elements.
 		$("#MainMenuButtonsWorkshopContent").visible = false;
 		$("#MainMenuButtonsSettingsContent").visible = false;
-		$("#MainMenuNewGamePlayButton").enabled = false;
+		const playbutton = $("#MainMenuNewGamePlayButton");
+		playbutton.enabled = false;
+		playbutton.SetPanelEvent("onactivate",(_)=>{});
 		$("#MainMenuNewGameChapterImage").SetImage("");
 		_hideElement("#QuitMenu",true);
 		_hideElement("#MainMenuButtonsNewGameContent",true)
 		_hideElement("#MainNewGamePanel",true)
-		currentSelectedMap = null
 		const panel = $("#NavListContainer");
 		panel.RemoveClass("hide");
 		panel.AddClass("show");
@@ -277,7 +272,6 @@ var MainMenuController = (function () {
 		onShowMainMenu: _onShowMainMenu,
 		hideElement: _hideElement,
 		onNewGameMenu: _onNewGameMenu,
-		playSelectedMap: _playSelectedMap,
 		enableMainMenu: _enableMainMenu,
 		onHideMainMenu: _onHideMainMenu,
 		onNewgameSelected: _onNewgameSelected,
