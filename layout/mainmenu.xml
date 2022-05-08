@@ -131,11 +131,14 @@
 				<Panel class="full MainNewGamePanel">
 					<Panel id="MainNewGamePanel" class="full hide">
 						<Image id="MainMenuNewGameCampaignImage"/>
-						<Label text="Chapters:"/>
+						<Label text=" Chapters:"/>
+						<Label class="full" id="MainMenuNewGameChapterTitleLabel"/>
+						<Label class="full" id="MainMenuNewGameChapterTitle2Label"/>
+						<Label class="full" id="MainMenuNewGameChapterDescriptionLabel"/>
 						<Panel class="full flow-right">
 							<Panel class="MainMenuNewGameContainer flow-down" id="MainMenuButtonsNewGamePanel">
 							</Panel>
-							<Image id="MainMenuNewGameChapterImage" scaling="100% 100%"/>
+							<Image id="MainMenuNewGameChapterImage" scaling="stretch"/>
 						</Panel>
 						<Button disabled="true" onactivate="MainMenuController.playSelectedMap()" hittest="true" id="MainMenuNewGamePlayButton" class="ListItem MainMenuNewGamePlayChapterButton">
 							<Label text="Start Game"/>
