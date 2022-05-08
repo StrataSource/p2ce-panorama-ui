@@ -87,12 +87,12 @@ var MainMenuController = (function () {
 	function _onNewGameMenu() {
 		_enableMainMenu(false)
 		_hideElement("#NavListContainer",true);
-		let content = $("#MainMenuButtonsNewGameList");
+		const content = $("#MainMenuButtonsNewGameList");
 		content.RemoveAndDeleteChildren();
-		let file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
+		const file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
 		if(file != undefined){ //this happens if the file is both not present or if it's invalid KV.
 			for(let [MenuIdentifier,MenuContents] of Object.entries(file)){
-				let button = $.CreatePanel("RadioButton", content, "", {class: "CampaignButtonButton ListItem MainNewGameListItem", group:"RBG1"});
+				const button = $.CreatePanel("RadioButton", content, "", {class: "CampaignButtonButton ListItem MainNewGameListItem", group:"RBG1"});
 				button.SetPanelEvent("onactivate", (_)=>{
 					MainMenuController.onNewgameSelected(MenuContents.maps)
 					$("#MainMenuNewGameChapterDescriptionLabel").text = MenuContents.description;
@@ -112,21 +112,21 @@ var MainMenuController = (function () {
 	}
 
 	function _onNewgameSelected(maps) {
-		let content = $("#MainMenuButtonsNewGamePanel");
+		const content = $("#MainMenuButtonsNewGamePanel");
 		$("#MainMenuNewGameChapterImage").SetImage("");
 		$("#MainMenuNewGamePlayButton").enabled = false;
 		content.RemoveAndDeleteChildren();
 		_hideElement("#MainNewGamePanel",false)
 		for(let [MenuIdentifier,MenuContents] of Object.entries(maps)){
-			let button = $.CreatePanel("RadioButton", content, "", {group:"RBG2", class: "ListItem MainMenuChapterListItem"});
+			const button = $.CreatePanel("RadioButton", content, "", {group:"RBG2", class: "ListItem MainMenuChapterListItem"});
 			button.SetPanelEvent("onactivate",(_)=>MainMenuController.onChapterSelected(MenuContents))
 			$.CreatePanel("Label",button,"", {text: MenuContents.name, class:""});
 		}
 	}
 
 	function _onChapterSelected(map) {
-		let content = $("#MainMenuNewGameChapterImage");
-		let playbutton = $("#MainMenuNewGamePlayButton");
+		const content = $("#MainMenuNewGameChapterImage");
+		const playbutton = $("#MainMenuNewGamePlayButton");
 		playbutton.enabled = true;
 		currentSelectedMap = map.map;
 		content.SetImage(map.image);
