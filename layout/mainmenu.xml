@@ -136,8 +136,7 @@
 						<Label class="full" id="MainMenuNewGameChapterTitle2Label"/>
 						<Label class="full" id="MainMenuNewGameChapterDescriptionLabel"/>
 						<Panel class="full flow-right">
-							<Panel class="MainMenuNewGameContainer flow-down" id="MainMenuButtonsNewGamePanel">
-							</Panel>
+							<Panel class="MainMenuNewGameContainer flow-down" id="MainMenuButtonsNewGamePanel" />
 							<Image id="MainMenuNewGameChapterImage" scaling="stretch"/>
 						</Panel>
 						<Button disabled="true" hittest="true" id="MainMenuNewGamePlayButton" class="MainMenuNewGamePlayChapterButton">
