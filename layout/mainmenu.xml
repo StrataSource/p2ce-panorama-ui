@@ -140,7 +140,7 @@
 							</Panel>
 							<Image id="MainMenuNewGameChapterImage" scaling="stretch"/>
 						</Panel>
-						<Button disabled="true" onactivate="MainMenuController.playSelectedMap()" hittest="true" id="MainMenuNewGamePlayButton" class="ListItem MainMenuNewGamePlayChapterButton">
+						<Button disabled="true" hittest="true" id="MainMenuNewGamePlayButton" class="ListItem MainMenuNewGamePlayChapterButton">
 							<Label text="Start Game"/>
 						</Button>
 					</Panel>
