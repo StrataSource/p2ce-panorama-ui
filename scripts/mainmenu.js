@@ -91,7 +91,7 @@ var MainMenuController = (function () {
 		if(file != undefined){ //this happens if the file is both not present or if it's invalid KV.
 			for(let [MenuIdentifier,MenuContents] of Object.entries(file)){
 				const button = $.CreatePanel("RadioButton", content, "", {class: "CampaignButtonButton ListItem MainNewGameListItem", group:"RBG1"});
-				button.SetPanelEvent("onactivate", (_)=>{
+				button.SetPanelEvent("onactivate", (_id)=>{
 					MainMenuController.onNewgameSelected(MenuContents.maps)
 					$("#MainMenuNewGameChapterDescriptionLabel").text = MenuContents.description;
 					$("#MainMenuNewGameChapterTitleLabel").text = MenuContents.name;
