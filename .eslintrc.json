@@ -3,9 +3,8 @@
         "browser": false,
         "es2021": true
     },
-    "extends": [
-        "standard",
-		"prettier"
+	"extends": [
+        "eslint:recommended"
     ],
     "parserOptions": {
         "ecmaVersion": "latest"
@@ -16,6 +15,11 @@
 		"arrow-parens": "error",
 		"indent": "off",
 		"no-mixed-spaces-and-tabs": "error",
-		"curly": "off"
+		"curly": "off",
+		"no-unused-vars": ["error", {
+			"argsIgnorePattern": "^_",
+			"destructuredArrayIgnorePattern": "^_",
+			"ignoreRestSiblings": true
+		}]
     }
 }

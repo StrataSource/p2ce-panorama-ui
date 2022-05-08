@@ -3,7 +3,7 @@ fonts
 images
 layout
 node_modules
-scripts/dummy
+scripts/__types_p2ce.js
 styles
 *.cfg
 *.json
@@ -12,5 +12,4 @@ styles
 .editorconfig
 .eslintignore
 .gitignore
-.prettierignore
-.prettierrc
+LICENSE

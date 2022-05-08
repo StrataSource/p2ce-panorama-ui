@@ -120,7 +120,7 @@ var MainMenuController = (function () {
 		GameInterfaceAPI.ConsoleCommand("map " + map);
 	}
 
-	function _onEscapeKeyPressed(eSource, nRepeats, focusPanel) {
+	function _onEscapeKeyPressed(_eSource, _nRepeats, _focusPanel) {
 		// Resume game (pause menu mode)
 		if (GameInterfaceAPI.GetGameUIState() == GAME_UI_STATE.PAUSEMENU) $.DispatchEvent("ChaosMainMenuResumeGame");
 		_hideAllSubMenus();
