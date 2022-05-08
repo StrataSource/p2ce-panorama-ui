@@ -117,7 +117,7 @@ var MainMenuController = (function () {
 		_hideElement("#MainNewGamePanel",false)
 		for(let [MenuIdentifier,MenuContents] of Object.entries(maps)){
 			const button = $.CreatePanel("RadioButton", content, "", {group:"RBG2", class: "ListItem MainMenuChapterListItem"});
-			button.SetPanelEvent("onactivate",(_)=>MainMenuController.onChapterSelected(MenuContents))
+			button.SetPanelEvent("onactivate",(_id)=>MainMenuController.onChapterSelected(MenuContents))
 			$.CreatePanel("Label",button,"", {text: MenuContents.name, class:""});
 		}
 	}
