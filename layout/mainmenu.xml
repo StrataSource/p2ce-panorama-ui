@@ -59,7 +59,7 @@
 										<TextButton id=""
 												class="ListItem MainMenuNavlistItem MainMenuOnly"
 												group="NavBar"
-												onactivate="MainMenuController.onNewGameMenu()"
+												onactivate="MainMenuController.onNewGameMenu();"
 												text="Start New Game" />
 
 										<TextButton id=""
@@ -108,7 +108,7 @@
 									<TextButton id=""
 										class="ListItem MainMenuQuitListItem"
 										group="NavBar"
-										onactivate="MainMenuController.hideElement('#QuitMenu',true)"
+										onactivate="MainMenuController.hideElement('#QuitMenu',true);"
 										text="No" />
 								</Panel>
 							</Panel>
