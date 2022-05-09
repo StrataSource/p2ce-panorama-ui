@@ -146,77 +146,8 @@
 				</Panel>
 			</Panel>
 		</Panel>
-		<!-- <Label class="MainMenuButtonsNewGameLabel" text="Start New Game" /> -->
+		
 		<Panel id="MainMenuButtonsSettingsContent" class="MainMenuButtonsContent" hittest="true">
-			<!-- todo: complete settings panel -->
-			<Panel id="MainMenuButtonsSettingsCategoryList">
-				<TextButton class="MainMenuButtonsSettingsCategoryListEntry"
-						group="MainMenuButtonsSettingsCategory"
-						onactivate=""
-						text="Audio" />
-				<TextButton class="MainMenuButtonsSettingsCategoryListEntry"
-						group="MainMenuButtonsSettingsCategory"
-						onactivate=""
-						text="Graphics" />
-				<TextButton class="MainMenuButtonsSettingsCategoryListEntry"
-						group="MainMenuButtonsSettingsCategory"
-						onactivate=""
-						text="Gameplay" />
-				<TextButton class="MainMenuButtonsSettingsCategoryListEntry"
-						group="MainMenuButtonsSettingsCategory"
-						onactivate=""
-						text="Keybinds" />
-				<TextButton class="MainMenuButtonsSettingsCategoryListEntry"
-						group="MainMenuButtonsSettingsCategory"
-						onactivate=""
-						text="Interface" />
-			</Panel>
-			<Panel id="MainMenuButtonsSettingsPropertyList">
-				<Label class="MainMenuButtonsSettingsPropertyListCategoryLabel" text="Audio" style="margin-top: 0px; border-top-left-radius: 4px;" />
-				<Panel class="MainMenuButtonsSettingsPropertyListCategory">
-					<Panel class="MainMenuButtonsSettingsPropertyListLabeledProperty">
-						<Label text="Master Volume:" />
-						<ChaosSettingsSlider id="MainMenuButtonsSettingsProperty_MasterVolume" class="ChaosSettingsSlider__hidevalue MainMenuSettingsSlider" text="" max="1.0" min="0.0" invert="false" percentage="true" value100percent="1.0" convar="volume" constrainrange="true" />
-					</Panel>
-					<Panel class="MainMenuButtonsSettingsPropertyListLabeledProperty">
-						<Label text="Music Volume:" />
-						<ChaosSettingsSlider id="MainMenuButtonsSettingsProperty_MusicVolume" class="ChaosSettingsSlider__hidevalue MainMenuSettingsSlider" text="" max="1.0" min="0.0" invert="false" percentage="true" value100percent="1.0" convar="snd_volume_music" constrainrange="true" />
-					</Panel>
-					<Panel class="MainMenuButtonsSettingsPropertyListLabeledProperty">
-						<Label text="Threaded Audio:" />
-						<ToggleButton id="MainMenuButtonsSettingsProperty_ThreadedAudio" onactivate="MainMenuController.toggleCVar('snd_hrtf_async');" />
-					</Panel>
-				</Panel>
-				<Label class="MainMenuButtonsSettingsPropertyListCategoryLabel" text="Graphics" />
-				<Panel class="MainMenuButtonsSettingsPropertyListCategory">
-					<Panel class="MainMenuButtonsSettingsPropertyListLabeledProperty">
-						<Label text="Vertical Sync:" />
-						<ToggleButton id="MainMenuButtonsSettingsProperty_VerticalSync" onactivate="MainMenuController.toggleCVar('mat_vsync');" />
-					</Panel>
-				</Panel>
-				<Label class="MainMenuButtonsSettingsPropertyListCategoryLabel" text="Customization" />
-				<Panel class="MainMenuButtonsSettingsPropertyListCategory">
-					<Panel class="MainMenuButtonsSettingsPropertyListLabeledProperty">
-						<Label text="Portal 1 Crosshair:" />
-						<ToggleButton id="MainMenuButtonsSettingsProperty_PortalOneCrosshair" onactivate="MainMenuController.toggleCVar('portalgun_crosshair_mode');" />
-					</Panel>
-				</Panel>
-				<Label class="MainMenuButtonsSettingsPropertyListCategoryLabel" text="Keybinds" />
-				<Panel class="MainMenuButtonsSettingsPropertyListCategory">
-					<Panel class="MainMenuButtonsSettingsPropertyListLabeledProperty">
-						<Label text="Empty for now" />
-					</Panel>
-				</Panel>
-				<Label class="MainMenuButtonsSettingsPropertyListCategoryLabel" text="Interface" />
-				<Panel class="MainMenuButtonsSettingsPropertyListCategory">
-					<Label text="Note: currently requires a restart" />
-					<Panel class="MainMenuButtonsSettingsPropertyListLabeledProperty">
-						<Label text="Quake Console:" />
-						<ToggleButton id="MainMenuButtonsSettingsProperty_ToggleQuakeConsole" onactivate="MainMenuController.toggleStoredVar('p2ce.console.quake');" />
-					</Panel>
-				</Panel>
-			</Panel>
-		<Panel id="MainMenuTopBarSettingsContent" class="MainMenuTopBarContent" hittest="true">
 			<Frame src="file://{resources}/layout/mainmenu/mainmenu_settings.xml"/>
 		</Panel>
 
