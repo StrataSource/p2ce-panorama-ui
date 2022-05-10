@@ -5,7 +5,7 @@
 	</styles>
   
 	<ChaosSettingsEnumDropDown>
-		<Panel>
+		<Panel class="horizontal-align-left">
 			<Label id="Title" />
 		</Panel>
 		<Panel>

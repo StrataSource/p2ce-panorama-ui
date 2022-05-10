@@ -1,12 +1,39 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/chaosstyles.sass" />
-		<include src="file://{resources}/styles/mainmenu.sass" />
+		<include src="file://{resources}/styles/container.sass" />
 	</styles>
 	<scripts>
 		<include src="file://{resources}/scripts/mainmenu/mainmenu_settings.js" />
 	</scripts>
 	<Panel>
-		<Frame src="file://{resources}/layout/mainmenu/settings_video.xml"/>
+		<Panel class="MenuContainer">
+			<Panel class="MenuContainer-Header">
+				<Label text="Settings"/>
+				<Panel class="MenuContainer-Header-Navbar">
+					<RadioButton id="SettingsGame" group="settings-navbar">
+						<Label text="Game"/>
+					</RadioButton>
+					<RadioButton id="SettingsVideo" selected="true" group="settings-navbar">
+						<Label text="Video"/>
+					</RadioButton>
+					<RadioButton id="SettingsAudio" group="settings-navbar">
+						<Label text="Audio"/>
+					</RadioButton>
+					<RadioButton id="SettingsKeyboard" group="settings-navbar">
+						<Label text="Keyboard"/>
+					</RadioButton>
+					<RadioButton id="SettingsController" group="settings-navbar">
+						<Label text="Controller"/>
+					</RadioButton>
+				</Panel>
+			</Panel>
+			<Panel class="MenuContainer-Content">
+				<Frame class="full-width" src="file://{resources}/layout/mainmenu/settings_video.xml"/>
+			</Panel>
+			<Panel class="MenuContainer-Footer">
+				<Label text="Footer"/>
+			</Panel>
+		</Panel>
 	</Panel>
 </root>

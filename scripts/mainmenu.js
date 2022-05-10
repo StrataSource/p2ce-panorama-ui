@@ -280,7 +280,7 @@ var MainMenuController = (function () {
 		onHidePauseMenu: _onHidePauseMenu,
 		onWorkshopMenuButtonPressed: _onWorkshopMenuButtonPressed,
 		onEscapeKeyPressed: _onEscapeKeyPressed,
-		initializeSettings: _initializeSettings,
+		//initializeSettings: _initializeSettings,
 		toggleCVar: _onToggleCVar,
 		toggleStoredVar: _onToggleStoredVar,
 	};
@@ -309,5 +309,5 @@ var MainMenuController = (function () {
 	MainMenuController.enableMainMenu();
 	MainMenuController.hideElement("#NavListContainer",false);
 	MainMenuController.hideElement("#QuitMenu",true);
-	MainMenuController.initializeSettings();
+	//MainMenuController.initializeSettings();
 })();

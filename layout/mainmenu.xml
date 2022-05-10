@@ -147,14 +147,16 @@
 			</Panel>
 		</Panel>
 		
-		<Panel id="MainMenuButtonsSettingsContent" class="MainMenuButtonsContent" hittest="true">
+		<Panel id="MainMenuButtonsSettingsContent" class="MainMenuButtonsContent hide" hittest="true">
 			<Frame src="file://{resources}/layout/mainmenu/mainmenu_settings.xml"/>
 		</Panel>
 
+		<!--
 		<Panel id="MainMenuBetaDisplay">
 			<Label id="MainMenuBetaDisplayHeader" text="Beta Main Menu" />
 			<Label id="MainMenuBetaDisplaySubheader" text="Menu is not finalized and subject to change." />
 		</Panel>
+		-->
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
 		<ChaosPopupManager id="PopupManager" onpopupsdismissed="" />

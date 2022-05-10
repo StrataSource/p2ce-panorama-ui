@@ -1,5 +1,4 @@
 @use "sass:math"
-@use "utils/utility"
 
 //-----------------//
 //---- Globals ----//
@@ -40,7 +39,7 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	horizontal-align: center
 	vertical-align: top
 	margin-top: $main-menu-buttons-height
-	background-color: $main-menu-background-color
+	//background-color: $main-menu-background-color
 	border-radius: $main-menu-border-radius
 
 
@@ -59,72 +58,12 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	flow-children: down
 
 #MainMenuButtonsSettingsContent
-	$main-menu-settings-category-width: 20%
-
-	width: 100% - ($main-menu-buttons-height * 0.75)
-	height: 100% - ($main-menu-buttons-height * 1.5)
-	flow-children: right
-
-	#MainMenuButtonsSettingsCategoryList
-		width: $main-menu-settings-category-width
-		height: 100%
-		overflow: scroll
-		flow-children: down
-		background-color: #4442
-
-		.MainMenuButtonsSettingsCategoryListEntry
-			width: 100%
-			height: 6.5%
-			border-bottom: 2px solid #444
-			flow-children: right
-			background-color: #333
-			&:hover
-				background-color: #444
-			
-			Label
-				align: center center
-				color: white
-		
-		.MainMenuButtonsSettingsCategoryListEntryActive
-			border-right: 4px solid orange
-
-	> Label
-		align: center top
-		color: white
-		font-size: 18px
-		margin-bottom: 1.5%
-	
-	#MainMenuButtonsSettingsPropertyList
-		$settings-property-list-margin: 1%
-		$settings-property-list-padding: 16px
-		margin-left: $settings-property-list-margin
-		width: 100% - $main-menu-settings-category-width - $settings-property-list-margin
-		height: 100%
-		overflow: scroll
-		flow-children: down
-
-		.MainMenuButtonsSettingsPropertyListCategoryLabel
-			width: 100%
-			align: left top
-			margin-top: 8px
-			padding: 4px 0px 4px $settings-property-list-padding
-			border-bottom-left-radius: $main-menu-border-radius
-			border-top-left-radius: $main-menu-border-radius
-			background-color: #444
-
-		.MainMenuButtonsSettingsPropertyListCategory
-			width: 100%
-			padding-left: $settings-property-list-padding
-			padding-top: 8px
-			flow-children: down
-
-			.MainMenuButtonsSettingsPropertyListLabeledProperty
-				padding-bottom: 8px
-				flow-children: right
-
-				Label
-					align: left center
-					padding-right: 16px
+	width: 60% - ($main-menu-buttons-height * 0.75)
+	height: 60% - ($main-menu-buttons-height * 1.5)
+	margin-left: 12.5%
+	margin-top: 41%
+	align: left top
+	flow-children: down
 
 //--------------------//
 //---- Pause Menu ----//

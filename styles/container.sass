@@ -1,0 +1,85 @@
+//
+//	Style Sheet for P2CE's panorama containers
+//
+// Todo: Button border doesn't work for some reason when disabled
+//
+//
+
+
+$Container-Header-Color: #D6D6D6
+$Container-Navbar-Separator-Color: #808080
+$Container-Background-Color: #CCCCCC
+
+$Container-Navbar-Button-Unselected-Color: #9F9F9F
+$Container-Navbar-Button-Hover-Color: #FF7D02
+
+.MenuContainer
+	//margin-top: 300px
+	//margin-left: 256px
+	max-height: 512px
+	//max-width: 1024px
+	min-width: 1024px
+	flow-children: down
+	background-color: $Container-Background-Color
+	border-radius: 4px
+
+	Label
+		color: black
+
+	&-Header
+		background-color: $Container-Header-Color
+		box-shadow: #000 0px 4px 8px 0px
+		width: 100%
+		flow-children: down
+
+		> Label
+			padding-top: 4px
+			padding-left: 8px
+			font-weight: bold
+			font-size: 28px
+
+		&-Navbar
+			width: 100%
+			padding-top: 8px
+			padding-bottom: 0px
+			border-top: 2px solid $Container-Navbar-Separator-Color
+			flow-children: right
+
+			> RadioButton,
+			> TextButton,
+			> ToggleButton,
+			> Button
+				margin-left: 8px
+				border-bottom: 8px solid $Container-Navbar-Button-Unselected-Color
+
+				&:disabled,
+				&:parentdisabled,
+				&:disabled:hover
+					border-bottom-color: $Container-Navbar-Button-Unselected-Color
+
+				&:selected,
+				&:hover
+					border-bottom-color: $Container-Navbar-Button-Hover-Color
+				
+				> Label
+					font-size: 20px
+					font-weight: bold
+
+	&-Content
+		width: 100%
+		padding: 8px
+		flow-children: down
+
+	&-Footer
+		padding-left: 12px
+		flow-children: right
+		width: 100%
+		min-height: 16px
+		box-shadow: fill #000 0px 4px 8px 0px
+		background-color: $Container-Header-Color
+
+		> Label
+			padding-top: 4px
+			padding-bottom: 4px
+			font-size: 20px
+			font-weight: bold

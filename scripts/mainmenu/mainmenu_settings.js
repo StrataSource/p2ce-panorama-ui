@@ -76,14 +76,18 @@ class MainMenuSettings {
 		"#UI_Settings_Rendering": {
 			// Todo: order these
 			CSMQualityLevel: {
-				text: "todo pls",
+				text: "#SFUI_Settings_CSM",
 				type: "ChaosSettingsEnumDropDown",
 				//oninputsubmit: "ChaosResolutionSelectionChanged()",
 				values: {
-					"resolution0": {
-						text: "0",
+					"csmqualitylevel0": {
+						text: "#SFUI_CSM_LOW",
 						value: "0"
-					}
+					},
+					"csmqualitylevel0": {
+						text: "#SFUI_CSM_LOW",
+						value: "0"
+					},
 				}
 			},
 			ModelTextureDetail: {
@@ -301,28 +305,30 @@ class MainMenuSettings {
 		//<ChaosVideoSettings id="root-settings" style="flow-children: down">
 		//</ChaosVideoSettings>
 
-		/*
-		const vidSetPanel = $.CreatePanel("ChaosVideoSettings", this.settingsPanel, "settings-video", {
-			style: "flow-children: down; overflow: squish scroll;"
-		});
+		//const vidSetPanel = $.CreatePanel("ChaosVideoSettings", this.settingsPanel, "settings-video", {
+		//	//class: "flow-down full",
+		//	style: "flow-children: down; overflow: squish scroll;"
+		//});
 
-		MainMenuSettings.parseOptions(vidSetPanel, this.videoSettings);
+		const file = $.LoadKeyValuesFile( "panorama/config/settings_video.kv" );
+		if (file != undefined)
+		{
+			MainMenuSettings.parseOptions(this.settingsPanel, Object.entries(file));
 
-		$.DispatchEvent('ChaosVideoSettingsInit');
-		*/
+			$.DispatchEvent('ChaosVideoSettingsInit');
+		}
 	}
 
 	static parseOptions(setPar, setObj) {
-		$.Msg(setPar);
+		//$.Msg(setObj);
 		Object.entries(setObj).forEach(([sbGrpName, sbGrpValue]) => {
-			//$.Msg(sbGrpName)
-			
-			$.CreatePanel("Label", setPar, "test", {
-				text: sbGrpName,
-			});
-
+			//$.CreatePanel("Label", setPar, "test", {
+			//	text: sbGrpName,
+			//});
 			Object.entries(sbGrpValue).forEach(([optName, optValue]) => {
-				//$.Msg(optName)
+				$.Msg(optName)
+				$.Msg(optValue)
+				/*
 				switch (optValue["type"]) {
 					case "ChaosSettingsEnumDropDown":
 						this.CreateEnumDropDown(setPar, optName, optValue);
@@ -343,9 +349,9 @@ class MainMenuSettings {
 						$.Warning(`[Settings] Could not find panel type for ${optName}. Panel type given was ${optValue["type"]}`);
 						break;
 				}
+				*/
 			});
 		});
-
 
 		//$.DispatchEvent('ChaosVideoSettingsInit');
 	}

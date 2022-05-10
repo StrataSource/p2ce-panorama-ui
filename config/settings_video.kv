@@ -1,0 +1,33 @@
+// TODO Localise all of these from SFUI to our own UI stuff
+// when that ever gets implemented.
+
+// TODO These need to be ordered correctly
+
+"settings_video"
+{
+	"#UI_Settings_Video"
+	{
+		"ColorMode"
+		{
+			"text" "#UI_Settings_ColorMode"
+			"type" "ChaosSettingsEnumDropDown"
+			"values"
+			{
+				"resolution0"
+				{
+					"text" "0"
+					"value" "0"
+				}
+			}
+		}
+		"brightness"
+		{
+			"text" "#GameUI_Brightness"
+			"type" "ChaosSettingsSlider"
+			"min" "1.6"
+			"max" "2.6"
+			"percentage" "true"
+			"convar" "mat_monitorgamma"
+		}
+	}
+}

@@ -5,8 +5,10 @@
 		<!--<include src="file://{resources}/styles/mainmenu/settings_video" />-->
 	</styles>
 	<Panel>
-		<Panel id="settings-root" style="flow-children: down; overflow: squish scroll;" />
+		<!--<Panel id="settings-root" class="full" />-->
+		<Panel id="settings-root" class="flow-down full-width overflow-vscroll"/>
 
+		<!--
 		<Panel style="flow-children: down; overflow: squish scroll;">
 			<ChaosSettingsEnumDropDown text="Testing">
 				<Label id="device1" text="XXXXXX 1" value="1" />
@@ -28,14 +30,13 @@
 				<Label id="beans7" text="XXXXXX 7" value="7" />
 				<Label id="beans8" text="XXXXXX 8" value="8" />
 			</ChaosSettingsEnumDropDown>
-			<!--
 			<ChaosSettingsEnum text="Testing">
 				<RadioButton group="losefocus" text="Off" value="0" />
 				<RadioButton group="losefocus" text="On" value="1" />
 			</ChaosSettingsEnum>
 			<ChaosSettingsSlider text="Testing" max="5.0" min="0.0"/>
 			<ChaosSettingsToggle text="Testing" />
-			-->
 		</Panel>
+		-->
 	</Panel>
 </root>
