@@ -60,8 +60,8 @@ var MainMenuController = (function () {
 
 		$.DispatchEvent("P2CEShowMainMenu");
 		// Do this after we know this ID is valid
-		$("#MainMenuCampaignFrame").AddClass("MainMenu");
-		$("#MainMenuCampaignFrame").RemoveClass("PauseMenu");
+		$("#MainMenuContainerPanel").AddClass("MainMenu");
+		$("#MainMenuContainerPanel").RemoveClass("PauseMenu");
 
 		$.DispatchEvent("P2CEMainMenuSetBackgroundMovie", "community_bg1");
 	}
@@ -76,8 +76,8 @@ var MainMenuController = (function () {
 		$("#MainMenuContainerPanel").AddClass("PauseMenuFade");
 		$("#BackbufferImagePanel").AddClass("PauseMenuVignette");
 
-		$("#MainMenuCampaignFrame").RemoveClass("MainMenu");
-		$("#MainMenuCampaignFrame").AddClass("PauseMenu");
+		$("#MainMenuContainerPanel").RemoveClass("MainMenu");
+		$("#MainMenuContainerPanel").AddClass("PauseMenu");
 
 		$.DispatchEvent("P2CEShowPauseMenu");
 	}
@@ -89,8 +89,9 @@ var MainMenuController = (function () {
 		content.RemoveAndDeleteChildren();
 		const file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
 		if(file != undefined){ //this happens if the file is both not present or if it's invalid KV.
-			for(let [MenuIdentifier,MenuContents] of Object.entries(file)){
+			for(let [_MenuIdentifier, MenuContents] of Object.entries(file)){
 				const button = $.CreatePanel("RadioButton", content, "", {class: "CampaignButtonButton ListItem MainNewGameListItem", group:"RBG1"});
+				button.RemoveAndDeleteChildren();
 				button.SetPanelEvent("onactivate", (_id)=>{
 					MainMenuController.onNewgameSelected(MenuContents.maps)
 					$("#MainMenuNewGameChapterDescriptionLabel").text = MenuContents.description;
@@ -115,9 +116,10 @@ var MainMenuController = (function () {
 		$("#MainMenuNewGamePlayButton").enabled = false;
 		content.RemoveAndDeleteChildren();
 		_hideElement("#MainNewGamePanel",false)
-		for(let [MenuIdentifier,MenuContents] of Object.entries(maps)){
+		for(let [_MenuIdentifier, MenuContents] of Object.entries(maps)){
 			const button = $.CreatePanel("RadioButton", content, "", {group:"RBG2", class: "ListItem MainMenuChapterListItem"});
-			button.SetPanelEvent("onactivate",(_id)=>MainMenuController.onChapterSelected(MenuContents))
+			button.RemoveAndDeleteChildren();
+			button.SetPanelEvent("onactivate",(_id)=>MainMenuController.onChapterSelected(MenuContents));
 			$.CreatePanel("Label",button,"", {text: MenuContents.name, class:""});
 		}
 	}
@@ -155,8 +157,8 @@ var MainMenuController = (function () {
 	// Icon buttons functions
 	// --------------------------------------------------------------------------------------------------
 
-	function _hideAllSubMenus() { //at this point, this function is a general "cleanup" function to get rid of any menu states/altered elements.
-		$("#MainMenuButtonsWorkshopContent").visible = false;
+	function _hideAllSubMenus() {
+		//at this point, this function is a general "cleanup" function to get rid of any menu states/altered elements.
 		$("#MainMenuButtonsSettingsContent").visible = false;
 		const playbutton = $("#MainMenuNewGamePlayButton");
 		playbutton.enabled = false;
@@ -172,20 +174,17 @@ var MainMenuController = (function () {
 		panel.AddClass("MainMenuFadeEnabled");
 		panel.visible = true;
 		//assure main menu is present.
-		
 	}
 
 	function _onSettingsMenuButtonPressed() {
 		_hideAllSubMenus();
-		_enableMainMenu(false)
+		_enableMainMenu(false);
 		$("#MainMenuButtonsSettingsContent").visible = true;
 	}
 
 	function _onWorkshopMenuButtonPressed() {
 		//currently partially unused, awaiting full workshop support.
 		_hideAllSubMenus();
-		_enableMainMenu(false)
-		$("#MainMenuButtonsWorkshopContent").visible = true;
 	}
 
 	function _playMap(map) {
