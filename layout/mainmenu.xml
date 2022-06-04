@@ -1,7 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/chaosstyles.sass" />
-		<include src="file://{resources}/styles/controls/togglebutton.sass" />
+		<include src="file://{resources}/styles/common.sass" />
 		<include src="file://{resources}/styles/mainmenu.sass" />
 	</styles>
 	<scripts>
@@ -36,14 +35,9 @@
 				<!-- Fills the entire screen. This is used as the backdrop -->
 				<Panel id="MainMenuCore" class="full" blurrects="ChaosLoadingScreen">
 					<Panel id="MainMenuBackground" class="full">
-
 						<!-- Background video -->
-						<Panel id="MainMenuMovieParent" class="full">
-							<!-- Movie added/removed dynamically when changing the visibility of the main menu -->
-						</Panel>
-						<Panel id="MainMenuVanityParent">
-							<!-- Vanity is not used but the engine needs this to exist -->
-						</Panel>
+						<!-- Movie added/removed dynamically when changing the visibility of the main menu -->
+						<Panel id="MainMenuMovieParent" class="full" />
 					</Panel>
 
 					<Panel id="MainMenuCampaignFrameParent" class="full">

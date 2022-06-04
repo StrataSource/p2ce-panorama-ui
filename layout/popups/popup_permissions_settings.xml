@@ -1,9 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/chaosstyles.sass" />
-		<include src="file://{resources}/styles/controls/button.sass" />
-		<include src="file://{resources}/styles/controls/radiobutton.sass" />
-		<include src="file://{resources}/styles/controls/togglebutton.sass" />
+		<include src="file://{resources}/styles/common.sass" />
 		<include src="file://{resources}/styles/popups/popups_shared.sass" />
 		<include src="file://{resources}/styles/popups/popup_permissions_settings.sass" />
 	</styles>
