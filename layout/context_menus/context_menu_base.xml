@@ -1,6 +1,6 @@
 <root>
 	<styles>
-    <include src="file://{resources}/styles/chaosstyles.sass" />
+    <include src="file://{resources}/styles/common.sass" />
     <include src="file://{resources}/styles/context_menus/context_menu_base.sass" />
 	</styles>
 

@@ -1,6 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/common.sass" />
 		<include src="file://{resources}/styles/loadingscreen.sass" />
 	</styles>
 

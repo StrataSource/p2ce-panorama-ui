@@ -1,7 +1,7 @@
 "use strict";
 
 class Console {
-	static onMoveDragStart(source, callback) {
+	static onMoveDragStart(_source, callback) {
 		callback.displayPanel = $.GetContextPanel();
 		callback.removePositionBeforeDrop = false;
 	}
