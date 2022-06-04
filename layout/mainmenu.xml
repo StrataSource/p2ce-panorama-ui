@@ -40,81 +40,70 @@
 						<Panel id="MainMenuMovieParent" class="full" />
 					</Panel>
 
-					<Panel id="MainMenuCampaignFrameParent" class="full">
-						<Frame id="MainMenuCampaignFrame" class="full"> 
-							<Panel class="full">
-								<Panel id="MainMenuPanel" class="full MainMenuNavlistContainer">
-									<Image id="MainMenuLogoDark"
-											class=""
-											src=""
-											defaultsrc="file://{images}/menu/p2ce/logo_title.png"
-											scaling="stretch-to-cover-preserve-aspect"/>
-									<Panel id="NavListContainer" class="full flow-down" >
-										<TextButton id=""
-												class="ListItem MainMenuOnly"
-												group="NavBar"
-												onactivate="MainMenuController.onNewGameMenu();"
-												text="Start New Game" />
-
-										<TextButton id=""
-												class="ListItem MainMenuOnly"
-												group="NavBar"
-												onactivate="$.DispatchEvent( 'P2CEMainMenuPlayMap', 'sp_a2_triple_laser' );"
-												text="Load Game" />
-
-										<TextButton id=""
-												class="ListItem PauseMenuOnly"
-												group="NavBar"
-												onactivate="$.DispatchEvent( 'P2CEPauseMenuResume' );"
-												text="Resume Game" />
-
-										<TextButton id=""
-												class="ListItem MainMenuOnly"
-												group="NavBar"
-												onactivate="MainMenuController.onWorkshopMenuButtonPressed();"
-												text="Manage Addons" />
-
-										<TextButton id=""
-												class="ListItem"
-												group="NavBar"
-												onactivate="MainMenuController.onSettingsMenuButtonPressed();"
-												text="Settings" />
-
-										<TextButton id=""
-												class="ListItem PauseMenuOnly"
-												group="NavBar"
-												onactivate="GameInterfaceAPI.ConsoleCommand( 'disconnect' );"
-												text="Exit to Main Menu" />
-										<TextButton id=""
-												class="ListItem"
-												group="NavBar"
-												onactivate="MainMenuController.hideElement('#QuitMenu',false);"
-												text="Quit" />
-									</Panel>
-								</Panel>
-								<Panel class="MainMenuSubContainer MainMenuNavlistContainer hide full" id="QuitMenu">
-									<Label class="MainMenuQuitListLabel" text="Are you sure you want to quit?" />
-									<TextButton id=""
-										class="MainMenuQuitListItem"
+					<Panel class="full">
+						<Panel id="MainMenuPanel" class="full MainMenuNavlistContainer">
+							<Image id="MainMenuLogoDark"
+									defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+									scaling="stretch-to-cover-preserve-aspect"/>
+							<Panel id="NavListContainer" class="full flow-down" >
+								<TextButton
+										class="ListItem MainMenuOnly"
 										group="NavBar"
-										onactivate="GameInterfaceAPI.ConsoleCommand('quit');"
-										text="Yes" />
-									<TextButton id=""
-										class="MainMenuQuitListItem"
+										onactivate="MainMenuController.onNewGameMenu();"
+										text="Start New Game" />
+
+								<TextButton
+										class="ListItem MainMenuOnly"
 										group="NavBar"
-										onactivate="MainMenuController.hideElement('#QuitMenu',true);"
-										text="No" />
-								</Panel>
+										onactivate=""
+										text="Load Game" />
+
+								<TextButton
+										class="ListItem PauseMenuOnly"
+										group="NavBar"
+										onactivate="$.DispatchEvent('P2CEPauseMenuResume');"
+										text="Resume Game" />
+
+								<TextButton
+										class="ListItem MainMenuOnly"
+										group="NavBar"
+										onactivate="MainMenuController.onWorkshopMenuButtonPressed();"
+										text="Manage Addons" />
+
+								<TextButton
+										class="ListItem"
+										group="NavBar"
+										onactivate="MainMenuController.onSettingsMenuButtonPressed();"
+										text="Settings" />
+
+								<TextButton
+										class="ListItem PauseMenuOnly"
+										group="NavBar"
+										onactivate="GameInterfaceAPI.ConsoleCommand('disconnect');"
+										text="Exit to Main Menu" />
+								<TextButton
+										class="ListItem"
+										group="NavBar"
+										onactivate="MainMenuController.hideElement('#QuitMenu',false);"
+										text="Quit" />
 							</Panel>
-						</Frame>
+						</Panel>
+						<Panel class="MainMenuSubContainer MainMenuNavlistContainer hide full" id="QuitMenu">
+							<Label class="MainMenuQuitListLabel" text="Are you sure you want to quit?" />
+							<TextButton
+								class="MainMenuQuitListItem"
+								group="NavBar"
+								onactivate="GameInterfaceAPI.ConsoleCommand('quit');"
+								text="Yes" />
+							<TextButton
+								class="MainMenuQuitListItem"
+								group="NavBar"
+								onactivate="MainMenuController.hideElement('#QuitMenu',true);"
+								text="No" />
+						</Panel>
 					</Panel>
 				</Panel>
 			</Panel>
-		</Panel>
-		
-		<Panel id="MainMenuButtonsWorkshopContent" class="MainMenuButtonsContent" hittest="true">
-			<!-- todo: addons panel -->
-			<Label style="align: center center;" text="Steam workshop functionality is not currently implemented." />
 		</Panel>
 		
 		<Panel id="MainMenuButtonsNewGameContent" class="MainMenuButtonsContent hide">
@@ -140,7 +129,7 @@
 				</Panel>
 			</Panel>
 		</Panel>
-		<!-- <Label class="MainMenuButtonsNewGameLabel" text="Start New Game" /> -->
+
 		<Panel id="MainMenuButtonsSettingsContent" class="MainMenuButtonsContent" hittest="true">
 			<!-- todo: complete settings panel -->
 			<Panel id="MainMenuButtonsSettingsCategoryList">

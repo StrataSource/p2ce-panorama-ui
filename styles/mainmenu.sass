@@ -10,22 +10,6 @@ $main-menu-border-radius: 8px
 $main-menu-background-color: #222
 $main-menu-buttons-button-width: math.div(1, 4)
 
-@keyframes pauseMenuVignette
-	0%
-		saturation: 1.0
-		blur: fastgaussian(0.0)
-		wash-color-fast: #00000000
-	100%
-		saturation: 0.35
-		blur: fastgaussian(6.0)
-		wash-color-fast: #000000a0
-		
-@keyframes pauseMenuFade
-	0%
-		opacity: 0.0
-	100%
-		opacity: 1.0
-
 // It is a class instead of ChaosSettingsSlider to override the height and width
 .MainMenuSettingsSlider
 	height: 16px
@@ -129,6 +113,16 @@ $main-menu-buttons-button-width: math.div(1, 4)
 //---- Pause Menu ----//
 //--------------------//
 
+@keyframes pauseMenuVignette
+	0%
+		saturation: 1.0
+		blur: fastgaussian(0.0)
+		wash-color-fast: #0000
+	100%
+		saturation: 0.35
+		blur: fastgaussian(6.0)
+		wash-color-fast: #000000a0
+
 .PauseMenuVignette
 	animation-name: pauseMenuVignette
 	animation-duration: 0.2s
@@ -137,7 +131,7 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	animation-fill-mode: forwards
 
 .PauseMenuFade
-	animation-name: pauseMenuFade
+	animation-name: fadein
 	animation-duration: 0.2s
 	animation-timing-function: ease-in-out
 	animation-iteration-count: 1
@@ -170,7 +164,7 @@ $main-menu-buttons-button-width: math.div(1, 4)
 //----------------------//
 //-- Main Menu Display -//
 //----------------------//
-@keyframes Rainbow
+@keyframes rainbow
 	0%
 		hue-rotation: 0deg
 	50%
@@ -178,7 +172,7 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	100%
 		hue-rotation: 359deg
 	
-@keyframes FadeLeftEnabled
+@keyframes fadeLeftEnabled
 	0%
 		transform: translate3d( -2%, 0px, 0px )
 		opacity: 0.0
@@ -186,7 +180,7 @@ $main-menu-buttons-button-width: math.div(1, 4)
 		transform: translate3d( 0%, 0px, 0px )
 		opacity: 1.0
 
-@keyframes FadeLeftDisabled
+@keyframes fadeLeftDisabled
 	0%
 		transform: translate3d( 0%, 0px, 0px )
 		opacity: 1.0
@@ -215,7 +209,7 @@ Label
 	width: 40%
 	align: left center
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #3338 ) )
-	//animation: Rainbow 2.1s linear 0.0s infinite normal forwards
+	//animation: rainbow 2.1s linear 0.0s infinite normal forwards
 
 #MainMenuNewGameCampaignImage
 	height: 80px
@@ -373,10 +367,10 @@ Label
 	margin-right: -0.5%
 
 .MainMenuFadeEnabled
-	animation: FadeLeftEnabled 0.2s linear 0.0s 1 normal forwards
+	animation: fadeLeftEnabled 0.2s linear 0.0s 1 normal forwards
 
 .MainMenuFadeDisabled
-	animation: FadeLeftDisabled 0.2s linear 0.0s 1 normal backwards
+	animation: fadeLeftDisabled 0.2s linear 0.0s 1 normal backwards
 
 .MainMenu .PauseMenuOnly
 	visibility: collapse
