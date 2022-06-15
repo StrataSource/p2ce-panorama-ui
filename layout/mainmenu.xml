@@ -219,8 +219,14 @@
 		</Panel>
 
 		<Panel id="MainMenuBetaDisplay">
-			<Label id="MainMenuBetaDisplayHeader" text="Beta Main Menu" />
-			<Label id="MainMenuBetaDisplaySubheader" text="Menu is not finalized and subject to change." />
+			<Image class="MainMenuBetaDisplayHeader"
+					src=""
+					defaultsrc="file://{images}/icons/Discord.svg"
+					scaling="stretch-to-cover-preserve-aspect"/>
+			<Image class="MainMenuBetaDisplayHeader"
+					src=""
+					defaultsrc="file://{images}/icons/Youtube.svg"
+					scaling="stretch-to-cover-preserve-aspect"/>
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
