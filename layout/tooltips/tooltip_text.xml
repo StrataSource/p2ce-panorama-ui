@@ -1,8 +1,8 @@
 <root>
-	<styles>
+  <styles>
     <include src="file://{resources}/styles/common.sass" />
     <include src="file://{resources}/styles/tooltips/tooltip_text.sass" />
-	</styles>
+  </styles>
 
   <TooltipText class="TextContents">
 		<!-- REI: this is pretty crappy, but we allowrawtext here because we don't have a good way
