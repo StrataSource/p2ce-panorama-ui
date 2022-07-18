@@ -40,91 +40,54 @@
 						<Panel id="MainMenuMovieParent" class="full" />
 					</Panel>
 
-					<Panel class="full">
-						<Panel id="MainMenuPanel" class="full MainMenuNavlistContainer">
-							<Image id="MainMenuLogoDark"
-									defaultsrc="file://{images}/menu/p2ce/logo_title.png"
-									scaling="stretch-to-cover-preserve-aspect"/>
-							<Panel id="NavListContainer" class="full flow-down" >
-								<TextButton
-										class="ListItem MainMenuOnly"
-										group="NavBar"
-										onactivate="MainMenu.onNewGameMenu()"
-										text="Start New Game" />
-
-								<TextButton
-										class="ListItem MainMenuOnly"
-										group="NavBar"
-										onactivate=""
-										text="Load Game" />
-
-								<TextButton
-										class="ListItem PauseMenuOnly"
-										group="NavBar"
-										onactivate="$.DispatchEvent('P2CEPauseMenuResume')"
-										text="Resume Game" />
-
-								<TextButton
-										class="ListItem MainMenuOnly"
-										group="NavBar"
-										onactivate="MainMenu.onWorkshopMenuButtonPressed()"
-										text="Manage Addons" />
-
-								<TextButton
-										class="ListItem"
-										group="NavBar"
-										onactivate="MainMenu.onSettingsMenuButtonPressed()"
-										text="Settings" />
-
-								<TextButton
-										class="ListItem PauseMenuOnly"
-										group="NavBar"
-										onactivate="GameInterfaceAPI.ConsoleCommand('disconnect')"
-										text="Exit to Main Menu" />
-								<TextButton
-										class="ListItem"
-										group="NavBar"
-										onactivate="MainMenu.hideElement('#QuitMenu',false)"
-										text="Quit" />
-							</Panel>
-						</Panel>
-						<Panel class="MainMenuSubContainer MainMenuNavlistContainer hide full" id="QuitMenu">
-							<Label class="MainMenuQuitListLabel" text="Are you sure you want to quit?" />
+					<Panel id="MainMenuSubMenuParent" class="MainMenuNavlistContainer full">
+						<Image id="MainMenuLogoDark"
+								defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+								scaling="stretch-to-cover-preserve-aspect"/>
+						<Panel id="MainMenuPanel" class="full flow-down">
 							<TextButton
-								class="MainMenuQuitListItem"
-								group="NavBar"
-								onactivate="GameInterfaceAPI.ConsoleCommand('quit');"
-								text="Yes" />
-							<TextButton
-								class="MainMenuQuitListItem"
-								group="NavBar"
-								onactivate="MainMenu.hideElement('#QuitMenu',true);"
-								text="No" />
-						</Panel>
-					</Panel>
-				</Panel>
-			</Panel>
-		</Panel>
+									class="ListItem MainMenuOnly"
+									group="NavBar"
+									onactivate="MainMenu.showSubMenu('new_game')"
+									text="Start New Game" />
 
-		<Panel id="MainMenuButtonsNewGameContent" class="MainMenuButtonsContent hide">
-			<Label class="MainMenuButtonsNewGameLabel" text="Start New Game" />
-			<Panel class="full flow-right">
-				<Panel class="MainNewGameList" id="MainMenuButtonsNewGameList">
-				</Panel>
-				<Panel class="full MainNewGamePanel">
-					<Panel id="MainNewGamePanel" class="full hide">
-						<Image id="MainMenuNewGameCampaignImage"/>
-						<Label text=" Chapters:"/>
-						<Label class="full" id="MainMenuNewGameChapterTitleLabel"/>
-						<Label class="full" id="MainMenuNewGameChapterTitle2Label"/>
-						<Label class="full" id="MainMenuNewGameChapterDescriptionLabel"/>
-						<Panel class="full flow-right">
-							<Panel class="MainMenuNewGameContainer flow-down" id="MainMenuButtonsNewGamePanel" />
-							<Image id="MainMenuNewGameChapterImage" scaling="stretch"/>
+							<TextButton
+									class="ListItem PauseMenuOnly"
+									group="NavBar"
+									onactivate="$.DispatchEvent('P2CEPauseMenuResume')"
+									text="Resume Game" />
+
+							<TextButton
+									class="ListItem"
+									group="NavBar"
+									onactivate="MainMenu.showSubMenu('load_game')"
+									text="Load Game" />
+
+							<TextButton
+									class="ListItem MainMenuOnly"
+									group="NavBar"
+									onactivate="MainMenu.showSubMenu('addons')"
+									text="Manage Addons" />
+
+							<TextButton
+									class="ListItem"
+									group="NavBar"
+									onactivate="MainMenu.showSubMenu('settings')"
+									text="Settings" />
+
+							<TextButton
+									class="ListItem PauseMenuOnly"
+									group="NavBar"
+									onactivate="GameInterfaceAPI.ConsoleCommand('disconnect')"
+									text="Exit to Menu" />
+
+							<TextButton
+									class="ListItem"
+									group="NavBar"
+									onactivate="MainMenu.showSubMenu('quit')"
+									text="Quit" />
 						</Panel>
-						<Button disabled="true" hittest="true" id="MainMenuNewGamePlayButton" class="MainMenuNewGamePlayChapterButton">
-							<Label text="Start Game"/>
-						</Button>
+						<!-- A Frame is inserted here in JS to handle submenus -->
 					</Panel>
 				</Panel>
 			</Panel>

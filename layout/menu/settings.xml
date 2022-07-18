@@ -1,0 +1,13 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/common.sass" />
+		<include src="file://{resources}/styles/menu/settings.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/menu/settings.js" />
+	</scripts>
+
+	<Panel class="MainMenuSubMenu MainMenuSettings" useglobalcontext="true">
+		<Label class="full text-align-center" text="Unimplemented" />
+	</Panel>
+</root>

@@ -1,0 +1,13 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/common.sass" />
+		<include src="file://{resources}/styles/menu/load_game.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/menu/load_game.js" />
+	</scripts>
+
+	<Panel class="MainMenuSubMenu MainMenuLoadGame" useglobalcontext="true">
+		<Label class="full text-align-center" text="Unimplemented" />
+	</Panel>
+</root>

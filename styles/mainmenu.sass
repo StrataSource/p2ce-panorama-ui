@@ -1,113 +1,22 @@
 @use "sass:math"
 
-//-----------------//
-//---- Globals ----//
-//-----------------//
-
-$main-menu-buttons-height: 6.5%
-$main-menu-buttons-width: 300px
-$main-menu-border-radius: 8px
-$main-menu-background-color: #222
-$main-menu-buttons-button-width: math.div(1, 4)
-
-// It is a class instead of ChaosSettingsSlider to override the height and width
-.MainMenuSettingsSlider
-	height: 16px
-	width: 256px
-
 //-------------------//
 //---- Main Menu ----//
 //-------------------//
 
-.MainMenuButtonsContent
-	horizontal-align: center
-	vertical-align: top
-	margin-top: $main-menu-buttons-height
+$main-menu-background-color: #c4c4c4
+$main-menu-border-radius: 8px
+$submenu-width: 50%
+$submenu-height: 50%
+
+.MainMenuSubMenu
 	background-color: $main-menu-background-color
 	border-radius: $main-menu-border-radius
 
+#MainMenuSubMenuFrame
+	min-width: $submenu-width
+	min-height: $submenu-height
 
-#MainMenuButtonsWorkshopContent
-	width: 100% - ($main-menu-buttons-height * 0.75)
-	height: 100% - ($main-menu-buttons-height * 1.5)
-	flow-children: down
-
-#MainMenuButtonsNewGameContent
-	width: 60% - ($main-menu-buttons-height * 0.75)
-	height: 60% - ($main-menu-buttons-height * 1.5)
-	margin-left: 12.5%
-	margin-top: 41%
-	align: left top
-	background-color: #c6c4c4
-	flow-children: down
-
-#MainMenuButtonsSettingsContent
-	$main-menu-settings-category-width: 20%
-
-	width: 100% - ($main-menu-buttons-height * 0.75)
-	height: 100% - ($main-menu-buttons-height * 1.5)
-	flow-children: right
-
-	#MainMenuButtonsSettingsCategoryList
-		width: $main-menu-settings-category-width
-		height: 100%
-		overflow: scroll
-		flow-children: down
-		background-color: #4442
-
-		.MainMenuButtonsSettingsCategoryListEntry
-			width: 100%
-			height: 6.5%
-			border-bottom: 2px solid #444
-			flow-children: right
-			background-color: #333
-			&:hover
-				background-color: #444
-			
-			Label
-				align: center center
-				color: white
-		
-		.MainMenuButtonsSettingsCategoryListEntryActive
-			border-right: 4px solid orange
-
-	> Label
-		align: center top
-		color: white
-		font-size: 18px
-		margin-bottom: 1.5%
-	
-	#MainMenuButtonsSettingsPropertyList
-		$settings-property-list-margin: 1%
-		$settings-property-list-padding: 16px
-		margin-left: $settings-property-list-margin
-		width: 100% - $main-menu-settings-category-width - $settings-property-list-margin
-		height: 100%
-		overflow: scroll
-		flow-children: down
-
-		.MainMenuButtonsSettingsPropertyListCategoryLabel
-			width: 100%
-			align: left top
-			margin-top: 8px
-			padding: 4px 0px 4px $settings-property-list-padding
-			border-bottom-left-radius: $main-menu-border-radius
-			border-top-left-radius: $main-menu-border-radius
-			background-color: #444
-
-		.MainMenuButtonsSettingsPropertyListCategory
-			width: 100%
-			padding-left: $settings-property-list-padding
-			padding-top: 8px
-			flow-children: down
-
-			.MainMenuButtonsSettingsPropertyListLabeledProperty
-				padding-bottom: 8px
-				flow-children: right
-
-				Label
-					align: left center
-					padding-right: 16px
 
 //--------------------//
 //---- Pause Menu ----//
@@ -137,6 +46,24 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	animation-iteration-count: 1
 	animation-fill-mode: forwards
 
+.MainMenuFadeEnabled
+	animation: fadeLeftEnabled 0.2s linear 0.0s 1 normal forwards
+
+.MainMenuFadeDisabled
+	animation: fadeLeftDisabled 0.2s linear 0.0s 1 normal backwards
+
+.MainMenu .PauseMenuOnly
+	visibility: collapse
+
+.MainMenu .MainMenuOnly
+	visibility: visible
+
+.PauseMenu .MainMenuOnly
+	visibility: collapse
+
+.PauseMenu .PauseMenuOnly
+	visibility: visible
+
 
 //----------------------//
 //---- Beta Display ----//
@@ -159,11 +86,15 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	#MainMenuBetaDisplayHeader
 		font-size: 36px
 		padding-top: 16px
+	
+	Label
+		color: #fff
 
 
 //----------------------//
 //-- Main Menu Display -//
 //----------------------//
+
 @keyframes rainbow
 	0%
 		hue-rotation: 0deg
@@ -187,11 +118,12 @@ $main-menu-buttons-button-width: math.div(1, 4)
 	100%
 		transform: translate3d( -2%, 0px, 0px )
 		opacity: 0.0
-	
 
 Label
 	font-size: 25px
 	font-weight: normal
+	font-family: "UniversLTStd"
+	color: #050505
 
 #MainMenuLogoDark
 	align: center center
@@ -203,37 +135,17 @@ Label
 	border-radius: 8px
 	margin-left: 12.5%
 	margin-top: 16.5%
-	
-	
+
 #MainMenuLogoDark
 	width: 40%
 	align: left center
 	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #3338 ) )
 	//animation: rainbow 2.1s linear 0.0s infinite normal forwards
 
-#MainMenuNewGameCampaignImage
-	height: 80px
-	width: 80px
-	align: left top
-	margin-left: 1.5%
-	margin-top: 1.5%
-
 .MainMenuNavlist
 	width: 75%
 	align: center center
 	flow-children: down
-
-.MainMenuButtonsNewGameLabel
-	width: 100%
-	height: 16%
-	padding-top: 15%
-	padding-left: 2%
-	// margin-left: 13.5%
-	font-family: "UniversLTStd"
-	font-size: 50px
-	color: #050505
-	align: left top
-
 
 .ListItem
 	width: 50%
@@ -245,8 +157,6 @@ Label
 
 	> Label
 		width: 100%
-		font-family: "UniversLTStd"
-		color: #050505
 		margin-left: 2.5%
 
 	&:disabled, &:parentdisabled
@@ -257,129 +167,3 @@ Label
 		border-left-color: #ff7d02ff
 		border-right-color: #ff7d02ff
 		background-color: #aaaa
-	
-
-.MainMenuQuitListItem
-	@extend .ListItem
-	width: 20%
-	height: 5.1%
-	margin-left: 50%
-
-.MainMenuQuitListLabel
-	width: 20%
-	height: 5.1%
-	color: #000
-	font-family: "UniversLTStd"
-	font-size: 22px
-	margin-left: 50.5%
-	
-.MainNewGameList
-	width: 40%
-	height: 100%
-	border-top: 8px solid #999d
-	flow-children: down
-	overflow: scroll
-
-.MainNewGamePanel
-	border-top: 8px solid #999d
-	border-left: 8px solid #999d
-	> Panel
-		> Label
-			height: 15%
-			width: 50%
-			color: #000
-		> Button 
-			height: 10%
-			width: 50%
-			border-right: 8px solid #999d
-			margin-left: 2%
-			color: #000
-	#MainMenuNewGameChapterDescriptionLabel
-		align: left center
-		width: 100%
-		height: 20%
-		background-color: #b6b6b6dd
-		margin-bottom: 40%
-	#MainMenuNewGameChapterTitleLabel,
-	#MainMenuNewGameChapterTitle2Label
-		align: left top
-		width: 85%
-		height: 8%
-		margin-top: 4%
-		margin-left: 15%
-	#MainMenuNewGameChapterTitle2Label
-		margin-top: 10%
-		color: #8d8d8d
-
-
-.MainMenuNewGamePlayChapterButton
-	@extend .ListItem
-	align: right bottom
-
-#MainMenuNewGameChapterImage
-	align: right bottom
-	width: 50%
-	height: 47.5%
-	margin-bottom: 10%
-
-.MainNewGameListItem
-	height: 18.5%
-	margin-left: 1.5%
-	width: 100%
-	.CampaignButtonLabel
-		margin-left: 18%
-	.CampaignButtonLabelPrimary
-		color: #000
-		align: left top
-	.CampaignButtonLabelSecondary
-		color: #8d8d8d
-		align: left center
-		margin-bottom: 20%
-
-.CampaignButtonButton
-	margin-top: 2%
-
-.CampaignButtonImage
-	height: 75%
-	width: 15%
-	align: left center
-	margin-left: 1.5%
-
-.MainMenuNewGameContainer
-	width: 50%
-	height: 50%
-	align: left bottom
-	background-color: #cecece
-	overflow: scroll
-
-.MainMenuChapterListItem
-	width: 95%
-	height: 25%
-	margin-left: 2%
-	> Label
-		align: left center
-		font-size: 18px
-		font-family: "UniversLTStd"
-
-.MainMenuSubContainer
-	height: 200%
-	padding-top: 44.8%
-	margin-right: -0.5%
-
-.MainMenuFadeEnabled
-	animation: fadeLeftEnabled 0.2s linear 0.0s 1 normal forwards
-
-.MainMenuFadeDisabled
-	animation: fadeLeftDisabled 0.2s linear 0.0s 1 normal backwards
-
-.MainMenu .PauseMenuOnly
-	visibility: collapse
-
-.MainMenu .MainMenuOnly
-	visibility: visible
-
-.PauseMenu .MainMenuOnly
-	visibility: collapse
-
-.PauseMenu .PauseMenuOnly
-	visibility: visible
