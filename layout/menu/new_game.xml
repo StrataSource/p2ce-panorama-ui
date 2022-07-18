@@ -1,0 +1,32 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/common.sass" />
+		<include src="file://{resources}/styles/menu/new_game.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/menu/new_game.js" />
+	</scripts>
+
+	<Panel class="MainMenuSubMenu MainMenuNewGame" useglobalcontext="true">
+		<Label class="MainMenuButtonsNewGameLabel" text="Start New Game" />
+		<Panel class="full flow-right">
+			<Panel class="MainNewGameList" id="MainMenuButtonsNewGameList"/>
+			<Panel class="full MainNewGamePanel">
+				<Panel id="MainNewGamePanel" class="full hide">
+					<Image id="MainMenuNewGameCampaignImage"/>
+					<Label text=" Chapters:"/>
+					<Label class="full" id="MainMenuNewGameChapterTitleLabel"/>
+					<Label class="full" id="MainMenuNewGameChapterTitle2Label"/>
+					<Label class="full" id="MainMenuNewGameChapterDescriptionLabel"/>
+					<Panel class="full flow-right">
+						<Panel class="MainMenuNewGameContainer flow-down" id="MainMenuButtonsNewGamePanel" />
+						<Image id="MainMenuNewGameChapterImage" scaling="stretch"/>
+					</Panel>
+					<Button disabled="true" hittest="true" id="MainMenuNewGamePlayButton" class="MainMenuNewGamePlayChapterButton">
+						<Label text="Start Game"/>
+					</Button>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

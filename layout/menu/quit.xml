@@ -1,0 +1,26 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/common.sass" />
+		<include src="file://{resources}/styles/menu/quit.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/menu/quit.js" />
+	</scripts>
+
+	<Panel class="MainMenuSubMenu MainMenuQuit" useglobalcontext="true">
+		<Label class="full text-align-center" text="Unimplemented" />
+	<!--
+		<Label class="MainMenuQuitListLabel" text="Are you sure you want to quit?" />
+		<TextButton
+			class="MainMenuQuitListItem"
+			group="NavBar"
+			onactivate="GameInterfaceAPI.ConsoleCommand('quit');"
+			text="Yes" />
+		<TextButton
+			class="MainMenuQuitListItem"
+			group="NavBar"
+			onactivate="MainMenu.hideElement('#QuitMenu',true);"
+			text="No" />
+	-->
+	</Panel>
+</root>

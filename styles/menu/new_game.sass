@@ -1,0 +1,111 @@
+@use "../mainmenu"
+
+.MainMenuNewGame
+	background-color: #c6c4c4
+	flow-children: down
+
+#MainMenuNewGameCampaignImage
+	height: 80px
+	width: 80px
+	align: left top
+	margin-left: 1.5%
+	margin-top: 1.5%
+
+.MainMenuButtonsNewGameLabel
+	width: 100%
+	height: 16%
+	padding-top: 15%
+	padding-left: 2%
+	// margin-left: 13.5%
+	font-family: "UniversLTStd"
+	font-size: 50px
+	color: #050505
+	align: left top
+
+.MainNewGameList
+	width: 40%
+	height: 100%
+	border-top: 8px solid #999d
+	flow-children: down
+	overflow: scroll
+
+.MainNewGamePanel
+	border-top: 8px solid #999d
+	border-left: 8px solid #999d
+	> Panel
+		> Label
+			height: 15%
+			width: 50%
+			color: #000
+		> Button 
+			height: 10%
+			width: 50%
+			border-right: 8px solid #999d
+			margin-left: 2%
+			color: #000
+	#MainMenuNewGameChapterDescriptionLabel
+		align: left center
+		width: 100%
+		height: 20%
+		background-color: #b6b6b6dd
+		margin-bottom: 40%
+	#MainMenuNewGameChapterTitleLabel,
+	#MainMenuNewGameChapterTitle2Label
+		align: left top
+		width: 85%
+		height: 8%
+		margin-top: 4%
+		margin-left: 15%
+	#MainMenuNewGameChapterTitle2Label
+		margin-top: 10%
+		color: #8d8d8d
+
+
+.MainMenuNewGamePlayChapterButton
+	@extend .ListItem
+	align: right bottom
+
+#MainMenuNewGameChapterImage
+	align: right bottom
+	width: 50%
+	height: 47.5%
+	margin-bottom: 10%
+
+.MainNewGameListItem
+	height: 18.5%
+	margin-left: 1.5%
+	width: 100%
+	.CampaignButtonLabel
+		margin-left: 18%
+	.CampaignButtonLabelPrimary
+		color: #000
+		align: left top
+	.CampaignButtonLabelSecondary
+		color: #8d8d8d
+		align: left center
+		margin-bottom: 20%
+
+.CampaignButtonButton
+	margin-top: 2%
+
+.CampaignButtonImage
+	height: 75%
+	width: 15%
+	align: left center
+	margin-left: 1.5%
+
+.MainMenuNewGameContainer
+	width: 50%
+	height: 50%
+	align: left bottom
+	background-color: #cecece
+	overflow: scroll
+
+.MainMenuChapterListItem
+	width: 95%
+	height: 25%
+	margin-left: 2%
+	> Label
+		align: left center
+		font-size: 18px
+		font-family: "UniversLTStd"

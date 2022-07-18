@@ -35,6 +35,22 @@ var MainMenu = {
 		videoPlayer.Play();
 	},
 
+	hideSubMenus() {
+		const frame = $("#MainMenuSubMenuFrame");
+		if (frame) {
+			// for any fades
+			frame.DeleteAsync(0.5);
+		}
+		$("#MainMenuPanel").visible = true;
+	},
+
+	showSubMenu(submenu) {
+		$("#MainMenuPanel").visible = false;
+		$.CreatePanel("Frame", $("#MainMenuSubMenuParent"), "MainMenuSubMenuFrame", {
+			src: `file://{resources}/layout/menu/${submenu}.xml`,
+		});
+	},
+
 	onShowMainMenu() {
 		// Just in case these haven't been removed (should only be active in the pause menu)
 		$("#MainMenuContainerPanel").RemoveClass("PauseMenuFade");
@@ -44,7 +60,7 @@ var MainMenu = {
 		GameInterfaceAPI.SetSettingInt("panorama_play_movie_ambient_sound", 1);
 
 		// No menus are open yet
-		MainMenu.hideAllSubMenus();
+		MainMenu.hideSubMenus();
 
 		// Set convars to play main menu dsp effects. These are overridden
 		// by the game engine when we enter a map.
@@ -53,7 +69,7 @@ var MainMenu = {
 
 		MainMenu.updateRichPresence();
 
-		// Do this after we know this ID is valid
+		// Do this after we know the id is valid
 		$("#MainMenuContainerPanel").AddClass("MainMenu");
 		$("#MainMenuContainerPanel").RemoveClass("PauseMenu");
 
@@ -62,7 +78,7 @@ var MainMenu = {
 
 	onHideMainMenu() {
 		UiToolkitAPI.CloseAllVisiblePopups();
-		MainMenu.hideAllSubMenus();
+		MainMenu.hideSubMenus();
 	},
 
 	onShowPauseMenu() {
@@ -80,91 +96,13 @@ var MainMenu = {
 		MainMenu.onHomeButtonPressed();
 	},
 
-	onNewGameMenu() {
-		MainMenu.hideElement("#NavListContainer",true);
-		const content = $("#MainMenuButtonsNewGameList");
-		content.RemoveAndDeleteChildren();
-		const file = $.LoadKeyValuesFile( "panorama/config/test_map_config.kv" );
-		if(file != undefined){ //this happens if the file is both not present or if it's invalid KV.
-			for(let [_MenuIdentifier, MenuContents] of Object.entries(file)){
-				const button = $.CreatePanel("RadioButton", content, "", {class: "CampaignButtonButton ListItem MainNewGameListItem", group:"RBG1"});
-				button.RemoveAndDeleteChildren();
-				button.SetPanelEvent("onactivate", (_id)=>{
-					MainMenu.onNewgameSelected(MenuContents.maps)
-					$("#MainMenuNewGameChapterDescriptionLabel").text = MenuContents.description;
-					$("#MainMenuNewGameChapterTitleLabel").text = MenuContents.name;
-					$("#MainMenuNewGameChapterTitle2Label").text = "By " + MenuContents.publisher;
-					$("#MainMenuNewGameCampaignImage").SetImage(MenuContents.icon);
-				});
-				$.CreatePanel("Label",button,"", {text: MenuContents.name, class:"CampaignButtonLabel CampaignButtonLabelPrimary"});
-				$.CreatePanel("Label",button,"", {text:"\nBy "+MenuContents.publisher, class:"CampaignButtonLabel CampaignButtonLabelSecondary"});
-				$.CreatePanel("Image",button,"", {src:MenuContents.icon, class:"CampaignButtonImage"});
-			}
-		} else {
-			//TODO: Write proper error handling for when the kv file is invalid/missing.
-			$.CreatePanel("Label", content, "", { style:"align: center center;", text: "OOPS!" });
-		}
-		MainMenu.hideElement("#MainMenuButtonsNewGameContent",false)
-	},
-
-	onNewgameSelected(maps) {
-		const content = $("#MainMenuButtonsNewGamePanel");
-		$("#MainMenuNewGameChapterImage").SetImage("");
-		$("#MainMenuNewGamePlayButton").enabled = false;
-		content.RemoveAndDeleteChildren();
-		MainMenu.hideElement("#MainNewGamePanel",false)
-		for(let [_MenuIdentifier, MenuContents] of Object.entries(maps)){
-			const button = $.CreatePanel("RadioButton", content, "", {group:"RBG2", class: "ListItem MainMenuChapterListItem"});
-			button.RemoveAndDeleteChildren();
-			button.SetPanelEvent("onactivate",(_id)=>MainMenu.onChapterSelected(MenuContents));
-			$.CreatePanel("Label",button,"", {text: MenuContents.name, class:""});
-		}
-	},
-
-	onChapterSelected(map) {
-		const content = $("#MainMenuNewGameChapterImage");
-		const playbutton = $("#MainMenuNewGamePlayButton");
-		playbutton.enabled = true;
-		playbutton.SetPanelEvent('onactivate', () => {
-			MainMenu.playMap(map.map);
-			MainMenu.hideAllSubMenus();
-		});
-		content.SetImage(map.image);
-	},
-
 	onHomeButtonPressed() {
-		MainMenu.hideAllSubMenus();
+		MainMenu.hideSubMenus();
 		$.DispatchEvent("HideContentPanel");
 	},
 
-	hideAllSubMenus() {
-		//at this point, this function is a general "cleanup" function to get rid of any menu states/altered elements.
-		const playbutton = $("#MainMenuNewGamePlayButton");
-		playbutton.enabled = false;
-		playbutton.SetPanelEvent("onactivate",(_)=>{});
-		$("#MainMenuNewGameChapterImage").SetImage("");
-		MainMenu.hideElement("#QuitMenu",true);
-		MainMenu.hideElement("#MainMenuButtonsNewGameContent",true)
-		MainMenu.hideElement("#MainNewGamePanel",true)
-		const panel = $("#NavListContainer");
-		panel.RemoveClass("hide");
-		panel.AddClass("show");
-		panel.RemoveClass("MainMenuFadeDisabled");
-		panel.AddClass("MainMenuFadeEnabled");
-		panel.visible = true;
-		//assure main menu is present.
-	},
-
-	onSettingsMenuButtonPressed() {
-		MainMenu.hideAllSubMenus();
-	},
-
-	onWorkshopMenuButtonPressed() {
-		MainMenu.hideAllSubMenus();
-	},
-
 	playMap(map) {
-		MainMenu.hideAllSubMenus();
+		MainMenu.hideSubMenus();
 		GameInterfaceAPI.ConsoleCommand("map " + map);
 	},
 
@@ -172,31 +110,7 @@ var MainMenu = {
 		// Resume game (pause menu mode)
 		if (GameInterfaceAPI.GetGameUIState() === GAME_UI_STATE.PAUSEMENU)
 			$.DispatchEvent("ChaosMainMenuResumeGame");
-		MainMenu.hideAllSubMenus();
-		MainMenu.hideElement("#NavListContainer", false);
-	},
-
-	hideElement(element, bool = true) {
-		if(element){
-			const panel = $(element);
-			if(!bool){
-				panel.RemoveClass("hide");
-				panel.AddClass("show");
-				panel.RemoveClass("MainMenuFadeDisabled");
-				panel.AddClass("MainMenuFadeEnabled");
-				panel.visible = true;
-			} else {
-				$.Schedule(0.2, ()=>{
-					panel.RemoveClass("show")
-					panel.AddClass("hide")
-					panel.visible = false;
-				});
-				panel.RemoveClass("MainMenuFadeEnabled");
-				panel.AddClass("MainMenuFadeDisabled");
-			}	
-		} else {
-			$.Warn("Unable to hide element: Undefined")
-		}
+		MainMenu.hideSubMenus();
 	},
 };
 
@@ -217,7 +131,4 @@ var MainMenu = {
 
 	$.DefineEvent("P2CEMenuPlayMap", 1);
 	$.RegisterForUnhandledEvent("P2CEMenuPlayMap", MainMenu.playMap);
-
-	MainMenu.hideElement("#NavListContainer", false);
-	MainMenu.hideElement("#QuitMenu", true);
 })();
