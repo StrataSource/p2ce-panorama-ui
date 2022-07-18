@@ -73,7 +73,7 @@
 	padding-bottom: 8px
 
 .hud-hint__priority-label
-	font-family: Stratum2	
+	font-family: notosans-regular	
 	horizontal-align: center	
 	//margin-left: 64px	
 	color: #ea4141	
@@ -94,9 +94,3 @@
 	font-weight: bold	
 	text-shadow-fast: 1px 1px #00000088	
 	//text-overflow: shrink
-
-//For Vietnamese we avoid using Stratum for any non-numeric text because it only contains a subset of the Vietnamese alphabet.
-//Ordinary (not monodigit) Stratum is globally replaced with Arial via the fonts.conf file.
-//But explicit overrides are required for any labels using Stratum2 monodigit for non-numeric text.
-.Language_vietnamese .hud-hint__text Label
-	font-family: 'Arial', 'Arial Unicode MS'	
