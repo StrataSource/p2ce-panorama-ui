@@ -24,14 +24,14 @@
 		</snippet>
 	</snippets>
 
-	<ChaosMainMenu class="InitialDisplay MainMenuRootPanel full" hittest="false" useglobalcontext="true" oncancel="MainMenuController.onEscapeKeyPressed();">
+	<ChaosMainMenu class="InitialDisplay MainMenuRootPanel full" hittest="false" useglobalcontext="true" oncancel="MainMenuController.onEscapeKeyPressed()">
 		<ChaosBackbufferImagePanel id="BackbufferImagePanel" class="full" />
 
 		<Panel id="MainMenuContainerPanel" class="full">
 
 			<!-- The actual panel with input & focus -->
-			<Panel id="MainMenuInput" class="full">
-				
+			<Panel id="MainMenuInput" class="full" hittest="true">
+
 				<!-- Fills the entire screen. This is used as the backdrop -->
 				<Panel id="MainMenuCore" class="full" blurrects="ChaosLoadingScreen">
 					<Panel id="MainMenuBackground" class="full">
@@ -105,7 +105,7 @@
 				</Panel>
 			</Panel>
 		</Panel>
-		
+
 		<Panel id="MainMenuButtonsNewGameContent" class="MainMenuButtonsContent hide">
 			<Label class="MainMenuButtonsNewGameLabel" text="Start New Game" />
 			<Panel class="full flow-right">
