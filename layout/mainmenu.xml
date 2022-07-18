@@ -24,7 +24,7 @@
 		</snippet>
 	</snippets>
 
-	<ChaosMainMenu class="InitialDisplay MainMenuRootPanel full" hittest="false" useglobalcontext="true" oncancel="MainMenuController.onEscapeKeyPressed()">
+	<ChaosMainMenu class="InitialDisplay MainMenuRootPanel full" hittest="false" useglobalcontext="true" oncancel="MainMenu.onEscapeKeyPressed()">
 		<ChaosBackbufferImagePanel id="BackbufferImagePanel" class="full" />
 
 		<Panel id="MainMenuContainerPanel" class="full">
@@ -49,7 +49,7 @@
 								<TextButton
 										class="ListItem MainMenuOnly"
 										group="NavBar"
-										onactivate="MainMenuController.onNewGameMenu();"
+										onactivate="MainMenu.onNewGameMenu()"
 										text="Start New Game" />
 
 								<TextButton
@@ -61,30 +61,30 @@
 								<TextButton
 										class="ListItem PauseMenuOnly"
 										group="NavBar"
-										onactivate="$.DispatchEvent('P2CEPauseMenuResume');"
+										onactivate="$.DispatchEvent('P2CEPauseMenuResume')"
 										text="Resume Game" />
 
 								<TextButton
 										class="ListItem MainMenuOnly"
 										group="NavBar"
-										onactivate="MainMenuController.onWorkshopMenuButtonPressed();"
+										onactivate="MainMenu.onWorkshopMenuButtonPressed()"
 										text="Manage Addons" />
 
 								<TextButton
 										class="ListItem"
 										group="NavBar"
-										onactivate="MainMenuController.onSettingsMenuButtonPressed();"
+										onactivate="MainMenu.onSettingsMenuButtonPressed()"
 										text="Settings" />
 
 								<TextButton
 										class="ListItem PauseMenuOnly"
 										group="NavBar"
-										onactivate="GameInterfaceAPI.ConsoleCommand('disconnect');"
+										onactivate="GameInterfaceAPI.ConsoleCommand('disconnect')"
 										text="Exit to Main Menu" />
 								<TextButton
 										class="ListItem"
 										group="NavBar"
-										onactivate="MainMenuController.hideElement('#QuitMenu',false);"
+										onactivate="MainMenu.hideElement('#QuitMenu',false)"
 										text="Quit" />
 							</Panel>
 						</Panel>
@@ -98,7 +98,7 @@
 							<TextButton
 								class="MainMenuQuitListItem"
 								group="NavBar"
-								onactivate="MainMenuController.hideElement('#QuitMenu',true);"
+								onactivate="MainMenu.hideElement('#QuitMenu',true);"
 								text="No" />
 						</Panel>
 					</Panel>
