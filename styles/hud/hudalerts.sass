@@ -31,16 +31,10 @@ ChaosHudAlerts
 	text-align: center
 	vertical-align: center
 	color: #f3f3f3
-    font-family: Stratum2 Bold Monodigit, 'Arial Unicode MS'
+    font-family: notosans-regular Bold Monodigit, 'Arial Unicode MS'
 	font-size: 30px
 	font-weight: bold
 	text-shadow-fast: 1px 1px #00000088
-
-//For Vietnamese we avoid using Stratum for any non-numeric text because it only contains a subset of the Vietnamese alphabet.
-//Ordinary (not monodigit) Stratum is globally replaced with Arial via the fonts.conf file.
-//But explicit overrides are required for any labels using Stratum2 monodigit for non-numeric text.
-.Language_vietnamese #AlertText 
-	font-family: 'Arial', 'Arial Unicode MS'
 
 .MatchStartAlert
 	color: #e10000
