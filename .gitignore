@@ -1,3 +1,6 @@
 .idea/
 .vs/
 node_modules/
+fonts.uuid
+.uuid
+conf.d
