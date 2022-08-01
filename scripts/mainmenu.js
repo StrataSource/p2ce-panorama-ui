@@ -228,7 +228,8 @@ var MainMenuController = (function () {
 		$("#MainMenuTopBarSettingsProperty_PortalOneCrosshair").checked = _getBooleanCVar("portalgun_crosshair_mode");
 
 		// Interface
-		$("#MainMenuTopBarSettingsProperty_ToggleQuakeConsole").checked = $.persistentStorage.getItem("p2ce.console.quake") ?? false;
+		$("#MainMenuTopBarSettingsProperty_ToggleQuakeConsole").checked =
+			$.persistentStorage.getItem("p2ce.console.quake") ?? false;
 	}
 
 	function _onToggleCVar(cvar) {
@@ -240,7 +241,9 @@ var MainMenuController = (function () {
 	}
 
 	function _displayStartupCampaign(layout) {
-		const newMenu = $("#MainMenuCampaignFrame") ?? $.CreatePanel("Frame", $("#MainMenuCampaignFrameParent"), "MainMenuCampaignFrame");
+		const newMenu =
+			$("#MainMenuCampaignFrame") ??
+			$.CreatePanel("Frame", $("#MainMenuCampaignFrameParent"), "MainMenuCampaignFrame");
 
 		if (currentMenuLayout !== layout) {
 			newMenu.SetSource("file://{resources}/layout/mainmenu/mainmenu_" + layout + ".xml");

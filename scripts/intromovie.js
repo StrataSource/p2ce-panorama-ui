@@ -13,7 +13,11 @@ class IntroMovieController {
 		// stutter. The same bug can be seen if you hit a breakpoint, then resume during a video playback with audio.
 		$.Schedule(0.0, IntroMovieController.playIntroMovie);
 		IntroMovieController.moviePlayer.SetFocus();
-		$.RegisterKeyBind($("#IntroMoviePlayer"), "key_enter,key_space,key_escape", IntroMovieController.skipIntroMovie);
+		$.RegisterKeyBind(
+			$("#IntroMoviePlayer"),
+			"key_enter,key_space,key_escape",
+			IntroMovieController.skipIntroMovie
+		);
 	}
 
 	static playIntroMovie() {
@@ -38,6 +42,10 @@ class IntroMovieController {
 	static {
 		IntroMovieController.moviePlayer = $("#IntroMoviePlayer");
 		$.RegisterForUnhandledEvent("ChaosShowIntroMovie", IntroMovieController.showIntroMovie);
-		$.RegisterEventHandler("MoviePlayerPlaybackEnded", IntroMovieController.moviePlayer, IntroMovieController.hideIntroMovie);
+		$.RegisterEventHandler(
+			"MoviePlayerPlaybackEnded",
+			IntroMovieController.moviePlayer,
+			IntroMovieController.hideIntroMovie
+		);
 	}
 }

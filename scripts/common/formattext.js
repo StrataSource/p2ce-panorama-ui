@@ -136,8 +136,10 @@ const FormatText = (function () {
 	};
 
 	return {
-		SetFormattedTextOnLabel: _SetFormattedTextOnLabel /* see documentation for FormattedText objects at top of file */,
-		ClearFormattedTextFromLabel: _ClearFormattedTextFromLabel /* see documentation for FormattedText objects at top of file */,
+		SetFormattedTextOnLabel:
+			_SetFormattedTextOnLabel /* see documentation for FormattedText objects at top of file */,
+		ClearFormattedTextFromLabel:
+			_ClearFormattedTextFromLabel /* see documentation for FormattedText objects at top of file */,
 		SecondsToDDHHMMSSWithSymbolSeperator: _SecondsToDDHHMMSSWithSymbolSeperator /* takes seconds */,
 		SecondsToSignificantTimeString: _SecondsToSignificantTimeString /* takes seconds, returns easy human string */,
 		PadNumber: _PadNumber /* takes integer and number of desired digits, optionally padding character */,
