@@ -6,7 +6,9 @@ class LoadingScreenController {
 
 	static init() {
 		$("#ProgressBar").value = 0;
-		$.GetContextPanel().FindChildInLayoutFile("BackgroundMapImage1").RemoveClass("loading-screen-backgroundhideanim");
+		$.GetContextPanel()
+			.FindChildInLayoutFile("BackgroundMapImage1")
+			.RemoveClass("loading-screen-backgroundhideanim");
 		$.GetContextPanel().FindChildInLayoutFile("BackgroundMapImage2").visible = false;
 	}
 
@@ -15,7 +17,9 @@ class LoadingScreenController {
 		if ($.GetContextPanel().FindChildInLayoutFile("BackgroundMapImage2").visible) return;
 
 		if ($("#ProgressBar").value > 0.35) {
-			$.GetContextPanel().FindChildInLayoutFile("BackgroundMapImage1").AddClass("loading-screen-backgroundhideanim");
+			$.GetContextPanel()
+				.FindChildInLayoutFile("BackgroundMapImage1")
+				.AddClass("loading-screen-backgroundhideanim");
 			$.GetContextPanel().FindChildInLayoutFile("BackgroundMapImage2").visible = true;
 			return;
 		}
@@ -40,10 +44,14 @@ class LoadingScreenController {
 			//       fixing this will probably involve making a variable storing every
 			//       map name in the game to map it to the right loading screen.
 			//       in the meantime, this looks pretty good
-			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a1")) return base + "default_a_" + number + "_widescreen.vtf";
-			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a2")) return base + "default_b_" + number + "_widescreen.vtf";
-			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a3")) return base + "default_c_" + number + "_widescreen.vtf";
-			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a4")) return base + "default_e_" + number + "_widescreen.vtf";
+			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a1"))
+				return base + "default_a_" + number + "_widescreen.vtf";
+			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a2"))
+				return base + "default_b_" + number + "_widescreen.vtf";
+			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a3"))
+				return base + "default_c_" + number + "_widescreen.vtf";
+			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a4"))
+				return base + "default_e_" + number + "_widescreen.vtf";
 			else if (LoadingScreenController.lastLoadedMapName.startsWith("sp_a5")) return base + "a5_1_widescreen.vtf";
 			else return base + "default_b_" + number + "_widescreen.vtf";
 		}
