@@ -54,5 +54,6 @@
 		<ChaosPopupManager id="PopupManager" onpopupsdismissed="" />
 		<ContextMenuManager id="ContextMenuManager" />
 		<ChaosTooltipManager id="TooltipManager" hittest="false" />
+		<ChaosToolPanelManager id="ToolPanelManager" />
 	</ChaosHud>
 </root>

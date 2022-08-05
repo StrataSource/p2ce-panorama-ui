@@ -1,0 +1,31 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/tools/tool_frame.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/tools/tool_frame.js" />
+	</scripts>
+	
+	<Panel class="ChaosToolPanel">
+	
+		<Panel id="TopBar" class="vertical-align-center" draggable="true">
+			<Label id="ToolPanelTitle" class="text-h4 pad-left-right-8" text="{s:title}"/>
+			<Button id="CollapseButton" class="button button__exit horizontal-align-left" onactivate="ToolFrame.toggleCollapse()">
+				<Image id="CollapseIcon" class="button__icon" src="file://{images}/icons/down-arrow.svg" textureheight="14"/>
+			</Button>
+			<Button class="button button__exit horizontal-align-right" onactivate="ToolFrame.close()">
+				<Image class="button__icon" src="file://{images}/icons/close.svg" textureheight="22"/>
+			</Button>
+		</Panel>
+	
+		<Panel id="CollapseContainer">
+			<Frame id="ContentsFrame" src="{s:layout}" class="pad-left-right-8"/>
+		
+			<ResizeDragKnob target="ContentsFrame" id="ToolPanelResize">
+				<Image src="file://{images}/icons/resize.svg" textureheight="12" />
+			</ResizeDragKnob>
+		</Panel>
+		
+	</Panel>
+</root>

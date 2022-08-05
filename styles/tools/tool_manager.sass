@@ -1,0 +1,53 @@
+
+@define launcher-background: rgb(25, 25, 25)
+@define launcher-background-2: rgb(10, 10, 10)
+	
+.LabeledOption
+	flow-children: right
+
+.ToggleButton
+	background-color: rgba(0,0,0,0)
+
+.ChaosDevPanelManager
+	width: 100%
+	height: 100%
+
+#LauncherPanel
+	width: 100%
+	height: 32px
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( launcher-background ), to( launcher-background-2 ) )
+	vertical-align: bottom
+	horizontal-align: left
+	
+#LauncherContainer
+	vertical-align: bottom
+	width: 100%
+	
+
+#LauncherDropDown
+	background-color: launcher-background
+	min-width: 320px
+
+.launcher-menu
+	padding: 0px
+	margin: 0px
+	margin-bottom: 8px
+	background-color: launcher-background
+	min-width: 320px
+
+	box-shadow: none
+	border-radius: 0px
+	
+	Label
+		padding: 4px
+		font-size: 16px
+
+DropDownMenu.DropDownMenuVisible
+	box-shadow: none
+	border-radius: 0px
+
+.launcher-item
+	padding: 3px
+	width: 100%
+	&:hover
+		background-color: launcher-background-2

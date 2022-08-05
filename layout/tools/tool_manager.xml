@@ -1,0 +1,27 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/chaosstyles.sass" />
+		<include src="file://{resources}/styles/tools/tool_manager.sass" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/tools/tool_manager.js"/>
+	</scripts>
+	<ChaosToolPanelManager hittest="false">
+		<!-- Panels can be shown in game using their ID (ie +show_dev_menu csm) -->
+		<!-- Title corresponds to the panel's title when shown in game -->
+		
+		<!-- Bottom bar panel with a list of available debug panels -->
+		<Panel id="LauncherContainer" class="bottom-top-flow">
+			<Panel id="LauncherPanel" class="left-right-flow">
+				<Button class="button horizontal-align-left" onactivate="ToolManager.toggleLauncher()">
+					<Image class="button__icon" src="file://{images}/icons/add.svg" textureheight="32"/>
+				</Button>
+			</Panel>
+			
+			<Panel visibility="hidden" id="LauncherDropDown" class="horizontal-align-left height-fit-children"/>
+		</Panel>
+		
+		<!--ChaosToolPanel visible="false" title="CSM Debug Panel" id="csm" layout="file://{resources}/layout/tools/tool_csm_panel.xml"/-->
+		
+	</ChaosToolPanelManager>
+</root>

@@ -1,0 +1,51 @@
+
+.ChaosToolPanel
+	flow-children: down
+	height: fit-children
+	width: fit-children
+	border-radius: 4px
+	min-width: 300px		// Ensure all parameters are within acceptable bounds
+	min-height: 24px
+	background-color: rgba(55, 55, 55, 0.9)
+	
+#TopBar
+	background-color: rgba(25, 25, 25, 0.9)
+	padding-top: 4px
+	padding-bottom: 4px
+	vertical-align: center
+	flow-children: right
+	width: 100%
+
+#ToolPanelResize
+	horizontal-align: right
+	vertical-align: bottom
+	padding: 8px
+
+.pad-left-right-8
+	padding-left: 8px
+	padding-right: 8px
+
+.button__exit
+	border: 1px inset black
+	background-color: black
+	margin-right: 4px
+	vertical-align: center
+
+	&:hover
+		wash-color: rgb(100, 100, 100)
+
+.button-hide__hidden
+	transition: transform 0.1s ease-in-out 0.05s
+	transform: rotateZ(-90deg)
+	
+.button-hide__shown
+	transition: transform 0.1s ease-in-out 0.05s
+	transform: rotateZ(0deg)
+	
+#CollapseContainer
+	flow-children: down
+	height: fit-children
+	width: 100%
+
+#CollapseButton
+	background-color: rgba(0,0,0,0)

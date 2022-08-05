@@ -1,0 +1,13 @@
+<root>
+    <styles>
+        <include src="file://{resources}/styles/chaosstyles.sass" />
+    </styles>
+	<scripts>
+		<include src="file://{resources}/scripts/controls/cvar_toggle.js"/>
+	</scripts>
+
+    <Panel class="left-right-flow width-fit-children height-fit-children">
+		<Label text="{s:label}"/>
+		<ToggleButton id="ToggleButton" onactivate="CvarToggle.toggleVar('{s:cvar}', '{s:onvalue}', '{s:offvalue}')"/>
+    </Panel>
+</root>
