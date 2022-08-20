@@ -8,6 +8,34 @@
 	</scripts>
 
 	<Panel class="MainMenuSubMenu MainMenuAddons" useglobalcontext="true">
-		<Label class="full text-align-center" text="Unimplemented" />
+		<Panel class="MainAddonsHeader">
+			<Label class="MainMenuButtonsAddonsLabel" text="Manage Addons" />
+			<Label class="MainMenuButtonsSortLabel" text="Sort by: " />
+			<DropDown class="DropDown">
+				<Label text="Date subscribed" />
+				<Label text="Test1" />
+			</DropDown>
+			<Label class="MainMenuButtonsFilterLabel" text="Filter by: " />
+			<DropDown class="DropDown">
+				<Label text="None" />
+				<Label text="Test2" />
+			</DropDown>
+		</Panel>
+		<Panel class="MainAddonsList">
+		</Panel>
+		<Panel class="MainAddonsFooter">
+			<Button>
+				<Label text="Disable"/>
+			</Button>
+			<Button>
+				<Label text="Uninstall"/>
+			</Button>
+			<Button>
+				<Label text="View in Workshop"/>
+			</Button>
+			<Button>
+				<Label text="Browse the Workshop"/>
+			</Button>
+		</Panel>
 	</Panel>
 </root>
