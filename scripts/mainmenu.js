@@ -38,14 +38,18 @@ var MainMenu = {
 	hideSubMenus() {
 		const frame = $("#MainMenuSubMenuFrame");
 		if (frame) {
-			// for any fades
-			frame.DeleteAsync(0.5);
+			// using DeleteAsync because RemoveAndDeleteChildren permanently deletes frame children???
+			frame.DeleteAsync(0.0);
 		}
 		$("#MainMenuPanel").visible = true;
 	},
 
 	showSubMenu(submenu) {
 		$("#MainMenuPanel").visible = false;
+		const existingFrame = $("#MainMenuSubMenuFrame");
+		if (existingFrame) {
+			existingFrame.DeleteAsync(0.0);
+		}
 		$.CreatePanel("Frame", $("#MainMenuSubMenuParent"), "MainMenuSubMenuFrame", {
 			src: `file://{resources}/layout/menu/${submenu}.xml`,
 		});
