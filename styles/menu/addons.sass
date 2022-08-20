@@ -1,1 +1,96 @@
 @use "../mainmenu"
+.MainMenuAddons
+	background-color: #d6d6d6
+	flow-children: down
+
+.MainMenuButtonsAddonsLabel
+	padding-left: 2%
+	margin-right: 10%
+	font-size: 40px
+	color: #050505
+	align: left top
+	font-weight: bold
+	align: left center
+
+.MainMenuButtonsSortLabel
+	padding-left: 2%
+	font-size: 25px
+	color: #050505
+	align: left center
+
+.MainMenuButtonsFilterLabel
+	padding-left: 2%
+	font-size: 25px
+	color: #050505
+	align: left center
+
+.MainAddonsHeader
+	width: 100%
+	height: 20%
+	background-color: #cccccc
+	flow-children: right
+
+.DropDown
+	border-left: 8px solid #9f9f9f
+	background-color: #c1c1c1
+	margin-right: 25px
+	padding: 2px 2px 2px 5px
+	align: left center
+	&:hover
+		border-left: 8px solid #ff7d02ff
+		background-color: #c1c1c1
+		margin-right: 25px
+		padding: 2px 2px 2px 5px
+		align: left center
+
+.MainAddonsList
+	width: 100%
+	height: 65%
+	background-color: #cccccc
+	border-top: 8px solid #999d
+	flow-children: down
+	overflow: scroll
+
+.MainAddonsFooter
+	width: 100%
+	height: 30%
+	background-color: #d6d6d6
+	border-top: 8px solid #999d
+	flow-children: right
+	padding-left: 2%
+	> Button
+		align: right center
+		border-left: 8px solid #9f9f9f
+		background-color: #c1c1c1
+		padding: 2px 2px 2px 5px
+		margin-right: 25px
+		> Label
+			font-size: 20px
+		&:hover
+			align: right center
+			border-left: 8px solid #ff7d02ff
+			background-color: #c1c1c1
+			padding: 2px 2px 2px 5px
+			margin-right: 25px
+			> Label
+				font-size: 20px
+
+.Addon
+	height: 100%
+	flow-children: right
+	width: 20%
+	background-color: #c1c1c1
+	padding: 10px
+	> Image
+		height: 50px
+		width: 100%
+
+.AddonText
+	color: #050505
+
+.AddonAuthor
+	color: #808080
+
+.AddonSize
+	color: #808080
+
