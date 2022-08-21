@@ -1,0 +1,11 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/world/worldui_example.sass" />
+	</styles>
+	<ChaosWorldPanel>
+		<Label text="Panorama World UI!"/>
+		<Button>
+			<Label text="I'm a button!"/>
+		</Button>
+	</ChaosWorldPanel>
+</root>
