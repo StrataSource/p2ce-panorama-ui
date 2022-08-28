@@ -259,6 +259,26 @@ var MainMenuController = (function () {
 		}
 	}
 
+	function _onMapLoaded(levelName, isBackgroundMap) {
+		if (!isBackgroundMap)
+			return;
+		// Fade out the video player
+		let videoPlayer = $("#MainMenuMovie");
+		if (videoPlayer != null) {
+			videoPlayer.Stop();
+			videoPlayer.AddClass("MainMenuMovieFadeOut");
+		}
+	}
+
+	function _onMapUnloaded() {
+		// Show the video player again
+		let videoPlayer = $("#MainMenuMovie");
+		if (videoPlayer != null) {
+			videoPlayer.Play();
+			videoPlayer.RemoveClass("MainMenuMovieFadeOut");
+		}
+	}
+
 	return {
 		playMap: _playMap,
 		setBackgroundMovie: _setBackgroundMovie,
@@ -276,6 +296,8 @@ var MainMenuController = (function () {
 		toggleCVar: _onToggleCVar,
 		toggleStoredVar: _onToggleStoredVar,
 		displayStartupCampaign: _displayStartupCampaign,
+		onMapLoaded: _onMapLoaded,
+		onMapUnloaded: _onMapUnloaded
 	};
 })();
 
@@ -286,6 +308,8 @@ var MainMenuController = (function () {
 	$.RegisterForUnhandledEvent("ChaosHideMainMenu", MainMenuController.onHideMainMenu);
 	$.RegisterForUnhandledEvent("ChaosShowPauseMenu", MainMenuController.onShowPauseMenu);
 	$.RegisterForUnhandledEvent("ChaosHidePauseMenu", MainMenuController.onHidePauseMenu);
+	$.RegisterForUnhandledEvent("MapLoaded", MainMenuController.onMapLoaded);
+	$.RegisterForUnhandledEvent("MapUnloaded", MainMenuController.onMapUnloaded);
 
 	$.RegisterEventHandler("Cancelled", $.GetContextPanel(), MainMenuController.onEscapeKeyPressed);
 
