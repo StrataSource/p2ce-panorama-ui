@@ -1,0 +1,31 @@
+name: Quality Checks
+on:
+  push:
+    branches: [main, new-menu]
+  pull_request:
+    branches: [main, new-menu]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: ESLint
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bahmutov/npm-install@v1
+      - run: npm run check
+  format-check:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: creyD/prettier_action@v4.2
+        with:
+          dry: True
+          only_changed: True
+  optimize-svgs:
+    name: Optimize SVGs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ericcornelissen/svgo-action@v3
+      with:
+        repo-token: ${{secrets.GITHUB_TOKEN}}

@@ -103,7 +103,9 @@ const Chat = (function () {
 		if ($.GetContextPanel().GetParent().id !== "MainMenuFriendsAndParty") return;
 
 		const panelToClipWidth = panelToClip.actuallayoutwidth;
-		const friendsListWidthWhenExpanded = panelToClip.GetParent().FindChildInLayoutFile("mainmenu-sidebar__blur-target").contentwidth;
+		const friendsListWidthWhenExpanded = panelToClip
+			.GetParent()
+			.FindChildInLayoutFile("mainmenu-sidebar__blur-target").contentwidth;
 
 		const sideBarWidth = noClip ? 0 : friendsListWidthWhenExpanded;
 		const widthDiff = panelToClipWidth - sideBarWidth;

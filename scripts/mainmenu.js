@@ -10,7 +10,6 @@
 
 // eslint-disable-next-line no-unused-vars
 var MainMenu = {
-
 	updateRichPresence() {
 		RichPresenceAPI.UpdateRichPresenceState({
 			discord: {
@@ -112,14 +111,13 @@ var MainMenu = {
 
 	onEscapeKeyPressed(_eSource, _nRepeats, _focusPanel) {
 		// Resume game (pause menu mode)
-		if (GameInterfaceAPI.GetGameUIState() === GAME_UI_STATE.PAUSEMENU)
-			$.DispatchEvent("ChaosMainMenuResumeGame");
+		if (GameInterfaceAPI.GetGameUIState() === GAME_UI_STATE.PAUSEMENU) $.DispatchEvent("ChaosMainMenuResumeGame");
 		MainMenu.hideSubMenus();
 	},
 };
 
 // Entry point called on create
-(function() {
+(function () {
 	$.RegisterForUnhandledEvent("ChaosShowMainMenu", MainMenu.onShowMainMenu);
 	$.RegisterForUnhandledEvent("ChaosHideMainMenu", MainMenu.onHideMainMenu);
 	$.RegisterForUnhandledEvent("ChaosShowPauseMenu", MainMenu.onShowPauseMenu);
