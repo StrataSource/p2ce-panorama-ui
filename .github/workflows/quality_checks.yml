@@ -13,16 +13,16 @@ jobs:
       - uses: bahmutov/npm-install@v1
       - run: npm run check
   format-check:
+    name: Prettier
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Prettier
-        uses: creyD/prettier_action@v4.2
+      - uses: creyD/prettier_action@v4.2
         with:
           dry: True
           only_changed: True
   optimize-svgs:
-    name: SVGs
+    name: Optimize SVGs
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
