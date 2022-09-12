@@ -1,4 +1,4 @@
-name: ESLint
+name: Quality Checks
 on:
   push:
     branches: [main, new-menu]
@@ -16,8 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Prettier Check
+      - name: Prettier
         uses: creyD/prettier_action@v4.2
         with:
           dry: True
           only_changed: True
+  optimize-svgs:
+    name: SVGs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ericcornelissen/svgo-action@v3
+      with:
+        repo-token: ${{secrets.GITHUB_TOKEN}}
