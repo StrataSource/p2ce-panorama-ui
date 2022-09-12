@@ -10,7 +10,6 @@
 
 // eslint-disable-next-line no-unused-vars
 var MainMenu = {
-
 	updateRichPresence() {
 		RichPresenceAPI.UpdateRichPresenceState({
 			discord: {
@@ -119,7 +118,7 @@ var MainMenu = {
 };
 
 // Entry point called on create
-(function() {
+(function () {
 	$.RegisterForUnhandledEvent("ChaosShowMainMenu", MainMenu.onShowMainMenu);
 	$.RegisterForUnhandledEvent("ChaosHideMainMenu", MainMenu.onHideMainMenu);
 	$.RegisterForUnhandledEvent("ChaosShowPauseMenu", MainMenu.onShowPauseMenu);
