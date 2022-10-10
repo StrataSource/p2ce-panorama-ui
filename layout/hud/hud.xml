@@ -16,6 +16,8 @@
 
 		<!-- HUD anchored to top center of screen, laid out vertically top-to-bottom -->
 		<Panel id="HudTopCenter" hittest="false" hittestchildren="false">
+			<ChaosHudShowPos />
+			<ChaosHudBoneCounts />
 		</Panel>
 
 		<!-- HUD anchored to top-left corner of screen, laid out vertically top-to-bottom -->
