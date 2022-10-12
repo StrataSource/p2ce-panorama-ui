@@ -6,4 +6,6 @@
 
 (function () {
 	UiToolkitAPI.RegisterPanel2d("ControlLibTestPanel", "file://{resources}/layout/tests/control-lib-test-panel.xml");
+
+	UiToolkitAPI.RegisterPanel2d("VersionInfo", "file://{resources}/layout/components/versioninfo.xml");
 })();
