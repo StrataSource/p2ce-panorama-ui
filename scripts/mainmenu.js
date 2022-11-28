@@ -76,7 +76,7 @@ var MainMenu = {
 		$("#MainMenuContainerPanel").AddClass("MainMenu");
 		$("#MainMenuContainerPanel").RemoveClass("PauseMenu");
 
-		$.DispatchEvent("P2CESetMenuBackgroundMovie", "community_bg1");
+		$.DispatchEvent("P2CESetMenuBackgroundMovie", "menu_act04");
 	},
 
 	onHideMainMenu() {

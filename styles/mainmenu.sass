@@ -8,6 +8,7 @@ $main-menu-background-color: #c4c4c4
 $main-menu-border-radius: 8px
 $submenu-width: 60%
 $submenu-height: 50%
+$navbar-background-color: #333D
 
 .MainMenuSubMenu
 	background-color: $main-menu-background-color
@@ -125,11 +126,6 @@ Label
 	font-family: notosans-regular, Arial, sans-serif
 	color: #050505
 
-#MainMenuLogoDark
-	align: center center
-	width: 95%
-	border-radius: 8px
-
 .MainMenuNavlistContainer
 	flow-children: down
 	align: center center
@@ -137,18 +133,89 @@ Label
 	margin-top: 16.5%
 
 #MainMenuLogoDark
-	width: 40%
 	align: left center
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #333D ), to( #3338 ) )
-	//animation: rainbow 2.1s linear 0.0s infinite normal forwards
+	border-radius: 4px
+	width: 40%
+	padding-left: 10px
+	padding-right: 10px
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( $navbar-background-color ), to( #3338 ) )
+	animation: rainbow 360s linear 0.0s infinite normal forwards
 
+#MainMenuNavbar
+	height: 15%
+	width: 100%
+	flow-children: down
+	background-color: $navbar-background-color
+	
+#MainMenuNavbarBlur
+	blur: fastgaussian(8, 8, 5)
+
+#MainMenuNavbarBackground
+	height: 15%
+	width: 100%
+		
+#MainMenuNavbarLogo
+	height: 60%
+	
+#MainMenuSubNavbar
+	height: 40%
+	width: 100%
+	flow-children: right
+	margin-left: 10%
+
+.NavbarButton
+	width: 10%
+	height: 100%
+	margin-left: 16px
+	//height: 7.5%
+	border-bottom: 6px solid #999d
+	transition: border-left-color 0.1s ease-in-out
+	margin-top: 12px
+	vertical-align: bottom
+
+	> Label
+		width: 100%
+		margin-left: 2.5%
+		vertical-align: bottom
+		horizontal-align: center
+		text-align: center
+		margin-bottom: 8px
+		color: #dddddddd
+
+	&:disabled, &:parentdisabled
+		background-color: #424242dd
+
+	&:hover:not(:parentdisabled):enabled,
+	&:selected
+		border-bottom-color: #ff7d02ff
+		border-right-color: #ff7d02ff
+		background-color:  gradient( linear, 0% 100%, 0% 0%, from( #b6b6b610 ), to( #3338 ) )
+		//background-color: #aaaa
+
+.NavbarIconButton
+	//height: 100%
+	//horizontal-align: right
+	margin-left: 10px
+	margin-bottom: 6px
+	vertical-align: bottom
+	&:hover:not(:parentdisabled):enabled,
+	&:selected
+		background-color: #000
+		
+.ButtonIcon
+	margin-bottom: 0px
+	vertical-align: center
+	horizontal-align: center
+	wash-color-fast: #FFF
+
+	
 .MainMenuNavlist
 	width: 75%
 	align: center center
 	flow-children: down
 
 .ListItem
-	width: 50%
+	width: 40%
 	height: 7.5%
 	background-color: #b6b6b6dd
 	border-left: 8px solid #999d

@@ -33,13 +33,47 @@
 			<Panel id="MainMenuInput" class="full" hittest="true">
 
 				<!-- Fills the entire screen. This is used as the backdrop -->
-				<Panel id="MainMenuCore" class="full" blurrects="ChaosLoadingScreen">
+				<Panel id="MainMenuCore" class="full" blurrects="MainMenuBackground">
 					<Panel id="MainMenuBackground" class="full">
 						<!-- Background video -->
 						<!-- Movie added/removed dynamically when changing the visibility of the main menu -->
 						<Panel id="MainMenuMovieParent" class="full" />
 					</Panel>
-
+					
+					<BaseBlurTarget
+						id="MainMenuNavbarBlur"
+						blurrects="MainMenuNavbar"
+						class="navbar__blur"/>
+					
+					<!-- The top bar containing nav items -->
+					<Panel id="MainMenuNavbar">
+						<Image id="MainMenuNavbarLogo"
+							defaultsrc="file://{images}/menu/p2ce/logo_title.png"
+							scaling="stretch-to-cover-preserve-aspect"/>
+							
+						<Panel id="MainMenuSubNavbar">
+							<TextButton
+								class="NavbarButton"
+								group="NavBar"
+								text="Singleplayer"/>
+							<TextButton
+								class="NavbarButton"
+								group="NavBar"
+								text="Multiplayer"/>
+							<TextButton
+								class="NavbarButton"
+								group="NavBar"
+								text="Addons"/>
+							<TextButton
+								class="NavbarButton"
+								group="NavBar"
+								text="Settings"/>
+							<Button class="NavbarIconButton">
+								<Image class="ButtonIcon" src="file://{images}/menu/quit.svg" textureheight="42" />
+							</Button>
+						</Panel>
+					</Panel>
+					
 					<Panel id="MainMenuSubMenuParent" class="MainMenuNavlistContainer full">
 						<Image id="MainMenuLogoDark"
 								defaultsrc="file://{images}/menu/p2ce/logo_title.png"
