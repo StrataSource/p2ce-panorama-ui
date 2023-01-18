@@ -1,9 +1,0 @@
-MomHudDamageIndicator {
-	vertical-align: center_nopixelsnap;
-	horizontal-align: center_nopixelsnap;
-}
-
-// Do not set any size values, those are all controlled by convars
-.damage-indicator {
-	opacity-mask: url('file://{images}/masks/damageindicator-mask.png');
-}

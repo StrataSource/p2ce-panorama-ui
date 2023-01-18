@@ -8,11 +8,7 @@
 
 		<!-- In world UI is first to make sure it shows up behind all "screen-looking" UI -->
 		<Panel id="HudInWorld" hittest="false" hittestchildren="false">
-			<MomHudGhostEntities />
-			<MomHudConcEntities />
-			<MomHudDamageIndicator />
-			<MomHudCgaz />
-			<MomHudReticle />
+			
 		</Panel>
 
 		<!-- Center of screen HUD laid out vertically top-to-bottom -->
@@ -22,55 +18,31 @@
 
 		<!-- HUD anchored to top-left corner of screen, laid out vertically top-to-bottom -->
 		<Panel id="HudTopLeft" hittest="false" hittestchildren="false">
-			<HudTrickTracker />
-			<HudComparisons />
+
 		</Panel>
 
 		<!-- Anchored to below the center of the screen, laid out from top to bottom -->
 		<!-- misleading name, not 'bottom-center' but 'below center' -->
 		<Panel id="HudBottomCenter" hittest="false" hittestchildren="false">
 			<!-- Anchored on Bottom-center, laid out from top to bottom -->
-			<MomHudSynchronizer />
-			<MomHudSpeedometer />
-			<MomHudConcCooktime />
-			<MomHudStickyCharge />
-			<MomHudStickyCount />
-			<MomHudStatus />
-			<MomHudTimer />
-			<MomHudStrafeSync />
+
 			<ChaosHudHintText id="HudHintText" />
 		</Panel>
 
 		<!-- Anchored to the bottom-left corner of the screen, laid out from top to bottom -->
 		<Panel id="HudLowerLeft" hittest="false" hittestchildren="true">
 			<HudStaticMenu />
-			<MomHudChat />
 		</Panel>
 
 		<!-- Anchored on lower-right corner, laid out from top to bottom -->
 		<Panel id="HudBottomRight" hittest="false" hittestchildren="false">
-			<MomHudDFJump />
-			<MomHudAmmo />
-			<MomHudKeyPress />
+
 		</Panel>
 
 		<!-- Anchored in top right corner of screen, laid out from top-to-bottom -->
 		<Panel id="HudTopRight" hittest="false" hittestchildren="false">
-			<MomHudVersionInfo />
-			<MomHudMapInfo />
-			<MomHudSpecInfo />
-			<MomHudWeaponSelection />
-		</Panel>
 
-		<ChaosHudBlurTarget
-			id="HudBlur"
-			blurrects="Leaderboards TrickList"
-			class="hud-blur"
-			hittest="false"
-			hittestchildren="false"
-		>
-			<ChaosBackbufferImagePanel class="full" />
-		</ChaosHudBlurTarget>
+		</Panel>
 
 		<!-- HUD anchored to top center of screen, laid out vertically top-to-bottom
 		-  NOTE: Not really set up properly - HudTeamCounter should dynamically move
@@ -81,19 +53,10 @@
 		<Panel id="HudTopCenter" hittest="false">
 			<ChaosHudShowPos />
 			<ChaosHudBoneCounts />
-			<MomHudSpectate id="Spectator" />
-			<MomHudJumpStats />
-		</Panel>
 
-		<TrickList id="TrickList" />
-
-		<!-- This container is here so we can move the leaderboard in and out of it during the end-of-match sequence -->
-		<Panel id="LeaderboardsContainer" class="full-width full-height" hittest="false" hittestchildren="true">
-			<HudLeaderboards id="Leaderboards" hittest="true" />
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
-		<ToastManager />
 		<ChaosPopupManager id="PopupManager" onpopupsdismissed="" />
 		<ContextMenuManager id="ContextMenuManager" />
 		<ChaosTooltipManager id="TooltipManager" hittest="false" />

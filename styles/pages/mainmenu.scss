@@ -14,8 +14,7 @@ $page-transition-timing-func: ease-in-out;
 }
 
 .MainMenuRootPanel.PopupBackgroundBlur #MainMenuInput {
-	blur: gaussian(8, 8, 5);
-	-s2-mix-blend-mode: opaque;
+	
 }
 
 .MainMenuModeOnly {
@@ -55,7 +54,6 @@ $drawer-width: 768px;
 	&__background-blur {
 		width: 100%;
 		height: 100%;
-		blur: fastgaussian(2, 2, 4);
 	}
 
 	&__content-blur {
@@ -64,13 +62,11 @@ $drawer-width: 768px;
 		width: 125%;
 		height: 125%;
 		overflow: noclip;
-		blur: fastgaussian(8, 8, 5);
 	}
 
 	&__pause-blur {
 		width: 100%;
 		height: 100%;
-		blur: fastgaussian(1, 1, 2);
 	}
 
 	&__movie {
@@ -660,22 +656,5 @@ $drawer-width: 768px;
 		tooltip-position: top;
 		tooltip-arrow-position: 50% 50%;
 		tooltip-body-position: 50% 50%;
-	}
-}
-
-.mapselector__background {
-	height: 100%;
-	width: 100%;
-	min-width: 1920px;
-	max-width: 2560px;
-	horizontal-align: middle;
-	transition-property: opacity;
-	transition-duration: $page-transition-duration;
-	transition-timing-function: $page-transition-timing-func;
-	opacity: 1;
-	z-index: 1;
-
-	&--hidden {
-		opacity: 0;
 	}
 }

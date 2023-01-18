@@ -4,9 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{resources}/scripts/common/gameui.js" />
-		<include src="file://{resources}/scripts/common/safeguards.js" />
 		<include src="file://{resources}/scripts/mainmenu.js" />
-		<include src="file://{resources}/scripts/mainmenu_drawer.js" />
 	</scripts>
 
 	<snippets>
@@ -60,35 +58,6 @@
 				</RadioButton>
 
 				<Panel id="MainMenuTopButtons" class="full-height flow-right">
-					<RadioButton
-						id="PlayButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenuController.navigateToPage('MapSelection', 'mainmenu_mapselector', false)"
-					>
-						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="64" />
-					</RadioButton>
-
-					<RadioButton
-						id="InventoryButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						disabled="true"
-						onmouseover="UiToolkitAPI.ShowTextTooltip('InventoryButton', $.Localize('#Common_ComingSoon'))"
-						onmouseout="UiToolkitAPI.HideTextTooltip()"
-						style="tooltip-position: bottom;"
-					>
-						<Image class="topnav__icon" src="file://{images}/inventory.svg" textureheight="64" />
-					</RadioButton>
-
-					<RadioButton
-						id="LearnButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenuController.navigateToPage('Learn', 'mainmenu_learn')"
-					>
-						<Image class="topnav__icon" src="file://{images}/learn.svg" textureheight="64" />
-					</RadioButton>
 
 					<RadioButton
 						id="SettingsButton"
@@ -105,8 +74,6 @@
 						<Image class="topnav__icon" src="file://{images}/notification.svg" textureheight="64" />
 					</RadioButton>
 
-					<PlayerCard class="full-height" onactivate="Drawer.onPlayerCardPressed();" />
-
 					<RadioButton id="QuitButton" class="topnav__button" onactivate="MainMenuController.onQuitButtonPressed()">
 						<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="64" />
 					</RadioButton>
@@ -119,73 +86,6 @@
 			<Panel class="topnav__shadow" />
 			<!-- /Topnav Shadow -->
 
-			<!-- Drawer -->
-			<Panel id="MainMenuDrawerPanel" class="drawer">
-
-				<!-- Rightnav Shadow -->
-				<Panel class="rightnav__shadow" />
-				<!-- /Rightnav Shadow -->
-
-				<!-- Rightnav -->
-				<Panel id="MainMenuOptionListRight" class="rightnav">
-					<Panel class="rightnav__wrapper">
-						<RadioButton
-							id="LobbyButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('LobbyDrawer')"
-						>
-							<Image id="LobbyButtonImage" class="rightnav__icon" src="file://{images}/lobby.svg" textureheight="32" />
-							<Label id="LobbyPlayerCountLabel" class="rightnav__button-subtitle rightnav__button-subtitle--hidden" />
-						</RadioButton>
-
-						<RadioButton
-							id="ProfileButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('ProfileDrawer')"
-						>
-							<Image class="rightnav__icon" src="file://{images}/profile.svg" textureheight="32" />
-						</RadioButton>
-
-						<RadioButton
-							id="ChallengesButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('ChallengesDrawer')"
-						>
-							<Image class="rightnav__icon" src="file://{images}/crown.svg" textureheight="32" />
-						</RadioButton>
-
-						<RadioButton
-							id="ChangelogButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('AboutDrawer')"
-						>
-							<Image class="rightnav__icon" src="file://{images}/news.svg" textureheight="32" />
-						</RadioButton>
-
-						<Button
-							id="SliderButton"
-							group="RightNavRadio"
-							class="rightnav__button rightnav__drawerbutton"
-							onactivate="Drawer.toggle()"
-						>
-							<Image class="rightnav__icon" src="file://{images}/right-arrow.svg" textureheight="32" orientation="180" />
-						</Button>
-					</Panel>
-				</Panel>
-				<!-- /Rightnav -->
-
-				<!-- Drawer Content -->
-				<Panel id="MainMenuDrawerContent" class="drawer__content">
-					<!-- Panels get added via JS here -->
-				</Panel>
-				<!-- /Drawer Content -->
-			</Panel>
-			<!-- /Drawer -->
-
 			<!-- Full page blur: used to blur everything below the drawer -->
 			<BaseBlurTarget
 				id="MainMenuFullBlur"
@@ -195,27 +95,19 @@
 				<Panel class="mainmenu__container">
 					<!-- Backgrounds -->
 					<!-- Background blur: used to blur the backgrounds behind mainmenu pages -->
-					<BaseBlurTarget
-						id="MainMenuBackgroundBlur"
-						class="mainmenu__background-blur"
-						blurrects="MainMenuContentBlur MainMenuNavBar NewsPanel"
-					>
-						<!-- Map Selector backgrounds -->
-						<Image id="MainMenuBackgroundMapSelectorImage" class="MainMenuModeOnly mapselector__background" />
+					
+					<!-- Movie background -->
+					<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
 
-						<!-- Movie background -->
-						<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
+					<!-- Static image background -->
+					<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
 
-						<!-- Static image background -->
-						<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
-
-						<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-						<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur" blurrects="PauseMenuMainMenuContent">
-							<!-- Backbuffer background -->
-							<ChaosBackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
-						</BaseBlurTarget>
-
+					<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+					<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur" blurrects="PauseMenuMainMenuContent">
+						<!-- Backbuffer background -->
+						<ChaosBackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
 					</BaseBlurTarget>
+
 					<!-- /Backgrounds -->
 
 					<Panel class="mainmenu__content">
@@ -301,7 +193,6 @@
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
-		<ToastManager />
 		<ChaosPopupManager id="PopupManager" onpopupsdismissed="" />
 		<ContextMenuManager id="ContextMenuManager" />
 		<ChaosTooltipManager id="TooltipManager" hittest="false" />

@@ -18,8 +18,6 @@ class MainMenuController {
 		image: $('#MainMenuBackground'),
 		/** @type {ModelPanel} @static */
 		model: $('#MainMenuModel'),
-		/** @type {Image} @static */
-		mapSelectorBackground: $('#MainMenuBackgroundMapSelectorImage'),
 		/** @type {Panel} @static */
 		topButtons: $('#MainMenuTopButtons'),
 		/** @type {RadioButton} @static */
@@ -33,19 +31,8 @@ class MainMenuController {
 		$.RegisterForUnhandledEvent('ChaosHideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ChaosShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('ChaosHidePauseMenu', this.onHidePauseMenu.bind(this));
-		$.RegisterForUnhandledEvent('MapSelector_OnLoaded', this.onMapSelectorLoaded.bind(this));
-		$.RegisterForUnhandledEvent('Safeguard_Disconnect', this.onSafeguardDisconnect.bind(this));
-		$.RegisterForUnhandledEvent('Safeguard_Quit', this.onSafeguardQuit.bind(this));
-		$.RegisterForUnhandledEvent('Safeguard_ChangeMap', this.onSafeguardMapChange.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuBackground.bind(this));
-		$.RegisterForUnhandledEvent('OnMomentumQuitPrompt', this.onQuitPrompt.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
-
-		// Close the map selector when a map is successfully loaded
-		$.RegisterForUnhandledEvent(
-			'MapSelector_TryPlayMap_Outcome',
-			(outcome) => outcome && this.onHomeButtonPressed()
-		);
 
 		$.DispatchEvent('ChaosHideIntroMovie');
 	}
@@ -118,8 +105,6 @@ class MainMenuController {
 	 * Switch main menu page
 	 */
 	static navigateToPage(tab, xmlName, hasBlur = true) {
-		this.panels.mapSelectorBackground.SetHasClass('mapselector__background--hidden', tab !== 'MapSelection');
-
 		this.panels.contentBlur.visible = hasBlur;
 
 		if (this.activeTab === tab) {
@@ -188,7 +173,6 @@ class MainMenuController {
 	static showContentPanel() {
 		this.panels.pageContent.RemoveClass('mainmenu__page-container--hidden');
 
-		$.DispatchEvent('RetractDrawer');
 		$.DispatchEvent('ShowContentPanel');
 
 		this.panels.homeContent.AddClass('home--hidden');
@@ -298,28 +282,10 @@ class MainMenuController {
 	}
 
 	/**
-	 * Hide the map selector background
-	 */
-	static hideMapSelectorBackground() {
-		this.panels.mapSelectorBackground.AddClass('mapselector__background--hidden');
-	}
-
-	/**
-	 * Handles the map selector load event to add blurs to some of the map selector panels.
-	 * Necessary to handle in here because map selector background is a part of the main menu background section.
-	 */
-	static onMapSelectorLoaded() {
-		['MapSelectorLeft', 'MapDescription', 'MapInfoStats', 'Leaderboards'].forEach((panel) =>
-			this.panels.backgroundBlur?.AddBlurPanel($.GetContextPanel().FindChildTraverse(panel))
-		);
-	}
-
-	/**
 	 * Handles home button getting pressed.
 	 */
 	static onHomeButtonPressed() {
 		this.onHideContentPanel();
-		this.hideMapSelectorBackground();
 	}
 
 	/**
@@ -353,45 +319,6 @@ class MainMenuController {
 			$.Localize('#Action_Return'),
 			() => {},
 			'blur'
-		);
-	}
-
-	/**
-	 * Shows a safeguard popup when disconnect is pressed during a run and safeguard is on
-	 */
-	static onSafeguardDisconnect() {
-		UiToolkitAPI.ShowGenericPopupOkCancel(
-			$.Localize('#Safeguard_MapQuitToMenu'),
-			$.Localize('#Safeguard_MapQuitToMenu_Message'),
-			'warning-popup',
-			() => $.DispatchEvent('Safeguard_Response', RunSafeguardType.QUIT_TO_MENU),
-			() => {}
-		);
-	}
-
-	/**
-	 * Shows a safeguard popup when quit is pressed during a run and safeguard is on
-	 */
-	static onSafeguardQuit() {
-		UiToolkitAPI.ShowGenericPopupOkCancel(
-			$.Localize('#Safeguard_MapQuitGame'),
-			$.Localize('#Safeguard_MapQuitGame_Message'),
-			'warning-popup',
-			() => $.DispatchEvent('Safeguard_Response', RunSafeguardType.QUIT_GAME),
-			() => {}
-		);
-	}
-
-	/**
-	 * Shows a safeguard popup when map change is triggered during a run and safeguard is on
-	 */
-	static onSafeguardMapChange(mapName) {
-		UiToolkitAPI.ShowGenericPopupOkCancel(
-			$.Localize('#Safeguard_MapChange'),
-			$.Localize('#Safeguard_MapChange_Message').replace('%map%', mapName),
-			'warning-popup',
-			() => GameInterfaceAPI.ConsoleCommand('__map_change_ok 1;map ' + mapName),
-			() => {}
 		);
 	}
 
