@@ -23,7 +23,7 @@
 		<!-- HUD anchored to top-left corner of screen, laid out vertically top-to-bottom -->
 		<Panel id="HudTopLeft" hittest="false" hittestchildren="false">
 			<ConVarEnabler convar="cl_drawhud" togglevisibility="true">
-				<Frame src="file://{resources}/layout/hud/consolenotify.xml" />
+				<Frame src="file://{resources}/layout/hud/console-notify.xml" />
 			</ConVarEnabler>
 		</Panel>
 

@@ -232,7 +232,7 @@
 						<Label class="fontSize-m fontWeight-light" text="Custom Layout Popup Types" />
 						<Label text=""/>
 
-						<Button class="PopupButton" onactivate="ClearPopupsText();UiToolkitAPI.ShowCustomLayoutPopup('', 'file://{resources}/layout/popups/popup_custom_layout_test.xml')">
+						<Button class="PopupButton" onactivate="ClearPopupsText();UiToolkitAPI.ShowCustomLayoutPopup('', 'file://{resources}/layout/modals/popups/custom-layout-test.xml')">
 							<Label text="Custom Layout"/>
 						</Button>
 						<Button class="PopupButton" onactivate="OnPopupCustomLayoutParamsPressed()">
@@ -315,10 +315,10 @@
 						</TooltipPanel>
 
 						<Label text=""/>
-						<TooltipPanel src="file://{resources}/layout/tooltips/tooltip_custom_test.xml" src-id="CustomTooltipUniqueId">
+						<TooltipPanel src="file://{resources}/layout/modals/tooltips/custom-test.xml" src-id="CustomTooltipUniqueId">
 							<Label class="Orange" text="Custom Layout Tooltip" />
 						</TooltipPanel>
-						<TooltipPanel src="file://{resources}/layout/tooltips/tooltip_custom_test.xml" src-id="CustomTooltipUniqueId2" src-parameters="test=blah">
+						<TooltipPanel src="file://{resources}/layout/modals/tooltips/custom-test.xml" src-id="CustomTooltipUniqueId2" src-parameters="test=blah">
 							<Label class="Orange" text="Custom Layout Tooltip with parameters" />
 						</TooltipPanel>
 					</Panel>
@@ -394,7 +394,7 @@
 						<Button class="PopupButton" oncontextmenu="OnSimpleContextMenu()" >
 							<Label text="Simple Context Menu"/>
 						</Button>
-						<Button class="PopupButton" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')">
+						<Button class="PopupButton" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')">
 							<Label text="Custom Layout"/>
 						</Button>
 						<Button class="PopupButton" oncontextmenu="OnContextMenuCustomLayoutParamsPressed()">
@@ -414,11 +414,11 @@
 							is 'right left bottom top'. If less than 4 positions are specified, the context menu first tries the opposite of the specified 
 							position along the same axis before switching to the other axis.&lt;/p&gt;" />
 						<Label text="Examples:"/>
-						<Label id="ContextMenuButtonPos1" class="Orange" acceptsinput="true" text="context-menu-position: top;" style="context-menu-position: top;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos1', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos2" class="Orange" acceptsinput="true" text="context-menu-position: bottom;" style="context-menu-position: bottom;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos2', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos3" class="Orange" acceptsinput="true" text="context-menu-position: left;" style="context-menu-position: left;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos3', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos4" class="Orange" acceptsinput="true" text="context-menu-position: right;" style="context-menu-position: right;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos4', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos5" class="Orange" acceptsinput="true" text="context-menu-position: left bottom;" style="context-menu-position: left bottom;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos5', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
+						<Label id="ContextMenuButtonPos1" class="Orange" acceptsinput="true" text="context-menu-position: top;" style="context-menu-position: top;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos1', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos2" class="Orange" acceptsinput="true" text="context-menu-position: bottom;" style="context-menu-position: bottom;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos2', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos3" class="Orange" acceptsinput="true" text="context-menu-position: left;" style="context-menu-position: left;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos3', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos4" class="Orange" acceptsinput="true" text="context-menu-position: right;" style="context-menu-position: right;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos4', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos5" class="Orange" acceptsinput="true" text="context-menu-position: left bottom;" style="context-menu-position: left bottom;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos5', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
 						<Label text=""/>
 						<Label text="context-menu-body-position:" style="font-weight: bold;" /> 
 						<Label class="fontSize-m fontWeight-light" html="true" text="&lt;p&gt;Specifies where to position the body of a context menu relative to this panel. The first value controls how the body is 
@@ -426,18 +426,18 @@
 							aligned vertically when the context menu is to the left or right of the panel. 0% means left/top aligned, 50% means 
 							center/middle aligned, and 100% means right/bottom aligned. Default is '0% 0%'.&lt;/p&gt;" />
 						<Label text="Examples:"/>
-						<Label id="ContextMenuButtonPos6" class="Orange" acceptsinput="true" text="context-menu-body-position: 0% 100%;" style="context-menu-position: top; context-menu-body-position: 0% 100%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos6', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos7" class="Orange" acceptsinput="true" text="context-menu-body-position: 50% 100%;" style="context-menu-position: top; context-menu-body-position: 50% 100%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos7', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos8" class="Orange" acceptsinput="true" text="context-menu-body-position: 100% 100%;" style="context-menu-position: top; context-menu-body-position: 100% 100%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos8', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
+						<Label id="ContextMenuButtonPos6" class="Orange" acceptsinput="true" text="context-menu-body-position: 0% 100%;" style="context-menu-position: top; context-menu-body-position: 0% 100%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos6', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos7" class="Orange" acceptsinput="true" text="context-menu-body-position: 50% 100%;" style="context-menu-position: top; context-menu-body-position: 50% 100%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos7', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos8" class="Orange" acceptsinput="true" text="context-menu-body-position: 100% 100%;" style="context-menu-position: top; context-menu-body-position: 100% 100%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos8', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
 						<Label text=""/>
 						<Label text="context-menu-arrow-position:" style="font-weight: bold;" /> 
 						<Label class="fontSize-m fontWeight-light" html="true" text="&lt;p&gt;Specifies where to point the arrow of a context menu at on this panel. The first value controls how the arrow is  
 							positioned horizontally when the context menu is to the top or bottom of the panel, and the second value controls how the arrow is 
 							positioned vertically when the context menu is to the left or right of the panel. Default is '50% 50%'.&lt;/p&gt;" />
 						<Label text="Examples:"/>
-						<Label id="ContextMenuButtonPos9" class="Orange" acceptsinput="true" text="context-menu-arrow-position: 25%;" style="context-menu-arrow-position: 25%; context-menu-position: top; context-menu-body-position: 0%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos9', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos10" class="Orange" acceptsinput="true" text="context-menu-arrow-position: 50%;" style="context-menu-arrow-position: 50%; context-menu-position: top; context-menu-body-position: 0%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos10', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
-						<Label id="ContextMenuButtonPos11" class="Orange" acceptsinput="true" text="context-menu-arrow-position: 75%;" style="context-menu-arrow-position: 75%; context-menu-position: top; context-menu-body-position: 0%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos11', '', 'file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml')"/>
+						<Label id="ContextMenuButtonPos9" class="Orange" acceptsinput="true" text="context-menu-arrow-position: 25%;" style="context-menu-arrow-position: 25%; context-menu-position: top; context-menu-body-position: 0%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos9', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos10" class="Orange" acceptsinput="true" text="context-menu-arrow-position: 50%;" style="context-menu-arrow-position: 50%; context-menu-position: top; context-menu-body-position: 0%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos10', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
+						<Label id="ContextMenuButtonPos11" class="Orange" acceptsinput="true" text="context-menu-arrow-position: 75%;" style="context-menu-arrow-position: 75%; context-menu-position: top; context-menu-body-position: 0%;" oncontextmenu="ClearContextMenuText();UiToolkitAPI.ShowCustomLayoutContextMenu('ContextMenuButtonPos11', '', 'file://{resources}/layout/modals/context-menus/custom-layout-test.xml')"/>
 					</Panel>
 				</Panel>
 			</Panel>
@@ -781,7 +781,7 @@
 					</Panel>
 
 					<Label class="fontSize-l fontWeight-Bold" text="Frames:" />
-					<Frame src="file://{resources}/layout/controlslibrary_frameexample.xml" />
+					<Frame src="file://{resources}/layout/pages/controlslibrary-frameexample.xml" />
 					<Frame snippet="frame-snippet-example" />
 				</Panel>
 			</Panel>
