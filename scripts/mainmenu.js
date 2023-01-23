@@ -246,7 +246,7 @@ var MainMenuController = (function () {
 			$.CreatePanel("Frame", $("#MainMenuCampaignFrameParent"), "MainMenuCampaignFrame");
 
 		if (currentMenuLayout !== layout) {
-			newMenu.SetSource("file://{resources}/layout/mainmenu/mainmenu_" + layout + ".xml");
+			newMenu.SetSource("file://{resources}/layout/pages/main-menu/" + layout + ".xml");
 			$.DispatchEvent("P2CEShowMainMenu");
 			currentMenuLayout = layout;
 

@@ -48,7 +48,7 @@ function OnPopupCustomLayoutParamsPressed() {
 	ClearPopupsText();
 	UiToolkitAPI.ShowCustomLayoutPopupParameters(
 		"",
-		"file://{resources}/layout/popups/popup_custom_layout_test.xml",
+		"file://{resources}/layout/modals/popups/layout-test.xml",
 		"popupvalue=123456&callback=" + jsPopupCallbackHandle
 	);
 }
@@ -57,7 +57,7 @@ function OnPopupCustomLayoutImagePressed() {
 	ClearPopupsText();
 	UiToolkitAPI.ShowCustomLayoutPopupParameters(
 		"",
-		"file://{resources}/layout/popups/popup_custom_layout_test_image.xml",
+		"file://{resources}/layout/modals/popups/custom-layout-test-image.xml",
 		"message=Example of popup with an image&image=file://{images}/control_icons/home_icon.vtf&callback=" +
 			jsPopupCallbackHandle
 	);
@@ -67,7 +67,7 @@ function OnPopupCustomLayoutImageSpinnerPressed() {
 	ClearPopupsText();
 	UiToolkitAPI.ShowCustomLayoutPopupParameters(
 		"",
-		"file://{resources}/layout/popups/popup_custom_layout_test_image.xml",
+		"file://{resources}/layout/modals/popups/custom-layout-test-image.xml",
 		"message=Example of popup with an image and a spinner&image=file://{images}/control_icons/home_icon.vtf&spinner=1&callback=" +
 			jsPopupCallbackHandle
 	);
@@ -78,7 +78,7 @@ function OnPopupCustomLayoutImageLoadingPressed() {
 	popupLoadingBarLevel = 0;
 	UiToolkitAPI.ShowCustomLayoutPopupParameters(
 		"",
-		"file://{resources}/layout/popups/popup_custom_layout_test_image.xml",
+		"file://{resources}/layout/modals/popups/custom-layout-test-image.xml",
 		"message=Example of popup with an image and a loading bar&image=file://{images}/control_icons/home_icon.vtf&callback=" +
 			jsPopupCallbackHandle +
 			"&loadingBarCallback=" +
@@ -91,7 +91,7 @@ function OnPopupCustomLayoutMatchAccept() {
 	popupLoadingBarLevel = 0;
 	const popup = UiToolkitAPI.ShowCustomLayoutPopupParameters(
 		"",
-		"file://{resources}/layout/popups/popup_accept_match.xml",
+		"file://{resources}/layout/modals/popups/accept-match.xml",
 		"map_and_isreconnect=de_dust2,false"
 	);
 	$.DispatchEvent("ShowAcceptPopup", popup);
@@ -103,7 +103,7 @@ function OnPopupCustomLayoutWeaponUpdate() {
 	const defIndex = 23;
 	UiToolkitAPI.ShowCustomLayoutPopupParameters(
 		"",
-		"file://{resources}/layout/popups/popup_weapon_update.xml",
+		"file://{resources}/layout/modals/popups/weapon-update.xml",
 		defIndex,
 		"none"
 	);
@@ -112,7 +112,7 @@ function OnPopupCustomLayoutWeaponUpdate() {
 function OnPopupCustomLayoutSurvivalEndOfMatch() {
 	UiToolkitAPI.ShowCustomLayoutPopupParameters(
 		"",
-		"file://{resources}/layout/survival/survival_endofmatch.xml",
+		"file://{resources}/layout/modals/survival/survival-endofmatch.xml",
 		"usefakedata=true",
 		"none"
 	);
@@ -177,7 +177,7 @@ function OnContextMenuCustomLayoutParamsPressed() {
 	UiToolkitAPI.ShowCustomLayoutContextMenuParameters(
 		"",
 		"",
-		"file://{resources}/layout/context_menus/context_menu_custom_layout_test.xml",
+		"file://{resources}/layout/modals/context-menus/custom-layout-test.xml",
 		"test=123456&callback=" + jsContextMenuCallbackHandle
 	);
 }

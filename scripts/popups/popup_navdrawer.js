@@ -45,7 +45,7 @@ function OnHomeButtonPressed() {
 }
 
 function OnSettingsButtonPressed() {
-	UiToolkitAPI.ShowCustomLayoutPopup("", "file://{resources}/layout/popups/popup_settings.xml");
+	UiToolkitAPI.ShowCustomLayoutPopup("", "file://{resources}/layout/modals/popups/settings.xml");
 
 	// Closes the popup
 	$.DispatchEvent("UIPopupButtonClicked", "");
