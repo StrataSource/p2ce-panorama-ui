@@ -1,0 +1,116 @@
+@use '../config' as *;
+@use '../abstract/function';
+@use '../abstract/mixin';
+@use 'button';
+@use 'sass:color';
+@use 'sass:list';
+
+.togglebutton {
+	transition-property: background-color;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in;
+
+	.TickBox {
+		visibility: collapse;
+	}
+
+	&:hover {
+		background-color: $button-background-hover;
+	}
+
+	&:selected {
+		background-color: $button-background-selected;
+	}
+}
+
+@each $name, $colors in $gradients-primary {
+	.togglebutton--#{$name} {
+		&:selected {
+			background-color: function.gradient-vertical(list.nth($colors, 1), list.nth($colors, 2));
+			border: $button-border;
+
+			&:hover {
+				background-color: function.gradient-vertical(
+					color.scale(
+						list.nth($colors, 1),
+						$saturation: list.nth($gradient-hover-transform, 1),
+						$lightness: list.nth($gradient-hover-transform, 2),
+						$alpha: list.nth($gradient-hover-transform, 3)
+					),
+					color.scale(
+						list.nth($colors, 2),
+						$saturation: list.nth($gradient-hover-transform, 1),
+						$lightness: list.nth($gradient-hover-transform, 2),
+						$alpha: list.nth($gradient-hover-transform, 3)
+					)
+				);
+			}
+		}
+	}
+}
+
+.checkbox {
+	flow-children: right;
+	height: $checkbox-width;
+	border: 0px solid white;
+	transition-property: background-color;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-in-out;
+
+	// This gets inserted in code
+	.TickBox {
+		height: 100%;
+		width: height-percentage(100%);
+		vertical-align: middle;
+		background-color: $checkbox-background;
+		border-radius: $checkbox-radius;
+		z-index: 1;
+		margin-left: 0;
+		margin-right: $checkbox-gap;
+		box-shadow: $checkbox-shadow;
+		transition: background-color 0.1s ease-in-out 0s;
+	}
+
+	$this: &;
+	&--right {
+		flow-children: left;
+
+		& .TickBox {
+			margin-right: 0;
+			margin-left: $checkbox-gap;
+		}
+	}
+
+	&:hover .TickBox {
+		background-color: $checkbox-background-hover;
+	}
+
+	&:disabled .TickBox,
+	&:disabled:hover .TickBox {
+		background-color: $checkbox-background-disabled;
+	}
+
+	&:selected .TickBox {
+		box-shadow: $checkbox-shadow;
+
+		background-color: $checkbox-background-selected;
+		background-image: url('file://{images}/checkmark.svg');
+		background-size: 60% 60%;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	&:selected:hover .TickBox {
+		background-color: $checkbox-background-selected-hover;
+	}
+
+	&:disabled:selected .TickBox {
+		background-color: $checkbox-background-disabled-selected;
+		opacity: 0.5;
+	}
+
+	& Label {
+		@include mixin.font-styles($use-header: $checkbox-use-header-font);
+		vertical-align: middle;
+	}
+}

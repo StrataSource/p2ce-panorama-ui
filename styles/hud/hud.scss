@@ -1,0 +1,82 @@
+/* styles for the Chaos Hud */
+
+ChaosHud,
+#PopupManager,
+#TooltipManager,
+#ContextMenuManager {
+	width: 100%;
+	height: 100%;
+}
+
+.hud-blur {
+	width: 100%;
+	height: 100%;
+	-s2-mix-blend-mode: opaque;
+	blur: fastgaussian(4, 4, 5);
+}
+
+#HudTopLeft {
+	horizontal-align: left;
+	vertical-align: top;
+	flow-children: down;
+}
+
+#HudNotify {
+	horizontal-align: left;
+	vertical-align: top;
+	flow-children: down;
+}
+
+#HudTopCenter {
+	horizontal-align: center;
+	width: 100%;
+	opacity: 1;
+	flow-children: down;
+}
+
+#HudBottomCenter {
+	horizontal-align: center;
+	vertical-align: bottom;
+	width: 100%;
+	height: 45%;
+	opacity: 1;
+	flow-children: down;
+}
+
+#HudLowerLeft {
+	horizontal-align: left;
+	vertical-align: bottom;
+	flow-children: down;
+}
+
+#HudTopRight {
+	horizontal-align: right;
+	vertical-align: top;
+	flow-children: down;
+}
+
+#HudCenter {
+	width: 100%;
+	height: 100%;
+	margin-top: 300px;
+	horizontal-align: center;
+	vertical-align: top;
+	flow-children: down;
+}
+
+#HudBottomRight {
+	horizontal-align: right;
+	vertical-align: bottom;
+	flow-children: down;
+}
+
+#HudInWorld,
+#HudReticle {
+	width: 100%;
+	height: 100%;
+}
+
+MomHudChat {
+	width: 576px;
+	height: 324px;
+}

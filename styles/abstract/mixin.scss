@@ -1,0 +1,129 @@
+@use '../config' as *;
+@use 'function';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:color';
+
+@mixin font-styles($use-header: false, $light-header: false) {
+	@if $use-header {
+		@if $light-header {
+			font-family: $font-header-light;
+		} @else {
+			font-family: $font-header;
+		}
+
+		text-shadow: $font-header-shadow;
+		letter-spacing: $font-header-spacing;
+	} @else {
+		font-family: $font;
+		text-shadow-fast: $font-shadow;
+		letter-spacing: $font-spacing;
+	}
+
+	color: $font-default-color;
+	font-style: normal;
+	font-weight: normal;
+}
+
+@mixin gradient-themed($color: 'blue', $direction: 'down') {
+	@if (map.has-key($gradients-primary, $color)) {
+		@if ($direction == 'down') {
+			background-color: function.gradient-vertical(
+				list.nth(map.get($gradients-primary, $color), 1),
+				list.nth(map.get($gradients-primary, $color), 2)
+			);
+		} @else if ($direction == 'up') {
+			background-color: function.gradient-vertical(
+				list.nth(map.get($gradients-primary, $color), 2),
+				list.nth(map.get($gradients-primary, $color), 1)
+			);
+		} @else if ($direction == 'left') {
+			background-color: function.gradient-horizontal(
+				list.nth(map.get($gradients-primary, $color), 2),
+				list.nth(map.get($gradients-primary, $color), 1)
+			);
+		} @else if ($direction == 'right') {
+			background-color: function.gradient-horizontal(
+				list.nth(map.get($gradients-primary, $color), 1),
+				list.nth(map.get($gradients-primary, $color), 2)
+			);
+		}
+	} @else {
+		@error "Gradient #{$color} not found!";
+	}
+}
+
+@mixin button-gradient($color: 'blue') {
+	@if (map.has-key($gradients-primary, $color)) {
+		$colors: map.get($gradients-primary, $color);
+		background-color: function.gradient-vertical(list.nth($colors, 1), list.nth($colors, 2));
+		border: $button-border;
+
+		&:hover {
+			background-color: function.gradient-vertical(
+				color.scale(
+					list.nth($colors, 1),
+					$saturation: list.nth($gradient-hover-transform, 1),
+					$lightness: list.nth($gradient-hover-transform, 2),
+					$alpha: list.nth($gradient-hover-transform, 3)
+				),
+				color.scale(
+					list.nth($colors, 2),
+					$saturation: list.nth($gradient-hover-transform, 1),
+					$lightness: list.nth($gradient-hover-transform, 2),
+					$alpha: list.nth($gradient-hover-transform, 3)
+				)
+			);
+		}
+
+		&:disabled {
+			background-color: $button-background-disabled;
+		}
+	} @else {
+		@error "Gradient #{$color} not found!";
+	}
+}
+
+@mixin grid($rows, $cols, $name: 'grid') {
+	.#{$name}#{$rows}x#{$cols} {
+		// So default height, width, x, y are 1 grid unit
+		width: math.percentage(math.div(1, $rows));
+		height: math.percentage(math.div(1, $cols));
+
+		@for $x from 1 through $rows {
+			&--w#{$x} {
+				width: math.percentage(math.div(1, $rows) * $x);
+			}
+
+			&--x#{$x} {
+				x: math.percentage(math.div(1, $rows) * ($x - 1));
+			}
+		}
+
+		@for $y from 1 through $cols {
+			&--h#{$y} {
+				height: math.percentage(math.div(1, $cols) * $y);
+			}
+
+			&--y#{$y} {
+				y: math.percentage(math.div(1, $cols) * ($y - 1));
+			}
+		}
+	}
+}
+
+@mixin nstate-button-state($state: 'off', $statenum: 1) {
+	&--#{$state} {
+		@include button-gradient($color: list.nth($nstatebutton-colors, $statenum));
+	}
+}
+
+@mixin level-indicator-size($size) {
+	& .levelindicator__icon:not(.levelindicator__icon--hidden) {
+		width: #{$size};
+		height: #{$size};
+	}
+	& .levelindicator__text:not(.levelindicator__icon--hidden) {
+		font-size: #{$size};
+	}
+}

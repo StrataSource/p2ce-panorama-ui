@@ -1,0 +1,34 @@
+@use '../config' as *;
+@use 'sass:list';
+
+.row {
+	flow-children: right;
+	height: fit-children;
+	width: fit-children;
+}
+
+.col {
+	flow-children: down;
+	width: fill-parent-flow(1);
+	height: fit-children;
+}
+
+.horizontal-separator {
+	horizontal-align: center;
+	width: 100%;
+	height: $separator-height;
+	margin: $separator-vertical-margin 0;
+	border-radius: $seperator-radius;
+	background-color: $separator-background;
+	box-shadow: $separator-box-shadow;
+}
+
+.vertical-separator {
+	horizontal-align: center;
+	width: $separator-height;
+	height: 100%;
+	margin: 0 $separator-vertical-margin;
+	border-radius: $seperator-radius;
+	background-color: $separator-background;
+	box-shadow: $separator-box-shadow;
+}

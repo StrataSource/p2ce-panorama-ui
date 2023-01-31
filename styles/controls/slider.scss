@@ -1,0 +1,92 @@
+@use '../config' as *;
+
+.slider {
+	transition: wash-color 0.1s linear 0s;
+
+	#SliderTrack {
+		align: center center;
+		background-color: $slider-track;
+		box-shadow: $slider-track-shadow;
+		z-index: 2;
+	}
+
+	#SliderTrackProgress {
+		align: center center;
+		z-index: 3;
+	}
+
+	#SliderDefault,
+	#SliderDefault2 {
+		align: center center;
+		background-color: $slider-default-color;
+		border-radius: $slider-default-radius;
+		box-shadow: $slider-default-shadow;
+		z-index: 4;
+	}
+
+	#SliderThumb,
+	#SliderThumb2 {
+		width: $slider-thumb-width;
+		height: $slider-thumb-height;
+		align: center center;
+		background-color: $slider-thumb-color;
+		border-radius: $slider-thumb-radius;
+		box-shadow: $slider-thumb-shadow;
+		z-index: 5;
+		transition: background-color 0.1s ease-in-out 0s;
+
+		// sliderthumbs are hovered when clicking on the slider will change its value (in code)
+		&:hover:not(:disabled) {
+			background-color: $slider-thumb-color-hover;
+		}
+	}
+
+	&:parentdisabled,
+	&:disabled {
+		wash-color: $disabled;
+	}
+
+	// Sliders has an extra .VerticalSlider/HorizontalSlider class added by C++ based on their `direction` attribute,
+	// but we don't actually want to use this to style is it messes with specificity.
+	&--horizontal {
+		width: fill-parent-flow(1);
+		padding: $slider-padding-height 0;
+
+		#SliderDefault,
+		#SliderDefault2 {
+			width: $slider-default-width;
+			height: $slider-default-height;
+		}
+
+		& #SliderTrack,
+		& #SliderTrackProgress {
+			width: 100%;
+			height: $slider-track-height;
+		}
+
+		& #SliderTrackProgress {
+			background-color: $slider-track-progress-horizontal;
+		}
+	}
+
+	&--vertical {
+		padding: 0 $slider-padding-height;
+		height: fill-parent-flow(1);
+
+		#SliderDefault,
+		#SliderDefault2 {
+			width: $slider-default-height;
+			height: $slider-default-width;
+		}
+
+		& #SliderTrack,
+		& #SliderTrackProgress {
+			width: $slider-track-height;
+			height: 100%;
+		}
+
+		& #SliderTrackProgress {
+			background-color: $slider-track-progress-vertical;
+		}
+	}
+}
