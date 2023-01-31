@@ -40,10 +40,11 @@
 			<!-- Topnav -->
 			<Panel id="MainMenuNavBar" class="topnav" style="z-index: 10;">
 				<RadioButton id="HomeButton" group="TopNavRadio" class="topnav__home" onactivate="MainMenu.onHomeButtonPressed()">
+					<!-- TODO: logo as SVG! -->
 					<Image
 						class="topnav__logo"
-						src="file://{images}/momentumLogo.svg"
-						textureheight="64"
+						src="file://{images}/logo.png"
+						textureheight="80"
 						scaling="stretch-to-fit-preserve-aspect"
 					/>
 				</RadioButton>
@@ -87,7 +88,7 @@
 					<BaseBlurTarget
 						id="MainMenuBackgroundBlur"
 						class="mainmenu__background-blur"
-						blurrects="MainMenuContentBlur MainMenuNavBar NewsPanel"
+						blurrects="MainMenuContentBlur MainMenuNavBar"
 					>
 
 						<!-- Movie background -->
@@ -116,7 +117,7 @@
 								<ModelPanel
 									id="MainMenuModel"
 									class="home__modelpanel"
-									src="models/shadertest/shaderball_pbr.mdl"
+									src="models/npcs/turret/turret.mdl"
 									cubemap="cubemaps/cubemap_menu_model_bg.hdr"
 									antialias="true"
 									mouse_rotate="true"
