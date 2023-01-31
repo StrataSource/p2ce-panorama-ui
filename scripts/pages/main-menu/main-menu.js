@@ -27,6 +27,7 @@ class MainMenu {
 	};
 
 	static activeTab = '';
+	static inSpace = false; // Temporary fun...
 
 	static {
 		$.RegisterForUnhandledEvent('ChaosShowMainMenu', this.onShowMainMenu.bind(this));
@@ -48,14 +49,25 @@ class MainMenu {
 		this.panels.movie = $('#MainMenuMovie');
 		this.panels.model = $('#MainMenuModel');
 
-		this.panels.model.SetModelRotation(0, 270, 0); // Get arrow logo facing to the right, looks better
-		this.panels.model.SetModelRotationSpeedTarget(0, 0.2, 0);
+		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
+
+		// Assign a random model
+		const models = [
+			'models/npcs/turret/turret.mdl',
+			'models/weapons/w_portalgun.mdl',
+			'models/props/schrodinger_cube.mdl',
+			'models/props/metal_box.mdl'
+		];
+
+		this.panels.model.src = models[Math.floor(Math.random() * models.length)]; // Pick a random model
+
+		this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.15, this.inSpace ? 0.02 : 0);
 		this.panels.model.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
 		this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 
 		this.panels.model.LookAtModel();
 		this.panels.model.SetCameraOffset(-200, 0, 0);
-		this.panels.model.SetCameraFOV(40);
+		this.panels.model.SetCameraFOV(30);
 
 		this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
 		this.panels.model.SetDirectionalLightDirection(0, 1, 0, 0);
@@ -224,11 +236,16 @@ class MainMenu {
 		this.panels.image.visible = !useVideo;
 		this.panels.image.SetReadyForDisplay(!useVideo);
 
+		let movie = 'file://{media}/community_bg1.webm';
+		if (this.inSpace) {
+			movie = 'file://{media}/sp_a5_credits.webm';
+		}
+
 		if (useVideo) {
-			this.panels.movie.SetMovie(`file://{media}/community_bg1.webm`);
+			this.panels.movie.SetMovie(movie);
 			this.panels.movie.Play();
 		} else {
-			this.panels.image.SetImage(`file://{materials}/vgui/backgrounds/background01_widescreen.vtf`);
+			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background01_widescreen.vtf');
 		}
 	}
 

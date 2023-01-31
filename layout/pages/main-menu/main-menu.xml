@@ -40,20 +40,18 @@
 			<!-- Topnav -->
 			<Panel id="MainMenuNavBar" class="topnav" style="z-index: 10;">
 				<RadioButton id="HomeButton" group="TopNavRadio" class="topnav__home" onactivate="MainMenu.onHomeButtonPressed()">
+					<!-- TODO: logo as SVG! -->
 					<Image
 						class="topnav__logo"
-						src="file://{images}/momentumLogo.svg"
-						textureheight="64"
+						src="file://{images}/logo.svg"
+						textureheight="90"
+						texturewidth="234"
 						scaling="stretch-to-fit-preserve-aspect"
 					/>
 				</RadioButton>
 
 				<Panel id="MainMenuTopButtons" class="full-height flow-right">
-					<RadioButton
-						id="PlayButton"
-						group="TopNavRadio"
-						class="topnav__button"
-					>
+					<RadioButton id="PlayButton" group="TopNavRadio" class="topnav__button">
 						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="64" />
 					</RadioButton>
 
@@ -85,10 +83,10 @@
 					<!-- Backgrounds -->
 					<!-- Background blur: used to blur the backgrounds behind mainmenu pages -->
 					<BaseBlurTarget
-						id="MainMenuBackgroundBlur"
-						class="mainmenu__background-blur"
-						blurrects="MainMenuContentBlur MainMenuNavBar NewsPanel"
-					>
+					id="MainMenuBackgroundBlur"
+					class="mainmenu__background-blur"
+					blurrects="MainMenuContentBlur MainMenuNavBar"
+				>
 
 						<!-- Movie background -->
 						<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
@@ -114,13 +112,13 @@
 							<Panel id="NewsModelWrapper" class="home__wrapper">
 
 								<ModelPanel
-									id="MainMenuModel"
-									class="home__modelpanel"
-									src="models/shadertest/shaderball_pbr.mdl"
-									cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-									antialias="true"
-									mouse_rotate="true"
-								/>
+								id="MainMenuModel"
+								class="home__modelpanel"
+								src="models/npcs/turret/turret.mdl"
+								cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+								antialias="true"
+								mouse_rotate="true"
+							/>
 
 							</Panel>
 
@@ -133,13 +131,15 @@
 								</TooltipPanel>
 
 								<RadioButton
-									id="ControlsLibraryButton"
-									class="bottombar__button hide"
-									group="TopNavRadio"
-									onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
-								>
+								id="ControlsLibraryButton"
+								class="bottombar__button hide"
+								group="TopNavRadio"
+								onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
+							>
 									<Label class="bottombar__text" text="Controls Library" />
 								</RadioButton>
+
+								<Label class="bottombar__notice" text="Beta menu concept, subject to change" />
 
 							</Panel>
 						</Panel>
