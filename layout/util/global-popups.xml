@@ -1,11 +1,9 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/chaosstyles.sass" />
-		<include src="file://{resources}/styles/globalpopups.sass" />
+		<include src="file://{resources}/styles/main.scss" />
 	</styles>	
 
 	<ChaosGlobalPopups hittest="false">
-		<!-- Make sure these are at the bottom to get the z-order right -->
 		<ChaosPopupManager id="PopupManager" onpopupsdismissed="" />
 		<ContextMenuManager id="ContextMenuManager" />
 		<ChaosTooltipManager id="TooltipManager" hittest="false" />

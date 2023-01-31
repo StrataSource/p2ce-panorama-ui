@@ -1,8 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/chaosstyles.sass" />
-		<include src="file://{resources}/styles/controls/togglebutton.sass" />
-		<include src="file://{resources}/styles/controls/movie.sass" />
+		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	
 	<Movie>
@@ -21,7 +19,7 @@
 
 				<Panel id="PlaybackControls">
 					<Label id="PlaybackSpeed" class="PlaybackControl" />
-					<Panel id="Timeline" class="PlaybackControl" >
+					<Panel id="Timeline" class="PlaybackControl">
 						<!-- Add bar for buffered data -->
 						
 						<!-- Wrap progress bar so transforms can be easily used to scale on animation thread -->
@@ -32,20 +30,55 @@
 
 					<Panel id="ControlBarRow" class="PlaybackControl">
 						<Panel id="ControlBar" tabindex="auto" selectionpos="auto" defaultfocus="PlayPause">
-							<Panel class="ControlBarBackground" />
+							<Panel class="ControlBarBackground">
+							</Panel>
 							<Panel class="ControlBarButtons" tabindex="auto" selectionpos="auto">
 								<Button id="JumpBack" class="ControlBarButton" tabindex="auto" selectionpos="auto" onactivate="MoviePlayerJumpBack();">
-									<Image src="file://{images}/icons/movie/jump_back.svg" />
+									<Image src="file://{images}/transport_controls/icon_jump_back.png" />
 								</Button>
-								<ToggleButton id="PlayPause" class="ControlBarButton" tabindex="auto" selectionpos="auto" onactivate="MoviePlayerTogglePlayPause();" />
-								<Button id="FastForward" class="ControlBarButton" tabindex="auto" selectionpos="auto" onactivate="MoviePlayerFastForward();">
-									<Image src="file://{images}/icons/movie/fast_forward.svg" />
+								<ToggleButton
+									id="PlayPause"
+									class="ControlBarButton"
+									tabindex="auto"
+									selectionpos="auto"
+									onactivate="MoviePlayerTogglePlayPause();"
+								>
+								</ToggleButton>
+								<Button
+									id="FastForward"
+									class="ControlBarButton"
+									tabindex="auto"
+									selectionpos="auto"
+									onactivate="MoviePlayerFastForward();"
+								>
+									<Image src="file://{images}/transport_controls/icon_ffwd.png" />
 								</Button>
-								<Button id="VideoQualityBtn" class="ControlBarButton" tabindex="auto" selectionpos="auto" onactivate="MoviePlayerSelectVideoQuality();">
-									<Image src="file://{images}/icons/settings.svg" />
+								<Button
+									id="VideoQualityBtn"
+									class="ControlBarButton"
+									tabindex="auto"
+									selectionpos="auto"
+									onactivate="MoviePlayerSelectVideoQuality();"
+								>
+									<Image src="file://{images}/transport_controls/icon_quality.png" />
 								</Button>
-								<Button id="VolumeControl" class="ControlBarButton" tabindex="auto" selectionpos="auto" onactivate="MoviePlayerVolumeControl();">
+								<Button
+									id="VolumeControl"
+									class="ControlBarButton"
+									tabindex="auto"
+									selectionpos="auto"
+									onactivate="MoviePlayerVolumeControl();"
+								>
 									<Panel class="VolumeImage" />
+								</Button>
+								<Button
+									id="FullscreenControl"
+									class="ControlBarButton"
+									tabindex="auto"
+									selectionpos="auto"
+									onactivate="MoviePlayerFullscreenControl();"
+								>
+									<Image src="file://{images}/transport_controls/icon_fullscreen.png" />
 								</Button>
 							</Panel>
 						</Panel>

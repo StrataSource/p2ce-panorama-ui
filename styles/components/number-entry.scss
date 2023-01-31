@@ -1,0 +1,45 @@
+@use '../config' as *;
+
+.numberentry {
+	flow-children: right;
+	height: $textentry-height;
+	background-color: $textentry-background;
+	border: $textentry-border;
+	border-radius: $textentry-radius;
+	box-shadow: $textentry-shadow;
+	font-size: $textentry-font-size;
+
+	&__textentry {
+		min-width: 40px;
+		vertical-align: middle;
+		padding: 6px 8px;
+		height: 100%;
+		width: fill-parent-flow(1);
+		horizontal-align: center;
+		text-align: center;
+		border: 0px none;
+		box-shadow: fill rgba(0, 0, 0, 0) 0px 0px 3px 0px;
+		border-radius: 0px;
+		background-color: rgba(255, 255, 255, 0.025);
+	}
+
+	&__button {
+		height: 100%;
+		width: height-percentage(100%);
+		background-color: rgba(0, 0, 0, 0.4);
+
+		transition-property: background-color, wash-color;
+		transition-duration: 0.1s;
+		transition-timing-function: ease-in-out;
+		wash-color: rgba(0, 0, 0, 0.4);
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.6);
+			wash-color: rgba(0, 0, 0, 0);
+		}
+	}
+
+	&__icon {
+		padding: 9px;
+	}
+}

@@ -1,0 +1,240 @@
+@use '../config' as *;
+@use 'sass:list';
+
+// ================
+// WIDTH / HEIGHT
+// ================
+
+.full {
+	width: 100%;
+	height: 100%;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.half-width {
+	width: 50%;
+}
+
+.full-height {
+	height: 100%;
+}
+
+.fill-width {
+	width: fill-parent-flow(1);
+}
+
+.fill-height {
+	height: fill-parent-flow(1);
+}
+
+.height-fit-children {
+	height: fit-children;
+}
+
+.width-fit-children {
+	width: fit-children;
+}
+
+@each $name, $width in ('200': 200px, '250': 250px, '300': 300px, '350': 350px, '400': 400px) {
+	.max-width-#{$width} {
+		max-width: $width;
+	}
+
+	.min-width-#{$width} {
+		min-width: $width;
+	}
+}
+
+// ================
+// MARGINS / PADDING
+// ================
+
+$s: list.join((0px), $spacers);
+@each $spacer in $s {
+	$index: list.index($s, $spacer) - 1;
+
+	.m-#{$index} {
+		margin: $spacer;
+	}
+
+	.mx-#{$index} {
+		margin-left: $spacer;
+		margin-right: $spacer;
+	}
+
+	.my-#{$index} {
+		margin-top: $spacer;
+		margin-bottom: $spacer;
+	}
+
+	.mt-#{$index} {
+		margin-top: $spacer;
+	}
+
+	.mb-#{$index} {
+		margin-bottom: $spacer;
+	}
+
+	.mr-#{$index} {
+		margin-right: $spacer;
+	}
+
+	.ml-#{$index} {
+		margin-left: $spacer;
+	}
+
+	.p-#{$index} {
+		padding: $spacer;
+	}
+
+	.px-#{$index} {
+		padding-left: $spacer;
+		padding-right: $spacer;
+	}
+
+	.py-#{$index} {
+		padding-top: $spacer;
+		padding-bottom: $spacer;
+	}
+
+	.pt-#{$index} {
+		padding-top: $spacer;
+	}
+
+	.pb-#{$index} {
+		padding-bottom: $spacer;
+	}
+
+	.pr-#{$index} {
+		padding-right: $spacer;
+	}
+
+	.pl-#{$index} {
+		padding-left: $spacer;
+	}
+}
+
+// ================
+// ALIGNMENT
+// ================
+
+.horizontal-align-center {
+	horizontal-align: center;
+}
+
+.horizontal-align-right {
+	horizontal-align: right;
+}
+
+.horizontal-align-left {
+	horizontal-align: left;
+}
+
+.vertical-align-center {
+	vertical-align: middle;
+}
+
+.vertical-align-top {
+	vertical-align: top;
+}
+
+.vertical-align-bottom {
+	vertical-align: bottom;
+}
+
+.text-align-left {
+	text-align: left;
+}
+
+.text-align-center {
+	text-align: center;
+}
+
+.text-align-right {
+	text-align: right;
+}
+
+// ================
+// OVERFLOW
+// ================
+
+.overflow-noclip {
+	overflow: noclip;
+}
+
+.overflow-vscroll {
+	overflow: squish scroll;
+}
+
+// ================
+// FLOW
+// ================
+
+.flow-right {
+	flow-children: right;
+}
+
+.flow-right-wrap {
+	flow-children: right-wrap;
+}
+
+.flow-left {
+	flow-children: left;
+}
+
+.flow-down {
+	flow-children: down;
+}
+
+.flow-up {
+	flow-children: up;
+}
+
+.no-flow {
+	flow-children: none;
+}
+
+// ================
+// VISIBILITY
+// ================
+
+.hide {
+	visibility: collapse;
+}
+
+.show {
+	visibility: visible;
+}
+
+.transparent {
+	opacity: 0;
+}
+
+.opaque {
+	opacity: 1;
+}
+
+// ================
+// TRANSFORMS
+// ================
+
+@each $rotation in (45, 90, 135, 180, 225, 270, 315) {
+	.rot-#{$rotation} {
+		transform: rotateZ(unquote($rotation + 'deg'));
+	}
+}
+
+// ================
+// DEBUG
+// ================
+
+.debug-border {
+	border: 1px solid rgba(0, 255, 0, 1);
+}
+
+.debug-background {
+	background-color: rgba(255, 0, 255, 0.5);
+}

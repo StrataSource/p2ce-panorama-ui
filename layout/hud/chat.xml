@@ -1,35 +1,23 @@
+<!--
+	Purpose: hard-coded layout file for <MomHudChat />
+	Having a RaisedChat MomentumChat and LoweredChat ToastContainer is mandatory
+
+	For snippets, see chat.xml, as we set message panels inside the toast container into that context
+
+	Upon opening the chat, the toast container will be hidden and the chat is shown, taking input focus (away from the game)
+	Upon closing (with escape) it's switched around and focus is returned to where it was before
+
+	We set "thinkwheninvisible" so messages disappear after their showtime even if the chat is kept open
+-->
 <root>
 	<styles>
-		<include src="file://{resources}/styles/chaosstyles.sass" />
-		<include src="file://{resources}/styles/controls/button.sass" />
-		<include src="file://{resources}/styles/controls/togglebutton.sass" />
-		<include src="file://{resources}/styles/hud/hudchat.sass" />
+		<include src="file://{resources}/styles/main.scss" />
 	</styles>
-
-	<ChaosHudChat tabindex="auto" selectionpos="auto" defaultfocus="ChatTextEntryBox">
-		<Panel id ="ChatContainer">
-			<Panel id="ChatMain">
-				<Panel id="ChatBGPanel" class="ChatBG" />
-				<Panel id="ChatFG">
-					<Panel id="ChatHistory">
-						<Panel id="ChatHistoryBG" class="ChatTextBG" />
-						<Label id="ChatHistoryText" acceptsfocus="true" class="vscroll"/>
-					</Panel>
-					<Panel id="ChatTextEntry">
-						<Panel id="ChatTextEntryBG" class="ChatTextBG" />
-						<Panel id="ChatTextEntryFG">
-							<TextEntry id="ChatTextEntryBox" placeholder="#SFUI_Settings_Chat_Say" maxchars="127"/>
-							<TextButton id="ChatSendButton" text="#SFUI_Settings_Chat_ButtonLabel"/>
-						</Panel>
-					</Panel>
-				</Panel>
-			</Panel>
-			<Panel id="GotvPanel">
-				<Panel id="GotvPanelBG"  class="ChatBG"/>
-				<ToggleButton id="GotvToggle" class="PopupButton">
-					<Label  id="" text="#SFUI_Settings_Chat_EnableGotv"/>
-				</ToggleButton>
-			</Panel>
-		</Panel>
-	</ChaosHudChat>
+	<scripts>
+		
+	</scripts>
+	<Panel class="hud-chat no-flow">
+        <MomentumChat id="RaisedChat" class="full-width full-height" />
+		<ToastContainer id="LoweredChat" class="toast-chat" thinkwheninvisible="true" />
+	</Panel>
 </root>

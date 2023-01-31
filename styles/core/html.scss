@@ -1,0 +1,32 @@
+@use '../config' as *;
+@use '../abstract/mixin';
+
+a:hover {
+	text-decoration: underline;
+}
+
+b {
+	font-weight: bold;
+}
+
+i {
+	font-style: italics;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italics;
+}
+
+pre {
+	font-family: $font-monospace;
+}
+
+@each $name, $size in $html-font-header-sizes {
+	#{$name} {
+		font-size: $size;
+	}
+}
