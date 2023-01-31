@@ -1,0 +1,24 @@
+$conc-ent-height: 22px;
+$conc-ent-border-radius: 11px;
+$conc-ent-width: 120px;
+$conc-ent-font-size: 20px;
+
+.conc-ent {
+	margin-top: 30px;
+	height: $conc-ent-height;
+	width: $conc-ent-width;
+
+	&__progressbar {
+		height: $conc-ent-height;
+		border-radius: $conc-ent-border-radius;
+
+		.ProgressBarLeft {
+			border-radius: $conc-ent-border-radius;
+		}
+	}
+
+	&__label {
+		height: $conc-ent-height;
+		font-size: $conc-ent-font-size;
+	}
+}

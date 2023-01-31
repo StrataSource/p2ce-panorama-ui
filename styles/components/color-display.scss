@@ -1,0 +1,34 @@
+// rangecolordisplay has its own layouting for this component
+:not(.rangecolordisplay) > .colordisplay {
+	height: 48px;
+	width: 100%;
+	padding: 0 4px 0 12px;
+	flow-children: right;
+	vertical-align: middle;
+
+	&__title {
+		vertical-align: middle;
+		width: fill-parent-flow(1);
+		margin-right: 10px;
+	}
+
+	&__display {
+		vertical-align: middle;
+		width: fill-parent-flow(1);
+		height: 32px;
+		border-radius: 4px;
+		margin-left: 10px;
+		background-image: url('file://{materials}/panorama/transparency-checkerboard.vtf');
+		background-img-opacity: 0;
+
+		&:hover {
+			box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.35);
+		}
+	}
+
+	&__hexentry {
+		width: 100px;
+		margin-left: 10px;
+		horizontal-align: right;
+	}
+}

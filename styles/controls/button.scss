@@ -1,0 +1,90 @@
+@use '../config' as *;
+@use '../abstract/function';
+@use '../abstract/mixin';
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+
+.button {
+	vertical-align: center;
+	height: $button-height;
+	background-color: $button-background;
+	box-shadow: $button-shadow;
+	border-radius: $button-radius;
+	border: $button-border;
+	color: $button-text-color;
+	flow-children: right;
+	tooltip-position: bottom;
+	transition: background-color 0.1s ease-in 0s;
+
+	&:hover {
+		background-color: $button-background-hover;
+	}
+
+	&:disabled,
+	&:disabled &:hover {
+		background-color: $button-background-disabled;
+	}
+
+	&:disabled &__text {
+		color: $button-text-disabled;
+	}
+
+	&:disabled &__icon {
+		wash-color: $button-text-disabled;
+	}
+
+	&__text {
+		@include mixin.font-styles($use-header: $button-use-header-font, $light-header: $button-light-header-font);
+		font-size: $button-font-size;
+		color: $button-text-color;
+		margin: 0 $button-text-side-margin;
+		text-shadow: $button-text-shadow;
+		vertical-align: middle;
+		horizontal-align: center;
+		text-align: center;
+		overflow: squish;
+		text-overflow: shrink;
+
+		&:hover {
+			color: $button-text-hover;
+		}
+
+		&--left {
+			margin-left: $button-text-side-margin;
+			margin-right: $button-icon-text-gap;
+		}
+
+		&--right {
+			margin-left: $button-icon-text-gap;
+			margin-right: $button-text-side-margin;
+		}
+	}
+
+	&__icon {
+		height: 100%;
+
+		width: height-percentage(100%);
+		padding: $button-icon-padding;
+		vertical-align: center;
+		horizontal-align: center;
+		img-shadow: $button-icon-shadow;
+		wash-color: $button-text-color;
+
+		&--left {
+			margin-left: $button-icon-with-text-side-margin - 2px;
+			margin-right: $button-icon-text-gap;
+		}
+
+		&--right {
+			margin-left: $button-icon-text-gap;
+			margin-right: $button-icon-with-text-side-margin - 2px;
+		}
+	}
+}
+
+@each $name in map.keys($gradients-primary) {
+	.button--#{$name} {
+		@include mixin.button-gradient($color: $name);
+	}
+}

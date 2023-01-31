@@ -1,0 +1,17 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+  
+	<!-- Unused, doesn't have styling -->
+
+	<ChaosSettingsToggle>
+		<Panel class="flow-right vertical-align-center full-width">
+			<Panel id="TitleContainer">
+				<Label id="Title" />
+			</Panel>
+			<ToggleButton id="Toggle" />
+		</Panel>
+	</ChaosSettingsToggle>
+  
+</root>

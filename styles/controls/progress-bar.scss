@@ -1,0 +1,40 @@
+@use '../config' as *;
+
+.progressbar {
+	width: $progressbar-width;
+	height: $progressbar-height;
+	box-shadow: $progressbar-shadow;
+	background-color: $progressbar-background;
+
+	.ProgressBarLeft {
+		background-color: $progressbar-background-progress;
+	}
+
+	.ProgressBarRight {
+		background-color: $progressbar-background;
+	}
+
+	&:disabled {
+		.progressbar,
+		.ProgressBarRight {
+			background-color: $progressbar-background-disabled;
+		}
+	}
+}
+
+.progressbar-hudmeter {
+	@extend .progressbar;
+
+	width: $progressbar-hudmeter-width;
+	height: $progressbar-hudmeter-height;
+	border-radius: $progressbar-hudmeter-border-radius;
+
+	.ProgressBarLeft {
+		border-radius: $progressbar-hudmeter-border-radius;
+	}
+
+	&__label {
+		font-size: $progressbar-hudmeter-font-size;
+		text-shadow: $progressbar-hudmeter-text-shadow;
+	}
+}
