@@ -34,7 +34,7 @@ $page-transition-timing-func: ease-in-out;
 	visibility: visible;
 }
 
-$topnav-height: 80px;
+$topnav-height: 90px;
 $rightnav-width: 50px;
 $drawer-width: 768px;
 
@@ -154,8 +154,8 @@ $drawer-width: 768px;
 	}
 
 	&__logo {
-		height: 56px;
-		margin: 0px 16px;
+		height: 90px;
+		margin: 0px 10px;
 		vertical-align: middle;
 	}
 
@@ -334,6 +334,15 @@ $drawer-width: 768px;
 		overflow: squish;
 		text-overflow: shrink;
 		@include mixin.font-styles($use-header: true);
+	}
+
+	&__notice {
+		text-align: center;
+		vertical-align: center;
+		horizontal-align: right;
+		overflow: squish;
+		font-size: 32px;
+		text-shadow: 1px 2px 2px black;
 	}
 
 	&__tooltip {

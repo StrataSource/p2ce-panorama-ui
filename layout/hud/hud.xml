@@ -21,7 +21,8 @@
 		<!-- Anchored to below the center of the screen, laid out from top to bottom -->
 		<!-- misleading name, not 'bottom-center' but 'below center' -->
 		<Panel id="HudBottomCenter" hittest="false" hittestchildren="false">
-			<ChaosHudHintText id="HudHintText" />
+			<!-- TODO: Fixup hint text stuff, we currently don't have any hints and it's annoying -->
+			<!--ChaosHudHintText id="HudHintText" /-->
 		</Panel>
 
 		<!-- Anchored to the bottom-left corner of the screen, laid out from top to bottom -->
