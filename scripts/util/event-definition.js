@@ -49,11 +49,5 @@ $.DefineEvent(
 	'Open drawer if closed, and switch the tab to the specified tab'
 );
 
-$.DefineEvent('RefreshLobbyList', 0, '', 'Send a refresh request for the lobby list');
-$.DefineEvent('Lobby_SetMaxPlayers', 1, 'maxplayers', 'Sets the max players of your lobby');
-
-$.DefineEvent('MapSelector_OnLoaded', 0);
-$.DefineEvent('MapSelector_ShowConfirmCancelDownload', 1);
-$.DefineEvent('HudLeaderboards_ForceClose', 0, '', 'Force close the leaderboards');
 $.DefineEvent('ColorPickerSave', 1, 'color');
 $.DefineEvent('ColorPickerCancel', 0);

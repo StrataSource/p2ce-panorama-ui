@@ -155,25 +155,7 @@
 				<ChaosSettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
 				<ChaosSettingsKeyBinder text="#Keybind_Weapon_Category_4" bind="slot4" tags="slot4" />
 				<ChaosSettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
-
-				<Label class="settings-group__subtitle" text="#Common_Timer" />
-
-				<ChaosSettingsKeyBinder text="#Keybind_Restart" bind="mom_restart" tags="restart,reset" />
-				<ChaosSettingsKeyBinder text="#Keybind_RestartStage" bind="mom_restart_stage" tags="restart,reset,stage" />
-				<ChaosSettingsKeyBinder text="#Keybind_StopTimer" bind="mom_timer_stop" tags="stop" />
 				
-				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Savestates" />
-
-				<ChaosSettingsKeyBinder text="#Keybind_Savestate_Create" bind="mom_saveloc_create" tags="saveloc,savestate" />
-				<ChaosSettingsKeyBinder text="#Keybind_Savestate_Goto" bind="+mom_saveloc_current" tags="saveloc,savestate" />
-				<ChaosSettingsKeyBinder
-					text="#Keybind_Savestate_Menu"
-					bind="chaos_hud_menu_show savelocmenu"
-					tags="saveloc,savestate"
-				/>
-				<ChaosSettingsKeyBinder text="#Keybind_StartMark_Create" bind="mom_start_mark_create" tags="saveloc,savestate" />
-				<ChaosSettingsKeyBinder text="#Keybind_StartMark_Clear" bind="mom_start_mark_clear" tags="saveloc,savestate" />
-
 				<Label class="settings-group__subtitle" text="#Common_Multiplayer" />
 
 				<ChaosSettingsKeyBinder text="#Keybind_ToggleTimes" bind="+showtimes" tags="leaderboard,tab,times" />
@@ -181,7 +163,6 @@
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
 
-				<ChaosSettingsKeyBinder text="#Keybind_Practice" bind="mom_practice" tags="practice,noclip" />
 				<ChaosSettingsKeyBinder text="#Keybind_MapCommands" bind="chaos_hud_menu_show mapcmdsmenu" />
 				<ChaosSettingsKeyBinder text="#Keybind_Ruler" bind="chaos_hud_menu_show rulermenu" tags="ruler,measure,distance" />
 				<ChaosSettingsKeyBinder text="#Keybind_Paint" bind="+paint" tags="paint" />

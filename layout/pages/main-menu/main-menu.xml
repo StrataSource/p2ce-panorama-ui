@@ -4,9 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{resources}/scripts/common/game-ui.js" />
-		<include src="file://{resources}/scripts/common/safeguards.js" />
 		<include src="file://{resources}/scripts/pages/main-menu/main-menu.js" />
-		<include src="file://{resources}/scripts/pages/drawer/drawer.js" />
 	</scripts>
 
 	<snippets>
@@ -26,16 +24,12 @@
 				</Movie>
 			</Panel>
 		</snippet>
-		<snippet name="MainMenuVanitySnippet">
-			<Panel>
-			</Panel>
-		</snippet>
 	</snippets>
 
 	<ChaosMainMenu
 		class="InitialDisplay MainMenuRootPanel"
 		hittest="false"
-		useglobalcontext="true"
+		useglobalcontext="false"
 		onload="MainMenu.onMainMenuLoaded()"
 	>
 
@@ -59,30 +53,8 @@
 						id="PlayButton"
 						group="TopNavRadio"
 						class="topnav__button"
-						onactivate="MainMenu.navigateToPage('MapSelection', 'map-selector/wrapper', false)"
 					>
 						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="64" />
-					</RadioButton>
-
-					<RadioButton
-						id="InventoryButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						disabled="true"
-						onmouseover="UiToolkitAPI.ShowTextTooltip('InventoryButton', $.Localize('#Common_ComingSoon'))"
-						onmouseout="UiToolkitAPI.HideTextTooltip()"
-						style="tooltip-position: bottom;"
-					>
-						<Image class="topnav__icon" src="file://{images}/inventory.svg" textureheight="64" />
-					</RadioButton>
-
-					<RadioButton
-						id="LearnButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenu.navigateToPage('Learn', 'learn')"
-					>
-						<Image class="topnav__icon" src="file://{images}/learn.svg" textureheight="64" />
 					</RadioButton>
 
 					<RadioButton
@@ -96,12 +68,6 @@
 				</Panel>
 
 				<Panel class="full-height flow-right horizontal-align-right">
-					<RadioButton id="NotificationsButton" class="topnav__button">
-						<Image class="topnav__icon" src="file://{images}/notification.svg" textureheight="64" />
-					</RadioButton>
-
-					<PlayerCard class="full-height" onactivate="Drawer.onPlayerCardPressed();" />
-
 					<RadioButton id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
 						<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="64" />
 					</RadioButton>
@@ -114,79 +80,7 @@
 			<Panel class="topnav__shadow" />
 			<!-- /Topnav Shadow -->
 
-			<!-- Drawer -->
-			<Panel id="MainMenuDrawerPanel" class="drawer">
-
-				<!-- Rightnav Shadow -->
-				<Panel class="rightnav__shadow" />
-				<!-- /Rightnav Shadow -->
-
-				<!-- Rightnav -->
-				<Panel id="MainMenuOptionListRight" class="rightnav">
-					<Panel class="rightnav__wrapper">
-						<RadioButton
-							id="LobbyButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('LobbyDrawer')"
-						>
-							<Image id="LobbyButtonImage" class="rightnav__icon" src="file://{images}/lobby.svg" textureheight="32" />
-							<Label id="LobbyPlayerCountLabel" class="rightnav__button-subtitle rightnav__button-subtitle--hidden" />
-						</RadioButton>
-
-						<RadioButton
-							id="ProfileButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('ProfileDrawer')"
-						>
-							<Image class="rightnav__icon" src="file://{images}/profile.svg" textureheight="32" />
-						</RadioButton>
-
-						<RadioButton
-							id="ChallengesButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('ChallengesDrawer')"
-						>
-							<Image class="rightnav__icon" src="file://{images}/crown.svg" textureheight="32" />
-						</RadioButton>
-
-						<RadioButton
-							id="ChangelogButton"
-							group="RightNavRadio"
-							class="rightnav__button"
-							onactivate="Drawer.extendAndNavigateToTab('AboutDrawer')"
-						>
-							<Image class="rightnav__icon" src="file://{images}/news.svg" textureheight="32" />
-						</RadioButton>
-
-						<Button
-							id="SliderButton"
-							group="RightNavRadio"
-							class="rightnav__button rightnav__drawerbutton"
-							onactivate="Drawer.toggle()"
-						>
-							<Image class="rightnav__icon" src="file://{images}/right-arrow.svg" textureheight="32" orientation="180" />
-						</Button>
-					</Panel>
-				</Panel>
-				<!-- /Rightnav -->
-
-				<!-- Drawer Content -->
-				<Panel id="MainMenuDrawerContent" class="drawer__content">
-					<!-- Panels get added via JS here -->
-				</Panel>
-				<!-- /Drawer Content -->
-			</Panel>
-			<!-- /Drawer -->
-
 			<!-- Full page blur: used to blur everything below the drawer -->
-			<BaseBlurTarget
-				id="MainMenuFullBlur"
-				class="mainmenu__content-blur"
-				blurrects="MainMenuDrawerContent MainMenuOptionListRight"
-			>
 				<Panel class="mainmenu__container">
 					<!-- Backgrounds -->
 					<!-- Background blur: used to blur the backgrounds behind mainmenu pages -->
@@ -195,8 +89,6 @@
 						class="mainmenu__background-blur"
 						blurrects="MainMenuContentBlur MainMenuNavBar NewsPanel"
 					>
-						<!-- Map Selector backgrounds -->
-						<Image id="MainMenuBackgroundMapSelectorImage" class="MainMenuModeOnly mapselector__background" />
 
 						<!-- Movie background -->
 						<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
@@ -221,12 +113,10 @@
 
 							<Panel id="NewsModelWrapper" class="home__wrapper">
 
-								<Frame id="NewsPanel" class="home__newspanel" src="file://{resources}/layout/pages/main-menu/news.xml" />
-
 								<ModelPanel
 									id="MainMenuModel"
 									class="home__modelpanel"
-									src="models/custom_props/hd_logo.mdl"
+									src="models/shadertest/shaderball_pbr.mdl"
 									cubemap="cubemaps/cubemap_menu_model_bg.hdr"
 									antialias="true"
 									mouse_rotate="true"
@@ -236,33 +126,9 @@
 
 							<Panel class="home__bottombar bottombar">
 
-								<TooltipPanel class="bottombar__tooltip" tooltip="#MainMenu_Button_MainSite">
-									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://momentum-mod.org/')">
-										<Image class="bottombar__icon" src="file://{images}/social/home.svg" textureheight="64" />
-									</Button>
-								</TooltipPanel>
-
 								<TooltipPanel class="bottombar__tooltip" tooltip="#MainMenu_Button_Github">
-									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://github.com/momentum-mod/game')">
+									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://github.com/ChaosInitiative')">
 										<Image class="bottombar__icon" src="file://{images}/social/github.svg" textureheight="64" />
-									</Button>
-								</TooltipPanel>
-
-								<TooltipPanel class="bottombar__tooltip" tooltip="#MainMenu_Button_Discord">
-									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://discord.gg/momentummod')">
-										<Image class="bottombar__icon" src="file://{images}/social/discord.svg" textureheight="64" />
-									</Button>
-								</TooltipPanel>
-
-								<TooltipPanel class="bottombar__tooltip" tooltip="#MainMenu_Button_Forums">
-									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://forum.momentum-mod.org/')">
-										<Image class="bottombar__icon" src="file://{images}/social/forum.svg" textureheight="64" />
-									</Button>
-								</TooltipPanel>
-
-								<TooltipPanel class="bottombar__tooltip" tooltip="#MainMenu_Button_Twitter">
-									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://twitter.com/MomentumMod')">
-										<Image class="bottombar__icon" src="file://{images}/social/twitter.svg" textureheight="64" />
 									</Button>
 								</TooltipPanel>
 
@@ -275,12 +141,6 @@
 									<Label class="bottombar__text" text="Controls Library" />
 								</RadioButton>
 
-								<TooltipPanel class="bottombar__tooltip horizontal-align-right" tooltip="#MainMenu_Button_SwitchBackground">
-									<Button class="bottombar__button" onactivate="MainMenu.toggleBackgroundLightDark()">
-										<Image class="bottombar__icon" src="file://{images}/theme-light-dark.svg" textureheight="64" />
-									</Button>
-								</TooltipPanel>
-
 							</Panel>
 						</Panel>
 
@@ -292,7 +152,6 @@
 						</Panel>
 					</Panel>
 				</Panel>
-			</BaseBlurTarget>
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
