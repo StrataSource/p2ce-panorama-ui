@@ -1,9 +1,0 @@
-<root>
-	<styles>
-		<include src="file://{resources}/styles/main.scss" />
-	</styles>
-
-	<MomHudAmmo class="full-width">
-		<Label class="ammo__label" text="{i:ammoCount}" />
-	</MomHudAmmo>
-</root>

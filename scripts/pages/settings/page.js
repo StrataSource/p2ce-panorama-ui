@@ -26,16 +26,6 @@ class SettingsShared {
 
 				break;
 			}
-			case 'OnlineSettings': {
-				this.onlineSettingsUpdateModel();
-
-				break;
-			}
-			case 'GameplaySettings': {
-				this.updatePaintPreview();
-
-				break;
-			}
 			// No default
 		}
 
@@ -151,42 +141,6 @@ class SettingsShared {
 			'file://{resources}/layout/modals/popups/import-export-settings.xml',
 			`${cvarParams}&name=${localeString}`
 		);
-	}
-
-	static updatePaintPreview() {
-		this.paintContainer ??= $('#GameplaySettings').FindChildInLayoutFile('PaintContainer');
-
-		if (this.paintContainer.actuallayoutwidth === 0) {
-			// Stupid hack. I can't figure out an appropriate event to handle when the panel is actually loaded
-			$.Schedule(0.05, () => this.updatePaintPreview());
-			return;
-		}
-
-		const width = this.paintContainer.actuallayoutwidth / this.paintContainer.actualuiscale_x;
-
-		const color = GameInterfaceAPI.GetSettingColor('mom_paint_color');
-		const scale = GameInterfaceAPI.GetSettingFloat('mom_paint_scale');
-
-		const paintPanel = this.paintContainer.FindChild('PaintBlob');
-
-		paintPanel.style.backgroundColor = color;
-		paintPanel.style.width = scale * width + 'px';
-	}
-
-	static onlineSettingsUpdateModel() {
-		const color = GameInterfaceAPI.GetSettingColor('mom_ghost_color');
-		const bodygroup = GameInterfaceAPI.GetSettingInt('mom_ghost_bodygroup');
-
-		const onlineSettingsPanel = $('#OnlineSettings');
-		const ghostPreview = onlineSettingsPanel.FindChildInLayoutFile('GhostModelPreview');
-
-		ghostPreview.SetCameraFOV(60);
-		ghostPreview.SetModelRotationBoundsEnabled(true, false, false);
-		ghostPreview.SetModelRotationBoundsX(-90, 90);
-		ghostPreview.LookAtModel();
-		ghostPreview.SetCameraOffset(-100, 0, 0);
-		ghostPreview.SetModelColor(color);
-		ghostPreview.SetModelBodygroup(1, bodygroup);
 	}
 
 	static initTextureReplacementDropdown() {
