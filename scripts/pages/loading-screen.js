@@ -19,7 +19,6 @@ class LoadingScreen {
 	};
 
 	static {
-		$.RegisterForUnhandledEvent('MapCache_MapLoad', this.updateLoadingScreenInfo.bind(this));
 		$.RegisterForUnhandledEvent('UnloadLoadingScreenAndReinit', this.init.bind(this));
 
 		$.RegisterEventHandler(
@@ -36,12 +35,6 @@ class LoadingScreen {
 
 	static init() {
 		this.panels.progressBar.value = 0;
-
-		const gamemode = GameModeAPI.GetCurrentGameMode();
-		const tip = GameModeAPI.GetRandomTipForGameMode(gamemode);
-
-		this.panels.cp.SetDialogVariable('tip', $.LocalizeSafe(tip));
-
 		this.panels.mapName.visible = false;
 		this.panels.author.visible = false;
 		this.panels.tierAndType.visible = false;

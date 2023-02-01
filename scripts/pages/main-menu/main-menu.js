@@ -33,19 +33,8 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('ChaosHideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ChaosShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('ChaosHidePauseMenu', this.onHidePauseMenu.bind(this));
-		$.RegisterForUnhandledEvent('MapSelector_OnLoaded', this.onMapSelectorLoaded.bind(this));
-		$.RegisterForUnhandledEvent('Safeguard_Disconnect', this.onSafeguardDisconnect.bind(this));
-		$.RegisterForUnhandledEvent('Safeguard_Quit', this.onSafeguardQuit.bind(this));
-		$.RegisterForUnhandledEvent('Safeguard_ChangeMap', this.onSafeguardMapChange.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuBackground.bind(this));
-		$.RegisterForUnhandledEvent('OnMomentumQuitPrompt', this.onQuitPrompt.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
-
-		// Close the map selector when a map is successfully loaded
-		$.RegisterForUnhandledEvent(
-			'MapSelector_TryPlayMap_Outcome',
-			(outcome) => outcome && this.onHomeButtonPressed()
-		);
 
 		$.DispatchEvent('ChaosHideIntroMovie');
 	}
@@ -74,8 +63,6 @@ class MainMenu {
 		if (GameInterfaceAPI.GetSettingBool('developer')) $('#ControlsLibraryButton').RemoveClass('hide');
 
 		this.setMainMenuBackground();
-
-		this.showPlaytestWelcomePopup();
 	}
 
 	/**
@@ -118,8 +105,6 @@ class MainMenu {
 	 * Switch main menu page
 	 */
 	static navigateToPage(tab, xmlName, hasBlur = true) {
-		this.panels.mapSelectorBackground.SetHasClass('mapselector__background--hidden', tab !== 'MapSelection');
-
 		this.panels.contentBlur.visible = hasBlur;
 
 		if (this.activeTab === tab) {
@@ -220,19 +205,6 @@ class MainMenu {
 	}
 
 	/**
-	 * Temporary method to show the playtest welcome thingy
-	 */
-	static showPlaytestWelcomePopup() {
-		if (!$.persistentStorage.getItem('dontShowAgain.playtestWelcome')) {
-			UiToolkitAPI.ShowCustomLayoutPopupParameters(
-				'',
-				'file://{resources}/layout/modals/popups/playtest-welcome.xml',
-				'storageKey=playtestWelcome'
-			);
-		}
-	}
-
-	/**
 	 * Set the video background based on persistent storage settings
 	 */
 	static setMainMenuBackground() {
@@ -252,65 +224,12 @@ class MainMenu {
 		this.panels.image.visible = !useVideo;
 		this.panels.image.SetReadyForDisplay(!useVideo);
 
-		const backgroundVar = Number.parseInt($.persistentStorage.getItem('settings.mainMenuBackground'));
-
-		if (Number.isNaN(backgroundVar)) {
-			// Light mode by default
-			$.persistentStorage.setItem('settings.mainMenuBackground', 0);
-		}
-
-		let name = '';
-
-		// If it's xmas and you're using one of the default backgrounds, replace it with the xmas version
-		const date = new Date();
-		if (date.getMonth() === 11 && date.getDate() >= 25 && backgroundVar <= 1) {
-			name = 'MomentumXmas';
-		} else {
-			// Using a switch as we're likely to add more of these in the future
-			switch (backgroundVar) {
-				case 1:
-					name = 'MomentumDark';
-					break;
-				default:
-					name = 'MomentumLight';
-					break;
-			}
-		}
-
 		if (useVideo) {
-			this.panels.movie.SetMovie(`file://{resources}/videos/backgrounds/${name}.webm`);
+			this.panels.movie.SetMovie(`file://{media}/community_bg1.webm`);
 			this.panels.movie.Play();
 		} else {
-			this.panels.image.SetImage(`file://{images}/backgrounds/${name}.dds`);
+			this.panels.image.SetImage(`file://{materials}/vgui/backgrounds/background01_widescreen.vtf`);
 		}
-	}
-
-	/*
-	 *	Toggles between dark and light mode in the main menu
-	 */
-	static toggleBackgroundLightDark() {
-		$.persistentStorage.setItem(
-			'settings.mainMenuBackground',
-			$.persistentStorage.getItem('settings.mainMenuBackground') === 0 ? 1 : 0
-		);
-
-		this.setMainMenuBackground();
-	}
-
-	/**
-	 * Hide the map selector background
-	 */
-	static hideMapSelectorBackground() {
-		this.panels.mapSelectorBackground.AddClass('mapselector__background--hidden');
-	}
-
-	/**
-	 * Handles the map selector load event to add blurs to some of the map selector panels.
-	 * Necessary to handle in here because map selector background is a part of the main menu background section.
-	 */
-	static onMapSelectorLoaded() {
-		for (const panel of ['MapSelectorLeft', 'MapDescription', 'MapInfoStats', 'Leaderboards'])
-			this.panels.backgroundBlur?.AddBlurPanel($.GetContextPanel().FindChildTraverse(panel));
 	}
 
 	/**
@@ -318,7 +237,6 @@ class MainMenu {
 	 */
 	static onHomeButtonPressed() {
 		this.onHideContentPanel();
-		this.hideMapSelectorBackground();
 	}
 
 	/**
@@ -352,45 +270,6 @@ class MainMenu {
 			$.Localize('#Action_Return'),
 			() => {},
 			'blur'
-		);
-	}
-
-	/**
-	 * Shows a safeguard popup when disconnect is pressed during a run and safeguard is on
-	 */
-	static onSafeguardDisconnect() {
-		UiToolkitAPI.ShowGenericPopupOkCancel(
-			$.Localize('#Safeguard_MapQuitToMenu'),
-			$.Localize('#Safeguard_MapQuitToMenu_Message'),
-			'warning-popup',
-			() => $.DispatchEvent('Safeguard_Response', RunSafeguardType.QUIT_TO_MENU),
-			() => {}
-		);
-	}
-
-	/**
-	 * Shows a safeguard popup when quit is pressed during a run and safeguard is on
-	 */
-	static onSafeguardQuit() {
-		UiToolkitAPI.ShowGenericPopupOkCancel(
-			$.Localize('#Safeguard_MapQuitGame'),
-			$.Localize('#Safeguard_MapQuitGame_Message'),
-			'warning-popup',
-			() => $.DispatchEvent('Safeguard_Response', RunSafeguardType.QUIT_GAME),
-			() => {}
-		);
-	}
-
-	/**
-	 * Shows a safeguard popup when map change is triggered during a run and safeguard is on
-	 */
-	static onSafeguardMapChange(mapName) {
-		UiToolkitAPI.ShowGenericPopupOkCancel(
-			$.Localize('#Safeguard_MapChange'),
-			$.Localize('#Safeguard_MapChange_Message').replace('%map%', mapName),
-			'warning-popup',
-			() => GameInterfaceAPI.ConsoleCommand('__map_change_ok 1;map ' + mapName),
-			() => {}
 		);
 	}
 
