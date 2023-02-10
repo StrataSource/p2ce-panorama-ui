@@ -1,0 +1,10 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/health.scss" />
+	</styles>
+
+	<HudHealth class="health">
+		<Label class="__label" text="{d:health}" />
+	</HudHealth>
+</root>

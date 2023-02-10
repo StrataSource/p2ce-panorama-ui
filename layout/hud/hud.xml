@@ -28,11 +28,13 @@
 		<!-- Anchored to the bottom-left corner of the screen, laid out from top to bottom -->
 		<Panel id="HudLowerLeft" hittest="false" hittestchildren="true">
 			<HudStaticMenu />
+			<HudHealth />
 		</Panel>
 
 		<!-- Anchored on lower-right corner, laid out from top to bottom -->
 		<Panel id="HudBottomRight" hittest="false" hittestchildren="false">
 			<PortalKeyPress />
+			<HudAmmo />
 		</Panel>
 
 		<!-- Anchored in top right corner of screen, laid out from top-to-bottom -->

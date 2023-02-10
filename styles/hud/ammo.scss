@@ -1,0 +1,56 @@
+@use '../config' as *;
+
+.ammo {
+	margin: 15px;
+	margin-right: 50px;
+	flow-children: right;
+	height: fit-children;
+	width: fit-children;
+
+	&__clip {
+		font-size: 50px;
+		vertical-align: center;
+		horizontal-align: center;
+		padding-left: 15px;
+	}
+
+	&__reserve {
+		font-size: 24px;
+		vertical-align: bottom;
+		margin-bottom: 15px;
+	}
+
+	&__label {
+		font-size: 20px;
+		vertical-align: center;
+		margin-left: 15px;
+	}
+
+	&__divider {
+		margin-left: 0px;
+		margin-bottom: 15px;
+		font-size: 24px;
+		vertical-align: bottom;
+	}
+
+	&__container {
+		background-color: #000000aa;
+		border-radius: 10px;
+		margin-right: 50px;
+
+		height: 80px;
+		width: 150px;
+
+		horizontal-align: center;
+		vertical-align: center;
+		flow-children: right;
+	}
+
+	&__primary {
+		width: 250px;
+	}
+
+	&__secondary {
+		width: 150px;
+	}
+}
