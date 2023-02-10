@@ -1,0 +1,18 @@
+@use '../config' as *;
+
+.health {
+	margin: 15px;
+	margin-left: 50px;
+	flow-children: right;
+	height: 80px;
+	width: 180px;
+	align: center top;
+	background-color: #000000aa;
+	border-radius: 10px;
+
+	& > Label {
+		font-size: 56px;
+		horizontal-align: center;
+		vertical-align: center;
+	}
+}

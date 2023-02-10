@@ -1,0 +1,20 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/ammo.scss" />
+	</styles>
+
+	<HudAmmo class="ammo">
+		<Panel class="ammo__container ammo__primary" id="PrimaryContainer">
+			<Label class="ammo__label" text="AMMO" />
+			<Label class="ammo__clip" text="{d:clip1Count}" />
+			<Label class="ammo__divider" text="/" />
+			<Label class="ammo__reserve" text="{d:ammo1Count}" />
+		</Panel>
+
+		<Panel class="ammo__container ammo__secondary" id="SecondaryContainer">
+			<Label class="ammo__label" text="ALT" />
+			<Label class="ammo__clip" text="{d:clip2Count}" />
+		</Panel>
+	</HudAmmo>
+</root>
