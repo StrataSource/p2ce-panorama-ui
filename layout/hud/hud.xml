@@ -3,6 +3,10 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 
+	<scripts>
+		<include src="file://{resources}/scripts/tests/game-event-test.js" />
+	</scripts>
+
 	<ChaosHud hittest="false">
 		<!-- Non-interactive HUD elements have hit test disabled for efficiency -->
 
