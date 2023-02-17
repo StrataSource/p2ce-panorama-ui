@@ -14,7 +14,7 @@ class GameEventTests {
 	}
 
 	static Dummy(evName, data) {
-		$.Msg('THIS MESSAGE SHOULD NOT SHOW');
+		throw 'THIS CODE SHOULD NOT BE HIT';
 	}
 
 	static {

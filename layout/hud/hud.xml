@@ -5,6 +5,7 @@
 
 	<scripts>
 		<include src="file://{resources}/scripts/tests/game-event-test.js" />
+		<include src="file://{resources}/scripts/tests/weapon-api-test.js" />
 	</scripts>
 
 	<ChaosHud hittest="false">
