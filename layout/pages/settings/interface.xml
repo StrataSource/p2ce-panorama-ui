@@ -69,6 +69,19 @@
 					<Label text="#Settings_Menu_Type1" value="1" id="bgtype1" />
 				</ChaosSettingsEnumDropDown>
 
+				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
+				<ChaosSettingsEnum
+					id="SentryReporting"
+					text="Sentry Crash Reporting"
+					infomessage="Sentry"
+					hasdocspage="false"
+					tags="sentry"
+				>
+					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
+						<Label class="button__text" text="Update Consent" />
+					</Button>
+				</ChaosSettingsEnum>
+
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
