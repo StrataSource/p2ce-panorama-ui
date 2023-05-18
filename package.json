@@ -1,7 +1,7 @@
 {
-	"name": "momentum-panorama",
+	"name": "p2ce-panorama",
 	"version": "1.0.0",
-	"description": "Scripts for handling Momentum Panorama files",
+	"description": "Scripts for handling P2CE Panorama files",
 	"config": {
 		"baseDir": "./"
 	},
@@ -11,11 +11,9 @@
 		"lint:fix": "eslint \"**/*.js\" --fix",
 		"lint:check": "eslint \"**/*.js\"",
 		"prepare": "husky install",
-		"pre-commit": "lint-staged",
-		"get-learn": "node tools/get-learn.js",
-		"get-credits": "node tools/get-credits.js"
+		"pre-commit": "lint-staged"
 	},
-	"author": "Momentum Team",
+	"author": "P2CE & Momentum Team",
 	"license": "MIT",
 	"dependencies": {},
 	"devDependencies": {
