@@ -227,4 +227,24 @@ class SettingsShared {
 			'ConVarColorDisplay'
 		].includes(panel.paneltype);
 	}
+
+	static sentryUpdateConsent() {
+		// Don't even bother asking if sentry isn't enabled
+		if (!SentryAPI.IsSentryActive()) {
+			return;
+		}
+
+		UiToolkitAPI.ShowGenericPopupYesNo(
+			'Sentry Consent',
+			'Allow automatic upload of crash dumps?' +
+				'\n\nCrash dumps contain game path information and the SteamID of the currently logged in Steam account.',
+			'wide-popup',
+			() => {
+				GameInterfaceAPI.ConsoleCommand('sentry_consent_give');
+			},
+			() => {
+				GameInterfaceAPI.ConsoleCommand('sentry_consent_revoke');
+			}
+		);
+	}
 }
