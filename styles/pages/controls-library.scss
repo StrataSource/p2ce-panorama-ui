@@ -19,3 +19,40 @@
 	brightness: 2;
 	contrast: 2;
 }
+
+$timing-function: cubic-bezier(.77,0,.18,1);
+
+@keyframes test-anim {
+	0% {
+		transform: rotateZ(0deg) scale3d(1,1,1);
+	}
+	25% {
+		transform: rotateZ(90deg) scale3d(1,1,1);
+	}
+	50% {
+		transform: rotateZ(90deg) scale3d(1.5,1.5,1.5);
+	}
+	75% {
+		transform: rotateZ(180deg) scale3d(1.5,1.5,1.5);
+	}
+	100% {
+		transform: rotateZ(180deg) scale3d(1,1,1);
+	}
+}
+
+.anim-panel {
+	height: 200px;
+	width: 200px;
+	//background-color: #111;
+}
+
+.bezier-spin {
+	align: center center;
+	width: 100px;
+	height: 100px;
+	background-color: #f44;
+	animation-name: test-anim;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: $timing-function;
+}
