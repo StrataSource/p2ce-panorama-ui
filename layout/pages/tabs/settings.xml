@@ -4,13 +4,13 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{resources}/scripts/common/settings.js" />
+		<!-- <include src="file://{resources}/scripts/common/settings.js" />
 		<include src="file://{resources}/scripts/pages/settings/page.js" />
 		<include src="file://{resources}/scripts/pages/settings/settings.js" />
-		<include src="file://{resources}/scripts/pages/settings/search.js" />
+		<include src="file://{resources}/scripts/pages/settings/search.js" /> -->
 	</scripts>
 
-	<Panel class="mainmenu__page" useglobalcontext="true">
+	<Panel class="body fill" useglobalcontext="true">
 
 		<Panel class="settings">
 
