@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"*.scss": "panoscss"
+	},
+
+	"panoscss.lint.idSelector": "ignore"
+}
