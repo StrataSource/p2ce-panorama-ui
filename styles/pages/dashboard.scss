@@ -3,17 +3,27 @@
 @use '../abstract/mixin';
 @use './main-menu' as *;
 
-$tile-margin: 8px;
+$tile-margin: 20px;
 
 Panel.body {
 	flow-children: right;
 	margin: $tile-margin;
 }
 
-TileGrid {
-	overflow: scroll clip;
-}
-
 TileGrid > Panel {
-	background-color: $gray-500;
+	background-color: $gray-400;
+	border: 1px solid $gray-500;
+	border-radius: 3px;
+	padding: 10px;
+
+	transition: background-color 0.1s linear 0.0s;
+
+	&:hover {
+		background-color: $gray-500;
+	}
+
+	> Label {
+		color: $gray-900;
+		font-size: 12px;
+	}
 }

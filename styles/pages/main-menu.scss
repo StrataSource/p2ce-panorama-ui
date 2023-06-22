@@ -104,3 +104,9 @@ ChaosMainMenu {
 	height: fill-parent-flow(1.0);
 	background-color: $gray-200;
 }
+
+#MainMenuFooter {
+	width: 100%;
+	height: $footer-height;
+	background-color: $gray-100;
+}

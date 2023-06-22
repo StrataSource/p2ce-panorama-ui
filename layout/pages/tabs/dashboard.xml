@@ -8,10 +8,11 @@
 
 		<TileGrid
 			class="fill"
-			margin="8px"
+			margin="20px"
 			flow-children="down"
 			rows="3"
-			col-width="300px"
+			columns="5"
+			col-width="fit"
 			row-height="fit"
 		>
 
@@ -22,12 +23,6 @@
 			<Panel><Label text="5" /></Panel>
 			<Panel><Label text="6" /></Panel>
 			<Panel><Label text="7" /></Panel>
-			<Panel><Label text="8" /></Panel>
-			<Panel><Label text="9" /></Panel>
-			<Panel><Label text="10" /></Panel>
-			<Panel><Label text="11" /></Panel>
-			<Panel><Label text="12" /></Panel>
-			<Panel><Label text="13" /></Panel>
 		</TileGrid>
 
 	</Panel>

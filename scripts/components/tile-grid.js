@@ -1,8 +1,5 @@
 'use strict';
 
-// Magic constant for size correction. (WTF)
-const CORRECT_SCALE = 1.2;
-
 // "fit" constant
 const FIT = 'fit';
 
@@ -126,8 +123,13 @@ class TileGrid {
 			return unit * width + (this.margin * (width - 1));
 		}
 
-		const containerWidth = this.element.actuallayoutwidth;
-		const containerHeight = this.element.actuallayoutheight;
+		// TODO: THIS CODE ASSUMES THAT THE DESIRED HEIGHT IS ALWAYS 100%. THIS IS BAD!
+		const windowHeight = this.element.desiredlayoutheight;
+		const CORRECT_SCALE = 1080 / windowHeight;
+
+		const containerWidth = this.element.actuallayoutwidth * CORRECT_SCALE;
+		const containerHeight = this.element.actuallayoutheight * CORRECT_SCALE;
+
 		const unitWidth = this.width === FIT ? calcSize(this.columns, containerWidth) : this.width;
 		const unitHeight = this.height === FIT ? calcSize(this.rows, containerHeight) : this.height;
 
@@ -138,11 +140,10 @@ class TileGrid {
 			const child = this.element.GetChild(i);
 			const info = this.childMap.get(child);
 
-			// These have to be multiplied by a constant (???)
-			const cx = CORRECT_SCALE * (unitWidth + this.margin) * info.x;
-			const cy = CORRECT_SCALE * (unitHeight + this.margin) * info.y;
-			const cw = CORRECT_SCALE * calcChildSize(info.w, unitWidth);
-			const ch = CORRECT_SCALE * calcChildSize(info.h, unitHeight);
+			const cx = (unitWidth + this.margin) * info.x;
+			const cy = (unitHeight + this.margin) * info.y;
+			const cw = calcChildSize(info.w, unitWidth);
+			const ch = calcChildSize(info.h, unitHeight);
 
 			child.style.position = `${cx}px ${cy}px 0.0px`;
 			child.style.width = `${cw}px`;

@@ -72,6 +72,9 @@
 			<Panel id="MainMenuBody">
 			</Panel>
 
+			<Panel id="MainMenuFooter">
+			</Panel>
+
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
