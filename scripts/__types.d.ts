@@ -497,7 +497,11 @@ declare interface Panel {
 
 	SetInputNamespace(arg0: string): void;
 
-	SetPanelEvent(...args: any[]): void;
+	/** @description Sets an event trigger for this panel.
+	 * @example latestUpdateImage.SetPanelEvent('onactivate', () => SteamOverlayAPI.OpenURLModal(item.link));
+	 * @see [Example](https://github.com/momentum-mod/panorama/blob/568f2d8de1303b86592a9a8602efd416f6a2f5bf/scripts/pages/main-menu/news.js#L57)
+	*/
+	SetPanelEvent(event: string, callback: Function): void;
 
 	SetParent(parent: Panel): void;
 

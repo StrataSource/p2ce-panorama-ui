@@ -4,10 +4,6 @@
 		<include src="file://{resources}/styles/pages/dashboard.scss" />
 	</styles>
 
-	<scripts>
-		<include src="file://{resources}/scripts/common/grid.js" />
-	</scripts>
-
 	<Panel class="body fill">
 
 		<TileGrid

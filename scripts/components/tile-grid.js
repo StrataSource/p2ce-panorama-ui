@@ -148,4 +148,9 @@ class TileGrid {
 	}
 }
 
-$.Schedule(0, () => new TileGrid($.GetContextPanel()));
+const panel = $.GetContextPanel();
+$.Schedule(0, () => {
+	const grid = new TileGrid(panel);
+	panel.SetPanelEvent('DoLayout', () => grid.layout());
+	panel.SetPanelEvent('DoRender', () => grid.render());
+});
