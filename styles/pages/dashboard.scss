@@ -4,18 +4,16 @@
 @use './main-menu' as *;
 
 $tile-margin: 8px;
-$width-big: 1080px - $header-height - $footer-height - $tile-margin * 4;
-$width-small: $width-big / 2;
 
 Panel.body {
 	flow-children: right;
 	margin: $tile-margin;
 }
 
-Panel#grid-dash {
+TileGrid {
 	overflow: scroll clip;
 }
 
-Panel.tile {
+TileGrid > Panel {
 	background-color: $gray-500;
 }

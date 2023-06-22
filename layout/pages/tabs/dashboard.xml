@@ -9,37 +9,30 @@
 	</scripts>
 
 	<Panel class="body fill">
-		<Panel
-			class="fill"
-			id="grid-dash"
 
+		<TileGrid
+			class="fill"
 			margin="8px"
 			flow-children="down"
-			rows="2"
-			col-width="400px"
+			rows="3"
+			col-width="300px"
 			row-height="fit"
-			onload="TileGrid.init('#grid-dash')">
+		>
 
-			<Panel class="tile"><Label text="1" /></Panel>
-			<Panel class="tile"><Label text="2" /></Panel>
-			<Panel class="tile"><Label text="3" /></Panel>
-			<Panel class="tile"><Label text="4" /></Panel>
-			<Panel class="tile"><Label text="5" /></Panel>
-			<Panel class="tile"><Label text="6" /></Panel>
-			<Panel class="tile"><Label text="7" /></Panel>
-			<Panel class="tile"><Label text="8" /></Panel>
-			<Panel class="tile"><Label text="9" /></Panel>
+			<Panel w="2" h="2"><Label text="1" /></Panel>
+			<Panel w="2" h="1"><Label text="2" /></Panel>
+			<Panel w="2"      ><Label text="3" /></Panel>
+			<Panel w="2" h="2"><Label text="4" /></Panel>
+			<Panel><Label text="5" /></Panel>
+			<Panel><Label text="6" /></Panel>
+			<Panel><Label text="7" /></Panel>
+			<Panel><Label text="8" /></Panel>
+			<Panel><Label text="9" /></Panel>
+			<Panel><Label text="10" /></Panel>
+			<Panel><Label text="11" /></Panel>
+			<Panel><Label text="12" /></Panel>
+			<Panel><Label text="13" /></Panel>
+		</TileGrid>
 
-			<Panel class="tile"><Label text="1" /></Panel>
-			<Panel class="tile"><Label text="2" /></Panel>
-			<Panel class="tile"><Label text="3" /></Panel>
-			<Panel class="tile"><Label text="4" /></Panel>
-			<Panel class="tile"><Label text="5" /></Panel>
-			<Panel class="tile"><Label text="6" /></Panel>
-			<Panel class="tile"><Label text="7" /></Panel>
-			<Panel class="tile"><Label text="8" /></Panel>
-			<Panel class="tile"><Label text="9" /></Panel>
-
-		</Panel>
 	</Panel>
 </root>

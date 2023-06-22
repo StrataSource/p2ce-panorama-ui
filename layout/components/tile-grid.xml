@@ -1,0 +1,12 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/pages/main-menu.scss" />
+		<include src="file://{resources}/styles/pages/dashboard.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/components/tile-grid.js" />
+	</scripts>
+
+	<Panel class="tile-grid" />
+</root>
