@@ -112,6 +112,9 @@ class TileGrid {
 		this.render();
 	}
 
+	/**
+	 * Renders the computed layout to the DOM, setting the positioning of this grid's children.
+	*/
 	render() {
 		const calcSize = (divisions, width) => {
 			if (!divisions) return width;

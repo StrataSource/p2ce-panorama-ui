@@ -1,1 +1,0 @@
-UiToolkitAPI.RegisterPanel2d('TileGrid', 'file://{resources}/layout/components/tile-grid.xml');
