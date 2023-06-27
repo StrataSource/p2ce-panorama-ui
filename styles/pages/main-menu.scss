@@ -2,9 +2,9 @@
 @use '../abstract/function';
 @use '../abstract/mixin';
 
-$header-height: 100px;
-$footer-height: 80px;
-$header-margins: 6px;
+$header-height: 120px;
+$footer-height: 100px;
+$header-margins: 8px;
 
 $page-transition-duration: 0.15s;
 $page-transition-timing-func: ease-in-out;
@@ -46,7 +46,7 @@ ChaosMainMenu {
 	width: 100%;
 	height: $header-height;
 	flow-children: right;
-	padding: $header-margins;
+	padding: $header-margins ($header-margins*2);
 
 	background-color: $gray-100;
 

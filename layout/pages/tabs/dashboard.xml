@@ -4,26 +4,31 @@
 		<include src="file://{resources}/styles/pages/dashboard.scss" />
 	</styles>
 
+	<scripts>
+		<include src="file://{resources}/scripts/components/tile-grid.js" />
+	</scripts>
+
 	<Panel class="body fill">
 
-		<TileGrid
+		<Panel
+			id="dashboard"
 			class="fill"
-			margin="20px"
-			flow-children="down"
-			rows="3"
-			columns="5"
+			margin="40px"
+			flow-children="right"
+			rows="2"
+			columns="4"
 			col-width="fit"
 			row-height="fit"
-		>
+			onload="TileGrid.init('#dashboard')"
+		>z
 
 			<Panel w="2" h="2"><Label text="1" /></Panel>
-			<Panel w="2" h="1"><Label text="2" /></Panel>
-			<Panel w="2"      ><Label text="3" /></Panel>
-			<Panel w="2" h="2"><Label text="4" /></Panel>
-			<Panel><Label text="5" /></Panel>
-			<Panel><Label text="6" /></Panel>
-			<Panel><Label text="7" /></Panel>
-		</TileGrid>
+			<Panel            ><Label text="2" /></Panel>
+			<Panel            ><Label text="3" /></Panel>
+			<Panel            ><Label text="4" /></Panel>
+			<Panel            ><Label text="5" /></Panel>
+		</Panel>
 
 	</Panel>
 </root>
+

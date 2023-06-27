@@ -43,6 +43,18 @@ class TileGrid {
 		$.Schedule(0, this.layout.bind(this));
 	}
 
+	/** @param {string} selector */
+	static init(selector) {
+		/** @type {Panel} */
+		const panel = $(selector);
+		$.Msg(selector);
+		$.Schedule(0, () => {
+			const grid = new TileGrid(panel);
+			panel.SetPanelEvent('DoLayout', () => grid.layout());
+			panel.SetPanelEvent('DoRender', () => grid.render());
+		});
+	}
+
 	/**
 	 * Calculates the layout for this grid and stores it for rendering.
 	 * @todo This algorithm is **NOT EFFICIENT IN THE SLIGHTEST.** You have been warned.
@@ -54,7 +66,7 @@ class TileGrid {
 
 		/** @type {{[key: string]: true}} */
 		const tileMap = {};
-		const consumeSpace  = (x, y, w, h) => {
+		const consumeSpace = (x, y, w, h) => {
 			for ( let _y=0;  _y<h; _y++ ) {
 				for ( let _x=0; _x<w; _x++ ) {
 					tileMap[(x+_x)+':'+(y+_y)] = true;
@@ -62,7 +74,7 @@ class TileGrid {
 			}
 			return false;
 		}
-		const checkSpace  = (x, y, w, h) => {
+		const checkSpace = (x, y, w, h) => {
 			for ( let _y=0; _y<h; _y++ ) {
 				for ( let _x=0; _x<w; _x++ ) {
 					if (tileMap[(x+_x)+':'+(y+_y)]) return true;
@@ -151,10 +163,3 @@ class TileGrid {
 		}
 	}
 }
-
-const panel = $.GetContextPanel();
-$.Schedule(0, () => {
-	const grid = new TileGrid(panel);
-	panel.SetPanelEvent('DoLayout', () => grid.layout());
-	panel.SetPanelEvent('DoRender', () => grid.render());
-});
