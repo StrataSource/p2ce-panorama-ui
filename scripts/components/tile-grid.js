@@ -47,7 +47,7 @@ class TileGrid {
 	static init(selector) {
 		/** @type {Panel} */
 		const panel = $(selector);
-		$.Msg(selector);
+
 		$.Schedule(0, () => {
 			const grid = new TileGrid(panel);
 			panel.SetPanelEvent('DoLayout', () => grid.layout());
