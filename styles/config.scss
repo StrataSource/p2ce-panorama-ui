@@ -302,10 +302,7 @@ $button-icon-shadow: 0 1px 2px 1 rgba(0, 0, 0, 1) !default;
 $dropdown-button-background: $button-background !default;
 
 $dropdown-button-background-disabled: $button-background-disabled !default;
-$dropdown-button-background-hover: gradient-vertical(
-	color.scale($button-background-base, $lightness: 0%, $alpha: 15%),
-	color.scale($button-background-base, $lightness: -20%, $alpha: 15%)
-) !default;
+$dropdown-button-background-hover: $button-background-hover !default;
 $dropdown-button-background-menuvisible: gradient-vertical(
 	color.scale($button-background-base, $lightness: -60%, $alpha: 50%),
 	color.scale($button-background-base, $lightness: -65%, $alpha: 50%)
