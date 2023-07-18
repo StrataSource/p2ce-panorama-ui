@@ -510,7 +510,7 @@ $scrollbar-hover-opacity: 0.8 !default;
 
 $progressbar-width: 320px !default;
 $progressbar-height: 22px !default;
-$progressbar-background: color.scale($orange, $saturation: -70%, $lightness: -50%) !default;
+$progressbar-background: $gray-300 !default;
 $progressbar-background-disabled: gradient(
 	linear,
 	0% 0%,
