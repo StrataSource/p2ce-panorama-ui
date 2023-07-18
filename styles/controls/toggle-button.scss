@@ -28,23 +28,6 @@
 		&:selected {
 			background-color: function.gradient-vertical(list.nth($colors, 1), list.nth($colors, 2));
 			border: $button-border;
-
-			&:hover {
-				background-color: function.gradient-vertical(
-					color.scale(
-						list.nth($colors, 1),
-						$saturation: list.nth($gradient-hover-transform, 1),
-						$lightness: list.nth($gradient-hover-transform, 2),
-						$alpha: list.nth($gradient-hover-transform, 3)
-					),
-					color.scale(
-						list.nth($colors, 2),
-						$saturation: list.nth($gradient-hover-transform, 1),
-						$lightness: list.nth($gradient-hover-transform, 2),
-						$alpha: list.nth($gradient-hover-transform, 3)
-					)
-				);
-			}
 		}
 	}
 }
