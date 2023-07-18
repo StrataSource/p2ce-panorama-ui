@@ -83,8 +83,8 @@
 	}
 }
 
-@each $name in map.keys($gradients-primary) {
+@each $name, $value in $gradients-primary {
 	.button--#{$name} {
-		@include mixin.button-gradient($color: $name);
+		background-color: list.nth($value, 1);
 	}
 }
