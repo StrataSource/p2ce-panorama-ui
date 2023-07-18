@@ -6,7 +6,7 @@
 		height: 768px;
 		min-width: 200px; /* Used for resize dragging! */
 		min-height: 200px; /* ditto */
-		background-color: rgba(0, 0, 0, 0.99);
+		background-color: $gray-300;
 		flow-children: down;
 		border-radius: 4px;
 		padding-left: 8px;
@@ -54,6 +54,8 @@
 		margin-left: 8px;
 		horizontal-align: right;
 		vertical-align: bottom;
+		width: 16px;
+		height: 16px;
 	}
 
 	&__header {
