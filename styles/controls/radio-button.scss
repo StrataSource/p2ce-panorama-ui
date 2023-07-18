@@ -21,7 +21,7 @@
 @each $name, $colors in $gradients-primary {
 	.radiobutton--#{$name} {
 		&:selected {
-			background-color: function.gradient-vertical(list.nth($colors, 1), list.nth($colors, 2));
+			background-color: list.nth($colors, 2);
 			border: $button-border;
 		}
 	}

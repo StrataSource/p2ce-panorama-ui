@@ -79,7 +79,7 @@
 		& > RadioButton {
 			@extend .button;
 			@extend .radiobutton;
-			@extend .radiobutton--blue;
+			@extend .radiobutton--orange;
 
 			width: fit-children;
 			min-width: 140px;
@@ -151,12 +151,12 @@
 		transition-timing-function: ease-in-out;
 
 		&:hover {
-			background-color: rgba($blue, 0.3);
-			border: 1px solid rgba($blue, 0.4);
+			background-color: rgba($orange, 0.3);
+			border: 1px solid rgba($orange, 0.4);
 		}
 
 		#{$root}:selected & {
-			animation-name: PulseBackgroundBlue;
+			animation-name: PulseBackgroundOrange;
 			animation-duration: 1.5s;
 			animation-timing-function: linear;
 			animation-iteration-count: infinite;

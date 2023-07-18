@@ -42,17 +42,17 @@
 	}
 }
 
-@keyframes PulseBackgroundBlue {
+@keyframes PulseBackgroundOrange {
 	0% {
-		background-color: rgba($blue, 0.3);
+		background-color: rgba($orange, 0.3);
 	}
 
 	50% {
-		background-color: rgba($blue, 0.8);
+		background-color: rgba($orange, 0.8);
 	}
 
 	100% {
-		background-color: rgba($blue, 0.3);
+		background-color: rgba($orange, 0.3);
 	}
 }
 
