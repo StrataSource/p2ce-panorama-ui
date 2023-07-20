@@ -8,18 +8,24 @@
 		<include src="file://{resources}/scripts/util/dosa.js" />
 	</scripts>
 
-	<PopupCustomLayout
-		class="PopupPanel Hidden generic-popup generic-popup--large"
-		popupbackground="blur"
-	>
+	<PopupCustomLayout class="PopupPanel Hidden generic-popup generic-popup--large" popupbackground="blur">
 
 		<Panel class="flow-down">
 
 			<Label class="text-h1 mb-4 full-width text-align-center" text="Welcome to the\nPortal 2: Community Edition playtest!" />
 
-			<Label class="mb-2" text="As a part of the playtest, the game will record a demo of your gameplay and some basic performance data." />
-			<Label class="mb-3" text="This data will be uploaded for our developers to review after the fact, allowing us to improve gameplay." />
-			<Label class="color-error mb-3 full-width text-align-center" text="NOTE: Consent can be given/revoked later in settings." />
+			<Label
+				class="mb-2"
+				text="As a part of the playtest, the game will record a demo of your gameplay and some basic performance data."
+			/>
+			<Label
+				class="mb-3"
+				text="This data will be uploaded for our developers to review after the fact, allowing us to improve gameplay."
+			/>
+			<Label
+				class="color-error mb-3 full-width text-align-center"
+				text="NOTE: Consent can be given/revoked later in settings."
+			/>
 
 		</Panel>
 
