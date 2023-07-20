@@ -76,8 +76,7 @@ class MainMenu {
 
 		this.setMainMenuBackground();
 
-		if(GameStateAPI.IsPlaytest())
-			this.showPlaytestConsentPopup();
+		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 	}
 
 	/**

@@ -84,7 +84,13 @@
 					</Button>
 				</ChaosSettingsEnum>
 
-				<ChaosSettingsEnum text="Playtest consent" infomessage="Playtest consent" convar="cl_playtest_enabled" hasdocspage="false" tags="consent">
+				<ChaosSettingsEnum
+					text="Playtest consent"
+					infomessage="Playtest consent"
+					convar="cl_playtest_enabled"
+					hasdocspage="false"
+					tags="consent"
+				>
 					<RadioButton group="enableconsent" text="#Common_Off" value="0" />
 					<RadioButton group="enableconsent" text="#Common_On" value="1" />
 				</ChaosSettingsEnum>
