@@ -5,6 +5,7 @@
 	<scripts>
 		<include src="file://{resources}/scripts/common/game-ui.js" />
 		<include src="file://{resources}/scripts/pages/main-menu/main-menu.js" />
+		<include src="file://{resources}/scripts/util/dosa.js" />
 	</scripts>
 
 	<snippets>
@@ -125,7 +126,7 @@
 							<Panel class="home__bottombar bottombar">
 
 								<TooltipPanel class="bottombar__tooltip" tooltip="#MainMenu_Button_Github">
-									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://github.com/ChaosInitiative')">
+									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://github.com/StrataSource')">
 										<Image class="bottombar__icon" src="file://{images}/social/github.svg" textureheight="64" />
 									</Button>
 								</TooltipPanel>

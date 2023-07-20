@@ -247,4 +247,8 @@ class SettingsShared {
 			}
 		);
 	}
+
+	static PlayTestDosaRemove() {
+		DosaHandler.removeDosa('playtestConsent');
+	}
 }

@@ -4,6 +4,8 @@
 	</styles>
 	<scripts>
 		<include src="file://{resources}/scripts/pages/settings/page.js" />
+		<!-- Temporary -->
+		<include src="file://{resources}/scripts/util/dosa.js" />
 	</scripts>
 
 	<Panel class="settings-page">
@@ -79,6 +81,23 @@
 				>
 					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
 						<Label class="button__text" text="Update Consent" />
+					</Button>
+				</ChaosSettingsEnum>
+
+				<ChaosSettingsEnum text="Playtest consent" infomessage="Playtest consent" convar="cl_playtest_enabled" hasdocspage="false" tags="consent">
+					<RadioButton group="enableconsent" text="#Common_Off" value="0" />
+					<RadioButton group="enableconsent" text="#Common_On" value="1" />
+				</ChaosSettingsEnum>
+
+				<ChaosSettingsEnum
+					id="PlaytestDOSARemove"
+					text="Playtest DOSA remove"
+					infomessage="Remove DOSA from playtest consent (For development purposes)"
+					hasdocspage="false"
+					tags="dosa"
+				>
+					<Button class="button horizontal-align-right" onactivate="SettingsShared.PlayTestDosaRemove()">
+						<Label class="button__text" text="Remove DOSA" />
 					</Button>
 				</ChaosSettingsEnum>
 

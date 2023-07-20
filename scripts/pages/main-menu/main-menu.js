@@ -75,6 +75,21 @@ class MainMenu {
 		if (GameInterfaceAPI.GetSettingBool('developer')) $('#ControlsLibraryButton').RemoveClass('hide');
 
 		this.setMainMenuBackground();
+
+		if(GameStateAPI.IsPlaytest())
+			this.showPlaytestConsentPopup();
+	}
+
+	/**
+	 * Shows playtest consent form
+	 */
+	static showPlaytestConsentPopup() {
+		if (!DosaHandler.checkDosa('playtestConsent'))
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'',
+				'file://{resources}/layout/modals/popups/playtest-consent.xml',
+				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent'
+			);
 	}
 
 	/**

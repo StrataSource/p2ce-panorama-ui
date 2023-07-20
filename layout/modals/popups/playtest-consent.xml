@@ -1,0 +1,48 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/modals/popups/playtest-consent.js" />
+		<include src="file://{resources}/scripts/util/dosa.js" />
+	</scripts>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup generic-popup--large"
+		popupbackground="blur"
+	>
+
+		<Panel class="flow-down">
+
+			<Label class="text-h1 mb-4 full-width text-align-center" text="Welcome to the\nPortal 2: Community Edition playtest!" />
+
+			<Label class="mb-2" text="As a part of the playtest, the game will record a demo of your gameplay and some basic performance data." />
+			<Label class="mb-3" text="This data will be uploaded for our developers to review after the fact, allowing us to improve gameplay." />
+			<Label class="color-error mb-3 full-width text-align-center" text="NOTE: Consent can be given/revoked later in settings." />
+
+		</Panel>
+
+		<Panel class="flow-down">
+
+			<!-- Localization needed  -->
+			<ToggleButton id="PlayTestConsentCheckbox" class="checkbox vertical-align-center">
+				<Label text="I consent to this." />
+			</ToggleButton>
+		</Panel>
+
+		<Panel class="flow-right full-width mt-4">
+
+			<Button class="button button--blue vertical-align-left" onactivate="PlaytestConsent.onDOSA()">
+				<Label class="button__text" text="#Common_Dontshowagain" />
+			</Button>
+
+			<Button class="button button--blue horizontal-align-right" onactivate="PlaytestConsent.onConsent()">
+				<Label class="button__text" text="#Common_Close" />
+			</Button>
+
+		</Panel>
+
+	</PopupCustomLayout>
+
+</root>
