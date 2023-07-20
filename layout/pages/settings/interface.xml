@@ -89,17 +89,19 @@
 					<RadioButton group="enableconsent" text="#Common_On" value="1" />
 				</ChaosSettingsEnum>
 
-				<ChaosSettingsEnum
-					id="PlaytestDOSARemove"
-					text="Playtest DOSA remove"
-					infomessage="Remove DOSA from playtest consent (For development purposes)"
-					hasdocspage="false"
-					tags="dosa"
-				>
-					<Button class="button horizontal-align-right" onactivate="SettingsShared.PlayTestDosaRemove()">
-						<Label class="button__text" text="Remove DOSA" />
-					</Button>
-				</ChaosSettingsEnum>
+				<ConVarEnabler convar="developer" togglevisibility="true">
+					<ChaosSettingsEnum
+						id="PlaytestDOSARemove"
+						text="Playtest DOSA remove"
+						infomessage="Remove DOSA from playtest consent (For development purposes)"
+						hasdocspage="false"
+						tags="dosa"
+					>
+						<Button class="button horizontal-align-right" onactivate="SettingsShared.PlayTestDosaRemove()">
+							<Label class="button__text" text="Remove DOSA" />
+						</Button>
+					</ChaosSettingsEnum>
+				</ConVarEnabler>
 
 			</Panel>
 
