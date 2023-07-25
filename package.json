@@ -6,8 +6,8 @@
 	"license": "MIT",
 
 	"scripts": {
-		"watch": "babel scripts/ --extensions .ts,.js --watch --out-dir .jsbuild/",
-		"build": "babel scripts/ --extensions .ts,.js --out-dir .jsbuild/",
+		"watch": "tsc --watch",
+		"build": "tsc",
 		"lint": "eslint",
 		"fix": "eslint --fix",
 		"postinstall": "husky install",
@@ -17,11 +17,6 @@
 	"dependencies": {},
 	"devDependencies": {
 		"typescript": "^5.1.6",
-		
-		"@babel/cli": "^7.22.9",
-		"@babel/core": "^7.22.9",
-		"@babel/preset-env": "^7.22.9",
-		"@babel/preset-typescript": "^7.22.5",
 
 		"eslint": "^8.45.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -36,6 +31,6 @@
 
 	"lint-staged": {
 		"**/*.{ts,xml,scss,css,md}": "eslint --fix",
-		"scripts/**/*.ts": "babel scripts/ --extensions .ts,.js --out-dir .jsbuild/"
+		"scripts/**/*.ts": "tsc"
 	}
 }

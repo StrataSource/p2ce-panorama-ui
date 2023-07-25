@@ -3,10 +3,12 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "NodeNext",
+		"rootDir": "scripts/",
+		"outDir": ".jsbuild/",
+
 		"isolatedModules": true,
-		"noEmit": true,
+		"allowJs": true,
 		"strict": true,
-		"rootDir": "scripts/"
 	},
 	"include": [
 		"scripts/"
