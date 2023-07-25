@@ -5,7 +5,7 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{resources}/scripts/components/tile-grid.js" />
+		<include src="file://{scripts}/components/tile-grid.js" />
 	</scripts>
 
 	<Panel class="tile-grid" />

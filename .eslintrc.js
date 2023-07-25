@@ -1,6 +1,6 @@
-module.exports = {
-	plugins: ['unicorn', 'prettier', '@typescript-eslint'],
-	extends: ['eslint:recommended', 'prettier'],
+export default {
+	plugins: ['@typescript-eslint'],
+	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
 	root: true,
 
 	env: {
@@ -15,7 +15,6 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'script',
 		impliedStrict: 'true',
-		
 	},
 
 	ignorePatterns: ['.eslintrc.js', 'node_modules', '.jsbuild/'],

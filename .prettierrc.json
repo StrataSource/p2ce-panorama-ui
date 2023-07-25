@@ -1,4 +1,5 @@
 {
+	"plugins": ["@prettier/plugin-xml"],
 	"printWidth": 120,
 	"tabWidth": 4,
 	"useTabs": true,

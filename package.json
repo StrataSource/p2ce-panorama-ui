@@ -8,8 +8,8 @@
 	"scripts": {
 		"watch": "tsc --watch",
 		"build": "tsc",
-		"lint": "eslint",
-		"fix": "eslint --fix",
+		"lint": "eslint && prettier . --check",
+		"fix": "eslint --fix && prettier . --write",
 		"postinstall": "husky install",
 		"pre-commit": "lint-staged"
 	},
@@ -20,7 +20,8 @@
 
 		"eslint": "^8.45.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.2.1",
+		"@typescript-eslint/parser": "^6.2.0",
+		"@typescript-eslint/eslint-plugin": "^6.2.0",
 
 		"husky": "^8.0.1",
 		"lint-staged": "^12.4.1",
@@ -30,7 +31,7 @@
 	},
 
 	"lint-staged": {
-		"**/*.{ts,xml,scss,css,md}": "eslint --fix",
-		"scripts/**/*.ts": "tsc"
+		"**/*.{ts,xml,scss,css,md}": "prettier . --write",
+		"scripts/**/*.ts": "eslint --fix && tsc"
 	}
 }
