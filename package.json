@@ -1,38 +1,41 @@
 {
 	"name": "p2ce-panorama",
-	"version": "1.0.0",
-	"description": "Scripts for handling P2CE Panorama files",
-	"config": {
-		"baseDir": "./"
-	},
+	"version": "1.0.1",
+	"description": "P2:CE's default Panorama UI.",
+	"author": "P2:CE & Momentum Team",
+	"license": "MIT",
+
 	"scripts": {
-		"format:fix": "prettier --write **/*.{js,xml,scss,css,md}",
-		"format:check": "prettier --check **/*.{js,xml,scss,css,md}",
-		"lint:fix": "eslint \"**/*.js\" --fix",
-		"lint:check": "eslint \"**/*.js\"",
-		"prepare": "husky install",
+		"watch": "babel scripts/ --extensions .ts,.js --watch --out-dir .jsbuild/",
+		"build": "babel scripts/ --extensions .ts,.js --out-dir .jsbuild/",
+		"lint": "eslint",
+		"fix": "eslint --fix",
+		"postinstall": "husky install",
 		"pre-commit": "lint-staged"
 	},
-	"author": "P2CE & Momentum Team",
-	"license": "MIT",
+
 	"dependencies": {},
 	"devDependencies": {
-		"husky": "^8.0.1",
-		"lint-staged": "^12.4.1",
-		"prettier": "^2.6.2",
-		"@prettier/plugin-xml": "^2.1.0",
-		"axios": "^0.26.0",
-		"papaparse": "^5.3.1",
-		"eslint": "^8.27.0",
-		"prettier-eslint": "^15.0.1",
+		"typescript": "^5.1.6",
+		
+		"@babel/cli": "^7.22.9",
+		"@babel/core": "^7.22.9",
+		"@babel/preset-env": "^7.22.9",
+		"@babel/preset-typescript": "^7.22.5",
+
+		"eslint": "^8.45.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-unicorn": "^44.0.2"
+
+		"husky": "^8.0.1",
+		"lint-staged": "^12.4.1",
+
+		"@prettier/plugin-xml": "^2.1.0",
+		"prettier": "^2.6.2"
 	},
+
 	"lint-staged": {
-		"**/*.{js,xml,scss,css,md}": [
-			"prettier --write"
-		],
-		"**/*.js": "eslint --fix"
+		"**/*.{ts,xml,scss,css,md}": "eslint --fix",
+		"scripts/**/*.ts": "babel scripts/ --extensions .ts,.js --out-dir .jsbuild/"
 	}
 }

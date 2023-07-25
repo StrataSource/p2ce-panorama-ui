@@ -13,12 +13,10 @@ This directory contains the layouts, scripts and styles for P2CE's Panorama UI.
 -   `panorama.cfg` -- This cfg defines various panorama directories, associating them with a name
 -   `default_keybinds.cfg` -- This is just a list of the default panorama keybinds
 
-## Using ESLint
+## The Build Process
 
-To write Panorama JS files, you will want to format them properly. This is where `eslint` comes in.
-To use this tool, you will need to do 3 things:
+Note that this is a fucking nightmare and that nobody should try to fix it.
 
-1. Install Node.js, the newest possible stable version should be the best.
-2. Open a command prompt inside this directory, and run `npm install`.
-3. Whenever you want to check your code for errors, run `npm run check`.
-   You can also run `npm run format` to attempt to automatically fix any errors found.
+This repo requires the following tools to operate effectively:
+- `eslint` and `prettier` lint and format the typescript code. `husky` is used to hook this action into a pre-commit step.
+- `babel` (with a `typescript` plugin) transform the typescript code into usable panorama code.

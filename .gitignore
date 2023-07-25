@@ -1,6 +1,7 @@
 .idea/
 .vs/
 node_modules/
+.jsbuild/
 fonts.uuid
 .uuid
 conf.d

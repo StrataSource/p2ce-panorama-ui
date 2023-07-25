@@ -1,4 +1,3 @@
-
 const DownloadState = {
 	UninstallPending: 0,
 	Uninstalling: 1,
@@ -12,6 +11,7 @@ const DownloadState = {
 if (!globalThis['WorkshopAPI']) {
 
 	/** @implements {WorkshopAPI} */
+	//@ts-ignore
 	globalThis.WorkshopAPI = class {
 		/** @type {{[key: string]: AddonMeta}} */
 		static __addons__ = {
@@ -24,11 +24,11 @@ if (!globalThis['WorkshopAPI']) {
 
 				authors: [ 'Baguettery' ],
 				tags: [ 'Among Us' ],
-				
+
 				dependencies: {},
 				subscriptions: 234,
 				votescore: 102,
-				
+
 				icon_small: 'file://{workshop_content}/2b37a65e12d4561f/small.png',
 				icon_big: 'file://{workshop_content}/2b37a65e12d4561f/small.png',
 			}
@@ -40,14 +40,14 @@ if (!globalThis['WorkshopAPI']) {
 			const currently_subbed = addon.__state__ >= 3;
 			if (currently_subbed === subscribed) return;
 
-			const new_state = subscribed ? DownloadState.InstallPending : Download.UninstallPending;
+			const new_state = subscribed ? DownloadState.InstallPending : DownloadState.UninstallPending;
 			$.DispatchEvent('WorkshopDownloadStatus', uuid, new_state);
 			$.Schedule(1, () => {
 
-				const next_state = subscribed ? DownloadState.Installing : Download.Uninstalling;
+				const next_state = subscribed ? DownloadState.Installing : DownloadState.Uninstalling;
 				$.Schedule(1, () => {
 
-					const final_state = subscribed ? DownloadState.Installed : Download.Uninstalled;
+					const final_state = subscribed ? DownloadState.Installed : DownloadState.Uninstalled;
 				});
 			});
 		};

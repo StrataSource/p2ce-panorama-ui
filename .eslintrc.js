@@ -1,13 +1,25 @@
 module.exports = {
-	plugins: ['unicorn', 'prettier'],
-	extends: ['eslint:recommended', 'plugin:unicorn/recommended', 'prettier'],
+	plugins: ['unicorn', 'prettier', '@typescript-eslint'],
+	extends: ['eslint:recommended', 'prettier'],
 	root: true,
+
+	env: {
+		es2023: true,
+		browser: false,
+		node: false,
+	},
+
+	parser: '@typescript-eslint/parser',
 	parserOptions: {
+		project: ['./tsconfig.json'],
 		ecmaVersion: 'latest',
 		sourceType: 'script',
-		impliedStrict: 'true'
+		impliedStrict: 'true',
+		
 	},
-	ignorePatterns: ['.eslintrc.js', 'node_modules', '__types_p2ce.js'],
+
+	ignorePatterns: ['.eslintrc.js', 'node_modules', '.jsbuild/'],
+
 	rules: {
 		quotes: ['error', 'single', { avoidEscape: true }],
 		'prefer-const': ['error'],
@@ -30,8 +42,6 @@ module.exports = {
 		'unicorn/prevent-abbreviations': ['off'],
 		// Not going to make devs use obscure JS syntax for something so minor.
 		'unicorn/numeric-separators-style': ['warn', { onlyIfContainsSeparator: true }],
-		// We don't use modules.
-		'unicorn/prefer-module': ['off'],
 		// This will hit for async IIFEs and warn about module crap. We don't use modules.
 		'unicorn/prefer-top-level-await': ['off'],
 		// Even though unicorn has a rule for no nested ternaries, it's insisting I make them due to this rule.

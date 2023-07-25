@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "NodeNext",
+		"isolatedModules": true,
+		"noEmit": true,
+		"strict": true,
+		"rootDir": "scripts/"
+	},
+	"include": [
+		"scripts/"
+	]
+}

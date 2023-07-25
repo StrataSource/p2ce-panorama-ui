@@ -35,6 +35,22 @@ declare type PanelEventSource = 0|1|2|3|4;
  */
 declare type GameUIState = 0|1|2|3|4|5;
 
+/**
+ * Defines the download state of a workshop item.
+ * ```
+ * enum DownloadState {
+ *     UninstallPending = 0,
+ *     Uninstalling,
+ *     Uninstalled,
+
+ *     InstallPending,
+ *     Installing,
+ *     Installed,
+ * }
+ * ```
+ */
+declare type DownloadState = 0|1|2|3|4|5;
+
 declare type float = number;
 declare type double = number;
 
@@ -275,7 +291,7 @@ declare namespace $ {
 	/** @description Log a warning */
 	function Warning(...args: any[]): void;
 
-};
+}
 
 /* ======================== PANEL ELEMENTS  ======================== */
 
@@ -523,16 +539,16 @@ declare interface Panel {
 	UpdateCurrentAnimationKeyframes(animation: Keyframes): void;
 
 	UpdateFocusInContext(): boolean;
-};
+}
 
 declare interface Button extends Panel {
-};
+}
 
 declare interface ToggleButton extends Panel {
 	text: string;
 
 	SetSelected(arg0: boolean): void;
-};
+}
 
 declare interface Frame extends Panel {
 	/** @description Sets the Frame content to the specified snippet. */
@@ -540,13 +556,13 @@ declare interface Frame extends Panel {
 
 	/** @description Sets the Frame content to the specified layout file url. */
 	SetSource(source: string): void;
-};
+}
 
 declare interface Image extends Panel {
 	SetImage(arg0: string): void;
 
 	SetScaling(arg0: string): void;
-};
+}
 
 declare interface Movie extends Panel {
 	IsAdjustingVolume(): boolean;
@@ -568,7 +584,7 @@ declare interface Movie extends Panel {
 	SetTitle(name: string): void;
 
 	Stop(): void;
-};
+}
 
 declare interface ProgressBar extends Panel {
 	max: float;
@@ -576,7 +592,7 @@ declare interface ProgressBar extends Panel {
 	min: float;
 
 	value: float;
-};
+}
 
 declare interface ResizeDragKnob extends Panel {
 	horizontalDrag: boolean;
@@ -585,17 +601,17 @@ declare interface ResizeDragKnob extends Panel {
 	target: unknown;
 
 	verticalDrag: boolean;
-};
+}
 
 declare interface ChaosBackbufferImagePanel extends Panel {
-};
+}
 
 declare interface ChaosLoadingScreen extends Panel {
-};
+}
 
 declare interface ChaosMainMenu extends Panel {
 	IsMultiplayer(): boolean;
-};
+}
 
 declare interface ChaosSettingsSlider extends Panel {
 	convar: string;
@@ -611,7 +627,7 @@ declare interface ChaosSettingsSlider extends Panel {
 	OnShow(): void;
 
 	RestoreCVarDefault(): void;
-};
+}
 
 /* ========================       APIS      ======================== */
 
@@ -622,7 +638,7 @@ declare namespace FriendsAPI {
 	/** @description Gets the name of the player with the given XUID. This will only be known by the local user if the given user is in their friends list, on the same game server, in a chat room or lobby, or in a small group with the local user */
 	function GetNameForXUID(xuid: uint64): string;
 
-};
+}
 
 declare namespace GameInterfaceAPI {
 	function ConsoleCommand(command: string): void;
@@ -655,7 +671,7 @@ declare namespace GameInterfaceAPI {
 
 	/** @description Gets the current game state. */
 	function GetGameUIState(): GameUIState;
-};
+}
 
 declare namespace RichPresenceAPI {
 	/** @description Clears the current rich presence data */
@@ -674,7 +690,7 @@ declare namespace RichPresenceAPI {
 		}
 	}): void;
 
-};
+}
 
 declare namespace SteamOverlayAPI {
 	/** @description Opens the steam overlay to the given user/group profile by their steam ID. profileID is the 64bit int steam ID in a string. */
@@ -686,7 +702,7 @@ declare namespace SteamOverlayAPI {
 	/** @description Opens the steam overlay browser at the given URL in a modal window (no other windows in overlay, and overlay closes when window closes) */
 	function OpenURLModal(url: string): void;
 
-};
+}
 
 declare namespace UiToolkitAPI {
 	/** @description Denies input to the game by filtering input events. Returns a handle used by ReleaseDenyAllInputToGame. */
@@ -862,10 +878,48 @@ declare namespace UiToolkitAPI {
 	/** @description Unregister a javascript callback previously registered with RegisterJSCallback. */
 	function UnregisterJSCallback(jsCallbackHandle: int32): void;
 
-};
+}
 
 declare namespace UserAPI {
 	/** @description Gets the XUID (steamid as integer) of the local player */
 	function GetXUID(): uint64;
 
-};
+}
+
+declare namespace WorkshopAPI {
+	function GetAddonCount(): number;
+	function GetAddonMeta(index: number): AddonMeta;
+	function GetAddonState(uuid: string): DownloadState;
+
+	function GetAddonSubscribed(uuid: string): boolean;
+	function GetAddonEnabled(uuid: string): boolean;
+
+	function SetAddonSubscribed(uuid: string, subscribed: boolean): boolean;
+	function SetAddonEnabled(uuid: string, enabled: boolean): boolean;
+}
+
+declare interface AddonMeta {
+	uuid: string;
+	name: string;
+	desc: string;
+
+	authors: string[];
+	tags: string[];
+
+	dependencies: {[uuid: string]: { required: boolean }};
+	subscriptions: number;
+	votescore: number;
+
+	icon_small: string;
+	icon_big: string;
+}
+
+// declare enum DownloadState {
+// 	UninstallPending,
+// 	Uninstalling,
+// 	Uninstalled,
+
+// 	InstallPending,
+// 	Installing,
+// 	Installed,
+// }
