@@ -35,22 +35,6 @@ declare type PanelEventSource = 0|1|2|3|4;
  */
 declare type GameUIState = 0|1|2|3|4|5;
 
-/**
- * Defines the download state of a workshop item.
- * ```
- * enum DownloadState {
- *     UninstallPending = 0,
- *     Uninstalling,
- *     Uninstalled,
-
- *     InstallPending,
- *     Installing,
- *     Installed,
- * }
- * ```
- */
-declare type DownloadState = 0|1|2|3|4|5;
-
 declare type float = number;
 declare type double = number;
 
@@ -109,10 +93,10 @@ declare interface Style {
 
 /* ======================== PANEL SELECTOR  ======================== */
 
-type QueryOutput<T> = T extends `.${string}` ? Panel[] : Panel;
+type QueryOutput<E, T> = T extends `.${string}` ? E[] : E;
 
 /** @description Selects an element. */
-declare function $<T extends string>(selector: T): QueryOutput<T>|null;
+declare function $<E extends Panel, T extends string = string>(selector: T): QueryOutput<E, T>|null;
 
 declare namespace $ {
 
@@ -130,13 +114,13 @@ declare namespace $ {
 		 * @example $.persistentStorage.getItem('settings.mainMenuMovie');
 		 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/pages/main-menu/main-menu.js#L241)
 		*/
-		function getItem(keyName: string): string|null;
+		function getItem<T extends string|number|boolean>(keyName: string): T|null;
 
 		/** @description $.persistentStorage.setItem(keyName, keyValue).  When passed a key name and value, will add that key to the storage, or update that key's value if it already exists.
 		 * @example $.persistentStorage.setItem('dontShowAgain.' + key, true);
 		 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/modals/popups/dont-show-again.js#L8)
 		*/
-		function setItem(keyName: string, keyValue: any): void;
+		function setItem(keyName: string, keyValue: string|number|boolean): void;
 	}
 
 	/** @description Make a web request.
@@ -201,7 +185,7 @@ declare namespace $ {
 
 	/** @description Dispatch an event to occur later.
 	 *  @todo There don't appear to be any uses of this in Momentum UI. This needs to be documented!
-	 */
+	*/
 	function DispatchEventAsync(...args: any[]): void;
 
 	/** @description Call a function on each given item. Functionally identical to (...).forEach(...) */
@@ -209,13 +193,13 @@ declare namespace $ {
 
 	/** @description Find an element.
 	 *  @todo There don't appear to be any uses of this in Momentum UI. This needs to be documented!
-	 */
+	*/
 	function FindChildInContext(...args: any[]): Panel|undefined;
 
 	/** @description Gets the root panel of the current Javascript context.
 	 *  @example $.GetContextPanel().color = color;
 	 *  @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/components/color-display.js#L17)
-	 */
+	*/
 	function GetContextPanel(): Panel;
 
 	/**
@@ -233,6 +217,11 @@ declare namespace $ {
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/pages/drawer/about.js#L76)
 	*/
 	function LoadKeyValuesFile(url: string): Object;
+
+	/** @description Load a named key values file and return as JS object.
+	 * @param url The path to the file, including the extension, relative to the content folder root.
+	*/
+	function LoadKeyValues3File(url: string): Object;
 
 	/** @description Localizes a string.
 	 * @example $.Localize('#HudStatus_Spawn');
@@ -425,6 +414,8 @@ declare interface Panel {
 
 	GetLastChild(): Panel|null;
 
+	GetLayoutFileDefine(def: string): unknown;
+
 	GetParent(): Panel|null;
 
 	GetPositionWithinWindow(): unknown;
@@ -442,6 +433,8 @@ declare interface Panel {
 	IsReadyForDisplay(): boolean;
 
 	IsSelected(): boolean;
+
+	IsSizeValid(): boolean;
 
 	IsTransparent(): boolean;
 
@@ -475,7 +468,7 @@ declare interface Panel {
 
 	ScrollParentToFitWhenFocused(): boolean;
 
-	ScrollParentToMakePanelFit(arg0: unknown, arg1: boolean): void;
+	ScrollParentToMakePanelFit(arg0: number, arg1: boolean): void;
 
 	ScrollToBottom(): void;
 
@@ -564,6 +557,10 @@ declare interface Image extends Panel {
 	SetScaling(arg0: string): void;
 }
 
+declare interface Label extends Panel {
+	text: string;
+}
+
 declare interface Movie extends Panel {
 	IsAdjustingVolume(): boolean;
 
@@ -601,6 +598,89 @@ declare interface ResizeDragKnob extends Panel {
 	target: unknown;
 
 	verticalDrag: boolean;
+}
+
+/** @description Renders a 3d model in the UI.
+ * @todo These types are incomplete and unverified!
+ * @example <ModelPanel
+ *     src="models/npcs/turret/turret.mdl"
+ *     cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+ *     antialias="true"
+ *     mouse_rotate="false" />
+*/
+declare interface ModelPanel extends Panel {
+	/** @description The model that this ModelPanel should display, relative to `/` */
+	src: string;
+
+	/** @description The cubemap that this ModelPanel should display, excluding the `.vtf` extension. This path is relative to `materials/`. */
+	cubemap: string;
+
+	/** @description Whether this ModelView should use antialiasing. */
+	antialias: boolean;
+
+	/** @description Whether the mouse can be dragged over this ModelView to rotate the model.
+	 * This property can only be set through XML. To modify it, use the `SetMouseRotationAllowed` method.
+	 * @readonly
+	*/
+	mouse_rotate: boolean;
+
+	AddParticleSystem(arg0: string, arg1: string, arg2: boolean): void;
+
+	LookAt(x: float, y: float, z: float): void;
+
+	LookAtModel(): void;
+
+	SetCameraAngles(x: float, y: float, z: float): void;
+
+	SetCameraFOV(fov: float): void;
+
+	SetCameraOffset(x: float, y: float, z: float): void;
+
+	SetCameraPosition(x: float, y: float, z: float): void;
+
+	/** @description Sets the color of a directional light as floats.
+	 * @param {int32} light The ID of the light. (0-4)
+	*/
+	SetDirectionalLightColor(light: int32, r: float, g: float, b: float): void;
+
+	/** @description Sets the direction of a directional light.
+	 * @param {int32} light The ID of the light. (0-4)
+	*/
+	SetDirectionalLightDirection(light: int32, x: float, y: float, z: float): void;
+
+	SetLightAmbient(r: float, g: float, b: float): void;
+
+	SetModelBodygroup(arg0: int32, arg1: int32): void;
+
+	SetModelColor(arg0: unknown): void;
+
+	SetModelRotation(x: float, y: float, z: float): void;
+
+	SetModelRotationAcceleration(x: float, y: float, z: float): void;
+
+	SetModelRotationBoundsEnabled(x: boolean, y: boolean, z: boolean): void;
+
+	SetModelRotationBoundsX(min: number, max: number): void;
+
+	SetModelRotationBoundsY(min: number, max: number): void;
+
+	SetModelRotationBoundsZ(min: number, max: number): void;
+
+	SetModelRotationSpeed(x: float, y: float, z: float): void;
+
+	SetModelRotationSpeedTarget(x: float, y: float, z: float): void;
+
+	SetModelRotationTarget(x: float, y: float, z: float): void;
+
+	SetMouseRotationAllowed(allow: boolean): void;
+
+	SetMouseXRotationScale(x: number, y: number, z: number): void;
+
+	SetMouseYRotationScale(x: number, y: number, z: number): void;
+
+	SetParticleSystemOffsetAngles(x: float, y: float, z: float): void;
+
+	SetParticleSystemOffsetPosition(x: float, y: float, z: float): void;
 }
 
 declare interface ChaosBackbufferImagePanel extends Panel {
@@ -886,40 +966,22 @@ declare namespace UserAPI {
 
 }
 
-declare namespace WorkshopAPI {
-	function GetAddonCount(): number;
-	function GetAddonMeta(index: number): AddonMeta;
-	function GetAddonState(uuid: string): DownloadState;
+declare namespace SentryAPI {
+	/** @description Returns whether or not the user has consented to allow sentry to upload crash dumps. */
+	function GetUserConsent(): boolean;
 
-	function GetAddonSubscribed(uuid: string): boolean;
-	function GetAddonEnabled(uuid: string): boolean;
-
-	function SetAddonSubscribed(uuid: string, subscribed: boolean): boolean;
-	function SetAddonEnabled(uuid: string, enabled: boolean): boolean;
+	/** @description Returns whether or not sentry is active. */
+	function IsSentryActive(): boolean;
 }
 
-declare interface AddonMeta {
-	uuid: string;
-	name: string;
-	desc: string;
+declare namespace VersionAPI {
+	function GetBranch(): string;
 
-	authors: string[];
-	tags: string[];
+	function GetGraphicsAPI(): string;
 
-	dependencies: {[uuid: string]: { required: boolean }};
-	subscriptions: number;
-	votescore: number;
+	function GetPhysicsEngine(): string;
 
-	icon_small: string;
-	icon_big: string;
+	function GetPlatform(): string;
+
+	function GetVersion(): string;
 }
-
-// declare enum DownloadState {
-// 	UninstallPending,
-// 	Uninstalling,
-// 	Uninstalled,
-
-// 	InstallPending,
-// 	Installing,
-// 	Installed,
-// }

@@ -1,6 +1,7 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/pages/main-menu.scss" />
 	</styles>
 
 	<scripts>

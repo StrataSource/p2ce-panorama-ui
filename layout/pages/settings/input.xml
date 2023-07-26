@@ -1,9 +1,10 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/pages/settings/settings.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/pages/settings/page.js" />
+		<!-- <include src="file://{scripts}/pages/settings/page.js" /> -->
 	</scripts>
 
 	<Panel class="settings-page">
@@ -155,7 +156,7 @@
 				<ChaosSettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
 				<ChaosSettingsKeyBinder text="#Keybind_Weapon_Category_4" bind="slot4" tags="slot4" />
 				<ChaosSettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
-				
+
 				<Label class="settings-group__subtitle" text="#Common_Multiplayer" />
 
 				<ChaosSettingsKeyBinder text="#Keybind_ToggleTimes" bind="+showtimes" tags="leaderboard,tab,times" />

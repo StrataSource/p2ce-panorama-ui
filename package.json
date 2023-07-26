@@ -32,6 +32,9 @@
 
 	"lint-staged": {
 		"**/*.{ts,xml,scss,css,md}": "prettier . --write",
-		"scripts/**/*.ts": "eslint --fix && tsc"
+		"scripts/**/*.ts": [
+			"eslint --fix",
+			"tsc"
+		]
 	}
 }

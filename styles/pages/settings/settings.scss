@@ -275,13 +275,7 @@ $page-width: 1920px - $rightnav-width;
 	height: 100%;
 	flow-children: down;
 
-	opacity: 0;
-
 	transition: opacity 0.1s linear 0s;
-
-	&--active {
-		opacity: 1;
-	}
 
 	&__header {
 		flow-children: right;

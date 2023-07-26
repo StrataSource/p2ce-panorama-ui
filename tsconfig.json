@@ -6,6 +6,7 @@
 		"rootDir": "scripts/",
 		"outDir": ".jsbuild/",
 
+		"alwaysStrict": true,
 		"isolatedModules": true,
 		"allowJs": true,
 		"strict": true,

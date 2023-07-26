@@ -1,10 +1,11 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/pages/settings/settings.scss" />
 	</styles>
 
 	<scripts>
-		<include src="file://{scripts}/pages/settings/page.js" />
+		<!-- <include src="file://{scripts}/pages/settings/page.js" /> -->
 	</scripts>
 
 	<Panel class="settings-page">
