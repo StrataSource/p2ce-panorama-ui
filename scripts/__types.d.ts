@@ -2,38 +2,30 @@
  * @author Koerismo
  * @description Describes the Panorama APIs with full typing. Some types defined in this file
  * may be out of date or innacurate. If you find something that needs to be fixed, report it!
- */
+*/
+
+// @ts-nocheck
 
 /* ========================    PRIMITIVES   ======================== */
 
-/**
- * Defines a panel event source.
- * ```
- * enum PanelEventSource {
- *     PROGRAM = 0,
- *     GAMEPAD,
- *     KEYBOARD,
- *     MOUSE,
- *     INVALID,
- * }
- * ```
-*/
-declare type PanelEventSource = 0|1|2|3|4;
+/** Defines a panel event source. */
+declare enum PanelEventSource {
+	PROGRAM = 0,
+	GAMEPAD,
+	KEYBOARD,
+	MOUSE,
+	INVALID,
+}
 
-/**
- * Defines the current game state.
- * ```
- * enum GameState {
- *     INVALID = 0,
- *     LOADINGSCREEN,
- *     INGAME,
- *     MAINMENU,
- *     PAUSEMENU,
- *     INTROMOVIE
- * }
- * ```
- */
-declare type GameUIState = 0|1|2|3|4|5;
+/** Defines the current game state. */
+declare enum GameUIState {
+	INVALID = 0,
+	LOADINGSCREEN,
+	INGAME,
+	MAINMENU,
+	PAUSEMENU,
+	INTROMOVIE
+}
 
 declare type float = number;
 declare type double = number;
@@ -723,7 +715,7 @@ declare namespace FriendsAPI {
 declare namespace GameInterfaceAPI {
 	function ConsoleCommand(command: string): void;
 
-	function GetSettingboolean(key: string): boolean;
+	function GetSettingBool(key: string): boolean;
 
 	function GetSettingColor(key: string): unknown;
 
@@ -736,7 +728,7 @@ declare namespace GameInterfaceAPI {
 	/** @description Registers a callback for a specific game event type, returns an event handler ID to unregister with */
 	function RegisterGameEventHandler(event_name: string, callback: Function): uuid;
 
-	function SetSettingboolean(key: string, value: boolean): void;
+	function SetSettingBool(key: string, value: boolean): void;
 
 	function SetSettingColor(key: string, value: unknown): void;
 

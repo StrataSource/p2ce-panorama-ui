@@ -9,41 +9,12 @@
 
 	<Panel class="settings-page">
 
-		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Input" />
-
-			<Panel class="settings-page__header-buttons">
-				<!-- Gamemode Dropdown will go here -->
-			</Panel>
-
-		</Panel>
-
 		<Panel id="SettingsPageContainer" class="settings-page__container">
 
 			<Panel id="MouseSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Mouse_Title" tags="mouse,cursor,aim,look,input" />
-
-					<Panel class="flow-right horizontal-align-right">
-
-						<Button
-							class="button mr-3"
-							onactivate="SettingsShared.showImportExportDialogue('Settings_Mouse_Title', 'MouseSubSection')"
-						>
-							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
-						</Button>
-
-						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-							<Button class="button" onactivate="SettingsShared.resetSettings('MouseSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
-							</Button>
-						</TooltipPanel>
-
-					</Panel>
-
 				</Panel>
 
 				<ChaosSettingsSlider
@@ -117,15 +88,7 @@
 			<Panel id="KeybindSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Keybinds_Title" tags="keyboard,keybind,controls,input" />
-
-					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-						<Button class="button" onactivate="SettingsShared.resetControls('KeybindSubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
-						</Button>
-					</TooltipPanel>
-
 				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Movement" />

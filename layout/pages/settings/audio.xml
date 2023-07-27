@@ -10,41 +10,12 @@
 
 	<Panel class="settings-page">
 
-		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Audio" />
-
-			<Panel class="settings-page__header-buttons">
-				<!-- Gamemode Dropdown will go here -->
-			</Panel>
-
-		</Panel>
-
 		<BaseAudioSettings id="SettingsPageContainer" class="settings-page__container">
 
 			<Panel id="VolumeSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Volume_Title" tags="volume,sound" />
-
-					<Panel class="flow-right horizontal-align-right">
-
-						<Button
-							class="button mr-3"
-							onactivate="SettingsShared.showImportExportDialogue('Settings_Volume_Title', 'VolumeSubSection')"
-						>
-							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
-						</Button>
-
-						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-							<Button class="button" onactivate="SettingsShared.resetSettings('VolumeSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
-							</Button>
-						</TooltipPanel>
-
-					</Panel>
-
 				</Panel>
 
 				<ChaosSettingsSlider
@@ -133,15 +104,7 @@
 			<Panel id="AudioDevicesSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_AudioDevices_Title" tags="audio,sound,devices" />
-
-					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-						<Button class="button" onactivate="SettingsShared.resetSettings('AudioDevicesSubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
-						</Button>
-					</TooltipPanel>
-
 				</Panel>
 
 				<ChaosSettingsEnumDropDown
