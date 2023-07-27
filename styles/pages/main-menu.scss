@@ -103,6 +103,10 @@ ChaosMainMenu {
 	width: 100%;
 	height: fill-parent-flow(1.0);
 	background-color: $gray-200;
+
+	ChaosMainMenu.paused > Panel > & {
+		background-color: #0008;
+	}
 }
 
 #MainMenuFooter {
