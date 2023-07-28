@@ -1,0 +1,11 @@
+// Bypass restricting web requests to this list of domains by adding the "-unrestrictedwebrequests" launch argument
+{
+	domains =
+	[
+		"steampowered.com",
+		"steamcommunity.com",
+		"valvesoftware.com",
+		"localhost",
+		"127.0.0.1",
+	]
+}
