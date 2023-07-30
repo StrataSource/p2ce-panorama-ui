@@ -1,49 +1,48 @@
-'use strict';
+/**  A point on a line on the LineGraph */
+type Point = {
+	x: number;								// X Coordinate
+	y: number;								// Y Coordinate
+	id: string;								// A ID for the point panel. Needed if the point has any events.
+	events: {[event: string]: Function};	// Object of kv pairs, event names and functions.
+	class: string;							// Styling class
+	selectionSize: number;					// Size of the bounding box around the point for hover and selection
+}
 
-/**
- * @typedef {Object} Point - A point on a line on the LineGraph
- * @property {number} x - X Coordinate
- * @property {number} y - Y Coordinate
- * @property {string} [id] - A ID for the point panel. Needed if the point has any events.
- * @property {Object} [events] - Object of kv pairs, event names and functions.
- * @property {string} [class] - Styling class
- * @property {number} [selectionSize] - Size of the bounding box around the point for hover and selection
- */
+/** A line on the LineGraph component */
+type Line = {
+	points: Point[];						// Array of points
+	color: string;							// Hex color of the line
+	thickness: number;						// Thickness of the line
+	shadeAboveToOriginColor: string;		// Hex color to shade between above the line and origin
+	shadeBelowToOriginColor: string;		// Hex color to shade between below the line and origin
+}
 
-/**
- * @typedef {Object} Line - A line on the LineGraph component
- * @property {Point[]} points - Array of points
- * @property {string} color	- Hex color of the line
- * @property {number} thickness - Thickness of the line
- * @property {string} [shadeAboveToOriginColor]	- Hex color to shade between above the line and origin
- * @property {string} [shadeBelowToOriginColor]	- Hex color to shade between below the line and origin
- */
-
-/**
- * @typedef {Object} Axis - An axis on the graph
- * @property {number} max - The maximum value on the axis
- * @property {number} min - The minimum value on the axis
- * @property {number} interval - The intervals upon which to draw gridlines
- * @property {string} name - The name to draw on the side of the axis
- */
+/** An axis on the graph */
+type Axis = {
+	max: number;		// The maximum value on the axis
+	min: number;		// The minimum value on the axis
+	interval: number;	// The intervals upon which to draw gridlines
+	name: string;		// The name to draw on the side of the axis
+}
 
 /**
  * Class for the basic line graph component.
  * This could be improved in the future to allow dynamically adding/modifying/removing points,
  * for now we just set the class properties then redraw it.
- * @property {number} height - The height of the graph
- * @property {number} width - The width of the graph
- * @property {Line[]} lines - Array of lines to draw
- * @property {Axis[]} axis - Array of the axis, X then Y
  */
 class LineGraph {
+	static height: number;	// The height of the graph
+	static width: number;	// The width of the graph
+	static lines: Line[];	// Array of lines to draw
+	static axis: Axis[];	// Array of the axis, X then Y
+
 	static panels = {
-		grid: $('#Grid'),
-		graphContainer: $('#GraphContainer')
+		grid: $('#Grid')!,
+		graphContainer: $('#GraphContainer')!
 	};
 
 	static {
-		// Attach the JS class
+		// @ts-ignore Attach the JS class
 		$.GetContextPanel().jsClass = this;
 
 		this.width = 0;
@@ -75,7 +74,7 @@ class LineGraph {
 			const cp = $.GetContextPanel();
 			const isX = i === 0;
 			const axis = this.axis[i];
-			const markers = cp.FindChildTraverse(axisName.toUpperCase() + 'Markers');
+			const markers = cp.FindChildTraverse(axisName.toUpperCase() + 'Markers')!;
 
 			// Set the name dialog var
 			cp.SetDialogVariable(`linegraph_${axisName}`, axis.name);
@@ -134,8 +133,8 @@ class LineGraph {
 			// Make a graph container, a canvas panel for the lines and a panel for the points.
 			panel.LoadLayoutSnippet('graph-instance');
 
-			const graph = panel.FindChild('Graph');
-			const pointsContainer = panel.FindChild('Points');
+			const graph = <UICanvas>panel.FindChild('Graph')!;
+			const pointsContainer = panel.FindChild('Points')!;
 
 			if (!line.points) continue;
 
@@ -164,6 +163,7 @@ class LineGraph {
 
 				// Inner panel, that actually displays the point.
 				$.CreatePanel('Panel', panel, '', {
+					// TODO: Typescript says that this is invalid. Is "style" supposed to be "class"? - Baguettery
 					class: 'linegraph__point ' + point?.style
 				});
 
@@ -260,7 +260,7 @@ class LineGraph {
 	 * @param {Point} point
 	 * @returns {Point}
 	 */
-	static #getRelativisedPosition(point) {
+	static #getRelativisedPosition(point: Point) {
 		// Linearly interpolate both components by the axis max and min
 		const xLerp = (point.x - this.axis[0].min) / (this.axis[0].max - this.axis[0].min);
 		const yLerp = (point.y - this.axis[1].min) / (this.axis[1].max - this.axis[1].min);

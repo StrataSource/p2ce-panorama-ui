@@ -2,9 +2,9 @@
 
 // "fit" constant
 const FIT = 'fit';
+type FIT = typeof FIT;
 
-/** @param {string} input */
-function parsePx(input) {
+function parsePx(input: string) {
 	if (!input.endsWith('px')) return null;
 	const value = parseInt(input.slice(0,-2));
 	if (isNaN(value)) return null;
@@ -12,24 +12,17 @@ function parsePx(input) {
 }
 
 class TileGrid {
-	/** @type {Panel} */
-	element = null;
+	element: Panel;
 	rows = 1;
 	columns = 1;
 	margin = 10;
 
-	/** @type {WeakMap<Panel, {x: number, y: number, w: number, h: number}>} */
-	childMap = new WeakMap();
+	childMap: WeakMap<Panel, {x: number, y: number, w: number, h: number}> = new WeakMap();
+	flowChildren: 'down'|'right' = 'right';
+	width:  number|FIT = FIT;
+	height: number|FIT = FIT;
 
-	/** @type {'down'|'right'} */
-	flowChildren = 'right';
-	/** @type {number|FIT} */
-	width = FIT;
-	/** @type {number|FIT} */
-	height = FIT;
-
-	/** @param {Panel} element */
-	constructor(element) {
+	constructor(element: Panel) {
 		this.element = element;
 		this.element.style.flowChildren = 'none';
 
@@ -38,15 +31,14 @@ class TileGrid {
 		this.margin = parsePx(element.GetAttributeString('margin', '')) ?? 0;
 		this.width = parsePx(element.GetAttributeString('col-width', '')) ?? 'fit';
 		this.height = parsePx(element.GetAttributeString('row-height', '')) ?? 'fit';
-		this.flowChildren = element.GetAttributeString('flow-children', 'right');
+		this.flowChildren = element.GetAttributeString('flow-children', 'right') as 'down'|'right';
 
 		$.Schedule(0, this.layout.bind(this));
 	}
 
-	/** @param {string} selector */
-	static init(selector) {
-		/** @type {Panel} */
+	static init(selector: string) {
 		const panel = $(selector);
+		if (!panel) throw(`Could not locate panel with selector "${selector}"!`);
 
 		$.Schedule(0, () => {
 			const grid = new TileGrid(panel);
@@ -64,9 +56,8 @@ class TileGrid {
 		const childCount = this.element.GetChildCount();
 		this.childMap = new WeakMap();
 
-		/** @type {{[key: string]: true}} */
-		const tileMap = {};
-		const consumeSpace = (x, y, w, h) => {
+		const tileMap: {[key: string]: true} = {};
+		const consumeSpace = (x: number, y: number, w: number, h: number) => {
 			for ( let _y=0;  _y<h; _y++ ) {
 				for ( let _x=0; _x<w; _x++ ) {
 					tileMap[(x+_x)+':'+(y+_y)] = true;
@@ -74,7 +65,7 @@ class TileGrid {
 			}
 			return false;
 		}
-		const checkSpace = (x, y, w, h) => {
+		const checkSpace = (x: number, y: number, w: number, h: number) => {
 			for ( let _y=0; _y<h; _y++ ) {
 				for ( let _x=0; _x<w; _x++ ) {
 					if (tileMap[(x+_x)+':'+(y+_y)]) return true;
@@ -90,11 +81,10 @@ class TileGrid {
 
 		// Time to morb
 		for ( let i=0; i<childCount; i++ ) {
-			/** @type {Panel} */
-			const child = this.element.GetChild(i);
+			const child = this.element.GetChild(i)!;
 			const width = child.GetAttributeInt('w', 1);
 			const height = child.GetAttributeInt('h', 1);
-			const entry = { w: width, h: height };
+			const entry = { w: width, h: height, x: 0, y: 0 };
 
 			let n = min_n, m = 0;
 			let x, y;
@@ -125,13 +115,13 @@ class TileGrid {
 	 * Renders the computed layout to the DOM, setting the positioning of this grid's children.
 	*/
 	render() {
-		const calcSize = (divisions, width) => {
+		const calcSize = (divisions: number, width: number) => {
 			if (!divisions) return width;
 			const margin = this.margin * (divisions - 1);
 			return (width - margin) / divisions;
 		}
 
-		const calcChildSize = (width, unit) => {
+		const calcChildSize = (width: number, unit: number) => {
 			return unit * width + (this.margin * (width - 1));
 		}
 
@@ -147,10 +137,8 @@ class TileGrid {
 
 		const childCount = this.element.GetChildCount();
 		for ( let i=0; i<childCount; i++ ) {
-
-			/** @type {Panel} */
-			const child = this.element.GetChild(i);
-			const info = this.childMap.get(child);
+			const child = this.element.GetChild(i)!;
+			const info = this.childMap.get(child)!;
 
 			const cx = (unitWidth + this.margin) * info.x;
 			const cy = (unitHeight + this.margin) * info.y;
