@@ -1,11 +1,7 @@
-'use strict';
-
 class RangeColorProfileNamePopup {
-	/** @type {TextEntry} @static */
-	static textEntry = $('#RangeColorProfileName');
-	/** @type {Label} @static */
-	static invalidNameLabel = $('#InvalidNameLabel');
-	static profileNames = [];
+	static textEntry = $<TextEntry>('#RangeColorProfileName')!;
+	static invalidNameLabel = $<Label>('#InvalidNameLabel')!;
+	static profileNames: string[] = [];
 
 	static onTextSubmitted() {
 		const text = this.textEntry.text;

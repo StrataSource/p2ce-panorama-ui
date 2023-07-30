@@ -1,19 +1,14 @@
-'use strict';
-
 class ImportExportSettings {
+	static exportString: string;
+	static cvars: {[key: number]: string} = {};
+
 	static panels = {
-		/** @type {TextEntry} @static */
-		import: $('#ImportCode'),
-		/** @type {TextEntry} @static */
-		export: $('#ExportCode'),
-		/** @type {ToggleButton} @static */
-		modeButton: $('#Base64ModeButton'),
-		/** @type {Label} @static */
-		modeWarning: $('#Base64ModeWarning'),
-		/** @type {Label} @static */
-		importStatus: $('#ImportStatus'),
-		/** @type {Label} @static */
-		blockInputWarning: $('#BlockInputWarning')
+		import: $<TextEntry>('#ImportCode')!,
+		export: $<TextEntry>('#ExportCode')!,
+		modeButton: $<ToggleButton>('#Base64ModeButton')!,
+		modeWarning: $<Label>('#Base64ModeWarning')!,
+		importStatus: $<Label>('#ImportStatus')!,
+		blockInputWarning: $<Label>('#BlockInputWarning')!
 	};
 
 	static base64Mode = $.persistentStorage.getItem('settings.base64ExportMode');
@@ -25,7 +20,7 @@ class ImportExportSettings {
 
 		cp.SetDialogVariable(
 			'title',
-			$.Localize('#Settings_ImportExport_Title').replace('%thing%', $.Localize(sectionName))
+			$.LocalizeSafe('#Settings_ImportExport_Title').replace('%thing%', $.LocalizeSafe(sectionName))
 		);
 		cp.SetDialogVariable('import_warning', '');
 
@@ -105,7 +100,7 @@ class ImportExportSettings {
 			this.panels.importStatus.AddClass('color-error');
 			$.GetContextPanel().SetDialogVariable(
 				'import_warning',
-				$.Localize('#Settings_ImportExport_Failure') + ' ' + $.Localize(error)
+				$.Localize('#Settings_ImportExport_Failure') + ' ' + $.Localize(error as string)
 			);
 			$.Warning($.Localize('#Settings import parser failed!') + ' ' + error);
 		}

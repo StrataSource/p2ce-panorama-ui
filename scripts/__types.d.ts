@@ -1,6 +1,6 @@
 /**
  * @author Koerismo
- * @description Describes the Panorama APIs with full typing. Some types defined in this file
+ * Describes the Panorama APIs with full typing. Some types defined in this file
  * may be out of date or innacurate. If you find something that needs to be fixed, report it!
 */
 
@@ -15,6 +15,7 @@ interface PanelTagNameMap {
 	'Image': Image,
 	'Label': Label,
 	'Movie': Movie
+	'NumberEntry': NumberEntry,
 	'ProgressBar': ProgressBar,
 	'ResizeDragKnob': ResizeDragKnob,
 	'ModelPanel': ModelPanel,
@@ -216,42 +217,42 @@ declare interface Style {
 
 type QueryOutput<E, T> = T extends `.${string}` ? E[] : E;
 
-/** @description Selects an element. */
+/** Selects an element. */
 declare function $<E extends Panel, T extends string = string>(selector: T): QueryOutput<E, T>|null;
 
 declare namespace $ {
 
 	namespace persistentStorage {
-		/** @readonly @description $.persistentStorage.length.  Returns an integer representing the number of data items stored in the Storage object. */
+		/** @readonly $.persistentStorage.length.  Returns an integer representing the number of data items stored in the Storage object. */
 		var length: int32;
 
-		/** @description $.persistentStorage.clear().  When invoked, will empty all keys out of the storage. */
+		/** $.persistentStorage.clear().  When invoked, will empty all keys out of the storage. */
 		function clear(): void;
 
-		/** @description $.persistentStorage.key(n).  When passed a number n, this method will return the name of the nth key in the storage. */
+		/** $.persistentStorage.key(n).  When passed a number n, this method will return the name of the nth key in the storage. */
 		function key(n: int32): string|null;
 
-		/** @description $.persistentStorage.getItem(keyName).  When passed a key name, will return that key's value.
+		/** $.persistentStorage.getItem(keyName).  When passed a key name, will return that key's value.
 		 * @example $.persistentStorage.getItem('settings.mainMenuMovie');
 		 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/pages/main-menu/main-menu.js#L241)
-		*/
+		 */
 		function getItem<T extends string|number|boolean>(keyName: string): T|null;
 
-		/** @description $.persistentStorage.setItem(keyName, keyValue).  When passed a key name and value, will add that key to the storage, or update that key's value if it already exists.
+		/** $.persistentStorage.setItem(keyName, keyValue).  When passed a key name and value, will add that key to the storage, or update that key's value if it already exists.
 		 * @example $.persistentStorage.setItem('dontShowAgain.' + key, true);
 		 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/modals/popups/dont-show-again.js#L8)
-		*/
+		 */
 		function setItem(keyName: string, keyValue: string|number|boolean): void;
 	}
 
-	/** @description Make a web request.
+	/** Make a web request.
 	 * @example $.AsyncWebRequest(DATA_URL, {
 	 *  type: 'GET',
 	 * 	complete: (data) =>
 	 * 	data.statusText === 'success' ? resolve(data.responseText) : reject(data.statusText)
 	 * });
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/pages/learn.js#L259)
-	*/
+	 */
 	function AsyncWebRequest(url: string, options?: {
 		// https://fetch.spec.whatwg.org/#methods
 		type: 'DELETE'|'GET'|'HEAD'|'OPTIONS'|'POST'|'PUT',
@@ -261,23 +262,29 @@ declare namespace $ {
 		}) => void,
 	}): void;
 
-	/** @description Cancel a scheduled function.
+	/** Cancel a scheduled function.
 	 * @example $.CancelScheduled(ConsoleNotify.scheduleOpacity);
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/hud/console-notify.js#L8)
-	*/
+	 */
 	function CancelScheduled(event: number): void;
 
-	/** @description Create a new panel.
+	/** Compresses the given string, and encodes result in base64. */
+	function CompressString(str: string): string;
+
+	/** Create a new panel.
 	 * @example $.CreatePanel('Split', wrapper, '', { class: 'split--hud split--latest' });
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/hud/comparisons.js#L107)
-	*/
+	 */
 	function CreatePanel<T extends keyof PanelTagNameMap>(type: T, parent: Panel, id: string, properties?: Object): PanelTagNameMap[T];
 	function CreatePanel(type: string, parent: Panel, id: string, properties?: Object): Panel;
 
-	/** @description Call during JS startup code to check if script is being reloaded */
+	/** Call during JS startup code to check if script is being reloaded */
 	function DbgIsReloadingScript(...args: any[]): void;
 
-	/** @description Define an event.
+	/** Decompresses the given base64 encoded input into a string. */
+	function DecompressString(str: string): string;
+
+	/** Define an event.
 	 *  @param event The event name.
 	 *  @param argscount The number of arguments that this event takes.
 	 *  @param argsdesc An optional description for the event arguments.
@@ -285,10 +292,10 @@ declare namespace $ {
 	 *  @example $.DefineEvent( eventName, NumArguments, [optional] ArgumentsDescription, [optional] Description )
 	 *  @example $.DefineEvent('SettingsNavigateToPanel', 2, 'category, settingPanel', 'Navigates to a setting by panel handle');
 	 *  @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/util/event-definition.js#L6)
-	*/
+	 */
 	function DefineEvent(event: string, argscount: number, argsdesc?: string, desc?: string): void;
 
-	/** @description Appears to be identical to $.DefineEvent(...). This function is not used anywhere in Momentum UI.
+	/** Appears to be identical to $.DefineEvent(...). This function is not used anywhere in Momentum UI.
 	 *  @param event The event name.
 	 *  @param argscount The number of arguments that this event takes.
 	 *  @param argsdesc An optional description for the event arguments.
@@ -296,110 +303,110 @@ declare namespace $ {
 	 *  @example $.DefinePanelEvent( eventName, NumArguments, [optional] ArgumentsDescription, [optional] Description )
 	 *  @example $.DefinePanelEvent('SettingsNavigateToPanel', 2, 'category, settingPanel', 'Navigates to a setting by panel handle');
 	 *  @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/util/event-definition.js#L7)
-	*/
+	 */
 	function DefinePanelEvent(event: string, argscount: number, argsdesc?: string, desc?: string): void;
 
-	/** @description Dispatch an event.
+	/** Dispatch an event.
 	 *  @example $.DispatchEvent('SettingsNavigateToPanel', matches.tabID, matches.panel);
 	 *  @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/pages/settings/search.js#L262)
 	*/
 	function DispatchEvent(event: string, ...args: any[]): void;
 
-	/** @description Dispatch an event to occur later.
+	/** Dispatch an event to occur later.
 	 *  @todo There don't appear to be any uses of this in Momentum UI. This needs to be documented!
-	*/
+	 */
 	function DispatchEventAsync(...args: any[]): void;
 
-	/** @description Call a function on each given item. Functionally identical to (...).forEach(...) */
+	/** Call a function on each given item. Functionally identical to (...).forEach(...) */
 	function Each<T>(items: T[], callback: (item: T, index: number) => void): void;
 
-	/** @description Find an element.
+	/** Find an element.
 	 *  @todo There don't appear to be any uses of this in Momentum UI. This needs to be documented!
-	*/
+	 */
 	function FindChildInContext(...args: any[]): Panel|undefined;
 
-	/** @description Gets the root panel of the current Javascript context.
+	/** Gets the root panel of the current Javascript context.
 	 *  @example $.GetContextPanel().color = color;
 	 *  @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/components/color-display.js#L17)
-	*/
+	 */
 	function GetContextPanel(): Panel;
 
 	/**
-	 * @description $.HTMLEscape(str, truncate=false).  Converts str, which must be 2048 utf-8 bytes or shorter, into an HTML-safe version.  If truncate=true, too long strings will be truncated instead of throwing an exception
+	 * $.HTMLEscape(str, truncate=false).  Converts str, which must be 2048 utf-8 bytes or shorter, into an HTML-safe version.  If truncate=true, too long strings will be truncated instead of throwing an exception
 	 * @todo There don't appear to be any uses of this in Momentum UI. This needs to be documented!
-	*/
+	 */
 	function HTMLEscape(str: string, truncate?: boolean): string;
 
-	/** @description Get the current language */
+	/** Get the current language */
 	function Language(): string;
 
-	/** @description Load a named key values file and return as JS object.
+	/** Load a named key values file and return as JS object.
 	 * @param url The path to the file, including the extension, relative to the content folder root.
 	 * @example $.LoadKeyValuesFile('panorama/data/changelog.vdf');
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/pages/drawer/about.js#L76)
-	*/
+	 */
 	function LoadKeyValuesFile(url: string): Object;
 
-	/** @description Load a named key values file and return as JS object.
+	/** Load a named key values file and return as JS object.
 	 * @param url The path to the file, including the extension, relative to the content folder root.
-	*/
+	 */
 	function LoadKeyValues3File(url: string): Object;
 
-	/** @description Localizes a string.
+	/** Localizes a string.
 	 * @example $.Localize('#HudStatus_Spawn');
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/hud/status.js#L47)
-	*/
+	 */
 	function Localize(str: string): string|null;
 
-	/** @description Localize a string, but return empty string if the localization token is not found */
+	/** Localize a string, but return empty string if the localization token is not found */
 	function LocalizeSafe(str: string): string;
 
-	/** @description Log a message */
+	/** Log a message */
 	function Msg(...messages: any[]): void;
 
-	/** @description $.PlaySoundEvent(str).  Plays the named sound event. */
+	/** $.PlaySoundEvent(str).  Plays the named sound event. */
 	function PlaySoundEvent(...args: any[]): void;
 
-	/** @description Register an event handler
+	/** Register an event handler
 	 * @example $.RegisterEventHandler('OnNewChatEntry', $.GetContextPanel(), this.onNewChatEntry.bind(this));
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/components/chat.js#L8)
 	 *
-	*/
-	function RegisterEventHandler(event: string, context: Panel, callback: Function): void;
+	 */
+	function RegisterEventHandler(event: string, context: Panel|string, callback: Function): void;
 
-	/** @description Register a handler for an event that is not otherwise handled
+	/** Register a handler for an event that is not otherwise handled
 	 * @example $.RegisterForUnhandledEvent('OnMomentumTimerStateChange', this.onTimerEvent.bind(this));
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/hud/comparisons.js#L18)
-	*/
+	 */
 	function RegisterForUnhandledEvent(event: string, callback: Function): void;
 
-	/** @description Register a key binding */
+	/** Register a key binding */
 	function RegisterKeyBind(panel: Panel, key: string, event: Function|string): void;
 
-	/** @description $.persistentStorage.removeItem(keyName).  When passed a key name, will remove that key from the storage. */
+	/** $.persistentStorage.removeItem(keyName).  When passed a key name, will remove that key from the storage. */
 	function removeItem(keyName: string): void;
 
-	/** @description Schedule a function to be called later
+	/** Schedule a function to be called later
 	 * @returns A unique event identifier.
-	*/
+	 */
 	function Schedule(time: duration, callback: Function): number;
 
-	/** @description $.StopSoundEvent(guid, [fadetime]). Stops the sound event. guid was returned from a previous call to PlaySoundEvent. fadetime is optional. */
+	/** $.StopSoundEvent(guid, [fadetime]). Stops the sound event. guid was returned from a previous call to PlaySoundEvent. fadetime is optional. */
 	function StopSoundEvent(guid: any, fadetime?: number): void;
 
-	/** @description Remove an event handler */
+	/** Remove an event handler */
 	function UnregisterEventHandler(...args: any[]): void;
 
-	/** @description Remove an unhandled event handler */
+	/** Remove an unhandled event handler */
 	function UnregisterForUnhandledEvent(...args: any[]): void;
 
-	/** @description $.UrlDecode(str).  Decodes str, which must be 2048 utf-8 bytes or shorter, from URL-encoded form. */
+	/** $.UrlDecode(str).  Decodes str, which must be 2048 utf-8 bytes or shorter, from URL-encoded form. */
 	function UrlDecode(...args: any[]): void;
 
-	/** @description $.UrlEncode(str).  Encodes str, which must be 2048 utf-8 bytes or shorter, into URL-encoded form. */
+	/** $.UrlEncode(str).  Encodes str, which must be 2048 utf-8 bytes or shorter, into URL-encoded form. */
 	function UrlEncode(...args: any[]): void;
 
-	/** @description Log a warning */
+	/** Log a warning */
 	function Warning(...args: any[]): void;
 
 }
@@ -511,7 +518,7 @@ declare interface Panel {
 
 	DeleteKeyframes(animation: Keyframes): void;
 
-	/** @description Searches this element's direct children and returns a child with the specified id. */
+	/** Searches this element's direct children and returns a child with the specified id. */
 	FindChild(id: string): Panel|null;
 
 	FindChildInLayoutFile(id: string): Panel|null;
@@ -579,7 +586,7 @@ declare interface Panel {
 
 	MoveChildBefore(arg0: unknown, arg1: unknown): void;
 
-	/** @description Registers this panel to receive ready/unready events.
+	/** Registers this panel to receive ready/unready events.
 	 * @param enable Should this panel receive ready/unready events?
 	 */
 	RegisterForReadyEvents(enable: boolean): void;
@@ -622,13 +629,13 @@ declare interface Panel {
 
 	SetDraggable(istrue: boolean): void;
 
-	SetFocus(): boolean;
+	SetFocus(focus: boolean): boolean;
 
 	SetHasClass(classname: string, hasclass: boolean): void;
 
 	SetInputNamespace(arg0: string): void;
 
-	/** @description Sets an event trigger for this panel.
+	/** Sets an event trigger for this panel.
 	 * @example latestUpdateImage.SetPanelEvent('onactivate', () => SteamOverlayAPI.OpenURLModal(item.link));
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/568f2d8de1303b86592a9a8602efd416f6a2f5bf/scripts/pages/main-menu/news.js#L57)
 	*/
@@ -659,7 +666,7 @@ declare interface Panel {
 declare interface Button extends Panel {
 }
 
-/** @description An interactive text input.
+/** An interactive text input.
  * @todo These types are incomplete and unverified!
  * @example <TextEntry
  *     id="MaxPlayers"
@@ -667,17 +674,21 @@ declare interface Button extends Panel {
  *     placeholder="32"
  *     maxchars="3"
  *     ontextentrychange="LobbySettings.onChanged()" />
-*/
+ */
 declare interface TextEntry extends Panel {
 	text: string;
 
 	ClearSelection(): void;
+
+	GetCursorOffset(): uint32;
 
 	GetMaxCharCount(): uint32;
 
 	RaiseChangeEvents(arg0: boolean): void;
 
 	SetCursorOffset(offset: int32): void;
+
+	SelectAll(): void;
 
 	SetMaxChars(max: uint32): void;
 
@@ -691,10 +702,10 @@ declare interface ToggleButton extends Panel {
 }
 
 declare interface Frame extends Panel {
-	/** @description Sets the Frame content to the specified snippet. */
+	/** Sets the Frame content to the specified snippet. */
 	SetSnippet(snippet: string): void;
 
-	/** @description Sets the Frame content to the specified layout file url. */
+	/** Sets the Frame content to the specified layout file url. */
 	SetSource(source: string): void;
 }
 
@@ -730,6 +741,13 @@ declare interface Movie extends Panel {
 	Stop(): void;
 }
 
+/** An interactive number input.
+ * @todo These types are incomplete and unverified!
+ * @example <NumberEntry max="255" />
+ */
+declare interface NumberEntry extends Panel {
+}
+
 declare interface ProgressBar extends Panel {
 	max: float;
 
@@ -747,27 +765,27 @@ declare interface ResizeDragKnob extends Panel {
 	verticalDrag: boolean;
 }
 
-/** @description Renders a 3d model in the UI.
+/** Renders a 3d model in the UI.
  * @example <ModelPanel
  *     src="models/npcs/turret/turret.mdl"
  *     cubemap="cubemaps/cubemap_menu_model_bg.hdr"
  *     antialias="true"
  *     mouse_rotate="false" />
-*/
+ */
 declare interface ModelPanel extends Panel {
-	/** @description The model that this ModelPanel should display, relative to `/` */
+	/** The model that this ModelPanel should display, relative to `/` */
 	src: string;
 
-	/** @description The cubemap that this ModelPanel should display, excluding the `.vtf` extension. This path is relative to `materials/`. */
+	/** The cubemap that this ModelPanel should display, excluding the `.vtf` extension. This path is relative to `materials/`. */
 	cubemap: string;
 
-	/** @description Whether this ModelView should use antialiasing. */
+	/** Whether this ModelView should use antialiasing. */
 	antialias: boolean;
 
-	/** @description Whether the mouse can be dragged over this ModelView to rotate the model.
+	/** Whether the mouse can be dragged over this ModelView to rotate the model.
 	 * This property can only be set through XML. To modify it, use the `SetMouseRotationAllowed` method.
 	 * @readonly
-	*/
+	 */
 	mouse_rotate: boolean;
 
 	AddParticleSystem(arg0: string, arg1: string, arg2: boolean): void;
@@ -784,14 +802,14 @@ declare interface ModelPanel extends Panel {
 
 	SetCameraPosition(x: float, y: float, z: float): void;
 
-	/** @description Sets the color of a directional light as floats.
+	/** Sets the color of a directional light as floats.
 	 * @param {int32} light The ID of the light. (0-4)
-	*/
+	 */
 	SetDirectionalLightColor(light: int32, r: float, g: float, b: float): void;
 
-	/** @description Sets the direction of a directional light.
+	/** Sets the direction of a directional light.
 	 * @param {int32} light The ID of the light. (0-4)
-	*/
+	 */
 	SetDirectionalLightDirection(light: int32, x: float, y: float, z: float): void;
 
 	SetLightAmbient(r: float, g: float, b: float): void;
@@ -829,9 +847,9 @@ declare interface ModelPanel extends Panel {
 	SetParticleSystemOffsetPosition(x: float, y: float, z: float): void;
 }
 
-/** @description Renders 2d shapes in the UI.
+/** Renders 2d shapes in the UI.
  * @todo These types are incomplete and unverified!
-*/
+ */
 declare interface UICanvas extends Panel {
 	/**
 	 * @param count The number of points to draw.
@@ -878,10 +896,10 @@ declare interface ChaosSettingsSlider extends Panel {
 /* ========================       APIS      ======================== */
 
 declare namespace FriendsAPI {
-	/** @description Gets the name of the local player */
+	/** Gets the name of the local player */
 	function GetLocalPlayerName(): string;
 
-	/** @description Gets the name of the player with the given XUID. This will only be known by the local user if the given user is in their friends list, on the same game server, in a chat room or lobby, or in a small group with the local user */
+	/** Gets the name of the player with the given XUID. This will only be known by the local user if the given user is in their friends list, on the same game server, in a chat room or lobby, or in a small group with the local user */
 	function GetNameForXUID(xuid: uint64): string;
 
 }
@@ -899,7 +917,7 @@ declare namespace GameInterfaceAPI {
 
 	function GetSettingString(key: string): string;
 
-	/** @description Registers a callback for a specific game event type, returns an event handler ID to unregister with */
+	/** Registers a callback for a specific game event type, returns an event handler ID to unregister with */
 	function RegisterGameEventHandler(event_name: string, callback: Function): uuid;
 
 	function SetSettingBool(key: string, value: boolean): void;
@@ -912,18 +930,18 @@ declare namespace GameInterfaceAPI {
 
 	function SetSettingString(key: string, value: string): void;
 
-	/** @description Unregisters a previously registered event handler for a game event */
+	/** Unregisters a previously registered event handler for a game event */
 	function UnregisterGameEventHandler(callback: uuid): void;
 
-	/** @description Gets the current game state. */
+	/** Gets the current game state. */
 	function GetGameUIState(): GameUIState;
 }
 
 declare namespace RichPresenceAPI {
-	/** @description Clears the current rich presence data */
+	/** Clears the current rich presence data */
 	function Clear(): void;
 
-	/** @description Updates the game's current rich presence state. */
+	/** Updates the game's current rich presence state. */
 	function UpdateRichPresenceState(state: {
 		discord: {
 			state: string;
@@ -939,204 +957,204 @@ declare namespace RichPresenceAPI {
 }
 
 declare namespace SteamOverlayAPI {
-	/** @description Opens the steam overlay to the given user/group profile by their steam ID. profileID is the 64bit int steam ID in a string. */
+	/** Opens the steam overlay to the given user/group profile by their steam ID. profileID is the 64bit int steam ID in a string. */
 	function OpenToProfileID(profileID: string): void;
 
-	/** @description Opens the steam overlay browser at the given URL */
+	/** Opens the steam overlay browser at the given URL */
 	function OpenURL(url: string): void;
 
-	/** @description Opens the steam overlay browser at the given URL in a modal window (no other windows in overlay, and overlay closes when window closes) */
+	/** Opens the steam overlay browser at the given URL in a modal window (no other windows in overlay, and overlay closes when window closes) */
 	function OpenURLModal(url: string): void;
 
 }
 
 declare namespace UiToolkitAPI {
-	/** @description Denies input to the game by filtering input events. Returns a handle used by ReleaseDenyAllInputToGame. */
+	/** Denies input to the game by filtering input events. Returns a handle used by ReleaseDenyAllInputToGame. */
 	function AddDenyAllInputToGame(panelPtr: unknown, strDebugContextName: string): uint64;
 
-	/** @description Denies mouse input to the game by filtering mouse input events. Returns a handle used by ReleaseDenyMouseInputToGame. */
+	/** Denies mouse input to the game by filtering mouse input events. Returns a handle used by ReleaseDenyMouseInputToGame. */
 	function AddDenyMouseInputToGame(panelPtr: unknown, strDebugContextName: string): uint64;
 
-	/** @description Force closing all visible popups */
+	/** Force closing all visible popups */
 	function CloseAllVisiblePopups(): void;
 
-	/** @description Returns a global object that can be used to store global variables you would like to share across js files. */
+	/** Returns a global object that can be used to store global variables you would like to share across js files. */
 	function GetGlobalObject(): unknown;
 
-	/** @description Hide the tooltip with the given id. */
+	/** Hide the tooltip with the given id. */
 	function HideCustomLayoutTooltip(tooltipID: string): void;
 
-	/** @description Hide the text tooltip */
+	/** Hide the text tooltip */
 	function HideTextTooltip(): void;
 
-	/** @description Hide the title image text tooltip */
+	/** Hide the title image text tooltip */
 	function HideTitleImageTextTooltip(): void;
 
-	/** @description Hide the title text tooltip */
+	/** Hide the title text tooltip */
 	function HideTitleTextTooltip(): void;
 
-	/** @description Invoke a javascript callback using a handle previously registered with RegisterJSCallback. First argument must be the callback handle followed by the callback's arguments. */
+	/** Invoke a javascript callback using a handle previously registered with RegisterJSCallback. First argument must be the callback handle followed by the callback's arguments. */
 	function InvokeJSCallback(callback: uuid, ...args: any[]): void;
 
-	/** @description Is Panorama in ECO (perf) mode */
+	/** Is Panorama in ECO (perf) mode */
 	function IsPanoramaInECOMode(): boolean;
 
 	function MakeStringSafe(str: string): string;
 
-	/** @description Notify telemetry that a zone is been entered */
+	/** Notify telemetry that a zone is been entered */
 	function ProfilingScopeBegin(tagName: string): void;
 
-	/** @description Notify telemetry that a zone is been left. Returns duration in milliseconds. */
+	/** Notify telemetry that a zone is been left. Returns duration in milliseconds. */
 	function ProfilingScopeEnd(): double;
 
-	/** @description Register a HUD panel type name with the corresponding layout file */
+	/** Register a HUD panel type name with the corresponding layout file */
 	function RegisterHUDPanel2d(panelTypeName: string, layoutFile: string): void;
 
-	/** @description Register a javascript callback that can be invoke at a later stage using InvokeJSCallback. Returns a callback handle. */
+	/** Register a javascript callback that can be invoke at a later stage using InvokeJSCallback. Returns a callback handle. */
 	function RegisterJSCallback(callback: Function): uuid;
 
-	/** @description Register a panel type name with the corresponding layout file */
+	/** Register a panel type name with the corresponding layout file */
 	function RegisterPanel2d(panelTypeName: string, layoutFile: string): void;
 
-	/** @description ReleaseDenyAllInputToGame takes a handle as parameters previously returned by AddDenyAllInputToGame */
+	/** ReleaseDenyAllInputToGame takes a handle as parameters previously returned by AddDenyAllInputToGame */
 	function ReleaseDenyAllInputToGame(handle: uint64): void;
 
-	/** @description ReleaseDenyMouseInputToGame takes a handle as parameters previously returned by AddDenyMouseInputToGame */
+	/** ReleaseDenyMouseInputToGame takes a handle as parameters previously returned by AddDenyMouseInputToGame */
 	function ReleaseDenyMouseInputToGame(handle: uint64): void;
 
-	/** @description Show a context menu with a specific id and using the given layout. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
+	/** Show a context menu with a specific id and using the given layout. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
 	function ShowCustomLayoutContextMenu(targetPanelID: string, contentmenuID: string, layoutFile: string): unknown;
 
-	/** @description Show a context menu with a specific id and using the given layout and parameters. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
+	/** Show a context menu with a specific id and using the given layout and parameters. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
 	function ShowCustomLayoutContextMenuParameters(targetPanelID: string, contentmenuID: string, layoutFile: string, parameters: string): unknown;
 
-	/** @description Show a context menu with a specific id and using the given layout and parameters and call a function when dismissed. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
+	/** Show a context menu with a specific id and using the given layout and parameters and call a function when dismissed. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
 	function ShowCustomLayoutContextMenuParametersDismissEvent(targetPanelID: string, contentmenuID: string, layoutFile: string, parameters: string, dismissJsFunc: unknown): unknown;
 
-	/** @description Show a tooltip with a specifix id and using the given layout and parameters. */
+	/** Show a tooltip with a specifix id and using the given layout and parameters. */
 	function ShowCustomLayoutParametersTooltip(targetPanelID: string, tooltipID: string, layoutFile: string, parameters: string): void;
 
-	/** @description Show a tooltip with a specifix id and using the given layout and parameters. Also apply a CSS class named "style" (to the tooltip root panel) in order to allow custom styling (eg. "Tooltip_NoArrow" to remove tooltip's arrow). */
+	/** Show a tooltip with a specifix id and using the given layout and parameters. Also apply a CSS class named "style" (to the tooltip root panel) in order to allow custom styling (eg. "Tooltip_NoArrow" to remove tooltip's arrow). */
 	function ShowCustomLayoutParametersTooltipStyled(targetPanelID: string, tooltipID: string, layoutFile: string, parameters: string, style: string): void;
 
-	/** @description Show a popup that lets you specify a layout. */
+	/** Show a popup that lets you specify a layout. */
 	function ShowCustomLayoutPopup(popupID: string, layoutFile: string): unknown;
 
-	/** @description Show a popup that lets you specify a layout and parameters. */
+	/** Show a popup that lets you specify a layout and parameters. */
 	function ShowCustomLayoutPopupParameters(popupID: string, layoutFile: string, parameters: string): unknown;
 
-	/** @description Show a tooltip with a specifix id and using the given layout. */
+	/** Show a tooltip with a specifix id and using the given layout. */
 	function ShowCustomLayoutTooltip(targetPanelID: string, tooltipID: string, layoutFile: string): void;
 
-	/** @description Show a tooltip with a specifix id and using the given layout. Also apply a CSS class named "style" (to the tooltip root panel) in order to allow custom styling (eg. "Tooltip_NoArrow" to remove tooltip's arrow). */
+	/** Show a tooltip with a specifix id and using the given layout. Also apply a CSS class named "style" (to the tooltip root panel) in order to allow custom styling (eg. "Tooltip_NoArrow" to remove tooltip's arrow). */
 	function ShowCustomLayoutTooltipStyled(targetPanelID: string, tooltipID: string, layoutFile: string, style: string): void;
 
-	/** @description Show a popup with the given title add message and optional style. Button present: "OK". */
+	/** Show a popup with the given title add message and optional style. Button present: "OK". */
 	function ShowGenericPopup(title: string, message: string, style: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "OK". */
+	/** Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "OK". */
 	function ShowGenericPopupBgStyle(title: string, message: string, style: string, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. Button present: "Cancel". */
+	/** Show a popup with the given title add message and optional style. Button present: "Cancel". */
 	function ShowGenericPopupCancel(title: string, message: string, style: string, cancelJSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Cancel". */
+	/** Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Cancel". */
 	function ShowGenericPopupCancelBgStyle(title: string, message: string, style: string, cancelJSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. Button present: "OK". */
+	/** Show a popup with the given title add message and optional style. Button present: "OK". */
 	function ShowGenericPopupOk(title: string, message: string, style: string, okJSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "OK". */
+	/** Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "OK". */
 	function ShowGenericPopupOkBgStyle(title: string, message: string, style: string, okJSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. Button present: "Ok"/"Cancel". */
+	/** Show a popup with the given title add message and optional style. Button present: "Ok"/"Cancel". */
 	function ShowGenericPopupOkCancel(title: string, message: string, style: string, okJSFunc: unknown, cancelJSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Ok"/"Cancel". */
+	/** Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Ok"/"Cancel". */
 	function ShowGenericPopupOkCancelBgStyle(title: string, message: string, style: string, okJSFunc: unknown, cancelJSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style and let you specify the name of one button. */
+	/** Show a popup with the given title add message and optional style and let you specify the name of one button. */
 	function ShowGenericPopupOneOption(title: string, message: string, style: string, optionName: string, optionJSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style and let you specify the name of one button. You can specify the background style ("none", "dim" or "blur").  */
+	/** Show a popup with the given title add message and optional style and let you specify the name of one button. You can specify the background style ("none", "dim" or "blur").  */
 	function ShowGenericPopupOneOptionBgStyle(title: string, message: string, style: string, optionName: string, optionJSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style and let you specify the name of two button. */
+	/** Show a popup with the given title add message and optional style and let you specify the name of two button. */
 	function ShowGenericPopupThreeOptions(title: string, message: string, style: string, option1Name: string, option1JSFunc: unknown, option2Name: string, option2JSFunc: unknown, option3Name: string, option3JSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style and let you specify the name of two button. You can specify the background style ("none", "dim" or "blur").  */
+	/** Show a popup with the given title add message and optional style and let you specify the name of two button. You can specify the background style ("none", "dim" or "blur").  */
 	function ShowGenericPopupThreeOptionsBgStyle(title: string, message: string, style: string, option1Name: string, option1JSFunc: unknown, option2Name: string, option2JSFunc: unknown, option3Name: string, option3JSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style and let you specify the name of two button. */
+	/** Show a popup with the given title add message and optional style and let you specify the name of two button. */
 	function ShowGenericPopupTwoOptions(title: string, message: string, style: string, option1Name: string, option1JSFunc: unknown, option2Name: string, option2JSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style and let you specify the name of two button. You can specify the background style ("none", "dim" or "blur").  */
+	/** Show a popup with the given title add message and optional style and let you specify the name of two button. You can specify the background style ("none", "dim" or "blur").  */
 	function ShowGenericPopupTwoOptionsBgStyle(title: string, message: string, style: string, option1Name: string, option1JSFunc: unknown, option2Name: string, option2JSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. Button present: "Yes"/"No". */
+	/** Show a popup with the given title add message and optional style. Button present: "Yes"/"No". */
 	function ShowGenericPopupYesNo(title: string, message: string, style: string, yesJSFunc: unknown, noJSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Yes"/"No". */
+	/** Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Yes"/"No". */
 	function ShowGenericPopupYesNoBgStyle(title: string, message: string, style: string, yesJSFunc: unknown, noJSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. Button present: "Yes"/"No"/"Cancel". */
+	/** Show a popup with the given title add message and optional style. Button present: "Yes"/"No"/"Cancel". */
 	function ShowGenericPopupYesNoCancel(title: string, message: string, style: string, yesJSFunc: unknown, noJSFunc: unknown, cancelJSFunc: unknown): unknown;
 
-	/** @description Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Yes"/"No"/"Cancel". */
+	/** Show a popup with the given title add message and optional style. You can specify the background style ("none", "dim" or "blur"). Button present: "Yes"/"No"/"Cancel". */
 	function ShowGenericPopupYesNoCancelBgStyle(title: string, message: string, style: string, yesJSFunc: unknown, noJSFunc: unknown, cancelJSFunc: unknown, bgStyle: string): unknown;
 
-	/** @description Show a popup on the 'global popups top level window' that lets you specify a layout. */
+	/** Show a popup on the 'global popups top level window' that lets you specify a layout. */
 	function ShowGlobalCustomLayoutPopup(popupID: string, layoutFile: string): unknown;
 
-	/** @description Show a popup on 'global popups top level window' that lets you specify a layout and parameters. */
+	/** Show a popup on 'global popups top level window' that lets you specify a layout and parameters. */
 	function ShowGlobalCustomLayoutPopupParameters(popupID: string, layoutFile: string, parameters: string): unknown;
 
-	/** @description Show a context menu with a specific id and populate the context menu item list using the given "items" array. Each elements of the items array is a javascript object of the form {label, jsCallback, style, icon}. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
+	/** Show a context menu with a specific id and populate the context menu item list using the given "items" array. Each elements of the items array is a javascript object of the form {label, jsCallback, style, icon}. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
 	function ShowSimpleContextMenu(targetPanelID: string, contentmenuID: string, items: unknown): unknown;
 
-	/** @description Show a context menu with a specific id and populate the context menu item list using the given "items" array. Each elements of the items array is a javascript object of the form {label, jsCallback, style, icon}. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
+	/** Show a context menu with a specific id and populate the context menu item list using the given "items" array. Each elements of the items array is a javascript object of the form {label, jsCallback, style, icon}. targetPanelID  can be the empty string in which case the cursor position is used to position the context menu. Returns context menu panel. */
 	function ShowSimpleContextMenuWithDismissEvent(targetPanelID: string, contentmenuID: string, items: unknown, dismissJsFunc: unknown): unknown;
 
-	/** @description Show a tooltip with the given text */
+	/** Show a tooltip with the given text */
 	function ShowTextTooltip(targetPanelID: string, text: string): void;
 
-	/** @description Show a tooltip with the given text on given panel */
+	/** Show a tooltip with the given text on given panel */
 	function ShowTextTooltipOnPanel(targetPanel: unknown, text: string): void;
 
-	/** @description Show a tooltip with the given text on given panel. Also apply a CSS class named "style" to allow custom styling. */
+	/** Show a tooltip with the given text on given panel. Also apply a CSS class named "style" to allow custom styling. */
 	function ShowTextTooltipOnPanelStyled(targetPanel: unknown, text: string, style: string): void;
 
-	/** @description Show a tooltip with the given text. Also apply a CSS class named "style" to allow custom styling. */
+	/** Show a tooltip with the given text. Also apply a CSS class named "style" to allow custom styling. */
 	function ShowTextTooltipStyled(targetPanelID: string, text: string, style: string): void;
 
-	/** @description Show a tooltip with the given title, image and text. */
+	/** Show a tooltip with the given title, image and text. */
 	function ShowTitleImageTextTooltip(targetPanelID: string, title: string, image: string, text: string): void;
 
-	/** @description Show a tooltip with the giben title, image and text. Also apply a CSS class named "style" to allow custom styling. */
+	/** Show a tooltip with the giben title, image and text. Also apply a CSS class named "style" to allow custom styling. */
 	function ShowTitleImageTextTooltipStyled(targetPanelID: string, title: string, image: string, text: string, style: string): void;
 
-	/** @description Show a tooltip with the given title and text. */
+	/** Show a tooltip with the given title and text. */
 	function ShowTitleTextTooltip(targetPanelID: string, title: string, text: string): void;
 
-	/** @description Show a tooltip with the given title and text. Also apply a CSS class named "style" to allow custom styling. */
+	/** Show a tooltip with the given title and text. Also apply a CSS class named "style" to allow custom styling. */
 	function ShowTitleTextTooltipStyled(targetPanelID: string, title: string, text: string, style: string): void;
 
-	/** @description Unregister a javascript callback previously registered with RegisterJSCallback. */
+	/** Unregister a javascript callback previously registered with RegisterJSCallback. */
 	function UnregisterJSCallback(jsCallbackHandle: int32): void;
 
 }
 
 declare namespace UserAPI {
-	/** @description Gets the XUID (steamid as integer) of the local player */
+	/** Gets the XUID (steamid as integer) of the local player */
 	function GetXUID(): uint64;
 
 }
 
 declare namespace SentryAPI {
-	/** @description Returns whether or not the user has consented to allow sentry to upload crash dumps. */
+	/** Returns whether or not the user has consented to allow sentry to upload crash dumps. */
 	function GetUserConsent(): boolean;
 
-	/** @description Returns whether or not sentry is active. */
+	/** Returns whether or not sentry is active. */
 	function IsSentryActive(): boolean;
 }
 

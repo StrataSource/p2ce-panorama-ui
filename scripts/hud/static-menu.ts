@@ -1,7 +1,5 @@
-'use strict';
-
 class HudStaticMenu {
-	static onEntrySelected(panel) {
+	static onEntrySelected(panel: Panel) {
 		panel.AddClass('static-hud-menu__entry--highlight');
 		const kfs = panel.CreateCopyOfCSSKeyframes('StaticHudMenuEntrySelected');
 		panel.UpdateCurrentAnimationKeyframes(kfs);
