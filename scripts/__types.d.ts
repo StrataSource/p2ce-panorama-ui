@@ -2,7 +2,7 @@
  * @author Koerismo
  * Describes the Panorama APIs with full typing. Some types defined in this file
  * may be out of date or innacurate. If you find something that needs to be fixed, report it!
-*/
+ */
 
 /* ========================    PRIMITIVES   ======================== */
 
@@ -24,6 +24,74 @@ interface PanelTagNameMap {
 	'ChaosLoadingScreen': ChaosBackbufferImagePanel,
 	'ChaosMainMenu': ChaosMainMenu,
 	'ChaosSettingsSlider': ChaosSettingsSlider,
+}
+
+interface PanelEventNameMap {
+	'AddStyle':							(cls: string) => void,
+	'AddStyleToEachChild':				(cls: string) => void,
+	'DragStart':						(source: unknown, info: DragEventInfo) => void,
+	'DropInputFocus':					() => void,
+	'IfHasClassEvent':					(cls: string, eventToFire: string) => void,
+	'IfHoverOtherEvent':				(otherPanelID: string, eventToFire: string) => void,
+	'IfNotHasClassEvent':				(cls: string, eventToFire: string) => void,
+	'IfNotHoverOtherEvent':				(otherPanelID: string, eventToFire: string) => void,
+	'ImageFailedLoad':					() => void,
+	'MovePanelDown':					(repeatCount: int32) => void,
+	'MovePanelLeft':					(repeatCount: int32) => void,
+	'MovePanelRight':					(repeatCount: int32) => void,
+	'MovePanelUp':						(repeatCount: int32) => void,
+	'PagePanelDown':					() => void,
+	'PagePanelLeft':					() => void,
+	'PagePanelRight':					() => void,
+	'PagePanelUp':						() => void,
+	'PanelLoaded':						() => void,
+	'PanoramaCastVoteNo':				() => void,
+	'PanoramaCastVoteYes':				() => void,
+	'RemoveStyle':						(cls: string) => void,
+	'RemoveStyleFromEachChild':			(cls: string) => void,
+	'ScrollPanelDown':					() => void,
+	'ScrollPanelLeft':					() => void,
+	'ScrollPanelRight':					() => void,
+	'ScrollPanelUp':					() => void,
+	'ScrollToBottom':					() => void,
+	'ScrollToTop':						() => void,
+	'SetChildPanelsSelected':			(selected: boolean) => void,
+	'SetInputFocus':					() => void,
+	'SetPanelEnabled':					(enabled: boolean) => void,
+	'SetPanelSelected':					(selected: boolean) => void,
+	'SwitchStyle':						(slot: string, cls: string) => void,
+	'TogglePanelSelected':				() => void,
+	'ToggleStyle':						(cls: string) => void,
+	'TriggerStyle':						(cls: string) => void,
+}
+
+interface GlobalEventNameMap {
+	'AsyncEvent':						(delay: duration, eventToFire: string) => void,
+	'ChaosHudProcessInput':				() => void,
+	'ChaosHudThink':					() => void,
+	'DemoPlaybackControl': 				(str: string, flt: float) => void,
+	'Drawer_ExtendAndNavigateToTab':	(tabid: string) => void,
+	'Drawer_NavigateToTab': 			(tabid: string) => void,
+	'Drawer_UpdateLobbyButton':			(imgsrc: string, playercount: unknown) => void,
+	'HideContentPanel':					() => void,
+	'LayoutReloaded':					() => void,
+	'MainMenuTabHidden':				(tabid: string) => void,
+	'MainMenuTabShown':					(tabid: string) => void,
+	'PageDown':							() => void,
+	'PageLeft':							() => void,
+	'PageRight':						() => void,
+	'PageUp':							() => void,
+	'PanoramaGameTimeJumpEvent':		(time: duration) => void,
+	'ReloadBackground':					() => void,
+	'ScrollDown':						() => void,
+	'ScrollLeft':						() => void,
+	'ScrollRight':						() => void,
+	'ScrollUp':							() => void,
+	'SettingsNavigateToPanel':			(category: string, panel: Panel) => void,
+	'ShowCenterPrintText':				(message: string, priority: unknown) => void,
+	'ShowContentPanel':					() => void,
+	'ShowVoteContextMenu':				() => void,
+	'StaticHudMenu_EntrySelected':		(panel: Panel) => void,
 }
 
 /** Defines a panel event source. */
@@ -67,10 +135,7 @@ declare type uuid = int32;
 /** Represents a keyframes animation return. */
 declare type Keyframes = unknown;
 
-/** Represents a console message target. */
-declare type StaticConsoleMessageTarget = Panel;
-
-/** Generic panel styling properties. UNFINISHED! */
+/** Generic panel styling properties. */
 declare interface Style {
 	// Foreground
 	color: string;
@@ -223,8 +288,8 @@ declare function $<E extends Panel, T extends string = string>(selector: T): Que
 declare namespace $ {
 
 	namespace persistentStorage {
-		/** @readonly $.persistentStorage.length.  Returns an integer representing the number of data items stored in the Storage object. */
-		var length: int32;
+		/** $.persistentStorage.length.  Returns an integer representing the number of data items stored in the Storage object. */
+		const length: int32;
 
 		/** $.persistentStorage.clear().  When invoked, will empty all keys out of the storage. */
 		function clear(): void;
@@ -310,7 +375,7 @@ declare namespace $ {
 	 *  @example $.DispatchEvent('SettingsNavigateToPanel', matches.tabID, matches.panel);
 	 *  @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/pages/settings/search.js#L262)
 	*/
-	function DispatchEvent(event: string, ...args: any[]): void;
+	function DispatchEvent<T extends string>(event: T, ...args: T extends keyof GlobalEventNameMap ? Parameters<GlobalEventNameMap[T]> : any[]): void;
 
 	/** Dispatch an event to occur later.
 	 *  @todo There don't appear to be any uses of this in Momentum UI. This needs to be documented!
@@ -372,12 +437,14 @@ declare namespace $ {
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/components/chat.js#L8)
 	 *
 	 */
+	function RegisterEventHandler<T extends keyof PanelEventNameMap>(event: T, context: Panel|string, callback: PanelEventNameMap[T]): void;
 	function RegisterEventHandler(event: string, context: Panel|string, callback: Function): void;
 
 	/** Register a handler for an event that is not otherwise handled
 	 * @example $.RegisterForUnhandledEvent('OnMomentumTimerStateChange', this.onTimerEvent.bind(this));
 	 * @see [Example](https://github.com/momentum-mod/panorama/blob/721f39fe40bad57cd93943278d3a3c857e9ae9d7/scripts/hud/comparisons.js#L18)
 	 */
+	function RegisterForUnhandledEvent<T extends keyof GlobalEventNameMap>(event: T, callback: GlobalEventNameMap[T]): void;
 	function RegisterForUnhandledEvent(event: string, callback: Function): void;
 
 	/** Register a key binding */
@@ -416,39 +483,29 @@ declare namespace $ {
 declare interface Panel {
 	activationenabled: boolean;
 
-	/** @readonly */
-	actuallayoutheight: float;
+	readonly actuallayoutheight: float;
 
-	/** @readonly */
-	actuallayoutwidth: float;
+	readonly actuallayoutwidth: float;
 
-	/** @readonly */
-	actualuiscale_x: float;
+	readonly actualuiscale_x: float;
 
-	/** @readonly */
-	actualuiscale_y: float;
+	readonly actualuiscale_y: float;
 
-	/** @readonly */
-	actualxoffset: float;
+	readonly actualxoffset: float;
 
-	/** @readonly */
-	actualyoffset: float;
+	readonly actualyoffset: float;
 
 	checked: boolean;
 
-	/** @readonly */
-	contentheight: float;
+	readonly contentheight: float;
 
-	/** @readonly */
-	contentwidth: float;
+	readonly contentwidth: float;
 
 	defaultfocus: string;
 
-	/** @readonly */
-	desiredlayoutheight: float;
+	readonly desiredlayoutheight: float;
 
-	/** @readonly */
-	desiredlayoutwidth: float;
+	readonly desiredlayoutwidth: float;
 
 	enabled: boolean;
 
@@ -456,31 +513,25 @@ declare interface Panel {
 
 	hittestchildren: boolean;
 
-	/** @readonly */
-	id: string;
+	readonly id: string;
 
 	inputnamespace: string;
 
-	/** @readonly */
-	layoutfile: string;
+	readonly layoutfile: string;
 
-	/** @readonly */
-	paneltype: string;
+	readonly paneltype: string;
 
 	rememberchildfocus: boolean;
 
-	/** @readonly */
-	scrolloffset_x: float;
+	readonly scrolloffset_x: float;
 
-	/** @readonly */
-	scrolloffset_y: float;
+	readonly scrolloffset_y: float;
 
 	selectionpos_x: float;
 
 	selectionpos_y: float;
 
-	/** @readonly */
-	style: Style;
+	readonly style: Style;
 
 	tabindex: float;
 
@@ -759,8 +810,7 @@ declare interface ProgressBar extends Panel {
 declare interface ResizeDragKnob extends Panel {
 	horizontalDrag: boolean;
 
-	/** @readonly */
-	target: unknown;
+	readonly target: unknown;
 
 	verticalDrag: boolean;
 }
@@ -784,9 +834,8 @@ declare interface ModelPanel extends Panel {
 
 	/** Whether the mouse can be dragged over this ModelView to rotate the model.
 	 * This property can only be set through XML. To modify it, use the `SetMouseRotationAllowed` method.
-	 * @readonly
 	 */
-	mouse_rotate: boolean;
+	readonly mouse_rotate: boolean;
 
 	AddParticleSystem(arg0: string, arg1: string, arg2: boolean): void;
 
@@ -847,6 +896,10 @@ declare interface ModelPanel extends Panel {
 	SetParticleSystemOffsetPosition(x: float, y: float, z: float): void;
 }
 
+/** A console message target. */
+declare interface StaticConsoleMessageTarget extends Panel {
+}
+
 /** Renders 2d shapes in the UI.
  * @todo These types are incomplete and unverified!
  */
@@ -891,6 +944,15 @@ declare interface ChaosSettingsSlider extends Panel {
 	OnShow(): void;
 
 	RestoreCVarDefault(): void;
+}
+
+/* ========================      EVENTS     ======================== */
+
+declare interface DragEventInfo {
+	removePositionBeforeDrop: boolean;
+	offsetX: number;
+	offsetY: number;
+	displayPanel: Panel|null;
 }
 
 /* ========================       APIS      ======================== */

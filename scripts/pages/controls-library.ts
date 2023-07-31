@@ -1,8 +1,6 @@
-'use strict';
-
 class ControlsLibrary {
-	static progressBar1 = $('#ProgressBar1');
-	static updatingProgressBars;
+	static progressBar1 = $<ProgressBar>('#ProgressBar1')!;
+	static updatingProgressBars: boolean;
 
 	static {
 		this.updatingProgressBars = true;
