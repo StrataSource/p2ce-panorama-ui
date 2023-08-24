@@ -12,7 +12,7 @@
 		"strict": true,
 
 		"lib": ["ES2020"],
-		"typeRoots": ["./types/pano/"],
+		"typeRoots": ["./node_modules/pano-typed"],
 		"types": ["p2ce"]
 	},
 	"include": [

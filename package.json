@@ -17,6 +17,7 @@
 	"dependencies": {},
 	"devDependencies": {
 		"typescript": "^5.1.6",
+		"pano-typed": "github:koerismo/pano-typed",
 
 		"eslint": "^8.45.0",
 		"eslint-config-prettier": "^8.5.0",
