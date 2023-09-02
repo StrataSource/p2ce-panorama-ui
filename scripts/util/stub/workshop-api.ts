@@ -1,75 +1,73 @@
-interface AddonMeta {
-	uuid: string|null;
-	name: string;
-	desc: string;
 
-	authors: string[];
-	tags: string[];
+namespace WorkshopAPI {
+	let __en__: boolean = true;
 
-	dependencies: {[uuid: string]: { required: boolean }};
-	subscriptions: number;
-	votescore: number;
-	flagged: boolean;
+	export function GetAddonCount(): number {
+		return 2;
+	}
 
-	icon_small: string;
-	icon_big: string;
-}
+	export function GetAddonMeta(index: number): AddonMeta {
+		const l = 
+		[
+			{
+				uuid: '1636452068648517094',
+				name: 'double decker',
+				desc: 'Holy shit guys, it\'s Among Us in Portal 2 by Valve Software!',
+				
+				filename: "sp_a2_double_decker_laser",
 
-enum DownloadState {
-	UninstallPending,
-	Uninstalling,
-	Uninstalled,
+				authors: [ 'Baguettery' ],
+				tags: [ 'Among Us' ],
 
-	InstallPending,
-	Installing,
-	Installed,
-}
+				dependencies: {},
+				subscriptions: 234,
+				votescore: 102,
+				flagged: false,
 
+				icon_small: 'file://{materials}/vgui/backgrounds/background01.vtf',
+				icon_big: 'file://{materials}/vgui/backgrounds/background01.vtf',
+			},
+			{
+				uuid: '1834678435856326332',
+				name: 'pit flings',
+				desc: 'Holy shit guys, it\'s Among Us in Portal 2 by Valve Software!',
+				
+				filename: "sp_a2_pit_flings_p2ce",
 
-class WorkshopAPI {
-	static __en__ = true;
+				authors: [ 'Baguettery' ],
+				tags: [ 'Among Us' ],
 
-	static GetAddonCount(): number {
+				dependencies: {},
+				subscriptions: 234,
+				votescore: 102,
+				flagged: false,
+
+				icon_small: 'file://{materials}/vgui/backgrounds/background01.vtf',
+				icon_big: 'file://{materials}/vgui/backgrounds/background01.vtf',
+			},
+			
+		];
+		return l[index];
+	}
+
+	export function GetAddonState(uuid: string): DownloadState {
 		return 1;
 	}
 
-	static GetAddonMeta(index: number): AddonMeta {
-		return {
-			uuid: '2b37a65e12d4561f',
-			name: 'Among Us in Portal 2',
-			desc: 'Holy shit guys, it\'s Among Us in Portal 2 by Valve Software!',
-
-			authors: [ 'Baguettery' ],
-			tags: [ 'Among Us' ],
-
-			dependencies: {},
-			subscriptions: 234,
-			votescore: 102,
-			flagged: false,
-
-			icon_small: 'file://{workshop_content}/2b37a65e12d4561f/small.png',
-			icon_big: 'file://{workshop_content}/2b37a65e12d4561f/small.png',
-		}
-	}
-
-	static GetAddonState(uuid: string): DownloadState {
-		return DownloadState.Installed;
-	}
-
-	static GetAddonSubscribed(uuid: string): boolean {
+	export function GetAddonSubscribed(uuid: string): boolean {
 		return true;
 	}
 
-	static GetAddonEnabled(uuid: string): boolean {
-		return this.__en__;
+	export function GetAddonEnabled(uuid: string): boolean {
+		return __en__;
 	}
 
-	static SetAddonSubscribed(uuid: string, subscribed: boolean): boolean {
+	export function SetAddonSubscribed(uuid: string, subscribed: boolean): boolean {
 		return true;
 	}
 
-	static SetAddonEnabled(uuid: string, enabled: boolean): boolean {
-		this.__en__ = enabled;
+	export function SetAddonEnabled(uuid: string, enabled: boolean): boolean {
+		__en__ = enabled;
 		return true;
 	}
 }

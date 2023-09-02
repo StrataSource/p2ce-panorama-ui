@@ -1,12 +1,44 @@
 <root>
 	<styles>
-		<!-- <include src="file://{resources}/styles/main.scss" /> -->
+		<include src="file://{resources}/styles/pages/main-menu.scss" />
+		<include src="file://{resources}/styles/pages/workshop.scss" />
 	</styles>
 
 	<scripts>
-		<!-- <include src="file://{scripts}/common/settings.js" /> -->
+		<include src="file://{scripts}/components/tile-grid.js" />
+		<include src="file://{scripts}/util/stub/workshop-api.js" />
+		<include src="file://{scripts}/pages/main-menu/workshop.js" />
 	</scripts>
 
-	<Panel class="body fill" useglobalcontext="false">
+	<Panel class="body fill">
+
+		<Panel
+			id="workshop"
+			class="fill"
+			margin="40px"
+			flow-children="right"
+			rows="4"
+			columns="8"
+			col-width="fit"
+			row-height="fit"
+			onload="Workshop.init('#workshop')"
+		>
+			<Panel
+				id="workshop-grid"
+				class="fill"
+				margin="40px"
+				flow-children="right"
+				rows="4"
+				columns="8"
+				col-width="fit"
+				row-height="fit"
+				onload="TileGrid.init('#workshop-grid')"
+			>
+				
+			</Panel>
+		</Panel>
+
+
 	</Panel>
 </root>
+
