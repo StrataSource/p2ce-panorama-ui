@@ -679,13 +679,36 @@
 					<Label class="button__text" text="TitleImageTextStyled Tooltip without title" />
 				</Panel>
 			</Panel>
-			
+
 			<Label class="text-h3 mt-3" text="Animations" />
-			<Panel class="row my-3">
-				<Panel class="anim-panel">
-        		<Panel class="bezier-spin">
-					<Label class="button__text" text="Bezier speeen"/>
+			<Panel class="row flow-down">
+				<Panel class="anim-panel row">
+					<Panel class="bezier-spin-ease bezier-spin">
+						<Label class="button__text" text="Ease"/>
+					</Panel>
+					<Panel class="bezier-spin-ease-in bezier-spin">
+						<Label class="button__text" text="Ease In"/>
+					</Panel>
+					<Panel class="bezier-spin-ease-out bezier-spin">
+						<Label class="button__text" text="Ease Out"/>
+					</Panel>
+					<Panel class="bezier-spin-ease-in-out bezier-spin">
+						<Label class="button__text" text="Ease In Out"/>
+					</Panel>
 				</Panel>
+				<Panel class="anim-panel row">
+					<Panel class="bezier-spin-ease-m bezier-spin">
+						<Label class="button__text" text="Ease"/>
+					</Panel>
+					<Panel class="bezier-spin-ease-in-m bezier-spin">
+						<Label class="button__text" text="Ease In"/>
+					</Panel>
+					<Panel class="bezier-spin-ease-out-m bezier-spin">
+						<Label class="button__text" text="Ease Out"/>
+					</Panel>
+					<Panel class="bezier-spin-ease-in-out-m bezier-spin">
+						<Label class="button__text" text="Ease In Out"/>
+					</Panel>
 				</Panel>
 			</Panel>
 

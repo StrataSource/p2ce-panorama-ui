@@ -20,7 +20,10 @@
 	contrast: 2;
 }
 
-$timing-function: cubic-bezier(.77,0,.18,1);
+$ease: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+$ease-in: cubic-bezier(0.42, 0.0, 1.0, 1.0);
+$ease-out: cubic-bezier(0.0, 0.0, 0.58, 1.0);
+$ease-in-out: cubic-bezier(0.42, 0.0, 0.58, 1.0);
 
 @keyframes test-anim {
 	0% {
@@ -30,10 +33,10 @@ $timing-function: cubic-bezier(.77,0,.18,1);
 		transform: rotateZ(90deg) scale3d(1,1,1);
 	}
 	50% {
-		transform: rotateZ(90deg) scale3d(1.5,1.5,1.5);
+		transform: rotateZ(90deg) scale3d(0.5,0.5,0.5);
 	}
 	75% {
-		transform: rotateZ(180deg) scale3d(1.5,1.5,1.5);
+		transform: rotateZ(180deg) scale3d(0.5,0.5,0.5);
 	}
 	100% {
 		transform: rotateZ(180deg) scale3d(1,1,1);
@@ -43,16 +46,27 @@ $timing-function: cubic-bezier(.77,0,.18,1);
 .anim-panel {
 	height: 200px;
 	width: 200px;
+	flow-children: right;
 	//background-color: #111;
 }
 
 .bezier-spin {
-	align: center center;
+	// align: center center;
 	width: 100px;
 	height: 100px;
 	background-color: #f44;
 	animation-name: test-anim;
 	animation-duration: 2s;
 	animation-iteration-count: infinite;
-	animation-timing-function: $timing-function;
+	animation-timing-function: linear;
 }
+
+.bezier-spin-ease { animation-timing-function: ease }
+.bezier-spin-ease-in { animation-timing-function: ease-in }
+.bezier-spin-ease-out { animation-timing-function: ease-out }
+.bezier-spin-ease-in-out { animation-timing-function: ease-in-out }
+
+.bezier-spin-ease-m { animation-timing-function: $ease }
+.bezier-spin-ease-in-m { animation-timing-function: $ease-in }
+.bezier-spin-ease-out-m { animation-timing-function: $ease-out }
+.bezier-spin-ease-in-out-m { animation-timing-function: $ease-in-out }
