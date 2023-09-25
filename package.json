@@ -1,6 +1,6 @@
 {
 	"name": "p2ce-panorama",
-	"version": "1.0.1",
+	"version": "2.0.0-alpha",
 	"description": "P2:CE's default Panorama UI.",
 	"author": "P2:CE & Momentum Team",
 	"license": "MIT",
@@ -17,7 +17,7 @@
 	"dependencies": {},
 	"devDependencies": {
 		"typescript": "^5.1.6",
-		"pano-typed": "github:koerismo/pano-typed",
+		"pano-typed": "github:StrataSource/pano-typed",
 
 		"eslint": "^8.45.0",
 		"eslint-config-prettier": "^8.5.0",
