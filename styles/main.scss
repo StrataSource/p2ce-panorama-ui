@@ -1,5 +1,10 @@
-@use 'controls';
-@use 'components';
-@use 'modals';
-@use 'hud';
-@use 'core';
+// @use 'controls';
+// @use 'components';
+// @use 'modals';
+// @use 'hud';
+// @use 'core';
+
+Panel {
+	color: #f0f;
+	font-size: 50px;
+}

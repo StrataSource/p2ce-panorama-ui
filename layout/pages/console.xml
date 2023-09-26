@@ -7,7 +7,6 @@
 -->
 <root>
 	<styles>
-		<include src="file://{resources}/styles/main.scss" />
 		<include src="file://{resources}/styles/pages/console.scss" />
 	</styles>
 	<scripts>

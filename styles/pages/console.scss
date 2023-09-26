@@ -28,7 +28,7 @@
 	}
 
 	&__top-splitter {
-		height: $separator-height;
+		height: 1px;
 		min-width: 100%;
 		background-color: gradient(linear, 0% 0%, 100% 0%, from(#d7d7d73f), to(#a0a0a03f), color-stop(0.9, #b4b4b43f));
 	}
