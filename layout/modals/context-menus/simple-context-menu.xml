@@ -1,6 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/main.scss" />
+		<!-- <include src="file://{resources}/styles/main.scss" /> -->
 	</styles>
 
 	<SimpleContextMenu class="contextmenu-fullscreen-container" tabindex="auto" selectionpos="auto">
@@ -8,7 +8,7 @@
 			<!-- Button panels containing labels will be added by code, like this:
 			<Button onactivate="ContextMenuEvent( DoMyAction() )">
 				<Label text="#MyActionText" />
-			</Button>		
+			</Button>
 			-->
 		</Panel>
 	</SimpleContextMenu>

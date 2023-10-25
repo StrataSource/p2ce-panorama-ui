@@ -1,10 +1,10 @@
 <root>
 	<styles>
+		<include src="file://{resources}/styles/main.scss" />
 		<include src="file://{resources}/styles/pages/main-menu.scss" />
 	</styles>
 
 	<scripts>
-		<include src="file://{scripts}/common/game-ui.js" />
 		<include src="file://{scripts}/pages/main-menu/main-menu.js" />
 	</scripts>
 
@@ -34,45 +34,39 @@
 		<Panel id="MainMenuInput">
 
 			<Panel id="MainMenuHeader">
-				<Image
-					id="MainMenuLogo"
-					src="file://{images}/logo.svg"
-					textureheight="90"
-					texturewidth="234"
-					scaling="stretch-to-fit-preserve-aspect" />
+				<Panel class="header-logo">
+					<Image
+						src="file://{images}/icons/header/logo.svg"
+						texturewidth="72"
+						scaling="stretch-to-fit-preserve-aspect" />
+				</Panel>
 
 				<Panel>
-					<Button id="nav-dashboard" group="menu-nav" onactivate="MainMenu.onNavbarSelect('dashboard')">
-						<Label text="Dashboard" />
+					<Button class="header-button" id="nav-dashboard" group="menu-nav" onactivate="MainMenu.onNavbarSelect('dashboard')">
+						<Image
+							src="file://{images}/icons/header/play.svg"
+							textureheight="96"
+							scaling="stretch-to-fit-preserve-aspect" />
 					</Button>
-					<Button id="nav-campaigns" group="menu-nav" onactivate="MainMenu.onNavbarSelect('campaigns')">
-						<Label text="Campaigns" />
-					</Button>
-					<Button id="nav-maps" group="menu-nav" onactivate="MainMenu.onNavbarSelect('maps')">
-						<Label text="Maps" />
-					</Button>
-					<Button id="nav-workshop" group="menu-nav" onactivate="MainMenu.onNavbarSelect('workshop')">
-						<Label text="Workshop" />
+					<Button class="header-button" id="nav-maps" group="menu-nav" onactivate="MainMenu.onNavbarSelect('maps')">
+						<Image
+							src="file://{images}/icons/header/settings.svg"
+							textureheight="96"
+							scaling="stretch-to-fit-preserve-aspect" />
 					</Button>
 				</Panel>
 
 				<Panel class="align-right">
-					<Button id="nav-develop" class="" group="menu-nav" onactivate="MainMenu.onNavbarSelect('develop')">
-						<Label text="DEVTEST" />
-					</Button>
-					<Button id="nav-settings" group="menu-nav" onactivate="MainMenu.onNavbarSelect('settings')">
-						<Label text="Settings" />
-					</Button>
-					<Button id="nav-quit" group="menu-nav" onactivate="MainMenu.promptQuit()">
-						<Image src="file://{images}/quit.svg" textureheight="48" scaling="stretch-to-fit-preserve-aspect" />
+					<Button class="header-button" id="nav-quit" onactivate="MainMenu.promptQuit()">
+						<Image
+							src="file://{images}/icons/header/quit.svg"
+							textureheight="96"
+							scaling="stretch-to-fit-preserve-aspect" />
 					</Button>
 				</Panel>
 			</Panel>
 
 			<Panel id="MainMenuBody">
-			</Panel>
-
-			<Panel id="MainMenuFooter">
 			</Panel>
 
 		</Panel>

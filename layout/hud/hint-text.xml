@@ -7,7 +7,7 @@
 -->
 <root>
 	<styles>
-		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/hint-text.scss" />
 	</styles>
 
 	<ChaosHudHintText hittest="false" class="hud-hint">

@@ -4,15 +4,31 @@
 // COLORS
 // ================
 
-$gray-100: #0f0f0f !default;
-$gray-200: #141414 !default;
-$gray-300: #2a2a2a !default;
-$gray-400: #363636 !default;
-$gray-500: #414141 !default;
-$gray-600: #4f4f4f !default;
-$gray-700: #5f5f5f !default;
-$gray-800: #828282 !default;
-$gray-900: #c8c8c8 !default;
+
+// Based on Neutral Gray N3
+// https://coolors.co/d1d2d4
+$light-100: #FCFCFC !default;
+$light-200: #E5E6E7 !default;
+$light-300: #DFE0E1 !default;
+$light-400: #D9D9DB !default;
+$light-500: #D1D2D4 !default;
+$light-600: #B3B5B8 !default;
+$light-700: #94969A !default;
+$light-800: #75787D !default;
+$light-900: #585A5D !default;
+
+// Based on Neutral Gray N10
+// https://coolors.co/2c2c2c
+$dark-100: #686868 !default;
+$dark-200: #595959 !default;
+$dark-300: #4A4A4A !default;
+$dark-400: #3A3A3A !default;
+$dark-500: #2C2C2C !default;
+$dark-600: #252525 !default;
+$dark-700: #1F1F1F !default;
+$dark-800: #161616 !default;
+$dark-900: #000000 !default;
+
 
 // ================
 // FONTS
@@ -23,14 +39,16 @@ $font-secondary: 'D-DIN Condensed', Arial, sans-serif !default;
 $font-secondary-light: 'D-DIN Condensed', Arial, sans-serif !default;
 $font-monospace: 'Roboto Mono' !default;
 $font-header-spacing: 1px !default;
-$font-default-size: 14px;
+$font-default-size: 22px;
 
-$font-size-h1: 64px;
-$font-size-h2: 50px;
-$font-size-h3: 42px;
-$font-size-h4: 34px;
-$font-size-h5: 24px;
+$font-size-h1: 42px;
+$font-size-h2: 38px;
+$font-size-h3: 34px;
+$font-size-h4: 30px;
+$font-size-h5: 26px;
 $font-size-h6: 20px;
+$font-size-h7: 17px;
+$font-size-h8: 14px;
 
 // ================
 // EASINGS (see https://easings.net/ for previews)

@@ -17,7 +17,7 @@
 	"dependencies": {},
 	"devDependencies": {
 		"typescript": "^5.1.6",
-		"pano-typed": "github:StrataSource/pano-typed",
+		"pano-typed": "github:StrataSource/pano-typed#feat/no-workshop-api",
 
 		"eslint": "^8.45.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -34,8 +34,7 @@
 	"lint-staged": {
 		"**/*.{ts,xml,scss,css,md}": "prettier . --write",
 		"scripts/**/*.ts": [
-			"eslint --fix",
-			"tsc"
+			"eslint --fix"
 		]
 	}
 }

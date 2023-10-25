@@ -1,6 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/bone-counts.scss" />
 	</styles>
 
 	<ChaosHudBoneCounts class="bonecounts">

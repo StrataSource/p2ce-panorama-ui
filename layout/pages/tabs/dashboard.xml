@@ -1,16 +1,16 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/pages/main-menu.scss" />
-		<include src="file://{resources}/styles/pages/dashboard.scss" />
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/pages/tabs/dashboard.scss" />
 	</styles>
 
 	<scripts>
 		<include src="file://{scripts}/components/tile-grid.js" />
 	</scripts>
 
-	<Panel class="body fill">
+	<Panel class="root">
 
-		<Panel
+		<!-- <Panel
 			id="dashboard"
 			class="fill"
 			margin="40px"
@@ -20,13 +20,71 @@
 			col-width="fit"
 			row-height="fit"
 			onload="TileGrid.init('#dashboard')"
-		>z
-
+		>
 			<Panel w="2" h="2"><Label text="1" /></Panel>
 			<Panel            ><Label text="2" /></Panel>
 			<Panel            ><Label text="3" /></Panel>
 			<Panel            ><Label text="4" /></Panel>
 			<Panel            ><Label text="5" /></Panel>
+		</Panel> -->
+
+		<Panel class="body">
+			<Panel class="category">
+				<Panel class="title">
+					<Label text="Featured" />
+				</Panel>
+				<Panel class="content">
+					<Panel class="card">
+						<Image src="file://{images}/temp/grid_portal2.png" scaling="stretch-to-fill-preserve-aspect" />
+						<Panel>
+							<Label class="title" text="Portal 2" />
+							<Label class="author" text="Valve Software" />
+							<Label class="description" text="Play the original singleplayer campaign of Portal 2, fully functional on the Strata Source engine!" />
+						</Panel>
+					</Panel>
+					<Panel class="card">
+						<Image src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
+						<Panel>
+							<Label class="title" text="Portal 2: Co-Op" />
+							<Label class="author" text="Valve Software" />
+							<Label class="description" text="Dolor sit amet. Lorem ipsum dolor sit. Amet. Dolor sit ipsum amet sit." />
+						</Panel>
+					</Panel>
+					<Panel class="card">
+						<Image src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
+						<Panel>
+							<Label class="title" text="P2:CE Campaign" />
+							<Label class="author" text="Strata Source Team" />
+							<Label class="description" text="Dolor sit amet. Lorem ipsum dolor sit. Amet. Dolor sit ipsum amet sit." />
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel class="category">
+				<Panel class="title">
+					<Label text="Subscribed" />
+				</Panel>
+				<Panel class="content">
+					<Panel class="card">
+						<Image src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
+						<Panel>
+							<Label class="title" text="Portal 2: Co-Op" />
+							<Label class="author" text="Valve Software" />
+							<Label class="description" text="Dolor sit amet. Lorem ipsum dolor sit. Amet. Dolor sit ipsum amet sit." />
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+
+		<Panel class="sidebar">
+			<Panel>
+				<Panel id="UserIcon">
+				</Panel>
+				<Label id="UserName" text="Username" />
+				<TextButton text="Workshop" />
+				<TextButton text="My Profile" />
+			</Panel>
 		</Panel>
 
 	</Panel>

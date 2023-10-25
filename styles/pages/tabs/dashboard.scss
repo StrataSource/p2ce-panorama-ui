@@ -1,0 +1,159 @@
+@use '../../config' as *;
+
+$vertical-pad: 96px;
+$horizontal-pad: 64px;
+$sidebar-width: 30%;
+
+$scroll-height: 10px;
+$card-height: 680px;
+$card-width: 400px;
+$info-height: 90px;
+$info-height-big: 170px;
+
+Panel.root {
+	width: 100%;
+	height: 100%;
+	flow-children: right;
+
+	> Panel {
+		height: 100%;
+	}
+}
+
+// ================ SIDEBAR ================
+
+Panel.sidebar {
+	width: $sidebar-width;
+	padding-top: $vertical-pad;
+	padding-right: $horizontal-pad;
+
+	> Panel {
+		height: 100%;
+		flow-children: down;
+		horizontal-align: center;
+	}
+
+	Label {
+		line-height: 60;
+		font-size: $font-size-h4;
+		color: $dark-500;
+	}
+
+	TextButton:hover > Label {
+		text-decoration: underline;
+	}
+}
+
+#UserIcon {
+	background-color: $dark-500;
+	width: 240px;
+	height: 240px;
+}
+
+#UserName {
+	font-weight: bold;
+}
+
+// ================ BODY ================
+
+Panel.body {
+	width: fill-parent-flow(1.0);
+	height: 100%;
+	padding: 0 0 $vertical-pad $horizontal-pad;
+
+	overflow: clip scroll;
+	flow-children: down;
+}
+
+Panel.category {
+	height: $card-height + $vertical-pad;
+	width: 100%;
+	overflow: clip noclip;
+	z-index: 10;
+	flow-children: down;
+
+	> Panel.title {
+		height: $vertical-pad;
+		Label {
+			z-index: 20;
+			align: left bottom;
+			margin-bottom: 10px;
+
+			font-size: $font-size-h1;
+			font-weight: bold;
+			color: $dark-200;
+		}
+	}
+
+	> Panel.content {
+		width: 100%;
+		flow-children: right;
+		overflow: scroll clip;
+	}
+}
+
+Panel.card {
+	height: $card-height;
+	width: $card-width;
+	margin-right: 32px;
+	overflow: clip clip;
+
+	> Image {
+		transition: pre-transform-scale2d 0.18s $easeInOutQuart 0.0s,
+		            position 0.18s $easeInOutExpo 0.0s;
+		pre-transform-scale2d: 1.0;
+		y: 0.0;
+		width: 100%;
+		height: 100%;
+		align: center bottom;
+	}
+
+	> Panel {
+		padding: 12px;
+		height: $info-height-big;
+
+		transition: position 0.25s $easeOutQuart 0.0s;
+		y: $card-height - $info-height;
+
+		flow-children: down;
+
+		background-color: $light-100;
+		color: $dark-500;
+	}
+
+	Label.title {
+		font-size: $font-size-h4;
+		font-weight: bold;
+	}
+
+	Label.author {
+		font-size: $font-size-h6;
+		margin-bottom: 4px;
+	}
+
+	Label.description {
+		transition: opacity 0.2s linear 0.0s;
+		opacity: 0.0;
+
+		font-size: $font-size-h6;
+		line-height: 26;
+
+		color: $dark-200;
+	}
+}
+
+Panel.card:hover {
+	> Image {
+		pre-transform-scale2d: 1.04;
+		y: -20.0px;
+	}
+
+	> Panel {
+		y: $card-height - $info-height-big;
+	}
+
+	Label.description {
+		transition: opacity 0.1s linear 0.0s;
+		opacity: 1.0;
+	}
+}

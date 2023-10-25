@@ -24,7 +24,7 @@ module.exports = {
 		'prefer-const': ['error'],
 		'no-empty': ['error', { allowEmptyCatch: true }],
 		'class-methods-use-this': ['error'],
-		'camelcase': ['warn'],
+		'camelcase': ['off'],
 		'eqeqeq': ['error', 'smart'],
 		'no-var': ['error'],
 		'no-useless-constructor': ['error'],

@@ -1,10 +1,11 @@
-// @use 'controls';
-// @use 'components';
-// @use 'modals';
-// @use 'hud';
-// @use 'core';
+@use './config' as *;
 
-Panel {
-	color: #f0f;
-	font-size: 50px;
+// ================
+// DEFAULT STYLES
+// ================
+
+Label {
+	font-size: $font-default-size;
+	font-family: $font-primary;
+	font-weight: normal;
 }
