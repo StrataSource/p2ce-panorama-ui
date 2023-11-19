@@ -5,7 +5,7 @@ const Categories = [
 	'Interface'
 ];
 
-class MainMenuSettings {
+class SettingsMenu {
 	static lastSelected: number|null = null;
 
 	static panels = {

@@ -18,6 +18,19 @@ ChaosMainMenu {
 	flow-children: down;
 }
 
+#BgModel {
+	width: 100%;
+	height: 100%;
+	opacity: 0.15;
+
+	transition: pre-transform-scale2d 0.5s $easeOutQuint 0.0s;
+	pre-transform-scale2d: 1.00;
+
+	&.zoom-in {
+		pre-transform-scale2d: 1.08;
+	}
+}
+
 // ================ HEADER ================
 
 #MainMenuHeader {
@@ -85,7 +98,6 @@ ChaosMainMenu {
 	}
 }
 
-#SteamNotificationsPlaceholder {
-	x: 100px;
-	y: 300px;
-}
+// #SteamNotificationsPlaceholder {
+// 	align: right bottom;
+// }

@@ -18,7 +18,16 @@ Panel.root {
 	> Panel {
 		height: 100%;
 	}
+
+	transition: pre-transform-scale2d 0.15s $easeOutQuint 0.0s,
+					opacity 0.1s linear 0.0s;
+
+	&.pre-trans {
+		pre-transform-scale2d: 1.05;
+		opacity: 0.0;
+	}
 }
+
 
 // ================ SIDEBAR ================
 
@@ -48,6 +57,11 @@ Panel.sidebar {
 	background-color: $dark-500;
 	width: 240px;
 	height: 240px;
+
+	Image {
+		width: 100%;
+		height: 100%;
+	}
 }
 
 #UserName {
@@ -98,14 +112,20 @@ Panel.card {
 	margin-right: 32px;
 	overflow: clip clip;
 
+	// Post-transition style. Can't use animations since they're broken.
+	transition: pre-transform-scale2d 0.2s $easeOutQuint 0.0s,
+	            opacity 0.2s linear 0.0s;
+
+	&.pre-trans {
+		pre-transform-scale2d: 0.9;
+		opacity: 0;
+	}
+
 	> Image {
-		transition: pre-transform-scale2d 0.18s $easeInOutQuart 0.0s,
-		            position 0.18s $easeInOutExpo 0.0s;
-		pre-transform-scale2d: 1.0;
+		transition: position 0.18s $easeOutQuart 0.05s;
 		y: 0.0;
 		width: 100%;
-		height: 100%;
-		align: center bottom;
+		height: $card-height - $info-height;
 	}
 
 	> Panel {
@@ -144,8 +164,7 @@ Panel.card {
 
 Panel.card:hover {
 	> Image {
-		pre-transform-scale2d: 1.04;
-		y: -20.0px;
+		y: ($info-height - $info-height-big) / 3;
 	}
 
 	> Panel {

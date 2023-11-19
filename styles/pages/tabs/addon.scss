@@ -1,0 +1,19 @@
+@use '../../config' as *;
+
+Panel.root {
+	width: 100%;
+	height: 100%;
+
+	transition: pre-transform-scale2d 0.3s $easeOutQuint 0.0s,
+					opacity 0.1s linear 0.0s;
+
+	&.pre-trans {
+		pre-transform-scale2d: 0.95;
+		opacity: 0.0;
+	}
+}
+
+Image#background {
+	width: 100%;
+	height: 100%;
+}

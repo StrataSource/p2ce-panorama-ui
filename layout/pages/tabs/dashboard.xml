@@ -5,68 +5,23 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{scripts}/components/tile-grid.js" />
+		<include src="file://{scripts}/common/game-ui.js" />
+		<include src="file://{scripts}/util/stub/workshop-api.js" />
+
+		<include src="file://{scripts}/components/addon-library.js" />
+		<include src="file://{scripts}/pages/tabs/dashboard.js" />
 	</scripts>
 
-	<Panel class="root">
-
-		<!-- <Panel
-			id="dashboard"
-			class="fill"
-			margin="40px"
-			flow-children="right"
-			rows="2"
-			columns="4"
-			col-width="fit"
-			row-height="fit"
-			onload="TileGrid.init('#dashboard')"
-		>
-			<Panel w="2" h="2"><Label text="1" /></Panel>
-			<Panel            ><Label text="2" /></Panel>
-			<Panel            ><Label text="3" /></Panel>
-			<Panel            ><Label text="4" /></Panel>
-			<Panel            ><Label text="5" /></Panel>
-		</Panel> -->
-
+	<Panel class="root" onload="DashboardMenu.onDashboardLoaded()" useglobalcontext="false">
 		<Panel class="body">
-			<Panel class="category">
-				<Panel class="title">
-					<Label text="Featured" />
-				</Panel>
-				<Panel class="content">
-					<Panel class="card">
-						<Image src="file://{images}/temp/grid_portal2.png" scaling="stretch-to-fill-preserve-aspect" />
-						<Panel>
-							<Label class="title" text="Portal 2" />
-							<Label class="author" text="Valve Software" />
-							<Label class="description" text="Play the original singleplayer campaign of Portal 2, fully functional on the Strata Source engine!" />
-						</Panel>
-					</Panel>
-					<Panel class="card">
-						<Image src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
-						<Panel>
-							<Label class="title" text="Portal 2: Co-Op" />
-							<Label class="author" text="Valve Software" />
-							<Label class="description" text="Dolor sit amet. Lorem ipsum dolor sit. Amet. Dolor sit ipsum amet sit." />
-						</Panel>
-					</Panel>
-					<Panel class="card">
-						<Image src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
-						<Panel>
-							<Label class="title" text="P2:CE Campaign" />
-							<Label class="author" text="Strata Source Team" />
-							<Label class="description" text="Dolor sit amet. Lorem ipsum dolor sit. Amet. Dolor sit ipsum amet sit." />
-						</Panel>
-					</Panel>
-				</Panel>
-			</Panel>
-			<Panel class="category">
+			<!-- <Panel class="category">
 				<Panel class="title">
 					<Label text="Subscribed" />
 				</Panel>
 				<Panel class="content">
 					<Panel class="card">
-						<Image src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
+						<Image class="cover" src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
+						<Image class="logo" src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
 						<Panel>
 							<Label class="title" text="Portal 2: Co-Op" />
 							<Label class="author" text="Valve Software" />
@@ -74,16 +29,15 @@
 						</Panel>
 					</Panel>
 				</Panel>
-			</Panel>
+			</Panel> -->
 		</Panel>
 
 		<Panel class="sidebar">
 			<Panel>
-				<Panel id="UserIcon">
-				</Panel>
+				<ChaosAvatarImage id="UserIcon" />
 				<Label id="UserName" text="Username" />
-				<TextButton text="Workshop" />
-				<TextButton text="My Profile" />
+				<TextButton text="Workshop" onactivate="DashboardMenu.openWorkshop()" />
+				<TextButton text="My Profile" onactivate="DashboardMenu.openProfile()" />
 			</Panel>
 		</Panel>
 

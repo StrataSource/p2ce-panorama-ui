@@ -1,0 +1,18 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/pages/tabs/addon.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/common/game-ui.js" />
+		<include src="file://{scripts}/util/stub/workshop-api.js" />
+
+		<include src="file://{scripts}/pages/tabs/addon.js" />
+	</scripts>
+
+	<Panel class="root pre-trans" useglobalcontext="false">
+		<Image id="background" src="file://{workshop}/id-placeholder/images/card.jpeg" />
+		<TextButton id="amogus" onactivate="AddonMenu.goBack()" />
+	</Panel>
+</root>

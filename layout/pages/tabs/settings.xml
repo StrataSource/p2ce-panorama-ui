@@ -8,7 +8,7 @@
 		<include src="file://{scripts}/pages/settings.js" />
 	</scripts>
 
-	<Panel class="body fill">
+	<Panel class="body fill" useglobalcontext="false">
 		<Panel class="sidebar">
 			<!-- <TextEntry
 				id="SettingsSearch"

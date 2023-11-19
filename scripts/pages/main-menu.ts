@@ -1,5 +1,14 @@
+type Active<T = Panel|null> = { button: T, content: T };
+
+/* Sounds:
+	"UI.Click"
+	"UI.Unclick"
+	"UI.Focus"
+	"UI.Unfocus"
+	"UI.Swap" */
+
 class MainMenu {
-	static active: {[key: string]: Panel|null} = {
+	static active: Active = {
 		button: null,
 		content: null,
 	};
@@ -7,9 +16,8 @@ class MainMenu {
 	static panels = {
 		header: $('#MainMenuHeader')!,
 		body:   $('#MainMenuBody')!,
-		cp:     $.GetContextPanel(),
-		// movie:  $('#MainMenuMovie'),
-		// image:  $('#MainMenuBackground'),
+		root:   $.GetContextPanel(),
+		bg:		$<ModelPanel>('#BgModel')!,
 	};
 
 	static {
@@ -17,9 +25,22 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('ChaosHideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ChaosShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('ChaosHidePauseMenu', this.onHidePauseMenu.bind(this));
-		// $.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuBackground.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 		$.DispatchEvent('ChaosHideIntroMovie');
+
+		$.RegisterForUnhandledEvent('MainMenu.AddonFocused', (index) => {
+			this.onNavbarSelect('addon', index, true);
+			this.panels.bg.AddClass('zoom-in');
+		});
+
+		$.RegisterForUnhandledEvent('MainMenu.AddonUnfocused', () => {
+			this.onNavbarSelect('dashboard', null, true);
+			this.panels.bg.RemoveClass('zoom-in');
+		});
+
+		this.panels.bg.SetCameraPosition(-26, -12, 31);
+		this.panels.bg.SetCameraAngles(45, 40, 35);
+		this.panels.bg.SetCameraFOV(80);
 	}
 
 	/**
@@ -27,45 +48,38 @@ class MainMenu {
 	 * Fired when ChaosMainMenu fires its onload event.
 	 */
 	static onMainMenuLoaded() {
+		// $.PlaySoundEvent('UI.Music.Ambient1');
+
 		if (GameInterfaceAPI.GetSettingBool('developer'))
 			$('#nav-develop')?.RemoveClass('hide');
 	}
 
 	/** Fired by C++ whenever main menu is switched to. */
 	static onShowMainMenu() {
+		$.Msg('onShowMainMenu called!');
 		// this.panels.movie = $('#MainMenuMovie');
 		// this.panels.image = $('#MainMenuBackground');
 	}
 
 	/** Fired by C++ whenever main menu is switched from. */
 	static onHideMainMenu() {
+		$.Msg('onHideMainMenu called!');
 		UiToolkitAPI.CloseAllVisiblePopups();
 	}
 
 	/** Fired by C++ whenever pause menu (i.e. main menu when in a map) is switched to. */
 	static onShowPauseMenu() {
-		this.panels.cp.AddClass('paused');
+		this.panels.root.AddClass('paused');
 	}
 
 	/** Fired by C++ whenever pause menu is switched from. */
 	static onHidePauseMenu() {
-		this.panels.cp.RemoveClass('paused');
-
-		// // Save to file whenever the settings page gets closed
-		// if (this.activeTab === 'Settings') {
-		// 	$.DispatchEvent('SettingsSave');
-		// }
+		this.panels.root.RemoveClass('paused');
 	}
 
-	/** Fired by XML inline events: Header button press event */
-	static onNavbarSelect(tab: string) {
+	/** Fired by XML inline events: Header button press event. The carryover parameter defines data to be sent to the tab post-transition. */
+	static onNavbarSelect(tab: string, carryover: unknown=null, silent: boolean=false) {
 		const tabID = 'tab-'+tab;
-
-		if (this.active.content) {
-			this.active.button!.RemoveClass('active');
-			this.active.content.visible = false;
-			this.active.content.SetReadyForDisplay(false);
-		}
 
 		let targetPanel = this.panels.body.FindChild(tabID);
 		if (!targetPanel) {
@@ -74,8 +88,19 @@ class MainMenu {
 			targetPanel.RegisterForReadyEvents(true);
 		}
 
-		this.active.button = this.panels.header.FindChildTraverse('nav-' + tab)!;
-		this.active.button.AddClass('active');
+		if (this.active.content === targetPanel) return;
+
+		if (!silent) $.PlaySoundEvent('UI.Swap');
+		$.DispatchEvent('MainMenu.TabSelected', tab, carryover);
+
+		if (this.active.content) {
+			this.active.button?.RemoveClass('active');
+			this.active.content.visible = false;
+			this.active.content.SetReadyForDisplay(false);
+		}
+
+		this.active.button = this.panels.header.FindChildTraverse('nav-' + tab);
+		this.active.button?.AddClass('active');
 
 		this.active.content = targetPanel;
 		this.active.content.visible = true;
@@ -89,16 +114,16 @@ class MainMenu {
 			return;
 		}
 
-		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-			$.LocalizeSafe('#Action_Quit'),
-			$.LocalizeSafe('#Action_Quit_Message'),
-			'warning-popup',
-			$.LocalizeSafe('#Action_Quit'),
-			this.quitGame,
-			$.LocalizeSafe('#Action_Return'),
-			() => {},
-			'blur'
-		);
+		// UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+		// 	$.LocalizeSafe('#Action_Quit'),
+		// 	$.LocalizeSafe('#Action_Quit_Message'),
+		// 	'warning-popup',
+		// 	$.LocalizeSafe('#Action_Quit'),
+		// 	this.quitGame,
+		// 	$.LocalizeSafe('#Action_Return'),
+		// 	() => {},
+		// 	'blur'
+		// );
 	}
 
 	/** Quits the game. Bye! */

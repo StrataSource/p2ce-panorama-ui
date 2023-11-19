@@ -50,3 +50,9 @@ $.DefineEvent(
 
 $.DefineEvent('ColorPickerSave', 1, 'color');
 $.DefineEvent('ColorPickerCancel', 0);
+
+// Custom new menu events
+
+$.DefineEvent('MainMenu.TabSelected', 2, 'The tab ID, the carry-over data.');
+$.DefineEvent('MainMenu.AddonFocused', 1, 'The addon index', 'Fired by the dashboard. Triggers a tab switch to the addon.');
+$.DefineEvent('MainMenu.AddonUnfocused', 0, '', 'Fired by the addon tab. Triggers a tab switch to the dashboard.');

@@ -18,6 +18,10 @@
 		width: 100%;
 		height: fill-parent-flow(1);
 		flow-children: down;
+
+		#ConsoleMessageTarget {
+			width: 100%;
+		}
 	}
 
 	&__message-target > MultiselectLabel {

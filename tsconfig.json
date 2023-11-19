@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "NodeNext",
+		"module": "ES2022",
+		"moduleResolution": "Node",
 		"rootDir": "scripts/",
 		"outDir": ".jsbuild/",
 
