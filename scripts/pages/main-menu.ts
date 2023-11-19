@@ -8,6 +8,8 @@ type Active<T = Panel|null> = { button: T, content: T };
 	"UI.Swap" */
 
 class MainMenu {
+	static addon_focused: boolean = false;
+
 	static active: Active = {
 		button: null,
 		content: null,
@@ -40,7 +42,7 @@ class MainMenu {
 
 		this.panels.bg.SetCameraPosition(-26, -12, 31);
 		this.panels.bg.SetCameraAngles(45, 40, 35);
-		this.panels.bg.SetCameraFOV(80);
+		this.panels.bg.SetCameraFOV(85);
 	}
 
 	/**
@@ -49,6 +51,7 @@ class MainMenu {
 	 */
 	static onMainMenuLoaded() {
 		// $.PlaySoundEvent('UI.Music.Ambient1');
+		this.onNavbarSelect('dashboard', null, true);
 
 		if (GameInterfaceAPI.GetSettingBool('developer'))
 			$('#nav-develop')?.RemoveClass('hide');
@@ -79,6 +82,8 @@ class MainMenu {
 
 	/** Fired by XML inline events: Header button press event. The carryover parameter defines data to be sent to the tab post-transition. */
 	static onNavbarSelect(tab: string, carryover: unknown=null, silent: boolean=false) {
+		this.addon_focused = (tab === 'addon');
+
 		const tabID = 'tab-'+tab;
 
 		let targetPanel = this.panels.body.FindChild(tabID);
@@ -138,6 +143,11 @@ class MainMenu {
 	 * @param focusPanel - Pressing in main menu returns undefined
 	 */
 	static onEscapeKeyPressed(source: unknown, repeats: unknown, focusPanel: unknown) {
+		if (this.addon_focused) {
+			$.DispatchEvent('MainMenu.AddonUnfocused');
+			$.PlaySoundEvent('UI.Unclick');
+		}
+
 		// Resume game in pause menu mode, OTHERWISE close the active menu menu page
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			$.DispatchEvent('ChaosMainMenuResumeGame');

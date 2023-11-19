@@ -1,6 +1,6 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/pages/settings.scss" />
+		<include src="file://{resources}/styles/pages/settings-page.scss" />
 	</styles>
 	<scripts>
 		<!-- <include src="file://{scripts}/pages/settings/page.js" /> -->

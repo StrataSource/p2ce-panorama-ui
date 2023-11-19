@@ -5,7 +5,7 @@ class AddonCardElement {
 	constructor(parent: Panel, meta: AddonMeta) {
 		this.element = $.CreatePanel('Panel', parent, '', { class: 'card pre-trans' });
 		this.element.CreateChildren(`
-			<Image class="cover" src="${meta.cover}" scaling="stretch-to-fill-preserve-aspect" />
+			<Image class="cover" src="${meta.cover}" scaling="stretch-to-cover-preserve-aspect" />
 			<Panel>
 				<Label class="title" text="${meta.title}" />
 				<Label class="author" text="${meta.authors[0]}" />
@@ -14,7 +14,7 @@ class AddonCardElement {
 		`);
 
 		this.element.SetPanelEvent('onactivate', () => {
-			$.DispatchEvent('MainMenu.AddonFocused', meta.uuid);
+			$.DispatchEvent('MainMenu.AddonFocused', meta.index);
 		});
 	}
 
@@ -46,7 +46,7 @@ class CardCategoryElement {
 			this.items[i] = card;
 
 			// Fade tiles in one-by-one on first load.
-			$.Schedule(i/50 + delay, () => card.element.RemoveClass('pre-trans'))
+			$.Schedule(i/20 + delay, () => card.element.RemoveClass('pre-trans'))
 		}
 	}
 }
@@ -57,14 +57,17 @@ class WorkshopMenuElement {
 
 	constructor(parent: Panel) {
 		const addonCount = WorkshopAPI.GetAddonCount();
-		const addons = new Array<AddonMeta>(addonCount);
-		for (let i=0; i<addonCount; i++) addons[i] = WorkshopAPI.GetAddonMeta(i);
 
-		// const featured = new CardCategoryElement(parent, 'Featured', [
-		// ]);
-		// this.categories.push(featured);
+		const featured: AddonMeta[] = [];
+		const subscribed: AddonMeta[] = [];
 
-		const subscribed = new CardCategoryElement(parent, 'Subscribed', addons);
-		this.categories.push(subscribed);
+		for (let i=0; i<addonCount; i++) {
+			const addon = WorkshopAPI.GetAddonMeta(i);
+			if (addon.local) featured.push(addon)
+			else subscribed.push(addon);
+		}
+
+		this.categories.push(new CardCategoryElement(parent, 'Local', featured));
+		this.categories.push(new CardCategoryElement(parent, 'Subscribed', subscribed));
 	}
 }

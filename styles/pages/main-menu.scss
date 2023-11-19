@@ -48,13 +48,16 @@ ChaosMainMenu {
 	Panel.align-right {
 		horizontal-align: right;
 	}
+
+	.double-padding {
+		margin-left: 32px;
+		margin-right: 32px;
+	}
 }
 
 .header-logo {
 	height: $header-height;
 	width: $header-height;
-	margin-left: 32px;
-	margin-right: 32px;
 
 	Image {
 		align: center center;

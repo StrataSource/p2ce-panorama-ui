@@ -1,0 +1,117 @@
+"this is entirely ignored by the valve parser because ????"
+{
+	"0"
+	{
+		index 0
+		local true
+		title "Portal 2"
+		description "Play the original singleplayer campaign of Portal 2, fully functional on the Strata Source engine!"
+
+		authors "Valve Corporation"
+		tags "Among Us"
+
+		dependencies { }
+		subscriptions 234
+		votescore 102
+		flagged false
+
+		cover "file://{workshop}/p2/images/620_library_hero.jpg"
+		logo "file://{amogus}"
+	}
+
+	// "1"
+	// {
+	// 	index 1
+	// 	local true
+	// 	title "Portal 2 Co-op"
+	// 	description "Holy shit guys, it\'s Among Us in Portal 2 by Valve Software!"
+
+	// 	authors "Valve Corporation"
+	// 	tags "Among Us"
+
+	// 	dependencies { }
+	// 	subscriptions 234
+	// 	votescore 102
+	// 	flagged false
+
+	// 	cover "file://{workshop}/p2/images/620_library_600x900.jpg"
+	// 	logo "file://{amogus}"
+	// }
+
+	"1"
+	{
+		index 1
+		local true
+		title "P2:CE Campaign"
+		description "Holy shit guys, it\'s Among Us in Portal 2 by Valve Software!"
+
+		authors "P2:CE Team"
+		tags "Among Us"
+
+		dependencies { }
+		subscriptions 234
+		votescore 102
+		flagged false
+
+		cover "file://{workshop}/p2ce/images/440000_hero.png"
+		logo "file://{amogus}"
+	}
+
+	"2"
+	{
+		index 2
+		local true
+		title ""
+		description ""
+
+		authors ""
+		tags "Among Us"
+
+		dependencies { }
+		subscriptions 234
+		votescore 102
+		flagged false
+
+		cover "none"
+		logo "file://{amogus}"
+	}
+
+	"3"
+	{
+		index 3
+		local false
+		title ""
+		description ""
+
+		authors ""
+		tags "Among Us"
+
+		dependencies { }
+		subscriptions 234
+		votescore 102
+		flagged false
+
+		cover "none"
+		logo "file://{amogus}"
+	}
+
+	"4"
+	{
+		index 4
+		local false
+		title ""
+		description ""
+
+		authors ""
+		tags "Among Us"
+
+		dependencies { }
+		subscriptions 234
+		votescore 102
+		flagged false
+
+		cover "none"
+		logo "file://{amogus}"
+	}
+
+}

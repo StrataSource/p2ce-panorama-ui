@@ -5,6 +5,7 @@
 	</styles>
 
 	<scripts>
+		<include src="file://{scripts}/common/game-ui.js" />
 		<include src="file://{scripts}/pages/main-menu.js" />
 	</scripts>
 
@@ -17,7 +18,7 @@
 		<Panel id="MainMenuInput">
 
 			<Panel id="MainMenuHeader">
-				<Panel class="header-logo">
+				<Panel class="header-logo double-padding">
 					<Image
 						src="file://{images}/icons/header/logo.svg"
 						texturewidth="72"
@@ -31,7 +32,7 @@
 							textureheight="96"
 							scaling="stretch-to-fit-preserve-aspect" />
 					</Button>
-					<Button class="header-button" id="nav-maps" group="menu-nav" onactivate="MainMenu.onNavbarSelect('maps')">
+					<Button class="header-button" id="nav-settings" group="menu-nav" onactivate="MainMenu.onNavbarSelect('settings')">
 						<Image
 							src="file://{images}/icons/header/settings.svg"
 							textureheight="96"
@@ -40,7 +41,7 @@
 				</Panel>
 
 				<Panel class="align-right">
-					<Button class="header-button" id="nav-quit" onactivate="MainMenu.promptQuit()">
+					<Button class="header-button double-padding" id="nav-quit" onactivate="MainMenu.promptQuit()">
 						<Image
 							src="file://{images}/icons/header/quit.svg"
 							textureheight="96"

@@ -22,7 +22,7 @@ class DashboardMenu {
 
 		$.RegisterForUnhandledEvent('MainMenu.AddonFocused', (index) => {
 			const addon = WorkshopAPI.GetAddonMeta(index);
-			$.PlaySoundEvent('UI.Click');
+			$.PlaySoundEvent('UI.Unclick');
 			$.Msg(`Focusing addon: ${addon.title}!`);
 		});
 

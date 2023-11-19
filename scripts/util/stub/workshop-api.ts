@@ -1,7 +1,8 @@
 interface AddonMeta {
-	uuid: uuid|null;
+	index: number;
 	title: string;
 	description: string;
+	local: boolean;
 
 	authors: string[];
 	tags: string[];
@@ -37,30 +38,25 @@ const DownloadState = {
 } as const;
 
 class WorkshopAPI {
-	static __en__ = true;
+	static sauce = $.LoadKeyValuesFile('panorama/workshop/builtins.vdf') as {
+		[key: string]: AddonMeta
+	};
+
+	static {
+		for (const key in this.sauce) {
+			this.sauce[key].authors = (<string><unknown>this.sauce[key].authors).split(',');
+			this.sauce[key].local = <string><unknown>this.sauce[key].local !== 'false';
+		}
+	}
 
 	static GetAddonCount(): number {
-		return 1;
+		$.Msg(this.sauce);
+		return Object.keys(this.sauce).length;
 	}
 
 	static GetAddonMeta(index: number): AddonMeta {
-		return {
-			uuid: 123686234876,
-			title: 'Among Us in Portal 2',
-			description: 'Holy shit guys, it\'s Among Us in Portal 2 by Valve Software!',
-
-			authors: [ 'Baguettery' ],
-			tags: [ 'Among Us' ],
-
-			dependencies: {},
-			subscriptions: 234,
-			votescore: 102,
-			flagged: false,
-
-			cover: 'file://{workshop}/id-placeholder/images/card.jpeg',
-			// background: 'file://{workshop_content}/2b37a65e12d4561f/small.png',
-			logo: 'file://{amogus}',
-		}
+		$.Msg(this.sauce)
+		return this.sauce[index];
 	}
 
 	static GetAddonMaps(index: number): AddonMapMeta[] {
@@ -90,7 +86,7 @@ class WorkshopAPI {
 	}
 
 	static GetAddonEnabled(index: number): boolean {
-		return this.__en__;
+		return true;
 	}
 
 	static SetAddonSubscribed(index: number, subscribed: boolean): boolean {
@@ -98,7 +94,6 @@ class WorkshopAPI {
 	}
 
 	static SetAddonEnabled(index: number, enabled: boolean): boolean {
-		this.__en__ = enabled;
 		return true;
 	}
 }

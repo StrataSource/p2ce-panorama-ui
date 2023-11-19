@@ -12,7 +12,7 @@
 	</scripts>
 
 	<Panel class="root pre-trans" useglobalcontext="false">
-		<Image id="background" src="file://{workshop}/id-placeholder/images/card.jpeg" />
+		<Image id="background" src="none" scaling="stretch-to-cover-preserve-aspect" />
 		<TextButton id="amogus" onactivate="AddonMenu.goBack()" />
 	</Panel>
 </root>

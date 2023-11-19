@@ -2,9 +2,10 @@
 
 $vertical-pad: 96px;
 $horizontal-pad: 64px;
-$sidebar-width: 30%;
+$sidebar-width: 30%; // fit-children;
 
-$scroll-height: 10px;
+$scroll-height: 12px;
+$card-spacing: 24px;
 $card-height: 680px;
 $card-width: 400px;
 $info-height: 90px;
@@ -20,7 +21,7 @@ Panel.root {
 	}
 
 	transition: pre-transform-scale2d 0.15s $easeOutQuint 0.0s,
-					opacity 0.1s linear 0.0s;
+				opacity 0.1s linear 0.0s;
 
 	&.pre-trans {
 		pre-transform-scale2d: 1.05;
@@ -33,6 +34,7 @@ Panel.root {
 
 Panel.sidebar {
 	width: $sidebar-width;
+	padding-left: $horizontal-pad;
 	padding-top: $vertical-pad;
 	padding-right: $horizontal-pad;
 
@@ -80,7 +82,8 @@ Panel.body {
 }
 
 Panel.category {
-	height: $card-height + $vertical-pad;
+	$scrollbar-padding: $card-spacing + $scroll-height - 6px;
+	height: $card-height + $vertical-pad + $scrollbar-padding;
 	width: 100%;
 	overflow: clip noclip;
 	z-index: 10;
@@ -103,17 +106,37 @@ Panel.category {
 		width: 100%;
 		flow-children: right;
 		overflow: scroll clip;
+		padding-top: $scrollbar-padding;
+
+		HorizontalScrollBar {
+			height: $scroll-height;
+			width: 100%;
+			opacity: 0.5;
+			background-color: $light-600;
+
+			transition: opacity 0.05s linear 0.0s;
+
+			&:hover {
+				opacity: 0.8;
+			}
+
+			.ScrollThumb {
+				height: 100%;
+				min-width: 32px;
+				background-color: $light-800;
+			}
+		}
 	}
 }
 
 Panel.card {
 	height: $card-height;
 	width: $card-width;
-	margin-right: 32px;
+	margin-right: $card-spacing;
 	overflow: clip clip;
 
 	// Post-transition style. Can't use animations since they're broken.
-	transition: pre-transform-scale2d 0.2s $easeOutQuint 0.0s,
+	transition: pre-transform-scale2d 0.35s $easeOutQuint 0.0s,
 	            opacity 0.2s linear 0.0s;
 
 	&.pre-trans {
@@ -122,6 +145,7 @@ Panel.card {
 	}
 
 	> Image {
+		background-color: $light-600;
 		transition: position 0.18s $easeOutQuart 0.05s;
 		y: 0.0;
 		width: 100%;
@@ -130,6 +154,7 @@ Panel.card {
 
 	> Panel {
 		padding: 12px;
+		width: 100%;
 		height: $info-height-big;
 
 		transition: position 0.25s $easeOutQuart 0.0s;

@@ -13,7 +13,7 @@ class AddonMenu {
 
 	static onAddonShown(uuid: uuid) {
 		$<Label>('#amogus')!.text = WorkshopAPI.GetAddonMeta(uuid).title;
-		$<Image>('#background')!.src = WorkshopAPI.GetAddonMeta(uuid).cover;
+		$<Image>('#background')!.SetImage(WorkshopAPI.GetAddonMeta(uuid).cover);
 		this.panels.root.RemoveClass('pre-trans');
 	}
 
