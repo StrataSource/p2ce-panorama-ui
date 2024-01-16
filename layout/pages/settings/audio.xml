@@ -46,16 +46,9 @@
 
 				</Panel>
 
-				<ChaosSettingsSlider
-					text="#Settings_Volume_Game"
-					min="0"
-					max="1"
-					percentage="true"
-					convar="volume"
-					hasdocspage="false"
-				/>
+				<SettingsSlider text="#Settings_Volume_Game" min="0" max="1" percentage="true" convar="volume" hasdocspage="false" />
 
-				<ChaosSettingsSlider
+				<SettingsSlider
 					text="#Settings_Volume_Music"
 					min="0"
 					max="1"
@@ -65,7 +58,7 @@
 					hasdocspage="false"
 				/>
 
-				<ChaosSettingsSlider
+				<SettingsSlider
 					text="#Settings_Volume_Ambient"
 					min="0"
 					max="1"
@@ -75,7 +68,7 @@
 					hasdocspage="false"
 				/>
 
-				<ChaosSettingsSlider
+				<SettingsSlider
 					text="#Settings_Volume_PlayerWeapon"
 					min="0"
 					max="1"
@@ -85,7 +78,7 @@
 					hasdocspage="false"
 				/>
 
-				<ChaosSettingsSlider
+				<SettingsSlider
 					text="#Settings_Volume_OverallWeapon"
 					min="0"
 					max="1"
@@ -95,7 +88,7 @@
 					hasdocspage="false"
 				/>
 
-				<ChaosSettingsSlider
+				<SettingsSlider
 					text="#Settings_Volume_UI"
 					min="0"
 					max="1"
@@ -105,7 +98,7 @@
 					hasdocspage="false"
 				/>
 
-				<ChaosSettingsSlider
+				<SettingsSlider
 					text="#Settings_Volume_Physics"
 					min="0"
 					max="1"
@@ -115,7 +108,7 @@
 					hasdocspage="false"
 				/>
 
-				<ChaosSettingsSlider
+				<SettingsSlider
 					text="#Settings_Volume_Footsteps"
 					min="0"
 					max="1"
@@ -143,7 +136,7 @@
 
 				</Panel>
 
-				<ChaosSettingsEnumDropDown
+				<SettingsEnumDropDown
 					text="#Settings_AudioDevices_Speaker"
 					convar="snd_surround_speakers"
 					oninputsubmit="BaseSpeakerConfigurationChanged()"
@@ -153,9 +146,9 @@
 					<Label text="#Settings_AudioDevices_Speaker_StereoSpeakers" id="speakerconfig2" value="2" />
 					<Label text="#Settings_AudioDevices_Speaker_Quad" id="speakerconfig3" value="4" />
 					<Label text="#Settings_AudioDevices_Speaker_51" id="speakerconfig4" value="5" />
-				</ChaosSettingsEnumDropDown>
+				</SettingsEnumDropDown>
 
-				<ChaosSettingsEnumDropDown
+				<SettingsEnumDropDown
 					text="#Settings_AudioDevices_Device"
 					id="DeviceConfigurationEnum"
 					convar="sound_device_override"
@@ -171,17 +164,17 @@
 					<Label id="device6" text="XXXXXX 6" />
 					<Label id="device7" text="XXXXXX 7" />
 					<Label id="device8" text="XXXXXX 8" />
-				</ChaosSettingsEnumDropDown>
+				</SettingsEnumDropDown>
 
-				<ChaosSettingsEnum text="#Settings_AudioDevices_HWCompat" convar="snd_hwcompat" hasdocspage="false">
+				<SettingsEnum text="#Settings_AudioDevices_HWCompat" convar="snd_hwcompat" hasdocspage="false">
 					<RadioButton group="hwcompat" text="#Common_Off" value="0" />
 					<RadioButton group="hwcompat" text="#Common_On" value="1" />
-				</ChaosSettingsEnum>
+				</SettingsEnum>
 
-				<ChaosSettingsEnum text="#Settings_AudioDevices_Background" convar="snd_mute_losefocus" hasdocspage="false">
+				<SettingsEnum text="#Settings_AudioDevices_Background" convar="snd_mute_losefocus" hasdocspage="false">
 					<RadioButton group="losefocus" text="#Common_Off" value="0" />
 					<RadioButton group="losefocus" text="#Common_On" value="1" />
-				</ChaosSettingsEnum>
+				</SettingsEnum>
 
 			</Panel>
 

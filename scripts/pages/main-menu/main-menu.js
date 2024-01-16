@@ -30,19 +30,19 @@ class MainMenu {
 	static inSpace = false; // Temporary fun...
 
 	static {
-		$.RegisterForUnhandledEvent('ChaosShowMainMenu', this.onShowMainMenu.bind(this));
-		$.RegisterForUnhandledEvent('ChaosHideMainMenu', this.onHideMainMenu.bind(this));
-		$.RegisterForUnhandledEvent('ChaosShowPauseMenu', this.onShowPauseMenu.bind(this));
-		$.RegisterForUnhandledEvent('ChaosHidePauseMenu', this.onHidePauseMenu.bind(this));
+		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
+		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
+		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
+		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuBackground.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 
-		$.DispatchEvent('ChaosHideIntroMovie');
+		$.DispatchEvent('HideIntroMovie');
 	}
 
 	/**
 	 * General onLoad initialisations.
-	 * Fired when ChaosMainMenu fires its onload event.
+	 * Fired when MainMenu fires its onload event.
 	 */
 	static onMainMenuLoaded() {
 		// These aren't accessible until the page has loaded fully, find them now
@@ -290,7 +290,7 @@ class MainMenu {
 	static onQuitPrompt(toDesktop = true) {
 		if (!toDesktop) return; // currently don't handle disconnect prompts
 
-		$.DispatchEvent('ChaosMainMenuPauseGame'); // make sure game is paused so we can see the popup if hit from a keybind in-game
+		$.DispatchEvent('MainMenuPauseGame'); // make sure game is paused so we can see the popup if hit from a keybind in-game
 
 		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 			$.Localize('#Action_Quit'),
@@ -318,7 +318,7 @@ class MainMenu {
 	static onEscapeKeyPressed(_eSource, _nRepeats, _focusPanel) {
 		// Resume game in pause menu mode, OTHERWISE close the active menu menu page
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-			$.DispatchEvent('ChaosMainMenuResumeGame');
+			$.DispatchEvent('MainMenuResumeGame');
 		} else {
 			this.onHomeButtonPressed();
 		}
