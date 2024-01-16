@@ -20,7 +20,7 @@ class SettingsShared {
 				discardVideoSettingsButton.enabled = false;
 
 				// Tell C++ to init controls from convars
-				$.DispatchEvent('ChaosVideoSettingsInit');
+				$.DispatchEvent('VideoSettingsInit');
 
 				this.initTextureReplacementDropdown();
 
@@ -43,9 +43,9 @@ class SettingsShared {
 
 	static resetSettingsRecursive(panel) {
 		// TODO: Add support for Enums and Colours here, then include
-		if (panel.paneltype === 'ChaosSettingsSlider' || panel.paneltype === 'ChaosSettingsEnumDropDown') {
+		if (panel.paneltype === 'SettingsSlider' || panel.paneltype === 'SettingsEnumDropDown') {
 			panel.RestoreCVarDefault();
-		} else if (panel.paneltype === 'ChaosSettingsKeyBinder') {
+		} else if (panel.paneltype === 'SettingsKeyBinder') {
 			// OptionsMenuAPI has already handled this, just refresh
 			panel.OnShow?.();
 		} else {
@@ -72,7 +72,7 @@ class SettingsShared {
 	static resetVideoSettings() {
 		// For future: use same localisation string as above
 		this.showConfirmResetSettings($.Localize('#Settings_General_ResetSomething'), () => {
-			$.DispatchEvent('ChaosVideoSettingsResetDefault');
+			$.DispatchEvent('VideoSettingsResetDefault');
 			this.resetSettingsRecursive($.GetContextPanel());
 			this.videoSettingsOnUserInputSubmit();
 		});
@@ -110,13 +110,13 @@ class SettingsShared {
 	static videoSettingsDiscardChanges() {
 		// Discard dialogue seems unnecessary here
 		// this.showConfirmResetSettings('Are you sure you want to discard your changes to video settings?', () => {
-		$.DispatchEvent('ChaosVideoSettingsInit');
+		$.DispatchEvent('VideoSettingsInit');
 		this.videoSettingsResetUserInput();
 		// });
 	}
 
 	static videoSettingsApplyChanges() {
-		$.DispatchEvent('ChaosApplyVideoSettings');
+		$.DispatchEvent('ApplyVideoSettings');
 		this.videoSettingsResetUserInput();
 	}
 
@@ -219,11 +219,11 @@ class SettingsShared {
 
 	static isSettingsPanel(panel) {
 		return [
-			'ChaosSettingsEnum',
-			'ChaosSettingsSlider',
-			'ChaosSettingsEnumDropDown',
-			'ChaosSettingsKeyBinder',
-			'ChaosSettingsToggle',
+			'SettingsEnum',
+			'SettingsSlider',
+			'SettingsEnumDropDown',
+			'SettingsKeyBinder',
+			'SettingsToggle',
 			'ConVarColorDisplay'
 		].includes(panel.paneltype);
 	}
