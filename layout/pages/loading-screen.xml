@@ -1,30 +1,18 @@
 <root>
 	<styles>
+		<include src="file://{resources}/styles/pages/loading-screen.scss" />
 	</styles>
 
-	<scripts>
-		<include src="file://{scripts}/pages/loading-screen.js" />
-	</scripts>
-
 	<Panel class="loadingscreen">
-		<Image id="BackgroundImageDefault" class="full" src="file://{materials}/panorama/bg_00.vtf" />
-		<Image id="BackgroundImage" class="full hide" scaling="stretch-to-cover-preserve-aspect" />
-
-		<Panel class="full flow-down">
-			<Panel class="loadingscreen__details">
-				<Panel class="loadingscreen__left-details">
-					<Label id="MapName" class="text-h1" text="{s:mapname}" />
-					<Label id="Author" class="text-h2" text="#LoadingScreen_Author" />
+		<Panel id="container" class="fill">
+			<Panel class="bottom row vertical">
+				<Panel class="row horizontal" id="details">
+					<Label id="ProgressStatusText" text="#LoadingScreen_Loading" />
+					<Label id="PercentText" class="right" text="{d:percent}%" />
 				</Panel>
-				<Panel class="loadingscreen__right-details">
-					<Label id="TierAndType" class="text-h1 loadingscreen__right-label" text="#LoadingScreen_TierAndType" />
-					<Label id="NumZones" class="text-h2 loadingscreen__right-label" text="#LoadingScreen_NumZones" />
-				</Panel>
-				<!--Label id="GameModeTip" class="text-l loadingscreen__tip" text="{s:tip}" /-->
-				<Label id="ProgressStatusText" class="text-h1 loadingscreen__status-label" text="#LoadingScreen_Loading" />
-				<Label id="PercentText" class="text-h1 loadingscreen__percentage-label" text="{d:percent}%" />
+				<ProgressBar class="row" id="ProgressBar" />
 			</Panel>
-			<ProgressBar id="ProgressBar" class="loadingscreen__progressbar progressbar" />
 		</Panel>
 	</Panel>
+
 </root>

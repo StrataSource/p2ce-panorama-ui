@@ -67,7 +67,8 @@ class MainMenu {
 	/** Fired by C++ whenever main menu is switched from. */
 	static onHideMainMenu() {
 		$.Msg('onHideMainMenu called!');
-		UiToolkitAPI.CloseAllVisiblePopups();
+		// this crashes the game :3
+		// UiToolkitAPI.CloseAllVisiblePopups();
 	}
 
 	/** Fired by C++ whenever pause menu (i.e. main menu when in a map) is switched to. */
