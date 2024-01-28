@@ -9,7 +9,7 @@
 		<include src="file://{scripts}/pages/main-menu.js" />
 	</scripts>
 
-	<ChaosMainMenu
+	<MainMenu
 		hittest="false"
 		useglobalcontext="false"
 		onload="MainMenu.onMainMenuLoaded()"
@@ -61,5 +61,5 @@
 
 		</Panel>
 
-	</ChaosMainMenu>
+	</MainMenu>
 </root>

@@ -34,7 +34,7 @@
 
 		<Panel class="sidebar">
 			<Panel>
-				<ChaosAvatarImage id="UserIcon" />
+				<AvatarImage id="UserIcon" />
 				<Label id="UserName" text="Username" />
 				<TextButton text="Workshop" onactivate="DashboardMenu.openWorkshop()" />
 				<TextButton text="My Profile" onactivate="DashboardMenu.openProfile()" />

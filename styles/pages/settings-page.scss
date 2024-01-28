@@ -10,11 +10,11 @@ Panel.settings-page {
 		border: 1px solid red;
 		padding: 10px;
 
-		ChaosSettingsSlider,
+		SettingsSlider,
 		Panel,
-		ChaosSettingsEnumDropDown,
-		ChaosSettingsEnum,
-		ChaosSettingsKeyBinder {
+		SettingsEnumDropDown,
+		SettingsEnum,
+		SettingsKeyBinder {
 			width: 100%;
 		}
 	}

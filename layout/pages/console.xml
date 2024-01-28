@@ -12,21 +12,25 @@
 	<scripts>
 		<include src="file://{scripts}/pages/console.js" />
 	</scripts>
-	<Panel class="console__outer" hittest="true" defaultfocus="ConsoleInput">
-		<Panel id="MoveDragArea" class="console__move-drag-area vertical-align-center" draggable="true">
-			<Label text="#Console_Title" class="text-h3 console__header" />
-			<Button class="button button--red horizontal-align-right" onactivate="Console.toggle()">
-				<Image class="button__icon" src="file://{images}/close.svg" />
+
+	<Panel hittest="true" defaultfocus="ConsoleInput">
+		<!-- Header -->
+		<Panel class="header" id="MoveDragArea" draggable="true">
+			<Label text="Debugger" />
+			<Button id="ConsoleClose" onactivate="" class="button">
+				<Image src="file://{images}/add.svg" textureheight="12" />
 			</Button>
 		</Panel>
 
-		<Panel class="console__top-splitter" />
-		<Panel class="console__inner" acceptsfocus="true" acceptsinput="true">
-			<StaticConsoleMessageTarget id="ConsoleMessageTarget" class="console__message-target full-width" />
-			<ConsoleInput id="ConsoleInput" class="textentry console__input full-width" clearaftersubmit="true" />
+		<!-- Console text -->
+		<StaticConsoleMessageTarget id="ConsoleMessageTarget" />
+
+		<!-- Footer -->
+		<Panel class="footer">
+			<ConsoleInput id="ConsoleInput" clearaftersubmit="true" />
+			<ResizeDragKnob target="Console" class="button">
+				<Image src="file://{images}/resize.svg" textureheight="12" />
+			</ResizeDragKnob>
 		</Panel>
-		<ResizeDragKnob target="Console" class="console__resize-drag-knob">
-			<Image src="file://{images}/resize.svg" textureheight="32" />
-		</ResizeDragKnob>
 	</Panel>
 </root>

@@ -1,74 +1,151 @@
 @use '../config' as *;
 
-.console {
-	&__outer {
-		width: 1024px;
-		height: 768px;
-		min-width: 200px; /* Used for resize dragging! */
-		min-height: 200px; /* ditto */
-		background-color: rgba(0, 0, 0, 0.99);
-		flow-children: down;
-		border-radius: 4px;
-		padding-left: 8px;
-		padding-right: 8px;
-		padding-bottom: 8px;
-	}
+$background: #222222fd;
+$color: $light-100;
+$border: #444;
+$radius: 3px;
 
-	&__inner {
+$height: 34px;
+$padding: 12px;
+
+$border-2: mix($background, $border, $weight: 50%);
+$border-3: mix($background, $border, $weight: 75%);
+$border-4: mix($background, $border, $weight: 85%);
+
+
+Panel#ChaosConsole.WindowRoot {
+	width: 100%;
+	height: 100%;
+}
+
+Console {
+	background-color: $background;
+	border: 1px solid $border;
+	border-radius: $radius;
+
+	box-shadow: #0005 2px 4px 14px 0px;
+ 	width: 1024px;
+	height: 768px;
+	min-width: 200px;
+	min-height: 200px;
+
+	flow-children: down;
+	padding: $padding;
+
+	font-family: $font-monospace;
+	font-weight: light;
+	font-size: 11px;
+	line-height: 1.4;
+
+	Panel.header,
+	Panel.footer {
 		width: 100%;
-		height: fill-parent-flow(1);
-		flow-children: down;
+		height: $height;
+		margin-right: 0-$padding;
+		margin-left: 0-$padding;
+		padding: 0 $padding;
 
-		#ConsoleMessageTarget {
-			width: 100%;
+		> Button,
+		> Panel,
+		> Label,
+		> ResizeDragKnob {
+			vertical-align: center;
 		}
 	}
 
-	&__message-target > MultiselectLabel {
-		text-shadow-fast: none;
-		font-family: $font-monospace;
-		font-size: 11px;
-		margin-right: 16px;
+	Panel.header:active {
+		background-color: $border-4;
 	}
 
-	&__top-splitter {
-		height: 1px;
-		min-width: 100%;
-		background-color: gradient(linear, 0% 0%, 100% 0%, from(#d7d7d73f), to(#a0a0a03f), color-stop(0.9, #b4b4b43f));
+	Panel.header { border-bottom: 1px solid $border-2; margin-top: 0-$padding; }
+	Panel.footer { border-top: 1px solid $border-2; margin-bottom:  0-$padding; }
+
+	Button#ConsoleClose {
+		transform: rotateZ(45deg);
 	}
 
-	&__message-target {
-		margin-top: 8px;
-		margin-bottom: 8px;
+	Panel.header,
+	Panel.footer {
+		color: $color;
 
-		overflow: squish scroll;
+		.button {
+			horizontal-align: right;
+			transition: opacity 0.1s linear 0.0s;
+			opacity: 0.05;
+		}
+
+		&:hover .button {
+			opacity: 0.2;
+		}
+
+		&:hover .button:hover {
+			opacity: 0.8;
+		}
+	}
+
+	StaticConsoleMessageTarget {
 		height: fill-parent-flow(1);
-		flow-children: up;
-	}
-
-	&__move-drag-area {
-		padding-bottom: 8px;
 		width: 100%;
-		flow-children: right;
-		padding-top: 8px;
+
+		flow-children: up;
+		overflow: squish scroll;
+		padding: $padding 0;
+
+		MultiselectLabel {
+			line-height: 14px;
+		}
 	}
 
-	&__resize-drag-knob {
-		margin-top: 8px;
-		margin-left: 8px;
-		horizontal-align: right;
-		vertical-align: bottom;
-	}
-
-	&__header {
+	ConsoleInput {
+		color: $color;
 		vertical-align: center;
-		font-size: 30px;
-	}
+		width: 100%;
+		height: $height;
 
-	&__input {
+		// Fixed inner text height, yucky hack.
+		padding: calc($height / 2) - 7px $padding;
+		margin: 0 0-$padding;
+
+		&:focus {
+			background-color: $border-4;
+		}
+	}
+}
+
+TextEntryAutocomplete {
+	width: 480px;
+	max-height: 280px;
+	flow-children: down;
+	overflow: squish scroll;
+
+	z-index: 0;
+	opacity: 1;
+
+	box-shadow: fill #00000066 2px 2px 4px 4px;
+	border: 1px solid $dark-800;
+
+	& Label {
+		width: 100%;
+		padding: 2px 0px 2px 16px;
+		// margin-right: 16px;
+
+		color: $dark-500;
+		background-color: $light-500;
+
 		font-family: $font-monospace;
-		font-size: $font-default-size;
-		text-overflow: clip;
-		white-space: nowrap;
+		font-size: $font-size-h8;
+		font-weight: normal;
+		z-index: 0;
+		border-bottom: 1px solid $light-600;
+
+		&:focus {
+			background-color: $dark-200;
+			color: $light-500;
+		}
+
+		&:hover {
+			background-color: $light-600;
+			color: $dark-800;
+		}
 	}
 }

@@ -8,7 +8,7 @@
 		<include src="file://{scripts}/pages/tabs/settings.js" />
 	</scripts>
 
-	<Panel class="root" useglobalcontext="false">
+	<Panel class="root pre-trans" useglobalcontext="false">
 		<Panel id="sidebar">
 			<Panel class="sidebar-body">
 				<Label class="sidebar-header" text="Settings" />

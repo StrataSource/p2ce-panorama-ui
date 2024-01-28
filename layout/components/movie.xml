@@ -1,8 +1,8 @@
 <root>
 	<styles>
-		<include src="file://{resources}/styles/main.scss" />
+		<!-- <include src="file://{resources}/styles/main.scss" /> -->
 	</styles>
-	
+
 	<Movie>
 		<MoviePanel id="MoviePanel" />
 
@@ -21,7 +21,7 @@
 					<Label id="PlaybackSpeed" class="PlaybackControl" />
 					<Panel id="Timeline" class="PlaybackControl">
 						<!-- Add bar for buffered data -->
-						
+
 						<!-- Wrap progress bar so transforms can be easily used to scale on animation thread -->
 						<Panel class="ProgressBarWrapper">
 							<Panel id="PlaybackProgress" />
@@ -86,5 +86,5 @@
 				</Panel>
 			</Panel>
 		</Panel>
-	</Movie>	
+	</Movie>
 </root>

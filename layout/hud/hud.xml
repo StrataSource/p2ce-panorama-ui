@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/hud/hud.scss" />
 	</styles>
 
-	<ChaosHud hittest="false">
+	<Hud hittest="false">
 		<!-- Non-interactive HUD elements have hit test disabled for efficiency -->
 
 		<!-- In world UI is first to make sure it shows up behind all "screen-looking" UI -->
@@ -46,18 +46,18 @@
 		-        while HudTeamCounter is visible
 		-->
 		<Panel id="HudTopCenter" hittest="false">
-			<ChaosHudShowPos />
-			<ChaosHudBoneCounts />
+			<HudShowPos />
+			<HudBoneCounts />
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
-		<ChaosPopupManager id="PopupManager" onpopupsdismissed="" />
+		<PopupManager id="PopupManager" onpopupsdismissed="" />
 		<ContextMenuManager id="ContextMenuManager" />
-		<ChaosTooltipManager id="TooltipManager" hittest="false" />
+		<TooltipManager id="TooltipManager" hittest="false" />
 
 		<!-- Console notifications should always draw above anything else! -->
 		<Panel id="HudNotify" hittest="false" hittestchildren="false">
 			<Frame src="file://{resources}/layout/hud/console-notify.xml" />
 		</Panel>
-	</ChaosHud>
+	</Hud>
 </root>

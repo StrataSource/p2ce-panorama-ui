@@ -33,12 +33,12 @@
 
 				</Panel>
 
-				<ChaosSettingsEnum text="#Settings_Menu_Console" convar="con_enable" hasdocspage="false" tags="console">
+				<SettingsEnum text="#Settings_Menu_Console" convar="con_enable" hasdocspage="false" tags="console">
 					<RadioButton group="enableconsole" text="#Common_Off" value="0" />
 					<RadioButton group="enableconsole" text="#Common_On" value="1" />
-				</ChaosSettingsEnum>
+				</SettingsEnum>
 
-				<ChaosSettingsEnum
+				<SettingsEnum
 					text="#Settings_Menu_Movie"
 					psvar="settings.mainMenuMovie"
 					infomessage="#Settings_Menu_Movie_Info"
@@ -56,9 +56,9 @@
 						value="1"
 						activateoverride="$.DispatchEvent('ReloadBackground');"
 					/>
-				</ChaosSettingsEnum>
+				</SettingsEnum>
 
-				<ChaosSettingsEnumDropDown
+				<SettingsEnumDropDown
 					text="#Settings_Menu_Type"
 					psvar="settings.mainMenuBackground"
 					submitoverride="$.DispatchEvent('ReloadBackground');"
@@ -67,20 +67,39 @@
 				>
 					<Label text="#Settings_Menu_Type0" value="0" id="bgtype0" />
 					<Label text="#Settings_Menu_Type1" value="1" id="bgtype1" />
-				</ChaosSettingsEnumDropDown>
+				</SettingsEnumDropDown>
 
 				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
-				<ChaosSettingsEnum
-					id="SentryReporting"
-					text="Sentry Crash Reporting"
-					infomessage="Sentry"
-					hasdocspage="false"
-					tags="sentry"
-				>
+				<SettingsEnum id="SentryReporting" text="Sentry Crash Reporting" infomessage="Sentry" hasdocspage="false" tags="sentry">
 					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
 						<Label class="button__text" text="Update Consent" />
 					</Button>
-				</ChaosSettingsEnum>
+				</SettingsEnum>
+
+				<SettingsEnum
+					text="Playtest consent"
+					infomessage="Playtest consent"
+					convar="cl_playtest_enabled"
+					hasdocspage="false"
+					tags="consent"
+				>
+					<RadioButton group="enableconsent" text="#Common_Off" value="0" />
+					<RadioButton group="enableconsent" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<ConVarEnabler convar="developer" togglevisibility="true">
+					<SettingsEnum
+						id="PlaytestDOSARemove"
+						text="Playtest DOSA remove"
+						infomessage="Remove DOSA from playtest consent (For development purposes)"
+						hasdocspage="false"
+						tags="dosa"
+					>
+						<Button class="button horizontal-align-right" onactivate="SettingsShared.PlayTestDosaRemove()">
+							<Label class="button__text" text="Remove DOSA" />
+						</Button>
+					</SettingsEnum>
+				</ConVarEnabler>
 
 			</Panel>
 

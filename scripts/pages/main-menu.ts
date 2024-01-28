@@ -23,12 +23,12 @@ class MainMenu {
 	};
 
 	static {
-		$.RegisterForUnhandledEvent('ChaosShowMainMenu', this.onShowMainMenu.bind(this));
-		$.RegisterForUnhandledEvent('ChaosHideMainMenu', this.onHideMainMenu.bind(this));
-		$.RegisterForUnhandledEvent('ChaosShowPauseMenu', this.onShowPauseMenu.bind(this));
-		$.RegisterForUnhandledEvent('ChaosHidePauseMenu', this.onHidePauseMenu.bind(this));
+		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
+		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
+		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
+		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
-		$.DispatchEvent('ChaosHideIntroMovie');
+		$.DispatchEvent('HideIntroMovie');
 
 		$.RegisterForUnhandledEvent('MainMenu.AddonFocused', (index) => {
 			this.onNavbarSelect('addon', index, true);
