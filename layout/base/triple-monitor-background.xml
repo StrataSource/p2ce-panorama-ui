@@ -1,0 +1,34 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/base.css" />
+		<include src="file://{resources}/styles/triplemonitorbackground.css" />
+	</styles>
+
+	<Panel class="WindowRoot" hittest="false" hittestchildren="false" acceptsinput="false" acceptsfocus="false">
+		<TripleMonitorBackground onload="$('#LeftMovie').Play();$('#RightMovie').Play();">
+			<Movie
+				id="LeftMovie"
+				class="triplemonitorbg triplemonitorbg--left"
+				src="file://{media}/minecraft.webm"
+				sound=""
+				controls="none"
+				repeat="true"
+				hittest="false"
+			>
+			</Movie>
+
+			<Movie
+				id="RightMovie"
+				class="triplemonitorbg triplemonitorbg--right"
+				src="file://{media}/subway.webm"
+				sound=""
+				controls="none"
+				repeat="true"
+				hittest="false"
+			>
+			</Movie>
+			<!--Panel class="triplemonitorbg triplemonitorbg-left"-->
+			<!--Panel class="triplemonitorbg triplemonitorbg-right" /-->
+		</TripleMonitorBackground>
+	</Panel>
+</root>
