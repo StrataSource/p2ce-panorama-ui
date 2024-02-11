@@ -1,9 +1,9 @@
 @use '../config' as *;
 
-$background: #222222fd;
+$background: #181818fd;
 $color: $light-100;
 $border: #444;
-$radius: 3px;
+$radius: 0px;
 
 $height: 34px;
 $padding: 12px;
@@ -34,7 +34,7 @@ Console {
 
 	font-family: $font-monospace;
 	font-weight: light;
-	font-size: 11px;
+	font-size: 12px;
 	line-height: 1.4;
 
 	Panel.header,

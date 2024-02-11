@@ -16,7 +16,7 @@
 	<Panel hittest="true" defaultfocus="ConsoleInput">
 		<!-- Header -->
 		<Panel class="header" id="MoveDragArea" draggable="true">
-			<Label text="Debugger" />
+			<Label text="Console" />
 			<Button id="ConsoleClose" onactivate="" class="button">
 				<Image src="file://{images}/add.svg" textureheight="12" />
 			</Button>
@@ -26,7 +26,7 @@
 		<StaticConsoleMessageTarget id="ConsoleMessageTarget" />
 
 		<!-- Footer -->
-		<Panel class="footer">
+		<Panel class="footer" id="ConsoleFooter">
 			<ConsoleInput id="ConsoleInput" clearaftersubmit="true" />
 			<ResizeDragKnob target="Console" class="button">
 				<Image src="file://{images}/resize.svg" textureheight="12" />
