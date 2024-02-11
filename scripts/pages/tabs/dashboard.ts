@@ -15,7 +15,7 @@ class DashboardMenu {
 
 	/**
 	 * General onLoad initialisations.
-	 * Fired when ChaosMainMenu fires its onload event.
+	 * Fired when MainMenu fires its onload event.
 	 */
 	static onDashboardLoaded() {
 		new WorkshopMenuElement($('.body')![0]);

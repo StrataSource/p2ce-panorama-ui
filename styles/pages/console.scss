@@ -12,12 +12,6 @@ $border-2: mix($background, $border, $weight: 50%);
 $border-3: mix($background, $border, $weight: 75%);
 $border-4: mix($background, $border, $weight: 85%);
 
-
-Panel#ChaosConsole.WindowRoot {
-	width: 100%;
-	height: 100%;
-}
-
 Console {
 	background-color: $background;
 	border: 1px solid $border;

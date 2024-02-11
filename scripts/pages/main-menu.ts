@@ -47,7 +47,7 @@ class MainMenu {
 
 	/**
 	 * General onLoad initialisations.
-	 * Fired when ChaosMainMenu fires its onload event.
+	 * Fired when MainMenu fires its onload event.
 	 */
 	static onMainMenuLoaded() {
 		// $.PlaySoundEvent('UI.Music.Ambient1');
@@ -151,7 +151,7 @@ class MainMenu {
 
 		// Resume game in pause menu mode, OTHERWISE close the active menu menu page
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-			$.DispatchEvent('ChaosMainMenuResumeGame');
+			$.DispatchEvent('MainMenuResumeGame');
 		} else {
 			this.promptQuit();
 		}
