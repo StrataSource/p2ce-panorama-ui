@@ -140,7 +140,7 @@
 									<Label class="bottombar__text" text="Controls Library" />
 								</RadioButton>
 
-								<Label class="bottombar__notice" text="Beta menu concept, subject to change" />
+								<Label class="bottombar__notice" text="Placeholder Menu" />
 
 							</Panel>
 						</Panel>
