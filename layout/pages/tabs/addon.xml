@@ -16,10 +16,6 @@
 		<TextButton id="amogus" onactivate="AddonMenu.goBack()" />
 		<Panel id="root">
 			<Panel id="addon-chapters">
-				<Panel></Panel>
-				<Panel></Panel>
-				<Panel></Panel>
-				<Panel></Panel>
 			</Panel>
 			<Panel id="addon-info">
 				<Panel>

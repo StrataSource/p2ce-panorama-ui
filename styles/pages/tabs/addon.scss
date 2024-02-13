@@ -2,15 +2,6 @@
 
 $scroll-height: 12px;
 
-Image#background {
-	width: 100%;
-	height: 100%;
-
-	pre-transform-scale2d: 1.0;
-	transition: pre-transform-scale2d 0.4s $easeOutQuint 0.0s,
-				opacity 0.1s linear 0.0s;
-}
-
 Panel.root {
 	width: 100%;
 	height: 100%;
@@ -21,12 +12,32 @@ Panel.root {
 	&.pre-trans {
 		pre-transform-scale2d: 0.95;
 		opacity: 0.0;
+	}
+}
 
-		Image#background {
-			pre-transform-scale2d: 1.5;
-			opacity: 0.0;
+Image#background {
+	width: 100%;
+	height: 100%;
+
+	@keyframes scalington {
+		0% {
+			width: 100%;
+			height: 100%;
+		}
+		50% {
+			width: 120%;
+			height: 120%;
+		}
+		100% {
+			width: 100%;
+			height: 100%;
 		}
 	}
+
+	animation-name: scalington;
+	animation-duration: 30s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
 }
 
 Panel#root {
