@@ -64,15 +64,15 @@ class WorkshopAPI {
 			map: 'sp_a1_intro1',
 			description: 'Chapter 1',
 			title: 'The Wakeup Call',
-			thumb: 'file://{workshop}/id-placeholder/images/card.jpeg',
-			background: 'file://{workshop}/id-placeholder/images/card.jpeg',
+			thumb: 'file://{workshop}/p2/images/620_library_hero.jpg',
+			background: 'file://{workshop}/p2/images/620_library_hero.jpg',
 			unlocked: true
 		}, {
 			map: 'sp_a1_intro2',
 			description: 'Chapter 2',
 			title: 'The Sleepy Call',
-			thumb: 'file://{workshop}/id-placeholder/images/card.jpeg',
-			background: 'file://{workshop}/id-placeholder/images/card.jpeg',
+			thumb: 'file://{workshop}/p2ce/images/440000_hero.jpg',
+			background: 'file://{workshop}/p2ce/images/440000_hero.jpg',
 			unlocked: true
 		}];
 	}

@@ -1,4 +1,5 @@
 @use '../../config' as *;
+@use 'sass:color';
 
 $scroll-height: 12px;
 
@@ -21,21 +22,18 @@ Image#background {
 
 	@keyframes scalington {
 		0% {
-			width: 100%;
-			height: 100%;
+			pre-transform-scale2d: 1.0;
 		}
 		50% {
-			width: 120%;
-			height: 120%;
+			pre-transform-scale2d: 1.3;
 		}
 		100% {
-			width: 100%;
-			height: 100%;
+			pre-transform-scale2d: 1.0;
 		}
 	}
 
 	animation-name: scalington;
-	animation-duration: 30s;
+	animation-duration: 60s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 }
@@ -46,13 +44,20 @@ Panel#root {
 	flow-children: right;
 }
 
+BaseBlurTarget {
+	height: 120%;
+	width: 100%;
+	overflow: noclip;
+	blur: fastgaussian(2, 2, 5);
+}
+
 Panel#addon-chapters {
 	flow-children: down;
 	overflow: clip scroll;
 
 	height: 100%;
 	width: 600px;
-	background-color: $dark-700;
+	background-color: color.change($dark-800, $alpha: 0.9);
 	padding: 50px;
 	margin-left: 100px;
 
@@ -67,11 +72,41 @@ Panel#addon-chapters {
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
 
-	> Panel {
+	// Each addons
+	> Button {
 		width: 100%;
-		height: 300px;
-		background-color: $light-500;
+		height: 150px;
+		background-color: $light-600;
 		margin-bottom: 50px;
+
+		border: 1px solid $dark-400;
+
+		transition: border 0.16s $easeOutQuint 0.0s;
+
+		Label {
+			color: $dark-600;
+			font-weight: bold;
+			width: fill-parent-flow(1.0);
+			height: 100%;
+			margin: 10px;
+		}
+
+		Image {
+			transition: width 0.2s $easeOutQuint 0.0s;
+
+			align: right bottom;
+			width: 40%;
+			height: 100%;
+		}
+
+		&.active {
+			background-color: $light-800;
+			border: 1px solid $light-800;
+
+			Image {
+				width: 45%;
+			}
+		}
 	}
 
 	VerticalScrollBar {
@@ -118,7 +153,6 @@ Panel#addon-info {
 		}
 
 		Label#chapter-description {
-
 		}
 	}
 

@@ -12,8 +12,9 @@
 	</scripts>
 
 	<Panel class="root pre-trans" useglobalcontext="false">
-		<Image id="background" src="none" scaling="stretch-to-cover-preserve-aspect" />
-		<TextButton id="amogus" onactivate="AddonMenu.goBack()" />
+		<BaseBlurTarget id="background-blur" blurrects="addon-chapters">
+			<Image id="background" src="none" scaling="stretch-to-cover-preserve-aspect" />
+		</BaseBlurTarget>
 		<Panel id="root">
 			<Panel id="addon-chapters">
 			</Panel>
@@ -22,7 +23,7 @@
 					<Label id="chapter-title" text="Title" />
 					<Label id="chapter-description" text="I cooke de pasta" />
 				</Panel>
-				<TextButton onclick="" text="Play" />
+				<TextButton onactivate="AddonMenu.playChapter()" text="Play" />
 			</Panel>
 		</Panel>
 	</Panel>
