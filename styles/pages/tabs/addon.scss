@@ -57,7 +57,7 @@ Panel#addon-chapters {
 
 	height: 100%;
 	width: 600px;
-	background-color: color.change($dark-800, $alpha: 0.9);
+	background-color: $dark-800; // color.change($dark-800, $alpha: 0.9);
 	padding: 50px;
 	margin-left: 100px;
 

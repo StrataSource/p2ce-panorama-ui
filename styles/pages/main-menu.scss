@@ -1,4 +1,5 @@
 @use '../config' as *;
+@use 'sass:color';
 
 $header-height: 100px;
 $page-transition-duration: 0.15s;
@@ -97,7 +98,7 @@ MainMenu {
 	z-index: 1;
 
 	MainMenu.paused > Panel > & {
-		background-color: #0008;
+		background-color: color.change($dark-700, $alpha: 0.9);
 	}
 }
 

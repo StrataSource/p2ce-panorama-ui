@@ -45,6 +45,10 @@ Panel#sidebar {
 			color: $dark-200;
 			font-size: $font-size-h2;
 			margin-bottom: 32px;
+
+			MainMenu.paused & {
+				color: $light-200;
+			}
 		}
 	}
 
@@ -71,6 +75,16 @@ Panel#sidebar {
 			width: 90%;
 			color: $dark-500;
 			border-right: 1px solid $light-600;
+
+			MainMenu.paused & {
+				color: $light-800;
+				border-right: 1px solid $dark-400;
+
+				&:selected {
+					background-color: $dark-400;
+					color: $light-200;
+				}
+			}
 
 			transition: width 0.12s $easeOutQuart 0.0s,
 			            color 0.08s linear 0.0s,

@@ -48,6 +48,10 @@ Panel.sidebar {
 		line-height: 60;
 		font-size: $font-size-h4;
 		color: $dark-500;
+
+		MainMenu.paused & {
+			color: $light-600;
+		}
 	}
 
 	TextButton:hover > Label {
@@ -105,6 +109,10 @@ Panel.category {
 			font-size: $font-size-h1;
 			font-weight: bold;
 			color: $dark-200;
+
+			MainMenu.paused & {
+				color: $light-200;
+			}
 		}
 	}
 
@@ -156,6 +164,10 @@ Panel.card {
 		y: 0.0;
 		width: 100%;
 		height: $card-height - $info-height;
+
+		MainMenu.paused & {
+			background-color: $dark-600;
+		}
 	}
 
 	> Panel {
@@ -170,6 +182,11 @@ Panel.card {
 
 		background-color: $light-100;
 		color: $dark-500;
+
+		MainMenu.paused & {
+			background-color: $dark-500;
+			color: $light-400;
+		}
 	}
 
 	Label.title {
@@ -190,6 +207,10 @@ Panel.card {
 		line-height: 26;
 
 		color: $dark-200;
+
+		MainMenu.paused & {
+			color: $light-800;
+		}
 	}
 }
 
