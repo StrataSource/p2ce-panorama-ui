@@ -14,5 +14,20 @@
 	<Panel class="root pre-trans" useglobalcontext="false">
 		<Image id="background" src="none" scaling="stretch-to-cover-preserve-aspect" />
 		<TextButton id="amogus" onactivate="AddonMenu.goBack()" />
+		<Panel id="root">
+			<Panel id="addon-chapters">
+				<Panel></Panel>
+				<Panel></Panel>
+				<Panel></Panel>
+				<Panel></Panel>
+			</Panel>
+			<Panel id="addon-info">
+				<Panel>
+					<Label id="chapter-title" text="Title" />
+					<Label id="chapter-description" text="I cooke de pasta" />
+				</Panel>
+				<TextButton onclick="" text="Play" />
+			</Panel>
+		</Panel>
 	</Panel>
 </root>

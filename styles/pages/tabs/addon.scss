@@ -1,5 +1,16 @@
 @use '../../config' as *;
 
+$scroll-height: 12px;
+
+Image#background {
+	width: 100%;
+	height: 100%;
+
+	pre-transform-scale2d: 1.0;
+	transition: pre-transform-scale2d 0.4s $easeOutQuint 0.0s,
+				opacity 0.1s linear 0.0s;
+}
+
 Panel.root {
 	width: 100%;
 	height: 100%;
@@ -10,10 +21,105 @@ Panel.root {
 	&.pre-trans {
 		pre-transform-scale2d: 0.95;
 		opacity: 0.0;
+
+		Image#background {
+			pre-transform-scale2d: 1.5;
+			opacity: 0.0;
+		}
 	}
 }
 
-Image#background {
+Panel#root {
 	width: 100%;
 	height: 100%;
+	flow-children: right;
+}
+
+Panel#addon-chapters {
+	flow-children: down;
+	overflow: clip scroll;
+
+	height: 100%;
+	width: 600px;
+	background-color: $dark-700;
+	padding: 50px;
+	margin-left: 100px;
+
+	@keyframes squirrel {
+		0% { opacity: 1.0 }
+		100% { opacity: 0.99 }
+	}
+
+	// squirrel hack, remove me when scrolling is fixed 🐿️🐿️🐿️🐿️
+	animation-name: squirrel;
+	animation-duration: 100000s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+
+	> Panel {
+		width: 100%;
+		height: 300px;
+		background-color: $light-500;
+		margin-bottom: 50px;
+	}
+
+	VerticalScrollBar {
+		width: $scroll-height;
+		height: 100%;
+		opacity: 0.5;
+		background-color: $light-600;
+		horizontal-align: right;
+
+		transition: opacity 0.05s linear 0.0s;
+
+		&:hover {
+			opacity: 0.8;
+		}
+
+		.ScrollThumb {
+			width: 100%;
+			min-height: 32px;
+			background-color: $light-800;
+		}
+	}
+}
+
+Panel#addon-info {
+	flow-children: down;
+	height: 100%;
+	width: 100%;
+	margin: 100px;
+
+	> Panel {
+		flow-children: down;
+		height: fill-parent-flow(1.0);
+		width: 100%;
+
+		Label {
+			horizontal-align: right;
+			text-shadow: 1px 1px 0px 2px $dark-800;
+			color: $light-100;
+		}
+
+		Label#chapter-title {
+			font-size: $font-size-h1;
+			font-weight: bold;
+		}
+
+		Label#chapter-description {
+
+		}
+	}
+
+	> TextButton {
+		background-color: $light-500;
+		color: $dark-500;
+		horizontal-align: right;
+
+		Label {
+			padding: 10px 80px;
+			font-size: $font-size-h6;
+			font-weight: bold;
+		}
+	}
 }

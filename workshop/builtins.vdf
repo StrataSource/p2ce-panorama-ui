@@ -16,7 +16,7 @@
 		flagged false
 
 		cover "file://{workshop}/p2/images/620_library_hero.jpg"
-		logo "file://{amogus}"
+		logo "file://{amogus}/p2/images/620_header.jpg"
 	}
 
 	// "1"
@@ -53,8 +53,8 @@
 		votescore 102
 		flagged false
 
-		cover "file://{workshop}/p2ce/images/440000_hero.png"
-		logo "file://{amogus}"
+		cover "file://{workshop}/p2ce/images/440000_hero.jpg"
+		logo "file://{workshop}/p2ce/images/440000_logo.png"
 	}
 
 	"2"

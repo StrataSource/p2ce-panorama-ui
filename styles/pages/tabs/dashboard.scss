@@ -79,6 +79,12 @@ Panel.body {
 
 	overflow: clip scroll;
 	flow-children: down;
+
+	// squirrel hack, remove me when scrolling is fixed 🐿️🐿️🐿️🐿️
+	animation-name: squirrel;
+	animation-duration: 100000s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
 }
 
 Panel.category {
@@ -200,4 +206,9 @@ Panel.card:hover {
 		transition: opacity 0.1s linear 0.0s;
 		opacity: 1.0;
 	}
+}
+
+@keyframes squirrel {
+	0% { opacity: 1.0 }
+	100% { opacity: 0.99 }
 }
