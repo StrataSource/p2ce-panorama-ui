@@ -1,0 +1,10 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/armor.scss" />
+	</styles>
+
+	<ChaosHudArmor class="armor">
+		<Label class="__label" text="0" />
+	</ChaosHudArmor>
+</root>

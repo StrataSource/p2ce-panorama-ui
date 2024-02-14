@@ -28,6 +28,7 @@
 		<Panel id="HudLowerLeft" hittest="false" hittestchildren="true">
 			<HudStaticMenu />
 			<ChaosHudHealth />
+			<ChaosHudArmor />
 		</Panel>
 
 		<!-- Anchored on lower-right corner, laid out from top to bottom -->
