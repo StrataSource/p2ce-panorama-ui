@@ -78,6 +78,18 @@
 					</Button>
 				</SettingsEnum>
 
+				<!-- TODO: Temp! -->
+				<SettingsEnum
+					text="Discord Rich Presence"
+					infomessage="Enables the display of your current game's state in Discord"
+					convar="cl_richpresence_enable"
+					hasdocspage="false"
+					tags="richpresence"
+				>
+					<RadioButton group="enablerpc" text="#Common_Off" value="0" />
+					<RadioButton group="enablerpc" text="#Common_On" value="1" />
+				</SettingsEnum>
+
 				<SettingsEnum
 					text="Playtest consent"
 					infomessage="Playtest consent"
