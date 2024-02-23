@@ -1,0 +1,125 @@
+{
+	chapters =
+	[
+		{
+			title = "The Courtesy Call"
+			subtitle = "Chapter 1"
+			icon = "file://{materials}/vgui/chapters/chapter1.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Cold Boot"
+			subtitle = "Chapter 2"
+			icon = "file://{materials}/vgui/chapters/chapter2.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Return"
+			subtitle = "Chapter 3"
+			icon = "file://{materials}/vgui/chapters/chapter3.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Surprise"
+			subtitle = "Chapter 4"
+			icon = "file://{materials}/vgui/chapters/chapter4.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Escape"
+			subtitle = "Chapter 5"
+			icon = "file://{materials}/vgui/chapters/chapter5.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Fall"
+			subtitle = "Chapter 6"
+			icon = "file://{materials}/vgui/chapters/chapter6.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Reunion"
+			subtitle = "Chapter 7"
+			icon = "file://{materials}/vgui/chapters/chapter7.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Itch"
+			subtitle = "Chapter 8"
+			icon = "file://{materials}/vgui/chapters/chapter8.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "The Part Where He Kills You"
+			subtitle = "Chapter 9"
+			icon = "file://{materials}/vgui/chapters/chapter9.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+		{
+			title = "Credits"
+			subtitle = "Chapter 10"
+			icon = "file://{materials}/vgui/chapters/chapter10.vtf"
+			maps = [
+				"sp_a1_intro1",
+				"sp_a1_intro2",
+				"sp_a1_intro3",
+				"sp_a1_intro4",
+				"sp_a1_intro5",
+			]
+		},
+	]
+}
