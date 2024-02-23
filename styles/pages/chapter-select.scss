@@ -1,0 +1,51 @@
+.chapterselect {
+	width: 100%;
+	height: 100%;
+
+	flow-children: right;
+
+	&__entry {
+		//background-color: orange;
+		background-color: #AAAAAA30;
+		flow-children: right;
+		width: 100%;
+
+		&:hover {
+			border-left: 10px;
+			border-left-color: orange;
+			background-color: #AAAAAAAA;
+		}
+	}
+
+	&__title_content {
+		flow-children: down;
+		vertical-align: center;
+	}
+
+	&__title {
+		font-size: 32px;
+	}
+
+	&__subtitle {
+		font-size: 20px;
+		font-style: italic;
+	}
+
+	&__logo {
+		width: 192px;
+		height: 192px;
+		margin: 20px;
+		margin-left: 25px;
+	}
+}
+
+.chapterlist {
+	width: 30%;
+	//background-color: red;
+	flow-children: down;
+}
+
+.chapterinfo {
+	width: 70%;
+	background-color: green;
+}

@@ -52,7 +52,7 @@
 				</RadioButton>
 
 				<Panel id="MainMenuTopButtons" class="full-height flow-right">
-					<RadioButton id="PlayButton" group="TopNavRadio" class="topnav__button">
+					<RadioButton id="PlayButton" group="TopNavRadio" class="topnav__button" onactivate="MainMenu.navigateToPage('ChapterSelect', 'main-menu/chapter-select')">
 						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="64" />
 					</RadioButton>
 

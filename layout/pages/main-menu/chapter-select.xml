@@ -1,0 +1,39 @@
+<root>
+
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/pages/chapter-select.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/pages/main-menu/chapter-select.js" />
+	</scripts>
+
+	<snippets>
+		<snippet name="ChapterEntry">
+			<Panel class="chapterselect__entry">
+				<Image
+					class="chapterselect__logo"
+					id="ChapterLogo"
+					textureheight="256"
+					texturewidth="256"
+					scaling="stretch-to-fit-preserve-aspect"
+				/>
+				<Panel class="chapterselect__title_content">
+					<Label text="{s:chapter-title}" class="chapterselect__title"/>
+					<Label text="{s:chapter-subtitle}" class="chapterselect__subtitle"/>
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="chapterselect">
+
+		<Panel class="chapterlist" id="ChapterList">
+		</Panel>
+
+		<Panel class="chapterinfo" id="ChapterInfo">
+		</Panel>
+
+	</Panel>
+</root>
