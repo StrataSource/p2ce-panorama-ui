@@ -1,0 +1,16 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/components/version-info.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/components/version-info.js" />
+	</scripts>
+
+	<Panel class="VersionInfo" onload="VersionInfo.update()">
+		<Label class="VersionInfoText" text="{s:graphics}" />
+		<Label class="VersionInfoText" text="{s:version}" />
+		<Label class="VersionInfoText" text="{s:branch}" />
+		<Label class="VersionInfoText" text="{s:platform}" />
+		<Label class="VersionInfoText" text="{s:physics}" />
+	</Panel>
+</root>
