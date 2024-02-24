@@ -50,6 +50,8 @@
 			<HudBoneCounts />
 		</Panel>
 
+		<HudWeaponSwitcher />
+
 		<!-- Make sure these are at the bottom to get the z-order right -->
 		<PopupManager id="PopupManager" onpopupsdismissed="" />
 		<ContextMenuManager id="ContextMenuManager" />

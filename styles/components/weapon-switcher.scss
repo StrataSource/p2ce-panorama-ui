@@ -1,0 +1,131 @@
+
+$ui-color: #ffd035;
+$ui-color2: #cf2626;
+$ui-background: #0009;
+$opacity: 0.7;
+$opacity-focus: 1.0;
+
+// Tab states:
+// - No weapons:          Only square background
+// - No usable weapons:   Square background and number
+
+// Weapon states:
+// - Weapon not obtained: Only square background
+// - No ammo for weapon:  Square background with red icon
+
+HudWeaponSwitcher {
+	flow-children: right;
+	horizontal-align: center;
+	width: fit-children;
+
+	color: $ui-color;
+
+	// When the HUD is active, show it.
+	opacity: 0;
+	&.active { opacity: 1 }
+	transition-property: opacity;
+	transition-duration: 0.2s;
+
+	Panel.ws-tab {
+		margin: 20px 10px 0 10px;
+
+		// This is *supposed* to mitigate a flickering issue which occurs
+		// when Panorama spends multiple frames updating the layout.
+		overflow: clip;
+		width: 72px;
+		&.focus { width: 240px; }
+
+		> Label {
+			position: 8px 8px 0;
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+		&.ws-disabled > Label {
+			visibility: collapse;
+		}
+
+		& > Panel.ws-tab-focus,
+		&.focus > Panel.ws-tab-default {
+			visibility: collapse;
+		}
+
+		&.focus > Panel.ws-tab-focus {
+			visibility: visible;
+		}
+	}
+
+	Panel.ws-content,
+	Panel.ws-tab-default {
+		padding: 12px;
+		border-radius: 6px;
+
+		background-color: $ui-background;
+		opacity: $opacity;
+
+		&.ws-highlight {
+			animation-name: ws-highlight;
+			animation-duration: 0.3s;
+		}
+	}
+
+	Panel.ws-tab-default {
+		width: 72px;
+		height: 72px;
+	}
+
+	Panel.ws-tab-focus {
+		flow-children: down;
+
+		& > Panel {
+			margin-bottom: 10px;
+			width: 240px;
+			height: 160px;
+
+			&.ws-disabled {
+				& > Label {
+					visibility: collapse;
+				}
+			}
+
+			&.ws-no-ammo {
+				color: $ui-color2;
+			}
+
+			> Label.icon {
+				font-family: 'HalfLife2';
+				font-size: 80px;
+				align: center center;
+			}
+
+			> Label.subtitle {
+				font-size: 12px;
+				font-weight: bold;
+
+				opacity: 0.0;
+				align: center bottom;
+			}
+
+			&.focus {
+				opacity: $opacity-focus;
+
+				> Label.icon {
+					text-shadow: change-color($color: $ui-color, $alpha: 0.3) 0 0 14px;
+				}
+
+				> Label.subtitle {
+					opacity: 1.0;
+				}
+			}
+		}
+	}
+}
+
+@keyframes ws-highlight {
+	from {
+		background-color: adjust-color($color: $ui-background, $alpha: 0.1);
+	}
+	to {
+		background-color: $ui-background;
+	}
+}
