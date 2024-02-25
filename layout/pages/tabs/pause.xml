@@ -1,0 +1,40 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/pages/tabs/pause.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/common/game-ui.js" />
+		<include src="file://{scripts}/util/stub/workshop-api.js" />
+
+		<include src="file://{scripts}/pages/tabs/pause.js" />
+	</scripts>
+
+	<Panel class="root pre-trans" useglobalcontext="false">
+		<BaseBlurTarget id="background-blur" blurrects="addon-chapters">
+			<Image id="background" src="none" scaling="stretch-to-cover-preserve-aspect" />
+		</BaseBlurTarget>
+		<Panel id="root">
+			<Panel id="menu-buttons">
+				<TextButton onactivate="$.DispatchEvent('MainMenuResumeGame')" text="Resume" />
+				<TextButton onactivate="GameInterfaceAPI.ConsoleCommand('disconnect')" text="Exit" />
+			</Panel>
+			<Panel id="menu-info">
+				<Image id="chapter-thumb" src="none" scaling="stretch-to-cover-preserve-aspect" />
+				<Panel id="addon-details">
+					<Panel id="titles">
+						<Label id="chapter-title" text="{s:chapter_title}" />
+						<Label id="addon-title" text="{s:addon_title}" />
+					</Panel>
+					<Panel id="addon-feedback">
+						<Label text="Your Rating" />
+						<AddonRatingPanel id="addon-rating" />
+						<Label text="Author" />
+						<AddonAuthorPanel id="addon-author" />
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

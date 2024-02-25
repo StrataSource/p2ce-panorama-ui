@@ -22,7 +22,7 @@ class AddonMenu {
 		const addon = WorkshopAPI.GetAddonMeta(uuid);
 		this.addon = addon;
 		this.panels.list.RemoveAndDeleteChildren();
-		const chapters = WorkshopAPI.GetAddonMaps(uuid);
+		const chapters = WorkshopAPI.GetAddonChapters(uuid);
 		for (let i=0; i<chapters.length; i++) {
 			const chapter = chapters[i];
 			const el_chapter = $.CreatePanel('Button', this.panels.list, '');
@@ -40,7 +40,7 @@ class AddonMenu {
 		this.panels.list.GetChild(this.chapter)!.RemoveClass('active');
 		this.panels.list.GetChild((this.chapter = n))!.AddClass('active');
 		this.chapter = n;
-		const chapter = WorkshopAPI.GetAddonMaps(this.addon!.index)[n];
+		const chapter = WorkshopAPI.GetAddonChapters(this.addon!.index)[n];
 
 		this.panels.title.text = chapter.title;
 		this.panels.desc.text = chapter.description;
@@ -48,7 +48,7 @@ class AddonMenu {
 	}
 
 	static playChapter() {
-		const chapter = WorkshopAPI.GetAddonMaps(this.addon!.index)[this.chapter];
+		const chapter = WorkshopAPI.GetAddonChapters(this.addon!.index)[this.chapter];
 		const map = chapter.map.replace(/[;"'\n\r\0]/g, '_');
 		GameInterfaceAPI.ConsoleCommand(`map "${map}"`);
 	}

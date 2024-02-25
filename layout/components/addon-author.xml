@@ -1,0 +1,16 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/components/addon-author.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/util/stub/workshop-api.js" />
+		<include src="file://{scripts}/components/addon-author.js" />
+	</scripts>
+	<Panel>
+		<Image id="icon" src="none" />
+		<Panel>
+			<Label id="text-username" text="{s:author_username}" />
+			<Label id="text-nickname" text="{s:author_nickname}" />
+		</Panel>
+	</Panel>
+</root>

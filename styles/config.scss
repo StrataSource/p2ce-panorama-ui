@@ -35,12 +35,13 @@ $dark-900: #000000 !default;
 // ================
 
 $font-primary: 'Roboto' !default;
-$font-secondary: 'D-DIN Condensed', Arial, sans-serif !default;
-$font-secondary-light: 'D-DIN Condensed', Arial, sans-serif !default;
+$font-secondary: 'D-DIN' !default;
+$font-secondary-light: 'D-DIN Condensed' !default;
 $font-monospace: 'Roboto Mono' !default;
 $font-header-spacing: 1px !default;
 $font-default-size: 22px;
 
+$font-size-h0: 48px;
 $font-size-h1: 42px;
 $font-size-h2: 38px;
 $font-size-h3: 34px;

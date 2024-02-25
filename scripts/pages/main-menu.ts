@@ -1,4 +1,8 @@
-type Active<T = Panel|null> = { button: T, content: T };
+type Active<T = Panel|null> = { button: T, content: T extends Panel ? TabPanel : null };
+
+interface TabPanel extends Panel {
+	name: string;
+}
 
 /* Sounds:
 	"UI.Click"
@@ -62,6 +66,11 @@ class MainMenu {
 		$.Msg('onShowMainMenu called!');
 		// this.panels.movie = $('#MainMenuMovie');
 		// this.panels.image = $('#MainMenuBackground');
+
+		// Silently switch to the dashboard if we're in the pause menu.
+		if (this.active.content?.name === 'pause') {
+			this.onNavbarSelect('dashboard', null, true);
+		}
 	}
 
 	/** Fired by C++ whenever main menu is switched from. */
@@ -74,6 +83,7 @@ class MainMenu {
 	/** Fired by C++ whenever pause menu (i.e. main menu when in a map) is switched to. */
 	static onShowPauseMenu() {
 		this.panels.root.AddClass('paused');
+		this.onNavbarSelect('pause', null, true);
 	}
 
 	/** Fired by C++ whenever pause menu is switched from. */
@@ -87,11 +97,12 @@ class MainMenu {
 
 		const tabID = 'tab-'+tab;
 
-		let targetPanel = this.panels.body.FindChild(tabID);
+		let targetPanel = this.panels.body.FindChild(tabID) as TabPanel;
 		if (!targetPanel) {
-			targetPanel = $.CreatePanel('Panel', this.panels.body, tabID);
+			targetPanel = $.CreatePanel('Panel', this.panels.body, tabID) as TabPanel;
 			targetPanel.LoadLayout(`file://{resources}/layout/pages/tabs/${tab}.xml`, false, false);
 			targetPanel.RegisterForReadyEvents(true);
+			targetPanel.name = tab;
 		}
 
 		if (this.active.content === targetPanel) return;
@@ -147,11 +158,17 @@ class MainMenu {
 		if (this.addon_focused) {
 			$.DispatchEvent('MainMenu.AddonUnfocused');
 			$.PlaySoundEvent('UI.Unclick');
+			return;
 		}
 
 		// Resume game in pause menu mode, OTHERWISE close the active menu menu page
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-			$.DispatchEvent('MainMenuResumeGame');
+			if (this.active.content?.name !== 'pause') {
+				this.onNavbarSelect('pause');
+			}
+			else {
+				$.DispatchEvent('MainMenuResumeGame');
+			}
 		} else {
 			this.promptQuit();
 		}

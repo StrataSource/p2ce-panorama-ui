@@ -1,0 +1,46 @@
+@use '../config' as *;
+
+$thumbs-up-color: #3bb2e9;
+$thumbs-down-color: #ff8724;
+
+AddonRatingPanel {
+	flow-children: right;
+	horizontal-align: right;
+	overflow: noclip;
+
+	Button {
+		overflow: noclip;
+	}
+
+	Image {
+		width: 72px;
+		height: 72px;
+		margin-left: 10px;
+
+		padding: 20px;
+		wash-color-fast: $light-800;
+		border: 1px solid $light-800;
+
+		&:hover {
+			wash-color-fast: $light-700;
+			border: 1px solid $light-700;
+		}
+	}
+
+	Image#thumbs-up.active {
+		wash-color-fast: $thumbs-up-color;
+		border: 1px solid $thumbs-up-color;
+		animation: select 0.15s $easeOutCubic 0.0s 1 normal forwards;
+	}
+
+	Image#thumbs-down.active {
+		wash-color-fast: $thumbs-down-color;
+		border: 1px solid $thumbs-down-color;
+		animation: select 0.15s $easeOutCubic 0.0s 1 normal forwards;
+	}
+}
+
+@keyframes select {
+	0% { pre-transform-scale2d: 1.05 }
+	100% { pre-transform-scale2d: 1.0 }
+}

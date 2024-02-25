@@ -1,0 +1,34 @@
+@use '../config' as *;
+
+AddonAuthorPanel {
+	height: 100px;
+	width: 100%;
+	max-width: 400px;
+	background-color: $light-500;
+	flow-children: right;
+
+	Image {
+		height: 100px;
+		width: 100px;
+		background-color: $light-600;
+		horizontal-align: left;
+		margin-right: 20px;
+	}
+
+	Panel {
+		flow-children: down;
+		vertical-align: center;
+	}
+
+	Label {
+		color: $dark-500;
+	}
+
+	#text-username {
+		font-size: $font-size-h7;
+	}
+
+	#text-nickname {
+		font-size: $font-size-h4;
+	}
+}

@@ -1,0 +1,17 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/components/addon-rating.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/util/stub/workshop-api.js" />
+		<include src="file://{scripts}/components/addon-rating.js" />
+	</scripts>
+	<Panel>
+		<Button onactivate="AddonRating.SetRating(true)">
+			<Image id="thumbs-up" src="file://{images}/thumb-up.svg" />
+		</Button>
+		<Button onactivate="AddonRating.SetRating(false)">
+			<Image id="thumbs-down"   src="file://{images}/thumb-down.svg" />
+		</Button>
+	</Panel>
+</root>
