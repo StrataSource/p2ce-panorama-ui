@@ -4,6 +4,7 @@ interface AddonAuthorPanel extends Panel {
 
 class AddonAuthor {
 	static root = $.GetContextPanel() as AddonAuthorPanel;
+	static icon = $<AvatarImage>('#icon')!;
 
 	static {
 		this.root.SetAddon = this.SetAddon.bind(this);
@@ -17,6 +18,7 @@ class AddonAuthor {
 		const username = 'UberPortalX LABS'; // NO APIS EXIST FOR THIS
 		const nickname = 'Jon Uberportal'; // NO APIS EXIST FOR THIS
 
+		this.icon.accountid = author;
 		this.root.SetDialogVariable('author_username', username);
 		this.root.SetDialogVariable('author_nickname', nickname);
 	}

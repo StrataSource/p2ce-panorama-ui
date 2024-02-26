@@ -3,11 +3,11 @@
 AddonAuthorPanel {
 	height: 100px;
 	width: 100%;
-	max-width: 400px;
+	max-width: 450px;
 	background-color: $light-500;
 	flow-children: right;
 
-	Image {
+	AvatarImage {
 		height: 100px;
 		width: 100px;
 		background-color: $light-600;

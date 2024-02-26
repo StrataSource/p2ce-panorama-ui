@@ -156,15 +156,25 @@ Panel#addon-info {
 		}
 	}
 
-	> TextButton {
-		background-color: $light-500;
-		color: $dark-500;
+	TextButton {
+		width: 350px;
+		padding: 12px;
 		horizontal-align: right;
+		background-color: color.change($dark-700, $alpha: 0.9);
 
 		Label {
-			padding: 10px 80px;
-			font-size: $font-size-h6;
+			font-size: $font-size-h5;
 			font-weight: bold;
+			horizontal-align: center;
+			color: $light-500;
+		}
+
+		&:hover {
+			background-color: $light-500;
+
+			Label {
+				color: $dark-500;
+			}
 		}
 	}
 }

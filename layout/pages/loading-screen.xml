@@ -2,8 +2,15 @@
 	<styles>
 		<include src="file://{resources}/styles/pages/loading-screen.scss" />
 	</styles>
+	
+	<scripts>
+		<include src="file://{scripts}/util/stub/workshop-api.js" />
+		
+		<include src="file://{scripts}/pages/loading-screen.js" />
+	</scripts>
 
 	<Panel class="loadingscreen">
+		<Image id="background" src="none" scaling="stretch-to-cover-preserve-aspect" />
 		<Panel id="container" class="fill">
 			<Panel class="bottom row vertical">
 				<Panel class="row horizontal" id="details">

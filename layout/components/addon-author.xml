@@ -7,7 +7,7 @@
 		<include src="file://{scripts}/components/addon-author.js" />
 	</scripts>
 	<Panel>
-		<Image id="icon" src="none" />
+		<AvatarImage id="icon" />
 		<Panel>
 			<Label id="text-username" text="{s:author_username}" />
 			<Label id="text-nickname" text="{s:author_nickname}" />

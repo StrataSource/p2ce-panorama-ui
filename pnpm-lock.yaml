@@ -28,7 +28,7 @@ devDependencies:
     version: 12.5.0
   pano-typed:
     specifier: github:StrataSource/pano-typed
-    version: github.com/StrataSource/pano-typed/1e8c465666d0c314ca0641ddad8c0f7fb78d4fa9
+    version: github.com/StrataSource/pano-typed/4c5c6347315f8f112fdc012126c28b6456a20e83
   prettier:
     specifier: ^2.8.8
     version: 2.8.8
@@ -1364,8 +1364,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/StrataSource/pano-typed/1e8c465666d0c314ca0641ddad8c0f7fb78d4fa9:
-    resolution: {tarball: https://codeload.github.com/StrataSource/pano-typed/tar.gz/1e8c465666d0c314ca0641ddad8c0f7fb78d4fa9}
+  github.com/StrataSource/pano-typed/4c5c6347315f8f112fdc012126c28b6456a20e83:
+    resolution: {tarball: https://codeload.github.com/StrataSource/pano-typed/tar.gz/4c5c6347315f8f112fdc012126c28b6456a20e83}
     name: pano-typed
     version: 1.0.0
     dev: true

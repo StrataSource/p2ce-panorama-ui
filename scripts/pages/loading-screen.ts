@@ -1,35 +1,40 @@
+
+GameInterfaceAPI.GetCurrentMap ??= function() {
+	return 'sp_a1_intro1';
+}
+
 class LoadingScreen {
+	static root = $.GetContextPanel();
 	static panels = {
-		cp: $.GetContextPanel(),
-		backgroundImage: $<Image>('#BackgroundImage')!,
-		progressBar: $<ProgressBar>('#ProgressBar')!,
-		mapName: $<Label>('#MapName')!,
-		author: $<Label>('#Author')!,
-		tierAndType: $<Label>('#TierAndType')!,
-		numZones: $<Label>('#NumZones')!
-	};
+		container: $('#container')!,
+		background: $<Image>('#background')!,
+	}
 
 	static {
 		$.RegisterForUnhandledEvent('UnloadLoadingScreenAndReinit', this.init.bind(this));
-
-		$.RegisterEventHandler(
-			'PanelLoaded',
-			this.panels.backgroundImage,
-			() => (this.panels.backgroundImage.visible = true)
-		);
-		$.RegisterEventHandler(
-			'ImageFailedLoad',
-			this.panels.backgroundImage,
-			() => (this.panels.backgroundImage.visible = false)
-		);
 	}
 
 	static init() {
-		this.panels.progressBar.value = 0;
-		this.panels.mapName.visible = false;
-		this.panels.author.visible = false;
-		this.panels.tierAndType.visible = false;
-		this.panels.numZones.visible = false;
-		this.panels.backgroundImage.visible = false;
+		const map = GameInterfaceAPI.GetCurrentMap()!;
+		const addon = WorkshopAPI.GetAddonByMap(map);
+		let chapter: AddonChapterMeta|null = null;
+
+		if (addon !== null) {
+			const chapters = WorkshopAPI.GetAddonChapters(addon);
+			for (const c of chapters) {
+				if (c.map !== map) continue;
+				chapter = c;
+				break;
+			}
+		}
+
+		if (chapter !== null) {
+			$.Msg('Setting loading screen background to '+chapter.background);
+			this.panels.background.AddClass('active');
+			this.panels.background.SetImage(chapter.background);
+		}
+		else {
+			this.panels.background.RemoveClass('active');
+		}
 	}
 }
