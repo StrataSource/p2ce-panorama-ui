@@ -8,24 +8,34 @@
 	</scripts>
 
 	<Panel class="loadingscreen">
-		<Image id="BackgroundImageDefault" class="full" src="file://{materials}/panorama/bg_00.vtf" />
-		<Image id="BackgroundImage" class="full hide" scaling="stretch-to-cover-preserve-aspect" />
+		<Image
+			id="BackgroundMapImage1"
+			class="loadingscreen__background loadingscreen__background-image1"
+			src=""
+			scaling="stretch"
+		/>
+		<Image
+			id="BackgroundMapImage2"
+			class="loadingscreen__background loadingscreen__background-image4"
+			src=""
+			scaling="stretch"
+		/>
 
-		<Panel class="full flow-down">
-			<Panel class="loadingscreen__details">
-				<Panel class="loadingscreen__left-details">
-					<Label id="MapName" class="text-h1" text="{s:mapname}" />
-					<Label id="Author" class="text-h2" text="#LoadingScreen_Author" />
-				</Panel>
-				<Panel class="loadingscreen__right-details">
-					<Label id="TierAndType" class="text-h1 loadingscreen__right-label" text="#LoadingScreen_TierAndType" />
-					<Label id="NumZones" class="text-h2 loadingscreen__right-label" text="#LoadingScreen_NumZones" />
-				</Panel>
-				<!--Label id="GameModeTip" class="text-l loadingscreen__tip" text="{s:tip}" /-->
-				<Label id="ProgressStatusText" class="text-h1 loadingscreen__status-label" text="#LoadingScreen_Loading" />
-				<Label id="PercentText" class="text-h1 loadingscreen__percentage-label" text="{d:percent}%" />
-			</Panel>
-			<ProgressBar id="ProgressBar" class="loadingscreen__progressbar progressbar" />
+		<!-- todo: set the logo dynamically -->
+		<Image
+			id="Logo"
+			class="loadingscreen__logo"
+			src=""
+			defaultsrc="file://{images}/menu/p2ce/logo.png"
+			scaling="stretch-to-cover-preserve-aspect"
+		/>
+
+		<Panel class="loadingscreen__fade--dark" />
+		<Panel id="LoadingScreenContents" class="loadingscreen__contents" />
+
+		<Panel id="" class="full-width full-height">
 		</Panel>
+
+		<ProgressBar id="ProgressBar" class="loadingscreen__progressbar" />
 	</Panel>
 </root>

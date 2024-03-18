@@ -1,6 +1,63 @@
 .loadingscreen {
 	width: 100%;
 	height: 100%;
+	background-color: rgba(255, 255, 255, 0.01);
+	transform: scale3d(1, 1, 1);
+	opacity: 1;
+
+	&__background {
+		width: 100%;
+		height: 100%;
+	}
+
+	&__background-image1 {
+		z-index: -1;
+	}
+
+	&__background-image4 {
+		z-index: -4;
+	}
+
+	&__contents {
+		opacity: 1;
+
+		transition-property: height, opacity;
+		transition-duration: 0.5s;
+		transition-timing-function: ease-in-out;
+	}
+
+	&__show {
+		animation-name: loadingscreen__show-animation;
+		animation-duration: 0.65s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: 1;
+		animation-fill-mode: both;
+	}
+
+	&__logo {
+		vertical-align: top;
+		horizontal-align: right;
+		width: 100px;
+		margin-right: 52px;
+		margin-top: 52px;
+	}
+
+	&__backgroundhideanim {
+		animation-name: loading-screen-background-hide-anim;
+		animation-duration: 0.8s;
+		animation-timing-function: linear;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+	}
+
+	&__progressbar {
+		width: 45%;
+		height: 10px;
+		background-color: #00a2ff44;
+		vertical-align: bottom;
+		margin-bottom: 52px;
+		horizontal-align: center;
+	}
 
 	&__details {
 		flow-children: none;
@@ -26,18 +83,6 @@
 	&__right-label {
 		text-align: right;
 		horizontal-align: right;
-	}
-
-	&__tip {
-		vertical-align: bottom;
-		horizontal-align: center;
-		margin-bottom: 100px;
-	}
-
-	&__progressbar {
-		width: 100%;
-		height: 20px;
-		box-shadow: none;
 	}
 
 	&__status-label {
@@ -77,4 +122,19 @@
 	100% {
 		opacity: 0;
 	}
+}
+
+@keyframes loading-screen-background-hide-anim {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+// Assigned to the progress bar by Panorama internally
+.ProgressBarLeft {
+	background-color: #ff9a00;
 }
