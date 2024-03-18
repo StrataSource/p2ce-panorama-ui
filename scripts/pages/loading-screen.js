@@ -1,80 +1,81 @@
 'use strict';
 
-class LoadingScreen {
-	static panels = {
-		/** @type {Panel} @static */
-		cp: $.GetContextPanel(),
-		/** @type {Image} @static */
-		backgroundImage: $('#BackgroundImage'),
-		/** @type {ProgressBar} @static */
-		progressBar: $('#ProgressBar'),
-		/** @type {Label} @static */
-		mapName: $('#MapName'),
-		/** @type {Label} @static */
-		author: $('#Author'),
-		/** @type {Label} @static */
-		tierAndType: $('#TierAndType'),
-		/** @type {Label} @static */
-		numZones: $('#NumZones')
-	};
-
-	static {
-		$.RegisterForUnhandledEvent('UnloadLoadingScreenAndReinit', this.init.bind(this));
-
-		$.RegisterEventHandler(
-			'PanelLoaded',
-			this.panels.backgroundImage,
-			() => (this.panels.backgroundImage.visible = true)
-		);
-		$.RegisterEventHandler(
-			'ImageFailedLoad',
-			this.panels.backgroundImage,
-			() => (this.panels.backgroundImage.visible = false)
-		);
-	}
+class LoadingScreenController {
+	static lastLoadedMapName = '';
 
 	static init() {
-		this.panels.progressBar.value = 0;
-		this.panels.mapName.visible = false;
-		this.panels.author.visible = false;
-		this.panels.tierAndType.visible = false;
-		this.panels.numZones.visible = false;
-		this.panels.backgroundImage.visible = false;
+		$('#ProgressBar').value = 0;
+		$.GetContextPanel()
+			.FindChildInLayoutFile('BackgroundMapImage1')
+			.RemoveClass('loadingscreen__backgroundhideanim');
+		$.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').visible = false;
 	}
 
-	static updateLoadingScreenInfo(mapName) {
-		if (!mapName) return;
+	static updateLoadingScreenInfoRepeater() {
+		// Progress bar will be 1.0 when loading finishes and is then reset to 0.0
+		if ($.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').visible) return;
 
-		const mapData = MapCacheAPI.GetCurrentMapData();
-
-		if (!mapData) {
-			// No data to go off of, just set the map name and hide the rest
-			this.panels.cp.SetDialogVariable('mapname', mapName);
-			this.panels.mapName.visible = true;
-
-			this.panels.author.visible = false;
-			this.panels.tierAndType.visible = false;
-			this.panels.numZones.visible = false;
-			this.panels.backgroundImage.SetImage('');
-
+		if ($('#ProgressBar').value > 0.35) {
+			$.GetContextPanel()
+				.FindChildInLayoutFile('BackgroundMapImage1')
+				.AddClass('loadingscreen__backgroundhideanim');
+			$.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').visible = true;
 			return;
 		}
 
-		this.panels.cp.SetDialogVariable('mapname', mapData.name);
-		this.panels.cp.SetDialogVariableInt('tier', mapData.mainTrack.difficulty);
-		this.panels.cp.SetDialogVariableInt('numzones', mapData.mainTrack.numZones);
-		this.panels.cp.SetDialogVariable('tracktype', mapData.mainTrack.isLinear ? 'Linear' : 'Staged');
+		// Rechecking every 8th of a second is OK, it doesn't need to be anything crazy
+		$.Schedule(0.125, LoadingScreenController.updateLoadingScreenInfoRepeater);
+	}
 
-		let authorString = '';
-		for (const [i, item] of mapData.credits.filter((x) => x.type === 'author').entries())
-			authorString += (i > 0 ? ', ' : '') + item.user.alias;
-		this.panels.cp.SetDialogVariable('author', authorString);
+	static updateLoadingScreenInfo(mapName) {
+		function getMapImage(map, number) {
+			const base = 'file://{materials}/vgui/loading_screens/loadingscreen_';
+			if (map.startsWith('e1912')) return base + 'e1912_1_widescreen.vtf';
+			else if (map.startsWith('sp_a1')) return base + 'a1_' + number + '_widescreen.vtf';
+			else if (map.startsWith('sp_a2')) return base + 'a2_' + number + '_widescreen.vtf';
+			else if (map.startsWith('sp_a3')) return base + 'a3_' + number + '_widescreen.vtf';
+			else if (map.startsWith('sp_a4')) return base + 'a4_' + number + '_widescreen.vtf';
+			else if (map.startsWith('sp_a5')) return base + 'a5_1_widescreen.vtf';
+			else if (map.startsWith('mp')) return base + 'coop_' + number + '_widescreen.vtf';
+			// if map is empty, we are reloading the current map
+			// todo: the aperture logo loading screens don't map exactly to the acts,
+			//       act 3 in particular has two different aperture logo loading screens.
+			//       fixing this will probably involve making a variable storing every
+			//       map name in the game to map it to the right loading screen.
+			//       in the meantime, this looks pretty good
+			else if (LoadingScreenController.lastLoadedMapName.startsWith('sp_a1'))
+				return base + 'default_a_' + number + '_widescreen.vtf';
+			else if (LoadingScreenController.lastLoadedMapName.startsWith('sp_a2'))
+				return base + 'default_b_' + number + '_widescreen.vtf';
+			else if (LoadingScreenController.lastLoadedMapName.startsWith('sp_a3'))
+				return base + 'default_c_' + number + '_widescreen.vtf';
+			else if (LoadingScreenController.lastLoadedMapName.startsWith('sp_a4'))
+				return base + 'default_e_' + number + '_widescreen.vtf';
+			else if (LoadingScreenController.lastLoadedMapName.startsWith('sp_a5')) return base + 'a5_1_widescreen.vtf';
+			else return base + 'default_b_' + number + '_widescreen.vtf';
+		}
 
-		this.panels.mapName.visible = true;
-		this.panels.author.visible = true;
-		this.panels.tierAndType.visible = true;
-		this.panels.numZones.visible = true;
+		if (mapName.length > 0) LoadingScreenController.lastLoadedMapName = mapName;
 
-		this.panels.backgroundImage.SetImage(mapData.thumbnail.urlLarge);
+		let imageNumber1, imageNumber2;
+		if (mapName.startsWith('mp')) {
+			imageNumber1 = Math.floor(Math.random() * 3) + 1;
+			imageNumber2 = imageNumber1 + 1;
+		} else {
+			imageNumber1 = 1;
+			imageNumber2 = 4;
+		}
+
+		const bgImage1 = $.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage1');
+		bgImage1.SetImage(getMapImage(mapName, imageNumber1));
+		bgImage1.visible = true;
+		$.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').SetImage(getMapImage(mapName, imageNumber2));
+
+		$.Schedule(0.125, LoadingScreenController.updateLoadingScreenInfoRepeater);
+	}
+
+	static {
+		$.RegisterForUnhandledEvent('UnloadLoadingScreenAndReinit', LoadingScreenController.init);
+		$.RegisterForUnhandledEvent('PopulateLoadingScreen', LoadingScreenController.updateLoadingScreenInfo);
 	}
 }
