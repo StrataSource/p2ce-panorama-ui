@@ -3,32 +3,32 @@
 class LoadingScreenController {
 	static lastLoadedMapName = '';
 
+	static progressBar = $('#ProgressBar') as ProgressBar;
+	static bgImage1 = $('#BackgroundMapImage1') as Image;
+	static bgImage2 = $('#BackgroundMapImage2') as Image;
+
 	static init() {
-		$('#ProgressBar').value = 0;
-		$.GetContextPanel()
-			.FindChildInLayoutFile('BackgroundMapImage1')
-			.RemoveClass('loadingscreen__backgroundhideanim');
-		$.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').visible = false;
+		this.progressBar.value = 0;
+		this.bgImage1.RemoveClass('loadingscreen__backgroundhideanim');
+		this.bgImage2.visible = false;
 	}
 
 	static updateLoadingScreenInfoRepeater() {
 		// Progress bar will be 1.0 when loading finishes and is then reset to 0.0
-		if ($.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').visible) return;
+		if (this.bgImage2.visible) return;
 
-		if ($('#ProgressBar').value > 0.35) {
-			$.GetContextPanel()
-				.FindChildInLayoutFile('BackgroundMapImage1')
-				.AddClass('loadingscreen__backgroundhideanim');
-			$.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').visible = true;
+		if (this.progressBar.value > 0.35) {
+			this.bgImage1.AddClass('loadingscreen__backgroundhideanim');
+			this.bgImage2.visible = true;
 			return;
 		}
 
 		// Rechecking every 8th of a second is OK, it doesn't need to be anything crazy
-		$.Schedule(0.125, LoadingScreenController.updateLoadingScreenInfoRepeater);
+		$.Schedule(0.125, this.updateLoadingScreenInfoRepeater.bind(this));
 	}
 
-	static updateLoadingScreenInfo(mapName) {
-		function getMapImage(map, number) {
+	static updateLoadingScreenInfo(mapName: string) {
+		function getMapImage(map: string, number: Number) {
 			const base = 'file://{materials}/vgui/loading_screens/loadingscreen_';
 			if (map.startsWith('e1912')) return base + 'e1912_1_widescreen.vtf';
 			else if (map.startsWith('sp_a1')) return base + 'a1_' + number + '_widescreen.vtf';
@@ -55,7 +55,7 @@ class LoadingScreenController {
 			else return base + 'default_b_' + number + '_widescreen.vtf';
 		}
 
-		if (mapName.length > 0) LoadingScreenController.lastLoadedMapName = mapName;
+		if (mapName.length > 0) this.lastLoadedMapName = mapName;
 
 		let imageNumber1, imageNumber2;
 		if (mapName.startsWith('mp')) {
@@ -66,16 +66,16 @@ class LoadingScreenController {
 			imageNumber2 = 4;
 		}
 
-		const bgImage1 = $.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage1');
-		bgImage1.SetImage(getMapImage(mapName, imageNumber1));
-		bgImage1.visible = true;
-		$.GetContextPanel().FindChildInLayoutFile('BackgroundMapImage2').SetImage(getMapImage(mapName, imageNumber2));
+		this.bgImage1.SetImage(getMapImage(mapName, imageNumber1));
+		this.bgImage1.visible = true;
 
-		$.Schedule(0.125, LoadingScreenController.updateLoadingScreenInfoRepeater);
+		this.bgImage2.SetImage(getMapImage(mapName, imageNumber2));
+
+		$.Schedule(0.125, this.updateLoadingScreenInfoRepeater.bind(this));
 	}
 
 	static {
-		$.RegisterForUnhandledEvent('UnloadLoadingScreenAndReinit', LoadingScreenController.init);
-		$.RegisterForUnhandledEvent('PopulateLoadingScreen', LoadingScreenController.updateLoadingScreenInfo);
+		$.RegisterForUnhandledEvent('UnloadLoadingScreenAndReinit', this.init.bind(this));
+		$.RegisterForUnhandledEvent('PopulateLoadingScreen', this.updateLoadingScreenInfo.bind(this));
 	}
 }
