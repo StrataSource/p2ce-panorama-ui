@@ -3,9 +3,9 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{resources}/scripts/pages/settings/page.js" />
+		<include src="file://{scripts}/pages/settings/page.js" />
 		<!-- Temporary -->
-		<include src="file://{resources}/scripts/util/dosa.js" />
+		<include src="file://{scripts}/util/dosa.js" />
 	</scripts>
 
 	<Panel class="settings-page">

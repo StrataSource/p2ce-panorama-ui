@@ -4,8 +4,8 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{resources}/scripts/modals/popups/playtest-consent.js" />
-		<include src="file://{resources}/scripts/util/dosa.js" />
+		<include src="file://{scripts}/modals/popups/playtest-consent.js" />
+		<include src="file://{scripts}/util/dosa.js" />
 	</scripts>
 
 	<PopupCustomLayout class="PopupPanel Hidden generic-popup generic-popup--large" popupbackground="blur">

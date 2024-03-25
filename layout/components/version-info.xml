@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/components/version-info.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{resources}/scripts/components/version-info.js" />
+		<include src="file://{scripts}/components/version-info.js" />
 	</scripts>
 
 	<Panel class="VersionInfo" onload="VersionInfo.update()">
