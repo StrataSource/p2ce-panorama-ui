@@ -2,28 +2,16 @@
 
 class MainMenu {
 	static panels = {
-		/** @type {Panel} @static */
 		cp: $.GetContextPanel(),
-		/** @type {Panel} @static */
 		pageContent: $('#PageContent'),
-		/** @type {Panel} @static */
 		homeContent: $('#HomeContent'),
-		/** @type {Panel} @static */
 		contentBlur: $('#MainMenuContentBlur'),
-		/** @type {Panel} @static */
 		backgroundBlur: $('#MainMenuBackgroundBlur'),
-		/** @type {Movie} @static */
-		movie: null,
-		/** @type {Image} @static */
-		image: $('#MainMenuBackground'),
-		/** @type {ModelPanel} @static */
-		model: $('#MainMenuModel'),
-		/** @type {Image} @static */
-		mapSelectorBackground: $('#MainMenuBackgroundMapSelectorImage'),
-		/** @type {Panel} @static */
+		movie: $<Movie>('#MainMenuMovie'),
+		image: $<Image>('#MainMenuBackground'),
+		model: $<ModelPanel>('#MainMenuModel'),
 		topButtons: $('#MainMenuTopButtons'),
-		/** @type {RadioButton} @static */
-		homeButton: $('#HomeButton')
+		homeButton: $<RadioButton>('#HomeButton')
 	};
 
 	static activeTab = '';
@@ -46,8 +34,8 @@ class MainMenu {
 	 */
 	static onMainMenuLoaded() {
 		// These aren't accessible until the page has loaded fully, find them now
-		this.panels.movie = $('#MainMenuMovie');
-		this.panels.model = $('#MainMenuModel');
+		this.panels.movie = $<Movie>('#MainMenuMovie');
+		this.panels.model = $<ModelPanel>('#MainMenuModel');
 
 		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
 
@@ -59,20 +47,22 @@ class MainMenu {
 			'models/props/metal_box.mdl'
 		];
 
-		this.panels.model.src = models[Math.floor(Math.random() * models.length)]; // Pick a random model
+		if (this.panels.model) {
+			this.panels.model.src = models[Math.floor(Math.random() * models.length)]; // Pick a random model
 
-		this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.15, this.inSpace ? 0.02 : 0);
-		this.panels.model.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
-		this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
+			this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.15, this.inSpace ? 0.02 : 0);
+			this.panels.model.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
+			this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 
-		this.panels.model.LookAtModel();
-		this.panels.model.SetCameraOffset(-200, 0, 0);
-		this.panels.model.SetCameraFOV(30);
+			this.panels.model.LookAtModel();
+			this.panels.model.SetCameraOffset(-200, 0, 0);
+			this.panels.model.SetCameraFOV(30);
 
-		this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
-		this.panels.model.SetDirectionalLightDirection(0, 1, 0, 0);
+			this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
+			this.panels.model.SetDirectionalLightDirection(0, 1, 0, 0);
+		}
 
-		if (GameInterfaceAPI.GetSettingBool('developer')) $('#ControlsLibraryButton').RemoveClass('hide');
+		if (GameInterfaceAPI.GetSettingBool('developer')) $('#ControlsLibraryButton')?.RemoveClass('hide');
 
 		this.setMainMenuBackground();
 
@@ -95,8 +85,8 @@ class MainMenu {
 	 * Fired by C++ whenever main menu is switched to.
 	 */
 	static onShowMainMenu() {
-		this.panels.movie = $('#MainMenuMovie');
-		this.panels.image = $('#MainMenuBackground');
+		this.panels.movie = $<Movie>('#MainMenuMovie');
+		this.panels.image = $<Image>('#MainMenuBackground');
 
 		this.setMainMenuBackground();
 	}
@@ -130,8 +120,8 @@ class MainMenu {
 	/**
 	 * Switch main menu page
 	 */
-	static navigateToPage(tab, xmlName, hasBlur = true) {
-		this.panels.contentBlur.visible = hasBlur;
+	static navigateToPage(tab: string, xmlName: string, hasBlur = true) {
+		if (this.panels.contentBlur) this.panels.contentBlur.visible = hasBlur;
 
 		if (this.activeTab === tab) {
 			$.DispatchEvent('Activated', this.panels.homeButton, 'mouse');
@@ -140,7 +130,7 @@ class MainMenu {
 
 		// Check to see if tab to show exists.
 		// If not load the xml file.
-		if (!this.panels.cp.FindChildInLayoutFile(tab)) {
+		if (!this.panels.cp.FindChildInLayoutFile(tab) && this.panels.pageContent) {
 			const newPanel = $.CreatePanel('Panel', this.panels.pageContent, tab);
 
 			newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
@@ -175,7 +165,7 @@ class MainMenu {
 			// If the tab exists then hide it
 			if (this.activeTab) {
 				const panelToHide = this.panels.cp.FindChildInLayoutFile(this.activeTab);
-				panelToHide.AddClass('mainmenu__page-container--hidden');
+				panelToHide?.AddClass('mainmenu__page-container--hidden');
 
 				$.DispatchEvent('MainMenuTabHidden', this.activeTab);
 			}
@@ -183,11 +173,11 @@ class MainMenu {
 			// Show selected tab
 			this.activeTab = tab;
 			const activePanel = this.panels.cp.FindChildInLayoutFile(tab);
-			activePanel.RemoveClass('mainmenu__page-container--hidden');
+			activePanel?.RemoveClass('mainmenu__page-container--hidden');
 
 			// Force a reload of any resources since we're about to display the panel
-			activePanel.visible = true;
-			activePanel.SetReadyForDisplay(true);
+			if (activePanel) activePanel.visible = true;
+			activePanel?.SetReadyForDisplay(true);
 		}
 
 		this.showContentPanel();
@@ -197,22 +187,22 @@ class MainMenu {
 	 * Show the main menu page container and retract the drawer.
 	 */
 	static showContentPanel() {
-		this.panels.pageContent.RemoveClass('mainmenu__page-container--hidden');
+		this.panels.pageContent?.RemoveClass('mainmenu__page-container--hidden');
 
 		$.DispatchEvent('RetractDrawer');
 		$.DispatchEvent('ShowContentPanel');
 
-		this.panels.homeContent.AddClass('home--hidden');
+		this.panels.homeContent?.AddClass('home--hidden');
 	}
 
 	/**
 	 * Hide the main menu page container and active page, and display the home page content.
 	 */
 	static onHideContentPanel() {
-		this.panels.pageContent.AddClass('mainmenu__page-container--hidden');
+		this.panels.pageContent?.AddClass('mainmenu__page-container--hidden');
 
 		// Uncheck the active button in the main menu navbar.
-		const activeButton = this.panels.topButtons.Children().find((panel) => panel.IsSelected());
+		const activeButton = this.panels.topButtons?.Children().find((panel) => panel.IsSelected());
 		if (activeButton && activeButton.id !== 'HomeButton') {
 			activeButton.checked = false;
 		}
@@ -227,7 +217,7 @@ class MainMenu {
 
 		this.activeTab = '';
 
-		this.panels.homeContent.RemoveClass('home--hidden');
+		this.panels.homeContent?.RemoveClass('home--hidden');
 	}
 
 	/**
@@ -244,8 +234,8 @@ class MainMenu {
 			$.persistentStorage.setItem('settings.mainMenuMovie', true);
 		}
 
-		this.panels.movie.visible = useVideo;
-		this.panels.movie.SetReadyForDisplay(useVideo);
+		this.panels.movie.visible = !!useVideo;
+		this.panels.movie.SetReadyForDisplay(!!useVideo);
 
 		this.panels.image.visible = !useVideo;
 		this.panels.image.SetReadyForDisplay(!useVideo);
@@ -293,12 +283,12 @@ class MainMenu {
 		$.DispatchEvent('MainMenuPauseGame'); // make sure game is paused so we can see the popup if hit from a keybind in-game
 
 		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-			$.Localize('#Action_Quit'),
-			$.Localize('#Action_Quit_Message'),
+			$.LocalizeSafe('#Action_Quit'),
+			$.LocalizeSafe('#Action_Quit_Message'),
 			'warning-popup',
-			$.Localize('#Action_Quit'),
+			$.LocalizeSafe('#Action_Quit'),
 			this.quitGame,
-			$.Localize('#Action_Return'),
+			$.LocalizeSafe('#Action_Return'),
 			() => {},
 			'blur'
 		);
