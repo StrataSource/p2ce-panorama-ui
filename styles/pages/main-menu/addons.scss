@@ -1,0 +1,80 @@
+
+.addons {
+	&__container {
+		flow-children: down;
+		overflow: scroll;
+		width: 40%;
+	}
+
+	&__item {
+		flow-children: right;
+		max-height: 200px;
+		width: 100%;
+		margin-top: 25px;
+		&:selected,
+		&:hover {
+			background-color: #333333AA;
+		}
+	}
+
+	&__title {
+		vertical-align: center;
+		flow-children: down;
+		margin-left: 10px;
+	}
+
+	&__cover {
+		width: 128px;
+		height: 128px;
+	}
+
+	&__desc {
+		margin-top: 10px;
+		margin-left: 10px;
+		color: #999999;
+	}
+
+	&__title {
+		font-size: 24px;
+	}
+
+	&__source {
+		font-size: 16px;
+		margin-top: 10px;
+		margin-left: 10px;
+		font-style: italic;
+		color: #aa5555;
+	}
+}
+
+.addonpanel {
+	&__container {
+		flow-children: down;
+		width: 100%;
+		margin-top: 10px;
+		margin-left: 25px;
+		margin-right: 25px;
+	}
+
+	&__title {
+		font-size: 48px;
+	}
+
+	&__desc-container {
+		width: 100%;
+		max-height: 300px;
+		overflow: scroll;
+		flow-children: down;
+	}
+
+	&__description {
+		font-size: 24px;
+
+	}
+
+	&__section-name {
+		font-size: 32px;
+		color: #aaaaaa;
+		font-style: italic;
+	}
+}
