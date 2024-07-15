@@ -1,0 +1,37 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/game-ui.js" />
+		<include src="file://{scripts}/pages/main-menu/addons.js" />
+	</scripts>
+
+	<snippets>
+		<snippet name="AddonEntrySnippet">
+			<Panel class="addons__item" onactivate="AddonManager.addonSelected()">
+				<Image id="AddonCover" class="addons__cover"
+					textureheight="128"
+					texturewidth="128"
+				/>
+				<Panel class="addons__title">
+					<Label id="AddonTitle" class="addons__title"/>
+					<Label id="AddonDesc" class="addons__desc"/>
+					<Label id="AddonSource" class="addons__source"/>
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="mainmenu__page flow-right" onload="AddonManager.init()">
+		<Panel id="AddonContainer" class="addons__container"/>
+
+		<Panel id="AddonPanel" class="addonpanel__container">
+			<Label id="AddonTitle" class="addonpanel__title" text="Addon Name"/>
+			<Panel class="addonpanel__desc-container">
+				<Label class="addonpanel__section-name" text="Description" />
+				<Label class="addonpanel__description" text="My Addon Description" />
+			</Panel>
+		</Panel>
+	</Panel>
+</root>
