@@ -1,0 +1,12 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/game-ui.js" />
+		<include src="file://{scripts}/pages/main-menu/servers.js" />
+	</scripts>
+
+	<Panel class="mainmenu__page" onload="ServerBrowser.init()">
+	</Panel>
+</root>
