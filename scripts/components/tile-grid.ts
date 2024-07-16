@@ -95,7 +95,8 @@ class TileGrid {
 
 				m += 1;
 				if (m >= max_m) {
-					n += 1, m = 0;
+					n += 1;
+					m = 0;
 					if (width === 1 && height === 1) min_n = n - 1;
 				}
 			}

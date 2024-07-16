@@ -1,17 +1,18 @@
+// TODO: This file is extremely unfinished and
+// causes lots of typescript errors. Just ignore them!
 
-// @ts-expect-error temp
-declare enum WeaponStateMode {
-	SWITCH = 0,
-	PICKUP = 1,
-	DROP = 2,
+
+const WeaponStateMode: WeaponStateModeEnum = {
+	Switch: 0,
+	Pickup: 1,
+	Drop: 2,
 }
 
-// @ts-expect-error temp
-declare enum WeaponSelectAction {
-	NEXT = 0,
-	PREV = 1,
-	SHOW = 2,
-	HIDE = 3
+const WeaponSelectAction: WeaponSelectActionEnum = {
+	Next: 0,
+	Prev: 1,
+	Show: 2,
+	Hide: 3
 }
 
 class HudWeaponSwitcher {
@@ -23,6 +24,7 @@ class HudWeaponSwitcher {
 		weapon: null,
 	}
 
+	static tabs: any[];
 	static root = $.GetContextPanel();
 	static hideDelay: uuid|null = null;
 	static resetDelay: uuid|null = null;
@@ -31,7 +33,7 @@ class HudWeaponSwitcher {
 	static init() {
 		$.RegisterForUnhandledEvent('WeaponSelect', (action) => {
 			$.Msg('action ', action);
-			if (action === WeaponSelectAction.SHOW) {
+			if (action === WeaponSelectAction.Show) {
 				this.root.AddClass('active');
 				$.Msg('Showing weapons hud');
 				const weapons = WeaponsAPI.GetWeapons();
@@ -40,7 +42,7 @@ class HudWeaponSwitcher {
 				// 	$.Msg('Weapon', weapon);
 				// }
 			}
-			if (action === WeaponSelectAction.HIDE) {
+			if (action === WeaponSelectAction.Hide) {
 				this.root.RemoveClass('active');
 				$.Msg('Hiding weapons hud');
 			}
