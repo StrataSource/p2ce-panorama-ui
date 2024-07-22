@@ -29,7 +29,6 @@
 	<MainMenu
 		class="InitialDisplay MainMenuRootPanel"
 		hittest="false"
-		useglobalcontext="true"
 		onload="MainMenu.onMainMenuLoaded()"
 	>
 
