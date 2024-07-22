@@ -2,6 +2,10 @@
 
 class AddonManager {
 	static addonContainer = $<Panel>('#AddonContainer');
+	static addonPanel = $<Panel>('#AddonPanel');
+	static addonTitle = this.addonPanel?.FindChildTraverse('AddonTitle') as Label;
+	static addonDesc = this.addonPanel?.FindChildTraverse('AddonDesc') as Label;
+	static addonAuthors = this.addonPanel?.FindChildTraverse('AddonAuthors') as Label;
 
 	static init() {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback);
@@ -16,7 +20,7 @@ class AddonManager {
 			const info = WorkshopAPI.GetAddonMeta(i);
 			$.Msg(info);
 			const panel = $.CreatePanel('Panel', this.addonContainer, 'addon'+i);
-			panel.SetPanelEvent('onactivate', () => AddonManager.addonSelected(i));
+			panel.SetPanelEvent('onactivate', () => this.addonSelected(i));
 			panel.LoadLayoutSnippet('AddonEntrySnippet');
 
 			const image = panel.FindChild('AddonCover') as Image;
@@ -41,7 +45,18 @@ class AddonManager {
 	}
 
 	static addonSelected(addon: number) {
-		$.Msg('Select ' + addon);
+		const info = WorkshopAPI.GetAddonMeta(addon);
+
+		this.addonTitle.text = info.title;
+		this.addonDesc.text = info.description;
+		if (info.authors.length > 0) {
+			this.addonAuthors.text = 'by ' + info.authors.join(', ');
+			this.addonAuthors.visible = true;
+		}
+		else {
+			this.addonAuthors.text = '';
+			this.addonAuthors.visible = false;
+		}
 	}
 
 }
