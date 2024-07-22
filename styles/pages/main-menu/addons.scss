@@ -10,7 +10,10 @@
 		flow-children: right;
 		max-height: 200px;
 		width: 100%;
-		margin-top: 25px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 10px;
+		border-radius: 4px;
 		&:selected,
 		&:hover {
 			background-color: #333333AA;
@@ -62,19 +65,33 @@
 
 	&__desc-container {
 		width: 100%;
-		max-height: 300px;
 		overflow: scroll;
 		flow-children: down;
 	}
 
 	&__description {
 		font-size: 24px;
+		margin-top: 10px;
+		background-color: #00000088;
+		border-radius: 4px;
+		text-overflow: ellipsis;
+		padding: 10px;
 
+		min-height: 50%;
+		width: 100%;
+	}
+
+	&__authors {
+		font-size: 24px;
+		font-style: italic;
 	}
 
 	&__section-name {
 		font-size: 32px;
 		color: #aaaaaa;
 		font-style: italic;
+		margin-top: 10px;
+		border-bottom: 3px solid #888888;
+		min-width: 100%;
 	}
 }
