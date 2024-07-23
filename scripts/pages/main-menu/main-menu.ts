@@ -24,6 +24,8 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuBackground.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
+		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
+		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
 
 		$.DispatchEvent('HideIntroMovie');
 	}
@@ -312,5 +314,17 @@ class MainMenu {
 		} else {
 			this.onHomeButtonPressed();
 		}
+	}
+
+	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
+		if (isBackgroundMap) {
+			this.panels.movie?.Stop();
+			this.panels.movie?.AddClass('mainmenu__fadeout');
+		}
+	}
+
+	static onMapUnloaded() {
+		this.panels.movie?.Play();
+		this.panels.movie?.RemoveClass('mainmenu__fadeout');
 	}
 }

@@ -125,6 +125,14 @@ $drawer-width: 768px;
 		transition-duration: 0s;
 		transition-timing-function: ease-in-out;
 	}
+
+	&__fadeout {
+		animation-name: FadeOut;
+		animation-duration: 3s;
+		animation-timing-function: ease-out;
+		animation-iteration-count: 1;
+		opacity: 0;
+	}
 }
 
 .topnav {

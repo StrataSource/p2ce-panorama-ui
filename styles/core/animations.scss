@@ -70,6 +70,16 @@
 	}
 }
 
+@keyframes FadeOut {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
 @keyframes AnimOutLeft {
 	0% {
 		transform: translateX(0px);
