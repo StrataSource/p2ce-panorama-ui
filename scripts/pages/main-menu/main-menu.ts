@@ -324,7 +324,9 @@ class MainMenu {
 	}
 
 	static onMapUnloaded() {
-		this.panels.movie?.Play();
-		this.panels.movie?.RemoveClass('mainmenu__fadeout');
+		if (this.panels.movie?.IsValid()) {
+			this.panels.movie?.RemoveClass('mainmenu__fadeout');
+			this.panels.movie?.Play();
+		}
 	}
 }
