@@ -38,6 +38,12 @@
 							textureheight="96"
 							scaling="stretch-to-fit-preserve-aspect" />
 					</Button>
+					<Button class="header-button" id="nav-controls-library" group="menu-nav" onactivate="MainMenu.onNavbarSelect('controls-library')">
+						<Image
+							src="file://{images}/icons/header/settings.svg"
+							textureheight="96"
+							scaling="stretch-to-fit-preserve-aspect" />
+					</Button>
 				</Panel>
 
 				<Panel class="align-right">

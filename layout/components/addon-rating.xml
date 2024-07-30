@@ -3,7 +3,6 @@
 		<include src="file://{resources}/styles/components/addon-rating.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/util/stub/workshop-api.js" />
 		<include src="file://{scripts}/components/addon-rating.js" />
 	</scripts>
 	<Panel>

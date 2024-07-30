@@ -1,0 +1,31 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/common/game-ui.js" />
+	</scripts>
+
+	<Panel class="root vertical pre-trans pad-10" useglobalcontext="false">
+		<Panel class="vertical panel">
+			<Label class="h0" text="H0 Header" />
+			<Label class="h1" text="H1 Header" />
+			<Label class="h2" text="H2 Header" />
+			<Label class="h3" text="H3 Header" />
+			<Label class="h4" text="H4 Header" />
+			<Label class="h5" text="H5 Header" />
+			<Label class="h6" text="H6 Header" />
+			<Label class="h7" text="H7 Header" />
+			<Label class="h8" text="H8 Header" />
+			<Label text="Regular text" />
+		</Panel>
+		<Panel class="vertical panel panel gap-10">
+			<TextButton text="Text Button" class="gap-10" />
+			<TextButton text="Text Button" class="primary gap-10" />
+			<TextButton text="Text Button" class="secondary gap-10" />
+			<ToggleButton class="gap-10" />
+			<ToggleButton class="primary gap-10" />
+		</Panel>
+	</Panel>
+</root>

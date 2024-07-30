@@ -6,8 +6,6 @@
 
 	<scripts>
 		<include src="file://{scripts}/common/game-ui.js" />
-		<include src="file://{scripts}/util/stub/workshop-api.js" />
-
 		<include src="file://{scripts}/pages/tabs/addon.js" />
 	</scripts>
 

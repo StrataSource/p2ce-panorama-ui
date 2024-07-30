@@ -1,17 +1,21 @@
+function assert(x: any, message='Assertion failed!'): asserts x {
+	if (!x) throw Error(message);
+}
+
 /** Describes a card used in the addons page. */
 class AddonCardElement {
 	element: Panel;
+	cover: Image;
 
 	constructor(parent: Panel, meta: AddonMeta) {
 		this.element = $.CreatePanel('Panel', parent, '', { class: 'card pre-trans' });
-		this.element.CreateChildren(`
-			<Image class="cover" src="${meta.cover}" scaling="stretch-to-cover-preserve-aspect" />
-			<Panel>
-				<Label class="title" text="${meta.title}" />
-				<Label class="author" text="${meta.authors[0]}" />
-				<Label class="description" text="${meta.description}" />
-			</Panel>
-		`);
+		assert(this.element.LoadLayoutSnippet('card'), 'Failed to load card snippet!');
+		this.cover = this.element.FindChild('cover')! as Image;
+
+		this.cover.SetImage(meta.cover ?? 'file://{resources}/images/squirrel.jpg');
+		this.element.SetDialogVariable('title', meta.title);
+		this.element.SetDialogVariable('description', meta.description);
+		this.element.SetDialogVariable('author', meta.authors.join(', '));
 
 		this.element.SetPanelEvent('onactivate', () => {
 			$.DispatchEvent('MainMenu.AddonFocused', meta.index);
@@ -34,10 +38,9 @@ class CardCategoryElement {
 
 	constructor(parent: Panel, name: string, addons: AddonMeta[], delay: number=0) {
 		this.element = $.CreatePanel('Panel', parent, '', { class: 'category' });
-		this.element.CreateChildren(`
-			<Panel class="title"><Label text="${name}" /></Panel>
-			<Panel class="content"></Panel>
-		`);
+		assert(this.element.LoadLayoutSnippet('category'), 'Failed to load category snippet!');
+		
+		this.element.SetDialogVariable('title', name);
 
 		const container = this.element.GetLastChild()!;
 		this.items = new Array(addons.length);
@@ -63,6 +66,8 @@ class WorkshopMenuElement {
 
 		for (let i=0; i<addonCount; i++) {
 			const addon = WorkshopAPI.GetAddonMeta(i);
+			addon.index = i;
+			
 			if (addon.local) featured.push(addon)
 			else subscribed.push(addon);
 		}

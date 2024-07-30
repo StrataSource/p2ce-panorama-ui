@@ -1,6 +1,48 @@
 @use './config' as *;
 
 // ================
+// LAYOUT CLASSES
+// ================
+
+.row { width: 100%; }
+.column { height: 100%; }
+.fill { width: 100%; height: 100%; }
+
+.vertical { flow-children: down; }
+.horizontal { flow-children: right; }
+
+.center { align: center center; }
+.right { horizontal-align: right; }
+.bottom { vertical-align: bottom; }
+
+.h0 { font-size: $font-size-h0; font-weight: bold; color: $light-200; }
+.h1 { font-size: $font-size-h1; font-weight: bold; color: $light-200; }
+.h2 { font-size: $font-size-h2; font-weight: bold; color: $light-200; }
+.h3 { font-size: $font-size-h3; font-weight: bold; color: $light-200; }
+.h4 { font-size: $font-size-h4; font-weight: bold; color: $light-200; }
+.h5 { font-size: $font-size-h5; font-weight: bold; color: $light-200; }
+.h6 { font-size: $font-size-h6; font-weight: bold; color: $light-200; }
+.h7 { font-size: $font-size-h7; font-weight: bold; color: $light-200; }
+.h8 { font-size: $font-size-h8; font-weight: bold; color: $light-200; }
+
+.panel {
+	background-color: $dark-500;
+	padding: 10px;
+}
+
+.pad-5 { padding: 5px }
+.pad-10 { padding: 10px }
+.pad-20 { padding: 20px }
+
+.margin-5 { margin: 5px }
+.margin-10 { margin: 10px }
+.margin-20 { margin: 20px }
+
+.gap-5 { margin-top: 5px }
+.gap-10 { margin-top: 10px }
+.gap-20 { margin-top: 20px }
+
+// ================
 // DEFAULT STYLES
 // ================
 
@@ -8,4 +50,77 @@ Label {
 	font-size: $font-default-size;
 	font-family: $font-primary;
 	font-weight: normal;
+	color: $light-400;
+}
+
+@mixin Button {
+	$fg-500: $light-500;
+	$fg-600: $light-600;
+
+	background-color: $fg-500;
+	Label { color: $dark-500; }
+	padding: 12px;
+
+	&.secondary {
+		padding: 12px 12px 10px 12px;
+		background-color: $dark-400;
+		border-bottom: 2px solid $fg-500;
+		Label { color: $fg-500; }
+
+		&:hover {
+			background-color: $fg-600;
+			border-bottom: 2px solid $fg-600;
+			Label { color: $dark-500; }
+		}
+
+		&:active {
+			background-color: $dark-400;
+			Label { color: $fg-500; }
+		}
+	}
+
+	&:hover {
+		background-color: $fg-600;
+	}
+
+	&:active {
+		background-color: $dark-400;
+		Label { color: $fg-500; }
+	}
+}
+
+TextButton {
+	@include Button;
+
+	&.floating {
+		width: 450px;
+		padding: 12px;
+	}
+}
+
+ToggleButton {
+	@include Button;
+
+	padding: 12px 12px 10px 12px;
+	width: 48px;
+	height: 48px;
+
+	background-color: $dark-400;
+	// border-bottom: 2px solid $light-500;
+
+	// transition: box-shadow 0.2s $easeOutCubic 0.0s 0.0s;
+	box-shadow: inset $orange-500 0px -2px 0px 0px;
+
+	.TickBox {
+		visibility: collapse;
+	}
+
+	&:selected {
+		background-color: $orange-500;
+		border: 2px solid $orange-500;
+		background-image: url('file://{images}/close.svg');
+		background-size: 60% 60%;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
 }

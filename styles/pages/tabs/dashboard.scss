@@ -43,20 +43,6 @@ Panel.sidebar {
 		flow-children: down;
 		horizontal-align: center;
 	}
-
-	Label {
-		line-height: 60;
-		font-size: $font-size-h4;
-		color: $dark-500;
-
-		MainMenu.paused & {
-			color: $light-600;
-		}
-	}
-
-	TextButton:hover > Label {
-		text-decoration: underline;
-	}
 }
 
 #UserIcon {

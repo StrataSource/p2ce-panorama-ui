@@ -4,8 +4,6 @@
 	</styles>
 	
 	<scripts>
-		<include src="file://{scripts}/util/stub/workshop-api.js" />
-		
 		<include src="file://{scripts}/pages/loading-screen.js" />
 	</scripts>
 

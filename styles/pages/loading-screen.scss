@@ -1,27 +1,5 @@
 @use '../config' as *;
 
-// TODO: Pretty much all of this is copy-pasted from my pano templates.
-// This should probably be restyled to be more p2ce-y and also have map info!!!
-
-.row { width: 100%; }
-.column { height: 100%; }
-.fill { width: 100%; height: 100%; }
-
-.vertical { flow-children: down; }
-.horizontal { flow-children: right; }
-
-.center { align: center center; }
-.right { horizontal-align: right; }
-.bottom { vertical-align: bottom; }
-
-
-.h1 { font-size: 48px; }
-.h2 { font-size: 36px; }
-.h3 { font-size: 30px; }
-.h4 { font-size: 24px; }
-.h5 { font-size: 18px; }
-.h6 { font-size: 16px; }
-
 LoadingScreen {
 	width: 100%;
 	height: 100%;

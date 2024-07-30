@@ -6,41 +6,45 @@
 
 	<scripts>
 		<include src="file://{scripts}/common/game-ui.js" />
-		<include src="file://{scripts}/util/stub/workshop-api.js" />
-
 		<include src="file://{scripts}/components/addon-library.js" />
 		<include src="file://{scripts}/pages/tabs/dashboard.js" />
 	</scripts>
 
-	<Panel class="root" onload="DashboardMenu.onDashboardLoaded()" useglobalcontext="false">
-		<Panel class="body">
-			<!-- <Panel class="category">
+	<snippets>
+		<snippet name="category">
+			<Panel class="category">
 				<Panel class="title">
-					<Label text="Subscribed" />
+					<Label class="h1" text="{s:title}" />
 				</Panel>
 				<Panel class="content">
-					<Panel class="card">
-						<Image class="cover" src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
-						<Image class="logo" src="file://{workshop}/id-placeholder/images/card.jpeg" scaling="stretch-to-fill-preserve-aspect" />
-						<Panel>
-							<Label class="title" text="Portal 2: Co-Op" />
-							<Label class="author" text="Valve Software" />
-							<Label class="description" text="Dolor sit amet. Lorem ipsum dolor sit. Amet. Dolor sit ipsum amet sit." />
-						</Panel>
-					</Panel>
 				</Panel>
-			</Panel> -->
+			</Panel>
+		</snippet>
+		<snippet name="card">
+			<Panel class="card pre-trans">
+				<Image class="cover" id="cover" src="{s:cover}" scaling="stretch-to-fill-preserve-aspect" />
+				<!-- <Image class="logo" src="{s:logo}" scaling="stretch-to-fill-preserve-aspect" /> -->
+				<Panel>
+					<Label class="title" text="{s:title}" />
+					<Label class="author" text="{s:author}" />
+					<Label class="description" text="{s:description}" />
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="root" onload="DashboardMenu.onDashboardLoaded()" useglobalcontext="false">
+		<Panel class="body">
 		</Panel>
 
 		<Panel class="sidebar">
 			<Panel>
 				<AvatarImage id="UserIcon" />
-				<Label id="UserName" text="Username" />
-				<TextButton text="Workshop" onactivate="DashboardMenu.openWorkshop()" />
-				<TextButton text="My Profile" onactivate="DashboardMenu.openProfile()" />
+				<Label id="UserName" text="Username" class="gap-5" />
+				<TextButton text="Workshop" onactivate="DashboardMenu.openWorkshop()" class="row gap-20 secondary" />
+				<TextButton text="My Profile" onactivate="DashboardMenu.openProfile()" class="row gap-20 secondary" />
 			</Panel>
 		</Panel>
 
 	</Panel>
 </root>
-

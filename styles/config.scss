@@ -4,7 +4,6 @@
 // COLORS
 // ================
 
-
 // Based on Neutral Gray N3
 // https://coolors.co/d1d2d4
 $light-100: #FCFCFC !default;
@@ -29,6 +28,12 @@ $dark-700: #1F1F1F !default;
 $dark-800: #161616 !default;
 $dark-900: #000000 !default;
 
+// Brand
+$orange-500: #ff7b02;
+$orange-600: color.mix($orange-500, $dark-700, 80%);
+$orange-700: color.mix($orange-500, $dark-700, 50%);
+$orange-800: color.mix($orange-500, $dark-700, 20%);
+$orange-900: color.mix($orange-500, $dark-700, 10%);
 
 // ================
 // FONTS

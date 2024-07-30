@@ -80,11 +80,12 @@ MainMenu {
 	}
 
 	&.active {
-		background-color: $dark-400;
-		box-shadow: 0px 10px 0px 0px $dark-400;
+		background-color: $orange-800;
+		box-shadow: 0px 10px 0px 0px $orange-500;
 
 		Image {
-			opacity: 0.8;
+			opacity: 1.0;
+			wash-color: $orange-500;
 		}
 	}
 }
@@ -94,7 +95,8 @@ MainMenu {
 #MainMenuBody {
 	width: 100%;
 	height: fill-parent-flow(1.0);
-	background-color: $light-500;
+	// background-color: $light-500;
+	background-color: $dark-800;
 	z-index: 1;
 
 	MainMenu.paused > Panel > & {

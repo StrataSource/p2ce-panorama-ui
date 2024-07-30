@@ -9,8 +9,7 @@
 		"build": "tsc",
 		"lint": "eslint && prettier . --check",
 		"fix": "eslint --fix && prettier . --write",
-		"postinstall": "husky install",
-		"pre-commit": "lint-staged"
+		"postinstall": "husky install"
 	},
 	"devDependencies": {
 		"@prettier/plugin-xml": "^2.2.0",
@@ -20,9 +19,9 @@
 		"eslint-config-prettier": "^8.10.0",
 		"husky": "^8.0.3",
 		"lint-staged": "^12.5.0",
+		"pano-typed": "github:StrataSource/pano-typed#feat/workshop-api-tmp",
 		"prettier": "^2.8.8",
-		"typescript": "^5.3.3",
-		"pano-typed": "github:StrataSource/pano-typed"
+		"typescript": "^5.5.4"
 	},
 	"lint-staged": {
 		"**/*.{ts,xml,scss,css,md}": "prettier . --write",

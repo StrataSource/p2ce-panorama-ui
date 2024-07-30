@@ -28,8 +28,11 @@ class PauseTab {
 	}
 
 	static UpdateChapterInfo() {
-		const map = 'sp_a1_intro2';
+		const map = GameInterfaceAPI.GetCurrentMap();
+		if (map === null) return;
 		const uuid = WorkshopAPI.GetAddonByMap(map);
+		if (uuid === null) return;
+		
 		const addon = WorkshopAPI.GetAddonMeta(uuid);
 		const chapter = WorkshopAPI.GetAddonChapters(uuid).filter(x => x.map === map)[0];
 
