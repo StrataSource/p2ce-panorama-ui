@@ -26,6 +26,7 @@ class MainMenu {
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
+		$.RegisterForUnhandledEvent('AchievementInfoLoaded', this.onAchievementsLoaded.bind(this));
 
 		$.DispatchEvent('HideIntroMovie');
 	}
@@ -69,6 +70,10 @@ class MainMenu {
 		this.setMainMenuBackground();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
+	}
+
+	static onAchievementsLoaded() {
+		$.Msg(AchievementsAPI.GetAchievements());
 	}
 
 	/**
@@ -117,6 +122,8 @@ class MainMenu {
 		if (this.activeTab === 'Settings') {
 			$.DispatchEvent('SettingsSave');
 		}
+		$.Msg(AchievementsAPI.GetAchievementCount());
+
 	}
 
 	/**
