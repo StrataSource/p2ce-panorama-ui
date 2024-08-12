@@ -18,7 +18,6 @@ class AddonManager {
 		const addonCount = WorkshopAPI.GetAddonCount();
 		for (let i = 0; i < addonCount; ++i) {
 			const info = WorkshopAPI.GetAddonMeta(i);
-			$.Msg(info);
 			const panel = $.CreatePanel('Panel', this.addonContainer, 'addon'+i);
 			panel.SetPanelEvent('onactivate', () => this.addonSelected(i));
 			panel.LoadLayoutSnippet('AddonEntrySnippet');
