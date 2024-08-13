@@ -11,7 +11,8 @@ class MainMenu {
 		image: $<Image>('#MainMenuBackground'),
 		model: $<ModelPanel>('#MainMenuModel'),
 		topButtons: $('#MainMenuTopButtons'),
-		homeButton: $<RadioButton>('#HomeButton')
+		homeButton: $<RadioButton>('#HomeButton'),
+		addonsButton: $<RadioButton>('#AddonsButton')
 	};
 
 	static activeTab = '';
@@ -38,6 +39,15 @@ class MainMenu {
 		// These aren't accessible until the page has loaded fully, find them now
 		this.panels.movie = $<Movie>('#MainMenuMovie');
 		this.panels.model = $<ModelPanel>('#MainMenuModel');
+
+		// TEMP: Hide the addons button if the workshop API is not available
+		try {
+			const count = WorkshopAPI.GetAddonCount();
+		}
+		catch(e) {
+			if (this.panels.addonsButton)
+				this.panels.addonsButton.visible = false;
+		}
 
 		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
 
