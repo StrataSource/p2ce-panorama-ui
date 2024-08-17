@@ -53,17 +53,14 @@ Label {
 	color: $light-400;
 }
 
-@mixin Button {
-	$fg-500: $light-500;
-	$fg-600: $light-600;
-
+@mixin Button($fg-500: $light-500, $fg-600: $light-600, $bg: $dark-400) {
 	background-color: $fg-500;
 	Label { color: $dark-500; }
 	padding: 12px;
 
 	&.secondary {
 		padding: 12px 12px 10px 12px;
-		background-color: $dark-400;
+		background-color: $bg;
 		border-bottom: 2px solid $fg-500;
 		Label { color: $fg-500; }
 
@@ -74,7 +71,7 @@ Label {
 		}
 
 		&:active {
-			background-color: $dark-400;
+			background-color: $bg;
 			Label { color: $fg-500; }
 		}
 	}
@@ -84,43 +81,81 @@ Label {
 	}
 
 	&:active {
-		background-color: $dark-400;
+		background-color: $bg;
 		Label { color: $fg-500; }
 	}
 }
 
 TextButton {
 	@include Button;
+	
+	&.primary {
+		@include Button($orange-500, $orange-600, $orange-800);
+	}
 
 	&.floating {
 		width: 450px;
 		padding: 12px;
+		background-color: transparent;
+
+		Label {
+			font-size: $font-size-h5;
+			font-weight: bold;
+			horizontal-align: center;
+			color: $light-500;
+		}
+		
+		&:hover {
+			background-color: $light-500;
+			Label {
+				color: $dark-500;
+			}
+		}
 	}
+
 }
 
 ToggleButton {
-	@include Button;
-
 	padding: 12px 12px 10px 12px;
 	width: 48px;
 	height: 48px;
 
 	background-color: $dark-400;
+	border: 2px solid $light-800;
 	// border-bottom: 2px solid $light-500;
 
 	// transition: box-shadow 0.2s $easeOutCubic 0.0s 0.0s;
-	box-shadow: inset $orange-500 0px -2px 0px 0px;
+	// box-shadow: inset $orange-500 0px -2px 0px 0px;
 
 	.TickBox {
 		visibility: collapse;
 	}
 
+	&:hover {
+		background-color: $orange-800;
+		border-color: $orange-500;
+	}
+
+	&:active {
+		background-color: $orange-900;
+	}
+
 	&:selected {
 		background-color: $orange-500;
-		border: 2px solid $orange-500;
+		border-color: $orange-500;
 		background-image: url('file://{images}/close.svg');
 		background-size: 60% 60%;
 		background-position: center;
 		background-repeat: no-repeat;
 	}
+
+	&:selected:hover {
+		background-color: $orange-600;
+		border-color: $orange-600;
+	}
+
+	&:selected:active {
+		background-color: $orange-900;
+	}
 }
+

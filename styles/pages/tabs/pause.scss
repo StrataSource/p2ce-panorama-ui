@@ -22,25 +22,6 @@ Panel#menu-buttons {
 	flow-children: down;
 	vertical-align: bottom;
 	padding: 100px;
-
-	TextButton {
-		width: 450px;
-		padding: 12px;
-
-		Label {
-			font-size: $font-size-h5;
-			font-weight: bold;
-			horizontal-align: center;
-			color: $light-500;
-		}
-
-		&:hover {
-			background-color: $light-500;
-			Label {
-				color: $dark-500;
-			}
-		}
-	}
 }
 
 Panel#menu-info {

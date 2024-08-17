@@ -15,8 +15,8 @@
 		</BaseBlurTarget>
 		<Panel id="root">
 			<Panel id="menu-buttons">
-				<TextButton onactivate="$.DispatchEvent('MainMenuResumeGame')" text="Resume" />
-				<TextButton onactivate="GameInterfaceAPI.ConsoleCommand('disconnect')" text="Exit" />
+				<TextButton class="floating" onactivate="$.DispatchEvent('MainMenuResumeGame')" text="Resume" />
+				<TextButton class="floating" onactivate="GameInterfaceAPI.ConsoleCommand('disconnect')" text="Exit" />
 			</Panel>
 			<Panel id="menu-info">
 				<Image id="chapter-thumb" src="none" scaling="stretch-to-cover-preserve-aspect" />

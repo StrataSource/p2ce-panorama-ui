@@ -1,7 +1,7 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
-		<include src="file://{resources}/styles/pages/settings.scss" />
+		<include src="file://{resources}/styles/pages/tabs/settings.scss" />
 	</styles>
 
 	<scripts>
@@ -18,7 +18,7 @@
 							placeholder="#Settings_General_Search_Prompt" /> -->
 
 						<!-- The below elements are populated by javascript.
-							See file://scripts/pages/settings.ts for details. -->
+							See file://scripts/pages/tabs/settings.ts for details. -->
 
 				<Panel id="categories">
 				</Panel>

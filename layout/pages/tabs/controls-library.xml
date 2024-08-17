@@ -21,9 +21,10 @@
 			<Label text="Regular text" />
 		</Panel>
 		<Panel class="vertical panel panel gap-10">
-			<TextButton text="Text Button" class="gap-10" />
+			<TextButton text="Text Button" class="" />
 			<TextButton text="Text Button" class="primary gap-10" />
 			<TextButton text="Text Button" class="secondary gap-10" />
+			<TextButton text="Text Button" class="floating gap-10" />
 			<ToggleButton class="gap-10" />
 			<ToggleButton class="primary gap-10" />
 		</Panel>

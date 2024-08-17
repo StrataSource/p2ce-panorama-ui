@@ -11,6 +11,10 @@ class DashboardMenu {
 			if (tab === 'dashboard') this.onDashboardShown();
 			else this.onDashboardHidden();
 		});
+
+		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
+			this.onDashboardLoaded();
+		});
 	}
 
 	/**
