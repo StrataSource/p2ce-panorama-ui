@@ -24,7 +24,7 @@
 	&__message-target > MultiselectLabel {
 		text-shadow-fast: none;
 		font-family: $font-monospace;
-		font-size: 11px;
+		font-size: $font-console-default-size;
 		margin-right: 16px;
 	}
 
