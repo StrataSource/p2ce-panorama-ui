@@ -307,7 +307,7 @@ class MainMenu {
 	 * @param {unknown} _nRepeats - Pressing in main menu returns "keyboard"
 	 * @param {unknown} _focusPanel - Pressing in main menu returns undefined
 	 */
-	static onEscapeKeyPressed(_eSource, _nRepeats, _focusPanel) {
+	static onEscapeKeyPressed(_eSource, _focusPanel) {
 		// Resume game in pause menu mode, OTHERWISE close the active menu menu page
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			$.DispatchEvent('MainMenuResumeGame');
