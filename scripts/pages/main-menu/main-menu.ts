@@ -26,6 +26,7 @@ class MainMenu {
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
+		$.RegisterForUnhandledEvent('GameSaved', this.onGameSaved.bind(this));
 
 		$.DispatchEvent('HideIntroMovie');
 	}
@@ -328,5 +329,10 @@ class MainMenu {
 			this.panels.movie?.RemoveClass('mainmenu__fadeout');
 			this.panels.movie?.Play();
 		}
+	}
+
+	static onGameSaved(save_name: string, save_type: SaveType) {
+		$.Msg(SaveRestoreAPI.GetSaves());
+		$.Msg('Saved ' + save_name + ' type is ' + save_type.toString());
 	}
 }
