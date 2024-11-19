@@ -17,6 +17,14 @@
 				<Panel class="addons__title">
 					<Label id="AddonTitle" class="addons__title"/>
 					<Label id="AddonDesc" class="addons__desc"/>
+					<Panel id="AddonButtons" class="flow-right">
+						<Button id="AddonEnable" class="addons__buttons">
+							<Label text="Enable" id="AddonEnableText"/>
+						</Button>
+						<Button id="AddonSubscribe" class="addons__buttons">
+							<Label text="Subscribe" id="AddonSubscribeText"/>
+						</Button>
+					</Panel>
 					<Label id="AddonSource" class="addons__source"/>
 				</Panel>
 			</Button>
@@ -24,7 +32,20 @@
 	</snippets>
 
 	<Panel class="mainmenu__page flow-right" onload="AddonManager.init()">
-		<Panel id="AddonContainer" class="addons__container"/>
+		<Panel class="addons__side_panel">
+			<Panel id="AddonContainer" class="addons__container"/>
+			<Panel class="addons__buttons_container">
+				<Button onactivate="AddonManager.enableAll()">
+					<Label text="Enable All"/>
+				</Button>
+				<Button onactivate="AddonManager.disableAll()">
+					<Label text="Disable All"/>
+				</Button>
+				<Button onactivate="AddonManager.reloadAddonList()">
+					<Label text="Reload Addon List"/>
+				</Button>
+			</Panel>
+		</Panel>
 
 		<Panel id="AddonPanel" class="addonpanel__container">
 			<Label id="AddonTitle" class="addonpanel__title" text="Addon Name"/>
