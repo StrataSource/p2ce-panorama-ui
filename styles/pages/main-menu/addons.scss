@@ -1,9 +1,21 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
 
 .addons {
 	&__container {
 		flow-children: down;
 		overflow: scroll;
+		width: 100%;
+		height: 100%;
+		//border-right: 3px solid #303030;
+		border-bottom: 4px solid #888888;
+	}
+
+	&__side_panel {
 		width: 40%;
+		height: 90%;
+		flow-children: down;
 	}
 
 	&__item {
@@ -43,10 +55,47 @@
 
 	&__source {
 		font-size: 16px;
-		margin-top: 10px;
 		margin-left: 10px;
 		font-style: italic;
 		color: #aa5555;
+	}
+
+	&__buttons_container {
+		horizontal-align: center;
+		height: 10%;
+		//border-top: 3px solid #888888;
+		//background-color: gradient( linear, 0% 0%, 0% 100%, from( #88888800 ), to( #303030FF) );
+		flow-children: right;
+
+		>Button {
+			margin-top: 10px;
+			background-color: #303030;
+			padding: 5px;
+			padding-left: 32px;
+			padding-right: 32px;
+			margin-right: 16px;
+			border-radius: 2px;
+
+			&:hover {
+				background-color: $primary-color;
+			}
+		}
+	}
+
+	&__buttons {
+		//flow-children: right;
+		font-size: 16px;
+		border-radius: 2px;
+		margin: 10px;
+		padding: 2px;
+		margin-right: 0px;
+		padding-left: 5px;
+		padding-right: 5px;
+		background-color: #303030;
+
+		&:hover {
+			background-color: $primary-color;
+		}
 	}
 }
 
