@@ -6,13 +6,14 @@ class AddonEntry {
 
 	enableText: Label|null = null;
 	subText: Label|null = null;
+	addonEnableCheck: ToggleButton|null = null;
 
 	constructor(index: number, panel: Panel) {
 		this.index = index;
 		this.panel = panel;
 
-		this.enableText = panel.FindChildTraverse<Label>('AddonEnableText');
 		this.subText = panel.FindChildTraverse<Label>('AddonSubscribeText');
+		this.addonEnableCheck = this.panel.FindChildTraverse<ToggleButton>('AddonEnable');
 	}
 
 	/**
@@ -21,7 +22,7 @@ class AddonEntry {
 	update() {
 		const info = WorkshopAPI.GetAddonMeta(this.index);
 
-		const image = this.panel.FindChild('AddonCover') as Image;
+		const image = this.panel.FindChildTraverse('AddonCover') as Image;
 		image.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
 		const title = this.panel.FindChildTraverse('AddonTitle') as Label;
@@ -30,19 +31,13 @@ class AddonEntry {
 		const desc = this.panel.FindChildTraverse('AddonDesc') as Label;
 		desc.text = info.description.split('\n')[0];
 
-		// Add a panel event for the subscribe/unsubscribe button
-		const subscribeButton = this.panel.FindChildTraverse('AddonSubscribe') as Button;
-		subscribeButton.SetPanelEvent('onactivate', () => this.addonSubscribed());
+		if (this.addonEnableCheck) {
+			this.addonEnableCheck.SetSelected(WorkshopAPI.GetAddonEnabled(this.index));
+			this.addonEnableCheck.SetPanelEvent('onactivate', () => this.addonToggle());
+		}
 
 		if (this.subText)
 			this.subText.text = WorkshopAPI.GetAddonSubscribed(this.index) ? 'Unsubscribe' : 'Subscribe';
-
-		// Add a panel event for the enable/disable button
-		const enableButton = this.panel.FindChildTraverse('AddonEnable') as Button;
-		enableButton.SetPanelEvent('onactivate', () => this.addonEnabled())
-
-		if (this.enableText)
-			this.enableText.text = WorkshopAPI.GetAddonEnabled(this.index) ? 'Disable' : 'Enable';
 
 		const source = this.panel.FindChildTraverse('AddonSource') as Label;
 		if (info.local)
@@ -54,11 +49,9 @@ class AddonEntry {
 	/**
 	 * Toggle an addon's enable state
 	 */
-	addonEnabled() {
-		WorkshopAPI.SetAddonEnabled(this.index, !WorkshopAPI.GetAddonEnabled(this.index));
-
-		if (this.enableText)
-			this.enableText.text = WorkshopAPI.GetAddonEnabled(this.index) ? 'Disable' : 'Enable';
+	addonToggle() {
+		if (this.addonEnableCheck)
+			WorkshopAPI.SetAddonEnabled(this.index, this.addonEnableCheck.IsSelected());
 	}
 
 	/**
@@ -80,7 +73,7 @@ class AddonManager {
 	static addonDesc = this.addonPanel?.FindChildTraverse('AddonDesc') as Label;
 	static addonAuthors = this.addonPanel?.FindChildTraverse('AddonAuthors') as Label;
 
-	static addons: AddonEntry[];
+	static addons: AddonEntry[] = [];
 
 	static init() {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback);
@@ -99,7 +92,7 @@ class AddonManager {
 	static createAddonEntries() {
 		if (!this.addonContainer) return;
 
-		this.addons = [];
+		this.purgeAddonList();
 
 		const addonCount = WorkshopAPI.GetAddonCount();
 		for (let i = 0; i < addonCount; ++i) {
@@ -140,8 +133,14 @@ class AddonManager {
 
 	}
 
-	static reloadAddonList() {
+	static purgeAddonList() {
+		while (this.addons.length > 0)
+			this.addons.pop()?.panel.DeleteAsync(0);
+	}
 
+	static reloadAddonList() {
+		this.purgeAddonList();
+		this.createAddonEntries();
 	}
 
 }
