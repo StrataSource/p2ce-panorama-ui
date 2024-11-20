@@ -73,17 +73,6 @@
 						<Label text="Addons" class="text"/>
 					</RadioButton>
 
-					<!-- Server List -->
-					<RadioButton
-						id="ServersButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenu.navigateToPage('Servers', 'main-menu/servers')"
-					>
-						<Image class="topnav__icon" src="file://{images}/server-list.svg" textureheight="80" />
-						<Label text="Servers" class="text"/>
-					</RadioButton>
-
 					<!-- Settings -->
 					<RadioButton
 						id="SettingsButton"
