@@ -8,6 +8,6 @@
 	</scripts>
 
 	<Panel class="mainmenu__page" onload="CampaignSelector.init()">
-		<Carousel class="campaignselector__carousel" id="CampaignCarousel"/>
+		<Label text="Coming soon :)" class="campaigns__coming_soon"/>
 	</Panel>
 </root>
