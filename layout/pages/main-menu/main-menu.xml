@@ -30,6 +30,7 @@
 		class="InitialDisplay MainMenuRootPanel"
 		hittest="false"
 		onload="MainMenu.onMainMenuLoaded()"
+		useglobalcontext="false"
 	>
 
 		<!-- Vanity is not used but the engine needs this to exist -->
