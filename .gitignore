@@ -6,4 +6,4 @@ pnpm-lock.yaml
 fonts.uuid
 .uuid
 conf.d
-.scripts_dist
+/scripts_dist/
