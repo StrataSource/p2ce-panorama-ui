@@ -60,7 +60,7 @@
 						onactivate="MainMenu.navigateToPage('Campaigns', 'main-menu/campaigns')"
 					>
 						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-						<Label text="Campaigns" class="text"/>
+						<Label text="Campaigns" class="text" />
 					</RadioButton>
 
 					<!-- Addon manager -->
@@ -71,7 +71,7 @@
 						onactivate="MainMenu.navigateToPage('Addons', 'main-menu/addons')"
 					>
 						<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
-						<Label text="Addons" class="text"/>
+						<Label text="Addons" class="text" />
 					</RadioButton>
 
 					<!-- Settings -->
@@ -82,7 +82,7 @@
 						onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')"
 					>
 						<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
-						<Label text="Settings" class="text"/>
+						<Label text="Settings" class="text" />
 					</RadioButton>
 				</Panel>
 

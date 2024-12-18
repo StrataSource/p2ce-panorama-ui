@@ -43,10 +43,8 @@ class MainMenu {
 		// TEMP: Hide the addons button if the workshop API is not available
 		try {
 			const count = WorkshopAPI.GetAddonCount();
-		}
-		catch(e) {
-			if (this.panels.addonsButton)
-				this.panels.addonsButton.visible = false;
+		} catch (e) {
+			if (this.panels.addonsButton) this.panels.addonsButton.visible = false;
 		}
 
 		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected

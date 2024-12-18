@@ -12,20 +12,17 @@
 			<Button class="addons__item">
 				<Panel class="addon-entry__left">
 					<!-- Addon icon cover -->
-					<Image id="AddonCover" class="addon-entry__cover"
-						textureheight="128"
-						texturewidth="128"
-					/>
+					<Image id="AddonCover" class="addon-entry__cover" textureheight="128" texturewidth="128" />
 
 					<!-- Addon info; title, description, 'source' -->
 					<Panel class="addon-entry__title">
-						<Label id="AddonTitle" class="addon-entry__title"/>
-						<Label id="AddonDesc" class="addon-entry__desc"/>
-						<Label id="AddonSource" class="addon-entry__source"/>
+						<Label id="AddonTitle" class="addon-entry__title" />
+						<Label id="AddonDesc" class="addon-entry__desc" />
+						<Label id="AddonSource" class="addon-entry__source" />
 					</Panel>
 				</Panel>
 				<Panel class="addon-entry__right">
-					<ToggleButton id="AddonEnable" class="checkbox addon-entry__checkbox"/>
+					<ToggleButton id="AddonEnable" class="checkbox addon-entry__checkbox" />
 				</Panel>
 			</Button>
 		</snippet>
@@ -37,24 +34,24 @@
 			<Panel class="addons__top_buttons__bg">
 				<Panel class="addons__top_buttons__container">
 					<Button onactivate="AddonManager.apply()" id="ApplyButton" class="button addons__top_buttons__apply" disabled="true">
-						<Label text="Apply"/>
+						<Label text="Apply" />
 					</Button>
 					<Button onactivate="AddonManager.cancel()" id="CancelButton" class="button addons__top_buttons__apply" disabled="true">
-						<Label text="Discard"/>
+						<Label text="Discard" />
 					</Button>
 					<Button id="ReloadAll" class="addons__top_buttons__reload" onactivate="AddonManager.reloadAddonList()">
-						<Image texturewidth="32" textureheight="32" src="file://{images}/refresh.svg"/>
+						<Image texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
 					</Button>
-					<ToggleButton id="ToggleAll" class="checkbox" onactivate="AddonManager.toggleAll()"/>
+					<ToggleButton id="ToggleAll" class="checkbox" onactivate="AddonManager.toggleAll()" />
 				</Panel>
 			</Panel>
 
 			<!-- Addon list -->
-			<Panel id="AddonContainer" class="addons__container"/>
+			<Panel id="AddonContainer" class="addons__container" />
 		</Panel>
 
 		<Panel id="AddonPanel" class="addonpanel__container">
-			<Label id="AddonTitle" class="addonpanel__title" text="Addon Name"/>
+			<Label id="AddonTitle" class="addonpanel__title" text="Addon Name" />
 			<Label id="AddonAuthors" class="addonpanel__authors" />
 			<Panel class="addonpanel__desc-container">
 				<Label class="addonpanel__section-name" text="Description" />

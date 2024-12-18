@@ -4,9 +4,9 @@ class AddonEntry {
 	index: number;
 	panel: Panel;
 
-	enableText: Label|null = null;
-	subText: Label|null = null;
-	addonEnableCheck: ToggleButton|null = null;
+	enableText: Label | null = null;
+	subText: Label | null = null;
+	addonEnableCheck: ToggleButton | null = null;
 
 	constructor(index: number, panel: Panel) {
 		this.index = index;
@@ -36,14 +36,11 @@ class AddonEntry {
 			this.addonEnableCheck.SetPanelEvent('onactivate', () => this.addonToggle());
 		}
 
-		if (this.subText)
-			this.subText.text = WorkshopAPI.GetAddonSubscribed(this.index) ? 'Unsubscribe' : 'Subscribe';
+		if (this.subText) this.subText.text = WorkshopAPI.GetAddonSubscribed(this.index) ? 'Unsubscribe' : 'Subscribe';
 
 		const source = this.panel.FindChildTraverse('AddonSource') as Label;
-		if (info.local)
-			source.text = 'Local Addon';
-		else
-			source.text = 'Workshop Addon ' + info.workshopid;
+		if (info.local) source.text = 'Local Addon';
+		else source.text = 'Workshop Addon ' + info.workshopid;
 	}
 
 	/**
@@ -57,8 +54,7 @@ class AddonEntry {
 	 * Returns if the addon is enabled or not
 	 */
 	isEnabled(): boolean {
-		if (this.addonEnableCheck)
-			return this.addonEnableCheck.IsSelected();
+		if (this.addonEnableCheck) return this.addonEnableCheck.IsSelected();
 		return false;
 	}
 
@@ -75,8 +71,7 @@ class AddonEntry {
 	 */
 	setAddonEnabled(en: boolean) {
 		if (this.addonEnableCheck) {
-			if (this.addonEnableCheck.IsSelected() != en)
-				AddonManager.markDirty();
+			if (this.addonEnableCheck.IsSelected() != en) AddonManager.markDirty();
 			this.addonEnableCheck.SetSelected(en);
 		}
 	}
@@ -87,11 +82,9 @@ class AddonEntry {
 	addonSubscribed() {
 		WorkshopAPI.SetAddonSubscribed(this.index, !WorkshopAPI.GetAddonSubscribed(this.index));
 
-		if (this.subText) 
-			this.subText.text = WorkshopAPI.GetAddonSubscribed(this.index) ? 'Unsubscribe' : 'Subscribe';
+		if (this.subText) this.subText.text = WorkshopAPI.GetAddonSubscribed(this.index) ? 'Unsubscribe' : 'Subscribe';
 	}
-
-};
+}
 
 class AddonManager {
 	static addonContainer = $<Panel>('#AddonContainer');
@@ -129,19 +122,17 @@ class AddonManager {
 		const addonCount = WorkshopAPI.GetAddonCount();
 		let anyEnabled = false;
 		for (let i = 0; i < addonCount; ++i) {
-			const panel = $.CreatePanel('Panel', this.addonContainer, 'addon'+i);
+			const panel = $.CreatePanel('Panel', this.addonContainer, 'addon' + i);
 			panel.SetPanelEvent('onactivate', () => this.addonSelected(i));
 			panel.LoadLayoutSnippet('AddonEntrySnippet');
 
-			if (WorkshopAPI.GetAddonEnabled(i))
-				anyEnabled = true;
+			if (WorkshopAPI.GetAddonEnabled(i)) anyEnabled = true;
 
 			this.addons.push(new AddonEntry(i, panel));
 		}
 
 		// If any addons are enabled, we'll default the "select all" button to true
-		if (this.toggleAllButton)
-			this.toggleAllButton.SetSelected(anyEnabled);
+		if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
 
 		this.updateAddons();
 	}
@@ -153,17 +144,14 @@ class AddonManager {
 	static addonSelected(addon: number) {
 		const info = WorkshopAPI.GetAddonMeta(addon);
 
-		if (this.addonTitle)
-			this.addonTitle.text = info.title;
+		if (this.addonTitle) this.addonTitle.text = info.title;
 
-		if (this.addonDesc)
-			this.addonDesc.text = info.description;
+		if (this.addonDesc) this.addonDesc.text = info.description;
 
 		if (info.authors.length > 0 && this.addonAuthors) {
 			this.addonAuthors.text = 'by ' + info.authors.join(', ');
 			this.addonAuthors.visible = true;
-		}
-		else if (this.addonAuthors) {
+		} else if (this.addonAuthors) {
 			this.addonAuthors.text = '';
 			this.addonAuthors.visible = false;
 		}
@@ -175,11 +163,9 @@ class AddonManager {
 	static markDirty(dirty: boolean = true) {
 		this.dirty = dirty;
 
-		if (this.cancelButton)
-			this.cancelButton.enabled = this.dirty;
+		if (this.cancelButton) this.cancelButton.enabled = this.dirty;
 
-		if (this.applyButton)
-			this.applyButton.enabled = this.dirty;
+		if (this.applyButton) this.applyButton.enabled = this.dirty;
 	}
 
 	/**
@@ -213,14 +199,12 @@ class AddonManager {
 		let anyEnabled = false;
 		for (const addon of this.addons) {
 			addon.updateEnabled();
-			if (addon.isEnabled())
-				anyEnabled = true;
+			if (addon.isEnabled()) anyEnabled = true;
 		}
 
 		this.markDirty(false);
 
-		if (this.toggleAllButton)
-			this.toggleAllButton.SetSelected(anyEnabled);
+		if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
 	}
 
 	/**
@@ -236,8 +220,7 @@ class AddonManager {
 	}
 
 	static purgeAddonList() {
-		while (this.addons.length > 0)
-			this.addons.pop()?.panel.DeleteAsync(0);
+		while (this.addons.length > 0) this.addons.pop()?.panel.DeleteAsync(0);
 	}
 
 	static reloadAddonList() {
