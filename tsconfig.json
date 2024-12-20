@@ -13,6 +13,5 @@
 		"typeRoots": ["./scripts/types/"],
 		"types": ["p2ce"]
 	},
-	"include": ["scripts/"],
-	"exclude": ["*.d.ts"]
+	"include": ["scripts/"]
 }

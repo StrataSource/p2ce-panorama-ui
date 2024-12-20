@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/pages/main-menu/addons.js" />
+		<include src="file://{scripts}/pages/main-menu/addons.ts" />
 	</scripts>
 
 	<snippets>
