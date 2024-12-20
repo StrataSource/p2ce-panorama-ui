@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/pages/main-menu/campaigns.js" />
+		<include src="file://{scripts}/pages/main-menu/campaigns.ts" />
 	</scripts>
 
 	<Panel class="mainmenu__page" onload="CampaignSelector.init()">
