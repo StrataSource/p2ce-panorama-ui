@@ -11,7 +11,7 @@ class DosaHandler {
 	 * @param {String} key
 	 * @param {String} nameToken
 	 */
-	static addDosa(key, nameToken) {
+	static addDosa(key: string, nameToken: string) {
 		const dosas = this.#getPSObject();
 		dosas[key] = nameToken;
 		this.#setPSObject(dosas);
@@ -22,7 +22,7 @@ class DosaHandler {
 	 * @param {String} key
 	 * @returns {Boolean} Whether the DoSA was deleted
 	 */
-	static removeDosa(key) {
+	static removeDosa(key: string): boolean {
 		const dosas = this.#getPSObject();
 
 		if (dosas[key]) {
@@ -38,7 +38,7 @@ class DosaHandler {
 	 * Check whether a DoSA is stored.
 	 * @param {String} key
 	 */
-	static checkDosa(key) {
+	static checkDosa(key: string): boolean {
 		const dosas = this.#getPSObject();
 
 		return !!dosas[key];
@@ -48,7 +48,7 @@ class DosaHandler {
 	 * Get all DoSAs as [key, nameToken] tuples
 	 * @returns {[string, string]}
 	 */
-	static getAll() {
+	static getAll(): [string, string][] {
 		return Object.entries(this.#getPSObject()).map(([key, nameToken]) => [key, nameToken]);
 	}
 
@@ -57,7 +57,7 @@ class DosaHandler {
 	 * @param {String} key
 	 * @returns {String | undefined}
 	 */
-	static getNameToken(key) {
+	static getNameToken(key: string): string|undefined {
 		const dosas = this.#getPSObject();
 
 		return dosas?.[key];
@@ -71,7 +71,7 @@ class DosaHandler {
 	 * @param {String} nameToken
 	 * @returns {Boolean} Whether a DoSA was added
 	 */
-	static handleDosaCheckbox(panel, key, nameToken) {
+	static handleDosaCheckbox(panel: Panel, key: string, nameToken: string): boolean {
 		key ??= panel.GetAttributeString('dosaKey', '');
 		nameToken ??= panel.GetAttributeString('dosaNameToken', '');
 
@@ -92,7 +92,7 @@ class DosaHandler {
 	 * @param {String} nameToken
 	 * @returns {Boolean} Whether a DoSA was added
 	 */
-	static handleDosaButton(panel, key, nameToken) {
+	static handleDosaButton(panel: Panel, key: string, nameToken: string): boolean {
 		key ??= panel.GetAttributeString('dosaKey', '');
 		nameToken ??= panel.GetAttributeString('dosaNameToken', '');
 
@@ -127,7 +127,7 @@ class DosaPopup {
 	 * @param {String} [dosaKey]
 	 * @param {String} [dosaNameToken]
 	 */
-	static onSubmit(dosaKey, dosaNameToken) {
+	static onSubmit(dosaKey: string, dosaNameToken: string) {
 		DosaHandler.handleDosaCheckbox($.GetContextPanel(), dosaKey, dosaNameToken);
 
 		UiToolkitAPI.CloseAllVisiblePopups();
@@ -137,7 +137,7 @@ class DosaPopup {
 	 * @param {String} [dosaKey]
 	 * @param {String} [dosaNameToken]
 	 */
-	static onButtonClick(dosaKey, dosaNameToken) {
+	static onButtonClick(dosaKey: string, dosaNameToken: string) {
 		DosaHandler.handleDosaButton($.GetContextPanel(), dosaKey, dosaNameToken);
 
 		UiToolkitAPI.CloseAllVisiblePopups();
