@@ -4,8 +4,10 @@ class Console {
 	/** @type {StaticConsoleMessageTarget} @static */
 	static messageTarget = $('#ConsoleMessageTarget');
 
-	static onMoveDragStart(_source, callback) {
-		callback.displayPanel = $.GetContextPanel();
+	static onMoveDragStart(_source: string, callback: DragEventInfo): void {
+		const context = $.GetContextPanel();
+		if (context)
+			callback.displayPanel = context;
 		callback.removePositionBeforeDrop = false;
 	}
 
@@ -14,11 +16,11 @@ class Console {
 	}
 
 	static onNewMessages() {
-		this.messageTarget.ScrollToBottom();
+		this.messageTarget?.ScrollToBottom();
 	}
 
 	static {
-		$.RegisterEventHandler('DragStart', $('#MoveDragArea'), Console.onMoveDragStart);
+		$.RegisterEventHandler('DragStart', 'MoveDragArea', Console.onMoveDragStart);
 		$.RegisterEventHandler('NewConsoleMessages', 'ConsoleMessageTarget', Console.onNewMessages.bind(this));
 	}
 }

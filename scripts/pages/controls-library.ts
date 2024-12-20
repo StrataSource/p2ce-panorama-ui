@@ -1,7 +1,7 @@
 'use strict';
 
 class ControlsLibrary {
-	static progressBar1 = $('#ProgressBar1');
+	static progressBar1 = $<ProgressBar>('#ProgressBar1');
 	static updatingProgressBars;
 
 	static {
@@ -11,6 +11,9 @@ class ControlsLibrary {
 	}
 
 	static updateProgressBars() {
+		if (!this.progressBar1)
+			return;
+
 		if (this.progressBar1.value <= this.progressBar1.max) this.progressBar1.value += 0.01;
 		else this.progressBar1.value = this.progressBar1.min;
 

@@ -4,7 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
-		<include src="file://{scripts}/util/dosa.js" />
+		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
 	<snippets>
