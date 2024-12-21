@@ -251,10 +251,8 @@ class MainMenu {
 		this.panels.image.SetReadyForDisplay(!useVideo);
 
 		let chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
-		if (chapter < 1)
-			chapter = 1;
-		if (chapter > 5)
-			chapter = 5;
+		if (chapter < 1) chapter = 1;
+		if (chapter > 5) chapter = 5;
 
 		let movie = 'file://{media}/menu_act0' + chapter + '.webm';
 		if (this.inSpace) {
