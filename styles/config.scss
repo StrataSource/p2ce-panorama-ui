@@ -2,12 +2,45 @@
 @use 'sass:map';
 @use 'abstract/function' as *;
 
-// ================
-// COLORS
-// ================
+//===========================
+// BRANDING COLORS
+//===========================
 
-$primary-color: #ff7b02 !default;
-$primary-color-light: #ffae64 !default;
+$primary-color: #EC6726 !default;
+$primary-color-light: #f08547 !default;
+$base-color: #222222 !default;
+$bright-color: #fbfbfb !default;
+
+// Primary colors
+$primary-50: #fef6ee !default;
+$primary-100: #fdead7 !default;
+$primary-200: #f9d1af !default;
+$primary-300: #f5b07c !default;
+$primary-400: #f08547 !default;
+$primary-500: #ec6726 !default;
+$primary-600: #dd4c19 !default;
+$primary-700: #b73817 !default;
+$primary-800: #922e1a !default;
+$primary-900: #762818 !default;
+$primary-950: #40120a !default;
+
+// Base colors
+$base-50: #FBFBFB !default;
+$base-100: #EEEEEE !default;
+$base-200: #D4D4D4 !default;
+$base-300: #BBBBBB !default;
+$base-400: #A2A2A2 !default;
+$base-500: #888888 !default;
+$base-600: #6F6F6F !default;
+$base-700: #555555 !default;
+$base-800: #3C3C3C !default;
+$base-900: #222222 !default;
+$base-950: #181818 !default;
+
+
+//===========================
+// COLORS
+//===========================
 
 $blue: #1896d3 !default;
 $mid-blue: #57c8ff !default;
