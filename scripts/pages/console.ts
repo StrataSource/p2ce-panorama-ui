@@ -6,8 +6,7 @@ class Console {
 
 	static onMoveDragStart(_source: string, callback: DragEventInfo): void {
 		const context = $.GetContextPanel();
-		if (context)
-			callback.displayPanel = context;
+		if (context) callback.displayPanel = context;
 		callback.removePositionBeforeDrop = false;
 	}
 
