@@ -57,7 +57,7 @@ class DosaHandler {
 	 * @param {String} key
 	 * @returns {String | undefined}
 	 */
-	static getNameToken(key: string): string|undefined {
+	static getNameToken(key: string): string | undefined {
 		const dosas = this.#getPSObject();
 
 		return dosas?.[key];
