@@ -250,7 +250,13 @@ class MainMenu {
 		this.panels.image.visible = !useVideo;
 		this.panels.image.SetReadyForDisplay(!useVideo);
 
-		let movie = 'file://{media}/community_bg1.webm';
+		let chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
+		if (chapter < 1)
+			chapter = 1;
+		if (chapter > 5)
+			chapter = 5;
+
+		let movie = 'file://{media}/menu_act0' + chapter + '.webm';
 		if (this.inSpace) {
 			movie = 'file://{media}/sp_a5_credits.webm';
 		}
