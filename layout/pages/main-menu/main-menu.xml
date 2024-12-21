@@ -44,9 +44,9 @@
 					<Image
 						class="topnav__logo"
 						src="file://{images}/logo.svg"
-						textureheight="90"
-						texturewidth="234"
-						scaling="stretch-to-fit-preserve-aspect"
+						textureheight="130"
+						texturewidth="440"
+						scaling="stretch-to-fit-x-preserve-aspect"
 					/>
 				</RadioButton>
 
