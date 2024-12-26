@@ -37,8 +37,7 @@ $.DefineEvent('ToggleDrawer', 0, 'Toggle the open or closed state of the right s
 $.DefineEvent(
 	'Drawer_UpdateLobbyButton',
 	2,
-	'imgsrc',
-	'playercount',
+	'imgsrc, playercount',
 	'Changes the rightnav lobby button with icon and playercount'
 );
 $.DefineEvent('Drawer_NavigateToTab', 1, 'tabid', 'Open drawer if closed, and switch the tab to the specified tab');
