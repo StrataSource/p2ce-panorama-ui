@@ -10,7 +10,7 @@
 		"allowJs": true,
 		"strict": true,
 		"noImplicitAny": false,
-		"typeRoots": ["./scripts/types/"],
+		"typeRoots": ["./scripts/types", "./scripts"],
 		"types": ["p2ce"]
 	},
 	"include": ["scripts/"]
