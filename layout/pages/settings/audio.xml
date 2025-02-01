@@ -21,6 +21,8 @@
 
 		<BaseAudioSettings id="SettingsPageContainer" class="settings-page__container">
 
+			<!-- Volume settings sub section -->
+
 			<Panel id="VolumeSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
@@ -120,7 +122,35 @@
 
 			</Panel>
 
-			<Panel class="settings-page__spacer" />
+			<!-- Closed Captions Section -->
+
+			<Panel id="AudioClosedCaptionsSubSection" class="settings-group">
+
+				<Panel class="settings-group__header">
+
+					<Label class="settings-group__title" text="#Settings_ClosedCaptions_Title" tags="audio,sound,closedcaptions" />
+
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button" onactivate="SettingsShared.resetSettings('AudioClosedCaptionsSubSection');">
+							<Image class="button__icon" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
+
+				</Panel>
+
+				<SettingsEnum text="#Settings_ClosedCaptions_Enable" convar="closecaption" hasdocspage="false">
+					<RadioButton group="closedcaptions" text="#Common_Off" value="0" />
+					<RadioButton group="closedcaptions" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<SettingsEnum text="#Settings_ClosedCaptions_Subtitles" convar="cc_subtitles" hasdocspage="false">
+					<RadioButton group="cc_subtitles" text="#Common_Off" value="0" />
+					<RadioButton group="cc_subtitles" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+			</Panel>
+
+			<!-- Audio Devices Section -->
 
 			<Panel id="AudioDevicesSubSection" class="settings-group">
 
