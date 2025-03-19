@@ -14,7 +14,12 @@
                 <Panel class="settings-group__header">
                     <Label class="settings-group__title" text="#Settings_Portal1_Title" tags="menu,ui,portal1" />
                 </Panel>
-                <SettingsEnum text="#Settings_Portal1_xhair" convar="cl_portal_crosshair_mode" infomessage="#Settings_Portal1_xhair_info" hasdocspage="false">
+                <SettingsEnum
+					text="#Settings_Portal1_xhair"
+					convar="cl_portal_crosshair_mode"
+					infomessage="#Settings_Portal1_xhair_info"
+					hasdocspage="false"
+				>
 					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
 					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
                 </SettingsEnum>
