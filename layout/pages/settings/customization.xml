@@ -1,0 +1,27 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/pages/settings/page.js" />
+		<!-- Temporary -->
+		<include src="file://{scripts}/util/dosa.ts" />
+	</scripts>
+
+    <Panel class="settings-page">
+        <Panel id="SettingsPageContainer" class="settings-page__container">
+            <Panel id="Portal1SubSection" class="settings-group">
+                <Panel class="settings-group__header">
+                    <Label class="settings-group__title" text="#Settings_Portal1_Title" tags="menu,ui,portal1" />
+
+
+                </Panel>
+
+                <SettingsEnum text="#Settings_Portal1_xhair" convar="cl_portal_crosshair_mode" infomessage="#Settings_Portal1_xhair_info" hasdocspage="false">
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
+                </SettingsEnum>
+            </Panel>
+        </Panel>
+    </Panel>
+</root>

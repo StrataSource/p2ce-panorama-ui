@@ -33,6 +33,13 @@ const SettingsTabs = {
 			UISubSection: 'UIRadio'
 		}
 	},
+	CustomizationSettings: {
+		xml: 'customization',
+		radioid: 'CustomizationRadio',
+		children: {
+			Portal1SubSection: 'Portal1Radio'
+		}
+	},
 	SearchSettings: {
 		xml: 'search'
 	}
