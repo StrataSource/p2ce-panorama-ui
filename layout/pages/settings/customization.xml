@@ -48,8 +48,8 @@
 					infomessage="#Settings_Portals_dlight_info"
 					hasdocspage="false"
 				>
-					<RadioButton group="portal_dlight" text="#Common_Off" value="0"/>
-					<RadioButton group="portal_dlight" text="#Common_On" value="1"/>
+					<RadioButton group="portal_dlight" text="#Common_Off" value="0" />
+					<RadioButton group="portal_dlight" text="#Common_On" value="1" />
 				</SettingsEnum>
 
 				<SettingsSlider
@@ -64,17 +64,25 @@
 					infomessage="#Settings_Portals_altcolors_info"
 					hasdocspage="false"
 				>
-					<RadioButton group="portal_altcolors" text="#Common_Off" value="0"/>
-					<RadioButton group="portal_altcolors" text="#Common_On" value="1"/>
+					<RadioButton group="portal_altcolors" text="#Common_Off" value="0" />
+					<RadioButton group="portal_altcolors" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<ConVarColorDisplay text="#Settings_Portals_altcolors_primary" convar="cl_portal_sp_primary_color" hasdocspage="false" />
-				<ConVarColorDisplay text="#Settings_Portals_altcolors_secondary" convar="cl_portal_sp_secondary_color" hasdocspage="false" />
+				<ConVarColorDisplay
+					text="#Settings_Portals_altcolors_primary"
+					convar="cl_portal_sp_primary_color"
+					hasdocspage="false"
+				/>
+				<ConVarColorDisplay
+					text="#Settings_Portals_altcolors_secondary"
+					convar="cl_portal_sp_secondary_color"
+					hasdocspage="false"
+				/>
 			</Panel>
 
 			<Panel id="GelsSubSection" class="settings-group">
 				<Panel class="settings-group__header">
-					<Label class="settings-group__title" text="#Settings_Gels_Title" tags="gels, customization"/>
+					<Label class="settings-group__title" text="#Settings_Gels_Title" tags="gels, customization" />
 				</Panel>
 
 				<ConVarColorDisplay text="#Settings_Gels_repulsion_color" convar="bounce_paint_color" hasdocspage="false" />
@@ -95,8 +103,8 @@
 					infomessage="#Settings_Misc_solenergy_refract_info"
 					hasdocspage="false"
 				>
-					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0"/>
-					<RadioButton group="misc_solidenergy" text="#Common_On" value="1"/>
+					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0" />
+					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
 				</SettingsEnum>
 			</Panel>
         </Panel>

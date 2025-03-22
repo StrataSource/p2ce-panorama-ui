@@ -39,7 +39,7 @@ const SettingsTabs = {
 		children: {
 			Portal1SubSection: 'Portal1Radio',
 			PortalsSubSection: 'PortalsRadio',
-			GelsSubSection:	'GelsRadio',
+			GelsSubSection: 'GelsRadio',
 			MiscSubSection: 'MiscRadio'
 		}
 	},
