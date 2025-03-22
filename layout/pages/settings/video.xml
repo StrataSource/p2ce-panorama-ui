@@ -134,6 +134,16 @@
 					<Label text="#Settings_General_Enabled" value="1" id="laptoppower1" />
 				</SettingsEnumDropDown>
 
+				<SettingsSlider
+					text="#Settings_Video_PStencilDepth"
+					convar="r_portal_stencil_depth"
+					id="PStencilDepth"
+					infomessage="#Settings_Video_PStencilDepth_Info"
+					min="0"
+					max="8"
+				>
+				</SettingsSlider>
+
 				<SettingsEnumDropDown
 					text="#Settings_Video_PreventThreadSleep"
 					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"

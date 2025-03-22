@@ -202,6 +202,54 @@
 
 						</RadioButton>
 
+						<Panel class="settings-nav__separator" />
+
+						<!-- CUSTOMIZATION -->
+
+						<RadioButton
+							id="CustomizationRadio"
+							class="settings-nav__item"
+							group="SettingsNav"
+							onactivate="MainMenuSettings.navigateToTab('CustomizationSettings')"
+						>
+							<Label class="settings-nav__item-label" text="#Settings_Customization" />
+
+							<Panel class="settings-nav__subsection settings-nav__subsection--11 settings-nav__subsection--hidden">
+								<RadioButton
+									id="Portal1Radio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'Portal1SubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_Portal1_Title" />
+								</RadioButton>
+								<RadioButton
+									id="PortalsRadio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'PortalsSubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_Portals_Title" />
+								</RadioButton>
+								<RadioButton
+									id="GelsRadio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'GelsSubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_Gels_Title" />
+								</RadioButton>
+								<RadioButton
+									id="MiscRadio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'MiscSubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_Misc_Title" />
+								</RadioButton>
+							</Panel>
+						</RadioButton>
+
 					</Panel>
 
 				</Panel>
