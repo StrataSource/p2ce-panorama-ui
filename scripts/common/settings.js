@@ -37,7 +37,10 @@ const SettingsTabs = {
 		xml: 'customization',
 		radioid: 'CustomizationRadio',
 		children: {
-			Portal1SubSection: 'Portal1Radio'
+			Portal1SubSection: 'Portal1Radio',
+			PortalsSubSection: 'PortalsRadio',
+			GelsSubSection:	'GelsRadio',
+			MiscSubSection: 'MiscRadio'
 		}
 	},
 	SearchSettings: {

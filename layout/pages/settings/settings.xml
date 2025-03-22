@@ -223,6 +223,30 @@
 								>
 									<Label class="settings-nav__subitem-label" text="#Settings_Portal1_Title" />
 								</RadioButton>
+								<RadioButton
+									id="PortalsRadio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'PortalsSubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_Portals_Title" />
+								</RadioButton>
+								<RadioButton
+									id="GelsRadio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'GelsSubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_Gels_Title" />
+								</RadioButton>
+								<RadioButton
+									id="MiscRadio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'MiscSubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_Misc_Title" />
+								</RadioButton>
 							</Panel>
 						</RadioButton>
 
