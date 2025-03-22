@@ -83,6 +83,12 @@
 			<Panel id="GelsSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Gels_Title" tags="gels, customization" />
+
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('GelsSubSection');">
+							<Image class="button__icon" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
 				</Panel>
 
 				<ConVarColorDisplay text="#Settings_Gels_repulsion_color" convar="bounce_paint_color" hasdocspage="false" />
