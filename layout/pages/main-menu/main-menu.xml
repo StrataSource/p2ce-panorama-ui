@@ -126,12 +126,12 @@
 
 					<Panel class="mainmenu__content">
 
-						<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur"/>
+						<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
 						<Panel id="PauseContent" class="mainmenu__home-container home PauseMenuModeOnly">
 							<Panel class="home__bottombar bottombar">
 							<!-- Putting "PauseMenuModeOnly" in version-info.xml itself doesn't work as a fyi. -->
-								<VersionInfo/>
+								<VersionInfo />
 							</Panel>
 						</Panel>
 
