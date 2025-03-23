@@ -20,5 +20,17 @@ class VersionInfo {
 		cp.SetDialogVariable('branch', branch);
 		cp.SetDialogVariable('platform', platform);
 		cp.SetDialogVariable('physics', physics);
+
+		if (GameInterfaceAPI.GetSettingBool('developer')) {
+			cp.visible = true;
+		} else {
+			cp.visible = false;
+		}
+
+		/* Currently not used, as the HasJolt() function hasn't been implemented on the C++ Backend yet.
+		if (VersionAPI.HasJolt()) {
+			cp.FindChild("PhysicsText").visible = false;
+		}
+		*/
 	}
 }
