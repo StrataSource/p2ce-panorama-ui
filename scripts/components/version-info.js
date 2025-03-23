@@ -28,7 +28,7 @@ class VersionInfo {
 		}
 
 		/* Currently not used, as the HasJolt() function hasn't been implemented on the C++ Backend yet.
-		if (VersionAPI.HasJolt()) {
+		if (!VersionAPI.HasJolt()) {
 			cp.FindChild("PhysicsText").visible = false;
 		}
 		*/
