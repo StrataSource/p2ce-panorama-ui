@@ -23,10 +23,9 @@ class VersionInfo {
 
 		GameInterfaceAPI.GetSettingBool('developer') ? (cp.visible = true) : (cp.visible = false);
 
-		/* Currently not used, as the HasJolt() function hasn't been implemented on the C++ Backend yet.
-		if (!VersionAPI.HasJolt()) {
+		if ( VersionAPI.GetPhysicsEngine() != "Jolt" ) {
 			cp.FindChild("PhysicsText").visible = false;
 		}
-		*/
+		
 	}
 }
