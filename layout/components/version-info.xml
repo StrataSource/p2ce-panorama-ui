@@ -7,10 +7,10 @@
 	</scripts>
 
 	<Panel class="VersionInfo" onload="VersionInfo.update()">
-		<Label class="VersionInfoText" text="{s:graphics}" />
-		<Label class="VersionInfoText" text="{s:version}" />
-		<Label class="VersionInfoText" text="{s:branch}" />
-		<Label class="VersionInfoText" text="{s:platform}" />
-		<Label class="VersionInfoText" text="{s:physics}" />
+        <Label class="VersionInfoText" text="P2CE - Beta | {s:version}" />
+		<Label class="VersionInfoText" text="Graphics | {s:graphics}" />
+		<Label class="VersionInfoText" text="Platform | {s:platform}" />
+		<Label class="VersionInfoText" text="Branch | {s:branch}" />
+		<Label class="VersionInfoText" id="PhysicsText" text="Physics | {s:physics}" />
 	</Panel>
 </root>
