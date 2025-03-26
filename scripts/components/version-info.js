@@ -23,9 +23,8 @@ class VersionInfo {
 
 		GameInterfaceAPI.GetSettingBool('developer') ? (cp.visible = true) : (cp.visible = false);
 
-		if ( VersionAPI.GetPhysicsEngine() != "Jolt" ) {
-			cp.FindChild("PhysicsText").visible = false;
+		if (VersionAPI.GetPhysicsEngine() != 'Jolt') {
+			cp.FindChild('PhysicsText').visible = false;
 		}
-		
 	}
 }
