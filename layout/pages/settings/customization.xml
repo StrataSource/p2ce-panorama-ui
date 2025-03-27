@@ -1,0 +1,118 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/pages/settings/page.js" />
+		<!-- Temporary -->
+		<include src="file://{scripts}/util/dosa.ts" />
+	</scripts>
+
+    <Panel class="settings-page">
+        <Panel id="SettingsPageContainer" class="settings-page__container">
+            <Panel id="Portal1SubSection" class="settings-group">
+                <Panel class="settings-group__header">
+                    <Label class="settings-group__title" text="#Settings_Portal1_Title" tags="menu,ui,portal1" />
+                </Panel>
+                <SettingsEnum
+					text="#Settings_Portal1_compat"
+					convar="sv_portal_legacy_compat"
+					infomessage="#Settings_Portal1_compat_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal1_compat" text="#Common_Off" value="0" />
+					<RadioButton group="portal1_compat" text="#Common_On" value="1" />
+                </SettingsEnum>
+
+                <SettingsEnum
+					text="#Settings_Portal1_xhair"
+					convar="cl_portal_crosshair_mode"
+					infomessage="#Settings_Portal1_xhair_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
+                </SettingsEnum>
+            </Panel>
+
+			<Panel class="settings-page__spacer" />
+
+			<Panel id="PortalsSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_Portals_Title" tags="portals, portal, color, customization" />
+				</Panel>
+
+				<SettingsEnum
+					text="#Settings_Portals_dlight"
+					convar="r_portal_use_dlights"
+					infomessage="#Settings_Portals_dlight_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal_dlight" text="#Common_Off" value="0" />
+					<RadioButton group="portal_dlight" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<!--<SettingsSlider
+					text="#Settings_Portals_dlight_power"
+					convar=""
+					infomessage="#Settings_Portals_dlight_power_info"
+					hasdocspage="false"
+				/>-->
+				<SettingsEnum
+					text="#Settings_Portals_altcolors"
+					convar="cl_portal_alternate_colors"
+					infomessage="#Settings_Portals_altcolors_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal_altcolors" text="#Common_Off" value="0" />
+					<RadioButton group="portal_altcolors" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<ConVarColorDisplay
+					text="#Settings_Portals_altcolors_primary"
+					convar="cl_portal_sp_primary_color"
+					hasdocspage="false"
+				/>
+				<ConVarColorDisplay
+					text="#Settings_Portals_altcolors_secondary"
+					convar="cl_portal_sp_secondary_color"
+					hasdocspage="false"
+				/>
+			</Panel>
+
+			<Panel id="GelsSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_Gels_Title" tags="gels, customization" />
+
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('GelsSubSection');">
+							<Image class="button__icon" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
+				</Panel>
+
+				<ConVarColorDisplay text="#Settings_Gels_repulsion_color" convar="bounce_paint_color" hasdocspage="false" />
+				<ConVarColorDisplay text="#Settings_Gels_propulsion_color" convar="speed_paint_color" hasdocspage="false" />
+				<ConVarColorDisplay text="#Settings_Gels_conversion_color" convar="portal_paint_color" hasdocspage="false" />
+				<ConVarColorDisplay text="#Settings_Gels_reflection_color" convar="reflect_paint_color" hasdocspage="false" />
+				<ConVarColorDisplay text="#Settings_Gels_adhesion_color" convar="stick_paint_color" hasdocspage="false" />
+			</Panel>
+
+			<Panel id="MiscSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_Misc_Title" tags="misc, customization" />
+				</Panel>
+
+				<SettingsEnum
+					text="#Settings_Misc_solenergy_refract"
+					convar="mat_solidenergy_refract"
+					infomessage="#Settings_Misc_solenergy_refract_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0" />
+					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
+				</SettingsEnum>
+			</Panel>
+        </Panel>
+    </Panel>
+</root>
