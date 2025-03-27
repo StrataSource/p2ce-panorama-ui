@@ -20,5 +20,11 @@ class VersionInfo {
 		cp.SetDialogVariable('branch', branch);
 		cp.SetDialogVariable('platform', platform);
 		cp.SetDialogVariable('physics', physics);
+
+		GameInterfaceAPI.GetSettingBool('developer') ? (cp.visible = true) : (cp.visible = false);
+
+		if (VersionAPI.GetPhysicsEngine() !== 'Jolt') {
+			cp.FindChild('PhysicsText').visible = false;
+		}
 	}
 }

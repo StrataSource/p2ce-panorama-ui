@@ -128,11 +128,18 @@
 
 						<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
+						<Panel id="PauseContent" class="mainmenu__home-container home PauseMenuModeOnly">
+							<Panel class="home__bottombar bottombar">
+							<!-- Putting "PauseMenuModeOnly" in version-info.xml itself doesn't work as a fyi. -->
+								<VersionInfo />
+							</Panel>
+						</Panel>
+
 						<Panel id="HomeContent" class="mainmenu__home-container home MainMenuModeOnly">
 
 							<Panel id="NewsModelWrapper" class="home__wrapper">
 
-								<ModelPanel
+							<ModelPanel
 								id="MainMenuModel"
 								class="home__modelpanel"
 								src="models/npcs/turret/turret.mdl"
@@ -156,7 +163,7 @@
 								class="bottombar__button hide"
 								group="TopNavRadio"
 								onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
-							>
+							>	
 									<Label class="bottombar__text" text="Controls Library" />
 								</RadioButton>
 
