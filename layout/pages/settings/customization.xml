@@ -52,12 +52,12 @@
 					<RadioButton group="portal_dlight" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<SettingsSlider
+				<!--<SettingsSlider
 					text="#Settings_Portals_dlight_power"
 					convar=""
 					infomessage="#Settings_Portals_dlight_power_info"
 					hasdocspage="false"
-				/>
+				/>-->
 				<SettingsEnum
 					text="#Settings_Portals_altcolors"
 					convar="cl_portal_alternate_colors"
