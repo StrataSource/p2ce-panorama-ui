@@ -1,10 +1,15 @@
+@use '../config' as *;
+
 .VersionInfo {
 	flow-children: down;
 
 	.VersionInfoText {
-		font-size: 18px;
+		font-size: 16px;
+		font-family: $font-monospace;
 	}
 
 	color: white;
-	background-color: rgb(53, 53, 53);
+	background-color: $base-color;
+	padding: 12px;
+	border-radius: 14px;
 }
