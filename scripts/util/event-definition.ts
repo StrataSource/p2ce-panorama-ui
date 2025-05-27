@@ -13,6 +13,8 @@
 //
 //--------------------------------------------------------------------------------------------------
 
+$.Msg(`USING THE NEW EVENT DEFS!`);
+
 $.DefineEvent(
 	'HideContentPanel',
 	0,
@@ -52,6 +54,12 @@ $.DefineEvent('ColorPickerSave', 1, 'color');
 $.DefineEvent('ColorPickerCancel', 0);
 
 // Custom new menu events
+
+declare interface GlobalEventNameMap {
+	'MainMenu.TabSelected':		(tab_name: string, extra_data: unknown) => void,
+	'MainMenu.AddonFocused':	(uuid: number) => void,
+	'MainMenu.AddonUnfocused':	() => void,
+}
 
 $.DefineEvent('MainMenu.TabSelected', 2, 'The tab ID, the carry-over data.');
 $.DefineEvent('MainMenu.AddonFocused', 1, 'The addon index', 'Fired by the dashboard. Triggers a tab switch to the addon.');

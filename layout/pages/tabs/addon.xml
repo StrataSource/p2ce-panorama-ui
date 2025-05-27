@@ -5,8 +5,8 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{scripts}/common/game-ui.js" />
-		<include src="file://{scripts}/pages/tabs/addon.js" />
+		<include src="file://{scripts}/common/game-ui.ts" />
+		<include src="file://{scripts}/pages/tabs/addon.ts" />
 	</scripts>
 
 	<Panel class="root pre-trans" useglobalcontext="false">

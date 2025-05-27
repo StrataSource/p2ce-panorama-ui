@@ -4,7 +4,8 @@
 	</styles>
 	
 	<scripts>
-		<include src="file://{scripts}/pages/loading-screen.js" />
+		<include src="file://{scripts}/util/workshop-polyfill.ts" />
+		<include src="file://{scripts}/pages/loading-screen.ts" />
 	</scripts>
 
 	<Panel class="loadingscreen">

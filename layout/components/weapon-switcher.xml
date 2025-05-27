@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/components/weapon-switcher.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/components/weapon-switcher.js" />
+		<include src="file://{scripts}/components/weapon-switcher.ts" />
 	</scripts>
 
 	<Panel class="root" onload="HudWeaponSwitcher.init()" />

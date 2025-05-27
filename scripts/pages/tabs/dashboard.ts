@@ -7,8 +7,8 @@ class DashboardMenu {
 	} as const;
 
 	static {
-		$.RegisterForUnhandledEvent('MainMenu.TabSelected', (tab) => {
-			if (tab === 'dashboard') this.onDashboardShown();
+		$.RegisterForUnhandledEvent('MainMenu.TabSelected', (tab_name) => {
+			if (tab_name === 'dashboard') this.onDashboardShown();
 			else this.onDashboardHidden();
 		});
 

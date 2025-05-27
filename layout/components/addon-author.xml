@@ -3,7 +3,8 @@
 		<include src="file://{resources}/styles/components/addon-author.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/components/addon-author.js" />
+		<include src="file://{scripts}/util/workshop-polyfill.ts" />
+		<include src="file://{scripts}/components/addon-author.ts" />
 	</scripts>
 	<Panel>
 		<AvatarImage id="icon" />

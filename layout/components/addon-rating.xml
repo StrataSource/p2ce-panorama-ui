@@ -3,7 +3,8 @@
 		<include src="file://{resources}/styles/components/addon-rating.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/components/addon-rating.js" />
+		<include src="file://{scripts}/util/workshop-polyfill.ts" />
+		<include src="file://{scripts}/components/addon-rating.ts" />
 	</scripts>
 	<Panel>
 		<Button onactivate="AddonRating.SetRating(true)">

@@ -5,7 +5,7 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{scripts}/pages/tabs/settings.js" />
+		<include src="file://{scripts}/pages/tabs/settings.ts" />
 	</scripts>
 
 	<Panel class="root pre-trans" useglobalcontext="false">

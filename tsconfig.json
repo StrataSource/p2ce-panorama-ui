@@ -8,6 +8,8 @@
 
 		"alwaysStrict": true,
 		"isolatedModules": true,
+		"allowImportingTsExtensions": true,
+		"noEmit": true,
 		"allowJs": true,
 		"strict": true,
 

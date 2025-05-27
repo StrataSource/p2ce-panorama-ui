@@ -1,5 +1,5 @@
-
 GameInterfaceAPI.GetCurrentMap ??= function() {
+	$.Msg('USING SHITTY POLYFILL!!!!!');
 	return 'sp_a1_intro1';
 }
 

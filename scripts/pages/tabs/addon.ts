@@ -12,13 +12,14 @@ class AddonMenu {
 	static chapter: number = 0;
 
 	static {
-		$.RegisterForUnhandledEvent('MainMenu.TabSelected', (tab, data) => {
-			if (tab === 'addon') this.onAddonShown(data);
-			else this.onAddonHidden();
+		$.RegisterForUnhandledEvent('MainMenu.TabSelected', (tab_name, uuid) => {
+			if (typeof uuid !== 'number') return $.Msg(`!!! ERROR: MainMenu.TabSelected("addon") fired with non-number arg! WTF?? !!!`);
+			if (tab_name === 'addon') this.onAddonMenuShown(<number>uuid);
+			else this.onAddonMenuHidden();
 		});
 	}
 
-	static onAddonShown(uuid: uuid) {
+	static onAddonMenuShown(uuid: uuid) {
 		const addon = WorkshopAPI.GetAddonMeta(uuid);
 		this.addon = addon;
 		this.panels.list.RemoveAndDeleteChildren();
@@ -53,7 +54,7 @@ class AddonMenu {
 		GameInterfaceAPI.ConsoleCommand(`map "${map}"`);
 	}
 
-	static onAddonHidden() {
+	static onAddonMenuHidden() {
 		this.panels.root.AddClass('pre-trans');
 	}
 

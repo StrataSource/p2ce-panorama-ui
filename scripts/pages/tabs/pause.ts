@@ -25,6 +25,9 @@ class PauseTab {
 			if (tab === 'pause') this.root.RemoveClass('pre-trans');
 			else this.root.AddClass('pre-trans');
 		});
+
+		// Update on panel first load
+		this.UpdateChapterInfo();
 	}
 
 	static UpdateChapterInfo() {

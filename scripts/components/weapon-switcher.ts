@@ -1,20 +1,6 @@
 // TODO: This file is extremely unfinished and
 // causes lots of typescript errors. Just ignore them!
 
-
-const WeaponStateMode: WeaponStateModeEnum = {
-	Switch: 0,
-	Pickup: 1,
-	Drop: 2,
-}
-
-const WeaponSelectAction: WeaponSelectActionEnum = {
-	Next: 0,
-	Prev: 1,
-	Show: 2,
-	Hide: 3
-}
-
 class HudWeaponSwitcher {
 	static state: {
 		tab: number|null,
@@ -33,7 +19,7 @@ class HudWeaponSwitcher {
 	static init() {
 		$.RegisterForUnhandledEvent('WeaponSelect', (action) => {
 			$.Msg('action ', action);
-			if (action === WeaponSelectAction.Show) {
+			if (action === WeaponSelectAction.SHOW) {
 				this.root.AddClass('active');
 				$.Msg('Showing weapons hud');
 				const weapons = WeaponsAPI.GetWeapons();
@@ -42,7 +28,7 @@ class HudWeaponSwitcher {
 				// 	$.Msg('Weapon', weapon);
 				// }
 			}
-			if (action === WeaponSelectAction.Hide) {
+			if (action === WeaponSelectAction.HIDE) {
 				this.root.RemoveClass('active');
 				$.Msg('Hiding weapons hud');
 			}
