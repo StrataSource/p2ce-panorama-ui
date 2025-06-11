@@ -52,6 +52,21 @@
 
 				<Panel id="MainMenuTopButtons" class="full-height flow-right">
 
+				</Panel>
+
+				<Panel class="full-height flow-right horizontal-align-right">
+
+					<!-- Home button -->
+					<RadioButton
+						id="HomeButton"
+						group="TopNavRadio"
+						class="topnav__button"
+						onactivate="MainMenu.onHomeButtonPressed()"
+					>
+						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
+						<Label text="Home" class="text" />
+					</RadioButton>
+
 					<!-- Campaign selector -->
 					<RadioButton
 						id="PlayButton"
@@ -84,11 +99,11 @@
 						<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
 						<Label text="Settings" class="text" />
 					</RadioButton>
-				</Panel>
 
-				<Panel class="full-height flow-right horizontal-align-right">
+					<!-- Quit -->
 					<RadioButton id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
 						<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
+						<Label text="Quit" class="text" />
 					</RadioButton>
 				</Panel>
 
