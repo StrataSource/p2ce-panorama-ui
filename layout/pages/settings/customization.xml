@@ -52,12 +52,36 @@
 					<RadioButton group="portal_dlight" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<!--<SettingsSlider
-					text="#Settings_Portals_dlight_power"
-					convar=""
-					infomessage="#Settings_Portals_dlight_power_info"
+				<SettingsSlider
+					text="#Settings_Portals_light_intensity"
+					convar="r_portal_light_intensity"
+					infomessage="#Settings_Portals_light_intensity_info"
 					hasdocspage="false"
-				/>-->
+					max="3"
+					min="0.01"
+					displayprecision="2"
+				/>
+
+				<SettingsEnum
+					text="#Settings_Turret_lights"
+					convar="cl_dynamic_light_turret"
+					infomessage="#Settings_Turret_lights_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="turret_lights" text="#Common_Off" value="0" />
+					<RadioButton group="turret_lights" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<SettingsEnum
+					text="#Settings_Ball_lights"
+					convar="cl_dynamic_light_energy_ball"
+					infomessage="#Settings_Ball_lights_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="ball_lights" text="#Common_Off" value="0" />
+					<RadioButton group="ball_lights" text="#Common_On" value="1" />
+				</SettingsEnum>
+
 				<SettingsEnum
 					text="#Settings_Portals_altcolors"
 					convar="cl_portal_alternate_colors"
