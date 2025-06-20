@@ -39,8 +39,7 @@
 		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Topnav -->
 			<Panel id="MainMenuNavBar" class="topnav" style="z-index: 10;">
-				<RadioButton id="HomeButton" group="TopNavRadio" class="topnav__home" onactivate="MainMenu.onHomeButtonPressed()">
-					<!-- TODO: logo as SVG! -->
+				<RadioButton id="HomeButton" class="topnav__home" onactivate="MainMenu.onHomeButtonPressed()">
 					<Image
 						class="topnav__logo"
 						src="file://{images}/logo.svg"
@@ -101,7 +100,12 @@
 					</RadioButton>
 
 					<!-- Quit -->
-					<RadioButton id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
+					<RadioButton
+						id="QuitButton"
+						class="topnav__button"
+						onactivate="MainMenu.onQuitButtonPressed()"
+						group="TopNavRadio"
+					>
 						<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
 						<Label text="Quit" class="text" />
 					</RadioButton>

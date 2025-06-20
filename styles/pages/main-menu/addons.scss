@@ -22,6 +22,7 @@ $disabled-wash: #00000088;
 		horizontal-align: right;
 		width: 28px;
 		height: 28px;
+		border-radius: 32px;
 	}
 
 	&__title {
@@ -61,7 +62,7 @@ $disabled-wash: #00000088;
 		height: 100%;
 		background-color: $container-bg;
 
-		border-radius: 6px;
+		//border-radius: 6px;
 		border: 1px solid #303030;
 		border-top: 0px;
 		border-top-left-radius: 0px;
@@ -76,12 +77,12 @@ $disabled-wash: #00000088;
 
 	&__item {
 		flow-children: right;
-		max-height: 200px;
+		max-height: 150px;
 		width: 100%;
 		padding-top: 10px;
 		padding-bottom: 10px;
 		padding-left: 10px;
-		border-radius: 4px;
+		//border-radius: 4px;
 		&:selected,
 		&:hover {
 			background-color: #333333ff;
@@ -99,7 +100,7 @@ $disabled-wash: #00000088;
 			padding-left: 32px;
 			padding-right: 32px;
 			margin-right: 16px;
-			border-radius: 2px;
+			//border-radius: 2px;
 			vertical-align: center;
 
 			&:hover {
@@ -118,7 +119,7 @@ $disabled-wash: #00000088;
 			flow-children: right;
 			width: 100%;
 
-			border-radius: 6px;
+			//border-radius: 6px;
 			border-bottom-left-radius: 0px;
 			border-bottom-right-radius: 0px;
 			border: 1px solid #303030;
@@ -133,7 +134,7 @@ $disabled-wash: #00000088;
 			padding-bottom: 8px;
 
 			> Button {
-				border-radius: 8px;
+				//border-radius: 8px;
 				margin-left: 16px;
 			}
 
@@ -176,9 +177,11 @@ $disabled-wash: #00000088;
 	&__container {
 		flow-children: down;
 		width: 100%;
-		margin-top: 10px;
+		height: 100%;
 		margin-left: 25px;
 		margin-right: 25px;
+		padding: 25px;
+		background-color: $base-900;
 	}
 
 	&__title {
@@ -195,7 +198,7 @@ $disabled-wash: #00000088;
 		font-size: 24px;
 		margin-top: 10px;
 		background-color: #00000088;
-		border-radius: 4px;
+		//border-radius: 4px;
 		text-overflow: ellipsis;
 		padding: 10px;
 
