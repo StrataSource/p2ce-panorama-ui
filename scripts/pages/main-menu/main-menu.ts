@@ -40,13 +40,6 @@ class MainMenu {
 		this.panels.movie = $<Movie>('#MainMenuMovie');
 		this.panels.model = $<ModelPanel>('#MainMenuModel');
 
-		// TEMP: Hide the addons button if the workshop API is not available
-		try {
-			const count = WorkshopAPI.GetAddonCount();
-		} catch (e) {
-			if (this.panels.addonsButton) this.panels.addonsButton.visible = false;
-		}
-
 		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
 
 		// Assign a random model
@@ -167,11 +160,6 @@ class MainMenu {
 		// If a we have a active tab and it is different from the selected tab hide it.
 		// Then show the selected tab
 		if (this.activeTab !== tab) {
-			// Trigger sound event for the new panel
-			// if (xmlName) {
-			// 	$.DispatchEvent('PlaySoundEffect', 'tab_' + xmlName.replace('/', '_'), 'MOUSE');
-			// }
-
 			// If the tab exists then hide it
 			if (this.activeTab) {
 				const panelToHide = this.panels.cp.FindChildInLayoutFile(this.activeTab);
