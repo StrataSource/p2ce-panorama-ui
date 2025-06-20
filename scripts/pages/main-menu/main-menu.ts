@@ -134,7 +134,7 @@ class MainMenu {
 		if (this.panels.contentBlur) this.panels.contentBlur.visible = hasBlur;
 
 		if (this.activeTab === tab) {
-			$.DispatchEvent('Activated', this.panels.homeButton, 'mouse');
+			if (this.panels.homeButton) $.DispatchEvent('Activated', this.panels.homeButton, PanelEventSource.MOUSE);
 			return;
 		}
 
