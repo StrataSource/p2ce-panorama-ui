@@ -216,9 +216,9 @@ $font-disabled-color: color.scale($font-default-color, $lightness: -20%) !defaul
 $font-default-size: 18px !default;
 $font-console-default-size: 14px !default;
 
-$font-primary: 'Roboto' !default;
-$font-secondary: 'Roboto', Arial, sans-serif !default;
-$font-secondary-light: 'Roboto', Arial, sans-serif !default;
+$font-primary: 'Inter' !default;
+$font-secondary: 'Inter', Arial, sans-serif !default;
+$font-secondary-light: 'Inter', Arial, sans-serif !default;
 $font-monospace: 'Roboto Mono' !default;
 
 $font-header: $font-secondary !default;

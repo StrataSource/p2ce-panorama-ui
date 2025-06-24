@@ -62,8 +62,8 @@
 						class="topnav__button"
 						onactivate="MainMenu.onHomeButtonPressed()"
 					>
-						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-						<Label text="Home" class="text" />
+						<Image class="topnav__icon" src="file://{images}/home.svg" textureheight="80" />
+						<Label text="HOME" class="text" />
 					</RadioButton>
 
 					<!-- Campaign selector -->
@@ -73,8 +73,8 @@
 						class="topnav__button"
 						onactivate="MainMenu.navigateToPage('Campaigns', 'main-menu/campaigns')"
 					>
-						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-						<Label text="Campaigns" class="text" />
+						<Image class="topnav__icon" src="file://{images}/campaigns.svg" textureheight="80" scaling="stretch-to-fit-x-preserve-aspect" />
+						<Label text="CAMPAIGNS" class="text" />
 					</RadioButton>
 
 					<!-- Addon manager -->
@@ -84,8 +84,8 @@
 						class="topnav__button"
 						onactivate="MainMenu.navigateToPage('Addons', 'main-menu/addons')"
 					>
-						<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
-						<Label text="Addons" class="text" />
+						<Image class="topnav__icon" src="file://{images}/addons.svg" textureheight="80" />
+						<Label text="ADDONS" class="text" />
 					</RadioButton>
 
 					<!-- Settings -->
@@ -96,7 +96,7 @@
 						onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')"
 					>
 						<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
-						<Label text="Settings" class="text" />
+						<Label text="SETTINGS" class="text" />
 					</RadioButton>
 
 					<!-- Quit -->
@@ -107,7 +107,7 @@
 						group="TopNavRadio"
 					>
 						<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
-						<Label text="Quit" class="text" />
+						<Label text="QUIT" class="text" />
 					</RadioButton>
 				</Panel>
 

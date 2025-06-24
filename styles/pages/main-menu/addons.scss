@@ -22,7 +22,7 @@ $disabled-wash: #00000088;
 		horizontal-align: right;
 		width: 28px;
 		height: 28px;
-		border-radius: 32px;
+		border-radius: 0px;
 	}
 
 	&__title {
@@ -49,8 +49,9 @@ $disabled-wash: #00000088;
 	}
 
 	&__cover {
-		width: 128px;
-		height: 128px;
+		width: 100px;
+		height: 100px;
+		border-radius: 8px;
 	}
 }
 
@@ -63,7 +64,7 @@ $disabled-wash: #00000088;
 		background-color: $container-bg;
 
 		//border-radius: 6px;
-		border: 1px solid #303030;
+		//border: 1px solid #303030;
 		border-top: 0px;
 		border-top-left-radius: 0px;
 		border-top-right-radius: 0px;
@@ -122,7 +123,7 @@ $disabled-wash: #00000088;
 			//border-radius: 6px;
 			border-bottom-left-radius: 0px;
 			border-bottom-right-radius: 0px;
-			border: 1px solid #303030;
+			//border: 1px solid #303030;
 			border-bottom: 0px;
 		}
 
