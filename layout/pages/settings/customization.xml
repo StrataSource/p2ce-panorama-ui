@@ -57,9 +57,9 @@
 					convar="r_portal_light_intensity"
 					infomessage="#Settings_Portals_light_intensity_info"
 					hasdocspage="false"
-					max="3"
-					min="0.01"
-					displayprecision="2"
+					max="0.5"
+					min="0.005"
+					displayprecision="3"
 				/>
 
 				<SettingsEnum
