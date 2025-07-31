@@ -196,11 +196,6 @@
 					<Label id="device8" text="XXXXXX 8" />
 				</SettingsEnumDropDown>
 
-				<SettingsEnum text="#Settings_AudioDevices_HWCompat" convar="snd_hwcompat" hasdocspage="false">
-					<RadioButton group="hwcompat" text="#Common_Off" value="0" />
-					<RadioButton group="hwcompat" text="#Common_On" value="1" />
-				</SettingsEnum>
-
 				<SettingsEnum text="#Settings_AudioDevices_Background" convar="snd_mute_losefocus" hasdocspage="false">
 					<RadioButton group="losefocus" text="#Common_Off" value="0" />
 					<RadioButton group="losefocus" text="#Common_On" value="1" />
