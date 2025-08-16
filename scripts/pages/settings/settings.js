@@ -203,7 +203,10 @@ class MainMenuSettings {
 						(child.actualyoffset + child.actuallayoutheight + this.spacerHeight) / containerHeight) ||
 				scrollOffset === 0
 			) {
-				this.panels.nav.FindChildTraverse(SettingsTabs[tab].children[child.id]).checked = true;
+				const navChild = this.panels.nav.FindChildTraverse(SettingsTabs[tab].children[child.id]);
+                if (navChild) {
+                    navChild.checked = true;
+                }
 				break;
 			}
 		}
