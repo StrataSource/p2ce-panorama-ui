@@ -16,19 +16,24 @@
 		/>
 		<Image
 			id="BackgroundMapImage2"
-			class="loadingscreen__background loadingscreen__background-image4"
+			class="loadingscreen__background loadingscreen__background-image2"
 			src=""
 			scaling="stretch"
 		/>
 
 		<!-- todo: set the logo dynamically -->
-		<Image
+		<!-- Disabled until further notice
+		<AnimatedImageStrip
 			id="Logo"
 			class="loadingscreen__logo"
+			animating="true"
+			defaultframe="0"
+			frametime="125ms"
 			src=""
-			defaultsrc="file://{images}/menu/p2ce/logo.png"
+			defaultsrc="file://{images}/menu/p2ce/spinner_strip.tga"
 			scaling="stretch-to-cover-preserve-aspect"
 		/>
+		-->
 
 		<Panel class="loadingscreen__fade--dark" />
 		<Panel id="LoadingScreenContents" class="loadingscreen__contents" />
@@ -36,6 +41,10 @@
 		<Panel id="" class="full-width full-height">
 		</Panel>
 
-		<ProgressBar id="ProgressBar" class="loadingscreen__progressbar" />
+		<Panel class="loadingscreen__progress-panel">
+			<Label id="ProgressStatusText" class="loadingscreen__details" text="Progress" />
+			<Label id="PercentText" class="loadingscreen__percentage-label" text="{d:percent}%" />
+			<ProgressBar id="ProgressBar" class="loadingscreen__progressbar" />
+		</Panel>
 	</Panel>
 </root>

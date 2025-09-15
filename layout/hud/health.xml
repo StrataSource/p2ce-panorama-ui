@@ -5,6 +5,7 @@
 	</styles>
 
 	<HudHealth class="health">
-		<Label class="__label" text="{d:health}" />
+		<Label class="health__label" text="HEALTH" />
+		<Label class="health__hp" text="{d:health}" />
 	</HudHealth>
 </root>
