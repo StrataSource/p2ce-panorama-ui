@@ -155,16 +155,13 @@ class LoadingScreenController {
 			else if (map.startsWith('sp_a6_sx')) return sx_base + 'a6_' + number + '_widescreen.vtf';
 			else if (map.startsWith('sp_a7_sx')) return sx_base + 'a7_' + number + '_widescreen.vtf';
 			else if (map.startsWith('sp_a8_sx')) return sx_base + 'a8_' + number + '_widescreen.vtf';
-			
 			// Pivot: Portal 2 VGUI behavior for "act 5" maps is to always resort to default Wheatley Laboratories BG as a placeholder.
 			//        Act 5 by itself is not real; it's a placeholder for the sp_30_a4_finale5 and callback biks that play at the very end
 			//        of finale4, which forcibly overrides the default basemodui background video to Act 5 as soon as the game ends via
 			//        a hacky workaround involving a point_clientcommand entity that toggles on hidden ConVar cl_finale_completed.
 			else if (map.startsWith('sp_a5')) return base + 'default_e_' + number + '_widescreen.vtf';
-			
 			// Coop is its own thing. We randomize the images later on.
 			else if (map.startsWith('mp')) return base + 'coop_' + number + '_widescreen.vtf';
-			
 			// if map is empty, we are reloading the current map
 			// todo: the aperture logo loading screens don't map exactly to the acts,
 			//       act 3 in particular has two different aperture logo loading screens.
