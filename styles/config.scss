@@ -221,8 +221,8 @@ $font-secondary: 'Roboto', Arial, sans-serif !default;
 $font-secondary-light: 'Roboto', Arial, sans-serif !default;
 $font-monospace: 'Roboto Mono' !default;
 
-$font-halflife2: 'HALFLIFE2' !default;
-$font-hl2ep2: 'HL2EP2' !default;
+$font-halflife2: 'HALFLIFE2', 'Roboto Mono', Arial, sans-serif !default;
+$font-hl2ep2: 'HL2EP2', 'Roboto Mono', Arial, sans-serif !default;
 
 $font-header: $font-secondary !default;
 $font-header-light: $font-secondary-light !default;

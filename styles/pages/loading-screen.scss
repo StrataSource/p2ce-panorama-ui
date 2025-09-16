@@ -95,7 +95,7 @@
 		horizontal-align: right;
 		text-align: right;
 	}
-	
+
 	&__progress-panel {
 		width: 60%;
 		height: 80px;
@@ -122,7 +122,7 @@
 	0% {
 		opacity: 1;
 	}
-	
+
 	25% {
 		opacity: 1;
 	}
@@ -144,5 +144,5 @@
 
 // Assigned to the progress bar by Panorama internally
 .ProgressBarLeft {
-	background-color: gradient( linear, 0% 0%, 100% 0, from( #e65602 ), to( #ff9a00 ) );
+	background-color: gradient(linear, 0% 0%, 100% 0, from(#e65602), to(#ff9a00));
 }
