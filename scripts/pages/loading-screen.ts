@@ -135,7 +135,7 @@ class LoadingScreenController {
 	}
 
 	static updateLoadingScreenInfo(mapName: string) {
-		function getMapImage(map: string, number: Number) {
+		const getMapImage = (map: string, number: number) => {
 			const base = 'file://{materials}/vgui/loading_screens/loadingscreen_';
 			const sx_base = 'file://{materials}/vgui/loading_screens/sixense_loadingscreen_';
 
@@ -168,19 +168,19 @@ class LoadingScreenController {
 			//       fixing this will probably involve making a variable storing every
 			//       map name in the game to map it to the right loading screen.
 			//       in the meantime, this looks pretty good
-			else if (this.portal2_Campaign_A1Maps.includes(lastLoadedMapName))
+			else if (this.portal2_Campaign_A1Maps.includes(this.lastLoadedMapName))
 				return base + 'default_a_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A2Maps.includes(lastLoadedMapName))
+			else if (this.portal2_Campaign_A2Maps.includes(this.lastLoadedMapName))
 				return base + 'default_b_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A3Part1Maps.includes(lastLoadedMapName))
+			else if (this.portal2_Campaign_A3Part1Maps.includes(this.lastLoadedMapName))
 				return base + 'default_c_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A3Part2Maps.includes(lastLoadedMapName))
+			else if (this.portal2_Campaign_A3Part2Maps.includes(this.lastLoadedMapName))
 				return base + 'default_d_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A3OutroMaps.includes(lastLoadedMapName))
+			else if (this.portal2_Campaign_A3OutroMaps.includes(this.lastLoadedMapName))
 				return base + 'default_b_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A4Maps.includes(lastLoadedMapName))
+			else if (this.portal2_Campaign_A4Maps.includes(this.lastLoadedMapName))
 				return base + 'default_e_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A5Maps.includes(lastLoadedMapName))
+			else if (this.portal2_Campaign_A5Maps.includes(this.lastLoadedMapName))
 				return base + 'default_e_' + number + '_widescreen.vtf'; // Pivot: See above.
 			// If not part of any inbox portal2 map, don't do anything.
 			else return base + 'default_b_' + number + '_widescreen.vtf';
