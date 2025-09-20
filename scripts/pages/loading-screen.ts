@@ -148,7 +148,8 @@ class LoadingScreenController {
 			else if (map.startsWith('sp_a3_sx')) return sx_base + 'a3_1_widescreen.vtf';
 			else if (map.startsWith('sp_a4_sx')) return sx_base + 'a4_1_widescreen.vtf';
 			else if (map.startsWith('sp_a5_sx')) return sx_base + 'a5_1_widescreen.vtf';
-			else if (map.startsWith('sp_a6_sx') || map.startsWith('sp_a7_sx') || map.startsWith('sp_a8_sx')) return sx_base + 'a6_1_widescreen.vtf';
+			else if (map.startsWith('sp_a6_sx') || map.startsWith('sp_a7_sx') || map.startsWith('sp_a8_sx'))
+				return sx_base + 'a6_1_widescreen.vtf';
 			// Standard Portal 2 SP maps.
 			else if (map.startsWith('sp_a1')) return base + 'a1_' + number + '_widescreen.vtf';
 			else if (map.startsWith('sp_a2')) return base + 'a2_' + number + '_widescreen.vtf';
@@ -167,33 +168,19 @@ class LoadingScreenController {
 			//       fixing this will probably involve making a variable storing every
 			//       map name in the game to map it to the right loading screen.
 			//       in the meantime, this looks pretty good
-			else if (
-				this.portal2_Campaign_A1Maps.includes(lastLoadedMapName)
-			)
+			else if (this.portal2_Campaign_A1Maps.includes(lastLoadedMapName))
 				return base + 'default_a_' + number + '_widescreen.vtf';
-			else if (
-				this.portal2_Campaign_A2Maps.includes(lastLoadedMapName)
-			)
+			else if (this.portal2_Campaign_A2Maps.includes(lastLoadedMapName))
 				return base + 'default_b_' + number + '_widescreen.vtf';
-			else if (
-				this.portal2_Campaign_A3Part1Maps.includes(lastLoadedMapName)
-			)
+			else if (this.portal2_Campaign_A3Part1Maps.includes(lastLoadedMapName))
 				return base + 'default_c_' + number + '_widescreen.vtf';
-			else if (
-				this.portal2_Campaign_A3Part2Maps.includes(lastLoadedMapName)
-			)
+			else if (this.portal2_Campaign_A3Part2Maps.includes(lastLoadedMapName))
 				return base + 'default_d_' + number + '_widescreen.vtf';
-			else if (
-				this.portal2_Campaign_A3OutroMaps.includes(lastLoadedMapName)
-			)
+			else if (this.portal2_Campaign_A3OutroMaps.includes(lastLoadedMapName))
 				return base + 'default_b_' + number + '_widescreen.vtf';
-			else if (
-				this.portal2_Campaign_A4Maps.includes(lastLoadedMapName)
-			)
+			else if (this.portal2_Campaign_A4Maps.includes(lastLoadedMapName))
 				return base + 'default_e_' + number + '_widescreen.vtf';
-			else if (
-				this.portal2_Campaign_A5Maps.includes(lastLoadedMapName)
-			)
+			else if (this.portal2_Campaign_A5Maps.includes(lastLoadedMapName))
 				return base + 'default_e_' + number + '_widescreen.vtf'; // Pivot: See above.
 			// If not part of any inbox portal2 map, don't do anything.
 			else return base + 'default_b_' + number + '_widescreen.vtf';
