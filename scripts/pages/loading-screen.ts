@@ -107,7 +107,7 @@ class LoadingScreenController {
 
 	static portal2_SXCampaign_A8Maps = [
 		'sp_a8_sx_turrets',
-		'sp_a8_sx_gdc', // CES 2011 demo: sp_a8_sx_turrets
+		'sp_a8_sx_gdc', // CES 2011 demo
 		'sp_a8_sx_tb_surf'
 	];
 
@@ -141,20 +141,19 @@ class LoadingScreenController {
 
 			// The Super 8 teaser has a special background image. Force it to "e1912_1".
 			if (map.startsWith('e1912')) return base + 'e1912_1_widescreen.vtf';
+			// Pivot: Account for Sixense maps in appids 660 and 247120... We already have a dedicated array for A5 maps set up, so maybe a match for sp_aX_sx would work?
+			// These only have one dedicated loading screen background image, so force "aX_1_widescreen.vtf".
+			else if (map.startsWith('sp_a1_sx')) return sx_base + 'a1_1_widescreen.vtf';
+			else if (map.startsWith('sp_a2_sx')) return sx_base + 'a2_1_widescreen.vtf';
+			else if (map.startsWith('sp_a3_sx')) return sx_base + 'a3_1_widescreen.vtf';
+			else if (map.startsWith('sp_a4_sx')) return sx_base + 'a4_1_widescreen.vtf';
+			else if (map.startsWith('sp_a5_sx')) return sx_base + 'a5_1_widescreen.vtf';
+			else if (map.startsWith('sp_a6_sx') || map.startsWith('sp_a7_sx') || map.startsWith('sp_a8_sx')) return sx_base + 'a6_1_widescreen.vtf';
 			// Standard Portal 2 SP maps.
 			else if (map.startsWith('sp_a1')) return base + 'a1_' + number + '_widescreen.vtf';
 			else if (map.startsWith('sp_a2')) return base + 'a2_' + number + '_widescreen.vtf';
 			else if (map.startsWith('sp_a3')) return base + 'a3_' + number + '_widescreen.vtf';
 			else if (map.startsWith('sp_a4')) return base + 'a4_' + number + '_widescreen.vtf';
-			// Pivot: Account for Sixense maps in appids 660 and 247120... We already have a dedicated array for A5 maps set up, so maybe a match for sp_aX_sx would work?
-			else if (map.startsWith('sp_a1_sx')) return sx_base + 'a1_' + number + '_widescreen.vtf';
-			else if (map.startsWith('sp_a2_sx')) return sx_base + 'a2_' + number + '_widescreen.vtf';
-			else if (map.startsWith('sp_a3_sx')) return sx_base + 'a3_' + number + '_widescreen.vtf';
-			else if (map.startsWith('sp_a4_sx')) return sx_base + 'a4_' + number + '_widescreen.vtf';
-			else if (map.startsWith('sp_a5_sx')) return sx_base + 'a5_' + number + '_widescreen.vtf';
-			else if (map.startsWith('sp_a6_sx')) return sx_base + 'a6_' + number + '_widescreen.vtf';
-			else if (map.startsWith('sp_a7_sx')) return sx_base + 'a7_' + number + '_widescreen.vtf';
-			else if (map.startsWith('sp_a8_sx')) return sx_base + 'a8_' + number + '_widescreen.vtf';
 			// Pivot: Portal 2 VGUI behavior for "act 5" maps is to always resort to default Wheatley Laboratories BG as a placeholder.
 			//        Act 5 by itself is not real; it's a placeholder for the sp_30_a4_finale5 and callback biks that play at the very end
 			//        of finale4, which forcibly overrides the default basemodui background video to Act 5 as soon as the game ends via
@@ -169,31 +168,31 @@ class LoadingScreenController {
 			//       map name in the game to map it to the right loading screen.
 			//       in the meantime, this looks pretty good
 			else if (
-				LoadingScreenController.portal2_Campaign_A1Maps.includes(LoadingScreenController.lastLoadedMapName)
+				this.portal2_Campaign_A1Maps.includes(lastLoadedMapName)
 			)
 				return base + 'default_a_' + number + '_widescreen.vtf';
 			else if (
-				LoadingScreenController.portal2_Campaign_A2Maps.includes(LoadingScreenController.lastLoadedMapName)
+				this.portal2_Campaign_A2Maps.includes(lastLoadedMapName)
 			)
 				return base + 'default_b_' + number + '_widescreen.vtf';
 			else if (
-				LoadingScreenController.portal2_Campaign_A3Part1Maps.includes(LoadingScreenController.lastLoadedMapName)
+				this.portal2_Campaign_A3Part1Maps.includes(lastLoadedMapName)
 			)
 				return base + 'default_c_' + number + '_widescreen.vtf';
 			else if (
-				LoadingScreenController.portal2_Campaign_A3Part2Maps.includes(LoadingScreenController.lastLoadedMapName)
+				this.portal2_Campaign_A3Part2Maps.includes(lastLoadedMapName)
 			)
 				return base + 'default_d_' + number + '_widescreen.vtf';
 			else if (
-				LoadingScreenController.portal2_Campaign_A3OutroMaps.includes(LoadingScreenController.lastLoadedMapName)
+				this.portal2_Campaign_A3OutroMaps.includes(lastLoadedMapName)
 			)
 				return base + 'default_b_' + number + '_widescreen.vtf';
 			else if (
-				LoadingScreenController.portal2_Campaign_A4Maps.includes(LoadingScreenController.lastLoadedMapName)
+				this.portal2_Campaign_A4Maps.includes(lastLoadedMapName)
 			)
 				return base + 'default_e_' + number + '_widescreen.vtf';
 			else if (
-				LoadingScreenController.portal2_Campaign_A5Maps.includes(LoadingScreenController.lastLoadedMapName)
+				this.portal2_Campaign_A5Maps.includes(lastLoadedMapName)
 			)
 				return base + 'default_e_' + number + '_widescreen.vtf'; // Pivot: See above.
 			// If not part of any inbox portal2 map, don't do anything.
