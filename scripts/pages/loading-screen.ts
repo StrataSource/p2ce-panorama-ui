@@ -184,7 +184,7 @@ class LoadingScreenController {
 				return base + 'default_e_' + number + '_widescreen.vtf'; // Pivot: See above.
 			// If not part of any inbox portal2 map, don't do anything.
 			else return base + 'default_b_' + number + '_widescreen.vtf';
-		}
+		};
 
 		if (mapName.length > 0) this.lastLoadedMapName = mapName;
 
