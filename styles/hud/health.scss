@@ -5,12 +5,20 @@
 	margin-left: 50px;
 	flow-children: right;
 	height: 80px;
-	width: 180px;
+	width: 220px;
 	align: center top;
 	background-color: #000000aa;
 	border-radius: 10px;
 
-	& > Label {
+	&__label {
+		font-size: 20px;
+		vertical-align: bottom;
+		margin-left: 15px;
+		margin-bottom: 15px;
+	}
+
+	&__hp {
+		font-family: $font-halflife2;
 		font-size: 56px;
 		horizontal-align: center;
 		vertical-align: center;

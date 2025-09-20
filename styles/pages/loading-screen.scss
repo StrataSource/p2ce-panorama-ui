@@ -14,8 +14,8 @@
 		z-index: -1;
 	}
 
-	&__background-image4 {
-		z-index: -4;
+	&__background-image2 {
+		z-index: -2;
 	}
 
 	&__contents {
@@ -44,26 +44,23 @@
 
 	&__backgroundhideanim {
 		animation-name: loading-screen-background-hide-anim;
-		animation-duration: 0.8s;
+		animation-duration: 0.33s;
 		animation-timing-function: linear;
 		animation-iteration-count: 1;
 		animation-fill-mode: forwards;
 	}
 
 	&__progressbar {
-		width: 45%;
+		width: 100%;
 		height: 10px;
 		background-color: #00a2ff44;
 		vertical-align: bottom;
-		margin-bottom: 52px;
 		horizontal-align: center;
 	}
 
 	&__details {
-		flow-children: none;
 		width: 100%;
 		height: fill-parent-flow(1);
-		margin: 32px 48px 8px 48px;
 	}
 
 	&__left-details {
@@ -94,9 +91,20 @@
 		// Right-aligned items sometimes don't adjust their width properly,
 		// set a static width that'll always be large enough to fit the text
 		width: 300px;
-		vertical-align: bottom;
+		vertical-align: top;
 		horizontal-align: right;
 		text-align: right;
+	}
+
+	&__progress-panel {
+		width: 60%;
+		height: 80px;
+		background-color: #000000aa;
+		border-radius: 10px;
+		padding: 20px;
+		margin-bottom: 24px;
+		vertical-align: bottom;
+		horizontal-align: center;
 	}
 }
 
@@ -104,7 +112,7 @@
 /* If you want to remove the animation, just set duration to 0s instead. */
 .loading-screen--closing {
 	animation-name: loading-screen--closing-animation;
-	animation-duration: 1s;
+	animation-duration: 0.4s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: 1;
 	animation-fill-mode: forwards;
@@ -115,7 +123,7 @@
 		opacity: 1;
 	}
 
-	70% {
+	25% {
 		opacity: 1;
 	}
 
@@ -136,5 +144,5 @@
 
 // Assigned to the progress bar by Panorama internally
 .ProgressBarLeft {
-	background-color: #ff9a00;
+	background-color: gradient(linear, 0% 0%, 100% 0, from(#e65602), to(#ff9a00));
 }
