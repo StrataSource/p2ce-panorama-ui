@@ -19,18 +19,18 @@
 	"license": "MIT",
 	"dependencies": {},
 	"devDependencies": {
-		"husky": "^8.0.1",
-		"lint-staged": "^12.4.1",
-		"prettier": "^2.6.2",
-		"@prettier/plugin-xml": "^2.1.0",
-		"axios": "^0.26.0",
-		"papaparse": "^5.3.1",
-		"eslint": "^8.27.0",
-		"prettier-eslint": "^15.0.1",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-unicorn": "^44.0.2",
-		"typescript": "5.4.3"
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.1",
+		"prettier": "^3.6.2",
+		"@prettier/plugin-xml": "^3.4.2",
+		"axios": "^1.12.2",
+		"papaparse": "^5.5.3",
+		"eslint": "^9.36.0",
+		"prettier-eslint": "^16.4.2",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-prettier": "^5.5.4",
+		"eslint-plugin-unicorn": "^61.0.2",
+		"typescript": "5.9.2"
 	},
 	"lint-staged": {
 		"**/*.{js,xml,scss,css,md}": [
