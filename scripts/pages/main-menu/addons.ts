@@ -33,7 +33,7 @@ class AddonEntry {
 
 		if (this.addonEnableCheck) {
 			this.addonEnableCheck.SetSelected(WorkshopAPI.GetAddonEnabled(this.index));
-			this.addonEnableCheck.SetPanelEvent('onactivate', () => this.addonToggle());
+			this.addonEnableCheck.SetPanelEvent('onactivate', () => AddonManager.markDirty());
 		}
 
 		if (this.subText) this.subText.text = WorkshopAPI.GetAddonSubscribed(this.index) ? 'Unsubscribe' : 'Subscribe';
@@ -59,19 +59,12 @@ class AddonEntry {
 	}
 
 	/**
-	 * Toggle an addon's enable state
-	 */
-	addonToggle() {
-		AddonManager.markDirty();
-	}
-
-	/**
 	 * Enable or disable addon (in UI only)
 	 * Marks the addon list dirty
 	 */
 	setAddonEnabled(en: boolean) {
 		if (this.addonEnableCheck) {
-			if (this.addonEnableCheck.IsSelected() != en) AddonManager.markDirty();
+			if (this.addonEnableCheck.IsSelected() !== en) AddonManager.markDirty();
 			this.addonEnableCheck.SetSelected(en);
 		}
 	}

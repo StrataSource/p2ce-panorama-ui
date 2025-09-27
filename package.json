@@ -8,33 +8,35 @@
 	"scripts": {
 		"build": "tsc",
 		"watch": "tsc --watch",
-		"format:fix": "prettier --write **/*.{js,xml,scss,css,md,ts}",
-		"format:check": "prettier --check **/*.{js,xml,scss,css,md,ts}",
-		"lint:fix": "eslint \"**/*.js\" --fix",
-		"lint:check": "eslint \"**/*.js\"",
+		"format:fix": "prettier --plugin=@prettier/plugin-xml --write **/*.{js,xml,scss,css,md,ts}",
+		"format:check": "prettier --plugin=@prettier/plugin-xml --check **/*.{js,xml,scss,css,md,ts}",
+		"lint:fix": "eslint \"**/*.{js,ts}\" --fix",
+		"lint:check": "eslint \"**/*.{js,ts}\"",
 		"prepare": "husky install",
 		"pre-commit": "lint-staged"
 	},
 	"author": "P2CE & Momentum Team",
 	"license": "MIT",
-	"dependencies": {},
 	"devDependencies": {
-		"husky": "^9.1.7",
-		"lint-staged": "^16.2.1",
-		"prettier": "^3.6.2",
+		"@eslint/eslintrc": "^3.3.1",
+		"@eslint/js": "^9.36.0",
 		"@prettier/plugin-xml": "^3.4.2",
 		"axios": "^1.12.2",
-		"papaparse": "^5.5.3",
 		"eslint": "^9.36.0",
-		"prettier-eslint": "^16.4.2",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.4",
 		"eslint-plugin-unicorn": "^61.0.2",
-		"typescript": "5.9.2"
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.1",
+		"papaparse": "^5.5.3",
+		"prettier": "^3.6.2",
+		"prettier-eslint": "^16.4.2",
+		"typescript": "^5.9.2",
+		"typescript-eslint": "^8.44.1"
 	},
 	"lint-staged": {
 		"**/*.{js,xml,scss,css,md}": [
-			"prettier --write"
+			"prettier --plugin=@prettier/plugin-xml --write"
 		],
 		"**/*.js": "eslint --fix"
 	}

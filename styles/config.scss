@@ -193,8 +193,14 @@ $gradients-primary: (
 
 // Saturation-Luminance-Alpha transform, scaling the underlying gradient
 $gradient-hover-transform: 10%, 25%, 10% !default;
-$gradient-disabled-transform: -70%, -20%, 20% !default;
-$gradient-selected-hover-transform: -10%, -10%, 0% !default;
+$gradient-disabled-transform:
+	-70%,
+	-20%,
+	20% !default;
+$gradient-selected-hover-transform:
+	-10%,
+	-10%,
+	0% !default;
 
 // ================
 // FONTS
