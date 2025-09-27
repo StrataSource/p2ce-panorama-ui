@@ -146,7 +146,7 @@ class AddonManager {
 
 		if (this.addonTitle) this.addonTitle.text = info.title;
 
-		if (this.addonDesc) this.addonDesc.text = info.description;
+		if (this.addonDesc) this.addonDesc.text = $.BBCodeToHTML(info.description);
 
 		if (info.authors.length > 0 && this.addonAuthors) {
 			this.addonAuthors.text = 'by ' + info.authors.join(', ');
