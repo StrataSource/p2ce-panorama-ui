@@ -7,7 +7,7 @@ class LoadingScreenController {
 	static bgImage1 = $('#BackgroundMapImage1') as Image;
 	static bgImage2 = $('#BackgroundMapImage2') as Image;
 
-	static portal2_Campaign_A1Maps = [
+	static portal2CampaignA1Maps = [
 		'sp_a1_intro1',
 		'sp_a1_intro2',
 		'sp_a1_intro3',
@@ -19,7 +19,7 @@ class LoadingScreenController {
 		'sp_a2_intro'
 	];
 
-	static portal2_Campaign_A2Maps = [
+	static portal2CampaignA2Maps = [
 		'sp_a2_bridge_intro',
 		'sp_a2_bridge_the_gap',
 		'sp_a2_bts1',
@@ -51,7 +51,7 @@ class LoadingScreenController {
 		'sp_a3_01'
 	];
 
-	static portal2_Campaign_A3Part1Maps = [
+	static portal2CampaignA3Part1Maps = [
 		'sp_a3_03',
 		'sp_a3_jump_intro',
 		'sp_a3_bomb_flings',
@@ -59,11 +59,11 @@ class LoadingScreenController {
 		'sp_a3_transition01'
 	];
 
-	static portal2_Campaign_A3Part2Maps = ['sp_a3_speed_ramp', 'sp_a3_speed_flings'];
+	static portal2CampaignA3Part2Maps = ['sp_a3_speed_ramp', 'sp_a3_speed_flings'];
 
-	static portal2_Campaign_A3OutroMaps = ['sp_a3_portal_intro', 'sp_a3_end'];
+	static portal2CampaignA3OutroMaps = ['sp_a3_portal_intro', 'sp_a3_end'];
 
-	static portal2_Campaign_A4Maps = [
+	static portal2CampaignA4Maps = [
 		'sp_a4_intro',
 		'sp_a4_tb_intro',
 		'sp_a4_tb_trust_drop',
@@ -81,9 +81,9 @@ class LoadingScreenController {
 		'sp_a4_finale4'
 	];
 
-	static portal2_Campaign_A5Maps = ['sp_a5_credits'];
+	static portal2CampaignA5Maps = ['sp_a5_credits'];
 
-	static portal2_SXCampaign_A1Maps = [
+	static portal2SXCampaignA1Maps = [
 		'sp_a1_sx_perc_tutorial',
 		'sp_a1_sx_perc_tutorial_2',
 		'sp_a1_sx_perc_surfing',
@@ -93,19 +93,19 @@ class LoadingScreenController {
 		'sp_a1_sx_perc_paint'
 	];
 
-	static portal2_SXCampaign_A2Maps = ['sp_a2_sx_intro', 'sp_a2_sx_reaching'];
+	static portal2SXCampaignA2Maps = ['sp_a2_sx_intro', 'sp_a2_sx_reaching'];
 
-	static portal2_SXCampaign_A3Maps = ['sp_a3_sx_intro', 'sp_a3_sx_shield'];
+	static portal2SXCampaignA3Maps = ['sp_a3_sx_intro', 'sp_a3_sx_shield'];
 
-	static portal2_SXCampaign_A4Maps = ['sp_a4_sx_intro', 'sp_a4_sx_thru_portals'];
+	static portal2SXCampaignA4Maps = ['sp_a4_sx_intro', 'sp_a4_sx_thru_portals'];
 
-	static portal2_SXCampaign_A5Maps = ['sp_a5_sx_final'];
+	static portal2SXCampaignA5Maps = ['sp_a5_sx_final'];
 
-	static portal2_SXCampaign_A6Maps = ['sp_a6_sx_intro', 'sp_a6_sx_lasers'];
+	static portal2SXCampaignA6Maps = ['sp_a6_sx_intro', 'sp_a6_sx_lasers'];
 
-	static portal2_SXCampaign_A7Maps = ['sp_a7_sx_gel', 'sp_a7_sx_paint'];
+	static portal2SXCampaignA7Maps = ['sp_a7_sx_gel', 'sp_a7_sx_paint'];
 
-	static portal2_SXCampaign_A8Maps = [
+	static portal2SXCampaignA8Maps = [
 		'sp_a8_sx_turrets',
 		'sp_a8_sx_gdc', // CES 2011 demo
 		'sp_a8_sx_tb_surf'
@@ -137,19 +137,19 @@ class LoadingScreenController {
 	static updateLoadingScreenInfo(mapName: string) {
 		const getMapImage = (map: string, number: number) => {
 			const base = 'file://{materials}/vgui/loading_screens/loadingscreen_';
-			const sx_base = 'file://{materials}/vgui/loading_screens/sixense_loadingscreen_';
+			const sxBase = 'file://{materials}/vgui/loading_screens/sixense_loadingscreen_';
 
 			// The Super 8 teaser has a special background image. Force it to "e1912_1".
 			if (map.startsWith('e1912')) return base + 'e1912_1_widescreen.vtf';
 			// Pivot: Account for Sixense maps in appids 660 and 247120... We already have a dedicated array for A5 maps set up, so maybe a match for sp_aX_sx would work?
 			// These only have one dedicated loading screen background image, so force "aX_1_widescreen.vtf".
-			else if (map.startsWith('sp_a1_sx')) return sx_base + 'a1_1_widescreen.vtf';
-			else if (map.startsWith('sp_a2_sx')) return sx_base + 'a2_1_widescreen.vtf';
-			else if (map.startsWith('sp_a3_sx')) return sx_base + 'a3_1_widescreen.vtf';
-			else if (map.startsWith('sp_a4_sx')) return sx_base + 'a4_1_widescreen.vtf';
-			else if (map.startsWith('sp_a5_sx')) return sx_base + 'a5_1_widescreen.vtf';
+			else if (map.startsWith('sp_a1_sx')) return sxBase + 'a1_1_widescreen.vtf';
+			else if (map.startsWith('sp_a2_sx')) return sxBase + 'a2_1_widescreen.vtf';
+			else if (map.startsWith('sp_a3_sx')) return sxBase + 'a3_1_widescreen.vtf';
+			else if (map.startsWith('sp_a4_sx')) return sxBase + 'a4_1_widescreen.vtf';
+			else if (map.startsWith('sp_a5_sx')) return sxBase + 'a5_1_widescreen.vtf';
 			else if (map.startsWith('sp_a6_sx') || map.startsWith('sp_a7_sx') || map.startsWith('sp_a8_sx'))
-				return sx_base + 'a6_1_widescreen.vtf';
+				return sxBase + 'a6_1_widescreen.vtf';
 			// Standard Portal 2 SP maps.
 			else if (map.startsWith('sp_a1')) return base + 'a1_' + number + '_widescreen.vtf';
 			else if (map.startsWith('sp_a2')) return base + 'a2_' + number + '_widescreen.vtf';
@@ -168,19 +168,19 @@ class LoadingScreenController {
 			//       fixing this will probably involve making a variable storing every
 			//       map name in the game to map it to the right loading screen.
 			//       in the meantime, this looks pretty good
-			else if (this.portal2_Campaign_A1Maps.includes(this.lastLoadedMapName))
+			else if (this.portal2CampaignA1Maps.includes(this.lastLoadedMapName))
 				return base + 'default_a_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A2Maps.includes(this.lastLoadedMapName))
+			else if (this.portal2CampaignA2Maps.includes(this.lastLoadedMapName))
 				return base + 'default_b_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A3Part1Maps.includes(this.lastLoadedMapName))
+			else if (this.portal2CampaignA3Part1Maps.includes(this.lastLoadedMapName))
 				return base + 'default_c_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A3Part2Maps.includes(this.lastLoadedMapName))
+			else if (this.portal2CampaignA3Part2Maps.includes(this.lastLoadedMapName))
 				return base + 'default_d_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A3OutroMaps.includes(this.lastLoadedMapName))
+			else if (this.portal2CampaignA3OutroMaps.includes(this.lastLoadedMapName))
 				return base + 'default_b_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A4Maps.includes(this.lastLoadedMapName))
+			else if (this.portal2CampaignA4Maps.includes(this.lastLoadedMapName))
 				return base + 'default_e_' + number + '_widescreen.vtf';
-			else if (this.portal2_Campaign_A5Maps.includes(this.lastLoadedMapName))
+			else if (this.portal2CampaignA5Maps.includes(this.lastLoadedMapName))
 				return base + 'default_e_' + number + '_widescreen.vtf'; // Pivot: See above.
 			// If not part of any inbox portal2 map, don't do anything.
 			else return base + 'default_b_' + number + '_widescreen.vtf';
