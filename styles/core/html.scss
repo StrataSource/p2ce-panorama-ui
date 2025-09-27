@@ -1,24 +1,28 @@
 @use '../config' as *;
 @use '../abstract/mixin';
 
-a:hover {
+a {
+	color: blue;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+b, strong {
+	font-weight: bold;
+}
+
+i, em {
+	font-style: italics;
+}
+
+u {
 	text-decoration: underline;
 }
 
-b {
-	font-weight: bold;
-}
-
-i {
-	font-style: italics;
-}
-
-strong {
-	font-weight: bold;
-}
-
-em {
-	font-style: italics;
+s {
+	text-decoration: line-through;
 }
 
 pre {
@@ -28,5 +32,6 @@ pre {
 @each $name, $size in $html-font-header-sizes {
 	#{$name} {
 		font-size: $size;
+		font-weight: bold;
 	}
 }

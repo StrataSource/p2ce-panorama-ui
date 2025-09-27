@@ -54,7 +54,7 @@
 			<Label id="AddonAuthors" class="addonpanel__authors" />
 			<Panel class="addonpanel__desc-container">
 				<Label class="addonpanel__section-name" text="Description" />
-				<Label id="AddonDesc" class="addonpanel__description" text="My Addon Description" />
+				<Label id="AddonDesc" class="addonpanel__description" text="My Addon Description" html="true" loadimages="true" />
 			</Panel>
 		</Panel>
 	</Panel>
