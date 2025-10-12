@@ -6,7 +6,54 @@
 		<include src="file://{scripts}/pages/main-menu/campaigns.ts" />
 	</scripts>
 
-	<Panel class="mainmenu__page" onload="CampaignSelector.init()">
-		<Label text="Coming soon :)" class="campaigns__coming_soon" />
+	<snippets>
+		<snippet name="CampaignEntrySnippet">
+			<Button class="addons__item">
+				<Panel class="addon-entry__left">
+					<!-- Addon icon cover -->
+					<Image id="AddonCover" class="addon-entry__cover" textureheight="128" texturewidth="128" />
+
+					<!-- Addon info; title, description, 'source' -->
+					<Panel class="addon-entry__title">
+						<Label id="CampaignTitle" class="addon-entry__title" />
+					</Panel>
+				</Panel>
+			</Button>
+		</snippet>
+
+		<snippet name="ChapterEntrySnippet">
+			<Button class="addons__item">
+				<Panel class="addon-entry__left">
+					<!-- Addon icon cover -->
+					<Image id="ChapterCover" class="addon-entry__cover" textureheight="128" texturewidth="128" />
+
+					<!-- Addon info; title, description, 'source' -->
+					<Panel class="addon-entry__title">
+						<Label id="ChapterTitle" class="addon-entry__title" />
+					</Panel>
+				</Panel>
+			</Button>
+		</snippet>
+	</snippets>
+
+	<Panel class="mainmenu__page flow-right" onload="CampaignSelector.init()">
+		<Panel class="addons__side_panel flow-down">
+			<!-- Top bar -->
+			<Panel class="addons__top_buttons__bg">
+				<Panel class="addons__top_buttons__container">
+					<Button id="ReloadAll" class="addons__top_buttons__reload" onactivate="CampaignSelector.reloadList()">
+						<Image texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
+					</Button>
+				</Panel>
+			</Panel>
+
+			<!-- Addon list -->
+			<Panel id="CampaignContainer" class="addons__container" />
+		</Panel>
+		
+		<Panel class="addons__side_panel flow-down">
+			<Panel id="ChapterContainer" class="addons__container" />
+		</Panel>
+
 	</Panel>
 </root>
