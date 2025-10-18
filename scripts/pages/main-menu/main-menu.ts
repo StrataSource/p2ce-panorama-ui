@@ -16,7 +16,6 @@ class MainMenu {
 	};
 
 	static activeTab = '';
-	static inSpace = false; // Temporary fun...
 
 	static {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
@@ -40,8 +39,6 @@ class MainMenu {
 		this.panels.movie = $<Movie>('#MainMenuMovie');
 		this.panels.model = $<ModelPanel>('#MainMenuModel');
 
-		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
-
 		// Assign a random model
 		const models = [
 			'models/npcs/turret/turret.mdl',
@@ -53,7 +50,7 @@ class MainMenu {
 		if (this.panels.model) {
 			this.panels.model.src = models[Math.floor(Math.random() * models.length)]; // Pick a random model
 
-			this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.15, this.inSpace ? 0.02 : 0);
+			this.panels.model.SetModelRotationSpeedTarget(0, 0.15, 0);
 			this.panels.model.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
 			this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 
@@ -232,26 +229,26 @@ class MainMenu {
 			$.persistentStorage.setItem('settings.mainMenuMovie', true);
 		}
 
+		let backgroundMovie = CampaignAPI.GetBackgroundMovie();
+		backgroundMovie = backgroundMovie.replace("media/", "");
+		if(backgroundMovie.length <= 0) {
+			useVideo = false;
+		}
+		
 		this.panels.movie.visible = !!useVideo;
 		this.panels.movie.SetReadyForDisplay(!!useVideo);
 
 		this.panels.image.visible = !useVideo;
 		this.panels.image.SetReadyForDisplay(!useVideo);
-
-		let chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
-		if (chapter < 1) chapter = 1;
-		if (chapter > 5) chapter = 5;
-
-		let movie = 'file://{media}/menu_act0' + chapter + '.webm';
-		if (this.inSpace) {
-			movie = 'file://{media}/sp_a5_credits.webm';
-		}
-
+		
 		if (useVideo) {
+			const movie = 'file://{media}/' + backgroundMovie;
 			this.panels.movie.SetMovie(movie);
 			this.panels.movie.Play();
 		} else {
-			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background01_widescreen.vtf');
+			let backgroundImage = CampaignAPI.GetBackgroundImage();
+			const image = 'file://{materials}/' + backgroundImage + '.vtf';
+			this.panels.image.SetImage(image);
 		}
 	}
 

@@ -16,6 +16,7 @@
 					<!-- Addon info; title, description, 'source' -->
 					<Panel class="addon-entry__title">
 						<Label id="CampaignTitle" class="addon-entry__title" />
+						<Label id="CampaignAuthors" class="addonpanel__authors" />
 					</Panel>
 				</Panel>
 			</Button>
@@ -36,12 +37,12 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="mainmenu__page flow-right" onload="CampaignSelector.init()">
+	<Panel class="mainmenu__page flow-right" onload="CampaignMgr.init()">
 		<Panel class="addons__side_panel flow-down">
 			<!-- Top bar -->
 			<Panel class="addons__top_buttons__bg">
 				<Panel class="addons__top_buttons__container">
-					<Button id="ReloadAll" class="addons__top_buttons__reload" onactivate="CampaignSelector.reloadList()">
+					<Button id="ReloadAll" class="addons__top_buttons__reload" onactivate="CampaignMgr.reload()">
 						<Image texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
 					</Button>
 				</Panel>
@@ -53,6 +54,26 @@
 		
 		<Panel class="addons__side_panel flow-down">
 			<Panel id="ChapterContainer" class="addons__container" />
+			<Panel id="CampaignStartPage" class="addonpanel__container flow-down" >
+				<Image
+					id="CampaignActiveLogo"
+					src="file://{images}/logo.svg"
+					textureheight="130"
+					texturewidth="440"
+					scaling="stretch-to-fit-x-preserve-aspect"
+				/>
+				<Label id="CampaignActiveTitle" class="addon-entry__title"/>
+
+				<Button id="CampaignContinue" class="addons__item" onactivate="CampaignStartPage.onContinue()">
+					<Label class="addon-entry__title" text="Continue"/>
+				</Button>
+				<Button id="CampaignNewGame" class="addons__item" onactivate="CampaignStartPage.onNewGame()">
+					<Label class="addon-entry__title" text="New Game"/>
+				</Button>
+				<Button id="CampaignLoadGame" class="addons__item" onactivate="CampaignStartPage.onLoadGame()">
+					<Label class="addon-entry__title" text="Load Game"/>
+				</Button>
+			</Panel>
 		</Panel>
 
 	</Panel>
