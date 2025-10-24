@@ -18,11 +18,9 @@ TextEntry {
 	border-radius: $textentry-radius;
 	box-shadow: $textentry-shadow;
 	font-size: $textentry-font-size;
-	color: $font-default-color;
+	color: $textentry-text-color;
 	vertical-align: middle;
-	transition-property: background-color, box-shadow;
-	transition-duration: 0.2s;
-	transition-timing-function: ease-in-out;
+	font-weight: bold;
 
 	#PlaceholderText {
 		color: $textentry-placeholder-color;
@@ -44,6 +42,7 @@ TextEntry {
 	&:focus {
 		background-color: $textentry-background-focus;
 		box-shadow: $textentry-shadow-hover;
+		color: $textentry-focus-text-color;
 	}
 
 	&:focus #PlaceholderText,

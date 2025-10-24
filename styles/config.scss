@@ -483,21 +483,22 @@ $tab-text-padding: 4px 10px;
 // TEXTENTRY
 // ================
 
-$textentry-background: $light-200 !default;
-$textentry-background-hover: color.scale($textentry-background, $alpha: 10%) !default;
-$textentry-background-focus: color.scale($textentry-background, $alpha: 8%) !default;
+$textentry-background: $primary-900 !default;
+$textentry-background-hover: $primary-700 !default;
+$textentry-background-focus: $primary-500 !default;
 
-$textentry-height: 32px !default;
+$textentry-height: 45px !default;
 $textentry-width: 256px !default;
-$textentry-padding: 6px 16px 6px 8px !default;
+$textentry-padding: 7px 0px 0px 15px !default;
 $textentry-border: 0 solid none !default;
 $textentry-radius: 0px !default;
 $textentry-shadow: none !default;
 $textentry-shadow-hover: none !default;
 
-$textentry-font-size: 18px !default;
+$textentry-font-size: 22px !default;
 $textentry-placeholder-font-size: 18px !default;
-$textentry-text-color: $font-default-color !default;
+$textentry-text-color: $bright-color !default;
+$textentry-focus-text-color: $base-color !default;
 $textentry-text-disabled: $font-disabled-color !default;
 $textentry-placeholder-color: color.scale($textentry-text-color, $alpha: -40%) !default;
 $textentry-placeholder-hover-color: color.scale($textentry-text-color, $alpha: 30%) !default;
