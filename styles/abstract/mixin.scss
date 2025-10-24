@@ -12,7 +12,7 @@
 			font-family: $font-header;
 		}
 
-		text-shadow: $font-header-shadow;
+		text-shadow-fast: $font-header-shadow;
 		letter-spacing: $font-header-spacing;
 	} @else {
 		font-family: $font;
