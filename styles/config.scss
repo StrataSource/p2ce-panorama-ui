@@ -340,78 +340,6 @@ $button-text-shadow: none !default;
 $button-icon-shadow: none !default;
 
 // ================
-// DROPDOWN
-// ================
-
-$dropdown-button-background: $button-background !default;
-
-$dropdown-button-background-disabled: $button-background-disabled !default;
-$dropdown-button-background-hover: $button-background-hover !default;
-$dropdown-button-background-menuvisible: gradient-vertical(
-	color.scale($button-background-base, $lightness: -60%, $alpha: 50%),
-	color.scale($button-background-base, $lightness: -65%, $alpha: 50%)
-) !default;
-
-$dropdown-button-icon-background: $light-300 !default;
-$dropdown-button-icon-background-hover: color.scale(
-	$dropdown-button-icon-background,
-	$lightness: 0%,
-	$alpha: 12%
-) !default;
-$dropdown-button-icon-background-menuvisible: color.scale(
-	$dropdown-button-icon-background,
-	$lightness: -40%,
-	$alpha: 20%
-) !default;
-$dropdown-button-icon-border: 0px solid rgba(0, 0, 0, 0) !default;
-$dropdown-button-icon-shadow: none !default;
-$dropdown-button-icon-icon-shadow: none !default;
-
-$dropdown-button-shadow: $button-shadow !default;
-$dropdown-button-radius: 0px !default;
-$dropdown-button-border: $button-border !default;
-
-$dropdown-button-use-header-font: true !default;
-$dropdown-button-font-size: 21px !default;
-$dropdown-button-height: 34px !default;
-$dropdown-button-text-color: $font-default-color !default;
-$dropdown-button-text-color-disabled: $font-disabled-color !default;
-$dropdown-button-text-shadow: $button-text-shadow;
-
-$dropdown-button-padding: 4px 12px !default;
-$dropdown-button-icon-width: 24px !default;
-
-$dropdown-menu-background: $gray-400 !default;
-$dropdown-menu-padding-y: 8px !default;
-$dropdown-menu-shadow: none !default;
-$dropdown-menu-border: 1px solid rgba(0, 0, 0, 0.9) !default;
-$dropdown-menu-radius: 0px !default;
-
-$dropdown-item-use-header-font: true !default;
-$dropdown-item-font-size: 20px !default;
-$dropdown-item-padding: 4px 16px 4px 16px !default;
-$dropdown-item-background: rgba(0, 0, 0, 0) !default;
-$dropdown-item-background-hover: $light-400 !default;
-
-// ================
-// CONTEXTMENU
-// ================
-
-$contextmenu-width: 300px;
-$contextmenu-padding-y: $dropdown-menu-padding-y !default;
-$contextmenu-background: $dropdown-menu-background !default;
-$contextmenu-radius: $dropdown-menu-radius !default;
-$contextmenu-shadow: $dropdown-menu-shadow !default;
-
-$contextmenu-item-use-header-font: $dropdown-item-use-header-font !default;
-$contextmenu-item-font-size: $dropdown-item-font-size !default;
-$contextmenu-item-padding: $dropdown-item-padding !default;
-$contextmenu-item-background: $dropdown-item-background !default;
-$contextmenu-item-background-hover: $dropdown-item-background-hover !default;
-
-$contextmenu-separator: 1px solid $gray-300 !default;
-
-// ================
 // CHECKBOX
 // ================
 
@@ -453,6 +381,69 @@ $radiobutton-use-header-font: false !default;
 $radiobutton-gap: 8px !default;
 $radiobutton-text-color: $font-default-color !default;
 $radiobutton-text-disabled: $font-disabled-color !default;
+
+// ================
+// DROPDOWN
+// ================
+
+$dropdown-button-background: $checkbox-background !default;
+
+$dropdown-button-background-disabled: $button-background-disabled !default;
+$dropdown-button-background-hover: $checkbox-background-hover !default;
+$dropdown-button-background-menuvisible: $checkbox-background-selected !default;
+
+$dropdown-button-icon-background: $primary-700 !default;
+$dropdown-button-icon-background-hover: $primary-600 !default;
+$dropdown-button-icon-background-menuvisible: $primary-500 !default;
+$dropdown-button-icon-border: 0px solid rgba(0, 0, 0, 0) !default;
+$dropdown-button-icon-shadow: none !default;
+$dropdown-button-icon-icon-shadow: none !default;
+
+$dropdown-button-shadow: $button-shadow !default;
+$dropdown-button-radius: 0px !default;
+$dropdown-button-border: 2px solid $primary-color !default;
+
+$dropdown-button-use-header-font: true !default;
+$dropdown-button-font-size: 21px !default;
+$dropdown-button-height: 34px !default;
+$dropdown-button-text-color: $bright-color !default;
+$dropdown-button-menuvisible-text-color: $base-950 !default;
+$dropdown-button-text-color-disabled: $button-text-disabled !default;
+$dropdown-button-text-shadow: $button-text-shadow;
+
+$dropdown-button-padding: 4px 12px !default;
+$dropdown-button-icon-width: 24px !default;
+
+$dropdown-menu-background: $base-950 !default;
+$dropdown-menu-padding-y: 0px !default;
+$dropdown-menu-shadow: none !default;
+$dropdown-menu-border: 1px solid $primary-color !default;
+$dropdown-menu-radius: 0px !default;
+
+$dropdown-item-use-header-font: true !default;
+$dropdown-item-font-size: 20px !default;
+$dropdown-item-padding: 8px 16px 8px 16px !default;
+$dropdown-item-background: rgba(0, 0, 0, 0) !default;
+$dropdown-item-background-hover: $primary-color !default;
+$dropdown-item-color: $base-950 !default;
+
+// ================
+// CONTEXTMENU
+// ================
+
+$contextmenu-width: 300px;
+$contextmenu-padding-y: $dropdown-menu-padding-y !default;
+$contextmenu-background: $dropdown-menu-background !default;
+$contextmenu-radius: $dropdown-menu-radius !default;
+$contextmenu-shadow: $dropdown-menu-shadow !default;
+
+$contextmenu-item-use-header-font: $dropdown-item-use-header-font !default;
+$contextmenu-item-font-size: $dropdown-item-font-size !default;
+$contextmenu-item-padding: $dropdown-item-padding !default;
+$contextmenu-item-background: $dropdown-item-background !default;
+$contextmenu-item-background-hover: $dropdown-item-background-hover !default;
+
+$contextmenu-separator: 1px solid $gray-300 !default;
 
 // ================
 // N-STATE BUTTON
