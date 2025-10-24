@@ -57,42 +57,38 @@ TextEntry {
 }
 
 TextEntryAutocomplete {
-	width: 480px;
+	width: $contextmenu-width;
 	flow-children: down;
-	background-color: #3d4448;
-	color: #e1e1e1;
 	overflow: squish scroll;
 	z-index: 0;
 	opacity: 1;
 	max-height: 220px;
 
-	box-shadow: fill #00000066 -3px -3px 6px 6px;
+	box-shadow: $contextmenu-shadow;
 
 	& Label {
 		width: 100%;
 		padding: 2px 0px 2px 16px;
 		margin-right: 16px;
 
-		color: #ffffff99;
-		background-color: #3d4448;
+		color: $dropdown-button-text-color;
+		background-color: $contextmenu-background;
 
 		font-family: $font-monospace;
-		font-size: $textentry-font-size;
+		font-size: $contextmenu-item-font-size;
 		font-weight: normal;
 		z-index: 0;
-		border-top: 1px solid #00000066;
-		border-bottom: 1px solid #00000066;
-
-		transition-property: background-color;
-		transition-duration: 0.2s;
-		transition-timing-function: ease-in-out;
+		border-top: $contextmenu-separator;
+		border-bottom: $contextmenu-separator;
 
 		&:hover {
-			background-color: #018eec;
+			background-color: $contextmenu-item-background-hover;
+			color: $dropdown-item-color;
+			border-color: $contextmenu-item-background-hover;
 		}
 
 		&:focus {
-			background-color: #585e62;
+			background-color: $base-700;
 		}
 	}
 }

@@ -430,7 +430,7 @@ $dropdown-item-color: $base-950 !default;
 // CONTEXTMENU
 // ================
 
-$contextmenu-width: 300px;
+$contextmenu-width: 500px;
 $contextmenu-padding-y: $dropdown-menu-padding-y !default;
 $contextmenu-background: $dropdown-menu-background !default;
 $contextmenu-radius: $dropdown-menu-radius !default;
@@ -442,7 +442,7 @@ $contextmenu-item-padding: $dropdown-item-padding !default;
 $contextmenu-item-background: $dropdown-item-background !default;
 $contextmenu-item-background-hover: $dropdown-item-background-hover !default;
 
-$contextmenu-separator: 1px solid $gray-300 !default;
+$contextmenu-separator: 1px solid rgba($base-800, 0.5) !default;
 
 // ================
 // N-STATE BUTTON
