@@ -567,8 +567,9 @@ $progressbar-shadow: none !default;
 // TOOLTIPS
 // ================
 
-$tooltip-background: $gray-400 !default;
-$tooltip-padding: 8px 12px !default;
+$tooltip-background: $base-950 !default;
+$tooltip-padding: 20px 22px !default;
+$tooltip-border: 2px solid $primary-color !default;
 $tooltip-radius: 0px !default;
 $tooltip-margin: 0px;
 
