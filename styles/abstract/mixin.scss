@@ -11,8 +11,10 @@
 		} @else {
 			font-weight: bold;
 		}
+
 		text-shadow-fast: $font-header-shadow;
 		letter-spacing: $font-header-spacing;
+		text-transform: $font-header-transform;
 	} @else {
 		font-weight: normal;
 		text-shadow-fast: $font-shadow;
