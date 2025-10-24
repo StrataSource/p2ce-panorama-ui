@@ -227,7 +227,7 @@
 			<Label class="text-h1 mt-3" text="Controls" />
 
 			<Label class="text-h3 mt-3" text="Buttons" />
-			<Panel class="row my-3">
+			<Panel class="row my-3 overflow-hscroll pb-4">
 				<Button class="button mr-2" onactivate="$.Msg('onactivated');">
 					<Label class="button__text" text="Button" />
 				</Button>
@@ -267,7 +267,7 @@
 					<Label class="button__text" text="purple" />
 				</Button>
 			</Panel>
-			<Panel class="row my-3">
+			<Panel class="row my-3 overflow-hscroll pb-4">
 				<Button class="button mr-2" disabled="true">
 					<Label class="button__text" text="Button" />
 				</Button>
@@ -314,7 +314,7 @@
 			</Panel>
 
 			<Label class="text-h3 mt-3" text="Toggle Buttons" />
-			<Panel class="row my-3">
+			<Panel class="row my-3 overflow-hscroll pb-4">
 				<ToggleButton class="button mr-2 togglebutton">
 					<Label class="button__text" text="ToggleButton" />
 				</ToggleButton>
