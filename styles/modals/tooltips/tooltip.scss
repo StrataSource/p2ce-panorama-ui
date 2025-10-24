@@ -9,7 +9,6 @@
 	$root: &;
 	flow-children: down;
 	opacity: 0;
-	transition: opacity 0.1s ease-out 0s;
 	margin: $tooltip-margin;
 
 	&__row {
