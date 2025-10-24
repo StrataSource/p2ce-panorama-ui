@@ -6,10 +6,6 @@
 @use 'sass:list';
 
 .togglebutton {
-	transition-property: background-color;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in;
-
 	.TickBox {
 		visibility: collapse;
 	}
@@ -35,10 +31,6 @@
 .checkbox {
 	flow-children: right;
 	height: $checkbox-width;
-	border: 0px solid white;
-	transition-property: background-color;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in-out;
 
 	// This gets inserted in code
 	.TickBox {
@@ -46,12 +38,12 @@
 		width: height-percentage(100%);
 		vertical-align: middle;
 		background-color: $checkbox-background;
+		border-bottom: $checkbox-border;
 		border-radius: $checkbox-radius;
 		z-index: 1;
 		margin-left: 0;
 		margin-right: $checkbox-gap;
 		box-shadow: $checkbox-shadow;
-		transition: background-color 0.1s ease-in-out 0s;
 	}
 
 	$this: &;

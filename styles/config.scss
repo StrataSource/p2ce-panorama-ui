@@ -354,6 +354,7 @@ $checkbox-use-header-font: false !default;
 
 $checkbox-shadow: none !default;
 
+$checkbox-border: 2px solid $primary-color !default;
 $checkbox-radius: 0px !default;
 $checkbox-width: 24px !default;
 
@@ -373,12 +374,12 @@ $radiobutton-background-disabled-selected: color.scale(
 $radiobutton-background-hover: $checkbox-background-hover !default;
 $radiobutton-background-selected: $bright-color !default;
 
-$radiobox-width: 24px !default;
+$radiobox-width: 25px !default;
 $radiobox-radius: 50% !default;
 $radiobox-shadow: none !default;
 
 $radiobutton-use-header-font: false !default;
-$radiobutton-gap: 8px !default;
+$radiobutton-gap: 7px !default;
 $radiobutton-text-color: $font-default-color !default;
 $radiobutton-text-disabled: $font-disabled-color !default;
 
