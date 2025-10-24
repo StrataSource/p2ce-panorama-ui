@@ -207,14 +207,14 @@ $gradient-selected-hover-transform:
 // ================#
 
 $font-shadows: (
-	'black': 2px 3px 8px 2 rgba(0, 0, 0, 1),
-	'bold': 1px 3px 8px 2 rgba(0, 0, 0, 0.35),
-	'medium': 0px 1px 6px 1 rgba(0, 0, 0, 1),
-	'regular': 0px 1px 3px 1 rgba(0, 0, 0, 1),
-	'light': 0px 1px 3px 1 rgba(0, 0, 0, 0.7),
-	'thin': 0px 1px 2px rgba(0, 0, 0, 0.5),
-	'outline': 0px 1px 2px 2 rgba(0, 0, 0, 1),
-	'none': 0 0 0 0 rgba(0, 0, 0, 0)
+	'black':    none,
+	'bold':     none,
+	'medium':   none,
+	'regular':  none,
+	'light':    none,
+	'thin':     none,
+	'outline':  none,
+	'none':     none
 ) !default;
 
 $font-default-color: $white !default;
@@ -250,16 +250,16 @@ $html-font-header-sizes: (
 ) !default;
 
 $font: $font-primary !default;
-$font-shadow: 0px 1px rgba(0, 0, 0, 0.9) !default; // This is a text-shadow-fast
+$font-shadow: none !default; // This is a text-shadow-fast
 $font-spacing: 0px !default;
 $font-sizes: (
 	'xxxl': 48px,
-	'xxl': 36px,
-	'xl': 28px,
-	'l': 24px,
-	'm': $font-default-size,
-	'sm': 14px,
-	'xs': 12px
+	'xxl':  36px,
+	'xl':   28px,
+	'l':    24px,
+	'm':    $font-default-size,
+	'sm':   14px,
+	'xs':   12px
 ) !default;
 
 $font-weights: ('thin', 'light', 'normal', 'medium', 'bold', 'black') !default;
