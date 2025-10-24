@@ -8,7 +8,7 @@ HTMLVerticalScrollBar {
 	vertical-align: center;
 	margin: 0px, $scrollbar-width;
 	opacity: $scrollbar-opacity;
-	transition-property: transform, opacity;
+	transition-property: transform;
 
 	&:hover {
 		opacity: $scrollbar-hover-opacity;
@@ -20,18 +20,16 @@ HTMLVerticalScrollBar {
 		background-color: $scrollbar-color;
 		opacity: $scrollbar-opacity;
 		border-radius: $scrollbar-radius;
-		transition-property: position;
-		transition-property: opacity, transform;
-		transition-duration: 0.1s;
-		transition-timing-function: linear;
 	}
 
 	&:hover .ScrollThumb {
 		opacity: $scrollbar-hover-opacity;
+		background-color: $scrollbar-hover-color;
 	}
 
 	&:active .ScrollThumb {
 		opacity: $scrollbar-hover-opacity;
+		background-color: $scrollbar-active-color;
 	}
 }
 

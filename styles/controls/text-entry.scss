@@ -14,7 +14,7 @@ TextEntry {
 	width: $textentry-width;
 	padding: $textentry-padding;
 	background-color: $textentry-background;
-	border: $textentry-border;
+	border-bottom: $textentry-border;
 	border-radius: $textentry-radius;
 	box-shadow: $textentry-shadow;
 	font-size: $textentry-font-size;

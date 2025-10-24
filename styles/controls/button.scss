@@ -18,7 +18,7 @@
 
 	$this: &;
 
-	&:hover {
+	&:hover:not(:disabled):not(:selected) {
 		background-color: $button-background-hover;
 		#{$this}__text {
 			color: $button-text-hover;
@@ -79,11 +79,13 @@
 		&--left {
 			margin-left: $button-icon-with-text-side-margin - 2px;
 			margin-right: $button-icon-text-gap;
+			padding: $button-icon-side-padding;
 		}
 
 		&--right {
 			margin-left: $button-icon-text-gap;
 			margin-right: $button-icon-with-text-side-margin - 2px;
+			padding: $button-icon-side-padding;
 		}
 	}
 }

@@ -16,14 +16,14 @@
 
 	&:selected {
 		background-color: $button-background-selected;
-	}
-}
+		border-color: $primary-color;
 
-@each $name, $colors in $gradients-primary {
-	.togglebutton--#{$name} {
-		&:selected {
-			background-color: function.gradient-vertical(list.nth($colors, 1), list.nth($colors, 2));
-			border: $button-border;
+		& .button__text {
+			color: $button-text-hover;
+		}
+
+		& .button__icon {
+			wash-color: $button-text-hover;
 		}
 	}
 }
@@ -63,6 +63,7 @@
 	&:disabled .TickBox,
 	&:disabled:hover .TickBox {
 		background-color: $checkbox-background-disabled;
+		border-color: $button-text-disabled;
 	}
 
 	&:selected .TickBox {
@@ -87,5 +88,20 @@
 	& Label {
 		@include mixin.font-styles($use-header: $checkbox-use-header-font);
 		vertical-align: middle;
+	}
+}
+
+@each $name, $value in $gradients-primary {
+	.togglebutton--#{$name} {
+		background-color: list.nth($value, 1);
+		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+		&:hover {
+			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		}
+
+		&:selected {
+			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		}
 	}
 }

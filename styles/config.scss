@@ -299,9 +299,9 @@ $easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 // ================
 
 $separator-height: 1px !default;
-$separator-vertical-margin: 8px !default;
+$separator-vertical-margin: 5px !default;
 $seperator-radius: 0px !default;
-$separator-background: $dark-100 !default;
+$separator-background: $base-700 !default;
 $separator-box-shadow: none !default;
 
 $spacers: (4px, 6px, 8px, 16px, 32px) !default;
@@ -313,10 +313,7 @@ $spacers: (4px, 6px, 8px, 16px, 32px) !default;
 $button-background-base: $primary-500 !default;
 $button-background: $button-background-base !default;
 $button-background-hover: $primary-700 !default;
-$button-background-selected: gradient-vertical(
-	color.scale($button-background-base, $lightness: 0%, $alpha: 20%),
-	color.scale($button-background-base, $lightness: -20%, $alpha: 20%)
-) !default; // Used by Radiobuttons + Togglebuttons
+$button-background-selected: $primary-700 !default; // Used by Radiobuttons + Togglebuttons
 $button-background-disabled:  $base-900 !default;
 
 $button-text-color: $base-950 !default;
@@ -328,7 +325,8 @@ $button-radius: 0px !default;
 $button-border: 2px solid $primary-700 !default;
 
 $button-height: 45px !default;
-$button-icon-padding: 6px !default;
+$button-icon-padding: 8px !default;
+$button-icon-side-padding: 6px !default;
 $button-text-side-margin: 20px !default;
 $button-icon-with-text-side-margin: 17px !default;
 $button-icon-text-gap: 0px !default;
@@ -490,7 +488,7 @@ $textentry-background-focus: $primary-500 !default;
 $textentry-height: 45px !default;
 $textentry-width: 256px !default;
 $textentry-padding: 7px 0px 0px 15px !default;
-$textentry-border: 0 solid none !default;
+$textentry-border: 2px solid $primary-color !default;
 $textentry-radius: 0px !default;
 $textentry-shadow: none !default;
 $textentry-shadow-hover: none !default;
@@ -537,9 +535,11 @@ $slider-default-shadow: none !default;
 
 $scrollbar-width: 6px !default;
 $scrollbar-radius: 0px !default;
-$scrollbar-color: $bright-color !default;
-$scrollbar-opacity: 0.6 !default;
-$scrollbar-hover-opacity: 0.8 !default;
+$scrollbar-color: $primary-500 !default;
+$scrollbar-hover-color: $primary-700 !default;
+$scrollbar-active-color: $primary-900 !default;
+$scrollbar-opacity: 1.0 !default;
+$scrollbar-hover-opacity: 0.9 !default;
 
 // ================
 // PROGRESSBAR
