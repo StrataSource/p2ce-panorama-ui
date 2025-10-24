@@ -14,9 +14,6 @@
 	vertical-align: center;
 	horizontal-align: right;
 	z-index: 1;
-	transition-property: background-color;
-	transition-duration: 0.15s;
-	transition-timing-function: ease-in-out;
 
 	$this: &;
 
@@ -32,16 +29,12 @@
 		box-shadow: $dropdown-button-icon-shadow;
 		img-shadow: $dropdown-button-icon-icon-shadow;
 		z-index: 100;
-		transition-property: background-color;
-		transition-duration: 0.15s;
-		transition-timing-function: ease-in-out;
 	}
 
 	// Inserted by code
 	&.DropDownMenuVisible {
 		background-color: $dropdown-button-background-menuvisible;
 		border-color: $dropdown-button-background-menuvisible;
-		transition-duration: 0s;
 
 		& > .DropDownIcon {
 			wash-color: $dropdown-button-menuvisible-text-color;
