@@ -222,13 +222,13 @@ $font-disabled-color: color.scale($font-default-color, $lightness: -20%) !defaul
 $font-default-size: 18px !default;
 $font-console-default-size: 14px !default;
 
-$font-primary: 'Roboto' !default;
-$font-secondary: 'Roboto', Arial, sans-serif !default;
-$font-secondary-light: 'Roboto', Arial, sans-serif !default;
-$font-monospace: 'Roboto Mono' !default;
+$font-primary: 'Lexend Deca' !default;
+$font-secondary: 'Lexend Deca' !default;
+$font-secondary-light: 'Lexend Deca' !default;
+$font-monospace: 'Cascadia Mono' !default;
 
-$font-halflife2: 'HALFLIFE2', 'Roboto Mono', Arial, sans-serif !default;
-$font-hl2ep2: 'HL2EP2', 'Roboto Mono', Arial, sans-serif !default;
+$font-halflife2: 'HALFLIFE2', 'Cascadia Mono' !default;
+$font-hl2ep2: 'HL2EP2', 'Cascadia Mono' !default;
 
 $font-header: $font-secondary !default;
 $font-header-light: $font-secondary-light !default;
