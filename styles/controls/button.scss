@@ -11,11 +11,10 @@
 	background-color: $button-background;
 	box-shadow: $button-shadow;
 	border-radius: $button-radius;
-	border: $button-border;
+	border-bottom: $button-border;
 	color: $button-text-color;
 	flow-children: right;
 	tooltip-position: bottom;
-	transition: background-color 0.1s ease-in 0s;
 
 	$this: &;
 
@@ -33,6 +32,7 @@
 	&:disabled,
 	&:disabled &:hover {
 		background-color: $button-background-disabled;
+		border-color: $button-text-disabled;
 	}
 
 	&:disabled &__text {

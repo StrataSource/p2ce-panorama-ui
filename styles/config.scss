@@ -325,12 +325,12 @@ $button-text-hover: $bright-color !default;
 
 $button-shadow: none !default;
 $button-radius: 0px !default;
-$button-border: 0px solid rgba(255, 255, 255, 0.025) !default;
+$button-border: 2px solid $primary-700 !default;
 
-$button-height: 34px !default;
+$button-height: 45px !default;
 $button-icon-padding: 6px !default;
-$button-text-side-margin: 10px !default;
-$button-icon-with-text-side-margin: 4px !default;
+$button-text-side-margin: 20px !default;
+$button-icon-with-text-side-margin: 17px !default;
 $button-icon-text-gap: 0px !default;
 
 $button-use-header-font: true !default;
