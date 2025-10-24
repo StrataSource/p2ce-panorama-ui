@@ -96,7 +96,7 @@
 		background-color: list.nth($value, 1);
 		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
 
-		&:hover {
+		&:hover:not(:disabled):not(:selected) {
 			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
 		}
 
