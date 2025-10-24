@@ -310,21 +310,18 @@ $spacers: (4px, 6px, 8px, 16px, 32px) !default;
 // BUTTON
 // ================
 
-$button-background-base: $light-700 !default;
+$button-background-base: $primary-500 !default;
 $button-background: $button-background-base !default;
-$button-background-hover: $light-800 !default;
+$button-background-hover: $primary-700 !default;
 $button-background-selected: gradient-vertical(
 	color.scale($button-background-base, $lightness: 0%, $alpha: 20%),
 	color.scale($button-background-base, $lightness: -20%, $alpha: 20%)
 ) !default; // Used by Radiobuttons + Togglebuttons
-$button-background-disabled: gradient-vertical(
-	color.scale($button-background-base, $lightness: -50%, $alpha: 20%),
-	color.scale($button-background-base, $lightness: -55%, $alpha: 20%)
-) !default;
+$button-background-disabled:  $base-900 !default;
 
-$button-text-color: $font-default-color !default;
+$button-text-color: $base-950 !default;
 $button-text-disabled: $font-disabled-color !default;
-$button-text-hover: $button-text-color !default;
+$button-text-hover: $bright-color !default;
 
 $button-shadow: none !default;
 $button-radius: 0px !default;
@@ -418,12 +415,12 @@ $contextmenu-separator: 1px solid $gray-300 !default;
 // CHECKBOX
 // ================
 
-$checkbox-background: $light-600 !default;
-$checkbox-background-disabled: color.scale($checkbox-background, $lightness: -50%, $alpha: 20%) !default;
-$checkbox-background-disabled-selected: color.scale($checkbox-background-disabled, $alpha: 50%) !default;
-$checkbox-background-hover: color.scale($checkbox-background, $alpha: 20%) !default;
-$checkbox-background-selected: $orange !default;
-$checkbox-background-selected-hover: color.scale($checkbox-background-selected, $lightness: -10%) !default;
+$checkbox-background: $primary-900 !default;
+$checkbox-background-disabled: $base-900 !default;
+$checkbox-background-disabled-selected: $base-900 !default;
+$checkbox-background-hover: $primary-700 !default;
+$checkbox-background-selected: $primary-500 !default;
+$checkbox-background-selected-hover: $primary-400 !default;
 
 $checkbox-use-header-font: false !default;
 
