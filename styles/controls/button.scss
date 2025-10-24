@@ -17,8 +17,13 @@
 	tooltip-position: bottom;
 	transition: background-color 0.1s ease-in 0s;
 
+	$this: &;
+
 	&:hover {
 		background-color: $button-background-hover;
+		#{$this}__text {
+			color: $button-text-hover;
+		}
 	}
 
 	&:disabled,
@@ -45,10 +50,6 @@
 		text-align: center;
 		overflow: squish;
 		text-overflow: shrink;
-
-		&:hover {
-			color: $button-text-hover;
-		}
 
 		&--left {
 			margin-left: $button-text-side-margin;
