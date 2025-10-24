@@ -300,7 +300,7 @@ $easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
 $separator-height: 1px !default;
 $separator-vertical-margin: 8px !default;
-$seperator-radius: 1px !default;
+$seperator-radius: 0px !default;
 $separator-background: $dark-100 !default;
 $separator-box-shadow: none !default;
 
@@ -327,7 +327,7 @@ $button-text-disabled: $font-disabled-color !default;
 $button-text-hover: $button-text-color !default;
 
 $button-shadow: none !default;
-$button-radius: 2px !default;
+$button-radius: 0px !default;
 $button-border: 0px solid rgba(255, 255, 255, 0.025) !default;
 
 $button-height: 34px !default;
@@ -371,7 +371,7 @@ $dropdown-button-icon-shadow: none !default;
 $dropdown-button-icon-icon-shadow: none !default;
 
 $dropdown-button-shadow: $button-shadow !default;
-$dropdown-button-radius: 2px !default;
+$dropdown-button-radius: 0px !default;
 $dropdown-button-border: $button-border !default;
 
 $dropdown-button-use-header-font: true !default;
@@ -388,7 +388,7 @@ $dropdown-menu-background: $gray-400 !default;
 $dropdown-menu-padding-y: 8px !default;
 $dropdown-menu-shadow: none !default;
 $dropdown-menu-border: 1px solid rgba(0, 0, 0, 0.9) !default;
-$dropdown-menu-radius: 4px !default;
+$dropdown-menu-radius: 0px !default;
 
 $dropdown-item-use-header-font: true !default;
 $dropdown-item-font-size: 20px !default;
@@ -429,7 +429,7 @@ $checkbox-use-header-font: false !default;
 
 $checkbox-shadow: none !default;
 
-$checkbox-radius: 4px !default;
+$checkbox-radius: 0px !default;
 $checkbox-width: 24px !default;
 
 $checkbox-gap: 8px !default;
@@ -502,7 +502,7 @@ $textentry-height: 32px !default;
 $textentry-width: 256px !default;
 $textentry-padding: 6px 16px 6px 8px !default;
 $textentry-border: 0 solid none !default;
-$textentry-radius: 4px !default;
+$textentry-radius: 0px !default;
 $textentry-shadow: none !default;
 $textentry-shadow-hover: none !default;
 
@@ -529,7 +529,7 @@ $slider-thumb-color: $white !default;
 $slider-thumb-color-hover: color.scale($slider-thumb-color, $lightness: -15%) !default;
 $slider-thumb-width: 16px !default;
 $slider-thumb-height: 16px !default;
-$slider-thumb-radius: 4px !default;
+$slider-thumb-radius: 0px !default;
 $slider-thumb-shadow: none !default;
 
 $slider-default-color: $gray-600 !default;
@@ -572,7 +572,7 @@ $progressbar-shadow: none !default;
 
 $tooltip-background: $gray-400 !default;
 $tooltip-padding: 8px 12px !default;
-$tooltip-radius: 4px !default;
+$tooltip-radius: 0px !default;
 $tooltip-margin: 0px;
 
 $tooltip-title-use-header-font: true !default;
@@ -591,7 +591,7 @@ $popup-wide: 960px !default;
 $popup-large-max-width: 720px !default;
 $popup-background: $gray-400 !default;
 $popup-padding: 24px 32px !default;
-$popup-radius: 4px !default;
+$popup-radius: 0px !default;
 
 $popup-title-use-header-font: true !default;
 $popup-title-font-size: 48px !default;
