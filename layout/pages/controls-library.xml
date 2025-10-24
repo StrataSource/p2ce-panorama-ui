@@ -326,7 +326,7 @@
 					<Label class="button__text button__text--right" text="icon--left + text" />
 				</ToggleButton>
 				<ToggleButton class="button mr-2 togglebutton">
-					<Label class="button__text button__text-left" text="icon--right + text" />
+					<Label class="button__text button__text--left" text="icon--right + text" />
 					<Image class="button__icon button__icon--right" texturewidth="32" textureheight="32" src="file://{images}/units.svg" />
 				</ToggleButton>
 				<ToggleButton class="button mr-2 togglebutton togglebutton--blue">
