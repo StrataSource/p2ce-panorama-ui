@@ -507,19 +507,22 @@ $textentry-placeholder-hover-color: color.scale($textentry-text-color, $alpha: 3
 // ================
 
 $slider-padding-height: 8px !default;
-$slider-track-height: 8px !default;
+$slider-track-height: 25px !default;
 
-$slider-track: $gray-900 !default;
-$slider-track-shadow: none !default;
-$slider-track-progress-horizontal: $orange !default;
-$slider-track-progress-vertical: $orange !default;
-
-$slider-thumb-color: $bright-color !default;
-$slider-thumb-color-hover: color.scale($slider-thumb-color, $lightness: -15%) !default;
-$slider-thumb-width: 16px !default;
-$slider-thumb-height: 16px !default;
+$slider-thumb-color: $primary-color !default;
+$slider-thumb-color-hover: $primary-700 !default;
+$slider-thumb-width: 30px !default;
+$slider-thumb-height: 30px !default;
 $slider-thumb-radius: 0px !default;
 $slider-thumb-shadow: none !default;
+
+$slider-track: $base-800 !default;
+$slider-track-shadow: none !default;
+$slider-track-progress-height: 20px !default;
+$slider-track-transform: translateX(10px) translateY(10px) !default;
+$slider-track-progress-horizontal: $primary-800 !default;
+$slider-track-progress-vertical: $primary-color !default;
+$slider-track-progress-border: 5px solid $slider-thumb-color !default;
 
 $slider-default-color: $gray-600 !default;
 $slider-default-width: 4px !default;
