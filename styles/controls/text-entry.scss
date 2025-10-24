@@ -57,7 +57,7 @@ TextEntry {
 }
 
 TextEntryAutocomplete {
-	width: $contextmenu-width;
+	width: $contextmenu-width * 2;
 	flow-children: down;
 	overflow: squish scroll;
 	z-index: 0;
@@ -68,14 +68,14 @@ TextEntryAutocomplete {
 
 	& Label {
 		width: 100%;
-		padding: 2px 0px 2px 16px;
+		padding: 4px 16px 4px 16px;
 		margin-right: 16px;
 
 		color: $dropdown-button-text-color;
 		background-color: $contextmenu-background;
 
 		font-family: $font-monospace;
-		font-size: $contextmenu-item-font-size;
+		font-size: $font-autocomplete-default-size;
 		font-weight: normal;
 		z-index: 0;
 		border-top: $contextmenu-separator;

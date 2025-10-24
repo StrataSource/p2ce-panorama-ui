@@ -221,6 +221,7 @@ $font-default-color: $bright-color !default;
 $font-disabled-color: color.scale($font-default-color, $lightness: -20%) !default;
 $font-default-size: 18px !default;
 $font-console-default-size: 14px !default;
+$font-autocomplete-default-size: 16px !default;
 
 $font-primary: 'Lexend Deca' !default;
 $font-secondary: 'Lexend Deca' !default;
@@ -430,9 +431,10 @@ $dropdown-item-color: $base-950 !default;
 // CONTEXTMENU
 // ================
 
-$contextmenu-width: 500px;
+$contextmenu-width: 250px;
 $contextmenu-padding-y: $dropdown-menu-padding-y !default;
 $contextmenu-background: $dropdown-menu-background !default;
+$contextmenu-border: 1px solid $primary-color !default;
 $contextmenu-radius: $dropdown-menu-radius !default;
 $contextmenu-shadow: $dropdown-menu-shadow !default;
 
