@@ -44,6 +44,7 @@
 		horizontal-align: left;
 		@include mixin.font-styles($use-header: $tooltip-title-use-header-font);
 		font-size: $tooltip-title-font-size;
+		transform: translateY(-6px);
 	}
 
 	&__text {
