@@ -217,7 +217,7 @@ $font-shadows: (
 	'none':     none
 ) !default;
 
-$font-default-color: $white !default;
+$font-default-color: $bright-color !default;
 $font-disabled-color: color.scale($font-default-color, $lightness: -20%) !default;
 $font-default-size: 18px !default;
 $font-console-default-size: 14px !default;
@@ -443,7 +443,7 @@ $radiobutton-background-disabled-selected: color.scale(
 	$alpha: 20%
 ) !default;
 $radiobutton-background-hover: $checkbox-background-hover !default;
-$radiobutton-background-selected: $white !default;
+$radiobutton-background-selected: $bright-color !default;
 
 $radiobox-width: 24px !default;
 $radiobox-radius: 50% !default;
@@ -522,7 +522,7 @@ $slider-track-shadow: none !default;
 $slider-track-progress-horizontal: $orange !default;
 $slider-track-progress-vertical: $orange !default;
 
-$slider-thumb-color: $white !default;
+$slider-thumb-color: $bright-color !default;
 $slider-thumb-color-hover: color.scale($slider-thumb-color, $lightness: -15%) !default;
 $slider-thumb-width: 16px !default;
 $slider-thumb-height: 16px !default;
@@ -541,7 +541,7 @@ $slider-default-shadow: none !default;
 
 $scrollbar-width: 6px !default;
 $scrollbar-radius: 0px !default;
-$scrollbar-color: $white !default;
+$scrollbar-color: $bright-color !default;
 $scrollbar-opacity: 0.6 !default;
 $scrollbar-hover-opacity: 0.8 !default;
 
@@ -571,7 +571,7 @@ $tooltip-background: $base-950 !default;
 $tooltip-padding: 20px 22px !default;
 $tooltip-border: 2px solid $primary-color !default;
 $tooltip-radius: 0px !default;
-$tooltip-margin: 0px;
+$tooltip-margin: 0px !default;
 
 $tooltip-title-use-header-font: true !default;
 $tooltip-title-font-size: 36px !default;
@@ -583,12 +583,13 @@ $tooltip-image-size: 20px !default;
 // POPUPS
 // ================
 
-$popup-min-width: 400px !default;
-$popup-max-width: 480px !default;
+$popup-min-width: 600px !default;
+$popup-max-width: 780px !default;
 $popup-wide: 960px !default;
 $popup-large-max-width: 720px !default;
-$popup-background: $gray-400 !default;
-$popup-padding: 24px 32px !default;
+$popup-background: $base-950 !default;
+$popup-padding: 25px 30px !default;
+$popup-border: 2px solid $primary-color !default;
 $popup-radius: 0px !default;
 
 $popup-title-use-header-font: true !default;
