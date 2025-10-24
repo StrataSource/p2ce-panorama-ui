@@ -91,5 +91,10 @@
 @each $name, $value in $gradients-primary {
 	.button--#{$name} {
 		background-color: list.nth($value, 1);
+		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+		&:hover {
+			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		}
 	}
 }
