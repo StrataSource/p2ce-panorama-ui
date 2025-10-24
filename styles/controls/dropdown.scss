@@ -61,7 +61,7 @@
 	&:parentdisabled,
 	&:disabled:hover {
 		background-color: $dropdown-button-background-disabled;
-		border-color: $dropdown-button-background-disabled;
+		border-color: $dropdown-button-text-color-disabled;
 	}
 
 	Label {
