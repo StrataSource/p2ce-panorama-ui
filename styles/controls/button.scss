@@ -24,6 +24,10 @@
 		#{$this}__text {
 			color: $button-text-hover;
 		}
+
+		#{$this}__icon {
+			wash-color: $button-text-hover;
+		}
 	}
 
 	&:disabled,
