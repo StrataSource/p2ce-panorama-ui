@@ -302,7 +302,7 @@ $separator-height: 1px !default;
 $separator-vertical-margin: 8px !default;
 $seperator-radius: 1px !default;
 $separator-background: $dark-100 !default;
-$separator-box-shadow: 0 0px 1px rgba(0, 0, 0, 0.25) !default;
+$separator-box-shadow: none !default;
 
 $spacers: (4px, 6px, 8px, 16px, 32px) !default;
 
@@ -326,7 +326,7 @@ $button-text-color: $font-default-color !default;
 $button-text-disabled: $font-disabled-color !default;
 $button-text-hover: $button-text-color !default;
 
-$button-shadow: fill rgba(0, 0, 0, 0.6) 0px 1px 1px 0px !default;
+$button-shadow: none !default;
 $button-radius: 2px !default;
 $button-border: 0px solid rgba(255, 255, 255, 0.025) !default;
 
@@ -339,8 +339,8 @@ $button-icon-text-gap: 0px !default;
 $button-use-header-font: true !default;
 $button-font-size: 20px !default;
 $button-light-header-font: false !default;
-$button-text-shadow: 0 1px 2px 2 rgba(0, 0, 0, 0.35) !default;
-$button-icon-shadow: 0 1px 2px 1 rgba(0, 0, 0, 1) !default;
+$button-text-shadow: none !default;
+$button-icon-shadow: none !default;
 
 // ================
 // DROPDOWN
@@ -367,8 +367,8 @@ $dropdown-button-icon-background-menuvisible: color.scale(
 	$alpha: 20%
 ) !default;
 $dropdown-button-icon-border: 0px solid rgba(0, 0, 0, 0) !default;
-$dropdown-button-icon-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3) !default;
-$dropdown-button-icon-icon-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5) !default;
+$dropdown-button-icon-shadow: none !default;
+$dropdown-button-icon-icon-shadow: none !default;
 
 $dropdown-button-shadow: $button-shadow !default;
 $dropdown-button-radius: 2px !default;
@@ -386,7 +386,7 @@ $dropdown-button-icon-width: 24px !default;
 
 $dropdown-menu-background: $gray-400 !default;
 $dropdown-menu-padding-y: 8px !default;
-$dropdown-menu-shadow: fill rgba(0, 0, 0, 0.9) 0px 3px 6px 0px !default;
+$dropdown-menu-shadow: none !default;
 $dropdown-menu-border: 1px solid rgba(0, 0, 0, 0.9) !default;
 $dropdown-menu-radius: 4px !default;
 
@@ -427,7 +427,7 @@ $checkbox-background-selected-hover: color.scale($checkbox-background-selected, 
 
 $checkbox-use-header-font: false !default;
 
-$checkbox-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px 0px !default;
+$checkbox-shadow: none !default;
 
 $checkbox-radius: 4px !default;
 $checkbox-width: 24px !default;
@@ -450,7 +450,7 @@ $radiobutton-background-selected: $white !default;
 
 $radiobox-width: 24px !default;
 $radiobox-radius: 50% !default;
-$radiobox-shadow: rgba(0, 0, 0, 0.45) 0px 1px 2px 0px !default;
+$radiobox-shadow: none !default;
 
 $radiobutton-use-header-font: false !default;
 $radiobutton-gap: 8px !default;
@@ -475,7 +475,7 @@ $tab-background: gradient-vertical(rgba(148, 148, 148, 0.3), rgba(120, 120, 120,
 $tab-background-hover: rgba(255, 255, 255, 0.05);
 $tab-background-selected: rgba(0, 0, 0, 0.5);
 $tab-background-disabled: rgba(0, 0, 0, 0);
-$tab-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+$tab-shadow: none;
 $tab-border-width: 1px;
 $tab-border-color: rgba(0, 0, 0, 0.3);
 $tab-lower-border-height: 2px;
@@ -485,7 +485,7 @@ $tab-lower-border-hover-color: rgba(255, 255, 255, 0.4);
 $tab-lower-border-selected-color: rgba(255, 255, 255, 0.6);
 $tab-padding: 2px 8px 0px 8px;
 $tab-font-size: 20px;
-$tab-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+$tab-text-shadow: none;
 $tab-use-header-font: true;
 $tab-light-header: false;
 $tab-text-padding: 4px 10px;
@@ -503,8 +503,8 @@ $textentry-width: 256px !default;
 $textentry-padding: 6px 16px 6px 8px !default;
 $textentry-border: 0 solid none !default;
 $textentry-radius: 4px !default;
-$textentry-shadow: fill rgba(0, 0, 0, 0.3) 0px 0px 3px 0px !default;
-$textentry-shadow-hover: fill rgba(0, 0, 0, 0.5) 0px 0px 3px 0px !default;
+$textentry-shadow: none !default;
+$textentry-shadow-hover: none !default;
 
 $textentry-font-size: 18px !default;
 $textentry-placeholder-font-size: 18px !default;
@@ -521,7 +521,7 @@ $slider-padding-height: 8px !default;
 $slider-track-height: 8px !default;
 
 $slider-track: $gray-900 !default;
-$slider-track-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px 0px !default;
+$slider-track-shadow: none !default;
 $slider-track-progress-horizontal: $orange !default;
 $slider-track-progress-vertical: $orange !default;
 
@@ -530,13 +530,13 @@ $slider-thumb-color-hover: color.scale($slider-thumb-color, $lightness: -15%) !d
 $slider-thumb-width: 16px !default;
 $slider-thumb-height: 16px !default;
 $slider-thumb-radius: 4px !default;
-$slider-thumb-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px !default;
+$slider-thumb-shadow: none !default;
 
 $slider-default-color: $gray-600 !default;
 $slider-default-width: 4px !default;
 $slider-default-height: 8px !default;
 $slider-default-radius: 0px !default;
-$slider-default-shadow: rgba(0, 0, 0, 0) 0px 0px 4px 0px !default;
+$slider-default-shadow: none !default;
 
 // ================
 // SCROLLBAR
@@ -564,7 +564,7 @@ $progressbar-background-disabled: gradient(
 );
 $progressbar-background-progress: $orange !default;
 
-$progressbar-shadow: rgba(0, 0, 0, 0.5) 0px 0px 3px 0px !default;
+$progressbar-shadow: none !default;
 
 // ================
 // TOOLTIPS
