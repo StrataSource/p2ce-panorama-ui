@@ -3,6 +3,7 @@
 .progressbar {
 	width: $progressbar-width;
 	height: $progressbar-height;
+	border-bottom: $progressbar-border;
 	box-shadow: $progressbar-shadow;
 	background-color: $progressbar-background;
 

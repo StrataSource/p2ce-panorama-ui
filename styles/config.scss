@@ -374,8 +374,8 @@ $dropdown-button-border: $button-border !default;
 $dropdown-button-use-header-font: true !default;
 $dropdown-button-font-size: 21px !default;
 $dropdown-button-height: 34px !default;
-$dropdown-button-color: $font-default-color !default;
-$dropdown-button-color-disabled: $font-disabled-color !default;
+$dropdown-button-text-color: $font-default-color !default;
+$dropdown-button-text-color-disabled: $font-disabled-color !default;
 $dropdown-button-text-shadow: $button-text-shadow;
 
 $dropdown-button-padding: 4px 12px !default;
@@ -549,9 +549,10 @@ $scrollbar-hover-opacity: 0.8 !default;
 // PROGRESSBAR
 // ================
 
-$progressbar-width: 320px !default;
-$progressbar-height: 22px !default;
-$progressbar-background: $gray-300 !default;
+$progressbar-width: 100% !default;
+$progressbar-height: 25px !default;
+$progressbar-border: 2px solid $primary-color !default;
+$progressbar-background: $base-900 !default;
 $progressbar-background-disabled: gradient(
 	linear,
 	0% 0%,
@@ -559,7 +560,7 @@ $progressbar-background-disabled: gradient(
 	from(color.scale($red, $saturation: -65%, $lightness: -45%)),
 	to(color.scale($red, $saturation: -55%, $lightness: -35%))
 );
-$progressbar-background-progress: $orange !default;
+$progressbar-background-progress: $primary-color !default;
 
 $progressbar-shadow: none !default;
 
