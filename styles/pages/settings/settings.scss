@@ -304,7 +304,7 @@ $page-width: 1920px - $rightnav-width;
 	border: $menu-pane-border;
 
 	&--search {
-		padding-top: 16px;
+		padding: 15px 20px;
 	}
 
 	&--highlight {
@@ -467,7 +467,7 @@ $page-width: 1920px - $rightnav-width;
 	height: 50px;
 	padding: 0 15px;
 
-	margin-bottom: 5px;
+	margin: 2.5px 0;
 
 	border: 2px solid $base-800;
 
