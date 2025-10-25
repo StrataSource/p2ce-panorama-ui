@@ -8,7 +8,7 @@
 		min-height: 200px; /* ditto */
 		background-color: $base-950;
 		padding: 0px 20px 20px 20px;
-		border: 1px solid $primary-color;
+		border: $menu-pane-border;
 	}
 
 	&__main {
