@@ -2,6 +2,7 @@
 @use '../../abstract/mixin';
 @use '../../abstract/function' as *;
 @use 'sass:color';
+@use 'sass:list';
 
 $page-width: 1920px - $rightnav-width;
 
@@ -108,7 +109,7 @@ $page-width: 1920px - $rightnav-width;
 
 	background-color: $base-950;
 
-	border: 1px solid $primary-color;
+	border: $menu-pane-border;
 	flow-children: none;
 
 	&__main {
@@ -300,8 +301,7 @@ $page-width: 1920px - $rightnav-width;
 	flow-children: down;
 
 	background-color: $base-950;
-	padding: 12px 15px;
-	border: 1px solid $primary-color;
+	border: $menu-pane-border;
 
 	&--search {
 		padding-top: 16px;
@@ -315,7 +315,9 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__header {
-		margin: 0px 4px 8px 4px;
+		margin: 10px 0px;
+		margin-left: list.nth($settings-padding, 2) * 0.5;
+		margin-right: list.nth($settings-padding, 4) * 0.5;
 		flow-children: right;
 		width: 100%;
 	}
@@ -350,8 +352,6 @@ $page-width: 1920px - $rightnav-width;
 		flow-children: down;
 
 		width: 100%;
-
-		margin-bottom: 5px;
 
 		// TODO: This could use an @extend if Sass was set up better, do during loading refactor
 		& .settings-enum,
@@ -392,10 +392,10 @@ $page-width: 1920px - $rightnav-width;
 	$this: &;
 
 	background-color: $base-950;
-	margin: 0 16px;
+	margin-left: 16px;
 	margin-top: 69px;
 	padding: 16px 10px;
-	border: 1px solid $primary-color;
+	border: $menu-pane-border;
 
 	&--hidden {
 		#{$this}__wrapper {
