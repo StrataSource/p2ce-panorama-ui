@@ -613,11 +613,14 @@ $rightnav-width: 50px;
 // SETTINGS
 // ================
 
+$settings-padding: 0 6px 0 15px !default;
+$settings-gap: 5px !default;
+
 $colordisplay-height: 48px !default;
-$colordisplay-padding: 0 4px 0 12px !default;
+$colordisplay-padding: $settings-padding !default;
 $colordisplay-title-margin: 10px !default;
 $colordisplay-color-height: 32px !default;
-$colordisplay-color-radius: 4px !default;
+$colordisplay-color-radius: 0px !default;
 $colordisplay-color-margin: 10px !default;
 $colordisplay-color-hover-shadow: 0 1px 2px 2px rga(0, 0, 0.35) !default;
 $colordisplay-hex-width: 140px !default;

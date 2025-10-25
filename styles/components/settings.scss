@@ -13,27 +13,21 @@
 	align: center center;
 
 	width: 100%;
-	height: 48px;
+	height: 50px;
 
-	padding: 0 6px 0 12px;
-
-	border-radius: 2px;
-	border: 1px solid rgba(0, 0, 0, 0.5);
-
-	margin-bottom: 4px;
+	padding: $settings-padding;
+	margin-bottom: $settings-gap;
 
 	&.--even {
-		background-color: rgba(255, 255, 255, 0.03);
+		//background-color: rgba(255, 255, 255, 0.03);
 	}
 	&.--odd {
-		background-color: rgba(255, 255, 255, 0.02);
+		//background-color: rgba(255, 255, 255, 0.02);
 	}
 	&.--even,
 	&.--odd {
-		transition: background-color 0.1s ease-in-out 0s;
-
 		&:hover {
-			background-color: rgba(255, 255, 255, 0.06);
+			background-color: $primary-950;
 		}
 
 		&:disabled {
