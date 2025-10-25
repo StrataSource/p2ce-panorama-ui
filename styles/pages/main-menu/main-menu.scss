@@ -269,11 +269,11 @@ $drawer-width: 768px;
 
 	&__modelpanel {
 		width: fill-parent-flow(1);
-		max-width: 1000px;
+		margin: 30px;
+		max-width: 896px;
 		height: 100%;
-		horizontal-align: right;
-		vertical-align: middle;
-		transform: translateX(550px);
+		horizontal-align: left;
+		vertical-align: bottom;
 
 		opacity: 1;
 		blur: gaussian(0, 0, 0);

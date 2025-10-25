@@ -56,7 +56,7 @@ class MainMenu {
 			this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 
 			this.panels.model.LookAtModel();
-			this.panels.model.SetCameraOffset(-100, 0, 0);
+			this.panels.model.SetCameraOffset(-300, 0, 22);
 			this.panels.model.SetCameraFOV(30);
 
 			this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
