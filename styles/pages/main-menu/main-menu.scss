@@ -135,10 +135,12 @@ $drawer-width: 768px;
 }
 
 .topnav {
-	flow-children: right;
-	height: $topnav-height;
 	width: 100%;
-	background-color: $base-color;
+	height: $topnav-height;
+
+	padding: 0 20px;
+	flow-children: right;
+	background-color: $base-950;
 	z-index: 1;
 
 	&__home {
@@ -161,81 +163,69 @@ $drawer-width: 768px;
 	}
 
 	&__logo {
-		margin: 0px 20px;
-		height: 80%;
+		height: 65%;
 		vertical-align: middle;
+		margin-right: 25px;
 	}
 
 	&__button {
-		height: 60%;
+		width: fit-children;
+		height: 100%;
+
 		vertical-align: middle;
-		padding: 8px;
-		padding-left: 16px;
-		padding-right: 16px;
-		margin-right: 12px;
-		background-color: $base-800;
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 		flow-children: right;
+		padding: 0 25px;
 
-		border-radius: 32px;
-
-		transition-property: background-color, box-shadow;
-		transition-duration: 0.1s;
-		transition-timing-function: ease-out;
+		border: 5px solid rgba(0, 0, 0, 0);
+		border-left-width: 0px;
+		border-right-width: 0px;
 
 		& .RadioBox {
 			visibility: collapse;
 		}
 
+		&__content {
+			height: 100%;
+			flow-children: right;
+			horizontal-align: middle;
+		}
+
 		& .text {
+			@include mixin.font-styles($use-header: true);
 			vertical-align: center;
-			font-size: 24px;
-			margin-left: 12px;
+			font-size: 28px;
 		}
 
 		$this: &;
-		&:hover {
+		&:hover:not(:selected) {
 			background-color: $primary-color;
-			box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.35);
+			border-bottom-color: $primary-800;
 
-			&:disabled {
-				background-color: function.gradient-radial-button(rgba(75, 75, 75, 0.25), rgba(83, 83, 83, 0.21));
-			}
-
-			#{$this}__icon {
-				opacity: 1;
-			}
-
-			#{$this}__text {
-				color: #202020;
+			#{$this}__content {
+				wash-color: $base-color;
 			}
 		}
 
 		&:selected {
-			background-color: $primary-color;
-			box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+			background-color: $primary-950;
+			border-bottom-color: $primary-color;
 
-			#{$this}__icon {
-				opacity: 1;
+			#{$this}__content {
+				wash-color: $primary-color;
 			}
 
-			#{$this}__text {
-				color: #202020;
-			}
 		}
 	}
 
 	&__icon {
+		height: 50%;
 		width: height-percentage(100%);
-		height: 60%;
+
+		visibility: collapse;
 		vertical-align: middle;
 		horizontal-align: center;
-		color: white;
-		opacity: 0.85;
-		img-shadow: 0px 0px 4px 0 rgba(0, 0, 0, 0.4);
-		transition-property: opacity;
-		transition-duration: 0.1s;
-		transition-timing-function: ease-in;
+		color: $bright-color;
+		opacity: 1.0;
 	}
 
 	&__home,

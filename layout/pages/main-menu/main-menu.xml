@@ -39,18 +39,39 @@
 		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Topnav -->
 			<Panel id="MainMenuNavBar" class="topnav" style="z-index: 10;">
-				<RadioButton id="HomeButton" group="TopNavRadio" class="topnav__home" onactivate="MainMenu.onHomeButtonPressed()">
-					<!-- TODO: logo as SVG! -->
-					<Image
-						class="topnav__logo"
-						src="file://{images}/logo.svg"
-						textureheight="130"
-						texturewidth="440"
-						scaling="stretch-to-fit-x-preserve-aspect"
-					/>
-				</RadioButton>
+				<Image
+					class="topnav__logo"
+					src="file://{images}/logo.svg"
+					textureheight="130"
+					texturewidth="440"
+					scaling="stretch-to-fit-x-preserve-aspect"
+				/>
 
-				<Panel id="MainMenuTopButtons" class="full-height flow-right">
+				<VersionInfo/>
+
+				<Panel id="MainMenuTopButtons" class="full-height flow-right horizontal-align-right">
+					<RadioButton
+						id="ControlsLibraryButton" class="topnav__button"
+						group="TopNavRadio"
+						onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
+					>
+						<Panel class="topnav__button__content">
+							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
+							<Label class="text" text="Library" />
+						</Panel>
+					</RadioButton>
+					<!-- Home selector -->
+					<RadioButton
+						id="HomeButton"
+						group="TopNavRadio"
+						class="topnav__button"
+						onactivate="MainMenu.onHomeButtonPressed()"
+					>
+						<Panel class="topnav__button__content">
+							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
+							<Label text="Home" class="text" />
+						</Panel>
+					</RadioButton>
 
 					<!-- Campaign selector -->
 					<RadioButton
@@ -59,8 +80,10 @@
 						class="topnav__button"
 						onactivate="MainMenu.navigateToPage('Campaigns', 'main-menu/campaigns')"
 					>
-						<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-						<Label text="Campaigns" class="text" />
+						<Panel class="topnav__button__content">
+							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
+							<Label text="Campaigns" class="text" />
+						</Panel>
 					</RadioButton>
 
 					<!-- Addon manager -->
@@ -70,8 +93,10 @@
 						class="topnav__button"
 						onactivate="MainMenu.navigateToPage('Addons', 'main-menu/addons')"
 					>
-						<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
-						<Label text="Addons" class="text" />
+						<Panel class="topnav__button__content">
+							<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
+							<Label text="Addons" class="text" />
+						</Panel>
 					</RadioButton>
 
 					<!-- Settings -->
@@ -81,23 +106,21 @@
 						class="topnav__button"
 						onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')"
 					>
-						<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
-						<Label text="Settings" class="text" />
+						<Panel class="topnav__button__content">
+							<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
+							<Label text="Settings" class="text" />
+						</Panel>
 					</RadioButton>
-				</Panel>
 
-				<Panel class="full-height flow-right horizontal-align-right">
-					<RadioButton id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
-						<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
-					</RadioButton>
+					<Button id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
+						<Panel class="topnav__button__content">
+							<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
+							<Label text="Quit" class="text" />
+						</Panel>
+					</Button>
 				</Panel>
-
 			</Panel>
 			<!-- /Topnav -->
-
-			<!-- Topnav Shadow -->
-			<Panel class="topnav__shadow" />
-			<!-- /Topnav Shadow -->
 
 			<!-- Full page blur: used to blur everything below the drawer -->
 				<Panel class="mainmenu__container">
@@ -125,20 +148,15 @@
 					<!-- /Backgrounds -->
 
 					<Panel class="mainmenu__content">
-
 						<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
 						<Panel id="PauseContent" class="mainmenu__home-container home PauseMenuModeOnly">
 							<Panel class="home__bottombar bottombar">
-							<!-- Putting "PauseMenuModeOnly" in version-info.xml itself doesn't work as a fyi. -->
-								<VersionInfo />
 							</Panel>
 						</Panel>
 
 						<Panel id="HomeContent" class="mainmenu__home-container home MainMenuModeOnly">
-
 							<Panel id="NewsModelWrapper" class="home__wrapper">
-
 							<ModelPanel
 								id="MainMenuModel"
 								class="home__modelpanel"
@@ -147,36 +165,12 @@
 								antialias="true"
 								mouse_rotate="true"
 							/>
-
-							</Panel>
-
-							<Panel class="home__bottombar bottombar">
-
-								<TooltipPanel class="bottombar__tooltip" tooltip="#MainMenu_Button_Github">
-									<Button class="bottombar__button" onactivate="SteamOverlayAPI.OpenURLModal('https://github.com/StrataSource')">
-										<Image class="bottombar__icon" src="file://{images}/social/github.svg" textureheight="64" />
-									</Button>
-								</TooltipPanel>
-
-								<RadioButton
-								id="ControlsLibraryButton"
-								class="bottombar__button hide"
-								group="TopNavRadio"
-								onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
-							>	
-									<Label class="bottombar__text" text="Controls Library" />
-								</RadioButton>
-
-								<Label class="bottombar__notice" text="Placeholder Menu" />
-
 							</Panel>
 						</Panel>
 
 						<Panel id="PageContent" class="mainmenu__page-container mainmenu__page-container--hidden">
-
 							<Panel id="MainMenuContentBlur" class="mainmenu__page-blur" />
 							<!-- A panel gets inserted here dynamically from js, depending on which tab we click -->
-
 						</Panel>
 					</Panel>
 				</Panel>
