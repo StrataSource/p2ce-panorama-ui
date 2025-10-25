@@ -84,6 +84,17 @@ $home-panel-width: 896px;
 
 		$this: &;
 
+		&__big-text {
+			horizontal-align: right;
+			vertical-align: middle;
+
+			@include mixin.font-styles($use-header: true);
+			font-size: 60px;
+			margin-top: -5px;
+
+			opacity: 0.1;
+		}
+
 		&__content {
 			height: 100%;
 			width: 100%;
@@ -108,6 +119,10 @@ $home-panel-width: 896px;
 				visibility: visible;
 			}
 
+			#{$this}__inactive-only {
+				visibility: collapse;
+			}
+
 			#{$this}__content {
 				background-color: rgba($primary-color, 1);
 				height: fit-children;
@@ -123,6 +138,10 @@ $home-panel-width: 896px;
 			opacity: 0;
 			visibility: collapse;
 			transition: opacity 0.1s ease-in-out 0s;
+		}
+
+		&__inactive-only {
+			visibility: visible;
 		}
 	}
 }

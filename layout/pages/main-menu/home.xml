@@ -28,8 +28,8 @@
 						class="home__prompt__image"
 					/>
 					<Panel class="home__prompt__content">
-						<Label class="home__heading" text="[PH] All Saves" />
-						<Label class="home__subheading" text="[PH] Across all campaigns" />
+						<Label class="home__heading" text="[HC] All Saves" />
+						<Label class="home__subheading" text="[HC] Across all campaigns" />
 					</Panel>
 				</Button>
 				<Panel class="home__spacer__h" />
@@ -40,7 +40,7 @@
 						class="home__prompt__image"
 					/>
 					<Panel class="home__prompt__content">
-						<Label class="home__heading" text="[PH] Continue" />
+						<Label class="home__heading" text="[HC] Continue" />
 						<Label class="home__subheading" text="[PH] Portal 2: The Escape" />
 					</Panel>
 				</Button>
@@ -53,11 +53,12 @@
 						scaling="stretch-to-cover-preserve-aspect"
 						class="home__prompt__image"
 					/>
+					<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] NEWS" />
 					<Panel class="home__expandable__content">
-						<Label class="home__heading" text="[HC] Clustered Update" />
+						<Label class="home__heading" text="[PH] Clustered Update" />
 						<Label
 							class="home__subheading home__expandable__active-only"
-							text="[HC] Clustered Shading allows Portal 2: Community Edition to use real-time lighting techniques, which greatly enhances the visuals."
+							text="[PH] Clustered Shading allows Portal 2: Community Edition to use real-time lighting techniques, which greatly enhances the visuals."
 						/>
 					</Panel>
 				</Button>
@@ -67,9 +68,10 @@
 						scaling="stretch-to-cover-preserve-aspect"
 						class="home__prompt__image"
 					/>
+					<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] FEATURED" />
 					<Panel class="home__expandable__content">
-						<Label class="home__heading" text="[HC] October Feature" />
-						<Label class="home__subheading home__expandable__active-only" text="[PH] My New Epic Campaign" />
+						<Label class="home__heading" text="[PH] My New Epic Campaign" />
+						<Label class="home__subheading home__expandable__active-only" text="[PH] by Someone on the Workshop or Something" />
 					</Panel>
 				</Button>
 			</Panel>
