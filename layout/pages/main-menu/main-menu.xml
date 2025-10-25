@@ -57,7 +57,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label class="text" text="Library" />
+							<Label class="text" text="[HC] Library" />
 						</Panel>
 					</RadioButton>
 					<!-- Home selector -->
@@ -69,7 +69,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label text="Home" class="text" />
+							<Label text="[HC] Home" class="text" />
 						</Panel>
 					</RadioButton>
 
@@ -82,7 +82,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label text="Campaigns" class="text" />
+							<Label text="[HC] Campaigns" class="text" />
 						</Panel>
 					</RadioButton>
 
@@ -95,7 +95,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
-							<Label text="Addons" class="text" />
+							<Label text="[HC] Addons" class="text" />
 						</Panel>
 					</RadioButton>
 
@@ -108,14 +108,14 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
-							<Label text="Settings" class="text" />
+							<Label text="[HC] Settings" class="text" />
 						</Panel>
 					</RadioButton>
 
 					<Button id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
-							<Label text="Quit" class="text" />
+							<Label text="[HC] Quit" class="text" />
 						</Panel>
 					</Button>
 				</Panel>

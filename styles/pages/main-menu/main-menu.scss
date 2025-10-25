@@ -193,7 +193,10 @@ $drawer-width: 768px;
 		& .text {
 			@include mixin.font-styles($use-header: true);
 			vertical-align: center;
-			font-size: 28px;
+			font-size: 24px;
+			// overflowing because of tags, so not putting this
+			// here for now, just reducing the size a bit - SS
+			//text-overflow: shrink;
 		}
 
 		$this: &;
