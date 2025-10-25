@@ -525,7 +525,7 @@ $slider-track-progress-horizontal: $primary-800 !default;
 $slider-track-progress-vertical: $primary-color !default;
 $slider-track-progress-border: 5px solid $slider-thumb-color !default;
 
-$slider-default-color: $gray-600 !default;
+$slider-default-color: $base-500 !default;
 $slider-default-width: 4px !default;
 $slider-default-height: 8px !default;
 $slider-default-radius: 0px !default;
@@ -613,10 +613,11 @@ $rightnav-width: 50px;
 // SETTINGS
 // ================
 
-$settings-padding: 0 6px 0 15px !default;
+$settings-height: 60px !default;
+$settings-padding: 0 15px 0 15px !default;
 $settings-gap: 5px !default;
 
-$colordisplay-height: 48px !default;
+$colordisplay-height: $settings-height !default;
 $colordisplay-padding: $settings-padding !default;
 $colordisplay-title-margin: 10px !default;
 $colordisplay-color-height: 32px !default;

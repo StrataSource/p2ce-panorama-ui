@@ -122,6 +122,7 @@
 
 			</Panel>
 
+			<Panel class="settings-page__spacer" />
 			<!-- Closed Captions Section -->
 
 			<Panel id="AudioClosedCaptionsSubSection" class="settings-group">
@@ -150,6 +151,7 @@
 
 			</Panel>
 
+			<Panel class="settings-page__spacer" />
 			<!-- Audio Devices Section -->
 
 			<Panel id="AudioDevicesSubSection" class="settings-group">

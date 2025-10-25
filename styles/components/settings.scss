@@ -13,7 +13,7 @@
 	align: center center;
 
 	width: 100%;
-	height: 50px;
+	height: $settings-height;
 
 	padding: $settings-padding;
 	margin-bottom: $settings-gap;
@@ -138,31 +138,23 @@
 .settings-keybinder {
 	$root: &;
 
-	transition: background-color 0.1s linear 0s;
-
 	&:hover {
 		background-color: rgba(255, 255, 255, 0.025);
 	}
 
 	&__container {
-		min-width: 32px;
-		height: 32px;
-		padding: 2px 0;
+		min-width: 75px;
+		height: $button-height;
+		padding: 5px 10px;
 		align: center center;
 
 		horizontal-align: right;
-		border-radius: 4px;
-		background-color: rgba(255, 255, 255, 0.1);
-		border: 1px solid rgba(255, 255, 255, 0.05);
-		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-
-		transition-property: background-color, border;
-		transition-duration: 0.15s;
-		transition-timing-function: ease-in-out;
+		background-color: $checkbox-background;
+		border-bottom: $checkbox-border;
 
 		&:hover {
-			background-color: rgba($orange, 0.3);
-			border: 1px solid rgba($orange, 0.4);
+			background-color: $checkbox-background-hover;
+			
 		}
 
 		#{$root}:selected & {
@@ -201,9 +193,10 @@
 		margin: 2px 4px;
 		opacity: 0.8;
 
-		background-image: url('file://{images}/close-circle.svg');
-		background-size: 100% 100%;
+		background-image: url('file://{images}/close.svg');
+		background-size: 24px;
 		background-repeat: no-repeat;
+		background-position: center;
 		visibility: collapse;
 
 		transition: wash-color 0.1s ease-in-out 0s;
@@ -223,7 +216,8 @@ ConVarEnabler > .settings-enum-dropdown,
 ConVarEnabler > .settings-slider,
 ConVarEnabler > .settings-keybinder,
 ConVarEnabler > .colordisplay {
-	height: 48px;
+	height: $settings-height;
+	padding: $settings-padding;
 	transition: height 0.1s ease-out 0s;
 
 	&:parentdisabled {

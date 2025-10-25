@@ -7,7 +7,6 @@ $page-width: 1920px - $rightnav-width;
 
 .settings {
 	flow-children: right;
-	margin: 8px 8px 16px 32px;
 	width: 100%;
 	height: 100%;
 
@@ -31,13 +30,12 @@ $page-width: 1920px - $rightnav-width;
 		width: fill-parent-flow(0.4);
 
 		height: 100%;
-		padding: 16px 0px 16px 32px;
 	}
 
 	&__search {
 		width: 600px;
-		height: 40px;
-		margin-bottom: 16px;
+		height: 50px;
+		margin-bottom: 15px;
 		margin-top: 4px;
 	}
 
@@ -50,7 +48,6 @@ $page-width: 1920px - $rightnav-width;
 		vertical-align: center;
 
 		opacity: 1;
-		transition: opacity 0.2s ease-out 0s;
 
 		&:parentdisabled {
 			opacity: 0;
@@ -62,8 +59,6 @@ $page-width: 1920px - $rightnav-width;
 			margin-right: 8px;
 			background-color: rgba(255, 255, 255, 0.03);
 			// border-radius: 2px; // Why the FUCK does this stop the crosshair from updating???
-
-			transition: width 0.2s ease-in-out 0s;
 
 			&:disabled {
 				width: 0px;
@@ -111,11 +106,9 @@ $page-width: 1920px - $rightnav-width;
 	width: 100%;
 	height: fit-children;
 
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: $base-950;
 
-	border-radius: 4px;
-	border: 1px solid rgba(0, 0, 0, 0.5);
-	box-shadow: fill rgba(255, 255, 255, 0.01) 0px 0px 2px 0px;
+	border: 1px solid $primary-color;
 	flow-children: none;
 
 	&__main {
@@ -135,9 +128,6 @@ $page-width: 1920px - $rightnav-width;
 
 		margin-right: 12px;
 
-		border-bottom-left-radius: 2px;
-		border-bottom-right-radius: 2px;
-
 		&:hover {
 			#{$root}__collapse-icon {
 				opacity: 1;
@@ -150,8 +140,6 @@ $page-width: 1920px - $rightnav-width;
 
 		align: center center;
 		padding: 4px;
-		opacity: 0.4;
-		transition: opacity 0.1s ease-in-out 0s;
 	}
 
 	// To animate we need to fixed height values
@@ -163,8 +151,6 @@ $page-width: 1920px - $rightnav-width;
 		flow-children: down;
 
 		width: 100%;
-
-		transition: height 0.1s ease-in-out 0s;
 
 		@each $child-count in (0, 1, 2, 3, 4, 5, 6, 7, 8) {
 			&--#{$child-count} {
@@ -180,93 +166,77 @@ $page-width: 1920px - $rightnav-width;
 	&__item,
 	&__subitem {
 		width: 100%;
-
-		transition-property: background-color, opacity, box-shadow, border, height;
-		transition-duration: 0.1s;
-		transition-timing-function: ease-in-out;
 	}
 
 	&__item {
 		flow-children: down;
 
 		padding: 6px 0;
-		border-left: 1px solid rgba(255, 255, 255, 0);
-
 		&:hover {
-			background-color: rgba(255, 255, 255, 0.025);
-
-			border-left: 1px solid rgba(255, 255, 255, 0.25);
+			background-color: $primary-950;
 		}
 
 		&:selected {
-			background-color: rgba(255, 255, 255, 0.05);
-
-			border-left: 1px solid rgba(255, 255, 255, 0.5);
-
-			&:hover {
-				background-color: rgba(255, 255, 255, 0.04);
-			}
+			background-color: $primary-color;
 
 			& > #{$root}__subitem:hover {
-				background-color: rgba(255, 255, 255, 0.015);
+				background-color: $primary-950;
+			}
+
+			#{$root}__item-label {
+				color: $base-950;
+			}
+
+			#{$root}__subitem-label {
+				color: $base-950;
 			}
 		}
 	}
 
 	&__item-label {
 		width: 100%;
-		padding: 0 16px;
+		padding: 0 15px;
 
 		@include mixin.font-styles($use-header: true, $light-header: false);
-		font-size: 38px;
-		opacity: 0.85;
+		font-size: 35px;
 		max-height: 50px;
 		overflow: squish;
 		text-overflow: shrink;
-
-		transition: opacity 0.1s ease-in-out 0s;
-		&:hover {
-			opacity: 1;
-		}
+		transform: translateY(-3px);
 	}
 
 	&__subitem {
-		background-color: rgba(0, 0, 0, 0);
 		padding: 2px 0;
 
 		height: $subitem-height;
 
-		margin-left: -1px; // Shove it left so the borders overlap
-		border-left: 1px solid rgba(255, 255, 255, 0);
-
 		&:hover {
-			background-color: rgba(255, 255, 255, 0.02);
+			background-color: $primary-800;
 
-			border-left: 1px solid rgba(255, 255, 255, 0.7);
+			#{$root}__subitem-label {
+				color: $bright-color;
+			}
 		}
 
 		&:selected {
-			background-color: rgba(255, 255, 255, 0.05);
+			background-color: $primary-700;
 
 			&:hover {
-				background-color: rgba(255, 255, 255, 0.1);
+				background-color: $primary-950;
 			}
-
-			border-left: 1px solid rgba(255, 255, 255, 0.9);
 		}
 	}
 
 	&__subitem-label {
-		padding-left: 24px;
+		padding-left: 25px;
 
 		@include mixin.font-styles($use-header: true, $light-header: true);
-		font-size: 20px;
 	}
 
 	&__separator {
 		width: 100%;
-		height: 1px;
-		background-color: rgba(0, 0, 0, 0.3);
+		height: 2px;
+		background-color: $base-color;
 	}
 }
 
@@ -276,8 +246,6 @@ $page-width: 1920px - $rightnav-width;
 	flow-children: down;
 
 	opacity: 0;
-
-	transition: opacity 0.1s linear 0s;
 
 	&--active {
 		opacity: 1;
@@ -295,7 +263,8 @@ $page-width: 1920px - $rightnav-width;
 		&-buttons {
 			flow-children: right;
 			horizontal-align: right;
-			vertical-align: center;
+			vertical-align: bottom;
+			margin-right: 16px;
 		}
 	}
 
@@ -315,9 +284,8 @@ $page-width: 1920px - $rightnav-width;
 		width: 100%;
 		flow-children: down;
 		overflow: squish scroll;
+		margin-top: 10px;
 		padding-right: 16px;
-		border-top-left-radius: 4px;
-		border-bottom-left-radius: 4px;
 	}
 
 	// These are so the page distance scrolled calculations work accurately
@@ -330,13 +298,10 @@ $page-width: 1920px - $rightnav-width;
 .settings-group {
 	width: 100%;
 	flow-children: down;
-	padding: 16px;
-	padding-top: 12px;
 
-	background-color: rgba(0, 0, 0, 0.5);
-
-	border-radius: 4px;
-	border: 1px solid rgba(0, 0, 0, 0.3);
+	background-color: $base-950;
+	padding: 12px 15px;
+	border: 1px solid $primary-color;
 
 	&--search {
 		padding-top: 16px;
@@ -367,10 +332,11 @@ $page-width: 1920px - $rightnav-width;
 
 	&__subtitle {
 		@include mixin.font-styles($use-header: true);
-		font-size: 32px;
-		margin-left: 4px;
-		margin-bottom: 4px;
-		margin-top: 12px;
+		font-size: 28px;
+		width: 100%;
+		padding: 10px 15px;
+		background-color: $primary-color;
+		color: $base-color;
 	}
 
 	&__dropdown {
@@ -385,10 +351,7 @@ $page-width: 1920px - $rightnav-width;
 
 		width: 100%;
 
-		border-radius: 2px;
-		border: 1px solid rgba(0, 0, 0, 0.5);
-
-		margin-bottom: 4px;
+		margin-bottom: 5px;
 
 		// TODO: This could use an @extend if Sass was set up better, do during loading refactor
 		& .settings-enum,
@@ -403,16 +366,13 @@ $page-width: 1920px - $rightnav-width;
 		}
 
 		&.--even {
-			background-color: rgba(255, 255, 255, 0.03);
 		}
 		&.--odd {
-			background-color: rgba(255, 255, 255, 0.02);
 		}
 		&.--even,
 		&.--odd {
-			transition: background-color 0.1s ease-in-out 0s;
 			&:hover {
-				background-color: rgba(255, 255, 255, 0.06);
+				background-color: $primary-950;
 			}
 		}
 	}
@@ -430,6 +390,13 @@ $page-width: 1920px - $rightnav-width;
 
 .settings-info {
 	$this: &;
+
+	background-color: $base-950;
+	margin: 0 16px;
+	margin-top: 69px;
+	padding: 16px 10px;
+	border: 1px solid $primary-color;
+
 	&--hidden {
 		#{$this}__wrapper {
 			transform: translateX(-16px);
@@ -439,7 +406,7 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&--switch {
-		animation-name: BlurFadeInOut;
+		//animation-name: BlurFadeInOut;
 		animation-duration: 0.1s;
 		animation-timing-function: ease-out;
 		animation-iteration-count: 1;
@@ -447,23 +414,21 @@ $page-width: 1920px - $rightnav-width;
 
 	&__wrapper {
 		flow-children: down;
-		margin-top: 36px;
 		opacity: 1;
-		transition-property: opacity, transform, blur, height;
-		transition-duration: 0.1s;
-		transition-timing-function: ease-out;
+		overflow: squish scroll;
+		padding: 0 15px;
 	}
 
 	&__title {
 		@include mixin.font-styles($use-header: true, $light-header: false);
-		font-size: 44px;
-		margin-bottom: 8px;
+		font-size: 36px;
+		margin-bottom: 10px;
 	}
 
 	&__description {
 		@include mixin.font-styles($use-header: false);
-		font-size: 18px;
-		margin-bottom: 8px;
+		font-size: 17px;
+		margin-bottom: 10px;
 
 		& h2 {
 			// I wish we could use margin-top here to avoid needing \n chars in the string,
@@ -499,20 +464,23 @@ $page-width: 1920px - $rightnav-width;
 	flow-children: right;
 	horizontal-align: left;
 	width: 100%;
-	height: 48px;
-	padding: 0 12px;
+	height: 50px;
+	padding: 0 15px;
 
-	margin-bottom: 4px;
+	margin-bottom: 5px;
 
-	border-radius: 2px;
-	border: 1px solid rgba(0, 0, 0, 0.5);
+	border: 2px solid $base-800;
 
-	background-color: rgba(255, 255, 255, 0.02);
-
-	transition: background-color 0.1s ease-in-out 0s;
+	background-color: $base-900;
 
 	&:hover {
-		background-color: rgba(255, 255, 255, 0.06);
+		background-color: $primary-800;
+		border-color: rgba(0, 0, 0, 0);
+		border-bottom-color: $primary-color;
+
+		#{$root}__text--match {
+			color: $primary-300;
+		}
 	}
 
 	&__text {
@@ -523,7 +491,7 @@ $page-width: 1920px - $rightnav-width;
 		}
 
 		&--group {
-			font-style: italic;
+			font-weight: light;
 		}
 
 		&--group-only {
@@ -531,26 +499,22 @@ $page-width: 1920px - $rightnav-width;
 		}
 
 		&--match {
-			color: color.scale($orange, $lightness: 30%);
+			color: $primary-color;
 		}
 	}
 
 	&__chevron {
 		width: 16px;
 		height: 16px;
-		margin: 12px 0;
+		margin: 12px 5px;
 		vertical-align: middle;
-		opacity: 0.4;
+		opacity: 0.5;
 	}
 
 	&__text,
 	&__chevron,
 	&__tags {
-		transform: translateX(0);
-		transition: transform 0.1s ease-in-out 0s;
-		#{$root}:hover & {
-			transform: translateX(5px);
-		}
+
 	}
 
 	&__tags {

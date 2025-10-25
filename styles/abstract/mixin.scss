@@ -7,7 +7,7 @@
 @mixin font-styles($use-header: false, $light-header: false) {
 	@if $use-header {
 		@if $light-header {
-			font-weight: light;
+			font-weight: normal;
 		} @else {
 			font-weight: bold;
 		}
