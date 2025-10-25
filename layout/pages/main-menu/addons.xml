@@ -8,7 +8,7 @@
 
 	<snippets>
 		<snippet name="AddonEntrySnippet">
-			<Button class="addons__entry">
+			<RadioButton class="addons__entry" group="AddonRadio">
 				<Panel class="addons__entry__left">
 					<!-- Addon icon cover -->
 					<Image id="AddonCover" class="addons__entry__cover" textureheight="128" texturewidth="128" />
@@ -23,25 +23,28 @@
 				<Panel class="addons__entry__right">
 					<ToggleButton id="AddonEnable" class="checkbox addons__entry__checkbox" />
 				</Panel>
-			</Button>
+			</RadioButton>
 		</snippet>
 	</snippets>
 
 	<Panel class="mainmenu__page flow-right" onload="AddonManager.init()">
 		<Panel class="addons">
 			<Panel class="addons__action-bar">
-				<Button onactivate="AddonManager.apply()" id="ApplyButton" class="button" disabled="true">
-					<Label class="button__text" text="Apply" />
-				</Button>
-				<Button onactivate="AddonManager.cancel()" id="CancelButton" class="button" disabled="true">
-					<Label class="button__text" text="Discard" />
-				</Button>
-				<Button id="ReloadAll" class="button" onactivate="AddonManager.reloadAddonList()">
-					<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
-				</Button>
-				<ToggleButton id="ToggleAll" class="button togglebutton" onactivate="AddonManager.toggleAll()">
-					<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/refresh.svg"/>
-				</ToggleButton>
+					<Button id="ReloadAll" class="button mr-2" onactivate="AddonManager.reloadAddonList()">
+						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
+					</Button>
+					<ToggleButton id="ToggleAll" class="button togglebutton" onactivate="AddonManager.toggleAll()">
+						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg"/>
+					</ToggleButton>
+
+				<Panel class="horizontal-align-right flow-right">
+					<Button onactivate="AddonManager.apply()" id="ApplyButton" class="button mr-2" disabled="true">
+						<Label class="button__text" text="Apply" />
+					</Button>
+					<Button onactivate="AddonManager.cancel()" id="CancelButton" class="button" disabled="true">
+						<Label class="button__text" text="Discard" />
+					</Button>
+				</Panel>
 			</Panel>
 
 			<!-- Addon list -->
@@ -52,12 +55,15 @@
 			<Panel class="flow-right">
 				<Image id="SelectedAddonCover" class="selected-addon__cover" textureheight="128" texturewidth="128" />
 				<Panel class="flow-down vertical-align-center">
-					<Label id="SelectedAddonTitle" class="selected-addon__title" text="Addon Name" />
-					<Label id="SelectedAddonAuthors" class="selected-addon__authors" />
+					<Label id="SelectedAddonTitle" class="selected-addon__title" text="[PH] Addon Name" />
+					<Label id="SelectedAddonAuthors" class="selected-addon__authors" text="[PH] Addon Authors" />
+					<Button id="SelectedAddonView" class="mt-2 button">
+						<Label class="button__text" text="[HC] View On Steam" />
+					</Button>
 				</Panel>
 			</Panel>
 			<Panel class="selected-addon__description">
-				<Label id="SelectedAddonDesc" class="selected-addon__description__text" text="My Addon Description" html="true" loadimages="true" />
+				<Label id="SelectedAddonDesc" class="selected-addon__description__text" text="[PH] Addon Description" html="true" loadimages="true" />
 			</Panel>
 		</Panel>
 	</Panel>

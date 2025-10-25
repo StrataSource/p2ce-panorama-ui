@@ -2,13 +2,13 @@
 
 class AddonEntry {
 	index: number;
-	panel: Panel;
+	panel: RadioButton;
 
 	enableText: Label | null = null;
 	subText: Label | null = null;
 	addonEnableCheck: ToggleButton | null = null;
 
-	constructor(index: number, panel: Panel) {
+	constructor(index: number, panel: RadioButton) {
 		this.index = index;
 		this.panel = panel;
 
@@ -82,6 +82,7 @@ class AddonEntry {
 class AddonManager {
 	static addonContainer = $<Panel>('#AddonContainer')!;
 	static addonPanel = $<Panel>('#SelectedAddonPanel')!;
+	static addonCover = $<Image>('#SelectedAddonCover')!;
 	static addonTitle = $<Label>('#SelectedAddonTitle')!;
 	static addonDesc = $<Label>('#SelectedAddonDesc')!;
 	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
@@ -115,7 +116,7 @@ class AddonManager {
 		const addonCount = WorkshopAPI.GetAddonCount();
 		let anyEnabled = false;
 		for (let i = 0; i < addonCount; ++i) {
-			const panel = $.CreatePanel('Panel', this.addonContainer, 'addon' + i);
+			const panel = $.CreatePanel('RadioButton', this.addonContainer, 'addon' + i);
 			panel.SetPanelEvent('onactivate', () => this.addonSelected(i));
 			panel.LoadLayoutSnippet('AddonEntrySnippet');
 
@@ -136,6 +137,8 @@ class AddonManager {
 
 	static addonSelected(addon: number) {
 		const info = WorkshopAPI.GetAddonMeta(addon);
+
+		if (this.addonCover) this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
 		if (this.addonTitle) this.addonTitle.text = info.title;
 
