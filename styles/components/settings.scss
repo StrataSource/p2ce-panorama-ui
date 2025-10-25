@@ -79,17 +79,33 @@
 		& > RadioButton {
 			@extend .button;
 			@extend .radiobutton;
-			@extend .radiobutton--orange;
 
 			width: fit-children;
 			min-width: 140px;
 			height: 100%;
 			margin-left: 6px;
+
+			&:hover:not(:disabled):not(:selected) {
+				& > Label {
+					color: $button-text-hover;
+				}
+			}
+
+			&:selected {
+				&:disabled {
+				}
+
+				&:not(:disabled) {
+					& > Label {
+						color: $button-text-hover;
+					}
+					border-color: $button-background;
+				}
+			}
 		}
 
 		& > RadioButton > Label {
 			@extend .button__text;
-			font-size: 22px;
 		}
 	}
 }
