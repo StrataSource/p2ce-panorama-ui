@@ -64,7 +64,6 @@ $drawer-width: 768px;
 		width: 125%;
 		height: 125%;
 		overflow: noclip;
-		blur: fastgaussian(8, 8, 5);
 	}
 
 	&__pause-blur {
@@ -110,7 +109,7 @@ $drawer-width: 768px;
 	&__page-blur {
 		width: 100%;
 		height: 100%;
-		background-color: rgba(0, 0, 0, 0.875);
+		background-color: rgba(0, 0, 0, 0.0);
 	}
 
 	&__page {
