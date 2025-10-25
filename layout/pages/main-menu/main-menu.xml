@@ -65,7 +65,7 @@
 						id="HomeButton"
 						group="TopNavRadio"
 						class="topnav__button"
-						onactivate="MainMenu.onHomeButtonPressed()"
+						onactivate="MainMenu.navigateToPage('Home', 'main-menu/home')"
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
@@ -150,22 +150,16 @@
 					<Panel class="mainmenu__content">
 						<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
-						<Panel id="PauseContent" class="mainmenu__home-container home PauseMenuModeOnly">
-							<Panel class="home__bottombar bottombar">
-							</Panel>
-						</Panel>
+						<ModelPanel
+							id="MainMenuModel"
+							class="main__modelpanel"
+							src="models/npcs/turret/turret.mdl"
+							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+							antialias="true"
+							mouse_rotate="true"
+						/>
 
-						<Panel id="HomeContent" class="mainmenu__home-container home MainMenuModeOnly">
-							<Panel id="NewsModelWrapper" class="home__wrapper">
-							<ModelPanel
-								id="MainMenuModel"
-								class="home__modelpanel"
-								src="models/npcs/turret/turret.mdl"
-								cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-								antialias="true"
-								mouse_rotate="true"
-							/>
-							</Panel>
+						<Panel id="PauseContent" class="mainmenu__main-container main PauseMenuModeOnly">
 						</Panel>
 
 						<Panel id="PageContent" class="mainmenu__page-container mainmenu__page-container--hidden">

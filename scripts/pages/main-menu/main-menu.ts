@@ -4,14 +4,13 @@ class MainMenu {
 	static panels = {
 		cp: $.GetContextPanel(),
 		pageContent: $('#PageContent'),
-		homeContent: $('#HomeContent'),
 		contentBlur: $('#MainMenuContentBlur'),
 		backgroundBlur: $('#MainMenuBackgroundBlur'),
 		movie: $<Movie>('#MainMenuMovie'),
 		image: $<Image>('#MainMenuBackground'),
 		model: $<ModelPanel>('#MainMenuModel'),
 		topButtons: $('#MainMenuTopButtons'),
-		homeButton: $<RadioButton>('#HomeButton'),
+		homeButton: $<RadioButton>('#HomeButton')!,
 		addonsButton: $<RadioButton>('#AddonsButton')
 	};
 
@@ -44,21 +43,20 @@ class MainMenu {
 
 		// Assign a random model
 		const models = [
-			'models/npcs/turret/turret.mdl',
-			'models/weapons/w_portalgun.mdl',
 			'models/props/schrodinger_cube.mdl',
+			'models/props/reflection_cube.mdl',
 			'models/props/metal_box.mdl'
 		];
 
 		if (this.panels.model) {
 			this.panels.model.src = models[Math.floor(Math.random() * models.length)]; // Pick a random model
 
-			this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.15, this.inSpace ? 0.02 : 0);
+			this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.05, this.inSpace ? 0.02 : 0);
 			this.panels.model.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
 			this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 
 			this.panels.model.LookAtModel();
-			this.panels.model.SetCameraOffset(-200, 0, 0);
+			this.panels.model.SetCameraOffset(-100, 0, 0);
 			this.panels.model.SetCameraFOV(30);
 
 			this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
@@ -92,6 +90,7 @@ class MainMenu {
 		this.panels.image = $<Image>('#MainMenuBackground');
 
 		this.setMainMenuBackground();
+		this.onHomeButtonPressed();
 	}
 
 	/**
@@ -106,6 +105,7 @@ class MainMenu {
 	 */
 	static onShowPauseMenu() {
 		this.panels.cp.AddClass('MainMenuRootPanel--PauseMenuMode');
+		this.onHomeButtonPressed();
 	}
 
 	/**
@@ -125,11 +125,6 @@ class MainMenu {
 	 */
 	static navigateToPage(tab: string, xmlName: string, hasBlur = true) {
 		if (this.panels.contentBlur) this.panels.contentBlur.visible = hasBlur;
-
-		if (this.activeTab === tab) {
-			if (this.panels.homeButton) $.DispatchEvent('Activated', this.panels.homeButton, PanelEventSource.MOUSE);
-			return;
-		}
 
 		// Check to see if tab to show exists.
 		// If not load the xml file.
@@ -189,8 +184,6 @@ class MainMenu {
 
 		$.DispatchEvent('RetractDrawer');
 		$.DispatchEvent('ShowContentPanel');
-
-		this.panels.homeContent?.AddClass('home--hidden');
 	}
 
 	/**
@@ -214,8 +207,6 @@ class MainMenu {
 		}
 
 		this.activeTab = '';
-
-		this.panels.homeContent?.RemoveClass('home--hidden');
 	}
 
 	/**
@@ -259,7 +250,7 @@ class MainMenu {
 	 * Handles home button getting pressed.
 	 */
 	static onHomeButtonPressed() {
-		this.onHideContentPanel();
+		$.DispatchEvent('Activated', this.panels.homeButton, PanelEventSource.MOUSE);
 	}
 
 	/**
