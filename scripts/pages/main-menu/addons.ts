@@ -80,11 +80,11 @@ class AddonEntry {
 }
 
 class AddonManager {
-	static addonContainer = $<Panel>('#AddonContainer');
-	static addonPanel = $<Panel>('#AddonPanel');
-	static addonTitle = this.addonPanel?.FindChildTraverse<Label>('AddonTitle');
-	static addonDesc = this.addonPanel?.FindChildTraverse<Label>('AddonDesc');
-	static addonAuthors = this.addonPanel?.FindChildTraverse<Label>('AddonAuthors');
+	static addonContainer = $<Panel>('#AddonContainer')!;
+	static addonPanel = $<Panel>('#SelectedAddonPanel')!;
+	static addonTitle = $<Label>('#SelectedAddonTitle')!;
+	static addonDesc = $<Label>('#SelectedAddonDesc')!;
+	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
 
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');

@@ -2,218 +2,128 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
-$container-bg: #353535aa;
-$disabled-wash: #00000088;
+.addons {
+	width: fill-parent-flow(0.45);
+	height: 100%;
+	flow-children: down;
 
-.addon-entry {
-	&__left {
-		width: 88%;
+	border: $menu-pane-border;
+
+	&__action-bar {
+		width: 100%;
+		height: fit-children;
 		flow-children: right;
+
+		border-bottom: $menu-pane-border;
+		background-color: $base-950;
+		padding: 15px;
 	}
 
-	&__right {
+	&__list {
+		width: 100%;
+		height: 100%;
+		overflow: squish scroll;
 		flow-children: down;
-		horizontal-align: right;
-		vertical-align: center;
-		margin-right: 28px;
+
+		background-color: $base-950;
 	}
 
-	&__checkbox {
-		horizontal-align: right;
-		width: 28px;
-		height: 28px;
-	}
+	&__entry {
+		width: 100%;
+		height: fit-children;
+		flow-children: right;
 
-	&__title {
-		flow-children: down;
-		margin-left: 10px;
-		font-size: 20px;
-		margin-top: 10px;
-	}
+		padding: 15px;
+		padding-right: 20px;
 
-	&__source {
-		font-size: 16px;
-		margin-left: 10px;
-		margin-top: 10px;
-		font-style: italic;
-		color: #aa5555;
-	}
+		&:hover {
+			background-color: $primary-950;
+		}
 
-	&__desc {
-		margin-top: 10px;
-		margin-left: 10px;
-		color: #999999;
-		text-overflow: ellipsis;
-		max-height: 24px;
+		&__left {
+			width: fill-parent-flow(1.0);
+			flow-children: right;
+		}
+
+		&__cover {
+			width: 128px;
+			height: 128px;
+
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			flow-children: down;
+
+			margin-left: 15px;
+			vertical-align: middle;
+
+			&__title {
+				@include mixin.font-styles($use-header: true);
+				font-size: 22px;
+			}
+
+			&__desc {
+				margin-top: 5px;
+			}
+
+			&__source {
+				visibility: collapse;
+			}
+		}
+
+		&__right {
+
+		}
+
+		&__checkbox {
+			height: 32px;
+
+			margin-left: 10px;
+			& > .TickBox {
+				margin-right: 0px;
+			}
+		}
 	}
+}
+
+.selected-addon {
+	width: fill-parent-flow(0.55);
+	height: 100%;
+	flow-children: down;
+
+	margin-left: 20px;
+	padding: 15px;
+	border: $menu-pane-border;
+	background-color: $base-950;
 
 	&__cover {
-		width: 128px;
-		height: 128px;
-	}
-}
+		width: 192px;
+		height: 192px;
 
-.addons {
-	&__container {
-		flow-children: down;
-		overflow: scroll;
-		width: 100%;
-		height: 100%;
-		background-color: $container-bg;
-
-		border-radius: 6px;
-		border: 1px solid #303030;
-		border-top: 0px;
-		border-top-left-radius: 0px;
-		border-top-right-radius: 0px;
-	}
-
-	&__side_panel {
-		width: 40%;
-		height: 100%;
-		flow-children: down;
-	}
-
-	&__item {
-		flow-children: right;
-		max-height: 200px;
-		width: 100%;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		padding-left: 10px;
-		border-radius: 4px;
-		&:selected,
-		&:hover {
-			background-color: #333333ff;
-		}
-	}
-
-	&__buttons_container {
-		horizontal-align: center;
-		flow-children: right;
-		vertical-align: center;
-
-		> Button {
-			background-color: #303030;
-			padding: 5px;
-			padding-left: 32px;
-			padding-right: 32px;
-			margin-right: 16px;
-			border-radius: 2px;
-			vertical-align: center;
-
-			&:hover {
-				background-color: $primary-color;
-			}
-
-			&:disabled {
-				background-color: #303030;
-			}
-		}
-	}
-
-	&__top_buttons {
-		&__bg {
-			background-color: #252525aa;
-			flow-children: right;
-			width: 100%;
-
-			border-radius: 6px;
-			border-bottom-left-radius: 0px;
-			border-bottom-right-radius: 0px;
-			border: 1px solid #303030;
-			border-bottom: 0px;
-		}
-
-		&__container {
-			horizontal-align: right;
-			vertical-align: center;
-			flow-children: right;
-			padding-top: 8px;
-			padding-bottom: 8px;
-
-			> Button {
-				border-radius: 8px;
-				margin-left: 16px;
-			}
-
-			> Button,
-			> ToggleButton {
-				vertical-align: center;
-			}
-
-			> ToggleButton {
-				margin-left: 28px;
-				margin-right: 28px;
-				width: 28px;
-				height: 28px;
-			}
-		}
-
-		&__apply {
-			background-color: #707070;
-			padding-left: 16px;
-			padding-right: 16px;
-			margin-left: 16px;
-
-			> Label {
-				vertical-align: center;
-				font-size: 20px;
-			}
-		}
-
-		&__reload {
-			width: 32px;
-			height: 32px;
-			&:hover {
-				wash-color: #aaaaaa;
-			}
-		}
-	}
-}
-
-.addonpanel {
-	&__container {
-		flow-children: down;
-		width: 100%;
-		margin-top: 10px;
-		margin-left: 25px;
-		margin-right: 25px;
+		border: $menu-pane-border;
+		margin-right: 15px;
 	}
 
 	&__title {
-		font-size: 48px;
-	}
-
-	&__desc-container {
-		width: 100%;
-		overflow: scroll;
-		flow-children: down;
-	}
-
-	&__description {
-		font-size: 24px;
-		margin-top: 10px;
-		background-color: #00000088;
-		border-radius: 4px;
-		text-overflow: ellipsis;
-		padding: 10px;
-
-		min-height: 50%;
-		width: 100%;
+		@include mixin.font-styles($use-header: true);
+		font-size: 32px;
 	}
 
 	&__authors {
-		font-size: 24px;
-		font-style: italic;
+		font-weight: light;
 	}
 
-	&__section-name {
-		font-size: 32px;
-		color: #aaaaaa;
-		font-style: italic;
-		margin-top: 10px;
-		border-bottom: 3px solid #888888;
-		min-width: 100%;
+	&__description {
+		width: 100%;
+		height: 100%;
+
+		margin-top: 15px;
+		border: $menu-pane-border;
+
+		&__text {
+			overflow: squish scroll;
+			padding: 15px;
+		}
 	}
 }
