@@ -558,7 +558,7 @@ $progressbar-background-disabled: gradient(
 	from(color.scale($red, $saturation: -65%, $lightness: -45%)),
 	to(color.scale($red, $saturation: -55%, $lightness: -35%))
 );
-$progressbar-background-progress: $primary-color !default;
+$progressbar-background-progress: gradient( linear, 0% 0%, 100% 0%, from( $primary-color ), to( $primary-color-light ) ) !default;
 
 $progressbar-shadow: none !default;
 
