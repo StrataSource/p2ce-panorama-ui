@@ -45,7 +45,7 @@
 		}
 
 		&__left {
-			width: fill-parent-flow(1.0);
+			width: fill-parent-flow(1);
 			flow-children: right;
 		}
 
@@ -79,7 +79,6 @@
 		}
 
 		&__right {
-
 		}
 
 		&__checkbox {

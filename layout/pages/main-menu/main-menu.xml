@@ -47,11 +47,12 @@
 					scaling="stretch-to-fit-x-preserve-aspect"
 				/>
 
-				<VersionInfo/>
+				<VersionInfo />
 
 				<Panel id="MainMenuTopButtons" class="full-height flow-right horizontal-align-right">
 					<RadioButton
-						id="ControlsLibraryButton" class="topnav__button"
+						id="ControlsLibraryButton"
+						class="topnav__button"
 						group="TopNavRadio"
 						onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
 					>

@@ -138,7 +138,8 @@ class AddonManager {
 	static addonSelected(addon: number) {
 		const info = WorkshopAPI.GetAddonMeta(addon);
 
-		if (this.addonCover) this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
+		if (this.addonCover)
+			this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
 		if (this.addonTitle) this.addonTitle.text = info.title;
 

@@ -38,7 +38,7 @@
 
 		& > .DropDownIcon {
 			wash-color: $dropdown-button-menuvisible-text-color;
-			transform: scaleY(-1.0);
+			transform: scaleY(-1);
 		}
 
 		& Label {
@@ -101,7 +101,6 @@
 	width: fit-children;
 	opacity: 0;
 
-
 	Label {
 		horizontal-align: left;
 		vertical-align: center;
@@ -109,7 +108,7 @@
 
 		@include mixin.font-styles($use-header: $dropdown-item-use-header-font);
 		font-size: $dropdown-item-font-size;
-		transform: translateY(0.0px);
+		transform: translateY(0px);
 
 		background-color: $dropdown-item-background;
 

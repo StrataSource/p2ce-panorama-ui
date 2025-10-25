@@ -207,14 +207,14 @@ $gradient-selected-hover-transform:
 // ================#
 
 $font-shadows: (
-	'black':    none,
-	'bold':     none,
-	'medium':   none,
-	'regular':  none,
-	'light':    none,
-	'thin':     none,
-	'outline':  none,
-	'none':     none
+	'black': none,
+	'bold': none,
+	'medium': none,
+	'regular': none,
+	'light': none,
+	'thin': none,
+	'outline': none,
+	'none': none
 ) !default;
 
 $font-default-color: $bright-color !default;
@@ -256,12 +256,12 @@ $font-shadow: none !default; // This is a text-shadow-fast
 $font-spacing: 0px !default;
 $font-sizes: (
 	'xxxl': 48px,
-	'xxl':  36px,
-	'xl':   28px,
-	'l':    24px,
-	'm':    $font-default-size,
-	'sm':   14px,
-	'xs':   12px
+	'xxl': 36px,
+	'xl': 28px,
+	'l': 24px,
+	'm': $font-default-size,
+	'sm': 14px,
+	'xs': 12px
 ) !default;
 
 $font-weights: ('thin', 'light', 'normal', 'medium', 'bold', 'black') !default;
@@ -315,7 +315,7 @@ $button-background-base: $primary-500 !default;
 $button-background: $button-background-base !default;
 $button-background-hover: $primary-700 !default;
 $button-background-selected: $primary-900 !default; // Used by Radiobuttons + Togglebuttons
-$button-background-disabled:  $base-900 !default;
+$button-background-disabled: $base-900 !default;
 
 $button-text-color: $base-950 !default;
 $button-text-disabled: $font-disabled-color !default;
@@ -540,7 +540,7 @@ $scrollbar-radius: 0px !default;
 $scrollbar-color: $primary-500 !default;
 $scrollbar-hover-color: $primary-700 !default;
 $scrollbar-active-color: $primary-900 !default;
-$scrollbar-opacity: 1.0 !default;
+$scrollbar-opacity: 1 !default;
 $scrollbar-hover-opacity: 0.9 !default;
 
 // ================

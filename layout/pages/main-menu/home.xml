@@ -15,11 +15,11 @@
 					class="home__prompt__image"
 				/>
 				<Panel class="home__prompt__content">
-					<Label class="home__heading" text="[PH] Play"/>
-					<Label class="home__subheading" text="[PH] 3 New Campaigns Installed!"/>
+					<Label class="home__heading" text="[PH] Play" />
+					<Label class="home__subheading" text="[PH] 3 New Campaigns Installed!" />
 				</Panel>
 			</Button>
-			<Panel class="home__spacer__v"/>
+			<Panel class="home__spacer__v" />
 			<Panel class="home__horizontal">
 				<Button class="home__prompt">
 					<Image
@@ -28,11 +28,11 @@
 						class="home__prompt__image"
 					/>
 					<Panel class="home__prompt__content">
-						<Label class="home__heading" text="[PH] All Saves"/>
-						<Label class="home__subheading" text="[PH] Across all campaigns"/>
+						<Label class="home__heading" text="[PH] All Saves" />
+						<Label class="home__subheading" text="[PH] Across all campaigns" />
 					</Panel>
 				</Button>
-				<Panel class="home__spacer__h"/>
+				<Panel class="home__spacer__h" />
 				<Button class="home__prompt">
 					<Image
 						src="file://{images}/menu/p2ce/random3.png"
@@ -40,8 +40,8 @@
 						class="home__prompt__image"
 					/>
 					<Panel class="home__prompt__content">
-						<Label class="home__heading" text="[PH] Continue"/>
-						<Label class="home__subheading" text="[PH] Portal 2: The Escape"/>
+						<Label class="home__heading" text="[PH] Continue" />
+						<Label class="home__subheading" text="[PH] Portal 2: The Escape" />
 					</Panel>
 				</Button>
 			</Panel>
@@ -54,8 +54,11 @@
 						class="home__prompt__image"
 					/>
 					<Panel class="home__expandable__content">
-						<Label class="home__heading" text="[HC] Clustered Update"/>
-						<Label class="home__subheading home__expandable__active-only" text="[HC] Clustered Shading allows Portal 2: Community Edition to use real-time lighting techniques, which greatly enhances the visuals."/>
+						<Label class="home__heading" text="[HC] Clustered Update" />
+						<Label
+							class="home__subheading home__expandable__active-only"
+							text="[HC] Clustered Shading allows Portal 2: Community Edition to use real-time lighting techniques, which greatly enhances the visuals."
+						/>
 					</Panel>
 				</Button>
 				<Button class="home__expandable">
@@ -65,8 +68,8 @@
 						class="home__prompt__image"
 					/>
 					<Panel class="home__expandable__content">
-						<Label class="home__heading" text="[HC] October Feature"/>
-						<Label class="home__subheading home__expandable__active-only" text="[PH] My New Epic Campaign"/>
+						<Label class="home__heading" text="[HC] October Feature" />
+						<Label class="home__subheading home__expandable__active-only" text="[PH] My New Epic Campaign" />
 					</Panel>
 				</Button>
 			</Panel>

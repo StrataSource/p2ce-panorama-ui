@@ -1,7 +1,5 @@
 'use strict';
 
 class HomePage {
-    static init() {
-        
-    }
+	static init() {}
 }

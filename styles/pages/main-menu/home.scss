@@ -4,125 +4,125 @@
 $home-panel-width: 896px;
 
 .home {
-    width: $home-panel-width;
-    height: 100%;
-    flow-children: down;
+	width: $home-panel-width;
+	height: 100%;
+	flow-children: down;
 
-    $root: &;
+	$root: &;
 
-    &__horizontal {
-        flow-children: right;
-    }
+	&__horizontal {
+		flow-children: right;
+	}
 
-    &__prompt {
-        height: 192px;
-        width: fill-parent-flow(1.0);
+	&__prompt {
+		height: 192px;
+		width: fill-parent-flow(1);
 
-        border: $menu-pane-border;
-        background-color: $base-950;
+		border: $menu-pane-border;
+		background-color: $base-950;
 
-        $this: &;
+		$this: &;
 
-        &__image {
-            width: 100%;
-        }
+		&__image {
+			width: 100%;
+		}
 
-        &__content {
-            width: 100%;
-            flow-children: down;
+		&__content {
+			width: 100%;
+			flow-children: down;
 
-            vertical-align: bottom;
-            padding: 15px;
+			vertical-align: bottom;
+			padding: 15px;
 
-            background-color: rgba($base-950, 0.9);
-        }
+			background-color: rgba($base-950, 0.9);
+		}
 
-        &:hover {
-            border-color: $primary-color;
+		&:hover {
+			border-color: $primary-color;
 
-            #{$this}__content {
-                background-color: $primary-color;
+			#{$this}__content {
+				background-color: $primary-color;
 
-                & > Label {
-                    color: $base-950;
-                }
-            }
-        }
-    }
+				& > Label {
+					color: $base-950;
+				}
+			}
+		}
+	}
 
-    &__spacer {
-        &__v {
-            height: 15px;
-        }
-        &__h {
-            width: 15px;
-        }
-    }
+	&__spacer {
+		&__v {
+			height: 15px;
+		}
+		&__h {
+			width: 15px;
+		}
+	}
 
-    &__heading {
-        @include mixin.font-styles($use-header: true);
-        font-size: 22px;
-    }
+	&__heading {
+		@include mixin.font-styles($use-header: true);
+		font-size: 22px;
+	}
 
-    &__subheading {
-        font-size: 18px;
-        color: $base-200;
-    }
+	&__subheading {
+		font-size: 18px;
+		color: $base-200;
+	}
 
-    &__bottom {
-        vertical-align: bottom;
-        flow-children: down;
-    }
+	&__bottom {
+		vertical-align: bottom;
+		flow-children: down;
+	}
 
-    &__expandable {
-        height: 64px;
-        width: fill-parent-flow(1.0);
+	&__expandable {
+		height: 64px;
+		width: fill-parent-flow(1);
 
-        transition: height 0.1s ease-in-out 0.0s;
-        border: $menu-pane-border;
-        background-color: $base-950;
+		transition: height 0.1s ease-in-out 0s;
+		border: $menu-pane-border;
+		background-color: $base-950;
 
-        $this: &;
+		$this: &;
 
-        &__content {
-            height: 100%;
-            width: 100%;
-            vertical-align: bottom;
-            flow-children: down;
+		&__content {
+			height: 100%;
+			width: 100%;
+			vertical-align: bottom;
+			flow-children: down;
 
-            padding: 15px;
-            //transition: background-color 0.1s ease-in-out 0.0s;
-            background-color: rgba($base-950, 0.9);
-        }
+			padding: 15px;
+			//transition: background-color 0.1s ease-in-out 0.0s;
+			background-color: rgba($base-950, 0.9);
+		}
 
-        &__join-btm {
-            border-bottom-color: rgba(0, 0, 0, 0);
-        }
+		&__join-btm {
+			border-bottom-color: rgba(0, 0, 0, 0);
+		}
 
-        &:hover {
-            height: 384px;
-            border-color: $primary-color;
+		&:hover {
+			height: 384px;
+			border-color: $primary-color;
 
-            #{$this}__active-only {
-                opacity: 1.0;
-                visibility: visible;
-            }
+			#{$this}__active-only {
+				opacity: 1;
+				visibility: visible;
+			}
 
-            #{$this}__content {
-                background-color: rgba($primary-color, 1.0);
-                height: fit-children;
-                vertical-align: top;
+			#{$this}__content {
+				background-color: rgba($primary-color, 1);
+				height: fit-children;
+				vertical-align: top;
 
-                & > Label {
-                    color: $base-color;
-                }
-            }
-        }
+				& > Label {
+					color: $base-color;
+				}
+			}
+		}
 
-        &__active-only {
-            opacity: 0.0;
-            visibility: collapse;
-            transition: opacity 0.1s ease-in-out 0.0s;
-        }
-    }
+		&__active-only {
+			opacity: 0;
+			visibility: collapse;
+			transition: opacity 0.1s ease-in-out 0s;
+		}
+	}
 }

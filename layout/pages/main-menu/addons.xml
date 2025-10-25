@@ -34,7 +34,7 @@
 						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
 					</Button>
 					<ToggleButton id="ToggleAll" class="button togglebutton" onactivate="AddonManager.toggleAll()">
-						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg"/>
+						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg" />
 					</ToggleButton>
 
 				<Panel class="horizontal-align-right flow-right">
@@ -63,7 +63,13 @@
 				</Panel>
 			</Panel>
 			<Panel class="selected-addon__description">
-				<Label id="SelectedAddonDesc" class="selected-addon__description__text" text="[PH] Addon Description" html="true" loadimages="true" />
+				<Label
+					id="SelectedAddonDesc"
+					class="selected-addon__description__text"
+					text="[PH] Addon Description"
+					html="true"
+					loadimages="true"
+				/>
 			</Panel>
 		</Panel>
 	</Panel>
