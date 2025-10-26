@@ -52,7 +52,7 @@
 				<Panel id="MainMenuTopButtons" class="full-height flow-right horizontal-align-right">
 					<RadioButton
 						id="ControlsLibraryButton"
-						class="topnav__button"
+						class="topnav__button MainMenuModeOnly"
 						group="TopNavRadio"
 						onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
 					>
@@ -113,10 +113,15 @@
 						</Panel>
 					</RadioButton>
 
-					<Button id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
+					<Button
+						id="QuitButton"
+						class="topnav__button"
+						onactivate="MainMenu.onQuitButtonPressed()"
+					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
-							<Label text="[HC] Quit" class="text" />
+							<Label text="[HC] Quit" class="text MainMenuModeOnly" />
+							<Label text="[HC] Exit" class="text PauseMenuModeOnly" />
 						</Panel>
 					</Button>
 				</Panel>

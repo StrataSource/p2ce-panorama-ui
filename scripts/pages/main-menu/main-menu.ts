@@ -254,16 +254,12 @@ class MainMenu {
 	}
 
 	/**
-	 * Handles quit button getting pressed, deciding whether to `disconnect` or `quit`
-	 * based on if we're ingame or not.
+	 * Handles quit button getting pressed.
 	 */
 	static onQuitButtonPressed() {
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-			GameInterfaceAPI.ConsoleCommand('disconnect');
-			this.onHomeButtonPressed();
-			return;
-		}
-		this.onQuitPrompt();
+		this.onQuitPrompt(
+			GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU
+		);
 	}
 
 	/**
@@ -271,20 +267,36 @@ class MainMenu {
 	 * @param {boolean} toDesktop
 	 */
 	static onQuitPrompt(toDesktop = true) {
-		if (!toDesktop) return; // currently don't handle disconnect prompts
-
 		$.DispatchEvent('MainMenuPauseGame'); // make sure game is paused so we can see the popup if hit from a keybind in-game
 
-		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-			$.LocalizeSafe('#Action_Quit'),
-			$.LocalizeSafe('#Action_Quit_Message'),
-			'warning-popup',
-			$.LocalizeSafe('#Action_Quit'),
-			this.quitGame,
-			$.LocalizeSafe('#Action_Return'),
-			() => {},
-			'blur'
-		);
+		if (toDesktop) {
+			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				$.LocalizeSafe('#Action_Quit'),
+				$.LocalizeSafe('#Action_Quit_Message'),
+				'warning-popup',
+				$.LocalizeSafe('#Action_Quit'),
+				this.quitGame,
+				$.LocalizeSafe('#Action_Return'),
+				() => {},
+				'blur'
+			);
+		} else {
+			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
+				'[HC] Exit Game?',
+				'[HC] Are you sure you want to exit? Unsaved progress will be lost!',
+				'warning-popup',
+				'[HC] Return to Menu',
+				() => {
+					GameInterfaceAPI.ConsoleCommand('disconnect');
+					this.onHomeButtonPressed();
+				},
+				'[HC] Quit to Desktop',
+				this.quitGame,
+				'[HC] Cancel',
+				() => {},
+				'blur'
+			);
+		}
 	}
 
 	/** Quits the game. Bye! */
