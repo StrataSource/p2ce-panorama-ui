@@ -189,6 +189,7 @@
 								<!-- Continue latest save -->
 								<Button class="home__prompt">
 									<Image
+										id="PausedLoadLastSaveButton"
 										src="file://{images}/menu/p2ce/random3.png"
 										scaling="stretch-to-cover-preserve-aspect"
 										class="home__prompt__image"
@@ -226,7 +227,10 @@
 								<!-- Quick & easy save access -->
 								<Panel class="home__horizontal">
 									<!-- See all saves -->
-									<Button class="home__prompt">
+									<Button
+										id="MainMenuViewSavesButton"
+										class="home__prompt"
+									>
 										<Image
 											src="file://{images}/menu/p2ce/random1.png"
 											scaling="stretch-to-cover-preserve-aspect"
@@ -239,7 +243,10 @@
 									</Button>
 									<Panel class="home__spacer__h" />
 									<!-- Continue latest save -->
-									<Button class="home__prompt">
+									<Button
+										id="MainMenuLoadLastSaveButton"
+										class="home__prompt"
+									>
 										<Image
 											src="file://{images}/menu/p2ce/random3.png"
 											scaling="stretch-to-cover-preserve-aspect"
@@ -247,7 +254,7 @@
 										/>
 										<Panel class="home__prompt__content">
 											<Label class="home__heading" text="[HC] Continue" />
-											<Label class="home__subheading" text="[HC] Portal 2: The Escape" />
+											<Label class="home__subheading" text="[HC] No Save Available" />
 										</Panel>
 									</Button>
 								</Panel>

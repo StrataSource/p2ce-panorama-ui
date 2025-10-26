@@ -279,7 +279,7 @@ $home-panel-width: 896px;
 					vertical-align: middle;
 				}
 
-				#{$this}:hover & {
+				#{$this}:hover:not(:disabled) & {
 					background-color: $primary-color;
 
 					& > Label {
@@ -303,7 +303,24 @@ $home-panel-width: 896px;
 			//background-color: rgba($base-950, 0.9);
 		}
 
-		&:hover {
+		&:disabled {
+			border-color: $button-text-disabled;
+
+			#{$this}__image {
+				saturation: 0;
+			}
+
+			#{$this}__content {
+				background-color: rgba($button-background-disabled, 0.8);
+
+				& > Label {
+					color: $button-text-disabled;
+					text-shadow-fast: 1px 1px rgba($base-950, 0);
+				}
+			}
+		}
+
+		&:hover:not(:disabled) {
 			border-color: $primary-color;
 
 			#{$this}__content {

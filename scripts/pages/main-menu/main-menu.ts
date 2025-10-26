@@ -12,8 +12,11 @@ class MainMenu {
 		image: $<Image>('#MainMenuBackground'),
 		model: $<ModelPanel>('#MainMenuModel'),
 		topButtons: $('#MainMenuTopButtons'),
-		homeButton: $<RadioButton>('#HomeButton')!,
-		addonsButton: $<RadioButton>('#AddonsButton')
+		homeButton: $<RadioButton>('#HomeButton'),
+		addonsButton: $<RadioButton>('#AddonsButton'),
+		pausedLoadLastSaveButton: $<Button>('#PausedLoadLastSaveButton'),
+		mainMenuViewSavesButton: $<Button>('#MainMenuViewSavesButton'),
+		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton')
 	};
 
 	static activeTab = '';
@@ -94,6 +97,8 @@ class MainMenu {
 
 		this.setMainMenuBackground();
 		this.onHomeButtonPressed();
+
+		this.updateHomeDetails();
 	}
 
 	/**
@@ -109,6 +114,8 @@ class MainMenu {
 	static onShowPauseMenu() {
 		this.panels.cp.AddClass('MainMenuRootPanel--PauseMenuMode');
 		this.onHomeButtonPressed();
+		
+		this.updateHomeDetails();
 	}
 
 	/**
@@ -121,6 +128,24 @@ class MainMenu {
 		if (this.activeTab === 'Settings') {
 			$.DispatchEvent('SettingsSave');
 		}
+	}
+
+	/**
+	 * Updates the elements within the homepages
+	 * e.g. disabling buttons related to loading saves if there are no saves available
+	 */
+	static updateHomeDetails() {
+		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
+		const hasSaves = saves.length !== 0;
+
+		if (this.panels.pausedLoadLastSaveButton)
+			this.panels.pausedLoadLastSaveButton.enabled = hasSaves;
+
+		if (this.panels.mainMenuViewSavesButton)
+			this.panels.mainMenuViewSavesButton.enabled = hasSaves;
+
+		if (this.panels.mainMenuLoadLastSaveButton)
+			this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
 	}
 
 	/**
