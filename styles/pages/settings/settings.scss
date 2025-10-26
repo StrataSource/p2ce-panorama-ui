@@ -15,7 +15,7 @@ $page-width: 1920px - $rightnav-width;
 
 	&__left {
 		flow-children: down;
-		width: fill-parent-flow(0.3);
+		width: fill-parent-flow(0.35);
 		min-width: 210px;
 
 		height: 100%;
@@ -28,7 +28,7 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__info {
-		width: fill-parent-flow(0.4);
+		width: fill-parent-flow(0.35);
 
 		height: 100%;
 	}
