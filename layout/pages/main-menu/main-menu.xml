@@ -158,7 +158,7 @@
 
 						<ModelPanel
 							id="MainMenuModel"
-							class="main__modelpanel"
+							class="main__modelpanel MainMenuModeOnly"
 							src="models/npcs/turret/turret.mdl"
 							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
 							antialias="true"

@@ -171,6 +171,7 @@ class MainMenu {
 			// Force a reload of any resources since we're about to display the panel
 			if (activePanel) activePanel.visible = true;
 			activePanel?.SetReadyForDisplay(true);
+			$.DispatchEvent('MainMenuTabShown', this.activeTab);
 		}
 
 		this.showContentPanel();
