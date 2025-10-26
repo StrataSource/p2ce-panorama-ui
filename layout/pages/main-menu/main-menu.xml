@@ -66,7 +66,8 @@
 						id="HomeButton"
 						group="TopNavRadio"
 						class="topnav__button"
-						onactivate="MainMenu.navigateToPage('Home', 'main-menu/home')"
+						onactivate="MainMenu.onHomeButtonPressed()"
+						activated="true"
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
@@ -156,16 +157,130 @@
 					<Panel class="mainmenu__content">
 						<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
-						<ModelPanel
-							id="MainMenuModel"
-							class="main__modelpanel MainMenuModeOnly"
-							src="models/npcs/turret/turret.mdl"
-							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-							antialias="true"
-							mouse_rotate="true"
-						/>
+						<Panel id="PauseContent" class="mainmenu__home-container PauseMenuModeOnly">
+							<Panel class="home">
+								<!-- Resume game button, pause menu only -->
+								<Button
+									class="home__prompt home__prompt__short"
+									onactivate="$.DispatchEvent('MainMenuResumeGame');"
+								>
+									<Image
+										src="file://{images}/menu/p2ce/random2.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__short__content">
+										<Label class="home__heading" text="[HC] Resume Game" />
+									</Panel>
+								</Button>
+								<Panel class="home__spacer__v" />
+								<!-- See all saves -->
+								<Button class="home__prompt">
+									<Image
+										src="file://{images}/menu/p2ce/random1.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__content">
+										<Label class="home__heading" text="[HC] Save/Load Game" />
+									</Panel>
+								</Button>
+								<Panel class="home__spacer__v" />
+								<!-- Continue latest save -->
+								<Button class="home__prompt">
+									<Image
+										src="file://{images}/menu/p2ce/random3.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__content">
+										<Label class="home__heading" text="[HC] Load Last Save" />
+									</Panel>
+								</Button>
+							</Panel>
+						</Panel>
 
-						<Panel id="PauseContent" class="mainmenu__main-container main PauseMenuModeOnly">
+						<Panel id="HomeContent" class="mainmenu__home-container MainMenuModeOnly">
+							<ModelPanel
+								id="MainMenuModel"
+								class="home__modelpanel MainMenuModeOnly"
+								src="models/npcs/turret/turret.mdl"
+								cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+								antialias="true"
+								mouse_rotate="true"
+							/>
+							<Panel class="home">
+								<!-- Call to action for the player, based on some criteria -->
+								<Button class="home__prompt">
+									<Image
+										src="file://{images}/menu/p2ce/random4.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__content">
+										<Label class="home__heading" text="[PH] Play" />
+										<Label class="home__subheading" text="[PH] 3 New Campaigns Installed!" />
+									</Panel>
+								</Button>
+								<Panel class="home__spacer__v" />
+								<!-- Quick & easy save access -->
+								<Panel class="home__horizontal">
+									<!-- See all saves -->
+									<Button class="home__prompt">
+										<Image
+											src="file://{images}/menu/p2ce/random1.png"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="home__prompt__image"
+										/>
+										<Panel class="home__prompt__content">
+											<Label class="home__heading" text="[HC] All Saves" />
+											<Label class="home__subheading" text="[HC] Across all campaigns" />
+										</Panel>
+									</Button>
+									<Panel class="home__spacer__h" />
+									<!-- Continue latest save -->
+									<Button class="home__prompt">
+										<Image
+											src="file://{images}/menu/p2ce/random3.png"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="home__prompt__image"
+										/>
+										<Panel class="home__prompt__content">
+											<Label class="home__heading" text="[HC] Continue" />
+											<Label class="home__subheading" text="[HC] Portal 2: The Escape" />
+										</Panel>
+									</Button>
+								</Panel>
+								<Panel class="home__bottom">
+									<Button class="home__expandable home__expandable__join-btm">
+										<Image
+											src="file://{images}/menu/p2ce/news-splash.png"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="home__prompt__image"
+										/>
+										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] NEWS" />
+										<Panel class="home__expandable__content">
+											<Label class="home__heading" text="[PH] Clustered Update" />
+											<Label
+												class="home__subheading home__expandable__active-only"
+												text="[PH] Clustered Shading allows Portal 2: Community Edition to use real-time lighting techniques, which greatly enhances the visuals."
+											/>
+										</Panel>
+									</Button>
+									<Button class="home__expandable">
+										<Image
+											src="file://{images}/menu/p2ce/random2.png"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="home__prompt__image"
+										/>
+										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] FEATURED" />
+										<Panel class="home__expandable__content">
+											<Label class="home__heading" text="[PH] My New Epic Campaign" />
+											<Label class="home__subheading home__expandable__active-only" text="[PH] by Someone on the Workshop or Something" />
+										</Panel>
+									</Button>
+								</Panel>
+							</Panel>
 						</Panel>
 
 						<Panel id="PageContent" class="mainmenu__page-container mainmenu__page-container--hidden">

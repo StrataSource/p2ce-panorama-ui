@@ -4,6 +4,8 @@ class MainMenu {
 	static panels = {
 		cp: $.GetContextPanel(),
 		pageContent: $('#PageContent'),
+		homeContent: $('#HomeContent'),
+		pauseContent: $('#PauseContent'),
 		contentBlur: $('#MainMenuContentBlur'),
 		backgroundBlur: $('#MainMenuBackgroundBlur'),
 		movie: $<Movie>('#MainMenuMovie'),
@@ -26,6 +28,7 @@ class MainMenu {
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.onLayoutReloaded.bind(this));
 
 		$.DispatchEvent('HideIntroMovie');
 	}
@@ -63,7 +66,7 @@ class MainMenu {
 			this.panels.model.SetDirectionalLightDirection(0, 1, 0, 0);
 		}
 
-		if (GameInterfaceAPI.GetSettingBool('developer')) $('#ControlsLibraryButton')?.RemoveClass('hide');
+		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
 
 		this.setMainMenuBackground();
 
@@ -185,6 +188,9 @@ class MainMenu {
 
 		$.DispatchEvent('RetractDrawer');
 		$.DispatchEvent('ShowContentPanel');
+
+		this.panels.homeContent?.AddClass('mainmenu__home-container--hidden');
+		this.panels.pauseContent?.AddClass('mainmenu__home-container--hidden');
 	}
 
 	/**
@@ -208,6 +214,9 @@ class MainMenu {
 		}
 
 		this.activeTab = '';
+
+		this.panels.homeContent?.RemoveClass('mainmenu__home-container--hidden');
+		this.panels.pauseContent?.RemoveClass('mainmenu__home-container--hidden');
 	}
 
 	/**
@@ -251,7 +260,8 @@ class MainMenu {
 	 * Handles home button getting pressed.
 	 */
 	static onHomeButtonPressed() {
-		$.DispatchEvent('Activated', this.panels.homeButton, PanelEventSource.MOUSE);
+		$<RadioButton>('#HomeButton')?.SetSelected(true);
+		this.onHideContentPanel();
 	}
 
 	/**
@@ -332,5 +342,12 @@ class MainMenu {
 			this.panels.movie?.RemoveClass('mainmenu__fadeout');
 			this.panels.movie?.Play();
 		}
+	}
+
+	static onLayoutReloaded() {
+		this.panels.cp.SetHasClass(
+			'MainMenuRootPanel--PauseMenuMode',
+			GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU
+		);
 	}
 }

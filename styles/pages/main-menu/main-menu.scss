@@ -4,6 +4,8 @@
 
 $page-transition-duration: 0.15s;
 $page-transition-timing-func: ease-in-out;
+$topnav-height: 90px;
+$home-panel-width: 896px;
 
 #TooltipManager,
 #ContextMenuManager,
@@ -33,10 +35,6 @@ $page-transition-timing-func: ease-in-out;
 .MainMenuRootPanel--PauseMenuMode .PauseMenuModeOnly {
 	visibility: visible;
 }
-
-$topnav-height: 90px;
-$rightnav-width: 50px;
-$drawer-width: 768px;
 
 .mainmenu {
 	width: 100%;
@@ -83,6 +81,10 @@ $drawer-width: 768px;
 		width: fill-parent-flow(1);
 		height: fill-parent-flow(1);
 		margin-top: $topnav-height;
+	}
+
+	&__home-container {
+		padding: 30px;
 	}
 
 	&__home-container,
@@ -239,32 +241,105 @@ $drawer-width: 768px;
 			sound: 'UIPanorama.ButtonPress';
 		}
 	}
-
-	&__shadow {
-		z-index: 1;
-		margin-top: $topnav-height;
-		width: 100%;
-		height: 20px;
-		opacity: 0.8;
-		border-top: 1px solid rgba(0, 0, 0, 0.5);
-		background-color: gradient(
-			linear,
-			0% 100%,
-			0% 0%,
-			from(rgba(0, 0, 0, 0)),
-			color-stop(0.5, rgba(0, 0, 0, 0.275)),
-			to(rgba(0, 0, 0, 0.8))
-		);
-	}
 }
 
-.main {
-	&__wrapper {
-		width: 100%;
-		max-width: 2560px;
-		height: 100%;
-		horizontal-align: middle;
+.home {
+	width: $home-panel-width;
+	height: 100%;
+	flow-children: down;
+
+	$root: &;
+
+	&__horizontal {
 		flow-children: right;
+	}
+
+	&__prompt {
+		height: 192px;
+		width: fill-parent-flow(1);
+
+		border: $menu-pane-border;
+		background-color: $base-950;
+
+		$this: &;
+
+		&__short {
+			height: 64px;
+
+			&__content {
+				width: 100%;
+				height: 100%;
+				vertical-align: middle;
+				flow-children: down;
+
+				padding: 0 15px;
+				background-color: rgba($base-950, 0.9);
+
+				& > Label {
+					vertical-align: middle;
+				}
+
+				#{$this}:hover & {
+					background-color: $primary-color;
+
+					& > Label {
+						color: $base-950;
+					}
+				}
+			}
+		}
+
+		&__image {
+			width: 100%;
+		}
+
+		&__content {
+			width: 100%;
+			flow-children: down;
+
+			vertical-align: bottom;
+			padding: 15px;
+
+			//background-color: rgba($base-950, 0.9);
+		}
+
+		&:hover {
+			border-color: $primary-color;
+
+			#{$this}__content {
+				background-color: $primary-color;
+
+				& > Label {
+					color: $base-950;
+				}
+			}
+
+			#{$root}__heading,
+			#{$root}__subheading {
+				text-shadow-fast: 1px 1px rgba($base-950, 0);
+			}
+		}
+	}
+
+	&__spacer {
+		&__v {
+			height: 15px;
+		}
+		&__h {
+			width: 15px;
+		}
+	}
+
+	&__heading {
+		@include mixin.font-styles($use-header: true);
+		font-size: 22px;
+		text-shadow-fast: 1px 1px $base-950;
+	}
+
+	&__subheading {
+		font-size: 18px;
+		color: $base-200;
+		text-shadow-fast: 1px 1px $base-950;
 	}
 
 	&__modelpanel {
@@ -285,68 +360,84 @@ $drawer-width: 768px;
 		}
 	}
 
-	&--hidden {
-		visibility: collapse;
+	&__bottom {
+		vertical-align: bottom;
+		flow-children: down;
 	}
-}
 
-.bottombar {
-	$root: &;
-	margin: 24px;
-	width: 100%;
+	&__expandable {
+		height: 64px;
+		width: fill-parent-flow(1);
 
-	&__button {
-		width: 60px;
-		height: width-percentage(100%);
-		margin: 0 2px;
-		transition-property: transform;
-		transition-timing-function: ease-in-out;
-		transition-duration: 0.2s;
+		transition: height 0.1s ease-in-out 0s;
+		border: $menu-pane-border;
+		background-color: $base-950;
+
+		$this: &;
+
+		&__big-text {
+			horizontal-align: right;
+			vertical-align: middle;
+
+			@include mixin.font-styles($use-header: true);
+			font-size: 60px;
+			margin-top: -5px;
+
+			opacity: 0.1;
+		}
+
+		&__content {
+			height: 100%;
+			width: 100%;
+			vertical-align: middle;
+			flow-children: down;
+
+			padding: 15px;
+			//transition: background-color 0.1s ease-in-out 0.0s;
+			background-color: rgba($base-950, 0.9);
+		}
+
+		&__join-btm {
+			border-bottom-color: rgba(0, 0, 0, 0);
+		}
 
 		&:hover {
-			transform: translateY(-6px);
+			height: 384px;
+			border-color: $primary-color;
+
+			#{$this}__active-only {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			#{$this}__inactive-only {
+				visibility: collapse;
+			}
+
+			#{$this}__content {
+				background-color: rgba($primary-color, 1);
+				height: fit-children;
+				vertical-align: top;
+
+				& > Label {
+					color: $base-color;
+				}
+			}
+
+			#{$root}__heading,
+			#{$root}__subheading {
+				text-shadow-fast: 1px 1px rgba($base-950, 0);
+			}
 		}
-	}
 
-	&__icon {
-		width: 100%;
-		height: width-percentage(100%);
-		padding: 8px;
-		vertical-align: middle;
-
-		opacity: 0.8;
-
-		transition-property: opacity, img-shadow;
-		transition-timing-function: ease-out;
-		transition-duration: 0.2s;
-		img-shadow: 0 0 16px 2 black;
-
-		#{$root}__button:hover & {
-			opacity: 1;
-			img-shadow: 0 0 24px 2 $orange;
+		&__active-only {
+			opacity: 0;
+			visibility: collapse;
+			transition: opacity 0.1s ease-in-out 0s;
 		}
-	}
 
-	&__text {
-		align: center center;
-		text-align: center;
-		overflow: squish;
-		text-overflow: shrink;
-		@include mixin.font-styles($use-header: true);
-	}
-
-	&__notice {
-		text-align: center;
-		vertical-align: center;
-		horizontal-align: right;
-		overflow: squish;
-		font-size: 32px;
-		text-shadow: 1px 2px 2px black;
-	}
-
-	&__tooltip {
-		tooltip-position: top;
-		tooltip-arrow-position: 50% 50%;
-		tooltip-body-position: 50% 50%;
+		&__inactive-only {
+			visibility: visible;
+		}
 	}
 }
