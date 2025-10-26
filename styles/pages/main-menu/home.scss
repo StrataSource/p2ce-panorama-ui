@@ -34,7 +34,7 @@ $home-panel-width: 896px;
 			vertical-align: bottom;
 			padding: 15px;
 
-			background-color: rgba($base-950, 0.9);
+			//background-color: rgba($base-950, 0.9);
 		}
 
 		&:hover {
@@ -46,6 +46,11 @@ $home-panel-width: 896px;
 				& > Label {
 					color: $base-950;
 				}
+			}
+
+			#{$root}__heading,
+			#{$root}__subheading {
+				text-shadow-fast: 1px 1px rgba($base-950, 0);
 			}
 		}
 	}
@@ -62,11 +67,13 @@ $home-panel-width: 896px;
 	&__heading {
 		@include mixin.font-styles($use-header: true);
 		font-size: 22px;
+		text-shadow-fast: 1px 1px $base-950;
 	}
 
 	&__subheading {
 		font-size: 18px;
 		color: $base-200;
+		text-shadow-fast: 1px 1px $base-950;
 	}
 
 	&__bottom {
@@ -131,6 +138,11 @@ $home-panel-width: 896px;
 				& > Label {
 					color: $base-color;
 				}
+			}
+
+			#{$root}__heading,
+			#{$root}__subheading {
+				text-shadow-fast: 1px 1px rgba($base-950, 0);
 			}
 		}
 
