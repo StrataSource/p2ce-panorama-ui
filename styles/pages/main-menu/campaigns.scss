@@ -1,7 +1,137 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
+
 .campaigns {
-	&__coming_soon {
-		vertical-align: center;
-		horizontal-align: center;
-		font-size: 64px;
+	width: fill-parent-flow(0.45);
+	height: 100%;
+	flow-children: down;
+
+	border: $menu-pane-border;
+
+	&__action-bar {
+		width: 100%;
+		height: fit-children;
+		flow-children: right;
+
+		border-bottom: $menu-pane-border;
+		background-color: $base-950;
+		padding: 15px;
+	}
+
+	&__list {
+		width: 100%;
+		height: 100%;
+		overflow: squish scroll;
+		flow-children: down;
+
+		background-color: $base-950;
+	}
+
+	&__entry {
+		width: 100%;
+		height: fit-children;
+		flow-children: right;
+
+		padding: 15px;
+		padding-right: 20px;
+
+		&:hover {
+			background-color: $primary-950;
+		}
+
+		&:selected {
+			background-color: $primary-800;
+		}
+
+		&__left {
+			width: fill-parent-flow(1);
+			flow-children: right;
+		}
+
+		&__cover {
+			width: 128px;
+			height: 128px;
+
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			flow-children: down;
+
+			margin-left: 15px;
+			vertical-align: middle;
+
+			&__title {
+				@include mixin.font-styles($use-header: true);
+				font-size: 22px;
+			}
+
+			&__desc {
+				margin-top: 5px;
+				font-size: 16px;
+				color: $base-200;
+			}
+
+			&__source {
+				visibility: collapse;
+			}
+		}
+
+		&__right {
+		}
+
+		&__checkbox {
+			height: 32px;
+
+			margin-left: 10px;
+			& > .TickBox {
+				margin-right: 0px;
+			}
+		}
+	}
+}
+
+.selected-campaign {
+	width: fill-parent-flow(0.55);
+	height: 100%;
+	flow-children: down;
+
+	margin-left: 20px;
+	padding: 15px;
+	border: $menu-pane-border;
+	background-color: $base-950;
+
+	&__cover {
+		width: 256px;
+		height: 256px;
+
+		border: $menu-pane-border;
+		margin-right: 15px;
+	}
+
+	&__title {
+		@include mixin.font-styles($use-header: true);
+		font-size: 32px;
+	}
+
+	&__authors {
+		font-weight: light;
+		font-size: 16px;
+		color: $base-200;
+		letter-spacing: 1px;
+	}
+
+	&__description {
+		width: 100%;
+		height: 100%;
+
+		margin-top: 15px;
+		border: $menu-pane-border;
+
+		&__text {
+			overflow: squish scroll;
+			padding: 15px;
+		}
 	}
 }
