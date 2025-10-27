@@ -16,7 +16,10 @@ class MainMenu {
 		addonsButton: $<RadioButton>('#AddonsButton'),
 		pausedLoadLastSaveButton: $<Button>('#PausedLoadLastSaveButton'),
 		mainMenuViewSavesButton: $<Button>('#MainMenuViewSavesButton'),
-		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton')
+		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton'),
+		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
+		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
+		pausedSaveImage: $<Image>('#PausedSaveImage')
 	};
 
 	static activeTab = '';
@@ -146,6 +149,20 @@ class MainMenu {
 
 		if (this.panels.mainMenuLoadLastSaveButton)
 			this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
+
+		if (hasSaves) {
+			const save = saves[0];
+			const thumbValid = save.thumb.length > 0;
+			const savePath = `file://${save.thumb}`;
+
+			if (this.panels.mainMenuSaveImage && thumbValid)
+				this.panels.mainMenuSaveImage.SetImage(savePath);
+			if (this.panels.pausedSaveImage && thumbValid)
+				this.panels.pausedSaveImage.SetImage(savePath);
+
+			if (this.panels.mainMenuSaveSubheadingLabel)
+				this.panels.mainMenuSaveSubheadingLabel.text = save.name;
+		}
 	}
 
 	/**
@@ -282,11 +299,46 @@ class MainMenu {
 	}
 
 	/**
+	 * Load the latest save available.
+	 */
+	static loadLatestSave() {
+		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
+		
+		if (saves.length === 0) return;
+
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				'[HC] Confirm Load',
+				'[HC] Are you sure you want to load the latest save? Progress will be lost!',
+				'warning-popup',
+				'[HC] Load Save',
+				() => { SaveRestoreAPI.LoadSave(saves[0].name); },
+				$.LocalizeSafe('#Action_Return'),
+				() => {},
+				'blur'
+			);
+		} else {
+			SaveRestoreAPI.LoadSave(saves[0].name);
+		}
+	}
+
+	/**
 	 * Handles home button getting pressed.
 	 */
 	static onHomeButtonPressed() {
 		$<RadioButton>('#HomeButton')?.SetSelected(true);
 		this.onHideContentPanel();
+	}
+
+	/**
+	 * Force a button to be pressed, given its ID.
+	 * The button must be of type ToggleButton.
+	 * @param btnId The ID of the button to be pressed.
+	 */
+	static selectNavButton(btnId: string) {
+		const btn = this.panels.cp.FindChildTraverse<ToggleButton>(btnId);
+
+		if (btn) $.DispatchEvent('Activated', btn, PanelEventSource.MOUSE);
 	}
 
 	/**
@@ -374,5 +426,7 @@ class MainMenu {
 			'MainMenuRootPanel--PauseMenuMode',
 			GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU
 		);
+
+		this.updateHomeDetails();
 	}
 }
