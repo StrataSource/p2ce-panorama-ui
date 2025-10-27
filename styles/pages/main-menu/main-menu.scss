@@ -300,7 +300,7 @@ $home-panel-width: 896px;
 			vertical-align: bottom;
 			padding: 15px;
 
-			//background-color: rgba($base-950, 0.9);
+			background-color: rgba($base-950, 0.5);
 		}
 
 		&:disabled {
@@ -419,7 +419,7 @@ $home-panel-width: 896px;
 		}
 
 		&:hover {
-			height: 384px;
+			height: 452px;
 			border-color: $primary-color;
 
 			#{$this}__active-only {
