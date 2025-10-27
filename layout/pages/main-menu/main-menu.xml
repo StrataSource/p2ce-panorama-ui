@@ -287,7 +287,7 @@
 											<Label class="home__heading" text="[PH] Clustered Update" />
 											<Label
 												class="home__subheading home__expandable__active-only"
-												text="[PH] Clustered Shading allows Portal 2: Community Edition to use real-time lighting techniques, which greatly enhances the visuals."
+												text="[PH] We have completely overhauled the Source Engine's lighting system to add a new level of depth and liveliness to the game's environments."
 											/>
 										</Panel>
 									</Button>
@@ -300,7 +300,7 @@
 										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] FEATURED" />
 										<Panel class="home__expandable__content">
 											<Label class="home__heading" text="[PH] My New Epic Campaign" />
-											<Label class="home__subheading home__expandable__active-only" text="[PH] by Someone on the Workshop or Something" />
+											<Label class="home__subheading home__expandable__active-only" text="[PH] Featured for October 2025, created by Someone on the Workshop or Something" />
 										</Panel>
 									</Button>
 								</Panel>
