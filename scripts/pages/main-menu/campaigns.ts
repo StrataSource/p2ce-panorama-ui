@@ -71,7 +71,25 @@ class ChapterEntry {
 			cover.SetImage(`file://{materials}/vgui/chapters/chapter${this.index + 1}.vtf`);
 		}
 
-		this.panel.SetPanelEvent('onactivate', () => { GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`) })
+		this.panel.SetPanelEvent(
+			'onactivate',
+			() => {
+				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
+					GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
+				else {
+					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+						'[HC] Confirm New Game',
+						'[HC] Are you sure you want to start a new game? Progress will be lost!',
+						'warning-popup',
+						$.LocalizeSafe('#UI_Yes'),
+						() => { GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`); },
+						$.LocalizeSafe('#UI_Cancel'),
+						() => {},
+						'blur'
+					);
+				}
+			}
+		);
 	}
 }
 
@@ -101,7 +119,25 @@ class SaveEntry {
 			cover.SetImage(`file://${this.save.thumb}`);
 		}
 
-		this.panel.SetPanelEvent('onactivate', () => { SaveRestoreAPI.LoadSave(this.save.name) });
+		this.panel.SetPanelEvent(
+			'onactivate',
+			() => {
+				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
+					SaveRestoreAPI.LoadSave(this.save.name);
+				else {
+					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+						'[HC] Confirm Load Game',
+						'[HC] Are you sure you want to load this save file? Progress will be lost!',
+						'warning-popup',
+						$.LocalizeSafe('#UI_Yes'),
+						() => { SaveRestoreAPI.LoadSave(this.save.name); },
+						$.LocalizeSafe('#UI_Cancel'),
+						() => {},
+						'blur'
+					);
+				}
+			}
+		);
 	}
 }
 
@@ -202,13 +238,27 @@ class CampaignLoadGameTab {
 
 	static loadLatest() {
 		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
-		if (saves.length > 0) {
+		if (saves.length === 0) return;
+
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				'[HC] Confirm Load',
+				'[HC] Are you sure you want to load the latest save? Progress will be lost!',
+				'warning-popup',
+				$.LocalizeSafe('#UI_Yes'),
+				() => { SaveRestoreAPI.LoadSave(saves[0].name); },
+				$.LocalizeSafe('#UI_Cancel'),
+				() => {},
+				'blur'
+			);
+		} else {
 			SaveRestoreAPI.LoadSave(saves[0].name);
 		}
 	}
 }
 
 class CampaignStartPage {
+	static campaignListerContainer = $<Panel>('#CampaignListerContainer');
 	static campaignStartPage = $<Panel>('#CampaignStartPage');
 	static campaignLogo = $<Image>('#CampaignLogo');
 	static campaignLoadLatestBtn = $<Button>('#CampaignLoadLatestBtn');
@@ -232,6 +282,9 @@ class CampaignStartPage {
 		if (!this.campaignStartPage) return;
 
 		this.campaignStartPage.visible = false;
+
+		if (this.campaignListerContainer)
+			this.campaignListerContainer.visible = false;
 	}
 
 	static setActive() {
