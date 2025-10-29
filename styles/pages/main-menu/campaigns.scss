@@ -3,21 +3,11 @@
 @use '../../abstract/mixin';
 
 .campaigns {
-	width: fill-parent-flow(0.45);
+	width: 100%;
 	height: 100%;
 	flow-children: down;
 
 	border: $menu-pane-border;
-
-	&__action-bar {
-		width: 100%;
-		height: fit-children;
-		flow-children: right;
-
-		border-bottom: $menu-pane-border;
-		background-color: $base-950;
-		padding: 15px;
-	}
 
 	&__list {
 		width: 100%;
@@ -50,8 +40,8 @@
 		}
 
 		&__cover {
-			width: 128px;
-			height: 128px;
+			width: 640px;
+			height: 360px;
 
 			border: $menu-pane-border;
 		}
@@ -59,17 +49,23 @@
 		&__details {
 			flow-children: down;
 
-			margin-left: 15px;
+			margin-left: 30px;
 			vertical-align: middle;
+
+			&__logo {
+				width: 440px;
+				height: 130px;
+			}
 
 			&__title {
 				@include mixin.font-styles($use-header: true);
-				font-size: 22px;
+				font-size: 50px;
+				letter-spacing: 4px;
 			}
 
 			&__desc {
 				margin-top: 5px;
-				font-size: 16px;
+				font-size: 20px;
 				color: $base-200;
 			}
 
@@ -93,21 +89,86 @@
 }
 
 .selected-campaign {
-	width: fill-parent-flow(0.55);
+	width: 100%;
 	height: 100%;
-	flow-children: down;
 
-	margin-left: 20px;
-	padding: 15px;
-	border: $menu-pane-border;
-	background-color: $base-950;
+	margin: -30px;
 
-	&__cover {
-		width: 256px;
-		height: 256px;
+	&__container {
+		width: 100%;
+		height: 100%;
+		margin: 30px;
 
-		border: $menu-pane-border;
-		margin-right: 15px;
+		flow-children: right;
+	}
+
+	&__controls {
+		width: 30%;
+		height: 100%;
+		flow-children: down;
+
+		&__button {
+			width: 100%;
+			height: 64px;
+			flow-children: right;
+
+			padding: 0 20px;
+			background-color: $primary-800;
+
+			$this: &;
+
+			&__text {
+				@include mixin.font-styles($use-header: true);
+				color: $bright-color;
+				vertical-align: middle;
+				font-size: 24px;
+			}
+
+			&:disabled {
+				background-color: $base-950;
+				border-color: rgba(0, 0, 0, 0);
+
+				#{$this}__text {
+					color: $button-text-disabled;
+				}
+			}
+
+			&:hover:not(:disabled) {
+				background-color: $primary-color;
+				border-color: $primary-color;
+				
+				#{$this}__text {
+					color: $base-950;
+				}
+			}
+		}
+	}
+
+	&__lister {
+		width: 100%;
+		height: fit-children;
+		flow-children: down;
+		overflow: squish scroll;
+		&__container {
+			width: 70%;
+			height: 100%;
+			margin-left: 30px;
+			border: $menu-pane-border;
+			background-color: $base-950;
+		}
+	}
+
+	&__background {
+		width: 100%;
+		height: 100%;
+	}
+
+	&__logo {
+		width: 440px;
+		height: 130px;
+		margin-bottom: 30px;
+
+		horizontal-align: center;
 	}
 
 	&__title {
@@ -132,6 +193,54 @@
 		&__text {
 			overflow: squish scroll;
 			padding: 15px;
+		}
+	}
+}
+
+.saves {
+	&__entry {
+		&__cover {
+			width: 480px;
+			height: 270px;
+
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			&__title {
+				@include mixin.font-styles($use-header: true);
+				font-size: 32px;
+			}
+
+			&__desc {
+				margin-top: 5px;
+				font-size: 20px;
+				color: $base-200;
+			}
+		}
+	}
+}
+
+.chapters {
+	&__entry {
+		&__cover {
+			width: 480px;
+			height: 270px;
+
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			&__title {
+				font-size: 24px;
+				color: $base-200;
+			}
+
+			&__desc {
+				@include mixin.font-styles($use-header: true);
+				margin-top: 5px;
+				font-size: 32px;
+			}
 		}
 	}
 }

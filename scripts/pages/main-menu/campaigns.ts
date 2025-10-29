@@ -1,15 +1,324 @@
 'use strict';
 
-class CampaignSelector {
-	static campaignCarousel = $<Carousel>('#CampaignCarousel');
+class CampaignEntry {
+	index: number;
+	panel: Button;
+	// TODO: CampaignInfo from CampaignAPI
+	info: null;
+
+	constructor(index: number, panel: Button, info: null) {
+		this.index = index;
+		this.panel = panel;
+		this.info = info;
+	}
+
+	update() {
+		const title = this.panel.FindChildTraverse<Label>('CampaignTitle');
+		const desc = this.panel.FindChildTraverse<Label>('CampaignDesc');
+
+		if (title) {
+			title.text = '[HC] Portal 2 (Singleplayer)';
+		}
+		if (desc) {
+			desc.text = 'Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned ' +
+				'the original Portal over 70 industry accolades and created a cult following. The single-player portion ' +
+				'of Portal 2 introduces a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
+				'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
+				'Labs and be reunited with GLaDOS, the occasionally murderous computer companion who guided them through ' +
+				'the original game.';
+		}
+
+		this.panel.SetPanelEvent('onactivate', () => { CampaignMgr.campaignSelected(null) });
+	}
+}
+
+// TODO: actual CampaignAPI
+class FakeChapter {
+	title: string;
+	map: string;
+
+	constructor(title: string, map: string) {
+		this.title = title;
+		this.map = map;
+	}
+}
+
+class ChapterEntry {
+	index: number;
+	panel: Button;
+	chapter: FakeChapter;
+	locked: boolean;
+
+	constructor(index: number, panel: Button, chapter: FakeChapter, locked: boolean) {
+		this.index = index;
+		this.panel = panel;
+		this.chapter = chapter;
+		this.locked = locked;
+	}
+
+	update() {
+		const title = this.panel.FindChildTraverse<Label>('ChapterTitle');
+		const desc = this.panel.FindChildTraverse<Label>('ChapterDesc');
+		const cover = this.panel.FindChildTraverse<Image>('ChapterCover');
+
+		if (title) {
+			title.text = `[HC] Chapter ${this.index + 1}`;
+		}
+		if (desc) {
+			desc.text = `[PH] ${this.chapter.title}`;
+		}
+		if (cover) {
+			cover.SetImage(`file://{materials}/vgui/chapters/chapter${this.index + 1}.vtf`);
+		}
+
+		this.panel.SetPanelEvent('onactivate', () => { GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`) })
+	}
+}
+
+class SaveEntry {
+	index: number;
+	panel: Button;
+	save: Save;
+
+	constructor(index: number, panel: Button, save: Save) {
+		this.index = index;
+		this.panel = panel;
+		this.save = save;
+	}
+
+	update() {
+		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
+		const desc = this.panel.FindChildTraverse<Label>('SaveDesc');
+		const cover = this.panel.FindChildTraverse<Image>('SaveCover');
+
+		if (title) {
+			title.text = this.save.name;
+		}
+		if (desc) {
+			desc.text = this.save.time;
+		}
+		if (cover) {
+			cover.SetImage(`file://${this.save.thumb}`);
+		}
+
+		this.panel.SetPanelEvent('onactivate', () => { SaveRestoreAPI.LoadSave(this.save.name) });
+	}
+}
+
+class CampaignNewGameTab {
+	static campaignLister = $<Panel>('#CampaignLister');
+	static chapterEntries: ChapterEntry[] = [];
+
+	static setActive() {
+		CampaignLoadGameTab.close();
+		this.purgeChapterList();
+		this.populateChapters();
+		this.show();
+	}
+
+	static close() {
+		this.purgeChapterList();
+	}
+
+	static show() {
+		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
+		if (campaignListerContainer)
+			campaignListerContainer.visible = true;
+	}
+
+	static purgeChapterList() {
+		while (this.chapterEntries.length > 0)
+			this.chapterEntries.pop()?.panel.DeleteAsync(0);
+	}
+
+	static populateChapters() {
+		// TODO: Actual chapters from CampaignAPI
+		if (!this.campaignLister) return;
+
+		const chapters: FakeChapter[] = [
+			{ title: 'The Courtesy Call', 'map': 'sp_a1_intro1' },
+			{ title: 'The Cold Boot', 'map': 'sp_a2_laser_intro' },
+			{ title: 'The Return', 'map': 'sp_a2_sphere_peek' },
+			{ title: 'The Surprise', 'map': 'sp_a2_column_blocker' },
+			{ title: 'The Escape', 'map': 'sp_a2_bts3' },
+			{ title: 'The Fall', 'map': 'sp_a3_00' },
+			{ title: 'The Reunion', 'map': 'sp_a3_speed_ramp' },
+			{ title: 'The Itch', 'map': 'sp_a4_intro' },
+			{ title: 'The Part Where...', 'map': 'sp_a4_finale1' },
+			{ title: 'The Credits', 'map': 'sp_a5_credits' },
+		];
+
+		for (let i = 0; i < chapters.length; ++i) {
+			const p = $.CreatePanel('Button', this.campaignLister, 'save' + i);
+			p.LoadLayoutSnippet('ChapterEntrySnippet');
+
+			this.chapterEntries.push(new ChapterEntry(i, p, chapters[i], false));
+			this.chapterEntries[i].update();
+		}
+	}
+}
+
+class CampaignLoadGameTab {
+	static campaignLister = $<Panel>('#CampaignLister');
+	static saveEntries: SaveEntry[] = [];
+
+	static setActive() {
+		CampaignNewGameTab.close();
+		this.purgeSaveList();
+		this.populateSaves();
+		this.show();
+	}
+
+	static close() {
+		this.purgeSaveList();
+	}
+
+	static show() {
+		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
+		if (campaignListerContainer)
+			campaignListerContainer.visible = true;
+	}
+
+	static purgeSaveList() {
+		while (this.saveEntries.length > 0)
+			this.saveEntries.pop()?.panel.DeleteAsync(0);
+	}
+
+	static populateSaves() {
+		// TODO: Saves from campaigns
+		// for now this will just list all saves
+
+		if (!this.campaignLister) return;
+
+		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
+		for (let i = 0; i < saves.length; ++i) {
+			const p = $.CreatePanel('Button', this.campaignLister, 'save' + i);
+			p.LoadLayoutSnippet('SaveEntrySnippet');
+
+			this.saveEntries.push(new SaveEntry(i, p, saves[i]));
+			this.saveEntries[i].update();
+		}
+	}
+
+	static loadLatest() {
+		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
+		if (saves.length > 0) {
+			SaveRestoreAPI.LoadSave(saves[0].name);
+		}
+	}
+}
+
+class CampaignStartPage {
+	static campaignStartPage = $<Panel>('#CampaignStartPage');
+	static campaignLogo = $<Image>('#CampaignLogo');
+	static campaignLoadLatestBtn = $<Button>('#CampaignLoadLatestBtn');
+	static campaignAllSavesBtn = $<Button>('#CampaignAllSavesBtn');
+
+	static {
+		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
+	}
 
 	static init() {
-		if (!this.campaignCarousel) return;
-		for (let i = 0; i < 16; ++i) {
-			$.CreatePanel('Label', this.campaignCarousel, 'test' + i, {
-				text: 'sussy ' + i,
-				class: 'campaignselector__item'
-			});
+		this.hide();
+	}
+
+	static show() {
+		if (!this.campaignStartPage) return;
+
+		this.campaignStartPage.visible = true;
+	}
+
+	static hide() {
+		if (!this.campaignStartPage) return;
+
+		this.campaignStartPage.visible = false;
+	}
+
+	static setActive() {
+		if (!this.campaignStartPage || !this.campaignLogo) return;
+
+		this.show();
+	}
+
+	static onCampaignScreenShown(tabid: string) {
+		if (tabid !== 'Campaigns') return;
+
+		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
+		if (campaignListerContainer)
+			campaignListerContainer.visible = false;
+
+		const hasSaves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time).length > 0;
+
+		if (this.campaignAllSavesBtn)
+			this.campaignAllSavesBtn.enabled = hasSaves;
+
+		if (this.campaignLoadLatestBtn)
+			this.campaignLoadLatestBtn.enabled = hasSaves;
+
+		// only change campaigns when not in game
+		const returnBtn = $('#CampaignStartReturn');
+		if (returnBtn)
+			returnBtn.visible = GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU;
+	}
+}
+
+class CampaignSelector {
+	static campaignList = $<Panel>('#CampaignContainer');
+	static campaignEntries: CampaignEntry[] = [];
+
+	static {
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.populateCampaigns.bind(this));
+	}
+
+	static init() {
+		this.reloadList();
+	}
+
+	static populateCampaigns() {
+		if (!this.campaignList) return;
+		for (let i = 0; i < 1; ++i) {
+			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
+			p.LoadLayoutSnippet('CampaignEntrySnippet');
+
+			this.campaignEntries.push(new CampaignEntry(i, p, null));
+			this.campaignEntries[i].update();
 		}
+	}
+
+	static purgeCampaignList() {
+		while (this.campaignEntries.length > 0)
+			this.campaignEntries.pop()?.panel.DeleteAsync(0);
+	}
+
+	static reloadList() {
+		this.purgeCampaignList();
+		this.populateCampaigns();
+	}
+}
+
+class CampaignMgr {
+	static currentCampaign: null = null;
+
+	static init() {
+		CampaignStartPage.init();
+		CampaignSelector.init();
+	}
+
+	static reload() {
+		CampaignStartPage.hide();
+		CampaignSelector.reloadList();
+	}
+
+	static startGame(chapter: string) {
+		if (this.currentCampaign) {
+			// TODO: CampaignAPI.StartCampaign(this.currentCampaign.id, chapter);
+			$.Msg('Start Campaign');
+		}
+	}
+
+	static campaignSelected(info: null) {
+		this.currentCampaign = info;
+
+		CampaignStartPage.setActive();
 	}
 }
