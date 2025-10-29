@@ -237,9 +237,10 @@
 								<!-- Quick & easy save access -->
 								<Panel class="home__horizontal">
 									<!-- See all saves -->
+									<!-- I actually don't know if this is gonna be useful so I'll hide it for now -->
 									<Button
 										id="MainMenuViewSavesButton"
-										class="home__prompt"
+										class="home__prompt hide"
 										onactivate="MainMenu.selectNavButton('PlayButton')"
 									>
 										<Image
@@ -252,7 +253,8 @@
 											<Label class="home__subheading" text="[HC] Across all campaigns" />
 										</Panel>
 									</Button>
-									<Panel class="home__spacer__h" />
+									<Panel class="home__spacer__h hide" />
+									<!-- /hide -->
 									<!-- Continue latest save -->
 									<Button
 										id="MainMenuLoadLastSaveButton"
@@ -261,7 +263,7 @@
 									>
 										<Image
 											id="MainMenuSaveImage"
-											defaultsrc="file://{images}/menu/p2ce/random3.png"
+											defaultsrc="file://{images}/menu/p2ce/random1.png"
 											scaling="stretch-to-cover-preserve-aspect"
 											class="home__prompt__image"
 										/>

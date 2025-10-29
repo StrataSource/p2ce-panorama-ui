@@ -304,7 +304,7 @@ $home-panel-width: 896px;
 		}
 
 		&:disabled {
-			border-color: $button-text-disabled;
+			border-color: $button-background-disabled;
 
 			#{$this}__image {
 				saturation: 0;
