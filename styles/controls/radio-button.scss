@@ -11,14 +11,23 @@
 
 	&:selected {
 		background-color: $button-background-selected;
+
+		.button__text {
+			color: $bright-color;
+		}
 	}
 }
 
 @each $name, $colors in $gradients-primary {
 	.radiobutton--#{$name} {
+		background-color: list.nth($colors, 1);
+		border-color: color.scale(list.nth($colors, 1), $lightness: -60%);
+		&:hover:not(:selected):not(:disabled) {
+			background-color: color.scale(list.nth($colors, 1), $lightness: -60%);
+		}
 		&:selected {
-			background-color: list.nth($colors, 2);
-			border: $button-border;
+			background-color: color.scale(list.nth($colors, 2), $lightness: -60%);
+			border-color: list.nth($colors, 1);
 		}
 	}
 }

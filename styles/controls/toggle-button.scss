@@ -101,7 +101,8 @@
 		}
 
 		&:selected {
-			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+			background-color: color.scale(list.nth($value, 2), $lightness: -60%);
+			border-color: list.nth($value, 1);
 		}
 	}
 }
