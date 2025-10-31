@@ -21,11 +21,10 @@ class CampaignEntry {
 		}
 		if (desc) {
 			desc.text = 'Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned ' +
-				'the original Portal over 70 industry accolades and created a cult following. The single-player portion ' +
-				'of Portal 2 introduces a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
+				'the original Portal over 70 industry accolades and created a cult following. ' +
+				'It features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
 				'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
-				'Labs and be reunited with GLaDOS, the occasionally murderous computer companion who guided them through ' +
-				'the original game.';
+				'Labs and be reunited with GLaDOS.';
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => { CampaignMgr.campaignSelected(null) });
