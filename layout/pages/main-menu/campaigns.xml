@@ -121,6 +121,31 @@
 	<Panel class="mainmenu__page no-flow" onload="CampaignMgr.init()">
 		<Panel class="campaigns">
 			<!-- Campaign list -->
+			<Panel class="campaigns__action-bar">
+				<Button
+					id="CampaignsViewLooseMapsBtn"
+					class="campaigns__action-bar__button mr-2"
+				>
+					<Image
+						class="campaigns__action-bar__button__icon"
+						src="file://{images}/cancel.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						texturewidth="32"
+						textureheight="32"
+					/>
+					<Label class="campaigns__action-bar__button__text" text="[HC] View Uncategorized Maps"/>
+				</Button>
+				<Button id="CampaignsGoWorkshopBtn" class="campaigns__action-bar__button">
+					<Image
+						class="campaigns__action-bar__button__icon"
+						src="file://{images}/cancel.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						texturewidth="32"
+						textureheight="32"
+					/>
+					<Label class="campaigns__action-bar__button__text" text="[HC] Open Workshop"/>
+				</Button>
+			</Panel>
 			<Panel id="CampaignContainer" class="campaigns__list">
 
 			</Panel>
