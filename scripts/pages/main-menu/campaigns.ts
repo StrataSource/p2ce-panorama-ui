@@ -185,7 +185,7 @@ class CampaignNewGameTab {
 		];
 
 		for (let i = 0; i < chapters.length; ++i) {
-			const p = $.CreatePanel('Button', this.campaignLister, 'save' + i);
+			const p = $.CreatePanel('Button', this.campaignLister, 'chapter' + i);
 			p.LoadLayoutSnippet('ChapterEntrySnippet');
 
 			this.chapterEntries.push(new ChapterEntry(i, p, chapters[i], false));
@@ -266,6 +266,11 @@ class CampaignStartPage {
 
 	static {
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.onLayoutReloaded.bind(this));
+	}
+
+	static onLayoutReloaded() {
+		$('#CampaignLister')?.RemoveAndDeleteChildren();
 	}
 
 	static init() {
@@ -296,9 +301,8 @@ class CampaignStartPage {
 	static onCampaignScreenShown(tabid: string) {
 		if (tabid !== 'Campaigns') return;
 
-		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
-		if (campaignListerContainer)
-			campaignListerContainer.visible = false;
+		if (this.campaignListerContainer)
+			this.campaignListerContainer.visible = false;
 
 		const hasSaves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time).length > 0;
 
@@ -320,7 +324,13 @@ class CampaignSelector {
 	static campaignEntries: CampaignEntry[] = [];
 
 	static {
-		$.RegisterForUnhandledEvent('LayoutReloaded', this.populateCampaigns.bind(this));
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
+	}
+
+	static layoutReload() {
+		this.purgeCampaignList();
+		this.campaignList?.RemoveAndDeleteChildren();
+		this.populateCampaigns();
 	}
 
 	static init() {
