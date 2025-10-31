@@ -7,42 +7,78 @@
 	height: 100%;
 	flow-children: down;
 
-	border: $menu-pane-border;
-
 	&__list {
-		width: 100%;
+		width: 60%;
 		height: 100%;
+		padding-right: 15px;
 		overflow: squish scroll;
 		flow-children: down;
+	}
 
-		background-color: $base-950;
+	&__action-bar {
+		width: 60%;
+		flow-children: right;
+
+		padding-right: 15px;
+		margin-bottom: 10px;
+
+		&__button {
+			width: fill-parent-flow(0.5);
+			flow-children: right;
+
+			padding: 15px;
+			background-color: $base-950;
+			border: $menu-pane-border;
+
+			&__icon {
+				margin-right: 10px;
+			}
+			&__text {
+				vertical-align: middle;
+			}
+
+			&:hover {
+				background-color: $button-background-hover;
+			}
+		}
 	}
 
 	&__entry {
 		width: 100%;
-		height: fit-children;
-		flow-children: right;
+		height: 288px;
 
-		padding: 15px;
-		padding-right: 20px;
+		border: $menu-pane-border;
+		margin-bottom: 10px;
+
+		background-image: url('file://{images}/menu/portal2/background01_widescreen.png');
+		background-position: center center;
+
+		$this: &;
 
 		&:hover {
-			background-color: $primary-950;
+			#{$this}__inner {
+				background-color: $primary-950;
+			}
 		}
 
 		&:selected {
 			background-color: $primary-800;
 		}
 
-		&__left {
+		&__inner {
 			width: fill-parent-flow(1);
 			flow-children: right;
+			padding: 15px;
+			background-color: gradient( linear, 0% 0%, 300% 0%, from( $base-950 ), to( rgba($base-950, 0) ) );
+		}
+
+		&__bg-image {
+			width: 100%;
+			visibility: collapse;
 		}
 
 		&__cover {
-			width: 640px;
-			height: 360px;
-
+			height: 256px;
 			border: $menu-pane-border;
 		}
 
@@ -53,36 +89,32 @@
 			vertical-align: middle;
 
 			&__logo {
-				width: 440px;
-				height: 130px;
+				height: 48px;
+				width: 48px;
+				vertical-align: bottom;
+				margin: 10px;
 			}
 
 			&__title {
 				@include mixin.font-styles($use-header: true);
-				font-size: 50px;
-				letter-spacing: 4px;
+				font-size: 28px;
+				text-shadow-fast: 2px 2px $base-950;
+			}
+
+			&__author {
+				font-size: 16px;
+				letter-spacing: 1px;
+				color: $base-400;
+				text-shadow-fast: 2px 2px $base-950;
 			}
 
 			&__desc {
-				margin-top: 5px;
-				font-size: 20px;
+				margin-top: 10px;
+				font-size: 17px;
+				letter-spacing: 1px;
 				color: $base-200;
-			}
-
-			&__source {
-				visibility: collapse;
-			}
-		}
-
-		&__right {
-		}
-
-		&__checkbox {
-			height: 32px;
-
-			margin-left: 10px;
-			& > .TickBox {
-				margin-right: 0px;
+				max-height: 200px;
+				text-shadow-fast: 2px 2px $base-950;
 			}
 		}
 	}
@@ -103,7 +135,7 @@
 	}
 
 	&__controls {
-		width: 30%;
+		width: 35%;
 		height: 100%;
 		flow-children: down;
 
@@ -150,7 +182,7 @@
 		flow-children: down;
 		overflow: squish scroll;
 		&__container {
-			width: 70%;
+			width: 65%;
 			height: 100%;
 			margin-left: 30px;
 			border: $menu-pane-border;
@@ -199,6 +231,12 @@
 
 .saves {
 	&__entry {
+		&__inner {
+			@extend .campaigns__entry__inner;
+			background-color: none;
+			background-image: none;
+		}
+
 		&__cover {
 			width: 480px;
 			height: 270px;
@@ -207,6 +245,7 @@
 		}
 
 		&__details {
+			@extend .campaigns__entry__details;
 			&__title {
 				@include mixin.font-styles($use-header: true);
 				font-size: 32px;
@@ -218,11 +257,21 @@
 				color: $base-200;
 			}
 		}
+
+		&:hover {
+			background-color: $primary-950;
+		}
 	}
 }
 
 .chapters {
 	&__entry {
+		&__inner {
+			@extend .campaigns__entry__inner;
+			background-color: none;
+			background-image: none;
+		}
+
 		&__cover {
 			width: 240px;
 			height: 135px;
@@ -231,6 +280,7 @@
 		}
 
 		&__details {
+			@extend .campaigns__entry__details;
 			&__title {
 				font-size: 24px;
 				color: $base-200;
@@ -241,6 +291,10 @@
 				margin-top: 5px;
 				font-size: 32px;
 			}
+		}
+
+		&:hover {
+			background-color: $primary-950;
 		}
 	}
 }

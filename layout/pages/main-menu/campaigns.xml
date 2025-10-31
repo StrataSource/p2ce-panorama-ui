@@ -7,33 +7,40 @@
 	</scripts>
 
 	<snippets>
+		<!-- Campaign Entry -->
 		<snippet name="CampaignEntrySnippet">
 			<Button class="campaigns__entry">
-				<Panel class="campaigns__entry__left">
+				<Panel class="campaigns__entry__inner">
 					<!-- Campaign icon cover -->
-					<Image
-						id="CampaignCover"
-						class="campaigns__entry__cover"
-						src="file://{images}/menu/p2ce/news-splash.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1920"
-						texturewidth="1080"
-					/>
-
-					<!-- Campaign info; title, description, 'source' -->
-					<Panel class="campaigns__entry__details">
+					<Panel>
+						<Image
+							id="CampaignCover"
+							class="campaigns__entry__cover"
+							src="file://{images}/menu/p2ce/news-splash.png"
+							scaling="stretch-to-cover-preserve-aspect"
+							textureheight="1920"
+							texturewidth="1080"
+						/>
 						<Image
 							id="CampaignLogo"
 							class="campaigns__entry__details__logo"
-							src="file://{images}/menu/portal2/portal2logo.png"
+							src="file://{images}/menu/portal2/logo.png"
 							scaling="stretch-to-fit-preserve-aspect"
-							textureheight="130"
-							texturewidth="440"
+							textureheight="128"
+							texturewidth="128"
 						/>
+					</Panel>
+					<!-- Campaign info; title, description, 'source' -->
+					<Panel class="campaigns__entry__details">
 						<Label
 							id="CampaignTitle"
 							class="campaigns__entry__details__title"
 							text="[PH] Campaign Title"
+						/>
+						<Label
+							id="CampaignAuthor"
+							class="campaigns__entry__details__author"
+							text="[PH] Campaign Author"
 						/>
 						<Label
 							id="CampaignDesc"
@@ -44,9 +51,12 @@
 				</Panel>
 			</Button>
 		</snippet>
+		<!-- / Campaign Entry -->
+
+		<!-- Save Entry -->
 		<snippet name="SaveEntrySnippet">
-			<Button class="campaigns__entry">
-				<Panel class="campaigns__entry__left">
+			<Button class="saves__entry">
+				<Panel class="saves__entry__inner">
 					<!-- Save icon cover -->
 					<Image
 						id="SaveCover"
@@ -58,7 +68,7 @@
 					/>
 
 					<!-- Save info; title, description, 'source' -->
-					<Panel class="campaigns__entry__details">
+					<Panel class="saves__entry__details">
 						<Label
 							id="SaveTitle"
 							class="saves__entry__details__title"
@@ -73,9 +83,12 @@
 				</Panel>
 			</Button>
 		</snippet>
+		<!-- / Save Entry -->
+
+		<!-- Chapter Entry -->
 		<snippet name="ChapterEntrySnippet">
-			<Button class="campaigns__entry">
-				<Panel class="campaigns__entry__left">
+			<Button class="chapters__entry">
+				<Panel class="chapters__entry__inner">
 					<!-- Chapter icon cover -->
 					<Image
 						id="ChapterCover"
@@ -87,7 +100,7 @@
 					/>
 
 					<!-- Chapter info; title, description, 'source' -->
-					<Panel class="campaigns__entry__details">
+					<Panel class="chapters__entry__details">
 						<Label
 							id="ChapterTitle"
 							class="chapters__entry__details__title"
@@ -102,6 +115,7 @@
 				</Panel>
 			</Button>
 		</snippet>
+		<!-- / Chapter Entry -->
 	</snippets>
 
 	<Panel class="mainmenu__page no-flow" onload="CampaignMgr.init()">
