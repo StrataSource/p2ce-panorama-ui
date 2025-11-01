@@ -388,7 +388,7 @@ class CampaignSelector {
 			'title': '[HC] Portal 2 (Co-Op)',
 			'author': '[HC] Valve',
 			'desc': '[HC] Portal 2 Multiplayer Campaign Description',
-			'cover': 'file://{images}/menu/portal2/mp_campaign_bg_2.png',
+			'cover': 'file://{images}/menu/portal2/mp_campaign_bg.png',
 			'background': 'file://{images}/menu/portal2/mp_campaign_bg.png',
 			'btnBg': 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
 			'ico': 'file://{images}/menu/portal2/logo.png',
