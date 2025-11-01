@@ -142,7 +142,10 @@
 						texturewidth="32"
 						textureheight="32"
 					/>
-					<Label class="campaigns__action-bar__button__text" text="[HC] View Uncategorized Maps"/>
+					<Panel class="flow-down vertical-align-center">
+						<Label class="campaigns__action-bar__button__text-top" text="[HC] Uncategorized Maps"/>
+						<Label class="campaigns__action-bar__button__text-btm" text="[PH] 3 newly subscribed"/>
+					</Panel>
 				</Button>
 				<Button id="CampaignsGoWorkshopBtn" class="campaigns__action-bar__button">
 					<Image
@@ -152,7 +155,10 @@
 						texturewidth="32"
 						textureheight="32"
 					/>
-					<Label class="campaigns__action-bar__button__text" text="[HC] Open Workshop"/>
+					<Panel class="flow-down vertical-align-center">
+						<Label class="campaigns__action-bar__button__text-top" text="[HC] Open Workshop"/>
+						<Label class="campaigns__action-bar__button__text-btm" text="[PH] Download &amp; manage content"/>
+					</Panel>
 				</Button>
 			</Panel>
 			<Panel id="CampaignContainer" class="campaigns__list">
@@ -169,6 +175,7 @@
 				textureheight="1920"
 				texturewidth="1080"
 			/>
+			<Button class="full-width full-height"/>
 			<Panel class="selected-campaign__container">
 				<Panel class="selected-campaign__controls">
 					<Image
@@ -199,6 +206,14 @@
 						onactivate="CampaignLoadGameTab.setActive()"
 					>
 						<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
+					</Button>
+					<Button
+						id="CampaignRobotEnrichment"
+						class="selected-campaign__controls__button mb-3"
+						onactivate="$.Msg('bleh')"
+						disabled="true"
+					>
+						<Label class="selected-campaign__controls__button__text" text="[HC Co-Op] Robot Enrichment" />
 					</Button>
 					<!--
 					<Button class="selected-campaign__controls__button">
