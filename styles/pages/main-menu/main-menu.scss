@@ -4,8 +4,8 @@
 
 $page-transition-duration: 0.15s;
 $page-transition-timing-func: ease-in-out;
-$topnav-height: 90px;
-$home-panel-width: 896px;
+$topnav-height: 80px;
+$home-panel-width: 50%;
 
 #TooltipManager,
 #ContextMenuManager,
@@ -140,32 +140,14 @@ $home-panel-width: 896px;
 	width: 100%;
 	height: $topnav-height;
 
-	padding: 0 20px;
+	padding-left: 25px;
 	flow-children: right;
 	background-color: $base-950;
+	border-bottom: $menu-pane-border;
 	z-index: 1;
 
-	&__home {
-		height: 100%;
-		vertical-align: middle;
-		background-color: rgba(255, 255, 255, 0);
-		transition: border 0.2s ease-in-out 0s;
-		transition-property: border;
-		transition-duration: 0.2s;
-		transition-timing-function: ease-in-out;
-		border-bottom: 6px solid #00000000;
-
-		&:hover {
-			border-bottom: 6px solid $primary-color;
-		}
-
-		.RadioBox {
-			visibility: collapse;
-		}
-	}
-
 	&__logo {
-		height: 65%;
+		height: 55%;
 		vertical-align: middle;
 		margin-right: 25px;
 	}
@@ -195,7 +177,7 @@ $home-panel-width: 896px;
 		& .text {
 			@include mixin.font-styles($use-header: true);
 			vertical-align: center;
-			font-size: 24px;
+			font-size: 20px;
 			// overflowing because of tags, so not putting this
 			// here for now, just reducing the size a bit - SS
 			//text-overflow: shrink;
