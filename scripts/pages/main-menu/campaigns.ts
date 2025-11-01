@@ -62,7 +62,7 @@ class CampaignEntry {
 			btnBg.SetImage(this.info.btnBg);
 		}
 
-		this.panel.SetPanelEvent('onactivate', () => { CampaignMgr.campaignSelected(null) });
+		this.panel.SetPanelEvent('onactivate', () => { CampaignMgr.campaignSelected(this.info) });
 	}
 }
 
@@ -297,6 +297,7 @@ class CampaignStartPage {
 	static campaignLogo = $<Image>('#CampaignLogo');
 	static campaignLoadLatestBtn = $<Button>('#CampaignLoadLatestBtn');
 	static campaignAllSavesBtn = $<Button>('#CampaignAllSavesBtn');
+	static campaignBg = $<Image>('#CampaignBackground');
 
 	static {
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
@@ -304,7 +305,6 @@ class CampaignStartPage {
 	}
 
 	static onLayoutReloaded() {
-		$('#CampaignLister')?.RemoveAndDeleteChildren();
 	}
 
 	static init() {
@@ -314,6 +314,9 @@ class CampaignStartPage {
 	static show() {
 		if (!this.campaignStartPage) return;
 
+		if (this.campaignBg && CampaignMgr.currentCampaign) {
+			this.campaignBg.SetImage(CampaignMgr.currentCampaign.background);
+		}
 		this.campaignStartPage.visible = true;
 	}
 
@@ -328,6 +331,10 @@ class CampaignStartPage {
 
 	static setActive() {
 		if (!this.campaignStartPage || !this.campaignLogo) return;
+
+		if (CampaignMgr.currentCampaign && this.campaignLogo) {
+			this.campaignLogo.SetImage(CampaignMgr.currentCampaign.logo);
+		}
 
 		this.show();
 	}
@@ -356,28 +363,47 @@ class CampaignStartPage {
 class CampaignSelector {
 	static fakeCampaigns: FakeCampaign[] = [
 		{
-			'title': '[HC] Portal 2 (Singleplayer)',
+			'title': '[HC] Portal 2: Community Edition',
+			'author': '[HC] P2:CE Team',
+			'desc': '[HC] P2:CE Campaign Description',
+			'cover': 'file://{images}/menu/p2ce/random5.png',
+			'background': 'file://{images}/menu/p2ce/news-splash.png',
+			'btnBg': 'file://{images}/menu/p2ce/random1.png',
+			'ico': 'file://{images}/menu/p2ce/logo.png',
+			'logo': 'file://{images}/logo.svg'
+		},
+		{
+			'title': '[HC] Portal 2',
 			'author': '[HC] Valve',
-			'desc': '[HC] Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned ' +
-					'the original Portal over 70 industry accolades and created a cult following. ' +
-					'It features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
+			'desc': '[HC] Portal 2 features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
 					'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
 					'Labs and be reunited with GLaDOS.',
 			'cover': 'file://{images}/menu/portal2/campaign_cover.png',
 			'background': 'file://{images}/menu/portal2/campaign_bg.png',
-			'btnBg': 'file://{images}/menu/portal2/campaign_btn_bg.png',
+			'btnBg': 'file://{images}/menu/portal2/campaign_btn_bg.jpg',
 			'ico': 'file://{images}/menu/portal2/logo.png',
 			'logo': 'file://{images}/menu/portal2/full_logo.png'
 		},
 		{
-			'title': '[HC] Portal 2 (Multiplayer)',
+			'title': '[HC] Portal 2 (Co-Op)',
 			'author': '[HC] Valve',
-			'desc': '[HC] Atlas & P-Body',
-			'cover': 'file://{images}/menu/portal2/mp_campaign_cover.png',
+			'desc': '[HC] Portal 2 Multiplayer Campaign Description',
+			'cover': 'file://{images}/menu/portal2/mp_campaign_bg_2.png',
 			'background': 'file://{images}/menu/portal2/mp_campaign_bg.png',
-			'btnBg': 'file://{images}/menu/portal2/mp_campaign_btn_bg.png',
+			'btnBg': 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
 			'ico': 'file://{images}/menu/portal2/logo.png',
 			'logo': 'file://{images}/menu/portal2/full_logo.png'
+		},
+		{
+			'title': '[HC] Portal',
+			'author': '[HC] Valve',
+			'desc': '[HC] Set in the mysterious Aperture Science Laboratories, players must solve physical puzzles and ' +
+					'challenges by opening portals to maneuver objects, and themselves, through space.',
+			'cover': 'file://{images}/menu/portal/campaign_bg.png',
+			'background': 'file://{images}/menu/portal/campaign_bg.png',
+			'btnBg': 'file://{images}/menu/portal/campaign_btn_bg.jpg',
+			'ico': 'file://{images}/menu/portal/logo.svg',
+			'logo': 'file://{images}/menu/portal/full_logo.svg'
 		}
 	];
 	static campaignList = $<Panel>('#CampaignContainer');
@@ -420,7 +446,7 @@ class CampaignSelector {
 }
 
 class CampaignMgr {
-	static currentCampaign: null = null;
+	static currentCampaign: FakeCampaign | null = null;
 
 	static init() {
 		CampaignStartPage.init();
@@ -439,7 +465,7 @@ class CampaignMgr {
 		}
 	}
 
-	static campaignSelected(info: null) {
+	static campaignSelected(info: FakeCampaign) {
 		this.currentCampaign = info;
 
 		CampaignStartPage.setActive();
