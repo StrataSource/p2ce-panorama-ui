@@ -160,11 +160,11 @@
 			}
 
 			&:disabled {
-				background-color: $base-950;
-				opacity: 0.5;
+				background-color: rgba($base-950, 0.5);
+				border-color: rgba($base-700, 0.1);
 
 				#{$this}__text {
-					color: $button-text-disabled;
+					color: rgba($button-text-disabled, 0.5);
 				}
 			}
 
