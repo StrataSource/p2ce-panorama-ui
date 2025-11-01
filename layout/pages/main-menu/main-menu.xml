@@ -215,68 +215,27 @@
 								mouse_rotate="true"
 							/>
 							<Panel class="home">
-								<!--
-									Call to action for the player, based on some criteria
-									For now, it'll just open the campaign panel
-								-->
+								<!-- Continue latest save -->
 								<Button
+									id="MainMenuLoadLastSaveButton"
 									class="home__prompt"
-									onactivate="MainMenu.selectNavButton('PlayButton')"
+									onactivate="MainMenu.loadLatestSave();"
 								>
 									<Image
-										src="file://{images}/menu/p2ce/random3.png"
+										id="MainMenuSaveImage"
+										defaultsrc="file://{images}/menu/p2ce/random1.png"
 										scaling="stretch-to-cover-preserve-aspect"
 										class="home__prompt__image"
 									/>
 									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[PH] Play" />
-										<Label class="home__subheading" text="[PH] Campaign installed: 'A Campaign From the Workshop, Perhaps'" />
+										<Label class="home__heading" text="[HC] Continue" />
+										<Label
+											id="MainMenuSaveSubheadingLabel"
+											class="home__subheading"
+											text="[HC] No Save Available"
+										/>
 									</Panel>
 								</Button>
-								<Panel class="home__spacer__v" />
-								<!-- Quick & easy save access -->
-								<Panel class="home__horizontal">
-									<!-- See all saves -->
-									<!-- I actually don't know if this is gonna be useful so I'll hide it for now -->
-									<Button
-										id="MainMenuViewSavesButton"
-										class="home__prompt hide"
-										onactivate="MainMenu.selectNavButton('PlayButton')"
-									>
-										<Image
-											src="file://{images}/menu/p2ce/random1.png"
-											scaling="stretch-to-cover-preserve-aspect"
-											class="home__prompt__image"
-										/>
-										<Panel class="home__prompt__content">
-											<Label class="home__heading" text="[HC] All Saves" />
-											<Label class="home__subheading" text="[HC] Across all campaigns" />
-										</Panel>
-									</Button>
-									<Panel class="home__spacer__h hide" />
-									<!-- /hide -->
-									<!-- Continue latest save -->
-									<Button
-										id="MainMenuLoadLastSaveButton"
-										class="home__prompt"
-										onactivate="MainMenu.loadLatestSave();"
-									>
-										<Image
-											id="MainMenuSaveImage"
-											defaultsrc="file://{images}/menu/p2ce/random1.png"
-											scaling="stretch-to-cover-preserve-aspect"
-											class="home__prompt__image"
-										/>
-										<Panel class="home__prompt__content">
-											<Label class="home__heading" text="[HC] Continue" />
-											<Label
-												id="MainMenuSaveSubheadingLabel"
-												class="home__subheading"
-												text="[HC] No Save Available"
-											/>
-										</Panel>
-									</Button>
-								</Panel>
 								<Panel class="home__bottom">
 									<Button class="home__expandable home__expandable__join-btm">
 										<Image
