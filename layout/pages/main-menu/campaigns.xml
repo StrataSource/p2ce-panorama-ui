@@ -10,13 +10,22 @@
 		<!-- Campaign Entry -->
 		<snippet name="CampaignEntrySnippet">
 			<Button class="campaigns__entry">
+				<!--  -->
+				<Image
+					id="CampaignBtnBg"
+					class="campaigns__entry__bg-image"
+					src="file://{images}/menu/portal2/campaign_cover.png"
+					scaling="stretch-to-cover-preserve-aspect"
+					textureheight="1920"
+					texturewidth="1080"
+				/>
 				<Panel class="campaigns__entry__inner">
 					<!-- Campaign icon cover -->
 					<Panel>
 						<Image
 							id="CampaignCover"
 							class="campaigns__entry__cover"
-							src="file://{images}/menu/p2ce/news-splash.png"
+							src="file://{images}/menu/portal2/campaign_cover.png"
 							scaling="stretch-to-cover-preserve-aspect"
 							textureheight="1920"
 							texturewidth="1080"
@@ -155,7 +164,7 @@
 			<Image
 				id="CampaignBackground"
 				class="selected-campaign__background"
-				src="file://{images}/menu/portal2/background01_widescreen.png"
+				src="file://{images}/menu/portal2/campaign_bg.png"
 				scaling="stretch-to-cover-preserve-aspect"
 				textureheight="1920"
 				texturewidth="1080"
@@ -165,7 +174,7 @@
 					<Image
 						id="CampaignLogo"
 						class="selected-campaign__logo"
-						src="file://{images}/menu/portal2/portal2logo.png"
+						src="file://{images}/menu/portal2/full_logo.png"
 						scaling="stretch-to-fit-preserve-aspect"
 						textureheight="130"
 						texturewidth="440"

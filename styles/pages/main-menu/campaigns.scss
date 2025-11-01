@@ -50,9 +50,6 @@
 		border: $menu-pane-border;
 		margin-bottom: 10px;
 
-		background-image: url('file://{images}/menu/portal2/background01_widescreen.png');
-		background-position: center center;
-
 		$this: &;
 
 		&:hover {
@@ -69,12 +66,11 @@
 			width: fill-parent-flow(1);
 			flow-children: right;
 			padding: 15px;
-			background-color: gradient( linear, 0% 0%, 300% 0%, from( $base-950 ), to( rgba($base-950, 0) ) );
+			background-color: gradient( linear, 0% 0%, 500% 0%, from( $base-950 ), to( rgba($base-950, 0.5) ) );
 		}
 
 		&__bg-image {
 			width: 100%;
-			visibility: collapse;
 		}
 
 		&__cover {
@@ -98,14 +94,14 @@
 			&__title {
 				@include mixin.font-styles($use-header: true);
 				font-size: 28px;
-				text-shadow-fast: 2px 2px $base-950;
+				text-shadow-fast: 1px 1px $base-950;
 			}
 
 			&__author {
 				font-size: 16px;
 				letter-spacing: 1px;
 				color: $base-400;
-				text-shadow-fast: 2px 2px $base-950;
+				text-shadow-fast: 1px 1px $base-950;
 			}
 
 			&__desc {
@@ -114,7 +110,7 @@
 				letter-spacing: 1px;
 				color: $base-200;
 				max-height: 200px;
-				text-shadow-fast: 2px 2px $base-950;
+				text-shadow-fast: 1px 1px $base-950;
 			}
 		}
 	}

@@ -1,12 +1,35 @@
 'use strict';
 
+// TODO: actual CampaignAPI
+class FakeCampaign {
+	title: string;
+	author: string;
+	desc: string;
+	cover: string;
+	background: string;
+	btnBg: string;
+	ico: string;
+	logo: string;
+
+	constructor(title: string, author: string, desc: string, cover: string, background: string, btnBg: string, ico: string, logo: string) {
+		this.title = title;
+		this.author = author;
+		this.desc = desc;
+		this.cover = cover;
+		this.background = background;
+		this.btnBg = btnBg;
+		this.ico = ico;
+		this.logo = logo;
+	}
+}
+
 class CampaignEntry {
 	index: number;
 	panel: Button;
 	// TODO: CampaignInfo from CampaignAPI
-	info: null;
+	info: FakeCampaign;
 
-	constructor(index: number, panel: Button, info: null) {
+	constructor(index: number, panel: Button, info: FakeCampaign) {
 		this.index = index;
 		this.panel = panel;
 		this.info = info;
@@ -14,17 +37,29 @@ class CampaignEntry {
 
 	update() {
 		const title = this.panel.FindChildTraverse<Label>('CampaignTitle');
+		const author = this.panel.FindChildTraverse<Label>('CampaignAuthor');
 		const desc = this.panel.FindChildTraverse<Label>('CampaignDesc');
+		const cover = this.panel.FindChildTraverse<Image>('CampaignCover');
+		const ico = this.panel.FindChildTraverse<Image>('CampaignLogo');
+		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
 		if (title) {
-			title.text = '[HC] Portal 2 (Singleplayer)';
+			title.text = this.info.title;
+		}
+		if (author) {
+			author.text = this.info.author;
 		}
 		if (desc) {
-			desc.text = 'Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned ' +
-				'the original Portal over 70 industry accolades and created a cult following. ' +
-				'It features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
-				'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
-				'Labs and be reunited with GLaDOS.';
+			desc.text = this.info.desc;
+		}
+		if (cover) {
+			cover.SetImage(this.info.cover);
+		}
+		if (ico) {
+			ico.SetImage(this.info.ico);
+		}
+		if (btnBg) {
+			btnBg.SetImage(this.info.btnBg);
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => { CampaignMgr.campaignSelected(null) });
@@ -319,6 +354,32 @@ class CampaignStartPage {
 }
 
 class CampaignSelector {
+	static fakeCampaigns: FakeCampaign[] = [
+		{
+			'title': '[HC] Portal 2 (Singleplayer)',
+			'author': '[HC] Valve',
+			'desc': '[HC] Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned ' +
+					'the original Portal over 70 industry accolades and created a cult following. ' +
+					'It features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
+					'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
+					'Labs and be reunited with GLaDOS.',
+			'cover': 'file://{images}/menu/portal2/campaign_cover.png',
+			'background': 'file://{images}/menu/portal2/campaign_bg.png',
+			'btnBg': 'file://{images}/menu/portal2/campaign_btn_bg.png',
+			'ico': 'file://{images}/menu/portal2/logo.png',
+			'logo': 'file://{images}/menu/portal2/full_logo.png'
+		},
+		{
+			'title': '[HC] Portal 2 (Multiplayer)',
+			'author': '[HC] Valve',
+			'desc': '[HC] Atlas & P-Body',
+			'cover': 'file://{images}/menu/portal2/mp_campaign_cover.png',
+			'background': 'file://{images}/menu/portal2/mp_campaign_bg.png',
+			'btnBg': 'file://{images}/menu/portal2/mp_campaign_btn_bg.png',
+			'ico': 'file://{images}/menu/portal2/logo.png',
+			'logo': 'file://{images}/menu/portal2/full_logo.png'
+		}
+	];
 	static campaignList = $<Panel>('#CampaignContainer');
 	static campaignEntries: CampaignEntry[] = [];
 
@@ -338,11 +399,11 @@ class CampaignSelector {
 
 	static populateCampaigns() {
 		if (!this.campaignList) return;
-		for (let i = 0; i < 1; ++i) {
+		for (let i = 0; i < this.fakeCampaigns.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
 			p.LoadLayoutSnippet('CampaignEntrySnippet');
 
-			this.campaignEntries.push(new CampaignEntry(i, p, null));
+			this.campaignEntries.push(new CampaignEntry(i, p, this.fakeCampaigns[i]));
 			this.campaignEntries[i].update();
 		}
 	}
