@@ -11,7 +11,7 @@
  * @param panel The panel whose layout will be traversed
  */
 function stripDevTagsFromLabels(panel: GenericPanel) {
-	//if (GameInterfaceAPI.GetSettingBool('developer')) return;
+	if (GameInterfaceAPI.GetSettingBool('developer')) return;
 
 	if (panel.paneltype === 'Label') {
 		const label: Label = panel;
