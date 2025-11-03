@@ -160,38 +160,44 @@
 						textureheight="130"
 						texturewidth="440"
 					/>
-
-					<Button class="selected-campaign__controls__button mb-2" onactivate="CampaignNewGameTab.setActive()">
-						<Label class="selected-campaign__controls__button__text" text="[HC] New Game" />
-					</Button>
-					<Button
-						id="CampaignLoadLatestBtn"
-						class="selected-campaign__controls__button mb-2"
-						onactivate="CampaignLoadGameTab.loadLatest()"
-					>
-						<Label class="selected-campaign__controls__button__text" text="[HC] Continue" />
-					</Button>
-					<Button
-						id="CampaignAllSavesBtn"
-						class="selected-campaign__controls__button mb-2"
-						onactivate="CampaignLoadGameTab.setActive()"
-					>
-						<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
-					</Button>
-					<Button class="selected-campaign__controls__button mb-2" disabled="true">
-						<Label class="selected-campaign__controls__button__text" text="[HC] Open in Workshop" />
-					</Button>
-					<Label class="horizontal-align-center" text="[HC] Proof of concept only. Portal 2 chapters &amp; saves displayed." />
-					<Button
-						id="CampaignStartReturn"
-						class="selected-campaign__controls__button vertical-align-bottom"
-						onactivate="CampaignStartPage.hide()"
-					>
-						<Label class="selected-campaign__controls__button__text" text="[HC] Back" />
-					</Button>
+					<Panel class="selected-campaign__controls__inner">
+						<Button class="selected-campaign__controls__button" onactivate="CampaignNewGameTab.setActive()">
+							<Label class="selected-campaign__controls__button__text" text="[HC] New Game" />
+						</Button>
+						<Button
+							id="CampaignLoadLatestBtn"
+							class="selected-campaign__controls__button"
+							onactivate="CampaignLoadGameTab.loadLatest()"
+						>
+							<Label class="selected-campaign__controls__button__text" text="[HC] Continue" />
+						</Button>
+						<Button
+							id="CampaignAllSavesBtn"
+							class="selected-campaign__controls__button"
+							onactivate="CampaignLoadGameTab.setActive()"
+						>
+							<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
+						</Button>
+						<Button class="selected-campaign__controls__button" disabled="true">
+							<Label class="selected-campaign__controls__button__text" text="[HC] Open in Workshop" />
+						</Button>
+						<Button id="CampaignStartReturn" class="selected-campaign__controls__button" onactivate="CampaignStartPage.hide()">
+							<Label class="selected-campaign__controls__button__text" text="[HC] Back to Campaign Select" />
+						</Button>
+						<Label
+							class="horizontal-align-center m-3"
+							text="[HC] Proof of concept only. Portal 2 chapters &amp; saves displayed."
+						/>
+					</Panel>
 				</Panel>
 				<Panel id="CampaignListerContainer" class="selected-campaign__lister__container">
-					<Panel id="CampaignLister" class="selected-campaign__lister">
+					<Label id="CampaignListerModeLabel" class="selected-campaign__lister__header" text="[PH] Lister Mode" />
+					<Panel class="selected-campaign__lister__body">
+						<Panel id="CampaignLister" class="selected-campaign__lister">
+						</Panel>
+						<Button id="CampaignBackScreen" class="selected-campaign__lister__button" onactivate="CampaignStartPage.closeLister()">
+							<Label class="selected-campaign__lister__button__text" text="[HC] Back" />
+						</Button>
 					</Panel>
 				</Panel>
 			</Panel>

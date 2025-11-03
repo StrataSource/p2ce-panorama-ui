@@ -134,24 +134,31 @@
 	&__container {
 		width: 100%;
 		height: 100%;
-		margin: 30px;
-
-		flow-children: right;
+		margin: 80px;
 	}
 
 	&__controls {
-		width: 35%;
+		width: 30%;
 		height: 100%;
+
+		margin-right: 0px;
+
 		flow-children: down;
+
+		&__inner {
+			width: 100%;
+			vertical-align: bottom;
+			flow-children: down;
+
+			background-color: $base-950;
+			border: $menu-pane-border;
+		}
 
 		&__button {
 			width: 100%;
-			height: 64px;
 			flow-children: right;
 
-			padding: 0 20px;
-			background-color: $base-950;
-			border: $menu-pane-border;
+			padding: 18px 20px;
 
 			$this: &;
 
@@ -159,7 +166,7 @@
 				@include mixin.font-styles($use-header: true);
 				color: $bright-color;
 				vertical-align: middle;
-				font-size: 24px;
+				font-size: 20px;
 			}
 
 			&:disabled {
@@ -184,15 +191,50 @@
 
 	&__lister {
 		width: 100%;
-		height: fit-children;
+		height: fill-parent-flow(1);
 		flow-children: down;
 		overflow: squish scroll;
-		&__container {
-			width: 65%;
-			height: 100%;
-			margin-left: 30px;
+
+		&__header {
+			min-width: 272px;
+			text-align: center;
+			padding: 18px 20px;
+
+			// account for funny line-height business
+			padding-top: 13px;
+			transform: translateY(1px);
+
 			border: $menu-pane-border;
-			background-color: rgba($base-950, 0.9);
+			border-bottom-width: 0px;
+			background-color: $base-950;
+
+			@include mixin.font-styles($use-header: true);
+			font-size: 24px;
+		}
+
+		&__body {
+			width: 100%;
+			height: 100%;
+			flow-children: down;
+			border: $menu-pane-border;
+			background-color: $base-950;
+		}
+
+		&__container {
+			width: 50%;
+			height: 70%;
+			flow-children: down;
+			vertical-align: bottom;
+		}
+
+		&__button {
+			@extend .selected-campaign__controls__button;
+
+			border-top: $menu-pane-border;
+
+			&__text {
+				@extend .selected-campaign__controls__button__text;
+			}
 		}
 	}
 
@@ -202,11 +244,8 @@
 	}
 
 	&__logo {
-		width: 440px;
+		width: 100%;
 		height: 130px;
-		margin-bottom: 30px;
-
-		horizontal-align: center;
 	}
 
 	&__title {
@@ -238,48 +277,15 @@
 .saves {
 	&__entry {
 		width: 100%;
-		height: 288px;
+
+		&__lined {
+			border-bottom: 1px solid $base-900;
+		}
 
 		&__inner {
 			@extend .campaigns__entry__inner;
-			background-color: none;
-			background-image: none;
-		}
 
-		&__cover {
-			width: 480px;
-			height: 270px;
-
-			border: $menu-pane-border;
-		}
-
-		&__details {
-			@extend .campaigns__entry__details;
-			&__title {
-				@include mixin.font-styles($use-header: true);
-				font-size: 32px;
-			}
-
-			&__desc {
-				margin-top: 5px;
-				font-size: 20px;
-				color: $base-200;
-			}
-		}
-
-		&:hover {
-			background-color: $primary-950;
-		}
-	}
-}
-
-.chapters {
-	&__entry {
-		width: 100%;
-		height: 150px;
-
-		&__inner {
-			@extend .campaigns__entry__inner;
+			height: fit-children;
 			background-color: none;
 			background-image: none;
 		}
@@ -294,14 +300,58 @@
 		&__details {
 			@extend .campaigns__entry__details;
 			&__title {
-				font-size: 24px;
+				@include mixin.font-styles($use-header: true);
+				font-size: 28px;
+			}
+
+			&__desc {
+				margin-top: 5px;
+				font-size: 18px;
 				color: $base-200;
+			}
+		}
+
+		&:hover {
+			background-color: $primary-950;
+		}
+	}
+}
+
+.chapters {
+	&__entry {
+		width: 100%;
+
+		&__lined {
+			@extend .saves__entry__lined;
+		}
+
+		&__inner {
+			@extend .campaigns__entry__inner;
+
+			height: fit-children;
+			background-color: none;
+			background-image: none;
+		}
+
+		&__cover {
+			width: 240px;
+			height: 135px;
+
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			@extend .campaigns__entry__details;
+			&__title {
+				font-size: 20px;
+				color: $base-200;
+				letter-spacing: 1px;
 			}
 
 			&__desc {
 				@include mixin.font-styles($use-header: true);
 				margin-top: 5px;
-				font-size: 32px;
+				font-size: 28px;
 			}
 		}
 
