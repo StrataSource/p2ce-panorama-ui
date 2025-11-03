@@ -181,15 +181,7 @@
 					<Button class="selected-campaign__controls__button mb-2" disabled="true">
 						<Label class="selected-campaign__controls__button__text" text="[HC] Open in Workshop" />
 					</Button>
-					<Button
-						id="CampaignRobotEnrichment"
-						class="selected-campaign__controls__button mb-2"
-						onactivate="$.Msg('bleh')"
-						disabled="true"
-					>
-						<Label class="selected-campaign__controls__button__text" text="[HC] Robot Enrichment" />
-					</Button>
-					<Label class="horizontal-align-center" text="Proof of concept only. Portal 2 chapters &amp; saves displayed." />
+					<Label class="horizontal-align-center" text="[HC] Proof of concept only. Portal 2 chapters &amp; saves displayed." />
 					<Button
 						id="CampaignStartReturn"
 						class="selected-campaign__controls__button vertical-align-bottom"
