@@ -93,6 +93,7 @@ class AddonManager {
 
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
+	static selectedAddon: number = -1;
 
 	static init() {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback);
@@ -138,6 +139,8 @@ class AddonManager {
 	static addonSelected(addon: number) {
 		const info = WorkshopAPI.GetAddonMeta(addon);
 
+		this.selectedAddon = addon;
+
 		if (this.addonCover)
 			this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
@@ -152,6 +155,16 @@ class AddonManager {
 			this.addonAuthors.text = '';
 			this.addonAuthors.visible = false;
 		}
+	}
+
+	/**
+	 * View currently selected addon index on Steam Workshop
+	 */
+	static viewSelectedOnSteam() {
+		if (this.selectedAddon === -1) return;
+
+		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
+		SteamOverlayAPI.OpenURL(`https://steamcommunity.com/sharedfiles/filedetails/?id=${info.workshopid}`);
 	}
 
 	/**

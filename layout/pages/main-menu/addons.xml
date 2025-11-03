@@ -57,7 +57,11 @@
 				<Panel class="flow-down vertical-align-center">
 					<Label id="SelectedAddonTitle" class="selected-addon__title" text="[PH] Addon Name" />
 					<Label id="SelectedAddonAuthors" class="selected-addon__authors" text="[PH] Addon Authors" />
-					<Button id="SelectedAddonView" class="mt-2 button">
+					<Button
+						id="SelectedAddonView"
+						class="mt-2 button"
+						onactivate="AddonManager.viewSelectedOnSteam()"
+					>
 						<Label class="button__text" text="[HC] View On Steam" />
 					</Button>
 				</Panel>
