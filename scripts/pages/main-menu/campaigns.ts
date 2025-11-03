@@ -108,7 +108,7 @@ class ChapterEntry {
 			title.text = tagDevString(`Chapter ${this.index + 1}`);
 		}
 		if (desc) {
-			desc.text = `${this.chapter.title}`;
+			desc.text = tagDevString(this.chapter.title);
 		}
 		if (cover) {
 			cover.SetImage(`file://{materials}/vgui/chapters/chapter${this.index + 1}.vtf`);
