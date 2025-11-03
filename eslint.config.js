@@ -1,23 +1,18 @@
 'use strict';
 
-const {
-    defineConfig,
-    globalIgnores,
-} = require('eslint/config');
+const { defineConfig, globalIgnores } = require('eslint/config');
 
 const unicorn = require('eslint-plugin-unicorn');
 const prettier = require('eslint-plugin-prettier');
 const tseslint = require('typescript-eslint');
 const js = require('@eslint/js');
 
-const {
-    FlatCompat,
-} = require('@eslint/eslintrc');
+const { FlatCompat } = require('@eslint/eslintrc');
 
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+	baseDirectory: __dirname,
+	recommendedConfig: js.configs.recommended,
+	allConfig: js.configs.all
 });
 
 module.exports = defineConfig([
@@ -25,7 +20,7 @@ module.exports = defineConfig([
 		plugins: {
 			unicorn,
 			prettier,
-			tseslint,
+			tseslint
 		},
 
 		extends: compat.extends('eslint:recommended', 'prettier', 'plugin:@typescript-eslint/recommended'),
@@ -35,8 +30,8 @@ module.exports = defineConfig([
 			sourceType: 'script',
 
 			parserOptions: {
-				impliedStrict: 'true',
-			},
+				impliedStrict: 'true'
+			}
 		},
 
 		rules: {
@@ -83,13 +78,8 @@ module.exports = defineConfig([
 			// We have a lot of "unused" class definitions and such
 			'@typescript-eslint/no-unused-vars': ['off'],
 			// This just straight up breaks sometimes
-			'@typescript-eslint/no-unused-expressions': ['off'],
-		},
+			'@typescript-eslint/no-unused-expressions': ['off']
+		}
 	},
-	globalIgnores([
-		'eslint.config.js',
-		'node_modules',
-		'scripts/types',
-		'scripts_dist',
-	]),
+	globalIgnores(['eslint.config.js', 'node_modules', 'scripts/types', 'scripts_dist'])
 ]);
