@@ -3,11 +3,11 @@
 /**
  * Traverses the layout hierarchy and removes instances of
  * [PH] or [HC] in LABELS if not in developer mode.
- * 
+ *
  * This assumes that
  * 1. A label contains no more than ONE tag (which it only should anyway)
  * 2. The label's tag and content are split with a space
- * 
+ *
  * @param panel The panel whose layout will be traversed
  */
 function stripDevTagsFromLabels(panel: GenericPanel) {

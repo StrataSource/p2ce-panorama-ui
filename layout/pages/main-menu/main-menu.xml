@@ -115,11 +115,7 @@
 						</Panel>
 					</RadioButton>
 
-					<Button
-						id="QuitButton"
-						class="topnav__button"
-						onactivate="MainMenu.onQuitButtonPressed()"
-					>
+					<Button id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
 							<Label text="[HC] Quit" class="text MainMenuModeOnly" />
@@ -161,47 +157,37 @@
 						<Panel id="PauseContent" class="mainmenu__home-container PauseMenuModeOnly">
 							<Panel class="home">
 								<!-- Resume game button, pause menu only -->
-								<Button
-									class="home__prompt home__prompt__short"
-									onactivate="$.DispatchEvent('MainMenuResumeGame');"
-								>
+								<Button class="home__prompt home__prompt__short" onactivate="$.DispatchEvent('MainMenuResumeGame');">
 									<Image
-										src="file://{images}/menu/p2ce/random2.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
+									src="file://{images}/menu/p2ce/random2.png"
+									scaling="stretch-to-cover-preserve-aspect"
+									class="home__prompt__image"
+								/>
 									<Panel class="home__prompt__short__content">
 										<Label class="home__heading" text="[HC] Resume Game" />
 									</Panel>
 								</Button>
 								<Panel class="home__spacer__v" />
 								<!-- See all saves -->
-								<Button
-									class="home__prompt"
-									disabled="true"
-								>
+								<Button class="home__prompt" disabled="true">
 									<Image
-										src="file://{images}/menu/p2ce/random1.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
+									src="file://{images}/menu/p2ce/random1.png"
+									scaling="stretch-to-cover-preserve-aspect"
+									class="home__prompt__image"
+								/>
 									<Panel class="home__prompt__content">
 										<Label class="home__heading" text="[HC] Save/Load Game (COMING SOON)" />
 									</Panel>
 								</Button>
 								<Panel class="home__spacer__v" />
 								<!-- Continue latest save -->
-								<Button
-									id="PausedLoadLastSaveButton"
-									class="home__prompt"
-									onactivate="MainMenu.loadLatestSave();"
-								>
+								<Button id="PausedLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
 									<Image
-										id="PausedSaveImage"
-										src="file://{images}/menu/p2ce/random3.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
+									id="PausedSaveImage"
+									src="file://{images}/menu/p2ce/random3.png"
+									scaling="stretch-to-cover-preserve-aspect"
+									class="home__prompt__image"
+								/>
 									<Panel class="home__prompt__content">
 										<Label class="home__heading" text="[HC] Load Last Save" />
 									</Panel>
@@ -211,82 +197,60 @@
 
 						<Panel id="HomeContent" class="mainmenu__home-container MainMenuModeOnly">
 							<ModelPanel
-								id="MainMenuModel"
-								class="home__modelpanel MainMenuModeOnly"
-								src="models/npcs/turret/turret.mdl"
-								cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-								antialias="true"
-								mouse_rotate="true"
-							/>
+							id="MainMenuModel"
+							class="home__modelpanel MainMenuModeOnly"
+							src="models/npcs/turret/turret.mdl"
+							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+							antialias="true"
+							mouse_rotate="true"
+						/>
 							<Panel class="home">
 								<!-- Continue latest save -->
-								<Button
-									id="MainMenuLoadLastSaveButton"
-									class="home__prompt"
-									onactivate="MainMenu.loadLatestSave();"
-								>
+								<Button id="MainMenuLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
 									<Image
-										id="MainMenuSaveImage"
-										defaultsrc="file://{images}/menu/p2ce/random1.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
+									id="MainMenuSaveImage"
+									defaultsrc="file://{images}/menu/p2ce/random1.png"
+									scaling="stretch-to-cover-preserve-aspect"
+									class="home__prompt__image"
+								/>
 									<Panel class="home__prompt__content">
 										<Label class="home__heading" text="[HC] Continue" />
-										<Label
-											id="MainMenuSaveSubheadingLabel"
-											class="home__subheading"
-											text="[HC] No Save Available"
-										/>
+										<Label id="MainMenuSaveSubheadingLabel" class="home__subheading" text="[HC] No Save Available" />
 									</Panel>
 								</Button>
 								<Panel class="home__bottom">
-									<Button
-										id="NewsFlyoutBtn"
-										class="home__expandable home__expandable__join-btm"
-									>
+									<Button id="NewsFlyoutBtn" class="home__expandable home__expandable__join-btm">
 										<Image
-											id="NewsFlyoutImage"
-											src="file://{images}/menu/p2ce/news-splash.png"
-											scaling="stretch-to-cover-preserve-aspect"
-											class="home__prompt__image"
-										/>
+										id="NewsFlyoutImage"
+										src="file://{images}/menu/p2ce/news-splash.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
 										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] NEWS" />
 										<Panel class="home__expandable__content">
+											<Label id="NewsFlyoutHeader" class="home__heading" text="[PH] News Flyout Header" />
 											<Label
-												id="NewsFlyoutHeader"
-												class="home__heading"
-												text="[PH] News Flyout Header"
-											/>
-											<Label
-												id="NewsFlyoutDescription"
-												class="home__subheading home__expandable__active-only"
-												text="[PH] News Flyout Description"
-											/>
+											id="NewsFlyoutDescription"
+											class="home__subheading home__expandable__active-only"
+											text="[PH] News Flyout Description"
+										/>
 										</Panel>
 									</Button>
-									<Button
-										class="home__expandable"
-										onactivate="MainMenu.onFeaturedFlyoutPressed()"
-									>
+									<Button class="home__expandable" onactivate="MainMenu.onFeaturedFlyoutPressed()">
 										<Image
-											id="FeaturedFlyoutImage"
-											src="file://{images}/menu/p2ce/random2.png"
-											scaling="stretch-to-cover-preserve-aspect"
-											class="home__prompt__image"
-										/>
+										id="FeaturedFlyoutImage"
+										src="file://{images}/menu/p2ce/random2.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
 										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] FEATURED" />
 										<Panel class="home__expandable__content">
+											<Label id="FeaturedFlyoutHeader" class="home__heading" text="[PH] Featured Flyout Header" />
 											<Label
-												id="FeaturedFlyoutHeader"
-												class="home__heading"
-												text="[PH] Featured Flyout Header"
-											/>
-											<Label
-												id="FeaturedFlyoutDescription"
-												class="home__subheading home__expandable__active-only"
-												text="[PH] Featured Flyout Description"
-											/>
+											id="FeaturedFlyoutDescription"
+											class="home__subheading home__expandable__active-only"
+											text="[PH] Featured Flyout Description"
+										/>
 										</Panel>
 									</Button>
 								</Panel>

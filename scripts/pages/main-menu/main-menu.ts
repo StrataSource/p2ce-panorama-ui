@@ -128,7 +128,7 @@ class MainMenu {
 	static onShowPauseMenu() {
 		this.panels.cp.AddClass('MainMenuRootPanel--PauseMenuMode');
 		this.onHomeButtonPressed();
-		
+
 		this.updateHomeDetails();
 	}
 
@@ -152,27 +152,21 @@ class MainMenu {
 		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
 		const hasSaves = saves.length !== 0;
 
-		if (this.panels.pausedLoadLastSaveButton)
-			this.panels.pausedLoadLastSaveButton.enabled = hasSaves;
+		if (this.panels.pausedLoadLastSaveButton) this.panels.pausedLoadLastSaveButton.enabled = hasSaves;
 
-		if (this.panels.mainMenuViewSavesButton)
-			this.panels.mainMenuViewSavesButton.enabled = hasSaves;
+		if (this.panels.mainMenuViewSavesButton) this.panels.mainMenuViewSavesButton.enabled = hasSaves;
 
-		if (this.panels.mainMenuLoadLastSaveButton)
-			this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
+		if (this.panels.mainMenuLoadLastSaveButton) this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
 
 		if (hasSaves) {
 			const save = saves[0];
 			const thumbValid = save.thumb.length > 0;
 			const savePath = `file://${save.thumb}`;
 
-			if (this.panels.mainMenuSaveImage && thumbValid)
-				this.panels.mainMenuSaveImage.SetImage(savePath);
-			if (this.panels.pausedSaveImage && thumbValid)
-				this.panels.pausedSaveImage.SetImage(savePath);
+			if (this.panels.mainMenuSaveImage && thumbValid) this.panels.mainMenuSaveImage.SetImage(savePath);
+			if (this.panels.pausedSaveImage && thumbValid) this.panels.pausedSaveImage.SetImage(savePath);
 
-			if (this.panels.mainMenuSaveSubheadingLabel)
-				this.panels.mainMenuSaveSubheadingLabel.text = save.name;
+			if (this.panels.mainMenuSaveSubheadingLabel) this.panels.mainMenuSaveSubheadingLabel.text = save.name;
 		}
 	}
 
@@ -311,30 +305,26 @@ class MainMenu {
 	}
 
 	static setMainMenuFlyouts() {
-		const NEWS_URL = 'https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=1&maxlength=180&format=json';
-		$.AsyncWebRequest(
-			NEWS_URL, {
-				type: 'GET',
-				complete: (data) => {
-					if (data.statusText !== 'success') {
-						this.panels.newsFlyoutHeader.text = tagDevString('Failed to retrieve news!');
-						return;
-					}
-
-					// using the responseText on its own results in a parsing error
-					const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
-					const news = response['appnews']['newsitems'][0];
-					this.panels.newsFlyoutBtn.SetPanelEvent(
-						'onactivate',
-						() => {
-							SteamOverlayAPI.OpenURL(news['url']);
-						}
-					);
-					this.panels.newsFlyoutHeader.text = news['title'];
-					this.panels.newsFlyoutDesc.text = news['contents'];
+		const NEWS_URL =
+			'https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=1&maxlength=180&format=json';
+		$.AsyncWebRequest(NEWS_URL, {
+			type: 'GET',
+			complete: (data) => {
+				if (data.statusText !== 'success') {
+					this.panels.newsFlyoutHeader.text = tagDevString('Failed to retrieve news!');
+					return;
 				}
+
+				// using the responseText on its own results in a parsing error
+				const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+				const news = response['appnews']['newsitems'][0];
+				this.panels.newsFlyoutBtn.SetPanelEvent('onactivate', () => {
+					SteamOverlayAPI.OpenURL(news['url']);
+				});
+				this.panels.newsFlyoutHeader.text = news['title'];
+				this.panels.newsFlyoutDesc.text = news['contents'];
 			}
-		);
+		});
 	}
 
 	/**
@@ -342,7 +332,7 @@ class MainMenu {
 	 */
 	static loadLatestSave() {
 		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
-		
+
 		if (saves.length === 0) return;
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
@@ -351,7 +341,9 @@ class MainMenu {
 				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
 				'warning-popup',
 				tagDevString('Load Save'),
-				() => { SaveRestoreAPI.LoadSave(saves[0].name); },
+				() => {
+					SaveRestoreAPI.LoadSave(saves[0].name);
+				},
 				$.Localize('#Action_Return'),
 				() => {},
 				'blur'
@@ -380,17 +372,13 @@ class MainMenu {
 		if (btn) $.DispatchEvent('Activated', btn, PanelEventSource.MOUSE);
 	}
 
-	static onFeaturedFlyoutPressed() {
-
-	}
+	static onFeaturedFlyoutPressed() {}
 
 	/**
 	 * Handles quit button getting pressed.
 	 */
 	static onQuitButtonPressed() {
-		this.onQuitPrompt(
-			GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU
-		);
+		this.onQuitPrompt(GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU);
 	}
 
 	/**

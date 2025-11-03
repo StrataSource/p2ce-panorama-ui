@@ -393,7 +393,7 @@ $home-panel-width: 50%;
 
 			padding: 15px;
 			//transition: background-color 0.1s ease-in-out 0.0s;
-			background-color: gradient( linear, 0% 0%, 150% 0%, from( $base-950 ), to( rgba($base-950, 0) ) );
+			background-color: gradient(linear, 0% 0%, 150% 0%, from($base-950), to(rgba($base-950, 0)));
 		}
 
 		&__join-btm {

@@ -74,7 +74,7 @@
 			height: 100%;
 			flow-children: right;
 			padding: 15px;
-			background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba($base-950, 0) ) );
+			background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba($base-950, 0)));
 		}
 
 		&__bg-image {
@@ -171,7 +171,7 @@
 			&:hover:not(:disabled) {
 				background-color: $primary-color;
 				border-color: $primary-color;
-				
+
 				#{$this}__text {
 					color: $base-950;
 				}

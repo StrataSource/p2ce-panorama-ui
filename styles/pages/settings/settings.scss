@@ -221,7 +221,7 @@ $page-width: 1920px - $rightnav-width;
 
 		&:selected {
 			background-color: $primary-700;
-			
+
 			#{$root}__subitem-label {
 				color: $bright-color;
 			}

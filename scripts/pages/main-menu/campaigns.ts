@@ -71,7 +71,9 @@ class CampaignEntry {
 			btnBg.SetImage(this.info.btnBg);
 		}
 
-		this.panel.SetPanelEvent('onactivate', () => { CampaignMgr.campaignSelected(this.info) });
+		this.panel.SetPanelEvent('onactivate', () => {
+			CampaignMgr.campaignSelected(this.info);
+		});
 	}
 }
 
@@ -114,25 +116,24 @@ class ChapterEntry {
 			cover.SetImage(`file://{materials}/vgui/chapters/chapter${this.index + 1}.vtf`);
 		}
 
-		this.panel.SetPanelEvent(
-			'onactivate',
-			() => {
-				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
-					GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
-				else {
-					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						tagDevString('Confirm New Game'),
-						tagDevString('Are you sure you want to start a new game? Progress will be lost!'),
-						'warning-popup',
-						$.Localize('#UI_Yes'),
-						() => { GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`); },
-						$.Localize('#UI_Cancel'),
-						() => {},
-						'blur'
-					);
-				}
+		this.panel.SetPanelEvent('onactivate', () => {
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
+				GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
+			else {
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					tagDevString('Confirm New Game'),
+					tagDevString('Are you sure you want to start a new game? Progress will be lost!'),
+					'warning-popup',
+					$.Localize('#UI_Yes'),
+					() => {
+						GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
+					},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
 			}
-		);
+		});
 	}
 }
 
@@ -162,25 +163,23 @@ class SaveEntry {
 			cover.SetImage(`file://${this.save.thumb}`);
 		}
 
-		this.panel.SetPanelEvent(
-			'onactivate',
-			() => {
-				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
-					SaveRestoreAPI.LoadSave(this.save.name);
-				else {
-					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						tagDevString('Confirm Load Game'),
-						tagDevString('Are you sure you want to load this save file? Progress will be lost!'),
-						'warning-popup',
-						$.Localize('#UI_Yes'),
-						() => { SaveRestoreAPI.LoadSave(this.save.name); },
-						$.Localize('#UI_Cancel'),
-						() => {},
-						'blur'
-					);
-				}
+		this.panel.SetPanelEvent('onactivate', () => {
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) SaveRestoreAPI.LoadSave(this.save.name);
+			else {
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					tagDevString('Confirm Load Game'),
+					tagDevString('Are you sure you want to load this save file? Progress will be lost!'),
+					'warning-popup',
+					$.Localize('#UI_Yes'),
+					() => {
+						SaveRestoreAPI.LoadSave(this.save.name);
+					},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
 			}
-		);
+		});
 	}
 }
 
@@ -201,13 +200,11 @@ class CampaignNewGameTab {
 
 	static show() {
 		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
-		if (campaignListerContainer)
-			campaignListerContainer.visible = true;
+		if (campaignListerContainer) campaignListerContainer.visible = true;
 	}
 
 	static purgeChapterList() {
-		while (this.chapterEntries.length > 0)
-			this.chapterEntries.pop()?.panel.DeleteAsync(0);
+		while (this.chapterEntries.length > 0) this.chapterEntries.pop()?.panel.DeleteAsync(0);
 	}
 
 	static populateChapters() {
@@ -215,16 +212,16 @@ class CampaignNewGameTab {
 		if (!this.campaignLister) return;
 
 		const chapters: FakeChapter[] = [
-			{ title: 'The Courtesy Call', 'map': 'sp_a1_intro1' },
-			{ title: 'The Cold Boot', 'map': 'sp_a2_laser_intro' },
-			{ title: 'The Return', 'map': 'sp_a2_sphere_peek' },
-			{ title: 'The Surprise', 'map': 'sp_a2_column_blocker' },
-			{ title: 'The Escape', 'map': 'sp_a2_bts3' },
-			{ title: 'The Fall', 'map': 'sp_a3_00' },
-			{ title: 'The Reunion', 'map': 'sp_a3_speed_ramp' },
-			{ title: 'The Itch', 'map': 'sp_a4_intro' },
-			{ title: 'The Part Where...', 'map': 'sp_a4_finale1' },
-			{ title: 'The Credits', 'map': 'sp_a5_credits' },
+			{ title: 'The Courtesy Call', map: 'sp_a1_intro1' },
+			{ title: 'The Cold Boot', map: 'sp_a2_laser_intro' },
+			{ title: 'The Return', map: 'sp_a2_sphere_peek' },
+			{ title: 'The Surprise', map: 'sp_a2_column_blocker' },
+			{ title: 'The Escape', map: 'sp_a2_bts3' },
+			{ title: 'The Fall', map: 'sp_a3_00' },
+			{ title: 'The Reunion', map: 'sp_a3_speed_ramp' },
+			{ title: 'The Itch', map: 'sp_a4_intro' },
+			{ title: 'The Part Where...', map: 'sp_a4_finale1' },
+			{ title: 'The Credits', map: 'sp_a5_credits' }
 		];
 
 		for (let i = 0; i < chapters.length; ++i) {
@@ -254,13 +251,11 @@ class CampaignLoadGameTab {
 
 	static show() {
 		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
-		if (campaignListerContainer)
-			campaignListerContainer.visible = true;
+		if (campaignListerContainer) campaignListerContainer.visible = true;
 	}
 
 	static purgeSaveList() {
-		while (this.saveEntries.length > 0)
-			this.saveEntries.pop()?.panel.DeleteAsync(0);
+		while (this.saveEntries.length > 0) this.saveEntries.pop()?.panel.DeleteAsync(0);
 	}
 
 	static populateSaves() {
@@ -289,7 +284,9 @@ class CampaignLoadGameTab {
 				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
 				'warning-popup',
 				$.Localize('#UI_Yes'),
-				() => { SaveRestoreAPI.LoadSave(saves[0].name); },
+				() => {
+					SaveRestoreAPI.LoadSave(saves[0].name);
+				},
 				$.Localize('#UI_Cancel'),
 				() => {},
 				'blur'
@@ -313,8 +310,7 @@ class CampaignStartPage {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.onLayoutReloaded.bind(this));
 	}
 
-	static onLayoutReloaded() {
-	}
+	static onLayoutReloaded() {}
 
 	static init() {
 		this.hide();
@@ -334,8 +330,7 @@ class CampaignStartPage {
 
 		this.campaignStartPage.visible = false;
 
-		if (this.campaignListerContainer)
-			this.campaignListerContainer.visible = false;
+		if (this.campaignListerContainer) this.campaignListerContainer.visible = false;
 	}
 
 	static setActive() {
@@ -351,68 +346,66 @@ class CampaignStartPage {
 	static onCampaignScreenShown(tabid: string) {
 		if (tabid !== 'Campaigns') return;
 
-		if (this.campaignListerContainer)
-			this.campaignListerContainer.visible = false;
+		if (this.campaignListerContainer) this.campaignListerContainer.visible = false;
 
 		const hasSaves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time).length > 0;
 
-		if (this.campaignAllSavesBtn)
-			this.campaignAllSavesBtn.enabled = hasSaves;
+		if (this.campaignAllSavesBtn) this.campaignAllSavesBtn.enabled = hasSaves;
 
-		if (this.campaignLoadLatestBtn)
-			this.campaignLoadLatestBtn.enabled = hasSaves;
+		if (this.campaignLoadLatestBtn) this.campaignLoadLatestBtn.enabled = hasSaves;
 
 		// only change campaigns when not in game
 		const returnBtn = $('#CampaignStartReturn');
-		if (returnBtn)
-			returnBtn.visible = GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU;
+		if (returnBtn) returnBtn.visible = GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU;
 	}
 }
 
 class CampaignSelector {
 	static fakeCampaigns: FakeCampaign[] = [
 		{
-			'title': '[HC] Portal 2: Community Edition',
-			'author': '[HC] P2:CE Team',
-			'desc': '[HC] P2:CE Campaign Description',
-			'cover': 'file://{images}/menu/p2ce/random5.png',
-			'background': 'file://{images}/menu/p2ce/news-splash.png',
-			'btnBg': 'file://{images}/menu/p2ce/random1.png',
-			'ico': 'file://{images}/menu/p2ce/logo.png',
-			'logo': 'file://{images}/logo.svg'
+			title: '[HC] Portal 2: Community Edition',
+			author: '[HC] P2:CE Team',
+			desc: '[HC] P2:CE Campaign Description',
+			cover: 'file://{images}/menu/p2ce/random5.png',
+			background: 'file://{images}/menu/p2ce/news-splash.png',
+			btnBg: 'file://{images}/menu/p2ce/random1.png',
+			ico: 'file://{images}/menu/p2ce/logo.png',
+			logo: 'file://{images}/logo.svg'
 		},
 		{
-			'title': '[HC] Portal 2',
-			'author': '[HC] Valve',
-			'desc': '[HC] Portal 2 features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
-					'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
-					'Labs and be reunited with GLaDOS.',
-			'cover': 'file://{images}/menu/portal2/campaign_cover.png',
-			'background': 'file://{images}/menu/portal2/campaign_bg.png',
-			'btnBg': 'file://{images}/menu/portal2/campaign_btn_bg.jpg',
-			'ico': 'file://{images}/menu/portal2/logo.png',
-			'logo': 'file://{images}/menu/portal2/full_logo.png'
+			title: '[HC] Portal 2',
+			author: '[HC] Valve',
+			desc:
+				'[HC] Portal 2 features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
+				'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
+				'Labs and be reunited with GLaDOS.',
+			cover: 'file://{images}/menu/portal2/campaign_cover.png',
+			background: 'file://{images}/menu/portal2/campaign_bg.png',
+			btnBg: 'file://{images}/menu/portal2/campaign_btn_bg.jpg',
+			ico: 'file://{images}/menu/portal2/logo.png',
+			logo: 'file://{images}/menu/portal2/full_logo.png'
 		},
 		{
-			'title': '[HC] Portal 2 (Co-Op)',
-			'author': '[HC] Valve',
-			'desc': '[HC] Portal 2 Multiplayer Campaign Description',
-			'cover': 'file://{images}/menu/portal2/mp_campaign_bg.png',
-			'background': 'file://{images}/menu/portal2/mp_campaign_bg.png',
-			'btnBg': 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
-			'ico': 'file://{images}/menu/portal2/logo.png',
-			'logo': 'file://{images}/menu/portal2/full_logo.png'
+			title: '[HC] Portal 2 (Co-Op)',
+			author: '[HC] Valve',
+			desc: '[HC] Portal 2 Multiplayer Campaign Description',
+			cover: 'file://{images}/menu/portal2/mp_campaign_bg.png',
+			background: 'file://{images}/menu/portal2/mp_campaign_bg.png',
+			btnBg: 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
+			ico: 'file://{images}/menu/portal2/logo.png',
+			logo: 'file://{images}/menu/portal2/full_logo.png'
 		},
 		{
-			'title': '[HC] Portal',
-			'author': '[HC] Valve',
-			'desc': '[HC] Set in the mysterious Aperture Science Laboratories, players must solve physical puzzles and ' +
-					'challenges by opening portals to maneuver objects, and themselves, through space.',
-			'cover': 'file://{images}/menu/portal/campaign_bg.png',
-			'background': 'file://{images}/menu/portal/campaign_bg.png',
-			'btnBg': 'file://{images}/menu/portal/campaign_btn_bg.jpg',
-			'ico': 'file://{images}/menu/portal/logo.svg',
-			'logo': 'file://{images}/menu/portal/full_logo.svg'
+			title: '[HC] Portal',
+			author: '[HC] Valve',
+			desc:
+				'[HC] Set in the mysterious Aperture Science Laboratories, players must solve physical puzzles and ' +
+				'challenges by opening portals to maneuver objects, and themselves, through space.',
+			cover: 'file://{images}/menu/portal/campaign_bg.png',
+			background: 'file://{images}/menu/portal/campaign_bg.png',
+			btnBg: 'file://{images}/menu/portal/campaign_btn_bg.jpg',
+			ico: 'file://{images}/menu/portal/logo.svg',
+			logo: 'file://{images}/menu/portal/full_logo.svg'
 		}
 	];
 	static campaignList = $<Panel>('#CampaignContainer');
@@ -445,8 +438,7 @@ class CampaignSelector {
 	}
 
 	static purgeCampaignList() {
-		while (this.campaignEntries.length > 0)
-			this.campaignEntries.pop()?.panel.DeleteAsync(0);
+		while (this.campaignEntries.length > 0) this.campaignEntries.pop()?.panel.DeleteAsync(0);
 	}
 
 	static reloadList() {

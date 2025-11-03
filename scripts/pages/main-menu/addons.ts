@@ -139,7 +139,7 @@ class AddonManager {
 
 	static onMainMenuTabShown(tabid: string) {
 		if (tabid !== 'Addons') return;
-		
+
 		this.selectedAddon = -1;
 		this.addonPanel.AddClass('hide');
 		this.purgeAddonList();
