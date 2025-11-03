@@ -3,6 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/campaigns.ts" />
 	</scripts>
 

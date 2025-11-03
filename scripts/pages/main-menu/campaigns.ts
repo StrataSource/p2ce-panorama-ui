@@ -432,6 +432,7 @@ class CampaignSelector {
 			this.campaignEntries.push(new CampaignEntry(i, p, this.fakeCampaigns[i]));
 			this.campaignEntries[i].update();
 		}
+		stripDevTagsFromLabels(this.campaignList);
 	}
 
 	static purgeCampaignList() {

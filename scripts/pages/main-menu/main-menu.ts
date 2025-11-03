@@ -77,6 +77,8 @@ class MainMenu {
 		this.setMainMenuBackground();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
+
+		stripDevTagsFromLabels($.GetContextPanel());
 	}
 
 	/**
@@ -178,6 +180,7 @@ class MainMenu {
 
 			newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 			newPanel.RegisterForReadyEvents(true);
+			stripDevTagsFromLabels(newPanel);
 
 			// Handler that catches PropertyTransitionEndEvent event for this panel.
 			// Check if the panel is transparent then collapse it.
