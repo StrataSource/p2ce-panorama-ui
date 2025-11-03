@@ -238,31 +238,52 @@
 									</Panel>
 								</Button>
 								<Panel class="home__bottom">
-									<Button class="home__expandable home__expandable__join-btm">
+									<Button
+										id="NewsFlyoutBtn"
+										class="home__expandable home__expandable__join-btm"
+									>
 										<Image
+											id="NewsFlyoutImage"
 											src="file://{images}/menu/p2ce/news-splash.png"
 											scaling="stretch-to-cover-preserve-aspect"
 											class="home__prompt__image"
 										/>
 										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] NEWS" />
 										<Panel class="home__expandable__content">
-											<Label class="home__heading" text="[PH] Clustered Update" />
 											<Label
+												id="NewsFlyoutHeader"
+												class="home__heading"
+												text="[PH] News Flyout Header"
+											/>
+											<Label
+												id="NewsFlyoutDescription"
 												class="home__subheading home__expandable__active-only"
-												text="[PH] We have completely overhauled the Source Engine's lighting system to add a new level of depth and liveliness to the game's environments."
+												text="[PH] News Flyout Description"
 											/>
 										</Panel>
 									</Button>
-									<Button class="home__expandable">
+									<Button
+										class="home__expandable"
+										onactivate="MainMenu.onFeaturedFlyoutPressed()"
+									>
 										<Image
+											id="FeaturedFlyoutImage"
 											src="file://{images}/menu/p2ce/random2.png"
 											scaling="stretch-to-cover-preserve-aspect"
 											class="home__prompt__image"
 										/>
 										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] FEATURED" />
 										<Panel class="home__expandable__content">
-											<Label class="home__heading" text="[PH] My New Epic Campaign" />
-											<Label class="home__subheading home__expandable__active-only" text="[PH] Featured for October 2025, created by Someone on the Workshop or Something" />
+											<Label
+												id="FeaturedFlyoutHeader"
+												class="home__heading"
+												text="[PH] Featured Flyout Header"
+											/>
+											<Label
+												id="FeaturedFlyoutDescription"
+												class="home__subheading home__expandable__active-only"
+												text="[PH] Featured Flyout Description"
+											/>
 										</Panel>
 									</Button>
 								</Panel>

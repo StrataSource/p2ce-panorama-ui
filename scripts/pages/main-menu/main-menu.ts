@@ -19,7 +19,15 @@ class MainMenu {
 		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton'),
 		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
 		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
-		pausedSaveImage: $<Image>('#PausedSaveImage')
+		pausedSaveImage: $<Image>('#PausedSaveImage'),
+
+		newsFlyoutBtn: $<Button>('#NewsFlyoutBtn')!,
+		newsFlyoutImage: $<Image>('#NewsFlyoutImage')!,
+		newsFlyoutHeader: $<Label>('#NewsFlyoutHeader')!,
+		newsFlyoutDesc: $<Label>('#NewsFlyoutDescription')!,
+		featuredFlyoutImage: $<Image>('#FeaturedFlyoutImage')!,
+		featuredFlyoutHeader: $<Label>('#FeaturedFlyoutHeader')!,
+		featuredFlyoutDesc: $<Label>('#FeaturedFlyoutDescription')!
 	};
 
 	static activeTab = '';
@@ -75,6 +83,7 @@ class MainMenu {
 		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
 
 		this.setMainMenuBackground();
+		this.setMainMenuFlyouts();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
@@ -301,6 +310,33 @@ class MainMenu {
 		}
 	}
 
+	static setMainMenuFlyouts() {
+		const NEWS_URL = 'https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=1&maxlength=180&format=json';
+		$.AsyncWebRequest(
+			NEWS_URL, {
+				type: 'GET',
+				complete: (data) => {
+					if (data.statusText !== 'success') {
+						this.panels.newsFlyoutHeader.text = tagDevString('Failed to retrieve news!');
+						return;
+					}
+
+					// using the responseText on its own results in a parsing error
+					const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+					const news = response['appnews']['newsitems'][0];
+					this.panels.newsFlyoutBtn.SetPanelEvent(
+						'onactivate',
+						() => {
+							SteamOverlayAPI.OpenURL(news['url']);
+						}
+					);
+					this.panels.newsFlyoutHeader.text = news['title'];
+					this.panels.newsFlyoutDesc.text = news['contents'];
+				}
+			}
+		);
+	}
+
 	/**
 	 * Load the latest save available.
 	 */
@@ -342,6 +378,10 @@ class MainMenu {
 		const btn = this.panels.cp.FindChildTraverse<ToggleButton>(btnId);
 
 		if (btn) $.DispatchEvent('Activated', btn, PanelEventSource.MOUSE);
+	}
+
+	static onFeaturedFlyoutPressed() {
+
 	}
 
 	/**
