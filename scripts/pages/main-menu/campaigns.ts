@@ -157,7 +157,8 @@ class SaveEntry {
 			title.text = this.save.name;
 		}
 		if (desc) {
-			desc.text = this.save.time;
+			const date = new Date(this.save.time * 1000);
+			desc.text = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 		}
 		if (cover) {
 			cover.SetImage(`file://${this.save.thumb}`);
