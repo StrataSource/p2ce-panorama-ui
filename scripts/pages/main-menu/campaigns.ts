@@ -11,7 +11,16 @@ class FakeCampaign {
 	ico: string;
 	logo: string;
 
-	constructor(title: string, author: string, desc: string, cover: string, background: string, btnBg: string, ico: string, logo: string) {
+	constructor(
+		title: string,
+		author: string,
+		desc: string,
+		cover: string,
+		background: string,
+		btnBg: string,
+		ico: string,
+		logo: string
+	) {
 		this.title = title;
 		this.author = author;
 		this.desc = desc;
@@ -443,6 +452,19 @@ class CampaignSelector {
 	static reloadList() {
 		this.purgeCampaignList();
 		this.populateCampaigns();
+	}
+
+	static viewLooseMaps() {
+		UiToolkitAPI.ShowGenericPopupOk(
+			tagDevString('Feature Unavailable'),
+			tagDevString('This feature is currently a work-in-progress and is not available.'),
+			'blur',
+			() => {}
+		);
+	}
+
+	static openWorkshop() {
+		SteamOverlayAPI.OpenURL('https://steamcommunity.com/app/440000/workshop/');
 	}
 }
 

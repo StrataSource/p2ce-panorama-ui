@@ -135,6 +135,7 @@
 				<Button
 					id="CampaignsViewLooseMapsBtn"
 					class="campaigns__action-bar__button mr-2"
+					onactivate="CampaignSelector.viewLooseMaps()"
 				>
 					<Image
 						class="campaigns__action-bar__button__icon"
@@ -148,7 +149,11 @@
 						<Label class="campaigns__action-bar__button__text-btm" text="[PH] 3 newly subscribed"/>
 					</Panel>
 				</Button>
-				<Button id="CampaignsGoWorkshopBtn" class="campaigns__action-bar__button">
+				<Button
+					id="CampaignsGoWorkshopBtn"
+					class="campaigns__action-bar__button"
+					onactivate="CampaignSelector.openWorkshop()"
+				>
 					<Image
 						class="campaigns__action-bar__button__icon"
 						src="file://{images}/cancel.svg"
