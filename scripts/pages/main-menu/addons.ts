@@ -96,7 +96,8 @@ class AddonManager {
 	static selectedAddon: number = -1;
 
 	static init() {
-		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback);
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onMainMenuTabShown.bind(this));
 		this.createAddonEntries();
 	}
 
@@ -136,10 +137,21 @@ class AddonManager {
 		this.createAddonEntries();
 	}
 
+	static onMainMenuTabShown(tabid: string) {
+		if (tabid !== 'Addons') return;
+		
+		this.selectedAddon = -1;
+		this.addonPanel.AddClass('hide');
+		this.purgeAddonList();
+		this.createAddonEntries();
+	}
+
 	static addonSelected(addon: number) {
 		const info = WorkshopAPI.GetAddonMeta(addon);
 
 		this.selectedAddon = addon;
+
+		this.addonPanel.RemoveClass('hide');
 
 		if (this.addonCover)
 			this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');

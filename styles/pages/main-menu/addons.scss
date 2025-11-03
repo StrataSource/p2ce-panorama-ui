@@ -3,7 +3,7 @@
 @use '../../abstract/mixin';
 
 .addons {
-	width: fill-parent-flow(0.45);
+	width: 50%;
 	height: 100%;
 	flow-children: down;
 
@@ -93,7 +93,7 @@
 }
 
 .selected-addon {
-	width: fill-parent-flow(0.55);
+	width: 50%;
 	height: 100%;
 	flow-children: down;
 

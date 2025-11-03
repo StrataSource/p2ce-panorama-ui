@@ -51,7 +51,7 @@
 			<Panel id="AddonContainer" class="addons__list" />
 		</Panel>
 
-		<Panel id="SelectedAddonPanel" class="selected-addon">
+		<Panel id="SelectedAddonPanel" class="selected-addon hide">
 			<Panel class="flow-right">
 				<Image id="SelectedAddonCover" class="selected-addon__cover" textureheight="128" texturewidth="128" />
 				<Panel class="flow-down vertical-align-center">
