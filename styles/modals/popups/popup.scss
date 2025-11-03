@@ -7,18 +7,17 @@
 	vertical-align: middle;
 	horizontal-align: center;
 	padding: $popup-padding;
+	border-bottom: $popup-border;
 	border-radius: $popup-radius;
 	background-color: $popup-background;
-	box-shadow: 0 0 100px 0 $gray-200;
 	opacity: 1;
-	transition-property: pre-transform-scale2d, opacity;
-	transition-duration: 0.15s;
+	transition-property: pre-transform-scale2d;
+	transition-duration: 0.1s;
 	transition-timing-function: ease-in-out;
 
 	&.Hidden {
 		opacity: 0;
-		pre-transform-scale2d: 1.05;
-		transition-duration: 0.2s;
+		pre-transform-scale2d: 1.15;
 		// sound: "ui_custom_lobby_dialog_slide";
 	}
 }
@@ -97,18 +96,18 @@
 #DimBackground {
 	width: 100%;
 	height: 100%;
-	background-color: $dark-200;
+	background-color: rgba($black, 0.9);
 	transition-property: opacity;
-	transition-duration: 0.3s;
+	transition-duration: 0.1s;
 	transition-timing-function: ease-in;
 }
 
 #BlurBackground {
 	width: 100%;
 	height: 100%;
-	background-color: $dark-200;
+	background-color: rgba($black, 0.9);
 	transition-property: background-color, opacity;
-	transition-duration: 0.3s;
+	transition-duration: 0.1s;
 	transition-timing-function: ease-in-out;
 }
 

@@ -7,22 +7,23 @@
 @mixin font-styles($use-header: false, $light-header: false) {
 	@if $use-header {
 		@if $light-header {
-			font-family: $font-header-light;
+			font-weight: normal;
 		} @else {
-			font-family: $font-header;
+			font-weight: bold;
 		}
 
-		text-shadow: $font-header-shadow;
+		text-shadow-fast: $font-header-shadow;
 		letter-spacing: $font-header-spacing;
+		//text-transform: $font-header-transform;
 	} @else {
-		font-family: $font;
+		font-weight: normal;
 		text-shadow-fast: $font-shadow;
 		letter-spacing: $font-spacing;
 	}
 
-	color: $font-default-color;
+	font-family: $font;
 	font-style: normal;
-	font-weight: normal;
+	color: $font-default-color;
 }
 
 @mixin gradient-themed($color: 'blue', $direction: 'down') {

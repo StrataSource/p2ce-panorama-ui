@@ -1,7 +1,366 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
+
 .campaigns {
-	&__coming_soon {
-		vertical-align: center;
-		horizontal-align: center;
-		font-size: 64px;
+	width: 100%;
+	height: 100%;
+	flow-children: down;
+
+	&__list {
+		width: 50%;
+		height: 100%;
+		//padding-right: 15px;
+		overflow: squish scroll;
+		flow-children: down;
+	}
+
+	&__action-bar {
+		width: 50%;
+		flow-children: right;
+
+		//padding-right: 15px;
+		margin-bottom: 10px;
+
+		&__button {
+			width: fill-parent-flow(0.5);
+			flow-children: right;
+
+			padding: 15px;
+			background-color: $base-950;
+			border: $menu-pane-border;
+
+			&__icon {
+				margin-right: 10px;
+				vertical-align: middle;
+			}
+			&__text-top {
+				font-weight: bold;
+			}
+
+			&__text-btm {
+				color: $base-300;
+				font-size: 16px;
+			}
+
+			&:hover {
+				background-color: $button-background-hover;
+			}
+		}
+	}
+
+	&__entry {
+		width: 100%;
+		height: 198px;
+
+		background-color: $base-950;
+		border: $menu-pane-border;
+		margin-bottom: 10px;
+
+		$this: &;
+
+		&:hover {
+			#{$this}__inner {
+				background-color: $button-background-hover;
+			}
+		}
+
+		&:selected {
+			background-color: $primary-800;
+		}
+
+		&__inner {
+			width: fill-parent-flow(1);
+			height: 100%;
+			flow-children: right;
+			padding: 15px;
+			background-color: gradient(linear, 0% 0%, 95% 0%, from(rgba(0, 0, 0, 0)), to($base-950));
+		}
+
+		&__bg-image {
+			width: 100%;
+			opacity: 0.2;
+		}
+
+		&__cover {
+			width: 356px;
+			height: 200px;
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			flow-children: down;
+
+			margin-left: 23px;
+			vertical-align: middle;
+
+			&__logo {
+				height: 48px;
+				width: 48px;
+				vertical-align: bottom;
+				margin: 10px;
+			}
+
+			&__title {
+				@include mixin.font-styles($use-header: true);
+				font-size: 22px;
+				text-shadow: 2px 2px 4px 2 $base-950;
+			}
+
+			&__author {
+				font-size: 14px;
+				letter-spacing: 1px;
+				text-shadow: 1px 1px 4px 2 $base-950;
+			}
+
+			&__desc {
+				margin-top: 10px;
+				font-size: 16px;
+				letter-spacing: 1px;
+				color: $base-200;
+				max-height: 110px;
+				text-shadow: 1px 1px 4px 2 $base-950;
+			}
+		}
+	}
+}
+
+.selected-campaign {
+	width: 100%;
+	height: 100%;
+
+	margin: -30px;
+
+	&__container {
+		width: 100%;
+		height: 100%;
+		margin: 80px;
+	}
+
+	&__controls {
+		width: 30%;
+		height: 100%;
+
+		margin-right: 0px;
+
+		flow-children: down;
+
+		&__inner {
+			width: 100%;
+			vertical-align: bottom;
+			flow-children: down;
+
+			background-color: $base-950;
+			border: $menu-pane-border;
+		}
+
+		&__button {
+			width: 100%;
+			flow-children: right;
+
+			padding: 18px 20px;
+
+			$this: &;
+
+			&__lined {
+				border-bottom: 1px solid $base-900;
+			}
+
+			&__text {
+				@include mixin.font-styles($use-header: true);
+				color: $bright-color;
+				vertical-align: middle;
+				font-size: 20px;
+			}
+
+			&:disabled {
+				background-color: rgba($base-950, 0.5);
+				border-color: rgba($base-700, 0.1);
+
+				#{$this}__text {
+					color: rgba($button-text-disabled, 0.5);
+				}
+			}
+
+			&:hover:not(:disabled) {
+				background-color: $primary-color;
+				border-color: $primary-color;
+
+				#{$this}__text {
+					color: $base-950;
+				}
+			}
+		}
+	}
+
+	&__lister {
+		width: 100%;
+		height: fill-parent-flow(1);
+		flow-children: down;
+		overflow: squish scroll;
+
+		&__header {
+			min-width: 272px;
+			text-align: center;
+			padding: 18px 20px;
+
+			// account for funny line-height business
+			padding-top: 13px;
+			transform: translateY(1px);
+
+			border: $menu-pane-border;
+			border-bottom-width: 0px;
+			background-color: $base-950;
+
+			@include mixin.font-styles($use-header: true);
+			font-size: 24px;
+		}
+
+		&__body {
+			width: 100%;
+			height: 100%;
+			flow-children: down;
+			border: $menu-pane-border;
+			background-color: $base-950;
+		}
+
+		&__container {
+			width: 50%;
+			height: 70%;
+			flow-children: down;
+			vertical-align: bottom;
+		}
+
+		&__button {
+			@extend .selected-campaign__controls__button;
+
+			border-top: $menu-pane-border;
+
+			&__text {
+				@extend .selected-campaign__controls__button__text;
+			}
+		}
+	}
+
+	&__background {
+		width: 100%;
+		height: 100%;
+	}
+
+	&__logo {
+		width: 100%;
+		height: 130px;
+	}
+
+	&__title {
+		@include mixin.font-styles($use-header: true);
+		font-size: 32px;
+	}
+
+	&__authors {
+		font-weight: light;
+		font-size: 16px;
+		color: $base-200;
+		letter-spacing: 1px;
+	}
+
+	&__description {
+		width: 100%;
+		height: 100%;
+
+		margin-top: 15px;
+		border: $menu-pane-border;
+
+		&__text {
+			overflow: squish scroll;
+			padding: 15px;
+		}
+	}
+}
+
+.saves {
+	&__entry {
+		width: 100%;
+
+		&__lined {
+			border-bottom: 1px solid $base-900;
+		}
+
+		&__inner {
+			@extend .campaigns__entry__inner;
+
+			height: fit-children;
+			background-color: none;
+			background-image: none;
+		}
+
+		&__cover {
+			width: 240px;
+			height: 135px;
+
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			@extend .campaigns__entry__details;
+			&__title {
+				@include mixin.font-styles($use-header: true);
+				font-size: 28px;
+			}
+
+			&__desc {
+				margin-top: 5px;
+				font-size: 18px;
+				color: $base-200;
+			}
+		}
+
+		&:hover {
+			background-color: $primary-950;
+		}
+	}
+}
+
+.chapters {
+	&__entry {
+		width: 100%;
+
+		&__lined {
+			@extend .saves__entry__lined;
+		}
+
+		&__inner {
+			@extend .campaigns__entry__inner;
+
+			height: fit-children;
+			background-color: none;
+			background-image: none;
+		}
+
+		&__cover {
+			width: 240px;
+			height: 135px;
+
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			@extend .campaigns__entry__details;
+			&__title {
+				font-size: 20px;
+				color: $base-200;
+				letter-spacing: 1px;
+			}
+
+			&__desc {
+				@include mixin.font-styles($use-header: true);
+				margin-top: 5px;
+				font-size: 28px;
+			}
+		}
+
+		&:hover {
+			background-color: $primary-950;
+		}
 	}
 }

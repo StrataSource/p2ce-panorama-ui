@@ -6,10 +6,6 @@
 @use 'sass:list';
 
 .togglebutton {
-	transition-property: background-color;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in;
-
 	.TickBox {
 		visibility: collapse;
 	}
@@ -20,14 +16,14 @@
 
 	&:selected {
 		background-color: $button-background-selected;
-	}
-}
+		border-color: $primary-color;
 
-@each $name, $colors in $gradients-primary {
-	.togglebutton--#{$name} {
-		&:selected {
-			background-color: function.gradient-vertical(list.nth($colors, 1), list.nth($colors, 2));
-			border: $button-border;
+		& .button__text {
+			color: $button-text-hover;
+		}
+
+		& .button__icon {
+			wash-color: $button-text-hover;
 		}
 	}
 }
@@ -35,10 +31,6 @@
 .checkbox {
 	flow-children: right;
 	height: $checkbox-width;
-	border: 0px solid white;
-	transition-property: background-color;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in-out;
 
 	// This gets inserted in code
 	.TickBox {
@@ -46,12 +38,12 @@
 		width: height-percentage(100%);
 		vertical-align: middle;
 		background-color: $checkbox-background;
+		border-bottom: $checkbox-border;
 		border-radius: $checkbox-radius;
 		z-index: 1;
 		margin-left: 0;
 		margin-right: $checkbox-gap;
 		box-shadow: $checkbox-shadow;
-		transition: background-color 0.1s ease-in-out 0s;
 	}
 
 	$this: &;
@@ -71,6 +63,7 @@
 	&:disabled .TickBox,
 	&:disabled:hover .TickBox {
 		background-color: $checkbox-background-disabled;
+		border-color: $button-text-disabled;
 	}
 
 	&:selected .TickBox {
@@ -95,5 +88,21 @@
 	& Label {
 		@include mixin.font-styles($use-header: $checkbox-use-header-font);
 		vertical-align: middle;
+	}
+}
+
+@each $name, $value in $gradients-primary {
+	.togglebutton--#{$name} {
+		background-color: list.nth($value, 1);
+		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+		&:hover:not(:disabled):not(:selected) {
+			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		}
+
+		&:selected {
+			background-color: color.scale(list.nth($value, 2), $lightness: -60%);
+			border-color: list.nth($value, 1);
+		}
 	}
 }

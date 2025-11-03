@@ -6,13 +6,13 @@
 		height: 768px;
 		min-width: 200px; /* Used for resize dragging! */
 		min-height: 200px; /* ditto */
-		background-color: $gray-300;
+		background-color: $base-950;
+		padding: 0px 20px 20px 20px;
+		border: $menu-pane-border;
+	}
+
+	&__main {
 		flow-children: down;
-		border-radius: 4px;
-		padding-left: 8px;
-		padding-right: 8px;
-		padding-bottom: 8px;
-		box-shadow: 0 0 100px 0 $gray-200;
 	}
 
 	&__inner {
@@ -31,7 +31,7 @@
 	&__top-splitter {
 		height: $separator-height;
 		min-width: 100%;
-		background-color: gradient(linear, 0% 0%, 100% 0%, from(#d7d7d73f), to(#a0a0a03f), color-stop(0.9, #b4b4b43f));
+		background-color: $base-700;
 	}
 
 	&__message-target {
@@ -44,17 +44,16 @@
 	}
 
 	&__move-drag-area {
-		padding-bottom: 8px;
 		width: 100%;
 		flow-children: right;
-		padding-top: 8px;
+		padding-top: 10px;
+		padding-bottom: 5px;
 	}
 
 	&__resize-drag-knob {
-		margin-top: 8px;
-		margin-left: 8px;
 		horizontal-align: right;
 		vertical-align: bottom;
+		margin: -8px;
 		width: 16px;
 		height: 16px;
 	}
@@ -69,5 +68,6 @@
 		font-size: $font-default-size;
 		text-overflow: clip;
 		white-space: nowrap;
+		height: fit-children;
 	}
 }

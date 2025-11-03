@@ -2,13 +2,13 @@
 
 class AddonEntry {
 	index: number;
-	panel: Panel;
+	panel: RadioButton;
 
 	enableText: Label | null = null;
 	subText: Label | null = null;
 	addonEnableCheck: ToggleButton | null = null;
 
-	constructor(index: number, panel: Panel) {
+	constructor(index: number, panel: RadioButton) {
 		this.index = index;
 		this.panel = panel;
 
@@ -80,11 +80,12 @@ class AddonEntry {
 }
 
 class AddonManager {
-	static addonContainer = $<Panel>('#AddonContainer');
-	static addonPanel = $<Panel>('#AddonPanel');
-	static addonTitle = this.addonPanel?.FindChildTraverse<Label>('AddonTitle');
-	static addonDesc = this.addonPanel?.FindChildTraverse<Label>('AddonDesc');
-	static addonAuthors = this.addonPanel?.FindChildTraverse<Label>('AddonAuthors');
+	static addonContainer = $<Panel>('#AddonContainer')!;
+	static addonPanel = $<Panel>('#SelectedAddonPanel')!;
+	static addonCover = $<Image>('#SelectedAddonCover')!;
+	static addonTitle = $<Label>('#SelectedAddonTitle')!;
+	static addonDesc = $<Label>('#SelectedAddonDesc')!;
+	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
 
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');
@@ -92,9 +93,11 @@ class AddonManager {
 
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
+	static selectedAddon: number = -1;
 
 	static init() {
-		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback);
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onMainMenuTabShown.bind(this));
 		this.createAddonEntries();
 	}
 
@@ -115,7 +118,7 @@ class AddonManager {
 		const addonCount = WorkshopAPI.GetAddonCount();
 		let anyEnabled = false;
 		for (let i = 0; i < addonCount; ++i) {
-			const panel = $.CreatePanel('Panel', this.addonContainer, 'addon' + i);
+			const panel = $.CreatePanel('RadioButton', this.addonContainer, 'addon' + i);
 			panel.SetPanelEvent('onactivate', () => this.addonSelected(i));
 			panel.LoadLayoutSnippet('AddonEntrySnippet');
 
@@ -134,8 +137,24 @@ class AddonManager {
 		this.createAddonEntries();
 	}
 
+	static onMainMenuTabShown(tabid: string) {
+		if (tabid !== 'Addons') return;
+
+		this.selectedAddon = -1;
+		this.addonPanel.AddClass('hide');
+		this.purgeAddonList();
+		this.createAddonEntries();
+	}
+
 	static addonSelected(addon: number) {
 		const info = WorkshopAPI.GetAddonMeta(addon);
+
+		this.selectedAddon = addon;
+
+		this.addonPanel.RemoveClass('hide');
+
+		if (this.addonCover)
+			this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
 		if (this.addonTitle) this.addonTitle.text = info.title;
 
@@ -148,6 +167,16 @@ class AddonManager {
 			this.addonAuthors.text = '';
 			this.addonAuthors.visible = false;
 		}
+	}
+
+	/**
+	 * View currently selected addon index on Steam Workshop
+	 */
+	static viewSelectedOnSteam() {
+		if (this.selectedAddon === -1) return;
+
+		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
+		SteamOverlayAPI.OpenURL(`https://steamcommunity.com/sharedfiles/filedetails/?id=${info.workshopid}`);
 	}
 
 	/**

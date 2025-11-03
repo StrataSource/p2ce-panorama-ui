@@ -1,13 +1,14 @@
 @use '../../config' as *;
 @use '../../abstract/mixin';
 @use '../../abstract/function';
+@use 'sass:list';
 @use 'sass:map';
+@use 'sass:math';
 
 .tooltip {
 	$root: &;
 	flow-children: down;
 	opacity: 0;
-	transition: opacity 0.1s ease-out 0s;
 	margin: $tooltip-margin;
 
 	&__row {
@@ -41,9 +42,9 @@
 
 	&__title {
 		horizontal-align: left;
-		margin-bottom: 4px;
 		@include mixin.font-styles($use-header: $tooltip-title-use-header-font);
 		font-size: $tooltip-title-font-size;
+		transform: translateY(-6px);
 	}
 
 	&__text {
@@ -112,7 +113,18 @@
 		wash-color: $tooltip-background;
 	}
 
-	@each $dir in ('top', 'right', 'bottom', 'right') {
+	$tooltip-directions: ('top', 'left', 'bottom', 'right');
+	@for $i from 1 through list.length($tooltip-directions) {
+		$dir: list.nth($tooltip-directions, $i);
+
+		// create a border in the opposite direction of the arrow
+		$opp: math.max(($i + 2) % 4, 1);
+		&__contents {
+			#{$root}.#{function.capitalize($dir)}ArrowVisible & {
+				border-#{list.nth($tooltip-directions, $opp)}: $tooltip-border;
+			}
+		}
+
 		&__#{$dir}-arrow {
 			background-image: url('file://{images}/tooltips/#{$dir}-arrow.svg');
 
@@ -120,7 +132,6 @@
 				visibility: visible;
 			}
 
-			margin-#{$dir}: -8px;
 			@if $dir == 'left' or $dir == 'right' {
 				margin: $tooltip-radius * 2 0px;
 			} @else {

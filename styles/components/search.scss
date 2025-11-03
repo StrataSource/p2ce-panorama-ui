@@ -7,37 +7,44 @@
 	min-width: 200px;
 	height: $button-height;
 	padding: 4px 0;
-	background-color: rgba(0, 0, 0, 0.5);
-	border-radius: 4px;
-	box-shadow: fill rgba(255, 255, 255, 0.01) 0px 0px 2px 0px;
-
-	transition-property: background-color, border;
-	transition-duration: 0.2s;
+	background-color: $textentry-background;
+	border-bottom: $textentry-border;
 
 	&:hover {
-		background-color: rgba(0, 0, 0, 0.7);
+		background-color: $textentry-background-hover;
 	}
 
 	&__icon {
 		height: fill-parent-flow(1);
 		width: height-percentage(100%);
-		opacity: 0.8;
+		opacity: 1;
 		vertical-align: middle;
-		margin: 0 4px;
-
-		img-shadow: 0 0px 2px 0 rgba(0, 0, 0, 1);
+		margin: 0 5px;
+		wash-color: $bright-color;
 
 		#{$root}:hover & {
 			opacity: 1;
 		}
 	}
 
+	// clicking away from a textentry seems to keep this state on?
+	&:descendantfocus {
+		background-color: $textentry-background-focus;
+
+		#{$root}__clearicon,
+		#{$root}__icon {
+			wash-color: $base-950;
+		}
+	}
+
 	&__textentry {
 		width: fill-parent-flow(1);
-		color: rgba(255, 255, 255, 1);
-		border: 0px;
-		box-shadow: none;
+		color: $textentry-text-color;
 		vertical-align: middle;
+
+		&:focus {
+			color: $textentry-focus-text-color;
+		}
 
 		&.HasInput #PlaceholderText {
 			opacity: 0;
@@ -67,9 +74,6 @@
 		background-color: none;
 		border-radius: 0;
 
-		opacity: 1;
-		transition: opacity 0.1s ease-out 0s;
-
 		&--hidden {
 			opacity: 0;
 		}
@@ -77,16 +81,6 @@
 
 	&__clearicon {
 		vertical-align: middle;
-		opacity: 0.25;
-
-		transition: opacity 0.2s ease-in-out 0s;
-
-		#{$root}:hover & {
-			opacity: 0.5;
-		}
-
-		&:hover {
-			opacity: 1;
-		}
+		wash-color: $bright-color;
 	}
 }

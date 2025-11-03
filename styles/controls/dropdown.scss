@@ -9,45 +9,40 @@
 	flow-children: left;
 	background-color: $dropdown-button-background;
 	border-radius: $dropdown-button-radius;
-	border: $dropdown-button-border;
+	border-bottom: $dropdown-button-border;
 	box-shadow: $dropdown-button-shadow;
 	vertical-align: center;
 	horizontal-align: right;
 	z-index: 1;
-	transition-property: background-color;
-	transition-duration: 0.15s;
-	transition-timing-function: ease-in-out;
 
-	&:hover .DropDownIcon {
-		background-color: $dropdown-button-icon-background-hover;
-	}
+	$this: &;
 
 	.DropDownIcon {
 		background-image: url('file://{images}/mom-arrow-down.svg');
 		background-repeat: no-repeat;
 		background-position: right 50% 50%;
 		background-size: 14px 14px;
-		border-radius: $dropdown-button-radius - 1px;
+		border-radius: $dropdown-button-radius;
 		height: 100%;
 		width: height-percentage(100%);
-		background-color: $dropdown-button-icon-background;
 		border: $dropdown-button-icon-border;
 		box-shadow: $dropdown-button-icon-shadow;
 		img-shadow: $dropdown-button-icon-icon-shadow;
 		z-index: 100;
-		transition-property: background-color;
-		transition-duration: 0.15s;
-		transition-timing-function: ease-in-out;
 	}
 
 	// Inserted by code
 	&.DropDownMenuVisible {
 		background-color: $dropdown-button-background-menuvisible;
-		transition-duration: 0s;
+		border-color: $dropdown-button-background-menuvisible;
 
 		& > .DropDownIcon {
-			background-color: $dropdown-button-icon-background-menuvisible;
-			brightness: 0.8;
+			wash-color: $dropdown-button-menuvisible-text-color;
+			transform: scaleY(-1);
+		}
+
+		& Label {
+			color: $dropdown-button-menuvisible-text-color;
 		}
 	}
 
@@ -59,22 +54,22 @@
 	&:parentdisabled,
 	&:disabled:hover {
 		background-color: $dropdown-button-background-disabled;
+		border-color: $dropdown-button-text-color-disabled;
 	}
 
 	Label {
 		@include mixin.font-styles($use-header: $dropdown-button-use-header-font);
-		color: $dropdown-button-color;
+		color: $dropdown-button-text-color;
 		font-size: $dropdown-button-font-size;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		vertical-align: center;
 		padding: $dropdown-button-padding;
 		vertical-align: center;
 		text-shadow: $dropdown-button-text-shadow;
 	}
 
 	&:disabled Label {
-		color: $dropdown-button-color-disabled;
+		color: $dropdown-button-text-color-disabled;
 	}
 
 	// DropDown/DropDropMenu needs a label as its immediate child to function properly so to include images we need to
@@ -95,7 +90,7 @@
 .dropdown-menu {
 	flow-children: down;
 	overflow: squish scroll;
-	max-height: 665px;
+	max-height: 500px;
 	padding: $dropdown-menu-padding-y list.nth($dropdown-menu-border, 1) * -1; // Negative horizontal padding to account for dumb Valve code.
 	border: $dropdown-menu-border;
 	border-radius: $dropdown-menu-radius;
@@ -105,9 +100,6 @@
 	visibility: collapse; // Make sure the dropdown menu does not take part in the layout traversal if not shown on the screen
 	width: fit-children;
 	opacity: 0;
-	transition-property: opacity;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in-out;
 
 	Label {
 		horizontal-align: left;
@@ -116,17 +108,22 @@
 
 		@include mixin.font-styles($use-header: $dropdown-item-use-header-font);
 		font-size: $dropdown-item-font-size;
-		text-shadow: 0 0 0;
+		transform: translateY(0px);
 
 		background-color: $dropdown-item-background;
 
 		z-index: 0;
 
-		transition: background-color 0.1s linear 0s;
+		$this: &;
 
 		&:hover {
 			background-color: $dropdown-item-background-hover;
+			color: $dropdown-item-color;
 			//sound: "UIPanorama.submenu_rollover";
+
+			& > Image {
+				wash-color: $dropdown-item-color;
+			}
 		}
 
 		&.IconLabel {
@@ -156,4 +153,5 @@
 DropDownMenuBackground {
 	width: 100%;
 	height: 100%;
+	background-color: rgba($black, 0.4);
 }

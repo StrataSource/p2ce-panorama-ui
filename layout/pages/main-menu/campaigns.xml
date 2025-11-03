@@ -3,10 +3,211 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/campaigns.ts" />
 	</scripts>
 
-	<Panel class="mainmenu__page" onload="CampaignSelector.init()">
-		<Label text="Coming soon :)" class="campaigns__coming_soon" />
+	<snippets>
+		<!-- Campaign Entry -->
+		<snippet name="CampaignEntrySnippet">
+			<Button class="campaigns__entry">
+				<!--  -->
+				<Image
+					id="CampaignBtnBg"
+					class="campaigns__entry__bg-image"
+					src="file://{images}/menu/portal2/campaign_cover.png"
+					scaling="stretch-to-cover-preserve-aspect"
+					textureheight="1920"
+					texturewidth="1080"
+				/>
+				<Panel class="campaigns__entry__inner">
+					<!-- Campaign icon cover -->
+					<Panel>
+						<Image
+							id="CampaignCover"
+							class="campaigns__entry__cover"
+							src="file://{images}/menu/portal2/campaign_cover.png"
+							scaling="stretch-to-cover-preserve-aspect"
+							textureheight="1920"
+							texturewidth="1080"
+						/>
+						<Image
+							id="CampaignLogo"
+							class="campaigns__entry__details__logo"
+							src="file://{images}/menu/portal2/logo.png"
+							scaling="stretch-to-fit-preserve-aspect"
+							textureheight="128"
+							texturewidth="128"
+						/>
+					</Panel>
+					<!-- Campaign info; title, description, 'source' -->
+					<Panel class="campaigns__entry__details">
+						<Label id="CampaignTitle" class="campaigns__entry__details__title" text="[PH] Campaign Title" />
+						<Label id="CampaignAuthor" class="campaigns__entry__details__author" text="[PH] Campaign Author" />
+						<Label id="CampaignDesc" class="campaigns__entry__details__desc" text="[PH] Campaign Description" />
+					</Panel>
+				</Panel>
+			</Button>
+		</snippet>
+		<!-- / Campaign Entry -->
+
+		<!-- Save Entry -->
+		<snippet name="SaveEntrySnippet">
+			<Button class="saves__entry">
+				<Panel class="saves__entry__inner">
+					<!-- Save icon cover -->
+					<Image
+						id="SaveCover"
+						class="saves__entry__cover"
+						src="file://{materials}/vgui/no_save_game.vtf"
+						scaling="stretch-to-cover-preserve-aspect"
+						textureheight="1920"
+						texturewidth="1080"
+					/>
+
+					<!-- Save info; title, description, 'source' -->
+					<Panel class="saves__entry__details">
+						<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
+						<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
+					</Panel>
+				</Panel>
+			</Button>
+		</snippet>
+		<!-- / Save Entry -->
+
+		<!-- Chapter Entry -->
+		<snippet name="ChapterEntrySnippet">
+			<Button class="chapters__entry">
+				<Panel class="chapters__entry__inner">
+					<!-- Chapter icon cover -->
+					<Image
+						id="ChapterCover"
+						class="chapters__entry__cover"
+						src="file://{images}/menu/p2ce/news-splash.png"
+						scaling="stretch-to-cover-preserve-aspect"
+						textureheight="1920"
+						texturewidth="1080"
+					/>
+
+					<!-- Chapter info; title, description, 'source' -->
+					<Panel class="chapters__entry__details">
+						<Label id="ChapterTitle" class="chapters__entry__details__title" text="[PH] Chapter Title" />
+						<Label id="ChapterDesc" class="chapters__entry__details__desc" text="[PH] Chapter Description" />
+					</Panel>
+				</Panel>
+			</Button>
+		</snippet>
+		<!-- / Chapter Entry -->
+	</snippets>
+
+	<Panel class="mainmenu__page no-flow" onload="CampaignMgr.init()">
+		<Panel class="campaigns">
+			<!-- Campaign list -->
+			<Panel class="campaigns__action-bar">
+				<Button
+					id="CampaignsViewLooseMapsBtn"
+					class="campaigns__action-bar__button mr-2"
+					onactivate="CampaignSelector.viewLooseMaps()"
+				>
+					<Image
+						class="campaigns__action-bar__button__icon"
+						src="file://{images}/cancel.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						texturewidth="32"
+						textureheight="32"
+					/>
+					<Panel class="flow-down vertical-align-center">
+						<Label class="campaigns__action-bar__button__text-top" text="[HC] Uncategorized Maps" />
+						<Label class="campaigns__action-bar__button__text-btm" text="[PH] 3 newly subscribed" />
+					</Panel>
+				</Button>
+				<Button id="CampaignsGoWorkshopBtn" class="campaigns__action-bar__button" onactivate="CampaignSelector.openWorkshop()">
+					<Image
+						class="campaigns__action-bar__button__icon"
+						src="file://{images}/cancel.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						texturewidth="32"
+						textureheight="32"
+					/>
+					<Panel class="flow-down vertical-align-center">
+						<Label class="campaigns__action-bar__button__text-top" text="[HC] Open Workshop" />
+						<Label class="campaigns__action-bar__button__text-btm" text="[PH] Download &amp; manage content" />
+					</Panel>
+				</Button>
+			</Panel>
+			<Panel id="CampaignContainer" class="campaigns__list">
+
+			</Panel>
+		</Panel>
+
+		<Panel id="CampaignStartPage" class="selected-campaign">
+			<Image
+				id="CampaignBackground"
+				class="selected-campaign__background"
+				src="file://{images}/menu/portal2/campaign_bg.png"
+				scaling="stretch-to-cover-preserve-aspect"
+				textureheight="1920"
+				texturewidth="1080"
+			/>
+			<Button class="full-width full-height" />
+			<Panel class="selected-campaign__container">
+				<Panel class="selected-campaign__controls">
+					<Image
+						id="CampaignLogo"
+						class="selected-campaign__logo"
+						src="file://{images}/menu/portal2/full_logo.png"
+						scaling="stretch-to-fit-preserve-aspect"
+						textureheight="130"
+						texturewidth="440"
+					/>
+					<Panel class="selected-campaign__controls__inner">
+						<Button
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							onactivate="CampaignNewGameTab.setActive()"
+						>
+							<Label class="selected-campaign__controls__button__text" text="[HC] New Game" />
+						</Button>
+						<Button
+							id="CampaignLoadLatestBtn"
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							onactivate="CampaignLoadGameTab.loadLatest()"
+						>
+							<Label class="selected-campaign__controls__button__text" text="[HC] Continue" />
+						</Button>
+						<Button
+							id="CampaignAllSavesBtn"
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							onactivate="CampaignLoadGameTab.setActive()"
+						>
+							<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
+						</Button>
+						<Button class="selected-campaign__controls__button selected-campaign__controls__button__lined" disabled="true">
+							<Label class="selected-campaign__controls__button__text" text="[HC] Open in Workshop" />
+						</Button>
+						<Button
+							id="CampaignStartReturn"
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							onactivate="CampaignStartPage.hide()"
+						>
+							<Label class="selected-campaign__controls__button__text" text="[HC] Back to Campaign Select" />
+						</Button>
+						<Label
+							class="horizontal-align-center m-3"
+							text="[HC] Proof of concept only. Portal 2 chapters &amp; saves displayed."
+						/>
+					</Panel>
+				</Panel>
+				<Panel id="CampaignListerContainer" class="selected-campaign__lister__container">
+					<Label id="CampaignListerModeLabel" class="selected-campaign__lister__header" text="[PH] Lister Mode" />
+					<Panel class="selected-campaign__lister__body">
+						<Panel id="CampaignLister" class="selected-campaign__lister">
+						</Panel>
+						<Button id="CampaignBackScreen" class="selected-campaign__lister__button" onactivate="CampaignStartPage.closeLister()">
+							<Label class="selected-campaign__lister__button__text" text="[HC] Back" />
+						</Button>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
 	</Panel>
 </root>

@@ -1,17 +1,17 @@
 @use '../config' as *;
 
 .slider {
-	transition: wash-color 0.1s linear 0s;
-
 	#SliderTrack {
-		align: center center;
+		align: center bottom;
 		background-color: $slider-track;
 		box-shadow: $slider-track-shadow;
+		transform: $slider-track-transform;
 		z-index: 2;
 	}
 
 	#SliderTrackProgress {
-		align: center center;
+		align: center bottom;
+		border-bottom: $slider-track-progress-border;
 		z-index: 3;
 	}
 
@@ -33,7 +33,6 @@
 		border-radius: $slider-thumb-radius;
 		box-shadow: $slider-thumb-shadow;
 		z-index: 5;
-		transition: background-color 0.1s ease-in-out 0s;
 
 		// sliderthumbs are hovered when clicking on the slider will change its value (in code)
 		&:hover:not(:disabled) {
@@ -61,7 +60,13 @@
 		& #SliderTrack,
 		& #SliderTrackProgress {
 			width: 100%;
+		}
+
+		& #SliderTrack {
 			height: $slider-track-height;
+		}
+		& #SliderTrackProgress {
+			height: $slider-track-progress-height;
 		}
 
 		& #SliderTrackProgress {

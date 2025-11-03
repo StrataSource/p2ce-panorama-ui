@@ -5,6 +5,7 @@ class MainMenu {
 		cp: $.GetContextPanel(),
 		pageContent: $('#PageContent'),
 		homeContent: $('#HomeContent'),
+		pauseContent: $('#PauseContent'),
 		contentBlur: $('#MainMenuContentBlur'),
 		backgroundBlur: $('#MainMenuBackgroundBlur'),
 		movie: $<Movie>('#MainMenuMovie'),
@@ -12,7 +13,21 @@ class MainMenu {
 		model: $<ModelPanel>('#MainMenuModel'),
 		topButtons: $('#MainMenuTopButtons'),
 		homeButton: $<RadioButton>('#HomeButton'),
-		addonsButton: $<RadioButton>('#AddonsButton')
+		addonsButton: $<RadioButton>('#AddonsButton'),
+		pausedLoadLastSaveButton: $<Button>('#PausedLoadLastSaveButton'),
+		mainMenuViewSavesButton: $<Button>('#MainMenuViewSavesButton'),
+		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton'),
+		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
+		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
+		pausedSaveImage: $<Image>('#PausedSaveImage'),
+
+		newsFlyoutBtn: $<Button>('#NewsFlyoutBtn')!,
+		newsFlyoutImage: $<Image>('#NewsFlyoutImage')!,
+		newsFlyoutHeader: $<Label>('#NewsFlyoutHeader')!,
+		newsFlyoutDesc: $<Label>('#NewsFlyoutDescription')!,
+		featuredFlyoutImage: $<Image>('#FeaturedFlyoutImage')!,
+		featuredFlyoutHeader: $<Label>('#FeaturedFlyoutHeader')!,
+		featuredFlyoutDesc: $<Label>('#FeaturedFlyoutDescription')!
 	};
 
 	static activeTab = '';
@@ -27,6 +42,7 @@ class MainMenu {
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.onLayoutReloaded.bind(this));
 
 		$.DispatchEvent('HideIntroMovie');
 	}
@@ -44,32 +60,34 @@ class MainMenu {
 
 		// Assign a random model
 		const models = [
-			'models/npcs/turret/turret.mdl',
-			'models/weapons/w_portalgun.mdl',
 			'models/props/schrodinger_cube.mdl',
+			'models/props/reflection_cube.mdl',
 			'models/props/metal_box.mdl'
 		];
 
 		if (this.panels.model) {
 			this.panels.model.src = models[Math.floor(Math.random() * models.length)]; // Pick a random model
 
-			this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.15, this.inSpace ? 0.02 : 0);
+			this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.05, this.inSpace ? 0.02 : 0);
 			this.panels.model.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
 			this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 
 			this.panels.model.LookAtModel();
-			this.panels.model.SetCameraOffset(-200, 0, 0);
+			this.panels.model.SetCameraOffset(-300, 0, 22);
 			this.panels.model.SetCameraFOV(30);
 
 			this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
 			this.panels.model.SetDirectionalLightDirection(0, 1, 0, 0);
 		}
 
-		if (GameInterfaceAPI.GetSettingBool('developer')) $('#ControlsLibraryButton')?.RemoveClass('hide');
+		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
 
 		this.setMainMenuBackground();
+		this.setMainMenuFlyouts();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
+
+		stripDevTagsFromLabels($.GetContextPanel());
 	}
 
 	/**
@@ -92,6 +110,9 @@ class MainMenu {
 		this.panels.image = $<Image>('#MainMenuBackground');
 
 		this.setMainMenuBackground();
+		this.onHomeButtonPressed();
+
+		this.updateHomeDetails();
 	}
 
 	/**
@@ -106,6 +127,9 @@ class MainMenu {
 	 */
 	static onShowPauseMenu() {
 		this.panels.cp.AddClass('MainMenuRootPanel--PauseMenuMode');
+		this.onHomeButtonPressed();
+
+		this.updateHomeDetails();
 	}
 
 	/**
@@ -121,15 +145,36 @@ class MainMenu {
 	}
 
 	/**
+	 * Updates the elements within the homepages
+	 * e.g. disabling buttons related to loading saves if there are no saves available
+	 */
+	static updateHomeDetails() {
+		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
+		const hasSaves = saves.length !== 0;
+
+		if (this.panels.pausedLoadLastSaveButton) this.panels.pausedLoadLastSaveButton.enabled = hasSaves;
+
+		if (this.panels.mainMenuViewSavesButton) this.panels.mainMenuViewSavesButton.enabled = hasSaves;
+
+		if (this.panels.mainMenuLoadLastSaveButton) this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
+
+		if (hasSaves) {
+			const save = saves[0];
+			const thumbValid = save.thumb.length > 0;
+			const savePath = `file://${save.thumb}`;
+
+			if (this.panels.mainMenuSaveImage && thumbValid) this.panels.mainMenuSaveImage.SetImage(savePath);
+			if (this.panels.pausedSaveImage && thumbValid) this.panels.pausedSaveImage.SetImage(savePath);
+
+			if (this.panels.mainMenuSaveSubheadingLabel) this.panels.mainMenuSaveSubheadingLabel.text = save.name;
+		}
+	}
+
+	/**
 	 * Switch main menu page
 	 */
 	static navigateToPage(tab: string, xmlName: string, hasBlur = true) {
 		if (this.panels.contentBlur) this.panels.contentBlur.visible = hasBlur;
-
-		if (this.activeTab === tab) {
-			if (this.panels.homeButton) $.DispatchEvent('Activated', this.panels.homeButton, PanelEventSource.MOUSE);
-			return;
-		}
 
 		// Check to see if tab to show exists.
 		// If not load the xml file.
@@ -138,6 +183,7 @@ class MainMenu {
 
 			newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 			newPanel.RegisterForReadyEvents(true);
+			stripDevTagsFromLabels(newPanel);
 
 			// Handler that catches PropertyTransitionEndEvent event for this panel.
 			// Check if the panel is transparent then collapse it.
@@ -176,6 +222,7 @@ class MainMenu {
 			// Force a reload of any resources since we're about to display the panel
 			if (activePanel) activePanel.visible = true;
 			activePanel?.SetReadyForDisplay(true);
+			$.DispatchEvent('MainMenuTabShown', this.activeTab);
 		}
 
 		this.showContentPanel();
@@ -190,7 +237,8 @@ class MainMenu {
 		$.DispatchEvent('RetractDrawer');
 		$.DispatchEvent('ShowContentPanel');
 
-		this.panels.homeContent?.AddClass('home--hidden');
+		this.panels.homeContent?.AddClass('mainmenu__home-container--hidden');
+		this.panels.pauseContent?.AddClass('mainmenu__home-container--hidden');
 	}
 
 	/**
@@ -215,7 +263,8 @@ class MainMenu {
 
 		this.activeTab = '';
 
-		this.panels.homeContent?.RemoveClass('home--hidden');
+		this.panels.homeContent?.RemoveClass('mainmenu__home-container--hidden');
+		this.panels.pauseContent?.RemoveClass('mainmenu__home-container--hidden');
 	}
 
 	/**
@@ -255,24 +304,81 @@ class MainMenu {
 		}
 	}
 
+	static setMainMenuFlyouts() {
+		const NEWS_URL =
+			'https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=1&maxlength=180&format=json';
+		$.AsyncWebRequest(NEWS_URL, {
+			type: 'GET',
+			complete: (data) => {
+				if (data.statusText !== 'success') {
+					this.panels.newsFlyoutHeader.text = tagDevString('Failed to retrieve news!');
+					return;
+				}
+
+				// using the responseText on its own results in a parsing error
+				const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+				const news = response['appnews']['newsitems'][0];
+				this.panels.newsFlyoutBtn.SetPanelEvent('onactivate', () => {
+					SteamOverlayAPI.OpenURL(news['url']);
+				});
+				this.panels.newsFlyoutHeader.text = news['title'];
+				this.panels.newsFlyoutDesc.text = news['contents'];
+			}
+		});
+	}
+
+	/**
+	 * Load the latest save available.
+	 */
+	static loadLatestSave() {
+		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
+
+		if (saves.length === 0) return;
+
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				tagDevString('Confirm Load'),
+				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
+				'warning-popup',
+				tagDevString('Load Save'),
+				() => {
+					SaveRestoreAPI.LoadSave(saves[0].name);
+				},
+				$.Localize('#Action_Return'),
+				() => {},
+				'blur'
+			);
+		} else {
+			SaveRestoreAPI.LoadSave(saves[0].name);
+		}
+	}
+
 	/**
 	 * Handles home button getting pressed.
 	 */
 	static onHomeButtonPressed() {
+		$<RadioButton>('#HomeButton')?.SetSelected(true);
 		this.onHideContentPanel();
 	}
 
 	/**
-	 * Handles quit button getting pressed, deciding whether to `disconnect` or `quit`
-	 * based on if we're ingame or not.
+	 * Force a button to be pressed, given its ID.
+	 * The button must be of type ToggleButton.
+	 * @param btnId The ID of the button to be pressed.
+	 */
+	static selectNavButton(btnId: string) {
+		const btn = this.panels.cp.FindChildTraverse<ToggleButton>(btnId);
+
+		if (btn) $.DispatchEvent('Activated', btn, PanelEventSource.MOUSE);
+	}
+
+	static onFeaturedFlyoutPressed() {}
+
+	/**
+	 * Handles quit button getting pressed.
 	 */
 	static onQuitButtonPressed() {
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-			GameInterfaceAPI.ConsoleCommand('disconnect');
-			this.onHomeButtonPressed();
-			return;
-		}
-		this.onQuitPrompt();
+		this.onQuitPrompt(GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU);
 	}
 
 	/**
@@ -280,20 +386,36 @@ class MainMenu {
 	 * @param {boolean} toDesktop
 	 */
 	static onQuitPrompt(toDesktop = true) {
-		if (!toDesktop) return; // currently don't handle disconnect prompts
-
 		$.DispatchEvent('MainMenuPauseGame'); // make sure game is paused so we can see the popup if hit from a keybind in-game
 
-		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-			$.LocalizeSafe('#Action_Quit'),
-			$.LocalizeSafe('#Action_Quit_Message'),
-			'warning-popup',
-			$.LocalizeSafe('#Action_Quit'),
-			this.quitGame,
-			$.LocalizeSafe('#Action_Return'),
-			() => {},
-			'blur'
-		);
+		if (toDesktop) {
+			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				$.Localize('#Action_Quit'),
+				$.Localize('#Action_Quit_Message'),
+				'warning-popup',
+				$.Localize('#Action_Quit'),
+				this.quitGame,
+				$.Localize('#Action_Return'),
+				() => {},
+				'blur'
+			);
+		} else {
+			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
+				tagDevString('Exit Game?'),
+				tagDevString('Are you sure you want to exit? Unsaved progress will be lost!'),
+				'warning-popup',
+				tagDevString('Return to Menu'),
+				() => {
+					GameInterfaceAPI.ConsoleCommand('disconnect');
+					this.onHomeButtonPressed();
+				},
+				tagDevString('Quit to Desktop'),
+				this.quitGame,
+				$.Localize('#UI_Cancel'),
+				() => {},
+				'blur'
+			);
+		}
 	}
 
 	/** Quits the game. Bye! */
@@ -328,5 +450,14 @@ class MainMenu {
 			this.panels.movie?.RemoveClass('mainmenu__fadeout');
 			this.panels.movie?.Play();
 		}
+	}
+
+	static onLayoutReloaded() {
+		this.panels.cp.SetHasClass(
+			'MainMenuRootPanel--PauseMenuMode',
+			GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU
+		);
+
+		this.updateHomeDetails();
 	}
 }

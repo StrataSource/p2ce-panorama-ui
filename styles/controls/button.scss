@@ -6,24 +6,32 @@
 @use 'sass:map';
 
 .button {
-	vertical-align: center;
 	height: $button-height;
 	background-color: $button-background;
 	box-shadow: $button-shadow;
 	border-radius: $button-radius;
-	border: $button-border;
+	border-bottom: $button-border;
 	color: $button-text-color;
 	flow-children: right;
 	tooltip-position: bottom;
-	transition: background-color 0.1s ease-in 0s;
 
-	&:hover {
+	$this: &;
+
+	&:hover:not(:disabled):not(:selected) {
 		background-color: $button-background-hover;
+		#{$this}__text {
+			color: $button-text-hover;
+		}
+
+		#{$this}__icon {
+			wash-color: $button-text-hover;
+		}
 	}
 
 	&:disabled,
 	&:disabled &:hover {
 		background-color: $button-background-disabled;
+		border-color: $button-text-disabled;
 	}
 
 	&:disabled &__text {
@@ -45,10 +53,6 @@
 		text-align: center;
 		overflow: squish;
 		text-overflow: shrink;
-
-		&:hover {
-			color: $button-text-hover;
-		}
 
 		&--left {
 			margin-left: $button-text-side-margin;
@@ -74,11 +78,13 @@
 		&--left {
 			margin-left: $button-icon-with-text-side-margin - 2px;
 			margin-right: $button-icon-text-gap;
+			padding: $button-icon-side-padding;
 		}
 
 		&--right {
 			margin-left: $button-icon-text-gap;
 			margin-right: $button-icon-with-text-side-margin - 2px;
+			padding: $button-icon-side-padding;
 		}
 	}
 }
@@ -86,5 +92,10 @@
 @each $name, $value in $gradients-primary {
 	.button--#{$name} {
 		background-color: list.nth($value, 1);
+		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+		&:hover:not(:disabled):not(:selected) {
+			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		}
 	}
 }

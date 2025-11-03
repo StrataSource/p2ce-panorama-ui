@@ -1,15 +1,14 @@
 @use '../config' as *;
 
 .VersionInfo {
+	vertical-align: middle;
 	flow-children: down;
 
 	.VersionInfoText {
-		font-size: 16px;
+		font-size: 12px;
 		font-family: $font-monospace;
+		letter-spacing: 1px;
 	}
 
-	color: white;
-	background-color: $base-color;
-	padding: 12px;
-	border-radius: 14px;
+	color: $bright-color;
 }

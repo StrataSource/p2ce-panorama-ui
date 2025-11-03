@@ -5,24 +5,29 @@
 @use 'sass:list';
 
 .radiobutton {
-	transition-property: background-color;
-	transition-duration: 0.05s;
-	transition-timing-function: linear;
-
 	.RadioBox {
 		visibility: collapse;
 	}
 
 	&:selected {
 		background-color: $button-background-selected;
+
+		.button__text {
+			color: $bright-color;
+		}
 	}
 }
 
 @each $name, $colors in $gradients-primary {
 	.radiobutton--#{$name} {
+		background-color: list.nth($colors, 1);
+		border-color: color.scale(list.nth($colors, 1), $lightness: -60%);
+		&:hover:not(:selected):not(:disabled) {
+			background-color: color.scale(list.nth($colors, 1), $lightness: -60%);
+		}
 		&:selected {
-			background-color: list.nth($colors, 2);
-			border: $button-border;
+			background-color: color.scale(list.nth($colors, 2), $lightness: -60%);
+			border-color: list.nth($colors, 1);
 		}
 	}
 }
@@ -31,10 +36,6 @@
 	background-color: none;
 	vertical-align: middle;
 	flow-children: right;
-
-	transition-property: background-color, color;
-	transition-duration: 0.1s;
-	transition-timing-function: ease-in-out;
 
 	.RadioBox {
 		width: $radiobox-width;
@@ -50,10 +51,6 @@
 			to($radiobutton-background)
 		);
 		box-shadow: $radiobox-shadow;
-
-		transition-property: background-color;
-		transition-duration: 0.2s;
-		transition-timing-function: ease-in-out;
 	}
 
 	&__text {
@@ -132,10 +129,6 @@
 
 		border-bottom: $tab-lower-border-height solid $tab-lower-border-color;
 
-		transition-property: background-color, border;
-		transition-duration: 0.1s;
-		transition-timing-function: ease-in-out;
-
 		&:hover {
 			background-color: $tab-background-hover;
 			border-bottom: $tab-lower-border-height solid $tab-lower-border-hover-color;
@@ -166,8 +159,6 @@
 		margin: 0px;
 		padding: $tab-text-padding;
 		opacity: 0.9;
-
-		transition: opacity 0.1s ease-in-out 0s;
 
 		#{$root}__tab:hover &,
 		#{$root}__tab:selected & {

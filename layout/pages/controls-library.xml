@@ -23,12 +23,12 @@
 					<Label class="text-h6" text="text-h6" />
 				</Panel>
 				<Panel class="col">
-					<Label class="text-h1 text-header-light" text="text-h1 text-header-light" />
-					<Label class="text-h2 text-header-light" text="text-h2 text-header-light" />
-					<Label class="text-h3 text-header-light" text="text-h3 text-header-light" />
-					<Label class="text-h4 text-header-light" text="text-h4 text-header-light" />
-					<Label class="text-h5 text-header-light" text="text-h5 text-header-light" />
-					<Label class="text-h6 text-header-light" text="text-h6 text-header-light" />
+					<Label class="text-h1-light" text="text-h1-light" />
+					<Label class="text-h2-light" text="text-h2-light" />
+					<Label class="text-h3-light" text="text-h3-light" />
+					<Label class="text-h4-light" text="text-h4-light" />
+					<Label class="text-h5-light" text="text-h5-light" />
+					<Label class="text-h6-light" text="text-h6-light" />
 				</Panel>
 				<Panel class="col">
 					<Label class="text-xxxl" text="text-xxxl" />
@@ -227,7 +227,7 @@
 			<Label class="text-h1 mt-3" text="Controls" />
 
 			<Label class="text-h3 mt-3" text="Buttons" />
-			<Panel class="row my-3">
+			<Panel class="row my-3 overflow-hscroll pb-4">
 				<Button class="button mr-2" onactivate="$.Msg('onactivated');">
 					<Label class="button__text" text="Button" />
 				</Button>
@@ -267,7 +267,7 @@
 					<Label class="button__text" text="purple" />
 				</Button>
 			</Panel>
-			<Panel class="row my-3">
+			<Panel class="row my-3 overflow-hscroll pb-4">
 				<Button class="button mr-2" disabled="true">
 					<Label class="button__text" text="Button" />
 				</Button>
@@ -314,7 +314,7 @@
 			</Panel>
 
 			<Label class="text-h3 mt-3" text="Toggle Buttons" />
-			<Panel class="row my-3">
+			<Panel class="row my-3 overflow-hscroll pb-4">
 				<ToggleButton class="button mr-2 togglebutton">
 					<Label class="button__text" text="ToggleButton" />
 				</ToggleButton>
@@ -326,7 +326,7 @@
 					<Label class="button__text button__text--right" text="icon--left + text" />
 				</ToggleButton>
 				<ToggleButton class="button mr-2 togglebutton">
-					<Label class="button__text button__text-left" text="icon--right + text" />
+					<Label class="button__text button__text--left" text="icon--right + text" />
 					<Image class="button__icon button__icon--right" texturewidth="32" textureheight="32" src="file://{images}/units.svg" />
 				</ToggleButton>
 				<ToggleButton class="button mr-2 togglebutton togglebutton--blue">

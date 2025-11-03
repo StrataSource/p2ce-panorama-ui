@@ -204,9 +204,9 @@ class MainMenuSettings {
 				scrollOffset === 0
 			) {
 				const navChild = this.panels.nav.FindChildTraverse(SettingsTabs[tab].children[child.id]);
-                if (navChild) {
-                    navChild.checked = true;
-                }
+				if (navChild) {
+					navChild.checked = true;
+				}
 				break;
 			}
 		}

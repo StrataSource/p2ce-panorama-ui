@@ -13,27 +13,22 @@
 	align: center center;
 
 	width: 100%;
-	height: 48px;
+	height: $settings-height;
 
-	padding: 0 6px 0 12px;
-
-	border-radius: 2px;
-	border: 1px solid rgba(0, 0, 0, 0.5);
-
-	margin-bottom: 4px;
+	border-top: 1px solid $base-900;
+	padding: $settings-padding;
+	margin-bottom: $settings-gap;
 
 	&.--even {
-		background-color: rgba(255, 255, 255, 0.03);
+		//background-color: rgba(255, 255, 255, 0.03);
 	}
 	&.--odd {
-		background-color: rgba(255, 255, 255, 0.02);
+		//background-color: rgba(255, 255, 255, 0.02);
 	}
 	&.--even,
 	&.--odd {
-		transition: background-color 0.1s ease-in-out 0s;
-
 		&:hover {
-			background-color: rgba(255, 255, 255, 0.06);
+			background-color: $primary-950;
 		}
 
 		&:disabled {
@@ -79,17 +74,33 @@
 		& > RadioButton {
 			@extend .button;
 			@extend .radiobutton;
-			@extend .radiobutton--orange;
 
 			width: fit-children;
 			min-width: 140px;
 			height: 100%;
 			margin-left: 6px;
+
+			&:hover:not(:disabled):not(:selected) {
+				& > Label {
+					color: $button-text-hover;
+				}
+			}
+
+			&:selected {
+				&:disabled {
+				}
+
+				&:not(:disabled) {
+					& > Label {
+						color: $button-text-hover;
+					}
+					border-color: $button-background;
+				}
+			}
 		}
 
 		& > RadioButton > Label {
 			@extend .button__text;
-			font-size: 22px;
 		}
 	}
 }
@@ -108,7 +119,7 @@
 	}
 
 	&__textentry {
-		width: 80px;
+		width: 140px;
 	}
 
 	&__outofbounds {
@@ -128,31 +139,22 @@
 .settings-keybinder {
 	$root: &;
 
-	transition: background-color 0.1s linear 0s;
-
 	&:hover {
 		background-color: rgba(255, 255, 255, 0.025);
 	}
 
 	&__container {
-		min-width: 32px;
-		height: 32px;
-		padding: 2px 0;
+		min-width: 75px;
+		height: $button-height;
+		padding: 5px 10px;
 		align: center center;
 
 		horizontal-align: right;
-		border-radius: 4px;
-		background-color: rgba(255, 255, 255, 0.1);
-		border: 1px solid rgba(255, 255, 255, 0.05);
-		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-
-		transition-property: background-color, border;
-		transition-duration: 0.15s;
-		transition-timing-function: ease-in-out;
+		background-color: $checkbox-background;
+		border-bottom: $checkbox-border;
 
 		&:hover {
-			background-color: rgba($orange, 0.3);
-			border: 1px solid rgba($orange, 0.4);
+			background-color: $checkbox-background-hover;
 		}
 
 		#{$root}:selected & {
@@ -191,9 +193,10 @@
 		margin: 2px 4px;
 		opacity: 0.8;
 
-		background-image: url('file://{images}/close-circle.svg');
-		background-size: 100% 100%;
+		background-image: url('file://{images}/close.svg');
+		background-size: 24px;
 		background-repeat: no-repeat;
+		background-position: center;
 		visibility: collapse;
 
 		transition: wash-color 0.1s ease-in-out 0s;
@@ -213,7 +216,8 @@ ConVarEnabler > .settings-enum-dropdown,
 ConVarEnabler > .settings-slider,
 ConVarEnabler > .settings-keybinder,
 ConVarEnabler > .colordisplay {
-	height: 48px;
+	height: $settings-height;
+	padding: $settings-padding;
 	transition: height 0.1s ease-out 0s;
 
 	&:parentdisabled {

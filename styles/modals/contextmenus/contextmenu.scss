@@ -11,6 +11,7 @@
 	height: 100%;
 	opacity: 1;
 	z-index: 10000;
+	background-color: rgba($black, 0.4);
 }
 
 // Wrapper class for the currently unused arrows bits and the menu itself
@@ -34,6 +35,7 @@
 	padding: $contextmenu-padding-y 0;
 	background-color: $contextmenu-background;
 	box-shadow: $contextmenu-shadow;
+	border: $contextmenu-border;
 	border-radius: $contextmenu-radius;
 
 	opacity: 1;
