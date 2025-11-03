@@ -104,13 +104,13 @@
 			&__title {
 				@include mixin.font-styles($use-header: true);
 				font-size: 22px;
-				text-shadow-fast: 2px 2px $base-950;
+				text-shadow: 2px 2px 4px 2 $base-950;
 			}
 
 			&__author {
 				font-size: 14px;
 				letter-spacing: 1px;
-				text-shadow-fast: 1px 1px $base-950;
+				text-shadow: 1px 1px 4px 2 $base-950;
 			}
 
 			&__desc {
@@ -119,7 +119,7 @@
 				letter-spacing: 1px;
 				color: $base-200;
 				max-height: 110px;
-				text-shadow-fast: 1px 1px $base-950;
+				text-shadow: 1px 1px 4px 2 $base-950;
 			}
 		}
 	}
