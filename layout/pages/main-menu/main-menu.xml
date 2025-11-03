@@ -176,14 +176,17 @@
 								</Button>
 								<Panel class="home__spacer__v" />
 								<!-- See all saves -->
-								<Button class="home__prompt">
+								<Button
+									class="home__prompt"
+									disabled="true"
+								>
 									<Image
 										src="file://{images}/menu/p2ce/random1.png"
 										scaling="stretch-to-cover-preserve-aspect"
 										class="home__prompt__image"
 									/>
 									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[HC] Save/Load Game" />
+										<Label class="home__heading" text="[HC] Save/Load Game (COMING SOON)" />
 									</Panel>
 								</Button>
 								<Panel class="home__spacer__v" />
