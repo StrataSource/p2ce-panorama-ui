@@ -16,8 +16,8 @@
 					<!-- Addon info; title, description, 'source' -->
 					<Panel class="addons__entry__details">
 						<Label id="AddonTitle" class="addons__entry__details__title" />
-						<Label id="AddonDesc" class="addons__entry__details__desc" />
 						<Label id="AddonSource" class="addons__entry__details__source" />
+						<Label id="AddonDesc" class="addons__entry__details__desc" />
 					</Panel>
 				</Panel>
 				<Panel class="addons__entry__right">

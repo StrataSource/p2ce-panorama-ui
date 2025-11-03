@@ -74,7 +74,10 @@
 			}
 
 			&__source {
-				visibility: collapse;
+				font-size: 14px;
+				color: $base-400;
+				font-weight: light;
+				letter-spacing: 1px;
 			}
 		}
 
