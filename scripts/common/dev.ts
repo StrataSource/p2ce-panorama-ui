@@ -32,6 +32,6 @@ function stripDevTagsFromLabels(panel: GenericPanel) {
  * @param str The string
  */
 function tagDevString(str: string) {
-	//if (GameInterfaceAPI.GetSettingBool('developer')) return str;
-	return `[HC] ${str}`;
+	if (GameInterfaceAPI.GetSettingBool('developer')) return `[HC] ${str}`;
+	return str;
 }
