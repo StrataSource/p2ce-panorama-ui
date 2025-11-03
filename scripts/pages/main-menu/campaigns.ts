@@ -96,10 +96,10 @@ class ChapterEntry {
 		const cover = this.panel.FindChildTraverse<Image>('ChapterCover');
 
 		if (title) {
-			title.text = `[HC] Chapter ${this.index + 1}`;
+			title.text = tagDevString(`Chapter ${this.index + 1}`);
 		}
 		if (desc) {
-			desc.text = `[PH] ${this.chapter.title}`;
+			desc.text = `${this.chapter.title}`;
 		}
 		if (cover) {
 			cover.SetImage(`file://{materials}/vgui/chapters/chapter${this.index + 1}.vtf`);
@@ -112,12 +112,12 @@ class ChapterEntry {
 					GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
 				else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						'[HC] Confirm New Game',
-						'[HC] Are you sure you want to start a new game? Progress will be lost!',
+						tagDevString('Confirm New Game'),
+						tagDevString('Are you sure you want to start a new game? Progress will be lost!'),
 						'warning-popup',
-						$.LocalizeSafe('#UI_Yes'),
+						$.Localize('#UI_Yes'),
 						() => { GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`); },
-						$.LocalizeSafe('#UI_Cancel'),
+						$.Localize('#UI_Cancel'),
 						() => {},
 						'blur'
 					);
@@ -160,12 +160,12 @@ class SaveEntry {
 					SaveRestoreAPI.LoadSave(this.save.name);
 				else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						'[HC] Confirm Load Game',
-						'[HC] Are you sure you want to load this save file? Progress will be lost!',
+						tagDevString('Confirm Load Game'),
+						tagDevString('Are you sure you want to load this save file? Progress will be lost!'),
 						'warning-popup',
-						$.LocalizeSafe('#UI_Yes'),
+						$.Localize('#UI_Yes'),
 						() => { SaveRestoreAPI.LoadSave(this.save.name); },
-						$.LocalizeSafe('#UI_Cancel'),
+						$.Localize('#UI_Cancel'),
 						() => {},
 						'blur'
 					);
@@ -276,12 +276,12 @@ class CampaignLoadGameTab {
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				'[HC] Confirm Load',
-				'[HC] Are you sure you want to load the latest save? Progress will be lost!',
+				tagDevString('Confirm Load'),
+				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
 				'warning-popup',
-				$.LocalizeSafe('#UI_Yes'),
+				$.Localize('#UI_Yes'),
 				() => { SaveRestoreAPI.LoadSave(saves[0].name); },
-				$.LocalizeSafe('#UI_Cancel'),
+				$.Localize('#UI_Cancel'),
 				() => {},
 				'blur'
 			);

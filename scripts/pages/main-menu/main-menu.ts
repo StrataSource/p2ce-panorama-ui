@@ -311,12 +311,12 @@ class MainMenu {
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				'[HC] Confirm Load',
-				'[HC] Are you sure you want to load the latest save? Progress will be lost!',
+				tagDevString('Confirm Load'),
+				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
 				'warning-popup',
-				'[HC] Load Save',
+				tagDevString('Load Save'),
 				() => { SaveRestoreAPI.LoadSave(saves[0].name); },
-				$.LocalizeSafe('#Action_Return'),
+				$.Localize('#Action_Return'),
 				() => {},
 				'blur'
 			);
@@ -362,28 +362,28 @@ class MainMenu {
 
 		if (toDesktop) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				$.LocalizeSafe('#Action_Quit'),
-				$.LocalizeSafe('#Action_Quit_Message'),
+				$.Localize('#Action_Quit'),
+				$.Localize('#Action_Quit_Message'),
 				'warning-popup',
-				$.LocalizeSafe('#Action_Quit'),
+				$.Localize('#Action_Quit'),
 				this.quitGame,
-				$.LocalizeSafe('#Action_Return'),
+				$.Localize('#Action_Return'),
 				() => {},
 				'blur'
 			);
 		} else {
 			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
-				'[HC] Exit Game?',
-				'[HC] Are you sure you want to exit? Unsaved progress will be lost!',
+				tagDevString('Exit Game?'),
+				tagDevString('Are you sure you want to exit? Unsaved progress will be lost!'),
 				'warning-popup',
-				'[HC] Return to Menu',
+				tagDevString('Return to Menu'),
 				() => {
 					GameInterfaceAPI.ConsoleCommand('disconnect');
 					this.onHomeButtonPressed();
 				},
-				'[HC] Quit to Desktop',
+				tagDevString('Quit to Desktop'),
 				this.quitGame,
-				'[HC] Cancel',
+				$.Localize('#UI_Cancel'),
 				() => {},
 				'blur'
 			);

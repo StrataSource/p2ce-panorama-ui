@@ -24,3 +24,14 @@ function stripDevTagsFromLabels(panel: GenericPanel) {
 		stripDevTagsFromLabels(child);
 	}
 }
+
+/**
+ * Tags a string (for usage by scripts) with [HC] (hardcode)
+ * if the game is running in developer mode. Otherwise, just uses
+ * the string as is.
+ * @param str The string
+ */
+function tagDevString(str: string) {
+	//if (GameInterfaceAPI.GetSettingBool('developer')) return str;
+	return `[HC] ${str}`;
+}
