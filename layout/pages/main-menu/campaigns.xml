@@ -161,27 +161,34 @@
 						texturewidth="440"
 					/>
 					<Panel class="selected-campaign__controls__inner">
-						<Button class="selected-campaign__controls__button" onactivate="CampaignNewGameTab.setActive()">
+						<Button
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							onactivate="CampaignNewGameTab.setActive()"
+						>
 							<Label class="selected-campaign__controls__button__text" text="[HC] New Game" />
 						</Button>
 						<Button
 							id="CampaignLoadLatestBtn"
-							class="selected-campaign__controls__button"
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignLoadGameTab.loadLatest()"
 						>
 							<Label class="selected-campaign__controls__button__text" text="[HC] Continue" />
 						</Button>
 						<Button
 							id="CampaignAllSavesBtn"
-							class="selected-campaign__controls__button"
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignLoadGameTab.setActive()"
 						>
 							<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
 						</Button>
-						<Button class="selected-campaign__controls__button" disabled="true">
+						<Button class="selected-campaign__controls__button selected-campaign__controls__button__lined" disabled="true">
 							<Label class="selected-campaign__controls__button__text" text="[HC] Open in Workshop" />
 						</Button>
-						<Button id="CampaignStartReturn" class="selected-campaign__controls__button" onactivate="CampaignStartPage.hide()">
+						<Button
+							id="CampaignStartReturn"
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							onactivate="CampaignStartPage.hide()"
+						>
 							<Label class="selected-campaign__controls__button__text" text="[HC] Back to Campaign Select" />
 						</Button>
 						<Label

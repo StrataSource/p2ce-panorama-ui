@@ -162,6 +162,10 @@
 
 			$this: &;
 
+			&__lined {
+				border-bottom: 1px solid $base-900;
+			}
+
 			&__text {
 				@include mixin.font-styles($use-header: true);
 				color: $bright-color;
