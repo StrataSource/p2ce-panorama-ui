@@ -74,12 +74,12 @@
 			height: 100%;
 			flow-children: right;
 			padding: 15px;
-			background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba($base-950, 0)));
+			background-color: gradient(linear, 0% 0%, 95% 0%, from(rgba(0, 0, 0, 0)), to($base-950));
 		}
 
 		&__bg-image {
 			width: 100%;
-			opacity: 0.5;
+			opacity: 0.2;
 		}
 
 		&__cover {
@@ -103,12 +103,14 @@
 
 			&__title {
 				@include mixin.font-styles($use-header: true);
-				font-size: 20px;
+				font-size: 22px;
+				text-shadow-fast: 2px 2px $base-950;
 			}
 
 			&__author {
 				font-size: 14px;
 				letter-spacing: 1px;
+				text-shadow-fast: 1px 1px $base-950;
 			}
 
 			&__desc {
@@ -117,6 +119,7 @@
 				letter-spacing: 1px;
 				color: $base-200;
 				max-height: 110px;
+				text-shadow-fast: 1px 1px $base-950;
 			}
 		}
 	}
