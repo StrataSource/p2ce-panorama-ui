@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Global event definitions for P2CE's UI
  */
