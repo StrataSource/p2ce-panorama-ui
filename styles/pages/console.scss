@@ -68,6 +68,19 @@
 		font-size: $font-default-size;
 		text-overflow: clip;
 		white-space: nowrap;
+		color: white;
 		height: fit-children;
+		border: 1px solid $base-700;
+		background-color: $base-900;
+
+		&:focus {
+			background-color: $base-900;
+			color: white;
+		}
+
+		&:hover {
+			background-color: $base-900;
+			color: white;
+		}
 	}
 }
