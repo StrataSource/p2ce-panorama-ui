@@ -81,5 +81,5 @@ module.exports = defineConfig([
 			'@typescript-eslint/no-unused-expressions': ['off']
 		}
 	},
-	globalIgnores(['eslint.config.js', 'node_modules', 'scripts/types', 'scripts_dist'])
+	globalIgnores(['eslint.config.js', 'node_modules', 'scripts/types', 'scripts/types-p2ce', 'scripts_dist'])
 ]);
