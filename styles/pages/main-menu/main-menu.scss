@@ -84,7 +84,7 @@ $home-panel-width: 50%;
 	}
 
 	&__home-container {
-		padding: 30px;
+		margin: 30px;
 	}
 
 	&__home-container,
@@ -226,18 +226,19 @@ $home-panel-width: 50%;
 }
 
 .home {
-	width: $home-panel-width;
+	width: 50%;
 	height: 100%;
 	flow-children: down;
 
 	$root: &;
 
 	&__horizontal {
+		width: 100%;
 		flow-children: right;
 	}
 
 	&__prompt {
-		height: 192px;
+		height: 128px;
 		width: fill-parent-flow(1);
 
 		border: $menu-pane-border;
@@ -247,6 +248,7 @@ $home-panel-width: 50%;
 
 		&__short {
 			height: 64px;
+			width: 100%;
 
 			&__content {
 				width: 100%;
@@ -260,19 +262,17 @@ $home-panel-width: 50%;
 				& > Label {
 					vertical-align: middle;
 				}
-
-				#{$this}:hover:not(:disabled) & {
-					background-color: $primary-color;
-
-					& > Label {
-						color: $base-950;
-					}
-				}
 			}
 		}
 
 		&__image {
 			width: 100%;
+		}
+
+		&__gradient {
+			width: 100%;
+			height: 100%;
+			background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba(0, 0, 0, 0) ), to( $base-950 ) );
 		}
 
 		&__content {
@@ -281,8 +281,6 @@ $home-panel-width: 50%;
 
 			vertical-align: bottom;
 			padding: 15px;
-
-			background-color: rgba($base-950, 0.5);
 		}
 
 		&:disabled {
@@ -305,40 +303,34 @@ $home-panel-width: 50%;
 		&:hover:not(:disabled) {
 			border-color: $primary-color;
 
-			#{$this}__content {
-				background-color: $primary-color;
-
-				& > Label {
-					color: $base-950;
-				}
-			}
-
-			#{$root}__heading,
-			#{$root}__subheading {
-				text-shadow-fast: 1px 1px rgba($base-950, 0);
+			#{$this}__gradient {
+				background-color: gradient( linear, 0% 0%, 100% 0%, from( rgba($primary-color, 0.25) ), to( rgba(0, 0, 0, 0) ) );
+				//background-color: gradient( linear, 0% 0%, 0% 200%, from( rgba(0, 0, 0, 0) ), to( $primary-color ) );
 			}
 		}
 	}
 
 	&__spacer {
 		&__v {
-			height: 15px;
+			height: 10px;
 		}
 		&__h {
-			width: 15px;
+			width: 10px;
 		}
 	}
 
 	&__heading {
 		@include mixin.font-styles($use-header: true);
+		width: 100%;
 		font-size: 22px;
-		text-shadow-fast: 1px 1px $base-950;
+		text-shadow: 2px 2px 4px 2 $base-950;
 	}
 
 	&__subheading {
+		width: 100%;
 		font-size: 18px;
 		color: $base-200;
-		text-shadow-fast: 1px 1px $base-950;
+		text-shadow: 2px 2px 4px 2 $base-950;
 	}
 
 	&__modelpanel {
@@ -347,7 +339,7 @@ $home-panel-width: 50%;
 		max-width: 896px;
 		height: 100%;
 		horizontal-align: left;
-		vertical-align: bottom;
+		vertical-align: center;
 
 		opacity: 1;
 		blur: gaussian(0, 0, 0);
@@ -360,83 +352,156 @@ $home-panel-width: 50%;
 	}
 
 	&__bottom {
+		width: 100%;
 		vertical-align: bottom;
 		flow-children: down;
 	}
 
-	&__expandable {
-		height: 64px;
-		width: fill-parent-flow(1);
+	&__news {
+		width: 100%;
+		height: 192px;
 
-		transition: height 0.1s ease-in-out 0s;
+		flow-children: right;
+
+		&__pips {
+			width: 32px;
+			vertical-align: center;
+			flow-children: down;
+			margin-right: 10px;
+
+			&__entry {
+				width: 32px;
+				height: 32px;
+				margin: 2px 0;
+				//border: $menu-pane-border;
+				//border-radius: 16px;
+
+				background-image: url('file://{images}/menu/indicator_inactive.png');
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 125%;
+
+				& .RadioBox {
+					visibility: collapse;
+				}
+
+				&:hover:not(:selected) {
+					background-image: url('file://{images}/menu/indicator_off.png');
+				}
+
+				&:selected {
+					background-image: url('file://{images}/menu/indicator_on.png');
+					//background-color: $primary-700;
+				}
+			}
+		}
+
+		&__content {
+			width: fill-parent-flow(1);
+			height: 100%;
+
+			flow-children: right;
+			padding: 15px;
+
+			border: $menu-pane-border;
+			background-color: $base-950;
+
+			$this: &;
+
+			&__image {
+				width: 384px;
+				height: 100%;
+
+				border: $menu-pane-border;
+
+				margin-right: 22px;
+			}
+
+			&__details {
+				width: fill-parent-flow(1);
+
+				vertical-align: center;
+				flow-children: down;
+
+				&__header {
+					@include mixin.font-styles($use-header: true);
+					font-size: 20px;
+					margin-bottom: 2px;
+				}
+
+				&__desc {
+					font-size: 16px;
+					color: $base-200;
+				}
+			}
+
+			&:hover {
+				background-color: $primary-color;
+
+				#{$this}__details {
+					&__header {
+						color: $base-950;
+					}
+					&__desc {
+						color: $base-950;
+					}
+				}
+			}
+		}
+	}
+
+	&__featured {
+		width: 100%;
+		height: 64px;
+
+		margin-bottom: 10px;
 		border: $menu-pane-border;
 		background-color: $base-950;
 
 		$this: &;
 
-		&__big-text {
-			horizontal-align: right;
-			vertical-align: middle;
-
-			@include mixin.font-styles($use-header: true);
-			font-size: 60px;
-			margin-top: -5px;
-
-			opacity: 0.1;
+		&__image {
+			width: 100%;
+			height: 100%;
 		}
 
 		&__content {
-			height: 100%;
 			width: 100%;
-			vertical-align: middle;
-			flow-children: down;
+			height: 100%;
+			background-color: gradient( linear, 0% 0%, 200% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
 
-			padding: 15px;
-			//transition: background-color 0.1s ease-in-out 0.0s;
-			background-color: gradient(linear, 0% 0%, 150% 0%, from($base-950), to(rgba($base-950, 0)));
-		}
+			&__container {
+				padding: 0 20px;
+				vertical-align: center;
+				flow-children: down;
+				transform: translateY(-2px);
+			}
 
-		&__join-btm {
-			border-bottom-color: rgba(0, 0, 0, 0);
+			&__header {
+				@include mixin.font-styles($use-header: true);
+				font-size: 20px;
+			}
+
+			&__subheader {
+				font-size: 16px;
+				color: $base-200;
+			}
 		}
 
 		&:hover {
-			height: 512px;
 			border-color: $primary-color;
 
-			#{$this}__active-only {
-				opacity: 1;
-				visibility: visible;
-			}
-
-			#{$this}__inactive-only {
-				visibility: collapse;
-			}
-
 			#{$this}__content {
-				background-color: rgba($primary-color, 1);
-				height: fit-children;
-				vertical-align: top;
+				background-color: gradient( linear, 0% 0%, 50% 0%, from( rgba($primary-color, 0.25) ), to( rgba(0, 0, 0, 0) ) );
 
-				& > Label {
-					color: $base-color;
+				&__header {
+					text-shadow: 1px 1px 4px 2 $base-950;
+				}
+
+				&__subheader {
+					text-shadow: 1px 1px 4px 2 $base-950;
 				}
 			}
-
-			#{$root}__heading,
-			#{$root}__subheading {
-				text-shadow-fast: 1px 1px rgba($base-950, 0);
-			}
-		}
-
-		&__active-only {
-			opacity: 0;
-			visibility: collapse;
-			transition: opacity 0.1s ease-in-out 0s;
-		}
-
-		&__inactive-only {
-			visibility: visible;
 		}
 	}
 }

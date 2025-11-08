@@ -1,5 +1,21 @@
 'use strict';
 
+class NewsEntry {
+	index: number;
+	header: string;
+	desc: string;
+	panel: RadioButton;
+	callback: () => void;
+
+	constructor(index: number, header: string, desc: string, panel: RadioButton, callback: () => void) {
+		this.index = index;
+		this.header = header;
+		this.desc = desc;
+		this.panel = panel;
+		this.callback = callback;
+	}
+}
+
 class MainMenu {
 	static panels = {
 		cp: $.GetContextPanel(),
@@ -21,24 +37,24 @@ class MainMenu {
 		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
 		pausedSaveImage: $<Image>('#PausedSaveImage'),
 
-		newsFlyoutBtn: $<Button>('#NewsFlyoutBtn')!,
-		newsFlyoutImage: $<Image>('#NewsFlyoutImage')!,
-		newsFlyoutHeader: $<Label>('#NewsFlyoutHeader')!,
-		newsFlyoutDesc: $<Label>('#NewsFlyoutDescription')!,
-		featuredFlyoutImage: $<Image>('#FeaturedFlyoutImage')!,
-		featuredFlyoutHeader: $<Label>('#FeaturedFlyoutHeader')!,
-		featuredFlyoutDesc: $<Label>('#FeaturedFlyoutDescription')!
+		newsPips: $<Panel>('#NewsPipContainer')!,
+		newsBtn: $<Button>('#NewsBtn')!,
+		newsImage: $<Image>('#NewsImage')!,
+		newsHeader: $<Label>('#NewsHeader')!,
+		newsDesc: $<Label>('#NewsDesc')!
 	};
 
 	static activeTab = '';
 	static inSpace = false; // Temporary fun...
+	static music = 0;
+	static newsEntries: NewsEntry[] = [];
 
 	static {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
-		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuBackground.bind(this));
+		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuDetails.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
@@ -56,7 +72,8 @@ class MainMenu {
 		this.panels.movie = $<Movie>('#MainMenuMovie');
 		this.panels.model = $<ModelPanel>('#MainMenuModel');
 
-		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
+		if (GameInterfaceAPI.GetSettingInt('sv_unlockedchapters') >= 5) this.inSpace = true;
+		else this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
 
 		// Assign a random model
 		const models = [
@@ -85,7 +102,7 @@ class MainMenu {
 
 		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
 
-		this.setMainMenuBackground();
+		this.setMainMenuDetails();
 		this.setMainMenuFlyouts();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
@@ -112,7 +129,7 @@ class MainMenu {
 		this.panels.movie = $<Movie>('#MainMenuMovie');
 		this.panels.image = $<Image>('#MainMenuBackground');
 
-		this.setMainMenuBackground();
+		this.setMainMenuDetails();
 		this.onHomeButtonPressed();
 
 		this.updateHomeDetails();
@@ -271,9 +288,9 @@ class MainMenu {
 	}
 
 	/**
-	 * Set the video background based on persistent storage settings
+	 * Set video bg and play menu music
 	 */
-	static setMainMenuBackground() {
+	static setMainMenuDetails() {
 		if (!this.panels.movie?.IsValid() || !this.panels.image?.IsValid()) return;
 
 		let useVideo = $.persistentStorage.getItem('settings.mainMenuMovie');
@@ -312,11 +329,14 @@ class MainMenu {
 			// TODO: account for 4:3 displays
 			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background0' + act + '_widescreen.vtf');
 		}
+		
+		$.PlaySoundEvent(`UIPanorama.Music.P2.MenuAct${chapter}`);
 	}
 
 	static setMainMenuFlyouts() {
+		const NEWS_COUNT = 4;
 		const NEWS_URL =
-			'https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=1&maxlength=180&format=json';
+			`https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=${NEWS_COUNT}&maxlength=280&format=json`;
 		$.AsyncWebRequest(NEWS_URL, {
 			type: 'GET',
 			complete: (data) => {
@@ -328,14 +348,29 @@ class MainMenu {
 
 				// using the responseText on its own results in a parsing error
 				const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
-				const news = response['appnews']['newsitems'][0];
-				this.panels.newsFlyoutBtn.SetPanelEvent('onactivate', () => {
-					SteamOverlayAPI.OpenURL(news['url']);
-				});
-				this.panels.newsFlyoutHeader.text = news['title'];
-				this.panels.newsFlyoutDesc.text = news['contents'];
+				const allNews = response['appnews']['newsitems'];
+
+				for (let i = 0; i < NEWS_COUNT; ++i) {
+					const news = allNews[i];
+					const entry = $.CreatePanel('RadioButton', this.panels.newsPips, `newsPip${i}`);
+					entry.LoadLayoutSnippet('NewsPipSnippet');
+
+					entry.SetPanelEvent('onactivate', () => { MainMenu.setActiveNews(i) });
+
+					this.newsEntries.push(new NewsEntry(i, news['title'], news['contents'], entry, () => { SteamOverlayAPI.OpenURL(news['url']) }));
+				}
+
+				$.DispatchEvent('Activated', this.newsEntries[0].panel, PanelEventSource.MOUSE);
 			}
 		});
+	}
+
+	static setActiveNews(index: number) {
+		const entry = this.newsEntries[index];
+
+		this.panels.newsHeader.text = entry.header;
+		this.panels.newsDesc.text = entry.desc;
+		this.panels.newsBtn.SetPanelEvent('onactivate', entry.callback);
 	}
 
 	/**
@@ -461,6 +496,8 @@ class MainMenu {
 			this.panels.movie?.RemoveClass('mainmenu__fadeout');
 			this.panels.movie?.Play();
 		}
+
+		$.PlaySoundEvent('UIPanorama.Music.StopAll');
 	}
 
 	static onLayoutReloaded() {

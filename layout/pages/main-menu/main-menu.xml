@@ -25,6 +25,12 @@
 				</Movie>
 			</Panel>
 		</snippet>
+		<snippet name="NewsPipSnippet">
+			<RadioButton
+				class="home__news__pips__entry"
+				group="NewsPipRadio"
+			/>
+		</snippet>
 	</snippets>
 
 	<MainMenu
@@ -159,100 +165,118 @@
 								<!-- Resume game button, pause menu only -->
 								<Button class="home__prompt home__prompt__short" onactivate="$.DispatchEvent('MainMenuResumeGame');">
 									<Image
-									src="file://{images}/menu/p2ce/random2.png"
+									src="file://{images}/menu/p2ce/random4.png"
 									scaling="stretch-to-cover-preserve-aspect"
 									class="home__prompt__image"
 								/>
+									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__short__content">
 										<Label class="home__heading" text="[HC] Resume Game" />
 									</Panel>
 								</Button>
 								<Panel class="home__spacer__v" />
-								<!-- See all saves -->
-								<Button class="home__prompt" disabled="true">
-									<Image
-									src="file://{images}/menu/p2ce/random1.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
-									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[HC] Save/Load Game (COMING SOON)" />
-									</Panel>
-								</Button>
-								<Panel class="home__spacer__v" />
-								<!-- Continue latest save -->
-								<Button id="PausedLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
-									<Image
-									id="PausedSaveImage"
-									src="file://{images}/menu/p2ce/random3.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
-									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[HC] Load Last Save" />
-									</Panel>
-								</Button>
+								<Panel class="home__horizontal">
+									<!-- See all saves -->
+									<Button class="home__prompt" disabled="true">
+										<Image
+										src="file://{images}/menu/p2ce/random5.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+										<Panel class="home__prompt__gradient" />
+										<Panel class="home__prompt__content">
+											<Label class="home__heading" text="[HC] Save/Load Game (COMING SOON)" />
+										</Panel>
+									</Button>
+									<Panel class="home__spacer__h" />
+									<!-- Continue latest save -->
+									<Button id="PausedLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
+										<Image
+										id="PausedSaveImage"
+										src="file://{images}/menu/p2ce/random3.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+										<Panel class="home__prompt__gradient" />
+										<Panel class="home__prompt__content">
+											<Label class="home__heading" text="[HC] Load Last Save" />
+										</Panel>
+									</Button>
+								</Panel>
 							</Panel>
 						</Panel>
 
 						<Panel id="HomeContent" class="mainmenu__home-container MainMenuModeOnly">
 							<ModelPanel
-							id="MainMenuModel"
-							class="home__modelpanel MainMenuModeOnly"
-							src="models/npcs/turret/turret.mdl"
-							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-							antialias="true"
-							mouse_rotate="true"
-						/>
+								id="MainMenuModel"
+								class="home__modelpanel MainMenuModeOnly"
+								src="models/npcs/turret/turret.mdl"
+								cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+								antialias="true"
+								mouse_rotate="true"
+							/>
 							<Panel class="home">
-								<!-- Continue latest save -->
-								<Button id="MainMenuLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
+								<Button class="home__featured">
 									<Image
-									id="MainMenuSaveImage"
-									defaultsrc="file://{images}/menu/p2ce/random1.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
-									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[HC] Continue" />
-										<Label id="MainMenuSaveSubheadingLabel" class="home__subheading" text="[HC] No Save Available" />
-									</Panel>
-								</Button>
-								<Panel class="home__bottom">
-									<Button id="NewsFlyoutBtn" class="home__expandable home__expandable__join-btm">
-										<Image
-										id="NewsFlyoutImage"
-										src="file://{images}/menu/p2ce/news-splash.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
-										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] NEWS" />
-										<Panel class="home__expandable__content">
-											<Label id="NewsFlyoutHeader" class="home__heading" text="[PH] News Flyout Header" />
-											<Label
-											id="NewsFlyoutDescription"
-											class="home__subheading home__expandable__active-only"
-											text="[PH] News Flyout Description"
-										/>
-										</Panel>
-									</Button>
-									<Button class="home__expandable" onactivate="MainMenu.onFeaturedFlyoutPressed()">
-										<Image
-										id="FeaturedFlyoutImage"
+										id="FeaturedImage"
 										src="file://{images}/menu/p2ce/random2.png"
 										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
+										class="home__featured__image"
 									/>
-										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] FEATURED" />
-										<Panel class="home__expandable__content">
-											<Label id="FeaturedFlyoutHeader" class="home__heading" text="[PH] Featured Flyout Header" />
-											<Label
-											id="FeaturedFlyoutDescription"
-											class="home__subheading home__expandable__active-only"
-											text="[PH] Featured Flyout Description"
+									<Panel class="home__featured__content">
+										<Panel class="home__featured__content__container">
+											<Label class="home__featured__content__header" text="[PH] Featured Item" />
+											<Label class="home__featured__content__subheader" text="[PH] Featured Author" />
+										</Panel>
+ 									</Panel>
+ 								</Button>
+								<!-- Continue latest save -->
+								<Panel class="home__horizontal">
+									<Button id="MainMenuActionButton" class="home__prompt">
+										<Image
+											id="MainMenuActionImage"
+											defaultsrc="file://{images}/menu/p2ce/random3.png"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="home__prompt__image"
 										/>
+										<Panel class="home__prompt__gradient" />
+										<Panel class="home__prompt__content">
+											<Label class="home__heading" text="[HC] Play" />
+											<Label class="home__subheading" text="[HC] New campaign installed" />
 										</Panel>
 									</Button>
+									<Panel class="home__spacer__h" />
+									<Button id="MainMenuLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
+										<Image
+											id="MainMenuSaveImage"
+											defaultsrc="file://{images}/menu/p2ce/random1.png"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="home__prompt__image"
+										/>
+										<Panel class="home__prompt__gradient" />
+										<Panel class="home__prompt__content">
+											<Label class="home__heading" text="[HC] Continue" />
+											<Label id="MainMenuSaveSubheadingLabel" class="home__subheading" text="[HC] No Save Available" />
+										</Panel>
+									</Button>
+								</Panel>
+								<Panel class="home__bottom">
+									<Panel class="home__news">
+										<Panel id="NewsPipContainer" class="home__news__pips">
+										</Panel>
+										<Button id="NewsBtn" class="home__news__content">
+											<Image
+												id="NewsImage"
+												src="file://{images}/menu/p2ce/news-splash.png"
+												scaling="stretch-to-cover-preserve-aspect"
+												class="home__news__content__image"
+											/>
+											<Panel class="home__news__content__details">
+												<Label id="NewsHeader" class="home__news__content__details__header" text="[PH] News Header" />
+												<Label id="NewsDesc" class="home__news__content__details__desc" text="[PH] News Description" />
+											</Panel>
+										</Button>
+									</Panel>
 								</Panel>
 							</Panel>
 						</Panel>
