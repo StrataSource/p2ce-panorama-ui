@@ -5,6 +5,7 @@
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
+		<include src="file://{scripts}/pages/main-menu/news.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
@@ -266,14 +267,22 @@
 										</Panel>
 										<Button id="NewsBtn" class="home__news__content">
 											<Image
-												id="NewsImage"
-												src="file://{images}/menu/p2ce/news-splash.png"
+												id="NewsGradientImage"
+												src="file://{images}/menu/p2ce/random4.png"
 												scaling="stretch-to-cover-preserve-aspect"
-												class="home__news__content__image"
+												class="home__news__content__bg-image"
 											/>
-											<Panel class="home__news__content__details">
-												<Label id="NewsHeader" class="home__news__content__details__header" text="[PH] News Header" />
-												<Label id="NewsDesc" class="home__news__content__details__desc" text="[PH] News Description" />
+											<Panel class="home__news__content__container">
+												<Image
+													id="NewsImage"
+													src="file://{images}/menu/p2ce/news-splash.png"
+													scaling="stretch-to-cover-preserve-aspect"
+													class="home__news__content__image"
+												/>
+												<Panel class="home__news__content__details">
+													<Label id="NewsHeader" class="home__news__content__details__header" text="[PH] News Header" />
+													<Label id="NewsDesc" class="home__news__content__details__desc" text="[PH] News Description" />
+												</Panel>
 											</Panel>
 										</Button>
 									</Panel>

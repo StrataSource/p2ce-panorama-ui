@@ -1,0 +1,60 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
+
+.home {
+	&__featured {
+		width: 100%;
+		height: 64px;
+
+		margin-bottom: 10px;
+		border: $menu-pane-border;
+		background-color: $base-950;
+
+		$this: &;
+
+		&__image {
+			width: 100%;
+			height: 100%;
+		}
+
+		&__content {
+			width: 100%;
+			height: 100%;
+			background-color: gradient( linear, 0% 0%, 200% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
+
+			&__container {
+				padding: 0 20px;
+				vertical-align: center;
+				flow-children: down;
+				transform: translateY(-2px);
+			}
+
+			&__header {
+				@include mixin.font-styles($use-header: true);
+				font-size: 20px;
+			}
+
+			&__subheader {
+				font-size: 16px;
+				color: $base-200;
+			}
+		}
+
+		&:hover {
+			border-color: $primary-color;
+
+			#{$this}__content {
+				background-color: gradient( linear, 0% 0%, 50% 0%, from( rgba($button-background-hover, 0.25) ), to( rgba(0, 0, 0, 0) ) );
+
+				&__header {
+					text-shadow: 1px 1px 4px 2 $base-950;
+				}
+
+				&__subheader {
+					text-shadow: 1px 1px 4px 2 $base-950;
+				}
+			}
+		}
+	}
+}

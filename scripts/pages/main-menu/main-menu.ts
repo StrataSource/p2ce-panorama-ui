@@ -1,20 +1,6 @@
 'use strict';
 
-class NewsEntry {
-	index: number;
-	header: string;
-	desc: string;
-	panel: RadioButton;
-	callback: () => void;
 
-	constructor(index: number, header: string, desc: string, panel: RadioButton, callback: () => void) {
-		this.index = index;
-		this.header = header;
-		this.desc = desc;
-		this.panel = panel;
-		this.callback = callback;
-	}
-}
 
 class MainMenu {
 	static panels = {
@@ -36,18 +22,10 @@ class MainMenu {
 		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
 		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
 		pausedSaveImage: $<Image>('#PausedSaveImage'),
-
-		newsPips: $<Panel>('#NewsPipContainer')!,
-		newsBtn: $<Button>('#NewsBtn')!,
-		newsImage: $<Image>('#NewsImage')!,
-		newsHeader: $<Label>('#NewsHeader')!,
-		newsDesc: $<Label>('#NewsDesc')!
 	};
 
 	static activeTab = '';
 	static inSpace = false; // Temporary fun...
-	static music = 0;
-	static newsEntries: NewsEntry[] = [];
 
 	static {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
@@ -103,7 +81,6 @@ class MainMenu {
 		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
 
 		this.setMainMenuDetails();
-		this.setMainMenuFlyouts();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
@@ -333,45 +310,7 @@ class MainMenu {
 		$.PlaySoundEvent(`UIPanorama.Music.P2.MenuAct${chapter}`);
 	}
 
-	static setMainMenuFlyouts() {
-		const NEWS_COUNT = 4;
-		const NEWS_URL =
-			`https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=${NEWS_COUNT}&maxlength=280&format=json`;
-		$.AsyncWebRequest(NEWS_URL, {
-			type: 'GET',
-			complete: (data) => {
-				if (data.statusText !== 'success') {
-					this.panels.newsFlyoutHeader.text = $.Localize('#MainMenu_News_Unavailable_Title');
-					this.panels.newsFlyoutDesc.text = $.Localize('#MainMenu_News_Unavailable_Description');
-					return;
-				}
-
-				// using the responseText on its own results in a parsing error
-				const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
-				const allNews = response['appnews']['newsitems'];
-
-				for (let i = 0; i < NEWS_COUNT; ++i) {
-					const news = allNews[i];
-					const entry = $.CreatePanel('RadioButton', this.panels.newsPips, `newsPip${i}`);
-					entry.LoadLayoutSnippet('NewsPipSnippet');
-
-					entry.SetPanelEvent('onactivate', () => { MainMenu.setActiveNews(i) });
-
-					this.newsEntries.push(new NewsEntry(i, news['title'], news['contents'], entry, () => { SteamOverlayAPI.OpenURL(news['url']) }));
-				}
-
-				$.DispatchEvent('Activated', this.newsEntries[0].panel, PanelEventSource.MOUSE);
-			}
-		});
-	}
-
-	static setActiveNews(index: number) {
-		const entry = this.newsEntries[index];
-
-		this.panels.newsHeader.text = entry.header;
-		this.panels.newsDesc.text = entry.desc;
-		this.panels.newsBtn.SetPanelEvent('onactivate', entry.callback);
-	}
+	
 
 	/**
 	 * Load the latest save available.

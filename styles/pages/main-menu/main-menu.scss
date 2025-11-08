@@ -5,7 +5,6 @@
 $page-transition-duration: 0.15s;
 $page-transition-timing-func: ease-in-out;
 $topnav-height: 80px;
-$home-panel-width: 50%;
 
 #TooltipManager,
 #ContextMenuManager,
@@ -304,7 +303,7 @@ $home-panel-width: 50%;
 			border-color: $primary-color;
 
 			#{$this}__gradient {
-				background-color: gradient( linear, 0% 0%, 100% 0%, from( rgba($primary-color, 0.25) ), to( rgba(0, 0, 0, 0) ) );
+				background-color: gradient( linear, 0% 0%, 100% 0%, from( rgba($button-background-hover, 0.25) ), to( rgba(0, 0, 0, 0) ) );
 				//background-color: gradient( linear, 0% 0%, 0% 200%, from( rgba(0, 0, 0, 0) ), to( $primary-color ) );
 			}
 		}
@@ -355,153 +354,5 @@ $home-panel-width: 50%;
 		width: 100%;
 		vertical-align: bottom;
 		flow-children: down;
-	}
-
-	&__news {
-		width: 100%;
-		height: 192px;
-
-		flow-children: right;
-
-		&__pips {
-			width: 32px;
-			vertical-align: center;
-			flow-children: down;
-			margin-right: 10px;
-
-			&__entry {
-				width: 32px;
-				height: 32px;
-				margin: 2px 0;
-				//border: $menu-pane-border;
-				//border-radius: 16px;
-
-				background-image: url('file://{images}/menu/indicator_inactive.png');
-				background-position: center;
-				background-repeat: no-repeat;
-				background-size: 125%;
-
-				& .RadioBox {
-					visibility: collapse;
-				}
-
-				&:hover:not(:selected) {
-					background-image: url('file://{images}/menu/indicator_off.png');
-				}
-
-				&:selected {
-					background-image: url('file://{images}/menu/indicator_on.png');
-					//background-color: $primary-700;
-				}
-			}
-		}
-
-		&__content {
-			width: fill-parent-flow(1);
-			height: 100%;
-
-			flow-children: right;
-			padding: 15px;
-
-			border: $menu-pane-border;
-			background-color: $base-950;
-
-			$this: &;
-
-			&__image {
-				width: 384px;
-				height: 100%;
-
-				border: $menu-pane-border;
-
-				margin-right: 22px;
-			}
-
-			&__details {
-				width: fill-parent-flow(1);
-
-				vertical-align: center;
-				flow-children: down;
-
-				&__header {
-					@include mixin.font-styles($use-header: true);
-					font-size: 20px;
-					margin-bottom: 2px;
-				}
-
-				&__desc {
-					font-size: 16px;
-					color: $base-200;
-				}
-			}
-
-			&:hover {
-				background-color: $primary-color;
-
-				#{$this}__details {
-					&__header {
-						color: $base-950;
-					}
-					&__desc {
-						color: $base-950;
-					}
-				}
-			}
-		}
-	}
-
-	&__featured {
-		width: 100%;
-		height: 64px;
-
-		margin-bottom: 10px;
-		border: $menu-pane-border;
-		background-color: $base-950;
-
-		$this: &;
-
-		&__image {
-			width: 100%;
-			height: 100%;
-		}
-
-		&__content {
-			width: 100%;
-			height: 100%;
-			background-color: gradient( linear, 0% 0%, 200% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
-
-			&__container {
-				padding: 0 20px;
-				vertical-align: center;
-				flow-children: down;
-				transform: translateY(-2px);
-			}
-
-			&__header {
-				@include mixin.font-styles($use-header: true);
-				font-size: 20px;
-			}
-
-			&__subheader {
-				font-size: 16px;
-				color: $base-200;
-			}
-		}
-
-		&:hover {
-			border-color: $primary-color;
-
-			#{$this}__content {
-				background-color: gradient( linear, 0% 0%, 50% 0%, from( rgba($primary-color, 0.25) ), to( rgba(0, 0, 0, 0) ) );
-
-				&__header {
-					text-shadow: 1px 1px 4px 2 $base-950;
-				}
-
-				&__subheader {
-					text-shadow: 1px 1px 4px 2 $base-950;
-				}
-			}
-		}
 	}
 }
