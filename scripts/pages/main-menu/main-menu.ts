@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 class MainMenu {
 	static panels = {
 		cp: $.GetContextPanel(),
@@ -21,7 +19,7 @@ class MainMenu {
 		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton'),
 		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
 		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
-		pausedSaveImage: $<Image>('#PausedSaveImage'),
+		pausedSaveImage: $<Image>('#PausedSaveImage')
 	};
 
 	static activeTab = '';
@@ -308,11 +306,9 @@ class MainMenu {
 			// TODO: account for 4:3 displays
 			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background0' + act + '_widescreen.vtf');
 		}
-		
+
 		$.PlaySoundEvent(`UIPanorama.Music.P2.MenuAct${chapter}`);
 	}
-
-	
 
 	/**
 	 * Load the latest save available.

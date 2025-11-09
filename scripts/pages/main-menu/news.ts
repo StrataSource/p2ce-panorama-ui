@@ -42,7 +42,7 @@ class NewsReel {
 	}
 
 	static onMainMenuOpened() {
-		while(this.entries.length > 0) this.entries.pop()?.panel.DeleteAsync(0);
+		while (this.entries.length > 0) this.entries.pop()?.panel.DeleteAsync(0);
 
 		this.container.visible = false;
 
@@ -72,11 +72,21 @@ class NewsReel {
 			const entry = $.CreatePanel('RadioButton', this.pips, `newsPip${i}`);
 			entry.LoadLayoutSnippet('NewsPipSnippet');
 
-			entry.SetPanelEvent('onactivate', () => { this.setActiveNews(i) });
-			entry.SetPanelEvent('onmouseover', () => { UiToolkitAPI.ShowTextTooltip(`newsPip${i}`, news['title']) });
-			entry.SetPanelEvent('onmouseout', () => { UiToolkitAPI.HideTextTooltip() });
+			entry.SetPanelEvent('onactivate', () => {
+				this.setActiveNews(i);
+			});
+			entry.SetPanelEvent('onmouseover', () => {
+				UiToolkitAPI.ShowTextTooltip(`newsPip${i}`, news['title']);
+			});
+			entry.SetPanelEvent('onmouseout', () => {
+				UiToolkitAPI.HideTextTooltip();
+			});
 
-			this.entries.push(new NewsEntry(i, news['title'], news['contents'], entry, () => { SteamOverlayAPI.OpenURL(news['url']) }));
+			this.entries.push(
+				new NewsEntry(i, news['title'], news['contents'], entry, () => {
+					SteamOverlayAPI.OpenURL(news['url']);
+				})
+			);
 		}
 
 		this.container.visible = true;
@@ -118,7 +128,7 @@ class NewsReel {
 	static onAutoAdvanceTimeElapsed(panel: string, prop: string) {
 		if (prop === 'width' && this.timeBar.HasClass('home__news__content__progress__activate-transition')) {
 			this.stopAutoAdvanceAnim();
-			
+
 			this.selectedEntry += 1;
 			if (this.selectedEntry >= this.entries.length) this.selectedEntry = 0;
 			$.DispatchEvent('Activated', this.entries[this.selectedEntry].panel, PanelEventSource.MOUSE);
