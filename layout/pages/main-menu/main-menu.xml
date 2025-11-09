@@ -217,35 +217,21 @@
 								mouse_rotate="true"
 							/>
 							<Panel class="home">
-								<Button class="home__featured">
-									<Image
-										id="FeaturedImage"
-										src="file://{images}/menu/p2ce/random2.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__featured__image"
-									/>
-									<Panel class="home__featured__content">
-										<Panel class="home__featured__content__container">
-											<Label class="home__featured__content__header" text="[PH] Featured Item" />
-											<Label class="home__featured__content__subheader" text="[PH] Featured Author" />
-										</Panel>
- 									</Panel>
- 								</Button>
 								<!-- Continue latest save -->
 								<Panel class="home__horizontal">
-									<Button id="MainMenuActionButton" class="home__prompt">
+									<Button class="home__prompt">
 										<Image
-											id="MainMenuActionImage"
-											defaultsrc="file://{images}/menu/p2ce/random3.png"
+											id="FeaturedImage"
+											src="file://{images}/menu/p2ce/random2.png"
 											scaling="stretch-to-cover-preserve-aspect"
 											class="home__prompt__image"
 										/>
 										<Panel class="home__prompt__gradient" />
 										<Panel class="home__prompt__content">
-											<Label class="home__heading" text="[HC] Play" />
-											<Label class="home__subheading" text="[HC] New campaign installed" />
-										</Panel>
-									</Button>
+											<Label class="home__heading" text="[PH] Featured Item" />
+											<Label class="home__subheading" text="[PH] Featured Author" />
+ 										</Panel>
+ 									</Button>
 									<Panel class="home__spacer__h" />
 									<Button id="MainMenuLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
 										<Image
