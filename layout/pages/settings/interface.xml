@@ -60,17 +60,6 @@
 					/>
 				</SettingsEnum>
 
-				<SettingsEnumDropDown
-					text="#Settings_Menu_Type"
-					psvar="settings.mainMenuBackground"
-					submitoverride="$.DispatchEvent('ReloadBackground');"
-					infomessage="#Settings_Menu_Type_Info"
-					tags="background,video,movie"
-				>
-					<Label text="#Settings_Menu_Type0" value="0" id="bgtype0" />
-					<Label text="#Settings_Menu_Type1" value="1" id="bgtype1" />
-				</SettingsEnumDropDown>
-
 				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
 				<SettingsEnum id="SentryReporting" text="#Settings_Menu_Sentry" infomessage="#Settings_Menu_Sentry_info" hasdocspage="false" tags="sentry">
 					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
