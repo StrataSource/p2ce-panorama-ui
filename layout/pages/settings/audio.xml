@@ -139,12 +139,22 @@
 
 				</Panel>
 
-				<SettingsEnum text="#Settings_ClosedCaptions_Enable" infomessage="#Settings_ClosedCaptions_Enable_info" convar="closecaption" hasdocspage="false">
+				<SettingsEnum
+					text="#Settings_ClosedCaptions_Enable"
+					infomessage="#Settings_ClosedCaptions_Enable_info"
+					convar="closecaption"
+					hasdocspage="false"
+				>
 					<RadioButton group="closedcaptions" text="#Common_Off" value="0" />
 					<RadioButton group="closedcaptions" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<SettingsEnum text="#Settings_ClosedCaptions_Subtitles" infomessage="#Settings_ClosedCaptions_Subtitles_info" convar="cc_subtitles" hasdocspage="false">
+				<SettingsEnum
+					text="#Settings_ClosedCaptions_Subtitles"
+					infomessage="#Settings_ClosedCaptions_Subtitles_info"
+					convar="cc_subtitles"
+					hasdocspage="false"
+				>
 					<RadioButton group="cc_subtitles" text="#Common_Off" value="0" />
 					<RadioButton group="cc_subtitles" text="#Common_On" value="1" />
 				</SettingsEnum>
