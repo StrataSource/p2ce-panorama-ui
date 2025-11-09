@@ -35,7 +35,7 @@
 
 				</Panel>
 
-				<SettingsEnum text="#Settings_Menu_Console" convar="con_enable" hasdocspage="false" tags="console">
+				<SettingsEnum text="#Settings_Menu_Console" infomessage="#Settings_Menu_Console_info" convar="con_enable" hasdocspage="false" tags="console">
 					<RadioButton group="enableconsole" text="#Common_Off" value="0" />
 					<RadioButton group="enableconsole" text="#Common_On" value="1" />
 				</SettingsEnum>
@@ -72,7 +72,7 @@
 				</SettingsEnumDropDown>
 
 				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
-				<SettingsEnum id="SentryReporting" text="Sentry Crash Reporting" infomessage="Sentry" hasdocspage="false" tags="sentry">
+				<SettingsEnum id="SentryReporting" text="#Settings_Menu_Sentry" infomessage="#Settings_Menu_Sentry_info" hasdocspage="false" tags="sentry">
 					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
 						<Label class="button__text" text="Update Consent" />
 					</Button>
@@ -80,8 +80,8 @@
 
 				<!-- TODO: Temp! -->
 				<SettingsEnum
-					text="Discord Rich Presence"
-					infomessage="Enables the display of your current game's state in Discord"
+					text="#Settings_Menu_DiscordIntegration"
+					infomessage="#Settings_Menu_DiscordIntegration_info"
 					convar="cl_richpresence_enable"
 					hasdocspage="false"
 					tags="richpresence"
@@ -91,8 +91,8 @@
 				</SettingsEnum>
 
 				<SettingsEnum
-					text="Playtest consent"
-					infomessage="Playtest consent"
+					text="Playtest Consent (DO NOT LOCALIZE)"
+					infomessage="Playtest Consent (DO NOT LOCALIZE)"
 					convar="cl_playtest_enabled"
 					hasdocspage="false"
 					tags="consent"
@@ -103,8 +103,8 @@
 
 				<ConVarEnabler convar="developer" togglevisibility="true">
 					<SettingsEnum
-						id="PlaytestDOSARemove"
-						text="Playtest DOSA remove"
+						id="PlaytestDOSARemove (DO NOT LOCALIZE)"
+						text="Playtest DOSA remove (DO NOT LOCALIZE)"
 						infomessage="Remove DOSA from playtest consent (For development purposes)"
 						hasdocspage="false"
 						tags="dosa"
