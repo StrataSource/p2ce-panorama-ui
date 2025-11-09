@@ -35,7 +35,13 @@
 
 				</Panel>
 
-				<SettingsEnum text="#Settings_Menu_Console" infomessage="#Settings_Menu_Console_info" convar="con_enable" hasdocspage="false" tags="console">
+				<SettingsEnum
+					text="#Settings_Menu_Console"
+					infomessage="#Settings_Menu_Console_info"
+					convar="con_enable"
+					hasdocspage="false"
+					tags="console"
+				>
 					<RadioButton group="enableconsole" text="#Common_Off" value="0" />
 					<RadioButton group="enableconsole" text="#Common_On" value="1" />
 				</SettingsEnum>
@@ -61,7 +67,13 @@
 				</SettingsEnum>
 
 				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
-				<SettingsEnum id="SentryReporting" text="#Settings_Menu_Sentry" infomessage="#Settings_Menu_Sentry_info" hasdocspage="false" tags="sentry">
+				<SettingsEnum
+					id="SentryReporting"
+					text="#Settings_Menu_Sentry"
+					infomessage="#Settings_Menu_Sentry_info"
+					hasdocspage="false"
+					tags="sentry"
+				>
 					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
 						<Label class="button__text" text="Update Consent" />
 					</Button>
@@ -92,7 +104,7 @@
 
 				<ConVarEnabler convar="developer" togglevisibility="true">
 					<SettingsEnum
-						id="PlaytestDOSARemove (DO NOT LOCALIZE)"
+						id="PlaytestDOSARemove"
 						text="Playtest DOSA remove (DO NOT LOCALIZE)"
 						infomessage="Remove DOSA from playtest consent (For development purposes)"
 						hasdocspage="false"
