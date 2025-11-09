@@ -321,7 +321,8 @@ class MainMenu {
 			type: 'GET',
 			complete: (data) => {
 				if (data.statusText !== 'success') {
-					this.panels.newsFlyoutHeader.text = $.Localize('#MainMenu_News_Unavailable');
+					this.panels.newsFlyoutHeader.text = $.Localize('#MainMenu_News_Unavailable_Title');
+					this.panels.newsFlyoutDesc.text = $.Localize('#MainMenu_News_Unavailable_Description');
 					return;
 				}
 
