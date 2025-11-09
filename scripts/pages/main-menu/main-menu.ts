@@ -262,6 +262,8 @@ class MainMenu {
 
 		this.panels.homeContent?.RemoveClass('mainmenu__home-container--hidden');
 		this.panels.pauseContent?.RemoveClass('mainmenu__home-container--hidden');
+
+		$.DispatchEvent('HideContentPanel');
 	}
 
 	/**

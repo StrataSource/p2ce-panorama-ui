@@ -262,10 +262,15 @@
 									</Button>
 								</Panel>
 								<Panel class="home__bottom">
-									<Panel class="home__news">
+									<Panel id="News" class="home__news">
 										<Panel id="NewsPipContainer" class="home__news__pips">
 										</Panel>
-										<Button id="NewsBtn" class="home__news__content">
+										<Button
+											id="NewsBtn"
+											class="home__news__content"
+											onmouseover="NewsReel.onReelMouseOver()"
+											onmouseout="NewsReel.onReelMouseOut()"
+										>
 											<Image
 												id="NewsGradientImage"
 												src="file://{images}/menu/p2ce/random4.png"
@@ -284,6 +289,7 @@
 													<Label id="NewsDesc" class="home__news__content__details__desc" text="[PH] News Description" />
 												</Panel>
 											</Panel>
+											<ProgressBar id="NewsProgressBar" class="home__news__content__progress" min="0.0" max="1.0" />
 										</Button>
 									</Panel>
 								</Panel>

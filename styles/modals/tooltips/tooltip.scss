@@ -43,6 +43,7 @@
 	&__title {
 		horizontal-align: left;
 		@include mixin.font-styles($use-header: $tooltip-title-use-header-font);
+		color: $tooltip-text-color;
 		font-size: $tooltip-title-font-size;
 		transform: translateY(-6px);
 	}
@@ -51,6 +52,7 @@
 		horizontal-align: left;
 		vertical-align: middle;
 		@include mixin.font-styles($use-header: $tooltip-text-use-header-font);
+		color: $tooltip-text-color;
 		font-size: $tooltip-text-font-size;
 	}
 
@@ -118,10 +120,20 @@
 		$dir: list.nth($tooltip-directions, $i);
 
 		// create a border in the opposite direction of the arrow
-		$opp: math.max(($i + 2) % 4, 1);
+		// don't work :(
+		// $opp: math.max(($i + 2) % 4, 1);
 		&__contents {
-			#{$root}.#{function.capitalize($dir)}ArrowVisible & {
-				border-#{list.nth($tooltip-directions, $opp)}: $tooltip-border;
+			#{$root}.TopArrowVisible & {
+				border-bottom: $tooltip-border;
+			}
+			#{$root}.RightArrowVisible & {
+				border-left: $tooltip-border;
+			}
+			#{$root}.BottomArrowVisible & {
+				border-top: $tooltip-border;
+			}
+			#{$root}.LeftArrowVisible & {
+				border-right: $tooltip-border;
 			}
 		}
 
