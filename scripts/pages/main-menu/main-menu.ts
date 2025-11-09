@@ -293,7 +293,7 @@ class MainMenu {
 		const chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
 		let act = 0;
 
-		if (chapter == 1) act = 1;
+		if (chapter === 1) act = 1;
 		else if ((chapter >= 2) & (chapter <= 5)) act = 2;
 		else if ((chapter >= 6) & (chapter <= 7)) act = 3;
 		else if ((chapter >= 8) & (chapter <= 9)) act = 4;
