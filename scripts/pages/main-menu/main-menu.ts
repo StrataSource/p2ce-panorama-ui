@@ -60,6 +60,9 @@ class MainMenu {
 
 		// Assign a random model
 		const models = [
+			'models/panorama/menu/BotPoses.mdl',
+			'models/panorama/menu/sp_a2_bridge_the_gap_WHEATLEY.mdl',
+			'models/panorama/menu/sp_a1_wakeup_glados_MERGED.mdl',
 			'models/props/schrodinger_cube.mdl',
 			'models/props/reflection_cube.mdl',
 			'models/props/metal_box.mdl'
@@ -73,7 +76,7 @@ class MainMenu {
 			this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 
 			this.panels.model.LookAtModel();
-			this.panels.model.SetCameraOffset(-300, 0, 22);
+			this.panels.model.SetCameraOffset(-300, 0, 0);
 			this.panels.model.SetCameraFOV(30);
 
 			this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
@@ -288,19 +291,29 @@ class MainMenu {
 		this.panels.image.SetReadyForDisplay(!useVideo);
 
 		let chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
-		if (chapter < 1) chapter = 1;
-		if (chapter > 5) chapter = 5;
+		let act = 0;
 
-		let movie = 'file://{media}/menu_act0' + chapter + '.webm';
+		if (chapter == 1) act = 1;
+		else if ((chapter >= 2) & (chapter <= 5)) act = 2;
+		else if ((chapter >= 6) & (chapter <= 7)) act = 3;
+		else if ((chapter >= 8) & (chapter <= 9)) act = 4;
+		else if (chapter >= 10) act = 5;
+		else act = act; // Bad unlockedchapters. Do nothing and resort to failsafe.
+
+		let movie = 'file://{media}/menu_act0' + act + '.webm';
 		if (this.inSpace) {
 			movie = 'file://{media}/sp_a5_credits.webm';
+		} else if (act <= 0) {
+			// This should only ever fall back if we have a bad unlockedchapters value!
+			movie = 'file://{media}/insert_disk.webm';
 		}
 
 		if (useVideo) {
 			this.panels.movie.SetMovie(movie);
 			this.panels.movie.Play();
 		} else {
-			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background01_widescreen.vtf');
+			// TODO: account for 4:3 displays
+			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background0' + act + '_widescreen.vtf');
 		}
 	}
 
@@ -311,7 +324,7 @@ class MainMenu {
 			type: 'GET',
 			complete: (data) => {
 				if (data.statusText !== 'success') {
-					this.panels.newsFlyoutHeader.text = tagDevString('Failed to retrieve news!');
+					this.panels.newsFlyoutHeader.text = $.Localize('#MainMenu_News_Unavailable');
 					return;
 				}
 
@@ -337,10 +350,10 @@ class MainMenu {
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				tagDevString('Confirm Load'),
-				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
+				$.Localize('#Action_LoadGame_Confirm'),
+				$.Localize('#Action_LoadGame_Auto_Message'),
 				'warning-popup',
-				tagDevString('Load Save'),
+				$.Localize('#Action_LoadGame'),
 				() => {
 					SaveRestoreAPI.LoadSave(saves[0].name);
 				},
@@ -401,17 +414,17 @@ class MainMenu {
 			);
 		} else {
 			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
-				tagDevString('Exit Game?'),
-				tagDevString('Are you sure you want to exit? Unsaved progress will be lost!'),
+				$.Localize('#Action_Quit'),
+				$.Localize('#Action_Quit_InGame_Message'),
 				'warning-popup',
-				tagDevString('Return to Menu'),
+				$.Localize('#Action_ReturnToMenu'),
 				() => {
 					GameInterfaceAPI.ConsoleCommand('disconnect');
 					this.onHomeButtonPressed();
 				},
-				tagDevString('Quit to Desktop'),
+				$.Localize('#Action_QuitToDesktop'),
 				this.quitGame,
-				$.Localize('#UI_Cancel'),
+				$.Localize('#Action_Return'),
 				() => {},
 				'blur'
 			);
