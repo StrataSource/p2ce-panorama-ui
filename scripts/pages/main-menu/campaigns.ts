@@ -10,6 +10,7 @@ class FakeCampaign {
 	btnBg: string;
 	ico: string;
 	logo: string;
+	boxart: string;
 
 	constructor(
 		title: string,
@@ -19,7 +20,8 @@ class FakeCampaign {
 		background: string,
 		btnBg: string,
 		ico: string,
-		logo: string
+		logo: string,
+		boxart: string
 	) {
 		this.title = title;
 		this.author = author;
@@ -29,6 +31,7 @@ class FakeCampaign {
 		this.btnBg = btnBg;
 		this.ico = ico;
 		this.logo = logo;
+		this.boxart = boxart;
 	}
 }
 
@@ -387,7 +390,8 @@ class CampaignSelector {
 			background: 'file://{images}/menu/p2ce/news-splash.png',
 			btnBg: 'file://{images}/menu/p2ce/random1.png',
 			ico: 'file://{images}/menu/p2ce/logo.png',
-			logo: 'file://{images}/logo.svg'
+			logo: 'file://{images}/logo.svg',
+			boxart: 'file://{images}/menu/p2ce/boxart.png'
 		},
 		{
 			title: '[HC] Portal 2',
@@ -400,7 +404,8 @@ class CampaignSelector {
 			background: 'file://{images}/menu/portal2/campaign_bg.png',
 			btnBg: 'file://{images}/menu/portal2/campaign_btn_bg.jpg',
 			ico: 'file://{images}/menu/portal2/logo.png',
-			logo: 'file://{images}/menu/portal2/full_logo.png'
+			logo: 'file://{images}/menu/portal2/full_logo.png',
+			boxart: 'file://{images}/menu/portal2/boxart.png'
 		},
 		{
 			title: '[HC] Portal 2 (Co-Op)',
@@ -410,7 +415,8 @@ class CampaignSelector {
 			background: 'file://{images}/menu/portal2/mp_campaign_bg.png',
 			btnBg: 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
 			ico: 'file://{images}/menu/portal2/logo.png',
-			logo: 'file://{images}/menu/portal2/full_logo.png'
+			logo: 'file://{images}/menu/portal2/full_logo.png',
+			boxart: 'file://{images}/menu/portal2/boxart.png'
 		},
 		{
 			title: '[HC] Portal',
@@ -422,10 +428,12 @@ class CampaignSelector {
 			background: 'file://{images}/menu/portal/campaign_bg.png',
 			btnBg: 'file://{images}/menu/portal/campaign_btn_bg.jpg',
 			ico: 'file://{images}/menu/portal/logo.svg',
-			logo: 'file://{images}/menu/portal/full_logo.svg'
+			logo: 'file://{images}/menu/portal/full_logo.svg',
+			boxart: 'file://{images}/menu/portal/boxart.png'
 		}
 	];
 	static campaignList = $<Panel>('#CampaignContainer');
+	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
 	static campaignEntries: CampaignEntry[] = [];
 
 	static {
@@ -447,6 +455,12 @@ class CampaignSelector {
 		for (let i = 0; i < this.fakeCampaigns.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
 			p.LoadLayoutSnippet('CampaignEntrySnippet');
+
+			if (i < this.fakeCampaigns.length - 1) {
+				p.AddClass('campaigns__entry__spaced');
+			}
+
+			p.SetPanelEvent('onmouseover', () => { this.hoverBoxart.SetImage(this.campaignEntries[i].info.boxart) });
 
 			this.campaignEntries.push(new CampaignEntry(i, p, this.fakeCampaigns[i]));
 			this.campaignEntries[i].update();

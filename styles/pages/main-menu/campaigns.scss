@@ -5,10 +5,21 @@
 .campaigns {
 	width: 100%;
 	height: 100%;
-	flow-children: down;
+	flow-children: right;
+
+	&__left {
+		width: 50%;
+		height: 100%;
+		flow-children: down;
+	}
+
+	&__right {
+		width: 50%;
+		height: 100%;
+	}
 
 	&__list {
-		width: 50%;
+		width: 100%;
 		height: 100%;
 		//padding-right: 15px;
 		overflow: squish scroll;
@@ -16,7 +27,7 @@
 	}
 
 	&__action-bar {
-		width: 50%;
+		width: 100%;
 		flow-children: right;
 
 		//padding-right: 15px;
@@ -47,17 +58,43 @@
 				background-color: $button-background-hover;
 			}
 		}
+
+		&__textentry {
+			text-overflow: clip;
+			white-space: nowrap;
+			color: $bright-color;
+			height: fit-children;
+			border: $menu-pane-border;
+			background-color: $base-950;
+
+			#PlaceholderText {
+				color: rgba($bright-color, 0.25);
+			}
+
+			&:focus {
+				background-color: $base-950;
+				color: $bright-color;
+			}
+
+			&:hover {
+				background-color: $base-950;
+				color: $bright-color;
+			}
+		}
 	}
 
 	&__entry {
 		width: 100%;
-		height: 198px;
+		height: 192px;
 
 		background-color: $base-950;
 		border: $menu-pane-border;
-		margin-bottom: 10px;
 
 		$this: &;
+
+		&__spaced {
+			margin-bottom: 10px;
+		}
 
 		&:hover {
 			#{$this}__inner {
@@ -109,26 +146,98 @@
 				margin: 10px;
 			}
 
+			&__status {
+				height: 48px;
+				width: 48px;
+				padding: 5px;
+				border: $menu-pane-border;
+				border-radius: 5px;
+				background-color: $base-950;
+				vertical-align: bottom;
+				horizontal-align: right;
+				margin: 10px;
+			}
+
 			&__title {
 				@include mixin.font-styles($use-header: true);
-				font-size: 22px;
+				font-size: 20px;
 				text-shadow: 2px 2px 4px 2 $base-950;
 			}
 
 			&__author {
-				font-size: 14px;
+				font-size: 13px;
 				letter-spacing: 1px;
 				text-shadow: 1px 1px 4px 2 $base-950;
 			}
 
 			&__desc {
 				margin-top: 10px;
-				font-size: 16px;
+				font-size: 15px;
 				letter-spacing: 1px;
 				color: $base-200;
 				max-height: 110px;
 				text-shadow: 1px 1px 4px 2 $base-950;
 			}
+		}
+	}
+
+	&__boxart {
+		&__bg {
+			width: 500px;
+			horizontal-align: center;
+			vertical-align: center;
+			background-color: $base-950;
+			border: $menu-pane-border;
+			flow-children: down;
+		}
+
+		&__image {
+			min-width: 498px;
+			min-height: 748px;
+			width: 100%;
+			height: width-percentage(1);
+			border-bottom: $menu-pane-border;
+		}
+
+		&__detail {
+
+			&__text {
+				vertical-align: center;
+				letter-spacing: 1px;
+				font-weight: bold;
+				font-size: 20px;
+				transform: translateY(-3px);
+				max-height: 25px;
+			}
+		}
+
+		&__horiz {
+			margin: 15px;
+			width: 100%;
+			flow-children: right;
+		}
+
+		&__status {
+			height: 48px;
+			width: 48px;
+			padding: 5px;
+			border: $menu-pane-border;
+			border-radius: 5px;
+			background-color: $base-950;
+			vertical-align: center;
+			horizontal-align: right;
+			margin-right: 10px;
+		}
+
+		&__text {
+			letter-spacing: 1px;
+			font-size: 16px;
+			color: $base-200;
+			max-height: 22px;
+		}
+
+		&__spacer {
+			margin-bottom: 10px;
 		}
 	}
 }
