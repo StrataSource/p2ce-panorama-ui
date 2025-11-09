@@ -290,7 +290,7 @@ class MainMenu {
 		this.panels.image.visible = !useVideo;
 		this.panels.image.SetReadyForDisplay(!useVideo);
 
-		let chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
+		const chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
 		let act = 0;
 
 		if (chapter == 1) act = 1;
@@ -298,14 +298,11 @@ class MainMenu {
 		else if ((chapter >= 6) & (chapter <= 7)) act = 3;
 		else if ((chapter >= 8) & (chapter <= 9)) act = 4;
 		else if (chapter >= 10) act = 5;
-		else act = act; // Bad unlockedchapters. Do nothing and resort to failsafe.
+		else act = 1; // Bad unlockedchapters. Resort to act 1.
 
 		let movie = 'file://{media}/menu_act0' + act + '.webm';
 		if (this.inSpace) {
 			movie = 'file://{media}/sp_a5_credits.webm';
-		} else if (act <= 0) {
-			// This should only ever fall back if we have a bad unlockedchapters value!
-			movie = 'file://{media}/insert_disk.webm';
 		}
 
 		if (useVideo) {
