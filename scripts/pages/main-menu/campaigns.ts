@@ -312,11 +312,12 @@ class CampaignLoadGameTab {
 class CampaignStartPage {
 	static campaignListerContainer = $<Panel>('#CampaignListerContainer');
 	static campaignLister = $<Panel>('#CampaignLister');
-	static campaignStartPage = $<Panel>('#CampaignStartPage');
+	static campaignStartPage = $<Panel>('#CampaignStartPage')!;
 	static campaignLogo = $<Image>('#CampaignLogo');
 	static campaignLoadLatestBtn = $<Button>('#CampaignLoadLatestBtn');
 	static campaignAllSavesBtn = $<Button>('#CampaignAllSavesBtn');
 	static campaignBg = $<Image>('#CampaignBackground');
+	static campaignControls = $<Panel>('#CampaignControls')!;
 
 	static {
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
@@ -326,28 +327,34 @@ class CampaignStartPage {
 	static onLayoutReloaded() {}
 
 	static init() {
-		this.hide();
+		this.campaignStartPage.visible = false;
+
+		$.RegisterEventHandler('PropertyTransitionEnd', this.campaignStartPage, (panelName, propertyName) => {
+			if (propertyName === 'opacity') {
+				if (this.campaignStartPage.IsTransparent()) {
+					this.campaignStartPage.visible = false;
+				}
+			}
+		});
 	}
 
 	static show() {
-		if (!this.campaignStartPage) return;
-
 		if (this.campaignBg && CampaignMgr.currentCampaign) {
 			this.campaignBg.SetImage(CampaignMgr.currentCampaign.background);
 		}
 		this.campaignStartPage.visible = true;
+		this.campaignStartPage.AddClass('selected-campaign__anim');
+		this.campaignStartPage.AddClass('selected-campaign__show');
 	}
 
 	static hide() {
-		if (!this.campaignStartPage) return;
-
-		this.campaignStartPage.visible = false;
-
 		if (this.campaignListerContainer) this.campaignListerContainer.visible = false;
+		this.campaignStartPage.RemoveClass('selected-campaign__show');
+		CampaignSelector.playReturnAnim();
 	}
 
 	static setActive() {
-		if (!this.campaignStartPage || !this.campaignLogo) return;
+		if (!this.campaignLogo) return;
 
 		if (CampaignMgr.currentCampaign && this.campaignLogo) {
 			this.campaignLogo.SetImage(CampaignMgr.currentCampaign.logo);
@@ -436,6 +443,7 @@ class CampaignSelector {
 	static hoverContainer = $<Panel>('#HoveredCampaignBorder')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
 	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
+	static selectorPage = $<Panel>('#CampaignSelector')!;
 	static campaignEntries: CampaignEntry[] = [];
 	static hoveredCampaign: FakeCampaign | null = null;
 
@@ -535,6 +543,14 @@ class CampaignSelector {
 	static hideBoxart() {
 		this.hoverContainer.RemoveClass('campaigns__boxart__border__show');
 	}
+
+	static playAwayAnim() {
+		this.selectorPage.AddClass('campaigns__hide');
+	}
+
+	static playReturnAnim() {
+		this.selectorPage.RemoveClass('campaigns__hide');
+	}
 }
 
 class CampaignMgr {
@@ -560,6 +576,7 @@ class CampaignMgr {
 	static campaignSelected(info: FakeCampaign) {
 		this.currentCampaign = info;
 
+		CampaignSelector.playAwayAnim();
 		CampaignStartPage.setActive();
 	}
 }
