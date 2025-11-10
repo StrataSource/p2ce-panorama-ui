@@ -188,8 +188,8 @@ class SaveEntry {
 }
 
 class CampaignNewGameTab {
-	static campaignLister = $<Panel>('#CampaignLister');
-	static tabLabel = $<Label>('#CampaignListerModeLabel');
+	static campaignLister = $<Panel>('#CampaignLister')!;
+	static tabLabel = $<Label>('#CampaignListerModeLabel')!;
 	static chapterEntries: ChapterEntry[] = [];
 
 	static setActive() {
@@ -206,7 +206,7 @@ class CampaignNewGameTab {
 	static show() {
 		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
 		if (campaignListerContainer) campaignListerContainer.visible = true;
-		if (this.tabLabel) this.tabLabel.text = tagDevString('New Game');
+		this.tabLabel.text = tagDevString('New Game');
 	}
 
 	static purgeChapterList() {
@@ -215,7 +215,6 @@ class CampaignNewGameTab {
 
 	static populateChapters() {
 		// TODO: Actual chapters from CampaignAPI
-		if (!this.campaignLister) return;
 
 		const chapters: FakeChapter[] = [
 			{ title: 'The Courtesy Call', map: 'sp_a1_intro1' },
@@ -243,8 +242,8 @@ class CampaignNewGameTab {
 }
 
 class CampaignLoadGameTab {
-	static campaignLister = $<Panel>('#CampaignLister');
-	static tabLabel = $<Label>('#CampaignListerModeLabel');
+	static campaignLister = $<Panel>('#CampaignLister')!;
+	static tabLabel = $<Label>('#CampaignListerModeLabel')!;
 	static saveEntries: SaveEntry[] = [];
 
 	static setActive() {
@@ -261,7 +260,7 @@ class CampaignLoadGameTab {
 	static show() {
 		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
 		if (campaignListerContainer) campaignListerContainer.visible = true;
-		if (this.tabLabel) this.tabLabel.text = tagDevString('Load Game');
+		this.tabLabel.text = tagDevString('Load Game');
 	}
 
 	static purgeSaveList() {
@@ -271,8 +270,6 @@ class CampaignLoadGameTab {
 	static populateSaves() {
 		// TODO: Saves from campaigns
 		// for now this will just list all saves
-
-		if (!this.campaignLister) return;
 
 		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
 		for (let i = 0; i < saves.length; ++i) {
@@ -310,13 +307,13 @@ class CampaignLoadGameTab {
 }
 
 class CampaignStartPage {
-	static campaignListerContainer = $<Panel>('#CampaignListerContainer');
-	static campaignLister = $<Panel>('#CampaignLister');
+	static campaignListerContainer = $<Panel>('#CampaignListerContainer')!;
+	static campaignLister = $<Panel>('#CampaignLister')!;
 	static campaignStartPage = $<Panel>('#CampaignStartPage')!;
-	static campaignLogo = $<Image>('#CampaignLogo');
-	static campaignLoadLatestBtn = $<Button>('#CampaignLoadLatestBtn');
-	static campaignAllSavesBtn = $<Button>('#CampaignAllSavesBtn');
-	static campaignBg = $<Image>('#CampaignBackground');
+	static campaignLogo = $<Image>('#CampaignLogo')!;
+	static campaignLoadLatestBtn = $<Button>('#CampaignLoadLatestBtn')!;
+	static campaignAllSavesBtn = $<Button>('#CampaignAllSavesBtn')!;
+	static campaignBg = $<Image>('#CampaignBackground')!;
 	static campaignControls = $<Panel>('#CampaignControls')!;
 
 	static {
@@ -339,7 +336,7 @@ class CampaignStartPage {
 	}
 
 	static show() {
-		if (this.campaignBg && CampaignMgr.currentCampaign) {
+		if (CampaignMgr.currentCampaign) {
 			this.campaignBg.SetImage(CampaignMgr.currentCampaign.background);
 		}
 		this.campaignStartPage.visible = true;
@@ -348,15 +345,13 @@ class CampaignStartPage {
 	}
 
 	static hide() {
-		if (this.campaignListerContainer) this.campaignListerContainer.visible = false;
+		this.campaignListerContainer.visible = false;
 		this.campaignStartPage.RemoveClass('selected-campaign__show');
 		CampaignSelector.playReturnAnim();
 	}
 
 	static setActive() {
-		if (!this.campaignLogo) return;
-
-		if (CampaignMgr.currentCampaign && this.campaignLogo) {
+		if (CampaignMgr.currentCampaign) {
 			this.campaignLogo.SetImage(CampaignMgr.currentCampaign.logo);
 		}
 
@@ -366,13 +361,12 @@ class CampaignStartPage {
 	static onCampaignScreenShown(tabid: string) {
 		if (tabid !== 'Campaigns') return;
 
-		if (this.campaignListerContainer) this.campaignListerContainer.visible = false;
+		this.campaignListerContainer.visible = false;
 
 		const hasSaves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time).length > 0;
 
-		if (this.campaignAllSavesBtn) this.campaignAllSavesBtn.enabled = hasSaves;
-
-		if (this.campaignLoadLatestBtn) this.campaignLoadLatestBtn.enabled = hasSaves;
+		this.campaignAllSavesBtn.enabled = hasSaves;
+		this.campaignLoadLatestBtn.enabled = hasSaves;
 
 		// only change campaigns when not in game
 		const returnBtn = $('#CampaignStartReturn');
@@ -380,10 +374,8 @@ class CampaignStartPage {
 	}
 
 	static closeLister() {
-		if (this.campaignListerContainer && this.campaignLister) {
-			this.campaignLister.ScrollToTop();
-			this.campaignListerContainer.visible = false;
-		}
+		this.campaignLister.ScrollToTop();
+		this.campaignListerContainer.visible = false;
 	}
 }
 
@@ -439,7 +431,7 @@ class CampaignSelector {
 			boxart: 'file://{images}/menu/portal/boxart.png'
 		}
 	];
-	static campaignList = $<Panel>('#CampaignContainer');
+	static campaignList = $<Panel>('#CampaignContainer')!;
 	static hoverContainer = $<Panel>('#HoveredCampaignBorder')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
 	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
@@ -455,7 +447,7 @@ class CampaignSelector {
 
 	static layoutReload() {
 		this.purgeCampaignList();
-		this.campaignList?.RemoveAndDeleteChildren();
+		this.campaignList.RemoveAndDeleteChildren();
 		this.populateCampaigns();
 	}
 
@@ -477,7 +469,6 @@ class CampaignSelector {
 	}
 
 	static populateCampaigns() {
-		if (!this.campaignList) return;
 		for (let i = 0; i < this.fakeCampaigns.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
 			p.LoadLayoutSnippet('CampaignEntrySnippet');
