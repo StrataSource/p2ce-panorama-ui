@@ -62,7 +62,7 @@
 	}
 
 	50% {
-		blur: gaussian(4, 0.5, 3);
+		blur: gaussian(0.5, 10, 3);
 	}
 
 	100% {

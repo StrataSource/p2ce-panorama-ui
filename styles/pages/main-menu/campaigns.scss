@@ -182,13 +182,28 @@
 	}
 
 	&__boxart {
-		&__bg {
+		&__border {
 			width: 500px;
 			horizontal-align: center;
 			vertical-align: center;
-			background-color: $base-950;
 			border: $menu-pane-border;
+		}
+
+		&__bg {
+			width: 100%;
+			background-color: $base-950;
 			flow-children: down;
+
+			&__hidden {
+				opacity: 0;
+			}
+
+			&__switch {
+				animation-name: BlurFadeInOut;
+				animation-duration: 0.2s;
+				animation-timing-function: ease-out;
+				animation-iteration-count: 1;
+			}
 		}
 
 		&__image {
