@@ -187,16 +187,24 @@
 			horizontal-align: center;
 			vertical-align: center;
 			border: $menu-pane-border;
+			background-color: $base-950;
+
+			opacity: 0;
+			transform: translateX(0px);
+
+			&__anim {
+				transition: opacity 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s;
+			}
+
+			&__show {
+				opacity: 1;
+				transform: translateX(-20px);
+			}
 		}
 
 		&__bg {
 			width: 100%;
-			background-color: $base-950;
 			flow-children: down;
-
-			&__hidden {
-				opacity: 0;
-			}
 
 			&__switch {
 				animation-name: BlurFadeInOut;
@@ -239,7 +247,6 @@
 			border: $menu-pane-border;
 			border-radius: 5px;
 			background-color: $base-950;
-			vertical-align: center;
 			horizontal-align: right;
 			margin-right: 10px;
 		}
@@ -249,6 +256,12 @@
 			font-size: 16px;
 			color: $base-200;
 			max-height: 22px;
+
+			&__small {
+				letter-spacing: 1px;
+				font-size: 14px;
+				color: $base-300;
+			}
 		}
 
 		&__spacer {

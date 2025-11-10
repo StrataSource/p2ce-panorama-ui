@@ -433,6 +433,7 @@ class CampaignSelector {
 		}
 	];
 	static campaignList = $<Panel>('#CampaignContainer');
+	static hoverContainer = $<Panel>('#HoveredCampaignBorder')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
 	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
 	static campaignEntries: CampaignEntry[] = [];
@@ -440,12 +441,27 @@ class CampaignSelector {
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuTabHidden', this.onCampaignScreenHidden.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
 	}
 
 	static layoutReload() {
 		this.purgeCampaignList();
 		this.campaignList?.RemoveAndDeleteChildren();
 		this.populateCampaigns();
+	}
+
+	static onCampaignScreenHidden(tabid: string) {
+		if (tabid !== 'Campaigns') return;
+
+		this.hoverContainer.RemoveClass('campaigns__boxart__border__anim');
+		this.hoverContainer.RemoveClass('campaigns__boxart__border__show');
+	}
+
+	static onCampaignScreenShown(tabid: string) {
+		if (tabid !== 'Campaigns') return;
+
+		this.hoverContainer.AddClass('campaigns__boxart__border__anim');
 	}
 
 	static init() {
@@ -471,20 +487,23 @@ class CampaignSelector {
 	}
 
 	static onCampaignHovered(info: FakeCampaign) {
-		if (info === this.hoveredCampaign) return;
-		this.hoveredCampaign = info;
-
 		let switchDelay = 0;
 
-		if (this.hoverInfo.HasClass('campaigns__boxart__bg__hidden')) {
-			this.hoverInfo.RemoveClass('campaigns__boxart__bg__hidden');
+		if (!this.hoverContainer.HasClass('campaigns__boxart__border__show')) {
+			this.hoverContainer.AddClass('campaigns__boxart__border__show');
+
+			if (info === this.hoveredCampaign) return;
 		} else {
+			if (info === this.hoveredCampaign) return;
+			
 			switchDelay = 0.1;
 
 			this.hoverInfo.AddClass('campaigns__boxart__bg__switch');
 			const kfs = this.hoverInfo.CreateCopyOfCSSKeyframes('BlurFadeInOut');
 			this.hoverInfo.UpdateCurrentAnimationKeyframes(kfs);
 		}
+
+		this.hoveredCampaign = info;
 
 		$.Schedule(switchDelay, () => {
 			this.hoverBoxart.SetImage(info.boxart);
@@ -511,6 +530,10 @@ class CampaignSelector {
 
 	static openWorkshop() {
 		SteamOverlayAPI.OpenURL('https://steamcommunity.com/app/440000/workshop/');
+	}
+
+	static hideBoxart() {
+		this.hoverContainer.RemoveClass('campaigns__boxart__border__show');
 	}
 }
 

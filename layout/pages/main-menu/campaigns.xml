@@ -145,20 +145,20 @@
 				</Panel>
 				<Panel class="campaigns__action-bar">
 					<TextEntry class="textentry campaigns__action-bar__textentry fill-width mr-2" placeholder="Search..." />
-					<DropDown class="dropdown" menuclass="dropdown-menu">
+					<DropDown id="CampaignSortMode" class="dropdown" menuclass="dropdown-menu">
 						<!-- <Panel class="DropDownIcon"/> -->
-						<Label text="Recently Added" value="1" />
-						<Label text="Alphabetical" value="2" />
-						<Label text="Last Played" value="3" />
-						<Label text="Lowest Completion" value="4" />
-						<Label text="Campaign Source" value="5" />
+						<Label text="Recently Added" id="CampaignSortMode1" value="1" />
+						<Label text="Alphabetical" id="CampaignSortMode2" value="2" />
+						<Label text="Last Played" id="CampaignSortMode3" value="3" />
+						<Label text="Completion" id="CampaignSortMode4" value="4" />
+						<Label text="Campaign Source" id="CampaignSortMode5" value="5" />
 					</DropDown>
 				</Panel>
 				<!-- Campaign list -->
-				<Panel id="CampaignContainer" class="campaigns__list" />
+				<Panel id="CampaignContainer" class="campaigns__list" onmouseout="CampaignSelector.hideBoxart()" />
 			</Panel>
 			<Panel class="campaigns__right">
-				<Panel class="campaigns__boxart__border">
+				<Panel id="HoveredCampaignBorder" class="campaigns__boxart__border">
 					<Panel id="HoveredCampaignInfo" class="campaigns__boxart__bg">
 						<Image
 							id="HoveredCampaignBoxart"
@@ -181,6 +181,9 @@
 								<Label class="campaigns__boxart__detail__text" text="[HC] 100% COMPLETION" />
 								<Label class="campaigns__boxart__text" text="[HC] Achievements: 29/29" />
 								<Label class="campaigns__boxart__text" text="[HC] Chapters: 10/10" />
+
+								<Label class="campaigns__boxart__text__small mt-2" text="[HC] Last Played: 3 days ago" />
+								<Label class="campaigns__boxart__text__small" text="[HC] Added on: 12 July 2030" />
 							</Panel>
 						</Panel>
 					</Panel>
