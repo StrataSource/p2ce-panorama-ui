@@ -158,28 +158,30 @@
 				<Panel id="CampaignContainer" class="campaigns__list" />
 			</Panel>
 			<Panel class="campaigns__right">
-				<Panel class="campaigns__boxart__bg">
-					<Image
-						id="HoveredCampaignBoxart"
-						class="campaigns__boxart__image"
-						src="file://{images}/menu/portal2/boxart.png"
-						scaling="stretch-to-fit-preserve-aspect"
-						texturewidth="600"
-						textureheight="900"
-					/>
-					<Panel class="campaigns__boxart__horiz">
+				<Panel class="campaigns__boxart__border">
+					<Panel id="HoveredCampaignInfo" class="campaigns__boxart__bg">
 						<Image
-							id="HoveredCampaignStatusImage"
-							class="campaigns__boxart__status"
-							src="file://{images}/crown.svg"
+							id="HoveredCampaignBoxart"
+							class="campaigns__boxart__image"
+							src="file://{images}/menu/portal2/boxart.png"
 							scaling="stretch-to-fit-preserve-aspect"
-							textureheight="128"
-							texturewidth="128"
+							texturewidth="600"
+							textureheight="900"
 						/>
-						<Panel class="flow-down vertical-align-center">
-							<Label class="campaigns__boxart__detail__text" text="[HC] 100% COMPLETION" />
-							<Label class="campaigns__boxart__text" text="[HC] Achievements: 29/29" />
-							<Label class="campaigns__boxart__text" text="[HC] Chapters: 10/10" />
+						<Panel class="campaigns__boxart__horiz">
+							<Image
+								id="HoveredCampaignStatusImage"
+								class="campaigns__boxart__status"
+								src="file://{images}/crown.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								textureheight="128"
+								texturewidth="128"
+							/>
+							<Panel class="flow-down vertical-align-center">
+								<Label class="campaigns__boxart__detail__text" text="[HC] 100% COMPLETION" />
+								<Label class="campaigns__boxart__text" text="[HC] Achievements: 29/29" />
+								<Label class="campaigns__boxart__text" text="[HC] Chapters: 10/10" />
+							</Panel>
 						</Panel>
 					</Panel>
 				</Panel>

@@ -433,8 +433,10 @@ class CampaignSelector {
 		}
 	];
 	static campaignList = $<Panel>('#CampaignContainer');
+	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
 	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
 	static campaignEntries: CampaignEntry[] = [];
+	static hoveredCampaign: FakeCampaign | null = null;
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
@@ -460,12 +462,33 @@ class CampaignSelector {
 				p.AddClass('campaigns__entry__spaced');
 			}
 
-			p.SetPanelEvent('onmouseover', () => { this.hoverBoxart.SetImage(this.campaignEntries[i].info.boxart) });
+			p.SetPanelEvent('onmouseover', () => { CampaignSelector.onCampaignHovered(this.fakeCampaigns[i]) });
 
 			this.campaignEntries.push(new CampaignEntry(i, p, this.fakeCampaigns[i]));
 			this.campaignEntries[i].update();
 		}
 		stripDevTagsFromLabels(this.campaignList);
+	}
+
+	static onCampaignHovered(info: FakeCampaign) {
+		if (info === this.hoveredCampaign) return;
+		this.hoveredCampaign = info;
+
+		let switchDelay = 0;
+
+		if (this.hoverInfo.HasClass('campaigns__boxart__bg__hidden')) {
+			this.hoverInfo.RemoveClass('campaigns__boxart__bg__hidden');
+		} else {
+			switchDelay = 0.1;
+
+			this.hoverInfo.AddClass('campaigns__boxart__bg__switch');
+			const kfs = this.hoverInfo.CreateCopyOfCSSKeyframes('BlurFadeInOut');
+			this.hoverInfo.UpdateCurrentAnimationKeyframes(kfs);
+		}
+
+		$.Schedule(switchDelay, () => {
+			this.hoverBoxart.SetImage(info.boxart);
+		});
 	}
 
 	static purgeCampaignList() {
