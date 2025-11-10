@@ -405,7 +405,7 @@ class CampaignSelector {
 			btnBg: 'file://{images}/menu/portal2/campaign_btn_bg.jpg',
 			ico: 'file://{images}/menu/portal2/logo.png',
 			logo: 'file://{images}/menu/portal2/full_logo.png',
-			boxart: 'file://{images}/menu/portal2/boxart.png'
+			boxart: 'file://{images}/menu/portal2/sp_boxart.png'
 		},
 		{
 			title: '[HC] Portal 2 (Co-Op)',
@@ -416,7 +416,7 @@ class CampaignSelector {
 			btnBg: 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
 			ico: 'file://{images}/menu/portal2/logo.png',
 			logo: 'file://{images}/menu/portal2/full_logo.png',
-			boxart: 'file://{images}/menu/portal2/boxart.png'
+			boxart: 'file://{images}/menu/portal2/mp_boxart.png'
 		},
 		{
 			title: '[HC] Portal',
