@@ -432,7 +432,7 @@ class CampaignSelector {
 		}
 	];
 	static campaignList = $<Panel>('#CampaignContainer')!;
-	static hoverContainer = $<Panel>('#HoveredCampaignBorder')!;
+	static hoverContainer = $<Panel>('#HoveredCampaignContainer')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
 	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
 	static selectorPage = $<Panel>('#CampaignSelector')!;
@@ -454,14 +454,14 @@ class CampaignSelector {
 	static onCampaignScreenHidden(tabid: string) {
 		if (tabid !== 'Campaigns') return;
 
-		this.hoverContainer.RemoveClass('campaigns__boxart__border__anim');
-		this.hoverContainer.RemoveClass('campaigns__boxart__border__show');
+		this.hoverContainer.RemoveClass('campaigns__boxart__container__anim');
+		this.hoverContainer.RemoveClass('campaigns__boxart__container__show');
 	}
 
 	static onCampaignScreenShown(tabid: string) {
 		if (tabid !== 'Campaigns') return;
 
-		this.hoverContainer.AddClass('campaigns__boxart__border__anim');
+		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 	}
 
 	static init() {
@@ -488,8 +488,8 @@ class CampaignSelector {
 	static onCampaignHovered(info: FakeCampaign) {
 		let switchDelay = 0;
 
-		if (!this.hoverContainer.HasClass('campaigns__boxart__border__show')) {
-			this.hoverContainer.AddClass('campaigns__boxart__border__show');
+		if (!this.hoverContainer.HasClass('campaigns__boxart__container__show')) {
+			this.hoverContainer.AddClass('campaigns__boxart__container__show');
 
 			if (info === this.hoveredCampaign) return;
 		} else {
@@ -532,7 +532,7 @@ class CampaignSelector {
 	}
 
 	static hideBoxart() {
-		this.hoverContainer.RemoveClass('campaigns__boxart__border__show');
+		this.hoverContainer.RemoveClass('campaigns__boxart__container__show');
 	}
 
 	static playAwayAnim() {
