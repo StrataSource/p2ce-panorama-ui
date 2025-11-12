@@ -9,13 +9,13 @@
 
 	opacity: 1;
 	blur: gaussian(0, 0, 0);
-	transform: scaleX(1) scaleY(1);
+	transform: translateX(0px);
 	transition: opacity 0.25s ease-in-out 0s, blur 0.25s ease-in-out 0s, transform 0.25s ease-in-out 0s;
 
 	&__hide {
 		opacity: 0;
 		blur: gaussian(10, 10, 3);
-		transform: scaleX(0.9) scaleY(0.9);
+		transform: translateX(20px);
 	}
 
 	&__left {
@@ -193,24 +193,33 @@
 	}
 
 	&__boxart {
-		&__border {
+		// this is a nasty workaround to borders disappearing while the panel is
+		// animated by specific properties, such as opacity. the animation here
+		// is handled by a container panel while the actual style is a child of this
+		// panel. yes, the layout is horribly nested but w/e this works for the time being.
+		&__container {
 			width: 500px;
 			horizontal-align: center;
 			vertical-align: center;
-			border: $menu-pane-border;
-			background-color: $base-950;
 
 			opacity: 0;
 			transform: translateX(0px);
 
 			&__anim {
-				transition: opacity 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s;
+				transition: opacity 0.2s ease-in-out 0s, transform 0.3s ease-in-out 0s;
 			}
 
 			&__show {
 				opacity: 1;
 				transform: translateX(-20px);
 			}
+		}
+
+		// ditto for __bg__switch (i hate myself)
+		&__border {
+			width: 100%;
+			border: $menu-pane-border;
+			background-color: $base-950;
 		}
 
 		&__bg {
@@ -289,30 +298,31 @@
 	margin: -30px;
 
 	opacity: 0;
+	blur: gaussian(10, 10, 3);
 
 	$root: &;
 
 	&__anim {
-		transition: opacity 0.2s ease-in-out 0s;
+		transition: opacity 0.2s ease-in-out 0s, blur 0.2s ease-in-out 0s;
 
 		#{$root}__background {
-			transition: transform 0.2s ease-in-out 0s, blur 0.2s ease-in-out 0s;
+			transition: transform 0.25s ease-in-out 0s;
 		}
 
-		#{$root}__controls {
+		#{$root}__container {
 			transition: transform 0.2s ease-in-out 0s;
 		}
 	}
 
 	&__show {
 		opacity: 1;
+		blur: gaussian(0, 0, 0);
 
 		#{$root}__background {
 			transform: scaleX(1.0) scaleY(1.0);
-			blur: gaussian(0, 0, 0);
 		}
 
-		#{$root}__controls {
+		#{$root}__container {
 			transform: translateX(0px);
 		}
 	}
@@ -321,6 +331,8 @@
 		width: 100%;
 		height: 100%;
 		margin: 80px;
+
+		transform: translateX(-25px);
 	}
 
 	&__controls {
@@ -330,8 +342,6 @@
 		margin-right: 0px;
 
 		flow-children: down;
-
-		transform: translateX(-25px);
 
 		&__inner {
 			width: 100%;
@@ -434,7 +444,6 @@
 		width: 100%;
 		height: 100%;
 		transform: scaleX(1.05) scaleY(1.05);
-		blur: gaussian(10, 10, 3);
 	}
 
 	&__logo {
