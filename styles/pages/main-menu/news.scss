@@ -115,7 +115,7 @@
 				}
 			}
 
-			&:hover {
+			&:hover:not(:parentdisabled) {
 				border-color: $primary-color;
 
 				#{$this}__container {

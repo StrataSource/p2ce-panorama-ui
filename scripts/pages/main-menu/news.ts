@@ -45,20 +45,34 @@ class NewsReel {
 		while (this.entries.length > 0) this.entries.pop()?.panel.DeleteAsync(0);
 
 		this.container.visible = false;
+		this.pips.visible = false;
 
-		$.AsyncWebRequest(this.NEWS_URL, {
-			type: 'GET',
-			complete: this.onWebResponse.bind(this)
-		});
+		try {
+			$.AsyncWebRequest(this.NEWS_URL, {
+				type: 'GET',
+				complete: this.onNewsRequestResponse.bind(this)
+			});
+		} catch (error) {
+			$.Warning(`AsyncWebRequest for news reel failed: ${error}`);
+			this.onNewsRequestFailed();
+		}
 	}
 
 	static onMainMenuClosed() {
 		this.stopAutoAdvanceAnim();
 	}
 
-	static onWebResponse(data) {
+	static onNewsRequestFailed() {
+		this.header.text = $.Localize('#MainMenu_News_Unavailable_Title');
+		this.desc.text = $.Localize('#MainMenu_News_Unavailable_Description');
+
+		this.container.enabled = false;
+		this.container.visible = true;
+	}
+
+	static onNewsRequestResponse(data) {
 		if (data.statusText !== 'success') {
-			$.Warning('Failed to retrieve news!');
+			this.onNewsRequestFailed();
 			return;
 		}
 
@@ -90,6 +104,7 @@ class NewsReel {
 		}
 
 		this.container.visible = true;
+		this.pips.visible = true;
 		$.DispatchEvent('Activated', this.entries[0].panel, PanelEventSource.MOUSE);
 	}
 
