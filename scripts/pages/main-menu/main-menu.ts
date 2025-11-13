@@ -355,8 +355,6 @@ class MainMenu {
 		if (btn) $.DispatchEvent('Activated', btn, PanelEventSource.MOUSE);
 	}
 
-	static onFeaturedFlyoutPressed() {}
-
 	/**
 	 * Handles quit button getting pressed.
 	 */
