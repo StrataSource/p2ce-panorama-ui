@@ -17,9 +17,10 @@ class MainMenu {
 		pausedLoadLastSaveButton: $<Button>('#PausedLoadLastSaveButton')!,
 		pausedViewSavesButton: $<Button>('#PausedViewSavesButton')!,
 		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton')!,
-		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
-		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
-		pausedSaveImage: $<Image>('#PausedSaveImage')
+		mainMenuSaveImage: $<Image>('#MainMenuSaveImage')!,
+		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel')!,
+		pausedSaveImage: $<Image>('#PausedSaveImage')!,
+		pausedLatestSaveTime: $<Label>('#PausedLatestSaveTimeLabel')!
 	};
 
 	static activeTab = '';
@@ -156,10 +157,15 @@ class MainMenu {
 			const thumbValid = save.thumb.length > 0;
 			const savePath = `file://${save.thumb}`;
 
-			if (this.panels.mainMenuSaveImage && thumbValid) this.panels.mainMenuSaveImage.SetImage(savePath);
-			if (this.panels.pausedSaveImage && thumbValid) this.panels.pausedSaveImage.SetImage(savePath);
+			if (thumbValid) {
+				this.panels.mainMenuSaveImage.SetImage(savePath);
+				this.panels.pausedSaveImage.SetImage(savePath);
+			}
 
-			if (this.panels.mainMenuSaveSubheadingLabel) this.panels.mainMenuSaveSubheadingLabel.text = save.name;
+			const date = new Date(save.time * 1000);
+			const dateStr = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+			this.panels.mainMenuSaveSubheadingLabel.text = dateStr;
+			this.panels.pausedLatestSaveTime.text = dateStr;
 		}
 	}
 
