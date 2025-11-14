@@ -14,9 +14,9 @@ class MainMenu {
 		topButtons: $('#MainMenuTopButtons'),
 		homeButton: $<RadioButton>('#HomeButton'),
 		addonsButton: $<RadioButton>('#AddonsButton'),
-		pausedLoadLastSaveButton: $<Button>('#PausedLoadLastSaveButton'),
-		mainMenuViewSavesButton: $<Button>('#MainMenuViewSavesButton'),
-		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton'),
+		pausedLoadLastSaveButton: $<Button>('#PausedLoadLastSaveButton')!,
+		pausedViewSavesButton: $<Button>('#PausedViewSavesButton')!,
+		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton')!,
 		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
 		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
 		pausedSaveImage: $<Image>('#PausedSaveImage')
@@ -147,11 +147,9 @@ class MainMenu {
 		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
 		const hasSaves = saves.length !== 0;
 
-		if (this.panels.pausedLoadLastSaveButton) this.panels.pausedLoadLastSaveButton.enabled = hasSaves;
-
-		if (this.panels.mainMenuViewSavesButton) this.panels.mainMenuViewSavesButton.enabled = hasSaves;
-
-		if (this.panels.mainMenuLoadLastSaveButton) this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
+		this.panels.pausedLoadLastSaveButton.enabled = hasSaves;
+		this.panels.pausedViewSavesButton.enabled = hasSaves;
+		this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
 
 		if (hasSaves) {
 			const save = saves[0];
@@ -260,6 +258,8 @@ class MainMenu {
 
 		this.panels.homeContent?.RemoveClass('mainmenu__home-container--hidden');
 		this.panels.pauseContent?.RemoveClass('mainmenu__home-container--hidden');
+
+		this.updateHomeDetails();
 
 		$.DispatchEvent('HideContentPanel');
 	}
@@ -445,12 +445,16 @@ class MainMenu {
 	}
 
 	static openSaveCampaign() {
+		// TODO: open the campaign derived from the current map
+		// default to fake portal 2 campaign
 		$.persistentStorage.setItem('campaigns.open', 1);
 		$.persistentStorage.setItem('campaigns.showTab', 'CampaignSaveBtn');
 		this.selectNavButton('PlayButton');
 	}
 
 	static openLoadCampaign() {
+		// TODO: open the campaign derived from the current map
+		// default to fake portal 2 campaign
 		$.persistentStorage.setItem('campaigns.open', 1);
 		$.persistentStorage.setItem('campaigns.showTab', 'CampaignAllSavesBtn');
 		this.selectNavButton('PlayButton');
