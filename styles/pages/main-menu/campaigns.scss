@@ -10,7 +10,10 @@
 	opacity: 1;
 	blur: gaussian(0, 0, 0);
 	transform: translateX(0px);
-	transition: opacity 0.25s ease-in-out 0s, blur 0.25s ease-in-out 0s, transform 0.25s ease-in-out 0s;
+	transition:
+		opacity 0.25s ease-in-out 0s,
+		blur 0.25s ease-in-out 0s,
+		transform 0.25s ease-in-out 0s;
 
 	&__hide {
 		opacity: 0;
@@ -206,7 +209,9 @@
 			transform: translateX(0px);
 
 			&__anim {
-				transition: opacity 0.2s ease-in-out 0s, transform 0.3s ease-in-out 0s;
+				transition:
+					opacity 0.2s ease-in-out 0s,
+					transform 0.3s ease-in-out 0s;
 			}
 
 			&__show {
@@ -303,7 +308,9 @@
 	$root: &;
 
 	&__anim {
-		transition: opacity 0.2s ease-in-out 0s, blur 0.2s ease-in-out 0s;
+		transition:
+			opacity 0.2s ease-in-out 0s,
+			blur 0.2s ease-in-out 0s;
 
 		#{$root}__background {
 			transition: transform 0.25s ease-in-out 0s;
@@ -319,7 +326,7 @@
 		blur: gaussian(0, 0, 0);
 
 		#{$root}__background {
-			transform: scaleX(1.0) scaleY(1.0);
+			transform: scaleX(1) scaleY(1);
 		}
 
 		#{$root}__container {
@@ -528,7 +535,7 @@
 		}
 
 		&:hover {
-			background-color: $primary-950;
+			background-color: $button-background-hover;
 		}
 	}
 }
@@ -572,7 +579,7 @@
 		}
 
 		&:hover {
-			background-color: $primary-950;
+			background-color: $button-background-hover;
 		}
 	}
 }

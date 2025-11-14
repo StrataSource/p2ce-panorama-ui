@@ -199,7 +199,7 @@
 									</Panel>
 								</Button>
 								<Panel class="home__spacer__h" />
-								<Button class="home__prompt" onactivate="MainMenu.openLoadCampaign()">
+								<Button id="PausedViewSavesButton" class="home__prompt" onactivate="MainMenu.openLoadCampaign()">
 									<Image
 										src="file://{images}/menu/p2ce/random4.png"
 										scaling="stretch-to-cover-preserve-aspect"
