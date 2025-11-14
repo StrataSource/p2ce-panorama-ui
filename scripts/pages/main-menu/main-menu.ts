@@ -19,15 +19,7 @@ class MainMenu {
 		mainMenuLoadLastSaveButton: $<Button>('#MainMenuLoadLastSaveButton'),
 		mainMenuSaveImage: $<Image>('#MainMenuSaveImage'),
 		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel'),
-		pausedSaveImage: $<Image>('#PausedSaveImage'),
-
-		newsFlyoutBtn: $<Button>('#NewsFlyoutBtn')!,
-		newsFlyoutImage: $<Image>('#NewsFlyoutImage')!,
-		newsFlyoutHeader: $<Label>('#NewsFlyoutHeader')!,
-		newsFlyoutDesc: $<Label>('#NewsFlyoutDescription')!,
-		featuredFlyoutImage: $<Image>('#FeaturedFlyoutImage')!,
-		featuredFlyoutHeader: $<Label>('#FeaturedFlyoutHeader')!,
-		featuredFlyoutDesc: $<Label>('#FeaturedFlyoutDescription')!
+		pausedSaveImage: $<Image>('#PausedSaveImage')
 	};
 
 	static activeTab = '';
@@ -38,7 +30,7 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
-		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuBackground.bind(this));
+		$.RegisterForUnhandledEvent('ReloadBackground', this.setMainMenuDetails.bind(this));
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
@@ -56,7 +48,8 @@ class MainMenu {
 		this.panels.movie = $<Movie>('#MainMenuMovie');
 		this.panels.model = $<ModelPanel>('#MainMenuModel');
 
-		this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
+		if (GameInterfaceAPI.GetSettingInt('sv_unlockedchapters') >= 5) this.inSpace = true;
+		else this.inSpace = Math.floor(Math.random() * 100) === 1; // 1% chance of being ejected
 
 		// Assign a random model
 		const models = [
@@ -85,8 +78,7 @@ class MainMenu {
 
 		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
 
-		this.setMainMenuBackground();
-		this.setMainMenuFlyouts();
+		this.setMainMenuDetails();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
@@ -112,7 +104,7 @@ class MainMenu {
 		this.panels.movie = $<Movie>('#MainMenuMovie');
 		this.panels.image = $<Image>('#MainMenuBackground');
 
-		this.setMainMenuBackground();
+		this.setMainMenuDetails();
 		this.onHomeButtonPressed();
 
 		this.updateHomeDetails();
@@ -268,12 +260,14 @@ class MainMenu {
 
 		this.panels.homeContent?.RemoveClass('mainmenu__home-container--hidden');
 		this.panels.pauseContent?.RemoveClass('mainmenu__home-container--hidden');
+
+		$.DispatchEvent('HideContentPanel');
 	}
 
 	/**
-	 * Set the video background based on persistent storage settings
+	 * Set video bg and play menu music
 	 */
-	static setMainMenuBackground() {
+	static setMainMenuDetails() {
 		if (!this.panels.movie?.IsValid() || !this.panels.image?.IsValid()) return;
 
 		let useVideo = $.persistentStorage.getItem('settings.mainMenuMovie');
@@ -312,30 +306,8 @@ class MainMenu {
 			// TODO: account for 4:3 displays
 			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background0' + act + '_widescreen.vtf');
 		}
-	}
 
-	static setMainMenuFlyouts() {
-		const NEWS_URL =
-			'https://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440000&count=1&maxlength=180&format=json';
-		$.AsyncWebRequest(NEWS_URL, {
-			type: 'GET',
-			complete: (data) => {
-				if (data.statusText !== 'success') {
-					this.panels.newsFlyoutHeader.text = $.Localize('#MainMenu_News_Unavailable_Title');
-					this.panels.newsFlyoutDesc.text = $.Localize('#MainMenu_News_Unavailable_Description');
-					return;
-				}
-
-				// using the responseText on its own results in a parsing error
-				const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
-				const news = response['appnews']['newsitems'][0];
-				this.panels.newsFlyoutBtn.SetPanelEvent('onactivate', () => {
-					SteamOverlayAPI.OpenURL(news['url']);
-				});
-				this.panels.newsFlyoutHeader.text = news['title'];
-				this.panels.newsFlyoutDesc.text = news['contents'];
-			}
-		});
+		$.PlaySoundEvent(`UIPanorama.Music.P2.MenuAct${chapter}`);
 	}
 
 	/**
@@ -382,8 +354,6 @@ class MainMenu {
 
 		if (btn) $.DispatchEvent('Activated', btn, PanelEventSource.MOUSE);
 	}
-
-	static onFeaturedFlyoutPressed() {}
 
 	/**
 	 * Handles quit button getting pressed.
@@ -461,6 +431,8 @@ class MainMenu {
 			this.panels.movie?.RemoveClass('mainmenu__fadeout');
 			this.panels.movie?.Play();
 		}
+
+		$.PlaySoundEvent('UIPanorama.Music.StopAll');
 	}
 
 	static onLayoutReloaded() {
