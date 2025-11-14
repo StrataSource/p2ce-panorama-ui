@@ -45,6 +45,30 @@
 			}
 		}
 
+		&__nav-btn {
+			height: 37px;
+
+			border: $menu-pane-border;
+			border-bottom-width: 0px;
+			background-color: $base-950;
+			padding: 0 15px;
+
+			& > Image {
+				vertical-align: center;
+			}
+
+			&__left {
+				border-right-width: 0;
+				&__img {
+					transform: scaleX(-1);
+				}
+			}
+
+			&:hover:not(:parentdisabled) {
+				background-color: $button-background-hover;
+			}
+		}
+
 		&__content {
 			width: fill-parent-flow(1);
 			height: 192px;

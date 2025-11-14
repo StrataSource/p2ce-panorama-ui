@@ -143,10 +143,7 @@ class NewsReel {
 	static onAutoAdvanceTimeElapsed(panel: string, prop: string) {
 		if (prop === 'width' && this.timeBar.HasClass('home__news__content__progress__activate-transition')) {
 			this.stopAutoAdvanceAnim();
-
-			this.selectedEntry += 1;
-			if (this.selectedEntry >= this.entries.length) this.selectedEntry = 0;
-			$.DispatchEvent('Activated', this.entries[this.selectedEntry].panel, PanelEventSource.MOUSE);
+			this.goNextArticle();
 		}
 	}
 
@@ -156,6 +153,18 @@ class NewsReel {
 
 	static onReelMouseOut() {
 		this.startAutoAdvanceAnim();
+	}
+
+	static goPrevArticle() {
+		this.selectedEntry -= 1;
+		if (this.selectedEntry < 0) this.selectedEntry = this.entries.length - 1;
+		$.DispatchEvent('Activated', this.entries[this.selectedEntry].panel, PanelEventSource.MOUSE);
+	}
+
+	static goNextArticle() {
+		this.selectedEntry += 1;
+		if (this.selectedEntry >= this.entries.length) this.selectedEntry = 0;
+		$.DispatchEvent('Activated', this.entries[this.selectedEntry].panel, PanelEventSource.MOUSE);
 	}
 
 	static onHomeNavAway() {

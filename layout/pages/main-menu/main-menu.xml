@@ -244,7 +244,27 @@
 							</Panel>
 							<Panel class="home__bottom">
 								<Panel id="News" class="home__news">
-									<Panel id="NewsPipContainer" class="home__news__pips" />
+									<Panel id="NewsActionBar" class="full-width">
+										<Panel id="NewsPipContainer" class="home__news__pips" />
+
+										<Panel class="horizontal-align-right flow-right">
+											<Button class="home__news__nav-btn home__news__nav-btn__left" onactivate="NewsReel.goPrevArticle()">
+												<Image
+													src="file://{images}/arrow-forward.svg"
+													class="home__news__nav-btn__left__img"
+													texturewidth="32"
+													textureheight="32"
+												/>
+											</Button>
+											<Button class="home__news__nav-btn" onactivate="NewsReel.goNextArticle()">
+												<Image
+													src="file://{images}/arrow-forward.svg"
+													texturewidth="32"
+													textureheight="32"
+												/>
+											</Button>
+										</Panel>
+									</Panel>
 									<Button
 										id="NewsBtn"
 										class="home__news__content"
