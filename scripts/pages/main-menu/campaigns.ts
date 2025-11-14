@@ -144,17 +144,20 @@ class SaveEntry {
 	index: number;
 	panel: Button;
 	save: Save;
+	isSaver: boolean;
 
-	constructor(index: number, panel: Button, save: Save) {
+	constructor(index: number, panel: Button, save: Save, isSaver: boolean) {
 		this.index = index;
 		this.panel = panel;
 		this.save = save;
+		this.isSaver = isSaver;
 	}
 
 	update() {
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
 		const desc = this.panel.FindChildTraverse<Label>('SaveDesc');
 		const cover = this.panel.FindChildTraverse<Image>('SaveCover');
+		const del = this.panel.FindChildTraverse<Button>('SaveDelete');
 
 		if (title) {
 			title.text = this.save.name;
@@ -166,24 +169,54 @@ class SaveEntry {
 		if (cover) {
 			cover.SetImage(`file://${this.save.thumb}`);
 		}
-
-		this.panel.SetPanelEvent('onactivate', () => {
-			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) SaveRestoreAPI.LoadSave(this.save.name);
-			else {
+		if (del) {
+			del.SetPanelEvent('onactivate', () => {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					tagDevString('Confirm Load Game'),
-					tagDevString('Are you sure you want to load this save file? Progress will be lost!'),
+					tagDevString('Delete Save?'),
+					tagDevString('Are you sure you want to delete this save file? Progress will be lost!'),
 					'warning-popup',
 					$.Localize('#UI_Yes'),
-					() => {
-						SaveRestoreAPI.LoadSave(this.save.name);
-					},
+					() => {},
 					$.Localize('#UI_Cancel'),
 					() => {},
 					'blur'
 				);
-			}
-		});
+			});
+		}
+
+		if (this.isSaver) {
+			this.panel.SetPanelEvent('onactivate', () => {
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					tagDevString('Overwrite Save?'),
+					tagDevString('Are you sure you want to overwrite this save file? Progress will be lost!'),
+					'warning-popup',
+					$.Localize('#UI_Yes'),
+					() => {},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
+			});
+		}
+		else {
+			this.panel.SetPanelEvent('onactivate', () => {
+				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) SaveRestoreAPI.LoadSave(this.save.name);
+				else {
+					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+						tagDevString('Confirm Load Game'),
+						tagDevString('Are you sure you want to load this save file? Progress will be lost!'),
+						'warning-popup',
+						$.Localize('#UI_Yes'),
+						() => {
+							SaveRestoreAPI.LoadSave(this.save.name);
+						},
+						$.Localize('#UI_Cancel'),
+						() => {},
+						'blur'
+					);
+				}
+			});
+		}
 	}
 }
 
@@ -193,7 +226,7 @@ class CampaignNewGameTab {
 	static chapterEntries: ChapterEntry[] = [];
 
 	static setActive() {
-		CampaignLoadGameTab.close();
+		CampaignSavesTab.close();
 		this.purgeChapterList();
 		this.populateChapters();
 		this.show();
@@ -241,26 +274,42 @@ class CampaignNewGameTab {
 	}
 }
 
-class CampaignLoadGameTab {
+class CampaignSavesTab {
 	static campaignLister = $<Panel>('#CampaignLister')!;
 	static tabLabel = $<Label>('#CampaignListerModeLabel')!;
 	static saveEntries: SaveEntry[] = [];
+	static createSaveBtn: Button | null = null;
+	static isSavingGame: boolean = false;
 
-	static setActive() {
+	static setSaveActive() {
+		this.close();
 		CampaignNewGameTab.close();
 		this.purgeSaveList();
+		this.addCreateSaveBtn();
+		this.isSavingGame = true;
 		this.populateSaves();
+		this.tabLabel.text = tagDevString('Save Game');
+		this.show();
+	}
+
+	static setLoadActive() {
+		this.close();
+		CampaignNewGameTab.close();
+		this.purgeSaveList();
+		this.isSavingGame = false;
+		this.populateSaves();
+		this.tabLabel.text = tagDevString('Load Game');
 		this.show();
 	}
 
 	static close() {
+		this.removeCreateSaveBtn();
 		this.purgeSaveList();
 	}
 
 	static show() {
 		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
 		if (campaignListerContainer) campaignListerContainer.visible = true;
-		this.tabLabel.text = tagDevString('Load Game');
 	}
 
 	static purgeSaveList() {
@@ -278,9 +327,57 @@ class CampaignLoadGameTab {
 			});
 			p.LoadLayoutSnippet('SaveEntrySnippet');
 
-			this.saveEntries.push(new SaveEntry(i, p, saves[i]));
+			this.saveEntries.push(new SaveEntry(i, p, saves[i], this.isSavingGame));
+
 			this.saveEntries[i].update();
+
+			if (this.isSavingGame) {
+				const img = p.FindChildTraverse<Image>('SaveCover');
+				if (img) img.AddClass('saves__entry__cover__short');
+			}
 		}
+	}
+
+	static addCreateSaveBtn() {
+		this.createSaveBtn = $.CreatePanel('Button', this.campaignLister, 'CreateSave', { class: 'saves__entry__lined' });
+		this.createSaveBtn.LoadLayoutSnippet('SaveEntrySnippet');
+
+		const title = this.createSaveBtn.FindChildTraverse<Label>('SaveTitle');
+		const desc = this.createSaveBtn.FindChildTraverse<Label>('SaveDesc');
+		const cover = this.createSaveBtn.FindChildTraverse<Image>('SaveCover');
+		const del = this.createSaveBtn.FindChildTraverse<Button>('SaveDelete');
+
+		if (title) {
+			title.text = tagDevString('Create New Save');
+		}
+		if (desc) {
+			desc.visible = false;
+		}
+		if (cover) {
+			cover.SetImage('file://{materials}/vgui/new_save_game.vtf');
+			cover.AddClass('saves__entry__cover__short');
+		}
+		if (del) {
+			del.visible = false;
+		}
+
+		this.createSaveBtn.SetPanelEvent('onactivate', () => {
+			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				tagDevString('Save Game?'),
+				tagDevString('Create new save?'),
+				'generic-popup',
+				$.Localize('#UI_Yes'),
+				() => {},
+				$.Localize('#UI_Cancel'),
+				() => {},
+				'blur'
+			)}
+		);
+	}
+
+	static removeCreateSaveBtn() {
+		if (this.createSaveBtn) this.createSaveBtn.DeleteAsync(0);
+		this.createSaveBtn = null;
 	}
 
 	static loadLatest() {
@@ -368,9 +465,15 @@ class CampaignStartPage {
 		this.campaignAllSavesBtn.enabled = hasSaves;
 		this.campaignLoadLatestBtn.enabled = hasSaves;
 
+		const isInGame = GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU;
+
 		// only change campaigns when not in game
-		const returnBtn = $('#CampaignStartReturn');
-		if (returnBtn) returnBtn.visible = GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU;
+		const returnBtn = $('#CampaignStartReturn')!;
+		returnBtn.visible = !isInGame;
+
+		// only save game when in game
+		const saveBtn = $('#CampaignSaveBtn')!;
+		saveBtn.visible = isInGame;
 	}
 
 	static closeLister() {

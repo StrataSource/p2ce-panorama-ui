@@ -78,6 +78,16 @@
 						<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
 						<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
 					</Panel>
+
+					<Button id="SaveDelete" class="saves__entry__delete__btn button button--red">
+						<Image
+							class="button__icon"
+							src="file://{images}/delete.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							texturewidth="48"
+							textureheight="48"
+						/>
+					</Button>
 				</Panel>
 			</Button>
 		</snippet>
@@ -223,14 +233,21 @@
 						<Button
 							id="CampaignLoadLatestBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
-							onactivate="CampaignLoadGameTab.loadLatest()"
+							onactivate="CampaignSavesTab.loadLatest()"
 						>
 							<Label class="selected-campaign__controls__button__text" text="[HC] Continue" />
 						</Button>
 						<Button
+							id="CampaignSaveBtn"
+							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							onactivate="CampaignSavesTab.setSaveActive()"
+						>
+							<Label class="selected-campaign__controls__button__text" text="[HC] Save Game" />
+						</Button>
+						<Button
 							id="CampaignAllSavesBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
-							onactivate="CampaignLoadGameTab.setActive()"
+							onactivate="CampaignSavesTab.setLoadActive()"
 						>
 							<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
 						</Button>
