@@ -549,22 +549,15 @@
 		}
 
 		&__inner {
-			@extend .campaigns__entry__inner;
-
-			height: fit-children;
-			background-color: none;
-			background-image: none;
+			@extend .saves__entry__inner;
 		}
 
 		&__cover {
-			width: 240px;
-			height: 135px;
-
-			border: $menu-pane-border;
+			@extend .saves__entry__cover;
 		}
 
 		&__details {
-			@extend .campaigns__entry__details;
+			@extend .saves__entry__details;
 			&__title {
 				font-size: 20px;
 				color: $base-200;
@@ -579,7 +572,7 @@
 		}
 
 		&:hover {
-			background-color: $button-background-hover;
+			@extend .saves__entry, :hover;
 		}
 	}
 }
