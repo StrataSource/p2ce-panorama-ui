@@ -439,6 +439,18 @@ class CampaignStartPage {
 		this.campaignStartPage.visible = true;
 		this.campaignStartPage.AddClass('selected-campaign__anim');
 		this.campaignStartPage.AddClass('selected-campaign__show');
+	
+		const tabToOpen = $.persistentStorage.getItem('campaigns.showTab');
+		if (tabToOpen) {
+			const tabBtn = this.campaignControls.FindChildTraverse<Button>(tabToOpen as string);
+			if (tabBtn) {
+				$.DispatchEvent('Activated', tabBtn, PanelEventSource.MOUSE);
+			}
+			else {
+				$.Warning('campaigns.showTab defined but invalid value');
+			}
+			$.persistentStorage.removeItem('campaigns.showTab');
+		}
 	}
 
 	static hide() {
@@ -650,14 +662,34 @@ class CampaignSelector {
 class CampaignMgr {
 	static currentCampaign: FakeCampaign | null = null;
 
+	static {
+		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
+	}
+
 	static init() {
 		CampaignStartPage.init();
 		CampaignSelector.init();
 	}
 
-	static reload() {
-		CampaignStartPage.hide();
-		CampaignSelector.reloadList();
+	static onCampaignScreenShown(tabid: string) {
+		if (tabid !== 'Campaigns') return;
+		
+		const openCampaign = $.persistentStorage.getItem('campaigns.open');
+		if (openCampaign) {
+			$.Msg(`Attempting to force open campaign: ${openCampaign}`);
+
+			const tryOpenCampaign = () => {
+				if (CampaignSelector.campaignEntries.length > 0) {
+					this.campaignSelected(CampaignSelector.fakeCampaigns[openCampaign as number]);
+					$.persistentStorage.removeItem('campaigns.open');
+				} else {
+					$.Warning('Campaigns have not been populated yet. Trying again.');
+					$.Schedule(0.001, tryOpenCampaign);
+				}
+			}
+
+			tryOpenCampaign();
+		}
 	}
 
 	static startGame(chapter: string) {

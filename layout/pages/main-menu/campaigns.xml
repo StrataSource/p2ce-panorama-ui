@@ -225,6 +225,7 @@
 					/>
 					<Panel class="selected-campaign__controls__inner">
 						<Button
+							id="CampaignNewGameBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignNewGameTab.setActive()"
 						>
