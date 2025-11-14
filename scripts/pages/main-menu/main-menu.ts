@@ -443,4 +443,16 @@ class MainMenu {
 
 		this.updateHomeDetails();
 	}
+
+	static openSaveCampaign() {
+		$.persistentStorage.setItem('campaigns.open', 1);
+		$.persistentStorage.setItem('campaigns.showTab', 'CampaignSaveBtn');
+		this.selectNavButton('PlayButton');
+	}
+
+	static openLoadCampaign() {
+		$.persistentStorage.setItem('campaigns.open', 1);
+		$.persistentStorage.setItem('campaigns.showTab', 'CampaignAllSavesBtn');
+		this.selectNavButton('PlayButton');
+	}
 }
