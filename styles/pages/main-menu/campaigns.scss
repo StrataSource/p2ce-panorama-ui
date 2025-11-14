@@ -498,6 +498,10 @@
 			height: 135px;
 
 			border: $menu-pane-border;
+
+			&__short {
+				height: 64px;
+			}
 		}
 
 		&__details {
@@ -511,6 +515,15 @@
 				margin-top: 5px;
 				font-size: 18px;
 				color: $base-200;
+			}
+		}
+
+		&__delete {
+			&__btn {
+				width: 48px;
+				height: 48px;
+				horizontal-align: right;
+				vertical-align: center;
 			}
 		}
 
