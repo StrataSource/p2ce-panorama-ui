@@ -257,11 +257,7 @@
 												/>
 											</Button>
 											<Button class="home__news__nav-btn" onactivate="NewsReel.goNextArticle()">
-												<Image
-													src="file://{images}/arrow-forward.svg"
-													texturewidth="32"
-													textureheight="32"
-												/>
+												<Image src="file://{images}/arrow-forward.svg" texturewidth="32" textureheight="32" />
 											</Button>
 										</Panel>
 									</Panel>
