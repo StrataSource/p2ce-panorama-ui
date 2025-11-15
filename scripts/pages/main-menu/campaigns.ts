@@ -154,6 +154,12 @@ class SaveEntry {
 	}
 
 	update() {
+		if (this.isSaver) {
+			if (this.save.name.includes('quick') || this.save.name.includes('auto')) {
+				this.panel.enabled = false;
+			}
+		}
+
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
 		const desc = this.panel.FindChildTraverse<Label>('SaveDesc');
 		const cover = this.panel.FindChildTraverse<Image>('SaveCover');
@@ -168,6 +174,7 @@ class SaveEntry {
 		}
 		if (cover) {
 			cover.SetImage(`file://${this.save.thumb}`);
+			if (this.isSaver) cover.AddClass('saves__entry__cover__short');
 		}
 		if (del) {
 			del.SetPanelEvent('onactivate', () => {
@@ -234,6 +241,8 @@ class SaveEntry {
 }
 
 class CampaignNewGameTab {
+	static campaignControls = $<Panel>('#CampaignControls')!;
+	static campaignListerContainer = $<Panel>('#CampaignListerContainer')!;
 	static campaignLister = $<Panel>('#CampaignLister')!;
 	static tabLabel = $<Label>('#CampaignListerModeLabel')!;
 	static chapterEntries: ChapterEntry[] = [];
@@ -250,8 +259,8 @@ class CampaignNewGameTab {
 	}
 
 	static show() {
-		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
-		if (campaignListerContainer) campaignListerContainer.visible = true;
+		this.campaignControls.visible = false;
+		this.campaignListerContainer.visible = true;
 		this.tabLabel.text = tagDevString('New Game');
 	}
 
@@ -288,6 +297,8 @@ class CampaignNewGameTab {
 }
 
 class CampaignSavesTab {
+	static campaignControls = $<Panel>('#CampaignControls')!;
+	static campaignListerContainer = $<Panel>('#CampaignListerContainer')!;
 	static campaignLister = $<Panel>('#CampaignLister')!;
 	static tabLabel = $<Label>('#CampaignListerModeLabel')!;
 	static saveEntries: SaveEntry[] = [];
@@ -321,8 +332,8 @@ class CampaignSavesTab {
 	}
 
 	static show() {
-		const campaignListerContainer = $<Panel>('#CampaignListerContainer');
-		if (campaignListerContainer) campaignListerContainer.visible = true;
+		this.campaignListerContainer.visible = true;
+		this.campaignControls.visible = false;
 	}
 
 	static purgeSaveList() {
@@ -341,13 +352,7 @@ class CampaignSavesTab {
 			p.LoadLayoutSnippet('SaveEntrySnippet');
 
 			this.saveEntries.push(new SaveEntry(i, p, saves[i], this.isSavingGame));
-
 			this.saveEntries[i].update();
-
-			if (this.isSavingGame) {
-				const img = p.FindChildTraverse<Image>('SaveCover');
-				if (img) img.AddClass('saves__entry__cover__short');
-			}
 		}
 	}
 
@@ -516,6 +521,7 @@ class CampaignStartPage {
 	static closeLister() {
 		this.campaignLister.ScrollToTop();
 		this.campaignListerContainer.visible = false;
+		this.campaignControls.visible = true;
 	}
 }
 
@@ -699,6 +705,7 @@ class CampaignSelector {
 
 class CampaignMgr {
 	static currentCampaign: FakeCampaign | null = null;
+	static isInitialized: boolean = false;
 
 	static {
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
@@ -707,28 +714,32 @@ class CampaignMgr {
 	static init() {
 		CampaignStartPage.init();
 		CampaignSelector.init();
+
+		this.isInitialized = true;
+		
+		this.checkOpenCampaign();
 	}
 
 	static onCampaignScreenShown(tabid: string) {
-		if (tabid !== 'Campaigns') return;
+		if (tabid !== 'Campaigns' || !this.isInitialized) return;
 
+		this.checkOpenCampaign();
+	}
+
+	static checkOpenCampaign() {
 		// used by main menu redirect or by loading the campaign
 		// screen for the first time (but already jumped in game)
 		const tryOpenCampaign = (campaignIndex: number) => {
-			if (CampaignSelector.campaignEntries.length > 0) {
-				this.campaignSelected(CampaignSelector.fakeCampaigns[campaignIndex as number]);
-
-				if ($.persistentStorage.getItem('campaigns.open')) $.persistentStorage.removeItem('campaigns.open');
-			} else {
-				$.Warning('Campaigns have not been populated yet. Trying again.');
-				$.Schedule(0.001, tryOpenCampaign);
-			}
+			this.campaignSelected(CampaignSelector.fakeCampaigns[campaignIndex as number]);
 		};
 
 		const openCampaign = $.persistentStorage.getItem('campaigns.open');
+
 		if (openCampaign) {
 			tryOpenCampaign(openCampaign as number);
-		} else if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU && !CampaignSelector.isHidden) {
+			$.persistentStorage.removeItem('campaigns.open');
+		}
+		else if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU && !CampaignSelector.isHidden) {
 			// TODO: force show the active campaign derived from the current map
 			// we don't want to switch the campaign while in-game
 			// default to fake portal 2 campaign
