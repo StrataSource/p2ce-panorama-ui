@@ -182,6 +182,7 @@
 								<Panel class="home__prompt__gradient" />
 								<Panel class="home__prompt__content">
 									<Label class="home__heading" text="[HC] Load Last Save" />
+									<Label id="PausedLatestSaveTimeLabel" class="home__subheading" text="[HC] No Save Available" />
 								</Panel>
 							</Button>
 							<Panel class="home__spacer__v" />
