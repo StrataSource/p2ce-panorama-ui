@@ -675,7 +675,15 @@ class CampaignSelector {
 	}
 
 	static hideBoxart() {
-		this.hoverContainer.RemoveClass('campaigns__boxart__container__show');
+		// there is a specific scenario where this can be invalid
+		//
+		// if boxart is shown, and then the game is closed (via OS taskbar or
+		// or some other way without letting the mouse leave the campaign list),
+		// then the campaign list onmouseout event fires this function, but
+		// the UI stuff is being deleted at this point
+		if (this.hoverContainer.IsValid()) {
+			this.hoverContainer.RemoveClass('campaigns__boxart__container__show');
+		}
 	}
 
 	static playAwayAnim() {
