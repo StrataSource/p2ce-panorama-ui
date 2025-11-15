@@ -95,6 +95,10 @@
 				background-color: $base-950;
 				color: $bright-color;
 			}
+
+			&:parentdisabled {
+				opacity: 0.5;
+			}
 		}
 	}
 
@@ -177,6 +181,7 @@
 				vertical-align: bottom;
 				horizontal-align: right;
 				margin: 10px;
+				visibility: collapse;
 			}
 
 			&__title {
@@ -282,6 +287,7 @@
 			border-radius: 5px;
 			background-color: $base-950;
 			margin: 10px;
+			visibility: collapse;
 		}
 
 		&__text {
