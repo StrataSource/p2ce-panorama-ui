@@ -283,18 +283,15 @@ $topnav-height: 80px;
 		}
 
 		&:disabled {
-			border-color: $button-background-disabled;
 
 			#{$this}__image {
 				saturation: 0;
 			}
 
 			#{$this}__content {
-				background-color: rgba($button-background-disabled, 0.8);
 
 				& > Label {
 					color: $button-text-disabled;
-					text-shadow-fast: 1px 1px rgba($base-950, 0);
 				}
 			}
 		}
