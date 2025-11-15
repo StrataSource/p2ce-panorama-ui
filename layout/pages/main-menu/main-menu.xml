@@ -212,6 +212,48 @@
 									</Panel>
 								</Button>
 							</Panel>
+
+							<Panel class="home__bottom">
+								<Panel class="home__campaign-detail">
+									<Image
+										id="CampaignGradientImage"
+										src="file://{images}/menu/portal2/campaign_btn_bg.jpg"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__campaign-detail__bg-image"
+									/>
+									<Panel class="home__campaign-detail__container">
+										<Panel class="home__campaign-detail__left">
+											<Image
+												id="CampaignImage"
+												src="file://{images}/menu/portal2/campaign_cover.png"
+												scaling="stretch-to-cover-preserve-aspect"
+												class="home__campaign-detail__image"
+											/>
+											<Image
+												id="CampaignLogo"
+												src="file://{images}/menu/portal2/logo.png"
+												scaling="stretch-to-cover-preserve-aspect"
+												class="home__campaign-detail__logo"
+											/>
+										</Panel>
+										<Panel class="home__campaign-detail__right">
+											<Label id="LevelHeader" class="home__campaign-detail__right__title" text="[PH] Campaign Name" />
+											<Label id="LevelChapter" class="home__campaign-detail__right__chapter" text="[PH] Campaign Chapter Name" />
+											<Label id="LevelDesc" class="home__campaign-detail__right__desc" text="[PH] Campaign Map Name" />
+											<Button class="home__campaign-detail__right__button">
+												<Image
+													class="home__campaign-detail__right__button__icon"
+													src="file://{images}/cancel.svg"
+													scaling="stretch-to-fit-preserve-aspect"
+													texturewidth="32"
+													textureheight="32"
+												/>
+												<Label class="home__campaign-detail__right__button__text" text="Open in Workshop" />
+											</Button>
+										</Panel>
+									</Panel>
+								</Panel>
+							</Panel>
 						</Panel>
 					</Panel>
 
@@ -227,7 +269,7 @@
 						<Panel class="home">
 							<!-- Continue latest save -->
 							<Panel class="home__horizontal">
-								<Button class="home__prompt">
+								<Button class="home__prompt" disabled="true">
 									<Image
 										id="FeaturedImage"
 										src="file://{images}/menu/p2ce/random2.png"
