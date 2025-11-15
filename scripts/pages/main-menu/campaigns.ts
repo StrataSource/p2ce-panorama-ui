@@ -159,10 +159,7 @@ class SaveEntry {
 				this.panel.enabled = false;
 
 				this.panel.SetPanelEvent('onmouseover', () => {
-					UiToolkitAPI.ShowTextTooltip(
-						this.panel.id,
-						tagDevString('You cannot overwrite this save.')
-					);
+					UiToolkitAPI.ShowTextTooltip(this.panel.id, tagDevString('You cannot overwrite this save.'));
 				});
 				this.panel.SetPanelEvent('onmouseout', () => {
 					UiToolkitAPI.HideTextTooltip();
@@ -726,7 +723,7 @@ class CampaignMgr {
 		CampaignSelector.init();
 
 		this.isInitialized = true;
-		
+
 		this.checkOpenCampaign();
 	}
 
@@ -748,8 +745,7 @@ class CampaignMgr {
 		if (openCampaign) {
 			tryOpenCampaign(openCampaign as number);
 			$.persistentStorage.removeItem('campaigns.open');
-		}
-		else if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU && !CampaignSelector.isHidden) {
+		} else if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU && !CampaignSelector.isHidden) {
 			// TODO: force show the active campaign derived from the current map
 			// we don't want to switch the campaign while in-game
 			// default to fake portal 2 campaign
