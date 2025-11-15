@@ -120,6 +120,10 @@
 
 	&__textentry {
 		width: 140px;
+
+		&:hover {
+			sound: 'UIPanorama.P2CE.MenuSelect';
+		}
 	}
 
 	&__outofbounds {
@@ -167,6 +171,7 @@
 			animation-duration: 1.5s;
 			animation-timing-function: linear;
 			animation-iteration-count: infinite;
+			sound: 'UIPanorama.P2CE.MenuFocus';
 		}
 	}
 

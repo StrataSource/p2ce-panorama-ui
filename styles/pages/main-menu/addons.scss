@@ -51,10 +51,12 @@
 
 		&:hover {
 			background-color: $primary-950;
+			sound: 'UIPanorama.P2CE.MenuSelect';
 		}
 
 		&:selected {
 			background-color: $primary-800;
+			sound: 'UIPanorama.P2CE.MenuAccept';
 		}
 
 		&__left {

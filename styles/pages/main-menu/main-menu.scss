@@ -304,6 +304,7 @@ $topnav-height: 80px;
 
 		&:hover:not(:disabled) {
 			border-color: $primary-color;
+			sound: 'UIPanorama.P2CE.MenuSelect';
 
 			#{$this}__gradient {
 				background-color: gradient(

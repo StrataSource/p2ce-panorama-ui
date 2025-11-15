@@ -135,7 +135,7 @@
 		&:hover {
 			background-color: $dropdown-item-background-hover;
 			color: $dropdown-item-color;
-			//sound: "UIPanorama.submenu_rollover";
+			sound: 'UIPanorama.P2CE.MenuSelect';
 
 			& > Image {
 				wash-color: $dropdown-item-color;
@@ -161,7 +161,7 @@
 		border-radius: $button-radius;
 
 		max-height: 444px;
-		//sound: "UIPanorama.submenu_dropdown_select";
+		sound: 'UIPanorama.P2CE.MenuAccept';
 	}
 }
 

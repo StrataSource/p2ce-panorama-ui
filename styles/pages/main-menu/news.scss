@@ -66,6 +66,7 @@
 
 			&:hover:not(:parentdisabled) {
 				background-color: $button-background-hover;
+				sound: 'UIPanorama.P2CE.MenuSelect';
 			}
 		}
 
@@ -141,6 +142,7 @@
 
 			&:hover:not(:parentdisabled) {
 				border-color: $primary-color;
+				sound: 'UIPanorama.P2CE.MenuSelect';
 
 				#{$this}__container {
 					background-color: $button-background-hover;

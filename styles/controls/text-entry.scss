@@ -85,6 +85,7 @@ TextEntryAutocomplete {
 			background-color: $contextmenu-item-background-hover;
 			color: $dropdown-item-color;
 			border-color: $contextmenu-item-background-hover;
+			sound: 'UIPanorama.P2CE.MenuSelect';
 		}
 
 		&:focus {
