@@ -136,7 +136,7 @@
 						/>
 						<Panel class="flow-down vertical-align-center">
 							<Label class="campaigns__action-bar__button__text-top" text="[HC] Uncategorized Maps" />
-							<Label class="campaigns__action-bar__button__text-btm" text="[PH] 3 newly subscribed" />
+							<Label class="campaigns__action-bar__button__text-btm" text="[PH] (?) newly installed maps" />
 						</Panel>
 					</Button>
 					<Button id="CampaignsGoWorkshopBtn" class="campaigns__action-bar__button" onactivate="CampaignSelector.openWorkshop()">
@@ -153,7 +153,7 @@
 						</Panel>
 					</Button>
 				</Panel>
-				<Panel class="campaigns__action-bar">
+				<Panel disabled="true" class="campaigns__action-bar">
 					<TextEntry class="textentry campaigns__action-bar__textentry fill-width mr-2" placeholder="Search..." />
 					<DropDown id="CampaignSortMode" class="dropdown" menuclass="dropdown-menu">
 						<!-- <Panel class="DropDownIcon"/> -->
@@ -190,12 +190,12 @@
 								/>
 							</Panel>
 							<Panel class="campaigns__boxart__bottom">
-								<Label class="campaigns__boxart__detail__text" text="[HC] 100% COMPLETION" />
-								<Label class="campaigns__boxart__text" text="[HC] Achievements: 29/29" />
-								<Label class="campaigns__boxart__text" text="[HC] Chapters: 10/10" />
+								<Label class="campaigns__boxart__detail__text" text="[PH] COMPLETION PERCENTAGE" />
+								<Label class="campaigns__boxart__text" text="[PH] Completion Stat 1" />
+								<Label class="campaigns__boxart__text" text="[PH] Completion Stat 2" />
 
-								<Label class="campaigns__boxart__text__small mt-2" text="[HC] Last Played: 3 days ago" />
-								<Label class="campaigns__boxart__text__small" text="[HC] Added on: 12 July 2030" />
+								<Label class="campaigns__boxart__text__small mt-2" text="[PH] Last Played Time" />
+								<Label class="campaigns__boxart__text__small" text="[PH] Installation Date" />
 							</Panel>
 						</Panel>
 					</Panel>
@@ -252,9 +252,11 @@
 						>
 							<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
 						</Button>
+						<!-- Just hide this for now
 						<Button class="selected-campaign__controls__button selected-campaign__controls__button__lined" disabled="true">
 							<Label class="selected-campaign__controls__button__text" text="[HC] Open in Workshop" />
 						</Button>
+						-->
 						<Button
 							id="CampaignStartReturn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
