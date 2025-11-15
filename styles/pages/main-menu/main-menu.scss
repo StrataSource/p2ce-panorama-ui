@@ -283,13 +283,11 @@ $topnav-height: 80px;
 		}
 
 		&:disabled {
-
 			#{$this}__image {
 				saturation: 0;
 			}
 
 			#{$this}__content {
-
 				& > Label {
 					color: $button-text-disabled;
 				}
@@ -357,5 +355,102 @@ $topnav-height: 80px;
 		width: 100%;
 		vertical-align: bottom;
 		flow-children: down;
+	}
+
+	&__campaign-detail {
+		width: fill-parent-flow(1);
+		height: 224px;
+
+		border: $menu-pane-border;
+		background-color: $base-950;
+
+		&__container {
+			width: 100%;
+			height: 100%;
+			flow-children: right;
+			padding: 15px;
+
+			background-color: gradient(linear, 0% 0%, 95% 0%, from(rgba(0, 0, 0, 0)), to($base-950));
+		}
+
+		&__bg-image {
+			width: 100%;
+			height: 100%;
+			opacity: 0.2;
+		}
+
+		&__left {
+			width: 384px;
+			height: 100%;
+
+			border: $menu-pane-border;
+
+			margin-right: 22px;
+		}
+
+		&__image {
+			width: 100%;
+			height: 100%;
+		}
+
+		&__logo {
+			width: 48px;
+			height: 48px;
+			vertical-align: bottom;
+			margin: 10px;
+		}
+
+		&__right {
+			width: fill-parent-flow(1);
+			flow-children: down;
+			vertical-align: center;
+
+			&__title {
+				@include mixin.font-styles($use-header: true);
+				font-size: 24px;
+				margin-bottom: 2px;
+				text-shadow: 2px 2px 4px 2 $base-950;
+				max-width: 485px;
+			}
+
+			&__chapter {
+				font-size: 16px;
+				color: $base-200;
+				text-shadow: 1px 1px 4px 2 $base-950;
+				max-width: 485px;
+			}
+
+			&__desc {
+				font-size: 18px;
+				color: $base-200;
+				text-shadow: 1px 1px 4px 2 $base-950;
+				max-width: 485px;
+			}
+
+			&__button {
+				visibility: collapse;
+				margin-top: 10px;
+				padding: 10px 15px;
+				background-color: $base-950;
+				border: $menu-pane-border;
+				flow-children: right;
+
+				&__icon {
+					width: 24px;
+					height: 24px;
+					margin-right: 8px;
+					vertical-align: center;
+				}
+
+				&__text {
+					font-weight: bold;
+					vertical-align: center;
+				}
+
+				&:hover {
+					background-color: $button-background-hover;
+				}
+			}
+		}
 	}
 }
