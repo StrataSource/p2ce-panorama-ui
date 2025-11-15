@@ -157,6 +157,16 @@ class SaveEntry {
 		if (this.isSaver) {
 			if (this.save.name.includes('quick') || this.save.name.includes('auto')) {
 				this.panel.enabled = false;
+
+				this.panel.SetPanelEvent('onmouseover', () => {
+					UiToolkitAPI.ShowTextTooltip(
+						this.panel.id,
+						tagDevString('You cannot overwrite this save.')
+					);
+				});
+				this.panel.SetPanelEvent('onmouseout', () => {
+					UiToolkitAPI.HideTextTooltip();
+				});
 			}
 		}
 

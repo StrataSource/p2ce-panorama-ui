@@ -214,7 +214,7 @@
 			/>
 			<Button class="full-width full-height" />
 			<Panel class="selected-campaign__container">
-				<Panel id="CampaignControls" class="selected-campaign__controls">
+				<Panel class="selected-campaign__controls">
 					<Image
 						id="CampaignLogo"
 						class="selected-campaign__logo"
@@ -223,7 +223,7 @@
 						textureheight="130"
 						texturewidth="440"
 					/>
-					<Panel class="selected-campaign__controls__inner">
+					<Panel id="CampaignControls" class="selected-campaign__controls__inner">
 						<Button
 							id="CampaignNewGameBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
