@@ -385,7 +385,7 @@ class MainMenu {
 			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background0' + act + '_widescreen.vtf');
 		}
 
-		$.PlaySoundEvent(`UIPanorama.Music.P2.MenuAct${chapter}`);
+		$.PlaySoundEvent(`UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`);
 	}
 
 	/**
