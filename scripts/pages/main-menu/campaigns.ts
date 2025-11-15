@@ -124,7 +124,7 @@ class ChapterEntry {
 				GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
 			else {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					tagDevString('Confirm New Game'),
+					tagDevString('Start New Game?'),
 					tagDevString('Are you sure you want to start a new game? Progress will be lost!'),
 					'warning-popup',
 					$.Localize('#UI_Yes'),
@@ -232,7 +232,7 @@ class SaveEntry {
 				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) SaveRestoreAPI.LoadSave(this.save.name);
 				else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						tagDevString('Confirm Load Game'),
+						tagDevString('Load Game?'),
 						tagDevString('Are you sure you want to load this save file? Progress will be lost!'),
 						'warning-popup',
 						$.Localize('#UI_Yes'),
@@ -429,7 +429,7 @@ class CampaignSavesTab {
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				tagDevString('Confirm Load'),
+				tagDevString('Load Game?'),
 				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
 				'warning-popup',
 				$.Localize('#UI_Yes'),
