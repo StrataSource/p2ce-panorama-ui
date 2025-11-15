@@ -215,9 +215,11 @@ class SaveEntry {
 					() => {
 						SaveRestoreAPI.SaveGame(this.save.name);
 						CampaignSavesTab.purgeSaveList();
-						$.Schedule(0.001, () => {
+						CampaignSavesTab.lockScreen();
+						$.Schedule(1, () => {
 							CampaignSavesTab.populateSaves();
 							CampaignStartPage.updateLoadBtns();
+							CampaignSavesTab.unlockScreen();
 						});
 					},
 					$.Localize('#UI_Cancel'),
@@ -311,6 +313,7 @@ class CampaignSavesTab {
 	static saveEntries: SaveEntry[] = [];
 	static createSaveBtn: Button | null = null;
 	static isSavingGame: boolean = false;
+	static backBtn = $<Button>('#CampaignBackScreen')!;
 
 	static setSaveActive() {
 		this.close();
@@ -397,9 +400,15 @@ class CampaignSavesTab {
 				() => {
 					SaveRestoreAPI.SaveGame(`${new Date().getTime()}`);
 					CampaignSavesTab.purgeSaveList();
-					$.Schedule(0.001, () => {
+					CampaignSavesTab.lockScreen();
+
+					if (this.createSaveBtn) this.createSaveBtn.enabled = false;
+
+					$.Schedule(1, () => {
 						CampaignSavesTab.populateSaves();
 						CampaignStartPage.updateLoadBtns();
+						CampaignSavesTab.unlockScreen();
+						if (this.createSaveBtn?.IsValid()) this.createSaveBtn.enabled = true;
 					});
 				},
 				$.Localize('#UI_Cancel'),
@@ -434,6 +443,14 @@ class CampaignSavesTab {
 		} else {
 			SaveRestoreAPI.LoadSave(saves[0].name);
 		}
+	}
+
+	static lockScreen() {
+		this.backBtn.enabled = false;
+	}
+
+	static unlockScreen() {
+		this.backBtn.enabled = true;
 	}
 }
 
