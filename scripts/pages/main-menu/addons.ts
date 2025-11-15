@@ -86,6 +86,7 @@ class AddonManager {
 	static addonTitle = $<Label>('#SelectedAddonTitle')!;
 	static addonDesc = $<Label>('#SelectedAddonDesc')!;
 	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
+	static addonSteam = $<Button>('#SelectedAddonView')!;
 
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');
@@ -167,6 +168,8 @@ class AddonManager {
 			this.addonAuthors.text = '';
 			this.addonAuthors.visible = false;
 		}
+
+		this.addonSteam.visible = !info.local;
 	}
 
 	/**
