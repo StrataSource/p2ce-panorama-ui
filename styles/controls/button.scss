@@ -19,6 +19,7 @@
 
 	&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
 		background-color: $button-background-hover;
+		sound: 'UIPanorama.P2CE.MenuSelect';
 		#{$this}__text {
 			color: $button-text-hover;
 		}

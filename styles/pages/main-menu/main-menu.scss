@@ -189,6 +189,8 @@ $topnav-height: 80px;
 			background-color: $primary-color;
 			border-bottom-color: $primary-800;
 
+			sound: 'UIPanorama.P2CE.MenuFocus';
+
 			#{$this}__content {
 				wash-color: $base-color;
 			}
@@ -197,6 +199,8 @@ $topnav-height: 80px;
 		&:selected {
 			background-color: $primary-950;
 			border-bottom-color: $primary-color;
+
+			sound-out: 'UIPanorama.P2CE.MenuAccept';
 
 			#{$this}__content {
 				wash-color: $primary-color;
