@@ -504,6 +504,7 @@ class CampaignStartPage {
 		if (tabid !== 'Campaigns') return;
 
 		this.campaignListerContainer.visible = false;
+		this.campaignControls.visible = true;
 
 		this.updateLoadBtns();
 
