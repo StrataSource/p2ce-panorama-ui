@@ -59,14 +59,27 @@
 @keyframes BlurFadeInOut {
 	0% {
 		blur: gaussian(0, 0, 0);
+		opacity: 1;
 	}
 
 	50% {
-		blur: gaussian(0.5, 10, 3);
+		blur: gaussian(2, 10, 2);
+		opacity: 0;
 	}
 
 	100% {
 		blur: gaussian(0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes FadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
 	}
 }
 

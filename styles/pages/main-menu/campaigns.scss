@@ -232,7 +232,7 @@
 			flow-children: down;
 
 			&__switch {
-				animation-name: BlurFadeInOut;
+				animation-name: FadeIn;
 				animation-duration: 0.2s;
 				animation-timing-function: ease-out;
 				animation-iteration-count: 1;
@@ -389,7 +389,6 @@
 
 			&:hover:not(:disabled) {
 				background-color: $primary-color;
-				border-color: $primary-color;
 
 				#{$this}__text {
 					color: $base-950;
@@ -430,7 +429,7 @@
 		}
 
 		&__container {
-			width: 50%;
+			width: 48%;
 			height: 70%;
 			flow-children: down;
 			vertical-align: bottom;
@@ -503,6 +502,7 @@
 		&__cover {
 			width: 240px;
 			height: 135px;
+			vertical-align: center;
 
 			border: $menu-pane-border;
 
@@ -515,7 +515,7 @@
 			@extend .campaigns__entry__details;
 			&__title {
 				@include mixin.font-styles($use-header: true);
-				font-size: 28px;
+				font-size: 26px;
 			}
 
 			&__desc {
@@ -527,6 +527,7 @@
 
 		&__delete {
 			&__btn {
+				margin-right: 15px;
 				width: 48px;
 				height: 48px;
 				horizontal-align: right;
