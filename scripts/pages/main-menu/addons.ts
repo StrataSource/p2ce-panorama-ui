@@ -87,6 +87,8 @@ class AddonManager {
 	static addonDesc = $<Label>('#SelectedAddonDesc')!;
 	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
 	static addonSteam = $<Button>('#SelectedAddonView')!;
+	static addonMapsPanel = $<Panel>('#SelectedAddonMapLauncher')!;
+	static addonMapsDropdown = $<DropDown>('#SelectedAddonMaps')!;
 
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');
@@ -95,11 +97,13 @@ class AddonManager {
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
 	static selectedAddon: number = -1;
+	static gameMaps: string[] = [];
 
 	static init() {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onMainMenuTabShown.bind(this));
 		this.createAddonEntries();
+		this.findMaps();
 	}
 
 	static updateAddons() {
@@ -145,6 +149,22 @@ class AddonManager {
 		this.addonPanel.AddClass('hide');
 		this.purgeAddonList();
 		this.createAddonEntries();
+		this.findMaps();
+	}
+
+	static findMaps() {
+		this.gameMaps = [];
+		const maps = GameInterfaceAPI.GetMaps();
+
+		for (let i = 0; i < maps.length; ++i) {
+			if (!maps[i].valid) continue;
+
+			const rawMap: string = maps[i].name;
+			const mapName: string = rawMap.substring(5, rawMap.length - 4);
+			if (mapName.startsWith('workshop/') || mapName.startsWith('puzzlemaker')) continue;
+
+			this.gameMaps.push(mapName);
+		}
 	}
 
 	static addonSelected(addon: number) {
@@ -170,6 +190,61 @@ class AddonManager {
 		}
 
 		this.addonSteam.visible = !info.local;
+
+		this.updateSelectedAddonMaps();
+	}
+	
+	static updateSelectedAddonMaps() {
+		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
+
+		if (!WorkshopAPI.GetAddonEnabled(this.selectedAddon)) {
+			this.addonMapsPanel.visible = false;
+			return;
+		}
+
+		// i dont like this, but...
+		const words = info.description.split(/[^a-zA-Z0-9_/]/);
+		const matchingMaps: string[] = [];
+		for (let i = 0; i < words.length; ++i) {
+			const word: string = words[i].trim();
+			const result = this.gameMaps.find((value: string, index: number) => {
+				return value === `${word}` || `${value}r` === `${word}`;
+			});
+
+			if (result) {
+				if (matchingMaps.includes(result)) continue;
+				matchingMaps.push(result);
+			}
+		}
+
+		this.addonMapsDropdown.RemoveAllOptions();
+
+		const hasMaps = matchingMaps.length > 0;
+
+		for (let i = 0; i < matchingMaps.length; ++i) {
+			const map = matchingMaps[i];
+			const entry = $.CreatePanel(
+				'Label',
+				this.addonMapsDropdown,
+				`AddonMap${map}`,
+				{ text: map, value: map }
+			);
+			this.addonMapsDropdown.AddOption(entry);
+		}
+
+		this.addonMapsDropdown.SetSelectedIndex(0);
+
+		this.addonMapsPanel.visible = hasMaps;
+	}
+
+	static launchSelectedAddonMap() {
+		const selected = this.addonMapsDropdown.GetSelected();
+		if (selected === null) return;
+
+		const map = selected.GetAttributeString('value', 'null');
+		if (map === null || map === 'null') return;
+
+		GameInterfaceAPI.ConsoleCommand(`map ${map}`);
 	}
 
 	/**
@@ -211,6 +286,8 @@ class AddonManager {
 		for (const addon of this.addons) {
 			addon.updateEnabled();
 		}
+
+		this.updateSelectedAddonMaps();
 	}
 
 	/**
@@ -230,6 +307,8 @@ class AddonManager {
 		this.markDirty(false);
 
 		if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
+
+		this.updateSelectedAddonMaps();
 	}
 
 	/**
