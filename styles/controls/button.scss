@@ -17,7 +17,7 @@
 
 	$this: &;
 
-	&:hover:not(:disabled):not(:selected) {
+	&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
 		background-color: $button-background-hover;
 		#{$this}__text {
 			color: $button-text-hover;
@@ -29,12 +29,15 @@
 	}
 
 	&:disabled,
-	&:disabled &:hover {
+	&:disabled &:hover,
+	&:parentdisabled,
+	&:parentdisabled &:hover {
 		background-color: $button-background-disabled;
 		border-color: $button-text-disabled;
 	}
 
-	&:disabled &__text {
+	&:disabled &__text,
+	&:parentdisabled &__text {
 		color: $button-text-disabled;
 	}
 
@@ -97,5 +100,40 @@
 		&:hover:not(:disabled):not(:selected) {
 			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
 		}
+	}
+}
+
+.button-mono {
+	@extend .button;
+
+	flow-children: right;
+
+	padding: 0 15px;
+	background-color: $base-950;
+	border: $menu-pane-border;
+
+	&__icon {
+		width: 24px;
+		height: 24px;
+		margin-right: 8px;
+		vertical-align: middle;
+	}
+
+	&__icon-right {
+		@extend .button-mono__icon;
+
+		margin-left: 8px;
+		margin-right: 0px;
+	}
+
+	&__text {
+		font-weight: bold;
+		font-size: 16px;
+		vertical-align: center;
+	}
+
+	&:hover {
+		border-color: $primary-color;
+		background-color: $button-background-hover;
 	}
 }

@@ -3,6 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/addons.ts" />
 	</scripts>
 
@@ -52,14 +53,38 @@
 		</Panel>
 
 		<Panel id="SelectedAddonPanel" class="selected-addon hide">
-			<Panel class="flow-right">
+			<Panel class="flow-right full-width">
 				<Image id="SelectedAddonCover" class="selected-addon__cover" textureheight="128" texturewidth="128" />
-				<Panel class="flow-down vertical-align-center">
+				<Panel class="flow-down vertical-align-center full-width">
 					<Label id="SelectedAddonTitle" class="selected-addon__title" text="[PH] Addon Name" />
 					<Label id="SelectedAddonAuthors" class="selected-addon__authors" text="[PH] Addon Authors" />
-					<Button id="SelectedAddonView" class="mt-2 button" onactivate="AddonManager.viewSelectedOnSteam()">
-						<Label class="button__text" text="#MainMenu_Addons_ViewOnWS" />
-					</Button>
+					<Panel class="flow-down full-width">
+						<Button id="SelectedAddonView" class="mt-2 button-mono full-width" onactivate="AddonManager.viewSelectedOnSteam()">
+							<Image
+								class="button-mono__icon"
+								src="file://{images}/icons/steam.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="32"
+								textureheight="32"
+							/>
+							<Label class="button-mono__text" text="[HC] View On Steam" />
+						</Button>
+						<Panel id="SelectedAddonMapLauncher" class="flow-right full-width mt-2">
+							<DropDown id="SelectedAddonMaps" class="dropdown-mono fill-width mr-2" menuclass="dropdown-menu">
+								<Label text="MAP 1" id="SelectedAddonMapsEntry1" value="1" />
+							</DropDown>
+							<Button class="button-mono" onactivate="AddonManager.launchSelectedAddonMap()">
+								<Image
+									class="button-mono__icon"
+									src="file://{images}/play.svg"
+									scaling="stretch-to-fit-preserve-aspect"
+									texturewidth="32"
+									textureheight="32"
+								/>
+								<Label class="button-mono__text" text="[HC] Launch Map!" />
+							</Button>
+						</Panel>
+					</Panel>
 				</Panel>
 			</Panel>
 			<Panel class="selected-addon__description">
