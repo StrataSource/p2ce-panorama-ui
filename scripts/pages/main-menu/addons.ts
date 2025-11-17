@@ -218,7 +218,7 @@ class AddonManager {
 
 		this.updateSelectedAddonMaps();
 	}
-	
+
 	static updateSelectedAddonMaps() {
 		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
 
@@ -248,12 +248,7 @@ class AddonManager {
 
 		for (let i = 0; i < matchingMaps.length; ++i) {
 			const map = matchingMaps[i];
-			const entry = $.CreatePanel(
-				'Label',
-				this.addonMapsDropdown,
-				`AddonMap${map}`,
-				{ text: map, value: map }
-			);
+			const entry = $.CreatePanel('Label', this.addonMapsDropdown, `AddonMap${map}`, { text: map, value: map });
 			this.addonMapsDropdown.AddOption(entry);
 		}
 
@@ -405,7 +400,7 @@ class MountManager {
 
 	static steamApps: number[] = [];
 	static mountEntries: MountEntry[] = [];
-	
+
 	static init() {
 		this.mountsPage.visible = false;
 
@@ -441,10 +436,10 @@ class MountManager {
 		const maxAppCount = Math.min(MAX_MOUNTS_DISPLAYED, this.steamApps.length);
 		for (let i = 0; i < maxAppCount; ++i) {
 			try {
-				$.AsyncWebRequest(
-					`${BASE_API_URL}${this.steamApps[i]}`,
-					{ type: 'GET', complete: this.onAppRequestResponse.bind(this) }
-				);
+				$.AsyncWebRequest(`${BASE_API_URL}${this.steamApps[i]}`, {
+					type: 'GET',
+					complete: this.onAppRequestResponse.bind(this)
+				});
 			} catch (error) {
 				$.Warning(`AsyncWebRequest for Mount ${this.steamApps[i]} failed: ${error}`);
 				this.onAppRequestFailed();
@@ -458,7 +453,14 @@ class MountManager {
 			const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
 			p.LoadLayoutSnippet('MountEntrySnippet');
 
-			this.mountEntries.push(new MountEntry(p, `AppID: ${appId}`, 'file://{images}/menu/unknown-app-header.png', 'Maximum displayed mount count reached.'));
+			this.mountEntries.push(
+				new MountEntry(
+					p,
+					`AppID: ${appId}`,
+					'file://{images}/menu/unknown-app-header.png',
+					'Maximum displayed mount count reached.'
+				)
+			);
 			this.mountEntries[this.mountEntries.length - 1].update();
 		}
 	}
@@ -469,7 +471,14 @@ class MountManager {
 		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
 		p.LoadLayoutSnippet('MountEntrySnippet');
 
-		this.mountEntries.push(new MountEntry(p, 'Unable to retrieve App Name', 'file://{images}/menu/unknown-app-header.png', `${appId ? appId : 'UNKNOWN'}`));
+		this.mountEntries.push(
+			new MountEntry(
+				p,
+				'Unable to retrieve App Name',
+				'file://{images}/menu/unknown-app-header.png',
+				`${appId ? appId : 'UNKNOWN'}`
+			)
+		);
 		this.mountEntries[this.mountEntries.length - 1].update();
 	}
 

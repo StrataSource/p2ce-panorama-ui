@@ -12,7 +12,7 @@
 			<RadioButton class="addons__entry" group="AddonRadio">
 				<Panel class="addons__entry__left">
 					<!-- Addon icon cover -->
-					<Image id="AddonCover" class="addons__entry__cover" scaling="stretch-to-cover-preserve-aspect"/>
+					<Image id="AddonCover" class="addons__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
 
 					<!-- Addon info; title, description, 'source' -->
 					<Panel class="addons__entry__details">
@@ -28,7 +28,7 @@
 		</snippet>
 		<snippet name="MountEntrySnippet">
 			<Panel class="mounts__entry">
-				<Image id="MountCover" class="mounts__entry__cover" scaling="stretch"/>
+				<Image id="MountCover" class="mounts__entry__cover" scaling="stretch" />
 				<Panel class="mounts__entry__details">
 					<Label id="MountTitle" class="mounts__entry__details__title" text="[PH] Mount Title" />
 					<Label id="MountAppId" class="mounts__entry__details__appid" text="[PH] Mount AppID" />
@@ -40,7 +40,12 @@
 	<Panel class="mainmenu__page flow-right">
 		<Panel class="content__left">
 			<Panel class="full-width flow-right mb-2">
-				<RadioButton id="ViewAddonsBtn" class="button-mono button-mono__bigger fill-width mr-1" group="ContentViewType" onactivate="AddonManager.showPage()">
+				<RadioButton
+					id="ViewAddonsBtn"
+					class="button-mono button-mono__bigger fill-width mr-1"
+					group="ContentViewType"
+					onactivate="AddonManager.showPage()"
+				>
 					<Image
 						class="button-mono__icon"
 						src="file://{images}/menu/p2ce/logo_plain.svg"
@@ -53,7 +58,12 @@
 						<Label class="button-mono__text-panel__subheader" text="[HC] Locally installed &amp; Steam Workshop content" />
 					</Panel>
 				</RadioButton>
-				<RadioButton id="ViewMountsBtn" class="button-mono button-mono__bigger fill-width ml-1" group="ContentViewType" onactivate="MountManager.showPage()">
+				<RadioButton
+					id="ViewMountsBtn"
+					class="button-mono button-mono__bigger fill-width ml-1"
+					group="ContentViewType"
+					onactivate="MountManager.showPage()"
+				>
 					<Image
 						class="button-mono__icon"
 						src="file://{images}/download.svg"
@@ -99,9 +109,15 @@
 							texturewidth="32"
 							textureheight="32"
 						/>
-						<Button class="vertical-align-center flow-down" onactivate="SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts')">
+						<Button
+							class="vertical-align-center flow-down"
+							onactivate="SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts')"
+						>
 							<Label class="mounts__disclaimer__text" text="[HC] Configuring mounts is in development and currently unavailable." />
-							<Label class="mounts__disclaimer__small-text" text="[HC] Click on this banner to view how to configure mounts manually on the Wiki" />
+							<Label
+								class="mounts__disclaimer__small-text"
+								text="[HC] Click on this banner to view how to configure mounts manually on the Wiki"
+							/>
 						</Button>
 					</Panel>
 				</Panel>
@@ -111,11 +127,7 @@
 
 		<Panel id="SelectedAddonPanel" class="selected-addon hide">
 			<Panel class="flow-right full-width">
-				<Image
-					id="SelectedAddonCover"
-					class="selected-addon__cover"
-					scaling="stretch-to-cover-preserve-aspect"
-				/>
+				<Image id="SelectedAddonCover" class="selected-addon__cover" scaling="stretch-to-cover-preserve-aspect" />
 				<Panel class="flow-down vertical-align-center">
 					<Label id="SelectedAddonTitle" class="selected-addon__title" text="[PH] Addon Name" />
 					<Label id="SelectedAddonAuthors" class="selected-addon__authors" text="[PH] Addon Authors" />
