@@ -493,10 +493,13 @@
 }
 
 .saves {
+	&__container {
+		width: 100%;
+		tooltip-body-position: 50% 50%;
+	}
+
 	&__entry {
 		width: 100%;
-
-		tooltip-body-position: 50% 50%;
 
 		$this: &;
 
@@ -538,16 +541,6 @@
 			}
 		}
 
-		&__delete {
-			&__btn {
-				margin-right: 15px;
-				width: 48px;
-				height: 48px;
-				horizontal-align: right;
-				vertical-align: center;
-			}
-		}
-
 		&:disabled {
 			#{$this}__cover,
 			#{$this}__details {
@@ -558,6 +551,14 @@
 
 		&:hover:not(:disabled) {
 			background-color: $button-background-hover;
+		}
+
+		&__delete {
+			margin-right: 30px;
+			width: 48px;
+			height: 48px;
+			horizontal-align: right;
+			vertical-align: center;
 		}
 	}
 }
