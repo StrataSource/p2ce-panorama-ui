@@ -5,6 +5,7 @@
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
+		<include src="file://{scripts}/pages/main-menu/news.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
@@ -24,6 +25,9 @@
 				>
 				</Movie>
 			</Panel>
+		</snippet>
+		<snippet name="NewsPipSnippet">
+			<RadioButton class="home__news__pips__entry" group="NewsPipRadio" />
 		</snippet>
 	</snippets>
 
@@ -127,76 +131,79 @@
 			<!-- /Topnav -->
 
 			<!-- Full page blur: used to blur everything below the drawer -->
-				<Panel class="mainmenu__container">
-					<!-- Backgrounds -->
-					<!-- Background blur: used to blur the backgrounds behind mainmenu pages -->
-					<BaseBlurTarget
+			<Panel class="mainmenu__container">
+				<!-- Backgrounds -->
+				<!-- Background blur: used to blur the backgrounds behind mainmenu pages -->
+				<BaseBlurTarget
 					id="MainMenuBackgroundBlur"
 					class="mainmenu__background-blur"
 					blurrects="MainMenuContentBlur MainMenuNavBar"
 				>
+					<!-- Movie background -->
+					<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
+					<!-- Static image background -->
+					<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
 
-						<!-- Movie background -->
-						<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
-
-						<!-- Static image background -->
-						<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
-
-						<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-						<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur" blurrects="PauseMenuMainMenuContent">
-							<!-- Backbuffer background -->
-							<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
-						</BaseBlurTarget>
-
+					<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+					<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur" blurrects="PauseMenuMainMenuContent">
+						<!-- Backbuffer background -->
+						<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
 					</BaseBlurTarget>
-					<!-- /Backgrounds -->
 
-					<Panel class="mainmenu__content">
-						<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
+				</BaseBlurTarget>
+				<!-- /Backgrounds -->
 
-						<Panel id="PauseContent" class="mainmenu__home-container PauseMenuModeOnly">
-							<Panel class="home">
-								<!-- Resume game button, pause menu only -->
-								<Button class="home__prompt home__prompt__short" onactivate="$.DispatchEvent('MainMenuResumeGame');">
-									<Image
-									src="file://{images}/menu/p2ce/random2.png"
+				<Panel class="mainmenu__content">
+					<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
+
+					<Panel id="PauseContent" class="mainmenu__home-container PauseMenuModeOnly">
+						<Panel class="home">
+							<!-- Resume game button, pause menu only -->
+							<Button class="home__prompt home__prompt__short" onactivate="$.DispatchEvent('MainMenuResumeGame');">
+								<Image
+									src="file://{images}/menu/p2ce/random4.png"
 									scaling="stretch-to-cover-preserve-aspect"
 									class="home__prompt__image"
 								/>
-									<Panel class="home__prompt__short__content">
-										<Label class="home__heading" text="[HC] Resume Game" />
-									</Panel>
-								</Button>
-								<Panel class="home__spacer__v" />
+								<Panel class="home__prompt__gradient" />
+								<Panel class="home__prompt__short__content">
+									<Label class="home__heading" text="[HC] Resume Game" />
+								</Panel>
+							</Button>
+							<Panel class="home__spacer__v" />
+							<Panel class="home__horizontal">
 								<!-- See all saves -->
 								<Button class="home__prompt" disabled="true">
 									<Image
-									src="file://{images}/menu/p2ce/random1.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
+										src="file://{images}/menu/p2ce/random5.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__content">
 										<Label class="home__heading" text="[HC] Save/Load Game (COMING SOON)" />
 									</Panel>
 								</Button>
-								<Panel class="home__spacer__v" />
+								<Panel class="home__spacer__h" />
 								<!-- Continue latest save -->
 								<Button id="PausedLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
 									<Image
-									id="PausedSaveImage"
-									src="file://{images}/menu/p2ce/random3.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
+										id="PausedSaveImage"
+										src="file://{images}/menu/p2ce/random3.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__content">
 										<Label class="home__heading" text="[HC] Load Last Save" />
 									</Panel>
 								</Button>
 							</Panel>
 						</Panel>
+					</Panel>
 
-						<Panel id="HomeContent" class="mainmenu__home-container MainMenuModeOnly">
-							<ModelPanel
+					<Panel id="HomeContent" class="mainmenu__home-container MainMenuModeOnly">
+						<ModelPanel
 							id="MainMenuModel"
 							class="home__modelpanel MainMenuModeOnly"
 							src="models/npcs/turret/turret.mdl"
@@ -204,65 +211,93 @@
 							antialias="true"
 							mouse_rotate="true"
 						/>
-							<Panel class="home">
-								<!-- Continue latest save -->
+						<Panel class="home">
+							<!-- Continue latest save -->
+							<Panel class="home__horizontal">
+								<Button class="home__prompt">
+									<Image
+										id="FeaturedImage"
+										src="file://{images}/menu/p2ce/random2.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__gradient" />
+									<Panel class="home__prompt__content">
+										<Label class="home__heading" text="[PH] Featured Item" />
+										<Label class="home__subheading" text="[PH] Featured Author" />
+ 									</Panel>
+ 								</Button>
+								<Panel class="home__spacer__h" />
 								<Button id="MainMenuLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
 									<Image
-									id="MainMenuSaveImage"
-									defaultsrc="file://{images}/menu/p2ce/random1.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
+										id="MainMenuSaveImage"
+										defaultsrc="file://{images}/menu/p2ce/random1.png"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="home__prompt__image"
+									/>
+									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__content">
 										<Label class="home__heading" text="[HC] Continue" />
 										<Label id="MainMenuSaveSubheadingLabel" class="home__subheading" text="[HC] No Save Available" />
 									</Panel>
 								</Button>
-								<Panel class="home__bottom">
-									<Button id="NewsFlyoutBtn" class="home__expandable home__expandable__join-btm">
-										<Image
-										id="NewsFlyoutImage"
-										src="file://{images}/menu/p2ce/news-splash.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
-										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] NEWS" />
-										<Panel class="home__expandable__content">
-											<Label id="NewsFlyoutHeader" class="home__heading" text="[PH] News Flyout Header" />
-											<Label
-											id="NewsFlyoutDescription"
-											class="home__subheading home__expandable__active-only"
-											text="[PH] News Flyout Description"
-										/>
+							</Panel>
+							<Panel class="home__bottom">
+								<Panel id="News" class="home__news">
+									<Panel id="NewsActionBar" class="full-width">
+										<Panel id="NewsPipContainer" class="home__news__pips" />
+
+										<Panel class="horizontal-align-right flow-right">
+											<Button class="home__news__nav-btn home__news__nav-btn__left" onactivate="NewsReel.goPrevArticle()">
+												<Image
+													src="file://{images}/arrow-forward.svg"
+													class="home__news__nav-btn__left__img"
+													texturewidth="32"
+													textureheight="32"
+												/>
+											</Button>
+											<Button class="home__news__nav-btn" onactivate="NewsReel.goNextArticle()">
+												<Image src="file://{images}/arrow-forward.svg" texturewidth="32" textureheight="32" />
+											</Button>
 										</Panel>
-									</Button>
-									<Button class="home__expandable" onactivate="MainMenu.onFeaturedFlyoutPressed()">
+									</Panel>
+									<Button
+										id="NewsBtn"
+										class="home__news__content"
+										onmouseover="NewsReel.onReelMouseOver()"
+										onmouseout="NewsReel.onReelMouseOut()"
+									>
 										<Image
-										id="FeaturedFlyoutImage"
-										src="file://{images}/menu/p2ce/random2.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
-										<Label class="home__expandable__inactive-only home__expandable__big-text" text="[HC] FEATURED" />
-										<Panel class="home__expandable__content">
-											<Label id="FeaturedFlyoutHeader" class="home__heading" text="[PH] Featured Flyout Header" />
-											<Label
-											id="FeaturedFlyoutDescription"
-											class="home__subheading home__expandable__active-only"
-											text="[PH] Featured Flyout Description"
+											id="NewsGradientImage"
+											src="file://{images}/menu/p2ce/random4.png"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="home__news__content__bg-image"
 										/>
+										<Panel class="home__news__content__container">
+											<Image
+												id="NewsImage"
+												src="file://{images}/menu/p2ce/news-splash.png"
+												scaling="stretch-to-cover-preserve-aspect"
+												class="home__news__content__image"
+											/>
+											<Panel class="home__news__content__details">
+												<Label id="NewsHeader" class="home__news__content__details__header" text="[PH] News Header" />
+												<Label id="NewsDesc" class="home__news__content__details__desc" text="[PH] News Description" />
+											</Panel>
 										</Panel>
+										<ProgressBar id="NewsProgressBar" class="home__news__content__progress" min="0.0" max="1.0" />
 									</Button>
 								</Panel>
 							</Panel>
 						</Panel>
+					</Panel>
 
-						<Panel id="PageContent" class="mainmenu__page-container mainmenu__page-container--hidden">
-							<Panel id="MainMenuContentBlur" class="mainmenu__page-blur" />
-							<!-- A panel gets inserted here dynamically from js, depending on which tab we click -->
-						</Panel>
+					<Panel id="PageContent" class="mainmenu__page-container mainmenu__page-container--hidden">
+						<Panel id="MainMenuContentBlur" class="mainmenu__page-blur" />
+						<!-- A panel gets inserted here dynamically from js, depending on which tab we click -->
 					</Panel>
 				</Panel>
+			</Panel>
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
@@ -272,6 +307,5 @@
 
 		<!-- Doesn't actually include the notifications, but we use its position to figure out where to show them -->
 		<Panel id="SteamNotificationsPlaceholder" hittest="false" />
-		
 	</MainMenu>
 </root>

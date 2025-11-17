@@ -1,0 +1,162 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
+
+.home {
+	&__news {
+		width: 100%;
+
+		flow-children: down;
+
+		&__pips {
+			vertical-align: center;
+			flow-children: right;
+			background-color: $base-950;
+			border: $menu-pane-border;
+			border-bottom-width: 0;
+			padding: 2px 6px;
+
+			&__entry {
+				width: 32px;
+				height: 32px;
+				//border: $menu-pane-border;
+				//border-radius: 16px;
+
+				tooltip-position: right;
+				tooltip-body-position: 0% 50%;
+
+				background-image: url('file://{images}/menu/indicator_inactive.png');
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 125%;
+
+				& .RadioBox {
+					visibility: collapse;
+				}
+
+				&:hover:not(:selected) {
+					background-image: url('file://{images}/menu/indicator_off.png');
+				}
+
+				&:selected {
+					background-image: url('file://{images}/menu/indicator_on.png');
+					//background-color: $primary-700;
+				}
+			}
+		}
+
+		&__nav-btn {
+			height: 37px;
+
+			border: $menu-pane-border;
+			border-bottom-width: 0px;
+			background-color: $base-950;
+			padding: 0 15px;
+
+			& > Image {
+				vertical-align: center;
+			}
+
+			&__left {
+				border-right-width: 0;
+				&__img {
+					transform: scaleX(-1);
+				}
+			}
+
+			&:hover:not(:parentdisabled) {
+				background-color: $button-background-hover;
+			}
+		}
+
+		&__content {
+			width: fill-parent-flow(1);
+			height: 192px;
+
+			border: $menu-pane-border;
+			background-color: $base-950;
+
+			$this: &;
+
+			&__container {
+				height: 100%;
+				flow-children: right;
+
+				padding: 15px;
+				background-color: gradient(linear, 0% 0%, 95% 0%, from(rgba(0, 0, 0, 0)), to($base-950));
+			}
+
+			&__bg-image {
+				width: 100%;
+				height: 100%;
+				opacity: 0.2;
+			}
+
+			&__image {
+				width: 384px;
+				height: 100%;
+
+				border: $menu-pane-border;
+
+				margin-right: 22px;
+			}
+
+			&__details {
+				width: fill-parent-flow(1);
+
+				vertical-align: center;
+				flow-children: down;
+
+				&__header {
+					@include mixin.font-styles($use-header: true);
+					font-size: 20px;
+					margin-bottom: 2px;
+					text-shadow: 2px 2px 4px 2 $base-950;
+				}
+
+				&__desc {
+					font-size: 16px;
+					color: $base-200;
+					text-shadow: 1px 1px 6px 3 $base-950;
+					max-height: 102px;
+				}
+			}
+
+			&__progress {
+				height: 2px;
+				width: 0%;
+				vertical-align: bottom;
+				background-color: $progressbar-background-progress;
+				&__activate-transition {
+					transition: width 15s linear 0s;
+				}
+				&__animate {
+					width: 100%;
+				}
+
+				.ProgressBarLeft {
+					background-color: $progressbar-background-progress;
+				}
+			}
+
+			&:hover:not(:parentdisabled) {
+				border-color: $primary-color;
+
+				#{$this}__container {
+					background-color: $button-background-hover;
+				}
+
+				#{$this}__image {
+					border-color: $primary-color;
+				}
+
+				#{$this}__details {
+					&__header,
+					&__desc {
+						text-shadow: none;
+					}
+				}
+			}
+		}
+	}
+}

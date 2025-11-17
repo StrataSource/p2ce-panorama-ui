@@ -63,6 +63,14 @@
 			#{$this}__inner {
 				background-color: $button-background-hover;
 			}
+
+			#{$this}__details {
+				&__title,
+				&__author,
+				&__desc {
+					text-shadow: none;
+				}
+			}
 		}
 
 		&:selected {
