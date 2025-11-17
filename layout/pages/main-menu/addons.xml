@@ -116,11 +116,11 @@
 					class="selected-addon__cover"
 					scaling="stretch-to-cover-preserve-aspect"
 				/>
-				<Panel class="flow-down vertical-align-center full-width">
+				<Panel class="flow-down vertical-align-center">
 					<Label id="SelectedAddonTitle" class="selected-addon__title" text="[PH] Addon Name" />
 					<Label id="SelectedAddonAuthors" class="selected-addon__authors" text="[PH] Addon Authors" />
-					<Panel class="flow-down full-width">
-						<Button id="SelectedAddonView" class="mt-1 button-mono full-width" onactivate="AddonManager.viewSelectedOnSteam()">
+					<Panel class="flow-down">
+						<Button id="SelectedAddonView" class="mt-1 button-mono" onactivate="AddonManager.viewSelectedOnSteam()">
 							<Image
 								class="button-mono__icon"
 								src="file://{images}/icons/steam.svg"
@@ -130,7 +130,7 @@
 							/>
 							<Label class="button-mono__text" text="[HC] View On Steam" />
 						</Button>
-						<Panel id="SelectedAddonMapLauncher" class="flow-right full-width mt-1">
+						<Panel id="SelectedAddonMapLauncher" class="flow-right fill-width mt-1">
 							<DropDown id="SelectedAddonMaps" class="dropdown-mono fill-width mr-1" menuclass="dropdown-menu">
 								<Label text="MAP 1" id="SelectedAddonMapsEntry1" value="1" />
 							</DropDown>
@@ -142,7 +142,7 @@
 									texturewidth="32"
 									textureheight="32"
 								/>
-								<Label class="button-mono__text" text="[HC] Launch Map!" />
+								<Label id="SelectedAddonRunMapText" class="button-mono__text" text="[HC] Launch Map!" />
 							</Button>
 						</Panel>
 					</Panel>
