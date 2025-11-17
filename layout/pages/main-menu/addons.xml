@@ -134,7 +134,7 @@
 							<DropDown id="SelectedAddonMaps" class="dropdown-mono fill-width mr-1" menuclass="dropdown-menu">
 								<Label text="MAP 1" id="SelectedAddonMapsEntry1" value="1" />
 							</DropDown>
-							<Button class="button-mono" onactivate="AddonManager.launchSelectedAddonMap()">
+							<Button id="SelectedAddonRunMapBtn" class="button-mono" onactivate="AddonManager.launchSelectedAddonMap()">
 								<Image
 									class="button-mono__icon"
 									src="file://{images}/play.svg"
