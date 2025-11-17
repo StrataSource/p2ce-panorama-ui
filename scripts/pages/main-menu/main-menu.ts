@@ -20,7 +20,8 @@ class MainMenu {
 		mainMenuSaveImage: $<Image>('#MainMenuSaveImage')!,
 		mainMenuSaveSubheadingLabel: $<Label>('#MainMenuSaveSubheadingLabel')!,
 		pausedSaveImage: $<Image>('#PausedSaveImage')!,
-		pausedLatestSaveTime: $<Label>('#PausedLatestSaveTimeLabel')!
+		pausedLatestSaveTime: $<Label>('#PausedLatestSaveTimeLabel')!,
+		pausedSaveGameBtn: $<Button>('#PausedSaveGameButton')!
 	};
 
 	static activeTab = '';
@@ -166,6 +167,21 @@ class MainMenu {
 			const dateStr = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 			this.panels.mainMenuSaveSubheadingLabel.text = dateStr;
 			this.panels.pausedLatestSaveTime.text = dateStr;
+		}
+
+		this.panels.pausedSaveGameBtn.ClearPanelEvent('onmouseover');
+		this.panels.pausedSaveGameBtn.ClearPanelEvent('onmouseout');
+		this.panels.pausedSaveGameBtn.enabled = !GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
+		if (!this.panels.pausedSaveGameBtn.enabled) {
+			this.panels.pausedSaveGameBtn.SetPanelEvent('onmouseover', () => {
+				UiToolkitAPI.ShowTextTooltip(
+					this.panels.pausedSaveGameBtn.id,
+					tagDevString('Saving is currently unavailable.')
+				);
+			});
+			this.panels.pausedSaveGameBtn.SetPanelEvent('onmouseout', () => {
+				UiToolkitAPI.HideTextTooltip();
+			});
 		}
 	}
 

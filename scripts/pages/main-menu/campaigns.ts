@@ -457,21 +457,20 @@ class CampaignSavesTab {
 }
 
 class CampaignStartPage {
+	static campaignStartPage = $<Panel>('#CampaignStartPage')!;
+	static campaignBg = $<Image>('#CampaignBackground')!;
+	static campaignLogo = $<Image>('#CampaignLogo')!;
 	static campaignListerContainer = $<Panel>('#CampaignListerContainer')!;
 	static campaignLister = $<Panel>('#CampaignLister')!;
-	static campaignStartPage = $<Panel>('#CampaignStartPage')!;
-	static campaignLogo = $<Image>('#CampaignLogo')!;
+	static campaignControls = $<Panel>('#CampaignControls')!;
+
 	static campaignLoadLatestBtn = $<Button>('#CampaignLoadLatestBtn')!;
 	static campaignAllSavesBtn = $<Button>('#CampaignAllSavesBtn')!;
-	static campaignBg = $<Image>('#CampaignBackground')!;
-	static campaignControls = $<Panel>('#CampaignControls')!;
+	static campaignSaveBtn = $<Button>('#CampaignSaveBtn')!;
 
 	static {
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
-		$.RegisterForUnhandledEvent('LayoutReloaded', this.onLayoutReloaded.bind(this));
 	}
-
-	static onLayoutReloaded() {}
 
 	static init() {
 		this.campaignStartPage.visible = false;
@@ -536,6 +535,18 @@ class CampaignStartPage {
 		// only save game when in game
 		const saveBtn = $('#CampaignSaveBtn')!;
 		saveBtn.visible = isInGame;
+
+		saveBtn.ClearPanelEvent('onmouseover');
+		saveBtn.ClearPanelEvent('onmouseout');
+		saveBtn.enabled = !GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
+		if (!saveBtn.enabled) {
+			saveBtn.SetPanelEvent('onmouseover', () => {
+				UiToolkitAPI.ShowTextTooltip(saveBtn.id, tagDevString('Saving is currently unavailable.'));
+			});
+			saveBtn.SetPanelEvent('onmouseout', () => {
+				UiToolkitAPI.HideTextTooltip();
+			});
+		}
 	}
 
 	static updateLoadBtns() {
