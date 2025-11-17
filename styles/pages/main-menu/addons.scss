@@ -119,8 +119,8 @@
 	background-color: $base-950;
 
 	&__cover {
-		width: 256px;
-		height: 256px;
+		min-width: 192px;
+		height: 192px;
 
 		border: $menu-pane-border;
 		margin-right: 15px;
@@ -128,7 +128,7 @@
 
 	&__title {
 		@include mixin.font-styles($use-header: true);
-		font-size: 32px;
+		font-size: 28px;
 	}
 
 	&__authors {
