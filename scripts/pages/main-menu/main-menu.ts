@@ -28,7 +28,6 @@ class MainMenu {
 	static inSpace = false; // Temporary fun...
 
 	static {
-		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
@@ -85,6 +84,9 @@ class MainMenu {
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
 		stripDevTagsFromLabels($.GetContextPanel());
+
+		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
+		this.onShowMainMenu();
 	}
 
 	/**
