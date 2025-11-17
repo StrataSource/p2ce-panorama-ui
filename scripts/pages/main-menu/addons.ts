@@ -89,6 +89,7 @@ class AddonManager {
 	static addonSteam = $<Button>('#SelectedAddonView')!;
 	static addonMapsPanel = $<Panel>('#SelectedAddonMapLauncher')!;
 	static addonMapsDropdown = $<DropDown>('#SelectedAddonMaps')!;
+	static addonsPage = $<Panel>('#AddonsPage')!;
 
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');
@@ -100,10 +101,23 @@ class AddonManager {
 	static gameMaps: string[] = [];
 
 	static init() {
+		this.addonsPage.visible = false;
+
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onMainMenuTabShown.bind(this));
 		this.createAddonEntries();
 		this.findMaps();
+
+		$.DispatchEvent('Activated', $<RadioButton>('#ViewAddonsBtn')!, PanelEventSource.MOUSE);
+	}
+
+	static showPage() {
+		MountManager.hidePage();
+		this.addonsPage.visible = true;
+	}
+
+	static hidePage() {
+		this.addonsPage.visible = false;
 	}
 
 	static updateAddons() {
@@ -330,5 +344,105 @@ class AddonManager {
 	static reloadAddonList() {
 		this.purgeAddonList();
 		this.createAddonEntries();
+	}
+}
+
+class MountEntry {
+	panel: Panel;
+	name: string;
+	capsuleUrl: string;
+	appid: string;
+
+	constructor(panel: Panel, name: string, capsuleUrl: string, appid: string) {
+		this.panel = panel;
+		this.name = name;
+		this.capsuleUrl = capsuleUrl;
+		this.appid = appid;
+	}
+
+	update() {
+		const title = this.panel.FindChildTraverse<Label>('MountTitle');
+		const appid = this.panel.FindChildTraverse<Label>('MountAppId');
+		const cover = this.panel.FindChildTraverse<Image>('MountCover');
+
+		if (title) {
+			title.text = this.name;
+		}
+		if (appid) {
+			appid.text = this.appid;
+		}
+		if (cover) {
+			cover.SetImage(this.capsuleUrl);
+		}
+	}
+}
+
+class MountManager {
+	static mountsList = $<Panel>('#MountContainer')!;
+	static mountsPage = $<Panel>('#MountsPage')!;
+
+	static steamApps: number[] = [];
+	static mountEntries: MountEntry[] = [];
+	
+	static init() {
+		this.mountsPage.visible = false;
+
+		this.steamApps = GameInterfaceAPI.GetMountedSteamApps();
+		this.populateMountEntries();
+	}
+
+	static showPage() {
+		AddonManager.hidePage();
+		this.mountsPage.visible = true;
+	}
+
+	static hidePage() {
+		this.mountsPage.visible = false;
+	}
+
+	static populateMountEntries() {
+		// don't flood the API with requests, just bail out
+		if (this.steamApps.length > 20) return;
+
+		const BASE_API_URL = 'https://store.steampowered.com/api/appdetails/?appids=';
+
+		for (let i = 0; i < this.steamApps.length; ++i) {
+			try {
+				$.AsyncWebRequest(
+					`${BASE_API_URL}${this.steamApps[i]}`,
+					{ type: 'GET', complete: this.onAppRequestResponse.bind(this) }
+				);
+			} catch (error) {
+				$.Warning(`AsyncWebRequest for Mount ${this.steamApps[i]} failed: ${error}`);
+				this.onAppRequestFailed();
+			}
+		}
+	}
+
+	static onAppRequestFailed(appId?: number) {
+		$.Warning('Failed to retrieve App ID details.');
+
+		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
+		p.LoadLayoutSnippet('MountEntrySnippet');
+
+		this.mountEntries.push(new MountEntry(p, 'Unable to retrieve App Name', 'file://{images}/menu/unknown-app-header.png', `${appId ? appId : 'UNKNOWN'}`));
+		this.mountEntries[this.mountEntries.length - 1].update();
+	}
+
+	static onAppRequestResponse(data) {
+		if (data.statusText !== 'success') {
+			this.onAppRequestFailed();
+			return;
+		}
+
+		const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+		const appId = Object.keys(response)[0];
+		const appInfo = response[Object.keys(response)[0]]['data'];
+
+		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
+		p.LoadLayoutSnippet('MountEntrySnippet');
+
+		this.mountEntries.push(new MountEntry(p, appInfo['name'], appInfo['header_image'], appId));
+		this.mountEntries[this.mountEntries.length - 1].update();
 	}
 }

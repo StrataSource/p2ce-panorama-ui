@@ -2,8 +2,21 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
+.content {
+	&__left {
+		width: 50%;
+		height: 100%;
+		flow-children: down;
+	}
+
+	&__action-bar {
+		width: 100%;
+		flow-children: right;
+	}
+}
+
 .addons {
-	width: 50%;
+	width: 100%;
 	height: 100%;
 	flow-children: down;
 
@@ -135,6 +148,91 @@
 		&__text {
 			overflow: squish scroll;
 			padding: 15px;
+		}
+	}
+}
+
+.mounts {
+	width: 100%;
+	height: 100%;
+	flow-children: down;
+
+	border: $menu-pane-border;
+
+	&__disclaimer {
+		width: 100%;
+		padding: 10px;
+		background-color: rgb(255, 53, 53);
+		border-bottom: $menu-pane-border;
+
+		$this: &;
+
+		&__icon {
+			vertical-align: center;
+			wash-color: $base-950;
+			margin-right: 8px;
+		}
+
+		&__text {
+			font-weight: bold;
+			color: $base-950;
+		}
+
+		&__small-text {
+			color: $base-950;
+			font-size: 16px;
+		}
+
+		&:hover {
+			background-color: rgb(190, 39, 39);
+
+			#{$this}__text,
+			#{$this}__small-text {
+				color: $bright-color;
+			}
+
+			#{$this}__icon {
+				wash-color: $bright-color;
+			}
+		}
+	}
+
+	&__list {
+		width: 100%;
+		height: fill-parent-flow(1);
+		overflow: squish scroll;
+		flow-children: down;
+
+		background-color: $base-950;
+	}
+
+	&__entry {
+		width: 100%;
+		flow-children: right;
+
+		padding: 15px;
+		border-bottom: $menu-pane-border;
+
+		&__cover {
+			width: 230px;
+			height: 108px;
+
+			border: $menu-pane-border;
+			margin-right: 23px;
+		}
+
+		&__details {
+			flow-children: down;
+			vertical-align: center;
+
+			&__title {
+				@include mixin.font-styles($use-header: true);
+				font-size: 32px;
+			}
+
+			&__appid {
+				color: $base-200;
+			}
 		}
 	}
 }

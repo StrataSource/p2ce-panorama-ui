@@ -102,7 +102,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
-							<Label text="#MainMenu_Navigation_Addons" class="text" />
+							<Label text="[HC] Content" class="text" />
 						</Panel>
 					</RadioButton>
 
