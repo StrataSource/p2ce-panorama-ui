@@ -188,7 +188,12 @@
 							<Panel class="home__spacer__v" />
 							<Panel class="home__horizontal">
 								<!-- See all saves -->
-								<Button class="home__prompt" onactivate="MainMenu.openSaveCampaign()">
+								<Button
+									id="PausedSaveGameButton"
+									class="home__prompt"
+									style="tooltip-position: left bottom; tooltip-body-position: 50%;"
+									onactivate="MainMenu.openSaveCampaign()"
+								>
 									<Image
 										src="file://{images}/menu/p2ce/random5.png"
 										scaling="stretch-to-cover-preserve-aspect"
