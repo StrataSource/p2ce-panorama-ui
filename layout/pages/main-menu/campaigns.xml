@@ -61,35 +61,35 @@
 
 		<!-- Save Entry -->
 		<snippet name="SaveEntrySnippet">
-			<Button class="saves__entry">
-				<Panel class="saves__entry__inner">
-					<!-- Save icon cover -->
-					<Image
-						id="SaveCover"
-						class="saves__entry__cover"
-						src="file://{materials}/vgui/no_save_game.vtf"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1920"
-						texturewidth="1080"
-					/>
-
-					<!-- Save info; title, description, 'source' -->
-					<Panel class="saves__entry__details">
-						<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
-						<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
-					</Panel>
-
-					<Button id="SaveDelete" class="saves__entry__delete__btn button button--red">
+			<Panel class="saves__container">
+				<Button id="SaveAction" class="saves__entry">
+					<Panel class="saves__entry__inner">
+						<!-- Save icon cover -->
 						<Image
-							class="button__icon"
-							src="file://{images}/delete.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="48"
-							textureheight="48"
+							id="SaveCover"
+							class="saves__entry__cover"
+							src="file://{materials}/vgui/no_save_game.vtf"
+							scaling="stretch-to-cover-preserve-aspect"
+							textureheight="1920"
+							texturewidth="1080"
 						/>
-					</Button>
-				</Panel>
-			</Button>
+						<!-- Save info; title, description, 'source' -->
+						<Panel class="saves__entry__details">
+							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
+							<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
+						</Panel>
+					</Panel>
+				</Button>
+				<Button id="SaveDelete" class="saves__entry__delete button button--red">
+					<Image
+						class="button__icon"
+						src="file://{images}/delete.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						texturewidth="48"
+						textureheight="48"
+					/>
+				</Button>
+			</Panel>
 		</snippet>
 		<!-- / Save Entry -->
 

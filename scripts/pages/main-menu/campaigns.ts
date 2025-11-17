@@ -154,9 +154,11 @@ class SaveEntry {
 	}
 
 	update() {
+		const actionBtn = this.panel.FindChildTraverse('SaveAction')!;
+
 		if (this.isSaver) {
 			if (this.save.name.includes('quick') || this.save.name.includes('auto')) {
-				this.panel.enabled = false;
+				actionBtn.enabled = false;
 
 				this.panel.SetPanelEvent('onmouseover', () => {
 					UiToolkitAPI.ShowTextTooltip(this.panel.id, tagDevString('You cannot overwrite this save.'));
@@ -206,7 +208,7 @@ class SaveEntry {
 		}
 
 		if (this.isSaver) {
-			this.panel.SetPanelEvent('onactivate', () => {
+			actionBtn.SetPanelEvent('onactivate', () => {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 					tagDevString('Overwrite Save?'),
 					tagDevString('Are you sure you want to overwrite this save file? Progress will be lost!'),
@@ -228,7 +230,7 @@ class SaveEntry {
 				);
 			});
 		} else {
-			this.panel.SetPanelEvent('onactivate', () => {
+			actionBtn.SetPanelEvent('onactivate', () => {
 				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) SaveRestoreAPI.LoadSave(this.save.name);
 				else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
