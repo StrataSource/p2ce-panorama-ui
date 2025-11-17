@@ -118,6 +118,15 @@ class AddonManager {
 
 	static hidePage() {
 		this.addonsPage.visible = false;
+		this.addonPanel.AddClass('hide');
+
+		const addonChildren = this.addonContainer.Children();
+		for (let i = 0; i < addonChildren.length; ++i) {
+			const child = addonChildren[i];
+
+			if (child.paneltype !== 'RadioButton') continue;
+			(child as RadioButton).SetSelected(false);
+		}
 	}
 
 	static updateAddons() {
@@ -380,7 +389,6 @@ class MountEntry {
 class MountManager {
 	static mountsList = $<Panel>('#MountContainer')!;
 	static mountsPage = $<Panel>('#MountsPage')!;
-	static addonPanel = $<Panel>('#SelectedAddonPanel')!;
 
 	static steamApps: number[] = [];
 	static mountEntries: MountEntry[] = [];
@@ -395,7 +403,6 @@ class MountManager {
 	static showPage() {
 		AddonManager.hidePage();
 		this.mountsPage.visible = true;
-		this.addonPanel.AddClass('hide');
 	}
 
 	static hidePage() {
