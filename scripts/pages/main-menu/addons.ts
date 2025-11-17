@@ -89,6 +89,7 @@ class AddonManager {
 	static addonSteam = $<Button>('#SelectedAddonView')!;
 	static addonMapsPanel = $<Panel>('#SelectedAddonMapLauncher')!;
 	static addonMapsDropdown = $<DropDown>('#SelectedAddonMaps')!;
+	static addonMapsLaunch = $<Button>('#SelectedAddonRunMapBtn')!;
 	static addonsPage = $<Panel>('#AddonsPage')!;
 
 	static applyButton = $<Button>('#ApplyButton');
@@ -256,6 +257,11 @@ class AddonManager {
 		}
 
 		this.addonMapsDropdown.SetSelectedIndex(0);
+
+		// don't bother showing the dropdown if there's only one map, save space
+		const multiMaps = matchingMaps.length > 1;
+		this.addonMapsDropdown.visible = multiMaps;
+		this.addonMapsLaunch.SetHasClass('fill-width', !multiMaps);
 
 		this.addonMapsPanel.visible = hasMaps;
 	}
