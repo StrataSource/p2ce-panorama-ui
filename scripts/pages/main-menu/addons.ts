@@ -380,6 +380,7 @@ class MountEntry {
 class MountManager {
 	static mountsList = $<Panel>('#MountContainer')!;
 	static mountsPage = $<Panel>('#MountsPage')!;
+	static addonPanel = $<Panel>('#SelectedAddonPanel')!;
 
 	static steamApps: number[] = [];
 	static mountEntries: MountEntry[] = [];
@@ -394,6 +395,7 @@ class MountManager {
 	static showPage() {
 		AddonManager.hidePage();
 		this.mountsPage.visible = true;
+		this.addonPanel.AddClass('hide');
 	}
 
 	static hidePage() {
@@ -401,12 +403,23 @@ class MountManager {
 	}
 
 	static populateMountEntries() {
-		// don't flood the API with requests, just bail out
-		if (this.steamApps.length > 20) return;
-
+		// don't flood the API with requests
+		const MAX_MOUNTS_DISPLAYED = 10;
 		const BASE_API_URL = 'https://store.steampowered.com/api/appdetails/?appids=';
 
-		for (let i = 0; i < this.steamApps.length; ++i) {
+		// warn user
+		if (this.steamApps.length > MAX_MOUNTS_DISPLAYED) {
+			UiToolkitAPI.ShowGenericPopupOk(
+				'High Mount Count',
+				`You have ${this.steamApps.length} games mounted. For technical reasons, only ${MAX_MOUNTS_DISPLAYED} will be properly displayed.`,
+				'generic-popup',
+				() => {}
+			);
+		}
+
+		// make requests
+		const maxAppCount = Math.min(MAX_MOUNTS_DISPLAYED, this.steamApps.length);
+		for (let i = 0; i < maxAppCount; ++i) {
 			try {
 				$.AsyncWebRequest(
 					`${BASE_API_URL}${this.steamApps[i]}`,
@@ -416,6 +429,17 @@ class MountManager {
 				$.Warning(`AsyncWebRequest for Mount ${this.steamApps[i]} failed: ${error}`);
 				this.onAppRequestFailed();
 			}
+		}
+
+		// do the rest if there's still more
+		for (let i = maxAppCount; i < this.steamApps.length; ++i) {
+			const appId = this.steamApps[i];
+
+			const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
+			p.LoadLayoutSnippet('MountEntrySnippet');
+
+			this.mountEntries.push(new MountEntry(p, `AppID: ${appId}`, 'file://{images}/menu/unknown-app-header.png', 'Maximum displayed mount count reached.'));
+			this.mountEntries[this.mountEntries.length - 1].update();
 		}
 	}
 
