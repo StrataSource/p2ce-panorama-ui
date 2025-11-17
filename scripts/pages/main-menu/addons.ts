@@ -90,6 +90,7 @@ class AddonManager {
 	static addonMapsPanel = $<Panel>('#SelectedAddonMapLauncher')!;
 	static addonMapsDropdown = $<DropDown>('#SelectedAddonMaps')!;
 	static addonMapsLaunch = $<Button>('#SelectedAddonRunMapBtn')!;
+	static addonMapsLaunchText = $<Label>('#SelectedAddonRunMapText')!;
 	static addonsPage = $<Panel>('#AddonsPage')!;
 
 	static applyButton = $<Button>('#ApplyButton');
@@ -262,7 +263,13 @@ class AddonManager {
 		const multiMaps = matchingMaps.length > 1;
 		this.addonMapsDropdown.visible = multiMaps;
 		this.addonMapsLaunch.SetHasClass('fill-width', !multiMaps);
+		if (multiMaps) {
+			this.addonMapsLaunchText.text = tagDevString('Launch Selected Map!');
+		} else {
+			this.addonMapsLaunchText.text = tagDevString('Play Map!');
+		}
 
+		this.addonSteam.SetHasClass('full-width', hasMaps);
 		this.addonMapsPanel.visible = hasMaps;
 	}
 
