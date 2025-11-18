@@ -63,7 +63,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label class="text" text="[HC] Library" />
+							<Label class="text" text="#MainMenu_Navigation_ControlsLibrary" />
 						</Panel>
 					</RadioButton>
 					<!-- Home selector -->
@@ -76,7 +76,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label text="[HC] Home" class="text" />
+							<Label text="#MainMenu_Navigation_Home" class="text" />
 						</Panel>
 					</RadioButton>
 
@@ -89,7 +89,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label text="[HC] Campaigns" class="text" />
+							<Label text="#MainMenu_Navigation_Campaigns" class="text" />
 						</Panel>
 					</RadioButton>
 
@@ -102,7 +102,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
-							<Label text="[HC] Addons" class="text" />
+							<Label text="#MainMenu_Navigation_Addons" class="text" />
 						</Panel>
 					</RadioButton>
 
@@ -115,15 +115,15 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
-							<Label text="[HC] Settings" class="text" />
+							<Label text="#MainMenu_Navigation_Options" class="text" />
 						</Panel>
 					</RadioButton>
 
 					<Button id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
-							<Label text="[HC] Quit" class="text MainMenuModeOnly" />
-							<Label text="[HC] Exit" class="text PauseMenuModeOnly" />
+							<Label text="#MainMenu_Navigation_QuitGame" class="text MainMenuModeOnly" />
+							<Label text="#MainMenu_Navigation_Disconnect" class="text PauseMenuModeOnly" />
 						</Panel>
 					</Button>
 				</Panel>
@@ -167,7 +167,7 @@
 								/>
 								<Panel class="home__prompt__gradient" />
 								<Panel class="home__prompt__short__content">
-									<Label class="home__heading" text="[HC] Resume Game" />
+									<Label class="home__heading" text="#MainMenu_Home_Resume" />
 								</Panel>
 							</Button>
 							<Panel class="home__spacer__v" />
@@ -181,8 +181,8 @@
 								/>
 								<Panel class="home__prompt__gradient" />
 								<Panel class="home__prompt__content">
-									<Label class="home__heading" text="[HC] Load Last Save" />
-									<Label id="PausedLatestSaveTimeLabel" class="home__subheading" text="[HC] No Save Available" />
+									<Label class="home__heading" text="#MainMenu_SaveRestore_LoadAuto" />
+									<Label id="PausedLatestSaveTimeLabel" class="home__subheading" text="#MainMenu_SaveRestore_NoSaves" />
 								</Panel>
 							</Button>
 							<Panel class="home__spacer__v" />
@@ -201,7 +201,7 @@
 									/>
 									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[HC] Save Game" />
+										<Label class="home__heading" text="#MainMenu_SaveRestore_CreateSave" />
 									</Panel>
 								</Button>
 								<Panel class="home__spacer__h" />
@@ -213,7 +213,7 @@
 									/>
 									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[HC] Load Game" />
+										<Label class="home__heading" text="#MainMenu_SaveRestore_Load" />
 									</Panel>
 								</Button>
 							</Panel>
@@ -242,9 +242,10 @@
 											/>
 										</Panel>
 										<Panel class="home__campaign-detail__right">
-											<Label id="LevelHeader" class="home__campaign-detail__right__title" text="[PH] Campaign Name" />
-											<Label id="LevelChapter" class="home__campaign-detail__right__chapter" text="[PH] Campaign Chapter Name" />
-											<Label id="LevelDesc" class="home__campaign-detail__right__desc" text="[PH] Campaign Map Name" />
+											<Label id="LevelHeader" class="home__campaign-detail__right__title" text="#MainMenu_Campaigns_MM_CampaignName_placeholder" />
+											<Label id="LevelChapter" class="home__campaign-detail__right__chapter" text="#MainMenu_Campaigns_MM_ChapterName" />
+											<Label id="LevelChapterNum" class="home__campaign-detail__right__chapter" text="#MainMenu_Campaigns_MM_ChapterNum" />
+											<Label id="LevelDesc" class="home__campaign-detail__right__desc" text="#MainMenu_Campaigns_MM_ChapterMapName" />
 											<Button class="home__campaign-detail__right__button">
 												<Image
 													class="home__campaign-detail__right__button__icon"
@@ -253,7 +254,7 @@
 													texturewidth="32"
 													textureheight="32"
 												/>
-												<Label class="home__campaign-detail__right__button__text" text="Open in Workshop" />
+												<Label class="home__campaign-detail__right__button__text" text="#MainMenu_Addons_ViewOnWS" />
 											</Button>
 										</Panel>
 									</Panel>
@@ -283,8 +284,8 @@
 									/>
 									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[PH] Featured Item" />
-										<Label class="home__subheading" text="[PH] Featured Author" />
+										<Label class="home__heading" text="#MainMenu_Featured_Title" />
+										<Label class="home__subheading" text="#MainMenu_Featured_Author" />
  									</Panel>
  								</Button>
 								<Panel class="home__spacer__h" />
@@ -297,8 +298,8 @@
 									/>
 									<Panel class="home__prompt__gradient" />
 									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="[HC] Continue" />
-										<Label id="MainMenuSaveSubheadingLabel" class="home__subheading" text="[HC] No Save Available" />
+										<Label class="home__heading" text="#MainMenu_Home_Continue" />
+										<Label id="MainMenuSaveSubheadingLabel" class="home__subheading" text="#MainMenu_SaveRestore_NoSaves" />
 									</Panel>
 								</Button>
 							</Panel>

@@ -50,9 +50,9 @@
 					</Panel>
 					<!-- Campaign info; title, description, 'source' -->
 					<Panel class="campaigns__entry__details">
-						<Label id="CampaignTitle" class="campaigns__entry__details__title" text="[PH] Campaign Title" />
-						<Label id="CampaignAuthor" class="campaigns__entry__details__author" text="[PH] Campaign Author" />
-						<Label id="CampaignDesc" class="campaigns__entry__details__desc" text="[PH] Campaign Description" />
+						<Label id="CampaignTitle" class="campaigns__entry__details__title" text="#MainMenu_Campaigns_MM_CampaignName_placeholder" />
+						<Label id="CampaignAuthor" class="campaigns__entry__details__author" text="#MainMenu_Campaigns_MM_CampaignAuthor" />
+						<Label id="CampaignDesc" class="campaigns__entry__details__desc" text="#MainMenu_Campaigns_MM_CampaignDescription_placeholder" />
 					</Panel>
 				</Panel>
 			</Button>
@@ -109,8 +109,8 @@
 
 					<!-- Chapter info; title, description, 'source' -->
 					<Panel class="chapters__entry__details">
-						<Label id="ChapterTitle" class="chapters__entry__details__title" text="[PH] Chapter Title" />
-						<Label id="ChapterDesc" class="chapters__entry__details__desc" text="[PH] Chapter Description" />
+						<Label id="ChapterTitle" class="chapters__entry__details__title" text="#MainMenu_Campaigns_MM_ChapterNum" />
+						<Label id="ChapterDesc" class="chapters__entry__details__desc" text="#MainMenu_Campaigns_MM_ChapterDesc" />
 					</Panel>
 				</Panel>
 			</Button>
@@ -135,8 +135,8 @@
 							textureheight="32"
 						/>
 						<Panel class="flow-down vertical-align-center">
-							<Label class="campaigns__action-bar__button__text-top" text="[HC] Uncategorized Maps" />
-							<Label class="campaigns__action-bar__button__text-btm" text="[PH] (?) newly installed maps" />
+							<Label class="campaigns__action-bar__button__text-top" text="#MainMenu_Campaigns_MapList" />
+							<Label class="campaigns__action-bar__button__text-btm" text="#MainMenu_Campaigns_MapList_Tagline_NewlySubbed" />
 						</Panel>
 					</Button>
 					<Button id="CampaignsGoWorkshopBtn" class="campaigns__action-bar__button" onactivate="CampaignSelector.openWorkshop()">
@@ -148,20 +148,20 @@
 							textureheight="32"
 						/>
 						<Panel class="flow-down vertical-align-center">
-							<Label class="campaigns__action-bar__button__text-top" text="[HC] Open Workshop" />
-							<Label class="campaigns__action-bar__button__text-btm" text="[PH] Download &amp; manage content" />
+							<Label class="campaigns__action-bar__button__text-top" text="#MainMenu_Campaigns_OpenWS" />
+							<Label class="campaigns__action-bar__button__text-btm" text="#MainMenu_Campaigns_OpenWS_Tagline" />
 						</Panel>
 					</Button>
 				</Panel>
 				<Panel disabled="true" class="campaigns__action-bar">
-					<TextEntry class="textentry campaigns__action-bar__textentry fill-width mr-2" placeholder="Search..." />
+					<TextEntry class="textentry campaigns__action-bar__textentry fill-width mr-2" placeholder="#MainMenu_Campaigns_Search_FillerText" />
 					<DropDown id="CampaignSortMode" class="dropdown" menuclass="dropdown-menu">
 						<!-- <Panel class="DropDownIcon"/> -->
-						<Label text="Recently Added" id="CampaignSortMode1" value="1" />
-						<Label text="Alphabetical" id="CampaignSortMode2" value="2" />
-						<Label text="Last Played" id="CampaignSortMode3" value="3" />
-						<Label text="Completion" id="CampaignSortMode4" value="4" />
-						<Label text="Campaign Source" id="CampaignSortMode5" value="5" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_NewSubs" id="CampaignSortMode1" value="1" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_AtoZ" id="CampaignSortMode2" value="2" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_Last" id="CampaignSortMode3" value="3" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_Completion" id="CampaignSortMode4" value="4" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_CampaignSrc" id="CampaignSortMode5" value="5" />
 					</DropDown>
 				</Panel>
 				<!-- Campaign list -->
@@ -190,12 +190,13 @@
 								/>
 							</Panel>
 							<Panel class="campaigns__boxart__bottom">
-								<Label class="campaigns__boxart__detail__text" text="[PH] COMPLETION PERCENTAGE" />
-								<Label class="campaigns__boxart__text" text="[PH] Completion Stat 1" />
-								<Label class="campaigns__boxart__text" text="[PH] Completion Stat 2" />
+								<Label class="campaigns__boxart__detail__text" text="#MainMenu_Campaigns_DetailCard_CompletionPercentage" />
+								<Label class="campaigns__boxart__text" text="#MainMenu_Campaigns_DetailCard_CompletationStat1" />
+								<Label class="campaigns__boxart__text" text="#MainMenu_Campaigns_DetailCard_CompletationStat1_CName" />
+								<Label class="campaigns__boxart__text" text="#MainMenu_Campaigns_DetailCard_CompletationStat2" />
 
-								<Label class="campaigns__boxart__text__small mt-2" text="[PH] Last Played Time" />
-								<Label class="campaigns__boxart__text__small" text="[PH] Installation Date" />
+								<Label class="campaigns__boxart__text__small mt-2" text="#MainMenu_Campaigns_DetailCard_LastPlayDate" />
+								<Label class="campaigns__boxart__text__small" text="#MainMenu_Campaigns_DetailCard_InstallDate" />
 							</Panel>
 						</Panel>
 					</Panel>
@@ -229,32 +230,32 @@
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignNewGameTab.setActive()"
 						>
-							<Label class="selected-campaign__controls__button__text" text="[HC] New Game" />
+							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_NewGame" />
 						</Button>
 						<Button
 							id="CampaignLoadLatestBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignSavesTab.loadLatest()"
 						>
-							<Label class="selected-campaign__controls__button__text" text="[HC] Continue" />
+							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_LoadAuto" />
 						</Button>
 						<Button
 							id="CampaignSaveBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignSavesTab.setSaveActive()"
 						>
-							<Label class="selected-campaign__controls__button__text" text="[HC] Save Game" />
+							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_SaveGame" />
 						</Button>
 						<Button
 							id="CampaignAllSavesBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignSavesTab.setLoadActive()"
 						>
-							<Label class="selected-campaign__controls__button__text" text="[HC] Load Game" />
+							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_LoadGame" />
 						</Button>
 						<!-- Just hide this for now
 						<Button class="selected-campaign__controls__button selected-campaign__controls__button__lined" disabled="true">
-							<Label class="selected-campaign__controls__button__text" text="[HC] Open in Workshop" />
+							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Addons_ViewOnWS" />
 						</Button>
 						-->
 						<Button
@@ -262,11 +263,11 @@
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
 							onactivate="CampaignStartPage.hide()"
 						>
-							<Label class="selected-campaign__controls__button__text" text="[HC] Back to Campaign Select" />
+							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_ReturnToCampaignMenu" />
 						</Button>
 						<Label
 							class="horizontal-align-center m-3"
-							text="[HC] Proof of concept only. Portal 2 chapters &amp; saves displayed."
+							text="#MainMenu_Campaigns_MM_PoC"
 						/>
 					</Panel>
 				</Panel>
@@ -276,7 +277,7 @@
 						<Panel id="CampaignLister" class="selected-campaign__lister">
 						</Panel>
 						<Button id="CampaignBackScreen" class="selected-campaign__lister__button" onactivate="CampaignStartPage.closeLister()">
-							<Label class="selected-campaign__lister__button__text" text="[HC] Back" />
+							<Label class="selected-campaign__lister__button__text" text="#MainMenu_Campaigns_MM_Back" />
 						</Button>
 					</Panel>
 				</Panel>

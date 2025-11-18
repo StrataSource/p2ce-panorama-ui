@@ -39,10 +39,10 @@
 
 				<Panel class="horizontal-align-right flow-right">
 					<Button onactivate="AddonManager.apply()" id="ApplyButton" class="button mr-2" disabled="true">
-						<Label class="button__text" text="[HC] Apply" />
+						<Label class="button__text" text="#MainMenu_Addons_Apply" />
 					</Button>
 					<Button onactivate="AddonManager.cancel()" id="CancelButton" class="button" disabled="true">
-						<Label class="button__text" text="[HC] Discard" />
+						<Label class="button__text" text="#MainMenu_Addons_Discard" />
 					</Button>
 				</Panel>
 			</Panel>
@@ -58,7 +58,7 @@
 					<Label id="SelectedAddonTitle" class="selected-addon__title" text="[PH] Addon Name" />
 					<Label id="SelectedAddonAuthors" class="selected-addon__authors" text="[PH] Addon Authors" />
 					<Button id="SelectedAddonView" class="mt-2 button" onactivate="AddonManager.viewSelectedOnSteam()">
-						<Label class="button__text" text="[HC] View On Steam" />
+						<Label class="button__text" text="#MainMenu_Addons_ViewOnWS" />
 					</Button>
 				</Panel>
 			</Panel>

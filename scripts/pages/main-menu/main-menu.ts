@@ -178,7 +178,7 @@ class MainMenu {
 			this.panels.pausedSaveGameBtn.SetPanelEvent('onmouseover', () => {
 				UiToolkitAPI.ShowTextTooltip(
 					this.panels.pausedSaveGameBtn.id,
-					tagDevString('Saving is currently unavailable.')
+					$.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled')
 				);
 			});
 			this.panels.pausedSaveGameBtn.SetPanelEvent('onmouseout', () => {

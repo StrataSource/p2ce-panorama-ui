@@ -56,13 +56,13 @@ class CampaignEntry {
 		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
 		if (title) {
-			title.text = this.info.title;
+			title.text = $.Localize(`${this.info.title}`);
 		}
 		if (author) {
-			author.text = this.info.author;
+			author.text = $.Localize(`${this.info.author}`);
 		}
 		if (desc) {
-			desc.text = this.info.desc;
+			desc.text = $.Localize(`${this.info.desc}`);
 		}
 		if (cover) {
 			cover.SetImage(this.info.cover);
@@ -113,7 +113,7 @@ class ChapterEntry {
 			title.text = tagDevString(`Chapter ${this.index + 1}`);
 		}
 		if (desc) {
-			desc.text = tagDevString(this.chapter.title);
+			desc.text = $.Localize(this.chapter.title);
 		}
 		if (cover) {
 			cover.SetImage(`file://{materials}/vgui/chapters/chapter${this.index + 1}.vtf`);
@@ -124,8 +124,8 @@ class ChapterEntry {
 				GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
 			else {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					tagDevString('Start New Game?'),
-					tagDevString('Are you sure you want to start a new game? Progress will be lost!'),
+					$.Localize('#Action_NewGame_Title'),
+					$.Localize('#Action_NewGame_Description'),
 					'warning-popup',
 					$.Localize('#UI_Yes'),
 					() => {
@@ -157,11 +157,11 @@ class SaveEntry {
 		const actionBtn = this.panel.FindChildTraverse('SaveAction')!;
 
 		if (this.isSaver) {
-			if (this.save.name.includes('quick') || this.save.name.includes('auto')) {
+			if (this.save.name.includes('quick') || this.save.name.includes('autosave') || this.save.name.includes('autosavedangerous')) {
 				actionBtn.enabled = false;
 
 				this.panel.SetPanelEvent('onmouseover', () => {
-					UiToolkitAPI.ShowTextTooltip(this.panel.id, tagDevString('You cannot overwrite this save.'));
+					UiToolkitAPI.ShowTextTooltip(this.panel.id, $.Localize('#MainMenu_SaveRestore_CannotOverwriteSave'));
 				});
 				this.panel.SetPanelEvent('onmouseout', () => {
 					UiToolkitAPI.HideTextTooltip();
@@ -179,19 +179,19 @@ class SaveEntry {
 		}
 		if (desc) {
 			const date = new Date(this.save.time * 1000);
-			desc.text = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+			desc.text = '${date.toLocaleDateString()} ${date.toLocaleTimeString()}';
 		}
 		if (cover) {
-			cover.SetImage(`file://${this.save.thumb}`);
+			cover.SetImage('file://${this.save.thumb}');
 			if (this.isSaver) cover.AddClass('saves__entry__cover__short');
 		}
 		if (del) {
 			del.SetPanelEvent('onactivate', () => {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					tagDevString('Delete Save?'),
-					tagDevString('Are you sure you want to delete this save file? Progress will be lost!'),
+					$.Localize('#Action_DeleteGame_Confirm'),
+					$.Localize('#Action_DeleteGame_Confirm_Message'),
 					'warning-popup',
-					$.Localize('#UI_Yes'),
+					$.Localize('#Action_DeleteGame'),
 					() => {
 						SaveRestoreAPI.DeleteSave(this.save.name);
 						CampaignSavesTab.purgeSaveList();
@@ -210,10 +210,10 @@ class SaveEntry {
 		if (this.isSaver) {
 			actionBtn.SetPanelEvent('onactivate', () => {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					tagDevString('Overwrite Save?'),
-					tagDevString('Are you sure you want to overwrite this save file? Progress will be lost!'),
+					$.Localize('#Action_OverwriteGame_Confirm'),
+					$.Localize('#Action_OverwriteGame_Confirm_Message'),
 					'warning-popup',
-					$.Localize('#UI_Yes'),
+					$.Localize('#Action_OverwriteGame'),
 					() => {
 						SaveRestoreAPI.SaveGame(this.save.name);
 						CampaignSavesTab.purgeSaveList();
@@ -234,10 +234,10 @@ class SaveEntry {
 				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) SaveRestoreAPI.LoadSave(this.save.name);
 				else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						tagDevString('Load Game?'),
-						tagDevString('Are you sure you want to load this save file? Progress will be lost!'),
+						$.Localize('#Action_LoadGame_Confirm'),
+						$.Localize('#Action_LoadGame_Confirm_Message'),
 						'warning-popup',
-						$.Localize('#UI_Yes'),
+						$.Localize('#Action_LoadGame'),
 						() => {
 							SaveRestoreAPI.LoadSave(this.save.name);
 						},
@@ -272,7 +272,7 @@ class CampaignNewGameTab {
 	static show() {
 		this.campaignControls.visible = false;
 		this.campaignListerContainer.visible = true;
-		this.tabLabel.text = tagDevString('New Game');
+		this.tabLabel.text = $.Localize('#MainMenu_Campaigns_MM_NewGame');
 	}
 
 	static purgeChapterList() {
@@ -283,16 +283,16 @@ class CampaignNewGameTab {
 		// TODO: Actual chapters from CampaignAPI
 
 		const chapters: FakeChapter[] = [
-			{ title: 'The Courtesy Call', map: 'sp_a1_intro1' },
-			{ title: 'The Cold Boot', map: 'sp_a2_laser_intro' },
-			{ title: 'The Return', map: 'sp_a2_sphere_peek' },
-			{ title: 'The Surprise', map: 'sp_a2_column_blocker' },
-			{ title: 'The Escape', map: 'sp_a2_bts3' },
-			{ title: 'The Fall', map: 'sp_a3_00' },
-			{ title: 'The Reunion', map: 'sp_a3_speed_ramp' },
-			{ title: 'The Itch', map: 'sp_a4_intro' },
-			{ title: 'The Part Where...', map: 'sp_a4_finale1' },
-			{ title: 'The Credits', map: 'sp_a5_credits' }
+			{ title: '#portal2_Chapter1_Subtitle', map: 'sp_a1_intro1' },
+			{ title: '#portal2_Chapter2_Subtitle', map: 'sp_a2_laser_intro' },
+			{ title: '#portal2_Chapter3_Subtitle', map: 'sp_a2_sphere_peek' },
+			{ title: '#portal2_Chapter4_Subtitle', map: 'sp_a2_column_blocker' },
+			{ title: '#portal2_Chapter5_Subtitle', map: 'sp_a2_bts3' },
+			{ title: '#portal2_Chapter6_Subtitle', map: 'sp_a3_00' },
+			{ title: '#portal2_Chapter7_Subtitle', map: 'sp_a3_speed_ramp' },
+			{ title: '#portal2_Chapter8_Subtitle', map: 'sp_a4_intro' },
+			{ title: '#portal2_Chapter9_Subtitle', map: 'sp_a4_finale1' },
+			{ title: '#portal2_Chapter10_Subtitle', map: 'sp_a5_credits' }
 		];
 
 		for (let i = 0; i < chapters.length; ++i) {
@@ -324,7 +324,7 @@ class CampaignSavesTab {
 		this.addCreateSaveBtn();
 		this.isSavingGame = true;
 		this.populateSaves();
-		this.tabLabel.text = tagDevString('Save Game');
+		this.tabLabel.text = $.Localize('#MainMenu_Campaigns_MM_SaveGame');
 		this.show();
 	}
 
@@ -334,7 +334,7 @@ class CampaignSavesTab {
 		this.purgeSaveList();
 		this.isSavingGame = false;
 		this.populateSaves();
-		this.tabLabel.text = tagDevString('Load Game');
+		this.tabLabel.text = $.Localize('#MainMenu_Campaigns_MM_LoadGame');
 		this.show();
 	}
 
@@ -380,7 +380,7 @@ class CampaignSavesTab {
 		const del = this.createSaveBtn.FindChildTraverse<Button>('SaveDelete');
 
 		if (title) {
-			title.text = tagDevString('Create New Save');
+			title.text = $.Localize('#MainMenu_SaveRestore_CreateSave');
 		}
 		if (desc) {
 			desc.visible = false;
@@ -400,7 +400,7 @@ class CampaignSavesTab {
 				'generic-popup',
 				$.Localize('#UI_Yes'),
 				() => {
-					SaveRestoreAPI.SaveGame(`${new Date().getTime()}`);
+					SaveRestoreAPI.SaveGame('${new Date().getTime()}');
 					CampaignSavesTab.purgeSaveList();
 					CampaignSavesTab.lockScreen();
 
@@ -431,10 +431,10 @@ class CampaignSavesTab {
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				tagDevString('Load Game?'),
-				tagDevString('Are you sure you want to load the latest save? Progress will be lost!'),
+				$.Localize('#Action_LoadGame_Confirm'),
+				$.Localize('#Action_LoadGame_Auto_Message'),
 				'warning-popup',
-				$.Localize('#UI_Yes'),
+				$.Localize('#Action_LoadGame'),
 				() => {
 					SaveRestoreAPI.LoadSave(saves[0].name);
 				},
@@ -541,7 +541,7 @@ class CampaignStartPage {
 		saveBtn.enabled = !GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
 		if (!saveBtn.enabled) {
 			saveBtn.SetPanelEvent('onmouseover', () => {
-				UiToolkitAPI.ShowTextTooltip(saveBtn.id, tagDevString('Saving is currently unavailable.'));
+				UiToolkitAPI.ShowTextTooltip(saveBtn.id, $.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled'));
 			});
 			saveBtn.SetPanelEvent('onmouseout', () => {
 				UiToolkitAPI.HideTextTooltip();
@@ -566,9 +566,9 @@ class CampaignStartPage {
 class CampaignSelector {
 	static fakeCampaigns: FakeCampaign[] = [
 		{
-			title: '[HC] Portal 2: Community Edition',
-			author: '[HC] P2:CE Team',
-			desc: '[HC] P2:CE Campaign Description',
+			title: '#MainMenu_Campaigns_P2CE',
+			author: '#MainMenu_Campaigns_P2CE_Author',
+			desc: '#MainMenu_Campaigns_P2CE_Description',
 			cover: 'file://{images}/menu/p2ce/random5.png',
 			background: 'file://{images}/menu/p2ce/news-splash.png',
 			btnBg: 'file://{images}/menu/p2ce/random1.png',
@@ -577,12 +577,9 @@ class CampaignSelector {
 			boxart: 'file://{images}/menu/p2ce/boxart.png'
 		},
 		{
-			title: '[HC] Portal 2',
-			author: '[HC] Valve',
-			desc:
-				'[HC] Portal 2 features a cast of dynamic new characters, a host of fresh puzzle elements, and a much ' +
-				'larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science ' +
-				'Labs and be reunited with GLaDOS.',
+			title: '#MainMenu_Campaigns_portal2',
+			author: '#MainMenu_Campaigns_Valve_Author',
+			desc: '#MainMenu_Campaigns_portal2_Description',
 			cover: 'file://{images}/menu/portal2/campaign_cover.png',
 			background: 'file://{images}/menu/portal2/campaign_bg.png',
 			btnBg: 'file://{images}/menu/portal2/campaign_btn_bg.jpg',
@@ -591,9 +588,9 @@ class CampaignSelector {
 			boxart: 'file://{images}/menu/portal2/sp_boxart.png'
 		},
 		{
-			title: '[HC] Portal 2 (Co-Op)',
-			author: '[HC] Valve',
-			desc: '[HC] Portal 2 Multiplayer Campaign Description',
+			title: '#MainMenu_Campaigns_portal2_MP',
+			author: '#MainMenu_Campaigns_Valve_Author',
+			desc: '#MainMenu_Campaigns_portal2_MP_Description',
 			cover: 'file://{images}/menu/portal2/mp_campaign_bg.png',
 			background: 'file://{images}/menu/portal2/mp_campaign_bg.png',
 			btnBg: 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
@@ -602,17 +599,50 @@ class CampaignSelector {
 			boxart: 'file://{images}/menu/portal2/mp_boxart.png'
 		},
 		{
-			title: '[HC] Portal',
-			author: '[HC] Valve',
-			desc:
-				'[HC] Set in the mysterious Aperture Science Laboratories, players must solve physical puzzles and ' +
-				'challenges by opening portals to maneuver objects, and themselves, through space.',
+			title: '#MainMenu_Campaigns_portal',
+			author: '#MainMenu_Campaigns_Valve_Author',
+			desc: '#MainMenu_Campaigns_portal_Description',
 			cover: 'file://{images}/menu/portal/campaign_bg.png',
 			background: 'file://{images}/menu/portal/campaign_bg.png',
 			btnBg: 'file://{images}/menu/portal/campaign_btn_bg.jpg',
 			ico: 'file://{images}/menu/portal/logo.svg',
 			logo: 'file://{images}/menu/portal/full_logo.svg',
 			boxart: 'file://{images}/menu/portal/boxart.png'
+		},
+		{
+			title: '#MainMenu_Campaigns_hl2',
+			author: '#MainMenu_Campaigns_Valve_Author',
+			desc: '#MainMenu_Campaigns_hl2_Description',
+			cover: 'file://{images}/menu/hl2/campaign_cover.png',
+			background: 'file://{images}/menu/hl2/campaign_bg.png',
+			btnBg: 'file://{images}/menu/hl2/campaign_btn_bg.png',
+			ico: 'file://{images}/menu/hl2/logo.svg',
+			logo: 'file://{images}/menu/hl2/full_logo.svg',
+			boxart: 'file://{images}/menu/hl2/boxart.png'
+		},
+		{
+			title: '#MainMenu_Campaigns_episodic',
+			author: '#MainMenu_Campaigns_Valve_Author',
+			desc:
+				'MainMenu_Campaigns_episodic_Description',
+			cover: 'file://{images}/menu/episodic/campaign_bg.png',
+			background: 'file://{images}/menu/episodic/campaign_bg.png',
+			btnBg: 'file://{images}/menu/episodic/campaign_btn_bg.png',
+			ico: 'file://{images}/menu/hl2/logo.svg',
+			logo: 'file://{images}/menu/episodic/full_logo.svg',
+			boxart: 'file://{images}/menu/episodic/boxart.png'
+		},
+		{
+			title: '#MainMenu_Campaigns_ep2',
+			author: '#MainMenu_Campaigns_Valve_Author',
+			desc:
+				'#MainMenu_Campaigns_ep2_Description',
+			cover: 'file://{images}/menu/hl2/campaign_cover.png',
+			background: 'file://{images}/menu/hl2/campaign_cover.png',
+			btnBg: 'file://{images}/menu/ep2/campaign_btn_bg.png',
+			ico: 'file://{images}/menu/hl2/logo.svg',
+			logo: 'file://{images}/menu/ep2/full_logo.svg',
+			boxart: 'file://{images}/menu/ep2/boxart.png'
 		}
 	];
 	static campaignList = $<Panel>('#CampaignContainer')!;
@@ -707,8 +737,8 @@ class CampaignSelector {
 
 	static viewLooseMaps() {
 		UiToolkitAPI.ShowGenericPopupOk(
-			tagDevString('Feature Unavailable'),
-			tagDevString('This feature is currently a work-in-progress and is not available.'),
+			$.Localize('#MainMenu_Feature_Unavailable_Title'),
+			$.Localize('#MainMenu_Feature_Unavailable_Description'),
 			'blur',
 			() => {}
 		);

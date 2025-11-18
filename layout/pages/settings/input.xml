@@ -156,9 +156,6 @@
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
 
-				<SettingsKeyBinder text="#Keybind_MapCommands" bind="hud_menu_show mapcmdsmenu" />
-				<SettingsKeyBinder text="#Keybind_Ruler" bind="hud_menu_show rulermenu" tags="ruler,measure,distance" />
-				<SettingsKeyBinder text="#Keybind_Paint" bind="+paint" tags="paint" />
 				<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />
 
 				<Label class="settings-group__subtitle" text="#Settings_Input_Keybinds_Misc" />
