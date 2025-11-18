@@ -84,6 +84,8 @@ class MainMenu {
 
 		this.setMainMenuDetails();
 
+		this.showPrereleaseWarning();
+		
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
 		stripDevTagsFromLabels($.GetContextPanel());
@@ -101,6 +103,18 @@ class MainMenu {
 				'',
 				'file://{resources}/layout/modals/popups/playtest-consent.xml',
 				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent'
+			);
+	}
+
+	/**
+	 * Shows prerelease notice form
+	 */
+	static showPrereleaseWarning() {
+		if (!DosaHandler.checkDosa('prereleaseAck'))
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'',
+				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
+				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck'
 			);
 	}
 

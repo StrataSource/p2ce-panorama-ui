@@ -35,7 +35,7 @@
 							id="CampaignLogo"
 							class="campaigns__entry__details__logo"
 							src="file://{images}/menu/portal2/logo.png"
-							scaling="stretch-to-fit-preserve-aspect"
+							scaling="stretch-to-cover-preserve-aspect"
 							textureheight="128"
 							texturewidth="128"
 						/>
@@ -220,7 +220,7 @@
 						id="CampaignLogo"
 						class="selected-campaign__logo"
 						src="file://{images}/menu/portal2/full_logo.png"
-						scaling="stretch-to-fit-preserve-aspect"
+						scaling="stretch-to-cover-preserve-aspect"
 						textureheight="130"
 						texturewidth="440"
 					/>

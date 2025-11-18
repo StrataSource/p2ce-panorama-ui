@@ -625,7 +625,7 @@ class CampaignSelector {
 			author: '#MainMenu_Campaigns_Valve_Author',
 			desc:
 				'MainMenu_Campaigns_episodic_Description',
-			cover: 'file://{images}/menu/episodic/campaign_bg.png',
+			cover: 'file://{images}/menu/episodic/campaign_cover.png',
 			background: 'file://{images}/menu/episodic/campaign_bg.png',
 			btnBg: 'file://{images}/menu/episodic/campaign_btn_bg.png',
 			ico: 'file://{images}/menu/hl2/logo.svg',
@@ -637,10 +637,10 @@ class CampaignSelector {
 			author: '#MainMenu_Campaigns_Valve_Author',
 			desc:
 				'#MainMenu_Campaigns_ep2_Description',
-			cover: 'file://{images}/menu/hl2/campaign_cover.png',
-			background: 'file://{images}/menu/hl2/campaign_cover.png',
+			cover: 'file://{images}/menu/ep2/campaign_cover.png',
+			background: 'file://{images}/menu/ep2/campaign_bg.png',
 			btnBg: 'file://{images}/menu/ep2/campaign_btn_bg.png',
-			ico: 'file://{images}/menu/hl2/logo.svg',
+			ico: 'file://{images}/menu/ep2/logo_white.svg',
 			logo: 'file://{images}/menu/ep2/full_logo.svg',
 			boxart: 'file://{images}/menu/ep2/boxart.png'
 		}
