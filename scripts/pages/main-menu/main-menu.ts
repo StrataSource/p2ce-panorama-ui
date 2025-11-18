@@ -71,10 +71,13 @@ class MainMenu {
 
 			this.panels.model.LookAtModel();
 			this.panels.model.SetCameraOffset(-300, 0, 0);
-			this.panels.model.SetCameraFOV(30);
+			this.panels.model.SetCameraFOV(35);
 
-			this.panels.model.SetDirectionalLightColor(0, 0.5, 0.5, 0.5);
-			this.panels.model.SetDirectionalLightDirection(0, 1, 0, 0);
+			this.panels.model.SetLightAmbient(0.2921, 0.327, 0.43);
+			this.panels.model.SetDirectionalLightColor(1, 1.076, 1.2, 1.282);
+			this.panels.model.SetDirectionalLightColor(0, 0.538, 0.6, 0.641);
+			this.panels.model.SetDirectionalLightDirection(1, -50, 270, 0);
+			this.panels.model.SetDirectionalLightDirection(0, -50, 135, 0);
 		}
 
 		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
