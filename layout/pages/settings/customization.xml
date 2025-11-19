@@ -98,6 +98,7 @@
 				<ConVarColorDisplay
 					text="#Settings_Portals_altcolors_primary"
 					convar="cl_portal_sp_primary_color"
+					infomessage="#Settings_Portals_altcolors_primary_Info"
 					hasdocspage="false"
 				/>
 				<ConVarColorDisplay
@@ -106,6 +107,54 @@
 					hasdocspage="false"
 				/>
 			</Panel>
+
+			<Panel class="settings-page__spacer" />
+
+            <Panel id="HL2SubSection" class="settings-group">
+                <Panel class="settings-group__header">
+                    <Label class="settings-group__title" text="#Settings_HL2_Title" tags="gameplay,customization,hl2,half-life,half-life 2" />
+                </Panel>
+
+                <SettingsEnum
+					text="#Settings_HL2_EPISODIC"
+					convar="hl2_episodic"
+					infomessage="#Settings_HL2_EPISODIC_Info"
+					hasdocspage="false"
+				>
+					<RadioButton group="hl2_episodic_convar" text="#Settings_HL2_EPISODIC_Legacy" value="0" />
+					<RadioButton group="hl2_episodic_convar" text="#Settings_HL2_EPISODIC_Ep2" value="1" />
+                </SettingsEnum>
+
+                <SettingsEnum
+					text="#Settings_PlayerObjThrowEnable"
+					convar="player_throwenable"
+					infomessage="#Settings_PlayerObjThrowEnable_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="player_throw_enable" text="#Common_Off" value="0" />
+					<RadioButton group="player_throw_enable" text="#Common_On" value="1" />
+                </SettingsEnum>
+
+                <SettingsEnum
+					text="#Settings_PlayerObjRotEnable"
+					convar="sv_enableholdrotation"
+					infomessage="#Settings_PlayerObjRotEnable_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="player_rot_enable" text="#Common_Off" value="0" />
+					<RadioButton group="player_rot_enable" text="#Common_On" value="1" />
+                </SettingsEnum>
+
+				<SettingsSlider
+					text="#Settings_PlayerThrowForce"
+					convar="player_throwforce"
+					infomessage="#Settings_PlayerThrowForce_Info"
+					hasdocspage="false"
+					max="200"
+					min="3000"
+					displayprecision="10"
+				/>
+            </Panel>
 
 			<Panel class="settings-page__spacer" />
 
