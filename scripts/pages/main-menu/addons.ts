@@ -318,6 +318,7 @@ class AddonManager {
 			addon.updateEnabled();
 		}
 
+		this.findMaps();
 		this.updateSelectedAddonMaps();
 	}
 
