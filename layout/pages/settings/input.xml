@@ -146,15 +146,31 @@
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_4" bind="slot4" tags="slot4" />
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
+				<SettingsKeyBinder text="#Keybind_Weapon_Category_6" bind="slot6" tags="slot6" />
 				
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_MP_COOP" />
 
 				<SettingsKeyBinder text="#Keybind_Chat_Message" bind="say" tags="coop,chat,talk" />
 				<SettingsKeyBinder text="#Keybind_Chat_Message_TeamOnly" bind="say_team" tags="coop,chat,talk" />
 				<SettingsKeyBinder text="#Keybind_Chat_Voice" bind="+voicerecord" tags="coop,voice,chat,push,talk" />
-				<SettingsKeyBinder text="#Keybind_Coop_RemoteView" bind="+remote_view" tags="coop,remote,view" />
-				<SettingsKeyBinder text="#Keybind_Coop_Ping" bind="+mouse_menu" tags="coop,ping,tool,radial" />
-				<SettingsKeyBinder text="#Keybind_Coop_Taunt" bind="+mouse_menu_taunt" tags="coop,gesture,taunt" />
+				<SettingsKeyBinder
+					text="#Keybind_Coop_RemoteView"
+					infomessage="Keybind_Coop_RemoteView_Info"
+					bind="+remote_view"
+					tags="coop,remote,view"
+				/>
+				<SettingsKeyBinder
+					text="#Keybind_Coop_PingTool"
+					infomessage="Keybind_Coop_PingTool_Info"
+					bind="+mouse_menu"
+					tags="coop,ping,tool,radial"
+				/>
+				<SettingsKeyBinder
+					text="#Keybind_Coop_Taunt"
+					infomessage="Keybind_Coop_Taunt_Info"
+					bind="+mouse_menu_taunt"
+					tags="coop,gesture,taunt"
+				/>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
 
