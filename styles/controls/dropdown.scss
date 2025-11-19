@@ -31,6 +31,10 @@
 		z-index: 100;
 	}
 
+	&:not(:parentdisabled) .DropDownIcon {
+		wash-color: $dropdown-button-text-color;
+	}
+
 	// Inserted by code
 	&.DropDownMenuVisible {
 		background-color: $dropdown-button-background-menuvisible;
@@ -48,6 +52,15 @@
 
 	&:hover {
 		background-color: $dropdown-button-background-hover;
+		sound: 'UIPanorama.P2CE.MenuSelect';
+
+		& Label {
+			color: $dropdown-button-text-hover-color;
+		}
+
+		& .DropDownIcon {
+			wash-color: $dropdown-button-text-hover-color;
+		}
 	}
 
 	&:disabled,
@@ -57,19 +70,22 @@
 		border-color: $dropdown-button-text-color-disabled;
 	}
 
+	&:disabled Label {
+		color: $dropdown-button-text-color-disabled;
+	}
+
+	&:not(:parentdisabled) Label {
+		color: $dropdown-button-text-color;
+	}
+
 	Label {
 		@include mixin.font-styles($use-header: $dropdown-button-use-header-font);
-		color: $dropdown-button-text-color;
 		font-size: $dropdown-button-font-size;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		padding: $dropdown-button-padding;
 		vertical-align: center;
 		text-shadow: $dropdown-button-text-shadow;
-	}
-
-	&:disabled Label {
-		color: $dropdown-button-text-color-disabled;
 	}
 
 	// DropDown/DropDropMenu needs a label as its immediate child to function properly so to include images we need to

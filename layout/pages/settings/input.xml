@@ -26,7 +26,7 @@
 
 					<Label class="settings-group__title" text="#Settings_Mouse_Title" tags="mouse,cursor,aim,look,input" />
 
-					<Panel class="flow-right horizontal-align-right">
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
 
 						<Button
 							class="button mr-3"

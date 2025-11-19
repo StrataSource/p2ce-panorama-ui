@@ -386,11 +386,11 @@ $radiobutton-text-disabled: $font-disabled-color !default;
 // DROPDOWN
 // ================
 
-$dropdown-button-background: $checkbox-background !default;
+$dropdown-button-background: $button-background !default;
 
 $dropdown-button-background-disabled: $button-background-disabled !default;
-$dropdown-button-background-hover: $checkbox-background-hover !default;
-$dropdown-button-background-menuvisible: $checkbox-background-selected !default;
+$dropdown-button-background-hover: $button-background-hover !default;
+$dropdown-button-background-menuvisible: $button-background-selected !default;
 
 $dropdown-button-icon-background: $primary-700 !default;
 $dropdown-button-icon-background-hover: $primary-600 !default;
@@ -401,13 +401,14 @@ $dropdown-button-icon-icon-shadow: none !default;
 
 $dropdown-button-shadow: $button-shadow !default;
 $dropdown-button-radius: 0px !default;
-$dropdown-button-border: 2px solid $primary-color !default;
+$dropdown-button-border: $button-border !default;
 
 $dropdown-button-use-header-font: true !default;
 $dropdown-button-font-size: 20px !default;
 $dropdown-button-height: 45px !default;
-$dropdown-button-text-color: $bright-color !default;
-$dropdown-button-menuvisible-text-color: $base-950 !default;
+$dropdown-button-text-color: $button-text-color !default;
+$dropdown-button-text-hover-color: $button-text-hover !default;
+$dropdown-button-menuvisible-text-color: $button-text-hover !default;
 $dropdown-button-text-color-disabled: $button-text-disabled !default;
 $dropdown-button-text-shadow: $button-text-shadow;
 
@@ -483,22 +484,24 @@ $tab-text-padding: 4px 10px;
 // TEXTENTRY
 // ================
 
-$textentry-background: $primary-900 !default;
-$textentry-background-hover: $primary-700 !default;
-$textentry-background-focus: $primary-500 !default;
+$textentry-autocomplete-item-color: $bright-color !default;
+$textentry-background: $button-background !default;
+$textentry-background-hover: $button-background-hover !default;
+$textentry-background-focus: $button-background-selected !default;
 
 $textentry-height: 45px !default;
 $textentry-width: 256px !default;
 $textentry-padding: 7px 0px 7px 15px !default;
-$textentry-border: 2px solid $primary-color !default;
+$textentry-border: $button-border !default;
 $textentry-radius: 0px !default;
 $textentry-shadow: none !default;
 $textentry-shadow-hover: none !default;
 
-$textentry-font-size: 22px !default;
-$textentry-placeholder-font-size: 22px !default;
-$textentry-text-color: $bright-color !default;
-$textentry-focus-text-color: $base-color !default;
+$textentry-font-size: 20px !default;
+$textentry-placeholder-font-size: 16px !default;
+$textentry-text-color: $button-text-color !default;
+$textentry-hover-text-color: $button-text-hover !default;
+$textentry-focus-text-color: $button-text-hover !default;
 $textentry-text-disabled: $font-disabled-color !default;
 $textentry-placeholder-color: color.scale($textentry-text-color, $alpha: -40%) !default;
 $textentry-placeholder-hover-color: color.scale($textentry-text-color, $alpha: 30%) !default;
@@ -572,12 +575,12 @@ $progressbar-shadow: none !default;
 // TOOLTIPS
 // ================
 
-$tooltip-background: $primary-color !default;
+$tooltip-background: $base-900 !default;
 $tooltip-padding: 20px 25px !default;
-$tooltip-border: 2px solid $primary-800 !default;
+$tooltip-border: 2px solid $primary-color !default;
 $tooltip-radius: 0px !default;
 $tooltip-margin: 0px !default;
-$tooltip-text-color: $base-950 !default;
+$tooltip-text-color: $bright-color !default;
 
 $tooltip-title-use-header-font: true !default;
 $tooltip-title-font-size: 36px !default;

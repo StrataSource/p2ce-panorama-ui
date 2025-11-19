@@ -29,7 +29,7 @@
 
 					<Label class="settings-group__title" text="#Settings_Volume_Title" tags="volume,sound" />
 
-					<Panel class="flow-right horizontal-align-right">
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
 
 						<Button
 							class="button mr-3"

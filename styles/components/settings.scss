@@ -150,11 +150,16 @@
 		align: center center;
 
 		horizontal-align: right;
-		background-color: $checkbox-background;
-		border-bottom: $checkbox-border;
+		background-color: $button-background;
+		border-bottom: $button-border;
 
 		&:hover {
-			background-color: $checkbox-background-hover;
+			sound: 'UIPanorama.P2CE.MenuSelect';
+			background-color: $button-background-hover;
+
+			#{$root}__key {
+				color: $button-text-hover;
+			}
 		}
 
 		#{$root}:selected & {
@@ -179,11 +184,14 @@
 	}
 
 	&__key {
-		@include mixin.font-styles($use-header: true, $light-header: true);
+		@include mixin.font-styles($use-header: true);
+		color: $button-text-color;
 		font-size: 25px;
 		margin: 0 6px;
 		align: center center;
 		text-align: center;
+
+		transform: translateY(-2px);
 	}
 
 	&__clear {

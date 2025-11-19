@@ -37,6 +37,7 @@ TextEntry {
 	&:hover {
 		background-color: $textentry-background-hover;
 		box-shadow: $textentry-shadow-hover;
+		color: $textentry-hover-text-color;
 	}
 
 	&:focus {
@@ -70,7 +71,7 @@ TextEntryAutocomplete {
 		padding: 4px 16px 4px 16px;
 		margin-right: 16px;
 
-		color: $dropdown-button-text-color;
+		color: $textentry-autocomplete-item-color;
 		background-color: $contextmenu-background;
 
 		font-family: $font-monospace;
