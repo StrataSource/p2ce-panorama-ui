@@ -116,6 +116,15 @@
 								</RadioButton>
 
 								<RadioButton
+									id="ClosedCaptionsRadio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('AudioSettings', 'AudioClosedCaptionsSubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_ClosedCaptions_Title" />
+								</RadioButton>
+
+								<RadioButton
 									id="AudioDeviceRadio"
 									class="settings-nav__subitem"
 									group="SettingsSubNav"
@@ -222,6 +231,14 @@
 									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'Portal1SubSection')"
 								>
 									<Label class="settings-nav__subitem-label" text="#Settings_Portal1_Title" />
+								</RadioButton>
+								<RadioButton
+									id="HL2Radio"
+									class="settings-nav__subitem"
+									group="SettingsSubNav"
+									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'HL2SubSection')"
+								>
+									<Label class="settings-nav__subitem-label" text="#Settings_HL2_Title" />
 								</RadioButton>
 								<RadioButton
 									id="PortalsRadio"
