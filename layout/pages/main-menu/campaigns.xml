@@ -142,9 +142,9 @@
 							texturewidth="32"
 							textureheight="32"
 						/>
-						<Panel class="flow-down vertical-align-center">
-							<Label class="campaigns__action-bar__button__text-top" text="#MainMenu_Campaigns_MapList" />
-							<Label class="campaigns__action-bar__button__text-btm" text="#MainMenu_Campaigns_MapList_Tagline_NewlySubbed" />
+						<Panel class="button-mono__text-panel">
+							<Label class="button-mono__text-panel__header" text="#MainMenu_Campaigns_MapList" />
+							<Label class="button-mono__text-panel__subheader" text="#MainMenu_Campaigns_MapList_Tagline_NewlySubbed" />
 						</Panel>
 					</Button>
 					<Button
@@ -159,9 +159,9 @@
 							texturewidth="32"
 							textureheight="32"
 						/>
-						<Panel class="flow-down vertical-align-center">
-							<Label class="campaigns__action-bar__button__text-top" text="#MainMenu_Campaigns_OpenWS" />
-							<Label class="campaigns__action-bar__button__text-btm" text="#MainMenu_Campaigns_OpenWS_Tagline" />
+						<Panel class="button-mono__text-panel">
+							<Label class="button-mono__text-panel__header" text="#MainMenu_Campaigns_OpenWS" />
+							<Label class="button-mono__text-panel__subheader" text="#MainMenu_Campaigns_OpenWS_Tagline" />
 						</Panel>
 					</Button>
 				</Panel>
