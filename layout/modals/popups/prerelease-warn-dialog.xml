@@ -1,0 +1,26 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/modals/popups/prerelease-warn-dialog.js" />
+		<include src="file://{scripts}/util/dosa.ts" />
+	</scripts>
+
+	<PopupCustomLayout class="PopupPanel Hidden generic-popup generic-popup--large" popupbackground="blur">
+		<Panel class="flow-down">
+			<Label class="text-h2 mb-4 full-width text-align-center" text="#MainMenu_PrereleaseNotice_Title" />
+			<Label class="mb-2" text="#MainMenu_PrereleaseNotice_Description" />
+		</Panel>
+		
+		<Panel class="flow-right full-width mt-4">
+			<Button class="button horizontal-align-center" onactivate="PrereleaseAck.onDOSA()">
+				<Label class="button__text" text="#MainMenu_PrereleaseNotice_Acknowledge" />
+			</Button>
+			<Button class="button button--red horizontal-align-center" onactivate="GameInterfaceAPI.ConsoleCommand('quit')">
+				<Label class="button__text" text="#MainMenu_PrereleaseNotice_Decline" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>
