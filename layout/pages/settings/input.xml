@@ -135,24 +135,26 @@
 				<SettingsKeyBinder text="#Keybind_Sprint" bind="+speed" tags="sprint,run,speed" />
 				<SettingsKeyBinder text="#Keybind_Toggle_Sprint" bind="toggle_speed" tags="toggle,sprint,run,speed" />
 				<SettingsKeyBinder text="#Keybind_Walk" bind="+walk" tags="walk" />
-				<SettingsKeyBinder text="#Keybind_Toggle_Walk" bind="toggle_walk" tags="toggle,walk" />
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Weapons" />
 
 				<SettingsKeyBinder text="#Keybind_Attack_Primary" bind="+attack" tags="attack,primary,fire" />
-				<SettingsKeyBinder text="#Keybind_Attack_Secondary" bind="+attack2" tags="secondary,fire" />
+				<SettingsKeyBinder text="#Keybind_Attack_Secondary" bind="+attack2" tags="attack,secondary,fire" />
 				<SettingsKeyBinder text="#Keybind_Use_Items" bind="+use" tags="use,interact" />
-				<SettingsKeyBinder text="#Keybind_Drop" bind="drop" tags="drop" />
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_1" bind="slot1" tags="slot1" />
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_2" bind="slot2" tags="slot2" />
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_4" bind="slot4" tags="slot4" />
 				<SettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
 				
-				<Label class="settings-group__subtitle" text="#Common_Multiplayer" />
+				<Label class="settings-group__subtitle" text="#Settings_Keybinds_MP_COOP" />
 
-				<SettingsKeyBinder text="#Keybind_ToggleTimes" bind="+showtimes" tags="leaderboard,tab,times" />
-				<SettingsKeyBinder text="#Keybind_Chat_Message" bind="chat_open" tags="chat,talk" />
+				<SettingsKeyBinder text="#Keybind_Chat_Message" bind="say" tags="coop,chat,talk" />
+				<SettingsKeyBinder text="#Keybind_Chat_Message_TeamOnly" bind="say_team" tags="coop,chat,talk" />
+				<SettingsKeyBinder text="#Keybind_Chat_Voice" bind="+voicerecord" tags="coop,voice,chat,push,talk" />
+				<SettingsKeyBinder text="#Keybind_Coop_RemoteView" bind="+remote_view" tags="coop,remote,view" />
+				<SettingsKeyBinder text="#Keybind_Coop_Ping" bind="+mouse_menu" tags="coop,ping,tool,radial" />
+				<SettingsKeyBinder text="#Keybind_Coop_Taunt" bind="+mouse_menu_taunt" tags="coop,gesture,taunt" />
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
 
