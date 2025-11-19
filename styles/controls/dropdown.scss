@@ -38,19 +38,15 @@
 	// Inserted by code
 	&.DropDownMenuVisible {
 		background-color: $dropdown-button-background-menuvisible;
-		border-color: $dropdown-button-background-menuvisible;
+		border-color: $primary-color;
 
 		& > .DropDownIcon {
 			wash-color: $dropdown-button-menuvisible-text-color;
 			transform: scaleY(-1);
 		}
-
-		& Label {
-			color: $dropdown-button-menuvisible-text-color;
-		}
 	}
 
-	&:hover {
+	&:hover:not(:disabled):not(:parentdisabled) {
 		background-color: $dropdown-button-background-hover;
 		sound: 'UIPanorama.P2CE.MenuSelect';
 
@@ -76,6 +72,10 @@
 
 	&:not(:parentdisabled) Label {
 		color: $dropdown-button-text-color;
+	}
+
+	&.DropDownMenuVisible:not(:parentdisabled) Label {
+		color: $dropdown-button-menuvisible-text-color;
 	}
 
 	Label {
@@ -178,7 +178,7 @@ DropDownMenuBackground {
 	background-color: $base-950;
 	border: $menu-pane-border;
 
-	&:hover {
+	&:hover:not(:disabled):not(:parentdisabled) {
 		border-color: $primary-color;
 
 		.DropDownIcon {
