@@ -38,10 +38,9 @@ class FakeCampaign {
 class CampaignEntry {
 	index: number;
 	panel: Button;
-	// TODO: CampaignInfo from CampaignAPI
-	info: FakeCampaign;
+	info: CampaignInfo;
 
-	constructor(index: number, panel: Button, info: FakeCampaign) {
+	constructor(index: number, panel: Button, info: CampaignInfo) {
 		this.index = index;
 		this.panel = panel;
 		this.info = info;
@@ -58,6 +57,7 @@ class CampaignEntry {
 		if (title) {
 			title.text = $.Localize(this.info.title);
 		}
+		/*
 		if (author) {
 			author.text = $.Localize(this.info.author);
 		}
@@ -73,6 +73,7 @@ class CampaignEntry {
 		if (btnBg) {
 			btnBg.SetImage(this.info.btnBg);
 		}
+		*/
 
 		this.panel.SetPanelEvent('onactivate', () => {
 			CampaignMgr.campaignSelected(this.info);
@@ -94,10 +95,10 @@ class FakeChapter {
 class ChapterEntry {
 	index: number;
 	panel: Button;
-	chapter: FakeChapter;
+	chapter: ChapterInfo;
 	locked: boolean;
 
-	constructor(index: number, panel: Button, chapter: FakeChapter, locked: boolean) {
+	constructor(index: number, panel: Button, chapter: ChapterInfo, locked: boolean) {
 		this.index = index;
 		this.panel = panel;
 		this.chapter = chapter;
@@ -116,20 +117,20 @@ class ChapterEntry {
 			desc.text = $.Localize(this.chapter.title);
 		}
 		if (cover) {
-			cover.SetImage(`file://{materials}/vgui/chapters/chapter${this.index + 1}.vtf`);
+			cover.SetImage(`file://{materials}/${this.chapter.thumbnail}.vtf`);
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
-				GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
-			else {
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
+				CampaignAPI.StartCampaign(CampaignMgr.currentCampaign!.id, this.chapter.id);
+			} else {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 					$.Localize('#Action_NewGame_Title'),
 					$.Localize('#Action_NewGame_Description'),
 					'warning-popup',
 					$.Localize('#UI_Yes'),
 					() => {
-						GameInterfaceAPI.ConsoleCommand(`map ${this.chapter.map}`);
+						CampaignAPI.StartCampaign(CampaignMgr.currentCampaign!.id, this.chapter.id);
 					},
 					$.Localize('#UI_Cancel'),
 					() => {},
@@ -287,20 +288,7 @@ class CampaignNewGameTab {
 	}
 
 	static populateChapters() {
-		// TODO: Actual chapters from CampaignAPI
-
-		const chapters: FakeChapter[] = [
-			{ title: '#portal2_Chapter1_Subtitle', map: 'sp_a1_intro1' },
-			{ title: '#portal2_Chapter2_Subtitle', map: 'sp_a2_laser_intro' },
-			{ title: '#portal2_Chapter3_Subtitle', map: 'sp_a2_sphere_peek' },
-			{ title: '#portal2_Chapter4_Subtitle', map: 'sp_a2_column_blocker' },
-			{ title: '#portal2_Chapter5_Subtitle', map: 'sp_a2_bts3' },
-			{ title: '#portal2_Chapter6_Subtitle', map: 'sp_a3_00' },
-			{ title: '#portal2_Chapter7_Subtitle', map: 'sp_a3_speed_ramp' },
-			{ title: '#portal2_Chapter8_Subtitle', map: 'sp_a4_intro' },
-			{ title: '#portal2_Chapter9_Subtitle', map: 'sp_a4_finale1' },
-			{ title: '#portal2_Chapter10_Subtitle', map: 'sp_a5_credits' }
-		];
+		const chapters = CampaignMgr.currentCampaign!.chapters;
 
 		for (let i = 0; i < chapters.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignLister, 'chapter' + i, {
@@ -492,9 +480,7 @@ class CampaignStartPage {
 	}
 
 	static show() {
-		if (CampaignMgr.currentCampaign) {
-			this.campaignBg.SetImage(CampaignMgr.currentCampaign.background);
-		}
+		//this.campaignBg.SetImage(CampaignMgr.currentCampaign.background);
 		this.campaignStartPage.visible = true;
 		this.campaignStartPage.AddClass('selected-campaign__anim');
 		this.campaignStartPage.AddClass('selected-campaign__show');
@@ -518,9 +504,9 @@ class CampaignStartPage {
 	}
 
 	static setActive() {
-		if (CampaignMgr.currentCampaign) {
-			this.campaignLogo.SetImage(CampaignMgr.currentCampaign.logo);
-		}
+		//if (CampaignMgr.currentCampaign) {
+		//	this.campaignLogo.SetImage(CampaignMgr.currentCampaign.logo);
+		//}
 
 		this.show();
 	}
@@ -574,92 +560,13 @@ class CampaignStartPage {
 }
 
 class CampaignSelector {
-	static fakeCampaigns: FakeCampaign[] = [
-		{
-			title: '#MainMenu_Campaigns_P2CE',
-			author: '#MainMenu_Campaigns_P2CE_Author',
-			desc: '#MainMenu_Campaigns_P2CE_Description',
-			cover: 'file://{images}/menu/p2ce/random5.png',
-			background: 'file://{images}/menu/p2ce/news-splash.png',
-			btnBg: 'file://{images}/menu/p2ce/random1.png',
-			ico: 'file://{images}/menu/p2ce/logo.png',
-			logo: 'file://{images}/logo.svg',
-			boxart: 'file://{images}/menu/p2ce/boxart.png'
-		},
-		{
-			title: '#MainMenu_Campaigns_portal2',
-			author: '#MainMenu_Campaigns_Valve_Author',
-			desc: '#MainMenu_Campaigns_portal2_Description',
-			cover: 'file://{images}/menu/portal2/campaign_cover.png',
-			background: 'file://{images}/menu/portal2/campaign_bg.png',
-			btnBg: 'file://{images}/menu/portal2/campaign_btn_bg.jpg',
-			ico: 'file://{images}/menu/portal2/logo.png',
-			logo: 'file://{images}/menu/portal2/full_logo.png',
-			boxart: 'file://{images}/menu/portal2/sp_boxart.png'
-		},
-		{
-			title: '#MainMenu_Campaigns_portal2_MP',
-			author: '#MainMenu_Campaigns_Valve_Author',
-			desc: '#MainMenu_Campaigns_portal2_MP_Description',
-			cover: 'file://{images}/menu/portal2/mp_campaign_bg.png',
-			background: 'file://{images}/menu/portal2/mp_campaign_bg.png',
-			btnBg: 'file://{images}/menu/portal2/mp_campaign_btn_bg.jpg',
-			ico: 'file://{images}/menu/portal2/logo.png',
-			logo: 'file://{images}/menu/portal2/full_logo.png',
-			boxart: 'file://{images}/menu/portal2/mp_boxart.png'
-		},
-		{
-			title: '#MainMenu_Campaigns_portal',
-			author: '#MainMenu_Campaigns_Valve_Author',
-			desc: '#MainMenu_Campaigns_portal_Description',
-			cover: 'file://{images}/menu/portal/campaign_bg.png',
-			background: 'file://{images}/menu/portal/campaign_bg.png',
-			btnBg: 'file://{images}/menu/portal/campaign_btn_bg.jpg',
-			ico: 'file://{images}/menu/portal/logo.svg',
-			logo: 'file://{images}/menu/portal/full_logo.svg',
-			boxart: 'file://{images}/menu/portal/boxart.png'
-		},
-		{
-			title: '#MainMenu_Campaigns_hl2',
-			author: '#MainMenu_Campaigns_Valve_Author',
-			desc: '#MainMenu_Campaigns_hl2_Description',
-			cover: 'file://{images}/menu/hl2/campaign_cover.png',
-			background: 'file://{images}/menu/hl2/campaign_bg.png',
-			btnBg: 'file://{images}/menu/hl2/campaign_btn_bg.png',
-			ico: 'file://{images}/menu/hl2/logo.svg',
-			logo: 'file://{images}/menu/hl2/full_logo.svg',
-			boxart: 'file://{images}/menu/hl2/boxart.png'
-		},
-		{
-			title: '#MainMenu_Campaigns_episodic',
-			author: '#MainMenu_Campaigns_Valve_Author',
-			desc: 'MainMenu_Campaigns_episodic_Description',
-			cover: 'file://{images}/menu/episodic/campaign_cover.png',
-			background: 'file://{images}/menu/episodic/campaign_bg.png',
-			btnBg: 'file://{images}/menu/episodic/campaign_btn_bg.png',
-			ico: 'file://{images}/menu/hl2/logo.svg',
-			logo: 'file://{images}/menu/episodic/full_logo.svg',
-			boxart: 'file://{images}/menu/episodic/boxart.png'
-		},
-		{
-			title: '#MainMenu_Campaigns_ep2',
-			author: '#MainMenu_Campaigns_Valve_Author',
-			desc: '#MainMenu_Campaigns_ep2_Description',
-			cover: 'file://{images}/menu/ep2/campaign_cover.png',
-			background: 'file://{images}/menu/ep2/campaign_bg.png',
-			btnBg: 'file://{images}/menu/ep2/campaign_btn_bg.png',
-			ico: 'file://{images}/menu/ep2/logo_white.svg',
-			logo: 'file://{images}/menu/ep2/full_logo.svg',
-			boxart: 'file://{images}/menu/ep2/boxart.png'
-		}
-	];
 	static campaignList = $<Panel>('#CampaignContainer')!;
 	static hoverContainer = $<Panel>('#HoveredCampaignContainer')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
 	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
 	static selectorPage = $<Panel>('#CampaignSelector')!;
 	static campaignEntries: CampaignEntry[] = [];
-	static hoveredCampaign: FakeCampaign | null = null;
+	static hoveredCampaign: CampaignInfo | null = null;
 	static isHidden: boolean = false;
 
 	static {
@@ -692,25 +599,26 @@ class CampaignSelector {
 	}
 
 	static populateCampaigns() {
-		for (let i = 0; i < this.fakeCampaigns.length; ++i) {
+		const campaigns = CampaignAPI.GetAllCampaigns();
+		for (let i = 0; i < campaigns.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
 			p.LoadLayoutSnippet('CampaignEntrySnippet');
 
-			if (i < this.fakeCampaigns.length - 1) {
+			if (i < campaigns.length - 1) {
 				p.AddClass('campaigns__entry__spaced');
 			}
 
 			p.SetPanelEvent('onmouseover', () => {
-				CampaignSelector.onCampaignHovered(this.fakeCampaigns[i]);
+				CampaignSelector.onCampaignHovered(campaigns[i]);
 			});
 
-			this.campaignEntries.push(new CampaignEntry(i, p, this.fakeCampaigns[i]));
+			this.campaignEntries.push(new CampaignEntry(i, p, campaigns[i]));
 			this.campaignEntries[i].update();
 		}
 		stripDevTagsFromLabels(this.campaignList);
 	}
 
-	static onCampaignHovered(info: FakeCampaign) {
+	static onCampaignHovered(info: CampaignInfo) {
 		let switchDelay = 0;
 
 		if (!this.hoverContainer.HasClass('campaigns__boxart__container__show')) {
@@ -730,7 +638,7 @@ class CampaignSelector {
 		this.hoveredCampaign = info;
 
 		$.Schedule(switchDelay, () => {
-			this.hoverBoxart.SetImage(info.boxart);
+			//this.hoverBoxart.SetImage(info.boxart);
 		});
 	}
 
@@ -780,7 +688,7 @@ class CampaignSelector {
 }
 
 class CampaignMgr {
-	static currentCampaign: FakeCampaign | null = null;
+	static currentCampaign: CampaignInfo | null = null;
 	static isInitialized: boolean = false;
 
 	static {
@@ -806,7 +714,8 @@ class CampaignMgr {
 		// used by main menu redirect or by loading the campaign
 		// screen for the first time (but already jumped in game)
 		const tryOpenCampaign = (campaignIndex: number) => {
-			this.campaignSelected(CampaignSelector.fakeCampaigns[campaignIndex as number]);
+			const campaigns = CampaignAPI.GetAllCampaigns();
+			this.campaignSelected(campaigns[campaignIndex]);
 		};
 
 		const openCampaign = $.persistentStorage.getItem('campaigns.open');
@@ -829,7 +738,7 @@ class CampaignMgr {
 		}
 	}
 
-	static campaignSelected(info: FakeCampaign) {
+	static campaignSelected(info: CampaignInfo) {
 		this.currentCampaign = info;
 
 		CampaignSelector.playAwayAnim();
