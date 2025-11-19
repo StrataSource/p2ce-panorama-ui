@@ -273,12 +273,11 @@
 						-->
 						<Button
 							id="CampaignStartReturn"
-							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
+							class="selected-campaign__controls__button"
 							onactivate="CampaignStartPage.hide()"
 						>
 							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_ReturnToCampaignMenu" />
 						</Button>
-						<Label class="horizontal-align-center m-3" text="#MainMenu_Campaigns_MM_PoC" />
 					</Panel>
 				</Panel>
 				<Panel id="CampaignListerContainer" class="selected-campaign__lister__container">
