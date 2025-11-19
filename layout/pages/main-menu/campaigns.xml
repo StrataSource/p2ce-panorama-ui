@@ -22,7 +22,7 @@
 				/>
 				<Panel class="campaigns__entry__inner">
 					<!-- Campaign icon cover -->
-					<Panel>
+					<Panel class="vertical-align-center">
 						<Image
 							id="CampaignCover"
 							class="campaigns__entry__cover"
@@ -220,9 +220,7 @@
 						id="CampaignLogo"
 						class="selected-campaign__logo"
 						src="file://{images}/menu/portal2/full_logo.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="130"
-						texturewidth="440"
+						scaling="stretch-to-fit-preserve-aspect"
 					/>
 					<Panel id="CampaignControls" class="selected-campaign__controls__inner">
 						<Button
