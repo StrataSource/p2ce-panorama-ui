@@ -112,7 +112,11 @@
 
             <Panel id="HL2SubSection" class="settings-group">
                 <Panel class="settings-group__header">
-                    <Label class="settings-group__title" text="#Settings_HL2_Title" tags="gameplay,customization,hl2,half-life,half-life 2" />
+                    <Label
+						class="settings-group__title"
+						text="#Settings_HL2_Title"
+						tags="gameplay,customization,hl2,half-life,half-life 2"
+					/>
                 </Panel>
 
                 <SettingsEnum
