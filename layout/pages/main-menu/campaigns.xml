@@ -50,9 +50,17 @@
 					</Panel>
 					<!-- Campaign info; title, description, 'source' -->
 					<Panel class="campaigns__entry__details">
-						<Label id="CampaignTitle" class="campaigns__entry__details__title" text="#MainMenu_Campaigns_MM_CampaignName_placeholder" />
+						<Label
+							id="CampaignTitle"
+							class="campaigns__entry__details__title"
+							text="#MainMenu_Campaigns_MM_CampaignName_placeholder"
+						/>
 						<Label id="CampaignAuthor" class="campaigns__entry__details__author" text="#MainMenu_Campaigns_MM_CampaignAuthor" />
-						<Label id="CampaignDesc" class="campaigns__entry__details__desc" text="#MainMenu_Campaigns_MM_CampaignDescription_placeholder" />
+						<Label
+							id="CampaignDesc"
+							class="campaigns__entry__details__desc"
+							text="#MainMenu_Campaigns_MM_CampaignDescription_placeholder"
+						/>
 					</Panel>
 				</Panel>
 			</Button>
@@ -154,7 +162,10 @@
 					</Button>
 				</Panel>
 				<Panel disabled="true" class="campaigns__action-bar">
-					<TextEntry class="textentry campaigns__action-bar__textentry fill-width mr-2" placeholder="#MainMenu_Campaigns_Search_FillerText" />
+					<TextEntry
+						class="textentry campaigns__action-bar__textentry fill-width mr-2"
+						placeholder="#MainMenu_Campaigns_Search_FillerText"
+					/>
 					<DropDown id="CampaignSortMode" class="dropdown" menuclass="dropdown-menu">
 						<!-- <Panel class="DropDownIcon"/> -->
 						<Label text="#MainMenu_Campaigns_Search_SortBy_NewSubs" id="CampaignSortMode1" value="1" />
@@ -263,10 +274,7 @@
 						>
 							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_ReturnToCampaignMenu" />
 						</Button>
-						<Label
-							class="horizontal-align-center m-3"
-							text="#MainMenu_Campaigns_MM_PoC"
-						/>
+						<Label class="horizontal-align-center m-3" text="#MainMenu_Campaigns_MM_PoC" />
 					</Panel>
 				</Panel>
 				<Panel id="CampaignListerContainer" class="selected-campaign__lister__container">

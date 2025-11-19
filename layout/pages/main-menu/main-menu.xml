@@ -242,7 +242,11 @@
 											/>
 										</Panel>
 										<Panel class="home__campaign-detail__right">
-											<Label id="LevelHeader" class="home__campaign-detail__right__title" text="#MainMenu_Campaigns_MM_CampaignName_placeholder" />
+											<Label
+												id="LevelHeader"
+												class="home__campaign-detail__right__title"
+												text="#MainMenu_Campaigns_MM_CampaignName_placeholder"
+											/>
 											<Label id="LevelChapter" class="home__campaign-detail__right__chapter" text="#MainMenu_Campaigns_MM_ChapterName" />
 											<Label id="LevelChapterNum" class="home__campaign-detail__right__chapter" text="#MainMenu_Campaigns_MM_ChapterNum" />
 											<Label id="LevelDesc" class="home__campaign-detail__right__desc" text="#MainMenu_Campaigns_MM_ChapterMapName" />

@@ -11,10 +11,7 @@
 	<PopupCustomLayout class="PopupPanel Hidden generic-popup generic-popup--large" popupbackground="blur">
 		<Panel class="flow-down">
 			<Label class="text-h2 mb-4 full-width text-align-center" text="#MainMenu_PrereleaseNotice_Title" />
-			<Label
-				class="mb-2"
-				text="#MainMenu_PrereleaseNotice_Description"
-			/>
+			<Label class="mb-2" text="#MainMenu_PrereleaseNotice_Description" />
 		</Panel>
 		
 		<Panel class="flow-right full-width mt-4">

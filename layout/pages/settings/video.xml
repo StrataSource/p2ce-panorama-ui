@@ -51,7 +51,14 @@
 
 				</Panel>
 
-				<SettingsSlider text="#Settings_Video_FOV" infomessage="#Settings_Video_FOV_Info" min="50" max="130" convar="fov_desired" hasdocspage="false" />
+				<SettingsSlider
+					text="#Settings_Video_FOV"
+					infomessage="#Settings_Video_FOV_Info"
+					min="50"
+					max="130"
+					convar="fov_desired"
+					hasdocspage="false"
+				/>
 			
 				<SettingsSlider
 					text="#Settings_Video_MaxFPS"

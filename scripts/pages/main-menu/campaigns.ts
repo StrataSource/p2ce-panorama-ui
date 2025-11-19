@@ -56,13 +56,13 @@ class CampaignEntry {
 		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
 		if (title) {
-			title.text = $.Localize(`${this.info.title}`);
+			title.text = $.Localize(this.info.title);
 		}
 		if (author) {
-			author.text = $.Localize(`${this.info.author}`);
+			author.text = $.Localize(this.info.author);
 		}
 		if (desc) {
-			desc.text = $.Localize(`${this.info.desc}`);
+			desc.text = $.Localize(this.info.desc);
 		}
 		if (cover) {
 			cover.SetImage(this.info.cover);
@@ -157,11 +157,18 @@ class SaveEntry {
 		const actionBtn = this.panel.FindChildTraverse('SaveAction')!;
 
 		if (this.isSaver) {
-			if (this.save.name.includes('quick') || this.save.name.includes('autosave') || this.save.name.includes('autosavedangerous')) {
+			if (
+				this.save.name.includes('quick') ||
+				this.save.name.includes('autosave') ||
+				this.save.name.includes('autosavedangerous')
+			) {
 				actionBtn.enabled = false;
 
 				this.panel.SetPanelEvent('onmouseover', () => {
-					UiToolkitAPI.ShowTextTooltip(this.panel.id, $.Localize('#MainMenu_SaveRestore_CannotOverwriteSave'));
+					UiToolkitAPI.ShowTextTooltip(
+						this.panel.id,
+						$.Localize('#MainMenu_SaveRestore_CannotOverwriteSave')
+					);
 				});
 				this.panel.SetPanelEvent('onmouseout', () => {
 					UiToolkitAPI.HideTextTooltip();
@@ -179,10 +186,10 @@ class SaveEntry {
 		}
 		if (desc) {
 			const date = new Date(this.save.time * 1000);
-			desc.text = '${date.toLocaleDateString()} ${date.toLocaleTimeString()}';
+			desc.text = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 		}
 		if (cover) {
-			cover.SetImage('file://${this.save.thumb}');
+			cover.SetImage(`file://${this.save.thumb}`);
 			if (this.isSaver) cover.AddClass('saves__entry__cover__short');
 		}
 		if (del) {
@@ -541,7 +548,10 @@ class CampaignStartPage {
 		saveBtn.enabled = !GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
 		if (!saveBtn.enabled) {
 			saveBtn.SetPanelEvent('onmouseover', () => {
-				UiToolkitAPI.ShowTextTooltip(saveBtn.id, $.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled'));
+				UiToolkitAPI.ShowTextTooltip(
+					saveBtn.id,
+					$.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled')
+				);
 			});
 			saveBtn.SetPanelEvent('onmouseout', () => {
 				UiToolkitAPI.HideTextTooltip();
@@ -623,8 +633,7 @@ class CampaignSelector {
 		{
 			title: '#MainMenu_Campaigns_episodic',
 			author: '#MainMenu_Campaigns_Valve_Author',
-			desc:
-				'MainMenu_Campaigns_episodic_Description',
+			desc: 'MainMenu_Campaigns_episodic_Description',
 			cover: 'file://{images}/menu/episodic/campaign_cover.png',
 			background: 'file://{images}/menu/episodic/campaign_bg.png',
 			btnBg: 'file://{images}/menu/episodic/campaign_btn_bg.png',
@@ -635,8 +644,7 @@ class CampaignSelector {
 		{
 			title: '#MainMenu_Campaigns_ep2',
 			author: '#MainMenu_Campaigns_Valve_Author',
-			desc:
-				'#MainMenu_Campaigns_ep2_Description',
+			desc: '#MainMenu_Campaigns_ep2_Description',
 			cover: 'file://{images}/menu/ep2/campaign_cover.png',
 			background: 'file://{images}/menu/ep2/campaign_bg.png',
 			btnBg: 'file://{images}/menu/ep2/campaign_btn_bg.png',

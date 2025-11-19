@@ -85,7 +85,7 @@ class MainMenu {
 		this.setMainMenuDetails();
 
 		this.showPrereleaseWarning();
-		
+
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
 		stripDevTagsFromLabels($.GetContextPanel());
