@@ -4,7 +4,11 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/pages/main-menu/campaigns.ts" />
+		<include src="file://{scripts}/pages/campaigns/manager.ts" />
+		<include src="file://{scripts}/pages/campaigns/campaign-selector.ts" />
+		<include src="file://{scripts}/pages/campaigns/campaign-home.ts" />
+		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
+		<include src="file://{scripts}/pages/campaigns/campaign-saves.ts" />
 	</scripts>
 
 	<snippets>
@@ -242,7 +246,7 @@
 						<Button
 							id="CampaignNewGameBtn"
 							class="selected-campaign__controls__button selected-campaign__controls__button__lined"
-							onactivate="CampaignNewGameTab.setActive()"
+							onactivate="CampaignChaptersTab.setActive()"
 						>
 							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_NewGame" />
 						</Button>
@@ -275,7 +279,7 @@
 						<Button
 							id="CampaignStartReturn"
 							class="selected-campaign__controls__button"
-							onactivate="CampaignStartPage.hide()"
+							onactivate="CampaignHome.hide()"
 						>
 							<Label class="selected-campaign__controls__button__text" text="#MainMenu_Campaigns_MM_ReturnToCampaignMenu" />
 						</Button>
@@ -286,7 +290,7 @@
 					<Panel class="selected-campaign__lister__body">
 						<Panel id="CampaignLister" class="selected-campaign__lister">
 						</Panel>
-						<Button id="CampaignBackScreen" class="selected-campaign__lister__button" onactivate="CampaignStartPage.closeLister()">
+						<Button id="CampaignBackScreen" class="selected-campaign__lister__button" onactivate="CampaignHome.closeLister()">
 							<Label class="selected-campaign__lister__button__text" text="#MainMenu_Campaigns_MM_Back" />
 						</Button>
 					</Panel>
