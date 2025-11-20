@@ -104,7 +104,7 @@
 
 							<Label class="settings-nav__item-label" text="#Settings_Audio" />
 
-							<Panel class="settings-nav__subsection settings-nav__subsection--2 settings-nav__subsection--hidden">
+							<Panel class="settings-nav__subsection settings-nav__subsection--3 settings-nav__subsection--hidden">
 
 								<RadioButton
 									id="VolumeRadio"
