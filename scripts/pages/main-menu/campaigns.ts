@@ -1,38 +1,21 @@
 'use strict';
 
-// TODO: actual CampaignAPI
-class FakeCampaign {
-	title: string;
-	author: string;
-	desc: string;
-	cover: string;
-	background: string;
-	btnBg: string;
-	ico: string;
-	logo: string;
-	boxart: string;
+// TODO: SPLIT INTO MULTIPLE FILES, THIS IS GETTING ABSURD!!
 
-	constructor(
-		title: string,
-		author: string,
-		desc: string,
-		cover: string,
-		background: string,
-		btnBg: string,
-		ico: string,
-		logo: string,
-		boxart: string
-	) {
-		this.title = title;
-		this.author = author;
-		this.desc = desc;
-		this.cover = cover;
-		this.background = background;
-		this.btnBg = btnBg;
-		this.ico = ico;
-		this.logo = logo;
-		this.boxart = boxart;
-	}
+/**
+ * Find campaign by map.
+ * Returns undefined if it doesn't exist.
+ */
+function getCampaignFromMap(mapToFind: string) {
+	const campaigns = CampaignAPI.GetAllCampaigns();
+	const matching = campaigns.find((campaign: CampaignInfo) => {
+		return campaign.chapters.find((chapter: ChapterInfo) => {
+			return chapter.maps.find((map) => {
+				return map.name === mapToFind;
+			}) !== undefined;
+		}) !== undefined;
+	});
+	return matching;
 }
 
 class CampaignEntry {
@@ -78,17 +61,6 @@ class CampaignEntry {
 		this.panel.SetPanelEvent('onactivate', () => {
 			CampaignMgr.campaignSelected(this.info);
 		});
-	}
-}
-
-// TODO: actual CampaignAPI
-class FakeChapter {
-	title: string;
-	map: string;
-
-	constructor(title: string, map: string) {
-		this.title = title;
-		this.map = map;
 	}
 }
 
@@ -144,10 +116,10 @@ class ChapterEntry {
 class SaveEntry {
 	index: number;
 	panel: Button;
-	save: Save;
+	save: GameSave;
 	isSaver: boolean;
 
-	constructor(index: number, panel: Button, save: Save, isSaver: boolean) {
+	constructor(index: number, panel: Button, save: GameSave, isSaver: boolean) {
 		this.index = index;
 		this.panel = panel;
 		this.save = save;
@@ -158,11 +130,7 @@ class SaveEntry {
 		const actionBtn = this.panel.FindChildTraverse('SaveAction')!;
 
 		if (this.isSaver) {
-			if (
-				this.save.name.includes('quick') ||
-				this.save.name.includes('autosave') ||
-				this.save.name.includes('autosavedangerous')
-			) {
+			if (this.save.isAutoSave) {
 				actionBtn.enabled = false;
 
 				this.panel.SetPanelEvent('onmouseover', () => {
@@ -183,63 +151,74 @@ class SaveEntry {
 		const del = this.panel.FindChildTraverse<Button>('SaveDelete');
 
 		if (title) {
-			title.text = this.save.name;
+			title.text = this.save.mapName;
 		}
 		if (desc) {
-			const date = new Date(this.save.time * 1000);
+			const date = new Date(this.save.fileTime * 1000);
 			desc.text = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 		}
 		if (cover) {
-			cover.SetImage(`file://${this.save.thumb}`);
+			const thumb = `file://{__saves}/${this.save.fileName.replace('.sav', '.tga')}`;
+			$.Msg(`Save screenshot resource: ${thumb}`);
+			cover.SetImage(thumb);
 			if (this.isSaver) cover.AddClass('saves__entry__cover__short');
 		}
 		if (del) {
-			del.SetPanelEvent('onactivate', () => {
-				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					$.Localize('#Action_DeleteGame_Confirm'),
-					$.Localize('#Action_DeleteGame_Confirm_Message'),
-					'warning-popup',
-					$.Localize('#Action_DeleteGame'),
-					() => {
-						SaveRestoreAPI.DeleteSave(this.save.name);
-						CampaignSavesTab.purgeSaveList();
-						$.Schedule(0.001, () => {
-							CampaignSavesTab.populateSaves();
-							CampaignStartPage.updateLoadBtns();
-						});
-					},
-					$.Localize('#UI_Cancel'),
-					() => {},
-					'blur'
-				);
-			});
+			del.enabled = false;
+			
+			//del.SetPanelEvent('onactivate', () => {
+			//	UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+			//		$.Localize('#Action_DeleteGame_Confirm'),
+			//		$.Localize('#Action_DeleteGame_Confirm_Message'),
+			//		'warning-popup',
+			//		$.Localize('#Action_DeleteGame'),
+			//		() => {
+			//			SaveRestoreAPI.DeleteSave(this.save.name);
+			//			CampaignSavesTab.purgeSaveList();
+			//			$.Schedule(0.001, () => {
+			//				CampaignSavesTab.populateSaves();
+			//				CampaignStartPage.updateLoadBtns();
+			//			});
+			//		},
+			//		$.Localize('#UI_Cancel'),
+			//		() => {},
+			//		'blur'
+			//	);
+			//});
 		}
 
 		if (this.isSaver) {
 			actionBtn.SetPanelEvent('onactivate', () => {
-				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					$.Localize('#Action_OverwriteGame_Confirm'),
-					$.Localize('#Action_OverwriteGame_Confirm_Message'),
+				UiToolkitAPI.ShowGenericPopupOk(
+					$.Localize('MainMenu_Feature_Unavailable_Title'),
+					$.Localize('MainMenu_Feature_Unavailable_Description'),
 					'warning-popup',
-					$.Localize('#Action_OverwriteGame'),
-					() => {
-						SaveRestoreAPI.SaveGame(this.save.name);
-						CampaignSavesTab.purgeSaveList();
-						CampaignSavesTab.lockScreen();
-						$.Schedule(1, () => {
-							CampaignSavesTab.populateSaves();
-							CampaignStartPage.updateLoadBtns();
-							CampaignSavesTab.unlockScreen();
-						});
-					},
-					$.Localize('#UI_Cancel'),
-					() => {},
-					'blur'
+					() => {}
 				);
+
+				//UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				//	$.Localize('#Action_OverwriteGame_Confirm'),
+				//	$.Localize('#Action_OverwriteGame_Confirm_Message'),
+				//	'warning-popup',
+				//	$.Localize('#Action_OverwriteGame'),
+				//	() => {
+				//		SaveRestoreAPI.SaveGame(this.save.name);
+				//		CampaignSavesTab.purgeSaveList();
+				//		CampaignSavesTab.lockScreen();
+				//		$.Schedule(1, () => {
+				//			CampaignSavesTab.populateSaves();
+				//			CampaignStartPage.updateLoadBtns();
+				//			CampaignSavesTab.unlockScreen();
+				//		});
+				//	},
+				//	$.Localize('#UI_Cancel'),
+				//	() => {},
+				//	'blur'
+				//);
 			});
 		} else {
 			actionBtn.SetPanelEvent('onactivate', () => {
-				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) SaveRestoreAPI.LoadSave(this.save.name);
+				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) GameInterfaceAPI.ConsoleCommand(`load ${this.save.fileName}`);
 				else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 						$.Localize('#Action_LoadGame_Confirm'),
@@ -247,7 +226,7 @@ class SaveEntry {
 						'warning-popup',
 						$.Localize('#Action_LoadGame'),
 						() => {
-							SaveRestoreAPI.LoadSave(this.save.name);
+							GameInterfaceAPI.ConsoleCommand(`load ${this.save.fileName}`);
 						},
 						$.Localize('#UI_Cancel'),
 						() => {},
@@ -348,10 +327,10 @@ class CampaignSavesTab {
 	}
 
 	static populateSaves() {
-		// TODO: Saves from campaigns
-		// for now this will just list all saves
+		const saves = GameSavesAPI.GetGameSaves()
+			.filter((v: Save) => { return v.mapGroup === CampaignMgr.currentCampaign!.id })
+			.sort((a, b) => b.fileTime - a.fileTime);
 
-		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
 		for (let i = 0; i < saves.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignLister, 'save' + i, {
 				class: i !== saves.length - 1 ? 'saves__entry__lined' : ''
@@ -395,18 +374,25 @@ class CampaignSavesTab {
 				'generic-popup',
 				$.Localize('#UI_Yes'),
 				() => {
-					SaveRestoreAPI.SaveGame('${new Date().getTime()}');
 					CampaignSavesTab.purgeSaveList();
+					GameSavesAPI.CreateSaveGame();
 					CampaignSavesTab.lockScreen();
 
 					if (this.createSaveBtn) this.createSaveBtn.enabled = false;
 
-					$.Schedule(1, () => {
-						CampaignSavesTab.populateSaves();
-						CampaignStartPage.updateLoadBtns();
-						CampaignSavesTab.unlockScreen();
-						if (this.createSaveBtn?.IsValid()) this.createSaveBtn.enabled = true;
-					});
+					const checkSaving = () => {
+						$.Schedule(0.001, () => {
+							if (GameSavesAPI.IsSaveInProgress() || GameSavesAPI.IsAutosaveInProgress()) {
+								$.Schedule(0.001, checkSaving);
+								return;
+							}
+
+							CampaignSavesTab.populateSaves();
+							CampaignStartPage.updateButtons();
+							CampaignSavesTab.unlockScreen();
+							if (this.createSaveBtn?.IsValid()) this.createSaveBtn.enabled = true;
+						});
+					}
 				},
 				$.Localize('#UI_Cancel'),
 				() => {},
@@ -421,9 +407,6 @@ class CampaignSavesTab {
 	}
 
 	static loadLatest() {
-		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
-		if (saves.length === 0) return;
-
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 				$.Localize('#Action_LoadGame_Confirm'),
@@ -431,14 +414,24 @@ class CampaignSavesTab {
 				'warning-popup',
 				$.Localize('#Action_LoadGame'),
 				() => {
-					SaveRestoreAPI.LoadSave(saves[0].name);
+					if (CampaignMgr.currentCampaign)
+						CampaignAPI.ContinueCampaign(CampaignMgr.currentCampaign.id);
+					else {
+						const saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
+						GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
+					}
 				},
 				$.Localize('#UI_Cancel'),
 				() => {},
 				'blur'
 			);
 		} else {
-			SaveRestoreAPI.LoadSave(saves[0].name);
+			if (CampaignMgr.currentCampaign)
+				CampaignAPI.ContinueCampaign(CampaignMgr.currentCampaign.id);
+			else {
+				const saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
+				GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
+			}
 		}
 	}
 
@@ -463,10 +456,6 @@ class CampaignStartPage {
 	static campaignAllSavesBtn = $<Button>('#CampaignAllSavesBtn')!;
 	static campaignSaveBtn = $<Button>('#CampaignSaveBtn')!;
 
-	static {
-		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
-	}
-
 	static init() {
 		this.campaignStartPage.visible = false;
 
@@ -477,6 +466,8 @@ class CampaignStartPage {
 				}
 			}
 		});
+
+		this.closeLister();
 	}
 
 	static show() {
@@ -485,16 +476,9 @@ class CampaignStartPage {
 		this.campaignStartPage.AddClass('selected-campaign__anim');
 		this.campaignStartPage.AddClass('selected-campaign__show');
 
-		const tabToOpen = $.persistentStorage.getItem('campaigns.showTab');
-		if (tabToOpen) {
-			const tabBtn = this.campaignControls.FindChildTraverse<Button>(tabToOpen as string);
-			if (tabBtn) {
-				$.DispatchEvent('Activated', tabBtn, PanelEventSource.MOUSE);
-			} else {
-				$.Warning('campaigns.showTab defined but invalid value');
-			}
-			$.persistentStorage.removeItem('campaigns.showTab');
-		}
+		$<Label>('#CampaignNamePlaceholder')!.text = `[DEV] DO NOT LOCALIZE - Campaign: ${CampaignMgr.currentCampaign!.title}`;
+		this.updateButtons();
+		this.checkOpenTab();
 	}
 
 	static hide() {
@@ -514,25 +498,27 @@ class CampaignStartPage {
 	static onCampaignScreenShown(tabid: string) {
 		if (tabid !== 'Campaigns') return;
 
-		this.campaignListerContainer.visible = false;
-		this.campaignControls.visible = true;
+		this.updateButtons();
+	}
 
-		this.updateLoadBtns();
+	static updateButtons() {
+		const hasSaves = GameSavesAPI.GetGameSaves().filter((v: Save) => {
+			if (CampaignMgr.currentCampaign === undefined) return false;
+			return v.mapGroup === CampaignMgr.currentCampaign!.id;
+		}).length > 0;
+
+		this.campaignAllSavesBtn.enabled = hasSaves;
+		this.campaignLoadLatestBtn.enabled = hasSaves;
 
 		const isInGame = GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU;
-
-		// only change campaigns when not in game
-		const returnBtn = $('#CampaignStartReturn')!;
-		returnBtn.visible = !isInGame;
 
 		// only save game when in game
 		const saveBtn = $('#CampaignSaveBtn')!;
 		saveBtn.visible = isInGame;
-
 		saveBtn.ClearPanelEvent('onmouseover');
 		saveBtn.ClearPanelEvent('onmouseout');
-		saveBtn.enabled = !GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
-		if (!saveBtn.enabled) {
+		saveBtn.enabled = !GameInterfaceAPI.GetSettingBool('map_wants_save_disable') && !CampaignMgr.isInUnspecifiedMap;
+		if (GameInterfaceAPI.GetSettingBool('map_wants_save_disable')) {
 			saveBtn.SetPanelEvent('onmouseover', () => {
 				UiToolkitAPI.ShowTextTooltip(
 					saveBtn.id,
@@ -542,14 +528,48 @@ class CampaignStartPage {
 			saveBtn.SetPanelEvent('onmouseout', () => {
 				UiToolkitAPI.HideTextTooltip();
 			});
+		} else if (CampaignMgr.isInUnspecifiedMap) {
+			saveBtn.SetPanelEvent('onmouseover', () => {
+				UiToolkitAPI.ShowTextTooltip(
+					saveBtn.id,
+					tagDevString('The map you are playing on does not belong to this campaign.\nYou cannot save here.')
+				);
+			});
+			saveBtn.SetPanelEvent('onmouseout', () => {
+				UiToolkitAPI.HideTextTooltip();
+			});
+		}
+
+		const returnBtn = $('#CampaignStartReturn')!;
+		returnBtn.enabled = !isInGame || CampaignMgr.isInUnspecifiedMap;
+		returnBtn.ClearPanelEvent('onmouseover');
+		returnBtn.ClearPanelEvent('onmouseout');
+		if (!returnBtn.enabled) {
+			returnBtn.SetPanelEvent('onmouseover', () => {
+				UiToolkitAPI.ShowTextTooltip(
+					returnBtn.id,
+					tagDevString('Cannot switch campaigns while in game.\nReturn to the main menu first.')
+				);
+			});
+			returnBtn.SetPanelEvent('onmouseout', () => {
+				UiToolkitAPI.HideTextTooltip();
+			});
 		}
 	}
 
-	static updateLoadBtns() {
-		const hasSaves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time).length > 0;
+	static checkOpenTab() {
+		// check if a tab is queued to be opened
+		const tabToOpen = $.persistentStorage.getItem('campaigns.showTab');
 
-		this.campaignAllSavesBtn.enabled = hasSaves;
-		this.campaignLoadLatestBtn.enabled = hasSaves;
+		if (tabToOpen) {
+			const tabBtn = this.campaignControls.FindChildTraverse<Button>(tabToOpen as string);
+			if (tabBtn) {
+				$.DispatchEvent('Activated', tabBtn, PanelEventSource.MOUSE);
+			} else {
+				$.Warning('campaigns.showTab defined but invalid value');
+			}
+			$.persistentStorage.removeItem('campaigns.showTab');
+		}
 	}
 
 	static closeLister() {
@@ -568,12 +588,6 @@ class CampaignSelector {
 	static campaignEntries: CampaignEntry[] = [];
 	static hoveredCampaign: CampaignInfo | null = null;
 	static isHidden: boolean = false;
-
-	static {
-		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
-		$.RegisterForUnhandledEvent('MainMenuTabHidden', this.onCampaignScreenHidden.bind(this));
-		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
-	}
 
 	static layoutReload() {
 		this.purgeCampaignList();
@@ -596,6 +610,9 @@ class CampaignSelector {
 
 	static init() {
 		this.reloadList();
+
+		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuTabHidden', this.onCampaignScreenHidden.bind(this));
 	}
 
 	static populateCampaigns() {
@@ -690,14 +707,13 @@ class CampaignSelector {
 class CampaignMgr {
 	static currentCampaign: CampaignInfo | null = null;
 	static isInitialized: boolean = false;
-
-	static {
-		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
-	}
+	static isInUnspecifiedMap = false;
 
 	static init() {
-		CampaignStartPage.init();
 		CampaignSelector.init();
+		CampaignStartPage.init();
+
+		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
 
 		this.isInitialized = true;
 
@@ -707,27 +723,53 @@ class CampaignMgr {
 	static onCampaignScreenShown(tabid: string) {
 		if (tabid !== 'Campaigns' || !this.isInitialized) return;
 
+		CampaignStartPage.closeLister();
+		
 		this.checkOpenCampaign();
+
+		CampaignSelector.onCampaignScreenShown(tabid);
+		CampaignStartPage.onCampaignScreenShown(tabid);
 	}
 
 	static checkOpenCampaign() {
-		// used by main menu redirect or by loading the campaign
-		// screen for the first time (but already jumped in game)
-		const tryOpenCampaign = (campaignIndex: number) => {
-			const campaigns = CampaignAPI.GetAllCampaigns();
-			this.campaignSelected(campaigns[campaignIndex]);
-		};
-
 		const openCampaign = $.persistentStorage.getItem('campaigns.open');
 
 		if (openCampaign) {
-			tryOpenCampaign(openCampaign as number);
+			$.Msg(`openCampaign defined, attempting to force open: ${openCampaign}`);
+
+			const campaigns = CampaignAPI.GetAllCampaigns();
+			const c = campaigns.find((campaign: CampaignInfo) => { return campaign.id === openCampaign });
+
+			if (c) {
+				this.campaignSelected(c);
+				this.isInUnspecifiedMap = false;
+			}
+			else $.Warning(`Campaign of ID ${openCampaign} does not exist`);
+
 			$.persistentStorage.removeItem('campaigns.open');
-		} else if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU && !CampaignSelector.isHidden) {
-			// TODO: force show the active campaign derived from the current map
-			// we don't want to switch the campaign while in-game
-			// default to fake portal 2 campaign
-			tryOpenCampaign(1);
+		} else if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			const curMap = GameInterfaceAPI.GetCurrentMap()!;
+			const mapCampaign = getCampaignFromMap(curMap);
+
+			this.isInUnspecifiedMap = mapCampaign === undefined;
+
+			if (!CampaignSelector.isHidden) {
+				$.Msg('Game in progress and selector open, attempting to force open a campaign...');
+
+				if (mapCampaign) {
+					this.campaignSelected(mapCampaign);
+					this.isInUnspecifiedMap = false;
+				}
+				else $.Warning(`Map ${GameInterfaceAPI.GetCurrentMap()} does not belong to any defined campaigns`);
+			} else {
+				if (mapCampaign) {
+					if (!this.currentCampaign || this.currentCampaign.id !== mapCampaign.id) {
+						$.Warning(`Campaign mismatch (should be ${mapCampaign.id}) while in-game. Switching...`);
+						this.campaignSelected(mapCampaign);
+						this.isInUnspecifiedMap = false;
+					}
+				}
+			}
 		}
 	}
 
