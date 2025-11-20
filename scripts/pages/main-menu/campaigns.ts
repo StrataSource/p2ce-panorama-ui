@@ -393,6 +393,8 @@ class CampaignSavesTab {
 							if (this.createSaveBtn?.IsValid()) this.createSaveBtn.enabled = true;
 						});
 					}
+
+					checkSaving();
 				},
 				$.Localize('#UI_Cancel'),
 				() => {},
