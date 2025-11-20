@@ -237,6 +237,7 @@
 						src="file://{images}/menu/portal2/full_logo.png"
 						scaling="stretch-to-fit-preserve-aspect"
 					/>
+					<Label id="CampaignNamePlaceholder" />
 					<Panel id="CampaignControls" class="selected-campaign__controls__inner">
 						<Button
 							id="CampaignNewGameBtn"
