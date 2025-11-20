@@ -233,14 +233,6 @@
 									<Label class="settings-nav__subitem-label" text="#Settings_Portal1_Title" />
 								</RadioButton>
 								<RadioButton
-									id="HL2Radio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'HL2SubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_HL2_Title" />
-								</RadioButton>
-								<RadioButton
 									id="PortalsRadio"
 									class="settings-nav__subitem"
 									group="SettingsSubNav"
