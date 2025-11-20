@@ -98,11 +98,13 @@
 				<ConVarColorDisplay
 					text="#Settings_Portals_altcolors_primary"
 					convar="cl_portal_sp_primary_color"
+					infomessage="#Settings_Portals_altcolors_primary_Info"
 					hasdocspage="false"
 				/>
 				<ConVarColorDisplay
 					text="#Settings_Portals_altcolors_secondary"
 					convar="cl_portal_sp_secondary_color"
+					infomessage="#Settings_Portals_altcolors_secondary_Info"
 					hasdocspage="false"
 				/>
 			</Panel>
@@ -120,11 +122,36 @@
 					</TooltipPanel>
 				</Panel>
 
-				<ConVarColorDisplay text="#Settings_Gels_repulsion_color" convar="bounce_paint_color" hasdocspage="false" />
-				<ConVarColorDisplay text="#Settings_Gels_propulsion_color" convar="speed_paint_color" hasdocspage="false" />
-				<ConVarColorDisplay text="#Settings_Gels_conversion_color" convar="portal_paint_color" hasdocspage="false" />
-				<ConVarColorDisplay text="#Settings_Gels_reflection_color" convar="reflect_paint_color" hasdocspage="false" />
-				<ConVarColorDisplay text="#Settings_Gels_adhesion_color" convar="stick_paint_color" hasdocspage="false" />
+				<ConVarColorDisplay
+					text="#Settings_Gels_repulsion_color"
+					infomessage="#Settings_Gels_repulsion_color_Info"
+					convar="bounce_paint_color"
+					hasdocspage="false"
+				/>
+				<ConVarColorDisplay
+					text="#Settings_Gels_propulsion_color"
+					infomessage="#Settings_Gels_propulsion_color_Info"
+					convar="speed_paint_color"
+					hasdocspage="false"
+				/>
+				<ConVarColorDisplay
+					text="#Settings_Gels_conversion_color"
+					infomessage="#Settings_Gels_conversion_color_Info"
+					convar="portal_paint_color"
+					hasdocspage="false"
+				/>
+				<ConVarColorDisplay
+					text="#Settings_Gels_reflection_color"
+					infomessage="#Settings_Gels_reflection_color_Info"
+					convar="reflect_paint_color"
+					hasdocspage="false"
+				/>
+				<ConVarColorDisplay
+					text="#Settings_Gels_adhesion_color"
+					infomessage="#Settings_Gels_adhesion_color_Info"
+					convar="stick_paint_color"
+					hasdocspage="false"
+				/>
 			</Panel>
 
 			<Panel class="settings-page__spacer" />

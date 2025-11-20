@@ -15,10 +15,10 @@
 		</Panel>
 		
 		<Panel class="flow-right full-width mt-4">
-			<Button class="button horizontal-align-center" onactivate="PrereleaseAck.onDOSA()">
+			<Button class="button horizontal-align-left" onactivate="PrereleaseAck.onDOSA()">
 				<Label class="button__text" text="#MainMenu_PrereleaseNotice_Acknowledge" />
 			</Button>
-			<Button class="button button--red horizontal-align-center" onactivate="GameInterfaceAPI.ConsoleCommand('quit')">
+			<Button class="button button--red horizontal-align-right" onactivate="GameInterfaceAPI.ConsoleCommand('quit')">
 				<Label class="button__text" text="#MainMenu_PrereleaseNotice_Decline" />
 			</Button>
 		</Panel>
