@@ -94,7 +94,7 @@ class ChapterEntry {
 
 		this.panel.SetPanelEvent('onactivate', () => {
 			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
-				CampaignAPI.StartCampaign(CampaignMgr.currentCampaign!.id, this.chapter.id);
+				CampaignMgr.startGame(this.chapter.id);
 			} else {
 				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 					$.Localize('#Action_NewGame_Title'),
@@ -102,7 +102,7 @@ class ChapterEntry {
 					'warning-popup',
 					$.Localize('#UI_Yes'),
 					() => {
-						CampaignAPI.StartCampaign(CampaignMgr.currentCampaign!.id, this.chapter.id);
+						CampaignMgr.startGame(this.chapter.id);
 					},
 					$.Localize('#UI_Cancel'),
 					() => {},
@@ -164,57 +164,56 @@ class SaveEntry {
 			if (this.isSaver) cover.AddClass('saves__entry__cover__short');
 		}
 		if (del) {
-			del.enabled = false;
-			
-			//del.SetPanelEvent('onactivate', () => {
-			//	UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-			//		$.Localize('#Action_DeleteGame_Confirm'),
-			//		$.Localize('#Action_DeleteGame_Confirm_Message'),
-			//		'warning-popup',
-			//		$.Localize('#Action_DeleteGame'),
-			//		() => {
-			//			SaveRestoreAPI.DeleteSave(this.save.name);
-			//			CampaignSavesTab.purgeSaveList();
-			//			$.Schedule(0.001, () => {
-			//				CampaignSavesTab.populateSaves();
-			//				CampaignStartPage.updateLoadBtns();
-			//			});
-			//		},
-			//		$.Localize('#UI_Cancel'),
-			//		() => {},
-			//		'blur'
-			//	);
-			//});
+			del.SetPanelEvent('onactivate', () => {
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					$.Localize('#Action_DeleteGame_Confirm'),
+					$.Localize('#Action_DeleteGame_Confirm_Message'),
+					'warning-popup',
+					$.Localize('#Action_DeleteGame'),
+					() => {
+						// TODO: Replace this with other save API
+						const savFile: string = this.save.fileName;
+						SaveRestoreAPI.DeleteSave(savFile.substring(0, savFile.length - 4));
+
+						CampaignSavesTab.purgeSaveList();
+
+						$.Schedule(0.001, () => {
+							CampaignSavesTab.populateSaves();
+							CampaignStartPage.updateButtons();
+						});
+					},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
+			});
 		}
 
 		if (this.isSaver) {
 			actionBtn.SetPanelEvent('onactivate', () => {
-				UiToolkitAPI.ShowGenericPopupOk(
-					$.Localize('MainMenu_Feature_Unavailable_Title'),
-					$.Localize('MainMenu_Feature_Unavailable_Description'),
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					$.Localize('#Action_OverwriteGame_Confirm'),
+					$.Localize('#Action_OverwriteGame_Confirm_Message'),
 					'warning-popup',
-					() => {}
-				);
+					$.Localize('#Action_OverwriteGame'),
+					() => {
+						// TODO: Replace this with other save API
+						const savFile: string = this.save.fileName;
+						SaveRestoreAPI.SaveGame(savFile.substring(0, savFile.length - 4));
 
-				//UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				//	$.Localize('#Action_OverwriteGame_Confirm'),
-				//	$.Localize('#Action_OverwriteGame_Confirm_Message'),
-				//	'warning-popup',
-				//	$.Localize('#Action_OverwriteGame'),
-				//	() => {
-				//		SaveRestoreAPI.SaveGame(this.save.name);
-				//		CampaignSavesTab.purgeSaveList();
-				//		CampaignSavesTab.lockScreen();
-				//		$.Schedule(1, () => {
-				//			CampaignSavesTab.populateSaves();
-				//			CampaignStartPage.updateLoadBtns();
-				//			CampaignSavesTab.unlockScreen();
-				//		});
-				//	},
-				//	$.Localize('#UI_Cancel'),
-				//	() => {},
-				//	'blur'
-				//);
+						CampaignSavesTab.purgeSaveList();
+						CampaignSavesTab.lockScreen();
+
+						$.Schedule(1, () => {
+							CampaignSavesTab.populateSaves();
+							CampaignStartPage.updateButtons();
+							CampaignSavesTab.unlockScreen();
+						});
+					},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
 			});
 		} else {
 			actionBtn.SetPanelEvent('onactivate', () => {
@@ -378,8 +377,6 @@ class CampaignSavesTab {
 					GameSavesAPI.CreateSaveGame();
 					CampaignSavesTab.lockScreen();
 
-					if (this.createSaveBtn) this.createSaveBtn.enabled = false;
-
 					const checkSaving = () => {
 						$.Schedule(0.001, () => {
 							if (GameSavesAPI.IsSaveInProgress() || GameSavesAPI.IsAutosaveInProgress()) {
@@ -390,7 +387,6 @@ class CampaignSavesTab {
 							CampaignSavesTab.populateSaves();
 							CampaignStartPage.updateButtons();
 							CampaignSavesTab.unlockScreen();
-							if (this.createSaveBtn?.IsValid()) this.createSaveBtn.enabled = true;
 						});
 					}
 
@@ -438,10 +434,18 @@ class CampaignSavesTab {
 	}
 
 	static lockScreen() {
+		if (this.createSaveBtn) {
+			const actionBtn = this.createSaveBtn.FindChildTraverse('SaveAction')!;
+			actionBtn.enabled = this.createSaveBtn.enabled = false;
+		}
 		this.backBtn.enabled = false;
 	}
 
 	static unlockScreen() {
+		if (this.createSaveBtn) {
+			const actionBtn = this.createSaveBtn.FindChildTraverse('SaveAction')!;
+			actionBtn.enabled = this.createSaveBtn.enabled = true;
+		}
 		this.backBtn.enabled = true;
 	}
 }
@@ -777,8 +781,8 @@ class CampaignMgr {
 
 	static startGame(chapter: string) {
 		if (this.currentCampaign) {
-			// TODO: CampaignAPI.StartCampaign(this.currentCampaign.id, chapter);
-			$.Msg('Start Campaign');
+			$.Msg(`Start: ${CampaignMgr.currentCampaign!.id}: ${chapter}`);
+			CampaignAPI.StartCampaign(CampaignMgr.currentCampaign!.id, chapter);
 		}
 	}
 
