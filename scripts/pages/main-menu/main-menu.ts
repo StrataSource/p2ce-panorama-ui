@@ -26,6 +26,7 @@ class MainMenu {
 
 	static activeTab = '';
 	static inSpace = false; // Temporary fun...
+	static currentMapCampaign: CampaignInfo | undefined = undefined;
 
 	static {
 		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
@@ -165,33 +166,50 @@ class MainMenu {
 	 * e.g. disabling buttons related to loading saves if there are no saves available
 	 */
 	static updateHomeDetails() {
-		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
-		const hasSaves = saves.length !== 0;
+		const campaigns = CampaignAPI.GetAllCampaigns();
+		const matching = campaigns.find((campaign: CampaignInfo) => {
+			return campaign.chapters.find((chapter: ChapterInfo) => {
+				return chapter.maps.find((map) => {
+					return map.name === GameInterfaceAPI.GetCurrentMap();
+				}) !== undefined;
+			}) !== undefined;
+		});
 
-		this.panels.pausedLoadLastSaveButton.enabled = hasSaves;
-		this.panels.pausedViewSavesButton.enabled = hasSaves;
+		this.currentMapCampaign = matching;
+
+		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
+		const campaignSaves = saves.filter((v: Save) => { return v.mapGroup === (matching ? matching.id : '') });
+
+		const hasSaves = saves.length !== 0;
+		const hasCampaignSaves = campaignSaves.length !== 0;
+
+		this.panels.pausedLoadLastSaveButton.enabled = hasCampaignSaves;
 		this.panels.mainMenuLoadLastSaveButton.enabled = hasSaves;
 
-		if (hasSaves) {
-			const save = saves[0];
-			const thumbValid = save.thumb.length > 0;
-			const savePath = `file://${save.thumb}`;
+		const updateSavePanel = (saveArray, imagePanel, label) => {
+			const save = saveArray[0];
+			const thumb = `file://{__saves}/${save.fileName.replace('.sav', '.tga')}`;
 
-			if (thumbValid) {
-				this.panels.mainMenuSaveImage.SetImage(savePath);
-				this.panels.pausedSaveImage.SetImage(savePath);
-			}
+			imagePanel.SetImage(thumb);
 
-			const date = new Date(save.time * 1000);
-			const dateStr = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-			this.panels.mainMenuSaveSubheadingLabel.text = dateStr;
-			this.panels.pausedLatestSaveTime.text = dateStr;
+			const date = new Date(save.fileTime * 1000);
+			const dateStr = `${save.mapName} ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+			label.text = dateStr;
 		}
+
+		if (hasSaves)
+			updateSavePanel(saves, this.panels.mainMenuSaveImage, this.panels.mainMenuSaveSubheadingLabel);
+
+		if (hasCampaignSaves)
+			updateSavePanel(campaignSaves, this.panels.pausedSaveImage, this.panels.pausedLatestSaveTime);
 
 		this.panels.pausedSaveGameBtn.ClearPanelEvent('onmouseover');
 		this.panels.pausedSaveGameBtn.ClearPanelEvent('onmouseout');
-		this.panels.pausedSaveGameBtn.enabled = !GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
-		if (!this.panels.pausedSaveGameBtn.enabled) {
+
+		this.panels.pausedViewSavesButton.enabled = matching !== undefined && hasSaves;
+		this.panels.pausedSaveGameBtn.enabled = matching !== undefined && !GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
+
+		if (GameInterfaceAPI.GetSettingBool('map_wants_save_disable')) {
 			this.panels.pausedSaveGameBtn.SetPanelEvent('onmouseover', () => {
 				UiToolkitAPI.ShowTextTooltip(
 					this.panels.pausedSaveGameBtn.id,
@@ -201,6 +219,25 @@ class MainMenu {
 			this.panels.pausedSaveGameBtn.SetPanelEvent('onmouseout', () => {
 				UiToolkitAPI.HideTextTooltip();
 			});
+		}
+
+		this.panels.pausedViewSavesButton.ClearPanelEvent('onmouseover');
+		this.panels.pausedViewSavesButton.ClearPanelEvent('onmouseout');
+
+		if (matching === undefined) {
+			const setTooltip = (panel) => {
+				panel.SetPanelEvent('onmouseover', () => {
+					UiToolkitAPI.ShowTextTooltip(
+						panel.id,
+						tagDevString('The map you are playing on does not belong to any campaign.\nYou cannot access this.')
+					);
+				});
+				panel.SetPanelEvent('onmouseout', () => {
+					UiToolkitAPI.HideTextTooltip();
+				});
+			}
+			setTooltip(this.panels.pausedSaveGameBtn);
+			setTooltip(this.panels.pausedViewSavesButton);
 		}
 	}
 
@@ -355,9 +392,7 @@ class MainMenu {
 	 * Load the latest save available.
 	 */
 	static loadLatestSave() {
-		const saves = SaveRestoreAPI.GetSaves().sort((a, b) => b.time - a.time);
-
-		if (saves.length === 0) return;
+		let saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
@@ -366,14 +401,20 @@ class MainMenu {
 				'warning-popup',
 				$.Localize('#Action_LoadGame'),
 				() => {
-					SaveRestoreAPI.LoadSave(saves[0].name);
+					// filter down to current campaign
+					saves = saves.filter((v: Save) => { return v.mapGroup === this.currentMapCampaign!.id });
+					if (saves.length === 0) return;
+
+					GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
 				},
 				$.Localize('#Action_Return'),
 				() => {},
 				'blur'
 			);
 		} else {
-			SaveRestoreAPI.LoadSave(saves[0].name);
+			// absolute latest (on main menu)
+			if (saves.length === 0) return;
+			GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
 		}
 	}
 
@@ -486,18 +527,18 @@ class MainMenu {
 	}
 
 	static openSaveCampaign() {
-		// TODO: open the campaign derived from the current map
-		// default to fake portal 2 campaign
-		$.persistentStorage.setItem('campaigns.open', 1);
-		$.persistentStorage.setItem('campaigns.showTab', 'CampaignSaveBtn');
-		this.selectNavButton('PlayButton');
+		if (this.currentMapCampaign) {
+			$.persistentStorage.setItem('campaigns.open', this.currentMapCampaign.id);
+			$.persistentStorage.setItem('campaigns.showTab', 'CampaignSaveBtn');
+			this.selectNavButton('PlayButton');
+		}
 	}
 
 	static openLoadCampaign() {
-		// TODO: open the campaign derived from the current map
-		// default to fake portal 2 campaign
-		$.persistentStorage.setItem('campaigns.open', 1);
-		$.persistentStorage.setItem('campaigns.showTab', 'CampaignAllSavesBtn');
-		this.selectNavButton('PlayButton');
+		if (this.currentMapCampaign) {
+			$.persistentStorage.setItem('campaigns.open', this.currentMapCampaign.id);
+			$.persistentStorage.setItem('campaigns.showTab', 'CampaignAllSavesBtn');
+			this.selectNavButton('PlayButton');
+		}
 	}
 }
