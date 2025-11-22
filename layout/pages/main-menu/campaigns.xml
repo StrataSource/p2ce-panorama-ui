@@ -132,32 +132,36 @@
 				<Panel class="campaigns__action-bar">
 					<Button
 						id="CampaignsViewLooseMapsBtn"
-						class="campaigns__action-bar__button mr-2"
+						class="button-mono button-mono__bigger fill-width mr-1"
 						onactivate="CampaignSelector.viewLooseMaps()"
 					>
 						<Image
-							class="campaigns__action-bar__button__icon"
+							class="button-mono__icon"
 							src="file://{images}/cancel.svg"
 							scaling="stretch-to-fit-preserve-aspect"
 							texturewidth="32"
 							textureheight="32"
 						/>
-						<Panel class="flow-down vertical-align-center">
-							<Label class="campaigns__action-bar__button__text-top" text="#MainMenu_Campaigns_MapList" />
-							<Label class="campaigns__action-bar__button__text-btm" text="#MainMenu_Campaigns_MapList_Tagline_NewlySubbed" />
+						<Panel class="button-mono__text-panel">
+							<Label class="button-mono__text-panel__header" text="#MainMenu_Campaigns_MapList" />
+							<Label class="button-mono__text-panel__subheader" text="#MainMenu_Campaigns_MapList_Tagline_NewlySubbed" />
 						</Panel>
 					</Button>
-					<Button id="CampaignsGoWorkshopBtn" class="campaigns__action-bar__button" onactivate="CampaignSelector.openWorkshop()">
+					<Button
+						id="CampaignsGoWorkshopBtn"
+						class="button-mono button-mono__bigger fill-width ml-1"
+						onactivate="CampaignSelector.openWorkshop()"
+					>
 						<Image
-							class="campaigns__action-bar__button__icon"
-							src="file://{images}/cancel.svg"
+							class="button-mono__icon"
+							src="file://{images}/icons/steam.svg"
 							scaling="stretch-to-fit-preserve-aspect"
 							texturewidth="32"
 							textureheight="32"
 						/>
-						<Panel class="flow-down vertical-align-center">
-							<Label class="campaigns__action-bar__button__text-top" text="#MainMenu_Campaigns_OpenWS" />
-							<Label class="campaigns__action-bar__button__text-btm" text="#MainMenu_Campaigns_OpenWS_Tagline" />
+						<Panel class="button-mono__text-panel">
+							<Label class="button-mono__text-panel__header" text="#MainMenu_Campaigns_OpenWS" />
+							<Label class="button-mono__text-panel__subheader" text="#MainMenu_Campaigns_OpenWS_Tagline" />
 						</Panel>
 					</Button>
 				</Panel>

@@ -87,6 +87,11 @@ class AddonManager {
 	static addonDesc = $<Label>('#SelectedAddonDesc')!;
 	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
 	static addonSteam = $<Button>('#SelectedAddonView')!;
+	static addonMapsPanel = $<Panel>('#SelectedAddonMapLauncher')!;
+	static addonMapsDropdown = $<DropDown>('#SelectedAddonMaps')!;
+	static addonMapsLaunch = $<Button>('#SelectedAddonRunMapBtn')!;
+	static addonMapsLaunchText = $<Label>('#SelectedAddonRunMapText')!;
+	static addonsPage = $<Panel>('#AddonsPage')!;
 
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');
@@ -95,11 +100,35 @@ class AddonManager {
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
 	static selectedAddon: number = -1;
+	static gameMaps: string[] = [];
 
 	static init() {
+		this.addonsPage.visible = false;
+
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onMainMenuTabShown.bind(this));
 		this.createAddonEntries();
+		this.findMaps();
+
+		$.DispatchEvent('Activated', $<RadioButton>('#ViewAddonsBtn')!, PanelEventSource.MOUSE);
+	}
+
+	static showPage() {
+		MountManager.hidePage();
+		this.addonsPage.visible = true;
+	}
+
+	static hidePage() {
+		this.addonsPage.visible = false;
+		this.addonPanel.AddClass('hide');
+
+		const addonChildren = this.addonContainer.Children();
+		for (let i = 0; i < addonChildren.length; ++i) {
+			const child = addonChildren[i];
+
+			if (child.paneltype !== 'RadioButton') continue;
+			(child as RadioButton).SetSelected(false);
+		}
 	}
 
 	static updateAddons() {
@@ -145,6 +174,22 @@ class AddonManager {
 		this.addonPanel.AddClass('hide');
 		this.purgeAddonList();
 		this.createAddonEntries();
+		this.findMaps();
+	}
+
+	static findMaps() {
+		this.gameMaps = [];
+		const maps = GameInterfaceAPI.GetMaps();
+
+		for (let i = 0; i < maps.length; ++i) {
+			if (!maps[i].valid) continue;
+
+			const rawMap: string = maps[i].name;
+			const mapName: string = rawMap.substring(5, rawMap.length - 4);
+			if (mapName.startsWith('workshop/') || mapName.startsWith('puzzlemaker')) continue;
+
+			this.gameMaps.push(mapName);
+		}
 	}
 
 	static addonSelected(addon: number) {
@@ -170,6 +215,67 @@ class AddonManager {
 		}
 
 		this.addonSteam.visible = !info.local;
+
+		this.updateSelectedAddonMaps();
+	}
+
+	static updateSelectedAddonMaps() {
+		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
+
+		if (!WorkshopAPI.GetAddonEnabled(this.selectedAddon)) {
+			this.addonMapsPanel.visible = false;
+			return;
+		}
+
+		// i dont like this, but...
+		const words = info.description.split(/[^a-zA-Z0-9_/]/);
+		const matchingMaps: string[] = [];
+		for (let i = 0; i < words.length; ++i) {
+			const word: string = words[i].trim();
+			const result = this.gameMaps.find((value: string, index: number) => {
+				return value === `${word}` || `${value}r` === `${word}`;
+			});
+
+			if (result) {
+				if (matchingMaps.includes(result)) continue;
+				matchingMaps.push(result);
+			}
+		}
+
+		this.addonMapsDropdown.RemoveAllOptions();
+
+		const hasMaps = matchingMaps.length > 0;
+
+		for (let i = 0; i < matchingMaps.length; ++i) {
+			const map = matchingMaps[i];
+			const entry = $.CreatePanel('Label', this.addonMapsDropdown, `AddonMap${map}`, { text: map, value: map });
+			this.addonMapsDropdown.AddOption(entry);
+		}
+
+		this.addonMapsDropdown.SetSelectedIndex(0);
+
+		// don't bother showing the dropdown if there's only one map, save space
+		const multiMaps = matchingMaps.length > 1;
+		this.addonMapsDropdown.visible = multiMaps;
+		this.addonMapsLaunch.SetHasClass('fill-width', !multiMaps);
+		if (multiMaps) {
+			this.addonMapsLaunchText.text = tagDevString('Launch Selected Map!');
+		} else {
+			this.addonMapsLaunchText.text = tagDevString('Play Map!');
+		}
+
+		this.addonSteam.SetHasClass('full-width', hasMaps);
+		this.addonMapsPanel.visible = hasMaps;
+	}
+
+	static launchSelectedAddonMap() {
+		const selected = this.addonMapsDropdown.GetSelected();
+		if (selected === null) return;
+
+		const map = selected.GetAttributeString('value', 'null');
+		if (map === null || map === 'null') return;
+
+		GameInterfaceAPI.ConsoleCommand(`map ${map}`);
 	}
 
 	/**
@@ -211,6 +317,9 @@ class AddonManager {
 		for (const addon of this.addons) {
 			addon.updateEnabled();
 		}
+
+		this.findMaps();
+		this.updateSelectedAddonMaps();
 	}
 
 	/**
@@ -230,6 +339,8 @@ class AddonManager {
 		this.markDirty(false);
 
 		if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
+
+		this.updateSelectedAddonMaps();
 	}
 
 	/**
@@ -251,5 +362,141 @@ class AddonManager {
 	static reloadAddonList() {
 		this.purgeAddonList();
 		this.createAddonEntries();
+	}
+}
+
+class MountEntry {
+	panel: Panel;
+	name: string;
+	capsuleUrl: string;
+	appid: string;
+
+	constructor(panel: Panel, name: string, capsuleUrl: string, appid: string) {
+		this.panel = panel;
+		this.name = name;
+		this.capsuleUrl = capsuleUrl;
+		this.appid = appid;
+	}
+
+	update() {
+		const title = this.panel.FindChildTraverse<Label>('MountTitle');
+		const appid = this.panel.FindChildTraverse<Label>('MountAppId');
+		const cover = this.panel.FindChildTraverse<Image>('MountCover');
+
+		if (title) {
+			title.text = this.name;
+		}
+		if (appid) {
+			appid.text = this.appid;
+		}
+		if (cover) {
+			cover.SetImage(this.capsuleUrl);
+		}
+	}
+}
+
+class MountManager {
+	static mountsList = $<Panel>('#MountContainer')!;
+	static mountsPage = $<Panel>('#MountsPage')!;
+
+	static steamApps: number[] = [];
+	static mountEntries: MountEntry[] = [];
+
+	static init() {
+		this.mountsPage.visible = false;
+
+		this.steamApps = GameInterfaceAPI.GetMountedSteamApps();
+		this.populateMountEntries();
+	}
+
+	static showPage() {
+		AddonManager.hidePage();
+		this.mountsPage.visible = true;
+	}
+
+	static hidePage() {
+		this.mountsPage.visible = false;
+	}
+
+	static populateMountEntries() {
+		// don't flood the API with requests
+		const MAX_MOUNTS_DISPLAYED = 10;
+		const BASE_API_URL = 'https://store.steampowered.com/api/appdetails/?appids=';
+
+		// warn user
+		if (this.steamApps.length > MAX_MOUNTS_DISPLAYED) {
+			UiToolkitAPI.ShowGenericPopupOk(
+				'High Mount Count',
+				`You have ${this.steamApps.length} games mounted. For technical reasons, only ${MAX_MOUNTS_DISPLAYED} will be properly displayed.`,
+				'generic-popup',
+				() => {}
+			);
+		}
+
+		// make requests
+		const maxAppCount = Math.min(MAX_MOUNTS_DISPLAYED, this.steamApps.length);
+		for (let i = 0; i < maxAppCount; ++i) {
+			try {
+				$.AsyncWebRequest(`${BASE_API_URL}${this.steamApps[i]}`, {
+					type: 'GET',
+					complete: this.onAppRequestResponse.bind(this)
+				});
+			} catch (error) {
+				$.Warning(`AsyncWebRequest for Mount ${this.steamApps[i]} failed: ${error}`);
+				this.onAppRequestFailed();
+			}
+		}
+
+		// do the rest if there's still more
+		for (let i = maxAppCount; i < this.steamApps.length; ++i) {
+			const appId = this.steamApps[i];
+
+			const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
+			p.LoadLayoutSnippet('MountEntrySnippet');
+
+			this.mountEntries.push(
+				new MountEntry(
+					p,
+					`AppID: ${appId}`,
+					'file://{images}/menu/unknown-app-header.png',
+					'Maximum displayed mount count reached.'
+				)
+			);
+			this.mountEntries[this.mountEntries.length - 1].update();
+		}
+	}
+
+	static onAppRequestFailed(appId?: number) {
+		$.Warning('Failed to retrieve App ID details.');
+
+		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
+		p.LoadLayoutSnippet('MountEntrySnippet');
+
+		this.mountEntries.push(
+			new MountEntry(
+				p,
+				'Unable to retrieve App Name',
+				'file://{images}/menu/unknown-app-header.png',
+				`${appId ? appId : 'UNKNOWN'}`
+			)
+		);
+		this.mountEntries[this.mountEntries.length - 1].update();
+	}
+
+	static onAppRequestResponse(data) {
+		if (data.statusText !== 'success') {
+			this.onAppRequestFailed();
+			return;
+		}
+
+		const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+		const appId = Object.keys(response)[0];
+		const appInfo = response[Object.keys(response)[0]]['data'];
+
+		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
+		p.LoadLayoutSnippet('MountEntrySnippet');
+
+		this.mountEntries.push(new MountEntry(p, appInfo['name'], appInfo['header_image'], appId));
+		this.mountEntries[this.mountEntries.length - 1].update();
 	}
 }
