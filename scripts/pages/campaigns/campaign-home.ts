@@ -38,8 +38,15 @@ class CampaignHome {
 	}
 
 	static hide() {
-		this.campaignListerContainer.visible = false;
+		this.closeLister();
 		this.campaignStartPage.RemoveClass('selected-campaign__show');
+		CampaignSelector.playReturnAnim();
+	}
+
+	static hideInstant() {
+		this.closeLister();
+		this.campaignStartPage.RemoveClass('selected-campaign__show');
+		this.campaignStartPage.visible = false;
 		CampaignSelector.playReturnAnim();
 	}
 
@@ -58,8 +65,9 @@ class CampaignHome {
 	}
 
 	static updateButtons() {
+		if (CampaignMgr.currentCampaign === null) return;
+
 		const hasSaves = GameSavesAPI.GetGameSaves().filter((v: Save) => {
-			if (CampaignMgr.currentCampaign === undefined) return false;
 			return v.mapGroup === CampaignMgr.currentCampaign!.id;
 		}).length > 0;
 

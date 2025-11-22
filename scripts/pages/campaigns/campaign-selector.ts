@@ -80,6 +80,8 @@ class CampaignSelector {
 
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuTabHidden', this.onCampaignScreenHidden.bind(this));
+		
+		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 	}
 
 	static populateCampaigns() {

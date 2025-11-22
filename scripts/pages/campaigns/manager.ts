@@ -26,6 +26,7 @@ class CampaignMgr {
 		CampaignHome.init();
 
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
+		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
 
 		this.isInitialized = true;
 
@@ -41,6 +42,12 @@ class CampaignMgr {
 
 		CampaignSelector.onCampaignScreenShown(tabid);
 		CampaignHome.onCampaignScreenShown(tabid);
+	}
+
+	// Returning to main menu
+	static onMainMenuShown() {
+		// Wipe the slate clean
+		CampaignHome.hideInstant();
 	}
 
 	static checkOpenCampaign() {
