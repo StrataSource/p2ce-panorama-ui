@@ -81,18 +81,16 @@ class MainMenu {
 			this.panels.model.SetDirectionalLightDirection(0, -50, 135, 0);
 		}
 
-		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
+		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
+		this.onShowMainMenu();
 
-		this.setMainMenuDetails();
+		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
 
 		this.showPrereleaseWarning();
 
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
 		stripDevTagsFromLabels($.GetContextPanel());
-
-		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
-		this.onShowMainMenu();
 	}
 
 	/**
