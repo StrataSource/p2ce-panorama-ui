@@ -17,7 +17,7 @@
 
 	$this: &;
 
-	&:hover:not(:disabled):not(:selected) {
+	&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
 		background-color: $button-background-hover;
 		#{$this}__text {
 			color: $button-text-hover;
@@ -29,12 +29,15 @@
 	}
 
 	&:disabled,
-	&:disabled &:hover {
+	&:disabled &:hover,
+	&:parentdisabled,
+	&:parentdisabled &:hover {
 		background-color: $button-background-disabled;
 		border-color: $button-text-disabled;
 	}
 
-	&:disabled &__text {
+	&:disabled &__text,
+	&:parentdisabled &__text {
 		color: $button-text-disabled;
 	}
 
@@ -94,8 +97,78 @@
 		background-color: list.nth($value, 1);
 		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
 
-		&:hover:not(:disabled):not(:selected) {
+		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
 			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		}
+	}
+}
+
+RadioButton.button-mono {
+	& .RadioBox {
+		visibility: collapse;
+	}
+}
+
+.button-mono {
+	@extend .button;
+
+	flow-children: right;
+
+	padding: 0 15px;
+	background-color: $base-950;
+	border: $menu-pane-border;
+
+	$this: &;
+
+	&__icon {
+		width: 24px;
+		height: 24px;
+		margin-right: 8px;
+		vertical-align: middle;
+	}
+
+	&__icon-right {
+		@extend .button-mono__icon;
+
+		margin-left: 8px;
+		margin-right: 0px;
+	}
+
+	&__text {
+		font-weight: bold;
+		font-size: 16px;
+		vertical-align: center;
+	}
+
+	&__text-panel {
+		vertical-align: center;
+		flow-children: down;
+
+		&__header {
+			font-weight: bold;
+		}
+
+		&__subheader {
+			color: $base-300;
+			font-size: 16px;
+			max-height: 23px;
+			text-overflow: ellipsis;
+		}
+	}
+
+	&:hover,
+	&:selected {
+		border-color: $primary-color;
+		background-color: $button-background-hover;
+	}
+
+	&__bigger {
+		height: fit-children;
+		padding: 15px;
+
+		#{$this}__icon {
+			width: 32px;
+			height: 32px;
 		}
 	}
 }

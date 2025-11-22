@@ -47,33 +47,6 @@
 		//padding-right: 15px;
 		margin-bottom: 10px;
 
-		&__button {
-			width: fill-parent-flow(0.5);
-			flow-children: right;
-
-			padding: 15px;
-			background-color: $base-950;
-			border: $menu-pane-border;
-
-			&__icon {
-				margin-right: 10px;
-				vertical-align: middle;
-			}
-			&__text-top {
-				font-weight: bold;
-			}
-
-			&__text-btm {
-				color: $base-300;
-				font-size: 16px;
-			}
-
-			&:hover {
-				border-color: $primary-color;
-				background-color: $button-background-hover;
-			}
-		}
-
 		&__textentry {
 			text-overflow: clip;
 			white-space: nowrap;
@@ -191,16 +164,16 @@
 			}
 
 			&__author {
-				font-size: 13px;
+				font-size: 12px;
 				letter-spacing: 1px;
 				text-shadow: 1px 1px 4px 2 $base-950;
 			}
 
 			&__desc {
-				margin-top: 10px;
+				margin-top: 5px;
 				font-size: 15px;
 				color: $base-200;
-				text-shadow: 1px 1px 4px 2 $base-950;
+				text-shadow: 1px 1px 8px 2 $base-950;
 			}
 		}
 	}

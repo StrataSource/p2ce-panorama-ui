@@ -31,23 +31,32 @@
 		z-index: 100;
 	}
 
+	&:not(:parentdisabled) .DropDownIcon {
+		wash-color: $dropdown-button-text-color;
+	}
+
 	// Inserted by code
 	&.DropDownMenuVisible {
 		background-color: $dropdown-button-background-menuvisible;
-		border-color: $dropdown-button-background-menuvisible;
+		border-color: $primary-color;
 
 		& > .DropDownIcon {
 			wash-color: $dropdown-button-menuvisible-text-color;
 			transform: scaleY(-1);
 		}
-
-		& Label {
-			color: $dropdown-button-menuvisible-text-color;
-		}
 	}
 
-	&:hover {
+	&:hover:not(:disabled):not(:parentdisabled) {
 		background-color: $dropdown-button-background-hover;
+		sound: 'UIPanorama.P2CE.MenuSelect';
+
+		& Label {
+			color: $dropdown-button-text-hover-color;
+		}
+
+		& .DropDownIcon {
+			wash-color: $dropdown-button-text-hover-color;
+		}
 	}
 
 	&:disabled,
@@ -57,19 +66,26 @@
 		border-color: $dropdown-button-text-color-disabled;
 	}
 
+	&:disabled Label {
+		color: $dropdown-button-text-color-disabled;
+	}
+
+	&:not(:parentdisabled) Label {
+		color: $dropdown-button-text-color;
+	}
+
+	&.DropDownMenuVisible:not(:parentdisabled) Label {
+		color: $dropdown-button-menuvisible-text-color;
+	}
+
 	Label {
 		@include mixin.font-styles($use-header: $dropdown-button-use-header-font);
-		color: $dropdown-button-text-color;
 		font-size: $dropdown-button-font-size;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		padding: $dropdown-button-padding;
 		vertical-align: center;
 		text-shadow: $dropdown-button-text-shadow;
-	}
-
-	&:disabled Label {
-		color: $dropdown-button-text-color-disabled;
 	}
 
 	// DropDown/DropDropMenu needs a label as its immediate child to function properly so to include images we need to
@@ -154,4 +170,43 @@ DropDownMenuBackground {
 	width: 100%;
 	height: 100%;
 	background-color: rgba($black, 0.4);
+}
+
+.dropdown-mono {
+	@extend .dropdown;
+
+	background-color: $base-950;
+	border: $menu-pane-border;
+
+	&:hover:not(:disabled):not(:parentdisabled) {
+		border-color: $primary-color;
+
+		.DropDownIcon {
+			border-left-color: $primary-color;
+		}
+	}
+
+	.DropDownIcon {
+		border-left: $menu-pane-border;
+	}
+
+	&:not(:parentdisabled) .DropDownIcon {
+		wash-color: $bright-color;
+	}
+
+	&.DropDownMenuVisible {
+		& > .DropDownIcon {
+			border-color: rgba(0, 0, 0, 0);
+			transform: scaleY(-1);
+		}
+	}
+
+	Label {
+		font-size: 16px;
+		width: 100%;
+	}
+
+	&:not(:parentdisabled) Label {
+		color: $bright-color;
+	}
 }

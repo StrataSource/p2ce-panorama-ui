@@ -3,6 +3,7 @@
 	domains =
 	[
 		"api.steampowered.com",
+		"store.steampowered.com",
 		"steampowered.com",
 		"steamcommunity.com",
 		"valvesoftware.com",
