@@ -50,3 +50,5 @@ $.DefineEvent(
 
 $.DefineEvent('ColorPickerSave', 1, 'color');
 $.DefineEvent('ColorPickerCancel', 0);
+
+$.DefineEvent('CampaignSettingHovered', 1, 'helpText');

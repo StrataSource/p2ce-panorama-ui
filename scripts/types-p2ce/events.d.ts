@@ -17,4 +17,5 @@ interface GlobalEventNameMap {
 	Drawer_ExtendAndNavigateToTab: (tabid) => void;
 	ColorPickerSave: (color) => void;
 	ColorPickerCancel: () => void;
+	CampaignSettingHovered: (helpText: string) => void;
 }
