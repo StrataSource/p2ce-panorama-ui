@@ -1,0 +1,9 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<Panel class="campaign-settings__subpage">
+		<Label text="[HC] SETTING-PRESETS WORK IN PROGRESS" />
+	</Panel>
+</root>
