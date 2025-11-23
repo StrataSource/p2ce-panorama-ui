@@ -41,7 +41,7 @@ class SaveEntry {
 			title.text = this.save.mapName;
 		}
 		if (desc) {
-			const date = new Date(this.save.fileTime * 1000);
+			const date = new Date(Number(this.save.fileTime) * 1000);
 			desc.text = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 		}
 		if (cover) {
@@ -171,8 +171,8 @@ class CampaignSavesTab {
 
 	static populateSaves() {
 		const saves = GameSavesAPI.GetGameSaves()
-			.filter((v: Save) => { return v.mapGroup === CampaignMgr.currentCampaign!.id })
-			.sort((a, b) => b.fileTime - a.fileTime);
+			.filter((v: GameSave) => { return v.mapGroup === CampaignMgr.currentCampaign!.id })
+			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
 		for (let i = 0; i < saves.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignLister, 'save' + i, {
@@ -259,7 +259,7 @@ class CampaignSavesTab {
 					if (CampaignMgr.currentCampaign)
 						CampaignAPI.ContinueCampaign(CampaignMgr.currentCampaign.id);
 					else {
-						const saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
+						const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 						GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
 					}
 				},
@@ -271,7 +271,7 @@ class CampaignSavesTab {
 			if (CampaignMgr.currentCampaign)
 				CampaignAPI.ContinueCampaign(CampaignMgr.currentCampaign.id);
 			else {
-				const saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
+				const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 				GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
 			}
 		}
