@@ -156,7 +156,7 @@ RadioButton.button-mono {
 		}
 	}
 
-	&:hover,
+	&:hover:not(:disabled):not(:parentdisabled),
 	&:selected {
 		border-color: $primary-color;
 		background-color: $button-background-hover;

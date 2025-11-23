@@ -5,9 +5,18 @@ class CampaignSettingsTab {
 	static chImage = $<Image>('#CampaignSettingsChapterImage')!;
 	static chText = $<Label>('#CampaignSettingsChapter')!;
 	static mapText = $<Label>('#CampaignSettingsMap')!;
+	static summary = $<Label>('#CampaignSettingsSummary')!;
+	static basePage = $<Panel>('#CampaignSettingsBase')!;
+	static subPage = $<Panel>('#CampaignSettingsSubpage')!;
+	static header = $<Label>('#CampaignSettingsHeader')!;
+	static subheader = $<Label>('#CampaignSettingsSubheader')!;
+	static startBtn = $<Button>('#CampaignSettingsStart')!;
+
+	static activeSubpage = '';
 
 	static init() {
 		this.hide();
+		this.startBtn.SetPanelEvent('onmouseout', () => { UiToolkitAPI.HideTextTooltip(); });
 	}
 
 	static setActive() {
@@ -20,14 +29,41 @@ class CampaignSettingsTab {
 
 	static show() {
 		this.page.visible = true;
-		
+		this.setHeaderText(tagDevString('Campaign Settings'), tagDevString('Customize your experience'));
+	}
+
+	static setHeaderText(header: string, subheader: string) {
+		this.header.text = header;
+		this.subheader.text = subheader;
 	}
 
 	static hide() {
 		this.page.visible = false;
+		this.closeSettingsSubpage();
+	}
+
+	static stepBack() {
+		if (this.activeSubpage) {
+			this.closeSettingsSubpage();
+		} else {
+			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+				tagDevString('Exit Campaign Setup'),
+				tagDevString('Are you sure you want to leave Campaign Setup?\nYou will lose the settings you have changed so far!'),
+				'warning-popup',
+				$.Localize('#UI_Yes'),
+				() => {
+					this.clear();
+				},
+				$.Localize('#UI_Cancel'),
+				() => {},
+				'blur'
+			);
+		}
 	}
 
 	static clear() {
+		this.closeSettingsSubpage();
+		this.subPage.RemoveAndDeleteChildren();
 		this.hide();
 		CampaignHome.openControls();
 	}
@@ -46,5 +82,59 @@ class CampaignSettingsTab {
 			() => {},
 			'blur'
 		);
+	}
+
+	static openSettingsSubpage(tab: string, xml: string, locH: string, locS: string) {
+		this.startBtn.SetPanelEvent('onmouseover', () => { UiToolkitAPI.ShowTextTooltip(this.startBtn.id, tagDevString('Complete your changes and go back in order to start the campaign.')); });
+		
+		this.basePage.visible = false;
+		this.subPage.visible = true;
+		this.startBtn.enabled = false;
+
+		this.setHeaderText(locH, locS);
+
+		// Check for existence
+		if (!this.subPage.FindChildTraverse(tab)) {
+			const p = $.CreatePanel('Panel', this.subPage, tab);
+
+			p.LoadLayout(`file://{resources}/layout/pages/campaigns/${xml}.xml`, false, false);
+			p.RegisterForReadyEvents(true);
+
+			stripDevTagsFromLabels(p);
+		}
+
+		// Check active subtab
+		// Generally this shouldn't happen but there might be cases
+		// where code forces open a subtab when we're already in one
+		if (this.activeSubpage !== tab) {
+			if (this.activeSubpage) {
+				const hide = this.subPage.FindChildTraverse(this.activeSubpage);
+				if (hide) hide.visible = false;
+			}
+
+			this.activeSubpage = tab;
+			const active = this.subPage.FindChildTraverse(tab);
+			if (active) {
+				active.visible = true;
+				active.SetReadyForDisplay(true);
+			}
+		}
+	}
+
+	static closeSettingsSubpage() {
+		if (this.activeSubpage) {
+			const hide = this.subPage.FindChildTraverse(this.activeSubpage);
+			if (hide) hide.visible = false;
+		}
+
+		this.subPage.visible = false;
+		this.basePage.visible = true;
+		this.startBtn.enabled = true;
+
+		this.setHeaderText(tagDevString('Campaign Settings'), tagDevString('Customize your experience'));
+
+		this.startBtn.ClearPanelEvent('onmouseover');
+
+		this.activeSubpage = '';
 	}
 }
