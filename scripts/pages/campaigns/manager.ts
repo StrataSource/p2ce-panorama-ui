@@ -18,12 +18,15 @@ function getCampaignFromMap(mapToFind: string) {
 
 class CampaignMgr {
 	static currentCampaign: CampaignInfo | null = null;
+	// chapter as selected by UI, not indicative of current chapter
+	static uiSelectedChapter: ChapterInfo | null = null;
 	static isInitialized: boolean = false;
 	static isInUnspecifiedMap = false;
 
 	static init() {
 		CampaignSelector.init();
 		CampaignHome.init();
+		CampaignSettingsTab.init();
 
 		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
@@ -92,10 +95,27 @@ class CampaignMgr {
 		}
 	}
 
-	static startGame(chapter: string) {
-		if (this.currentCampaign) {
-			$.Msg(`Start: ${CampaignMgr.currentCampaign!.id}: ${chapter}`);
-			CampaignAPI.StartCampaign(CampaignMgr.currentCampaign!.id, chapter);
+	static selectChapter(chapter: ChapterInfo) {
+		if (!this.currentCampaign) {
+			$.Warning('Chapter selected without an active campaign. Aborting.');
+			return;
+		}
+
+		if (!chapter) {
+			$.Warning('Invalid chapter passed in. Aborting.');
+			return;
+		}
+
+		this.uiSelectedChapter = chapter;
+		CampaignSettingsTab.setActive();
+	}
+
+	static startGame() {
+		if (this.currentCampaign && this.uiSelectedChapter) {
+			$.Msg(`Start: ${this.currentCampaign.id}: ${this.uiSelectedChapter}`);
+			CampaignAPI.StartCampaign(this.currentCampaign.id, this.uiSelectedChapter.id);
+		} else {
+			$.Warning('Campaign or chapter selection is invalid. Aborting.');
 		}
 	}
 

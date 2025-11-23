@@ -29,22 +29,7 @@ class ChapterEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
-				CampaignMgr.startGame(this.chapter.id);
-			} else {
-				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					$.Localize('#Action_NewGame_Title'),
-					$.Localize('#Action_NewGame_Description'),
-					'warning-popup',
-					$.Localize('#UI_Yes'),
-					() => {
-						CampaignMgr.startGame(this.chapter.id);
-					},
-					$.Localize('#UI_Cancel'),
-					() => {},
-					'blur'
-				);
-			}
+			CampaignMgr.selectChapter(this.chapter);
 		});
 	}
 }
