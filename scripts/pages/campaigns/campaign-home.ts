@@ -67,7 +67,7 @@ class CampaignHome {
 	static updateButtons() {
 		if (CampaignMgr.currentCampaign === null) return;
 
-		const hasSaves = GameSavesAPI.GetGameSaves().filter((v: Save) => {
+		const hasSaves = GameSavesAPI.GetGameSaves().filter((v: GameSave) => {
 			return v.mapGroup === CampaignMgr.currentCampaign!.id;
 		}).length > 0;
 
