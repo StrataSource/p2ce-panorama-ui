@@ -137,8 +137,16 @@ class CampaignHome {
 	}
 
 	static closeLister() {
+		this.closeListerNoReturn();
+		this.campaignControls.visible = true;
+	}
+
+	static closeListerNoReturn() {
 		this.campaignLister.ScrollToTop();
 		this.campaignListerContainer.visible = false;
+	}
+
+	static openControls() {
 		this.campaignControls.visible = true;
 	}
 }
