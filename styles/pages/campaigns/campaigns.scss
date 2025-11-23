@@ -622,11 +622,10 @@
 		width: fill-parent-flow(0.3);
 		height: fill-parent-flow(1);
 		border: $menu-pane-border;
-		margin-right: 10px;
 
 		&__icon {
-			width: 64px;
-			height: 64px;
+			width: 96px;
+			height: 96px;
 			horizontal-align: center;
 			margin-bottom: 10px;
 		}
@@ -650,6 +649,7 @@
 	&__right {
 		height: 100%;
 		flow-children: down;
+		margin-left: 10px;
 	}
 
 	&__chapter-overlay {
@@ -685,6 +685,49 @@
 		border: $menu-pane-border;
 		border-top-width: 0;
 		flow-children: down;
-		padding: 15px;
+		padding: 10px;
+
+		&__header {
+			@include mixin.font-styles($use-header: true, $light-header: false);
+			font-size: 20px;
+		}
+
+		&__inner {
+			margin-top: 5px;
+			width: 100%;
+			height: 100%;
+			flow-children: down;
+			overflow: squish scroll;
+		}
+
+		&__text {
+			color: $base-200;
+			font-size: 16px;
+		}
+	}
+
+	&__start {
+		height: fit-children;
+		padding: 15px 20px;
+		tooltip-position: left;
+		tooltip-body-position: 50% 50%;
+
+		&__icon {
+			width: 48px;
+			height: 48px;
+			margin-right: 10px;
+		}
+
+		&__text {
+			@include mixin.font-styles($use-header: true, $light-header: false);
+			font-size: 24px;
+			transform: translateY(-2px);
+		}
+	}
+
+	&__subpage {
+		width: 100%;
+		height: 100%;
+		flow-children: down;
 	}
 }
