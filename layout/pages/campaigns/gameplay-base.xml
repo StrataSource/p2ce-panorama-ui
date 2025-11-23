@@ -2,8 +2,55 @@
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/pages/campaigns/shared.ts" />
+	</scripts>
 
-	<Panel class="campaign-settings__subpage">
-		<Label text="[HC] GAMEPLAY-BASE WORK IN PROGRESS" />
+	<Panel class="campaign-settings__subpage" settingfield="GameplayBase" onload="CampaignShared.ApplyMarkup()">
+		<Panel class="campaign-setting__entry" settingfield="Cheats">
+			<Label
+				class="campaign-setting__entry__text"
+				text="[HC] Enable Cheats"
+			/>
+
+			<ToggleButton
+				class="checkbox campaign-setting__entry__value campaign-setting__entry__checkbox"
+			/>
+		</Panel>
+		<Panel class="campaign-setting__entry" settingfield="MirrorWorld">
+			<Label
+				class="campaign-setting__entry__text"
+				text="[HC] Mirror World"
+			/>
+
+			<ToggleButton
+				class="checkbox campaign-setting__entry__value campaign-setting__entry__checkbox"
+			/>
+		</Panel>
+		<Panel class="campaign-setting__entry" settingfield="Gravity">
+			<Label
+				class="campaign-setting__entry__text"
+				text="[HC] Gravity"
+			/>
+
+			<TextEntry
+				class="textentry campaign-setting__entry__value campaign-setting__entry__textentry"
+			/>
+		</Panel>
+		<Panel class="campaign-setting__entry" settingfield="Difficulty">
+			<Label
+				class="campaign-setting__entry__text"
+				text="[HC] Difficulty"
+			/>
+
+			<DropDown
+				class="dropdown campaign-setting__entry__value campaign-setting__entry__dropdown"
+				menuclass="dropdown-menu"
+			>
+				<Label text="Easy" id="Skill1" value="1" />
+				<Label text="Normal" id="Skill2" value="2" />
+				<Label text="Hard" id="Skill3" value="3" />
+			</DropDown>
+		</Panel>
 	</Panel>
 </root>

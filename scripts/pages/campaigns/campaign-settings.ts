@@ -5,18 +5,22 @@ class CampaignSettingsTab {
 	static chImage = $<Image>('#CampaignSettingsChapterImage')!;
 	static chText = $<Label>('#CampaignSettingsChapter')!;
 	static mapText = $<Label>('#CampaignSettingsMap')!;
-	static summary = $<Label>('#CampaignSettingsSummary')!;
+	static summaryPanel = $<Panel>('#CampaignSettingsSummaryPanel')!;
 	static basePage = $<Panel>('#CampaignSettingsBase')!;
 	static subPage = $<Panel>('#CampaignSettingsSubpage')!;
 	static header = $<Label>('#CampaignSettingsHeader')!;
 	static subheader = $<Label>('#CampaignSettingsSubheader')!;
 	static startBtn = $<Button>('#CampaignSettingsStart')!;
+	static helpPage = $<Panel>('#CampaignSettingsHelp')!;
+	static helpTxt = $<Label>('#CampaignSettingsHelpText')!;
 
 	static activeSubpage = '';
 
 	static init() {
 		this.hide();
 		this.startBtn.SetPanelEvent('onmouseout', () => { UiToolkitAPI.HideTextTooltip(); });
+	
+		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
 	}
 
 	static setActive() {
@@ -91,13 +95,15 @@ class CampaignSettingsTab {
 		this.subPage.visible = true;
 		this.startBtn.enabled = false;
 
-		this.setHeaderText(locH, locS);
+		this.setHeaderText(tagDevString(locH), tagDevString(locS));
 
 		// Check for existence
 		if (!this.subPage.FindChildTraverse(tab)) {
 			const p = $.CreatePanel('Panel', this.subPage, tab);
 
 			p.LoadLayout(`file://{resources}/layout/pages/campaigns/${xml}.xml`, false, false);
+			p.SetAttributeString('settings.category', tab);
+			p.SetAttributeString('settings.name', locH);
 			p.RegisterForReadyEvents(true);
 
 			stripDevTagsFromLabels(p);
@@ -119,16 +125,21 @@ class CampaignSettingsTab {
 				active.SetReadyForDisplay(true);
 			}
 		}
+
+		this.helpPage.visible = true;
 	}
 
 	static closeSettingsSubpage() {
 		if (this.activeSubpage) {
 			const hide = this.subPage.FindChildTraverse(this.activeSubpage);
-			if (hide) hide.visible = false;
+			if (hide) {
+				hide.visible = false;
+			}
 		}
 
 		this.subPage.visible = false;
 		this.basePage.visible = true;
+		this.helpPage.visible = false;
 		this.startBtn.enabled = true;
 
 		this.setHeaderText(tagDevString('Campaign Settings'), tagDevString('Customize your experience'));
@@ -136,5 +147,60 @@ class CampaignSettingsTab {
 		this.startBtn.ClearPanelEvent('onmouseover');
 
 		this.activeSubpage = '';
+
+		this.updateSummary();
+	}
+
+	static updateSummary() {
+		const subpages = this.subPage.Children();
+
+		this.summaryPanel.RemoveAndDeleteChildren();
+
+		for (let i = 0; i < subpages.length; ++i) {
+			const subpage = subpages[i];
+			const cat = subpage.GetAttributeString('settings.category', 'none');
+
+			if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
+			
+			$.CreatePanel(
+				'Label',
+				this.summaryPanel,
+				`SummaryHeading${i}`, {
+					class: 'campaign-settings__summary__header',
+					text: `${subpage.GetAttributeString('settings.name', 'NOT FOUND')}`
+				}
+			);
+
+			const nonDefaults = CampaignShared.FetchNonDefaultSettings(subpage);
+
+			if (nonDefaults.length === 0) {
+				$.CreatePanel(
+					'Label',
+					this.summaryPanel,
+					`SummaryHeading${i}`, {
+						class: 'campaign-settings__summary__text',
+						html: true,
+						text: '<b>No changes detected.</b>'
+					}
+				);
+			}
+
+			for (let j = 0; j < nonDefaults.length; ++j) {
+				const entry = nonDefaults[j];
+				$.CreatePanel(
+					'Label',
+					this.summaryPanel,
+					`SummaryHeading${i}`, {
+						class: 'campaign-settings__summary__text',
+						html: true,
+						text: `<b>- ${entry.name}:</b> ${entry.actual}`
+					}
+				);
+			}
+		}
+	}
+
+	static onCampaignSettingHovered(helpText) {
+		this.helpTxt.text = helpText;
 	}
 }

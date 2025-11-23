@@ -2,6 +2,98 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
-.placeholder {
-    
+.campaign-setting {
+	&__entry {
+		width: 100%;
+		height: 50px;
+		padding: 0 15px;
+		background-color: $base-950;
+		flow-children: right;
+
+		&__odd {
+			background-color: $base-900;
+		}
+
+		&__text {
+			@include mixin.font-styles($use-header: true);
+			width: fill-parent-flow(0.5);
+			font-size: 20px;
+			vertical-align: center;
+			transform: translateY(-2px);
+		}
+
+		&__value {
+			width: fill-parent-flow(0.5);
+			vertical-align: center;
+		}
+
+		&__checkbox {
+			height: 24px;
+
+			.TickBox {
+				margin-right: 0;
+				background-color: $base-950;
+				border: $menu-pane-border;
+				horizontal-align: right;
+			}
+
+			&:hover .TickBox {
+				background-color: $base-900;
+			}
+		}
+
+		&__textentry {
+			height: fit-children;
+			font-size: 16px;
+			font-family: $font-monospace;
+			color: $bright-color;
+			border: 1px solid $base-700;
+			background-color: $base-950;
+
+			&:focus {
+				background-color: $base-900;
+				color: $bright-color;
+			}
+
+			&:hover {
+				background-color: $base-900;
+				color: $bright-color;
+			}
+		}
+
+		&__dropdown {
+			width: 407px;
+			height: 38px;
+
+			background-color: $base-950;
+			border: $menu-pane-border;
+			&:hover:not(:disabled):not(:parentdisabled) {
+				background-color: $base-900;
+				.DropDownIcon {
+					border-left-color: $base-700;
+				}
+			}
+			.DropDownIcon {
+				border-left: $menu-pane-border;
+			}
+			&:not(:parentdisabled) .DropDownIcon {
+				wash-color: $bright-color;
+			}
+			&.DropDownMenuVisible {
+				border-color: $base-700;
+				background-color: $base-900;
+				& > .DropDownIcon {
+					border-color: $base-700;
+					transform: scaleY(-1);
+				}
+			}
+			Label {
+				font-size: 14px;
+				width: 100%;
+			}
+			&:not(:parentdisabled) Label {
+				color: $bright-color;
+			}
+		}
+	}
 }
