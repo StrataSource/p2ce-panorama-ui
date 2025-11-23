@@ -10,6 +10,7 @@
 		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-saves.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-settings.ts" />
+		<include src="file://{resources}/scripts/pages/campaigns/shared.ts" />
 	</scripts>
 
 	<snippets>
@@ -325,7 +326,7 @@
 							<Panel class="row fill-height">
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', 'setting-presets', '[HC] Presets', '[HC] Create/Apply a configuration set')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', 'setting-presets', 'Presets', 'Create/Apply a configuration set')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -341,7 +342,7 @@
 								</Button>
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', 'server', '[HC] Server Settings', '[HC] Administrative settings')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', 'server', 'Server Settings', 'Administrative settings')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -357,7 +358,7 @@
 								</Button>
 								<Button
 									class="campaign-settings__button"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', 'map-select', '[HC] Map Selection', '[HC] Start at a specific map within this chapter')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', 'map-select', 'Map Selection', 'Start at a specific map within this chapter')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -376,7 +377,7 @@
 							<Panel class="row mt-2 fill-height">
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', 'gameplay-base', '[HC] Base Gameplay', '[HC] Simple configurable constants')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', 'gameplay-base', 'Base Gameplay', 'Simple configurable constants')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -392,7 +393,7 @@
 								</Button>
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', 'gameplay-addons', '[HC] Gameplay Modifiers', '[HC] Select custom features &amp; scripts')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', 'gameplay-addons', 'Gameplay Modifiers', 'Select custom features &amp; scripts')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -420,6 +421,9 @@
 								</Button>
 							</Panel>
 						</Panel>
+						<Panel id="CampaignSettingsHelp" class="campaign-settings__help">
+							<Label id="CampaignSettingsHelpText" html="true" text="[PH] Help Text" />
+						</Panel>
 						<Panel id="CampaignSettingsSubpage" class="campaign-settings__left">
 						</Panel>
 						<!-- Summary panel -->
@@ -440,9 +444,8 @@
 								</Panel>
 							</Panel>
 							<Panel class="campaign-settings__summary">
-								<Label id="CampaignSettingsSummary" class="campaign-settings__summary__header" text="[HC] Settings Summary" />
-								<Panel class="campaign-settings__summary__inner">
-									<Label class="campaign-settings__summary__text" text="[PH] No changes detected." />
+								<Panel id="CampaignSettingsSummaryPanel" class="campaign-settings__summary__inner">
+									<Label class="campaign-settings__summary__text" html="true" text="[PH] No changes detected." />
 								</Panel>
 							</Panel>
 							<Button id="CampaignSettingsStart" class="button-mono campaign-settings__start button-mono mt-2 full-width" onactivate="CampaignSettingsTab.finishSettings()">
