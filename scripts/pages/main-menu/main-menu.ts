@@ -177,8 +177,8 @@ class MainMenu {
 
 		this.currentMapCampaign = matching;
 
-		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
-		const campaignSaves = saves.filter((v: Save) => { return v.mapGroup === (matching ? matching.id : '') });
+		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
+		const campaignSaves = saves.filter((v: GameSave) => { return v.mapGroup === (matching ? matching.id : '') });
 
 		const hasSaves = saves.length !== 0;
 		const hasCampaignSaves = campaignSaves.length !== 0;
@@ -392,7 +392,7 @@ class MainMenu {
 	 * Load the latest save available.
 	 */
 	static loadLatestSave() {
-		let saves = GameSavesAPI.GetGameSaves().sort((a, b) => b.fileTime - a.fileTime);
+		let saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
@@ -402,7 +402,7 @@ class MainMenu {
 				$.Localize('#Action_LoadGame'),
 				() => {
 					// filter down to current campaign
-					saves = saves.filter((v: Save) => { return v.mapGroup === this.currentMapCampaign!.id });
+					saves = saves.filter((v: GameSave) => { return v.mapGroup === this.currentMapCampaign!.id });
 					if (saves.length === 0) return;
 
 					GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
