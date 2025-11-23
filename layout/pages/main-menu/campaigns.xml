@@ -132,6 +132,7 @@
 	</snippets>
 
 	<Panel class="mainmenu__page no-flow" onload="CampaignMgr.init()">
+		<!-- CAMPAIGN SELECTOR -->
 		<Panel id="CampaignSelector" class="campaigns">
 			<Panel class="campaigns__left">
 				<Panel class="campaigns__action-bar">
@@ -223,7 +224,9 @@
 				</Panel>
 			</Panel>
 		</Panel>
+		<!-- / CAMPAIGN SELECTOR -->
 
+		<!-- CAMPAIGN HOME -->
 		<Panel id="CampaignStartPage" class="selected-campaign">
 			<Image
 				id="CampaignBackground"
@@ -235,6 +238,7 @@
 			/>
 			<Button class="full-width full-height" />
 			<Panel class="selected-campaign__container">
+				<!-- MAIN CONTROLS -->
 				<Panel class="selected-campaign__controls">
 					<Image
 						id="CampaignLogo"
@@ -286,6 +290,9 @@
 						</Button>
 					</Panel>
 				</Panel>
+				<!-- / MAIN CONTROLS -->
+
+				<!-- LISTER FOR CHAPTERS / SAVES -->
 				<Panel id="CampaignListerContainer" class="selected-campaign__lister__container">
 					<Label id="CampaignListerModeLabel" class="selected-campaign__lister__header" text="[PH] Lister Mode" />
 					<Panel class="selected-campaign__lister__body">
@@ -296,11 +303,14 @@
 						</Button>
 					</Panel>
 				</Panel>
+				<!-- / LISTER -->
+
+				<!-- CAMPAIGN SETTINGS -->
 				<Panel id="CampaignSettingsContainer" class="campaign-settings__container">
 					<Panel class="campaign-settings__header">
 						<Panel class="flow-down">
-							<Label class="campaign-settings__header__top" text="[HC] Campaign Settings" />
-							<Label class="campaign-settings__header__btm" text="[HC] Customize your experience" />
+							<Label id="CampaignSettingsHeader" class="campaign-settings__header__top" text="[PH] Campaign Settings Header" />
+							<Label id="CampaignSettingsSubheader" class="campaign-settings__header__btm" text="[PH] Campaign Settings Subheader" />
 						</Panel>
 						<Image
 							id="CampaignSettingsLogo"
@@ -310,14 +320,17 @@
 						/>
 					</Panel>
 					<Panel class="campaign-settings">
-						<Panel class="campaign-settings__left">
+						<Panel id="CampaignSettingsBase" class="campaign-settings__left">
 							<!-- SETTINGS ROW 1 -->
 							<Panel class="row fill-height">
-								<Button class="campaign-settings__button">
+								<Button
+									class="campaign-settings__button mr-2"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', 'setting-presets', '[HC] Presets', '[HC] Create/Apply a configuration set')"
+								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
 											class="campaign-settings__button__icon"
-											src="file://{images}/icons/steam.svg"
+											src="file://{images}/cancel.svg"
 											scaling="stretch-to-fit-preserve-aspect"
 											texturewidth="128"
 											textureheight="128"
@@ -326,11 +339,14 @@
 										<Label class="campaign-settings__button__subtext" text="[HC] Create/apply a configuration set" />
 									</Panel>
 								</Button>
-								<Button class="campaign-settings__button">
+								<Button
+									class="campaign-settings__button mr-2"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', 'server', '[HC] Server Settings', '[HC] Administrative settings')"
+								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
 											class="campaign-settings__button__icon"
-											src="file://{images}/icons/steam.svg"
+											src="file://{images}/cancel.svg"
 											scaling="stretch-to-fit-preserve-aspect"
 											texturewidth="128"
 											textureheight="128"
@@ -339,11 +355,14 @@
 										<Label class="campaign-settings__button__subtext" text="[HC] General administrative settings" />
 									</Panel>
 								</Button>
-								<Button class="campaign-settings__button">
+								<Button
+									class="campaign-settings__button"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', 'map-select', '[HC] Map Selection', '[HC] Start at a specific map within this chapter')"
+								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
 											class="campaign-settings__button__icon"
-											src="file://{images}/icons/steam.svg"
+											src="file://{images}/cancel.svg"
 											scaling="stretch-to-fit-preserve-aspect"
 											texturewidth="128"
 											textureheight="128"
@@ -355,11 +374,14 @@
 							</Panel>
 							<!-- SETTINGS ROW 2 -->
 							<Panel class="row mt-2 fill-height">
-								<Button class="campaign-settings__button">
+								<Button
+									class="campaign-settings__button mr-2"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', 'gameplay-base', '[HC] Base Gameplay', '[HC] Simple configurable constants')"
+								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
 											class="campaign-settings__button__icon"
-											src="file://{images}/icons/steam.svg"
+											src="file://{images}/cancel.svg"
 											scaling="stretch-to-fit-preserve-aspect"
 											texturewidth="128"
 											textureheight="128"
@@ -368,11 +390,14 @@
 										<Label class="campaign-settings__button__subtext" text="[HC] Simple configurable constants" />
 									</Panel>
 								</Button>
-								<Button class="campaign-settings__button">
+								<Button
+									class="campaign-settings__button mr-2"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', 'gameplay-addons', '[HC] Gameplay Modifiers', '[HC] Select custom features &amp; scripts')"
+								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
 											class="campaign-settings__button__icon"
-											src="file://{images}/icons/steam.svg"
+											src="file://{images}/cancel.svg"
 											scaling="stretch-to-fit-preserve-aspect"
 											texturewidth="128"
 											textureheight="128"
@@ -385,15 +410,17 @@
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
 											class="campaign-settings__button__icon"
-											src="file://{images}/icons/steam.svg"
+											src="file://{images}/cancel.svg"
 											scaling="stretch-to-fit-preserve-aspect"
 											texturewidth="128"
 											textureheight="128"
 										/>
-										<Label class="campaign-settings__button__text" text="[HC] Map Selection" />
+										<Label class="campaign-settings__button__text" text="[HC] Dummy Slot" />
 									</Panel>
 								</Button>
 							</Panel>
+						</Panel>
+						<Panel id="CampaignSettingsSubpage" class="campaign-settings__left">
 						</Panel>
 						<!-- Summary panel -->
 						<Panel class="campaign-settings__right">
@@ -401,7 +428,7 @@
 								<Image
 									id="CampaignSettingsChapterImage"
 									class="campaign-settings__chapter-img"
-									src="file://{materials}/vgui/chapters/chapter1.vtf"
+									src="file://{materials}/vgui/new_save_game.vtf"
 									scaling="stretch-to-cover-preserve-aspect"
 									textureheight="1920"
 									texturewidth="1080"
@@ -413,21 +440,24 @@
 								</Panel>
 							</Panel>
 							<Panel class="campaign-settings__summary">
-								<Label text="[PH] Settings Summary" />
+								<Label id="CampaignSettingsSummary" class="campaign-settings__summary__header" text="[HC] Settings Summary" />
+								<Panel class="campaign-settings__summary__inner">
+									<Label class="campaign-settings__summary__text" text="[PH] No changes detected." />
+								</Panel>
 							</Panel>
-							<Button class="button-mono mt-2 full-width" onactivate="CampaignSettingsTab.finishSettings()">
+							<Button id="CampaignSettingsStart" class="button-mono campaign-settings__start button-mono mt-2 full-width" onactivate="CampaignSettingsTab.finishSettings()">
 								<Image
-									class="button-mono__icon"
+									class="button-mono__icon campaign-settings__start__icon"
 									src="file://{images}/cancel.svg"
 									scaling="stretch-to-fit-preserve-aspect"
-									texturewidth="32"
-									textureheight="32"
+									texturewidth="48"
+									textureheight="48"
 								/>
-								<Label class="button-mono__text" text="[HC] Start" />
+								<Label class="button-mono__text campaign-settings__start__text" text="[HC] Start" />
 							</Button>
 						</Panel>
 					</Panel>
-					<Button class="button-mono mt-2" onactivate="CampaignSettingsTab.clear()">
+					<Button class="button-mono mt-2" onactivate="CampaignSettingsTab.stepBack()">
 						<Image
 							class="button-mono__icon"
 							src="file://{images}/cancel.svg"
@@ -438,7 +468,9 @@
 						<Label class="button-mono__text" text="[HC] Back" />
 					</Button>
 				</Panel>
+				<!-- / CAMPAIGN SETTINGS -->
 			</Panel>
 		</Panel>
+		<!-- / CAMPAIGN HOME -->
 	</Panel>
 </root>
