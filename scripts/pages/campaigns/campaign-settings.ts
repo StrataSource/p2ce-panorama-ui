@@ -79,6 +79,8 @@ class CampaignSettingsTab {
 			'warning-popup',
 			$.Localize('#UI_Yes'),
 			() => {
+				this.applySettings();
+
 				CampaignMgr.startGame();
 				this.clear();
 			},
@@ -156,10 +158,13 @@ class CampaignSettingsTab {
 
 		this.summaryPanel.RemoveAndDeleteChildren();
 
+		// iterate through all setting subpages
+		// TODO: do in specific order (order of buttons)
 		for (let i = 0; i < subpages.length; ++i) {
 			const subpage = subpages[i];
 			const cat = subpage.GetAttributeString('settings.category', 'none');
 
+			// skip these ones, they're not helpful
 			if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
 			
 			$.CreatePanel(
@@ -171,9 +176,35 @@ class CampaignSettingsTab {
 				}
 			);
 
-			const nonDefaults = CampaignShared.FetchNonDefaultSettings(subpage);
+			// fetch page settings
+			const settings = CampaignShared.FetchPageSettings(subpage);
 
-			if (nonDefaults.length === 0) {
+			// iterate through each one and determine if they've changed
+			// if they have, display that
+			let applied = 0;
+			for (let j = 0; j < settings.length; ++j) {
+				const entry = settings[j];
+
+				if (entry.defaultVal === entry.actual) {
+					// skip values that are exactly the same
+					continue;
+				}
+
+				$.CreatePanel(
+					'Label',
+					this.summaryPanel,
+					`SummaryHeading${i}`, {
+						class: 'campaign-settings__summary__text',
+						html: true,
+						text: `<b>- ${entry.name}:</b> ${entry.actual}`
+					}
+				);
+
+				++applied;
+			}
+
+			// no changes applied to this section
+			if (applied === 0) {
 				$.CreatePanel(
 					'Label',
 					this.summaryPanel,
@@ -184,18 +215,33 @@ class CampaignSettingsTab {
 					}
 				);
 			}
+		}
+	}
 
-			for (let j = 0; j < nonDefaults.length; ++j) {
-				const entry = nonDefaults[j];
-				$.CreatePanel(
-					'Label',
-					this.summaryPanel,
-					`SummaryHeading${i}`, {
-						class: 'campaign-settings__summary__text',
-						html: true,
-						text: `<b>- ${entry.name}:</b> ${entry.actual}`
-					}
-				);
+	static applySettings() {
+		const subpages = this.subPage.Children();
+		for (let i = 0; i < subpages.length; ++i) {
+			const subpage = subpages[i];
+			const cat = subpage.GetAttributeString('settings.category', 'none');
+
+			// skip these ones, they're not helpful
+			if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
+
+			// fetch page settings
+			const settings = CampaignShared.FetchPageSettings(subpage);
+
+			// iterate through each one and determine if they've changed
+			// if they have, display that
+			for (let j = 0; j < settings.length; ++j) {
+				const entry = settings[j];
+
+				if (entry.defaultVal === entry.actual) {
+					// skip values that are exactly the same
+					continue;
+				}
+
+				$.Msg(`Execute ${entry.command} ${entry.actual}`);
+				GameInterfaceAPI.ConsoleCommand(`${entry.command} ${entry.actual}`);
 			}
 		}
 	}
