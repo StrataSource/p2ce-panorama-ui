@@ -107,7 +107,13 @@ class CampaignMgr {
 		}
 
 		this.uiSelectedChapter = chapter;
-		CampaignSettingsTab.setActive();
+	}
+
+	static customizeChapter(chapter: ChapterInfo) {
+		this.selectChapter(chapter);
+
+		if (this.uiSelectedChapter)
+			CampaignSettingsTab.setActive();
 	}
 
 	static startGame() {
