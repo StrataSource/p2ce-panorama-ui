@@ -407,7 +407,7 @@ class CampaignSavesTab {
 				'generic-popup',
 				$.Localize('#UI_Yes'),
 				() => {
-					SaveRestoreAPI.SaveGame('${new Date().getTime()}');
+					SaveRestoreAPI.SaveGame(`${new Date().getTime()}`);
 					CampaignSavesTab.purgeSaveList();
 					CampaignSavesTab.lockScreen();
 
