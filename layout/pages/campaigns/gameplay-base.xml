@@ -47,9 +47,9 @@
 				class="dropdown campaign-setting__entry__value campaign-setting__entry__dropdown"
 				menuclass="dropdown-menu"
 			>
-				<Label text="Easy" id="Skill1" value="1" />
-				<Label text="Normal" id="Skill2" value="2" />
-				<Label text="Hard" id="Skill3" value="3" />
+				<Label text="Easy" id="Skill1" value="1" index="0" />
+				<Label text="Normal" id="Skill2" value="2" index="1" />
+				<Label text="Hard" id="Skill3" value="3" index="2" />
 			</DropDown>
 		</Panel>
 	</Panel>
