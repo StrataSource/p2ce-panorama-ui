@@ -75,7 +75,7 @@
 					min="0"
 					max="1"
 					percentage="true"
-					convar="snd_volume_weapon_player"
+					convar="snd_volume_weapon_localplayer"
 					tags="weapon"
 					hasdocspage="false"
 				/>
@@ -85,7 +85,7 @@
 					min="0"
 					max="1"
 					percentage="true"
-					convar="snd_volume_weapon_overall"
+					convar="snd_volume_weapon"
 					tags="overall"
 					hasdocspage="false"
 				/>
