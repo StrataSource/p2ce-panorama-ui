@@ -109,7 +109,7 @@
 
 		<!-- Chapter Entry -->
 		<snippet name="ChapterEntrySnippet">
-			<Button class="chapters__entry">
+			<RadioButton group="ChaptersGroupRadio" class="chapters__entry">
 				<Panel class="chapters__entry__inner">
 					<!-- Chapter icon cover -->
 					<Image
@@ -127,7 +127,7 @@
 						<Label id="ChapterDesc" class="chapters__entry__details__desc" text="#MainMenu_Campaigns_MM_ChapterDesc" />
 					</Panel>
 				</Panel>
-			</Button>
+			</RadioButton>
 		</snippet>
 		<!-- / Chapter Entry -->
 	</snippets>
@@ -298,6 +298,14 @@
 					<Label id="CampaignListerModeLabel" class="selected-campaign__lister__header" text="[PH] Lister Mode" />
 					<Panel class="selected-campaign__lister__body">
 						<Panel id="CampaignLister" class="selected-campaign__lister">
+						</Panel>
+						<Panel id="CampaignStarterPanel" class="full-width flow-right">
+							<Button id="CampaignCustomizeBtn" class="selected-campaign__lister__button" onactivate="CampaignChaptersTab.customizeChapter()">
+								<Label class="selected-campaign__lister__button__text" text="[HC] Start Custom Game" />
+							</Button>
+							<Button id="CampaignCleanStartBtn" class="selected-campaign__lister__button" onactivate="CampaignChaptersTab.startChapter()">
+								<Label class="selected-campaign__lister__button__text" text="[HC] Start Without Customizing" />
+							</Button>
 						</Panel>
 						<Button id="CampaignBackScreen" class="selected-campaign__lister__button" onactivate="CampaignHome.closeLister()">
 							<Label class="selected-campaign__lister__button__text" text="#MainMenu_Campaigns_MM_Back" />
