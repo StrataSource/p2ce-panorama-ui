@@ -447,9 +447,17 @@
 									texturewidth="1080"
 								/>
 								<Panel class="campaign-settings__chapter-overlay" />
-								<Panel class="m-3 flow-down vertical-align-bottom full-width">
-									<Label id="CampaignSettingsChapter" class="campaign-settings__chapter-text" text="[PH] Campaign Chapter" />
-									<Label id="CampaignSettingsMap" class="campaign-settings__map-text" text="[PH] Campaign Map" />
+								<Panel class="m-3 flow-right vertical-align-bottom full-width">
+									<Image
+										id="CampaignSettingsBoxLogo"
+										class="campaign-settings__box-logo"
+										src="file://{images}/menu/portal2/logo.png"
+										scaling="stretch-to-fit-preserve-aspect"
+									/>
+									<Panel class="flow-down fill-width">
+										<Label id="CampaignSettingsChapter" class="campaign-settings__chapter-text" text="[PH] Campaign Chapter" />
+										<Label id="CampaignSettingsMap" class="campaign-settings__map-text" text="[PH] Campaign Map" />
+									</Panel>
 								</Panel>
 							</Panel>
 							<Panel class="campaign-settings__summary">

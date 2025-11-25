@@ -602,6 +602,7 @@
 
 	&__header {
 		width: 100%;
+		flow-children: right;
 		background-color: $base-950;
 		border: $menu-pane-border;
 		border-bottom-width: 0;
@@ -687,17 +688,26 @@
 		background-color: gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0)), to($base-950));
 	}
 
+	&__box-logo {
+		width: 48px;
+		height: 48px;
+		margin-right: 10px;
+		vertical-align: center;
+	}
+
 	&__chapter-text {
 		@include mixin.font-styles($use-header: true, $light-header: false);
 		width: 100%;
 		font-size: 24px;
 		text-shadow: 2px 2px 4px 2 $base-950;
+		transform: translateY(-2px);
 	}
 
 	&__map-text {
 		color: $base-200;
 		width: 100%;
 		text-shadow: 2px 2px 2px 2 $base-950;
+		transform: translateY(-2px);
 	}
 
 	&__chapter-img {
