@@ -228,6 +228,7 @@ $topnav-height: 80px;
 
 .home {
 	width: 50%;
+	max-width: 930px;
 	height: 100%;
 	flow-children: down;
 
@@ -339,8 +340,7 @@ $topnav-height: 80px;
 
 	&__modelpanel {
 		width: fill-parent-flow(1);
-		margin: 30px;
-		max-width: 896px;
+		max-width: 930px;
 		height: 100%;
 		horizontal-align: left;
 		vertical-align: center;

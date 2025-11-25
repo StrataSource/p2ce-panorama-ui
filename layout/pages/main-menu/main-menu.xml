@@ -89,7 +89,7 @@
 					>
 						<Panel class="topnav__button__content">
 							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label text="#MainMenu_Navigation_Campaigns" class="text" />
+							<Label text="#MainMenu_Navigation_Play" class="text" />
 						</Panel>
 					</RadioButton>
 
