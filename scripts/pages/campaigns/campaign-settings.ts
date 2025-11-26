@@ -97,7 +97,7 @@ class CampaignSettingsTab {
 		this.subPage.visible = true;
 		this.startBtn.enabled = false;
 
-		this.setHeaderText(tagDevString(locH), tagDevString(locS));
+		this.setHeaderText($.Localize(locH), $.Localize(locS));
 
 		// Check for existence
 		if (!this.subPage.FindChildTraverse(tab)) {
