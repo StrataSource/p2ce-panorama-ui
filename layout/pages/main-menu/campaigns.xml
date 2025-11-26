@@ -362,7 +362,7 @@
 											textureheight="128"
 										/>
 										<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Title" />
-										<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Dsec" />
+										<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc" />
 									</Panel>
 								</Button>
 								<Button
