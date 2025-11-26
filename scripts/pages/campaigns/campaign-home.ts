@@ -96,7 +96,7 @@ class CampaignHome {
 			saveBtn.SetPanelEvent('onmouseover', () => {
 				UiToolkitAPI.ShowTextTooltip(
 					saveBtn.id,
-					tagDevString('The map you are playing on does not belong to this campaign.\nYou cannot save here.')
+					$.Localize('#MainMenu_SaveRestore_SaveFailed_NotPartOfCampaign')
 				);
 			});
 			saveBtn.SetPanelEvent('onmouseout', () => {
@@ -112,7 +112,7 @@ class CampaignHome {
 			returnBtn.SetPanelEvent('onmouseover', () => {
 				UiToolkitAPI.ShowTextTooltip(
 					returnBtn.id,
-					tagDevString('Cannot switch campaigns while in game.\nReturn to the main menu first.')
+					$.Localize('#MainMenu_Campaigns_MM_ReturnToCampaignMenu_InGame')
 				);
 			});
 			returnBtn.SetPanelEvent('onmouseout', () => {
