@@ -1,0 +1,53 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/pages/main-menu/news.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="NewsPipSnippet">
+			<RadioButton class="news__pips__entry" group="NewsPipRadio" />
+		</snippet>
+	</snippets>
+
+	<Panel class="news">
+		<Panel id="NewsActionBar" class="full-width">
+			<Panel id="NewsPipContainer" class="news__pips" />
+			<Panel class="horizontal-align-right flow-right">
+				<Button class="news__nav-btn news__nav-btn__left" onactivate="NewsReel.goPrevArticle()">
+					<Image
+						src="file://{images}/arrow-forward.svg"
+						class="news__nav-btn__left__img"
+						texturewidth="32"
+						textureheight="32"
+					/>
+				</Button>
+				<Button class="news__nav-btn" onactivate="NewsReel.goNextArticle()">
+					<Image src="file://{images}/arrow-forward.svg" texturewidth="32" textureheight="32" />
+				</Button>
+			</Panel>
+		</Panel>
+		<Button
+			id="NewsBtn"
+			class="news__content"
+			onmouseover="NewsReel.onReelMouseOver()"
+			onmouseout="NewsReel.onReelMouseOut()"
+		>
+			<Image
+				id="NewsGradientImage"
+				src="file://{images}/menu/p2ce/random4.png"
+				scaling="stretch-to-cover-preserve-aspect"
+				class="news__content__bg-image"
+			/>
+			<Panel class="news__content__container">
+				<Panel class="news__content__details">
+					<Label id="NewsHeader" class="news__content__details__header" text="[PH] News Header" />
+					<Label id="NewsDesc" class="news__content__details__desc" text="[PH] News Description" />
+				</Panel>
+			</Panel>
+			<Panel id="NewsProgressBar" class="news__content__progress" min="0.0" max="1.0" />
+		</Button>
+	</Panel>
+</root>

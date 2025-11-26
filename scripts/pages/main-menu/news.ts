@@ -27,7 +27,7 @@ class NewsReel {
 	static header = $<Label>('#NewsHeader')!;
 	static desc = $<Label>('#NewsDesc')!;
 	static timeBar = $<Panel>('#NewsProgressBar')!;
-	static container = $<Panel>('#News')!;
+	static container = $.GetContextPanel();
 
 	static entries: NewsEntry[] = [];
 	static selectedEntry: number = 0;
