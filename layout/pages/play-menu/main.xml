@@ -27,21 +27,6 @@
 
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.onLoad()">
 		<Panel class="play-menu__main">
-			<Button class="play-menu__featured">
-				<Image
-					class="play-menu__featured__image"
-					src="file://{images}/menu/p2ce/random3.png"
-					scaling="stretch-to-cover-preserve-aspect"
-					textureheight="1920"
-					texturewidth="1080"
-				/>
-				<Panel class="play-menu__featured__details">
-					<Panel class="flow-down vertical-align-center">
-						<Label class="play-menu__featured__details__header" text="[HC] Featured Item Hub" />
-						<Label class="play-menu__featured__details__subheader" text="[HC] Woag new stuff!" />
-					</Panel>
-				</Panel>
-			</Button>
 			<Panel class="flow-down full-width">
 				<Button class="play-menu__card">
 					<Image

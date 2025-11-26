@@ -4,7 +4,7 @@
 
 .content {
 	&__left {
-		width: 50%;
+		width: 960px;
 		height: 100%;
 		flow-children: down;
 	}
@@ -109,7 +109,7 @@
 }
 
 .selected-addon {
-	width: 50%;
+	width: fill-parent-flow(1);
 	height: 100%;
 	flow-children: down;
 
