@@ -136,42 +136,6 @@
 		<!-- CAMPAIGN SELECTOR -->
 		<Panel id="CampaignSelector" class="campaigns">
 			<Panel class="campaigns__left">
-				<Panel class="campaigns__action-bar">
-					<Button
-						id="CampaignsViewLooseMapsBtn"
-						class="button-mono button-mono__bigger fill-width mr-1"
-						onactivate="CampaignSelector.viewLooseMaps()"
-					>
-						<Image
-							class="button-mono__icon"
-							src="file://{images}/cancel.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="32"
-							textureheight="32"
-						/>
-						<Panel class="button-mono__text-panel">
-							<Label class="button-mono__text-panel__header" text="#MainMenu_Campaigns_MapList" />
-							<Label class="button-mono__text-panel__subheader" text="#MainMenu_Campaigns_MapList_Tagline_NewlySubbed" />
-						</Panel>
-					</Button>
-					<Button
-						id="CampaignsGoWorkshopBtn"
-						class="button-mono button-mono__bigger fill-width ml-1"
-						onactivate="CampaignSelector.openWorkshop()"
-					>
-						<Image
-							class="button-mono__icon"
-							src="file://{images}/icons/steam.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="32"
-							textureheight="32"
-						/>
-						<Panel class="button-mono__text-panel">
-							<Label class="button-mono__text-panel__header" text="#MainMenu_Campaigns_OpenWS" />
-							<Label class="button-mono__text-panel__subheader" text="#MainMenu_Campaigns_OpenWS_Tagline" />
-						</Panel>
-					</Button>
-				</Panel>
 				<Panel disabled="true" class="campaigns__action-bar">
 					<TextEntry
 						class="textentry campaigns__action-bar__textentry fill-width mr-2"
@@ -198,8 +162,8 @@
 								<Image
 									id="HoveredCampaignBoxart"
 									class="campaigns__boxart__image"
-									src="file://{images}/menu/portal2/boxart.png"
-									scaling="stretch-to-fit-preserve-aspect"
+									src="file://{images}/menu/portal2/sp_boxart.png"
+									scaling="stretch-to-fit-y-preserve-aspect"
 									texturewidth="600"
 									textureheight="900"
 								/>

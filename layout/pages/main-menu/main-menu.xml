@@ -5,15 +5,12 @@
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
-		<include src="file://{scripts}/pages/main-menu/news.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
 	<snippets>
 		<snippet name="MainMenuMovieSnippet">
 			<Panel>
-				<!-- Source is set in script. -->
-				<!-- Set what you want the movie to be using the data-type example 'nuke' the .webm is appended in script. -->
 				<Movie
 					id="MainMenuMovie"
 					class="mainmenu__movie MainMenuModeOnly"
@@ -26,9 +23,6 @@
 				</Movie>
 			</Panel>
 		</snippet>
-		<snippet name="NewsPipSnippet">
-			<RadioButton class="home__news__pips__entry" group="NewsPipRadio" />
-		</snippet>
 	</snippets>
 
 	<MainMenu
@@ -37,330 +31,118 @@
 		onload="MainMenu.onMainMenuLoaded()"
 		useglobalcontext="false"
 	>
-
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
 		<Panel id="MainMenuInput" class="mainmenu">
-			<!-- Topnav -->
-			<Panel id="MainMenuNavBar" class="topnav" style="z-index: 10;">
-				<Image
-					class="topnav__logo"
-					src="file://{images}/logo.svg"
-					textureheight="130"
-					texturewidth="440"
-					scaling="stretch-to-fit-x-preserve-aspect"
-				/>
-
-				<VersionInfo />
-
-				<Panel id="MainMenuTopButtons" class="full-height flow-right horizontal-align-right">
-					<RadioButton
-						id="ControlsLibraryButton"
-						class="topnav__button MainMenuModeOnly"
-						group="TopNavRadio"
-						onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
-					>
-						<Panel class="topnav__button__content">
-							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label class="text" text="#MainMenu_Navigation_ControlsLibrary" />
-						</Panel>
-					</RadioButton>
-					<!-- Home selector -->
-					<RadioButton
-						id="HomeButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenu.onHomeButtonPressed()"
-						activated="true"
-					>
-						<Panel class="topnav__button__content">
-							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label text="#MainMenu_Navigation_Home" class="text" />
-						</Panel>
-					</RadioButton>
-
-					<!-- Campaign selector -->
-					<RadioButton
-						id="PlayButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenu.navigateToPage('Campaigns', 'main-menu/campaigns')"
-					>
-						<Panel class="topnav__button__content">
-							<Image class="topnav__icon" src="file://{images}/play-circle.svg" textureheight="80" />
-							<Label text="#MainMenu_Navigation_Play" class="text" />
-						</Panel>
-					</RadioButton>
-
-					<!-- Addon manager -->
-					<RadioButton
-						id="AddonsButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenu.navigateToPage('Addons', 'main-menu/addons')"
-					>
-						<Panel class="topnav__button__content">
-							<Image class="topnav__icon" src="file://{images}/playlist-plus.svg" textureheight="80" />
-							<Label text="#MainMenu_Navigation_Addons" class="text" />
-						</Panel>
-					</RadioButton>
-
-					<!-- Settings -->
-					<RadioButton
-						id="SettingsButton"
-						group="TopNavRadio"
-						class="topnav__button"
-						onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')"
-					>
-						<Panel class="topnav__button__content">
-							<Image class="topnav__icon" src="file://{images}/settings.svg" textureheight="80" />
-							<Label text="#MainMenu_Navigation_Options" class="text" />
-						</Panel>
-					</RadioButton>
-
-					<Button id="QuitButton" class="topnav__button" onactivate="MainMenu.onQuitButtonPressed()">
-						<Panel class="topnav__button__content">
-							<Image class="topnav__icon" src="file://{images}/quit.svg" textureheight="80" />
-							<Label text="#MainMenu_Navigation_QuitGame" class="text MainMenuModeOnly" />
-							<Label text="#MainMenu_Navigation_Disconnect" class="text PauseMenuModeOnly" />
-						</Panel>
-					</Button>
-				</Panel>
-			</Panel>
-			<!-- /Topnav -->
+			
 
 			<!-- Full page blur: used to blur everything below the drawer -->
 			<Panel class="mainmenu__container">
-				<!-- Backgrounds -->
-				<!-- Background blur: used to blur the backgrounds behind mainmenu pages -->
-				<BaseBlurTarget
-					id="MainMenuBackgroundBlur"
-					class="mainmenu__background-blur"
-					blurrects="MainMenuContentBlur MainMenuNavBar"
-				>
-					<!-- Movie background -->
-					<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
-					<!-- Static image background -->
-					<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
-
-					<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-					<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur" blurrects="PauseMenuMainMenuContent">
-						<!-- Backbuffer background -->
-						<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
-					</BaseBlurTarget>
-
+				<!-- Movie background -->
+				<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
+				<!-- Static image background -->
+				<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
+				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+				<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur" blurrects="PauseMenuMainMenuContent">
+					<!-- Backbuffer background -->
+					<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
 				</BaseBlurTarget>
-				<!-- /Backgrounds -->
+
+				<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
 				<Panel class="mainmenu__content">
-					<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
-
-					<Panel id="PauseContent" class="mainmenu__home-container PauseMenuModeOnly">
-						<Panel class="home">
-							<!-- Resume game button, pause menu only -->
-							<Button class="home__prompt home__prompt__short" onactivate="$.DispatchEvent('MainMenuResumeGame');">
-								<Image
-									src="file://{images}/menu/p2ce/random4.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
-								<Panel class="home__prompt__gradient" />
-								<Panel class="home__prompt__short__content">
-									<Label class="home__heading" text="#MainMenu_Home_Resume" />
-								</Panel>
-							</Button>
-							<Panel class="home__spacer__v" />
-							<!-- Continue latest save -->
-							<Button id="PausedLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
-								<Image
-									id="PausedSaveImage"
-									src="file://{images}/menu/p2ce/random3.png"
-									scaling="stretch-to-cover-preserve-aspect"
-									class="home__prompt__image"
-								/>
-								<Panel class="home__prompt__gradient" />
-								<Panel class="home__prompt__content">
-									<Label class="home__heading" text="#MainMenu_SaveRestore_LoadAuto" />
-									<Label id="PausedLatestSaveTimeLabel" class="home__subheading" text="#MainMenu_SaveRestore_NoSaves" />
-								</Panel>
-							</Button>
-							<Panel class="home__spacer__v" />
-							<Panel class="home__horizontal">
-								<!-- See all saves -->
+					<Panel id="GradientBar" class="mainmenu__gradient-bar">
+						<Panel id="HomeControls" class="mainmenu__nav">
+							<Image
+								class="mainmenu__logo"
+								src="file://{images}/logo.svg"
+								textureheight="130"
+								texturewidth="440"
+								scaling="stretch-to-fit-x-preserve-aspect"
+							/>
+							<Panel class="mainmenu__nav__controls">
 								<Button
-									id="PausedSaveGameButton"
-									class="home__prompt"
-									style="tooltip-position: left bottom; tooltip-body-position: 50%;"
-									onactivate="MainMenu.openSaveCampaign()"
+									class="mainmenu__nav__btn MainMenuModeOnly"
+									onactivate="MainMenu.navigateToPage('[HC] Featured', '[HC] Explore highlighted workshop content', false, 'main-menu/placeholder')"
 								>
-									<Image
-										src="file://{images}/menu/p2ce/random5.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
-									<Panel class="home__prompt__gradient" />
-									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="#MainMenu_SaveRestore_CreateSave" />
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Featured" />
+										<Label class="mainmenu__nav__btn__small-text" text="Explore highlighted workshop content" />
 									</Panel>
 								</Button>
-								<Panel class="home__spacer__h" />
-								<Button id="PausedViewSavesButton" class="home__prompt" onactivate="MainMenu.openLoadCampaign()">
-									<Image
-										src="file://{images}/menu/p2ce/random4.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
-									<Panel class="home__prompt__gradient" />
-									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="#MainMenu_SaveRestore_Load" />
+								<Button class="mainmenu__nav__btn MainMenuModeOnly" onactivate="MainMenu.navigateToPage('[HC] Play', '[HC] Start a new experience', false, 'play-menu/main')">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Play" />
+										<Label class="mainmenu__nav__btn__small-text" text="Start a new experience" />
+									</Panel>
+								</Button>
+								<Button class="mainmenu__nav__btn PauseMenuModeOnly" onactivate="">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Resume Game" />
+										<Label class="mainmenu__nav__btn__small-text" text="Close this menu &amp; return to the game" />
+									</Panel>
+								</Button>
+								<Button class="mainmenu__nav__btn" onactivate="">
+									<Panel class="vertical-align-center flow-down">
+										<Panel class="flow-right MainMenuModeOnly">
+											<Label class="mainmenu__nav__btn__text" text="Continue" />
+										</Panel>
+										<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="Portal 2" />
+										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="Load Last Save" />
+										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="Load the latest save file" />
+									</Panel>
+								</Button>
+								<Button class="mainmenu__nav__btn PauseMenuModeOnly" onactivate="">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Load Game" />
+										<Label class="mainmenu__nav__btn__small-text" text="Load a previous game file" />
+									</Panel>
+								</Button>
+								<Button class="mainmenu__nav__btn PauseMenuModeOnly" onactivate="">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Save Game" />
+										<Label class="mainmenu__nav__btn__small-text" text="Save your progress" />
+									</Panel>
+								</Button>
+								<Button class="mainmenu__nav__btn MainMenuModeOnly" onactivate="MainMenu.navigateToPage('[HC] Content', '[HC] Manage subscriptions &amp; mounted games', false, 'main-menu/addons')">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Content" />
+										<Label class="mainmenu__nav__btn__small-text" text="Manage subscriptions &amp; mounted games" />
+									</Panel>
+								</Button>
+								<Button class="mainmenu__nav__btn" onactivate="MainMenu.navigateToPage('[HC] Settings', '[HC] Tweak keybinds, video, preferences, etc.', true, 'settings/settings')">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Settings" />
+										<Label class="mainmenu__nav__btn__small-text" text="Tweak keybinds, video, preferences, etc." />
+									</Panel>
+								</Button>
+								<Button class="mainmenu__nav__btn" onactivate="MainMenu.onQuitButtonPressed()">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="Quit Game" />
+										<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="Leave" />
+										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="Exit" />
+										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="Leave" />
 									</Panel>
 								</Button>
 							</Panel>
-
-							<Panel class="home__bottom">
-								<Panel class="home__campaign-detail">
-									<Image
-										id="CampaignGradientImage"
-										src="file://{images}/menu/portal2/campaign_btn_bg.jpg"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__campaign-detail__bg-image"
-									/>
-									<Panel class="home__campaign-detail__container">
-										<Panel class="home__campaign-detail__left">
-											<Image
-												id="CampaignImage"
-												src="file://{images}/menu/portal2/campaign_cover.png"
-												scaling="stretch-to-cover-preserve-aspect"
-												class="home__campaign-detail__image"
-											/>
-											<Image
-												id="CampaignLogo"
-												src="file://{images}/menu/portal2/logo.png"
-												scaling="stretch-to-cover-preserve-aspect"
-												class="home__campaign-detail__logo"
-											/>
-										</Panel>
-										<Panel class="home__campaign-detail__right">
-											<Label
-												id="LevelHeader"
-												class="home__campaign-detail__right__title"
-												text="#MainMenu_Campaigns_MM_CampaignName_placeholder"
-											/>
-											<Label id="LevelChapter" class="home__campaign-detail__right__chapter" text="#MainMenu_Campaigns_MM_ChapterName" />
-											<Label id="LevelChapterNum" class="home__campaign-detail__right__chapter" text="#MainMenu_Campaigns_MM_ChapterNum" />
-											<Label id="LevelDesc" class="home__campaign-detail__right__desc" text="#MainMenu_Campaigns_MM_ChapterMapName" />
-											<Button class="home__campaign-detail__right__button">
-												<Image
-													class="home__campaign-detail__right__button__icon"
-													src="file://{images}/cancel.svg"
-													scaling="stretch-to-fit-preserve-aspect"
-													texturewidth="32"
-													textureheight="32"
-												/>
-												<Label class="home__campaign-detail__right__button__text" text="#MainMenu_Addons_ViewOnWS" />
-											</Button>
-										</Panel>
-									</Panel>
-								</Panel>
-							</Panel>
+							<VersionInfo class="mainmenu__version" />
 						</Panel>
 					</Panel>
 
-					<Panel id="HomeContent" class="mainmenu__home-container MainMenuModeOnly">
-						<ModelPanel
-							id="MainMenuModel"
-							class="home__modelpanel MainMenuModeOnly"
-							src="models/npcs/turret/turret.mdl"
-							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-							antialias="true"
-							mouse_rotate="true"
-						/>
-						<Panel class="home">
-							<!-- Continue latest save -->
-							<Panel class="home__horizontal">
-								<Button class="home__prompt" disabled="true">
-									<Image
-										id="FeaturedImage"
-										src="file://{images}/menu/p2ce/random2.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
-									<Panel class="home__prompt__gradient" />
-									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="#MainMenu_Featured_Title" />
-										<Label class="home__subheading" text="#MainMenu_Featured_Author" />
- 									</Panel>
- 								</Button>
-								<Panel class="home__spacer__h" />
-								<Button id="MainMenuLoadLastSaveButton" class="home__prompt" onactivate="MainMenu.loadLatestSave();">
-									<Image
-										id="MainMenuSaveImage"
-										defaultsrc="file://{images}/menu/p2ce/random1.png"
-										scaling="stretch-to-cover-preserve-aspect"
-										class="home__prompt__image"
-									/>
-									<Panel class="home__prompt__gradient" />
-									<Panel class="home__prompt__content">
-										<Label class="home__heading" text="#MainMenu_Home_Continue" />
-										<Label id="MainMenuSaveSubheadingLabel" class="home__subheading" text="#MainMenu_SaveRestore_NoSaves" />
-									</Panel>
-								</Button>
-							</Panel>
-							<Panel class="home__bottom">
-								<Panel id="News" class="home__news">
-									<Panel id="NewsActionBar" class="full-width">
-										<Panel id="NewsPipContainer" class="home__news__pips" />
+					<Panel id="PageWrap" class="mainmenu__normal-page-container">
+						<Label id="PageHeadline" class="mainmenu__page-head" text="[PH] Page Headline" />
+						<Label id="PageTagline" class="mainmenu__page-tagline" text="[PH] Page Tagline" />
 
-										<Panel class="horizontal-align-right flow-right">
-											<Button class="home__news__nav-btn home__news__nav-btn__left" onactivate="NewsReel.goPrevArticle()">
-												<Image
-													src="file://{images}/arrow-forward.svg"
-													class="home__news__nav-btn__left__img"
-													texturewidth="32"
-													textureheight="32"
-												/>
-											</Button>
-											<Button class="home__news__nav-btn" onactivate="NewsReel.goNextArticle()">
-												<Image src="file://{images}/arrow-forward.svg" texturewidth="32" textureheight="32" />
-											</Button>
-										</Panel>
-									</Panel>
-									<Button
-										id="NewsBtn"
-										class="home__news__content"
-										onmouseover="NewsReel.onReelMouseOver()"
-										onmouseout="NewsReel.onReelMouseOut()"
-									>
-										<Image
-											id="NewsGradientImage"
-											src="file://{images}/menu/p2ce/random4.png"
-											scaling="stretch-to-cover-preserve-aspect"
-											class="home__news__content__bg-image"
-										/>
-										<Panel class="home__news__content__container">
-											<Image
-												id="NewsImage"
-												src="file://{images}/menu/p2ce/news-splash.png"
-												scaling="stretch-to-cover-preserve-aspect"
-												class="home__news__content__image"
-											/>
-											<Panel class="home__news__content__details">
-												<Label id="NewsHeader" class="home__news__content__details__header" text="[PH] News Header" />
-												<Label id="NewsDesc" class="home__news__content__details__desc" text="[PH] News Description" />
-											</Panel>
-										</Panel>
-										<ProgressBar id="NewsProgressBar" class="home__news__content__progress" min="0.0" max="1.0" />
-									</Button>
-								</Panel>
-							</Panel>
+						<Panel id="PageInsert" class="fill-width fill-height" />
+
+						<Panel class="mainmenu__page-actions">
+							<Button class="button-mono" onactivate="MainMenu.navigateBack()">
+								<Label class="button-mono__text" text="Back" />
+							</Button>
 						</Panel>
 					</Panel>
 
-					<Panel id="PageContent" class="mainmenu__page-container mainmenu__page-container--hidden">
-						<Panel id="MainMenuContentBlur" class="mainmenu__page-blur" />
-						<!-- A panel gets inserted here dynamically from js, depending on which tab we click -->
-					</Panel>
 				</Panel>
 			</Panel>
 		</Panel>
