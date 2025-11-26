@@ -54,8 +54,8 @@
 						textureheight="130"
 					/>
 					<Panel class="button-mono__text-panel">
-						<Label class="button-mono__text-panel__header" text="[HC] P2:CE Addons" />
-						<Label class="button-mono__text-panel__subheader" text="[HC] Locally installed &amp; Steam Workshop content" />
+						<Label class="button-mono__text-panel__header" text="#MainMenu_Addons_Category_WS" />
+						<Label class="button-mono__text-panel__subheader" text="#MainMenu_Addons_Category_WS_Tagline" />
 					</Panel>
 				</RadioButton>
 				<RadioButton
@@ -72,8 +72,8 @@
 						textureheight="32"
 					/>
 					<Panel class="button-mono__text-panel">
-						<Label class="button-mono__text-panel__header" text="[HC] Mounted Games" />
-						<Label class="button-mono__text-panel__subheader" text="[HC] Content from other installed games" />
+						<Label class="button-mono__text-panel__header" text="#MainMenu_Addons_Category_Mounts" />
+						<Label class="button-mono__text-panel__subheader" text="#MainMenu_Addons_Category_Mounts_Tagline" />
 					</Panel>
 				</RadioButton>
 			</Panel>
@@ -113,10 +113,10 @@
 							class="vertical-align-center flow-down"
 							onactivate="SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts')"
 						>
-							<Label class="mounts__disclaimer__text" text="[HC] Configuring mounts is in development and currently unavailable." />
+							<Label class="mounts__disclaimer__text" text="#MainMenu_Mounts_WIP_Title" />
 							<Label
 								class="mounts__disclaimer__small-text"
-								text="[HC] Click on this banner to view how to configure mounts manually on the Wiki"
+								text="#MainMenu_Mounts_WIP_Tagline"
 							/>
 						</Button>
 					</Panel>
@@ -154,7 +154,7 @@
 									texturewidth="32"
 									textureheight="32"
 								/>
-								<Label id="SelectedAddonRunMapText" class="button-mono__text" text="[HC] Launch Map!" />
+								<Label id="SelectedAddonRunMapText" class="button-mono__text" text="#MainMenu_Addons_LaunchMap_Multi" />
 							</Button>
 						</Panel>
 					</Panel>

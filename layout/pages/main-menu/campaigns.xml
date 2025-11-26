@@ -181,9 +181,10 @@
 						<!-- <Panel class="DropDownIcon"/> -->
 						<Label text="#MainMenu_Campaigns_Search_SortBy_NewSubs" id="CampaignSortMode1" value="1" />
 						<Label text="#MainMenu_Campaigns_Search_SortBy_AtoZ" id="CampaignSortMode2" value="2" />
-						<Label text="#MainMenu_Campaigns_Search_SortBy_Last" id="CampaignSortMode3" value="3" />
-						<Label text="#MainMenu_Campaigns_Search_SortBy_Completion" id="CampaignSortMode4" value="4" />
-						<Label text="#MainMenu_Campaigns_Search_SortBy_CampaignSrc" id="CampaignSortMode5" value="5" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_ZtoA" id="CampaignSortMode2" value="3" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_Last" id="CampaignSortMode3" value="4" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_Completion" id="CampaignSortMode4" value="5" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_CampaignSrc" id="CampaignSortMode5" value="6" />
 					</DropDown>
 				</Panel>
 				<!-- Campaign list -->
@@ -301,10 +302,10 @@
 						</Panel>
 						<Panel id="CampaignStarterPanel" class="full-width flow-right">
 							<Button id="CampaignCustomizeBtn" class="selected-campaign__lister__button" onactivate="CampaignChaptersTab.customizeChapter()">
-								<Label class="selected-campaign__lister__button__text" text="[HC] Start Custom Game" />
+								<Label class="selected-campaign__lister__button__text" text="#MainMenu_Campaigns_MM_StartCustom" />
 							</Button>
 							<Button id="CampaignCleanStartBtn" class="selected-campaign__lister__button" onactivate="CampaignChaptersTab.startChapter()">
-								<Label class="selected-campaign__lister__button__text" text="[HC] Start Without Customizing" />
+								<Label class="selected-campaign__lister__button__text" text="#MainMenu_Campaigns_MM_StartVanilla" />
 							</Button>
 						</Panel>
 						<Button id="CampaignBackScreen" class="selected-campaign__lister__button" onactivate="CampaignHome.closeLister()">
@@ -334,7 +335,7 @@
 							<Panel class="row fill-height">
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', 'setting-presets', 'Presets', 'Create/Apply a configuration set')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', 'setting-presets', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Title', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -344,13 +345,13 @@
 											texturewidth="128"
 											textureheight="128"
 										/>
-										<Label class="campaign-settings__button__text" text="[HC] Presets" />
-										<Label class="campaign-settings__button__subtext" text="[HC] Create/apply a configuration set" />
+										<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Title" />
+										<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc" />
 									</Panel>
 								</Button>
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', 'server', 'Server Settings', 'Administrative settings')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', 'server', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Title', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -360,13 +361,13 @@
 											texturewidth="128"
 											textureheight="128"
 										/>
-										<Label class="campaign-settings__button__text" text="[HC] Server Settings" />
-										<Label class="campaign-settings__button__subtext" text="[HC] General administrative settings" />
+										<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Title" />
+										<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc" />
 									</Panel>
 								</Button>
 								<Button
 									class="campaign-settings__button"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', 'map-select', 'Map Selection', 'Start at a specific map within this chapter')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', 'map-select', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -376,8 +377,8 @@
 											texturewidth="128"
 											textureheight="128"
 										/>
-										<Label class="campaign-settings__button__text" text="[HC] Map Selection" />
-										<Label class="campaign-settings__button__subtext" text="[HC] Start at a specific map" />
+										<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title" />
+										<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc" />
 									</Panel>
 								</Button>
 							</Panel>
@@ -385,7 +386,7 @@
 							<Panel class="row mt-2 fill-height">
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', 'gameplay-base', 'Base Gameplay', 'Simple configurable constants')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', 'gameplay-base', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -395,13 +396,13 @@
 											texturewidth="128"
 											textureheight="128"
 										/>
-										<Label class="campaign-settings__button__text" text="[HC] Base Gameplay" />
-										<Label class="campaign-settings__button__subtext" text="[HC] Simple configurable constants" />
+										<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title" />
+										<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc" />
 									</Panel>
 								</Button>
 								<Button
 									class="campaign-settings__button mr-2"
-									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', 'gameplay-addons', 'Gameplay Modifiers', 'Select custom features &amp; scripts')"
+									onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', 'gameplay-addons', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc')"
 								>
 									<Panel class="horizontal-align-center vertical-align-center flow-down">
 										<Image
@@ -411,8 +412,8 @@
 											texturewidth="128"
 											textureheight="128"
 										/>
-										<Label class="campaign-settings__button__text" text="[HC] Gameplay Modifiers" />
-										<Label class="campaign-settings__button__subtext" text="[HC] Workshop features &amp; scripts" />
+										<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title" />
+										<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc" />
 									</Panel>
 								</Button>
 								<Button class="campaign-settings__button transparent">
@@ -453,7 +454,7 @@
 							</Panel>
 							<Panel class="campaign-settings__summary">
 								<Panel id="CampaignSettingsSummaryPanel" class="campaign-settings__summary__inner">
-									<Label class="campaign-settings__summary__text" html="true" text="[PH] No changes detected." />
+									<Label class="campaign-settings__summary__text" html="true" text="#MainMenu_Campaigns_Setup_Summary_NoChanges" />
 								</Panel>
 							</Panel>
 							<Button id="CampaignSettingsStart" class="button-mono campaign-settings__start button-mono mt-2 full-width" onactivate="CampaignSettingsTab.finishSettings()">
@@ -464,7 +465,7 @@
 									texturewidth="48"
 									textureheight="48"
 								/>
-								<Label class="button-mono__text campaign-settings__start__text" text="[HC] Start" />
+								<Label class="button-mono__text campaign-settings__start__text" text="#Action_NewGame_Title" />
 							</Button>
 						</Panel>
 					</Panel>
@@ -476,7 +477,7 @@
 							texturewidth="32"
 							textureheight="32"
 						/>
-						<Label class="button-mono__text" text="[HC] Back" />
+						<Label class="button-mono__text" text="#MainMenu_Campaigns_MM_Back" />
 					</Button>
 				</Panel>
 				<!-- / CAMPAIGN SETTINGS -->

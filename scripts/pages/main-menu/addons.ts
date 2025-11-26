@@ -261,9 +261,9 @@ class AddonManager {
 		this.addonMapsDropdown.visible = multiMaps;
 		this.addonMapsLaunch.SetHasClass('fill-width', !multiMaps);
 		if (multiMaps) {
-			this.addonMapsLaunchText.text = tagDevString('Launch Selected Map!');
+			this.addonMapsLaunchText.text = $.Localize('#MainMenu_Addons_LaunchMap_Multi');
 		} else {
-			this.addonMapsLaunchText.text = tagDevString('Play Map!');
+			this.addonMapsLaunchText.text = $.Localize('#MainMenu_Addons_LaunchMap_Single');
 		}
 
 		this.addonSteam.SetHasClass('full-width', hasMaps);

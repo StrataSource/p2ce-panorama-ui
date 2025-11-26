@@ -33,7 +33,7 @@ class CampaignSettingsTab {
 
 	static show() {
 		this.page.visible = true;
-		this.setHeaderText(tagDevString('Campaign Settings'), tagDevString('Customize your experience'));
+		this.setHeaderText($.Localize('#MainMenu_Campaigns_Setup_Title'), $.Localize('#MainMenu_Campaigns_Setup_Tagline'));
 	}
 
 	static setHeaderText(header: string, subheader: string) {
@@ -51,8 +51,8 @@ class CampaignSettingsTab {
 			this.closeSettingsSubpage();
 		} else {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				tagDevString('Exit Campaign Setup'),
-				tagDevString('Are you sure you want to leave Campaign Setup?\nYou will lose the settings you have changed so far!'),
+				$.Localize('#MainMenu_Campaigns_Setup_Discard_Title'),
+				$.Localize('#MainMenu_Campaigns_Setup_Discard_Description'),
 				'warning-popup',
 				$.Localize('#UI_Yes'),
 				() => {
@@ -75,7 +75,7 @@ class CampaignSettingsTab {
 	static finishSettings() {
 		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 			$.Localize('#Action_NewGame_Title'),
-			tagDevString('Start a new game with these settings?\n\nWARNING: Gameplay modifiers cannot be changed once a save has started!'),
+			$.Localize('#Action_NewGame_CampaignSetup_Description'),
 			'warning-popup',
 			$.Localize('#UI_Yes'),
 			() => {
@@ -91,13 +91,13 @@ class CampaignSettingsTab {
 	}
 
 	static openSettingsSubpage(tab: string, xml: string, locH: string, locS: string) {
-		this.startBtn.SetPanelEvent('onmouseover', () => { UiToolkitAPI.ShowTextTooltip(this.startBtn.id, tagDevString('Complete your changes and go back in order to start the campaign.')); });
+		this.startBtn.SetPanelEvent('onmouseover', () => { UiToolkitAPI.ShowTextTooltip(this.startBtn.id, $.Localize('#MainMenu_Campaigns_Setup_ExitNote')); });
 		
 		this.basePage.visible = false;
 		this.subPage.visible = true;
 		this.startBtn.enabled = false;
 
-		this.setHeaderText(tagDevString(locH), tagDevString(locS));
+		this.setHeaderText($.Localize(locH), $.Localize(locS));
 
 		// Check for existence
 		if (!this.subPage.FindChildTraverse(tab)) {
@@ -144,7 +144,7 @@ class CampaignSettingsTab {
 		this.helpPage.visible = false;
 		this.startBtn.enabled = true;
 
-		this.setHeaderText(tagDevString('Campaign Settings'), tagDevString('Customize your experience'));
+		this.setHeaderText($.Localize('#MainMenu_Campaigns_Setup_Title'), $.Localize('#MainMenu_Campaigns_Setup_Tagline'));
 
 		this.startBtn.ClearPanelEvent('onmouseover');
 
@@ -211,7 +211,7 @@ class CampaignSettingsTab {
 					`SummaryHeading${i}`, {
 						class: 'campaign-settings__summary__text',
 						html: true,
-						text: '<b>No changes detected.</b>'
+						text: '<b>#MainMenu_Campaigns_Setup_Summary_NoChanges</b>'
 					}
 				);
 			}
