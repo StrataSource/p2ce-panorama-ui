@@ -229,7 +229,7 @@ class MainMenu {
 				panel.SetPanelEvent('onmouseover', () => {
 					UiToolkitAPI.ShowTextTooltip(
 						panel.id,
-						tagDevString('The map you are playing on does not belong to any campaign.\nYou cannot access this.')
+						$.Localize('#MainMenu_SaveRestore_SaveFailed_NotPartOfCampaign')
 					);
 				});
 				panel.SetPanelEvent('onmouseout', () => {

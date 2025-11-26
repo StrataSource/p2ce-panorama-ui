@@ -10,7 +10,7 @@
 		<Panel class="campaign-setting__entry" settingfield="Cheats">
 			<Label
 				class="campaign-setting__entry__text"
-				text="[HC] Enable Cheats"
+				text="#MainMenu_Campaigns_Setup_Var_sv_cheats"
 			/>
 
 			<ToggleButton
@@ -20,7 +20,7 @@
 		<Panel class="campaign-setting__entry" settingfield="MirrorWorld">
 			<Label
 				class="campaign-setting__entry__text"
-				text="[HC] Mirror World"
+				text="#MainMenu_Campaigns_Setup_Var_cl_mirror_world"
 			/>
 
 			<ToggleButton
@@ -30,7 +30,7 @@
 		<Panel class="campaign-setting__entry" settingfield="Gravity">
 			<Label
 				class="campaign-setting__entry__text"
-				text="[HC] Gravity"
+				text="#MainMenu_Campaigns_Setup_Var_sv_gravity"
 			/>
 
 			<TextEntry
@@ -40,16 +40,16 @@
 		<Panel class="campaign-setting__entry" settingfield="Difficulty">
 			<Label
 				class="campaign-setting__entry__text"
-				text="[HC] Difficulty"
+				text="#MainMenu_Campaigns_Setup_Var_skill"
 			/>
 
 			<DropDown
 				class="dropdown campaign-setting__entry__value campaign-setting__entry__dropdown"
 				menuclass="dropdown-menu"
 			>
-				<Label text="Easy" id="Skill1" value="1" index="0" />
-				<Label text="Normal" id="Skill2" value="2" index="1" />
-				<Label text="Hard" id="Skill3" value="3" index="2" />
+				<Label text="#MainMenu_Campaigns_Setup_Var_skill_1" id="Skill1" value="1" index="0" />
+				<Label text="#MainMenu_Campaigns_Setup_Var_skill_2" id="Skill2" value="2" index="1" />
+				<Label text="#MainMenu_Campaigns_Setup_Var_skill_3" id="Skill3" value="3" index="2" />
 			</DropDown>
 		</Panel>
 	</Panel>

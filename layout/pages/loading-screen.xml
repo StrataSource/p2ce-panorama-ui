@@ -22,7 +22,7 @@
 		/>
 
 		<!-- todo: set the logo dynamically -->
-		<!-- Disabled until further notice
+		<!-- Pivot (26/11/2025): Re-enabling this in the hopes that custom campaigns will be able to override this -->
 		<AnimatedImageStrip
 			id="Logo"
 			class="loadingscreen__logo"
@@ -33,7 +33,6 @@
 			defaultsrc="file://{images}/menu/p2ce/spinner_strip.tga"
 			scaling="stretch-to-cover-preserve-aspect"
 		/>
-		-->
 
 		<Panel class="loadingscreen__fade--dark" />
 		<Panel id="LoadingScreenContents" class="loadingscreen__contents" />
