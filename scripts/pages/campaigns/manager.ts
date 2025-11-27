@@ -28,10 +28,10 @@ class CampaignMgr {
 		CampaignHome.init();
 		CampaignSettingsTab.init();
 
-		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onCampaignScreenShown.bind(this));
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
 
 		this.isInitialized = true;
+
 
 		this.checkOpenCampaign();
 	}

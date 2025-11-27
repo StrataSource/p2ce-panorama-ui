@@ -16,6 +16,16 @@ class MainMenu {
 
 	static continueBox = $<Panel>('#ContinueBox')!;
 
+	static clearUiPayloads() {
+		const len = $.persistentStorage.length;
+		for (let i = 0; i < len; ++i) {
+			const key = $.persistentStorage.key(i);
+			if (!key || key.startsWith('ui-payload.')) continue;
+			$.persistentStorage.removeItem(key);
+			$.Msg(`Stale UI Payload Key removed: ${key}`);
+		}
+	}
+
 	static onMainMenuLoaded() {
 		this.movie = $<Movie>('#MainMenuMovie');
 
@@ -45,6 +55,8 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
+	
+		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.onOpenNestedPageRequest.bind(this));
 	}
 
 	static onShowMainMenu() {
@@ -61,6 +73,12 @@ class MainMenu {
 
 	static onHidePauseMenu() {
 		$.GetContextPanel().RemoveClass('PauseMenuMode');
+	}
+
+	static onOpenNestedPageRequest(locH: string, locS: string, xmlName: string, payloadKey: string, payload: JsonValue | undefined = undefined) {
+		// FIXME: Don't like this one bit and susceptible to issues, revamp sometime.
+		if (payload) $.persistentStorage.setItem(`ui-payload.${payloadKey}`, payload);
+		this.navigateToPage(locH, locS, false, xmlName);
 	}
 
 	// open a page, handles nested pages and receives calls via events from other pages
@@ -129,6 +147,7 @@ class MainMenu {
 		if (this.pages.length > 0) {
 			// restore the lower level page
 			this.pages[this.pages.length - 1].visible = true;
+			$.GetContextPanel().SetFocus(true);
 		} else {
 			// no more pages
 			this.hidePage();
@@ -157,6 +176,7 @@ class MainMenu {
 	 * @param {unknown} _focusPanel - Pressing in main menu returns undefined
 	 */
 	static onEscapeKeyPressed(_eSource, _focusPanel) {
+		$.Msg('Esc Pressed');
 		// Resume game in pause menu mode
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			// Has to be on the root menu in order to resume

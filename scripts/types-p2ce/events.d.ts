@@ -3,19 +3,11 @@
  */
 interface GlobalEventNameMap {
 	ReloadBackground: () => void;
-	HideContentPanel: () => void;
-	ShowContentPanel: () => void;
-	MainMenuTabShown: (tabid) => void;
-	MainMenuTabHidden: (tabid) => void;
 	SettingsNavigateToPanel: (category, settingPanel) => void;
 	SettingsSave: () => void;
-	ExtendDrawer: () => void;
-	RetractDrawer: () => void;
-	ToggleDrawer: () => void;
-	Drawer_UpdateLobbyButton: (imagesrc, playercount) => void;
-	Drawer_NavigateToTab: (tabid) => void;
-	Drawer_ExtendAndNavigateToTab: (tabid) => void;
 	ColorPickerSave: (color) => void;
 	ColorPickerCancel: () => void;
+	MainMenuOpenNestedPage: (locH: string, locS: string, xmlName: string, payloadKey: string, payload: JsonValue | undefined) => void;
+	MainMenuCloseAllPages: () => void;
 	CampaignSettingHovered: (helpText: string) => void;
 }

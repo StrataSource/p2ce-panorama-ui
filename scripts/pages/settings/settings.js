@@ -44,7 +44,7 @@ class MainMenuSettings {
 		$.RegisterForUnhandledEvent('SettingsNavigateToPanel', this.navigateToSettingPanel.bind(this));
 
 		// Save to file whenever the settings page gets closed
-		$.RegisterForUnhandledEvent('MainMenuTabHidden', (tab) => tab === 'Settings' && this.saveSettings());
+		//$.RegisterForUnhandledEvent('MainMenuTabHidden', (tab) => tab === 'Settings' && this.saveSettings());
 
 		// Handle the settings save event
 		$.RegisterForUnhandledEvent('SettingsSave', this.saveSettings.bind(this));

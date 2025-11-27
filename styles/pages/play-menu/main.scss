@@ -5,6 +5,7 @@
 .play-menu {
 	&__main {
 		width: 960px;
+		height: 100%;
 		flow-children: down;
 	}
 
@@ -47,10 +48,19 @@
 			background-color: gradient(linear, 100% 0%, 0% 0%, from(rgba($base-950, 0.9)), to($base-950));
 			border-top: $menu-pane-border;
 
+			&__no-bg {
+				background-color: rgba(0, 0, 0, 0);
+			}
+
 			&__header {
 				@include mixin.font-styles($use-header: true);
 				font-size: 20px;
 				text-shadow: 2px 2px 4px 2 $base-950;
+
+				&__dark {
+					color: $base-950;
+					text-shadow: none;
+				}
 			}
 
 			&__subheader {

@@ -1,0 +1,40 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/play-menu/main.ts" />
+	</scripts>
+
+	<Panel class="mainmenu__page no-flow">
+		<Panel class="play-menu__main">
+			<Panel class="flow-right full-width full-height">
+				<Button class="play-menu__card fill-width mr-3" onactivate="PlayMenu.onPlayerBtnPressed(true)">
+					<Image
+						class="play-menu__card__image"
+						src="file://{images}/menu/vertical-banner-solo.png"
+						scaling="stretch-to-cover-preserve-aspect"
+						textureheight="473"
+						texturewidth="793"
+					/>
+					<Panel class="play-menu__card__details play-menu__card__details__no-bg">
+						<Label class="play-menu__card__details__header play-menu__card__details__header__dark" text="[HC] Singleplayer" />
+					</Panel>
+				</Button>
+				<Button class="play-menu__card fill-width" onactivate="PlayMenu.onPlayerBtnPressed()">
+					<Image
+						class="play-menu__card__image"
+						src="file://{images}/menu/vertical-banner-mp.png"
+						scaling="stretch-to-cover-preserve-aspect"
+						textureheight="473"
+						texturewidth="793"
+					/>
+					<Panel class="play-menu__card__details play-menu__card__details__no-bg">
+						<Label class="play-menu__card__details__header play-menu__card__details__header__dark" text="[HC] Multiplayer" />
+					</Panel>
+				</Button>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

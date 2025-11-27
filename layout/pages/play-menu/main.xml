@@ -7,28 +7,10 @@
 		<include src="file://{scripts}/pages/play-menu/main.ts" />
 	</scripts>
 
-	<snippets>
-		<snippet name="PlayCardSnippet">
-			<Button class="play-menu__card">
-				<Image
-					class="play-menu__card__image"
-					src="file://{images}/menu/p2ce/random5.png"
-					scaling="stretch-to-cover-preserve-aspect"
-					textureheight="1920"
-					texturewidth="1080"
-				/>
-				<Panel class="play-menu__card__details">
-					<Label class="play-menu__card__details__header" text="[HC] Campaigns" />
-					<Label class="play-menu__card__details__subheader" text="[HC] Play specially design experiences" />
-				</Panel>
-			</Button>
-		</snippet>
-	</snippets>
-
-	<Panel class="mainmenu__page no-flow" onload="PlayMenu.onLoad()">
+	<Panel class="mainmenu__page no-flow">
 		<Panel class="play-menu__main">
 			<Panel class="flow-down full-width">
-				<Button class="play-menu__card">
+				<Button class="play-menu__card" onactivate="PlayMenu.onPlayBtnPressed('campaigns')">
 					<Image
 						class="play-menu__card__image"
 						src="file://{images}/menu/p2ce/random1.png"
@@ -45,7 +27,7 @@
 					</Panel>
 				</Button>
 				<Panel class="play-menu__minor-cards">
-					<Button class="play-menu__card play-menu__card">
+					<Button class="play-menu__card play-menu__card" onactivate="PlayMenu.onSoloMapsBtnPressed()">
 						<Image
 							class="play-menu__card__image"
 							src="file://{images}/menu/p2ce/random3.png"
