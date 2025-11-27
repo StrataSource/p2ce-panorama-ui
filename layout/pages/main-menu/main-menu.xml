@@ -83,7 +83,18 @@
 										<Label class="mainmenu__nav__btn__small-text" text="Close this menu &amp; return to the game" />
 									</Panel>
 								</Button>
-								<Button class="mainmenu__nav__btn" onactivate="">
+								<Button class="mainmenu__nav__btn CampaignSelectedOnly" onactivate="">
+									<Panel class="vertical-align-center flow-down">
+										<Label class="mainmenu__nav__btn__text" text="Start New Game" />
+										<Label class="mainmenu__nav__btn__small-text" text="Configure &amp; start a new game" />
+									</Panel>
+								</Button>
+								<Button
+									class="mainmenu__nav__btn mainmenu__nav__btn__no-gradient"
+									onactivate=""
+									onmouseover="MainMenu.onContinueMouseOver()"
+									onmouseout="MainMenu.onContinueMouseOut()"
+								>
 									<Panel class="vertical-align-center flow-down">
 										<Panel class="flow-right MainMenuModeOnly">
 											<Label class="mainmenu__nav__btn__text" text="Continue" />
@@ -93,7 +104,7 @@
 										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="Load the latest save file" />
 									</Panel>
 								</Button>
-								<Button class="mainmenu__nav__btn PauseMenuModeOnly" onactivate="">
+								<Button class="mainmenu__nav__btn CampaignSelectedOnly" onactivate="">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="Load Game" />
 										<Label class="mainmenu__nav__btn__small-text" text="Load a previous game file" />
@@ -120,13 +131,36 @@
 								<Button class="mainmenu__nav__btn" onactivate="MainMenu.onQuitButtonPressed()">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="Quit Game" />
-										<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="Leave" />
+										<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="Leave to test another day" />
 										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="Exit" />
-										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="Leave" />
+										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="Return to the main menu or quit the game" />
 									</Panel>
 								</Button>
 							</Panel>
 							<VersionInfo class="mainmenu__version" />
+						</Panel>
+					</Panel>
+
+					<Panel id="ContinueBox" class="mainmenu__display-box">
+						<Panel>
+							<Image
+								class="mainmenu__display-box__img"
+								src="file://{images}/menu/p2ce/random4.png"
+								textureheight="1920"
+								texturewidth="1080"
+								scaling="stretch-to-cover-preserve-aspect"
+							/>
+							<Image
+								class="mainmenu__display-box__logo"
+								src="file://{images}/menu/p2ce/logo.png"
+								textureheight="64"
+								texturewidth="64"
+								scaling="stretch-to-cover-preserve-aspect"
+							/>
+						</Panel>
+						<Panel class="mainmenu__display-box__details">
+							<Label class="mainmenu__display-box__head" text="[PH] Head" />
+							<Label class="mainmenu__display-box__tagline" text="[PH] Tagline" />
 						</Panel>
 					</Panel>
 

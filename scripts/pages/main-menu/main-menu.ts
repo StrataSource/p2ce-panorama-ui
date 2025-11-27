@@ -14,6 +14,8 @@ class MainMenu {
 	// page vars
 	static pages: GenericPanel[] = [];
 
+	static continueBox = $<Panel>('#ContinueBox')!;
+
 	static onMainMenuLoaded() {
 		this.movie = $<Movie>('#MainMenuMovie');
 
@@ -35,6 +37,7 @@ class MainMenu {
 		}
 
 		this.hidePage();
+		this.onContinueMouseOut();
 
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 
@@ -53,11 +56,11 @@ class MainMenu {
 	}
 
 	static onShowPauseMenu() {
-		$.GetContextPanel().AddClass('MainMenuRootPanel--PauseMenuMode');
+		$.GetContextPanel().AddClass('PauseMenuMode');
 	}
 
 	static onHidePauseMenu() {
-		$.GetContextPanel().RemoveClass('MainMenuRootPanel--PauseMenuMode');
+		$.GetContextPanel().RemoveClass('PauseMenuMode');
 	}
 
 	// open a page, handles nested pages and receives calls via events from other pages
@@ -137,6 +140,14 @@ class MainMenu {
 		while (this.pages.length > 0) {
 			this.navigateBack();
 		}
+	}
+
+	static onContinueMouseOver() {
+		this.continueBox.visible = true;
+	}
+
+	static onContinueMouseOut() {
+		this.continueBox.visible = false;
 	}
 
 	/**
