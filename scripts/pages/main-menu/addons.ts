@@ -106,7 +106,6 @@ class AddonManager {
 		this.addonsPage.visible = false;
 
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
-		$.RegisterForUnhandledEvent('MainMenuTabShown', this.onMainMenuTabShown.bind(this));
 		this.createAddonEntries();
 		this.findMaps();
 

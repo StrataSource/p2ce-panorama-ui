@@ -1,0 +1,40 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/play-menu/main.ts" />
+	</scripts>
+
+	<Panel class="mainmenu__page no-flow">
+		<Panel class="play-menu__main">
+			<Panel class="flow-right full-width full-height">
+				<Button class="play-menu__card fill-width mr-3" onactivate="PlayMenu.onPlayBtnPressed('p2ce')">
+					<Image
+						class="play-menu__card__image"
+						src="file://{images}/menu/p2ce/random5.png"
+						scaling="stretch-to-cover-preserve-aspect"
+						textureheight="473"
+						texturewidth="793"
+					/>
+					<Panel class="play-menu__card__details">
+						<Label class="play-menu__card__details__header" text="[HC] P2:CE Maps" />
+					</Panel>
+				</Button>
+				<Button class="play-menu__card fill-width" onactivate="PlayMenu.onPlayBtnPressed('portal2')">
+					<Image
+						class="play-menu__card__image"
+						src="file://{images}/menu/p2ce/random4.png"
+						scaling="stretch-to-cover-preserve-aspect"
+						textureheight="473"
+						texturewidth="793"
+					/>
+					<Panel class="play-menu__card__details">
+						<Label class="play-menu__card__details__header" text="[HC] Portal 2 Maps" />
+					</Panel>
+				</Button>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>
