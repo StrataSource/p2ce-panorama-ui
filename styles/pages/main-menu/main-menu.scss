@@ -14,7 +14,7 @@
 	visibility: visible;
 }
 
-.MainMenuRootPanel--PauseMenuMode .MainMenuModeOnly {
+.PauseMenuMode .MainMenuModeOnly {
 	visibility: collapse;
 }
 
@@ -22,7 +22,15 @@
 	visibility: collapse;
 }
 
-.MainMenuRootPanel--PauseMenuMode .PauseMenuModeOnly {
+.PauseMenuMode .PauseMenuModeOnly {
+	visibility: visible;
+}
+
+.CampaignSelectedOnly {
+	visibility: collapse;
+}
+
+.CampaignSelected .CampaignSelectedOnly {
 	visibility: visible;
 }
 
@@ -40,6 +48,7 @@
 		width: 125%;
 		height: 125%;
 		saturation: 0.4;
+		brightness: 0.4;
 		blur: fastgaussian(2,2,2);
 		overflow: noclip;
 	}
@@ -110,6 +119,46 @@
 			&:hover {
 				background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0, 0, 0, 0) ) );
 			}
+
+			&__no-gradient {
+				&:hover {
+					background-color: $button-background-hover;
+				}
+			}
+		}
+	}
+
+	&__display-box {
+		margin-left: 797px;
+		width: 480px;
+		flow-children: down;
+		border: $menu-pane-border;
+		border-color: $button-background-hover;
+		vertical-align: center;
+		&__img {
+			width: 480px;
+			height: 270px;
+		}
+		&__details {
+			width: 100%;
+			background-color: $base-950;
+			border-top: $menu-pane-border;
+			border-color: $button-background-hover;
+			flow-children: down;
+			padding: 15px;
+		}
+		&__logo {
+			width: 64px;
+			height: 64px;
+			margin: 15px;
+		}
+		&__head {
+			@include mixin.font-styles($use-header: true);
+		}
+		&__tagline {
+			color: $base-300;
+			font-weight: light;
+			letter-spacing: 1px;
 		}
 	}
 
