@@ -23,4 +23,6 @@ $.DefineEvent('ColorPickerCancel', 0);
 
 $.DefineEvent('CampaignSettingHovered', 1, 'helpText');
 
-$.DefineEvent('MainMenuOpenNestedPage', 5);
+$.DefineEvent('MainMenuOpenNestedPage', 2);
+$.DefineEvent('MainMenuCloseAllPages', 0);
+$.DefineEvent('MainMenuSetPageLines', 2);
