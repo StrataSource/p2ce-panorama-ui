@@ -1,24 +1,70 @@
 'use strict';
 
 class PlayMenu {
-	static cardContainer = $<Panel>('#CardContainer')!;
-
-	static onLoad() {
+	// shows the player count selection page
+	static onPlayBtnPressed(type: string) {
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'[HC] Select Player Count',
+			'[HC] Are you playing alone or playing multiplayer?',
+			'play-menu/player-mode',
+			'play-type',
+			type
+		);
 	}
 
-	static displayHomeCards() {
-		this.cardContainer.RemoveAndDeleteChildren();
+	// shows the loose map type page
+	static onSoloMapsBtnPressed() {
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'[HC] Select Community Map Pool',
+			'[HC] Would you like to play P2:CE or Portal 2 Workshop maps?',
+			'play-menu/solo-map-mode',
+			'', undefined
+		);
+	}
+	
+	// shows the campaign lister page with the correct filters as specified
+	static onPlayerBtnPressed(isSingleplayer: boolean = false) {
+		const playType = $.persistentStorage.getItem('ui-payload.play-type');
 
-		for (let i = 0; i < 4; ++i) {
-			const card = $.CreatePanel(
-				'Button',
-				this.cardContainer,
-				`Card${i}`
-			);
+		if (playType) {
+			const playerCount = isSingleplayer ? 'singleplayer' : 'multiplayer';
 
-			card.LoadLayoutSnippet('PlayCardSnippet');
+			// TODO: This needs to be localized and also made to not be ass.
+			const headerInterject = isSingleplayer ? 'Singleplayer' : 'Multiplayer';
 
-			if (i < 3) card.AddClass('play-menu__card__spaced');
+			// campaign
+			if (playType === 'campaigns') {
+				$.DispatchEvent(
+					'MainMenuOpenNestedPage',
+					`[HC] Play ${headerInterject} Campaign`,
+					'[HC] Select a campaign to play',
+					'main-menu/campaigns',
+					'player-count',
+					playerCount
+				);
+			// p2ce solo map
+			} else if (playType === 'p2ce') {
+				$.DispatchEvent(
+					'MainMenuOpenNestedPage',
+					`[HC] Play P2:CE ${headerInterject} Workshop Map`,
+					'[HC] Select a community map to play',
+					'main-menu/campaigns',
+					'player-count',
+					playerCount
+				);
+			} else {
+				// p2 workshop map
+				$.DispatchEvent(
+					'MainMenuOpenNestedPage',
+					`[HC] Play Portal 2 ${headerInterject} Workshop Map`,
+					'[HC] Select a community map to play',
+					'main-menu/campaigns',
+					'player-count',
+					playerCount
+				);
+			}
 		}
 	}
 }
