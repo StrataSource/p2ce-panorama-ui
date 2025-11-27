@@ -7,7 +7,8 @@ interface GlobalEventNameMap {
 	SettingsSave: () => void;
 	ColorPickerSave: (color) => void;
 	ColorPickerCancel: () => void;
-	MainMenuOpenNestedPage: (locH: string, locS: string, xmlName: string, payloadKey: string, payload: JsonValue | undefined) => void;
+	MainMenuOpenNestedPage: (tab: string, xmlName: string) => void;
 	MainMenuCloseAllPages: () => void;
+	MainMenuSetPageLines: (headline: string, tagline: string) => void;
 	CampaignSettingHovered: (helpText: string) => void;
 }

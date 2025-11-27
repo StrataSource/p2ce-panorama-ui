@@ -10,7 +10,7 @@
 		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-saves.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-settings.ts" />
-		<include src="file://{resources}/scripts/pages/campaigns/shared.ts" />
+		<include src="file://{scripts}/pages/campaigns/shared.ts" />
 	</scripts>
 
 	<snippets>
