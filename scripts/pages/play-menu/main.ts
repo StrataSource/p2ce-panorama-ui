@@ -1,70 +1,77 @@
 'use strict';
 
 class PlayMenu {
+	static setPlayMenuLines() {
+		$.DispatchEvent('MainMenuSetPageLines', '[HC] Play', '[HC] Start a new experience');
+	}
+
+	static setPlayerMenuLines() {
+		$.DispatchEvent('MainMenuSetPageLines', '[HC] Play', '[HC] Play singleplayer or co-op?');
+	}
+
+	static setMapPoolLines() {
+		$.DispatchEvent('MainMenuSetPageLines', '[HC] Play', '[HC] Play P2:CE or Portal 2 Workshop Maps?');
+	}
+
+	// root screen
 	// shows the player count selection page
-	static onPlayBtnPressed(type: string) {
+	static onCampaignsBtnPressed() {
+		UiToolkitAPI.GetGlobalObject()['game-type'] = GameType.P2CE_CAMPAIGN;
+
 		$.DispatchEvent(
 			'MainMenuOpenNestedPage',
-			'[HC] Select Player Count',
-			'[HC] Are you playing alone or playing multiplayer?',
-			'play-menu/player-mode',
-			'play-type',
-			type
+			'PlayerMode',
+			'play-menu/player-mode'
 		);
 	}
 
-	// shows the loose map type page
+	// shows the solo map type page
 	static onSoloMapsBtnPressed() {
 		$.DispatchEvent(
 			'MainMenuOpenNestedPage',
-			'[HC] Select Community Map Pool',
-			'[HC] Would you like to play P2:CE or Portal 2 Workshop maps?',
-			'play-menu/solo-map-mode',
-			'', undefined
+			'SoloMapMode',
+			'play-menu/solo-map-mode'
 		);
 	}
-	
-	// shows the campaign lister page with the correct filters as specified
-	static onPlayerBtnPressed(isSingleplayer: boolean = false) {
-		const playType = $.persistentStorage.getItem('ui-payload.play-type');
 
-		if (playType) {
-			const playerCount = isSingleplayer ? 'singleplayer' : 'multiplayer';
+	// solo maps screen
+	static onCeMapsBtnPressed() {
+		UiToolkitAPI.GetGlobalObject()['game-type'] = GameType.P2CE_MAP;
 
-			// TODO: This needs to be localized and also made to not be ass.
-			const headerInterject = isSingleplayer ? 'Singleplayer' : 'Multiplayer';
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'PlayerMode',
+			'play-menu/player-mode'
+		);
+	}
 
-			// campaign
-			if (playType === 'campaigns') {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					`[HC] Play ${headerInterject} Campaign`,
-					'[HC] Select a campaign to play',
-					'main-menu/campaigns',
-					'player-count',
-					playerCount
-				);
-			// p2ce solo map
-			} else if (playType === 'p2ce') {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					`[HC] Play P2:CE ${headerInterject} Workshop Map`,
-					'[HC] Select a community map to play',
-					'main-menu/campaigns',
-					'player-count',
-					playerCount
-				);
-			} else {
-				// p2 workshop map
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					`[HC] Play Portal 2 ${headerInterject} Workshop Map`,
-					'[HC] Select a community map to play',
-					'main-menu/campaigns',
-					'player-count',
-					playerCount
-				);
-			}
-		}
+	static onP2MapsBtnPressed() {
+		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.PORTAL2_MAP;
+
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'PlayerMode',
+			'play-menu/player-mode'
+		);
+	}
+
+	static onSinglePlayerBtnPressed() {
+		UiToolkitAPI.GetGlobalObject()['PlayerMode'] = PlayerMode.SINGLEPLAYER;
+
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'Campaigns',
+			'main-menu/campaigns',
+		);
+	}
+
+	static onMultiPlayerBtnPressed() {
+		UiToolkitAPI.GetGlobalObject()['PlayerMode'] = PlayerMode.MULTIPLAYER;
+
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'Campaigns',
+			'main-menu/campaigns',
+		);
 	}
 }

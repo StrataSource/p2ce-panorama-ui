@@ -110,6 +110,7 @@ class AddonManager {
 		this.findMaps();
 
 		$.DispatchEvent('Activated', $<RadioButton>('#ViewAddonsBtn')!, PanelEventSource.MOUSE);
+		$.DispatchEvent('MainMenuSetPageLines', '[HC] Content', '[HC] Manage Workshop subscriptions & mounted games');
 	}
 
 	static showPage() {

@@ -1,5 +1,22 @@
 'use strict';
 
+class MenuPage {
+	name: string;
+	panel: Panel;
+	headline?: string;
+	tagline?: string;
+
+	constructor(name: string, panel: Panel) {
+		this.name = name;
+		this.panel = panel;
+	}
+
+	setLines(headline: string, tagline: string) {
+		this.headline = headline;
+		this.tagline = tagline;
+	}
+}
+
 class MainMenu {
 	static movie = $<Movie>('#MainMenuMovie');
 
@@ -16,20 +33,10 @@ class MainMenu {
 	static model = $<ModelPanel>('#MainMenuModel')!;
 
 	// page vars
-	static pages: GenericPanel[] = [];
+	static pages: MenuPage[] = [];
 
 	// sussy mode
 	static inSpace = false;
-
-	static clearUiPayloads() {
-		const len = $.persistentStorage.length;
-		for (let i = 0; i < len; ++i) {
-			const key = $.persistentStorage.key(i);
-			if (!key || key.startsWith('ui-payload.')) continue;
-			$.persistentStorage.removeItem(key);
-			$.Msg(`Stale UI Payload Key removed: ${key}`);
-		}
-	}
 
 	static onMainMenuLoaded() {
 		this.setMainMenuBackground();
@@ -46,6 +53,7 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
 	
 		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.onOpenNestedPageRequest.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
 	}
 
 	static setMainMenuBackground() {
@@ -114,6 +122,7 @@ class MainMenu {
 
 	static onHideMainMenu() {
 		UiToolkitAPI.CloseAllVisiblePopups();
+		this.closePages();
 	}
 
 	static onShowPauseMenu() {
@@ -124,29 +133,33 @@ class MainMenu {
 		$.GetContextPanel().RemoveClass('PauseMenuMode');
 	}
 
-	static onOpenNestedPageRequest(locH: string, locS: string, xmlName: string, payloadKey: string, payload: JsonValue | undefined = undefined) {
-		// FIXME: Don't like this one bit and susceptible to issues, revamp sometime.
-		if (payload) $.persistentStorage.setItem(`ui-payload.${payloadKey}`, payload);
-		this.navigateToPage(locH, locS, false, xmlName);
+	static onOpenNestedPageRequest(tab: string, xmlName: string) {
+		this.navigateToPage(tab, false, xmlName);
+	}
+
+	static onMenuSetPageLines(headline: string, tagline: string) {
+		this.pageHeadline.text = headline;
+		this.pageTagline.text = tagline;
+		
+		if (this.pages.length > 0) {
+			this.pages[this.pages.length - 1].setLines(headline, tagline);
+		}
 	}
 
 	// open a page, handles nested pages and receives calls via events from other pages
-	static navigateToPage(locH: string, locS: string, useWidePage: boolean, xmlName: string) {
+	// note: page headline/tagline are set by the corresponding page script, not here
+	static navigateToPage(tab: string, useWidePage: boolean, xmlName: string) {
 		// hide the previous page
 		if (this.pages.length > 0) {
 			const priorPage = this.pages[this.pages.length - 1];
-			if (priorPage.IsValid()) priorPage.visible = false;
+			if (priorPage.panel.IsValid()) priorPage.panel.visible = false;
 		}
 
 		// create the new page
 		const newPanel = $.CreatePanel('Panel', this.pageInsert, `PageTab${this.pages.length}`);
+		this.pages.push(new MenuPage(tab, newPanel));
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 		newPanel.RegisterForReadyEvents(true);
-		this.pages.push(newPanel);
-
-		// TODO: $.Localize these when tokens come in
-		this.pageHeadline.text = locH;
-		this.pageTagline.text = locS;
 
 		stripDevTagsFromLabels(newPanel);
 
@@ -195,11 +208,19 @@ class MainMenu {
 
 		// delete the current page
 		const currentPage = this.pages.pop();
-		currentPage?.DeleteAsync(0);
+		currentPage?.panel?.DeleteAsync(0);
 
 		if (this.pages.length > 0) {
+			const nowPage = this.pages[this.pages.length - 1];
+			// set directly to avoid placing the lines back haha
+			if (nowPage?.headline && nowPage?.tagline) {
+				this.pageHeadline.text = nowPage.headline;
+				this.pageTagline.text = nowPage.tagline;
+			}
 			// restore the lower level page
-			this.pages[this.pages.length - 1].visible = true;
+			nowPage.panel.visible = true;
+			// force focus back so that spamming ESC is possible
+			// TODO: probably handle this different for controllers...
 			$.GetContextPanel().SetFocus(true);
 		} else {
 			// no more pages
@@ -281,91 +302,3 @@ class MainMenu {
 		GameInterfaceAPI.ConsoleCommand('quit');
 	}
 }
-
-/*
-class MainMenuREF {
-	static onMainMenuLoaded() {
-		// Assign a random model
-		const models = [
-			'models/panorama/menu/BotPoses.mdl',
-			'models/panorama/menu/sp_a2_bridge_the_gap_WHEATLEY.mdl',
-			'models/panorama/menu/sp_a1_wakeup_glados_MERGED.mdl',
-		];
-		if (this.panels.model) {
-			this.panels.model.src = models[Math.floor(Math.random() * models.length)]; // Pick a random model
-
-			this.panels.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.05, this.inSpace ? 0.02 : 0);
-			this.panels.model.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
-			this.panels.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
-
-			this.panels.model.LookAtModel();
-			this.panels.model.SetCameraOffset(-300, 0, 0);
-			this.panels.model.SetCameraFOV(35);
-
-			this.panels.model.SetLightAmbient(0.2921, 0.327, 0.43);
-			this.panels.model.SetDirectionalLightColor(1, 1.076, 1.2, 1.282);
-			this.panels.model.SetDirectionalLightColor(0, 0.538, 0.6, 0.641);
-			this.panels.model.SetDirectionalLightDirection(1, -50, 270, 0);
-			this.panels.model.SetDirectionalLightDirection(0, -50, 135, 0);
-		}
-
-		$('#ControlsLibraryButton')?.SetHasClass('hide', !GameInterfaceAPI.GetSettingBool('developer'));
-
-		this.setMainMenuDetails();
-
-		this.showPrereleaseWarning();
-
-		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
-
-		stripDevTagsFromLabels($.GetContextPanel());
-
-		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
-		this.onShowMainMenu();
-	}
-
-	static showPlaytestConsentPopup() {
-		if (!DosaHandler.checkDosa('playtestConsent'))
-			UiToolkitAPI.ShowCustomLayoutPopupParameters(
-				'',
-				'file://{resources}/layout/modals/popups/playtest-consent.xml',
-				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent'
-			);
-	}
-
-	static showPrereleaseWarning() {
-		if (!DosaHandler.checkDosa('prereleaseAck'))
-			UiToolkitAPI.ShowCustomLayoutPopupParameters(
-				'',
-				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
-				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck'
-			);
-	}
-
-	static setMainMenuDetails() {
-		const chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
-		let act = 0;
-
-		if (chapter === 1) act = 1;
-		else if (chapter >= 2 && chapter <= 5) act = 2;
-		else if (chapter >= 6 && chapter <= 7) act = 3;
-		else if (chapter >= 8 && chapter <= 9) act = 4;
-		else if (chapter >= 10) act = 5;
-		else act = 1; // Bad unlockedchapters. Resort to act 1.
-
-		let movie = 'file://{media}/menu_act0' + act + '.webm';
-		if (this.inSpace) {
-			movie = 'file://{media}/sp_a5_credits.webm';
-		}
-
-		if (useVideo) {
-			this.panels.movie.SetMovie(movie);
-			this.panels.movie.Play();
-		} else {
-			// TODO: account for 4:3 displays
-			this.panels.image.SetImage('file://{materials}/vgui/backgrounds/background0' + act + '_widescreen.vtf');
-		}
-	}
-
-	
-}
-*/

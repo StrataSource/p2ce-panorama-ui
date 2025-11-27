@@ -29,7 +29,6 @@
 		class="InitialDisplay MainMenuRootPanel"
 		hittest="false"
 		onload="MainMenu.onMainMenuLoaded()"
-		useglobalcontext="false"
 	>
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
@@ -72,14 +71,14 @@
 							<Panel class="mainmenu__nav__controls">
 								<Button
 									class="mainmenu__nav__btn MainMenuModeOnly"
-									onactivate="MainMenu.navigateToPage('[HC] Featured', '[HC] Explore highlighted workshop content', false, 'main-menu/placeholder')"
+									onactivate="MainMenu.navigateToPage('Featured', false, 'main-menu/placeholder')"
 								>
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="Featured" />
 										<Label class="mainmenu__nav__btn__small-text" text="Explore highlighted workshop content" />
 									</Panel>
 								</Button>
-								<Button class="mainmenu__nav__btn MainMenuModeOnly" onactivate="MainMenu.navigateToPage('[HC] Play', '[HC] Start a new experience', false, 'play-menu/main')">
+								<Button class="mainmenu__nav__btn MainMenuModeOnly" onactivate="MainMenu.navigateToPage('Play', false, 'play-menu/main')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="Play" />
 										<Label class="mainmenu__nav__btn__small-text" text="Start a new experience" />
@@ -124,13 +123,13 @@
 										<Label class="mainmenu__nav__btn__small-text" text="Save your progress" />
 									</Panel>
 								</Button>
-								<Button class="mainmenu__nav__btn MainMenuModeOnly" onactivate="MainMenu.navigateToPage('[HC] Content', '[HC] Manage subscriptions &amp; mounted games', false, 'main-menu/addons')">
+								<Button class="mainmenu__nav__btn MainMenuModeOnly" onactivate="MainMenu.navigateToPage('Content', false, 'main-menu/addons')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="Content" />
 										<Label class="mainmenu__nav__btn__small-text" text="Manage subscriptions &amp; mounted games" />
 									</Panel>
 								</Button>
-								<Button class="mainmenu__nav__btn" onactivate="MainMenu.navigateToPage('[HC] Settings', '[HC] Tweak keybinds, video, preferences, etc.', true, 'settings/settings')">
+								<Button class="mainmenu__nav__btn" onactivate="MainMenu.navigateToPage('Settings', true, 'settings/settings')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="Settings" />
 										<Label class="mainmenu__nav__btn__small-text" text="Tweak keybinds, video, preferences, etc." />

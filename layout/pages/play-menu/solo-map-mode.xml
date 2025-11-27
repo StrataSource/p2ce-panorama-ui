@@ -7,10 +7,10 @@
 		<include src="file://{scripts}/pages/play-menu/main.ts" />
 	</scripts>
 
-	<Panel class="mainmenu__page no-flow">
+	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setMapPoolLines()">
 		<Panel class="play-menu__main">
 			<Panel class="flow-right full-width full-height">
-				<Button class="play-menu__card fill-width mr-3" onactivate="PlayMenu.onPlayBtnPressed('p2ce')">
+				<Button class="play-menu__card fill-width mr-3" onactivate="PlayMenu.onCeMapsBtnPressed()">
 					<Image
 						class="play-menu__card__image"
 						src="file://{images}/menu/p2ce/random5.png"
@@ -22,7 +22,7 @@
 						<Label class="play-menu__card__details__header" text="[HC] P2:CE Maps" />
 					</Panel>
 				</Button>
-				<Button class="play-menu__card fill-width" onactivate="PlayMenu.onPlayBtnPressed('portal2')">
+				<Button class="play-menu__card fill-width" onactivate="PlayMenu.onP2MapsBtnPressed()">
 					<Image
 						class="play-menu__card__image"
 						src="file://{images}/menu/p2ce/random4.png"
