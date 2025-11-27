@@ -47,7 +47,7 @@
 	&__pause-blur {
 		width: 125%;
 		height: 125%;
-		saturation: 0.4;
+		saturation: 0.7;
 		brightness: 0.4;
 		blur: fastgaussian(2,2,2);
 		overflow: noclip;
@@ -74,13 +74,21 @@
 	&__gradient-bar {
 		width: 672px;
 		height: 100%;
-		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba($base-300, 0) ) );
+		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
 		border-left: $menu-pane-border;
 		margin: 0 125px;
 	}
 
+	&__modelpanel {
+		width: 960px;
+		height: 100%;
+		transform: translateY(-330px);
+		opacity: 0.2;
+	}
+
 	&__logo {
 		horizontal-align: center;
+		img-shadow: 4px 4px 4px 4.0 $base-950;
 	}
 
 	&__nav {

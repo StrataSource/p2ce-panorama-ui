@@ -11,10 +11,15 @@ class MainMenu {
 	static pageHeadline = $<Label>('#PageHeadline')!;
 	static pageTagline = $<Label>('#PageTagline')!;
 
+	static continueBox = $<Panel>('#ContinueBox')!;
+
+	static model = $<ModelPanel>('#MainMenuModel')!;
+
 	// page vars
 	static pages: GenericPanel[] = [];
 
-	static continueBox = $<Panel>('#ContinueBox')!;
+	// sussy mode
+	static inSpace = false;
 
 	static clearUiPayloads() {
 		const len = $.persistentStorage.length;
@@ -27,6 +32,23 @@ class MainMenu {
 	}
 
 	static onMainMenuLoaded() {
+		this.setMainMenuBackground();
+		this.setMainMenuModelPanel();
+
+		this.hidePage();
+		this.onContinueMouseOut();
+
+		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
+
+		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
+		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
+		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
+		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
+	
+		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.onOpenNestedPageRequest.bind(this));
+	}
+
+	static setMainMenuBackground() {
 		this.movie = $<Movie>('#MainMenuMovie');
 
 		const chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
@@ -45,22 +67,49 @@ class MainMenu {
 			this.movie.SetMovie(movie);
 			this.movie.Play();
 		}
+	}
 
-		this.hidePage();
-		this.onContinueMouseOut();
+	static setMainMenuModelPanel() {
+		// Assign a random model
+		const models = [
+			'models/panorama/menu/BotPoses.mdl',
+			'models/panorama/menu/sp_a2_bridge_the_gap_WHEATLEY.mdl',
+			'models/panorama/menu/sp_a1_wakeup_glados_MERGED.mdl',
+		];
+		const modelRotations = [
+			-240,
+			-100,
+			-180
+		];
 
-		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
+		if (models.length !== modelRotations.length) {
+			$.Warning('main-menu: models & modelRotations array sizes mismatch');
+			return;
+		}
 
-		$.RegisterForUnhandledEvent('ShowMainMenu', this.onShowMainMenu.bind(this));
-		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
-		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
-		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
-	
-		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.onOpenNestedPageRequest.bind(this));
+		if (this.model) {
+			const index = Math.floor(Math.random() * models.length);
+			this.model.src = models[index]; // Pick a random model
+
+			//this.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.05, this.inSpace ? 0.02 : 0);
+			this.model.SetMouseXRotationScale(0, 0, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
+			this.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
+			this.model.SetModelRotation(0, modelRotations[index], 0);
+
+			this.model.LookAtModel();
+			this.model.SetCameraOffset(-300, 0, 0);
+			this.model.SetCameraFOV(35);
+
+			this.model.SetLightAmbient(0.2921, 0.327, 0.43);
+			this.model.SetDirectionalLightColor(1, 1.076, 1.2, 1.282);
+			this.model.SetDirectionalLightColor(0, 0.538, 0.6, 0.641);
+			this.model.SetDirectionalLightDirection(1, -50, 270, 0);
+			this.model.SetDirectionalLightDirection(0, -50, 135, 0);
+		}
 	}
 
 	static onShowMainMenu() {
-
+		this.setMainMenuBackground();
 	}
 
 	static onHideMainMenu() {
@@ -115,6 +164,7 @@ class MainMenu {
 	static showPage() {
 		this.page.visible = true;
 		this.controls.visible = false;
+		this.model.visible = false;
 		this.page.AddClass('mainmenu__normal-page-container');
 		this.page.RemoveClass('mainmenu__wide-page-container');
 	}
@@ -123,6 +173,7 @@ class MainMenu {
 	static showWidePage() {
 		this.page.visible = true;
 		this.controls.visible = false;
+		this.model.visible = false;
 		this.gradientBar.visible = false;
 		this.page.RemoveClass('mainmenu__normal-page-container');
 		this.page.AddClass('mainmenu__wide-page-container');
@@ -133,7 +184,9 @@ class MainMenu {
 		this.pageInsert.RemoveAndDeleteChildren();
 
 		this.page.visible = false;
-		this.gradientBar.visible = this.controls.visible = true;
+		this.gradientBar.visible = true;
+		this.controls.visible = true;
+		this.model.visible = true;
 	}
 
 	// pop top page, returning to main menu if applicable
@@ -176,7 +229,6 @@ class MainMenu {
 	 * @param {unknown} _focusPanel - Pressing in main menu returns undefined
 	 */
 	static onEscapeKeyPressed(_eSource, _focusPanel) {
-		$.Msg('Esc Pressed');
 		// Resume game in pause menu mode
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			// Has to be on the root menu in order to resume

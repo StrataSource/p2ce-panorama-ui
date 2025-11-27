@@ -53,6 +53,14 @@
 
 				<Panel class="mainmenu__content">
 					<Panel id="GradientBar" class="mainmenu__gradient-bar">
+						<ModelPanel
+							id="MainMenuModel"
+							class="mainmenu__modelpanel MainMenuModeOnly"
+							src="models/npcs/turret/turret.mdl"
+							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+							antialias="true"
+							mouse_rotate="true"
+						/>
 						<Panel id="HomeControls" class="mainmenu__nav">
 							<Image
 								class="mainmenu__logo"
