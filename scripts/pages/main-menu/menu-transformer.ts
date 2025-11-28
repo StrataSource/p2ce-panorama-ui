@@ -89,7 +89,7 @@ class MainMenuCampaignMode {
 		$.GetContextPanel().AddClass('CampaignSelected');
 
 		// TODO: Set logo image appropriately
-		this.logo.SetImage('file://{images}/menu/portal2/full_logo.png');
+		this.logo.SetImage('file://{images}/menu/portal2/full_logo.svg');
 		this.campaignDevTxt.text = `[DEV] Campaign: ${campaign.title} (${id})`;
 	
 		this.setContinueDetails();
