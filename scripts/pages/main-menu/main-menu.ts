@@ -54,6 +54,9 @@ class MainMenu {
 	
 		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.onOpenNestedPageRequest.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
+
+		MainMenuCampaignMode.onMainMenuLoaded();
 	}
 
 	static setMainMenuBackground() {
@@ -240,7 +243,8 @@ class MainMenu {
 	}
 
 	static onContinueMouseOut() {
-		this.continueBox.visible = false;
+		if (this.continueBox.IsValid())
+			this.continueBox.visible = false;
 	}
 
 	/**

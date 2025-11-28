@@ -11,4 +11,5 @@ interface GlobalEventNameMap {
 	MainMenuCloseAllPages: () => void;
 	MainMenuSetPageLines: (headline: string, tagline: string) => void;
 	CampaignSettingHovered: (helpText: string) => void;
+	SetActiveUiCampaign: (campaignId: string) => void;
 }

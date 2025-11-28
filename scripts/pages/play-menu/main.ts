@@ -36,7 +36,7 @@ class PlayMenu {
 
 	// solo maps screen
 	static onCeMapsBtnPressed() {
-		UiToolkitAPI.GetGlobalObject()['game-type'] = GameType.P2CE_MAP;
+		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.P2CE_MAP;
 
 		$.DispatchEvent(
 			'MainMenuOpenNestedPage',
