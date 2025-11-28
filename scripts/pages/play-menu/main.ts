@@ -2,21 +2,21 @@
 
 class PlayMenu {
 	static setPlayMenuLines() {
-		$.DispatchEvent('MainMenuSetPageLines', '[HC] Play', '[HC] Start a new experience');
+		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Play'), tagDevString('Start a new Experience'));
 	}
 
 	static setPlayerMenuLines() {
-		$.DispatchEvent('MainMenuSetPageLines', '[HC] Play', '[HC] Play singleplayer or co-op?');
+		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Play'), tagDevString('Select Singleplayer or Multiplayer'));
 	}
 
 	static setMapPoolLines() {
-		$.DispatchEvent('MainMenuSetPageLines', '[HC] Play', '[HC] Play P2:CE or Portal 2 Workshop Maps?');
+		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Play'), tagDevString('Select P2:CE or Portal 2 Workshop maps'));
 	}
 
 	// root screen
 	// shows the player count selection page
 	static onCampaignsBtnPressed() {
-		UiToolkitAPI.GetGlobalObject()['game-type'] = GameType.P2CE_CAMPAIGN;
+		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.P2CE_CAMPAIGN;
 
 		$.DispatchEvent(
 			'MainMenuOpenNestedPage',

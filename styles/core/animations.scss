@@ -151,3 +151,17 @@
 		box-shadow: fill 0 0 0 0 rgba($primary-color, 0);
 	}
 }
+
+// MAIN MENU ANIM KEYFRAMES
+
+@keyframes MainMenuFlash {
+	0% {
+		blur: gaussian(10, 10, 2);
+		opacity: 0.5;
+	}
+
+	100% {
+		blur: gaussian(0, 0, 0);
+		opacity: 1;
+	}
+}
