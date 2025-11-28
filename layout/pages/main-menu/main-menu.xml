@@ -179,7 +179,7 @@
 							<Image
 								id="ContinueSaveLogo"
 								class="mainmenu__display-box__logo"
-								src="file://{images}/menu/portal2/logo.png"
+								src="file://{images}/menu/portal2/logo.svg"
 								textureheight="64"
 								texturewidth="64"
 								scaling="stretch-to-cover-preserve-aspect"

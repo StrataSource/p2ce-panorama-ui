@@ -33,7 +33,7 @@
 						<Image
 							id="CampaignLogo"
 							class="campaigns__entry__details__logo"
-							src="file://{images}/menu/portal2/logo.png"
+							src="file://{images}/menu/portal2/logo.svg"
 							scaling="stretch-to-cover-preserve-aspect"
 							textureheight="128"
 							texturewidth="128"
