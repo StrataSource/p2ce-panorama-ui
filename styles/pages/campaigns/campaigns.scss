@@ -8,18 +8,6 @@
 	flow-children: right;
 
 	opacity: 1;
-	blur: gaussian(0, 0, 0);
-	transform: translateX(0px);
-	transition:
-		opacity 0.25s ease-in-out 0s,
-		blur 0.25s ease-in-out 0s,
-		transform 0.25s ease-in-out 0s;
-
-	&__hide {
-		opacity: 0;
-		blur: gaussian(10, 10, 3);
-		transform: translateX(20px);
-	}
 
 	&__left {
 		vertical-align: center;
@@ -280,74 +268,35 @@
 }
 
 .selected-campaign {
-	width: 100%;
-	height: 100%;
-
-	margin: -30px;
-
-	opacity: 0;
-	blur: gaussian(10, 10, 3);
-
-	$root: &;
-
-	&__anim {
-		transition:
-			opacity 0.2s ease-in-out 0s,
-			blur 0.2s ease-in-out 0s;
-
-		#{$root}__background {
-			transition: transform 0.25s ease-in-out 0s;
-		}
-
-		#{$root}__container {
-			transition: transform 0.2s ease-in-out 0s;
-		}
-	}
-
-	&__show {
-		opacity: 1;
-		blur: gaussian(0, 0, 0);
-
-		#{$root}__background {
-			transform: scaleX(1) scaleY(1);
-		}
-
-		#{$root}__container {
-			transform: translateX(0px);
-		}
-	}
-
-	&__container {
+	&__sticky {
 		width: 100%;
-		height: 100%;
-		margin: 60px;
-
-		transform: translateX(-25px);
+		max-width: 960px;
 	}
 
-	&__controls {
-		width: 30%;
-		height: 100%;
-		margin: 20px;
-
+	&__lister {
+		width: 100%;
+		max-width: 960px;
+		height: fill-parent-flow(1);
 		flow-children: down;
+		overflow: squish scroll;
+		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
 
-		&__inner {
+		&__body {
 			width: 100%;
-			vertical-align: bottom;
+			height: 100%;
 			flow-children: down;
-
-			background-color: $base-950;
 			border: $menu-pane-border;
+			background-color: $base-950;
 		}
 
 		&__button {
-			width: 100%;
+			width: fill-parent-flow(1);
 			flow-children: right;
 
 			padding: 18px 20px;
 			tooltip-position: right;
 			tooltip-body-position: 50% 50%;
+			border-top: $menu-pane-border;
 
 			$this: &;
 
@@ -378,105 +327,10 @@
 		}
 	}
 
-	&__sticky {
-		width: 100%;
-		max-width: 960px;
-	}
-
-	&__lister {
-		width: 100%;
-		max-width: 960px;
-		height: fill-parent-flow(1);
-		flow-children: down;
-		overflow: squish scroll;
-		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
-
-		&__header {
-			min-width: 272px;
-			text-align: center;
-			padding: 18px 20px;
-
-			// account for funny line-height business
-			padding-top: 13px;
-			transform: translateY(1px);
-
-			border: $menu-pane-border;
-			border-bottom-width: 0px;
-			background-color: $base-950;
-
-			@include mixin.font-styles($use-header: true);
-			font-size: 24px;
-		}
-
-		&__body {
-			width: 100%;
-			height: 100%;
-			flow-children: down;
-			border: $menu-pane-border;
-			background-color: $base-950;
-		}
-
-		&__container {
-			width: 48%;
-			height: 70%;
-			margin: 20px;
-			flow-children: down;
-			vertical-align: bottom;
-		}
-
-		&__button {
-			@extend .selected-campaign__controls__button;
-
-			width: fill-parent-flow(1);
-
-			border-top: $menu-pane-border;
-
-			&__text {
-				@extend .selected-campaign__controls__button__text;
-			}
-		}
-	}
-
 	&__action-bar {
 		width: 100%;
 		max-width: 960px;
 		flow-children: right;
-	}
-
-	&__background {
-		width: 100%;
-		height: 100%;
-		transform: scaleX(1.05) scaleY(1.05);
-	}
-
-	&__logo {
-		width: 100%;
-		height: 130px;
-	}
-
-	&__title {
-		@include mixin.font-styles($use-header: true);
-		font-size: 32px;
-	}
-
-	&__authors {
-		font-weight: light;
-		font-size: 16px;
-		color: $base-200;
-		letter-spacing: 1px;
-	}
-
-	&__description {
-		width: 100%;
-		height: 100%;
-
-		margin-top: 15px;
-		border: $menu-pane-border;
-
-		&__text {
-			overflow: squish scroll;
-			padding: 15px;
-		}
 	}
 }
 
@@ -520,12 +374,14 @@
 			&__title {
 				@include mixin.font-styles($use-header: true);
 				font-size: 26px;
+				text-shadow: 2px 2px 2px 2 $base-950;
 			}
 
 			&__desc {
 				margin-top: 5px;
 				font-size: 18px;
 				color: $base-200;
+				text-shadow: 1px 1px 2px 2 $base-950;
 			}
 		}
 
@@ -545,6 +401,11 @@
 			background-color: $button-background-hover;
 			#{$this}__details {
 				wash-color: $base-950;
+
+				&__title,
+				&__desc {
+					text-shadow: none;
+				}
 			}
 		}
 
@@ -562,6 +423,8 @@
 	&__entry {
 		@extend .saves__entry;
 		width: 100%;
+
+		$this: &;
 
 		& .RadioBox {
 			visibility: collapse;
@@ -585,12 +448,14 @@
 				font-size: 20px;
 				color: $base-200;
 				letter-spacing: 1px;
+				text-shadow: 1px 1px 2px 2 $base-950;
 			}
 
 			&__desc {
 				@include mixin.font-styles($use-header: true);
 				margin-top: 5px;
 				font-size: 28px;
+				text-shadow: 2px 2px 2px 2 $base-950;
 			}
 		}
 
@@ -600,185 +465,14 @@
 
 		&:selected {
 			@extend .saves__entry, :selected;
+			#{$this}__details {
+				wash-color: $base-950;
+
+				&__title,
+				&__desc {
+					text-shadow: none;
+				}
+			}
 		}
-	}
-}
-
-.campaign-settings {
-	width: 100%;
-	height: fill-parent-flow(1);
-
-	background-color: $base-950;
-	border: $menu-pane-border;
-	flow-children: right;
-	padding: 15px;
-
-	&__header {
-		width: 100%;
-		flow-children: right;
-		background-color: $base-950;
-		border: $menu-pane-border;
-		border-bottom-width: 0;
-		padding: 10px 15px;
-
-		&__top {
-			@include mixin.font-styles($use-header: true, $light-header: false);
-			font-size: 24px;
-		}
-
-		&__btm {
-			color: $base-300;
-			font-size: 16px;
-		}
-
-		&__logo {
-			horizontal-align: right;
-			width: 150px;
-			height: 100%;
-		}
-	}
-
-	&__container {
-		width: 100%;
-		height: 100%;
-		flow-children: down;
-	}
-
-	&__left {
-		width: fill-parent-flow(1);
-		height: 100%;
-		flow-children: down;
-	}
-
-	&__button {
-		width: fill-parent-flow(0.3);
-		height: fill-parent-flow(1);
-		border: $menu-pane-border;
-
-		&__icon {
-			width: 96px;
-			height: 96px;
-			horizontal-align: center;
-			margin-bottom: 10px;
-		}
-
-		&__text {
-			@include mixin.font-styles($use-header: true, $light-header: false);
-			horizontal-align: center;
-		}
-
-		&__subtext {
-			color: $base-300;
-			font-size: 16px;
-		}
-
-		&:hover {
-			border-color: $primary-color;
-			background-color: $button-background-hover;
-		}
-	}
-
-	&__help {
-		width: fill-parent-flow(0.5);
-		height: 100%;
-		flow-children: down;
-		background-color: $base-900;
-		border: $menu-pane-border;
-		margin-right: 10px;
-		padding: 15px;
-	}
-
-	&__right {
-		height: 100%;
-		flow-children: down;
-		margin-left: 10px;
-	}
-
-	&__chapter-overlay {
-		width: 100%;
-		height: 100%;
-		margin: 1px;
-		background-color: gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0)), to($base-950));
-	}
-
-	&__box-logo {
-		width: 48px;
-		height: 48px;
-		margin-right: 10px;
-		vertical-align: center;
-	}
-
-	&__chapter-text {
-		@include mixin.font-styles($use-header: true, $light-header: false);
-		width: 100%;
-		font-size: 24px;
-		text-shadow: 2px 2px 4px 2 $base-950;
-		transform: translateY(-2px);
-	}
-
-	&__map-text {
-		color: $base-200;
-		width: 100%;
-		text-shadow: 2px 2px 2px 2 $base-950;
-		transform: translateY(-2px);
-	}
-
-	&__chapter-img {
-		width: 480px;
-		height: 270px;
-		border: $menu-pane-border;
-	}
-
-	&__summary {
-		width: 100%;
-		height: fill-parent-flow(1);
-		background-color: $base-900;
-		border: $menu-pane-border;
-		border-top-width: 0;
-		flow-children: down;
-		padding: 10px;
-
-		&__header {
-			@include mixin.font-styles($use-header: true, $light-header: false);
-			font-size: 20px;
-		}
-
-		&__inner {
-			width: 100%;
-			height: 100%;
-			flow-children: down;
-			overflow: squish scroll;
-		}
-
-		&__text {
-			color: $base-200;
-			font-size: 16px;
-			margin-left: 15px;
-		}
-	}
-
-	&__start {
-		height: fit-children;
-		padding: 15px 20px;
-		tooltip-position: left;
-		tooltip-body-position: 50% 50%;
-
-		&__icon {
-			width: 48px;
-			height: 48px;
-			margin-right: 10px;
-		}
-
-		&__text {
-			@include mixin.font-styles($use-header: true, $light-header: false);
-			font-size: 24px;
-			transform: translateY(-2px);
-		}
-	}
-
-	&__subpage {
-		width: 100%;
-		height: 100%;
-		flow-children: down;
 	}
 }

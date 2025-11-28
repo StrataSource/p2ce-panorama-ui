@@ -41,7 +41,8 @@ class CampaignEntry {
 		*/
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			CampaignMgr.campaignSelected(this.info);
+			$.DispatchEvent('SetActiveUiCampaign', this.info.id);
+			$.DispatchEvent('MainMenuCloseAllPages');
 		});
 	}
 }
