@@ -36,16 +36,15 @@
 		<Panel id="MainMenuVanityParent" />
 
 		<Panel id="MainMenuInput" class="mainmenu">
-			
-
 			<!-- Full page blur: used to blur everything below the drawer -->
 			<Panel class="mainmenu__container">
 				<!-- Movie background -->
 				<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
 				<!-- Static image background -->
 				<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
+
 				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-				<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur" blurrects="PauseMenuMainMenuContent">
+				<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur PauseMenuModeOnly" blurrects="PauseMenuMainMenuContent">
 					<!-- Backbuffer background -->
 					<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
 				</BaseBlurTarget>
@@ -56,17 +55,8 @@
 					<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No Campaign Active" />
 
 					<Panel id="GradientBar" class="mainmenu__gradient-bar">
-						
 						<Panel id="HomeControls" class="mainmenu__nav">
 							<Panel class="mainmenu__nav__top">
-								<ModelPanel
-									id="MainMenuModel"
-									class="mainmenu__modelpanel MainMenuModeOnly"
-									src="models/npcs/turret/turret.mdl"
-									cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-									antialias="true"
-									mouse_rotate="true"
-								/>
 								<Image
 									id="GameFullLogo"
 									class="mainmenu__logo"
@@ -191,6 +181,15 @@
 						</Panel>
 					</Panel>
 
+					<ModelPanel
+						id="MainMenuModel"
+						class="mainmenu__modelpanel MainMenuModeOnly"
+						src="models/npcs/turret/turret.mdl"
+						cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+						antialias="true"
+						mouse_rotate="true"
+					/>
+
 					<Panel id="PageWrap" class="mainmenu__normal-page-container">
 						<Label id="PageHeadline" class="mainmenu__page-head mainmenu__page-controls mainmenu__page-controls__t-prop" text="[PH] Page Headline" />
 						<Label id="PageTagline" class="mainmenu__page-tagline mainmenu__page-controls mainmenu__page-controls__t-prop" text="[PH] Page Tagline" />
@@ -204,6 +203,16 @@
 						</Panel>
 					</Panel>
 				</Panel>
+
+				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+				<BaseBlurTarget id="SwitcherBlur" class="mainmenu__switcher-blur MainMenuModeOnly" blurrects="SwitcherBlurContent" hittest="false">
+					<!-- Backbuffer background -->
+					<BackbufferImagePanel class="mainmenu__background MainMenuModeOnly" hittest="false" />
+				</BaseBlurTarget>
+
+				<Panel id="SwitcherBlurContent" class="mainmenu__pause-content-blur" hittest="false" />
+
+				<Label id="LoadingIndicator" class="loading-indicator" text="#MainMenu_Loading" />
 			</Panel>
 		</Panel>
 

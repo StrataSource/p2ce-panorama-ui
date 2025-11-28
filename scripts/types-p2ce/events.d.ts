@@ -10,6 +10,7 @@ interface GlobalEventNameMap {
 	MainMenuOpenNestedPage: (tab: string, xmlName: string) => void;
 	MainMenuCloseAllPages: () => void;
 	MainMenuSetPageLines: (headline: string, tagline: string) => void;
+	MainMenuSwitchFade: () => void;
 	CampaignSettingHovered: (helpText: string) => void;
 	SetActiveUiCampaign: (campaignId: string) => void;
 }

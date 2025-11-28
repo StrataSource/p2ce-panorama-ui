@@ -11,7 +11,7 @@
 
 	&__left {
 		vertical-align: center;
-		width: 960px;
+		width: 975px;
 		flow-children: down;
 	}
 
@@ -24,6 +24,7 @@
 		width: 100%;
 		overflow: squish scroll;
 		flow-children: down;
+		padding-right: 15px;
 	}
 
 	&__action-bar {

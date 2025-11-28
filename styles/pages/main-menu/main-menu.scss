@@ -44,6 +44,19 @@ $pane-move-delay: 0.1s;
 	visibility: collapse;
 }
 
+.loading-indicator {
+	horizontal-align: right;
+	vertical-align: bottom;
+	padding: 12px 14px;
+	margin: 15px;
+	margin-right: 16px;
+	color: white;
+	background-color: black;
+	font-size: 16px;
+	border-radius: 6px;
+	font-family: Verdana;
+}
+
 .mainmenu {
 	width: 100%;
 	height: 100%;
@@ -70,6 +83,12 @@ $pane-move-delay: 0.1s;
 			saturation: 0.7;
 			brightness: 0.4;
 		}
+	}
+
+	&__switcher-blur {
+		width: 100%;
+		height: 100%;
+		overflow: noclip;
 	}
 
 	&__movie {
@@ -129,18 +148,19 @@ $pane-move-delay: 0.1s;
 	}
 
 	&__modelpanel {
-		width: 300%;
-		height: 250%;
-		horizontal-align: center;
+		width: 960px;
+		height: 100%;
+		transform: translateX(-30px);
+		horizontal-align: right;
 		vertical-align: center;
-		opacity: 0.0;
+		opacity: 1;
 	}
 
 	&__logo {
 		width: 440px;
 		height: 130px;
 		horizontal-align: center;
-		img-shadow: 4px 4px 4px 4.0 $base-950;
+		img-shadow: 0px 0px 100px 4.0 $base-950;
 	}
 
 	&__nav {
