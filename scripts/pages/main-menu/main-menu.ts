@@ -172,6 +172,11 @@ class MainMenu {
 			-100,
 			-180
 		];
+		const modelZTranslates = [
+			0,
+			0,
+			-30
+		];
 
 		if (models.length !== modelRotations.length) {
 			$.Warning('main-menu: models & modelRotations array sizes mismatch');
@@ -179,17 +184,17 @@ class MainMenu {
 		}
 
 		if (this.model) {
-			const index = 0; // = Math.floor(Math.random() * models.length);
+			const index = Math.floor(Math.random() * models.length);
 			this.model.src = models[index]; // Pick a random model
 
-			//this.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.05, this.inSpace ? 0.02 : 0);
-			this.model.SetMouseXRotationScale(0, 0, 0);
+			this.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.01, this.inSpace ? 0.02 : 0);
+			this.model.SetMouseXRotationScale(0, 0.5, 0);
 			this.model.SetMouseYRotationScale(0, 0, 0);
 			this.model.SetModelRotation(0, modelRotations[index], 0);
 
 			this.model.LookAtModel();
-			this.model.SetCameraOffset(-300, 0, 0);
-			this.model.SetCameraFOV(65);
+			this.model.SetCameraOffset(-300, 0, modelZTranslates[index]);
+			this.model.SetCameraFOV(20);
 
 			this.model.SetLightAmbient(0.2921, 0.327, 0.43);
 			this.model.SetDirectionalLightColor(1, 1.076, 1.2, 1.282);
@@ -355,6 +360,8 @@ class MainMenu {
 		if (this.pages.length > 0) {
 			const nowPage = this.pages[this.pages.length - 1];
 
+			if (!nowPage.panel.IsValid()) return;
+
 			// set directly to avoid placing the lines back haha
 			if (nowPage?.headline && nowPage?.tagline) {
 				this.pageHeadline.text = nowPage.headline;
@@ -414,7 +421,9 @@ class MainMenu {
 	}
 
 	static onQuitPrompt(toDesktop = true) {
-		$.DispatchEvent('MainMenuPauseGame'); // make sure game is paused so we can see the popup if hit from a keybind in-game
+		// make sure game is paused so we can see the popup if hit from a keybind in-game
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU)
+			$.DispatchEvent('MainMenuPauseGame');
 
 		if (toDesktop) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(

@@ -165,3 +165,45 @@
 		opacity: 1;
 	}
 }
+
+@keyframes MainMenuSwitch {
+	0% {
+		blur: fastanimgaussian(0, 0, 0);
+	}
+
+	100% {
+		blur: fastgaussian(10, 10, 5);
+	}
+}
+
+@keyframes MainMenuSwitchReverse {
+	0% {
+		blur: fastanimgaussian(10, 10, 5);
+	}
+
+	100% {
+		blur: fastgaussian(0, 0, 0);
+	}
+}
+
+.anim-main-menu-switch {
+	animation-name: MainMenuSwitch;
+	animation-duration: 0.5s;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+
+	-s2-mix-blend-mode: opaque;
+
+	blur: fastgaussian(10, 10, 5);
+}
+
+.anim-main-menu-switch-reverse {
+	animation-name: MainMenuSwitchReverse;
+	animation-duration: 0.5s;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+
+	-s2-mix-blend-mode: opaque;
+
+	blur: fastgaussian(0, 0, 0);
+}

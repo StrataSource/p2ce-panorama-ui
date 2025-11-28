@@ -1,8 +1,16 @@
 'use strict';
 
 class MainMenuCampaignMode {
+	static movie = $<Movie>('#MainMenuMovie')!;
+
 	static logo = $<Image>('#GameFullLogo')!;
 	static campaignDevTxt = $<Label>('#DevCampaign')!;
+	static menuContent = $<Panel>('#MenuContentRoot')!;
+	static switchBlur = $<Panel>('#SwitcherBlur')!;
+	static pageInsert = $<Panel>('#PageInsert')!;
+	static imgBg = $<Image>('#MainMenuBackground')!;
+	static loadingIndicator = $<Label>('#LoadingIndicator')!;
+
 	static selectedCampaign: CampaignInfo;
 
 	static continueBtn = $<Button>('#CampaignContinueBtn')!;
@@ -14,8 +22,14 @@ class MainMenuCampaignMode {
 
 	static latestSave: GameSave;
 
+	static isBlurred = false;
+
 	static onMainMenuLoaded() {
 		$.RegisterForUnhandledEvent('SetActiveUiCampaign', this.onCampaignSelected.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuSwitchFade', this.switchFade.bind(this));
+		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
+
+		this.loadingIndicator.visible = false;
 	}
 
 	static setContinueDetails() {
@@ -76,7 +90,75 @@ class MainMenuCampaignMode {
 		this.continueBtn.enabled = true;
 	}
 
+	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
+		if (this.isBlurred && isBackgroundMap) {
+			this.switchReverse();
+			this.movie.visible = false;
+			this.imgBg.visible = false;
+		}
+	}
+
+	// set campaign details
+	// background map takes priority
+	// then background movie
+	// then background image
+	//
+	// this function returns true if the reverse anim should be delayed
+	static setCampaignMenuDetails() {
+		this.movie = $<Movie>('#MainMenuMovie')!;
+
+		const bgl = CampaignAPI.GetBackgroundLevel();
+		const bgm = CampaignAPI.GetBackgroundMovie();
+		const bgi = CampaignAPI.GetBackgroundImage();
+
+		if (bgl.length > 0) {
+			this.imgBg.visible = true;
+			this.imgBg.SetImage(`file://{materials}/${bgi}`);
+			$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`));
+		} else if (bgm.length > 0) {
+			GameInterfaceAPI.ConsoleCommand('disconnect');
+			this.movie.SetMovie(`file://{media}/${bgm}`);
+			this.movie.Play();
+			this.movie.visible = true;
+		} else if (bgi.length > 0) {
+			GameInterfaceAPI.ConsoleCommand('disconnect');
+			this.imgBg.visible = true;
+			this.imgBg.SetImage(`file://{materials}/${bgi}`);
+			this.movie.visible = false;
+		}
+
+		$.Schedule(0.001, () => { $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()) });
+
+		return bgl.length > 0;
+	}
+
+	static switchFade() {
+		$.PlaySoundEvent('UIPanorama.Music.StopAll');
+		this.movie = $<Movie>('#MainMenuMovie')!;
+		this.movie.Stop();
+
+		this.menuContent.AddClass('mainmenu__content__t-prop');
+		this.menuContent.AddClass('mainmenu__content__anim');
+		this.switchBlur.RemoveClass('anim-main-menu-switch-reverse');
+		this.switchBlur.AddClass('anim-main-menu-switch');
+
+		this.isBlurred = true;
+	}
+
+	static switchReverse() {
+		this.menuContent.RemoveClass('mainmenu__content__t-prop');
+		this.menuContent.RemoveClass('mainmenu__content__anim');
+		this.switchBlur.RemoveClass('anim-main-menu-switch');
+		this.switchBlur.AddClass('anim-main-menu-switch-reverse');
+		this.pageInsert.RemoveAndDeleteChildren();
+
+		this.isBlurred = false;
+		this.loadingIndicator.visible = false;
+	}
+
 	static onCampaignSelected(id: string) {
+		this.loadingIndicator.visible = true;
+
 		const campaign = CampaignAPI.GetAllCampaigns().find((v) => { return v.id === id });
 		if (!campaign) {
 			$.Warning(`Menu: Campaign ID ${id} received but that's not a valid Campaign?`);
@@ -84,6 +166,7 @@ class MainMenuCampaignMode {
 		}
 
 		this.selectedCampaign = campaign;
+		CampaignAPI.SetActiveCampaign(this.selectedCampaign.id);
 		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
@@ -93,6 +176,9 @@ class MainMenuCampaignMode {
 		this.campaignDevTxt.text = `[DEV] Campaign: ${campaign.title} (${id})`;
 	
 		this.setContinueDetails();
+		if (!this.setCampaignMenuDetails()) {
+			this.switchReverse();
+		}
 	}
 
 	static exitCampaign() {
