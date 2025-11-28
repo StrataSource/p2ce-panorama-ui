@@ -110,6 +110,7 @@
 								<!-- When not in Campaign mode, it picks the latest save by time -->
 								<!-- When in Campaign mode, it picks latest save filtered by current Campaign -->
 								<Button
+									id="CampaignContinueBtn"
 									class="mainmenu__nav__btn mainmenu__nav__btn__lined mainmenu__nav__btn__no-gradient"
 									onactivate=""
 									onmouseover="MainMenu.onContinueMouseOver()"
@@ -117,7 +118,7 @@
 								>
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Campaigns_MM_LoadAuto" />
-										<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[PH] Portal 2" />
+										<Label id="ContinueCampaignText" class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[PH] ????" />
 										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto" />
 										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="[HC] Load the latest save file" />
 									</Panel>
@@ -168,6 +169,7 @@
 					<Panel id="ContinueBox" class="mainmenu__display-box">
 						<Panel>
 							<Image
+								id="ContinueSaveThumb"
 								class="mainmenu__display-box__img"
 								src="file://{images}/menu/p2ce/random4.png"
 								textureheight="1920"
@@ -175,16 +177,17 @@
 								scaling="stretch-to-cover-preserve-aspect"
 							/>
 							<Image
+								id="ContinueSaveLogo"
 								class="mainmenu__display-box__logo"
-								src="file://{images}/menu/p2ce/logo.png"
+								src="file://{images}/menu/portal2/logo.png"
 								textureheight="64"
 								texturewidth="64"
 								scaling="stretch-to-cover-preserve-aspect"
 							/>
 						</Panel>
 						<Panel class="mainmenu__display-box__details">
-							<Label class="mainmenu__display-box__head" text="[PH] Head" />
-							<Label class="mainmenu__display-box__tagline" text="[PH] Tagline" />
+							<Label id="ContinueSaveHeadline" class="mainmenu__display-box__head" text="[PH] Head" />
+							<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
 						</Panel>
 					</Panel>
 

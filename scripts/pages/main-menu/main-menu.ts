@@ -36,11 +36,20 @@ class MainMenu {
 
 	static model = $<ModelPanel>('#MainMenuModel')!;
 
+	static continueBtn = $<Button>('#CampaignContinueBtn')!;
+	static continueText = $<Label>('#ContinueCampaignText')!;
+	static continueImg = $<Image>('#ContinueSaveThumb')!;
+	static continueLogo = $<Image>('#ContinueSaveLogo')!;
+	static continueHeadline = $<Label>('#ContinueSaveHeadline')!;
+	static continueTagline = $<Label>('#ContinueSaveTagline')!;
+
 	// page vars
 	static pages: MenuPage[] = [];
 
 	// sussy mode - i gotta repair this
 	static inSpace = false;
+
+	static latestSave: GameSave;
 
 	static onMainMenuLoaded() {
 		this.setMainMenuBackground();
@@ -62,6 +71,71 @@ class MainMenu {
 
 		MainMenuCampaignMode.onMainMenuLoaded();
 		stripDevTagsFromLabels($.GetContextPanel());
+
+		this.setContinueDetails();
+	}
+
+	static setContinueDetails() {
+		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
+		this.continueBtn.enabled = false;
+		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
+		
+		if (saves.length === 0) {
+			$.Warning('CONTINUE: No saves');
+			return;
+		}
+
+		this.latestSave = saves[0];
+
+		const campaigns = CampaignAPI.GetAllCampaigns();
+		const savCampaign = campaigns.find((v) => { return v.id === this.latestSave.mapGroup });
+
+		if (!savCampaign) {
+			$.Warning('CONTINUE: Save exists, but the campaign it belongs to cannot be found.');
+			return;
+		}
+
+		const savChapter = savCampaign.chapters.find((ch) => {
+			return ch.maps.find((map) => {
+				return map.name === this.latestSave.mapName;
+			}) !== undefined;
+		});
+
+		if (!savChapter) {
+			$.Warning('CONTINUE: Map could not be found for Campaign');
+			return;
+		}
+
+		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
+		this.continueImg.SetImage(thumb);
+
+		this.continueText.text = `${savCampaign.title}`;
+		this.continueHeadline.text = `${savChapter.title}`;
+		this.continueTagline.text = `${this.latestSave.mapName}\n${new Date(Number(this.latestSave.fileTime) * 1000).toDateString()}`
+	
+		this.continueBtn.SetPanelEvent(
+			'onactivate',
+			() => {
+				if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+						$.Localize('#Action_LoadGame_Confirm'),
+						$.Localize('#Action_LoadGame_Auto_Message'),
+						'warning-popup',
+						$.Localize('#Action_LoadGame'),
+						() => {
+							CampaignAPI.ContinueCampaign(savCampaign.id);
+						},
+						$.Localize('#UI_Cancel'),
+						() => {},
+						'blur'
+					);
+				} else {
+					CampaignAPI.ContinueCampaign(savCampaign.id);
+				}
+			}
+		);
+
+		this.continueBtn.enabled = true;
 	}
 
 	static setMainMenuBackground() {
@@ -308,7 +382,8 @@ class MainMenu {
 	}
 
 	static onContinueMouseOver() {
-		this.continueBox.visible = true;
+		if (this.continueBtn.enabled)
+			this.continueBox.visible = true;
 	}
 
 	static onContinueMouseOut() {
