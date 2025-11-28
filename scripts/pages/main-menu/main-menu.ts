@@ -35,7 +35,7 @@ class MainMenu {
 	// page vars
 	static pages: MenuPage[] = [];
 
-	// sussy mode
+	// sussy mode - i gotta repair this
 	static inSpace = false;
 
 	static onMainMenuLoaded() {
@@ -80,6 +80,7 @@ class MainMenu {
 		}
 	}
 
+	// i think we could do something cool and have campaigns specify a model?
 	static setMainMenuModelPanel() {
 		// Assign a random model
 		const models = [
@@ -103,8 +104,8 @@ class MainMenu {
 			this.model.src = models[index]; // Pick a random model
 
 			//this.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.05, this.inSpace ? 0.02 : 0);
-			this.model.SetMouseXRotationScale(0, 0, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
-			this.model.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
+			this.model.SetMouseXRotationScale(0, 0, 0);
+			this.model.SetMouseYRotationScale(0, 0, 0);
 			this.model.SetModelRotation(0, modelRotations[index], 0);
 
 			this.model.LookAtModel();
@@ -134,6 +135,7 @@ class MainMenu {
 
 	static onHidePauseMenu() {
 		$.GetContextPanel().RemoveClass('PauseMenuMode');
+		this.closePages();
 	}
 
 	static onOpenNestedPageRequest(tab: string, xmlName: string) {
@@ -180,19 +182,19 @@ class MainMenu {
 	static showPage() {
 		this.page.visible = true;
 		this.controls.visible = false;
-		this.model.visible = false;
 		this.page.AddClass('mainmenu__normal-page-container');
 		this.page.RemoveClass('mainmenu__wide-page-container');
+		this.model.AddClass('hide');
 	}
 
 	// show page container using wide variant, hides all menu elements
 	static showWidePage() {
 		this.page.visible = true;
 		this.controls.visible = false;
-		this.model.visible = false;
 		this.gradientBar.visible = false;
 		this.page.RemoveClass('mainmenu__normal-page-container');
 		this.page.AddClass('mainmenu__wide-page-container');
+		this.model.AddClass('hide');
 	}
 
 	// hide page container
@@ -202,7 +204,7 @@ class MainMenu {
 		this.page.visible = false;
 		this.gradientBar.visible = true;
 		this.controls.visible = true;
-		this.model.visible = true;
+		this.model.RemoveClass('hide');
 	}
 
 	// pop top page, returning to main menu if applicable
