@@ -56,26 +56,29 @@
 					<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No Campaign Active" />
 
 					<Panel id="GradientBar" class="mainmenu__gradient-bar">
-						<ModelPanel
-							id="MainMenuModel"
-							class="mainmenu__modelpanel MainMenuModeOnly"
-							src="models/npcs/turret/turret.mdl"
-							cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-							antialias="true"
-							mouse_rotate="true"
-						/>
+						
 						<Panel id="HomeControls" class="mainmenu__nav">
-							<Image
-								id="GameFullLogo"
-								class="mainmenu__logo"
-								src="file://{images}/logo.svg"
-								scaling="stretch-to-fit-x-preserve-aspect"
-							/>
+							<Panel class="mainmenu__nav__top">
+								<ModelPanel
+									id="MainMenuModel"
+									class="mainmenu__modelpanel MainMenuModeOnly"
+									src="models/npcs/turret/turret.mdl"
+									cubemap="cubemaps/cubemap_menu_model_bg.hdr"
+									antialias="true"
+									mouse_rotate="true"
+								/>
+								<Image
+									id="GameFullLogo"
+									class="mainmenu__logo"
+									src="file://{images}/logo.svg"
+									scaling="stretch-to-fit-x-preserve-aspect"
+								/>
+							</Panel>
 							<Panel class="mainmenu__nav__controls">
 								<!-- Featured Hub (NOT Campaign Mode / Main Menu) -->
 								<Button
 									class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-									onactivate="MainMenu.navigateToPage('Featured', false, 'main-menu/placeholder')"
+									onactivate="MainMenu.navigateToPage('Featured', 'main-menu/placeholder')"
 								>
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="[HC] Featured" />
@@ -83,7 +86,7 @@
 									</Panel>
 								</Button>
 								<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly" onactivate="MainMenu.navigateToPage('Play', false, 'play-menu/main')">
+								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly" onactivate="MainMenu.navigateToPage('Play', 'play-menu/main')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Play" />
 										<Label class="mainmenu__nav__btn__small-text" text="[HC] Start a new experience" />
@@ -97,7 +100,7 @@
 									</Panel>
 								</Button>
 								<!-- Start New Game (Campaign Mode / in-game) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('NewGame', false, 'campaigns/new-game')">
+								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Campaigns_MM_NewGame" />
 										<Label class="mainmenu__nav__btn__small-text" text="[HC] Configure &amp; start a new game" />
@@ -120,7 +123,7 @@
 									</Panel>
 								</Button>
 								<!-- Save/Load Game (Campaign Mode / in-game) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('GameSaves', false, 'campaigns/saves-list')">
+								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_SaveRestore_Load" />
 										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_Main" />
@@ -128,14 +131,14 @@
 									</Panel>
 								</Button>
 								<!-- Addons/Mounts -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly" onactivate="MainMenu.navigateToPage('Content', false, 'main-menu/addons')">
+								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly" onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Addons" />
 										<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage subscriptions &amp; mounted games" />
 									</Panel>
 								</Button>
 								<!-- Settings -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined" onactivate="MainMenu.navigateToPage('Settings', true, 'settings/settings')">
+								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined" onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Options" />
 										<Label class="mainmenu__nav__btn__small-text" text="[HC] Tweak keybinds, video, preferences, etc." />
@@ -186,12 +189,12 @@
 					</Panel>
 
 					<Panel id="PageWrap" class="mainmenu__normal-page-container">
-						<Label id="PageHeadline" class="mainmenu__page-head" text="[PH] Page Headline" />
-						<Label id="PageTagline" class="mainmenu__page-tagline" text="[PH] Page Tagline" />
+						<Label id="PageHeadline" class="mainmenu__page-head mainmenu__page-controls mainmenu__page-controls__t-prop" text="[PH] Page Headline" />
+						<Label id="PageTagline" class="mainmenu__page-tagline mainmenu__page-controls mainmenu__page-controls__t-prop" text="[PH] Page Tagline" />
 
-						<Panel id="PageInsert" class="fill-width fill-height" />
+						<Panel id="PageInsert" class="mainmenu__page-insert" />
 
-						<Panel class="mainmenu__page-actions">
+						<Panel id="PageActions" class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop">
 							<Button class="button-mono" onactivate="MainMenu.navigateBack()">
 								<Label class="button-mono__text" text="Back" />
 							</Button>
