@@ -157,6 +157,9 @@ class MainMenu {
 			this.movie.SetMovie(movie);
 			this.movie.Play();
 		}
+
+		const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
+		$.PlaySoundEvent(music);
 	}
 
 	// i think we could do something cool and have campaigns specify a model?
