@@ -56,6 +56,11 @@ class CampaignSelector {
 	static hoveredCampaign: CampaignInfo | null = null;
 	static isHidden: boolean = false;
 
+	// campaigns, p2ce ws, p2 ws
+	static gameType: GameType;
+	// filters by SP or MP
+	static playerMode: PlayerMode;
+
 	static layoutReload() {
 		this.purgeCampaignList();
 		this.campaignList.RemoveAndDeleteChildren();
@@ -81,6 +86,42 @@ class CampaignSelector {
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
 		
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
+	
+		this.gameType = UiToolkitAPI.GetGlobalObject()['GameType'] as GameType;
+		this.playerMode = UiToolkitAPI.GetGlobalObject()['GameType'] as PlayerMode;
+		this.setPageLines();
+	}
+
+	static setPageLines() {
+		const playerModeStr = this.playerMode === PlayerMode.SINGLEPLAYER ? 'Singleplayer' : 'Multiplayer';
+
+		let headline: string;
+		let tagline: string;
+
+		switch (this.gameType) {
+			case GameType.P2CE_CAMPAIGN:
+				headline = tagDevString(`${playerModeStr} Campaigns`);
+				tagline = tagDevString('Select a campaign to play');
+				break;
+
+			case GameType.P2CE_MAP:
+				headline = tagDevString(`${playerModeStr} Maps`);
+				tagline = tagDevString('Select a P2:CE Workshop map to play');
+				break;
+
+			case GameType.PORTAL2_MAP:
+				headline = tagDevString(`${playerModeStr} Maps`);
+				tagline = tagDevString('Select a Portal 2 Workshop map to play');
+				break;
+
+			case GameType.LOOSE_MAP:
+				headline = tagDevString(`${playerModeStr} Loose Maps`);
+				tagline = tagDevString('Select a disk map to play');
+				break;
+		
+			default:
+				break;
+		}
 	}
 
 	static populateCampaigns() {

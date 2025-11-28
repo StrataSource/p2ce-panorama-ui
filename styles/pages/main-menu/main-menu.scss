@@ -34,6 +34,14 @@
 	visibility: visible;
 }
 
+.CampaignSelected .NoCampaignSelectedOnly {
+	visibility: collapse;
+}
+
+.PauseMenuMode .MainMenuModeOnly.CampaignSelectedOnly {
+	visibility: collapse;
+}
+
 .mainmenu {
 	width: 100%;
 	height: 100%;
@@ -71,6 +79,17 @@
 		max-height: 1080px;
 	}
 
+	&__devtext {
+		margin: 15px;
+		horizontal-align: right;
+		vertical-align: bottom;
+		font-size: 16px;
+		color: $base-300;
+		font-weight: light;
+		letter-spacing: 1px;
+		text-shadow: 1px 1px 2px 2 $base-950;
+	}
+
 	&__gradient-bar {
 		width: 672px;
 		height: 100%;
@@ -87,6 +106,8 @@
 	}
 
 	&__logo {
+		width: 440px;
+		height: 130px;
 		horizontal-align: center;
 		img-shadow: 4px 4px 4px 4.0 $base-950;
 	}
