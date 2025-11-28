@@ -179,6 +179,8 @@ $pane-move-delay: 0.1s;
 			min-height: 72px;
 			padding-left: 75px;
 
+			$this: &;
+
 			&__text {
 				@include mixin.font-styles($use-header: true);
 				vertical-align: center;
@@ -196,13 +198,22 @@ $pane-move-delay: 0.1s;
 				text-shadow: 1px 1px 2px 2 $base-950;
 			}
 
-			&:hover {
+			&:hover:not(:disabled) {
 				background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0, 0, 0, 0) ) );
 			}
 
 			&__no-gradient {
-				&:hover {
+				&:hover:not(:disabled) {
 					background-color: $button-background-hover;
+				}
+			}
+
+			&:disabled {
+				opacity: 0.5;
+
+				#{$this}__text,
+				#{$this}__small-text {
+					color: $base-500;
 				}
 			}
 		}
