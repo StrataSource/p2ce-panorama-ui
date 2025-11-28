@@ -29,6 +29,9 @@ class MainMenu {
 	static pageTagline = $<Label>('#PageTagline')!;
 	static pageActions = $<Panel>('#PageActions')!;
 
+	static pauseBlur = $<Panel>('#PauseMenuMainMenuBlur')!;
+	static menuContent = $<Panel>('#MenuContentRoot')!;
+
 	static continueBox = $<Panel>('#ContinueBox')!;
 
 	static model = $<ModelPanel>('#MainMenuModel')!;
@@ -124,20 +127,39 @@ class MainMenu {
 
 	static onShowMainMenu() {
 		this.setMainMenuBackground();
+		this.menuContent.RemoveClass('mainmenu__content__t-prop');
+		this.menuContent.RemoveClass('mainmenu__content__anim');
 	}
 
 	static onHideMainMenu() {
 		UiToolkitAPI.CloseAllVisiblePopups();
 		this.closePages();
+		// kickoff pause anim
+		this.menuContent.AddClass('mainmenu__content__anim');
+	}
+
+	static pauseAnimIn() {
+		this.pauseBlur.AddClass('mainmenu__pause-blur__anim');
+		this.menuContent.AddClass('mainmenu__content__t-prop');
+		this.menuContent.RemoveClass('mainmenu__content__anim');
+	}
+
+	// not intended to actually animate, just reset the classes
+	static pauseAnimOut() {
+		this.pauseBlur.RemoveClass('mainmenu__pause-blur__anim');
+		this.menuContent.RemoveClass('mainmenu__content__t-prop');
+		this.menuContent.AddClass('mainmenu__content__anim');
 	}
 
 	static onShowPauseMenu() {
 		$.GetContextPanel().AddClass('PauseMenuMode');
+		this.pauseAnimIn();
 	}
 
 	static onHidePauseMenu() {
 		$.GetContextPanel().RemoveClass('PauseMenuMode');
 		this.closePages();
+		this.pauseAnimOut();
 	}
 
 	static onMenuSetPageLines(headline: string, tagline: string) {
