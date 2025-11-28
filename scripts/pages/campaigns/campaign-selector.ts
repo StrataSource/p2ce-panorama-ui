@@ -89,7 +89,7 @@ class CampaignSelector {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 	
 		this.gameType = UiToolkitAPI.GetGlobalObject()['GameType'] as GameType;
-		this.playerMode = UiToolkitAPI.GetGlobalObject()['GameType'] as PlayerMode;
+		this.playerMode = UiToolkitAPI.GetGlobalObject()['PlayerMode'] as PlayerMode;
 		this.setPageLines();
 	}
 
@@ -121,8 +121,11 @@ class CampaignSelector {
 				break;
 		
 			default:
+				headline = tagline = '????';
 				break;
 		}
+
+		$.DispatchEvent('MainMenuSetPageLines', headline, tagline);
 	}
 
 	static populateCampaigns() {

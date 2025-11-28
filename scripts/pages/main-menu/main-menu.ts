@@ -27,6 +27,7 @@ class MainMenu {
 	static gradientBar = $<Panel>('#GradientBar')!;
 	static pageHeadline = $<Label>('#PageHeadline')!;
 	static pageTagline = $<Label>('#PageTagline')!;
+	static pageActions = $<Panel>('#PageActions')!;
 
 	static continueBox = $<Panel>('#ContinueBox')!;
 
@@ -52,11 +53,12 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
 	
-		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.onOpenNestedPageRequest.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
 
 		MainMenuCampaignMode.onMainMenuLoaded();
+		stripDevTagsFromLabels($.GetContextPanel());
 	}
 
 	static setMainMenuBackground() {
@@ -100,7 +102,7 @@ class MainMenu {
 		}
 
 		if (this.model) {
-			const index = Math.floor(Math.random() * models.length);
+			const index = 0; // = Math.floor(Math.random() * models.length);
 			this.model.src = models[index]; // Pick a random model
 
 			//this.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.05, this.inSpace ? 0.02 : 0);
@@ -110,7 +112,7 @@ class MainMenu {
 
 			this.model.LookAtModel();
 			this.model.SetCameraOffset(-300, 0, 0);
-			this.model.SetCameraFOV(35);
+			this.model.SetCameraFOV(65);
 
 			this.model.SetLightAmbient(0.2921, 0.327, 0.43);
 			this.model.SetDirectionalLightColor(1, 1.076, 1.2, 1.282);
@@ -138,10 +140,6 @@ class MainMenu {
 		this.closePages();
 	}
 
-	static onOpenNestedPageRequest(tab: string, xmlName: string) {
-		this.navigateToPage(tab, false, xmlName);
-	}
-
 	static onMenuSetPageLines(headline: string, tagline: string) {
 		this.pageHeadline.text = headline;
 		this.pageTagline.text = tagline;
@@ -151,13 +149,38 @@ class MainMenu {
 		}
 	}
 
+	// animate a 'flash' on the page header texts
+	static flashPageLines() {
+		// TODO: use keyframe anims
+		//const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
+		//this.pageHeadline.UpdateCurrentAnimationKeyframes(kfs);
+		//this.pageTagline.UpdateCurrentAnimationKeyframes(kfs);
+
+		// remove the property setting the transitions
+		this.pageHeadline.RemoveClass('mainmenu__page-controls__t-prop');
+		this.pageTagline.RemoveClass('mainmenu__page-controls__t-prop');
+		// set the blur
+		this.pageHeadline.AddClass('mainmenu__page-controls__flash');
+		this.pageTagline.AddClass('mainmenu__page-controls__flash');
+		// return the transition properties and remove the blur
+		$.Schedule(0.001, () => {
+			this.pageHeadline.AddClass('mainmenu__page-controls__t-prop');
+			this.pageTagline.AddClass('mainmenu__page-controls__t-prop');
+			this.pageHeadline.RemoveClass('mainmenu__page-controls__flash');
+			this.pageTagline.RemoveClass('mainmenu__page-controls__flash');
+		});
+	}
+
 	// open a page, handles nested pages and receives calls via events from other pages
 	// note: page headline/tagline are set by the corresponding page script, not here
-	static navigateToPage(tab: string, useWidePage: boolean, xmlName: string) {
+	static navigateToPage(tab: string, xmlName: string) {
 		// hide the previous page
 		if (this.pages.length > 0) {
 			const priorPage = this.pages[this.pages.length - 1];
-			if (priorPage.panel.IsValid()) priorPage.panel.visible = false;
+			if (priorPage.panel.IsValid()) {
+				//priorPage.panel.visible = false;
+				priorPage.panel.AddClass('mainmenu__page__back-anim');
+			}
 		}
 
 		// create the new page
@@ -165,46 +188,57 @@ class MainMenu {
 		this.pages.push(new MenuPage(tab, newPanel));
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 		newPanel.RegisterForReadyEvents(true);
+		newPanel.AddClass('mainmenu__page__anim');
 
 		stripDevTagsFromLabels(newPanel);
 
 		// hide menu elements, only done on root level
 		if (this.pages.length === 1) {
-			if (useWidePage) {
-				this.showWidePage();
-			} else {
-				this.showPage();
-			}
+			this.showPage();
+		} else {
+			// 'flash' the pagelines
+			this.flashPageLines();
 		}
 	}
 
 	// show page container
 	static showPage() {
-		this.page.visible = true;
-		this.controls.visible = false;
+		this.page.hittest = true;
+		this.pageInsert.hittest = false;
+		
+		this.pageHeadline.AddClass('mainmenu__page-controls__anim');
+		this.pageTagline.AddClass('mainmenu__page-controls__anim');
+		this.pageActions.AddClass('mainmenu__page-controls__anim');
+
+		this.controls.AddClass('mainmenu__nav__anim');
+		this.gradientBar.AddClass('mainmenu__gradient-bar__anim');
 		this.page.AddClass('mainmenu__normal-page-container');
 		this.page.RemoveClass('mainmenu__wide-page-container');
 		this.model.AddClass('hide');
 	}
 
-	// show page container using wide variant, hides all menu elements
-	static showWidePage() {
-		this.page.visible = true;
-		this.controls.visible = false;
-		this.gradientBar.visible = false;
-		this.page.RemoveClass('mainmenu__normal-page-container');
-		this.page.AddClass('mainmenu__wide-page-container');
-		this.model.AddClass('hide');
-	}
-
 	// hide page container
 	static hidePage() {
-		this.pageInsert.RemoveAndDeleteChildren();
+		this.pageHeadline.RemoveClass('mainmenu__page-controls__anim');
+		this.pageTagline.RemoveClass('mainmenu__page-controls__anim');
+		this.pageActions.RemoveClass('mainmenu__page-controls__anim');
 
-		this.page.visible = false;
-		this.gradientBar.visible = true;
-		this.controls.visible = true;
+		this.page.hittest = false;
+		this.pageInsert.hittest = false;
+		this.gradientBar.RemoveClass('mainmenu__gradient-bar__anim');
+		this.controls.RemoveClass('mainmenu__nav__anim');
 		this.model.RemoveClass('hide');
+	}
+
+	static reversePageAnim(panel: GenericPanel) {
+		$.RegisterEventHandler('PropertyTransitionEnd', panel, (panelName, propertyName) => {
+			if (panel.id === panelName && propertyName === 'transform') {
+				if (panel.IsTransparent()) {
+					panel.DeleteAsync(0);
+				}
+			}
+		});
+		panel.RemoveClass('mainmenu__page__anim');
 	}
 
 	// pop top page, returning to main menu if applicable
@@ -213,17 +247,28 @@ class MainMenu {
 
 		// delete the current page
 		const currentPage = this.pages.pop();
-		currentPage?.panel?.DeleteAsync(0);
+
+		if (currentPage) {
+			if (currentPage.name === 'Settings')
+				$.DispatchEvent('SettingsSave');
+
+			if (currentPage.panel.IsValid())
+				this.reversePageAnim(currentPage.panel);
+		}
 
 		if (this.pages.length > 0) {
 			const nowPage = this.pages[this.pages.length - 1];
+
 			// set directly to avoid placing the lines back haha
 			if (nowPage?.headline && nowPage?.tagline) {
 				this.pageHeadline.text = nowPage.headline;
 				this.pageTagline.text = nowPage.tagline;
 			}
+			
 			// restore the lower level page
-			nowPage.panel.visible = true;
+			nowPage.panel.RemoveClass('mainmenu__page__back-anim');
+			this.flashPageLines();
+
 			// force focus back so that spamming ESC is possible
 			// TODO: probably handle this different for controllers...
 			$.GetContextPanel().SetFocus(true);

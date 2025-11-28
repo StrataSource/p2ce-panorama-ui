@@ -44,6 +44,8 @@ class CampaignChapters {
 	static campaign: CampaignInfo = (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign']) as CampaignInfo;
 
 	static populateChapters() {
+		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Chapter Select'), tagDevString('Configure & Start a New Game'));
+		
 		const chapters = this.campaign.chapters;
 
 		for (let i = 0; i < chapters.length; ++i) {

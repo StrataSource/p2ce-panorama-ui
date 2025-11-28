@@ -93,6 +93,8 @@ class CampaignSaves {
 	static campaign: CampaignInfo = (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign']) as CampaignInfo;
 	
 	static init() {
+		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Saved Games'), tagDevString('Manage your Save Files'));
+		
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			this.addCreateSaveBtn();
 		} else {
