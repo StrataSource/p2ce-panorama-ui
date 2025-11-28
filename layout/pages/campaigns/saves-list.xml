@@ -1,0 +1,9 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<Panel class="mainmenu__page no-flow">
+		<Label class="text-h3 vertical-align-center" text="[HC] Saves." />
+	</Panel>
+</root>

@@ -126,9 +126,7 @@ class CampaignMgr {
 	}
 
 	static campaignSelected(info: CampaignInfo) {
-		this.currentCampaign = info;
-
-		CampaignSelector.playAwayAnim();
-		CampaignHome.setActive();
+		$.DispatchEvent('SetActiveUiCampaign', info.id);
+		$.DispatchEvent('MainMenuCloseAllPages');
 	}
 }
