@@ -52,7 +52,7 @@
 
 				<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
-				<Panel class="mainmenu__content">
+				<Panel id="MenuContentRoot" class="mainmenu__content">
 					<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No Campaign Active" />
 
 					<Panel id="GradientBar" class="mainmenu__gradient-bar">
@@ -93,7 +93,7 @@
 									</Panel>
 								</Button>
 								<!-- Resume Game (in-game) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly" onactivate="">
+								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly" onactivate="$.DispatchEvent('MainMenuResumeGame');">
 									<Panel class="vertical-align-center flow-down">
 										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Home_Resume" />
 										<Label class="mainmenu__nav__btn__small-text" text="[HC] Close this menu &amp; return to the game" />

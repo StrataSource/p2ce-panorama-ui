@@ -279,7 +279,6 @@
 		height: fill-parent-flow(1);
 		flow-children: down;
 		overflow: squish scroll;
-		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
 
 		&__body {
 			width: 100%;
