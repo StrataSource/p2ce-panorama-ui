@@ -378,11 +378,18 @@
 		}
 	}
 
+	&__sticky {
+		width: 100%;
+		max-width: 960px;
+	}
+
 	&__lister {
 		width: 100%;
+		max-width: 960px;
 		height: fill-parent-flow(1);
 		flow-children: down;
 		overflow: squish scroll;
+		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
 
 		&__header {
 			min-width: 272px;
@@ -428,6 +435,12 @@
 				@extend .selected-campaign__controls__button__text;
 			}
 		}
+	}
+
+	&__action-bar {
+		width: 100%;
+		max-width: 960px;
+		flow-children: right;
 	}
 
 	&__background {
@@ -479,7 +492,7 @@
 		$this: &;
 
 		&__lined {
-			border-bottom: 1px solid $base-900;
+			border-bottom: $menu-pane-border;
 		}
 
 		&__inner {
@@ -525,7 +538,7 @@
 		}
 
 		&:hover:not(:disabled):not(:selected) {
-			background-color: $button-background-hover;
+			background-color: gradient( linear, 100% 0%, 0% 0%, from( $button-background-hover ), to( rgba(0, 0, 0, 0) ) );
 		}
 
 		&:selected {
@@ -547,6 +560,7 @@
 
 .chapters {
 	&__entry {
+		@extend .saves__entry;
 		width: 100%;
 
 		& .RadioBox {

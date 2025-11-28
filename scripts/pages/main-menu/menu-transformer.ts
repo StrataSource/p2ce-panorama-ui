@@ -17,6 +17,7 @@ class MainMenuCampaignMode {
 		}
 
 		this.selectedCampaign = campaign;
+		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
 
@@ -28,6 +29,7 @@ class MainMenuCampaignMode {
 	static exitCampaign() {
 		$.GetContextPanel().RemoveClass('CampaignSelected');
 
+		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = undefined;
 		this.logo.SetImage('file://{images}/logo.svg');
 		this.campaignDevTxt.text = '[DEV] No Campaign Active';
 	}

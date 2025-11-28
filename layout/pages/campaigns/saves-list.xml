@@ -2,8 +2,56 @@
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/campaigns/campaign-saves.ts" />
+	</scripts>
 
-	<Panel class="mainmenu__page no-flow">
-		<Label class="text-h3 vertical-align-center" text="[HC] Saves." />
+	<snippets>
+		<snippet name="SaveEntrySnippet">
+			<Panel class="saves__container">
+				<RadioButton id="SaveAction" group="SaveGroupRadio" class="saves__entry">
+					<Panel class="saves__entry__inner">
+						<!-- Save icon cover -->
+						<Image
+							id="SaveCover"
+							class="saves__entry__cover"
+							src="file://{materials}/vgui/no_save_game.vtf"
+							scaling="stretch-to-cover-preserve-aspect"
+							textureheight="1920"
+							texturewidth="1080"
+						/>
+						<!-- Save info; title, description, 'source' -->
+						<Panel class="saves__entry__details">
+							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
+							<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
+						</Panel>
+					</Panel>
+				</RadioButton>
+				<Button id="SaveDelete" class="saves__entry__delete button button--red">
+					<Image
+						class="button__icon"
+						src="file://{images}/delete.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						texturewidth="48"
+						textureheight="48"
+					/>
+				</Button>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="mainmenu__page" onload="CampaignSaves.init()">
+		<Panel id="CampaignSaveCreateSticky" class="selected-campaign__sticky">
+		</Panel>
+		<Panel id="CampaignSaves" class="selected-campaign__lister" />
+		<Panel id="CampaignSaveActions" class="selected-campaign__action-bar" disabled="true">
+			<Button id="SaveOverwrite" class="button-mono button-mono__bigger fill-width mr-2" onactivate="CampaignSaves.overwriteSave()">
+				<Label class="button-mono__text" text="[HC] Overwrite Save" />
+			</Button>
+			<Button id="SaveLoad" class="button-mono button-mono__bigger fill-width" onactivate="CampaignSaves.loadSave()">
+				<Label class="button-mono__text" text="[HC] Load Save" />
+			</Button>
+		</Panel>
 	</Panel>
 </root>

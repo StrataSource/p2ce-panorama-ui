@@ -162,6 +162,19 @@ RadioButton.button-mono {
 		background-color: $button-background-hover;
 	}
 
+	&:disabled,
+	&:disabled &:hover,
+	&:parentdisabled,
+	&:parentdisabled &:hover {
+		background-color: $button-background-disabled;
+		border-color: $base-800;
+	}
+
+	&:disabled &__text,
+	&:parentdisabled &__text {
+		color: $base-500;
+	}
+
 	&__bigger {
 		height: fit-children;
 		padding: 15px;
