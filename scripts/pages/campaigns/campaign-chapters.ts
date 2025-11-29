@@ -59,7 +59,8 @@ class CampaignChapters {
 
 	static startChapter() {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
-			CampaignAPI.StartCampaign(this.campaign.id, this.selectedChapter.id);
+			$.DispatchEvent('MainMenuCloseAllPages');
+			$.Schedule(0.001, () => CampaignAPI.StartCampaign(this.campaign.id, this.selectedChapter.id));
 		} else {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 				$.Localize('#Action_NewGame_Title'),
@@ -67,7 +68,8 @@ class CampaignChapters {
 				'warning-popup',
 				$.Localize('#UI_Yes'),
 				() => {
-					CampaignAPI.StartCampaign(this.campaign.id, this.selectedChapter.id);
+					$.DispatchEvent('MainMenuCloseAllPages');
+					$.Schedule(0.001, () => CampaignAPI.StartCampaign(this.campaign.id, this.selectedChapter.id));
 				},
 				$.Localize('#UI_Cancel'),
 				() => {},

@@ -36,6 +36,8 @@ class MainMenu {
 
 	static model = $<ModelPanel>('#MainMenuModel')!;
 
+	static loadingIndicator = $<Label>('#LoadingIndicator')!;
+
 	static continueBtn = $<Button>('#CampaignContinueBtn')!;
 	static continueText = $<Label>('#ContinueCampaignText')!;
 	static continueImg = $<Image>('#ContinueSaveThumb')!;
@@ -64,7 +66,8 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('HideMainMenu', this.onHideMainMenu.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
-	
+		$.RegisterForUnhandledEvent('ReloadBackground', this.reloadBackground.bind(this));
+
 		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
@@ -109,8 +112,10 @@ class MainMenu {
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
 
-		this.continueText.text = `${savCampaign.title}`;
-		this.continueHeadline.text = `${savChapter.title}`;
+		const chapterString = `(${savCampaign.chapters.indexOf(savChapter!) + 1} / ${savCampaign.chapters.length})`;
+
+		this.continueText.text = `${$.Localize(savCampaign.title)} ${chapterString}`;
+		this.continueHeadline.text = `${$.Localize(savChapter.title)}`;
 		this.continueTagline.text = `${this.latestSave.mapName}\n${new Date(Number(this.latestSave.fileTime) * 1000).toDateString()}`
 	
 		this.continueBtn.SetPanelEvent(
@@ -123,6 +128,7 @@ class MainMenu {
 						'warning-popup',
 						$.Localize('#Action_LoadGame'),
 						() => {
+							$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
 							CampaignAPI.ContinueCampaign(savCampaign.id);
 						},
 						$.Localize('#UI_Cancel'),
@@ -130,6 +136,7 @@ class MainMenu {
 						'blur'
 					);
 				} else {
+					$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
 					CampaignAPI.ContinueCampaign(savCampaign.id);
 				}
 			}
@@ -138,24 +145,26 @@ class MainMenu {
 		this.continueBtn.enabled = true;
 	}
 
+	static reloadBackground() {
+		// TODO: Grab active campaign from API instead of this
+		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
+
+		this.loadingIndicator.visible = true;
+		GameInterfaceAPI.ConsoleCommand('disconnect');
+		$.Schedule(0.001, () => {
+			this.setMainMenuBackground();
+			MainMenuCampaignMode.switchReverse();
+			this.loadingIndicator.visible = false;
+		});
+	}
+
 	static setMainMenuBackground() {
 		this.movie = $<Movie>('#MainMenuMovie');
 
-		const chapter = GameInterfaceAPI.GetSettingInt('sv_unlockedchapters');
-		let act = 0;
-
-		if (chapter === 1) act = 1;
-		else if (chapter >= 2 && chapter <= 5) act = 2;
-		else if (chapter >= 6 && chapter <= 7) act = 3;
-		else if (chapter >= 8 && chapter <= 9) act = 4;
-		else if (chapter >= 10) act = 5;
-		else act = 1; // Bad unlockedchapters. Resort to act 1.
-
-		const movie = 'file://{media}/menu_act0' + act + '.webm';
-
 		if (this.movie) {
-			this.movie.SetMovie(movie);
+			this.movie.SetMovie('file://{media}/sp_credits_bg.webm');
 			this.movie.Play();
+			this.movie.visible = true;
 		}
 
 		const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
@@ -240,7 +249,6 @@ class MainMenu {
 
 	static onHidePauseMenu() {
 		$.GetContextPanel().RemoveClass('PauseMenuMode');
-		this.closePages();
 		this.pauseAnimOut();
 	}
 
@@ -381,6 +389,7 @@ class MainMenu {
 		} else {
 			// no more pages
 			this.hidePage();
+			$.DispatchEvent('MainMenuFullBackNav');
 		}
 	}
 

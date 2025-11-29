@@ -13,4 +13,5 @@ interface GlobalEventNameMap {
 	MainMenuSwitchFade: () => void;
 	CampaignSettingHovered: (helpText: string) => void;
 	SetActiveUiCampaign: (campaignId: string) => void;
+	MainMenuFullBackNav: () => void;
 }

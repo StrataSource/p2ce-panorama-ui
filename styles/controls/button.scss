@@ -183,5 +183,10 @@ RadioButton.button-mono {
 			width: 32px;
 			height: 32px;
 		}
+
+		#{$this}__text {
+			@include mixin.font-styles($use-header: true);
+			font-size: 22px;
+		}
 	}
 }
