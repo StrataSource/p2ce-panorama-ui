@@ -191,7 +191,13 @@ $pane-move-delay: 0.1s;
 		&__controls {
 			width: 100%;
 			flow-children: down;
-			margin: 75px 0;
+			vertical-align: center;
+
+			&__wrapper {
+				width: 100%;
+				min-height: 504px;
+				margin: 75px 0;
+			}
 		}
 
 		&__btn {
@@ -220,6 +226,11 @@ $pane-move-delay: 0.1s;
 
 			&:hover:not(:disabled) {
 				background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0, 0, 0, 0) ) );
+
+				#{$this}__text,
+				#{$this}__small-text {
+					text-shadow: none;
+				}
 			}
 
 			&__no-gradient {
@@ -313,7 +324,6 @@ $pane-move-delay: 0.1s;
 	}
 
 	&__page-controls {
-		width: 100%;
 		opacity: 0;
 		transform: translateX(50px);
 		blur: gaussian(10, 10, 2);

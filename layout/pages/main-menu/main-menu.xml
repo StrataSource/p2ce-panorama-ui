@@ -61,96 +61,98 @@
 									id="GameFullLogo"
 									class="mainmenu__logo"
 									src="file://{images}/logo.svg"
-									scaling="stretch-to-fit-x-preserve-aspect"
+									scaling="stretch-to-fit-preserve-aspect"
 								/>
 							</Panel>
-							<Panel class="mainmenu__nav__controls">
-								<!-- Featured Hub (NOT Campaign Mode / Main Menu) -->
-								<Button
-									class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-									onactivate="MainMenu.navigateToPage('Featured', 'main-menu/placeholder')"
-								>
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text" text="[HC] Featured" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Explore highlighted workshop content" />
-									</Panel>
-								</Button>
-								<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly" onactivate="MainMenu.navigateToPage('Play', 'play-menu/main')">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Play" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Start a new experience" />
-									</Panel>
-								</Button>
-								<!-- Resume Game (in-game) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly" onactivate="$.DispatchEvent('MainMenuResumeGame');">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Home_Resume" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Close this menu &amp; return to the game" />
-									</Panel>
-								</Button>
-								<!-- Start New Game (Campaign Mode / in-game) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Campaigns_MM_NewGame" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Configure &amp; start a new game" />
-									</Panel>
-								</Button>
-								<!-- Continue Latest Save -->
-								<!-- When not in Campaign mode, it picks the latest save by time -->
-								<!-- When in Campaign mode, it picks latest save filtered by current Campaign -->
-								<Button
-									id="CampaignContinueBtn"
-									class="mainmenu__nav__btn mainmenu__nav__btn__lined mainmenu__nav__btn__no-gradient"
-									onactivate=""
-									onmouseover="MainMenu.onContinueMouseOver()"
-									onmouseout="MainMenu.onContinueMouseOut()"
-								>
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Campaigns_MM_LoadAuto" />
-										<Label id="ContinueCampaignText" class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[PH] ????" />
-										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto" />
-										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="[HC] Load the latest save file" />
-									</Panel>
-								</Button>
-								<!-- Save/Load Game (Campaign Mode / in-game) -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list')">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_SaveRestore_Load" />
-										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_Main" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage game save files" />
-									</Panel>
-								</Button>
-								<!-- Addons/Mounts -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly" onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Addons" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage subscriptions &amp; mounted games" />
-									</Panel>
-								</Button>
-								<!-- Settings -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined" onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Options" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Tweak keybinds, video, preferences, etc." />
-									</Panel>
-								</Button>
-								<!-- Exit Campaign Mode -->
-								<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly" onactivate="MainMenuCampaignMode.exitCampaign()">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text" text="[HC] Return" />
-										<Label class="mainmenu__nav__btn__small-text" text="[HC] Exit the experience" />
-									</Panel>
-								</Button>
-								<!-- Quit/Disconnect -->
-								<Button class="mainmenu__nav__btn" onactivate="MainMenu.onQuitButtonPressed()">
-									<Panel class="vertical-align-center flow-down">
-										<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame" />
-										<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[HC] Leave to test another day" />
-										<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_Navigation_Disconnect" />
-										<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="[HC] Return to the main menu or quit the game" />
-									</Panel>
-								</Button>
+							<Panel class="mainmenu__nav__controls__wrapper">
+								<Panel class="mainmenu__nav__controls">
+									<!-- Featured Hub (NOT Campaign Mode / Main Menu) -->
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
+										onactivate="MainMenu.navigateToPage('Featured', 'main-menu/placeholder')"
+									>
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="[HC] Featured" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Explore highlighted workshop content" />
+										</Panel>
+									</Button>
+									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
+									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly" onactivate="MainMenu.navigateToPage('Play', 'play-menu/main')">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Play" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Start a new experience" />
+										</Panel>
+									</Button>
+									<!-- Resume Game (in-game) -->
+									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly" onactivate="$.DispatchEvent('MainMenuResumeGame');">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Home_Resume" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Close this menu &amp; return to the game" />
+										</Panel>
+									</Button>
+									<!-- Start New Game (Campaign Mode / in-game) -->
+									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Campaigns_MM_NewGame" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Configure &amp; start a new game" />
+										</Panel>
+									</Button>
+									<!-- Continue Latest Save -->
+									<!-- When not in Campaign mode, it picks the latest save by time -->
+									<!-- When in Campaign mode, it picks latest save filtered by current Campaign -->
+									<Button
+										id="CampaignContinueBtn"
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined mainmenu__nav__btn__no-gradient"
+										onactivate=""
+										onmouseover="MainMenu.onContinueMouseOver()"
+										onmouseout="MainMenu.onContinueMouseOut()"
+									>
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Campaigns_MM_LoadAuto" />
+											<Label id="ContinueCampaignText" class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[PH] ????" />
+											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto" />
+											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="[HC] Load the latest save file" />
+										</Panel>
+									</Button>
+									<!-- Save/Load Game (Campaign Mode / in-game) -->
+									<Button id="LoadGameBtn" class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list')">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_SaveRestore_Load" />
+											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_Main" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage game save files" />
+										</Panel>
+									</Button>
+									<!-- Addons/Mounts -->
+									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly" onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Addons" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage subscriptions &amp; mounted games" />
+										</Panel>
+									</Button>
+									<!-- Settings -->
+									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined" onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Options" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Tweak keybinds, video, preferences, etc." />
+										</Panel>
+									</Button>
+									<!-- Exit Campaign Mode -->
+									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly" onactivate="MainMenuCampaignMode.exitCampaign()">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="[HC] Return" />
+											<Label class="mainmenu__nav__btn__small-text" text="[HC] Exit the experience" />
+										</Panel>
+									</Button>
+									<!-- Quit/Disconnect -->
+									<Button class="mainmenu__nav__btn" onactivate="MainMenu.onQuitButtonPressed()">
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame" />
+											<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[HC] Leave to test another day" />
+											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_Navigation_Disconnect" />
+											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="[HC] Return to the main menu or quit the game" />
+										</Panel>
+									</Button>
+								</Panel>
 							</Panel>
 							<VersionInfo class="mainmenu__version" />
 						</Panel>

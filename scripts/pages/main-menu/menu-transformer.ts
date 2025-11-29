@@ -11,7 +11,7 @@ class MainMenuCampaignMode {
 	static imgBg = $<Image>('#MainMenuBackground')!;
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
 
-	static selectedCampaign: CampaignInfo;
+	static selectedCampaign: CampaignInfo | undefined = undefined;
 
 	static continueBtn = $<Button>('#CampaignContinueBtn')!;
 	static continueText = $<Label>('#ContinueCampaignText')!;
@@ -19,31 +19,64 @@ class MainMenuCampaignMode {
 	static continueLogo = $<Image>('#ContinueSaveLogo')!;
 	static continueHeadline = $<Label>('#ContinueSaveHeadline')!;
 	static continueTagline = $<Label>('#ContinueSaveTagline')!;
+	static loadGameBtn = $<Button>('#LoadGameBtn')!;
 
 	static latestSave: GameSave;
 
 	static isBlurred = false;
 
+	// constants
+	static BACKGROUND_IMAGE_FADE_IN_TIME = 0.25;
+
 	static onMainMenuLoaded() {
+		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
+		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onPauseMenuShown.bind(this));
 		$.RegisterForUnhandledEvent('SetActiveUiCampaign', this.onCampaignSelected.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSwitchFade', this.switchFade.bind(this));
+		$.RegisterForUnhandledEvent('ReloadBackground', this.reloadBackground.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
+		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuFullBackNav', this.onFullBackNav.bind(this));
 
 		this.loadingIndicator.visible = false;
 	}
 
+	static onMainMenuShown() {
+		if (this.selectedCampaign === undefined) return;
+
+		this.setContinueDetails();
+		this.setCampaignMenuDetails();
+	}
+
+	static onPauseMenuShown() {
+		if (this.selectedCampaign === undefined) {
+			MainMenu.setContinueDetails();
+		} else {
+			this.setContinueDetails();
+		}
+	}
+
+	static onFullBackNav() {
+		this.setContinueDetails();
+	}
+
 	static setContinueDetails() {
+		if (this.selectedCampaign === undefined) return;
+
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
-			.filter((a) => { return a.mapGroup === this.selectedCampaign.id });
+			.filter((a) => { return a.mapGroup === this.selectedCampaign!.id });
 		
 		this.continueBtn.enabled = false;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
 
 		if (saves.length === 0) {
 			$.Warning('CONTINUE: No saves');
+			this.loadGameBtn.enabled = false;
 			return;
 		}
+
+		this.loadGameBtn.enabled = true;
 
 		this.latestSave = saves[0];
 
@@ -58,10 +91,12 @@ class MainMenuCampaignMode {
 			return;
 		}
 
+		const chapterString = `(${this.selectedCampaign.chapters.indexOf(savChapter!) + 1} / ${this.selectedCampaign.chapters.length})`;
+
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
 
-		this.continueText.text = `${savChapter.title}`;
+		this.continueText.text = `${chapterString} ${$.Localize(savChapter.title)}`;
 		this.continueHeadline.text = `${this.latestSave.mapName}`;
 		this.continueTagline.text = `${new Date(Number(this.latestSave.fileTime) * 1000).toDateString()}`
 	
@@ -75,14 +110,14 @@ class MainMenuCampaignMode {
 						'warning-popup',
 						$.Localize('#Action_LoadGame'),
 						() => {
-							CampaignAPI.ContinueCampaign(this.selectedCampaign.id);
+							CampaignAPI.ContinueCampaign(this.selectedCampaign!.id);
 						},
 						$.Localize('#UI_Cancel'),
 						() => {},
 						'blur'
 					);
 				} else {
-					CampaignAPI.ContinueCampaign(this.selectedCampaign.id);
+					CampaignAPI.ContinueCampaign(this.selectedCampaign!.id);
 				}
 			}
 		);
@@ -90,12 +125,26 @@ class MainMenuCampaignMode {
 		this.continueBtn.enabled = true;
 	}
 
+	static showBgImg() {
+		this.imgBg.style.animation = `FadeOut ${this.BACKGROUND_IMAGE_FADE_IN_TIME}s ease-out 0s 1 reverse forwards`;
+	}
+
+	static hideBgImg() {
+		this.imgBg.style.animation = 'FadeOut 1s ease-out 0s 1 normal forwards';
+	}
+
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
-		if (this.isBlurred && isBackgroundMap) {
+		if (isBackgroundMap) {
 			this.switchReverse();
+
+			// background maps take priority, turn these off
 			this.movie.visible = false;
-			this.imgBg.visible = false;
+			this.hideBgImg();
 		}
+	}
+
+	static onMapUnloaded() {
+		$.PlaySoundEvent('UIPanorama.Music.StopAll');
 	}
 
 	// set campaign details
@@ -112,9 +161,12 @@ class MainMenuCampaignMode {
 		const bgi = CampaignAPI.GetBackgroundImage();
 
 		if (bgl.length > 0) {
-			this.imgBg.visible = true;
+			this.showBgImg();
 			this.imgBg.SetImage(`file://{materials}/${bgi}`);
-			$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`));
+			$.Schedule(
+				this.BACKGROUND_IMAGE_FADE_IN_TIME,
+				() => GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`)
+			);
 		} else if (bgm.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			this.movie.SetMovie(`file://{media}/${bgm}`);
@@ -122,7 +174,7 @@ class MainMenuCampaignMode {
 			this.movie.visible = true;
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			this.imgBg.visible = true;
+			this.showBgImg();
 			this.imgBg.SetImage(`file://{materials}/${bgi}`);
 			this.movie.visible = false;
 		}
@@ -133,7 +185,6 @@ class MainMenuCampaignMode {
 	}
 
 	static switchFade() {
-		$.PlaySoundEvent('UIPanorama.Music.StopAll');
 		this.movie = $<Movie>('#MainMenuMovie')!;
 		this.movie.Stop();
 
@@ -146,6 +197,8 @@ class MainMenuCampaignMode {
 	}
 
 	static switchReverse() {
+		if (!this.isBlurred) return;
+
 		this.menuContent.RemoveClass('mainmenu__content__t-prop');
 		this.menuContent.RemoveClass('mainmenu__content__anim');
 		this.switchBlur.RemoveClass('anim-main-menu-switch');
@@ -157,11 +210,12 @@ class MainMenuCampaignMode {
 	}
 
 	static onCampaignSelected(id: string) {
-		this.loadingIndicator.visible = true;
-
 		const campaign = CampaignAPI.GetAllCampaigns().find((v) => { return v.id === id });
 		if (!campaign) {
 			$.Warning(`Menu: Campaign ID ${id} received but that's not a valid Campaign?`);
+			return;
+		} else if (this.selectedCampaign && this.selectedCampaign.id === id) {
+			$.Warning(`Campaign ${id} already active. Doing nothing.`);
 			return;
 		}
 
@@ -172,22 +226,51 @@ class MainMenuCampaignMode {
 		$.GetContextPanel().AddClass('CampaignSelected');
 
 		// TODO: Set logo image appropriately
-		this.logo.SetImage('file://{images}/menu/portal2/full_logo.svg');
-		this.campaignDevTxt.text = `[DEV] Campaign: ${campaign.title} (${id})`;
+		let saveImg = 'file://{images}/menu/portal2/full_logo.svg';
+		switch (this.selectedCampaign.id) {
+			case 'portal1_sp':
+				saveImg = 'file://{images}/menu/portal/full_logo.svg';
+				break;
+
+			case 'hl2':
+				saveImg = 'file://{images}/menu/hl2/full_logo.svg';
+				break;
+
+			case 'episodic':
+				saveImg = 'file://{images}/menu/episodic/full_logo.svg';
+				break;
+
+			case 'ep2':
+				saveImg = 'file://{images}/menu/ep2/full_logo.svg';
+				break;
+		}
+		this.logo.SetImage(saveImg);
+		this.campaignDevTxt.text = `[DEV] Campaign: ${$.Localize(campaign.title)} (${id})`;
 	
 		this.setContinueDetails();
+	}
+
+	static reloadBackground() {
+		// TODO: Grab active campaign from API instead of this
+		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] === undefined) return;
+
+		this.loadingIndicator.visible = true;
 		if (!this.setCampaignMenuDetails()) {
 			this.switchReverse();
 		}
 	}
 
 	static exitCampaign() {
-		$.GetContextPanel().RemoveClass('CampaignSelected');
-
 		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = undefined;
-		this.logo.SetImage('file://{images}/logo.svg');
-		this.campaignDevTxt.text = '[DEV] No Campaign Active';
+		this.selectedCampaign = undefined;
 
-		MainMenu.setContinueDetails();
+		$.DispatchEvent('MainMenuSwitchFade');
+		$.Schedule(0.5, () => {
+			this.logo.SetImage('file://{images}/logo.svg');
+			this.campaignDevTxt.text = '[DEV] No Campaign Active';
+			$.GetContextPanel().RemoveClass('CampaignSelected');
+			$.DispatchEvent('ReloadBackground');
+			MainMenu.setContinueDetails();
+		});
 	}
 }
