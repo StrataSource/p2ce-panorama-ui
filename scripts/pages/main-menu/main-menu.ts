@@ -28,6 +28,7 @@ class MainMenu {
 	static pageHeadline = $<Label>('#PageHeadline')!;
 	static pageTagline = $<Label>('#PageTagline')!;
 	static pageActions = $<Panel>('#PageActions')!;
+	static pageBg = $<Panel>('#PageBg')!;
 
 	static pauseBlur = $<Panel>('#PauseMenuMainMenuBlur')!;
 	static menuContent = $<Panel>('#MenuContentRoot')!;
@@ -147,12 +148,15 @@ class MainMenu {
 
 	static reloadBackground() {
 		// TODO: Grab active campaign from API instead of this
+		// checking if campaign is active, if so, block setting background as it's
+		// done by the campaign menu instead
 		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
 
 		this.loadingIndicator.visible = true;
 		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
+			// buh
 			MainMenuCampaignMode.switchReverse();
 			this.loadingIndicator.visible = false;
 		});
@@ -217,7 +221,6 @@ class MainMenu {
 	}
 
 	static onShowMainMenu() {
-		this.setMainMenuBackground();
 		this.menuContent.RemoveClass('mainmenu__content__t-prop');
 		this.menuContent.RemoveClass('mainmenu__content__anim');
 	}
@@ -327,6 +330,7 @@ class MainMenu {
 		this.page.AddClass('mainmenu__normal-page-container');
 		this.page.RemoveClass('mainmenu__wide-page-container');
 		this.model.AddClass('hide');
+		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 	}
 
 	// hide page container
@@ -340,6 +344,7 @@ class MainMenu {
 		this.gradientBar.RemoveClass('mainmenu__gradient-bar__anim');
 		this.controls.RemoveClass('mainmenu__nav__anim');
 		this.model.RemoveClass('hide');
+		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 	}
 
 	static reversePageAnim(panel: GenericPanel) {
@@ -382,15 +387,15 @@ class MainMenu {
 			// restore the lower level page
 			nowPage.panel.RemoveClass('mainmenu__page__back-anim');
 			this.flashPageLines();
-
-			// force focus back so that spamming ESC is possible
-			// TODO: probably handle this different for controllers...
-			$.GetContextPanel().SetFocus(true);
 		} else {
 			// no more pages
 			this.hidePage();
 			$.DispatchEvent('MainMenuFullBackNav');
 		}
+
+		// force focus back so that spamming ESC is possible
+		// TODO: probably handle this different for controllers...
+		$.GetContextPanel().SetFocus(true);
 	}
 
 	// pops all pages

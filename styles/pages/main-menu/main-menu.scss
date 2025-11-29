@@ -145,6 +145,20 @@ $pane-move-delay: 0.1s;
 		&__anim {
 			transform: translateX(0px);
 		}
+
+		&__grid1 {
+			vertical-align: top;
+			horizontal-align: left;
+			transform: translateX(-1px) scaleY(-1);
+			opacity: 0.25;
+		}
+
+		&__grid2 {
+			vertical-align: bottom;
+			horizontal-align: left;
+			transform: translateX(-1px);
+			opacity: 0.25;
+		}
 	}
 
 	&__modelpanel {
@@ -282,6 +296,12 @@ $pane-move-delay: 0.1s;
 			font-weight: light;
 			letter-spacing: 1px;
 		}
+	}
+
+	&__page-bg {
+		width: 100%;
+		height: 100%;
+		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
 	}
 
 	&__normal-page-container {
