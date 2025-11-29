@@ -194,11 +194,20 @@ class CampaignSaves {
 				'warning-popup',
 				$.Localize('#Action_LoadGame'),
 				() => {
-					if (this.campaign)
-						CampaignAPI.ContinueCampaign(this.campaign.id);
+					if (this.campaign) {
+						$.DispatchEvent('MainMenuCloseAllPages');
+						$.Schedule(
+							0.001,
+							() => CampaignAPI.ContinueCampaign(this.campaign.id)
+						);
+					}
 					else {
 						const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
-						GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
+						$.DispatchEvent('MainMenuCloseAllPages');
+						$.Schedule(
+							0.001,
+							() => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`)
+						);
 					}
 				},
 				$.Localize('#UI_Cancel'),
@@ -206,11 +215,20 @@ class CampaignSaves {
 				'blur'
 			);
 		} else {
-			if (this.campaign)
-				CampaignAPI.ContinueCampaign(this.campaign.id);
+			if (this.campaign) {
+				$.DispatchEvent('MainMenuCloseAllPages');
+				$.Schedule(
+					0.001,
+					() => CampaignAPI.ContinueCampaign(this.campaign.id)
+				);
+			}
 			else {
 				const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
-				GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`);
+				$.DispatchEvent('MainMenuCloseAllPages');
+				$.Schedule(
+					0.001,
+					() => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`)
+				);
 			}
 		}
 	}
@@ -260,8 +278,13 @@ class CampaignSaves {
 	}
 
 	static loadSave() {
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
-			GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`);
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
+			$.DispatchEvent('MainMenuCloseAllPages');
+			$.Schedule(
+				0.001,
+				() => GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`)
+			);
+		}
 		else {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 				$.Localize('#Action_LoadGame_Confirm'),
@@ -269,7 +292,11 @@ class CampaignSaves {
 				'warning-popup',
 				$.Localize('#Action_LoadGame'),
 				() => {
-					GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`);
+					$.DispatchEvent('MainMenuCloseAllPages');
+					$.Schedule(
+						0.001,
+						() => GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`)
+					);
 				},
 				$.Localize('#UI_Cancel'),
 				() => {},

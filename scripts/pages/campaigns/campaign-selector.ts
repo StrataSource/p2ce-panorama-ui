@@ -45,6 +45,7 @@ class CampaignEntry {
 			$.Schedule(0.5, () => {
 				$.DispatchEvent('SetActiveUiCampaign', this.info.id);
 				$.DispatchEvent('MainMenuCloseAllPages');
+				$.DispatchEvent('ReloadBackground');
 			});
 		});
 	}
@@ -54,46 +55,21 @@ class CampaignSelector {
 	static campaignList = $<Panel>('#CampaignContainer')!;
 	static hoverContainer = $<Panel>('#HoveredCampaignContainer')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
-	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
-	static selectorPage = $<Panel>('#CampaignSelector')!;
 	static campaignEntries: CampaignEntry[] = [];
 	static hoveredCampaign: CampaignInfo | null = null;
-	static isHidden: boolean = false;
 
 	// campaigns, p2ce ws, p2 ws
 	static gameType: GameType;
 	// filters by SP or MP
 	static playerMode: PlayerMode;
 
-	static layoutReload() {
-		this.purgeCampaignList();
-		this.campaignList.RemoveAndDeleteChildren();
-		this.populateCampaigns();
-	}
-
-	static onCampaignScreenHidden(tabid: string) {
-		if (tabid !== 'Campaigns') return;
-
-		this.hoverContainer.RemoveClass('campaigns__boxart__container__anim');
-		this.hoverContainer.RemoveClass('campaigns__boxart__container__show');
-	}
-
-	static onCampaignScreenShown(tabid: string) {
-		if (tabid !== 'Campaigns') return;
-
-		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
-	}
-
 	static init() {
-		this.reloadList();
-
-		$.RegisterForUnhandledEvent('LayoutReloaded', this.layoutReload.bind(this));
-		
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 	
 		this.gameType = UiToolkitAPI.GetGlobalObject()['GameType'] as GameType;
 		this.playerMode = UiToolkitAPI.GetGlobalObject()['PlayerMode'] as PlayerMode;
 		this.setPageLines();
+		this.reloadList();
 	}
 
 	static setPageLines() {
@@ -132,7 +108,15 @@ class CampaignSelector {
 	}
 
 	static populateCampaigns() {
-		const campaigns = CampaignAPI.GetAllCampaigns();
+		let campaigns = CampaignAPI.GetAllCampaigns();
+		campaigns = campaigns.filter((v) => {
+			if (this.playerMode === PlayerMode.SINGLEPLAYER) {
+				return !v.is_coop;
+			} else if (this.playerMode === PlayerMode.MULTIPLAYER) {
+				return v.is_coop;
+			}
+		}, this);
+
 		for (let i = 0; i < campaigns.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
 			p.LoadLayoutSnippet('CampaignEntrySnippet');
@@ -184,19 +168,6 @@ class CampaignSelector {
 		this.populateCampaigns();
 	}
 
-	static viewLooseMaps() {
-		UiToolkitAPI.ShowGenericPopupOk(
-			$.Localize('#MainMenu_Feature_Unavailable_Title'),
-			$.Localize('#MainMenu_Feature_Unavailable_Description'),
-			'blur',
-			() => {}
-		);
-	}
-
-	static openWorkshop() {
-		SteamOverlayAPI.OpenURL('https://steamcommunity.com/app/440000/workshop/');
-	}
-
 	static hideBoxart() {
 		// there is a specific scenario where this can be invalid
 		//
@@ -207,15 +178,5 @@ class CampaignSelector {
 		if (this.hoverContainer.IsValid()) {
 			this.hoverContainer.RemoveClass('campaigns__boxart__container__show');
 		}
-	}
-
-	static playAwayAnim() {
-		this.selectorPage.AddClass('campaigns__hide');
-		this.isHidden = true;
-	}
-
-	static playReturnAnim() {
-		this.selectorPage.RemoveClass('campaigns__hide');
-		this.isHidden = false;
 	}
 }
