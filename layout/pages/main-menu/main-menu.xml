@@ -52,9 +52,23 @@
 				<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
 
 				<Panel id="MenuContentRoot" class="mainmenu__content">
+					<Panel id="PageBg" class="mainmenu__page-bg" />
+
 					<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No Campaign Active" />
 
 					<Panel id="GradientBar" class="mainmenu__gradient-bar">
+						<Image
+							class="mainmenu__gradient-bar__grid1"
+							src="file://{images}/menu/menu_grid1.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							hittest="false"
+						/>
+						<Image
+							class="mainmenu__gradient-bar__grid2"
+							src="file://{images}/menu/menu_grid2.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							hittest="false"
+						/>
 						<Panel id="HomeControls" class="mainmenu__nav">
 							<Panel class="mainmenu__nav__top">
 								<Image
