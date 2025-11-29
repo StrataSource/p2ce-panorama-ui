@@ -140,6 +140,7 @@ class MainMenuCampaignMode {
 			// background maps take priority, turn these off
 			this.movie.visible = false;
 			this.hideBgImg();
+			$.PlaySoundEvent(CampaignAPI.GetBackgroundMusic());
 		}
 	}
 
@@ -169,17 +170,17 @@ class MainMenuCampaignMode {
 			);
 		} else if (bgm.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			this.movie.SetMovie(`file://{media}/${bgm}`);
+			this.movie.SetMovie(`file://{game}/${bgm}`);
 			this.movie.Play();
 			this.movie.visible = true;
+			$.Schedule(0.001, () => $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()));
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			this.showBgImg();
 			this.imgBg.SetImage(`file://{materials}/${bgi}`);
 			this.movie.visible = false;
+			$.Schedule(0.001, () => $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()));
 		}
-
-		$.Schedule(0.001, () => { $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()) });
 
 		return bgl.length > 0;
 	}
@@ -221,6 +222,7 @@ class MainMenuCampaignMode {
 
 		this.selectedCampaign = campaign;
 		CampaignAPI.SetActiveCampaign(this.selectedCampaign.id);
+		// TODO: Grab active campaign from API instead of this
 		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
@@ -261,6 +263,7 @@ class MainMenuCampaignMode {
 	}
 
 	static exitCampaign() {
+		// TODO: Grab active campaign from API instead of this
 		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = undefined;
 		this.selectedCampaign = undefined;
 
