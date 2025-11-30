@@ -418,7 +418,7 @@
 		}
 
 		&:hover:not(:disabled):not(:selected) {
-			background-color: gradient( linear, 100% 0%, 0% 0%, from( $button-background-hover ), to( rgba(0, 0, 0, 0) ) );
+			background-color: gradient(linear, 100% 0%, 0% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
 		}
 
 		&:selected {

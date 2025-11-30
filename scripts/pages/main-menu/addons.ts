@@ -110,7 +110,11 @@ class AddonManager {
 		this.findMaps();
 
 		$.DispatchEvent('Activated', $<RadioButton>('#ViewAddonsBtn')!, PanelEventSource.MOUSE);
-		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Content'), tagDevString('Manage Workshop subscriptions & mounted Source Engine games'));
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			tagDevString('Content'),
+			tagDevString('Manage Workshop subscriptions & mounted Source Engine games')
+		);
 	}
 
 	static showPage() {

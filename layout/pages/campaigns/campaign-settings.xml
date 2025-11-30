@@ -156,7 +156,11 @@
 						<Label class="campaign-settings__summary__text" html="true" text="#MainMenu_Campaigns_Setup_Summary_NoChanges" />
 					</Panel>
 				</Panel>
-				<Button id="CampaignSettingsStart" class="button-mono campaign-settings__start button-mono mt-2 full-width" onactivate="CampaignSettingsTab.finishSettings()">
+				<Button
+					id="CampaignSettingsStart"
+					class="button-mono campaign-settings__start button-mono mt-2 full-width"
+					onactivate="CampaignSettingsTab.finishSettings()"
+				>
 					<Image
 						class="button-mono__icon campaign-settings__start__icon"
 						src="file://{images}/cancel.svg"

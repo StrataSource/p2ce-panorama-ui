@@ -17,7 +17,7 @@ class SaveEntry {
 		actionBtn.SetPanelEvent('onactivate', () => {
 			CampaignSaves.overwriteBtn.ClearPanelEvent('onmouseover');
 			CampaignSaves.overwriteBtn.ClearPanelEvent('onmouseout');
-			
+
 			CampaignSaves.selectedSave = this;
 			CampaignSaves.actionPanel.enabled = true;
 
@@ -109,11 +109,11 @@ class CampaignSaves {
 	static saveEntries: SaveEntry[] = [];
 	static createSaveBtn: Button | null = null;
 	static selectedSave: SaveEntry;
-	static campaign: CampaignInfo = (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign']) as CampaignInfo;
-	
+	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
+
 	static init() {
 		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Saved Games'), tagDevString('Manage your Save Files'));
-		
+
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			this.addCreateSaveBtn();
 		} else {
@@ -130,7 +130,9 @@ class CampaignSaves {
 
 	static populateSaves() {
 		const saves = GameSavesAPI.GetGameSaves()
-			.filter((v: GameSave) => { return v.mapGroup === this.campaign.id })
+			.filter((v: GameSave) => {
+				return v.mapGroup === this.campaign.id;
+			})
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
 		for (let i = 0; i < saves.length; ++i) {
@@ -173,7 +175,7 @@ class CampaignSaves {
 							CampaignSaves.populateSaves();
 							CampaignSaves.unlockScreen();
 						});
-					}
+					};
 
 					checkSaving();
 				},
@@ -199,18 +201,13 @@ class CampaignSaves {
 				() => {
 					if (this.campaign) {
 						$.DispatchEvent('MainMenuCloseAllPages');
-						$.Schedule(
-							0.001,
-							() => CampaignAPI.ContinueCampaign(this.campaign.id)
+						$.Schedule(0.001, () => CampaignAPI.ContinueCampaign(this.campaign.id));
+					} else {
+						const saves = GameSavesAPI.GetGameSaves().sort(
+							(a, b) => Number(b.fileTime) - Number(a.fileTime)
 						);
-					}
-					else {
-						const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 						$.DispatchEvent('MainMenuCloseAllPages');
-						$.Schedule(
-							0.001,
-							() => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`)
-						);
+						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`));
 					}
 				},
 				$.Localize('#UI_Cancel'),
@@ -220,18 +217,11 @@ class CampaignSaves {
 		} else {
 			if (this.campaign) {
 				$.DispatchEvent('MainMenuCloseAllPages');
-				$.Schedule(
-					0.001,
-					() => CampaignAPI.ContinueCampaign(this.campaign.id)
-				);
-			}
-			else {
+				$.Schedule(0.001, () => CampaignAPI.ContinueCampaign(this.campaign.id));
+			} else {
 				const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 				$.DispatchEvent('MainMenuCloseAllPages');
-				$.Schedule(
-					0.001,
-					() => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`)
-				);
+				$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`));
 			}
 		}
 	}
@@ -283,12 +273,8 @@ class CampaignSaves {
 	static loadSave() {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
 			$.DispatchEvent('MainMenuCloseAllPages');
-			$.Schedule(
-				0.001,
-				() => GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`)
-			);
-		}
-		else {
+			$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`));
+		} else {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 				$.Localize('#Action_LoadGame_Confirm'),
 				$.Localize('#Action_LoadGame_Confirm_Message'),
@@ -296,10 +282,7 @@ class CampaignSaves {
 				$.Localize('#Action_LoadGame'),
 				() => {
 					$.DispatchEvent('MainMenuCloseAllPages');
-					$.Schedule(
-						0.001,
-						() => GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`)
-					);
+					$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.selectedSave.save.fileName}`));
 				},
 				$.Localize('#UI_Cancel'),
 				() => {},
