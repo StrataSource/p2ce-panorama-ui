@@ -175,6 +175,11 @@ RadioButton.button-mono {
 		color: $base-500;
 	}
 
+	&:disabled &__icon,
+	&:parentdisabled &__icon {
+		wash-color: $base-500;
+	}
+
 	&__bigger {
 		height: fit-children;
 		padding: 15px;

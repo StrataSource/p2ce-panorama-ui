@@ -137,26 +137,24 @@ $pane-move-delay: 0.1s;
 		width: 672px;
 		height: 100%;
 		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
-		border-left: $menu-pane-border;
-		transform: translateX(125px);
 
-		transition: transform $pane-move-delay ease-out 0s;
-
-		&__anim {
-			transform: translateX(0px);
-		}
+		// murdered bc JJ doesn't like it sadge :(
+		// transform: translateX(125px);
+		// transition: transform $pane-move-delay ease-out 0s;
+		// &__anim {
+		// 	transform: translateX(0px);
+		// }
 
 		&__grid1 {
 			vertical-align: top;
 			horizontal-align: left;
-			transform: translateX(-1px) scaleY(-1);
+			transform: scaleY(-1);
 			opacity: 0.25;
 		}
 
 		&__grid2 {
 			vertical-align: bottom;
 			horizontal-align: left;
-			transform: translateX(-1px);
 			opacity: 0.25;
 		}
 	}
@@ -265,7 +263,7 @@ $pane-move-delay: 0.1s;
 	}
 
 	&__display-box {
-		margin-left: 797px;
+		margin-left: 672px;
 		width: 480px;
 		flow-children: down;
 		border: $menu-pane-border;
@@ -290,11 +288,13 @@ $pane-move-delay: 0.1s;
 		}
 		&__head {
 			@include mixin.font-styles($use-header: true);
+			font-size: 20px;
 		}
 		&__tagline {
 			color: $base-300;
 			font-weight: light;
 			letter-spacing: 1px;
+			font-size: 16px;
 		}
 	}
 

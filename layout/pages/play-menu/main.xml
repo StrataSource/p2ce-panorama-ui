@@ -10,16 +10,16 @@
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setPlayMenuLines()">
 		<Panel class="play-menu__main">
 			<Panel class="flow-down full-width">
-				<Button class="play-menu__card" onactivate="PlayMenu.onCampaignsBtnPressed()">
-					<Image
-						class="play-menu__card__image"
-						src="file://{images}/menu/p2ce/random1.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1920"
-						texturewidth="1080"
-					/>
-					<Panel class="play-menu__card__status">
-						<Label class="play-menu__card__status__text" text="NEW" />
+				<Button class="play-menu__card play-menu__card__occupy" onactivate="PlayMenu.onCampaignsBtnPressed()">
+					<Panel class="full-width fill-height">
+						<Image
+							class="play-menu__card__image"
+							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<Panel class="play-menu__card__status">
+							<Label class="play-menu__card__status__text" text="NEW" />
+						</Panel>
 					</Panel>
 					<Panel class="play-menu__card__details">
 						<Label class="play-menu__card__details__header" text="[HC] Campaigns" />
@@ -30,10 +30,8 @@
 					<Button class="play-menu__card play-menu__card" onactivate="PlayMenu.onSoloMapsBtnPressed()">
 						<Image
 							class="play-menu__card__image"
-							src="file://{images}/menu/p2ce/random3.png"
+							src="file://{images}/menu/banner-multiverse.png"
 							scaling="stretch-to-cover-preserve-aspect"
-							textureheight="1920"
-							texturewidth="1080"
 						/>
 						<Panel class="play-menu__card__details">
 							<Label class="play-menu__card__details__header" text="[HC] Solo Maps" />

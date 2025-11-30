@@ -13,18 +13,29 @@
 				<RadioButton id="SaveAction" group="SaveGroupRadio" class="saves__entry">
 					<Panel class="saves__entry__inner">
 						<!-- Save icon cover -->
-						<Image
-							id="SaveCover"
-							class="saves__entry__cover"
-							src="file://{materials}/vgui/no_save_game.vtf"
-							scaling="stretch-to-cover-preserve-aspect"
-							textureheight="1920"
-							texturewidth="1080"
-						/>
+						<Panel>
+							<Image
+								id="SaveCover"
+								class="saves__entry__cover"
+								src="file://{materials}/vgui/no_save_game.vtf"
+								scaling="stretch-to-cover-preserve-aspect"
+								textureheight="1920"
+								texturewidth="1080"
+							/>
+							<Image
+								id="SaveCloud"
+								class="saves__entry__cloud"
+								src="file://{images}/cloud.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								textureheight="32"
+								texturewidth="32"
+							/>
+						</Panel>
 						<!-- Save info; title, description, 'source' -->
 						<Panel class="saves__entry__details">
-							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
+							<Label id="SaveType" class="saves__entry__details__type" text="[HC] AUTOSAVE" />
 							<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
+							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
 						</Panel>
 					</Panel>
 				</RadioButton>
@@ -39,6 +50,27 @@
 				</Button>
 			</Panel>
 		</snippet>
+		<snippet name="CreateSaveSnippet">
+			<Panel class="saves__container">
+				<Button id="SaveAction" class="saves__entry">
+					<Panel class="saves__entry__inner saves__entry__lined">
+						<!-- Save icon cover -->
+						<Image
+							id="SaveCover"
+							class="saves__entry__cover saves__entry__cover__short"
+							src="file://{materials}/vgui/new_save_game.vtf"
+							scaling="stretch-to-cover-preserve-aspect"
+							textureheight="1920"
+							texturewidth="1080"
+						/>
+						<!-- Save info; title, description, 'source' -->
+						<Panel class="saves__entry__details">
+							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
+						</Panel>
+					</Panel>
+				</Button>
+			</Panel>
+		</snippet>
 	</snippets>
 
 	<Panel class="mainmenu__page" onload="CampaignSaves.init()">
@@ -47,9 +79,23 @@
 		<Panel id="CampaignSaves" class="selected-campaign__lister" />
 		<Panel id="CampaignSaveActions" class="selected-campaign__action-bar" disabled="true">
 			<Button id="SaveOverwrite" class="button-mono button-mono__bigger fill-width mr-2" onactivate="CampaignSaves.overwriteSave()">
+				<Image
+					class="button-mono__icon"
+					src="file://{images}/download.svg"
+					scaling="stretch-to-fit-preserve-aspect"
+					texturewidth="32"
+					textureheight="32"
+				/>
 				<Label class="button-mono__text" text="[HC] Overwrite Save" />
 			</Button>
 			<Button id="SaveLoad" class="button-mono button-mono__bigger fill-width" onactivate="CampaignSaves.loadSave()">
+				<Image
+					class="button-mono__icon"
+					src="file://{images}/play.svg"
+					scaling="stretch-to-fit-preserve-aspect"
+					texturewidth="32"
+					textureheight="32"
+				/>
 				<Label class="button-mono__text" text="[HC] Load Save" />
 			</Button>
 		</Panel>
