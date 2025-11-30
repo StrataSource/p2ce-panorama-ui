@@ -70,9 +70,9 @@ $pane-move-delay: 0.1s;
 	&__pause-blur {
 		width: 125%;
 		height: 125%;
-		saturation: 1.0;
-		brightness: 1.0;
-		blur: fastgaussian(2,2,2);
+		saturation: 1;
+		brightness: 1;
+		blur: fastgaussian(2, 2, 2);
 		overflow: noclip;
 
 		transition:
@@ -136,7 +136,7 @@ $pane-move-delay: 0.1s;
 	&__gradient-bar {
 		width: 672px;
 		height: 100%;
-		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
+		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
 
 		// murdered bc JJ doesn't like it sadge :(
 		// transform: translateX(125px);
@@ -172,7 +172,7 @@ $pane-move-delay: 0.1s;
 		width: 440px;
 		height: 130px;
 		horizontal-align: center;
-		img-shadow: 0px 0px 100px 4.0 $base-950;
+		img-shadow: 0px 0px 100px 4 $base-950;
 	}
 
 	&__nav {
@@ -183,7 +183,7 @@ $pane-move-delay: 0.1s;
 		opacity: 1;
 		transform: translateX(0px);
 		blur: gaussian(0, 0, 0);
-		
+
 		transition:
 			transform calc($pane-move-delay * 1.5) ease-out 0s,
 			opacity $pane-move-delay ease-in-out 0s,
@@ -237,7 +237,13 @@ $pane-move-delay: 0.1s;
 			}
 
 			&:hover:not(:disabled) {
-				background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0, 0, 0, 0) ) );
+				background-color: gradient(
+					linear,
+					0% 0%,
+					100% 0%,
+					from($button-background-hover),
+					to(rgba(0, 0, 0, 0))
+				);
 
 				#{$this}__text,
 				#{$this}__small-text {
@@ -301,7 +307,7 @@ $pane-move-delay: 0.1s;
 	&__page-bg {
 		width: 100%;
 		height: 100%;
-		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba(0, 0, 0, 0) ) );
+		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
 	}
 
 	&__normal-page-container {
@@ -325,7 +331,7 @@ $pane-move-delay: 0.1s;
 		opacity: 0;
 		transform: translateX(125px);
 		blur: gaussian(10, 10, 2);
-		
+
 		transition:
 			transform calc($pane-move-delay * 1.5) ease-out 0s,
 			opacity $pane-move-delay ease-in-out 0s,
@@ -350,7 +356,7 @@ $pane-move-delay: 0.1s;
 
 		// TODO: Use keyframe anims
 		//animation: MainMenuFlash 0.2s ease-in-out 0s 1 normal forwards;
-		
+
 		&__t-prop {
 			transition:
 				transform calc($pane-move-delay * 2) ease-out 0s,

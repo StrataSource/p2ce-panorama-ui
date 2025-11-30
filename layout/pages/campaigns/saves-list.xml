@@ -78,7 +78,11 @@
 		</Panel>
 		<Panel id="CampaignSaves" class="selected-campaign__lister" />
 		<Panel id="CampaignSaveActions" class="selected-campaign__action-bar" disabled="true">
-			<Button id="SaveOverwrite" class="button-mono button-mono__bigger fill-width mr-2" onactivate="CampaignSaves.overwriteSave()">
+			<Button
+				id="SaveOverwrite"
+				class="button-mono button-mono__bigger fill-width mr-2"
+				onactivate="CampaignSaves.overwriteSave()"
+			>
 				<Image
 					class="button-mono__icon"
 					src="file://{images}/download.svg"

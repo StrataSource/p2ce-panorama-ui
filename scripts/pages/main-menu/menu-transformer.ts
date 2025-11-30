@@ -65,8 +65,10 @@ class MainMenuCampaignMode {
 
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
-			.filter((a) => { return a.mapGroup === this.selectedCampaign!.id });
-		
+			.filter((a) => {
+				return a.mapGroup === this.selectedCampaign!.id;
+			});
+
 		this.continueBtn.enabled = false;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
 
@@ -81,9 +83,11 @@ class MainMenuCampaignMode {
 		this.latestSave = saves[0];
 
 		const savChapter = this.selectedCampaign.chapters.find((ch) => {
-			return ch.maps.find((map) => {
-				return map.name === this.latestSave.mapName;
-			}) !== undefined;
+			return (
+				ch.maps.find((map) => {
+					return map.name === this.latestSave.mapName;
+				}) !== undefined
+			);
 		});
 
 		if (!savChapter) {
@@ -100,28 +104,25 @@ class MainMenuCampaignMode {
 		this.continueHeadline.text = `${this.latestSave.mapName}`;
 		const date = new Date(Number(this.latestSave.fileTime) * 1000);
 		this.continueTagline.text = `${date.toDateString()}, ${date.toLocaleTimeString()}`;
-	
-		this.continueBtn.SetPanelEvent(
-			'onactivate',
-			() => {
-				if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						$.Localize('#Action_LoadGame_Confirm'),
-						$.Localize('#Action_LoadGame_Auto_Message'),
-						'warning-popup',
-						$.Localize('#Action_LoadGame'),
-						() => {
-							CampaignAPI.ContinueCampaign(this.selectedCampaign!.id);
-						},
-						$.Localize('#UI_Cancel'),
-						() => {},
-						'blur'
-					);
-				} else {
-					CampaignAPI.ContinueCampaign(this.selectedCampaign!.id);
-				}
+
+		this.continueBtn.SetPanelEvent('onactivate', () => {
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					$.Localize('#Action_LoadGame_Confirm'),
+					$.Localize('#Action_LoadGame_Auto_Message'),
+					'warning-popup',
+					$.Localize('#Action_LoadGame'),
+					() => {
+						CampaignAPI.ContinueCampaign(this.selectedCampaign!.id);
+					},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
+			} else {
+				CampaignAPI.ContinueCampaign(this.selectedCampaign!.id);
 			}
-		);
+		});
 
 		this.continueBtn.enabled = true;
 	}
@@ -165,9 +166,8 @@ class MainMenuCampaignMode {
 		if (bgl.length > 0) {
 			this.showBgImg();
 			this.imgBg.SetImage(`file://{materials}/${bgi}`);
-			$.Schedule(
-				this.BACKGROUND_IMAGE_FADE_IN_TIME,
-				() => GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`)
+			$.Schedule(this.BACKGROUND_IMAGE_FADE_IN_TIME, () =>
+				GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`)
 			);
 		} else if (bgm.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
@@ -212,7 +212,9 @@ class MainMenuCampaignMode {
 	}
 
 	static onCampaignSelected(id: string) {
-		const campaign = CampaignAPI.GetAllCampaigns().find((v) => { return v.id === id });
+		const campaign = CampaignAPI.GetAllCampaigns().find((v) => {
+			return v.id === id;
+		});
 		if (!campaign) {
 			$.Warning(`Menu: Campaign ID ${id} received but that's not a valid Campaign?`);
 			return;
@@ -249,7 +251,7 @@ class MainMenuCampaignMode {
 		}
 		this.logo.SetImage(saveImg);
 		this.campaignDevTxt.text = `[DEV] Campaign: ${$.Localize(campaign.title)} (${id})`;
-	
+
 		this.setContinueDetails();
 	}
 

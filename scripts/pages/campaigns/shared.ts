@@ -1,14 +1,14 @@
 'use strict';
 
 interface CampaignSetting {
-	Name: string,
-	HelpText: string,
-	Default: unknown,
-	Command: string
+	Name: string;
+	HelpText: string;
+	Default: unknown;
+	Command: string;
 }
 
 interface CampaignPageGroup {
-	[key: string]: {[key: string]: CampaignSetting};
+	[key: string]: { [key: string]: CampaignSetting };
 }
 
 const CampaignSettingHelpers: CampaignPageGroup = {
@@ -16,7 +16,8 @@ const CampaignSettingHelpers: CampaignPageGroup = {
 	GameplayBase: {
 		Cheats: {
 			Name: 'Server Cheats',
-			HelpText: 'Enable <pre>sv_cheats 1</pre> and allow the usage of commands that require it, such as <pre>noclip</pre>.\n\nDefault: false',
+			HelpText:
+				'Enable <pre>sv_cheats 1</pre> and allow the usage of commands that require it, such as <pre>noclip</pre>.\n\nDefault: false',
 			Default: false,
 			Command: 'sv_cheats'
 		},
@@ -34,12 +35,13 @@ const CampaignSettingHelpers: CampaignPageGroup = {
 		},
 		Difficulty: {
 			Name: 'Difficulty',
-			HelpText: 'Sets the skill level and affects how much damage is dealt/taken. Does not apply to Portal campaigns.\n\nDefault: Normal',
+			HelpText:
+				'Sets the skill level and affects how much damage is dealt/taken. Does not apply to Portal campaigns.\n\nDefault: Normal',
 			Default: 1,
 			Command: 'skill'
 		}
 	}
-}
+};
 
 class NonDefaultDescriptor {
 	panel: GenericPanel;
@@ -54,7 +56,7 @@ class NonDefaultDescriptor {
 		this.defaultVal = defaultVal;
 		this.command = command;
 	}
-};
+}
 
 class CampaignShared {
 	static ApplyMarkup() {
@@ -67,13 +69,15 @@ class CampaignShared {
 
 			if (!isSetting) continue;
 
-			child.SetHasClass('campaign-setting__entry__odd', (i % 2) !== 0);
+			child.SetHasClass('campaign-setting__entry__odd', i % 2 !== 0);
 
 			const settingField = child.GetAttributeString('settingfield', 'None');
 			const helper = helperBlock[settingField];
 
-			child.SetPanelEvent('onmouseover', () => { $.DispatchEvent('CampaignSettingHovered', helper['HelpText']) });
-		
+			child.SetPanelEvent('onmouseover', () => {
+				$.DispatchEvent('CampaignSettingHovered', helper['HelpText']);
+			});
+
 			const input = child.FindChildrenWithClassTraverse('campaign-setting__entry__value')[0];
 
 			switch (input.paneltype) {
@@ -88,7 +92,7 @@ class CampaignShared {
 				case 'DropDown':
 					(input as DropDown).SetSelectedIndex(Number(helper.Default));
 					break;
-			
+
 				default:
 					break;
 			}
@@ -126,7 +130,7 @@ class CampaignShared {
 				case 'DropDown':
 					entry.actual = ((input as DropDown).GetSelected() as Label).text;
 					break;
-			
+
 				default:
 					break;
 			}

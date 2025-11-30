@@ -17,12 +17,7 @@
 			<Panel id="NewsPipContainer" class="news__pips" />
 			<Panel class="horizontal-align-right flow-right">
 				<Button class="news__nav-btn news__nav-btn__left" onactivate="NewsReel.goPrevArticle()">
-					<Image
-						src="file://{images}/arrow-forward.svg"
-						class="news__nav-btn__left__img"
-						texturewidth="32"
-						textureheight="32"
-					/>
+					<Image src="file://{images}/arrow-forward.svg" class="news__nav-btn__left__img" texturewidth="32" textureheight="32" />
 				</Button>
 				<Button class="news__nav-btn" onactivate="NewsReel.goNextArticle()">
 					<Image src="file://{images}/arrow-forward.svg" texturewidth="32" textureheight="32" />

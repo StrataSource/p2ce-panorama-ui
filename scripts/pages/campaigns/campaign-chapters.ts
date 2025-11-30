@@ -41,11 +41,15 @@ class CampaignChapters {
 
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: ChapterInfo;
-	static campaign: CampaignInfo = (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign']) as CampaignInfo;
+	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
 
 	static populateChapters() {
-		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Chapter Select'), tagDevString('Configure & Start a New Game'));
-		
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			tagDevString('Chapter Select'),
+			tagDevString('Configure & Start a New Game')
+		);
+
 		const chapters = this.campaign.chapters;
 
 		for (let i = 0; i < chapters.length; ++i) {
@@ -83,7 +87,7 @@ class CampaignChapters {
 			'[DEV] Not Available',
 			'This is still being rewritten.',
 			'generic-popup',
-			() => { }
+			() => {}
 		);
 		//CampaignMgr.customizeChapter(this.selectedChapter);
 	}

@@ -114,10 +114,7 @@
 							onactivate="SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts')"
 						>
 							<Label class="mounts__disclaimer__text" text="#MainMenu_Mounts_WIP_Title" />
-							<Label
-								class="mounts__disclaimer__small-text"
-								text="#MainMenu_Mounts_WIP_Tagline"
-							/>
+							<Label class="mounts__disclaimer__small-text" text="#MainMenu_Mounts_WIP_Tagline" />
 						</Button>
 					</Panel>
 				</Panel>

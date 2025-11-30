@@ -49,7 +49,11 @@ class MainMenuSettings {
 		// Handle the settings save event
 		$.RegisterForUnhandledEvent('SettingsSave', this.saveSettings.bind(this));
 
-		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Settings'), tagDevString('Tweak keybinds, video, preferences, etc.'));
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			tagDevString('Settings'),
+			tagDevString('Tweak keybinds, video, preferences, etc.')
+		);
 	}
 
 	static navigateToTab(tab) {
