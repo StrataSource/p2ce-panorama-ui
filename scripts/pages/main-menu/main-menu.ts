@@ -117,7 +117,9 @@ class MainMenu {
 
 		this.continueText.text = `${$.Localize(savCampaign.title)} ${chapterString}`;
 		this.continueHeadline.text = `${$.Localize(savChapter.title)}`;
-		this.continueTagline.text = `${this.latestSave.mapName}\n${new Date(Number(this.latestSave.fileTime) * 1000).toDateString()}`
+
+		const date = new Date(Number(this.latestSave.fileTime) * 1000);
+		this.continueTagline.text = `${this.latestSave.mapName}\n${date.toDateString()}, ${date.toLocaleTimeString()}`;
 	
 		this.continueBtn.SetPanelEvent(
 			'onactivate',

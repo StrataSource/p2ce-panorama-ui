@@ -39,17 +39,36 @@ class SaveEntry {
 		const desc = this.panel.FindChildTraverse<Label>('SaveDesc');
 		const cover = this.panel.FindChildTraverse<Image>('SaveCover');
 		const del = this.panel.FindChildTraverse<Button>('SaveDelete');
+		const type = this.panel.FindChildTraverse<Label>('SaveType');
+		const cloud = this.panel.FindChildTraverse<Image>('SaveCloud');
 
 		if (title) {
 			title.text = this.save.mapName;
 		}
 		if (desc) {
 			const date = new Date(Number(this.save.fileTime) * 1000);
-			desc.text = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+			desc.text = `${date.toDateString()}, ${date.toLocaleTimeString()}`;
 		}
 		if (cover) {
 			const thumb = `file://{__saves}/${this.save.fileName.replace('.sav', '.tga')}`;
 			cover.SetImage(thumb);
+		}
+		if (type) {
+			const isQuicksave = this.save.fileName.includes('quick');
+			const isAuto = this.save.isAutoSave;
+
+			type.visible = isQuicksave || isAuto;
+
+			if (isQuicksave) {
+				type.text = tagDevString('Quicksave');
+			} else if (isAuto) {
+				type.text = tagDevString('Autosave');
+			}
+		}
+		if (cloud) {
+			if (!this.save.isSavedInCloud) {
+				cloud.SetImage('file://{images}/save.svg');
+			}
 		}
 		if (del) {
 			del.SetPanelEvent('onactivate', () => {
@@ -125,28 +144,12 @@ class CampaignSaves {
 	}
 
 	static addCreateSaveBtn() {
-		this.createSaveBtn = $.CreatePanel('Button', this.stickyPanel, 'CreateSave', {
-			class: 'saves__entry__lined'
-		});
-		this.createSaveBtn.LoadLayoutSnippet('SaveEntrySnippet');
+		this.createSaveBtn = $.CreatePanel('Button', this.stickyPanel, 'CreateSave');
+		this.createSaveBtn.LoadLayoutSnippet('CreateSaveSnippet');
 
 		const title = this.createSaveBtn.FindChildTraverse<Label>('SaveTitle');
-		const desc = this.createSaveBtn.FindChildTraverse<Label>('SaveDesc');
-		const cover = this.createSaveBtn.FindChildTraverse<Image>('SaveCover');
-		const del = this.createSaveBtn.FindChildTraverse<Button>('SaveDelete');
-
 		if (title) {
 			title.text = $.Localize('#MainMenu_SaveRestore_CreateSave');
-		}
-		if (desc) {
-			desc.visible = false;
-		}
-		if (cover) {
-			cover.SetImage('file://{materials}/vgui/new_save_game.vtf');
-			cover.AddClass('saves__entry__cover__short');
-		}
-		if (del) {
-			del.visible = false;
 		}
 
 		this.createSaveBtn.SetPanelEvent('onactivate', () => {

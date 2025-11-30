@@ -13,10 +13,8 @@
 				<Button class="play-menu__card fill-width mr-3" onactivate="PlayMenu.onCeMapsBtnPressed()">
 					<Image
 						class="play-menu__card__image"
-						src="file://{images}/menu/p2ce/random5.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="473"
-						texturewidth="793"
+						src="file://{images}/menu/vertical-banner-p2ce.svg"
+						scaling="stretch-to-fit-preserve-aspect"
 					/>
 					<Panel class="play-menu__card__details">
 						<Label class="play-menu__card__details__header" text="[HC] P2:CE Maps" />
@@ -25,10 +23,8 @@
 				<Button class="play-menu__card fill-width" onactivate="PlayMenu.onP2MapsBtnPressed()">
 					<Image
 						class="play-menu__card__image"
-						src="file://{images}/menu/p2ce/random4.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="473"
-						texturewidth="793"
+						src="file://{images}/menu/vertical-banner-p2.svg"
+						scaling="stretch-to-fit-preserve-aspect"
 					/>
 					<Panel class="play-menu__card__details">
 						<Label class="play-menu__card__details__header" text="[HC] Portal 2 Maps" />
