@@ -19,6 +19,10 @@
 
 		$this: &;
 
+		&__occupy {
+			flow-children: down;
+		}
+
 		&__image {
 			width: 100%;
 			height: fill-parent-flow(1);
@@ -50,6 +54,7 @@
 
 			&__no-bg {
 				background-color: rgba(0, 0, 0, 0);
+				border-color: rgba(0, 0, 0, 0);
 			}
 
 			&__header {
