@@ -35,10 +35,18 @@
 		<Panel id="CampaignChapters" class="selected-campaign__lister">
 		</Panel>
 		<Panel id="CampaignStarterPanel" class="selected-campaign__action-bar" disabled="true">
-			<Button id="CampaignCustomizeBtn" class="button-mono button-mono__bigger fill-width mr-2" onactivate="CampaignChapters.customizeChapter()">
+			<Button
+				id="CampaignCustomizeBtn"
+				class="button-mono button-mono__bigger fill-width mr-2"
+				onactivate="CampaignChapters.customizeChapter()"
+			>
 				<Label class="button-mono__text" text="#MainMenu_Campaigns_MM_StartCustom" />
 			</Button>
-			<Button id="CampaignCleanStartBtn" class="button-mono button-mono__bigger fill-width" onactivate="CampaignChapters.startChapter()">
+			<Button
+				id="CampaignCleanStartBtn"
+				class="button-mono button-mono__bigger fill-width"
+				onactivate="CampaignChapters.startChapter()"
+			>
 				<Label class="button-mono__text" text="#MainMenu_Campaigns_MM_StartVanilla" />
 			</Button>
 		</Panel>

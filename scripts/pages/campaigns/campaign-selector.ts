@@ -65,7 +65,7 @@ class CampaignSelector {
 
 	static init() {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
-	
+
 		this.gameType = UiToolkitAPI.GetGlobalObject()['GameType'] as GameType;
 		this.playerMode = UiToolkitAPI.GetGlobalObject()['PlayerMode'] as PlayerMode;
 		this.setPageLines();
@@ -98,7 +98,7 @@ class CampaignSelector {
 				headline = tagDevString(`${playerModeStr} Loose Maps`);
 				tagline = tagDevString('Select a disk map to play');
 				break;
-		
+
 			default:
 				headline = tagline = '????';
 				break;

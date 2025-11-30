@@ -83,7 +83,7 @@ class MainMenu {
 		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 		this.continueBtn.enabled = false;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
-		
+
 		if (saves.length === 0) {
 			$.Warning('CONTINUE: No saves');
 			return;
@@ -92,7 +92,9 @@ class MainMenu {
 		this.latestSave = saves[0];
 
 		const campaigns = CampaignAPI.GetAllCampaigns();
-		const savCampaign = campaigns.find((v) => { return v.id === this.latestSave.mapGroup });
+		const savCampaign = campaigns.find((v) => {
+			return v.id === this.latestSave.mapGroup;
+		});
 
 		if (!savCampaign) {
 			$.Warning('CONTINUE: Save exists, but the campaign it belongs to cannot be found.');
@@ -100,9 +102,11 @@ class MainMenu {
 		}
 
 		const savChapter = savCampaign.chapters.find((ch) => {
-			return ch.maps.find((map) => {
-				return map.name === this.latestSave.mapName;
-			}) !== undefined;
+			return (
+				ch.maps.find((map) => {
+					return map.name === this.latestSave.mapName;
+				}) !== undefined
+			);
 		});
 
 		if (!savChapter) {
@@ -120,30 +124,27 @@ class MainMenu {
 
 		const date = new Date(Number(this.latestSave.fileTime) * 1000);
 		this.continueTagline.text = `${this.latestSave.mapName}\n${date.toDateString()}, ${date.toLocaleTimeString()}`;
-	
-		this.continueBtn.SetPanelEvent(
-			'onactivate',
-			() => {
-				if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						$.Localize('#Action_LoadGame_Confirm'),
-						$.Localize('#Action_LoadGame_Auto_Message'),
-						'warning-popup',
-						$.Localize('#Action_LoadGame'),
-						() => {
-							$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
-							CampaignAPI.ContinueCampaign(savCampaign.id);
-						},
-						$.Localize('#UI_Cancel'),
-						() => {},
-						'blur'
-					);
-				} else {
-					$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
-					CampaignAPI.ContinueCampaign(savCampaign.id);
-				}
+
+		this.continueBtn.SetPanelEvent('onactivate', () => {
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					$.Localize('#Action_LoadGame_Confirm'),
+					$.Localize('#Action_LoadGame_Auto_Message'),
+					'warning-popup',
+					$.Localize('#Action_LoadGame'),
+					() => {
+						$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
+						CampaignAPI.ContinueCampaign(savCampaign.id);
+					},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
+			} else {
+				$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
+				CampaignAPI.ContinueCampaign(savCampaign.id);
 			}
-		);
+		});
 
 		this.continueBtn.enabled = true;
 	}
@@ -183,18 +184,10 @@ class MainMenu {
 		const models = [
 			'models/panorama/menu/BotPoses.mdl',
 			'models/panorama/menu/sp_a2_bridge_the_gap_WHEATLEY.mdl',
-			'models/panorama/menu/sp_a1_wakeup_glados_MERGED.mdl',
+			'models/panorama/menu/sp_a1_wakeup_glados_MERGED.mdl'
 		];
-		const modelRotations = [
-			-240,
-			-100,
-			-180
-		];
-		const modelZTranslates = [
-			0,
-			0,
-			-30
-		];
+		const modelRotations = [-240, -100, -180];
+		const modelZTranslates = [0, 0, -30];
 
 		if (models.length !== modelRotations.length) {
 			$.Warning('main-menu: models & modelRotations array sizes mismatch');
@@ -260,7 +253,7 @@ class MainMenu {
 	static onMenuSetPageLines(headline: string, tagline: string) {
 		this.pageHeadline.text = headline;
 		this.pageTagline.text = tagline;
-		
+
 		if (this.pages.length > 0) {
 			this.pages[this.pages.length - 1].setLines(headline, tagline);
 		}
@@ -322,7 +315,7 @@ class MainMenu {
 	static showPage() {
 		this.page.hittest = true;
 		this.pageInsert.hittest = false;
-		
+
 		this.pageHeadline.AddClass('mainmenu__page-controls__anim');
 		this.pageTagline.AddClass('mainmenu__page-controls__anim');
 		this.pageActions.AddClass('mainmenu__page-controls__anim');
@@ -368,11 +361,9 @@ class MainMenu {
 		const currentPage = this.pages.pop();
 
 		if (currentPage) {
-			if (currentPage.name === 'Settings')
-				$.DispatchEvent('SettingsSave');
+			if (currentPage.name === 'Settings') $.DispatchEvent('SettingsSave');
 
-			if (currentPage.panel.IsValid())
-				this.reversePageAnim(currentPage.panel);
+			if (currentPage.panel.IsValid()) this.reversePageAnim(currentPage.panel);
 		}
 
 		if (this.pages.length > 0) {
@@ -385,7 +376,7 @@ class MainMenu {
 				this.pageHeadline.text = nowPage.headline;
 				this.pageTagline.text = nowPage.tagline;
 			}
-			
+
 			// restore the lower level page
 			nowPage.panel.RemoveClass('mainmenu__page__back-anim');
 			this.flashPageLines();
@@ -408,13 +399,11 @@ class MainMenu {
 	}
 
 	static onContinueMouseOver() {
-		if (this.continueBtn.enabled)
-			this.continueBox.visible = true;
+		if (this.continueBtn.enabled) this.continueBox.visible = true;
 	}
 
 	static onContinueMouseOut() {
-		if (this.continueBox.IsValid())
-			this.continueBox.visible = false;
+		if (this.continueBox.IsValid()) this.continueBox.visible = false;
 	}
 
 	/**
@@ -441,8 +430,7 @@ class MainMenu {
 
 	static onQuitPrompt(toDesktop = true) {
 		// make sure game is paused so we can see the popup if hit from a keybind in-game
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU)
-			$.DispatchEvent('MainMenuPauseGame');
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) $.DispatchEvent('MainMenuPauseGame');
 
 		if (toDesktop) {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(

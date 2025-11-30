@@ -18,8 +18,10 @@ class CampaignSettingsTab {
 
 	static init() {
 		this.hide();
-		this.startBtn.SetPanelEvent('onmouseout', () => { UiToolkitAPI.HideTextTooltip(); });
-	
+		this.startBtn.SetPanelEvent('onmouseout', () => {
+			UiToolkitAPI.HideTextTooltip();
+		});
+
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
 	}
 
@@ -33,7 +35,10 @@ class CampaignSettingsTab {
 
 	static show() {
 		this.page.visible = true;
-		this.setHeaderText($.Localize('#MainMenu_Campaigns_Setup_Title'), $.Localize('#MainMenu_Campaigns_Setup_Tagline'));
+		this.setHeaderText(
+			$.Localize('#MainMenu_Campaigns_Setup_Title'),
+			$.Localize('#MainMenu_Campaigns_Setup_Tagline')
+		);
 	}
 
 	static setHeaderText(header: string, subheader: string) {
@@ -91,8 +96,10 @@ class CampaignSettingsTab {
 	}
 
 	static openSettingsSubpage(tab: string, xml: string, locH: string, locS: string) {
-		this.startBtn.SetPanelEvent('onmouseover', () => { UiToolkitAPI.ShowTextTooltip(this.startBtn.id, $.Localize('#MainMenu_Campaigns_Setup_ExitNote')); });
-		
+		this.startBtn.SetPanelEvent('onmouseover', () => {
+			UiToolkitAPI.ShowTextTooltip(this.startBtn.id, $.Localize('#MainMenu_Campaigns_Setup_ExitNote'));
+		});
+
 		this.basePage.visible = false;
 		this.subPage.visible = true;
 		this.startBtn.enabled = false;
@@ -144,7 +151,10 @@ class CampaignSettingsTab {
 		this.helpPage.visible = false;
 		this.startBtn.enabled = true;
 
-		this.setHeaderText($.Localize('#MainMenu_Campaigns_Setup_Title'), $.Localize('#MainMenu_Campaigns_Setup_Tagline'));
+		this.setHeaderText(
+			$.Localize('#MainMenu_Campaigns_Setup_Title'),
+			$.Localize('#MainMenu_Campaigns_Setup_Tagline')
+		);
 
 		this.startBtn.ClearPanelEvent('onmouseover');
 
@@ -166,15 +176,11 @@ class CampaignSettingsTab {
 
 			// skip these ones, they're not helpful
 			if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
-			
-			$.CreatePanel(
-				'Label',
-				this.summaryPanel,
-				`SummaryHeading${i}`, {
-					class: 'campaign-settings__summary__header',
-					text: `${subpage.GetAttributeString('settings.name', 'NOT FOUND')}`
-				}
-			);
+
+			$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
+				class: 'campaign-settings__summary__header',
+				text: `${subpage.GetAttributeString('settings.name', 'NOT FOUND')}`
+			});
 
 			// fetch page settings
 			const settings = CampaignShared.FetchPageSettings(subpage);
@@ -190,30 +196,22 @@ class CampaignSettingsTab {
 					continue;
 				}
 
-				$.CreatePanel(
-					'Label',
-					this.summaryPanel,
-					`SummaryHeading${i}`, {
-						class: 'campaign-settings__summary__text',
-						html: true,
-						text: `<b>- ${entry.name}:</b> ${entry.actual}`
-					}
-				);
+				$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
+					class: 'campaign-settings__summary__text',
+					html: true,
+					text: `<b>- ${entry.name}:</b> ${entry.actual}`
+				});
 
 				++applied;
 			}
 
 			// no changes applied to this section
 			if (applied === 0) {
-				$.CreatePanel(
-					'Label',
-					this.summaryPanel,
-					`SummaryHeading${i}`, {
-						class: 'campaign-settings__summary__text',
-						html: true,
-						text: '<b>#MainMenu_Campaigns_Setup_Summary_NoChanges</b>'
-					}
-				);
+				$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
+					class: 'campaign-settings__summary__text',
+					html: true,
+					text: '<b>#MainMenu_Campaigns_Setup_Summary_NoChanges</b>'
+				});
 			}
 		}
 	}

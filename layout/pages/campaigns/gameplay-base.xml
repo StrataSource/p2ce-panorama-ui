@@ -8,45 +8,24 @@
 
 	<Panel class="campaign-settings__subpage" settingfield="GameplayBase" onload="CampaignShared.ApplyMarkup()">
 		<Panel class="campaign-setting__entry" settingfield="Cheats">
-			<Label
-				class="campaign-setting__entry__text"
-				text="#MainMenu_Campaigns_Setup_Var_sv_cheats"
-			/>
+			<Label class="campaign-setting__entry__text" text="#MainMenu_Campaigns_Setup_Var_sv_cheats" />
 
-			<ToggleButton
-				class="checkbox campaign-setting__entry__value campaign-setting__entry__checkbox"
-			/>
+			<ToggleButton class="checkbox campaign-setting__entry__value campaign-setting__entry__checkbox" />
 		</Panel>
 		<Panel class="campaign-setting__entry" settingfield="MirrorWorld">
-			<Label
-				class="campaign-setting__entry__text"
-				text="#MainMenu_Campaigns_Setup_Var_cl_mirror_world"
-			/>
+			<Label class="campaign-setting__entry__text" text="#MainMenu_Campaigns_Setup_Var_cl_mirror_world" />
 
-			<ToggleButton
-				class="checkbox campaign-setting__entry__value campaign-setting__entry__checkbox"
-			/>
+			<ToggleButton class="checkbox campaign-setting__entry__value campaign-setting__entry__checkbox" />
 		</Panel>
 		<Panel class="campaign-setting__entry" settingfield="Gravity">
-			<Label
-				class="campaign-setting__entry__text"
-				text="#MainMenu_Campaigns_Setup_Var_sv_gravity"
-			/>
+			<Label class="campaign-setting__entry__text" text="#MainMenu_Campaigns_Setup_Var_sv_gravity" />
 
-			<TextEntry
-				class="textentry campaign-setting__entry__value campaign-setting__entry__textentry"
-			/>
+			<TextEntry class="textentry campaign-setting__entry__value campaign-setting__entry__textentry" />
 		</Panel>
 		<Panel class="campaign-setting__entry" settingfield="Difficulty">
-			<Label
-				class="campaign-setting__entry__text"
-				text="#MainMenu_Campaigns_Setup_Var_skill"
-			/>
+			<Label class="campaign-setting__entry__text" text="#MainMenu_Campaigns_Setup_Var_skill" />
 
-			<DropDown
-				class="dropdown campaign-setting__entry__value campaign-setting__entry__dropdown"
-				menuclass="dropdown-menu"
-			>
+			<DropDown class="dropdown campaign-setting__entry__value campaign-setting__entry__dropdown" menuclass="dropdown-menu">
 				<Label text="#MainMenu_Campaigns_Setup_Var_skill_1" id="Skill1" value="1" index="0" />
 				<Label text="#MainMenu_Campaigns_Setup_Var_skill_2" id="Skill2" value="2" index="1" />
 				<Label text="#MainMenu_Campaigns_Setup_Var_skill_3" id="Skill3" value="3" index="2" />

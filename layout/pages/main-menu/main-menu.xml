@@ -27,11 +27,7 @@
 		</snippet>
 	</snippets>
 
-	<MainMenu
-		class="InitialDisplay MainMenuRootPanel"
-		hittest="false"
-		onload="MainMenu.onMainMenuLoaded()"
-	>
+	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()">
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
@@ -44,7 +40,11 @@
 				<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
 
 				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-				<BaseBlurTarget id="PauseMenuMainMenuBlur" class="mainmenu__pause-blur PauseMenuModeOnly" blurrects="PauseMenuMainMenuContent">
+				<BaseBlurTarget
+					id="PauseMenuMainMenuBlur"
+					class="mainmenu__pause-blur PauseMenuModeOnly"
+					blurrects="PauseMenuMainMenuContent"
+				>
 					<!-- Backbuffer background -->
 					<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
 				</BaseBlurTarget>
@@ -91,21 +91,30 @@
 										</Panel>
 									</Button>
 									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
-									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly" onactivate="MainMenu.navigateToPage('Play', 'play-menu/main')">
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
+										onactivate="MainMenu.navigateToPage('Play', 'play-menu/main')"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Play" />
 											<Label class="mainmenu__nav__btn__small-text" text="[HC] Start a new experience" />
 										</Panel>
 									</Button>
 									<!-- Resume Game (in-game) -->
-									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly" onactivate="$.DispatchEvent('MainMenuResumeGame');">
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly"
+										onactivate="$.DispatchEvent('MainMenuResumeGame');"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Home_Resume" />
 											<Label class="mainmenu__nav__btn__small-text" text="[HC] Close this menu &amp; return to the game" />
 										</Panel>
 									</Button>
 									<!-- Start New Game (Campaign Mode / in-game) -->
-									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')">
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly"
+										onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Campaigns_MM_NewGame" />
 											<Label class="mainmenu__nav__btn__small-text" text="[HC] Configure &amp; start a new game" />
@@ -129,7 +138,11 @@
 										</Panel>
 									</Button>
 									<!-- Save/Load Game (Campaign Mode / in-game) -->
-									<Button id="LoadGameBtn" class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly" onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list')">
+									<Button
+										id="LoadGameBtn"
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly"
+										onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list')"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_SaveRestore_Load" />
 											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_Main" />
@@ -137,21 +150,30 @@
 										</Panel>
 									</Button>
 									<!-- Addons/Mounts -->
-									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly" onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')">
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly"
+										onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Addons" />
 											<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage subscriptions &amp; mounted games" />
 										</Panel>
 									</Button>
 									<!-- Settings -->
-									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined" onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')">
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined"
+										onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Options" />
 											<Label class="mainmenu__nav__btn__small-text" text="[HC] Tweak keybinds, video, preferences, etc." />
 										</Panel>
 									</Button>
 									<!-- Exit Campaign Mode -->
-									<Button class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly" onactivate="MainMenuCampaignMode.exitCampaign()">
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly"
+										onactivate="MainMenuCampaignMode.exitCampaign()"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="[HC] Return" />
 											<Label class="mainmenu__nav__btn__small-text" text="[HC] Exit the experience" />
@@ -207,8 +229,16 @@
 					/>
 
 					<Panel id="PageWrap" class="mainmenu__normal-page-container">
-						<Label id="PageHeadline" class="mainmenu__page-head mainmenu__page-controls mainmenu__page-controls__t-prop" text="[PH] Page Headline" />
-						<Label id="PageTagline" class="mainmenu__page-tagline mainmenu__page-controls mainmenu__page-controls__t-prop" text="[PH] Page Tagline" />
+						<Label
+							id="PageHeadline"
+							class="mainmenu__page-head mainmenu__page-controls mainmenu__page-controls__t-prop"
+							text="[PH] Page Headline"
+						/>
+						<Label
+							id="PageTagline"
+							class="mainmenu__page-tagline mainmenu__page-controls mainmenu__page-controls__t-prop"
+							text="[PH] Page Tagline"
+						/>
 
 						<Panel id="PageInsert" class="mainmenu__page-insert" />
 
@@ -221,7 +251,12 @@
 				</Panel>
 
 				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-				<BaseBlurTarget id="SwitcherBlur" class="mainmenu__switcher-blur MainMenuModeOnly" blurrects="SwitcherBlurContent" hittest="false">
+				<BaseBlurTarget
+					id="SwitcherBlur"
+					class="mainmenu__switcher-blur MainMenuModeOnly"
+					blurrects="SwitcherBlurContent"
+					hittest="false"
+				>
 					<!-- Backbuffer background -->
 					<BackbufferImagePanel class="mainmenu__background MainMenuModeOnly" hittest="false" />
 				</BaseBlurTarget>
