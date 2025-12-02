@@ -294,7 +294,7 @@ class MainMenu {
 		}
 
 		// create the new page
-		const newPanel = $.CreatePanel('Panel', this.pageInsert, `PageTab${this.pages.length}`);
+		const newPanel = $.CreatePanel('Panel', this.pageInsert, tab);
 		this.pages.push(new MenuPage(tab, newPanel));
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 		newPanel.RegisterForReadyEvents(true);
@@ -361,8 +361,8 @@ class MainMenu {
 		const currentPage = this.pages.pop();
 
 		if (currentPage) {
+			$.DispatchEvent('MainMenuPagePreClose', currentPage.name);
 			if (currentPage.name === 'Settings') $.DispatchEvent('SettingsSave');
-
 			if (currentPage.panel.IsValid()) this.reversePageAnim(currentPage.panel);
 		}
 

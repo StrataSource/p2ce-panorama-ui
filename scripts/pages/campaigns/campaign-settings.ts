@@ -1,54 +1,33 @@
 'use strict';
 
 class CampaignSettingsTab {
-	static page = $<Panel>('#CampaignSettingsContainer')!;
+	static page = $.GetContextPanel();
 	static chImage = $<Image>('#CampaignSettingsChapterImage')!;
 	static chText = $<Label>('#CampaignSettingsChapter')!;
 	static mapText = $<Label>('#CampaignSettingsMap')!;
 	static summaryPanel = $<Panel>('#CampaignSettingsSummaryPanel')!;
-	static basePage = $<Panel>('#CampaignSettingsBase')!;
 	static subPage = $<Panel>('#CampaignSettingsSubpage')!;
-	static header = $<Label>('#CampaignSettingsHeader')!;
-	static subheader = $<Label>('#CampaignSettingsSubheader')!;
-	static startBtn = $<Button>('#CampaignSettingsStart')!;
 	static helpPage = $<Panel>('#CampaignSettingsHelp')!;
 	static helpTxt = $<Label>('#CampaignSettingsHelpText')!;
+
+	static campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] as CampaignInfo;
+	static chapter = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo;
 
 	static activeSubpage = '';
 
 	static init() {
-		this.hide();
-		this.startBtn.SetPanelEvent('onmouseout', () => {
-			UiToolkitAPI.HideTextTooltip();
-		});
-
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
-	}
 
-	static setActive() {
-		CampaignHome.closeListerNoReturn();
 		this.show();
-		this.chImage.SetImage(`file://{materials}/${CampaignMgr.uiSelectedChapter!.thumbnail}.vtf`);
-		this.chText.text = $.Localize(CampaignMgr.uiSelectedChapter!.title);
-		this.mapText.text = CampaignMgr.uiSelectedChapter!.maps[0].name;
+		this.chImage.SetImage(`file://{materials}/${this.chapter.thumbnail}.vtf`);
+		this.chText.text = $.Localize(this.chapter.title);
+		this.mapText.text = this.chapter.maps[0].name;
+
+		this.clear();
 	}
 
 	static show() {
 		this.page.visible = true;
-		this.setHeaderText(
-			$.Localize('#MainMenu_Campaigns_Setup_Title'),
-			$.Localize('#MainMenu_Campaigns_Setup_Tagline')
-		);
-	}
-
-	static setHeaderText(header: string, subheader: string) {
-		this.header.text = header;
-		this.subheader.text = subheader;
-	}
-
-	static hide() {
-		this.page.visible = false;
-		this.closeSettingsSubpage();
 	}
 
 	static stepBack() {
@@ -72,9 +51,6 @@ class CampaignSettingsTab {
 
 	static clear() {
 		this.closeSettingsSubpage();
-		this.subPage.RemoveAndDeleteChildren();
-		this.hide();
-		CampaignHome.openControls();
 	}
 
 	static finishSettings() {
@@ -86,7 +62,6 @@ class CampaignSettingsTab {
 			() => {
 				this.applySettings();
 
-				CampaignMgr.startGame();
 				this.clear();
 			},
 			$.Localize('#UI_Cancel'),
@@ -95,16 +70,16 @@ class CampaignSettingsTab {
 		);
 	}
 
-	static openSettingsSubpage(tab: string, xml: string, locH: string, locS: string) {
-		this.startBtn.SetPanelEvent('onmouseover', () => {
-			UiToolkitAPI.ShowTextTooltip(this.startBtn.id, $.Localize('#MainMenu_Campaigns_Setup_ExitNote'));
-		});
+	static openSettingsSubpage(tab: string, locH: string, locS: string, xml?: string) {
+		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTING_PAGE] = tab;
+		$.DispatchEvent('MainMenuOpenNestedPage', tab, 'campaigns/settings-base');
+		$.DispatchEvent('MainMenuSetPageLines', $.Localize(locH), $.Localize(locS));
 
-		this.basePage.visible = false;
-		this.subPage.visible = true;
-		this.startBtn.enabled = false;
+		//$.DispatchEvent('MainMenuOpenNestedPage', tab, `campaigns/${xml}`);
 
-		this.setHeaderText($.Localize(locH), $.Localize(locS));
+		/*
+
+		//this.setHeaderText($.Localize(locH), $.Localize(locS));
 
 		// Check for existence
 		if (!this.subPage.FindChildTraverse(tab)) {
@@ -136,34 +111,17 @@ class CampaignSettingsTab {
 		}
 
 		this.helpPage.visible = true;
+		*/
 	}
 
 	static closeSettingsSubpage() {
-		if (this.activeSubpage) {
-			const hide = this.subPage.FindChildTraverse(this.activeSubpage);
-			if (hide) {
-				hide.visible = false;
-			}
-		}
-
-		this.subPage.visible = false;
-		this.basePage.visible = true;
-		this.helpPage.visible = false;
-		this.startBtn.enabled = true;
-
-		this.setHeaderText(
-			$.Localize('#MainMenu_Campaigns_Setup_Title'),
-			$.Localize('#MainMenu_Campaigns_Setup_Tagline')
-		);
-
-		this.startBtn.ClearPanelEvent('onmouseover');
-
 		this.activeSubpage = '';
 
 		this.updateSummary();
 	}
 
 	static updateSummary() {
+		/*
 		const subpages = this.subPage.Children();
 
 		this.summaryPanel.RemoveAndDeleteChildren();
@@ -214,9 +172,11 @@ class CampaignSettingsTab {
 				});
 			}
 		}
+		*/
 	}
 
 	static applySettings() {
+		/*
 		const subpages = this.subPage.Children();
 		for (let i = 0; i < subpages.length; ++i) {
 			const subpage = subpages[i];
@@ -242,9 +202,10 @@ class CampaignSettingsTab {
 				GameInterfaceAPI.ConsoleCommand(`${entry.command} ${entry.actual}`);
 			}
 		}
+		*/
 	}
 
 	static onCampaignSettingHovered(helpText) {
-		this.helpTxt.text = helpText;
+		//this.helpTxt.text = helpText;
 	}
 }

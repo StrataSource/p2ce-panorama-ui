@@ -15,7 +15,7 @@
 					<Image
 						id="ChapterCover"
 						class="chapters__entry__cover"
-						src="file://{images}/menu/p2ce/news-splash.png"
+						defaultsrc="file://{images}/menu/p2ce-generic.png"
 						scaling="stretch-to-cover-preserve-aspect"
 						textureheight="1920"
 						texturewidth="1080"

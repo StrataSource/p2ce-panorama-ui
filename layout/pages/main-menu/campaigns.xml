@@ -14,7 +14,7 @@
 				<Image
 					id="CampaignBtnBg"
 					class="campaigns__entry__bg-image"
-					src="file://{images}/menu/portal2/campaign_cover.png"
+					src="file://{images}/menu/p2ce-generic.png"
 					scaling="stretch-to-cover-preserve-aspect"
 					textureheight="1920"
 					texturewidth="1080"
@@ -25,7 +25,7 @@
 						<Image
 							id="CampaignCover"
 							class="campaigns__entry__cover"
-							src="file://{images}/menu/portal2/campaign_cover.png"
+							src="file://{images}/menu/p2ce-generic.png"
 							scaling="stretch-to-cover-preserve-aspect"
 							textureheight="1920"
 							texturewidth="1080"
@@ -33,7 +33,7 @@
 						<Image
 							id="CampaignLogo"
 							class="campaigns__entry__details__logo"
-							src="file://{images}/menu/portal2/logo.svg"
+							src="file://{images}/menu/missing-cover.png"
 							scaling="stretch-to-cover-preserve-aspect"
 							textureheight="128"
 							texturewidth="128"

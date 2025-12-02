@@ -226,7 +226,7 @@ class MainMenuCampaignMode {
 		this.selectedCampaign = campaign;
 		CampaignAPI.SetActiveCampaign(this.selectedCampaign.id);
 		// TODO: Grab active campaign from API instead of this
-		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = campaign;
+		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
 
@@ -257,7 +257,7 @@ class MainMenuCampaignMode {
 
 	static reloadBackground() {
 		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] === undefined) return;
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
 
 		this.loadingIndicator.visible = true;
 		if (!this.setCampaignMenuDetails()) {
@@ -267,7 +267,7 @@ class MainMenuCampaignMode {
 
 	static exitCampaign() {
 		// TODO: Grab active campaign from API instead of this
-		UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] = undefined;
+		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = undefined;
 		this.selectedCampaign = undefined;
 
 		$.DispatchEvent('MainMenuSwitchFade');

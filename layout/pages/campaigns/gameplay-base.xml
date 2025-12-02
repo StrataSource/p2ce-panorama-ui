@@ -6,7 +6,8 @@
 		<include src="file://{resources}/scripts/pages/campaigns/shared.ts" />
 	</scripts>
 
-	<Panel class="campaign-settings__subpage" settingfield="GameplayBase" onload="CampaignShared.ApplyMarkup()">
+	<Panel class="mainmenu__page flow-right" settingfield="GameplayBase" onload="CampaignShared.ApplyMarkup()">
+		<Panel class="fill-width full-height flow-down mr-1">
 		<Panel class="campaign-setting__entry" settingfield="Cheats">
 			<Label class="campaign-setting__entry__text" text="#MainMenu_Campaigns_Setup_Var_sv_cheats" />
 
@@ -31,5 +32,8 @@
 				<Label text="#MainMenu_Campaigns_Setup_Var_skill_3" id="Skill3" value="3" index="2" />
 			</DropDown>
 		</Panel>
+		</Panel>
+
+		<Panel id="HelpInsert" class="fill-width full-height flow-down ml-1" />
 	</Panel>
 </root>

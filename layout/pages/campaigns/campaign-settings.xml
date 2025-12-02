@@ -1,5 +1,6 @@
 <root>
 	<styles>
+		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
@@ -7,16 +8,12 @@
 		<include src="file://{scripts}/pages/campaigns/shared.ts" />
 	</scripts>
 
-	<Panel id="CampaignSettingsContainer" class="campaign-settings__container">
+	<Panel class="mainmenu__page" onload="CampaignSettingsTab.init()">
 		<Panel class="campaign-settings__header">
-			<Panel class="flow-down">
-				<Label id="CampaignSettingsHeader" class="campaign-settings__header__top" text="[PH] Campaign Settings Header" />
-				<Label id="CampaignSettingsSubheader" class="campaign-settings__header__btm" text="[PH] Campaign Settings Subheader" />
-			</Panel>
 			<Image
 				id="CampaignSettingsLogo"
 				class="campaign-settings__header__logo"
-				src="file://{images}/menu/portal2/full_logo.png"
+				src="file://{images}/menu/portal2/full_logo.svg"
 				scaling="stretch-to-fit-preserve-aspect"
 			/>
 		</Panel>
@@ -26,7 +23,7 @@
 				<Panel class="row fill-height">
 					<Button
 						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', 'setting-presets', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Title', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc')"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Title', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc', 'setting-presets')"
 					>
 						<Panel class="horizontal-align-center vertical-align-center flow-down">
 							<Image
@@ -42,7 +39,7 @@
 					</Button>
 					<Button
 						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', 'server', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Title', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc')"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Title', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc')"
 					>
 						<Panel class="horizontal-align-center vertical-align-center flow-down">
 							<Image
@@ -58,7 +55,7 @@
 					</Button>
 					<Button
 						class="campaign-settings__button"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', 'map-select', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc')"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc', 'map-select')"
 					>
 						<Panel class="horizontal-align-center vertical-align-center flow-down">
 							<Image
@@ -77,7 +74,7 @@
 				<Panel class="row mt-2 fill-height">
 					<Button
 						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', 'gameplay-base', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc')"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc')"
 					>
 						<Panel class="horizontal-align-center vertical-align-center flow-down">
 							<Image
@@ -93,7 +90,7 @@
 					</Button>
 					<Button
 						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', 'gameplay-addons', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc')"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc', 'gameplay-addons')"
 					>
 						<Panel class="horizontal-align-center vertical-align-center flow-down">
 							<Image
@@ -121,18 +118,13 @@
 					</Button>
 				</Panel>
 			</Panel>
-			<Panel id="CampaignSettingsHelp" class="campaign-settings__help">
-				<Label id="CampaignSettingsHelpText" html="true" text="[PH] Help Text" />
-			</Panel>
-			<Panel id="CampaignSettingsSubpage" class="campaign-settings__left">
-			</Panel>
 			<!-- Summary panel -->
 			<Panel class="campaign-settings__right">
 				<Panel>
 					<Image
 						id="CampaignSettingsChapterImage"
 						class="campaign-settings__chapter-img"
-						src="file://{materials}/vgui/new_save_game.vtf"
+						defaultsrc="file://{materials}/vgui/new_save_game.vtf"
 						scaling="stretch-to-cover-preserve-aspect"
 						textureheight="1920"
 						texturewidth="1080"
@@ -142,7 +134,7 @@
 						<Image
 							id="CampaignSettingsBoxLogo"
 							class="campaign-settings__box-logo"
-							src="file://{images}/menu/portal2/logo.png"
+							src="file://{images}/menu/portal2/logo.svg"
 							scaling="stretch-to-fit-preserve-aspect"
 						/>
 						<Panel class="flow-down fill-width">
@@ -172,15 +164,5 @@
 				</Button>
 			</Panel>
 		</Panel>
-		<Button class="button-mono mt-2" onactivate="CampaignSettingsTab.stepBack()">
-			<Image
-				class="button-mono__icon"
-				src="file://{images}/cancel.svg"
-				scaling="stretch-to-fit-preserve-aspect"
-				texturewidth="32"
-				textureheight="32"
-			/>
-			<Label class="button-mono__text" text="#MainMenu_Campaigns_MM_Back" />
-		</Button>
 	</Panel>
 </root>

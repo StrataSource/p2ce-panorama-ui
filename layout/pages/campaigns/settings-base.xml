@@ -1,0 +1,15 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/pages/campaigns/shared.ts" />
+	</scripts>
+
+	<Panel class="mainmenu__page flow-right" onload="CampaignShared.constructPage()">
+		<Panel id="SettingPageInsert" class="fill-width full-height flow-down mr-1">
+		</Panel>
+
+		<Panel id="HelpInsert" class="fill-width full-height flow-down ml-1" />
+	</Panel>
+</root>

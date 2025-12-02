@@ -1,151 +1,246 @@
 'use strict';
 
+declare const enum SettingPages {
+	NONE = 'None',
+	GAMEPLAY_BASE = 'GameplayBase'
+}
+
+interface CampaignDropDownValue {
+	text: string;
+	value: string;
+}
+
 interface CampaignSetting {
-	Name: string;
-	HelpText: string;
-	Default: unknown;
-	Command: string;
+	id: string;
+	name: string;
+	helpText: string;
+	// default, in the case of a dropdown, refers to the INDEX of the option, NOT the value (if it is a number)
+	// see the skill setting for example
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	default: any;
+	command: string;
+	panelType: keyof PanelTagNameMap;
+	dropDownValues?: Array<CampaignDropDownValue>;
 }
 
 interface CampaignPageGroup {
-	[key: string]: { [key: string]: CampaignSetting };
+	[key: string]: CampaignSetting[];
 }
 
-const CampaignSettingHelpers: CampaignPageGroup = {
-	None: {},
-	GameplayBase: {
-		Cheats: {
-			Name: 'Server Cheats',
-			HelpText:
-				'Enable <pre>sv_cheats 1</pre> and allow the usage of commands that require it, such as <pre>noclip</pre>.\n\nDefault: false',
-			Default: false,
-			Command: 'sv_cheats'
+const CAMPAIGN_SETTINGS: Record<string, CampaignSetting[]> = {
+	'GameplayBase': [
+		{
+			id: 'cheats',
+			name: 'Server Cheats',
+			helpText:
+				'Enable <pre>sv_cheats 1</pre> and allow the usage of commands that require it, such as <pre>noclip</pre>.\n\ndefault: false',
+			default: false,
+			command: 'sv_cheats',
+			panelType: 'ToggleButton'
 		},
-		MirrorWorld: {
-			Name: 'Mirror World',
-			HelpText: 'Flips the world horizontally.\n\nDefault: False',
-			Default: false,
-			Command: 'cl_mirror_world'
+		{
+			id: 'mirrorWorld',
+			name: 'Mirror World',
+			helpText: 'Flips the world horizontally.\n\ndefault: False',
+			default: false,
+			command: 'cl_mirror_world',
+			panelType: 'ToggleButton'
 		},
-		Gravity: {
-			Name: 'Gravity',
-			HelpText: 'Adjust the world gravity.\n\nDefault: 600',
-			Default: 600,
-			Command: 'sv_gravity'
+		{
+			id: 'gravity',
+			name: 'Gravity',
+			helpText: 'Adjust the world gravity.\n\ndefault: 600',
+			default: 600,
+			command: 'sv_gravity',
+			// numberentry only supports integers
+			panelType: 'TextEntry'
 		},
-		Difficulty: {
-			Name: 'Difficulty',
-			HelpText:
-				'Sets the skill level and affects how much damage is dealt/taken. Does not apply to Portal campaigns.\n\nDefault: Normal',
-			Default: 1,
-			Command: 'skill'
+		{
+			id: 'skill',
+			name: 'Difficulty',
+			helpText:
+				'Sets the skill level and affects how much damage is dealt/taken. Does not apply to Portal campaigns.\n\ndefault: Normal',
+			default: '1',
+			command: 'skill',
+			panelType: 'DropDown',
+			dropDownValues: [
+				{
+					text: 'Easy',
+					value: '1'
+				},
+				{
+					text: 'Medium',
+					value: '2'
+				},
+				{
+					text: 'Hard',
+					value: '3'
+				}
+			]
 		}
-	}
-};
+	]
+}
 
-class NonDefaultDescriptor {
-	panel: GenericPanel;
+class CampaignSettingField {
+	id: string;
 	name: string;
-	defaultVal: string;
-	actual: string = '';
 	command: string;
+	panel: GenericPanel;
+	default: unknown;
+	value: unknown;
 
-	constructor(panel: GenericPanel, name: string, defaultVal: string, command: string) {
-		this.panel = panel;
+	constructor (id: string, name: string, command: string, panel: GenericPanel, defaultValue: unknown) {
+		this.id = id;
 		this.name = name;
-		this.defaultVal = defaultVal;
 		this.command = command;
+		this.panel = panel;
+		this.default = defaultValue;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	setValue(value: any) {
+		this.value = value;
 	}
 }
 
 class CampaignShared {
-	static ApplyMarkup() {
-		const children = $.GetContextPanel().Children();
-		const helperBlock = CampaignSettingHelpers[$.GetContextPanel().GetAttributeString('settingfield', 'None')];
+	static inputFields: Array<CampaignSettingField> = [];
 
-		for (let i = 0; i < children.length; ++i) {
-			const child = children[i];
-			const isSetting = child.HasClass('campaign-setting__entry');
+	// TODO: transmit non-default state BACK to page construction
+	static constructPage() {
+		const parent = $<Panel>('#SettingPageInsert');
+		const page = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTING_PAGE] as string;
 
-			if (!isSetting) continue;
+		const settings = CAMPAIGN_SETTINGS[page];
 
-			child.SetHasClass('campaign-setting__entry__odd', i % 2 !== 0);
+		for (const setting of settings) {
+			const wrapper = $.CreatePanel(
+				'Panel',
+				parent,
+				`${setting.id}_Wrapper`,
+				{ class: 'campaign-setting__entry' }
+			);
 
-			const settingField = child.GetAttributeString('settingfield', 'None');
-			const helper = helperBlock[settingField];
+			$.CreatePanel(
+				'Label',
+				wrapper,
+				`${setting.id}_Text`,
+				{
+					class: 'campaign-setting__entry__text',
+					text: setting.name
+				}
+			);
 
-			child.SetPanelEvent('onmouseover', () => {
-				$.DispatchEvent('CampaignSettingHovered', helper['HelpText']);
-			});
-
-			const input = child.FindChildrenWithClassTraverse('campaign-setting__entry__value')[0];
-
-			switch (input.paneltype) {
+			let inputClassPrefix = '';
+			switch (setting.panelType) {
 				case 'ToggleButton':
-					(input as ToggleButton).SetSelected(Boolean(helper.Default));
+					inputClassPrefix = 'checkbox campaign-setting__entry__checkbox';
 					break;
 
 				case 'TextEntry':
-					(input as TextEntry).text = String(helper.Default);
+					inputClassPrefix = 'textentry campaign-setting__entry__textentry';
 					break;
 
 				case 'DropDown':
-					(input as DropDown).SetSelectedIndex(Number(helper.Default));
+					inputClassPrefix = 'dropdown campaign-setting__entry__dropdown';
 					break;
-
+			
 				default:
+					throw new Error('This panel type is not supported as a setting widget.');
 					break;
 			}
+
+			const inputter = $.CreatePanel(
+				setting.panelType,
+				wrapper,
+				`${setting.id}_Input`,
+				{
+					class: `campaign-setting__entry__value ${inputClassPrefix}`,
+					menuclass: 'dropdown-menu'
+				}
+			);
+
+			if (setting.panelType === 'DropDown') {
+				if (!setting.dropDownValues) {
+					$.Warning(`Campaign setting ${setting.id} is of type DropDown but does not specify any values.`);
+					throw new Error(`Campaign setting ${setting.id} is of type DropDown but does not specify any values.`);
+				}
+
+				for (let i = 0; i < setting.dropDownValues.length; ++i) {
+					const value = setting.dropDownValues[i];
+					const o = $.CreatePanel(
+						'Label', inputter, `${setting.id}${value.value}`,
+						{ text: value.text, value: value.value, index: i }
+					);
+					(inputter as DropDown).AddOption(o);
+				}
+			}
+
+			switch (setting.panelType) {
+				case 'ToggleButton':
+					(inputter as ToggleButton).SetSelected(setting.default);
+					break;
+
+				case 'TextEntry':
+					(inputter as TextEntry).text = setting.default;
+					(inputter as TextEntry).RaiseChangeEvents(true);
+					break;
+
+				case 'DropDown':
+					(inputter as DropDown).SetSelectedIndex(Number(setting.default));
+					break;
+			
+				default:
+					throw new Error('This panel type is not supported as a setting widget.');
+					break;
+			}
+
+			this.inputFields.push(
+				new CampaignSettingField(
+					setting.id,
+					setting.name,
+					setting.command,
+					inputter,
+					setting.default
+				)
+			);
 		}
+
+		$.RegisterForUnhandledEvent('MainMenuPagePreClose', this.onPreClose.bind(this));
 	}
 
-	static FetchPageSettings(panel: GenericPanel) {
-		const children = panel.Children();
-		const helperBlock = CampaignSettingHelpers[panel.GetAttributeString('settingfield', 'None')];
+	static onPreClose(tab: string) {
+		if (tab !== $.GetContextPanel().id) return;
 
-		const nonDefaults: NonDefaultDescriptor[] = [];
-
-		for (let i = 0; i < children.length; ++i) {
-			const child = children[i];
-			const isSetting = child.HasClass('campaign-setting__entry');
-
-			if (!isSetting) continue;
-
-			const settingField = child.GetAttributeString('settingfield', 'None');
-			const helper = helperBlock[settingField];
-
-			const input = child.FindChildrenWithClassTraverse('campaign-setting__entry__value')[0];
-
-			const entry = new NonDefaultDescriptor(input, helper.Name, String(helper.Default), helper.Command);
-
-			switch (input.paneltype) {
+		$.Msg('Collecting setting changes...');
+		for (const field of this.inputFields) {
+			const p = field.panel;
+			switch (p.paneltype) {
 				case 'ToggleButton':
-					entry.actual = String(Number((input as ToggleButton).IsSelected()));
+					field.value = (p as ToggleButton).IsSelected();
 					break;
 
 				case 'TextEntry':
-					entry.actual = (input as TextEntry).text;
+					field.value = (p as TextEntry).text;
 					break;
 
 				case 'DropDown':
-					entry.actual = ((input as DropDown).GetSelected() as Label).text;
+					field.value = (p as DropDown).GetSelected().GetAttributeInt('index', -1);
+					if (field.value === -1) throw new Error('Unable to retrieve index from DropDown Field');
 					break;
-
+			
 				default:
+					throw new Error('This panel type is not supported as a setting widget.');
 					break;
 			}
 
-			// Set default field appropriately
-			if (input.paneltype === 'DropDown') {
-				const setIndex = (input as DropDown).GetSelected().GetAttributeInt('index', 0);
-				(input as DropDown).SetSelectedIndex(Number(entry.defaultVal));
-				entry.defaultVal = ((input as DropDown).GetSelected() as Label).text;
-				(input as DropDown).SetSelectedIndex(setIndex);
+			$.Msg(`Field ${field.command} is value ${field.value}, default: ${field.default}`);
+			// eslint-disable-next-line eqeqeq
+			if (field.default == field.value) {
+				continue;
 			}
-
-			nonDefaults.push(entry);
+			
+			$.Msg('Saving this field...');
 		}
-
-		return nonDefaults;
 	}
 }
