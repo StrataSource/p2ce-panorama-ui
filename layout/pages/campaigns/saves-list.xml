@@ -17,7 +17,7 @@
 							<Image
 								id="SaveCover"
 								class="saves__entry__cover"
-								src="file://{materials}/vgui/no_save_game.vtf"
+								defaultsrc="file://{materials}/vgui/no_save_game.vtf"
 								scaling="stretch-to-cover-preserve-aspect"
 								textureheight="1920"
 								texturewidth="1080"

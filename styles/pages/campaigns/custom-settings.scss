@@ -30,9 +30,8 @@
 		}
 
 		&__logo {
-			horizontal-align: right;
 			width: 150px;
-			height: 100%;
+			height: 50px;
 		}
 	}
 
@@ -52,6 +51,7 @@
 		width: fill-parent-flow(0.3);
 		height: fill-parent-flow(1);
 		border: $menu-pane-border;
+		padding: 30px;
 
 		&__icon {
 			width: 96px;
@@ -68,6 +68,7 @@
 		&__subtext {
 			color: $base-300;
 			font-size: 16px;
+			text-align: center;
 		}
 
 		&:hover {
@@ -173,12 +174,6 @@
 			transform: translateY(-2px);
 		}
 	}
-
-	&__subpage {
-		width: 100%;
-		height: 100%;
-		flow-children: down;
-	}
 }
 
 .campaign-setting {
@@ -186,7 +181,6 @@
 		width: 100%;
 		height: 50px;
 		padding: 0 15px;
-		background-color: $base-950;
 		flow-children: right;
 
 		&__odd {
@@ -241,7 +235,7 @@
 		}
 
 		&__dropdown {
-			width: 407px;
+			width: 447px;
 			height: 38px;
 
 			background-color: $base-950;
