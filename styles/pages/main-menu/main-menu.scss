@@ -148,13 +148,14 @@ $pane-move-delay: 0.1s;
 		&__grid1 {
 			vertical-align: top;
 			horizontal-align: left;
-			transform: scaleY(-1);
+			transform: scaleY(-1) translateX(-1px) translateY(-1px);
 			opacity: 0.25;
 		}
 
 		&__grid2 {
 			vertical-align: bottom;
 			horizontal-align: left;
+			transform: translateX(-1px) translateY(1px);
 			opacity: 0.25;
 		}
 	}

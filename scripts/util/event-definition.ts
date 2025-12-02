@@ -29,3 +29,4 @@ $.DefineEvent('MainMenuSetPageLines', 2);
 $.DefineEvent('SetActiveUiCampaign', 1, 'campaignId');
 $.DefineEvent('MainMenuSwitchFade', 0);
 $.DefineEvent('MainMenuFullBackNav', 0);
+$.DefineEvent('MainMenuPagePreClose', 1);

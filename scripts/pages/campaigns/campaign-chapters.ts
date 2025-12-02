@@ -83,12 +83,9 @@ class CampaignChapters {
 	}
 
 	static customizeChapter() {
-		UiToolkitAPI.ShowGenericPopupOk(
-			'[DEV] Not Available',
-			'This is still being rewritten.',
-			'generic-popup',
-			() => {}
-		);
+		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
+
+		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings');
 		//CampaignMgr.customizeChapter(this.selectedChapter);
 	}
 }
