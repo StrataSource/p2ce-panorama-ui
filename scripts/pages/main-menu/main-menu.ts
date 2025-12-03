@@ -54,6 +54,8 @@ class MainMenu {
 
 	static latestSave: GameSave;
 
+	static music;
+
 	static onMainMenuLoaded() {
 		this.setMainMenuBackground();
 		this.setMainMenuModelPanel();
@@ -175,7 +177,7 @@ class MainMenu {
 		}
 
 		const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
-		$.PlaySoundEvent(music);
+		this.music = $.PlaySoundEvent(music);
 	}
 
 	// i think we could do something cool and have campaigns specify a model?
@@ -464,5 +466,10 @@ class MainMenu {
 
 	static quitGame() {
 		GameInterfaceAPI.ConsoleCommand('quit');
+	}
+
+	static stopMusic() {
+		if (this.music) $.StopSoundEvent(this.music);
+		this.music = undefined;
 	}
 }
