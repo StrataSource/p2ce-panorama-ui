@@ -25,6 +25,8 @@ class MainMenuCampaignMode {
 
 	static isBlurred = false;
 
+	static music;
+
 	// constants
 	static BACKGROUND_IMAGE_FADE_IN_TIME = 0.25;
 
@@ -142,12 +144,19 @@ class MainMenuCampaignMode {
 			// background maps take priority, turn these off
 			this.movie.visible = false;
 			this.hideBgImg();
-			$.PlaySoundEvent(CampaignAPI.GetBackgroundMusic());
+
+			const bgmu = CampaignAPI.GetBackgroundMusic();
+			if (bgmu) this.music = $.PlaySoundEvent(bgmu);
 		}
 	}
 
+	static stopMusic() {
+		if (this.music) $.StopSoundEvent(this.music);
+		this.music = undefined;
+	}
+
 	static onMapUnloaded() {
-		$.PlaySoundEvent('UIPanorama.Music.StopAll');
+		this.stopMusic();
 	}
 
 	// set campaign details
@@ -163,6 +172,8 @@ class MainMenuCampaignMode {
 		const bgm = CampaignAPI.GetBackgroundMovie();
 		const bgi = CampaignAPI.GetBackgroundImage();
 
+		MainMenu.stopMusic();
+
 		if (bgl.length > 0) {
 			this.showBgImg();
 			this.imgBg.SetImage(`file://{materials}/${bgi}`);
@@ -174,13 +185,13 @@ class MainMenuCampaignMode {
 			this.movie.SetMovie(`file://{game}/${bgm}`);
 			this.movie.Play();
 			this.movie.visible = true;
-			$.Schedule(0.001, () => $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()));
+			$.Schedule(0.001, () => { this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()) });
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			this.showBgImg();
 			this.imgBg.SetImage(`file://{materials}/${bgi}`);
 			this.movie.visible = false;
-			$.Schedule(0.001, () => $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()));
+			$.Schedule(0.001, () => { this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()) });
 		}
 
 		return bgl.length > 0;
