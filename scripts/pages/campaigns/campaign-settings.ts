@@ -61,8 +61,9 @@ class CampaignSettingsTab {
 			$.Localize('#UI_Yes'),
 			() => {
 				this.applySettings();
-
 				this.clear();
+				$.DispatchEvent('MainMenuCloseAllPages');
+				$.Schedule(0.001, () => CampaignAPI.StartCampaign(this.campaign.id, this.chapter.id));
 			},
 			$.Localize('#UI_Cancel'),
 			() => {},

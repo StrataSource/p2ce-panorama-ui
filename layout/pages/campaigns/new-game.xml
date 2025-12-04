@@ -9,7 +9,7 @@
 
 	<snippets>
 		<snippet name="ChapterEntrySnippet">
-			<RadioButton group="ChaptersGroupRadio" class="chapters__entry">
+			<Button group="ChaptersGroupRadio" class="chapters__entry">
 				<Panel class="chapters__entry__inner">
 					<!-- Chapter icon cover -->
 					<Image
@@ -27,14 +27,14 @@
 						<Label id="ChapterDesc" class="chapters__entry__details__desc" text="#MainMenu_Campaigns_MM_ChapterDesc" />
 					</Panel>
 				</Panel>
-			</RadioButton>
+			</Button>
 		</snippet>
 	</snippets>
 
 	<Panel class="mainmenu__page" onload="CampaignChapters.populateChapters()">
 		<Panel id="CampaignChapters" class="selected-campaign__lister">
 		</Panel>
-		<Panel id="CampaignStarterPanel" class="selected-campaign__action-bar" disabled="true">
+		<Panel id="CampaignStarterPanel" class="selected-campaign__action-bar hide" disabled="true">
 			<Button
 				id="CampaignCustomizeBtn"
 				class="button-mono button-mono__bigger fill-width mr-2"
