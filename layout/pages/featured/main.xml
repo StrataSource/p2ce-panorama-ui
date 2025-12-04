@@ -1,0 +1,91 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/featured/main.ts" />
+	</scripts>
+
+	<Panel class="mainmenu__page flow-right" onload="FeaturedMenu.onLoad()">
+		<Panel class="featured-pane">
+			<Button class="card card__occupy" onactivate="">
+				<Panel class="full-width fill-height">
+					<Image
+						class="card__image"
+						src="file://{images}/menu/p2ce-generic-bigger.svg"
+						scaling="stretch-to-cover-preserve-aspect"
+					/>
+					<AvatarImage id="MainFeatureAvatar" class="card__avatar" />
+				</Panel>
+				<Panel class="card__details">
+					<Label class="card__details__header" text="[PH] Major Feature" />
+					<Label class="card__details__subheader" text="[PH] Author" />
+				</Panel>
+			</Button>
+		</Panel>
+		<Panel class="featured-pane ml-2">
+			<!-- TODO: procedurally generate these -->
+			<Panel class="fill-height flow-right">
+				<Button class="card card__occupy" onactivate="">
+					<Panel class="full-width fill-height">
+						<Image
+							class="card__image"
+							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<AvatarImage id="MinorFeature01Avatar" class="card__avatar" />
+					</Panel>
+					<Panel class="card__details">
+						<Label class="card__details__header" text="[PH] Minor Feature" />
+						<Label class="card__details__subheader" text="[PH] Author" />
+					</Panel>
+				</Button>
+				<Button class="card card__occupy ml-2" onactivate="">
+					<Panel class="full-width fill-height">
+						<Image
+							class="card__image"
+							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<AvatarImage id="MinorFeature02Avatar" class="card__avatar" />
+					</Panel>
+					<Panel class="card__details">
+						<Label class="card__details__header" text="[PH] Minor Feature" />
+						<Label class="card__details__subheader" text="[PH] Author" />
+					</Panel>
+				</Button>
+			</Panel>
+			<Panel class="fill-height flow-right mt-2">
+				<Button class="card card__occupy" onactivate="">
+					<Panel class="full-width fill-height">
+						<Image
+							class="card__image"
+							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<AvatarImage id="MinorFeature03Avatar" class="card__avatar" />
+					</Panel>
+					<Panel class="card__details">
+						<Label class="card__details__header" text="[PH] Minor Feature" />
+						<Label class="card__details__subheader" text="[PH] Author" />
+					</Panel>
+				</Button>
+				<Button class="card card__occupy ml-2" onactivate="">
+					<Panel class="full-width fill-height">
+						<Image
+							class="card__image"
+							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<AvatarImage id="MinorFeature04Avatar" class="card__avatar" />
+					</Panel>
+					<Panel class="card__details">
+						<Label class="card__details__header" text="[PH] Minor Feature" />
+						<Label class="card__details__subheader" text="[PH] Author" />
+					</Panel>
+				</Button>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

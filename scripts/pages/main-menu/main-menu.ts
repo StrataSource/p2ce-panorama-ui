@@ -70,6 +70,7 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.reloadBackground.bind(this));
+		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
 
 		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
@@ -165,6 +166,10 @@ class MainMenu {
 			MainMenuCampaignMode.switchReverse();
 			this.loadingIndicator.visible = false;
 		});
+	}
+
+	static onMapUnloaded() {
+		this.stopMusic();
 	}
 
 	static setMainMenuBackground() {

@@ -134,7 +134,7 @@ class MainMenuCampaignMode {
 	}
 
 	static hideBgImg() {
-		this.imgBg.style.animation = 'FadeOut 1s ease-out 0s 1 normal forwards';
+		this.imgBg.style.animation = 'FadeOut 3.5s ease-out 0s 1 normal forwards';
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
