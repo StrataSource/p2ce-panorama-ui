@@ -83,7 +83,7 @@
 									<!-- Featured Hub (NOT Campaign Mode / Main Menu) -->
 									<Button
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('Featured', 'main-menu/placeholder')"
+										onactivate="MainMenu.navigateToPage('Featured', 'featured/main')"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="[HC] Featured" />

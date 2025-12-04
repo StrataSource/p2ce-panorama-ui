@@ -26,7 +26,7 @@
 						<Label class="card__details__subheader" text="[HC] Play specially designed experiences" />
 					</Panel>
 				</Button>
-				<Panel class="minor-cards-row">
+				<Panel class="minor-cards-row mt-3">
 					<Button class="card card" onactivate="PlayMenu.onSoloMapsBtnPressed()">
 						<Image
 							class="card__image"
