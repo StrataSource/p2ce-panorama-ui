@@ -146,6 +146,7 @@ class MainMenuCampaignMode {
 			this.hideBgImg();
 
 			const bgmu = CampaignAPI.GetBackgroundMusic();
+			$.Msg(bgmu);
 			if (bgmu) this.music = $.PlaySoundEvent(bgmu);
 		}
 	}

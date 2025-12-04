@@ -10,24 +10,24 @@
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setMapPoolLines()">
 		<Panel class="play-menu__main">
 			<Panel class="flow-right full-width full-height">
-				<Button class="play-menu__card fill-width mr-3" onactivate="PlayMenu.onCeMapsBtnPressed()">
+				<Button class="card fill-width mr-3" onactivate="PlayMenu.onCeMapsBtnPressed()">
 					<Image
-						class="play-menu__card__image"
+						class="card__image"
 						src="file://{images}/menu/vertical-banner-p2ce.svg"
 						scaling="stretch-to-fit-preserve-aspect"
 					/>
-					<Panel class="play-menu__card__details">
-						<Label class="play-menu__card__details__header" text="[HC] P2:CE Maps" />
+					<Panel class="card__details">
+						<Label class="card__details__header" text="[HC] P2:CE Maps" />
 					</Panel>
 				</Button>
-				<Button class="play-menu__card fill-width" onactivate="PlayMenu.onP2MapsBtnPressed()">
+				<Button class="card fill-width" onactivate="PlayMenu.onP2MapsBtnPressed()">
 					<Image
-						class="play-menu__card__image"
+						class="card__image"
 						src="file://{images}/menu/vertical-banner-p2.svg"
 						scaling="stretch-to-fit-preserve-aspect"
 					/>
-					<Panel class="play-menu__card__details">
-						<Label class="play-menu__card__details__header" text="[HC] Portal 2 Maps" />
+					<Panel class="card__details">
+						<Label class="card__details__header" text="[HC] Portal 2 Maps" />
 					</Panel>
 				</Button>
 			</Panel>
