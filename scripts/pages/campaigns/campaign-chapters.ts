@@ -25,7 +25,7 @@ class ChapterEntry {
 			desc.text = $.Localize(this.chapter.title);
 		}
 		if (cover) {
-			cover.SetImage(`file://{game}/${this.chapter.thumbnail}`);
+			cover.SetImage(`file://${this.chapter.thumbnail}`);
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
