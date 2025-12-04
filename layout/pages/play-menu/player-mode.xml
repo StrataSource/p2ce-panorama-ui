@@ -10,28 +10,28 @@
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setPlayerMenuLines()">
 		<Panel class="play-menu__main">
 			<Panel class="flow-right full-width full-height">
-				<Button class="play-menu__card fill-width mr-3" onactivate="PlayMenu.onSinglePlayerBtnPressed()">
+				<Button class="card fill-width mr-3" onactivate="PlayMenu.onSinglePlayerBtnPressed()">
 					<Image
-						class="play-menu__card__image"
+						class="card__image"
 						src="file://{images}/menu/vertical-banner-solo.png"
 						scaling="stretch-to-cover-preserve-aspect"
 						textureheight="1839"
 						texturewidth="1002"
 					/>
-					<Panel class="play-menu__card__details play-menu__card__details__no-bg">
-						<Label class="play-menu__card__details__header play-menu__card__details__header__dark" text="[HC] Singleplayer" />
+					<Panel class="card__details card__details__no-bg">
+						<Label class="card__details__header card__details__header__dark" text="[HC] Singleplayer" />
 					</Panel>
 				</Button>
-				<Button class="play-menu__card fill-width" onactivate="PlayMenu.onMultiPlayerBtnPressed()">
+				<Button class="card fill-width" onactivate="PlayMenu.onMultiPlayerBtnPressed()">
 					<Image
-						class="play-menu__card__image"
+						class="card__image"
 						src="file://{images}/menu/vertical-banner-mp.png"
 						scaling="stretch-to-cover-preserve-aspect"
 						textureheight="1839"
 						texturewidth="1002"
 					/>
-					<Panel class="play-menu__card__details play-menu__card__details__no-bg">
-						<Label class="play-menu__card__details__header play-menu__card__details__header__dark" text="[HC] Multiplayer" />
+					<Panel class="card__details card__details__no-bg">
+						<Label class="card__details__header card__details__header__dark" text="[HC] Multiplayer" />
 					</Panel>
 				</Button>
 			</Panel>

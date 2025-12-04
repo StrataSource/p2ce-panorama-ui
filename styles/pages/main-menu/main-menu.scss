@@ -85,10 +85,13 @@ $pane-move-delay: 0.1s;
 		}
 	}
 
+	// this should be similar to pause blur
+	// and extend out of the container and be clipped back
+	// but for some reason it's behaving differently and
+	// i can't figure out why
 	&__switcher-blur {
 		width: 100%;
 		height: 100%;
-		overflow: noclip;
 	}
 
 	&__movie {
