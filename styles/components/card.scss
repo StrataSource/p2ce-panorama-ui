@@ -21,6 +21,14 @@
 		height: fill-parent-flow(1);
 	}
 
+	&__avatar {
+		margin: 5px;
+		width: 96px;
+		height: 96px;
+		background-color: $base-950;
+		border: $menu-pane-border;
+	}
+
 	&__status {
 		horizontal-align: right;
 		margin: 5px;
@@ -77,6 +85,10 @@
 			opacity: 0.9;
 		}
 
+		#{$this}__avatar {
+			border-color: $primary-color;
+		}
+
 		#{$this}__details {
 			background-color: $button-background-hover;
 			border-color: $primary-color;
@@ -92,6 +104,5 @@
 .minor-cards-row {
 	height: 320px;
 	width: 100%;
-	margin-top: 15px;
 	flow-children: right;
 }
