@@ -2,11 +2,11 @@
 
 class ChapterEntry {
 	index: number;
-	panel: RadioButton;
+	panel: Button;
 	chapter: ChapterInfo;
 	locked: boolean;
 
-	constructor(index: number, panel: RadioButton, chapter: ChapterInfo, locked: boolean) {
+	constructor(index: number, panel: Button, chapter: ChapterInfo, locked: boolean) {
 		this.index = index;
 		this.panel = panel;
 		this.chapter = chapter;
@@ -25,12 +25,14 @@ class ChapterEntry {
 			desc.text = $.Localize(this.chapter.title);
 		}
 		if (cover) {
-			cover.SetImage(`file://{materials}/${this.chapter.thumbnail}.vtf`);
+			cover.SetImage(`file://{game}/${this.chapter.thumbnail}`);
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
+			//CampaignChapters.actions.enabled = true;
 			CampaignChapters.selectedChapter = this.chapter;
-			CampaignChapters.actions.enabled = true;
+			UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.chapter;
+			$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings');
 		});
 	}
 }
@@ -53,7 +55,7 @@ class CampaignChapters {
 		const chapters = this.campaign.chapters;
 
 		for (let i = 0; i < chapters.length; ++i) {
-			const p = $.CreatePanel('RadioButton', this.list, 'chapter' + i);
+			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
 			p.LoadLayoutSnippet('ChapterEntrySnippet');
 
 			this.chapterEntries.push(new ChapterEntry(i, p, chapters[i], false));
@@ -84,7 +86,6 @@ class CampaignChapters {
 
 	static customizeChapter() {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
-
 		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings');
 		//CampaignMgr.customizeChapter(this.selectedChapter);
 	}

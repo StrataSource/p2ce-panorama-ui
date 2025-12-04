@@ -151,7 +151,7 @@
 									</Button>
 									<!-- Addons/Mounts -->
 									<Button
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly"
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
 										onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')"
 									>
 										<Panel class="vertical-align-center flow-down">
