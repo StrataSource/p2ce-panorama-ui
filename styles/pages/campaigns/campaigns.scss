@@ -468,6 +468,11 @@
 
 		&__cover {
 			@extend .saves__entry__cover;
+			border-style: none;
+
+			&__border {
+				border: $menu-pane-border;
+			}
 		}
 
 		&__details {
@@ -484,6 +489,14 @@
 				margin-top: 5px;
 				font-size: 28px;
 				text-shadow: 2px 2px 2px 2 $base-950;
+			}
+		}
+
+		&:disabled,
+		&:parentdisabled {
+			#{$this}__cover {
+				blur: gaussian(15, 15, 5);
+				saturation: 0;
 			}
 		}
 
