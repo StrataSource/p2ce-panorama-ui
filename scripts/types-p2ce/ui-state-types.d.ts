@@ -14,5 +14,5 @@ declare const enum GlobalUiObjects {
 	UI_ACTIVE_CHAPTER = 'ActiveUiChapter',
 	UI_ACTIVE_CAMPAIGN = 'ActiveUiCampaign',
 	UI_CAMPAIGN_SETTINGS = 'UiCampaignSettings',
-	UI_CAMPAIGN_SETTING_PAGE = 'UiCampaignSettingPage',
+	UI_CAMPAIGN_SETTING_PAGE = 'UiCampaignSettingPage'
 }

@@ -21,11 +21,7 @@
 					</Panel>
 				</Button>
 				<Button class="card fill-width" onactivate="PlayMenu.onP2MapsBtnPressed()">
-					<Image
-						class="card__image"
-						src="file://{images}/menu/vertical-banner-p2.svg"
-						scaling="stretch-to-fit-preserve-aspect"
-					/>
+					<Image class="card__image" src="file://{images}/menu/vertical-banner-p2.svg" scaling="stretch-to-fit-preserve-aspect" />
 					<Panel class="card__details">
 						<Label class="card__details__header" text="[HC] Portal 2 Maps" />
 					</Panel>
