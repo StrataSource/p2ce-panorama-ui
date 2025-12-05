@@ -75,6 +75,7 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuSetFocus', this.setFocus.bind(this));
 
 		MainMenuCampaignMode.onMainMenuLoaded();
 		stripDevTagsFromLabels($.GetContextPanel());
@@ -393,9 +394,7 @@ class MainMenu {
 			$.DispatchEvent('MainMenuFullBackNav');
 		}
 
-		// force focus back so that spamming ESC is possible
-		// TODO: probably handle this different for controllers...
-		$.GetContextPanel().SetFocus(true);
+		$.DispatchEvent('MainMenuSetFocus');
 	}
 
 	// pops all pages
@@ -403,6 +402,12 @@ class MainMenu {
 		while (this.pages.length > 0) {
 			this.navigateBack();
 		}
+	}
+
+	static setFocus() {
+		// force focus back so that spamming ESC is possible
+		// TODO: probably handle this different for controllers...
+		$.GetContextPanel().SetFocus(true);
 	}
 
 	static onContinueMouseOver() {
