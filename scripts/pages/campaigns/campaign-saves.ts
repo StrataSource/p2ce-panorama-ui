@@ -21,7 +21,20 @@ class SaveEntry {
 			CampaignSaves.selectedSave = this;
 			CampaignSaves.actionPanel.enabled = true;
 
-			if (this.save.isAutoSave) {
+			// disable save creation if desired
+			const disableSave = GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
+			if (disableSave) {
+				CampaignSaves.overwriteBtn.enabled = false;
+				CampaignSaves.overwriteBtn.SetPanelEvent('onmouseover', () => {
+					UiToolkitAPI.ShowTextTooltip(
+						CampaignSaves.overwriteBtn.id,
+						$.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled')
+					);
+				});
+				CampaignSaves.overwriteBtn.SetPanelEvent('onmouseout', () => {
+					UiToolkitAPI.HideTextTooltip();
+				});
+			} else if (this.save.isAutoSave) {
 				CampaignSaves.overwriteBtn.enabled = false;
 				CampaignSaves.overwriteBtn.SetPanelEvent('onmouseover', () => {
 					UiToolkitAPI.ShowTextTooltip(
@@ -147,14 +160,14 @@ class CampaignSaves {
 	}
 
 	static addCreateSaveBtn() {
+		// create the button
 		this.createSaveBtn = $.CreatePanel('Button', this.stickyPanel, 'CreateSave');
 		this.createSaveBtn.LoadLayoutSnippet('CreateSaveSnippet');
 
 		const title = this.createSaveBtn.FindChildTraverse<Label>('SaveTitle');
-		if (title) {
-			title.text = $.Localize('#MainMenu_SaveRestore_CreateSave');
-		}
+		title?.SetLocalizationString('#MainMenu_SaveRestore_CreateSave');
 
+		// set save action
 		this.createSaveBtn.SetPanelEvent('onactivate', () => {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 				tagDevString('Save Game?'),
@@ -185,6 +198,27 @@ class CampaignSaves {
 				'blur'
 			);
 		});
+
+		// disable save creation if desired
+
+		const noSave = GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
+		if (!noSave) return;
+
+		if (this.createSaveBtn) {
+			const actionBtn = this.createSaveBtn.FindChildTraverse('SaveAction')!;
+			actionBtn.enabled = this.createSaveBtn.enabled = false;
+
+			this.createSaveBtn.SetPanelEvent('onmouseover', () => {
+				UiToolkitAPI.ShowTextTooltip(
+					this.createSaveBtn!.id,
+					$.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled')
+				);
+			});
+
+			this.createSaveBtn.SetPanelEvent('onmouseout', () => {
+				UiToolkitAPI.HideTextTooltip();
+			});
+		}
 	}
 
 	static removeCreateSaveBtn() {
