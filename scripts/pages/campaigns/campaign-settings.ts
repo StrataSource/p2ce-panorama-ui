@@ -21,7 +21,11 @@ class CampaignSettingsTab {
 
 	static init() {
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
-		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Game Pre-Launch'), tagDevString('Confirm settings and begin a new game'));
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			tagDevString('Game Pre-Launch'),
+			tagDevString('Confirm settings and begin a new game')
+		);
 
 		this.show();
 		this.chImage.SetImage(`file://${this.chapter.thumbnail}`);

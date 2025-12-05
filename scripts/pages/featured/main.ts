@@ -11,7 +11,11 @@ class FeaturedMenu {
 	static avatar05 = $<AvatarImage>('#MinorFeature04Avatar')!;
 
 	static onLoad() {
-		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Featured'), tagDevString('Explore highlighted Workshop content'));
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			tagDevString('Featured'),
+			tagDevString('Explore highlighted Workshop content')
+		);
 
 		const XUID = UserAPI.GetXUID();
 		this.avatar01.steamid = XUID;
