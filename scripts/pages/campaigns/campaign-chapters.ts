@@ -28,18 +28,23 @@ class ChapterEntry {
 			title.text = tagDevString(`Chapter ${this.index + 1}`);
 		}
 		if (desc) {
-			desc.text = $.Localize(this.chapter.title);
+			if (this.locked) desc.text = '????';
+			else desc.text = $.Localize(this.chapter.title);
 		}
 		if (cover) {
 			cover.SetImage(`file://${this.chapter.thumbnail}`);
 		}
 
-		this.panel.SetPanelEvent('onactivate', () => {
-			//CampaignChapters.actions.enabled = true;
-			CampaignChapters.selectedChapter = this.chapter;
-			UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.chapter;
-			$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings');
-		});
+		if (this.locked) {
+			this.panel.enabled = false;
+		} else {
+			this.panel.SetPanelEvent('onactivate', () => {
+				//CampaignChapters.actions.enabled = true;
+				CampaignChapters.selectedChapter = this.chapter;
+				UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.chapter;
+				$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings');
+			});
+		}
 	}
 }
 
@@ -59,12 +64,14 @@ class CampaignChapters {
 		);
 
 		const chapters = this.campaign.chapters;
+		const prog = CampaignAPI.GetCampaignUnlockProgress(this.campaign.id);
+		$.Msg(`Campaign progress: ${prog}`);
 
 		for (let i = 0; i < chapters.length; ++i) {
 			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
 			p.LoadLayoutSnippet('ChapterEntrySnippet');
 
-			this.chapterEntries.push(new ChapterEntry(i, p, chapters[i], false));
+			this.chapterEntries.push(new ChapterEntry(i, p, chapters[i], prog < i));
 			this.chapterEntries[i].update();
 		}
 	}
