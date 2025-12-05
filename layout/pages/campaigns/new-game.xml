@@ -12,14 +12,16 @@
 			<Button group="ChaptersGroupRadio" class="chapters__entry">
 				<Panel class="chapters__entry__inner">
 					<!-- Chapter icon cover -->
-					<Image
-						id="ChapterCover"
-						class="chapters__entry__cover"
-						defaultsrc="file://{images}/menu/p2ce-generic.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1920"
-						texturewidth="1080"
-					/>
+					<Panel class="chapters__entry__cover__border">
+						<Image
+							id="ChapterCover"
+							class="chapters__entry__cover"
+							defaultsrc="file://{images}/menu/p2ce-generic.png"
+							scaling="stretch-to-cover-preserve-aspect"
+							textureheight="1920"
+							texturewidth="1080"
+						/>
+					</Panel>
 
 					<!-- Chapter info; title, description, 'source' -->
 					<Panel class="chapters__entry__details">
