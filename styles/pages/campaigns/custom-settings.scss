@@ -3,37 +3,8 @@
 @use '../../abstract/mixin';
 
 .campaign-settings {
-	width: 100%;
 	height: fill-parent-flow(1);
-
-	background-color: $base-950;
-	border: $menu-pane-border;
-	flow-children: right;
-	padding: 15px;
-
-	&__header {
-		width: 100%;
-		flow-children: right;
-		background-color: $base-950;
-		border: $menu-pane-border;
-		border-bottom-width: 0;
-		padding: 10px 15px;
-
-		&__top {
-			@include mixin.font-styles($use-header: true, $light-header: false);
-			font-size: 24px;
-		}
-
-		&__btm {
-			color: $base-300;
-			font-size: 16px;
-		}
-
-		&__logo {
-			width: 150px;
-			height: 50px;
-		}
-	}
+	flow-children: left;
 
 	&__container {
 		width: 100%;
@@ -41,16 +12,35 @@
 		flow-children: down;
 	}
 
+	&__expand-btn {
+		height: 100%;
+		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-900 ), to( rgba(0,0,0,0) ) );
+		tooltip-body-position: 50% 50%;
+
+		&__icon {
+			padding: 15px;
+			vertical-align: center;
+			horizontal-align: center;
+		}
+
+		&:hover {
+			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0,0,0,0) ) );
+		}
+	}
+
 	&__left {
 		width: fill-parent-flow(1);
 		height: 100%;
 		flow-children: down;
+		visibility: collapse;
+		margin-left: 10px;
 	}
 
 	&__button {
 		width: fill-parent-flow(0.3);
 		height: fill-parent-flow(1);
 		border: $menu-pane-border;
+		background-color: $base-950;
 		padding: 30px;
 
 		&__icon {
@@ -90,7 +80,6 @@
 	&__right {
 		height: 100%;
 		flow-children: down;
-		margin-left: 10px;
 	}
 
 	&__chapter-overlay {
@@ -123,9 +112,10 @@
 	}
 
 	&__chapter-img {
-		width: 480px;
+		width: 512px;
 		height: 270px;
 		border: $menu-pane-border;
+		background-color: $base-950;
 	}
 
 	&__summary {
@@ -134,8 +124,9 @@
 		background-color: $base-900;
 		border: $menu-pane-border;
 		border-top-width: 0;
+		border-bottom-width: 0;
 		flow-children: down;
-		padding: 10px;
+		padding: 15px 10px;
 
 		&__header {
 			@include mixin.font-styles($use-header: true, $light-header: false);

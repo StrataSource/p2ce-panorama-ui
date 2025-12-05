@@ -8,15 +8,7 @@
 		<include src="file://{scripts}/pages/campaigns/shared.ts" />
 	</scripts>
 
-	<Panel class="mainmenu__page" onload="CampaignSettingsTab.init()">
-		<Panel class="campaign-settings__header">
-			<Image
-				id="CampaignSettingsLogo"
-				class="campaign-settings__header__logo"
-				src="file://{images}/menu/portal2/full_logo.svg"
-				scaling="stretch-to-fit-preserve-aspect"
-			/>
-		</Panel>
+	<Panel class="mainmenu__page flow-right" onload="CampaignSettingsTab.init()">
 		<Panel class="campaign-settings">
 			<Panel id="CampaignSettingsBase" class="campaign-settings__left">
 				<!-- SETTINGS ROW 1 -->
@@ -150,7 +142,7 @@
 				</Panel>
 				<Button
 					id="CampaignSettingsStart"
-					class="button-mono campaign-settings__start button-mono mt-2 full-width"
+					class="button-mono campaign-settings__start button-mono full-width"
 					onactivate="CampaignSettingsTab.finishSettings()"
 				>
 					<Image
@@ -164,5 +156,20 @@
 				</Button>
 			</Panel>
 		</Panel>
+		<Button
+			id="ExpandBtn"
+			class="campaign-settings__expand-btn"
+			onactivate="CampaignSettingsTab.toggleSettingButtons()"
+			onmouseover="UiToolkitAPI.ShowTextTooltip('ExpandBtn', '[HC] Open advanced settings &amp; custom controls');"
+			onmouseout="UiToolkitAPI.HideTextTooltip();"
+		>
+			<Image
+				class="campaign-settings__expand-btn__icon"
+				src="file://{images}/settings.svg"
+				scaling="stretch-to-fit-preserve-aspect"
+				textureheight="64"
+				texturewidth="64"
+			/>
+		</Button>
 	</Panel>
 </root>

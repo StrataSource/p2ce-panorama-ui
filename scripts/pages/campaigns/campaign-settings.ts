@@ -10,16 +10,21 @@ class CampaignSettingsTab {
 	static helpPage = $<Panel>('#CampaignSettingsHelp')!;
 	static helpTxt = $<Label>('#CampaignSettingsHelpText')!;
 
+	static settingsPage = $<Panel>('#CampaignSettingsBase')!;
+
 	static campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] as CampaignInfo;
 	static chapter = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo;
+
+	static advancedOpened = false;
 
 	static activeSubpage = '';
 
 	static init() {
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
+		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Game Pre-Launch'), tagDevString('Confirm settings and begin a new game'));
 
 		this.show();
-		this.chImage.SetImage(`file://{materials}/${this.chapter.thumbnail}.vtf`);
+		this.chImage.SetImage(`file://${this.chapter.thumbnail}`);
 		this.chText.text = $.Localize(this.chapter.title);
 		this.mapText.text = this.chapter.maps[0].name;
 
@@ -69,6 +74,12 @@ class CampaignSettingsTab {
 			() => {},
 			'blur'
 		);
+	}
+
+	static toggleSettingButtons() {
+		this.advancedOpened = !this.advancedOpened;
+
+		this.settingsPage.visible = this.advancedOpened;
 	}
 
 	static openSettingsSubpage(tab: string, locH: string, locS: string, xml?: string) {
