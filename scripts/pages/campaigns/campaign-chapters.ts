@@ -18,6 +18,12 @@ class ChapterEntry {
 		const desc = this.panel.FindChildTraverse<Label>('ChapterDesc');
 		const cover = this.panel.FindChildTraverse<Image>('ChapterCover');
 
+		$.RegisterEventHandler('ImageFailedLoad', this.panel, () => {
+			const c = this.panel.FindChildTraverse<Image>('ChapterCover');
+			// defaultsrc attribute is unreliable
+			c?.SetImage('file://{images}/menu/p2ce-generic.png');
+		});
+
 		if (title) {
 			title.text = tagDevString(`Chapter ${this.index + 1}`);
 		}

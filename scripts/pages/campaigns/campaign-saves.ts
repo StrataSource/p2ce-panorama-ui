@@ -88,6 +88,7 @@ class SaveEntry {
 
 						$.Schedule(0.001, () => {
 							CampaignSaves.populateSaves();
+							$.DispatchEvent('MainMenuSetFocus');
 						});
 					},
 					$.Localize('#UI_Cancel'),
