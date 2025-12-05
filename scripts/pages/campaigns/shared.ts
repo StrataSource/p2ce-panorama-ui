@@ -28,7 +28,7 @@ interface CampaignPageGroup {
 }
 
 const CAMPAIGN_SETTINGS: Record<string, CampaignSetting[]> = {
-	'GameplayBase': [
+	GameplayBase: [
 		{
 			id: 'cheats',
 			name: 'Server Cheats',
@@ -79,7 +79,7 @@ const CAMPAIGN_SETTINGS: Record<string, CampaignSetting[]> = {
 			]
 		}
 	]
-}
+};
 
 class CampaignSettingField {
 	id: string;
@@ -89,7 +89,7 @@ class CampaignSettingField {
 	default: unknown;
 	value: unknown;
 
-	constructor (id: string, name: string, command: string, panel: GenericPanel, defaultValue: unknown) {
+	constructor(id: string, name: string, command: string, panel: GenericPanel, defaultValue: unknown) {
 		this.id = id;
 		this.name = name;
 		this.command = command;
@@ -114,22 +114,14 @@ class CampaignShared {
 		const settings = CAMPAIGN_SETTINGS[page];
 
 		for (const setting of settings) {
-			const wrapper = $.CreatePanel(
-				'Panel',
-				parent,
-				`${setting.id}_Wrapper`,
-				{ class: 'campaign-setting__entry' }
-			);
+			const wrapper = $.CreatePanel('Panel', parent, `${setting.id}_Wrapper`, {
+				class: 'campaign-setting__entry'
+			});
 
-			$.CreatePanel(
-				'Label',
-				wrapper,
-				`${setting.id}_Text`,
-				{
-					class: 'campaign-setting__entry__text',
-					text: setting.name
-				}
-			);
+			$.CreatePanel('Label', wrapper, `${setting.id}_Text`, {
+				class: 'campaign-setting__entry__text',
+				text: setting.name
+			});
 
 			let inputClassPrefix = '';
 			switch (setting.panelType) {
@@ -144,34 +136,32 @@ class CampaignShared {
 				case 'DropDown':
 					inputClassPrefix = 'dropdown campaign-setting__entry__dropdown';
 					break;
-			
+
 				default:
 					throw new Error('This panel type is not supported as a setting widget.');
 					break;
 			}
 
-			const inputter = $.CreatePanel(
-				setting.panelType,
-				wrapper,
-				`${setting.id}_Input`,
-				{
-					class: `campaign-setting__entry__value ${inputClassPrefix}`,
-					menuclass: 'dropdown-menu'
-				}
-			);
+			const inputter = $.CreatePanel(setting.panelType, wrapper, `${setting.id}_Input`, {
+				class: `campaign-setting__entry__value ${inputClassPrefix}`,
+				menuclass: 'dropdown-menu'
+			});
 
 			if (setting.panelType === 'DropDown') {
 				if (!setting.dropDownValues) {
 					$.Warning(`Campaign setting ${setting.id} is of type DropDown but does not specify any values.`);
-					throw new Error(`Campaign setting ${setting.id} is of type DropDown but does not specify any values.`);
+					throw new Error(
+						`Campaign setting ${setting.id} is of type DropDown but does not specify any values.`
+					);
 				}
 
 				for (let i = 0; i < setting.dropDownValues.length; ++i) {
 					const value = setting.dropDownValues[i];
-					const o = $.CreatePanel(
-						'Label', inputter, `${setting.id}${value.value}`,
-						{ text: value.text, value: value.value, index: i }
-					);
+					const o = $.CreatePanel('Label', inputter, `${setting.id}${value.value}`, {
+						text: value.text,
+						value: value.value,
+						index: i
+					});
 					(inputter as DropDown).AddOption(o);
 				}
 			}
@@ -189,20 +179,14 @@ class CampaignShared {
 				case 'DropDown':
 					(inputter as DropDown).SetSelectedIndex(Number(setting.default));
 					break;
-			
+
 				default:
 					throw new Error('This panel type is not supported as a setting widget.');
 					break;
 			}
 
 			this.inputFields.push(
-				new CampaignSettingField(
-					setting.id,
-					setting.name,
-					setting.command,
-					inputter,
-					setting.default
-				)
+				new CampaignSettingField(setting.id, setting.name, setting.command, inputter, setting.default)
 			);
 		}
 
@@ -228,7 +212,7 @@ class CampaignShared {
 					field.value = (p as DropDown).GetSelected().GetAttributeInt('index', -1);
 					if (field.value === -1) throw new Error('Unable to retrieve index from DropDown Field');
 					break;
-			
+
 				default:
 					throw new Error('This panel type is not supported as a setting widget.');
 					break;
@@ -239,7 +223,7 @@ class CampaignShared {
 			if (field.default == field.value) {
 				continue;
 			}
-			
+
 			$.Msg('Saving this field...');
 		}
 	}

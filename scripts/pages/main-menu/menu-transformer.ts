@@ -76,15 +76,14 @@ class MainMenuCampaignMode {
 
 		// disable the saves menu in the main menu
 		// always be enabled to allow creation of saves in game
-		
+
 		this.loadGameBtn.enabled = true;
 
 		if (saves.length === 0) {
 			$.Warning('CONTINUE: No saves');
 
-			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
-				this.loadGameBtn.enabled = false;
-			
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) this.loadGameBtn.enabled = false;
+
 			return;
 		}
 
@@ -194,13 +193,17 @@ class MainMenuCampaignMode {
 			this.movie.SetMovie(`file://{game}/${bgm}`);
 			this.movie.Play();
 			this.movie.visible = true;
-			$.Schedule(0.001, () => { this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()) });
+			$.Schedule(0.001, () => {
+				this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic());
+			});
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			this.showBgImg();
 			this.imgBg.SetImage(`file://${bgi}`);
 			this.movie.visible = false;
-			$.Schedule(0.001, () => { this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()) });
+			$.Schedule(0.001, () => {
+				this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic());
+			});
 		}
 
 		return bgl.length > 0;

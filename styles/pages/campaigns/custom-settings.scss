@@ -14,7 +14,7 @@
 
 	&__expand-btn {
 		height: 100%;
-		background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-900 ), to( rgba(0,0,0,0) ) );
+		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-900), to(rgba(0, 0, 0, 0)));
 		tooltip-body-position: 50% 50%;
 
 		&__icon {
@@ -24,7 +24,7 @@
 		}
 
 		&:hover {
-			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0,0,0,0) ) );
+			background-color: gradient(linear, 0% 0%, 100% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
 		}
 	}
 
