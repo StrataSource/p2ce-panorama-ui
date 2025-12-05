@@ -177,7 +177,7 @@ class MainMenuCampaignMode {
 
 		if (bgl.length > 0) {
 			this.showBgImg();
-			this.imgBg.SetImage(`file://{materials}/${bgi}`);
+			this.imgBg.SetImage(`file://${bgi}`);
 			$.Schedule(this.BACKGROUND_IMAGE_FADE_IN_TIME, () =>
 				GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`)
 			);
@@ -190,7 +190,7 @@ class MainMenuCampaignMode {
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			this.showBgImg();
-			this.imgBg.SetImage(`file://{materials}/${bgi}`);
+			this.imgBg.SetImage(`file://${bgi}`);
 			this.movie.visible = false;
 			$.Schedule(0.001, () => { this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic()) });
 		}
