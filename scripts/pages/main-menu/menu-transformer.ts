@@ -74,13 +74,21 @@ class MainMenuCampaignMode {
 		this.continueBtn.enabled = false;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
 
+		// disable the saves menu in the main menu
+		// always be enabled to allow creation of saves in game
+		
+		this.loadGameBtn.enabled = true;
+
 		if (saves.length === 0) {
 			$.Warning('CONTINUE: No saves');
-			this.loadGameBtn.enabled = false;
+
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU)
+				this.loadGameBtn.enabled = false;
+			
 			return;
 		}
 
-		this.loadGameBtn.enabled = true;
+		// set the continue button states
 
 		this.latestSave = saves[0];
 
