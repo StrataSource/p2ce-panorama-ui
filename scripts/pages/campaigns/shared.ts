@@ -30,15 +30,6 @@ interface CampaignPageGroup {
 const CAMPAIGN_SETTINGS: Record<string, CampaignSetting[]> = {
 	GameplayBase: [
 		{
-			id: 'cheats',
-			name: 'Server Cheats',
-			helpText:
-				'Enable <pre>sv_cheats 1</pre> and allow the usage of commands that require it, such as <pre>noclip</pre>.\n\ndefault: false',
-			default: false,
-			command: 'sv_cheats',
-			panelType: 'ToggleButton'
-		},
-		{
 			id: 'mirrorWorld',
 			name: 'Mirror World',
 			helpText: 'Flips the world horizontally.\n\ndefault: False',
@@ -54,7 +45,7 @@ const CAMPAIGN_SETTINGS: Record<string, CampaignSetting[]> = {
 			command: 'sv_gravity',
 			// numberentry only supports integers
 			panelType: 'TextEntry'
-		},
+		}, 
 		{
 			id: 'skill',
 			name: 'Difficulty',
@@ -77,6 +68,89 @@ const CAMPAIGN_SETTINGS: Record<string, CampaignSetting[]> = {
 					value: '3'
 				}
 			]
+		},
+		{
+			id: 'throw',
+			name: 'Enable Throw',
+			helpText: 'Enable throw',
+			default: false,
+			command: 'player_throwenable',
+			panelType: 'ToggleButton'
+		},
+		{
+			id: 'throwForce',
+			name: 'Throw Force',
+			helpText: 'Throw',
+			default: '1000',
+			command: 'player_throwforce',
+			panelType: 'TextEntry'
+		},
+		{
+			id: 'bhop',
+			name: 'Enable Bunnyhop Speed Boost',
+			helpText: 'Enable bhop speed',
+			default: false,
+			command: 'mv_bhop',
+			panelType: 'ToggleButton'
+		},
+		{
+			id: 'crouchJump',
+			name: 'Enable Crouch Jumping',
+			helpText: 'Enable duckjump',
+			default: false,
+			command: 'mv_duckjump',
+			panelType: 'ToggleButton'
+		}
+	],
+	ServerSettings: [
+		{
+			id: 'hostname',
+			name: 'Server Name',
+			helpText: 'Server Name',
+			default: `${FriendsAPI.GetLocalPlayerName()}'s game`,
+			command: 'hostname',
+			panelType: 'TextEntry'
+		},
+		{
+			id: 'maxplayers',
+			name: 'Maximum Player Count',
+			helpText: 'Max players',
+			default: '1',
+			command: 'maxplayers',
+			panelType: 'TextEntry'
+		},
+		{
+			id: 'password',
+			name: 'Server Password',
+			helpText: 'Server password',
+			default: '',
+			command: 'sv_password',
+			panelType: 'TextEntry'
+		},
+		{
+			id: 'lan',
+			name: 'LAN Only',
+			helpText: 'LAN',
+			default: false,
+			command: 'sv_lan',
+			panelType: 'ToggleButton'
+		},
+		{
+			id: 'tags',
+			name: 'Server Browser Tags',
+			helpText: 'Tags',
+			default: '',
+			command: 'sv_tags',
+			panelType: 'TextEntry'
+		},
+		{
+			id: 'cheats',
+			name: 'Server Cheats',
+			helpText:
+				'Enable <pre>sv_cheats 1</pre> and allow the usage of commands that require it, such as <pre>noclip</pre>.\n\nDefault: false',
+			default: false,
+			command: 'sv_cheats',
+			panelType: 'ToggleButton'
 		}
 	]
 };

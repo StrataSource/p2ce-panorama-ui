@@ -2,8 +2,13 @@
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
+	<scripts>
+	</scripts>
 
 	<Panel class="mainmenu__page flow-right">
-		<Label text="[HC] MAP-SELECT WORK IN PROGRESS" />
+		<Panel id="SettingPageInsert" class="fill-width full-height flow-down mr-1">
+		</Panel>
+
+		<Panel id="HelpInsert" class="fill-width full-height flow-down ml-1" />
 	</Panel>
 </root>
