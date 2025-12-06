@@ -13,7 +13,7 @@
 				<Panel class="full-width fill-height">
 					<Image
 						class="card__image"
-						src="file://{images}/menu/p2ce-generic-bigger.svg"
+						src="file://{images}/menu/p2ce-generic.png"
 						scaling="stretch-to-cover-preserve-aspect"
 					/>
 					<AvatarImage id="MainFeatureAvatar" class="card__avatar" />
@@ -31,7 +31,7 @@
 					<Panel class="full-width fill-height">
 						<Image
 							class="card__image"
-							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							src="file://{images}/menu/p2ce-generic.png"
 							scaling="stretch-to-cover-preserve-aspect"
 						/>
 						<AvatarImage id="MinorFeature01Avatar" class="card__avatar" />
@@ -45,7 +45,7 @@
 					<Panel class="full-width fill-height">
 						<Image
 							class="card__image"
-							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							src="file://{images}/menu/p2ce-generic.png"
 							scaling="stretch-to-cover-preserve-aspect"
 						/>
 						<AvatarImage id="MinorFeature02Avatar" class="card__avatar" />
@@ -61,7 +61,7 @@
 					<Panel class="full-width fill-height">
 						<Image
 							class="card__image"
-							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							src="file://{images}/menu/p2ce-generic.png"
 							scaling="stretch-to-cover-preserve-aspect"
 						/>
 						<AvatarImage id="MinorFeature03Avatar" class="card__avatar" />
@@ -75,7 +75,7 @@
 					<Panel class="full-width fill-height">
 						<Image
 							class="card__image"
-							src="file://{images}/menu/p2ce-generic-bigger.svg"
+							src="file://{images}/menu/p2ce-generic.png"
 							scaling="stretch-to-cover-preserve-aspect"
 						/>
 						<AvatarImage id="MinorFeature04Avatar" class="card__avatar" />
