@@ -108,7 +108,28 @@
 		margin-bottom: 24px;
 		vertical-align: bottom;
 		horizontal-align: center;
-		flow-children: down;
+	}
+
+	&__grid1 {
+		margin: -20px;
+		width: 100%;
+		height: 100%;
+		background-image: url('file://{images}/menu/menu_grid5.png');
+		background-repeat: no-repeat;
+		background-position: left bottom;
+		opacity: 0.1;
+	}
+
+	&__grid2 {
+		margin: -20px;
+		width: 100%;
+		height: 100%;
+		vertical-align: bottom;
+		horizontal-align: right;
+		background-image: url('file://{images}/menu/menu_grid4.png');
+		background-repeat: no-repeat;
+		background-position: right bottom;
+		opacity: 0.1;
 	}
 }
 
