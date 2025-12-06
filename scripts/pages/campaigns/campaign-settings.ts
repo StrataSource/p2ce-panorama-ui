@@ -88,7 +88,10 @@ class CampaignSettingsTab {
 
 	static openSettingsSubpage(tab: string, locH: string, locS: string, xml?: string) {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTING_PAGE] = tab;
-		$.DispatchEvent('MainMenuOpenNestedPage', tab, 'campaigns/settings-base');
+
+		if (xml) $.DispatchEvent('MainMenuOpenNestedPage', tab, `campaigns/${xml}`);
+		else $.DispatchEvent('MainMenuOpenNestedPage', tab, 'campaigns/settings-base');
+
 		$.DispatchEvent('MainMenuSetPageLines', $.Localize(locH), $.Localize(locS));
 
 		//$.DispatchEvent('MainMenuOpenNestedPage', tab, `campaigns/${xml}`);
