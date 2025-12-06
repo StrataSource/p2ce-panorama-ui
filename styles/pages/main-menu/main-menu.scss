@@ -2,7 +2,7 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
-$pane-move-delay: 0.1s;
+$pane-move-time: 0.1s;
 
 #TooltipManager,
 #ContextMenuManager,
@@ -143,7 +143,7 @@ $pane-move-delay: 0.1s;
 
 		// murdered bc JJ doesn't like it sadge :(
 		// transform: translateX(125px);
-		// transition: transform $pane-move-delay ease-out 0s;
+		// transition: transform $pane-move-time ease-out 0s;
 		// &__anim {
 		// 	transform: translateX(0px);
 		// }
@@ -189,9 +189,9 @@ $pane-move-delay: 0.1s;
 		blur: gaussian(0, 0, 0);
 
 		transition:
-			transform calc($pane-move-delay * 1.5) ease-out 0s,
-			opacity $pane-move-delay ease-in-out 0s,
-			blur calc($pane-move-delay * 2) ease-in-out 0s;
+			transform calc($pane-move-time * 1.5) ease-out 0s,
+			opacity $pane-move-time ease-in-out 0s,
+			blur calc($pane-move-time * 2) ease-in-out 0s;
 
 		&__anim {
 			opacity: 0;
@@ -241,6 +241,7 @@ $pane-move-delay: 0.1s;
 			}
 
 			&:hover:not(:disabled) {
+				animation: OpacityFlicker 3s linear 0s infinite normal forwards;
 				background-color: gradient(
 					linear,
 					0% 0%,
@@ -251,7 +252,7 @@ $pane-move-delay: 0.1s;
 
 				#{$this}__text,
 				#{$this}__small-text {
-					text-shadow: none;
+					//text-shadow: none;
 				}
 			}
 
@@ -286,6 +287,10 @@ $pane-move-delay: 0.1s;
 		&__details {
 			width: 100%;
 			background-color: $base-950;
+			background-image: url('file://{images}/menu/menu_grid4.png');
+			background-repeat: no-repeat;
+			background-position: right top;
+			background-img-opacity: 0.1;
 			border-top: $menu-pane-border;
 			border-color: $button-background-hover;
 			flow-children: down;
@@ -337,9 +342,9 @@ $pane-move-delay: 0.1s;
 		blur: gaussian(10, 10, 2);
 
 		transition:
-			transform calc($pane-move-delay * 1.5) ease-out 0s,
-			opacity $pane-move-delay ease-in-out 0s,
-			blur calc($pane-move-delay * 2) ease-in-out 0s;
+			transform calc($pane-move-time * 1.5) ease-out 0s,
+			opacity $pane-move-time ease-in-out 0s,
+			blur calc($pane-move-time * 2) ease-in-out 0s;
 
 		&__anim {
 			opacity: 1;
@@ -363,9 +368,9 @@ $pane-move-delay: 0.1s;
 
 		&__t-prop {
 			transition:
-				transform calc($pane-move-delay * 2) ease-out 0s,
-				opacity $pane-move-delay ease-in-out 0s,
-				blur calc($pane-move-delay * 2.5) linear 0s;
+				transform calc($pane-move-time * 2) ease-out 0s,
+				opacity $pane-move-time ease-in-out 0s,
+				blur calc($pane-move-time * 2.5) linear 0s;
 		}
 
 		&__anim {
