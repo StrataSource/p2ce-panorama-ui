@@ -418,6 +418,7 @@
 		}
 
 		&:hover:not(:disabled):not(:selected) {
+			animation: OpacityFlicker 6s linear 0s infinite normal forwards;
 			background-color: gradient(linear, 100% 0%, 0% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
 		}
 
