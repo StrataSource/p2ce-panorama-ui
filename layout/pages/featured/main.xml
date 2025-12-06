@@ -11,11 +11,7 @@
 		<Panel class="featured-pane">
 			<Button class="card card__occupy" onactivate="">
 				<Panel class="full-width fill-height">
-					<Image
-						class="card__image"
-						src="file://{images}/menu/p2ce-generic.png"
-						scaling="stretch-to-cover-preserve-aspect"
-					/>
+					<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
 					<AvatarImage id="MainFeatureAvatar" class="card__avatar" />
 				</Panel>
 				<Panel class="card__details">
@@ -29,11 +25,7 @@
 			<Panel class="fill-height flow-right">
 				<Button class="card card__occupy" onactivate="">
 					<Panel class="full-width fill-height">
-						<Image
-							class="card__image"
-							src="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-						/>
+						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
 						<AvatarImage id="MinorFeature01Avatar" class="card__avatar" />
 					</Panel>
 					<Panel class="card__details">
@@ -43,11 +35,7 @@
 				</Button>
 				<Button class="card card__occupy ml-2" onactivate="">
 					<Panel class="full-width fill-height">
-						<Image
-							class="card__image"
-							src="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-						/>
+						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
 						<AvatarImage id="MinorFeature02Avatar" class="card__avatar" />
 					</Panel>
 					<Panel class="card__details">
@@ -59,11 +47,7 @@
 			<Panel class="fill-height flow-right mt-2">
 				<Button class="card card__occupy" onactivate="">
 					<Panel class="full-width fill-height">
-						<Image
-							class="card__image"
-							src="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-						/>
+						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
 						<AvatarImage id="MinorFeature03Avatar" class="card__avatar" />
 					</Panel>
 					<Panel class="card__details">
@@ -73,11 +57,7 @@
 				</Button>
 				<Button class="card card__occupy ml-2" onactivate="">
 					<Panel class="full-width fill-height">
-						<Image
-							class="card__image"
-							src="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-						/>
+						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
 						<AvatarImage id="MinorFeature04Avatar" class="card__avatar" />
 					</Panel>
 					<Panel class="card__details">

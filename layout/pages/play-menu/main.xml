@@ -12,11 +12,7 @@
 			<Panel class="flow-down full-width">
 				<Button class="card card__occupy" onactivate="PlayMenu.onCampaignsBtnPressed()">
 					<Panel class="full-width fill-height">
-						<Image
-							class="card__image"
-							src="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-						/>
+						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
 						<Panel class="card__status">
 							<Label class="card__status__text" text="NEW" />
 						</Panel>
