@@ -41,11 +41,21 @@
 		</Panel>
 
 		<Panel class="loadingscreen__progress-panel">
-			<Panel class="full-width">
-				<Label id="ProgressStatusText" class="loadingscreen__details" text="Progress" />
-				<Label id="PercentText" class="loadingscreen__percentage-label" text="{d:percent}%" />
+			<Panel
+				class="loadingscreen__grid1"
+				hittest="false"
+			/>
+			<Panel
+				class="loadingscreen__grid2"
+				hittest="false"
+			/>
+			<Panel class="full-width flow-down">
+				<Panel class="full-width">
+					<Label id="ProgressStatusText" class="loadingscreen__details" text="Progress" />
+					<Label id="PercentText" class="loadingscreen__percentage-label" text="{d:percent}%" />
+				</Panel>
+				<ProgressBar id="ProgressBar" class="progressbar loadingscreen__progressbar" />
 			</Panel>
-			<ProgressBar id="ProgressBar" class="progressbar loadingscreen__progressbar" />
 		</Panel>
 	</Panel>
 </root>

@@ -7,9 +7,13 @@
 	vertical-align: middle;
 	horizontal-align: center;
 	padding: $popup-padding;
-	border-bottom: $popup-border;
+	border: $popup-border;
 	border-radius: $popup-radius;
 	background-color: $popup-background;
+	background-image: url('file://{images}/menu/menu_grid4.png');
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	background-img-opacity: 0.1;
 	opacity: 1;
 	transition-property: pre-transform-scale2d;
 	transition-duration: 0.1s;
