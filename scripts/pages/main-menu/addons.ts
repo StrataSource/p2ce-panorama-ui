@@ -224,9 +224,9 @@ class AddonManager {
 	}
 
 	static updateSelectedAddonMaps() {
-		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
+		if (this.selectedAddon === -1) return;
 
-		// TODO: YOU DUMB IDIOT!!!
+		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
 
 		if (!WorkshopAPI.GetAddonEnabled(this.selectedAddon)) {
 			this.addonMapsPanel.visible = false;
