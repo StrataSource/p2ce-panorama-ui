@@ -27,6 +27,11 @@ class CampaignSettingsTab {
 			tagDevString('Confirm settings and begin a new game')
 		);
 
+		$.RegisterEventHandler('ImageFailedLoad', this.chImage, () => {
+			// defaultsrc attribute is unreliable
+			this.chImage.SetImage('file://{images}/menu/p2ce-generic.png');
+		});
+
 		this.show();
 		this.chImage.SetImage(`file://${this.chapter.thumbnail}`);
 		this.chText.text = $.Localize(this.chapter.title);

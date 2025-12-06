@@ -80,6 +80,15 @@
 							</Panel>
 							<Panel class="mainmenu__nav__controls__wrapper">
 								<Panel class="mainmenu__nav__controls">
+									<!-- Controls -->
+									<Button
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
+										onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
+									>
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_ControlsLibrary" />
+										</Panel>
+									</Button>
 									<!-- Featured Hub (NOT Campaign Mode / Main Menu) -->
 									<Button
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"

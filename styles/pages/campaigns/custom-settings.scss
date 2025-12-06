@@ -3,7 +3,7 @@
 @use '../../abstract/mixin';
 
 .campaign-settings {
-	height: fill-parent-flow(1);
+	height: 100%;
 	flow-children: left;
 
 	&__container {
@@ -112,10 +112,19 @@
 	}
 
 	&__chapter-img {
-		width: 512px;
+		width: 576px;
 		height: 270px;
 		border: $menu-pane-border;
 		background-color: $base-950;
+	}
+
+	&__header {
+		width: 100%;
+		flow-children: right;
+		padding: 15px;
+		background-color: $base-950;
+		border: $menu-pane-border;
+		border-bottom-width: 0px;
 	}
 
 	&__summary {
@@ -154,15 +163,17 @@
 		tooltip-body-position: 50% 50%;
 
 		&__icon {
-			width: 48px;
-			height: 48px;
-			margin-right: 10px;
+			width: 64px;
+			height: 64px;
+			margin-right: 15px;
 		}
 
 		&__text {
 			@include mixin.font-styles($use-header: true, $light-header: false);
-			font-size: 24px;
+			letter-spacing: 3px;
+			font-size: 32px;
 			transform: translateY(-2px);
+			text-transform: uppercase;
 		}
 	}
 }
@@ -175,7 +186,11 @@
 		flow-children: right;
 
 		&__odd {
-			background-color: $base-900;
+		}
+
+		&:hover {
+			animation: OpacityFlicker 12s linear 0s infinite normal forwards;
+			background-color: gradient(linear, 0% 0%, 100% 0%, from(rgba(0, 0, 0, 0)), to($button-background-hover));
 		}
 
 		&__text {

@@ -45,7 +45,7 @@ const CAMPAIGN_SETTINGS: Record<string, CampaignSetting[]> = {
 			command: 'sv_gravity',
 			// numberentry only supports integers
 			panelType: 'TextEntry'
-		}, 
+		},
 		{
 			id: 'skill',
 			name: 'Difficulty',
@@ -187,10 +187,14 @@ class CampaignShared {
 
 		const settings = CAMPAIGN_SETTINGS[page];
 
-		for (const setting of settings) {
+		for (let i = 0; i < settings.length; ++i) {
+			const setting = settings[i];
+
 			const wrapper = $.CreatePanel('Panel', parent, `${setting.id}_Wrapper`, {
 				class: 'campaign-setting__entry'
 			});
+
+			wrapper.SetHasClass('campaign-setting__entry__odd', i % 2 === 0);
 
 			$.CreatePanel('Label', wrapper, `${setting.id}_Text`, {
 				class: 'campaign-setting__entry__text',
@@ -292,13 +296,11 @@ class CampaignShared {
 					break;
 			}
 
-			$.Msg(`Field ${field.command} is value ${field.value}, default: ${field.default}`);
 			// eslint-disable-next-line eqeqeq
 			if (field.default == field.value) {
 				continue;
 			}
-
-			$.Msg('Saving this field...');
+			$.Msg(`Saving field '${field.command}', VALUE: [${field.value}], DEFAULT: [${field.default}]`);
 		}
 	}
 }

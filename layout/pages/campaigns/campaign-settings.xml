@@ -112,29 +112,26 @@
 			</Panel>
 			<!-- Summary panel -->
 			<Panel class="campaign-settings__right">
-				<Panel>
+				<Panel class="campaign-settings__header">
 					<Image
-						id="CampaignSettingsChapterImage"
-						class="campaign-settings__chapter-img"
-						defaultsrc="file://{materials}/vgui/new_save_game.vtf"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1920"
-						texturewidth="1080"
+						id="CampaignSettingsBoxLogo"
+						class="campaign-settings__box-logo"
+						src="file://{images}/menu/portal2/logo.svg"
+						scaling="stretch-to-fit-preserve-aspect"
 					/>
-					<Panel class="campaign-settings__chapter-overlay" />
-					<Panel class="m-3 flow-right vertical-align-bottom full-width">
-						<Image
-							id="CampaignSettingsBoxLogo"
-							class="campaign-settings__box-logo"
-							src="file://{images}/menu/portal2/logo.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-						/>
-						<Panel class="flow-down fill-width">
-							<Label id="CampaignSettingsChapter" class="campaign-settings__chapter-text" text="[PH] Campaign Chapter" />
-							<Label id="CampaignSettingsMap" class="campaign-settings__map-text" text="[PH] Campaign Map" />
-						</Panel>
+					<Panel class="flow-down fill-width">
+						<Label id="CampaignSettingsChapter" class="campaign-settings__chapter-text" text="[PH] Campaign Chapter" />
+						<Label id="CampaignSettingsMap" class="campaign-settings__map-text" text="[PH] Campaign Map" />
 					</Panel>
 				</Panel>
+				<Image
+					id="CampaignSettingsChapterImage"
+					class="campaign-settings__chapter-img"
+					defaultsrc="file://{materials}/vgui/new_save_game.vtf"
+					scaling="stretch-to-cover-preserve-aspect"
+					textureheight="1920"
+					texturewidth="1080"
+				/>
 				<Panel class="campaign-settings__summary">
 					<Panel id="CampaignSettingsSummaryPanel" class="campaign-settings__summary__inner">
 						<Label class="campaign-settings__summary__text" html="true" text="#MainMenu_Campaigns_Setup_Summary_NoChanges" />
@@ -149,8 +146,8 @@
 						class="button-mono__icon campaign-settings__start__icon"
 						src="file://{images}/cancel.svg"
 						scaling="stretch-to-fit-preserve-aspect"
-						texturewidth="48"
-						textureheight="48"
+						texturewidth="64"
+						textureheight="64"
 					/>
 					<Label class="button-mono__text campaign-settings__start__text" text="#Action_NewGame_Title" />
 				</Button>
