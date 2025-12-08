@@ -13,8 +13,8 @@ class FeaturedMenu {
 	static onLoad() {
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
-			tagDevString('Featured'),
-			tagDevString('Explore highlighted Workshop content')
+			$.Localize('#MainMenu_Navigation_Featured'),
+			$.Localize('#MainMenu_Navigation_Featured_Tagline')
 		);
 
 		const XUID = UserAPI.GetXUID();

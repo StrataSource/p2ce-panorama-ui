@@ -73,9 +73,9 @@ class SaveEntry {
 			type.visible = isQuicksave || isAuto;
 
 			if (isQuicksave) {
-				type.text = tagDevString('Quicksave');
+				type.text = $.Localize('#MainMenu_SaveRestore_SaveType_quick');
 			} else if (isAuto) {
-				type.text = tagDevString('Autosave');
+				type.text = $.Localize('#MainMenu_SaveRestore_SaveType_autosave');
 			}
 		}
 		if (cloud) {
@@ -126,7 +126,7 @@ class CampaignSaves {
 	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
 
 	static init() {
-		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Saved Games'), tagDevString('Manage your Save Files'));
+		$.DispatchEvent('MainMenuSetPageLines', $.Localize('#MainMenu_SaveRestore_Main'), $.Localize('#MainMenu_SaveRestore_Main_Tagline'));
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			this.addCreateSaveBtn();
@@ -170,8 +170,8 @@ class CampaignSaves {
 		// set save action
 		this.createSaveBtn.SetPanelEvent('onactivate', () => {
 			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				tagDevString('Save Game?'),
-				tagDevString('Create new save?'),
+				$.Localize('#Action_NewSave_Confirm'),
+				$.Localize('#Action_NewSave_Confirm_Message'),
 				'generic-popup',
 				$.Localize('#UI_Yes'),
 				() => {

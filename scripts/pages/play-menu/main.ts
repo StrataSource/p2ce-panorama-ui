@@ -2,22 +2,22 @@
 
 class PlayMenu {
 	static setPlayMenuLines() {
-		$.DispatchEvent('MainMenuSetPageLines', tagDevString('Play'), tagDevString('Start a new Experience'));
+		$.DispatchEvent('MainMenuSetPageLines', $.Localize('#MainMenu_Navigation_Play'), $.Localize('#MainMenu_Navigation_Play_Tagline'));
 	}
 
 	static setPlayerMenuLines() {
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
-			tagDevString('Play'),
-			tagDevString('Select Singleplayer or Multiplayer')
+			$.Localize('#MainMenu_Navigation_Play'),
+			$.Localize('#MainMenu_Navigation_Play_Modes')
 		);
 	}
 
 	static setMapPoolLines() {
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
-			tagDevString('Play'),
-			tagDevString('Select P2:CE or Portal 2 Workshop maps')
+			$.Localize('#MainMenu_Navigation_Play'),
+			$.Localize('#MainMenu_Navigation_Play_MapTypes')
 		);
 	}
 
