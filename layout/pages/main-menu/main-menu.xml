@@ -82,6 +82,7 @@
 								<Panel class="mainmenu__nav__controls">
 									<!-- Controls -->
 									<Button
+										id="DevControls"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
 										onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
 									>

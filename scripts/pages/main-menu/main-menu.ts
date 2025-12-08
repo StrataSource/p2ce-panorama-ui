@@ -46,6 +46,8 @@ class MainMenu {
 	static continueHeadline = $<Label>('#ContinueSaveHeadline')!;
 	static continueTagline = $<Label>('#ContinueSaveTagline')!;
 
+	static devControls = $<Button>('#DevControls')!;
+
 	// page vars
 	static pages: MenuPage[] = [];
 
@@ -57,6 +59,10 @@ class MainMenu {
 	static music;
 
 	static onMainMenuLoaded() {
+		// don't override visibility if this is true
+		if (!GameInterfaceAPI.GetSettingBool('developer'))
+			this.devControls.visible = false;
+
 		this.setMainMenuBackground();
 		this.setMainMenuModelPanel();
 
