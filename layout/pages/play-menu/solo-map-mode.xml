@@ -17,13 +17,13 @@
 						scaling="stretch-to-fit-preserve-aspect"
 					/>
 					<Panel class="card__details">
-						<Label class="card__details__header" text="[HC] P2:CE Maps" />
+						<Label class="card__details__header" text="#MainMenu_Campaigns_MapType_p2ce" />
 					</Panel>
 				</Button>
 				<Button class="card fill-width" onactivate="PlayMenu.onP2MapsBtnPressed()">
 					<Image class="card__image" src="file://{images}/menu/vertical-banner-p2.svg" scaling="stretch-to-fit-preserve-aspect" />
 					<Panel class="card__details">
-						<Label class="card__details__header" text="[HC] Portal 2 Maps" />
+						<Label class="card__details__header" text="#MainMenu_Campaigns_MapType_portal2" />
 					</Panel>
 				</Button>
 			</Panel>
