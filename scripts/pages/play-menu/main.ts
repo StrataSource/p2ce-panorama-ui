@@ -2,7 +2,11 @@
 
 class PlayMenu {
 	static setPlayMenuLines() {
-		$.DispatchEvent('MainMenuSetPageLines', $.Localize('#MainMenu_Navigation_Play'), $.Localize('#MainMenu_Navigation_Play_Tagline'));
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			$.Localize('#MainMenu_Navigation_Play'),
+			$.Localize('#MainMenu_Navigation_Play_Tagline')
+		);
 	}
 
 	static setPlayerMenuLines() {

@@ -73,7 +73,10 @@ class CampaignSelector {
 	}
 
 	static setPageLines() {
-		const playerModeStr = this.playerMode === PlayerMode.SINGLEPLAYER ? '#MainMenu_Campaigns_CType_SP' : '#MainMenu_Campaigns_CType_MP';
+		const playerModeStr =
+			this.playerMode === PlayerMode.SINGLEPLAYER
+				? '#MainMenu_Campaigns_CType_SP'
+				: '#MainMenu_Campaigns_CType_MP';
 
 		let headline: string;
 		let tagline: string;

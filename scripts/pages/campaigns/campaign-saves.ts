@@ -126,7 +126,11 @@ class CampaignSaves {
 	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
 
 	static init() {
-		$.DispatchEvent('MainMenuSetPageLines', $.Localize('#MainMenu_SaveRestore_Main'), $.Localize('#MainMenu_SaveRestore_Main_Tagline'));
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			$.Localize('#MainMenu_SaveRestore_Main'),
+			$.Localize('#MainMenu_SaveRestore_Main_Tagline')
+		);
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			this.addCreateSaveBtn();
