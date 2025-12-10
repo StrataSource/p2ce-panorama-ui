@@ -53,16 +53,17 @@
 	}
 
 	&__progressbar {
+		height: 20px;
 		width: 100%;
 		vertical-align: bottom;
 		horizontal-align: center;
-		margin-top: 8px;
+		margin-top: 5px;
 	}
 
 	&__details {
 		width: 100%;
 		height: fill-parent-flow(1);
-		font-size: 24px;
+		font-size: 20px;
 	}
 
 	&__left-details {
@@ -96,22 +97,24 @@
 		vertical-align: top;
 		horizontal-align: right;
 		text-align: right;
-		font-size: 24px;
+		font-size: 20px;
 		font-weight: bold;
 	}
 
 	&__progress-panel {
+		min-height: 94px;
 		width: 60%;
+		max-width: 1152px;
 		background-color: $base-950;
 		border: $menu-pane-border;
-		padding: 20px;
-		margin-bottom: 24px;
+		padding: 0 20px;
+		margin-bottom: 25px;
 		vertical-align: bottom;
 		horizontal-align: center;
 	}
 
 	&__grid1 {
-		margin: -20px;
+		margin: 0 -20px;
 		width: 100%;
 		height: 100%;
 		background-image: url('file://{images}/menu/menu_grid5.png');
@@ -121,7 +124,7 @@
 	}
 
 	&__grid2 {
-		margin: -20px;
+		margin: 0 -20px;
 		width: 100%;
 		height: 100%;
 		vertical-align: bottom;

@@ -49,7 +49,7 @@
 				class="loadingscreen__grid2"
 				hittest="false"
 			/>
-			<Panel class="full-width flow-down">
+			<Panel class="full-width flow-down vertical-align-center">
 				<Panel class="full-width">
 					<Label id="ProgressStatusText" class="loadingscreen__details" text="Progress" />
 					<Label id="PercentText" class="loadingscreen__percentage-label" text="{d:percent}%" />
