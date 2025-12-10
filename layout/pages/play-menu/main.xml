@@ -18,8 +18,8 @@
 						</Panel>
 					</Panel>
 					<Panel class="card__details">
-						<Label class="card__details__header" text="[HC] Campaigns" />
-						<Label class="card__details__subheader" text="[HC] Play specially designed experiences" />
+						<Label class="card__details__header" text="#MainMenu_Campaigns_Title" />
+						<Label class="card__details__subheader" text="#MainMenu_Campaigns_Tagline" />
 					</Panel>
 				</Button>
 				<Panel class="minor-cards-row mt-3">
@@ -30,8 +30,8 @@
 							scaling="stretch-to-cover-preserve-aspect"
 						/>
 						<Panel class="card__details">
-							<Label class="card__details__header" text="[HC] Solo Maps" />
-							<Label class="card__details__subheader" text="[HC] Bite-sized experiences" />
+							<Label class="card__details__header" text="#MainMenu_Campaigns_ModeSel_Solo_Title" />
+							<Label class="card__details__subheader" text="#MainMenu_Campaigns_ModeSel_Solo_Tagline" />
 						</Panel>
 					</Button>
 					<Button class="card ml-3">
@@ -43,8 +43,8 @@
 							texturewidth="1080"
 						/>
 						<Panel class="card__details">
-							<Label class="card__details__header" text="[HC] Custom Games" />
-							<Label class="card__details__subheader" text="[HC] Find or create a perfect game, unrestricted" />
+							<Label class="card__details__header" text="#MainMenu_Campaigns_ModeSel_ServerBrowser_Title" />
+							<Label class="card__details__subheader" text="#MainMenu_Campaigns_ModeSel_ServerBrowser_Tagline" />
 						</Panel>
 					</Button>
 				</Panel>

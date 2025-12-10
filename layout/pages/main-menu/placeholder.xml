@@ -4,6 +4,6 @@
 	</styles>
 
 	<Panel class="mainmenu__page no-flow">
-		<Label class="text-h3 vertical-align-center" text="[HC] This page is a work-in-progress." />
+		<Label class="text-h3 vertical-align-center" text="#MainMenu_PH_Note" />
 	</Panel>
 </root>
