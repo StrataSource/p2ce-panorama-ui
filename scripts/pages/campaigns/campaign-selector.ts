@@ -83,22 +83,22 @@ class CampaignSelector {
 
 		switch (this.gameType) {
 			case GameType.P2CE_CAMPAIGN:
-				headline = $.Localize(`#MainMenu_Campaigns_MapList_Campaigns`);
+				headline = $.Localize('#MainMenu_Campaigns_MapList_Campaigns');
 				tagline = $.Localize('#MainMenu_Campaigns_MapList_Campaigns_Tagline');
 				break;
 
 			case GameType.P2CE_MAP:
-				headline = $.Localize(`#MainMenu_Campaigns_MapList`);
+				headline = $.Localize('#MainMenu_Campaigns_MapList');
 				tagline = $.Localize('#MainMenu_Campaigns_MapList_p2ce_Tagline');
 				break;
 
 			case GameType.PORTAL2_MAP:
-				headline = $.Localize(`#MainMenu_Campaigns_MapList`);
+				headline = $.Localize('#MainMenu_Campaigns_MapList');
 				tagline = $.Localize('#MainMenu_Campaigns_MapList_portal2_Tagline');
 				break;
 
 			case GameType.LOOSE_MAP:
-				headline = $.Localize(`#MainMenu_Campaigns_MapList_Uncategorized`);
+				headline = $.Localize('#MainMenu_Campaigns_MapList_Uncategorized');
 				tagline = $.Localize('#MainMenu_Campaigns_MapList_Uncategorized_Tagline');
 				break;
 
