@@ -51,8 +51,8 @@ class MainMenuSettings {
 
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
-			tagDevString('Settings'),
-			tagDevString('Tweak keybinds, video, preferences, etc.')
+			$.Localize('#MainMenu_Navigation_Options'),
+			$.Localize('#MainMenu_Navigation_Options_Tagline')
 		);
 	}
 

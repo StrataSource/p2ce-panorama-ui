@@ -33,7 +33,7 @@
 						</Panel>
 						<!-- Save info; title, description, 'source' -->
 						<Panel class="saves__entry__details">
-							<Label id="SaveType" class="saves__entry__details__type" text="[HC] AUTOSAVE" />
+							<Label id="SaveType" class="saves__entry__details__type" text="#MainMenu_SaveRestore_SaveType_autosave" />
 							<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
 							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
 						</Panel>
@@ -90,7 +90,7 @@
 					texturewidth="32"
 					textureheight="32"
 				/>
-				<Label class="button-mono__text" text="[HC] Overwrite Save" />
+				<Label class="button-mono__text" text="#Action_OverwriteGame" />
 			</Button>
 			<Button id="SaveLoad" class="button-mono button-mono__bigger fill-width" onactivate="CampaignSaves.loadSave()">
 				<Image
@@ -100,7 +100,7 @@
 					texturewidth="32"
 					textureheight="32"
 				/>
-				<Label class="button-mono__text" text="[HC] Load Save" />
+				<Label class="button-mono__text" text="#Action_LoadGame" />
 			</Button>
 		</Panel>
 	</Panel>

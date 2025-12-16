@@ -157,7 +157,7 @@
 			id="ExpandBtn"
 			class="campaign-settings__expand-btn"
 			onactivate="CampaignSettingsTab.toggleSettingButtons()"
-			onmouseover="UiToolkitAPI.ShowTextTooltip('ExpandBtn', '[HC] Open advanced settings &amp; custom controls');"
+			onmouseover="UiToolkitAPI.ShowTextTooltip('ExpandBtn', $.Localize('#MainMenu_Campaigns_Setup_AdvExpand'));"
 			onmouseout="UiToolkitAPI.HideTextTooltip();"
 		>
 			<Image

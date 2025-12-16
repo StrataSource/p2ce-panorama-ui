@@ -112,8 +112,8 @@ class AddonManager {
 		$.DispatchEvent('Activated', $<RadioButton>('#ViewAddonsBtn')!, PanelEventSource.MOUSE);
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
-			tagDevString('Content'),
-			tagDevString('Manage Workshop subscriptions & mounted Source Engine games')
+			$.Localize('#MainMenu_Navigation_Addons'),
+			$.Localize('#MainMenu_Navigation_Addons_Tagline')
 		);
 	}
 

@@ -19,7 +19,7 @@
 						texturewidth="1002"
 					/>
 					<Panel class="card__details card__details__no-bg">
-						<Label class="card__details__header card__details__header__dark" text="[HC] Singleplayer" />
+						<Label class="card__details__header card__details__header__dark" text="#MainMenu_Campaigns_CType_SP" />
 					</Panel>
 				</Button>
 				<Button class="card fill-width" onactivate="PlayMenu.onMultiPlayerBtnPressed()">
@@ -31,7 +31,7 @@
 						texturewidth="1002"
 					/>
 					<Panel class="card__details card__details__no-bg">
-						<Label class="card__details__header card__details__header__dark" text="[HC] Multiplayer" />
+						<Label class="card__details__header card__details__header__dark" text="#MainMenu_Campaigns_CType_MP" />
 					</Panel>
 				</Button>
 			</Panel>
