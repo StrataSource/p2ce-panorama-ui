@@ -23,8 +23,8 @@ class CampaignSettingsTab {
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
-			tagDevString('Game Pre-Launch'),
-			tagDevString('Confirm settings and begin a new game')
+			$.Localize('#MainMenu_Campaigns_Setup_Title'),
+			$.Localize('#MainMenu_Campaigns_Setup_Tagline')
 		);
 
 		$.RegisterEventHandler('ImageFailedLoad', this.chImage, () => {

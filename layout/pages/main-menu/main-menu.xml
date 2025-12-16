@@ -54,7 +54,7 @@
 				<Panel id="MenuContentRoot" class="mainmenu__content">
 					<Panel id="PageBg" class="mainmenu__page-bg" />
 
-					<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No Campaign Active" />
+					<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No campaign active" />
 
 					<Panel id="GradientBar" class="mainmenu__gradient-bar">
 						<Image
@@ -95,8 +95,8 @@
 										onactivate="MainMenu.navigateToPage('Featured', 'featured/main')"
 									>
 										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="[HC] Featured" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Explore highlighted workshop content" />
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Featured" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Featured_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
@@ -106,7 +106,7 @@
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Play" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Start a new experience" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Play_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Resume Game (in-game) -->
@@ -116,7 +116,7 @@
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Home_Resume" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Close this menu &amp; return to the game" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Home_Resume_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Start New Game (Campaign Mode / in-game) -->
@@ -126,7 +126,7 @@
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Campaigns_MM_NewGame" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Configure &amp; start a new game" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Campaigns_MM_NewGame_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Continue Latest Save -->
@@ -143,7 +143,7 @@
 											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Campaigns_MM_LoadAuto" />
 											<Label id="ContinueCampaignText" class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[PH] ????" />
 											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto" />
-											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="[HC] Load the latest save file" />
+											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Save/Load Game (Campaign Mode / in-game) -->
@@ -155,7 +155,7 @@
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_SaveRestore_Load" />
 											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_Main" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage game save files" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_SaveRestore_Main_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Addons/Mounts -->
@@ -165,7 +165,7 @@
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Addons" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Manage subscriptions &amp; mounted games" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Addons_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Settings -->
@@ -175,7 +175,7 @@
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Options" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Tweak keybinds, video, preferences, etc." />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Options_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Exit Campaign Mode -->
@@ -184,17 +184,17 @@
 										onactivate="MainMenuCampaignMode.exitCampaign()"
 									>
 										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="[HC] Return" />
-											<Label class="mainmenu__nav__btn__small-text" text="[HC] Exit the experience" />
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Disconnect" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Disconnect_CM_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Quit/Disconnect -->
 									<Button class="mainmenu__nav__btn" onactivate="MainMenu.onQuitButtonPressed()">
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame" />
-											<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[HC] Leave to test another day" />
+											<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame_Tagline" />
 											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_Navigation_Disconnect" />
-											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="[HC] Return to the main menu or quit the game" />
+											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="#MainMenu_Navigation_Disconnect_Tagline" />
 										</Panel>
 									</Button>
 								</Panel>

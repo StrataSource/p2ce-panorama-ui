@@ -73,30 +73,33 @@ class CampaignSelector {
 	}
 
 	static setPageLines() {
-		const playerModeStr = this.playerMode === PlayerMode.SINGLEPLAYER ? 'Singleplayer' : 'Multiplayer';
+		const playerModeStr =
+			this.playerMode === PlayerMode.SINGLEPLAYER
+				? '#MainMenu_Campaigns_CType_SP'
+				: '#MainMenu_Campaigns_CType_MP';
 
 		let headline: string;
 		let tagline: string;
 
 		switch (this.gameType) {
 			case GameType.P2CE_CAMPAIGN:
-				headline = tagDevString(`${playerModeStr} Campaigns`);
-				tagline = tagDevString('Select a campaign to play');
+				headline = $.Localize('#MainMenu_Campaigns_MapList_Campaigns');
+				tagline = $.Localize('#MainMenu_Campaigns_MapList_Campaigns_Tagline');
 				break;
 
 			case GameType.P2CE_MAP:
-				headline = tagDevString(`${playerModeStr} Maps`);
-				tagline = tagDevString('Select a P2:CE Workshop map to play');
+				headline = $.Localize('#MainMenu_Campaigns_MapList');
+				tagline = $.Localize('#MainMenu_Campaigns_MapList_p2ce_Tagline');
 				break;
 
 			case GameType.PORTAL2_MAP:
-				headline = tagDevString(`${playerModeStr} Maps`);
-				tagline = tagDevString('Select a Portal 2 Workshop map to play');
+				headline = $.Localize('#MainMenu_Campaigns_MapList');
+				tagline = $.Localize('#MainMenu_Campaigns_MapList_portal2_Tagline');
 				break;
 
 			case GameType.LOOSE_MAP:
-				headline = tagDevString(`${playerModeStr} Loose Maps`);
-				tagline = tagDevString('Select a disk map to play');
+				headline = $.Localize('#MainMenu_Campaigns_MapList_Uncategorized');
+				tagline = $.Localize('#MainMenu_Campaigns_MapList_Uncategorized_Tagline');
 				break;
 
 			default:
