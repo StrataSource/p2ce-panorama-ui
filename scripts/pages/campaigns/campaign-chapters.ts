@@ -59,8 +59,8 @@ class CampaignChapters {
 	static populateChapters() {
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
-			tagDevString('Chapter Select'),
-			tagDevString('Configure & Start a New Game')
+			$.Localize('#MainMenu_Campaigns_MM_Start_Title'),
+			$.Localize('#MainMenu_Campaigns_MM_Start_Tagline')
 		);
 
 		const chapters = this.campaign.chapters;
