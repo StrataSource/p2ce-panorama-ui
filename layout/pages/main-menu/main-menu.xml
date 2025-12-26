@@ -54,8 +54,6 @@
 				<Panel id="MenuContentRoot" class="mainmenu__content">
 					<Panel id="PageBg" class="mainmenu__page-bg" />
 
-					<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No campaign active" />
-
 					<Panel id="GradientBar" class="mainmenu__gradient-bar">
 						<Image
 							class="mainmenu__gradient-bar__grid1"
@@ -88,16 +86,6 @@
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_ControlsLibrary" />
-										</Panel>
-									</Button>
-									<!-- Featured Hub (NOT Campaign Mode / Main Menu) -->
-									<Button
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('Featured', 'featured/main')"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Featured" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Featured_Tagline" />
 										</Panel>
 									</Button>
 									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
@@ -200,11 +188,38 @@
 									</Button>
 								</Panel>
 							</Panel>
-							<VersionInfo class="mainmenu__version" />
 						</Panel>
 					</Panel>
 
-					<Panel id="ContinueBox" class="mainmenu__display-box">
+					<VersionInfo class="mainmenu__version" />
+
+					<Button
+						id="FeaturedBtn"
+						class="mainmenu__featured__button"
+						onactivate="MainMenu.navigateToPage('Featured', 'featured/main')"
+					>
+						<Image
+							id="FeaturedImage"
+							class="mainmenu__featured__image"
+							src="file://{images}/menu/p2ce-generic.png"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<Panel class="mainmenu__featured__overlay" />
+						<Panel class="mainmenu__featured__content">
+							<AvatarImage id="FeaturedAvatar" class="mainmenu__featured__content__avatar" />
+							<Panel class="flow-down vertical-align-center">
+								<Label class="mainmenu__featured__content__header" text="[PH] Major Feature" />
+								<Label class="mainmenu__featured__content__subheader" text="[PH] Author" />
+							</Panel>
+						</Panel>
+					</Button>
+
+					<Panel
+						id="ContinueBox"
+						class="mainmenu__display-box"
+						hittest="false"
+						hittestchildren="false"
+					>
 						<Panel>
 							<Image
 								id="ContinueSaveThumb"
@@ -259,6 +274,7 @@
 						</Panel>
 					</Panel>
 				</Panel>
+				<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No campaign active" />
 
 				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
 				<BaseBlurTarget

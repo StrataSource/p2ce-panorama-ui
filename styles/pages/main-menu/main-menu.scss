@@ -127,8 +127,6 @@ $pane-move-time: 0.1s;
 
 	&__devtext {
 		margin: 15px;
-		horizontal-align: right;
-		vertical-align: bottom;
 		font-size: 16px;
 		color: $base-300;
 		font-weight: light;
@@ -212,7 +210,7 @@ $pane-move-time: 0.1s;
 			&__wrapper {
 				width: 100%;
 				min-height: 504px;
-				margin: 75px 0;
+				margin: 50px 0;
 			}
 		}
 
@@ -269,6 +267,73 @@ $pane-move-time: 0.1s;
 				#{$this}__small-text {
 					color: $base-500;
 				}
+			}
+		}
+	}
+
+	&__featured {
+		$this: &;
+
+		&__button {
+			border: $menu-pane-border;
+			width: 512px;
+			height: 160px;
+			horizontal-align: right;
+			vertical-align: bottom;
+			margin: 15px;
+			background-color: $base-950;
+
+			&:hover {
+				border-color: $primary-color;
+				background-color: $button-background-hover;
+
+				#{$this}__image {
+					opacity: 0.9;
+				}
+
+				#{$this}__overlay {
+					background-color: gradient( linear, 0% 100%, 0% 0%, from( $primary-950 ), to( rgba(0,0,0,0) ) );
+				}
+			}
+		}
+
+		&__image {
+			height: 100%;
+			width: 100%;
+		}
+		
+		&__overlay {
+			width: 100%;
+			height: 100%;
+			background-color: gradient( linear, 0% 100%, 0% 0%, from( $base-950 ), to( rgba(0,0,0,0) ) );
+		}
+
+		&__content {
+			width: 100%;
+			vertical-align: bottom;
+			flow-children: right;
+			padding: 10px;
+
+			&__avatar {
+				width: 48px;
+				height: 48px;
+				margin-right: 10px;
+				background-color: $base-950;
+				border: $menu-pane-border;
+			}
+
+			&__header {
+				@include mixin.font-styles($use-header: true);
+				font-size: 18px;
+				text-shadow: 2px 2px 2px 2 $base-950;
+			}
+
+			&__subheader {
+				font-size: 14px;
+				letter-spacing: 1px;
+				text-shadow: 1px 1px 4px 2 $base-950;
+				font-weight: light;
+				color: $base-200;
 			}
 		}
 	}
@@ -405,6 +470,7 @@ $pane-move-time: 0.1s;
 	}
 
 	&__version {
-		margin-left: 75px;
+		horizontal-align: right;
+		margin: 15px;
 	}
 }
