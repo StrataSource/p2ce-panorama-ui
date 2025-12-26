@@ -149,7 +149,7 @@ class MainMenuCampaignMode {
 			this.switchReverse();
 
 			// background maps take priority, turn these off
-			this.movie.visible = false;
+			if (this.movie) this.movie.visible = false;
 			this.hideBgImg();
 
 			const bgmu = CampaignAPI.GetBackgroundMusic();

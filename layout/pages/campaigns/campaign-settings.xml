@@ -11,104 +11,96 @@
 	<Panel class="mainmenu__page flow-right" onload="CampaignSettingsTab.init()">
 		<Panel class="campaign-settings">
 			<Panel id="CampaignSettingsBase" class="campaign-settings__left">
-				<!-- SETTINGS ROW 1 -->
-				<Panel class="row fill-height">
-					<Button
-						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Title', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc', 'setting-presets')"
-					>
-						<Panel class="horizontal-align-center vertical-align-center flow-down">
-							<Image
-								class="campaign-settings__button__icon"
-								src="file://{images}/cancel.svg"
-								scaling="stretch-to-fit-preserve-aspect"
-								texturewidth="128"
-								textureheight="128"
-							/>
+				<Button
+					class="campaign-settings__button"
+					onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Title', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc', 'setting-presets')"
+				>
+					<Panel class="vertical-align-center flow-right">
+						<Image
+							class="campaign-settings__button__icon"
+							src="file://{images}/cancel.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							texturewidth="128"
+							textureheight="128"
+						/>
+						<Panel class="flow-down">
 							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Title" />
 							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc" />
 						</Panel>
-					</Button>
-					<Button
-						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Title', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc')"
-					>
-						<Panel class="horizontal-align-center vertical-align-center flow-down">
-							<Image
-								class="campaign-settings__button__icon"
-								src="file://{images}/cancel.svg"
-								scaling="stretch-to-fit-preserve-aspect"
-								texturewidth="128"
-								textureheight="128"
-							/>
+					</Panel>
+				</Button>
+				<Button
+					class="campaign-settings__button"
+					onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Title', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc')"
+				>
+					<Panel class="vertical-align-center flow-right">
+						<Image
+							class="campaign-settings__button__icon"
+							src="file://{images}/cancel.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							texturewidth="128"
+							textureheight="128"
+						/>
+						<Panel class="flow-down">
 							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Title" />
 							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc" />
 						</Panel>
-					</Button>
-					<Button
-						class="campaign-settings__button"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc', 'map-select')"
-					>
-						<Panel class="horizontal-align-center vertical-align-center flow-down">
-							<Image
-								class="campaign-settings__button__icon"
-								src="file://{images}/cancel.svg"
-								scaling="stretch-to-fit-preserve-aspect"
-								texturewidth="128"
-								textureheight="128"
-							/>
+					</Panel>
+				</Button>
+				<Button
+					class="campaign-settings__button"
+					onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc', 'map-select')"
+				>
+					<Panel class="vertical-align-center flow-right">
+						<Image
+							class="campaign-settings__button__icon"
+							src="file://{images}/cancel.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							texturewidth="128"
+							textureheight="128"
+						/>
+						<Panel class="flow-down">
 							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title" />
 							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc" />
 						</Panel>
-					</Button>
-				</Panel>
-				<!-- SETTINGS ROW 2 -->
-				<Panel class="row mt-2 fill-height">
-					<Button
-						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc')"
-					>
-						<Panel class="horizontal-align-center vertical-align-center flow-down">
-							<Image
-								class="campaign-settings__button__icon"
-								src="file://{images}/cancel.svg"
-								scaling="stretch-to-fit-preserve-aspect"
-								texturewidth="128"
-								textureheight="128"
-							/>
+					</Panel>
+				</Button>
+				<Button
+					class="campaign-settings__button"
+					onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc')"
+				>
+					<Panel class="vertical-align-center flow-right">
+						<Image
+							class="campaign-settings__button__icon"
+							src="file://{images}/cancel.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							texturewidth="128"
+							textureheight="128"
+						/>
+						<Panel class="flow-down">
 							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title" />
 							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc" />
 						</Panel>
-					</Button>
-					<Button
-						class="campaign-settings__button mr-2"
-						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc', 'gameplay-addons')"
-					>
-						<Panel class="horizontal-align-center vertical-align-center flow-down">
-							<Image
-								class="campaign-settings__button__icon"
-								src="file://{images}/cancel.svg"
-								scaling="stretch-to-fit-preserve-aspect"
-								texturewidth="128"
-								textureheight="128"
-							/>
+					</Panel>
+				</Button>
+				<Button
+					class="campaign-settings__button"
+					onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc', 'gameplay-addons')"
+				>
+					<Panel class="vertical-align-center flow-right">
+						<Image
+							class="campaign-settings__button__icon"
+							src="file://{images}/cancel.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							texturewidth="128"
+							textureheight="128"
+						/>
+						<Panel class="flow-down">
 							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title" />
 							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc" />
 						</Panel>
-					</Button>
-					<Button class="campaign-settings__button transparent">
-						<Panel class="horizontal-align-center vertical-align-center flow-down">
-							<Image
-								class="campaign-settings__button__icon"
-								src="file://{images}/cancel.svg"
-								scaling="stretch-to-fit-preserve-aspect"
-								texturewidth="128"
-								textureheight="128"
-							/>
-							<Label class="campaign-settings__button__text" text="[HC] Dummy Slot" />
-						</Panel>
-					</Button>
-				</Panel>
+					</Panel>
+				</Button>
 			</Panel>
 			<!-- Summary panel -->
 			<Panel class="campaign-settings__right">
@@ -127,10 +119,8 @@
 				<Image
 					id="CampaignSettingsChapterImage"
 					class="campaign-settings__chapter-img"
-					defaultsrc="file://{materials}/vgui/new_save_game.vtf"
+					defaultsrc="file://{images}/menu/p2ce-generic.png"
 					scaling="stretch-to-cover-preserve-aspect"
-					textureheight="1920"
-					texturewidth="1080"
 				/>
 				<Panel class="campaign-settings__summary">
 					<Panel id="CampaignSettingsSummaryPanel" class="campaign-settings__summary__inner">
