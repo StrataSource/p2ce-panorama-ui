@@ -33,7 +33,11 @@ class CampaignSettingsTab {
 		});
 
 		this.show();
-		this.chImage.SetImage(`file://${this.chapter.thumbnail}`);
+		if (this.chapter.thumbnail.endsWith('.vtf') || this.chapter.thumbnail.endsWith('.png') || this.chapter.thumbnail.endsWith('.jpg'))
+			this.chImage.SetImage(`file://${this.chapter.thumbnail}`);
+		else
+			this.chImage.SetImage(this.chapter.thumbnail);
+
 		this.chText.text = $.Localize(this.chapter.title);
 		this.mapText.text = this.chapter.maps[0].name;
 

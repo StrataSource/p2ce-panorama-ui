@@ -18,8 +18,6 @@
 							class="chapters__entry__cover"
 							defaultsrc="file://{images}/menu/p2ce-generic.png"
 							scaling="stretch-to-cover-preserve-aspect"
-							textureheight="1920"
-							texturewidth="1080"
 						/>
 					</Panel>
 
