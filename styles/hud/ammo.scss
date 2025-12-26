@@ -8,6 +8,7 @@
 	width: fit-children;
 
 	&__clip {
+		color: $hl2-yellow;
 		font-family: $font-halflife2;
 		font-size: 56px;
 		vertical-align: center;
@@ -16,21 +17,27 @@
 	}
 
 	&__reserve {
+		color: $hl2-yellow;
 		font-family: $font-halflife2;
 		font-size: 24px;
 		vertical-align: bottom;
 		margin-bottom: 15px;
-		padding-left: 5px;
+		padding-right: 35px;
+		horizontal-align: right;
 	}
 
 	&__label {
-		font-size: 20px;
+		color: $hl2-yellow;
+		font-family: $font-halflife2-hud;
+		font-size: 14px;
 		vertical-align: bottom;
 		margin-left: 15px;
 		margin-bottom: 15px;
 	}
 
 	&__divider {
+		visibility: collapse;
+		color: $hl2-yellow;
 		margin-left: 0px;
 		margin-bottom: 15px;
 		font-size: 24px;
@@ -39,7 +46,7 @@
 	}
 
 	&__container {
-		background-color: #000000aa;
+		background-color: $hl2-bg;
 		border-radius: 10px;
 		margin-right: 15px;
 
@@ -52,10 +59,12 @@
 	}
 
 	&__primary {
+		color: $hl2-yellow;
 		width: 250px;
 	}
 
 	&__secondary {
+		color: $hl2-yellow;
 		width: 150px;
 	}
 }
