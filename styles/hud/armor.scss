@@ -7,10 +7,11 @@
 	height: 80px;
 	width: 180px;
 	align: center top;
-	background-color: #000000aa;
+	background-color: $hl2-bg;
 	border-radius: 10px;
 
 	& > Label {
+		color: $hl2-yellow;
 		font-size: 56px;
 		horizontal-align: center;
 		vertical-align: center;
