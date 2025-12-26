@@ -14,17 +14,21 @@
 
 	&__expand-btn {
 		height: 100%;
-		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-900), to(rgba(0, 0, 0, 0)));
 		tooltip-body-position: 50% 50%;
+
+		$this: &;
 
 		&__icon {
 			padding: 15px;
 			vertical-align: center;
 			horizontal-align: center;
+			img-shadow: 5px 5px 1px 1.0 $base-950;
 		}
 
 		&:hover {
-			background-color: gradient(linear, 0% 0%, 100% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
+			#{$this}__icon {
+				img-shadow: 5px 5px 1px 1.0 $primary-color;
+			}
 		}
 	}
 
@@ -38,21 +42,20 @@
 
 	&__button {
 		width: fill-parent-flow(0.3);
-		height: fill-parent-flow(1);
 		border: $menu-pane-border;
 		background-color: $base-950;
-		padding: 30px;
+		padding: 10px 15px;
+		margin-bottom: 5px;
 
 		&__icon {
-			width: 96px;
-			height: 96px;
-			horizontal-align: center;
-			margin-bottom: 10px;
+			width: 32px;
+			height: 32px;
+			vertical-align: center;
+			margin-right: 10px;
 		}
 
 		&__text {
 			@include mixin.font-styles($use-header: true, $light-header: false);
-			horizontal-align: center;
 		}
 
 		&__subtext {
@@ -112,8 +115,8 @@
 	}
 
 	&__chapter-img {
-		width: 576px;
-		height: 270px;
+		width: 640px;
+		height: 360px;
 		border: $menu-pane-border;
 		background-color: $base-950;
 	}

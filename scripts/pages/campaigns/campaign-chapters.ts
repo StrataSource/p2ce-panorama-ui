@@ -32,7 +32,10 @@ class ChapterEntry {
 			else desc.text = $.Localize(this.chapter.title);
 		}
 		if (cover) {
-			cover.SetImage(`file://${this.chapter.thumbnail}`);
+			if (this.chapter.thumbnail.endsWith('.vtf') || this.chapter.thumbnail.endsWith('.png') || this.chapter.thumbnail.endsWith('.jpg'))
+				cover.SetImage(`file://${this.chapter.thumbnail}`);
+			else
+				cover.SetImage(this.chapter.thumbnail);
 		}
 
 		if (this.locked) {

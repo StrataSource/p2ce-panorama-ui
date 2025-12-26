@@ -362,6 +362,7 @@
 			height: 135px;
 			vertical-align: center;
 
+			background-color: $base-950;
 			border: $menu-pane-border;
 
 			&__short {
@@ -419,7 +420,7 @@
 
 		&:hover:not(:disabled):not(:selected) {
 			animation: OpacityFlicker 6s linear 0s infinite normal forwards;
-			background-color: gradient(linear, 100% 0%, 0% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
+			background-color: gradient(linear, 0% 0%, 100% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
 		}
 
 		&:selected {
