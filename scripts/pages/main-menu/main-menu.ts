@@ -48,6 +48,10 @@ class MainMenu {
 
 	static devControls = $<Button>('#DevControls')!;
 
+	static featuredBtn = $<Button>('#FeaturedBtn')!;
+	static featuredImage = $<Image>('#FeaturedImage')!;
+	static featuredAvatar = $<AvatarImage>('#FeaturedAvatar')!;
+	
 	// page vars
 	static pages: MenuPage[] = [];
 
@@ -62,6 +66,9 @@ class MainMenu {
 		// don't override visibility if this is true
 		if (!GameInterfaceAPI.GetSettingBool('developer'))
 			this.devControls.visible = false;
+
+		const XUID = UserAPI.GetXUID();
+		this.featuredAvatar.steamid = XUID;
 
 		this.setMainMenuBackground();
 		this.setMainMenuModelPanel();
@@ -114,7 +121,7 @@ class MainMenu {
 		const savChapter = savCampaign.chapters.find((ch) => {
 			return (
 				ch.maps.find((map) => {
-					return map.name === this.latestSave.mapName;
+					return map.name === this.latestSave.mapName || map.name === `${this.latestSave.mapName}.bsp`;
 				}) !== undefined
 			);
 		});
@@ -169,6 +176,8 @@ class MainMenu {
 		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
+			this.featuredBtn.visible = true;
+			this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 			// buh
 			MainMenuCampaignMode.switchReverse();
 			this.loadingIndicator.visible = false;
@@ -232,6 +241,10 @@ class MainMenu {
 	static onShowMainMenu() {
 		this.menuContent.RemoveClass('mainmenu__content__t-prop');
 		this.menuContent.RemoveClass('mainmenu__content__anim');
+
+		// TODO: Grab active campaign from API instead of this
+		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
+		this.featuredBtn.visible = false;
 	}
 
 	static onHideMainMenu() {
@@ -257,6 +270,8 @@ class MainMenu {
 	static onShowPauseMenu() {
 		$.GetContextPanel().AddClass('PauseMenuMode');
 		this.pauseAnimIn();
+
+		this.featuredBtn.visible = false;
 	}
 
 	static onHidePauseMenu() {
@@ -340,6 +355,11 @@ class MainMenu {
 		this.page.RemoveClass('mainmenu__wide-page-container');
 		this.model.AddClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
+
+		// TODO: Grab active campaign from API instead of this
+		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
+
+		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 	}
 
 	// hide page container
@@ -354,6 +374,11 @@ class MainMenu {
 		this.controls.RemoveClass('mainmenu__nav__anim');
 		this.model.RemoveClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+
+		// TODO: Grab active campaign from API instead of this
+		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
+
+		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 	}
 
 	static reversePageAnim(panel: GenericPanel) {

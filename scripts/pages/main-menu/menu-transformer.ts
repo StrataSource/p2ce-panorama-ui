@@ -94,7 +94,7 @@ class MainMenuCampaignMode {
 		const savChapter = this.selectedCampaign.chapters.find((ch) => {
 			return (
 				ch.maps.find((map) => {
-					return map.name === this.latestSave.mapName;
+					return map.name === this.latestSave.mapName || map.name === `${this.latestSave.mapName}.bsp`;
 				}) !== undefined
 			);
 		});
