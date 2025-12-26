@@ -41,6 +41,9 @@ $base-950: #181818 !default;
 // COLORS
 //===========================
 
+$hl2-bg: rgba(0,0,0,0.4) !default;
+$hl2-yellow: rgba(255, 220, 0, 0.4) !default;
+
 $blue: #1896d3 !default;
 $mid-blue: #57c8ff !default;
 $light-blue: #71f0ff !default;
@@ -228,7 +231,8 @@ $font-secondary: 'Lexend Deca' !default;
 $font-secondary-light: 'Lexend Deca' !default;
 $font-monospace: 'Cascadia Mono' !default;
 
-$font-halflife2: 'HALFLIFE2', 'Cascadia Mono' !default;
+$font-halflife2-hud: 'Verdana' !default;
+$font-halflife2: 'HALFLIFE2' !default;
 $font-hl2ep2: 'HL2EP2', 'Cascadia Mono' !default;
 
 $font-header: $font-secondary !default;
