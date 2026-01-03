@@ -33,7 +33,7 @@
 
 			<Panel class="flow-right mt-2 horizontal-align-center">
 				<Button class="button mr-1" onactivate="CampaignChapters.backPage()">
-					<Label class="text" text="&lt;" />
+					<Label class="button__text" text="&lt;" />
 				</Button>
 				<Button class="button ml-1" onactivate="CampaignChapters.forwardPage()">
 					<Label class="button__text" text="&gt;" />
