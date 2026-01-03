@@ -7,11 +7,7 @@
 		<include src="file://{scripts}/pages/play-menu/main.ts" />
 	</scripts>
 
-	<Panel
-		class="mainmenu__page no-flow"
-		onload="PlayMenu.setPlayMenuLines()"
-		onfocus="PlayMenu.onPlayMenuFocused()"
-	>
+	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setPlayMenuLines()" onfocus="PlayMenu.onPlayMenuFocused()">
 		<Panel class="play-menu__main">
 			<Panel class="flow-down full-width">
 				<Button
@@ -33,12 +29,7 @@
 					</Panel>
 				</Button>
 				<Panel class="minor-cards-row mt-3">
-					<Button
-						class="card card"
-						onactivate="PlayMenu.onSoloMapsBtnPressed()"
-						tabindex="auto"
-						selectionpos="auto"
-					>
+					<Button class="card card" onactivate="PlayMenu.onSoloMapsBtnPressed()" tabindex="auto" selectionpos="auto">
 						<Image
 							class="card__image"
 							src="file://{images}/menu/banner-multiverse.png"
@@ -49,11 +40,7 @@
 							<Label class="card__details__subheader" text="#MainMenu_Campaigns_ModeSel_Solo_Tagline" />
 						</Panel>
 					</Button>
-					<Button
-						class="card ml-3"
-						tabindex="auto"
-						selectionpos="auto"
-					>
+					<Button class="card ml-3" tabindex="auto" selectionpos="auto">
 						<Image
 							class="card__image"
 							src="file://{images}/menu/p2ce/random5.png"
