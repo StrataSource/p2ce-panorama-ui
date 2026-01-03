@@ -190,7 +190,7 @@
 									<!-- Quit/Disconnect -->
 									<Button
 										id="QuitBtn"
-										class="mainmenu__nav__btn"
+										class="mainmenu__nav__btn NoCampaignSelectedOnly"
 										onactivate="MainMenu.onQuitButtonPressed()"
 										tabindex="auto"
 										selectionpos="auto"

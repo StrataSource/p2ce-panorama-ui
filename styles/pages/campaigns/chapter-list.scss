@@ -9,7 +9,6 @@
 	}
 
 	&__entry {
-		width: 480px;
 		margin: 0 10px;
 		flow-children: down;
 		background-color: $base-950;
@@ -21,8 +20,8 @@
 		}
 
 		&__cover {
-			width: 100%;
-			height: 270px;
+			width: 384px;
+			height: 216px;
 		}
 
 		&__details {
@@ -51,7 +50,7 @@
 			opacity: 0.5;
 
 			#{$this}__cover {
-				blur: gaussian(15, 15, 5);
+				blur: fastgaussian(15, 15, 4);
 				saturation: 0;
 			}
 		}

@@ -1,6 +1,6 @@
 'use strict';
 
-const CHAPTER_PAGE_ENTRIES = 3;
+const CHAPTER_PAGE_ENTRIES = 4;
 
 class ChapterEntry {
 	num: number;
