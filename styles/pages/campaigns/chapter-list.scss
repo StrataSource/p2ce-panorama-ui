@@ -51,7 +51,7 @@
 			opacity: 0.5;
 
 			#{$this}__cover {
-				blur: gaussian(15, 15, 5);
+				blur: fastgaussian(15, 15, 4);
 				saturation: 0;
 			}
 		}
