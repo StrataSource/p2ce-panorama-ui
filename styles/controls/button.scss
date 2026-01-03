@@ -10,15 +10,18 @@
 	background-color: $button-background;
 	box-shadow: $button-shadow;
 	border-radius: $button-radius;
-	border-bottom: $button-border;
+	border: $button-border;
 	color: $button-text-color;
 	flow-children: right;
 	tooltip-position: bottom;
 
 	$this: &;
 
-	&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
+	&:hover:not(:disabled):not(:parentdisabled):not(:selected),
+	&:focus:not(:disabled):not(:parentdisabled):not(:selected) {
 		background-color: $button-background-hover;
+		border: $button-border-hover;
+
 		#{$this}__text {
 			color: $button-text-hover;
 		}
@@ -34,6 +37,7 @@
 	&:parentdisabled &:hover {
 		background-color: $button-background-disabled;
 		border-color: $button-text-disabled;
+		border: $button-border-disabled;
 	}
 
 	&:disabled &__text,
@@ -94,11 +98,25 @@
 
 @each $name, $value in $gradients-primary {
 	.button--#{$name} {
+		@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+			& Label {
+				color: $base-950;
+			}
+		}
+
 		background-color: list.nth($value, 1);
 		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
 
-		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
+		&:hover:not(:disabled):not(:parentdisabled):not(:selected),
+		&:focus:not(:disabled):not(:parentdisabled):not(:selected) {
+			border-color: list.nth($value, 1);
 			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+				& Label {
+					color: $bright-color;
+				}
+			}
 		}
 	}
 }
@@ -110,7 +128,14 @@ RadioButton.button-mono {
 }
 
 .button-mono {
-	@extend .button;
+	// @extend is causing a parsing error for god knows why
+	height: $button-height;
+	box-shadow: $button-shadow;
+	border-radius: $button-radius;
+	color: $button-text-color;
+	tooltip-position: bottom;
+
+	$this: &;
 
 	flow-children: right;
 
@@ -156,10 +181,22 @@ RadioButton.button-mono {
 		}
 	}
 
-	&:hover:not(:disabled):not(:parentdisabled),
-	&:selected {
+	&:hover:not(:disabled):not(:parentdisabled):not(:selected),
+	&:focus:not(:disabled):not(:parentdisabled):not(:selected) {
 		border-color: $primary-color;
 		background-color: $button-background-hover;
+	}
+
+	&:selected {
+		border-color: $primary-color;
+		background-color: $primary-color;
+
+		#{$this}__icon,
+		#{$this}__icon-right,
+		#{$this}__text-panel__header,
+		#{$this}__text-panel__subheader {
+			wash-color: $base-950;
+		}
 	}
 
 	&:disabled,

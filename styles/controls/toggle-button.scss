@@ -38,7 +38,7 @@
 		width: height-percentage(100%);
 		vertical-align: middle;
 		background-color: $checkbox-background;
-		border-bottom: $checkbox-border;
+		border: $checkbox-border;
 		border-radius: $checkbox-radius;
 		z-index: 1;
 		margin-left: 0;
@@ -58,6 +58,7 @@
 
 	&:hover .TickBox {
 		background-color: $checkbox-background-hover;
+		border: $checkbox-border-hover;
 	}
 
 	&:disabled .TickBox,
@@ -67,6 +68,7 @@
 	}
 
 	&:selected .TickBox {
+		border: $checkbox-border-selected;
 		box-shadow: $checkbox-shadow;
 
 		background-color: $checkbox-background-selected;
@@ -93,16 +95,29 @@
 
 @each $name, $value in $gradients-primary {
 	.togglebutton--#{$name} {
+		@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+			& Label {
+				color: $base-950;
+			}
+		}
+
 		background-color: list.nth($value, 1);
 		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
 
-		&:hover:not(:disabled):not(:selected) {
+		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
+			border-color: list.nth($value, 1);
 			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+				& Label {
+					color: $bright-color;
+				}
+			}
 		}
 
 		&:selected {
 			background-color: color.scale(list.nth($value, 2), $lightness: -60%);
-			border-color: list.nth($value, 1);
+			border-color: color.scale(list.nth($value, 2), $lightness: -60%);
 		}
 	}
 }
