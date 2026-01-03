@@ -94,7 +94,7 @@
 					& > Label {
 						color: $button-text-hover;
 					}
-					border-color: $button-background;
+					border: $button-border-hover;
 				}
 			}
 		}
@@ -151,11 +151,12 @@
 
 		horizontal-align: right;
 		background-color: $button-background;
-		border-bottom: $button-border;
+		border: $button-border;
 
 		&:hover {
 			sound: 'UIPanorama.P2CE.MenuSelect';
 			background-color: $button-background-hover;
+			border: $button-border-hover;
 
 			#{$root}__key {
 				color: $button-text-hover;

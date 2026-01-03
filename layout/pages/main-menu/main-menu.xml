@@ -27,11 +27,19 @@
 		</snippet>
 	</snippets>
 
-	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()">
+	<MainMenu
+		class="InitialDisplay MainMenuRootPanel"
+		hittest="false"
+		onload="MainMenu.onMainMenuLoaded()"
+	>
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
-		<Panel id="MainMenuInput" class="mainmenu">
+		<Panel
+			id="MainMenuInput"
+			class="mainmenu"
+			onfocus="MainMenu.onMainMenuFocused()"
+		>
 			<!-- Full page blur: used to blur everything below the drawer -->
 			<Panel class="mainmenu__container">
 				<!-- Movie background -->
@@ -78,20 +86,13 @@
 							</Panel>
 							<Panel class="mainmenu__nav__controls__wrapper">
 								<Panel class="mainmenu__nav__controls">
-									<!-- Controls -->
-									<Button
-										id="DevControls"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('ControlsLibrary', 'controls-library')"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_ControlsLibrary" />
-										</Panel>
-									</Button>
 									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
 									<Button
+										id="PlayBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
 										onactivate="MainMenu.navigateToPage('Play', 'play-menu/main')"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Play" />
@@ -100,8 +101,11 @@
 									</Button>
 									<!-- Resume Game (in-game) -->
 									<Button
+										id="ResumeBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly"
 										onactivate="$.DispatchEvent('MainMenuResumeGame');"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Home_Resume" />
@@ -110,8 +114,11 @@
 									</Button>
 									<!-- Start New Game (Campaign Mode / in-game) -->
 									<Button
+										id="NewGameBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly"
 										onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Campaigns_MM_NewGame" />
@@ -127,9 +134,12 @@
 										onactivate=""
 										onmouseover="MainMenu.onContinueMouseOver()"
 										onmouseout="MainMenu.onContinueMouseOut()"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Campaigns_MM_LoadAuto" />
+											<Label class="mainmenu__nav__btn__text MainMenuModeOnly CampaignSelectedOnly" text="#MainMenu_Campaigns_MM_LoadAuto" />
+											<Label class="mainmenu__nav__btn__text MainMenuModeOnly NoCampaignSelectedOnly" text="#MainMenu_Campaigns_MM_Resume" />
 											<Label id="ContinueCampaignText" class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[PH] ????" />
 											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto" />
 											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto_Tagline" />
@@ -140,6 +150,8 @@
 										id="LoadGameBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly"
 										onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list')"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_SaveRestore_Load" />
@@ -151,6 +163,8 @@
 									<Button
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
 										onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Addons" />
@@ -161,6 +175,8 @@
 									<Button
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined"
 										onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Options" />
@@ -171,6 +187,8 @@
 									<Button
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly"
 										onactivate="MainMenuCampaignMode.exitCampaign()"
+										tabindex="auto"
+										selectionpos="auto"
 									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Disconnect" />
@@ -178,7 +196,14 @@
 										</Panel>
 									</Button>
 									<!-- Quit/Disconnect -->
-									<Button class="mainmenu__nav__btn" onactivate="MainMenu.onQuitButtonPressed()">
+									<Button
+										id="QuitBtn"
+										class="mainmenu__nav__btn"
+										onactivate="MainMenu.onQuitButtonPressed()"
+										tabindex="auto"
+										selectionpos="auto"
+										onmovedown="MainMenu.tryNavigateFeatured()"
+									>
 										<Panel class="vertical-align-center flow-down">
 											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame" />
 											<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame_Tagline" />
@@ -189,30 +214,33 @@
 								</Panel>
 							</Panel>
 						</Panel>
+						<Button
+							id="FeaturedBtn"
+							class="mainmenu__featured__button"
+							onactivate="MainMenu.navigateToPage('Featured', 'featured/main')"
+							tabindex="auto"
+							selectionpos="auto"
+							onmoveup="MainMenu.tryNavigateUpFeatured()"
+							onmovedown="MainMenu.tryNavigateDownFeatured()"
+						>
+							<Image
+								id="FeaturedImage"
+								class="mainmenu__featured__image"
+								src="file://{images}/menu/p2ce-generic.png"
+								scaling="stretch-to-cover-preserve-aspect"
+							/>
+							<Panel class="mainmenu__featured__overlay" />
+							<Panel class="mainmenu__featured__content">
+								<AvatarImage id="FeaturedAvatar" class="mainmenu__featured__content__avatar" />
+								<Panel class="flow-down vertical-align-center">
+									<Label class="mainmenu__featured__content__header" text="[PH] Major Feature" />
+									<Label class="mainmenu__featured__content__subheader" text="[PH] Author" />
+								</Panel>
+							</Panel>
+						</Button>
 					</Panel>
 
 					<VersionInfo class="mainmenu__version" />
-
-					<Button
-						id="FeaturedBtn"
-						class="mainmenu__featured__button"
-						onactivate="MainMenu.navigateToPage('Featured', 'featured/main')"
-					>
-						<Image
-							id="FeaturedImage"
-							class="mainmenu__featured__image"
-							src="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-						/>
-						<Panel class="mainmenu__featured__overlay" />
-						<Panel class="mainmenu__featured__content">
-							<AvatarImage id="FeaturedAvatar" class="mainmenu__featured__content__avatar" />
-							<Panel class="flow-down vertical-align-center">
-								<Label class="mainmenu__featured__content__header" text="[PH] Major Feature" />
-								<Label class="mainmenu__featured__content__subheader" text="[PH] Author" />
-							</Panel>
-						</Panel>
-					</Button>
 
 					<Panel
 						id="ContinueBox"
@@ -268,8 +296,13 @@
 						<Panel id="PageInsert" class="mainmenu__page-insert" />
 
 						<Panel id="PageActions" class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop">
-							<Button class="button-mono" onactivate="MainMenu.navigateBack()">
-								<Label class="button-mono__text" text="Back" />
+							<Button
+								class="button"
+								onactivate="MainMenu.navigateBack()"
+								tabindex="auto"
+								selectionpos="auto"
+							>
+								<Label class="button__text" text="Back" />
 							</Button>
 						</Panel>
 					</Panel>

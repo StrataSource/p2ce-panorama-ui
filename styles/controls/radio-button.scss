@@ -11,24 +11,7 @@
 
 	&:selected {
 		background-color: $button-background-selected;
-
-		.button__text {
-			color: $bright-color;
-		}
-	}
-}
-
-@each $name, $colors in $gradients-primary {
-	.radiobutton--#{$name} {
-		background-color: list.nth($colors, 1);
-		border-color: color.scale(list.nth($colors, 1), $lightness: -60%);
-		&:hover:not(:selected):not(:disabled) {
-			background-color: color.scale(list.nth($colors, 1), $lightness: -60%);
-		}
-		&:selected {
-			background-color: color.scale(list.nth($colors, 2), $lightness: -60%);
-			border-color: list.nth($colors, 1);
-		}
+		border-color: $primary-color;
 	}
 }
 
@@ -172,5 +155,40 @@
 
 	.RadioBox {
 		visibility: collapse;
+	}
+}
+
+@each $name, $value in $gradients-primary {
+	.radiobutton--#{$name} {
+		@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+			& Label {
+				color: $base-950;
+			}
+		}
+
+		background-color: list.nth($value, 1);
+		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
+			border-color: list.nth($value, 1);
+			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+
+			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+				& Label {
+					color: $bright-color;
+				}
+			}
+		}
+
+		&:selected {
+			background-color: color.scale(list.nth($value, 2), $lightness: -60%);
+			border-color: color.scale(list.nth($value, 2), $lightness: -60%);
+
+			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+				& Label {
+					color: $bright-color;
+				}
+			}
+		}
 	}
 }

@@ -5,7 +5,7 @@
 	height: $textentry-height;
 	background-color: $textentry-background;
 	font-size: $textentry-font-size;
-	border-bottom: $button-border;
+	border: $button-border;
 
 	$this: &;
 
@@ -20,6 +20,10 @@
 		border: 0px none;
 		border-radius: 0px;
 		background-color: rgba(255, 255, 255, 0.025);
+
+		&:hover {
+			border: 0px none;
+		}
 	}
 
 	&__button {

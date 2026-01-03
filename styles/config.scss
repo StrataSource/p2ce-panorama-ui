@@ -315,21 +315,24 @@ $spacers: (5px, 10px, 15px, 25px, 35px) !default;
 // BUTTON
 // ================
 
-$button-background-base: $primary-500 !default;
+$button-background-base: $base-950 !default;
 $button-background: $button-background-base !default;
 $button-background-hover: $primary-700 !default;
-$button-background-selected: $primary-900 !default; // Used by Radiobuttons + Togglebuttons
-$button-background-disabled: $base-900 !default;
+$button-background-selected: $primary-color !default; // Used by Radiobuttons + Togglebuttons
+$button-background-disabled: rgba($base-950, 0.5) !default;
 
-$button-text-color: $base-950 !default;
+$button-text-color: $bright-color !default;
 $button-text-disabled: $font-disabled-color !default;
 $button-text-hover: $bright-color !default;
 
 $button-shadow: none !default;
 $button-radius: 0px !default;
-$button-border: 2px solid $primary-700 !default;
 
-$button-height: 45px !default;
+$button-border: 1px solid $base-700 !default;
+$button-border-hover: 1px solid $primary-color !default;
+$button-border-disabled: 1px solid rgba($base-700, 0.5) !default;
+
+$button-height: 40px !default;
 $button-icon-padding: 8px !default;
 $button-icon-side-padding: 6px !default;
 $button-text-side-margin: 20px !default;
@@ -337,7 +340,7 @@ $button-icon-with-text-side-margin: 17px !default;
 $button-icon-text-gap: 0px !default;
 
 $button-use-header-font: true !default;
-$button-font-size: 20px !default;
+$button-font-size: 18px !default;
 $button-light-header-font: false !default;
 $button-text-shadow: none !default;
 $button-icon-shadow: none !default;
@@ -346,18 +349,20 @@ $button-icon-shadow: none !default;
 // CHECKBOX
 // ================
 
-$checkbox-background: $primary-900 !default;
-$checkbox-background-disabled: $base-900 !default;
+$checkbox-background: $button-background !default;
+$checkbox-background-disabled: $button-background-disabled !default;
 $checkbox-background-disabled-selected: $base-900 !default;
-$checkbox-background-hover: $primary-700 !default;
-$checkbox-background-selected: $primary-500 !default;
-$checkbox-background-selected-hover: $primary-400 !default;
+$checkbox-background-hover: $button-background-hover !default;
+$checkbox-background-selected: $button-background-selected !default;
+$checkbox-background-selected-hover: $button-background-hover !default;
 
 $checkbox-use-header-font: false !default;
 
 $checkbox-shadow: none !default;
 
-$checkbox-border: 2px solid $primary-color !default;
+$checkbox-border: 1px solid $base-700 !default;
+$checkbox-border-hover: $button-border-hover !default;
+$checkbox-border-selected: $button-border-hover !default;
 $checkbox-radius: 0px !default;
 $checkbox-width: 24px !default;
 
@@ -406,10 +411,12 @@ $dropdown-button-icon-icon-shadow: none !default;
 $dropdown-button-shadow: $button-shadow !default;
 $dropdown-button-radius: 0px !default;
 $dropdown-button-border: $button-border !default;
+$dropdown-button-border-disabled: $button-border-disabled !default;
+$dropdown-button-border-hover: $button-border-hover !default;
 
 $dropdown-button-use-header-font: true !default;
-$dropdown-button-font-size: 20px !default;
-$dropdown-button-height: 45px !default;
+$dropdown-button-font-size: 18px !default;
+$dropdown-button-height: 40px !default;
 $dropdown-button-text-color: $button-text-color !default;
 $dropdown-button-text-hover-color: $button-text-hover !default;
 $dropdown-button-menuvisible-text-color: $button-text-hover !default;
@@ -493,15 +500,16 @@ $textentry-background: $button-background !default;
 $textentry-background-hover: $button-background-hover !default;
 $textentry-background-focus: $button-background-selected !default;
 
-$textentry-height: 45px !default;
+$textentry-height: 40px !default;
 $textentry-width: 256px !default;
 $textentry-padding: 7px 0px 7px 15px !default;
 $textentry-border: $button-border !default;
+$textentry-border-hover: $button-border-hover !default;
 $textentry-radius: 0px !default;
 $textentry-shadow: none !default;
 $textentry-shadow-hover: none !default;
 
-$textentry-font-size: 20px !default;
+$textentry-font-size: 18px !default;
 $textentry-placeholder-font-size: 16px !default;
 $textentry-text-color: $button-text-color !default;
 $textentry-hover-text-color: $button-text-hover !default;
@@ -519,18 +527,18 @@ $slider-track-height: 25px !default;
 
 $slider-thumb-color: $primary-color !default;
 $slider-thumb-color-hover: $primary-700 !default;
-$slider-thumb-width: 30px !default;
-$slider-thumb-height: 30px !default;
+$slider-thumb-width: 5px !default;
+$slider-thumb-height: 25px !default;
 $slider-thumb-radius: 0px !default;
 $slider-thumb-shadow: none !default;
 
 $slider-track: $base-800 !default;
 $slider-track-shadow: none !default;
-$slider-track-progress-height: 20px !default;
+$slider-track-progress-height: 25px !default;
 $slider-track-transform: translateX(5px) translateY(5px) !default;
 $slider-track-progress-horizontal: $primary-800 !default;
 $slider-track-progress-vertical: $primary-color !default;
-$slider-track-progress-border: 5px solid $slider-thumb-color !default;
+$slider-track-progress-border: 2px solid $slider-thumb-color !default;
 
 $slider-default-color: $base-500 !default;
 $slider-default-width: 4px !default;
@@ -556,7 +564,7 @@ $scrollbar-hover-opacity: 0.9 !default;
 
 $progressbar-width: 100% !default;
 $progressbar-height: 25px !default;
-$progressbar-border: 2px solid $primary-color !default;
+$progressbar-border: 1px solid $primary-color !default;
 $progressbar-background: $base-900 !default;
 $progressbar-background-disabled: gradient(
 	linear,
@@ -569,8 +577,8 @@ $progressbar-background-progress: gradient(
 	linear,
 	0% 0%,
 	100% 0%,
-	from($primary-color),
-	to($primary-color-light)
+	from($base-950),
+	to($primary-color)
 ) !default;
 
 $progressbar-shadow: none !default;
@@ -606,10 +614,10 @@ $popup-border: 1px solid $base-700 !default;
 $popup-radius: 0px !default;
 
 $popup-title-use-header-font: true !default;
-$popup-title-font-size: 48px !default;
+$popup-title-font-size: 40px !default;
 $popup-text-use-header-font: false !default;
 $popup-text-font-size: 18px !default;
-$popup-button-font-size: 24px !default;
+$popup-button-font-size: 20px !default;
 
 // ================
 // LINEGRAPH
