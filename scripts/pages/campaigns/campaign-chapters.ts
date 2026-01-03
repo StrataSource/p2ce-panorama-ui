@@ -1,13 +1,15 @@
 'use strict';
 
+const CHAPTER_PAGE_ENTRIES = 3;
+
 class ChapterEntry {
-	index: number;
+	num: number;
 	panel: Button;
 	chapter: ChapterInfo;
 	locked: boolean;
 
-	constructor(index: number, panel: Button, chapter: ChapterInfo, locked: boolean) {
-		this.index = index;
+	constructor(num: number, panel: Button, chapter: ChapterInfo, locked: boolean) {
+		this.num = num;
 		this.panel = panel;
 		this.chapter = chapter;
 		this.locked = locked;
@@ -25,7 +27,8 @@ class ChapterEntry {
 		});
 
 		if (title) {
-			title.text = tagDevString(`Chapter ${this.index + 1}`);
+			this.panel.SetDialogVariableInt('chapter_num', this.num + 1);
+			//title.text = tagDevString(`Chapter ${this.num + 1}`);
 		}
 		if (desc) {
 			if (this.locked) desc.text = '????';
@@ -58,8 +61,27 @@ class CampaignChapters {
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: ChapterInfo;
 	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
+	static chapterPage = 0;
+	static maxPages = -1;
+
+	static backPage() {
+		this.chapterPage -= 1;
+		if (this.chapterPage < 0) this.chapterPage = this.maxPages - 1;
+		this.populateChapters();
+	}
+
+	static forwardPage() {
+		this.chapterPage += 1;
+		if (this.chapterPage >= this.maxPages) this.chapterPage = 0;
+		this.populateChapters();
+	}
 
 	static populateChapters() {
+		if (this.maxPages === -1)
+			this.maxPages = Math.ceil(this.campaign.chapters.length / CHAPTER_PAGE_ENTRIES);
+
+		$.Msg(`Pages: ${this.chapterPage}/${this.maxPages}`);
+
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
 			$.Localize('#MainMenu_Campaigns_MM_Start_Title'),
@@ -70,11 +92,31 @@ class CampaignChapters {
 		const prog = CampaignAPI.GetCampaignUnlockProgress(this.campaign.id);
 		$.Msg(`Campaign progress: ${prog}`);
 
-		for (let i = 0; i < chapters.length; ++i) {
+		this.list.RemoveAndDeleteChildren();
+		this.chapterEntries = [];
+
+		for (
+			let i = 0;
+			i < Math.min(
+				CHAPTER_PAGE_ENTRIES,
+				chapters.length - (this.chapterPage * CHAPTER_PAGE_ENTRIES)
+			);
+			++i
+		) {
 			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
 			p.LoadLayoutSnippet('ChapterEntrySnippet');
 
-			this.chapterEntries.push(new ChapterEntry(i, p, chapters[i], prog < i));
+			const idx = (this.chapterPage * CHAPTER_PAGE_ENTRIES) + i;
+
+			this.chapterEntries.push(
+				new ChapterEntry(
+					idx,
+					p,
+					chapters[idx],
+					prog < idx
+				)
+			);
+
 			this.chapterEntries[i].update();
 		}
 	}

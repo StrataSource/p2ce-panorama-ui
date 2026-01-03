@@ -72,6 +72,7 @@ class MainMenuCampaignMode {
 			});
 
 		this.continueBtn.enabled = false;
+		this.continueBtn.visible = true;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
 
 		// disable the saves menu in the main menu
@@ -255,6 +256,7 @@ class MainMenuCampaignMode {
 
 		// TODO: Set logo image appropriately
 		let saveImg = 'file://{images}/menu/portal2/full_logo.svg';
+		this.logo.visible = true;
 		switch (this.selectedCampaign.id) {
 			case 'portal1_sp':
 				saveImg = 'file://{images}/menu/portal/full_logo.svg';

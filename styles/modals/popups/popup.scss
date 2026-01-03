@@ -48,7 +48,7 @@
 
 	&__message-panel {
 		flow-children: right;
-		margin: 16px 0;
+		margin: 10px 0;
 	}
 
 	&__message-label {
@@ -80,6 +80,15 @@
 
 .warning-popup {
 	#Button0 {
+		@extend .button--red;
+	}
+}
+
+.warning-2-popup {
+	#Button0 {
+		@extend .button--red;
+	}
+	#Button1 {
 		@extend .button--red;
 	}
 }
