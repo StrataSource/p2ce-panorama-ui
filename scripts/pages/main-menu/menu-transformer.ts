@@ -186,9 +186,15 @@ class MainMenuCampaignMode {
 		if (bgl.length > 0) {
 			this.showBgImg();
 			this.imgBg.SetImage(`file://${bgi}`);
-			$.Schedule(this.BACKGROUND_IMAGE_FADE_IN_TIME, () =>
-				GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`)
-			);
+			$.Schedule(this.BACKGROUND_IMAGE_FADE_IN_TIME, () => {
+				//if (GameInterfaceAPI.GetMaps().find((v: GameInterfaceAPI.GameMap) => { return v.name === bgl; }) === undefined) {
+				//this.onBackgroundMapLoaded('', true);
+				//this.exitCampaign();
+				//$.Warning('!!! Background map failed to load. Exiting this campaign.');
+				//} else {
+				GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`);
+				//}
+			});
 		} else if (bgm.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			this.movie.SetMovie(`file://{game}/${bgm}`);

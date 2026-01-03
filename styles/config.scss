@@ -41,7 +41,7 @@ $base-950: #181818 !default;
 // COLORS
 //===========================
 
-$hl2-bg: rgba(0,0,0,0.4) !default;
+$hl2-bg: rgba(0, 0, 0, 0.4) !default;
 $hl2-yellow: rgba(255, 220, 0, 0.4) !default;
 
 $blue: #1896d3 !default;
@@ -573,13 +573,7 @@ $progressbar-background-disabled: gradient(
 	from(color.scale($red, $saturation: -65%, $lightness: -45%)),
 	to(color.scale($red, $saturation: -55%, $lightness: -35%))
 );
-$progressbar-background-progress: gradient(
-	linear,
-	0% 0%,
-	100% 0%,
-	from($base-950),
-	to($primary-color)
-) !default;
+$progressbar-background-progress: gradient(linear, 0% 0%, 100% 0%, from($base-950), to($primary-color)) !default;
 
 $progressbar-shadow: none !default;
 
