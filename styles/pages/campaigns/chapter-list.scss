@@ -1,0 +1,83 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
+
+.chapters {
+	&__list {
+		horizontal-align: center;
+		flow-children: right;
+	}
+
+	&__entry {
+		width: 480px;
+		margin: 0 10px;
+		flow-children: down;
+		background-color: $base-950;
+		border: $menu-pane-border;
+
+		$this: &;
+
+		&__lined {
+		}
+
+		&__cover {
+			width: 100%;
+			height: 270px;
+		}
+
+		&__details {
+			width: 100%;
+			margin-left: 0;
+			padding: 15px;
+			border-top: $menu-pane-border;
+			flow-children: down;
+
+			&__title {
+				font-size: 16px;
+				color: $base-200;
+				letter-spacing: 1px;
+			}
+
+			&__desc {
+				font-size: 18px;
+				font-weight: bold;
+				max-height: 23px;
+				text-overflow: shrink;
+			}
+		}
+
+		&:disabled,
+		&:parentdisabled {
+			opacity: 0.5;
+
+			#{$this}__cover {
+				blur: gaussian(15, 15, 5);
+				saturation: 0;
+			}
+		}
+
+		&:hover:not(:disabled):not(:selected) {
+			border-color: $primary-color;
+			background-color: $button-background-hover;
+
+			#{$this}__cover {
+				opacity: 0.9;
+			}
+
+			#{$this}__details {
+				border-color: $primary-color;
+			}
+		}
+
+		&:selected {
+			#{$this}__details {
+				wash-color: $base-950;
+
+				&__title,
+				&__desc {
+					text-shadow: none;
+				}
+			}
+		}
+	}
+}

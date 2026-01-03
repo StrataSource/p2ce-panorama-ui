@@ -51,6 +51,8 @@ class MainMenu {
 	static featuredBtn = $<Button>('#FeaturedBtn')!;
 	static featuredImage = $<Image>('#FeaturedImage')!;
 	static featuredAvatar = $<AvatarImage>('#FeaturedAvatar')!;
+
+	static quitBtn = $<Button>('#QuitBtn')!;
 	
 	// page vars
 	static pages: MenuPage[] = [];
@@ -91,14 +93,37 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('MainMenuSetFocus', this.setFocus.bind(this));
 
 		MainMenuCampaignMode.onMainMenuLoaded();
+		MainMenuAnim.onMainMenuLoaded();
 		stripDevTagsFromLabels($.GetContextPanel());
 
 		this.setContinueDetails();
 	}
 
+	static onMainMenuFocused() {
+		$<Button>('#PlayBtn')!.SetFocus(true);
+	}
+
+	static tryNavigateFeatured() {
+		// TODO: Grab active campaign from API instead of this
+		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
+		if (campaign === undefined)
+		{
+			this.featuredBtn.SetFocus(true);
+		}
+	}
+
+	static tryNavigateUpFeatured() {
+		this.quitBtn.SetFocus(true);
+	}
+
+	static tryNavigateDownFeatured() {
+		$<Button>('#PlayBtn')!.SetFocus(true);
+	}
+
 	static setContinueDetails() {
 		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 		this.continueBtn.enabled = false;
+		this.continueBtn.visible = false;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
 
 		if (saves.length === 0) {
@@ -115,6 +140,7 @@ class MainMenu {
 
 		if (!savCampaign) {
 			$.Warning('CONTINUE: Save exists, but the campaign it belongs to cannot be found.');
+			$.Warning(`Group: ${this.latestSave.mapGroup}`);
 			return;
 		}
 
@@ -134,9 +160,7 @@ class MainMenu {
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
 
-		const chapterString = `(${savCampaign.chapters.indexOf(savChapter!) + 1} / ${savCampaign.chapters.length})`;
-
-		this.continueText.text = `${$.Localize(savCampaign.title)} ${chapterString}`;
+		this.continueText.text = `${$.Localize(savCampaign.title)}`;
 		this.continueHeadline.text = `${$.Localize(savChapter.title)}`;
 
 		const date = new Date(Number(this.latestSave.fileTime) * 1000);
@@ -164,6 +188,7 @@ class MainMenu {
 		});
 
 		this.continueBtn.enabled = true;
+		this.continueBtn.visible = true;
 	}
 
 	static reloadBackground() {
@@ -176,6 +201,7 @@ class MainMenu {
 		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
+			$<Image>('#GameFullLogo')!.visible = true;
 			this.featuredBtn.visible = true;
 			this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 			// buh
@@ -271,6 +297,8 @@ class MainMenu {
 		$.GetContextPanel().AddClass('PauseMenuMode');
 		this.pauseAnimIn();
 
+		$('#ResumeBtn')!.SetFocus(true);
+
 		this.featuredBtn.visible = false;
 	}
 
@@ -328,6 +356,7 @@ class MainMenu {
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 		newPanel.RegisterForReadyEvents(true);
 		newPanel.AddClass('mainmenu__page__anim');
+		newPanel.SetFocus(true);
 
 		stripDevTagsFromLabels(newPanel);
 
@@ -490,7 +519,7 @@ class MainMenu {
 			UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
 				$.Localize('#Action_Quit'),
 				$.Localize('#Action_Quit_InGame_Message'),
-				'warning-popup',
+				'warning-2-popup',
 				$.Localize('#Action_ReturnToMenu'),
 				() => {
 					GameInterfaceAPI.ConsoleCommand('disconnect');
