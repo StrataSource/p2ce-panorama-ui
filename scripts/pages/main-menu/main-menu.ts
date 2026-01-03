@@ -84,6 +84,7 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onShowPauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('HidePauseMenu', this.onHidePauseMenu.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.reloadBackground.bind(this));
+		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
 
 		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
@@ -95,6 +96,14 @@ class MainMenu {
 		stripDevTagsFromLabels($.GetContextPanel());
 
 		this.setContinueDetails();
+	}
+
+	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
+		// TODO: Grab active campaign from API instead of this
+		if (isBackgroundMap && UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined)
+		{
+			if (this.movie) this.movie.visible = false;
+		}
 	}
 
 	static onMainMenuFocused() {

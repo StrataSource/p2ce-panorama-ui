@@ -146,6 +146,10 @@ class MainMenuCampaignMode {
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
+		// TODO: Grab active campaign from API instead of this
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined)
+			return;
+
 		if (isBackgroundMap) {
 			this.switchReverse();
 
