@@ -23,6 +23,7 @@ class ChapterEntry {
 		$.RegisterEventHandler('ImageFailedLoad', this.panel, () => {
 			const c = this.panel.FindChildTraverse<Image>('ChapterCover');
 			// defaultsrc attribute is unreliable
+			$.Warning('Could not load chapter image');
 			c?.SetImage('file://{images}/menu/p2ce-generic.png');
 		});
 
@@ -42,6 +43,8 @@ class ChapterEntry {
 			)
 				cover.SetImage(`file://${this.chapter.thumbnail}`);
 			else cover.SetImage(this.chapter.thumbnail);
+
+			$.Msg(`PATH TO CHAPTER IMAGE: file://${this.chapter.thumbnail}`);
 		}
 
 		if (this.locked) {
