@@ -419,7 +419,6 @@
 		}
 
 		&:hover:not(:disabled):not(:selected) {
-			animation: OpacityFlicker 6s linear 0s infinite normal forwards;
 			background-color: gradient(linear, 0% 0%, 100% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
 		}
 
@@ -445,77 +444,6 @@
 			height: 48px;
 			horizontal-align: right;
 			vertical-align: center;
-		}
-	}
-}
-
-.chapters {
-	&__entry {
-		@extend .saves__entry;
-		width: 100%;
-
-		$this: &;
-
-		& .RadioBox {
-			visibility: collapse;
-		}
-
-		&__lined {
-			@extend .saves__entry__lined;
-		}
-
-		&__inner {
-			@extend .saves__entry__inner;
-		}
-
-		&__cover {
-			@extend .saves__entry__cover;
-			border-style: none;
-
-			&__border {
-				border: $menu-pane-border;
-			}
-		}
-
-		&__details {
-			@extend .saves__entry__details;
-			&__title {
-				font-size: 20px;
-				color: $base-200;
-				letter-spacing: 1px;
-				text-shadow: 1px 1px 2px 2 $base-950;
-			}
-
-			&__desc {
-				@include mixin.font-styles($use-header: true);
-				margin-top: 5px;
-				font-size: 28px;
-				text-shadow: 2px 2px 2px 2 $base-950;
-			}
-		}
-
-		&:disabled,
-		&:parentdisabled {
-			#{$this}__cover {
-				blur: gaussian(15, 15, 5);
-				saturation: 0;
-			}
-		}
-
-		&:hover:not(:disabled):not(:selected) {
-			@extend .saves__entry, :hover;
-		}
-
-		&:selected {
-			@extend .saves__entry, :selected;
-			#{$this}__details {
-				wash-color: $base-950;
-
-				&__title,
-				&__desc {
-					text-shadow: none;
-				}
-			}
 		}
 	}
 }

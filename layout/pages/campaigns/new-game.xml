@@ -10,45 +10,35 @@
 	<snippets>
 		<snippet name="ChapterEntrySnippet">
 			<Button group="ChaptersGroupRadio" class="chapters__entry">
-				<Panel class="chapters__entry__inner">
-					<!-- Chapter icon cover -->
-					<Panel class="chapters__entry__cover__border">
-						<Image
-							id="ChapterCover"
-							class="chapters__entry__cover"
-							defaultsrc="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-						/>
-					</Panel>
+				<!-- Chapter icon cover -->
+				<Image
+					id="ChapterCover"
+					class="chapters__entry__cover"
+					defaultsrc="file://{images}/menu/p2ce-generic.png"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
 
-					<!-- Chapter info; title, description, 'source' -->
-					<Panel class="chapters__entry__details">
-						<Label id="ChapterTitle" class="chapters__entry__details__title" text="#MainMenu_Campaigns_MM_ChapterNum" />
-						<Label id="ChapterDesc" class="chapters__entry__details__desc" text="#MainMenu_Campaigns_MM_ChapterDesc" />
-					</Panel>
+				<!-- Chapter info; title, description, 'source' -->
+				<Panel class="chapters__entry__details">
+					<Label id="ChapterTitle" class="chapters__entry__details__title" text="#MainMenu_Campaigns_MM_ChapterNum" />
+					<Label id="ChapterDesc" class="chapters__entry__details__desc" text="#MainMenu_Campaigns_MM_ChapterDesc" />
 				</Panel>
 			</Button>
 		</snippet>
 	</snippets>
 
-	<Panel class="mainmenu__page" onload="CampaignChapters.populateChapters()">
-		<Panel id="CampaignChapters" class="selected-campaign__lister">
-		</Panel>
-		<Panel id="CampaignStarterPanel" class="selected-campaign__action-bar hide" disabled="true">
-			<Button
-				id="CampaignCustomizeBtn"
-				class="button-mono button-mono__bigger fill-width mr-2"
-				onactivate="CampaignChapters.customizeChapter()"
-			>
-				<Label class="button-mono__text" text="#MainMenu_Campaigns_MM_StartCustom" />
-			</Button>
-			<Button
-				id="CampaignCleanStartBtn"
-				class="button-mono button-mono__bigger fill-width"
-				onactivate="CampaignChapters.startChapter()"
-			>
-				<Label class="button-mono__text" text="#MainMenu_Campaigns_MM_StartVanilla" />
-			</Button>
+	<Panel class="mainmenu__page" onload="CampaignChapters.populateChapters(0)">
+		<Panel class="full-width flow-down vertical-align-center">
+			<Panel id="CampaignChapters" class="chapters__list" />
+
+			<Panel class="flow-right mt-2 horizontal-align-center">
+				<Button class="button mr-1" onactivate="CampaignChapters.backPage()">
+					<Label class="text" text="&lt;" />
+				</Button>
+				<Button class="button ml-1" onactivate="CampaignChapters.forwardPage()">
+					<Label class="button__text" text="&gt;" />
+				</Button>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

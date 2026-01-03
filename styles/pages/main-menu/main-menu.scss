@@ -4,6 +4,40 @@
 
 $pane-move-time: 0.1s;
 
+@keyframes RotateFull {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.GridAnim {
+	width: 100%;
+	height: 100%;
+	overflow: clip;
+}
+
+.GridChild {
+	background-color: $base-950;
+	border: 1px solid $base-700;
+}
+
+.bbtest {
+	width: 96px;
+	height: 96px;
+	horizontal-align: center;
+	vertical-align: center;
+
+	border: $menu-pane-border;
+
+	animation-name: RotateFull;
+	animation-duration: 0.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
 #TooltipManager,
 #ContextMenuManager,
 #PopupManager,
@@ -132,6 +166,8 @@ $pane-move-time: 0.1s;
 		font-weight: light;
 		letter-spacing: 1px;
 		text-shadow: 1px 1px 2px 2 $base-950;
+		horizontal-align: right;
+		vertical-align: bottom;
 	}
 
 	&__gradient-bar {
@@ -171,10 +207,18 @@ $pane-move-time: 0.1s;
 	}
 
 	&__logo {
+		width: 540px;
+		height: 130px;
+		horizontal-align: center;
+		img-shadow: 0px 0px 100px 4 $base-950;
+	}
+
+	&__cooltext {
 		width: 440px;
 		height: 130px;
 		horizontal-align: center;
 		img-shadow: 0px 0px 100px 4 $base-950;
+		visibility: collapse;
 	}
 
 	&__nav {
@@ -216,29 +260,31 @@ $pane-move-time: 0.1s;
 
 		&__btn {
 			width: 100%;
-			min-height: 72px;
+			min-height: 65px;
 			padding-left: 75px;
+			margin: 2px 0;
 
 			$this: &;
 
 			&__text {
 				@include mixin.font-styles($use-header: true);
 				vertical-align: center;
-				font-size: 22px;
+				font-size: 20px;
 				margin-right: 15px;
 				text-shadow: 2px 2px 2px 2 $base-950;
 			}
 
 			&__small-text {
 				vertical-align: center;
-				font-size: 16px;
+				font-size: 14px;
 				color: $base-300;
 				font-weight: light;
 				letter-spacing: 1px;
 				text-shadow: 1px 1px 2px 2 $base-950;
 			}
 
-			&:hover:not(:disabled) {
+			&:hover:not(:disabled),
+			&:focus:not(:disabled) {
 				animation: OpacityFlicker 3s linear 0s infinite normal forwards;
 				background-color: gradient(
 					linear,
@@ -278,12 +324,13 @@ $pane-move-time: 0.1s;
 			border: $menu-pane-border;
 			width: 512px;
 			height: 160px;
-			horizontal-align: right;
 			vertical-align: bottom;
-			margin: 15px;
+			horizontal-align: center;
 			background-color: $base-950;
+			margin-bottom: 50px;
 
-			&:hover {
+			&:hover,
+			&:focus {
 				border-color: $primary-color;
 				background-color: $button-background-hover;
 
