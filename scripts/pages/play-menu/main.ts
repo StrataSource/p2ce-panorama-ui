@@ -8,7 +8,7 @@ class PlayMenu {
 			$.Localize('#MainMenu_Navigation_Play_Tagline')
 		);
 	}
-	
+
 	static onPlayMenuFocused() {
 		$<Button>('#BtnCampaigns')!.SetFocus(true);
 	}

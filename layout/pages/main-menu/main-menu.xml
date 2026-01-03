@@ -27,19 +27,11 @@
 		</snippet>
 	</snippets>
 
-	<MainMenu
-		class="InitialDisplay MainMenuRootPanel"
-		hittest="false"
-		onload="MainMenu.onMainMenuLoaded()"
-	>
+	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()">
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
-		<Panel
-			id="MainMenuInput"
-			class="mainmenu"
-			onfocus="MainMenu.onMainMenuFocused()"
-		>
+		<Panel id="MainMenuInput" class="mainmenu" onfocus="MainMenu.onMainMenuFocused()">
 			<!-- Full page blur: used to blur everything below the drawer -->
 			<Panel class="mainmenu__container">
 				<!-- Movie background -->
@@ -242,12 +234,7 @@
 
 					<VersionInfo class="mainmenu__version" />
 
-					<Panel
-						id="ContinueBox"
-						class="mainmenu__display-box"
-						hittest="false"
-						hittestchildren="false"
-					>
+					<Panel id="ContinueBox" class="mainmenu__display-box" hittest="false" hittestchildren="false">
 						<Panel>
 							<Image
 								id="ContinueSaveThumb"
@@ -296,12 +283,7 @@
 						<Panel id="PageInsert" class="mainmenu__page-insert" />
 
 						<Panel id="PageActions" class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop">
-							<Button
-								class="button"
-								onactivate="MainMenu.navigateBack()"
-								tabindex="auto"
-								selectionpos="auto"
-							>
+							<Button class="button" onactivate="MainMenu.navigateBack()" tabindex="auto" selectionpos="auto">
 								<Label class="button__text" text="Back" />
 							</Button>
 						</Panel>

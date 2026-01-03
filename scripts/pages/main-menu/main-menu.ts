@@ -53,7 +53,7 @@ class MainMenu {
 	static featuredAvatar = $<AvatarImage>('#FeaturedAvatar')!;
 
 	static quitBtn = $<Button>('#QuitBtn')!;
-	
+
 	// page vars
 	static pages: MenuPage[] = [];
 
@@ -66,8 +66,7 @@ class MainMenu {
 
 	static onMainMenuLoaded() {
 		// don't override visibility if this is true
-		if (!GameInterfaceAPI.GetSettingBool('developer'))
-			this.devControls.visible = false;
+		if (!GameInterfaceAPI.GetSettingBool('developer')) this.devControls.visible = false;
 
 		const XUID = UserAPI.GetXUID();
 		this.featuredAvatar.steamid = XUID;
@@ -93,7 +92,6 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('MainMenuSetFocus', this.setFocus.bind(this));
 
 		MainMenuCampaignMode.onMainMenuLoaded();
-		MainMenuAnim.onMainMenuLoaded();
 		stripDevTagsFromLabels($.GetContextPanel());
 
 		this.setContinueDetails();
@@ -106,8 +104,7 @@ class MainMenu {
 	static tryNavigateFeatured() {
 		// TODO: Grab active campaign from API instead of this
 		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
-		if (campaign === undefined)
-		{
+		if (campaign === undefined) {
 			this.featuredBtn.SetFocus(true);
 		}
 	}

@@ -35,10 +35,13 @@ class ChapterEntry {
 			else desc.text = $.Localize(this.chapter.title);
 		}
 		if (cover) {
-			if (this.chapter.thumbnail.endsWith('.vtf') || this.chapter.thumbnail.endsWith('.png') || this.chapter.thumbnail.endsWith('.jpg'))
+			if (
+				this.chapter.thumbnail.endsWith('.vtf') ||
+				this.chapter.thumbnail.endsWith('.png') ||
+				this.chapter.thumbnail.endsWith('.jpg')
+			)
 				cover.SetImage(`file://${this.chapter.thumbnail}`);
-			else
-				cover.SetImage(this.chapter.thumbnail);
+			else cover.SetImage(this.chapter.thumbnail);
 		}
 
 		if (this.locked) {
@@ -77,8 +80,7 @@ class CampaignChapters {
 	}
 
 	static populateChapters() {
-		if (this.maxPages === -1)
-			this.maxPages = Math.ceil(this.campaign.chapters.length / CHAPTER_PAGE_ENTRIES);
+		if (this.maxPages === -1) this.maxPages = Math.ceil(this.campaign.chapters.length / CHAPTER_PAGE_ENTRIES);
 
 		$.Msg(`Pages: ${this.chapterPage}/${this.maxPages}`);
 
@@ -97,25 +99,15 @@ class CampaignChapters {
 
 		for (
 			let i = 0;
-			i < Math.min(
-				CHAPTER_PAGE_ENTRIES,
-				chapters.length - (this.chapterPage * CHAPTER_PAGE_ENTRIES)
-			);
+			i < Math.min(CHAPTER_PAGE_ENTRIES, chapters.length - this.chapterPage * CHAPTER_PAGE_ENTRIES);
 			++i
 		) {
 			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
 			p.LoadLayoutSnippet('ChapterEntrySnippet');
 
-			const idx = (this.chapterPage * CHAPTER_PAGE_ENTRIES) + i;
+			const idx = this.chapterPage * CHAPTER_PAGE_ENTRIES + i;
 
-			this.chapterEntries.push(
-				new ChapterEntry(
-					idx,
-					p,
-					chapters[idx],
-					prog < idx
-				)
-			);
+			this.chapterEntries.push(new ChapterEntry(idx, p, chapters[idx], prog < idx));
 
 			this.chapterEntries[i].update();
 		}

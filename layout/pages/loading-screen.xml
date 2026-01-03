@@ -41,14 +41,8 @@
 		</Panel>
 
 		<Panel class="loadingscreen__progress-panel">
-			<Panel
-				class="loadingscreen__grid1"
-				hittest="false"
-			/>
-			<Panel
-				class="loadingscreen__grid2"
-				hittest="false"
-			/>
+			<Panel class="loadingscreen__grid1" hittest="false" />
+			<Panel class="loadingscreen__grid2" hittest="false" />
 			<Panel class="full-width flow-down vertical-align-center">
 				<Panel class="full-width">
 					<Label id="ProgressStatusText" class="loadingscreen__details" text="Progress" />
