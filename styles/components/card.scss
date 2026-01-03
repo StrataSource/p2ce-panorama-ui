@@ -77,7 +77,8 @@
 		}
 	}
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: $button-background-hover;
 		border-color: $primary-color;
 

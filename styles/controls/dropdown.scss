@@ -9,7 +9,7 @@
 	flow-children: left;
 	background-color: $dropdown-button-background;
 	border-radius: $dropdown-button-radius;
-	border-bottom: $dropdown-button-border;
+	border: $dropdown-button-border;
 	box-shadow: $dropdown-button-shadow;
 	vertical-align: center;
 	horizontal-align: right;
@@ -48,6 +48,7 @@
 
 	&:hover:not(:disabled):not(:parentdisabled) {
 		background-color: $dropdown-button-background-hover;
+		border: $dropdown-button-border-hover;
 		sound: 'UIPanorama.P2CE.MenuSelect';
 
 		& Label {
@@ -63,7 +64,7 @@
 	&:parentdisabled,
 	&:disabled:hover {
 		background-color: $dropdown-button-background-disabled;
-		border-color: $dropdown-button-text-color-disabled;
+		border: $dropdown-button-border-disabled;
 	}
 
 	&:disabled Label {

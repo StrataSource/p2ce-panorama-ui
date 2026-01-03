@@ -253,6 +253,7 @@ class MainMenuCampaignMode {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
+		$('#NewGameBtn')!.SetFocus(true);
 
 		// TODO: Set logo image appropriately
 		let saveImg = 'file://{images}/menu/portal2/full_logo.svg';
