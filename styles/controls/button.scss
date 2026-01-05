@@ -102,6 +102,9 @@
 			& Label {
 				color: $base-950;
 			}
+			& Image {
+				wash-color: $base-950;
+			}
 		}
 
 		background-color: list.nth($value, 1);
@@ -115,6 +118,9 @@
 			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
 				& Label {
 					color: $bright-color;
+				}
+				& Image {
+					wash-color: $bright-color;
 				}
 			}
 		}
