@@ -105,7 +105,7 @@ class MainMenuCampaignMode {
 			return;
 		}
 
-		const chapterString = `(${this.selectedCampaign.chapters.indexOf(savChapter!) + 1} / ${this.selectedCampaign.chapters.length})`;
+		const chapterString = `[${this.selectedCampaign.chapters.indexOf(savChapter!) + 1} / ${this.selectedCampaign.chapters.length}]`;
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
@@ -147,8 +147,7 @@ class MainMenuCampaignMode {
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
 		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined)
-			return;
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
 
 		if (isBackgroundMap) {
 			this.switchReverse();

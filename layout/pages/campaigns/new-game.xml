@@ -28,17 +28,14 @@
 	</snippets>
 
 	<Panel class="mainmenu__page" onload="CampaignChapters.populateChapters(0)">
-		<Panel class="full-width flow-down vertical-align-center">
+		<Panel class="flow-right vertical-align-center horizontal-align-center m-3">
+			<Button class="button mr-2 vertical-align-center" onactivate="CampaignChapters.backPage()">
+				<Label class="button__text" text="&lt;" />
+			</Button>
 			<Panel id="CampaignChapters" class="chapters__list" />
-
-			<Panel class="flow-right mt-2 horizontal-align-center">
-				<Button class="button mr-1" onactivate="CampaignChapters.backPage()">
-					<Label class="button__text" text="&lt;" />
-				</Button>
-				<Button class="button ml-1" onactivate="CampaignChapters.forwardPage()">
-					<Label class="button__text" text="&gt;" />
-				</Button>
-			</Panel>
+			<Button class="button ml-2 vertical-align-center" onactivate="CampaignChapters.forwardPage()">
+				<Label class="button__text" text="&gt;" />
+			</Button>
 		</Panel>
 	</Panel>
 </root>
