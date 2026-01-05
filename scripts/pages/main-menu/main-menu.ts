@@ -96,12 +96,14 @@ class MainMenu {
 		stripDevTagsFromLabels($.GetContextPanel());
 
 		this.setContinueDetails();
+
+		this.showPrereleaseWarning();
+		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
 		// TODO: Grab active campaign from API instead of this
-		if (isBackgroundMap && UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined)
-		{
+		if (isBackgroundMap && UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
 			if (this.movie) this.movie.visible = false;
 		}
 	}
@@ -547,5 +549,29 @@ class MainMenu {
 	static stopMusic() {
 		if (this.music) $.StopSoundEvent(this.music);
 		this.music = undefined;
+	}
+
+	/**
+	 * Shows playtest consent form
+	 */
+	static showPlaytestConsentPopup() {
+		if (!DosaHandler.checkDosa('playtestConsent'))
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'',
+				'file://{resources}/layout/modals/popups/playtest-consent.xml',
+				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent'
+			);
+	}
+
+	/**
+	 * Shows prerelease notice form
+	 */
+	static showPrereleaseWarning() {
+		if (!DosaHandler.checkDosa('prereleaseAck'))
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'',
+				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
+				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck'
+			);
 	}
 }
