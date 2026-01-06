@@ -50,6 +50,7 @@ class SaveEntry {
 
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
 		const desc = this.panel.FindChildTraverse<Label>('SaveDesc');
+		const bg = this.panel.FindChildTraverse<Image>('SaveBg');
 		const cover = this.panel.FindChildTraverse<Image>('SaveCover');
 		const del = this.panel.FindChildTraverse<Button>('SaveDelete');
 		const type = this.panel.FindChildTraverse<Label>('SaveType');
@@ -80,19 +81,32 @@ class SaveEntry {
 				)
 			}`;
 		}
+		const savChapter = CampaignSaves.campaign.chapters.find((ch) => {
+			return (
+				ch.maps.find((map) => {
+					return map.name === this.save.mapName || map.name === `${this.save.mapName}.bsp`;
+				}) !== undefined
+			);
+		});
 		if (desc) {
-			const savChapter = CampaignSaves.campaign.chapters.find((ch) => {
-				return (
-					ch.maps.find((map) => {
-						return map.name === this.save.mapName || map.name === `${this.save.mapName}.bsp`;
-					}) !== undefined
-				);
-			});
 			if (!savChapter) {
 				$.Warning('CONTINUE: Chapter could not be found for this map');
 				desc.text = this.save.mapName;
 			} else {
 				desc.text = $.Localize(savChapter.title);
+			}
+		}
+		if (bg) {
+			if (!savChapter) {
+				bg.visible = false;
+			} else {
+				if (
+					savChapter.thumbnail.endsWith('.vtf') ||
+					savChapter.thumbnail.endsWith('.png') ||
+					savChapter.thumbnail.endsWith('.jpg')
+				)
+					bg.SetImage(`file://${savChapter.thumbnail}`);
+				else bg.SetImage(savChapter.thumbnail);
 			}
 		}
 		if (cover) {
@@ -182,6 +196,7 @@ class CampaignSaves {
 	static populateSaves() {
 		const saves = GameSavesAPI.GetGameSaves()
 			.filter((v: GameSave) => {
+				$.Msg(`${v.mapGroup}, ${v.mapName}, ${v.chapter}`);
 				return v.mapGroup === this.campaign.id;
 			})
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));

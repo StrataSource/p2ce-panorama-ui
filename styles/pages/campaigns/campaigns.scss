@@ -337,17 +337,16 @@
 .saves {
 	&__container {
 		width: 100%;
+		margin: 10px 15px;
 		tooltip-body-position: 50% 50%;
 	}
 
 	&__entry {
 		width: 100%;
+		background-color: rgba($base-950, 0.9);
+		border: $menu-pane-border;
 
 		$this: &;
-
-		&__lined {
-			border-bottom: $menu-pane-border;
-		}
 
 		&__inner {
 			@extend .campaigns__entry__inner;
@@ -357,6 +356,11 @@
 			background-image: none;
 		}
 
+		&__bg {
+			width: 100%;
+			height: 100%;
+		}
+
 		&__cover {
 			width: 240px;
 			height: 135px;
@@ -364,6 +368,10 @@
 
 			background-color: $base-950;
 			border: $menu-pane-border;
+
+			&__container {
+				margin-right: 23px;
+			}
 
 			&__short {
 				height: 64px;
@@ -382,7 +390,9 @@
 		}
 
 		&__details {
-			@extend .campaigns__entry__details;
+			flow-children: down;
+			vertical-align: middle;
+
 			&__title {
 				letter-spacing: 1px;
 				color: $base-200;
@@ -418,11 +428,20 @@
 		}
 
 		&:hover:not(:disabled):not(:selected) {
-			background-color: gradient(linear, 0% 0%, 100% 0%, from($button-background-hover), to(rgba(0, 0, 0, 0)));
+			border-color: $primary-color;
+			background-color: rgba($button-background-hover, 0.9);
+
+			#{$this}__cover {
+				border-color: $primary-color;
+			}
 		}
 
 		&:selected {
-			background-color: $button-background-hover;
+			border-color: $button-background-selected;
+			background-color: $button-background-selected;
+			#{$this}__cover {
+				border-color: $button-background-selected;
+			}
 			#{$this}__details {
 				wash-color: $base-950;
 
