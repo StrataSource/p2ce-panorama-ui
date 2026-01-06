@@ -190,17 +190,28 @@
 									<!-- Quit/Disconnect -->
 									<Button
 										id="QuitBtn"
-										class="mainmenu__nav__btn NoCampaignSelectedOnly"
+										class="mainmenu__nav__btn NoCampaignSelectedOnly MainMenuModeOnly"
 										onactivate="MainMenu.onQuitButtonPressed()"
 										tabindex="auto"
 										selectionpos="auto"
 										onmovedown="MainMenu.tryNavigateFeatured()"
 									>
 										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame" />
-											<Label class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="#MainMenu_Navigation_QuitGame_Tagline" />
-											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_Navigation_Disconnect" />
-											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="#MainMenu_Navigation_Disconnect_Tagline" />
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_QuitGame" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_QuitGame_Tagline" />
+										</Panel>
+									</Button>
+									<Button
+										id="DisconnectBtn"
+										class="mainmenu__nav__btn PauseMenuModeOnly"
+										onactivate="MainMenu.onQuitButtonPressed()"
+										tabindex="auto"
+										selectionpos="auto"
+										onmovedown="MainMenu.tryNavigateFeatured()"
+									>
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Disconnect" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Disconnect_Tagline" />
 										</Panel>
 									</Button>
 								</Panel>

@@ -65,6 +65,9 @@ class MainMenuCampaignMode {
 	static setContinueDetails() {
 		if (this.selectedCampaign === undefined) return;
 
+		this.continueLogo.visible = false;
+		this.continueHeadline.visible = false;
+
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
 			.filter((a) => {
