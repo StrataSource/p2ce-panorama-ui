@@ -337,13 +337,13 @@
 .saves {
 	&__container {
 		width: 100%;
-		margin: 10px 15px;
+		margin: 5px 15px;
 		tooltip-body-position: 50% 50%;
 	}
 
 	&__entry {
 		width: 100%;
-		background-color: rgba($base-950, 0.9);
+		background-color: gradient( linear, 30% 0%, 200% 0%, from( $base-950 ), to( rgba(0,0,0,0) ) );
 		border: $menu-pane-border;
 
 		$this: &;
@@ -357,7 +357,8 @@
 		}
 
 		&__bg {
-			width: 100%;
+			horizontal-align: right;
+			width: 75%;
 			height: 100%;
 		}
 
