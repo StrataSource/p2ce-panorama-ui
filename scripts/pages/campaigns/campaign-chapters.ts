@@ -27,13 +27,22 @@ class ChapterEntry {
 			c?.SetImage('file://{images}/menu/p2ce-generic.png');
 		});
 
+		const chTitleSplit = $.Localize(this.chapter.title).split('\n');
+
 		if (title) {
-			this.panel.SetDialogVariableInt('chapter_num', this.num + 1);
-			//title.text = tagDevString(`Chapter ${this.num + 1}`);
+			if (chTitleSplit.length === 2) {
+				title.text = chTitleSplit[0];
+			} else {
+				title.visible = false;
+			}
 		}
 		if (desc) {
 			if (this.locked) desc.text = '????';
-			else desc.text = $.Localize(this.chapter.title);
+			else if (chTitleSplit.length === 2) {
+				desc.text = chTitleSplit[1];
+			} else {
+				desc.text = chTitleSplit[0];
+			}
 		}
 		if (cover) {
 			if (

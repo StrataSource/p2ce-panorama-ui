@@ -248,6 +248,7 @@ class MainMenuCampaignMode {
 	}
 
 	static onCampaignSelected(id: string) {
+		$.Msg(`Begin searching for campaign: ${id}`);
 		const campaign = CampaignAPI.GetAllCampaigns().find((v) => {
 			return v.id === id;
 		});
@@ -260,7 +261,11 @@ class MainMenuCampaignMode {
 		}
 
 		this.selectedCampaign = campaign;
-		CampaignAPI.SetActiveCampaign(this.selectedCampaign.id);
+		$.Msg(`Switching campaign to: ${this.selectedCampaign.id}`);
+		if (CampaignAPI.SetActiveCampaign(this.selectedCampaign.id))
+		{
+			$.Warning('JS: SetActiveCampaign failed!');
+		}
 		// TODO: Grab active campaign from API instead of this
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = campaign;
 
