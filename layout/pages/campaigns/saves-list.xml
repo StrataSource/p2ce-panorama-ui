@@ -10,10 +10,18 @@
 	<snippets>
 		<snippet name="SaveEntrySnippet">
 			<Panel class="saves__container">
+				<Image
+					id="SaveBg"
+					class="saves__entry__bg"
+					src="file://{images}/menu/p2ce-generic.png"
+					scaling="stretch-to-cover-preserve-aspect"
+					textureheight="1920"
+					texturewidth="1080"
+				/>
 				<RadioButton id="SaveAction" group="SaveGroupRadio" class="saves__entry">
 					<Panel class="saves__entry__inner">
 						<!-- Save icon cover -->
-						<Panel>
+						<Panel class="saves__entry__cover__container">
 							<Image
 								id="SaveCover"
 								class="saves__entry__cover"
@@ -54,15 +62,6 @@
 			<Panel class="saves__container">
 				<Button id="SaveAction" class="saves__entry">
 					<Panel class="saves__entry__inner saves__entry__lined">
-						<!-- Save icon cover -->
-						<Image
-							id="SaveCover"
-							class="saves__entry__cover saves__entry__cover__short"
-							src="file://{images}/menu/p2ce-generic.png"
-							scaling="stretch-to-cover-preserve-aspect"
-							textureheight="1920"
-							texturewidth="1080"
-						/>
 						<!-- Save info; title, description, 'source' -->
 						<Panel class="saves__entry__details">
 							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
