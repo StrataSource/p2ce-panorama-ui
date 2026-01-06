@@ -130,6 +130,8 @@ class MainMenu {
 
 	static setContinueDetails() {
 		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
+		this.continueLogo.visible = true;
+		this.continueHeadline.visible = true;
 		this.continueBtn.enabled = false;
 		this.continueBtn.visible = false;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
@@ -172,7 +174,7 @@ class MainMenu {
 		this.continueHeadline.text = `${$.Localize(savChapter.title)}`;
 
 		const date = new Date(Number(this.latestSave.fileTime) * 1000);
-		this.continueTagline.text = `${this.latestSave.mapName}\n${date.toDateString()}, ${date.toLocaleTimeString()}`;
+		this.continueTagline.text = `${date.toDateString()}, ${date.toLocaleTimeString()}`;
 
 		this.continueBtn.SetPanelEvent('onactivate', () => {
 			if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
