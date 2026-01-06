@@ -294,7 +294,7 @@
 						<Panel id="PageInsert" class="mainmenu__page-insert" />
 
 						<Panel id="PageActions" class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop">
-							<Button class="button" onactivate="MainMenu.navigateBack()" tabindex="auto" selectionpos="auto">
+							<Button class="button mainmenu__page-actions__button" onactivate="MainMenu.navigateBack()" tabindex="auto" selectionpos="auto">
 								<Label class="button__text" text="Back" />
 							</Button>
 						</Panel>

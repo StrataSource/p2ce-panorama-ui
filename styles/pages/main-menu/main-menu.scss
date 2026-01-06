@@ -168,7 +168,7 @@ $pane-move-time: 0.1s;
 			vertical-align: bottom;
 			horizontal-align: left;
 			transform: translateX(-1px) translateY(1px);
-			opacity: 0.25;
+			opacity: 0;
 		}
 	}
 
@@ -489,6 +489,14 @@ $pane-move-time: 0.1s;
 	&__page-actions {
 		width: 100%;
 		margin-top: 15px;
+		//&__button {
+		//	height: 32px;
+		//	width: 94px;
+		//	& Label {
+		//		font-size: 16px;
+		//		transform: translateY(0px);
+		//	}
+		//}
 	}
 
 	&__version {
