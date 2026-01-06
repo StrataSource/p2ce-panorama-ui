@@ -56,11 +56,44 @@ class SaveEntry {
 		const cloud = this.panel.FindChildTraverse<Image>('SaveCloud');
 
 		if (title) {
-			title.text = this.save.mapName;
+			const date = new Date(Number(this.save.fileTime) * 1000);
+			const currentDate = new Date();
+			title.text = `${
+				date.toLocaleDateString(
+					undefined,
+					{
+						weekday: 'long',
+						month: 'long',
+						day: '2-digit',
+						// only display the year if we are in a different year than the save's
+						year: currentDate.getFullYear() !== date.getFullYear() ? 'numeric' : undefined
+					}
+				)
+			}\n${
+				date.toLocaleTimeString(
+					undefined,
+					{
+						hour: 'numeric',
+						minute: 'numeric',
+						second: undefined
+					}
+				)
+			}`;
 		}
 		if (desc) {
-			const date = new Date(Number(this.save.fileTime) * 1000);
-			desc.text = `${date.toDateString()}, ${date.toLocaleTimeString()}`;
+			const savChapter = CampaignSaves.campaign.chapters.find((ch) => {
+				return (
+					ch.maps.find((map) => {
+						return map.name === this.save.mapName || map.name === `${this.save.mapName}.bsp`;
+					}) !== undefined
+				);
+			});
+			if (!savChapter) {
+				$.Warning('CONTINUE: Chapter could not be found for this map');
+				desc.text = this.save.mapName;
+			} else {
+				desc.text = $.Localize(savChapter.title);
+			}
 		}
 		if (cover) {
 			const thumb = `file://{__saves}/${this.save.fileName.replace('.sav', '.tga')}`;
