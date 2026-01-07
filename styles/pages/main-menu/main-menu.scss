@@ -168,7 +168,7 @@ $pane-move-time: 0.1s;
 			vertical-align: bottom;
 			horizontal-align: left;
 			transform: translateX(-1px) translateY(1px);
-			opacity: 0;
+			opacity: 0.25;
 		}
 	}
 
@@ -373,6 +373,7 @@ $pane-move-time: 0.1s;
 		}
 		&__details {
 			width: 100%;
+			height: 94px;
 			background-color: $base-950;
 			background-image: url('file://{images}/menu/menu_grid4.png');
 			background-repeat: no-repeat;
@@ -381,7 +382,6 @@ $pane-move-time: 0.1s;
 			border-top: $menu-pane-border;
 			border-color: $button-background-hover;
 			flow-children: down;
-			padding: 15px;
 		}
 		&__logo {
 			width: 64px;
@@ -489,14 +489,14 @@ $pane-move-time: 0.1s;
 	&__page-actions {
 		width: 100%;
 		margin-top: 15px;
-		//&__button {
-		//	height: 32px;
-		//	width: 94px;
-		//	& Label {
-		//		font-size: 16px;
-		//		transform: translateY(0px);
-		//	}
-		//}
+		&__button {
+			height: 32px;
+			width: 94px;
+			& Label {
+				font-size: 16px;
+				transform: translateY(0px);
+			}
+		}
 	}
 
 	&__version {

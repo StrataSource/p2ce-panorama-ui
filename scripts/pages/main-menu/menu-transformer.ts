@@ -66,7 +66,7 @@ class MainMenuCampaignMode {
 		if (this.selectedCampaign === undefined) return;
 
 		this.continueLogo.visible = false;
-		this.continueHeadline.visible = false;
+		this.continueTagline.visible = false;
 
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
@@ -114,9 +114,8 @@ class MainMenuCampaignMode {
 		this.continueImg.SetImage(thumb);
 
 		this.continueText.text = `${chapterString} ${$.Localize(savChapter.title)}`;
-		this.continueHeadline.text = `${this.latestSave.mapName}`;
 		const date = new Date(Number(this.latestSave.fileTime) * 1000);
-		this.continueTagline.text = `${date.toDateString()}, ${date.toLocaleTimeString()}`;
+		this.continueHeadline.text = convertTime(date);
 
 		this.continueBtn.SetPanelEvent('onactivate', () => {
 			if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {

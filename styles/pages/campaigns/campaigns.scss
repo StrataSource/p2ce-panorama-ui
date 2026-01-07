@@ -337,13 +337,13 @@
 .saves {
 	&__container {
 		width: 100%;
-		margin: 5px 15px;
+		margin: 5px 15px 5px 0;
 		tooltip-body-position: 50% 50%;
 	}
 
 	&__entry {
 		width: 100%;
-		background-color: gradient( linear, 30% 0%, 200% 0%, from( $base-950 ), to( rgba(0,0,0,0) ) );
+		background-color: gradient( linear, 25% 0%, 90% 0%, from( $base-950 ), to( rgba($base-950, 0.8) ) );
 		border: $menu-pane-border;
 
 		$this: &;
@@ -396,14 +396,14 @@
 
 			&__title {
 				letter-spacing: 1px;
-				color: $base-200;
-				font-size: 18px;
+				font-weight: bold;
+				font-size: 24px;
 			}
 
 			&__desc {
 				letter-spacing: 1px;
-				font-weight: bold;
-				font-size: 24px;
+				color: $base-200;
+				font-size: 18px;
 			}
 
 			&__type {
@@ -457,12 +457,19 @@
 			}
 		}
 
-		&__delete {
+		&__controls {
+			// overridden by code
+			visibility: collapse;
 			margin-right: 30px;
-			width: 48px;
-			height: 48px;
 			horizontal-align: right;
 			vertical-align: center;
+			flow-children: right;
+
+			& Button {
+				margin-left: 5px;
+				width: 48px;
+				height: 48px;
+			}
 		}
 	}
 }

@@ -24,7 +24,7 @@ class ChapterEntry {
 			const c = this.panel.FindChildTraverse<Image>('ChapterCover');
 			// defaultsrc attribute is unreliable
 			$.Warning('Could not load chapter image');
-			c?.SetImage('file://{images}/menu/p2ce-generic.png');
+			c?.SetImage(getRandomFallbackImage());
 		});
 
 		const chTitleSplit = $.Localize(this.chapter.title).split('\n');
@@ -45,14 +45,7 @@ class ChapterEntry {
 			}
 		}
 		if (cover) {
-			if (
-				this.chapter.thumbnail.endsWith('.vtf') ||
-				this.chapter.thumbnail.endsWith('.png') ||
-				this.chapter.thumbnail.endsWith('.jpg')
-			)
-				cover.SetImage(`file://${this.chapter.thumbnail}`);
-			else cover.SetImage(this.chapter.thumbnail);
-
+			cover.SetImage(convertImagePath(this.chapter.thumbnail));
 			$.Msg(`PATH TO CHAPTER IMAGE: file://${this.chapter.thumbnail}`);
 		}
 

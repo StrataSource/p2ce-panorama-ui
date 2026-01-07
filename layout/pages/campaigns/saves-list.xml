@@ -18,7 +18,7 @@
 					textureheight="1920"
 					texturewidth="1080"
 				/>
-				<RadioButton id="SaveAction" group="SaveGroupRadio" class="saves__entry">
+				<Panel id="SaveAction" group="SaveGroupRadio" class="saves__entry">
 					<Panel class="saves__entry__inner">
 						<!-- Save icon cover -->
 						<Panel class="saves__entry__cover__container">
@@ -42,20 +42,40 @@
 						<!-- Save info; title, description, 'source' -->
 						<Panel class="saves__entry__details">
 							<Label id="SaveType" class="saves__entry__details__type" text="#MainMenu_SaveRestore_SaveType_autosave" />
-							<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
 							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
+							<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
 						</Panel>
 					</Panel>
-				</RadioButton>
-				<Button id="SaveDelete" class="saves__entry__delete button button--red">
-					<Image
-						class="button__icon"
-						src="file://{images}/delete.svg"
-						scaling="stretch-to-fit-preserve-aspect"
-						texturewidth="48"
-						textureheight="48"
-					/>
-				</Button>
+					<Panel id="SaveControls" class="saves__entry__controls">
+						<Button id="SaveLoad" class="button">
+							<Image
+								class="button__icon"
+								src="file://{images}/play.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="48"
+								textureheight="48"
+							/>
+						</Button>
+						<Button id="SaveOverwrite" class="button">
+							<Image
+								class="button__icon"
+								src="file://{images}/download.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="48"
+								textureheight="48"
+							/>
+						</Button>
+						<Button id="SaveDelete" class="button button--red">
+							<Image
+								class="button__icon"
+								src="file://{images}/delete.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="48"
+								textureheight="48"
+							/>
+						</Button>
+					</Panel>
+				</Panel>
 			</Panel>
 		</snippet>
 		<snippet name="CreateSaveSnippet">
@@ -64,7 +84,7 @@
 					<Panel class="saves__entry__inner saves__entry__lined">
 						<!-- Save info; title, description, 'source' -->
 						<Panel class="saves__entry__details">
-							<Label id="SaveTitle" class="saves__entry__details__title" text="[PH] Save Title" />
+							<Label id="SaveTitle" class="saves__entry__details__title" text="#MainMenu_SaveRestore_CreateSave" />
 						</Panel>
 					</Panel>
 				</Button>
@@ -76,31 +96,5 @@
 		<Panel id="CampaignSaveCreateSticky" class="selected-campaign__sticky">
 		</Panel>
 		<Panel id="CampaignSaves" class="selected-campaign__lister" />
-		<Panel id="CampaignSaveActions" class="selected-campaign__action-bar" disabled="true">
-			<Button
-				id="SaveOverwrite"
-				class="button-mono button-mono__bigger fill-width mr-2"
-				onactivate="CampaignSaves.overwriteSave()"
-			>
-				<Image
-					class="button-mono__icon"
-					src="file://{images}/download.svg"
-					scaling="stretch-to-fit-preserve-aspect"
-					texturewidth="32"
-					textureheight="32"
-				/>
-				<Label class="button-mono__text" text="#Action_OverwriteGame" />
-			</Button>
-			<Button id="SaveLoad" class="button-mono button-mono__bigger fill-width" onactivate="CampaignSaves.loadSave()">
-				<Image
-					class="button-mono__icon"
-					src="file://{images}/play.svg"
-					scaling="stretch-to-fit-preserve-aspect"
-					texturewidth="32"
-					textureheight="32"
-				/>
-				<Label class="button-mono__text" text="#Action_LoadGame" />
-			</Button>
-		</Panel>
 	</Panel>
 </root>
