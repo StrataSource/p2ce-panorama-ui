@@ -104,10 +104,10 @@
 											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Home_Resume_Tagline" />
 										</Panel>
 									</Button>
-									<!-- Start New Game (Campaign Mode / in-game) -->
+									<!-- Start New Game (Campaign Mode) -->
 									<Button
 										id="NewGameBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly"
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly"
 										onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')"
 										tabindex="auto"
 										selectionpos="auto"
@@ -265,8 +265,10 @@
 							/>
 						</Panel>
 						<Panel class="mainmenu__display-box__details">
-							<Label id="ContinueSaveHeadline" class="mainmenu__display-box__head" text="[PH] Head" />
-							<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
+							<Panel class="vertical-align-center flow-down ml-3">
+								<Label id="ContinueSaveHeadline" class="mainmenu__display-box__head" text="[PH] Head" />
+								<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
+							</Panel>
 						</Panel>
 					</Panel>
 
