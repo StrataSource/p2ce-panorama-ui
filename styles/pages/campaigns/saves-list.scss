@@ -1,0 +1,142 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
+
+.saves {
+	&__container {
+		width: 100%;
+		margin: 5px 15px 5px 0;
+		tooltip-body-position: 50% 50%;
+	}
+
+	&__entry {
+		width: 100%;
+		background-color: gradient( linear, 25% 0%, 90% 0%, from( $base-950 ), to( rgba($base-950, 0.8) ) );
+		border: $menu-pane-border;
+
+		$this: &;
+
+		&__inner {
+			width: fill-parent-flow(1);
+			height: fit-children;
+			flow-children: right;
+			padding: 15px;
+		}
+
+		&__bg {
+			horizontal-align: right;
+			width: 75%;
+			height: 100%;
+		}
+
+		&__cover {
+			width: 240px;
+			height: 135px;
+			vertical-align: center;
+
+			background-color: $base-950;
+			border: $menu-pane-border;
+
+			&__container {
+				margin-right: 23px;
+			}
+
+			&__short {
+				height: 64px;
+			}
+		}
+
+		&__cloud {
+			background-color: $base-950;
+			horizontal-align: right;
+			vertical-align: bottom;
+			width: 32px;
+			height: 32px;
+			margin: 5px;
+			padding: 5px;
+			border: $menu-pane-border;
+		}
+
+		&__details {
+			flow-children: down;
+			vertical-align: middle;
+
+			&__title {
+				letter-spacing: 1px;
+				font-weight: bold;
+				font-size: 24px;
+			}
+
+			&__desc {
+				letter-spacing: 1px;
+				color: $base-200;
+				font-size: 18px;
+			}
+
+			&__type {
+				margin-bottom: 5px;
+				font-size: 18px;
+				color: $bright-color;
+				font-weight: bold;
+				letter-spacing: 1px;
+				background-color: $base-950;
+				padding: 5px 10px;
+				border: $menu-pane-border;
+				transform: translateY(0px);
+				text-transform: uppercase;
+			}
+		}
+
+		&:disabled {
+			#{$this}__cover,
+			#{$this}__details {
+				opacity: 0.5;
+				wash-color: $button-text-disabled;
+			}
+		}
+
+		&:hover:not(:disabled):not(:selected) {
+			border-color: $primary-color;
+			background-color: rgba($button-background-hover, 0.9);
+
+			#{$this}__cover {
+				border-color: $primary-color;
+			}
+		}
+
+		&:selected {
+			border-color: $button-background-selected;
+			background-color: $button-background-selected;
+			#{$this}__cover {
+				border-color: $button-background-selected;
+			}
+			#{$this}__details {
+				wash-color: $base-950;
+
+				&__title,
+				&__desc {
+					text-shadow: none;
+				}
+
+				&__type {
+					background-color: none;
+				}
+			}
+		}
+
+		&__controls {
+			// overridden by code
+			visibility: collapse;
+			margin-right: 30px;
+			horizontal-align: right;
+			vertical-align: center;
+			flow-children: right;
+
+			& Button {
+				margin-left: 5px;
+				width: 48px;
+				height: 48px;
+			}
+		}
+	}
+}
