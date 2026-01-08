@@ -44,6 +44,7 @@ TextEntry {
 	&:focus {
 		background-color: $textentry-background-focus;
 		box-shadow: $textentry-shadow-hover;
+		border: $textentry-border-hover;
 		color: $textentry-focus-text-color;
 	}
 

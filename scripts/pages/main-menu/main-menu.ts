@@ -414,6 +414,8 @@ class MainMenu {
 		this.model.RemoveClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
+		$.DispatchEvent('MainMenuSetFocus');
+
 		// TODO: Grab active campaign from API instead of this
 		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
 
@@ -458,13 +460,12 @@ class MainMenu {
 			// restore the lower level page
 			nowPage.panel.RemoveClass('mainmenu__page__back-anim');
 			this.flashPageLines();
+			nowPage.panel.SetFocus(true);
 		} else {
 			// no more pages
 			this.hidePage();
 			$.DispatchEvent('MainMenuFullBackNav');
 		}
-
-		$.DispatchEvent('MainMenuSetFocus');
 	}
 
 	// pops all pages
@@ -475,8 +476,6 @@ class MainMenu {
 	}
 
 	static setFocus() {
-		// force focus back so that spamming ESC is possible
-		// TODO: probably handle this different for controllers...
 		$.GetContextPanel().SetFocus(true);
 	}
 
