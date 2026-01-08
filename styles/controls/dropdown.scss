@@ -46,6 +46,7 @@
 		}
 	}
 
+	&:focus,
 	&:hover:not(:disabled):not(:parentdisabled) {
 		background-color: $dropdown-button-background-hover;
 		border: $dropdown-button-border-hover;
