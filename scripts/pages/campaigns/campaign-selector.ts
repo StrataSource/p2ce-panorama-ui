@@ -19,6 +19,13 @@ class CampaignEntry {
 		const ico = this.panel.FindChildTraverse<Image>('CampaignLogo');
 		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
+		// eject out into the action bar
+		if (this.index === 0) {
+			this.panel.SetPanelEvent('onmoveup', () => {
+				CampaignSelector.focusActionBar();
+			});
+		}
+
 		if (title) {
 			title.text = $.Localize(this.info.title);
 		}
@@ -62,6 +69,15 @@ class CampaignSelector {
 	static gameType: GameType;
 	// filters by SP or MP
 	static playerMode: PlayerMode;
+
+	static focusActionBar() {
+		$('#SearchBar')!.SetFocus(true);
+	}
+
+	static focusCampaignList() {
+		if (this.campaignEntries.length > 0)
+			this.campaignEntries[0].panel.SetFocus(true);
+	}
 
 	static init() {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
@@ -136,6 +152,10 @@ class CampaignSelector {
 			this.campaignEntries[i].update();
 		}
 		stripDevTagsFromLabels(this.campaignList);
+
+		if (this.campaignEntries.length > 0) {
+			this.campaignEntries[0].panel.SetFocus(true);
+		}
 	}
 
 	static onCampaignHovered(info: CampaignInfo) {

@@ -9,7 +9,11 @@
 
 	<snippets>
 		<snippet name="CampaignEntrySnippet">
-			<Button class="campaigns__entry">
+			<Button
+				class="campaigns__entry"
+				tabindex="auto"
+				selectionpos="auto"
+			>
 				<!--  -->
 				<Image
 					id="CampaignBtnBg"
@@ -70,12 +74,23 @@
 		<!-- CAMPAIGN SELECTOR -->
 		<Panel id="CampaignSelector" class="campaigns">
 			<Panel class="campaigns__left">
-				<Panel disabled="true" class="campaigns__action-bar">
+				<Panel class="campaigns__action-bar">
 					<TextEntry
+						id="SearchBar"
 						class="textentry campaigns__action-bar__textentry fill-width mr-2"
 						placeholder="#MainMenu_Campaigns_Search_FillerText"
+						tabindex="auto"
+						selectionpos="auto"
+						onmovedown="CampaignSelector.focusCampaignList()"
 					/>
-					<DropDown id="CampaignSortMode" class="dropdown" menuclass="dropdown-menu">
+					<DropDown
+						id="CampaignSortMode"
+						class="dropdown"
+						menuclass="dropdown-menu"
+						tabindex="auto"
+						selectionpos="auto"
+						onmovedown="CampaignSelector.focusCampaignList()"
+					>
 						<!-- <Panel class="DropDownIcon"/> -->
 						<Label text="#MainMenu_Campaigns_Search_SortBy_NewSubs" id="CampaignSortMode1" value="1" />
 						<Label text="#MainMenu_Campaigns_Search_SortBy_AtoZ" id="CampaignSortMode2" value="2" />

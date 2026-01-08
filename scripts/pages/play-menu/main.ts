@@ -9,10 +9,6 @@ class PlayMenu {
 		);
 	}
 
-	static onPlayMenuFocused() {
-		$<Button>('#BtnCampaigns')!.SetFocus(true);
-	}
-
 	static setPlayerMenuLines() {
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
@@ -30,6 +26,8 @@ class PlayMenu {
 	}
 
 	// root screen
+	///////
+
 	// shows the player count selection page
 	static onCampaignsBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.P2CE_CAMPAIGN;
@@ -42,7 +40,17 @@ class PlayMenu {
 		$.DispatchEvent('MainMenuOpenNestedPage', 'SoloMapMode', 'play-menu/solo-map-mode');
 	}
 
+	static onDownFromCampaigns() {
+		$<Button>('#BtnSoloMaps')!.SetFocus(true);
+	}
+
+	static onUpFromPlayModes() {
+		$<Button>('#BtnCampaigns')!.SetFocus(true);
+	}
+
 	// solo maps screen
+	///////
+
 	static onCeMapsBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.P2CE_MAP;
 
@@ -54,6 +62,9 @@ class PlayMenu {
 
 		$.DispatchEvent('MainMenuOpenNestedPage', 'PlayerMode', 'play-menu/player-mode');
 	}
+
+	// player mode
+	///////
 
 	static onSinglePlayerBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['PlayerMode'] = PlayerMode.SINGLEPLAYER;
