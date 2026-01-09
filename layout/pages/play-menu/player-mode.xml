@@ -27,12 +27,7 @@
 						<Label class="card__details__header card__details__header__dark" text="#MainMenu_Campaigns_CType_SP" />
 					</Panel>
 				</Button>
-				<Button
-					class="card fill-width"
-					onactivate="PlayMenu.onMultiPlayerBtnPressed()"
-					tabindex="auto"
-					selectionpos="auto"
-				>
+				<Button class="card fill-width" onactivate="PlayMenu.onMultiPlayerBtnPressed()" tabindex="auto" selectionpos="auto">
 					<Image
 						class="card__image"
 						src="file://{images}/menu/vertical-banner-mp.png"
