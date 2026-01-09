@@ -9,14 +9,13 @@
 
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setPlayMenuLines()">
 		<Panel class="play-menu__main">
-			<Panel class="flow-down full-width">
+			<Panel class="flow-down full-width" tabindex="auto" selectionpos="auto">
 				<Button
 					id="BtnCampaigns"
 					class="card card__occupy"
 					onactivate="PlayMenu.onCampaignsBtnPressed()"
 					tabindex="auto"
 					selectionpos="auto"
-					onmovedown="PlayMenu.onDownFromCampaigns()"
 				>
 					<Panel class="full-width fill-height">
 						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
@@ -29,15 +28,8 @@
 						<Label class="card__details__subheader" text="#MainMenu_Campaigns_Tagline" />
 					</Panel>
 				</Button>
-				<Panel class="minor-cards-row mt-3">
-					<Button
-						id="BtnSoloMaps"
-						class="card"
-						onactivate="PlayMenu.onSoloMapsBtnPressed()"
-						tabindex="auto"
-						selectionpos="auto"
-						onmoveup="PlayMenu.onUpFromPlayModes()"
-					>
+				<Panel class="minor-cards-row mt-3" tabindex="auto" selectionpos="auto">
+					<Button id="BtnSoloMaps" class="card" onactivate="PlayMenu.onSoloMapsBtnPressed()" tabindex="auto" selectionpos="auto">
 						<Image
 							class="card__image"
 							src="file://{images}/menu/banner-multiverse.png"
@@ -48,12 +40,7 @@
 							<Label class="card__details__subheader" text="#MainMenu_Campaigns_ModeSel_Solo_Tagline" />
 						</Panel>
 					</Button>
-					<Button
-						class="card ml-3"
-						tabindex="auto"
-						selectionpos="auto"
-						onmoveup="PlayMenu.onUpFromPlayModes()"
-					>
+					<Button class="card ml-3" tabindex="auto" selectionpos="auto">
 						<Image
 							class="card__image"
 							src="file://{images}/menu/p2ce/random5.png"

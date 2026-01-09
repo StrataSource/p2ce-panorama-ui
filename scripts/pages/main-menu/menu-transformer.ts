@@ -261,8 +261,7 @@ class MainMenuCampaignMode {
 
 		this.selectedCampaign = campaign;
 		$.Msg(`Switching campaign to: ${this.selectedCampaign.id}`);
-		if (CampaignAPI.SetActiveCampaign(this.selectedCampaign.id))
-		{
+		if (CampaignAPI.SetActiveCampaign(this.selectedCampaign.id)) {
 			$.Warning('JS: SetActiveCampaign failed!');
 		}
 		// TODO: Grab active campaign from API instead of this

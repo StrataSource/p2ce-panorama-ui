@@ -9,11 +9,7 @@
 
 	<snippets>
 		<snippet name="CampaignEntrySnippet">
-			<Button
-				class="campaigns__entry"
-				tabindex="auto"
-				selectionpos="auto"
-			>
+			<Button class="campaigns__entry" tabindex="auto" selectionpos="auto">
 				<!--  -->
 				<Image
 					id="CampaignBtnBg"
@@ -74,23 +70,15 @@
 		<!-- CAMPAIGN SELECTOR -->
 		<Panel id="CampaignSelector" class="campaigns">
 			<Panel class="campaigns__left">
-				<Panel class="campaigns__action-bar">
+				<Panel class="campaigns__action-bar" tabindex="auto" selectionpos="auto">
 					<TextEntry
 						id="SearchBar"
 						class="textentry campaigns__action-bar__textentry fill-width mr-2"
 						placeholder="#MainMenu_Campaigns_Search_FillerText"
 						tabindex="auto"
 						selectionpos="auto"
-						onmovedown="CampaignSelector.focusCampaignList()"
 					/>
-					<DropDown
-						id="CampaignSortMode"
-						class="dropdown"
-						menuclass="dropdown-menu"
-						tabindex="auto"
-						selectionpos="auto"
-						onmovedown="CampaignSelector.focusCampaignList()"
-					>
+					<DropDown id="CampaignSortMode" class="dropdown" menuclass="dropdown-menu" tabindex="auto" selectionpos="auto">
 						<!-- <Panel class="DropDownIcon"/> -->
 						<Label text="#MainMenu_Campaigns_Search_SortBy_NewSubs" id="CampaignSortMode1" value="1" />
 						<Label text="#MainMenu_Campaigns_Search_SortBy_AtoZ" id="CampaignSortMode2" value="2" />
@@ -101,7 +89,13 @@
 					</DropDown>
 				</Panel>
 				<!-- Campaign list -->
-				<Panel id="CampaignContainer" class="campaigns__list" onmouseout="CampaignSelector.hideBoxart()" />
+				<Panel
+					id="CampaignContainer"
+					class="campaigns__list"
+					onmouseout="CampaignSelector.hideBoxart()"
+					tabindex="auto"
+					selectionpos="auto"
+				/>
 			</Panel>
 			<Panel class="campaigns__right">
 				<Panel id="HoveredCampaignContainer" class="campaigns__boxart__container">
