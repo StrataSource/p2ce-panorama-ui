@@ -77,7 +77,7 @@
 								/>
 							</Panel>
 							<Panel class="mainmenu__nav__controls__wrapper">
-								<Panel class="mainmenu__nav__controls" childfocusonhover="true">
+								<Panel id="MenuBtnList" class="mainmenu__nav__controls" childfocusonhover="true">
 									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
 									<Button
 										id="PlayBtn"
