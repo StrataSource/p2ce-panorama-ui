@@ -54,6 +54,8 @@ class MainMenu {
 
 	static quitBtn = $<Button>('#QuitBtn')!;
 
+	static menuBtns = $<Panel>('#MenuBtnList')!;
+
 	// page vars
 	static pages: MenuPage[] = [];
 
@@ -109,7 +111,14 @@ class MainMenu {
 	}
 
 	static onMainMenuFocused() {
-		$<Button>('#PlayBtn')!.SetFocus(true);
+		const children = this.menuBtns.Children();
+		for (let i = 0; i < children.length; ++i) {
+			const child = children[i];
+			if (child.IsValid() && child.visible && child.enabled) {
+				child.SetFocus(true);
+				break;
+			}
+		}
 	}
 
 	static tryNavigateFeatured() {
@@ -465,6 +474,7 @@ class MainMenu {
 			// no more pages
 			this.hidePage();
 			$.DispatchEvent('MainMenuFullBackNav');
+			$.DispatchEvent('MainMenuSetFocus');
 		}
 	}
 
@@ -476,7 +486,7 @@ class MainMenu {
 	}
 
 	static setFocus() {
-		$.GetContextPanel().SetFocus(true);
+		this.onMainMenuFocused();
 	}
 
 	static onContinueMouseOver() {
