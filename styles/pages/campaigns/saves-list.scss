@@ -95,6 +95,7 @@
 			}
 		}
 
+		&:focus,
 		&:hover:not(:disabled):not(:selected) {
 			border-color: $primary-color;
 			background-color: rgba($button-background-hover, 0.9);
