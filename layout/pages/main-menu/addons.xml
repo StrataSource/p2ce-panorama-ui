@@ -9,7 +9,7 @@
 
 	<snippets>
 		<snippet name="AddonEntrySnippet">
-			<RadioButton class="addons__entry" group="AddonRadio">
+			<RadioButton class="addons__entry" group="AddonRadio" tabindex="auto" selectionpos="auto">
 				<Panel class="addons__entry__left">
 					<!-- Addon icon cover -->
 					<Image id="AddonCover" class="addons__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
@@ -39,12 +39,14 @@
 
 	<Panel class="mainmenu__page flow-right">
 		<Panel class="content__left">
-			<Panel class="full-width flow-right mb-2">
+			<Panel class="full-width flow-right mb-2" tabindex="auto" selectionpos="auto">
 				<RadioButton
 					id="ViewAddonsBtn"
 					class="button-mono button-mono__bigger fill-width mr-1"
 					group="ContentViewType"
 					onactivate="AddonManager.showPage()"
+					tabindex="auto"
+					selectionpos="auto"
 				>
 					<Image
 						class="button-mono__icon"
@@ -63,6 +65,8 @@
 					class="button-mono button-mono__bigger fill-width ml-1"
 					group="ContentViewType"
 					onactivate="MountManager.showPage()"
+					tabindex="auto"
+					selectionpos="auto"
 				>
 					<Image
 						class="button-mono__icon"
@@ -77,31 +81,57 @@
 					</Panel>
 				</RadioButton>
 			</Panel>
-			<Panel id="AddonsPage" class="addons" onload="AddonManager.init()">
+			<Panel id="AddonsPage" class="addons" onload="AddonManager.init()" tabindex="auto" selectionpos="auto">
 				<Panel class="addons__action-bar">
-					<Button id="ReloadAll" class="button mr-2" onactivate="AddonManager.reloadAddonList()">
+					<Button
+						id="ReloadAll"
+						class="button mr-2"
+						onactivate="AddonManager.reloadAddonList()"
+						tabindex="auto"
+						selectionpos="auto"
+					>
 						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
 					</Button>
-					<ToggleButton id="ToggleAll" class="button togglebutton" onactivate="AddonManager.toggleAll()">
+					<ToggleButton
+						id="ToggleAll"
+						class="button togglebutton"
+						onactivate="AddonManager.toggleAll()"
+						tabindex="auto"
+						selectionpos="auto"
+					>
 						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg" />
 					</ToggleButton>
 
-					<Panel class="horizontal-align-right flow-right">
-						<Button onactivate="AddonManager.apply()" id="ApplyButton" class="button mr-2" disabled="true">
+					<Panel class="horizontal-align-right flow-right" tabindex="auto" selectionpos="auto">
+						<Button
+							onactivate="AddonManager.apply()"
+							id="ApplyButton"
+							class="button mr-2"
+							disabled="true"
+							tabindex="auto"
+							selectionpos="auto"
+						>
 							<Label class="button__text" text="#MainMenu_Addons_Apply" />
 						</Button>
-						<Button onactivate="AddonManager.cancel()" id="CancelButton" class="button" disabled="true">
+						<Button
+							onactivate="AddonManager.cancel()"
+							id="CancelButton"
+							class="button"
+							disabled="true"
+							tabindex="auto"
+							selectionpos="auto"
+						>
 							<Label class="button__text" text="#MainMenu_Addons_Discard" />
 						</Button>
 					</Panel>
 				</Panel>
 
 				<!-- Addon list -->
-				<Panel id="AddonContainer" class="addons__list" />
+				<Panel id="AddonContainer" class="addons__list" tabindex="auto" selectionpos="auto" />
 			</Panel>
 			<Panel id="MountsPage" class="mounts" onload="MountManager.init()">
-				<Panel class="mounts__disclaimer">
-					<Panel class="horizontal-align-center vertical-align-center flow-right">
+				<Panel class="mounts__disclaimer" tabindex="auto" selectionpos="auto">
+					<Panel class="horizontal-align-center vertical-align-center flow-right" tabindex="auto" selectionpos="auto">
 						<Image
 							class="mounts__disclaimer__icon"
 							src="file://{images}/info.svg"
@@ -112,6 +142,8 @@
 						<Button
 							class="vertical-align-center flow-down"
 							onactivate="SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts')"
+							tabindex="auto"
+							selectionpos="auto"
 						>
 							<Label class="mounts__disclaimer__text" text="#MainMenu_Mounts_WIP_Title" />
 							<Label class="mounts__disclaimer__small-text" text="#MainMenu_Mounts_WIP_Tagline" />

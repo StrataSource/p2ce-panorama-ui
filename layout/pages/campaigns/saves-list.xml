@@ -9,7 +9,7 @@
 
 	<snippets>
 		<snippet name="SaveEntrySnippet">
-			<Panel class="saves__container">
+			<Panel class="saves__container" tabindex="auto" selectionpos="auto">
 				<Image
 					id="SaveBg"
 					class="saves__entry__bg"
@@ -18,7 +18,7 @@
 					textureheight="1920"
 					texturewidth="1080"
 				/>
-				<Panel id="SaveAction" group="SaveGroupRadio" class="saves__entry">
+				<Panel id="SaveAction" group="SaveGroupRadio" class="saves__entry" tabindex="auto" selectionpos="auto">
 					<Panel class="saves__entry__inner">
 						<!-- Save icon cover -->
 						<Panel class="saves__entry__cover__container">
@@ -46,8 +46,8 @@
 							<Label id="SaveDesc" class="saves__entry__details__desc" text="[PH] Save Description" />
 						</Panel>
 					</Panel>
-					<Panel id="SaveControls" class="saves__entry__controls">
-						<Button id="SaveLoad" class="button">
+					<Panel id="SaveControls" class="saves__entry__controls" tabindex="auto" selectionpos="auto">
+						<Button id="SaveLoad" class="button" tabindex="auto" selectionpos="auto">
 							<Image
 								class="button__icon"
 								src="file://{images}/play.svg"
@@ -56,7 +56,7 @@
 								textureheight="48"
 							/>
 						</Button>
-						<Button id="SaveOverwrite" class="button">
+						<Button id="SaveOverwrite" class="button" tabindex="auto" selectionpos="auto">
 							<Image
 								class="button__icon"
 								src="file://{images}/download.svg"
@@ -65,7 +65,7 @@
 								textureheight="48"
 							/>
 						</Button>
-						<Button id="SaveDelete" class="button button--red">
+						<Button id="SaveDelete" class="button button--red" tabindex="auto" selectionpos="auto">
 							<Image
 								class="button__icon"
 								src="file://{images}/delete.svg"
@@ -79,8 +79,8 @@
 			</Panel>
 		</snippet>
 		<snippet name="CreateSaveSnippet">
-			<Panel class="saves__container">
-				<Button id="SaveAction" class="saves__entry">
+			<Panel class="saves__container" tabindex="auto" selectionpos="auto">
+				<Button id="SaveAction" class="saves__entry" tabindex="auto" selectionpos="auto">
 					<Panel class="saves__entry__inner saves__entry__lined">
 						<!-- Save info; title, description, 'source' -->
 						<Panel class="saves__entry__details">
@@ -92,9 +92,9 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="mainmenu__page" onload="CampaignSaves.init()">
-		<Panel id="CampaignSaveCreateSticky" class="selected-campaign__sticky">
+	<Panel class="mainmenu__page" onload="CampaignSaves.init()" tabindex="auto" selectionpos="auto">
+		<Panel id="CampaignSaveCreateSticky" class="selected-campaign__sticky" tabindex="auto" selectionpos="auto">
 		</Panel>
-		<Panel id="CampaignSaves" class="selected-campaign__lister" />
+		<Panel id="CampaignSaves" class="selected-campaign__lister" tabindex="auto" selectionpos="auto" />
 	</Panel>
 </root>

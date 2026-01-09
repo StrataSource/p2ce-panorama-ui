@@ -112,16 +112,52 @@ class SaveEntry {
 			});
 		}
 
+		// SELECTION STUFF
 		const mainPanel = this.panel.FindChildTraverse('SaveAction')!;
 		this.actionPanel = this.panel.FindChildTraverse<Panel>('SaveControls');
-		mainPanel.SetPanelEvent('onmouseover', () => {
+		const showActionPanel = () => {
 			if (this.actionPanel) {
 				this.actionPanel.visible = true;
 			}
+		};
+		if (this.actionPanel) {
+			const children = this.actionPanel.Children();
+			for (let i = 0; i < children.length; ++i) {
+				const child = children[i];
+				child.SetPanelEvent('onmovedown', () => {
+					const nextIndex = this.index + 1;
+					if (nextIndex < CampaignSaves.saveEntries.length) {
+						CampaignSaves.saveEntries[nextIndex].panel.SetFocus(true);
+					}
+				});
+				child.SetPanelEvent('onmoveup', () => {
+					const prevIndex = this.index - 1;
+					if (prevIndex >= 0) {
+						CampaignSaves.saveEntries[prevIndex].panel.SetFocus(true);
+					}
+				});
+			}
+		}
+		mainPanel.SetPanelEvent('onmouseover', showActionPanel);
+		mainPanel.SetPanelEvent('onfocus', () => {
+			showActionPanel();
+			CampaignSaves.hideActionsOnAllSaves(this.index);
 		});
 		mainPanel.SetPanelEvent('onmouseout', () => {
 			if (this.actionPanel) {
 				this.actionPanel.visible = false;
+			}
+		});
+		mainPanel.SetPanelEvent('onmoveright', () => {
+			if (this.actionPanel) {
+				const children = this.actionPanel.Children();
+				for (let i = 0; i < children.length; ++i) {
+					const child = children[i];
+					if (child.visible) {
+						child.SetFocus(true);
+						break;
+					}
+				}
 			}
 		});
 
@@ -195,6 +231,21 @@ class CampaignSaves {
 	static createSaveBtn: Button | null = null;
 	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
 
+	static hideActionsOnAllSaves(excludeIndex: number) {
+		for (let i = 0; i < this.saveEntries.length; ++i) {
+			if (i === excludeIndex) continue;
+
+			const saveEntry = this.saveEntries[i];
+			if (!saveEntry.panel.IsValid()) continue;
+
+			const p = saveEntry.panel.FindChildTraverse<Panel>('SaveControls');
+
+			if (p && p.visible) {
+				p.visible = false;
+			}
+		}
+	}
+
 	static init() {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			this.addCreateSaveBtn();
@@ -234,6 +285,8 @@ class CampaignSaves {
 			this.saveEntries.push(new SaveEntry(i, p, saves[i]));
 			this.saveEntries[i].update();
 		}
+
+		if (this.saveEntries.length > 0) this.saveEntries[0].panel.SetFocus(true);
 	}
 
 	static addCreateSaveBtn() {
