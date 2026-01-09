@@ -49,7 +49,8 @@
 		padding: 15px;
 		padding-right: 20px;
 
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: $primary-950;
 		}
 
@@ -183,7 +184,8 @@
 			font-size: 16px;
 		}
 
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: rgb(190, 39, 39);
 
 			#{$this}__text,

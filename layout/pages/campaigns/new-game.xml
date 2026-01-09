@@ -9,7 +9,7 @@
 
 	<snippets>
 		<snippet name="ChapterEntrySnippet">
-			<Button group="ChaptersGroupRadio" class="chapters__entry">
+			<Button group="ChaptersGroupRadio" class="chapters__entry" tabindex="auto" selectionpos="auto">
 				<!-- Chapter icon cover -->
 				<Image
 					id="ChapterCover"
@@ -29,11 +29,21 @@
 
 	<Panel class="mainmenu__page" onload="CampaignChapters.populateChapters(0)">
 		<Panel class="flow-right vertical-align-center horizontal-align-center m-3">
-			<Button class="button mr-2 vertical-align-center" onactivate="CampaignChapters.backPage()">
+			<Button
+				class="button mr-2 vertical-align-center"
+				onactivate="CampaignChapters.backPage()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
 				<Label class="button__text" text="&lt;" />
 			</Button>
-			<Panel id="CampaignChapters" class="chapters__list" />
-			<Button class="button ml-2 vertical-align-center" onactivate="CampaignChapters.forwardPage()">
+			<Panel id="CampaignChapters" class="chapters__list" tabindex="auto" selectionpos="auto" />
+			<Button
+				class="button ml-2 vertical-align-center"
+				onactivate="CampaignChapters.forwardPage()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
 				<Label class="button__text" text="&gt;" />
 			</Button>
 		</Panel>
