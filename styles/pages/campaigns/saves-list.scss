@@ -11,7 +11,7 @@
 
 	&__entry {
 		width: 100%;
-		background-color: gradient( linear, 25% 0%, 90% 0%, from( $base-950 ), to( rgba($base-950, 0.8) ) );
+		background-color: gradient(linear, 25% 0%, 90% 0%, from($base-950), to(rgba($base-950, 0.8)));
 		border: $menu-pane-border;
 
 		$this: &;

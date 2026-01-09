@@ -74,11 +74,6 @@ class CampaignSelector {
 		$('#SearchBar')!.SetFocus(true);
 	}
 
-	static focusCampaignList() {
-		if (this.campaignEntries.length > 0)
-			this.campaignEntries[0].panel.SetFocus(true);
-	}
-
 	static init() {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 

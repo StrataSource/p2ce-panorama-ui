@@ -42,42 +42,28 @@ function getRandomFallbackImage() {
 		'file://{images}/menu/fallback/dead_atlas.png',
 		'file://{images}/menu/fallback/asset_missing_bright.png',
 		'file://{images}/menu/fallback/programmer_art_logo.png',
-		'file://{images}/menu/fallback/programmer_art_text.png',
+		'file://{images}/menu/fallback/programmer_art_text.png'
 	];
 	return imagePaths[Math.floor(Math.random() * imagePaths.length)];
 }
 
 function convertTime(date: Date, split: boolean = true) {
 	const currentDate = new Date();
-	return `${
-		date.toLocaleDateString(
-			undefined,
-			{
-				weekday: 'long',
-				month: 'long',
-				day: '2-digit',
-				// only display the year if we are in a different year than the save's
-				year: currentDate.getFullYear() !== date.getFullYear() ? 'numeric' : undefined
-			}
-		)
-	}${ split ? '\n' : ' ' }${
-		date.toLocaleTimeString(
-			undefined,
-			{
-				hour: 'numeric',
-				minute: 'numeric',
-				second: undefined
-			}
-		)
-	}`;
+	return `${date.toLocaleDateString(undefined, {
+		weekday: 'long',
+		month: 'long',
+		day: '2-digit',
+		// only display the year if we are in a different year than the save's
+		year: currentDate.getFullYear() !== date.getFullYear() ? 'numeric' : undefined
+	})}${split ? '\n' : ' '}${date.toLocaleTimeString(undefined, {
+		hour: 'numeric',
+		minute: 'numeric',
+		second: undefined
+	})}`;
 }
 
 function convertImagePath(thumbPath: string) {
-	if (
-		thumbPath.endsWith('.vtf') ||
-		thumbPath.endsWith('.png') ||
-		thumbPath.endsWith('.jpg')
-	)
+	if (thumbPath.endsWith('.vtf') || thumbPath.endsWith('.png') || thumbPath.endsWith('.jpg'))
 		return `file://${thumbPath}`;
 	else return thumbPath;
 }

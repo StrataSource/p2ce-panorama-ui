@@ -10,12 +10,7 @@
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setMapPoolLines()">
 		<Panel class="play-menu__main">
 			<Panel class="flow-right full-width full-height">
-				<Button
-					class="card fill-width mr-3"
-					onactivate="PlayMenu.onCeMapsBtnPressed()"
-					tabindex="auto"
-					selectionpos="auto"
-				>
+				<Button class="card fill-width mr-3" onactivate="PlayMenu.onCeMapsBtnPressed()" tabindex="auto" selectionpos="auto">
 					<Image
 						class="card__image"
 						src="file://{images}/menu/vertical-banner-p2ce.svg"
@@ -25,17 +20,8 @@
 						<Label class="card__details__header" text="#MainMenu_Campaigns_MapType_p2ce" />
 					</Panel>
 				</Button>
-				<Button
-					class="card fill-width"
-					onactivate="PlayMenu.onP2MapsBtnPressed()"
-					tabindex="auto"
-					selectionpos="auto"
-				>
-					<Image
-						class="card__image"
-						src="file://{images}/menu/vertical-banner-p2.svg"
-						scaling="stretch-to-fit-preserve-aspect"
-					/>
+				<Button class="card fill-width" onactivate="PlayMenu.onP2MapsBtnPressed()" tabindex="auto" selectionpos="auto">
+					<Image class="card__image" src="file://{images}/menu/vertical-banner-p2.svg" scaling="stretch-to-fit-preserve-aspect" />
 					<Panel class="card__details">
 						<Label class="card__details__header" text="#MainMenu_Campaigns_MapType_portal2" />
 					</Panel>

@@ -68,9 +68,9 @@ class SaveEntry {
 								// TODO: Replace this with other save API
 								const savFile: string = this.save.fileName;
 								SaveRestoreAPI.SaveGame(savFile.substring(0, savFile.length - 4));
-							
+
 								CampaignSaves.purgeSaveList();
-							
+
 								$.Schedule(1, () => {
 									CampaignSaves.populateSaves();
 								});

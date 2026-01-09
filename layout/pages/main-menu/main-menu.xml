@@ -293,10 +293,20 @@
 							text="[PH] Page Tagline"
 						/>
 
-						<Panel id="PageInsert" class="mainmenu__page-insert" />
+						<Panel id="PageInsert" class="mainmenu__page-insert" tabindex="auto" selectionpos="auto" />
 
-						<Panel id="PageActions" class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop">
-							<Button class="button mainmenu__page-actions__button" onactivate="MainMenu.navigateBack()" tabindex="auto" selectionpos="auto">
+						<Panel
+							id="PageActions"
+							class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop"
+							tabindex="auto"
+							selectionpos="auto"
+						>
+							<Button
+								class="button mainmenu__page-actions__button"
+								onactivate="MainMenu.navigateBack()"
+								tabindex="auto"
+								selectionpos="auto"
+							>
 								<Label class="button__text" text="Back" />
 							</Button>
 						</Panel>
