@@ -19,6 +19,7 @@ class MenuPage {
 }
 
 class MainMenu {
+	static imgBg = $<Image>('#MainMenuBackground')!;
 	static movie = $<Movie>('#MainMenuMovie');
 
 	// menu controls & page panels
@@ -245,6 +246,11 @@ class MainMenu {
 			this.movie.visible = true;
 		}
 
+		if (this.imgBg) {
+			this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';
+			this.imgBg.SetImage('file://{images}/menu/featured/microcomp_dark_mikatastrophe.png');
+		}
+
 		const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
 		this.music = $.PlaySoundEvent(music);
 	}
@@ -290,10 +296,6 @@ class MainMenu {
 		this.menuContent.RemoveClass('mainmenu__content__t-prop');
 		this.menuContent.RemoveClass('mainmenu__content__anim');
 
-		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
-		this.featuredBtn.visible = false;
-
 		this.onMainMenuFocused();
 	}
 
@@ -324,6 +326,7 @@ class MainMenu {
 		$('#ResumeBtn')!.SetFocus(true);
 
 		this.featuredBtn.visible = false;
+		this.onMainMenuFocused();
 	}
 
 	static onHidePauseMenu() {

@@ -83,14 +83,14 @@
 		wash-color: $button-text-color;
 
 		&--left {
-			margin-left: $button-icon-with-text-side-margin - 2px;
+			margin-left: $button-icon-with-text-side-margin;
 			margin-right: $button-icon-text-gap;
 			padding: $button-icon-side-padding;
 		}
 
 		&--right {
 			margin-left: $button-icon-text-gap;
-			margin-right: $button-icon-with-text-side-margin - 2px;
+			margin-right: $button-icon-with-text-side-margin;
 			padding: $button-icon-side-padding;
 		}
 	}
