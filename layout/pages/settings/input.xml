@@ -176,7 +176,7 @@
 
 				<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />
 				<SettingsKeyBinder text="#P2_Zoom" bind="+zoom" tags="Toggle zoom" />
-				<SettingsKeyBinder text="#P2_Zoom bind="+zoom_in" tags="Zoom in" />
+				<SettingsKeyBinder text="#P2_Zoom" bind="+zoom_in" tags="Zoom in" />
 				<SettingsKeyBinder text="#P2_Zoom" bind="+zoom_out" tags="Zoom outs" />
 
 				<Label class="settings-group__subtitle" text="#Settings_Input_Keybinds_Misc" />
