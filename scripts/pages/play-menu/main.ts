@@ -32,12 +32,12 @@ class PlayMenu {
 	static onCampaignsBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.P2CE_CAMPAIGN;
 
-		$.DispatchEvent('MainMenuOpenNestedPage', 'PlayerMode', 'play-menu/player-mode');
+		$.DispatchEvent('MainMenuOpenNestedPage', 'PlayerMode', 'play-menu/player-mode', undefined);
 	}
 
 	// shows the solo map type page
 	static onSoloMapsBtnPressed() {
-		$.DispatchEvent('MainMenuOpenNestedPage', 'SoloMapMode', 'play-menu/solo-map-mode');
+		$.DispatchEvent('MainMenuOpenNestedPage', 'SoloMapMode', 'play-menu/solo-map-mode', undefined);
 	}
 
 	static onDownFromCampaigns() {
@@ -54,13 +54,13 @@ class PlayMenu {
 	static onCeMapsBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.P2CE_MAP;
 
-		$.DispatchEvent('MainMenuOpenNestedPage', 'PlayerMode', 'play-menu/player-mode');
+		$.DispatchEvent('MainMenuOpenNestedPage', 'PlayerMode', 'play-menu/player-mode', undefined);
 	}
 
 	static onP2MapsBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['GameType'] = GameType.PORTAL2_MAP;
 
-		$.DispatchEvent('MainMenuOpenNestedPage', 'PlayerMode', 'play-menu/player-mode');
+		$.DispatchEvent('MainMenuOpenNestedPage', 'PlayerMode', 'play-menu/player-mode', undefined);
 	}
 
 	// player mode
@@ -69,12 +69,12 @@ class PlayMenu {
 	static onSinglePlayerBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['PlayerMode'] = PlayerMode.SINGLEPLAYER;
 
-		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'main-menu/campaigns');
+		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'main-menu/campaigns', undefined);
 	}
 
 	static onMultiPlayerBtnPressed() {
 		UiToolkitAPI.GetGlobalObject()['PlayerMode'] = PlayerMode.MULTIPLAYER;
 
-		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'main-menu/campaigns');
+		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'main-menu/campaigns', undefined);
 	}
 }

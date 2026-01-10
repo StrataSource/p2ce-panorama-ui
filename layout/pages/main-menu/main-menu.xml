@@ -31,7 +31,7 @@
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
-		<Panel id="MainMenuInput" class="mainmenu" onfocus="MainMenu.onMainMenuFocused()">
+		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Full page blur: used to blur everything below the drawer -->
 			<Panel class="mainmenu__container">
 				<!-- Movie background -->
@@ -82,7 +82,7 @@
 									<Button
 										id="PlayBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('Play', 'play-menu/main')"
+										onactivate="MainMenu.navigateToPage('Play', 'play-menu/main', $('#PlayBtn'))"
 										tabindex="auto"
 										selectionpos="auto"
 									>
@@ -108,7 +108,7 @@
 									<Button
 										id="NewGameBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game')"
+										onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game', $('#NewGameBtn'))"
 										tabindex="auto"
 										selectionpos="auto"
 									>
@@ -123,7 +123,6 @@
 									<Button
 										id="CampaignContinueBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined mainmenu__nav__btn__no-gradient"
-										onactivate=""
 										onmouseover="MainMenu.onContinueMouseOver()"
 										onmouseout="MainMenu.onContinueMouseOut()"
 										tabindex="auto"
@@ -141,7 +140,7 @@
 									<Button
 										id="LoadGameBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list')"
+										onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list', $('#LoadGameBtn'))"
 										tabindex="auto"
 										selectionpos="auto"
 									>
@@ -153,8 +152,9 @@
 									</Button>
 									<!-- Addons/Mounts -->
 									<Button
+										id="AddonsBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons')"
+										onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons', $('#AddonsBtn'))"
 										tabindex="auto"
 										selectionpos="auto"
 									>
@@ -165,8 +165,9 @@
 									</Button>
 									<!-- Settings -->
 									<Button
+										id="SettingsBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined"
-										onactivate="MainMenu.navigateToPage('Settings', 'settings/settings')"
+										onactivate="MainMenu.navigateToPage('Settings', 'settings/settings', $('#SettingsBtn'))"
 										tabindex="auto"
 										selectionpos="auto"
 									>
@@ -220,11 +221,10 @@
 						<Button
 							id="FeaturedBtn"
 							class="mainmenu__featured__button"
-							onactivate="MainMenu.navigateToPage('Featured', 'featured/main')"
+							onactivate="MainMenu.navigateToPage('Featured', 'featured/main', $('#FeaturedBtn'))"
 							tabindex="auto"
 							selectionpos="auto"
 							onmoveup="MainMenu.tryNavigateUpFeatured()"
-							onmovedown="MainMenu.tryNavigateDownFeatured()"
 						>
 							<Image
 								id="FeaturedImage"
