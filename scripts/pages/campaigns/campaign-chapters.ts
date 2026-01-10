@@ -56,7 +56,7 @@ class ChapterEntry {
 				//CampaignChapters.actions.enabled = true;
 				CampaignChapters.selectedChapter = this.chapter;
 				UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.chapter;
-				$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings');
+				$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings', undefined);
 			});
 		}
 	}
@@ -141,7 +141,7 @@ class CampaignChapters {
 
 	static customizeChapter() {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
-		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings');
+		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings', undefined);
 		//CampaignMgr.customizeChapter(this.selectedChapter);
 	}
 }

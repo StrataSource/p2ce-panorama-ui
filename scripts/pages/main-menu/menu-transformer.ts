@@ -139,12 +139,27 @@ class MainMenuCampaignMode {
 		this.continueBtn.enabled = true;
 	}
 
-	static showBgImg() {
-		this.imgBg.style.animation = `FadeOut ${this.BACKGROUND_IMAGE_FADE_IN_TIME}s ease-out 0s 1 reverse forwards`;
+	static showBgImg(instant?: boolean) {
+		// dont do anything if it's already visible
+		if (!this.imgBg.IsTransparent()) return;
+
+		if (instant) {
+			this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';
+		} else {
+			this.imgBg.style.animation = `FadeOut ${this.BACKGROUND_IMAGE_FADE_IN_TIME}s ease-out 0s 1 reverse forwards`;
+		}
 	}
 
-	static hideBgImg() {
-		this.imgBg.style.animation = 'FadeOut 3.5s ease-out 0s 1 normal forwards';
+	static hideBgImg(instant?: boolean) {
+		// dont do anything if it's already invisible
+		if (this.imgBg.IsTransparent()) return;
+
+		if (instant) {
+			this.imgBg.style.animation = 'FadeOut 0.01s linear 0s 1 normal forwards';
+		}
+		else {
+			this.imgBg.style.animation = 'FadeOut 3.5s ease-out 0s 1 normal forwards';
+		}
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
@@ -202,6 +217,7 @@ class MainMenuCampaignMode {
 			});
 		} else if (bgm.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
+			this.hideBgImg(true);
 			this.movie.SetMovie(`file://{game}/${bgm}`);
 			this.movie.Play();
 			this.movie.visible = true;
@@ -210,7 +226,7 @@ class MainMenuCampaignMode {
 			});
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			this.showBgImg();
+			this.showBgImg(true);
 			this.imgBg.SetImage(`file://${bgi}`);
 			this.movie.visible = false;
 			$.Schedule(0.001, () => {
