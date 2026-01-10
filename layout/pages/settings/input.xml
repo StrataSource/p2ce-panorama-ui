@@ -175,6 +175,7 @@
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
 
 				<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />
+				<SettingsKeyBinder text="#HL2_GravityGun" bind="phys_swap" tags="gravity gun" />
 
 				<Label class="settings-group__subtitle" text="#Settings_Input_Keybinds_Misc" />
 
