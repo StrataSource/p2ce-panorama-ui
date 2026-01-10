@@ -45,7 +45,6 @@
 	}
 
 	&__details {
-		visibility: collapse;
 		width: 100%;
 		vertical-align: bottom;
 		flow-children: down;
@@ -78,8 +77,8 @@
 		}
 	}
 
-	&:hover,
-	&:focus {
+	.InputController &:focus,
+	&:hover {
 		background-color: $button-background-hover;
 		border-color: $primary-color;
 

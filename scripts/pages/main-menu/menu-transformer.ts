@@ -294,6 +294,7 @@ class MainMenuCampaignMode {
 		this.campaignDevTxt.text = `[DEV] Campaign: ${$.Localize(campaign.title)} (${id})`;
 
 		this.setContinueDetails();
+		MainMenu.onMainMenuFocused();
 	}
 
 	static reloadBackground() {
@@ -318,6 +319,7 @@ class MainMenuCampaignMode {
 			$.GetContextPanel().RemoveClass('CampaignSelected');
 			$.DispatchEvent('ReloadBackground');
 			MainMenu.setContinueDetails();
+			MainMenu.onMainMenuFocused();
 		});
 	}
 }

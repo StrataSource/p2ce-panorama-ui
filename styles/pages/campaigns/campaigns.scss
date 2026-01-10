@@ -46,11 +46,7 @@
 				color: rgba($bright-color, 0.25);
 			}
 
-			&:focus {
-				background-color: $base-950;
-				color: $bright-color;
-			}
-
+			.InputController &:focus,
 			&:hover {
 				background-color: $base-950;
 				color: $bright-color;
@@ -75,7 +71,7 @@
 			margin-bottom: 10px;
 		}
 
-		&:focus,
+		.InputController &:focus,
 		&:hover {
 			border-color: $primary-color;
 

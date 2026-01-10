@@ -5,6 +5,7 @@ class MenuPage {
 	panel: Panel;
 	headline?: string;
 	tagline?: string;
+	invokerPanel?: Panel;
 
 	constructor(name: string, panel: Panel) {
 		this.name = name;
@@ -101,6 +102,8 @@ class MainMenu {
 
 		this.showPrereleaseWarning();
 		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
+
+		this.onMainMenuFocused();
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
@@ -290,6 +293,8 @@ class MainMenu {
 		// TODO: Grab active campaign from API instead of this
 		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
 		this.featuredBtn.visible = false;
+
+		this.onMainMenuFocused();
 	}
 
 	static onHideMainMenu() {
@@ -359,7 +364,7 @@ class MainMenu {
 
 	// open a page, handles nested pages and receives calls via events from other pages
 	// note: page headline/tagline are set by the corresponding page script, not here
-	static navigateToPage(tab: string, xmlName: string) {
+	static navigateToPage(tab: string, xmlName: string, invokerPanel?: Panel) {
 		// hide the previous page
 		if (this.pages.length > 0) {
 			const priorPage = this.pages[this.pages.length - 1];
@@ -371,7 +376,9 @@ class MainMenu {
 
 		// create the new page
 		const newPanel = $.CreatePanel('Panel', this.pageInsert, tab);
-		this.pages.push(new MenuPage(tab, newPanel));
+		const newPage = new MenuPage(tab, newPanel);
+		newPage.invokerPanel = invokerPanel;
+		this.pages.push(newPage);
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 		newPanel.RegisterForReadyEvents(true);
 		newPanel.AddClass('mainmenu__page__anim');
@@ -423,8 +430,6 @@ class MainMenu {
 		this.model.RemoveClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
-		$.DispatchEvent('MainMenuSetFocus');
-
 		// TODO: Grab active campaign from API instead of this
 		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
 
@@ -448,11 +453,18 @@ class MainMenu {
 
 		// delete the current page
 		const currentPage = this.pages.pop();
+		let noResetFocus = false;
 
 		if (currentPage) {
 			$.DispatchEvent('MainMenuPagePreClose', currentPage.name);
 			if (currentPage.name === 'Settings') $.DispatchEvent('SettingsSave');
 			if (currentPage.panel.IsValid()) this.reversePageAnim(currentPage.panel);
+
+			if (currentPage.invokerPanel && currentPage.invokerPanel.IsValid() && currentPage.invokerPanel.visible && currentPage.invokerPanel.enabled) {
+				noResetFocus = true;
+				currentPage.invokerPanel.SetFocus(true);
+				$.Msg(`Setting focus to ${currentPage.invokerPanel.id}`);
+			}
 		}
 
 		if (this.pages.length > 0) {
@@ -474,7 +486,9 @@ class MainMenu {
 			// no more pages
 			this.hidePage();
 			$.DispatchEvent('MainMenuFullBackNav');
-			$.DispatchEvent('MainMenuSetFocus');
+
+			if (!noResetFocus)
+				$.DispatchEvent('MainMenuSetFocus');
 		}
 	}
 

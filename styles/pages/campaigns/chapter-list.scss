@@ -55,14 +55,8 @@
 				saturation: 0;
 			}
 		}
-
-		&:focus {
-			border-color: $primary-color;
-			#{$this}__details {
-				border-color: $primary-color;
-			}
-		}
-
+		
+		.InputController &:focus,
 		&:hover:not(:disabled):not(:selected) {
 			border-color: $primary-color;
 			background-color: $button-background-hover;
