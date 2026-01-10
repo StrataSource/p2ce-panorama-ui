@@ -259,7 +259,7 @@ $pane-move-time: 0.1s;
 			}
 
 			&:hover:not(:disabled),
-			&:focus:not(:disabled) {
+			.InputController &:focus:not(:disabled) {
 				animation: OpacityFlicker 3s linear 0s infinite normal forwards;
 				background-color: gradient(
 					linear,
@@ -304,8 +304,8 @@ $pane-move-time: 0.1s;
 			background-color: $base-950;
 			margin-bottom: 50px;
 
-			&:hover,
-			&:focus {
+			.InputController &:focus,
+			&:hover {
 				border-color: $primary-color;
 				background-color: $button-background-hover;
 

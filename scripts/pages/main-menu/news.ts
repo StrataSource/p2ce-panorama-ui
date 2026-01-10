@@ -37,8 +37,6 @@ class NewsReel {
 		$.RegisterForUnhandledEvent('HideMainMenu', this.onMainMenuClosed.bind(this));
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.onLayoutReloaded.bind(this));
 		$.RegisterEventHandler('PropertyTransitionEnd', this.timeBar, this.onAutoAdvanceTimeElapsed.bind(this));
-		$.RegisterForUnhandledEvent('ShowContentPanel', this.onHomeNavAway.bind(this));
-		$.RegisterForUnhandledEvent('HideContentPanel', this.onHomeNavTo.bind(this));
 	}
 
 	static onMainMenuOpened() {
