@@ -6,6 +6,7 @@
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-transformer.ts" />
+		<include src="file://{scripts}/pages/main-menu/menu-splash.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
@@ -32,25 +33,29 @@
 		<Panel id="MainMenuVanityParent" />
 
 		<Panel id="MainMenuInput" class="mainmenu">
+			<!-- Movie background -->
+			<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
+			<!-- Static image background -->
+			<Image
+				id="MainMenuBackground"
+				class="mainmenu__background MainMenuModeOnly"
+				scaling="stretch-to-cover-preserve-aspect"
+			/>
+
+			<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+			<BaseBlurTarget
+				id="PauseMenuMainMenuBlur"
+				class="mainmenu__pause-blur PauseMenuModeOnly"
+				blurrects="PauseMenuMainMenuContent"
+			>
+				<!-- Backbuffer background -->
+				<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
+			</BaseBlurTarget>
+
+			<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
+
 			<!-- Full page blur: used to blur everything below the drawer -->
-			<Panel class="mainmenu__container">
-				<!-- Movie background -->
-				<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
-				<!-- Static image background -->
-				<Image id="MainMenuBackground" class="mainmenu__background MainMenuModeOnly" />
-
-				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-				<BaseBlurTarget
-					id="PauseMenuMainMenuBlur"
-					class="mainmenu__pause-blur PauseMenuModeOnly"
-					blurrects="PauseMenuMainMenuContent"
-				>
-					<!-- Backbuffer background -->
-					<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
-				</BaseBlurTarget>
-
-				<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
-
+			<Panel id="MainContainer" class="mainmenu__container mainmenu__menu" disabled="true">
 				<Panel id="MenuContentRoot" class="mainmenu__content">
 					<Panel id="PageBg" class="mainmenu__page-bg" />
 
@@ -241,9 +246,8 @@
 								</Panel>
 							</Panel>
 						</Button>
+						<VersionInfo class="mainmenu__version" />
 					</Panel>
-
-					<VersionInfo class="mainmenu__version" />
 
 					<Panel id="ContinueBox" class="mainmenu__display-box" hittest="false" hittestchildren="false">
 						<Panel>
@@ -307,27 +311,96 @@
 								tabindex="auto"
 								selectionpos="auto"
 							>
-								<Label class="button__text" text="Back" />
+								<Image
+									class="button__icon button__icon--left"
+									texturewidth="48"
+									textureheight="48"
+									src="file://{images}/glyphs/xbox/xbox_button_b.svg"
+								/>
+								<Label class="button__text button__text--right" text="Back" />
 							</Button>
 						</Panel>
 					</Panel>
 				</Panel>
+
 				<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No campaign active" />
+			</Panel>
 
-				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-				<BaseBlurTarget
-					id="SwitcherBlur"
-					class="mainmenu__switcher-blur MainMenuModeOnly"
-					blurrects="SwitcherBlurContent"
+			<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly">
+				<Panel class="flow-down vertical-align-center">
+					<Label class="mainmenu__featured-bg__text" text="Background by:" />
+					<Label id="BgName" class="mainmenu__featured-bg__name" text="mikatastrophe" />
+				</Panel>
+				<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
+			</Panel>
+
+			<!-- Backbuffer blur: used to blur the backbuffer when switching campaigns -->
+			<BaseBlurTarget
+				id="SwitcherBlur"
+				class="mainmenu__switcher-blur MainMenuModeOnly"
+				blurrects="SwitcherBlurContent"
+				hittest="false"
+			>
+				<!-- Backbuffer background -->
+				<BackbufferImagePanel class="mainmenu__background MainMenuModeOnly" hittest="false" />
+			</BaseBlurTarget>
+
+			<Panel id="SwitcherBlurContent" class="mainmenu__pause-content-blur" hittest="false" />
+			<Label id="LoadingIndicator" class="loading-indicator" text="#MainMenu_Loading" />
+
+			<!-- Splash screen -->
+			<Panel id="SplashContainer" class="mainmenu__container mainmenu__splash">
+				<Button id="SplashBtn" class="full-width full-height" onactivate="MenuSplash.onActivated()" />
+				<!--
+				<Image
+					class="full-width full-height"
+					src="file://{images}/menu/checkerbox_grid.svg"
+					scaling="stretch-to-fit-preserve-aspect"
+					texturewidth="1920"
+					textureheight="1080"
+				/>
+				-->
+				<Image
+					class="mainmenu__splash__grid1"
+					src="file://{images}/menu/menu_grid1.svg"
+					scaling="stretch-to-fit-preserve-aspect"
 					hittest="false"
-				>
-					<!-- Backbuffer background -->
-					<BackbufferImagePanel class="mainmenu__background MainMenuModeOnly" hittest="false" />
-				</BaseBlurTarget>
-
-				<Panel id="SwitcherBlurContent" class="mainmenu__pause-content-blur" hittest="false" />
-
-				<Label id="LoadingIndicator" class="loading-indicator" text="#MainMenu_Loading" />
+					texturewidth="1118"
+					textureheight="436"
+				/>
+				<Image
+					class="mainmenu__splash__grid2"
+					src="file://{images}/menu/menu_grid2.svg"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+					texturewidth="1056"
+					textureheight="374"
+				/>
+				<Panel id="SplashIndicatorLeft" class="mainmenu__splash__indicator__left_panel">
+					<Panel class="mainmenu__splash__indicator" />
+					<Panel class="mainmenu__splash__indicator" />
+					<Panel class="mainmenu__splash__indicator" />
+					<Panel class="mainmenu__splash__indicator" />
+				</Panel>
+				<Panel id="SplashIndicatorRight" class="mainmenu__splash__indicator__right_panel">
+					<Panel class="mainmenu__splash__indicator" />
+					<Panel class="mainmenu__splash__indicator" />
+					<Panel class="mainmenu__splash__indicator" />
+					<Panel class="mainmenu__splash__indicator" />
+				</Panel>
+				<Panel class="horizontal-align-center vertical-align-center flow-down">
+					<Image
+						id="SplashLogo"
+						class="mainmenu__splash__logo"
+						src="file://{images}/logo.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						texturewidth="880"
+						textureheight="259"
+					/>
+					<Panel class="mt-5 flow-right horizontal-align-center">
+						<Label class="mainmenu__splash__text" text="Press any button" />
+					</Panel>
+				</Panel>
 			</Panel>
 		</Panel>
 
