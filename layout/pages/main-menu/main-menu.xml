@@ -7,6 +7,7 @@
 		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-transformer.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-splash.ts" />
+		<include src="file://{scripts}/pages/main-menu/bg-map.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
@@ -28,7 +29,7 @@
 		</snippet>
 	</snippets>
 
-	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()">
+	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded(); MenuFeaturedBackgrounds.onMainMenuLoaded();">
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
@@ -351,43 +352,6 @@
 			<!-- Splash screen -->
 			<Panel id="SplashContainer" class="mainmenu__container mainmenu__splash">
 				<Button id="SplashBtn" class="full-width full-height" onactivate="MenuSplash.onActivated()" />
-				<!--
-				<Image
-					class="full-width full-height"
-					src="file://{images}/menu/checkerbox_grid.svg"
-					scaling="stretch-to-fit-preserve-aspect"
-					texturewidth="1920"
-					textureheight="1080"
-				/>
-				-->
-				<Image
-					class="mainmenu__splash__grid1"
-					src="file://{images}/menu/menu_grid1.svg"
-					scaling="stretch-to-fit-preserve-aspect"
-					hittest="false"
-					texturewidth="1118"
-					textureheight="436"
-				/>
-				<Image
-					class="mainmenu__splash__grid2"
-					src="file://{images}/menu/menu_grid2.svg"
-					scaling="stretch-to-fit-preserve-aspect"
-					hittest="false"
-					texturewidth="1056"
-					textureheight="374"
-				/>
-				<Panel id="SplashIndicatorLeft" class="mainmenu__splash__indicator__left_panel">
-					<Panel class="mainmenu__splash__indicator" />
-					<Panel class="mainmenu__splash__indicator" />
-					<Panel class="mainmenu__splash__indicator" />
-					<Panel class="mainmenu__splash__indicator" />
-				</Panel>
-				<Panel id="SplashIndicatorRight" class="mainmenu__splash__indicator__right_panel">
-					<Panel class="mainmenu__splash__indicator" />
-					<Panel class="mainmenu__splash__indicator" />
-					<Panel class="mainmenu__splash__indicator" />
-					<Panel class="mainmenu__splash__indicator" />
-				</Panel>
 				<Panel class="horizontal-align-center vertical-align-center flow-down">
 					<Image
 						id="SplashLogo"

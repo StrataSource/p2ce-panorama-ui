@@ -110,7 +110,12 @@ class MainMenu {
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
 		// TODO: Grab active campaign from API instead of this
 		if (isBackgroundMap && UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
+			this.movie = $<Movie>('#MainMenuMovie');
 			if (this.movie) this.movie.visible = false;
+			if (this.imgBg) MainMenuCampaignMode.hideBgImg(true);
+			$.Msg('hiding');
+		} else {
+			$.Msg('did not trigger');
 		}
 	}
 
@@ -224,12 +229,9 @@ class MainMenu {
 		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
-			$<Image>('#GameFullLogo')!.visible = true;
 			this.featuredBtn.visible = true;
 			this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
-			// buh
-			MainMenuCampaignMode.switchReverse();
-			this.loadingIndicator.visible = false;
+			$<Image>('#GameFullLogo')!.visible = true;
 		});
 	}
 
@@ -238,18 +240,18 @@ class MainMenu {
 	}
 
 	static setMainMenuBackground() {
-		this.movie = $<Movie>('#MainMenuMovie');
+		//this.movie = $<Movie>('#MainMenuMovie');
+		//if (this.movie) {
+		//	this.movie.SetMovie('file://{media}/sp_credits_bg.webm');
+		//	this.movie.Play();
+		//	this.movie.visible = true;
+		//}
+		//if (this.imgBg) {
+		//	this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';
+		//	this.imgBg.SetImage('file://{images}/menu/featured/microcomp_dark_mikatastrophe.png');
+		//}
 
-		if (this.movie) {
-			this.movie.SetMovie('file://{media}/sp_credits_bg.webm');
-			this.movie.Play();
-			this.movie.visible = true;
-		}
-
-		if (this.imgBg) {
-			this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';
-			this.imgBg.SetImage('file://{images}/menu/featured/microcomp_dark_mikatastrophe.png');
-		}
+		MenuFeaturedBackgrounds.loadBackground();
 
 		const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
 		this.music = $.PlaySoundEvent(music);
