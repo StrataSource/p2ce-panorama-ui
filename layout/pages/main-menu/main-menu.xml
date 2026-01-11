@@ -44,6 +44,13 @@
 				scaling="stretch-to-cover-preserve-aspect"
 			/>
 
+			<!-- Save background -->
+			<Image
+				id="MainMenuSaveBackground"
+				class="mainmenu__background MainMenuModeOnly"
+				scaling="stretch-to-cover-preserve-aspect"
+			/>
+
 			<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
 			<BaseBlurTarget
 				id="PauseMenuMainMenuBlur"
@@ -89,7 +96,7 @@
 									<Button
 										id="PlayBtn"
 										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onactivate="MainMenu.navigateToPage('Play', 'play-menu/main', $('#PlayBtn'))"
+										onactivate="MainMenu.navigateToPage('Play', 'play-menu/player-mode', $('#PlayBtn'))"
 										tabindex="auto"
 										selectionpos="auto"
 									>
@@ -129,9 +136,9 @@
 									<!-- When in Campaign mode, it picks latest save filtered by current Campaign -->
 									<Button
 										id="CampaignContinueBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined mainmenu__nav__btn__no-gradient"
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined"
 										onmouseover="MainMenu.onContinueMouseOver()"
-										onmouseout="MainMenu.onContinueMouseOut()"
+										onmouseout="MainMenu.onContinueMouseOut(false)"
 										tabindex="auto"
 										selectionpos="auto"
 									>
@@ -248,7 +255,6 @@
 								</Panel>
 							</Panel>
 						</Button>
-						<VersionInfo class="mainmenu__version" />
 					</Panel>
 
 					<Panel id="ContinueBox" class="mainmenu__display-box" hittest="false" hittestchildren="false">
@@ -327,13 +333,16 @@
 
 				<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No campaign active" />
 			</Panel>
-
-			<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly">
-				<Panel class="flow-down vertical-align-center">
-					<Label class="mainmenu__featured-bg__text" text="Background by:" />
-					<Label id="BgName" class="mainmenu__featured-bg__name" text="mikatastrophe" />
+			
+			<Panel class="horizontal-align-right flow-right m-3">
+				<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly">
+					<Panel class="flow-down vertical-align-center">
+						<Label class="mainmenu__featured-bg__text" text="Background by:" />
+						<Label id="BgName" class="mainmenu__featured-bg__name" text="mikatastrophe" />
+					</Panel>
+					<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
 				</Panel>
-				<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
+				<VersionInfo class="mainmenu__version" />
 			</Panel>
 
 			<!-- Backbuffer blur: used to blur the backbuffer when switching campaigns -->

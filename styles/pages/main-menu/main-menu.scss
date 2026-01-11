@@ -214,10 +214,11 @@ $pane-move-time: 0.1s;
 	}
 
 	&__featured-bg {
-		margin: 15px;
+		background-color: $base-950;
+		border: $menu-pane-border;
+		padding: 10px 15px;
+		vertical-align: center;
 		flow-children: right;
-		horizontal-align: right;
-		vertical-align: bottom;
 
 		&__text {
 			horizontal-align: right;
@@ -246,9 +247,9 @@ $pane-move-time: 0.1s;
 		margin: 15px;
 		font-size: 16px;
 		color: $base-300;
-		font-weight: light;
+		font-weight: bold;
 		letter-spacing: 1px;
-		text-shadow: 1px 1px 2px 2 $base-950;
+		vertical-align: bottom;
 		horizontal-align: right;
 	}
 
@@ -292,7 +293,7 @@ $pane-move-time: 0.1s;
 		width: 540px;
 		height: 130px;
 		horizontal-align: center;
-		img-shadow: 0px 0px 100px 4 $base-950;
+		img-shadow: 0px 0px 50px 4 $base-950;
 	}
 
 	&__cooltext {
@@ -604,6 +605,6 @@ $pane-move-time: 0.1s;
 	}
 
 	&__version {
-		margin: 15px;
+		margin-left: 15px;
 	}
 }

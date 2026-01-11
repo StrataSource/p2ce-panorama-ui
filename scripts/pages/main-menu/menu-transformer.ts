@@ -2,13 +2,13 @@
 
 class MainMenuCampaignMode {
 	static movie = $<Movie>('#MainMenuMovie')!;
+	static imgBg = $<Image>('#MainMenuBackground')!;
 
 	static logo = $<Image>('#GameFullLogo')!;
 	static campaignDevTxt = $<Label>('#DevCampaign')!;
 	static menuContent = $<Panel>('#MenuContentRoot')!;
 	static switchBlur = $<Panel>('#SwitcherBlur')!;
 	static pageInsert = $<Panel>('#PageInsert')!;
-	static imgBg = $<Image>('#MainMenuBackground')!;
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
 
 	static selectedCampaign: CampaignInfo | undefined = undefined;
@@ -28,9 +28,6 @@ class MainMenuCampaignMode {
 	static music;
 
 	static bgMapLoad: uuid | undefined = undefined;
-
-	// constants
-	static BACKGROUND_IMAGE_FADE_IN_TIME = 0.25;
 
 	static onMainMenuLoaded() {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
@@ -107,13 +104,13 @@ class MainMenuCampaignMode {
 			return;
 		}
 
-		const chapterString = `[${this.selectedCampaign.chapters.indexOf(savChapter!) + 1} / ${this.selectedCampaign.chapters.length}]`;
+		//const chapterString = `[${this.selectedCampaign.chapters.indexOf(savChapter!) + 1} / ${this.selectedCampaign.chapters.length}]`;
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
 
-		this.continueText.text = `${chapterString} ${$.Localize(savChapter.title)}`;
-		const date = new Date(Number(this.latestSave.fileTime) * 1000);
+		this.continueText.text = `${$.Localize(savChapter.title)}`;
+		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueHeadline.text = convertTime(date);
 
 		this.continueBtn.SetPanelEvent('onactivate', () => {
@@ -136,29 +133,7 @@ class MainMenuCampaignMode {
 		});
 
 		this.continueBtn.enabled = true;
-	}
-
-	static showBgImg(instant?: boolean) {
-		// dont do anything if it's already visible
-		if (!this.imgBg.IsTransparent()) return;
-
-		if (instant) {
-			this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';
-		} else {
-			this.imgBg.style.animation = `FadeOut ${this.BACKGROUND_IMAGE_FADE_IN_TIME}s ease-out 0s 1 reverse forwards`;
-		}
-	}
-
-	static hideBgImg(instant?: boolean) {
-		// dont do anything if it's already invisible
-		if (this.imgBg.IsTransparent()) return;
-
-		if (instant) {
-			this.imgBg.style.animation = 'FadeOut 0.01s linear 0s 1 normal forwards';
-		}
-		else {
-			this.imgBg.style.animation = 'FadeOut 3.5s ease-out 0s 1 normal forwards';
-		}
+		this.continueBtn.AddClass('mainmenu__nav__btn__no-gradient');
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
@@ -173,7 +148,7 @@ class MainMenuCampaignMode {
 
 			// background maps take priority, turn these off
 			if (this.movie) this.movie.visible = false;
-			this.hideBgImg();
+			MenuAnimation.hideBgImg();
 
 			const bgmu = CampaignAPI.GetBackgroundMusic();
 			$.Msg(bgmu);
@@ -206,9 +181,10 @@ class MainMenuCampaignMode {
 		MainMenu.stopMusic();
 
 		if (bgl.length > 0) {
-			this.showBgImg();
+			MenuAnimation.showBgImg();
 			this.imgBg.SetImage(`file://${bgi}`);
-			$.Schedule(this.BACKGROUND_IMAGE_FADE_IN_TIME, () => {
+			$.Schedule(MenuAnimation.BACKGROUND_IMAGE_FADE_IN_TIME, () => {
+				this.loadingIndicator.visible = true;
 				this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
 					'map_load_failed',
 					(mapName: string, isBackgroundMap: boolean) => {
@@ -225,7 +201,7 @@ class MainMenuCampaignMode {
 			});
 		} else if (bgm.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			this.hideBgImg(true);
+			MenuAnimation.hideBgImg(true);
 			this.movie.SetMovie(`file://{game}/${bgm}`);
 			this.movie.Play();
 			this.movie.visible = true;
@@ -234,7 +210,7 @@ class MainMenuCampaignMode {
 			});
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			this.showBgImg(true);
+			MenuAnimation.showBgImg(true);
 			this.imgBg.SetImage(`file://${bgi}`);
 			this.movie.visible = false;
 			$.Schedule(0.001, () => {
@@ -299,7 +275,6 @@ class MainMenuCampaignMode {
 		// TODO: Grab active campaign from API instead of this
 		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
 
-		this.loadingIndicator.visible = true;
 		if (!this.setCampaignMenuDetails()) {
 			MenuAnimation.switchReverse();
 		}
@@ -312,8 +287,9 @@ class MainMenuCampaignMode {
 
 		$.DispatchEvent('MainMenuSwitchFade');
 		$.Schedule(0.5, () => {
+			this.continueBtn.RemoveClass('mainmenu__nav__btn__no-gradient');
 			this.logo.SetImage('file://{images}/logo.svg');
-			this.campaignDevTxt.text = '[DEV] No Campaign Active';
+			this.campaignDevTxt.text = '[DEV] No campaign active';
 			$.GetContextPanel().RemoveClass('CampaignSelected');
 			$.DispatchEvent('ReloadBackground');
 			MainMenu.setContinueDetails();
