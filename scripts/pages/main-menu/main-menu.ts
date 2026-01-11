@@ -96,7 +96,10 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSetFocus', this.setFocus.bind(this));
 
+		MenuAnimation.onMainMenuLoaded();
 		MainMenuCampaignMode.onMainMenuLoaded();
+		MenuFeaturedBackgrounds.onMainMenuLoaded();
+		
 		stripDevTagsFromLabels($.GetContextPanel());
 
 		this.setContinueDetails();
@@ -236,25 +239,10 @@ class MainMenu {
 	}
 
 	static onMapUnloaded() {
-		this.stopMusic();
 	}
 
 	static setMainMenuBackground() {
-		//this.movie = $<Movie>('#MainMenuMovie');
-		//if (this.movie) {
-		//	this.movie.SetMovie('file://{media}/sp_credits_bg.webm');
-		//	this.movie.Play();
-		//	this.movie.visible = true;
-		//}
-		//if (this.imgBg) {
-		//	this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';
-		//	this.imgBg.SetImage('file://{images}/menu/featured/microcomp_dark_mikatastrophe.png');
-		//}
-
 		MenuFeaturedBackgrounds.loadBackground();
-
-		const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
-		this.music = $.PlaySoundEvent(music);
 	}
 
 	// i think we could do something cool and have campaigns specify a model?
