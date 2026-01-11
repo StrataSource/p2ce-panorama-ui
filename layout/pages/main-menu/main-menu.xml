@@ -7,6 +7,7 @@
 		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-transformer.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-splash.ts" />
+		<include src="file://{scripts}/pages/main-menu/menu-anim.ts" />
 		<include src="file://{scripts}/pages/main-menu/bg-map.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
@@ -29,7 +30,7 @@
 		</snippet>
 	</snippets>
 
-	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded(); MenuFeaturedBackgrounds.onMainMenuLoaded();">
+	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()">
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
