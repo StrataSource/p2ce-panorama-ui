@@ -1,6 +1,8 @@
 'use strict';
 
 class MenuFeaturedBackgrounds {
+	static loadingIndicator = $<Label>('#LoadingIndicator')!;
+	static staticBg = $<Image>('#MainMenuBackground')!;
 	static bgMapLoad: uuid | undefined = undefined;
 	static loadingMap = false;
 
@@ -12,8 +14,23 @@ class MenuFeaturedBackgrounds {
 
 	static loadBackground() {
 		// TODO: check for BG Map Option
+		// eslint-disable-next-line no-constant-condition
+		if (false) {
+			this.loadStaticBg();
+		} else {
+			this.loadLiveBg();
+		}
+	}
 
+	static loadStaticBg() {
+		this.staticBg.SetImage('file://{images}/menu/featured/microcomp_dark_mikatastrophe.png');
+		MenuAnimation.showBgImg(true);
+		MenuAnimation.switchReverse();
+	}
+
+	static loadLiveBg() {
 		// load up a random map from our pool
+		this.loadingIndicator.visible = true;
 		this.loadingMap = true;
 		this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
 			'map_load_failed',
@@ -21,8 +38,11 @@ class MenuFeaturedBackgrounds {
 				if (!isBackgroundMap) return;
 				$.Warning('!!!!! Could not load featured background map !!!!!');
 				$.Schedule(0.001, () => {
-					GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad!);
-					this.bgMapLoad = undefined;
+					if (this.bgMapLoad) {
+						GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad!);
+						this.bgMapLoad = undefined;
+					}
+					this.loadingMap = false;
 					MenuAnimation.switchReverse();
 				});
 			}

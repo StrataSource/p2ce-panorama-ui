@@ -2,12 +2,14 @@
 
 .VersionInfo {
 	flow-children: down;
+	background-color: $base-950;
+	border: $menu-pane-border;
+	padding: 10px 15px;
 
 	.VersionInfoText {
 		font-size: 12px;
 		font-family: $font-monospace;
-		letter-spacing: 1px;
 		color: $base-300;
-		text-shadow: 1px 1px 2px 2 $base-950;
+		font-weight: bold;
 	}
 }
