@@ -179,7 +179,7 @@ class SaveEntry {
 
 		const desc = this.panel.FindChildTraverse<Label>('SaveDesc');
 		if (desc) {
-			const date = new Date(Number(this.save.fileTime) * 1000);
+			const date = new Date(Number(this.save.fileTime));
 			desc.text = convertTime(date);
 		}
 

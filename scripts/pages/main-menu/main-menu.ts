@@ -35,12 +35,14 @@ class MainMenu {
 	static pauseBlur = $<Panel>('#PauseMenuMainMenuBlur')!;
 	static menuContent = $<Panel>('#MenuContentRoot')!;
 
+	static saveBg = $<Image>('#MainMenuSaveBackground')!;
 	static continueBox = $<Panel>('#ContinueBox')!;
 
 	static model = $<ModelPanel>('#MainMenuModel')!;
 
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
 
+	static menuLogo = $<Image>('#GameFullLogo')!;
 	static continueBtn = $<Button>('#CampaignContinueBtn')!;
 	static continueText = $<Label>('#ContinueCampaignText')!;
 	static continueImg = $<Image>('#ContinueSaveThumb')!;
@@ -68,6 +70,9 @@ class MainMenu {
 
 	static music;
 
+	static savCampaign: CampaignInfo | undefined = undefined;
+	static savChapter: ChapterInfo | undefined = undefined;
+
 	static onMainMenuLoaded() {
 		// don't override visibility if this is true
 		if (!GameInterfaceAPI.GetSettingBool('developer')) this.devControls.visible = false;
@@ -75,11 +80,8 @@ class MainMenu {
 		const XUID = UserAPI.GetXUID();
 		this.featuredAvatar.steamid = XUID;
 
-		this.setMainMenuBackground();
-		this.setMainMenuModelPanel();
-
 		this.hidePage();
-		this.onContinueMouseOut();
+		this.onContinueMouseOut(true);
 
 		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), this.onEscapeKeyPressed.bind(this));
 
@@ -99,6 +101,11 @@ class MainMenu {
 		MenuAnimation.onMainMenuLoaded();
 		MainMenuCampaignMode.onMainMenuLoaded();
 		MenuFeaturedBackgrounds.onMainMenuLoaded();
+
+		$.DispatchEvent('MainMenuSwitchFade');
+
+		this.setMainMenuBackground();
+		this.setMainMenuModelPanel();
 		
 		stripDevTagsFromLabels($.GetContextPanel());
 
@@ -115,10 +122,7 @@ class MainMenu {
 		if (isBackgroundMap && UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
 			this.movie = $<Movie>('#MainMenuMovie');
 			if (this.movie) this.movie.visible = false;
-			if (this.imgBg) MainMenuCampaignMode.hideBgImg(true);
-			$.Msg('hiding');
-		} else {
-			$.Msg('did not trigger');
+			if (this.imgBg) MenuAnimation.hideBgImg(true);
 		}
 	}
 
@@ -156,6 +160,8 @@ class MainMenu {
 		this.continueBtn.enabled = false;
 		this.continueBtn.visible = false;
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
+		this.savCampaign = undefined;
+		this.savChapter = undefined;
 
 		if (saves.length === 0) {
 			$.Warning('CONTINUE: No saves');
@@ -190,11 +196,12 @@ class MainMenu {
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
+		this.saveBg.SetImage(thumb);
 
 		this.continueText.text = `${$.Localize(savCampaign.title)}`;
 		this.continueHeadline.text = `${$.Localize(savChapter.title)}`;
 
-		const date = new Date(Number(this.latestSave.fileTime) * 1000);
+		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueTagline.text = convertTime(date);
 
 		this.continueBtn.SetPanelEvent('onactivate', () => {
@@ -220,6 +227,9 @@ class MainMenu {
 
 		this.continueBtn.enabled = true;
 		this.continueBtn.visible = true;
+
+		this.savCampaign = savCampaign;
+		this.savChapter = savChapter;
 	}
 
 	static reloadBackground() {
@@ -228,13 +238,12 @@ class MainMenu {
 		// done by the campaign menu instead
 		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
 
-		this.loadingIndicator.visible = true;
 		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
 			this.featuredBtn.visible = true;
 			this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
-			$<Image>('#GameFullLogo')!.visible = true;
+			this.menuLogo.visible = true;
 		});
 	}
 
@@ -497,11 +506,65 @@ class MainMenu {
 	}
 
 	static onContinueMouseOver() {
-		if (this.continueBtn.enabled) this.continueBox.visible = true;
+		if (!this.continueBtn.enabled) return;
+
+		// TODO: Grab active campaign from API instead of this
+		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
+		if (campaign !== undefined) {
+			this.continueBox.visible = true;
+			return;
+		}
+
+		this.saveBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
+		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
+
+		if (!this.savCampaign) return;
+
+		let saveImg = 'file://{images}/menu/portal2/full_logo.svg';
+		switch (this.savCampaign.id) {
+			case 'portal1_sp':
+				saveImg = 'file://{images}/menu/portal/full_logo.svg';
+				break;
+			case 'hl2':
+				saveImg = 'file://{images}/menu/hl2/full_logo.svg';
+				break;
+			case 'episodic':
+				saveImg = 'file://{images}/menu/episodic/full_logo.svg';
+				break;
+			case 'ep2':
+				saveImg = 'file://{images}/menu/ep2/full_logo.svg';
+				break;
+		}
+		this.menuLogo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+		this.menuLogo.SetImage(saveImg);
+		const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
+		this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
+
+		if (!this.savChapter) return;
+
+		const date = new Date(Number(this.latestSave.fileTime));
+		this.continueText.text = `${$.Localize(this.savChapter.title)} [${convertTime(date, false)}]`;
 	}
 
-	static onContinueMouseOut() {
-		if (this.continueBox.IsValid()) this.continueBox.visible = false;
+	static onContinueMouseOut(instant: boolean) {
+		if (!this.continueBox.IsValid()) return;
+
+		this.continueBox.visible = false;
+
+		// TODO: Grab active campaign from API instead of this
+		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
+		if (campaign !== undefined)
+			return;
+
+		this.saveBg.style.animation = `FadeOut ${instant ? 0.01 : 0.2}s ease-out 0s 1 normal forwards`;
+		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+		this.menuLogo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+		const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
+		this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
+		this.menuLogo.SetImage('file://{images}/logo.svg');
+
+		if (this.savCampaign)
+			this.continueText.text = $.Localize(this.savCampaign.title);
 	}
 
 	/**
