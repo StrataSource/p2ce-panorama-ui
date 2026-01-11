@@ -27,6 +27,8 @@ class MainMenuCampaignMode {
 
 	static music;
 
+	static bgMapLoad: uuid | undefined = undefined;
+
 	// constants
 	static BACKGROUND_IMAGE_FADE_IN_TIME = 0.25;
 
@@ -34,13 +36,10 @@ class MainMenuCampaignMode {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onPauseMenuShown.bind(this));
 		$.RegisterForUnhandledEvent('SetActiveUiCampaign', this.onCampaignSelected.bind(this));
-		$.RegisterForUnhandledEvent('MainMenuSwitchFade', this.switchFade.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.reloadBackground.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuFullBackNav', this.onFullBackNav.bind(this));
-
-		this.loadingIndicator.visible = false;
 	}
 
 	static onMainMenuShown() {
@@ -166,8 +165,11 @@ class MainMenuCampaignMode {
 		// TODO: Grab active campaign from API instead of this
 		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
 
-		if (isBackgroundMap) {
-			this.switchReverse();
+		if (isBackgroundMap && this.bgMapLoad) {
+			GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad);
+			this.bgMapLoad = undefined;
+
+			MenuAnimation.switchReverse();
 
 			// background maps take priority, turn these off
 			if (this.movie) this.movie.visible = false;
@@ -207,13 +209,19 @@ class MainMenuCampaignMode {
 			this.showBgImg();
 			this.imgBg.SetImage(`file://${bgi}`);
 			$.Schedule(this.BACKGROUND_IMAGE_FADE_IN_TIME, () => {
-				//if (GameInterfaceAPI.GetMaps().find((v: GameInterfaceAPI.GameMap) => { return v.name === bgl; }) === undefined) {
-				//this.onBackgroundMapLoaded('', true);
-				//this.exitCampaign();
-				//$.Warning('!!! Background map failed to load. Exiting this campaign.');
-				//} else {
+				this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
+					'map_load_failed',
+					(mapName: string, isBackgroundMap: boolean) => {
+						if (!isBackgroundMap) return;
+						$.Warning('!!!!! Background map was specified, but it failed to load! Exiting campaign !!!!!');
+						$.Schedule(0.001, () => {
+							GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad!);
+							this.bgMapLoad = undefined;
+							this.exitCampaign();
+						});
+					}
+				);
 				GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`);
-				//}
 			});
 		} else if (bgm.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
@@ -237,31 +245,6 @@ class MainMenuCampaignMode {
 		return bgl.length > 0;
 	}
 
-	static switchFade() {
-		this.movie = $<Movie>('#MainMenuMovie')!;
-		this.movie.Stop();
-
-		this.menuContent.AddClass('mainmenu__content__t-prop');
-		this.menuContent.AddClass('mainmenu__content__anim');
-		this.switchBlur.RemoveClass('anim-main-menu-switch-reverse');
-		this.switchBlur.AddClass('anim-main-menu-switch');
-
-		this.isBlurred = true;
-	}
-
-	static switchReverse() {
-		if (!this.isBlurred) return;
-
-		this.menuContent.RemoveClass('mainmenu__content__t-prop');
-		this.menuContent.RemoveClass('mainmenu__content__anim');
-		this.switchBlur.RemoveClass('anim-main-menu-switch');
-		this.switchBlur.AddClass('anim-main-menu-switch-reverse');
-		this.pageInsert.RemoveAndDeleteChildren();
-
-		this.isBlurred = false;
-		this.loadingIndicator.visible = false;
-	}
-
 	static onCampaignSelected(id: string) {
 		$.Msg(`Begin searching for campaign: ${id}`);
 		const campaign = CampaignAPI.GetAllCampaigns().find((v) => {
@@ -277,7 +260,7 @@ class MainMenuCampaignMode {
 
 		this.selectedCampaign = campaign;
 		$.Msg(`Switching campaign to: ${this.selectedCampaign.id}`);
-		if (CampaignAPI.SetActiveCampaign(this.selectedCampaign.id)) {
+		if (!CampaignAPI.SetActiveCampaign(this.selectedCampaign.id)) {
 			$.Warning('JS: SetActiveCampaign failed!');
 		}
 		// TODO: Grab active campaign from API instead of this
@@ -310,7 +293,6 @@ class MainMenuCampaignMode {
 		this.campaignDevTxt.text = `[DEV] Campaign: ${$.Localize(campaign.title)} (${id})`;
 
 		this.setContinueDetails();
-		MainMenu.onMainMenuFocused();
 	}
 
 	static reloadBackground() {
@@ -319,7 +301,7 @@ class MainMenuCampaignMode {
 
 		this.loadingIndicator.visible = true;
 		if (!this.setCampaignMenuDetails()) {
-			this.switchReverse();
+			MenuAnimation.switchReverse();
 		}
 	}
 
