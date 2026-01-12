@@ -30,7 +30,7 @@
 		</snippet>
 	</snippets>
 
-	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()">
+	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()" onfocus="MainMenu.onMainMenuFocused()">
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
@@ -331,12 +331,12 @@
 								tabindex="auto"
 								selectionpos="auto"
 							>
-								<SteamInputAction id="BackSteamAction" class="ml-2 mr-2" actionset="MenuControls" action="menu_cancel" separatortext="/" controllernumber="1" /> 
-								<Label class="button__text button__text--right" text="Back" />
+								<SteamInputAction class="mr-2" id="BackSteamAction" actionset="MenuControls" action="menu_cancel" separatortext="/" controllernumber="1" glyphsize="large" /> 
+								<Label class="button__text" text="Back" />
 							</Button>
 							<Panel class="flow-right vertical-align-center ml-2">
-								<SteamInputAction id="SelectSteamAction" class="mr-1" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber="1" /> 
-								<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name" />
+								<SteamInputAction id="SelectSteamAction" class="mr-1" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber="1" glyphsize="large" /> 
+								<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name font-weight-bold" />
 							</Panel>
 						</Panel>
 					</Panel>
