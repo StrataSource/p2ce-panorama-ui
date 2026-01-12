@@ -30,34 +30,30 @@ class MenuFeaturedBackgrounds {
 
 	static loadLiveBg() {
 		// load up a random map from our pool
+		$.Msg('Loading live background...');
 		this.loadingIndicator.visible = true;
 		this.loadingMap = true;
-		this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
-			'map_load_failed',
-			(mapName: string, isBackgroundMap: boolean) => {
-				if (!isBackgroundMap) return;
-				$.Warning('!!!!! Could not load featured background map !!!!!');
-				$.Schedule(0.001, () => {
-					if (this.bgMapLoad) {
-						GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad!);
-						this.bgMapLoad = undefined;
-					}
-					this.loadingMap = false;
-					MenuAnimation.switchReverse();
-				});
-			}
-		);
-		
+
+		if (!this.bgMapLoad) {
+			$.Msg('Live BG fail event created');
+			this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
+				'map_load_failed',
+				(mapName: string, isBackgroundMap: boolean) => {
+					if (!isBackgroundMap || !this.loadingMap) return;
+					$.Warning('!!!!! Could not load featured background map !!!!!');
+					$.Schedule(0.001, () => {
+						this.loadingMap = false;
+						MenuAnimation.switchReverse();
+					});
+				}
+			);
+		}
+
 		GameInterfaceAPI.ConsoleCommand(`map_background ${'p2ce_background_laser_intro'}`);
 	}
 
 	static onBackgroundMapLoaded(map: string, bgMap: boolean) {
-		if (bgMap && this.loadingMap) {
-			if (this.bgMapLoad) {
-				GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad);
-				this.bgMapLoad = undefined;
-			}
-
+		if (this.loadingMap) {
 			this.loadingMap = false;
 			MenuAnimation.switchReverse();
 		}
