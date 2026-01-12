@@ -50,7 +50,7 @@ class MainMenu {
 	static continueHeadline = $<Label>('#ContinueSaveHeadline')!;
 	static continueTagline = $<Label>('#ContinueSaveTagline')!;
 
-	static devControls = $<Button>('#DevControls')!;
+	static devControls = $<Button>('#DevBtn')!;
 
 	static featuredBtn = $<Button>('#FeaturedBtn')!;
 	static featuredImage = $<Image>('#FeaturedImage')!;
