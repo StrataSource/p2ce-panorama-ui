@@ -37,6 +37,8 @@ class MenuAnimation {
 
 	static switchFade() {
 		if (this.isBlurred) return;
+
+		$('#MainContainer')!.enabled = false;
 		
 		this.movie = $<Movie>('#MainMenuMovie')!;
 		this.movie.Stop();
@@ -53,6 +55,8 @@ class MenuAnimation {
 		this.loadingIndicator.visible = false;
 
 		if (!this.isBlurred) return;
+
+		$('#MainContainer')!.enabled = true;
 
 		this.menuContent.RemoveClass('mainmenu__content__t-prop');
 		this.menuContent.RemoveClass('mainmenu__content__anim');

@@ -126,6 +126,7 @@ class MainMenu {
 			this.movie = $<Movie>('#MainMenuMovie');
 			if (this.movie) this.movie.visible = false;
 			if (this.imgBg) MenuAnimation.hideBgImg(true);
+			$.Schedule(0.001, () => { MainMenu.onMainMenuFocused() });
 		}
 	}
 
@@ -216,6 +217,7 @@ class MainMenu {
 					'warning-popup',
 					$.Localize('#Action_LoadGame'),
 					() => {
+						this.onContinueMouseOut(true);
 						$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
 						CampaignAPI.ContinueCampaign(savCampaign.id);
 					},
@@ -224,6 +226,7 @@ class MainMenu {
 					'blur'
 				);
 			} else {
+				this.onContinueMouseOut(true);
 				$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
 				CampaignAPI.ContinueCampaign(savCampaign.id);
 			}
