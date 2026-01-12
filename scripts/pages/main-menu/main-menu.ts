@@ -133,6 +133,7 @@ class MainMenu {
 		for (let i = 0; i < children.length; ++i) {
 			const child = children[i];
 			if (child.IsValid() && child.visible && child.enabled) {
+				$.Msg(`Setting focus to: ${child.id} (${child.paneltype})`);
 				child.SetFocus(true);
 				break;
 			}
@@ -323,14 +324,12 @@ class MainMenu {
 	static onShowPauseMenu() {
 		$.GetContextPanel().AddClass('PauseMenuMode');
 		this.pauseAnimIn();
-
-		$('#ResumeBtn')!.SetFocus(true);
-
 		this.featuredBtn.visible = false;
-		this.onMainMenuFocused();
+		$.Schedule(0.001, () => { this.onMainMenuFocused(); });
 	}
 
 	static onHidePauseMenu() {
+		this.closePages();
 		$.GetContextPanel().RemoveClass('PauseMenuMode');
 		this.pauseAnimOut();
 	}
