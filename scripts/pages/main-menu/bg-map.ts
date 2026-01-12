@@ -26,6 +26,7 @@ class MenuFeaturedBackgrounds {
 		this.staticBg.SetImage('file://{images}/menu/featured/microcomp_dark_mikatastrophe.png');
 		MenuAnimation.showBgImg(true);
 		MenuAnimation.switchReverse();
+		$.DispatchEvent('MainBackgroundLoaded');
 	}
 
 	static loadLiveBg() {
@@ -44,6 +45,7 @@ class MenuFeaturedBackgrounds {
 					$.Schedule(0.001, () => {
 						this.loadingMap = false;
 						MenuAnimation.switchReverse();
+						$.DispatchEvent('MainBackgroundLoaded');
 					});
 				}
 			);
@@ -56,6 +58,7 @@ class MenuFeaturedBackgrounds {
 		if (this.loadingMap) {
 			this.loadingMap = false;
 			MenuAnimation.switchReverse();
+			$.DispatchEvent('MainBackgroundLoaded');
 		}
 	}
 }

@@ -16,4 +16,5 @@ interface GlobalEventNameMap {
 	CampaignSettingHovered: (helpText: string) => void;
 	SetActiveUiCampaign: (campaignId: string) => void;
 	MainMenuFullBackNav: () => void;
+	MainBackgroundLoaded: () => void;
 }

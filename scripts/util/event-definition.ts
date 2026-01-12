@@ -31,3 +31,4 @@ $.DefineEvent('MainMenuSwitchFade', 0);
 $.DefineEvent('MainMenuFullBackNav', 0);
 $.DefineEvent('MainMenuPagePreClose', 1);
 $.DefineEvent('MainMenuSetFocus', 0);
+$.DefineEvent('MainBackgroundLoaded', 0);

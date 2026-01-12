@@ -76,6 +76,8 @@ class MainMenu {
 	static savChapter: ChapterInfo | undefined = undefined;
 	static isContinueActive: boolean = false;
 
+	static afterReturnQueue: (() => void)[] = [];
+
 	static onMainMenuLoaded() {
 		// don't override visibility if this is true
 		if (!GameInterfaceAPI.GetSettingBool('developer')) this.devControls.visible = false;
@@ -100,6 +102,7 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSetFocus', this.setFocus.bind(this));
+		$.RegisterForUnhandledEvent('MainBackgroundLoaded', this.onBackgroundLoaded.bind(this));
 
 		MenuAnimation.onMainMenuLoaded();
 		MainMenuCampaignMode.onMainMenuLoaded();
@@ -126,7 +129,6 @@ class MainMenu {
 			this.movie = $<Movie>('#MainMenuMovie');
 			if (this.movie) this.movie.visible = false;
 			if (this.imgBg) MenuAnimation.hideBgImg(true);
-			$.Schedule(0.001, () => { MainMenu.onMainMenuFocused() });
 		}
 	}
 
@@ -513,6 +515,21 @@ class MainMenu {
 
 	static setFocus() {
 		this.onMainMenuFocused();
+	}
+
+	static addToReturnQueue(func: () => void) {
+		this.afterReturnQueue.push(func);
+	}
+
+	static onBackgroundLoaded() {
+		if (this.afterReturnQueue.length > 0) {
+			for (let i = 0; i < this.afterReturnQueue.length; ++i) {
+				this.afterReturnQueue[i]();
+			}
+			this.afterReturnQueue = [];
+		} else {
+			$.Schedule(0.001, () => { MainMenu.onMainMenuFocused() });
+		}
 	}
 
 	static onContinueFocused() {
