@@ -597,6 +597,7 @@ $pane-move-time: 0.1s;
 	&__page-actions {
 		width: 100%;
 		margin-top: 15px;
+		flow-children: right;
 		&__button {
 			& Label {
 				transform: translateY(-1px);
