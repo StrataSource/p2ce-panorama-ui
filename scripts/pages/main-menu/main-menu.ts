@@ -74,6 +74,7 @@ class MainMenu {
 
 	static savCampaign: CampaignInfo | undefined = undefined;
 	static savChapter: ChapterInfo | undefined = undefined;
+	static isContinueActive: boolean = false;
 
 	static onMainMenuLoaded() {
 		// don't override visibility if this is true
@@ -511,8 +512,17 @@ class MainMenu {
 		this.onMainMenuFocused();
 	}
 
+	static onContinueFocused() {
+		if ($.GetContextPanel().HasClass('InputController'))
+			this.onContinueMouseOver();
+	}
+
 	static onContinueMouseOver() {
+		if (this.isContinueActive) return;
 		if (!this.continueBtn.enabled) return;
+		if (!this.bgCredit.IsValid()) return;
+
+		this.isContinueActive = true;
 
 		// TODO: Grab active campaign from API instead of this
 		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
@@ -554,7 +564,10 @@ class MainMenu {
 	}
 
 	static onContinueMouseOut(instant: boolean) {
+		if (!this.isContinueActive && !instant) return;
 		if (!this.continueBox.IsValid()) return;
+
+		this.isContinueActive = false;
 
 		this.continueBox.visible = false;
 
