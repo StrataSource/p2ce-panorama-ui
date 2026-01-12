@@ -4,15 +4,6 @@
 
 $pane-move-time: 0.1s;
 
-@keyframes RotateFull {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
 @keyframes Splash_SplashFadeOut {
 	0% {
 		opacity: 1;
@@ -31,6 +22,14 @@ $pane-move-time: 0.1s;
 	100% {
 		opacity: 1;
 	}
+}
+
+.ControllerOnly {
+	visibility: collapse;
+}
+
+.InputController .ControllerOnly {
+	visibility: visible;
 }
 
 #TooltipManager,
@@ -342,12 +341,21 @@ $pane-move-time: 0.1s;
 		}
 
 		&__btn {
+			flow-children: right;
 			width: 100%;
 			min-height: 65px;
 			padding-left: 75px;
 			margin: 2px 0;
 
 			$this: &;
+
+			& > SteamInputAction {
+				horizontal-align: right;
+				margin-right: 15px;
+			}
+			& > SteamInputAction.ControllerConnected {
+				visibility: collapse;
+			}
 
 			&__text {
 				@include mixin.font-styles($use-header: true);
@@ -364,6 +372,12 @@ $pane-move-time: 0.1s;
 				font-weight: light;
 				letter-spacing: 1px;
 				//text-shadow: 1px 1px 2px 2 $base-950;
+			}
+
+			.InputController &:focus:not(:disabled) {
+				& > SteamInputAction {
+					visibility: visible;
+				}
 			}
 
 			.InputKeyboard &:hover:not(:disabled),
@@ -384,7 +398,8 @@ $pane-move-time: 0.1s;
 			}
 
 			&__no-gradient {
-				&:hover:not(:disabled) {
+				.InputKeyboard &:hover:not(:disabled),
+				.InputController &:focus:not(:disabled) {
 					background-color: $button-background-hover;
 				}
 			}
@@ -599,6 +614,9 @@ $pane-move-time: 0.1s;
 		margin-top: 15px;
 		flow-children: right;
 		&__button {
+			@at-root .InputController .mainmenu__page-actions__button {
+				visibility: collapse;
+			}
 			& Label {
 				transform: translateY(-1px);
 			}
