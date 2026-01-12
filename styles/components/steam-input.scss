@@ -1,0 +1,98 @@
+// TODO: separate and clean up this file
+
+// steaminputaction
+
+SteamInputAction
+{
+	flow-children: right;
+	horizontal-align: center;
+	vertical-align: center;
+	width: fit-children;
+	height: fit-children;
+	transition-property: transform, brightness;
+	transition-duration: 0.125s;
+	transition-timing-function: ease-out;
+	visibility: collapse;
+	
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+.SteamInputGlyphsActive SteamInputAction.ControllerConnected
+{
+	visibility: visible;
+}
+
+SteamInputAction.AnalogDeadZoned,
+SteamInputAction.DigitalReleased
+{
+	brightness: 1;
+	transform: translateY(-1px);
+}
+
+SteamInputAction.AnalogThrown,
+SteamInputAction.DigitalPressed
+{
+	brightness: 0.5;
+	transform: translateY(1px);
+}
+
+.HoldButtonToActivate .steam-button-glyph
+{
+	border: 2px solid green;
+}
+
+// steaminputglyphs
+
+SteamInputGlyph,
+.glyph-container,
+.steam-button-glyph,
+.steam-button-name
+{
+	horizontal-align : center;
+	vertical-align : center;
+	width: fit-children;
+	height: fit-children;
+}
+
+.action-container
+{
+	flow-children: down;
+}
+
+.glyph-container
+{
+	flow-children: down;
+}
+
+.steam-button-glyph
+{
+	width: 24px;
+	height: 24px;
+}
+
+.steam-button-name
+{
+	text-align: center;
+	font-family: stratum2Font;
+	font-weight: lighter;
+	font-size: 20px;
+	text-transform: uppercase;
+	text-overflow: ellipsis;
+	visibility: collapse;
+}
+
+// steaminputactionlabel
+
+.steam-action-name
+{
+	horizontal-align : center;
+	vertical-align : center;
+	width: fit-children;
+	height: fit-children;
+}
+
+.play-menu__playbtn SteamInputAction .steam-action-name
+{
+	visibility: collapse;
+}
