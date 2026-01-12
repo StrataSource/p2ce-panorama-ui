@@ -28,6 +28,7 @@ class MainMenuCampaignMode {
 	static music;
 
 	static bgMapLoad: uuid | undefined = undefined;
+	static loadingMap: boolean = false;
 
 	static onMainMenuLoaded() {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
@@ -140,10 +141,8 @@ class MainMenuCampaignMode {
 		// TODO: Grab active campaign from API instead of this
 		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
 
-		if (isBackgroundMap && this.bgMapLoad) {
-			GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad);
-			this.bgMapLoad = undefined;
-
+		if (isBackgroundMap && this.loadingMap) {
+			this.loadingMap = false;
 			MenuAnimation.switchReverse();
 
 			// background maps take priority, turn these off
@@ -183,20 +182,27 @@ class MainMenuCampaignMode {
 		if (bgl.length > 0) {
 			MenuAnimation.showBgImg();
 			this.imgBg.SetImage(`file://${bgi}`);
+			this.loadingMap = true;
 			$.Schedule(MenuAnimation.BACKGROUND_IMAGE_FADE_IN_TIME, () => {
 				this.loadingIndicator.visible = true;
-				this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
-					'map_load_failed',
-					(mapName: string, isBackgroundMap: boolean) => {
-						if (!isBackgroundMap) return;
-						$.Warning('!!!!! Background map was specified, but it failed to load! Exiting campaign !!!!!');
-						$.Schedule(0.001, () => {
-							GameInterfaceAPI.UnregisterGameEventHandler(this.bgMapLoad!);
-							this.bgMapLoad = undefined;
+				if (!this.bgMapLoad) {
+					$.Msg('Campaign BG fail event created');
+					this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
+						'map_load_failed',
+						(mapName: string, isBackgroundMap: boolean) => {
+							if (!isBackgroundMap || !this.loadingMap) return;
+							this.loadingMap = false;
+							$.Warning('!!!!! Background map was specified, but it failed to load! Exiting campaign !!!!!');
+							UiToolkitAPI.ShowGenericPopupOk(
+								$.Localize('#Popup_CampaignBgLoadFailed'),
+								$.Localize('#Popup_CampaignBgLoadFailed_Message'),
+								'bad-popup',
+								() => {}
+							);
 							this.exitCampaign();
-						});
-					}
-				);
+						}
+					);
+				}
 				GameInterfaceAPI.ConsoleCommand(`map_background ${bgl}`);
 			});
 		} else if (bgm.length > 0) {
@@ -282,6 +288,11 @@ class MainMenuCampaignMode {
 
 	static exitCampaign() {
 		// TODO: Grab active campaign from API instead of this
+		// must block subsequent requests to exit campaign
+		// (this only happens on controller because for some reason buttons
+		// that are disabled can still be activated if focused)
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined)
+			return;
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = undefined;
 		this.selectedCampaign = undefined;
 
@@ -293,7 +304,6 @@ class MainMenuCampaignMode {
 			$.GetContextPanel().RemoveClass('CampaignSelected');
 			$.DispatchEvent('ReloadBackground');
 			MainMenu.setContinueDetails();
-			MainMenu.onMainMenuFocused();
 		});
 	}
 }

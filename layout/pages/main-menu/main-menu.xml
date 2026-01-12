@@ -36,12 +36,17 @@
 
 		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Movie background -->
-			<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" />
+			<Panel
+				id="MainMenuMovieParent"
+				class="mainmenu__background MainMenuModeOnly"
+				hittest="false"
+			/>
 			<!-- Static image background -->
 			<Image
 				id="MainMenuBackground"
 				class="mainmenu__background MainMenuModeOnly"
 				scaling="stretch-to-cover-preserve-aspect"
+				hittest="false"
 			/>
 
 			<!-- Save background -->
@@ -49,6 +54,7 @@
 				id="MainMenuSaveBackground"
 				class="mainmenu__background MainMenuModeOnly"
 				scaling="stretch-to-cover-preserve-aspect"
+				hittest="false"
 			/>
 
 			<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
@@ -56,15 +62,16 @@
 				id="PauseMenuMainMenuBlur"
 				class="mainmenu__pause-blur PauseMenuModeOnly"
 				blurrects="PauseMenuMainMenuContent"
+				hittest="false"
 			>
 				<!-- Backbuffer background -->
-				<BackbufferImagePanel class="mainmenu__background PauseMenuModeOnly" />
+				<BackbufferImagePanel hittest="false" class="mainmenu__background PauseMenuModeOnly" />
 			</BaseBlurTarget>
 
-			<Panel id="PauseMenuMainMenuContent" class="mainmenu__pause-content-blur" />
+			<Panel id="PauseMenuMainMenuContent" hittest="false" class="mainmenu__pause-content-blur" />
 
 			<!-- Full page blur: used to blur everything below the drawer -->
-			<Panel id="MainContainer" class="mainmenu__container mainmenu__menu" disabled="true">
+			<Panel id="MainContainer" class="mainmenu__container mainmenu__menu" disabled="true" onfocus="MainMenu.onMainMenuFocused()">
 				<Panel id="MenuContentRoot" class="mainmenu__content">
 					<Panel id="PageBg" class="mainmenu__page-bg" />
 
