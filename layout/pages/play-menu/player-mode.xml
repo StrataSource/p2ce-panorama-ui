@@ -9,7 +9,7 @@
 
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setPlayerMenuLines()">
 		<Panel class="play-menu__main">
-			<Panel class="flow-right full-width full-height">
+			<Panel class="flow-right full-width full-height" childfocusonhover="true">
 				<Button
 					class="card fill-width mr-3"
 					onactivate="PlayMenu.onSinglePlayerBtnPressed()"

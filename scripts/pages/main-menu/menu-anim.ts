@@ -35,7 +35,7 @@ class MenuAnimation {
 		}
 	}
 
-	static switchFade() {
+	static switchFade(instant?: boolean) {
 		if (this.isBlurred) return;
 
 		$('#MainContainer')!.enabled = false;
@@ -46,7 +46,9 @@ class MenuAnimation {
 		this.menuContent.AddClass('mainmenu__content__t-prop');
 		this.menuContent.AddClass('mainmenu__content__anim');
 		this.switchBlur.RemoveClass('anim-main-menu-switch-reverse');
-		this.switchBlur.AddClass('anim-main-menu-switch');
+
+		if (instant) this.switchBlur.AddClass('anim-main-menu-blur');
+		else this.switchBlur.AddClass('anim-main-menu-switch');
 
 		this.isBlurred = true;
 	}
@@ -60,6 +62,7 @@ class MenuAnimation {
 
 		this.menuContent.RemoveClass('mainmenu__content__t-prop');
 		this.menuContent.RemoveClass('mainmenu__content__anim');
+		this.switchBlur.RemoveClass('anim-main-menu-blur');
 		this.switchBlur.RemoveClass('anim-main-menu-switch');
 		this.switchBlur.AddClass('anim-main-menu-switch-reverse');
 		this.pageInsert.RemoveAndDeleteChildren();
