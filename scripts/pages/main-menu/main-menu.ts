@@ -369,6 +369,11 @@ class MainMenu {
 	// open a page, handles nested pages and receives calls via events from other pages
 	// note: page headline/tagline are set by the corresponding page script, not here
 	static navigateToPage(tab: string, xmlName: string, invokerPanel?: Panel) {
+		if (this.pages.find((v: MenuPage) => { return v.name === tab })) {
+			$.Warning(`Page '${tab}' already exists, rejecting request to open the page.`);
+			return;
+		}
+
 		// hide the previous page
 		if (this.pages.length > 0) {
 			const priorPage = this.pages[this.pages.length - 1];
