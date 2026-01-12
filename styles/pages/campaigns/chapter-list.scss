@@ -56,8 +56,8 @@
 			}
 		}
 		
-		.InputController &:focus,
-		&:hover:not(:disabled):not(:selected) {
+		.InputKeyboard &:hover:not(:disabled),
+		.InputController &:focus:not(:disabled) {
 			border-color: $primary-color;
 			background-color: $button-background-hover;
 

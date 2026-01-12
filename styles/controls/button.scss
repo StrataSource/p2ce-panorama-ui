@@ -18,8 +18,8 @@
 
 	$this: &;
 
-	&:hover:not(:disabled):not(:parentdisabled):not(:selected),
-	&:focus:not(:disabled):not(:parentdisabled):not(:selected) {
+	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
+	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		background-color: $button-background-hover;
 		border: $button-border-hover;
 
@@ -111,8 +111,8 @@
 		background-color: list.nth($value, 1);
 		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
 
-		&:hover:not(:disabled):not(:parentdisabled):not(:selected),
-		&:focus:not(:disabled):not(:parentdisabled):not(:selected) {
+		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
+		.InputController &:focus:not(:disabled):not(:parentdisabled) {
 			border-color: list.nth($value, 1);
 			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
 
@@ -188,8 +188,8 @@ RadioButton.button-mono {
 		}
 	}
 
-	&:hover:not(:disabled):not(:parentdisabled):not(:selected),
-	&:focus:not(:disabled):not(:parentdisabled):not(:selected) {
+	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
+	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		border-color: $primary-color;
 		background-color: $button-background-hover;
 	}

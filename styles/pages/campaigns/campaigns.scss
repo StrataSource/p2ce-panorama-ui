@@ -46,8 +46,8 @@
 				color: rgba($bright-color, 0.25);
 			}
 
-			.InputController &:focus,
-			&:hover {
+			.InputKeyboard &:hover:not(:disabled),
+			.InputController &:focus:not(:disabled) {
 				background-color: $base-950;
 				color: $bright-color;
 			}
@@ -71,8 +71,8 @@
 			margin-bottom: 10px;
 		}
 
-		.InputController &:focus,
-		&:hover {
+		.InputKeyboard &:hover:not(:disabled),
+		.InputController &:focus:not(:disabled) {
 			border-color: $primary-color;
 
 			#{$this}__inner {
