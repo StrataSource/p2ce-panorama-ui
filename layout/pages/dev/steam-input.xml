@@ -1,0 +1,200 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+	</scripts>
+
+	<Panel class="mainmenu__page">
+		<Panel class="overflow-vscroll">
+			<Panel class="flow-down dev-ref__bg mr-3 b-menu-pane">
+				<Panel class="dev-ref__bg__gray full-width py-3 dev-ref__input flow-down bb-menu-pane">
+					<Label class="text-h3 px-3" text="SteamInputGlyph" />
+					<Label class="text-h5 px-3" text="Styles" />
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [Default]"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" />
+						<SteamInputGlyph button_or_axis_name="button_b" />
+						<SteamInputGlyph button_or_axis_name="button_x" />
+						<SteamInputGlyph button_or_axis_name="button_y" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [SVG] [glyphstyle : light]"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" svg="true" glyphstyle="light" />
+						<SteamInputGlyph button_or_axis_name="button_b" svg="true" glyphstyle="light" />
+						<SteamInputGlyph button_or_axis_name="button_x" svg="true" glyphstyle="light" />
+						<SteamInputGlyph button_or_axis_name="button_y" svg="true" glyphstyle="light" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-down px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Panel class="flow-right dev-ref__input">
+						<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [SVG] [glyphstyle : dark]"/>
+						<Panel class="dev-ref__input__right flow-right bg-white">
+							<SteamInputGlyph button_or_axis_name="button_a" svg="true" glyphstyle="dark" />
+							<SteamInputGlyph button_or_axis_name="button_b" svg="true" glyphstyle="dark" />
+							<SteamInputGlyph button_or_axis_name="button_x" svg="true" glyphstyle="dark" />
+							<SteamInputGlyph button_or_axis_name="button_y" svg="true" glyphstyle="dark" />
+						</Panel>
+					</Panel>
+					<Label class="horizontal-align-right text-xs text-weight-light" text="bg-white for contrast" />
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [SVG] [glyphstyle : knockout]"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" svg="true" glyphstyle="knockout" />
+						<SteamInputGlyph button_or_axis_name="button_b" svg="true" glyphstyle="knockout" />
+						<SteamInputGlyph button_or_axis_name="button_x" svg="true" glyphstyle="knockout" />
+						<SteamInputGlyph button_or_axis_name="button_y" svg="true" glyphstyle="knockout" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [PNG] [glyphstyle : knockout] [neutral_colors : false]"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" svg="false" glyphstyle="knockout" neutral_colors="false"/>
+						<SteamInputGlyph button_or_axis_name="button_b" svg="false" glyphstyle="knockout" neutral_colors="false"/>
+						<SteamInputGlyph button_or_axis_name="button_x" svg="false" glyphstyle="knockout" neutral_colors="false"/>
+						<SteamInputGlyph button_or_axis_name="button_y" svg="false" glyphstyle="knockout" neutral_colors="false"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [SVG] [glyphstyle : light] [solid]"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" svg="true" glyphstyle="light" solid="true" />
+						<SteamInputGlyph button_or_axis_name="button_b" svg="true" glyphstyle="light" solid="true" />
+						<SteamInputGlyph button_or_axis_name="button_x" svg="true" glyphstyle="light" solid="true" />
+						<SteamInputGlyph button_or_axis_name="button_y" svg="true" glyphstyle="light" solid="true" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [PNG] [glyphstyle : light] [solid] [neutral_colors : false]"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" svg="false" glyphstyle="light" solid="true" neutral_colors="false" />
+						<SteamInputGlyph button_or_axis_name="button_b" svg="false" glyphstyle="light" solid="true" neutral_colors="false" />
+						<SteamInputGlyph button_or_axis_name="button_x" svg="false" glyphstyle="light" solid="true" neutral_colors="false" />
+						<SteamInputGlyph button_or_axis_name="button_y" svg="false" glyphstyle="light" solid="true" neutral_colors="false" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label class="dev-ref__input__left" allowrawtext="true" text="[Literal] [PNG] [glyphstyle : knockout] [solid] [neutral_colors : false]"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" svg="false" glyphstyle="knockout" solid="true" neutral_colors="false" />
+						<SteamInputGlyph button_or_axis_name="button_b" svg="false" glyphstyle="knockout" solid="true" neutral_colors="false" />
+						<SteamInputGlyph button_or_axis_name="button_x" svg="false" glyphstyle="knockout" solid="true" neutral_colors="false" />
+						<SteamInputGlyph button_or_axis_name="button_y" svg="false" glyphstyle="knockout" solid="true" neutral_colors="false" />
+					</Panel>
+				</Panel>
+
+				<Panel class="dev-ref__bg__gray full-width dev-ref__input by-menu-pane">
+					<Label class="text-h5 px-3 py-3" text="Controller Types" />
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label class="dev-ref__input__left" text="controller_xbox360" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_xbox360" />
+						<SteamInputGlyph button_or_axis_name="button_b" controller_type="controller_xbox360" />
+						<SteamInputGlyph button_or_axis_name="button_x" controller_type="controller_xbox360" />
+						<SteamInputGlyph button_or_axis_name="button_y" controller_type="controller_xbox360" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label class="dev-ref__input__left" text="controller_switch_pro" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_switch_pro" />
+						<SteamInputGlyph button_or_axis_name="button_b" controller_type="controller_switch_pro" />
+						<SteamInputGlyph button_or_axis_name="button_x" controller_type="controller_switch_pro" />
+						<SteamInputGlyph button_or_axis_name="button_y" controller_type="controller_switch_pro" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label class="dev-ref__input__left" text="controller_ps5" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_ps5" />
+						<SteamInputGlyph button_or_axis_name="button_b" controller_type="controller_ps5" />
+						<SteamInputGlyph button_or_axis_name="button_x" controller_type="controller_ps5" />
+						<SteamInputGlyph button_or_axis_name="button_y" controller_type="controller_ps5" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label class="dev-ref__input__left" text="controller_switch_joycon_single" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_switch_joycon_single" />
+						<SteamInputGlyph button_or_axis_name="button_b" controller_type="controller_switch_joycon_single" />
+						<SteamInputGlyph button_or_axis_name="button_x" controller_type="controller_switch_joycon_single" />
+						<SteamInputGlyph button_or_axis_name="button_y" controller_type="controller_switch_joycon_single" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label class="dev-ref__input__left" text="controller_switch_joycon_pair" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_switch_joycon_pair" />
+						<SteamInputGlyph button_or_axis_name="button_b" controller_type="controller_switch_joycon_pair" />
+						<SteamInputGlyph button_or_axis_name="button_x" controller_type="controller_switch_joycon_pair" />
+						<SteamInputGlyph button_or_axis_name="button_y" controller_type="controller_switch_joycon_pair" />
+					</Panel>
+				</Panel>
+
+				<Panel class="dev-ref__bg__gray full-width py-3 dev-ref__input flow-down by-menu-pane">
+					<Label class="text-h3 px-3" text="SteamInputAction/Label" />
+					<Label class="text-h5 px-3" text="ActionSet: GameControls" />
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: Move"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="ButtonTest8" actionset="GameControls" action="Move" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="Move" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: use_or_reload"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="ButtonTest9" actionset="GameControls" action="use_or_reload" separatortext="/" controllernumber = "1" glyphsize="medium"/>
+						<SteamInputActionLabel actionset="GameControls" action="use_or_reload" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: attack"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="ButtonTest10" actionset="GameControls" action="attack" separatortext="/" controllernumber = "1" glyphsize="small"/>
+						<SteamInputActionLabel actionset="GameControls" action="attack" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: attack2"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="ButtonTest11" actionset="GameControls" action="attack2" separatortext="/" controllernumber = "1" glyphsize="small"/>
+						<SteamInputActionLabel actionset="GameControls" action="attack2" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: duck"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="ButtonTest12" actionset="GameControls" action="duck" separatortext="/" controllernumber = "1" glyphsize="large"/>
+						<SteamInputActionLabel actionset="GameControls" action="duck" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: toggle_duck"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="ButtonTest13" actionset="GameControls" action="toggle_duck" separatortext="/" controllernumber = "1" svg="false"/>
+						<SteamInputActionLabel actionset="GameControls" action="toggle_duck" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="dev-ref__bg__gray dev-ref__input full-width by-menu-pane">
+					<Label class="text-h5 px-3 py-3" text="ActionSet: MenuControls" />
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: menu_select"/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="ButtonTest14" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber = "1"/> 
+						<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

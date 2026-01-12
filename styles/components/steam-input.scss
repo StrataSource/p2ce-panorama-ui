@@ -12,10 +12,6 @@ SteamInputAction
 	transition-property: transform, brightness;
 	transition-duration: 0.125s;
 	transition-timing-function: ease-out;
-	visibility: collapse;
-	
-	margin-top: 1px;
-	margin-bottom: 1px;
 }
 
 .SteamInputGlyphsActive SteamInputAction.ControllerConnected
@@ -35,6 +31,12 @@ SteamInputAction.DigitalPressed
 {
 	brightness: 0.5;
 	transform: translateY(1px);
+}
+
+SteamInputAction > Label {
+	vertical-align: center;
+	font-weight: bold;
+	margin: 0 5px;
 }
 
 .HoldButtonToActivate .steam-button-glyph
@@ -67,15 +69,13 @@ SteamInputGlyph,
 
 .steam-button-glyph
 {
-	width: 24px;
-	height: 24px;
+	width: 32px;
+	height: 32px;
 }
 
 .steam-button-name
 {
 	text-align: center;
-	font-family: stratum2Font;
-	font-weight: lighter;
 	font-size: 20px;
 	text-transform: uppercase;
 	text-overflow: ellipsis;
