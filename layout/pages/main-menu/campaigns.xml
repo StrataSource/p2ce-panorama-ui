@@ -95,6 +95,7 @@
 					onmouseout="CampaignSelector.hideBoxart()"
 					tabindex="auto"
 					selectionpos="auto"
+					childfocusonhover="true"
 				/>
 			</Panel>
 			<Panel class="campaigns__right">

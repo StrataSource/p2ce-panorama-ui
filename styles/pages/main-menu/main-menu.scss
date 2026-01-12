@@ -428,7 +428,7 @@ $pane-move-time: 0.1s;
 			margin-bottom: 50px;
 
 			.InputController &:focus,
-			&:hover {
+			.InputKeyboard &:hover {
 				border-color: $primary-color;
 				background-color: $button-background-hover;
 
@@ -438,6 +438,28 @@ $pane-move-time: 0.1s;
 
 				#{$this}__overlay {
 					background-color: gradient(linear, 0% 100%, 0% 0%, from($primary-950), to(rgba(0, 0, 0, 0)));
+				}
+			}
+
+			& > SteamInputAction {
+				vertical-align: top;
+				horizontal-align: right;
+				margin: 5px;
+				& Image {
+					img-shadow: 3px 3px 5px 2 $base-950;
+					overflow: noclip;
+				}
+				& Label {
+					text-shadow: 3px 3px 5px 2 $base-950;
+					overflow: noclip;
+				}
+			}
+			& > SteamInputAction.ControllerConnected {
+				visibility: collapse;
+			}
+			.InputController &:focus:not(:disabled) {
+				& > SteamInputAction {
+					visibility: visible;
 				}
 			}
 		}
@@ -610,6 +632,7 @@ $pane-move-time: 0.1s;
 	}
 
 	&__page-actions {
+		height: $button-height;
 		width: 100%;
 		margin-top: 15px;
 		flow-children: right;

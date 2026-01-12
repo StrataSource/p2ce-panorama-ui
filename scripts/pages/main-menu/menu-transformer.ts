@@ -44,7 +44,8 @@ class MainMenuCampaignMode {
 		if (this.selectedCampaign === undefined) return;
 
 		this.setContinueDetails();
-		this.setCampaignMenuDetails();
+		if (this.setCampaignMenuDetails())
+			MenuAnimation.switchFade(true);
 	}
 
 	static onPauseMenuShown() {
