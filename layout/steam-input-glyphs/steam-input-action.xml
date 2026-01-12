@@ -1,0 +1,9 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/components/steam-input.scss" />
+	</styles>
+	<SteamInputAction>
+		<Panel class="action-container"/>
+	</SteamInputAction>
+</root>
