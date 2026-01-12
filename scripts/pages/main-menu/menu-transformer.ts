@@ -193,12 +193,16 @@ class MainMenuCampaignMode {
 							if (!isBackgroundMap || !this.loadingMap) return;
 							this.loadingMap = false;
 							$.Warning('!!!!! Background map was specified, but it failed to load! Exiting campaign !!!!!');
-							UiToolkitAPI.ShowGenericPopupOk(
-								$.Localize('#Popup_CampaignBgLoadFailed'),
-								$.Localize('#Popup_CampaignBgLoadFailed_Message'),
-								'bad-popup',
-								() => {}
-							);
+							MainMenu.addToReturnQueue(() => {
+								UiToolkitAPI.ShowGenericPopupOk(
+									$.Localize('#Popup_CampaignBgLoadFailed'),
+									$.Localize('#Popup_CampaignBgLoadFailed_Message'),
+									'bad-popup',
+									() => {
+										MainMenu.onMainMenuFocused();
+									}
+								);
+							});
 							this.exitCampaign();
 						}
 					);
