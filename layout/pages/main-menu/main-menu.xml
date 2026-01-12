@@ -331,14 +331,13 @@
 								tabindex="auto"
 								selectionpos="auto"
 							>
-								<Image
-									class="button__icon button__icon--left"
-									texturewidth="48"
-									textureheight="48"
-									src="file://{images}/glyphs/xbox/xbox_button_b.svg"
-								/>
+								<SteamInputAction id="BackSteamAction" class="ml-2 mr-2" actionset="MenuControls" action="menu_cancel" separatortext="/" controllernumber="1" /> 
 								<Label class="button__text button__text--right" text="Back" />
 							</Button>
+							<Panel class="flow-right vertical-align-center ml-2">
+								<SteamInputAction id="SelectSteamAction" class="mr-1" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber="1" /> 
+								<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name" />
+							</Panel>
 						</Panel>
 					</Panel>
 				</Panel>

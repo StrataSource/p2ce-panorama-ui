@@ -171,10 +171,10 @@
 					</Panel>
 				</Panel>
 				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
-					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: duck"/>
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: duck_notoggle"/>
 					<Panel class="dev-ref__input__right">
-						<SteamInputAction id="ButtonTest12" actionset="GameControls" action="duck" separatortext="/" controllernumber = "1" glyphsize="large"/>
-						<SteamInputActionLabel actionset="GameControls" action="duck" class="steam-action-name"/>
+						<SteamInputAction id="ButtonTest12" actionset="GameControls" action="duck_notoggle" separatortext="/" controllernumber = "1" glyphsize="large"/>
+						<SteamInputActionLabel actionset="GameControls" action="duck_notoggle" class="steam-action-name"/>
 					</Panel>
 				</Panel>
 				<Panel class="flow-right px-3 py-1 dev-ref__input">
@@ -192,6 +192,259 @@
 					<Panel class="dev-ref__input__right">
 						<SteamInputAction id="ButtonTest14" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber = "1"/> 
 						<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="dev-ref__bg__gray full-width py-3 dev-ref__input flow-down by-menu-pane">
+					<Label class="text-h3 px-3" text="P2CE Mappings" />
+					<Label class="text-h5 px-3" text="ActionSet: GameControls" />
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="Move" actionset="GameControls" action="Move" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="Move" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="TouchPadMove" actionset="GameControls" action="TouchPadMove" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="TouchPadMove" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="GyroCamera" actionset="GameControls" action="GyroCamera" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="GyroCamera" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="TouchPadCamera" actionset="GameControls" action="TouchPadCamera" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="TouchPadCamera" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="JoystickCamera" actionset="GameControls" action="JoystickCamera" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="JoystickCamera" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="attack" actionset="GameControls" action="attack" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="attack" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="attack2" actionset="GameControls" action="attack2" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="attack2" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="quick_ping" actionset="GameControls" action="quick_ping" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="quick_ping" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="zoom" actionset="GameControls" action="zoom" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="zoom" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="remote_view" actionset="GameControls" action="remote_view" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="remote_view" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="duck_notoggle" actionset="GameControls" action="duck_notoggle" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="duck_notoggle" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="toggle_duck" actionset="GameControls" action="toggle_duck" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="toggle_duck" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="jump" actionset="GameControls" action="jump" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="jump" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="use" actionset="GameControls" action="use" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="use" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="mouse_menu_taunt" actionset="GameControls" action="mouse_menu_taunt" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="mouse_menu_taunt" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="mouse_menu" actionset="GameControls" action="mouse_menu" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="mouse_menu" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="pause_menu" actionset="GameControls" action="pause_menu" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="pause_menu" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="invnext" actionset="GameControls" action="invnext" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="invnext" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="invprev" actionset="GameControls" action="invprev" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="invprev" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="lastinv" actionset="GameControls" action="lastinv" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="lastinv" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="showscores" actionset="GameControls" action="showscores" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="showscores" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="voicerecord" actionset="GameControls" action="voicerecord" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="voicerecord" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="reload" actionset="GameControls" action="reload" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="reload" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="speed" actionset="GameControls" action="speed" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="speed" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="nextpaint" actionset="GameControls" action="nextpaint" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="nextpaint" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="prevpaint" actionset="GameControls" action="prevpaint" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="GameControls" action="prevpaint" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+
+				<Panel class="dev-ref__bg__gray full-width dev-ref__input by-menu-pane">
+					<Label class="text-h5 px-3 py-3" text="ActionSet: MenuControls" />
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_up" actionset="MenuControls" action="menu_up" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_up" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_down" actionset="MenuControls" action="menu_down" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_down" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_left" actionset="MenuControls" action="menu_left" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_left" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_right" actionset="MenuControls" action="menu_right" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_right" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_select" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_cancel" actionset="MenuControls" action="menu_cancel" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_cancel" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_x" actionset="MenuControls" action="menu_x" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_x" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="menu_y" actionset="MenuControls" action="menu_y" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="menu_y" class="steam-action-name"/>
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text=""/>
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction id="pause_menu" actionset="MenuControls" action="pause_menu" separatortext="/" controllernumber="1" glyphsize="large" />
+						<SteamInputActionLabel actionset="MenuControls" action="pause_menu" class="steam-action-name"/>
 					</Panel>
 				</Panel>
 			</Panel>
