@@ -92,6 +92,18 @@
 							</Panel>
 							<Panel class="mainmenu__nav__controls__wrapper">
 								<Panel id="MenuBtnList" class="mainmenu__nav__controls" childfocusonhover="true">
+									<Button
+										id="DevBtn"
+										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
+										onactivate="MainMenu.navigateToPage('Dev', 'main-menu/developer', $('#DevBtn'))"
+										tabindex="auto"
+										selectionpos="auto"
+									>
+										<Panel class="vertical-align-center flow-down">
+											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Developer" />
+											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Developer_Tagline" />
+										</Panel>
+									</Button>
 									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
 									<Button
 										id="PlayBtn"

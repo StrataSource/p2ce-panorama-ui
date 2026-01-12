@@ -1,0 +1,32 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+	</scripts>
+
+	<Panel
+		class="mainmenu__page"
+		onload="$.DispatchEvent(
+					'MainMenuSetPageLines',
+					$.Localize('#MainMenu_Navigation_Developer'),
+					$.Localize('#MainMenu_Navigation_Developer_Tagline')
+				);"
+	>
+		<Panel class="vertical-align-center flow-down">
+			<Button
+				class="button"
+				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'controls-library', undefined);"
+			>
+				<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
+			</Button>
+			<Button
+				class="button mt-2"
+				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'SteamInput', 'dev/steam-input', undefined);"
+			>
+				<Label class="button__text" text="#MainMenu_Navigation_SteamInputLibrary" />
+			</Button>
+		</Panel>
+	</Panel>
+</root>

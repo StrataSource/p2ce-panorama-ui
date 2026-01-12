@@ -1,0 +1,40 @@
+@use '../../config' as *;
+
+.b-menu-pane {
+	border: $menu-pane-border;
+}
+.bx-menu-pane {
+	border-left: $menu-pane-border;
+	border-right: $menu-pane-border;
+}
+.by-menu-pane {
+	border-top: $menu-pane-border;
+	border-bottom: $menu-pane-border;
+}
+.bb-menu-pane {
+	border-bottom: $menu-pane-border;
+}
+
+.dev-ref {
+    &__bg {
+        background-color: rgba($base-950, 0.8);
+        &__light {
+            background-color: rgba($bright-color, 0.01);
+        }
+        &__gray {
+            background-color: $base-950;
+        }
+    }
+    &__input {
+        width: 900px;
+        &__left {
+            vertical-align: center;
+            font-weight: light;
+        }
+        &__right {
+            horizontal-align: right;
+            flow-children: right;
+            height: 48px;
+        }
+    }
+}
