@@ -366,7 +366,7 @@ $pane-move-time: 0.1s;
 				//text-shadow: 1px 1px 2px 2 $base-950;
 			}
 
-			&:hover:not(:disabled),
+			.InputKeyboard &:hover:not(:disabled),
 			.InputController &:focus:not(:disabled) {
 				animation: OpacityFlicker 3s linear 0s infinite normal forwards;
 				background-color: gradient(

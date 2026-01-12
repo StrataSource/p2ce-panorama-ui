@@ -4,6 +4,7 @@
 
 SteamInputAction
 {
+	visibility: collapse;
 	flow-children: right;
 	horizontal-align: center;
 	vertical-align: center;
@@ -14,7 +15,7 @@ SteamInputAction
 	transition-timing-function: ease-out;
 }
 
-.SteamInputGlyphsActive SteamInputAction.ControllerConnected
+SteamInputAction.ControllerConnected
 {
 	visibility: visible;
 }

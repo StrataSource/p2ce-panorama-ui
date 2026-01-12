@@ -14,6 +14,7 @@
 	color: $button-text-color;
 	flow-children: right;
 	tooltip-position: bottom;
+	padding: 0 $button-text-side-margin;
 
 	$this: &;
 
@@ -53,7 +54,7 @@
 		@include mixin.font-styles($use-header: $button-use-header-font, $light-header: $button-light-header-font);
 		font-size: $button-font-size;
 		color: $button-text-color;
-		margin: 0 $button-text-side-margin;
+		//margin: 0 $button-text-side-margin;
 		text-shadow: $button-text-shadow;
 		vertical-align: middle;
 		horizontal-align: center;
@@ -62,13 +63,13 @@
 		text-overflow: shrink;
 
 		&--left {
-			margin-left: $button-text-side-margin;
-			margin-right: $button-icon-text-gap;
+			//margin-left: $button-text-side-margin;
+			//margin-right: $button-icon-text-gap;
 		}
 
 		&--right {
-			margin-left: $button-icon-text-gap;
-			margin-right: $button-text-side-margin;
+			//margin-left: $button-icon-text-gap;
+			//margin-right: $button-text-side-margin;
 		}
 	}
 
