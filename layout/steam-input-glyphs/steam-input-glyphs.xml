@@ -1,0 +1,12 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/components/steam-input.scss" />
+	</styles>
+	<SteamInputGlyph>
+		<Panel class="glyph-container">
+			<Image id="ButtonGlyph" class="steam-button-glyph" texturewidth="64" textureheight="64"/>
+			<Label id="NameOfButton" class="steam-button-name"/>
+		</Panel>
+	</SteamInputGlyph>
+</root>

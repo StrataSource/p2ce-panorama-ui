@@ -1,0 +1,49 @@
+Obtained from CS:GO
+
+<Label allowrawtext="true" text="button_y (literal) (console defaults)"/>
+<SteamInputGlyph button_or_axis_name="button_y" />
+<Label allowrawtext="true" text="button_y (literal) (svg) (glyphstyle:light)"/>
+<SteamInputGlyph button_or_axis_name="button_y" svg="true" glyphstyle="light" />
+<Label allowrawtext="true" text="button_y (literal) (svg) (glyphstyle:dark)"/>
+<SteamInputGlyph button_or_axis_name="button_y" svg="true" glyphstyle="dark" />
+<Label allowrawtext="true" text="button_y (literal) (svg) (glyphstyle:knockout)"/>
+<SteamInputGlyph button_or_axis_name="button_y" svg="true" glyphstyle="knockout" />
+<Label allowrawtext="true" text="button_x (literal) (png) (glyphstyle:knockout) (neutral_colors:false)"/>
+<SteamInputGlyph button_or_axis_name="button_x" svg="false" glyphstyle="knockout" neutral_colors="false"/>
+<Label allowrawtext="true" text="button_b (literal) (svg) (glyphstyle:light) (solid)"/>
+<SteamInputGlyph button_or_axis_name="button_b" svg="true" glyphstyle="light" solid="true" />
+<Label allowrawtext="true" text="button_a (literal) (png) (glyphstyle:light) (solid) (neutral_colors:false)"/>
+<SteamInputGlyph button_or_axis_name="button_a" svg="false" glyphstyle="light" solid="true" neutral_colors="false" />
+<Label allowrawtext="true" text="button_a (literal) (png) (glyphstyle:knockout) (solid) (neutral_colors:false)"/>
+<SteamInputGlyph button_or_axis_name="button_a" svg="false" glyphstyle="knockout" solid="true" neutral_colors="false" />
+<Panel class="flowright">
+	<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_xbox360" />
+	<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_switch_pro" />
+	<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_ps5" />
+	<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_switch_joycon_single" />
+	<SteamInputGlyph button_or_axis_name="button_a" controller_type="controller_switch_joycon_pair" />
+</Panel>
+
+<SteamInputAction id="ButtonTest8" actionset="GameControls" action="Move" 	separatortext="/"	 controllernumber = "1" glyphsize="large" />
+<SteamInputActionLabel actionset="GameControls" action="Move"  class ="steam-action-name"/>
+<Label allowrawtext="true" text="Action Set: GameControls. Action: use_or_reload"/>
+<SteamInputAction id="ButtonTest9" actionset="GameControls" action="use_or_reload" separatortext="/" controllernumber = "1" glyphsize="medium"/>
+<SteamInputActionLabel actionset="GameControls" action="use_or_reload" class ="steam-action-name"/>
+<Label allowrawtext="true" text="Action Set: GameControls. Action: attack"/>
+<SteamInputAction id="ButtonTest10" actionset="GameControls" action="attack" separatortext="/" controllernumber = "1" glyphsize="small"/>
+<SteamInputActionLabel actionset="GameControls" action="attack" class ="steam-action-name"/>
+<Label allowrawtext="true" text="Action Set: GameControls. Action: duck"/>
+<SteamInputAction id="ButtonTest11" actionset="GameControls" action="duck" separatortext="/" controllernumber = "1" glyphsize="large"/>
+<SteamInputActionLabel actionset="GameControls" action="duck" class ="steam-action-name"/>
+<Label allowrawtext="true" text="Action Set: GameControls. Action: toggle_duck"/>
+<SteamInputAction id="ButtonTest12" actionset="GameControls" action="toggle_duck" separatortext="/" controllernumber = "1" svg="false"/>
+<SteamInputActionLabel actionset="GameControls" action="toggle_duck" class ="steam-action-name"/>
+<Label allowrawtext="true" text="Action Set: MenuControls. Action: menu_select"/>
+<SteamInputAction id="ButtonTest13" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber = "1"/> 
+<SteamInputActionLabel actionset="MenuControls" action="menu_select" class ="steam-action-name"/>
+<Label allowrawtext="true" text="Action Set: BuyZoneLayer. Action: buymenu"/>
+<SteamInputAction id="ButtonTest14" actionset="BuyZoneLayer" action="buymenu" separatortext="/" controllernumber = "1"/> 
+<SteamInputActionLabel actionset="BuyZoneLayer" action="buymenu" class ="steam-action-name"/>
+
+<SteamInputAction actionset="GameControls" action="drop" separatortext="/" controllernumber = "1"/>
+
