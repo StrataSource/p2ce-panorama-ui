@@ -108,7 +108,7 @@ class MainMenu {
 		MainMenuCampaignMode.onMainMenuLoaded();
 		MenuFeaturedBackgrounds.onMainMenuLoaded();
 
-		$.DispatchEvent('MainMenuSwitchFade');
+		MenuAnimation.switchFade(true);
 
 		this.setMainMenuBackground();
 		this.setMainMenuModelPanel();
@@ -169,6 +169,15 @@ class MainMenu {
 		this.continueText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
 		this.savCampaign = undefined;
 		this.savChapter = undefined;
+
+		// mp
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			if (GameInterfaceAPI.GetSettingInt('maxplayers') > 1) {
+				return;
+			} else if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
+				return;
+			}
+		}
 
 		if (saves.length === 0) {
 			$.Warning('CONTINUE: No saves');
@@ -304,6 +313,14 @@ class MainMenu {
 		this.menuContent.RemoveClass('mainmenu__content__t-prop');
 		this.menuContent.RemoveClass('mainmenu__content__anim');
 
+		// TODO: this would likely be conditional based on non-linear campaigns
+		this.continueBtn.visible = true;
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
+			MenuAnimation.switchFade(true);
+			this.setContinueDetails();
+			this.reloadBackground();
+		}
+
 		this.onMainMenuFocused();
 	}
 
@@ -331,6 +348,7 @@ class MainMenu {
 		$.GetContextPanel().AddClass('PauseMenuMode');
 		this.pauseAnimIn();
 		this.featuredBtn.visible = false;
+
 		$.Schedule(0.001, () => { this.onMainMenuFocused(); });
 	}
 
@@ -426,7 +444,7 @@ class MainMenu {
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 
 		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] !== undefined) return;
 
 		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 	}
@@ -445,7 +463,7 @@ class MainMenu {
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
 		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] !== undefined) return;
 
 		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 	}
@@ -550,6 +568,8 @@ class MainMenu {
 			this.continueBox.visible = true;
 			return;
 		}
+
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) return;
 
 		this.saveBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
