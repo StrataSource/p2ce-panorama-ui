@@ -5,6 +5,10 @@ class MenuFeaturedBackgrounds {
 	static staticBg = $<Image>('#MainMenuBackground')!;
 	static bgMapLoad: uuid | undefined = undefined;
 	static loadingMap = false;
+	static maps = [
+		'p2ce_background_laser_intro',
+		'p2ce_background_gentle_hum'
+	];
 
 	static onMainMenuLoaded() {
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
@@ -51,7 +55,7 @@ class MenuFeaturedBackgrounds {
 			);
 		}
 
-		GameInterfaceAPI.ConsoleCommand(`map_background ${'p2ce_background_laser_intro'}`);
+		GameInterfaceAPI.ConsoleCommand(`map_background ${'p2ce_background_gentle_hum'}`);
 	}
 
 	static onBackgroundMapLoaded(map: string, bgMap: boolean) {
