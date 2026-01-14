@@ -177,9 +177,11 @@ class MainMenuCampaignMode {
 
 		const meta = CampaignAPI.GetCampaignMeta(null);
 		const bgs = meta['background_music'] ?? '';
-		const bgl = meta['background_level'] ?? '';
+		const bgl = meta['background_map'] ?? '';
 		const bgm = meta['background_movie'] ?? '';
 		const bgi = meta['background_image'] ?? '';
+
+		$.Msg(`Music: ${bgs}, Level: ${bgl}, Movie: ${bgm}, Image: ${bgi}`);
 
 		MainMenu.stopMusic();
 
