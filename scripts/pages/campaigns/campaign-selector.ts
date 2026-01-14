@@ -4,11 +4,23 @@ class CampaignEntry {
 	index: number;
 	panel: Button;
 	info: CampaignInfo;
+	boxartPath: string;
+	coverPath: string;
+	iconPath: string;
+	btnBgPath: string;
+	desc: string;
+	author: string;
 
-	constructor(index: number, panel: Button, info: CampaignInfo) {
+	constructor(index: number, panel: Button, info: CampaignInfo, boxart: string, cover: string, icon: string, btnBg: string, desc: string, author: string) {
 		this.index = index;
 		this.panel = panel;
 		this.info = info;
+		this.boxartPath = boxart;
+		this.coverPath = cover;
+		this.iconPath = icon;
+		this.btnBgPath = btnBg;
+		this.desc = desc;
+		this.author = author;
 	}
 
 	update() {
@@ -29,23 +41,21 @@ class CampaignEntry {
 		if (title) {
 			title.text = $.Localize(this.info.title);
 		}
-		/*
 		if (author) {
-			author.text = $.Localize(this.info.author);
+			author.text = $.Localize(this.author);
 		}
 		if (desc) {
-			desc.text = $.Localize(this.info.desc);
+			desc.text = $.Localize(this.desc);
 		}
 		if (cover) {
-			cover.SetImage(this.info.cover);
+			cover.SetImage(`file://${this.coverPath}`);
 		}
 		if (ico) {
-			ico.SetImage(this.info.ico);
+			ico.SetImage(`file://${this.iconPath}`);
 		}
 		if (btnBg) {
-			btnBg.SetImage(this.info.btnBg);
+			btnBg.SetImage(`file://${this.btnBgPath}`);
 		}
-		*/
 
 		this.panel.SetPanelEvent('onactivate', () => {
 			$.DispatchEvent('MainMenuSwitchFade');
@@ -62,6 +72,7 @@ class CampaignSelector {
 	static campaignList = $<Panel>('#CampaignContainer')!;
 	static hoverContainer = $<Panel>('#HoveredCampaignContainer')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
+	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
 	static campaignEntries: CampaignEntry[] = [];
 	static hoveredCampaign: CampaignInfo | null = null;
 
@@ -71,7 +82,7 @@ class CampaignSelector {
 	static playerMode: PlayerMode;
 
 	static focusActionBar() {
-		$('#SearchBar')!.SetFocus(true);
+		$('#SearchBar')!.SetFocus();
 	}
 
 	static init() {
@@ -139,29 +150,42 @@ class CampaignSelector {
 				p.AddClass('campaigns__entry__spaced');
 			}
 
+			const c = campaigns[i];
+
+			this.campaignEntries.push(new CampaignEntry(
+				i,
+				p,
+				c,
+				c.meta[CampaignMeta.BOX_ART],
+				c.meta[CampaignMeta.COVER],
+				c.meta[CampaignMeta.SQUARE_LOGO],
+				c.meta[CampaignMeta.BTN_BG],
+				c.meta[CampaignMeta.DESC],
+				c.meta[CampaignMeta.AUTHOR]
+			));
+
 			p.SetPanelEvent('onmouseover', () => {
-				CampaignSelector.onCampaignHovered(campaigns[i]);
+				CampaignSelector.onCampaignHovered(this.campaignEntries[i]);
 			});
 
-			this.campaignEntries.push(new CampaignEntry(i, p, campaigns[i]));
 			this.campaignEntries[i].update();
 		}
 		stripDevTagsFromLabels(this.campaignList);
 
 		if (this.campaignEntries.length > 0) {
-			this.campaignEntries[0].panel.SetFocus(true);
+			this.campaignEntries[0].panel.SetFocus();
 		}
 	}
 
-	static onCampaignHovered(info: CampaignInfo) {
+	static onCampaignHovered(e: CampaignEntry) {
 		let switchDelay = 0;
 
 		if (!this.hoverContainer.HasClass('campaigns__boxart__container__show')) {
 			this.hoverContainer.AddClass('campaigns__boxart__container__show');
 
-			if (info === this.hoveredCampaign) return;
+			if (e.info === this.hoveredCampaign) return;
 		} else {
-			if (info === this.hoveredCampaign) return;
+			if (e.info === this.hoveredCampaign) return;
 
 			switchDelay = 0.0;
 
@@ -170,10 +194,10 @@ class CampaignSelector {
 			this.hoverInfo.UpdateCurrentAnimationKeyframes(kfs);
 		}
 
-		this.hoveredCampaign = info;
+		this.hoveredCampaign = e.info;
 
 		$.Schedule(switchDelay, () => {
-			//this.hoverBoxart.SetImage(info.boxart);
+			this.hoverBoxart.SetImage(`file://${e.boxartPath}`);
 		});
 	}
 

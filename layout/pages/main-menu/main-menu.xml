@@ -70,6 +70,15 @@
 
 			<Panel id="PauseMenuMainMenuContent" hittest="false" class="mainmenu__pause-content-blur" />
 
+			<Image
+				id="ContinueSaveLogo"
+				class="mainmenu__square-logo"
+				src="file://{images}/menu/portal2/logo.svg"
+				textureheight="2048"
+				texturewidth="2048"
+				scaling="stretch-to-fit-preserve-aspect"
+			/>
+
 			<!-- Full page blur: used to blur everything below the drawer -->
 			<Panel id="MainContainer" class="mainmenu__container mainmenu__menu" disabled="true" onfocus="MainMenu.onMainMenuFocused()">
 				<Panel id="MenuContentRoot" class="mainmenu__content">
@@ -394,14 +403,16 @@
 								texturewidth="1080"
 								scaling="stretch-to-cover-preserve-aspect"
 							/>
+							<!--
 							<Image
-								id="ContinueSaveLogo"
+								id="ContinueSaveLogo" 
 								class="mainmenu__display-box__logo"
 								src="file://{images}/menu/portal2/logo.svg"
 								textureheight="64"
 								texturewidth="64"
 								scaling="stretch-to-cover-preserve-aspect"
 							/>
+							-->
 						</Panel>
 						<Panel class="mainmenu__display-box__details">
 							<Panel class="vertical-align-center flow-down ml-3">
@@ -459,8 +470,6 @@
 						</Panel>
 					</Panel>
 				</Panel>
-
-				<Label id="DevCampaign" class="mainmenu__devtext" text="[DEV] No campaign active" />
 			</Panel>
 			
 			<Panel class="horizontal-align-right flow-right m-3">

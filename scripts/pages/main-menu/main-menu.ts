@@ -141,7 +141,7 @@ class MainMenu {
 			const child = children[i];
 			if (child.IsValid() && child.visible && child.enabled) {
 				$.Msg(`Setting focus to: ${child.id} (${child.paneltype})`);
-				child.SetFocus(true);
+				child.SetFocus();
 				break;
 			}
 		}
@@ -151,16 +151,16 @@ class MainMenu {
 		// TODO: Grab active campaign from API instead of this
 		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
 		if (campaign === undefined) {
-			this.featuredBtn.SetFocus(true);
+			this.featuredBtn.SetFocus();
 		}
 	}
 
 	static tryNavigateUpFeatured() {
-		this.quitBtn.SetFocus(true);
+		this.quitBtn.SetFocus();
 	}
 
 	static tryNavigateDownFeatured() {
-		$<Button>('#PlayBtn')!.SetFocus(true);
+		$<Button>('#PlayBtn')!.SetFocus();
 	}
 
 	static setContinueDetails() {
@@ -216,6 +216,7 @@ class MainMenu {
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
 		this.saveBg.SetImage(thumb);
+		this.continueLogo.SetImage(`file://${savCampaign.meta[CampaignMeta.SQUARE_LOGO]}`);
 
 		this.continueText.text = `${$.Localize(savCampaign.title)}`;
 		this.continueHeadline.text = `${$.Localize(savChapter.title)}`;
@@ -416,7 +417,7 @@ class MainMenu {
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 		newPanel.RegisterForReadyEvents(true);
 		newPanel.AddClass('mainmenu__page__anim');
-		newPanel.SetFocus(true);
+		newPanel.SetFocus();
 
 		stripDevTagsFromLabels(newPanel);
 
@@ -496,7 +497,7 @@ class MainMenu {
 
 			if (currentPage.invokerPanel && currentPage.invokerPanel.IsValid() && currentPage.invokerPanel.visible && currentPage.invokerPanel.enabled) {
 				noResetFocus = true;
-				currentPage.invokerPanel.SetFocus(true);
+				currentPage.invokerPanel.SetFocus();
 				$.Msg(`Setting focus to ${currentPage.invokerPanel.id}`);
 			}
 		}
@@ -515,7 +516,7 @@ class MainMenu {
 			// restore the lower level page
 			nowPage.panel.RemoveClass('mainmenu__page__back-anim');
 			this.flashPageLines();
-			nowPage.panel.SetFocus(true);
+			nowPage.panel.SetFocus();
 		} else {
 			// no more pages
 			this.hidePage();
@@ -548,6 +549,8 @@ class MainMenu {
 			}
 			this.afterReturnQueue = [];
 		} else {
+			//const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
+			//this.music = $.PlaySoundEvent(music);
 			$.Schedule(0.001, () => { MainMenu.onMainMenuFocused() });
 		}
 	}
@@ -579,23 +582,8 @@ class MainMenu {
 
 		if (!this.savCampaign) return;
 
-		let saveImg = 'file://{images}/menu/portal2/full_logo.svg';
-		switch (this.savCampaign.id) {
-			case 'portal1_sp':
-				saveImg = 'file://{images}/menu/portal/full_logo.svg';
-				break;
-			case 'hl2':
-				saveImg = 'file://{images}/menu/hl2/full_logo.svg';
-				break;
-			case 'episodic':
-				saveImg = 'file://{images}/menu/episodic/full_logo.svg';
-				break;
-			case 'ep2':
-				saveImg = 'file://{images}/menu/ep2/full_logo.svg';
-				break;
-		}
+		this.menuLogo.SetImage(`file://${this.savCampaign.meta[CampaignMeta.FULL_LOGO]}`);
 		this.menuLogo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-		this.menuLogo.SetImage(saveImg);
 		const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
 		this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
 
@@ -603,6 +591,8 @@ class MainMenu {
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueText.text = `${$.Localize(this.savChapter.title)} [${convertTime(date, false)}]`;
+
+		this.continueLogo.AddClass('mainmenu__square-logo__anim');
 	}
 
 	static onContinueMouseOut(instant: boolean) {
@@ -628,6 +618,8 @@ class MainMenu {
 
 		if (this.savCampaign)
 			this.continueText.text = $.Localize(this.savCampaign.title);
+		
+		this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
 	}
 
 	/**
