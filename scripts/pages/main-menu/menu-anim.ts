@@ -31,7 +31,7 @@ class MenuAnimation {
 			this.imgBg.style.animation = 'FadeOut 0.01s linear 0s 1 normal forwards';
 		}
 		else {
-			this.imgBg.style.animation = 'FadeOut 3.5s ease-out 0s 1 normal forwards';
+			this.imgBg.style.animation = 'FadeOut 2.0s ease-out 0s 1 normal forwards';
 		}
 	}
 

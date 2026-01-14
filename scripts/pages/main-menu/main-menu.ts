@@ -110,6 +110,9 @@ class MainMenu {
 
 		MenuAnimation.switchFade(true);
 
+		$.Msg(GameInterfaceAPI.GetSettingString('map'));
+		$.Msg(GameInterfaceAPI.GetCurrentMap());
+
 		this.setMainMenuBackground();
 		this.setMainMenuModelPanel();
 		
@@ -256,7 +259,6 @@ class MainMenu {
 		// done by the campaign menu instead
 		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
 
-		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
 			this.featuredBtn.visible = true;

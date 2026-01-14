@@ -27,6 +27,12 @@
 			>
 				<Label class="button__text" text="#MainMenu_Navigation_SteamInputLibrary" />
 			</Button>
+			<Button
+				class="button mt-2"
+				onactivate="$.DispatchEvent('MainMenuCloseAllPages'); $.DispatchEvent('MainMenuSwitchFade'); $.DispatchEvent('ReloadBackground')"
+			>
+				<Label class="button__text" text="[HC] Reroll Background" />
+			</Button>
 		</Panel>
 	</Panel>
 </root>
