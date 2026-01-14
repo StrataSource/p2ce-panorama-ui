@@ -188,7 +188,7 @@ class SaveEntry {
 			if (!savChapter) {
 				bg.visible = false;
 			} else {
-				bg.SetImage(convertImagePath(savChapter.thumbnail));
+				bg.SetImage(convertImagePath(savChapter.meta["thumbnail"]));
 			}
 		}
 

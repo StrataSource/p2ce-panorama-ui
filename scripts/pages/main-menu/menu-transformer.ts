@@ -173,7 +173,9 @@ class MainMenuCampaignMode {
 			if (this.movie) this.movie.visible = false;
 			this.hideBgImg();
 
-			const bgmu = CampaignAPI.GetBackgroundMusic();
+			const meta = CampaignAPI.GetCampaignMeta(null)
+			const bgmu = meta["background_music"] ?? "";
+
 			$.Msg(bgmu);
 			if (bgmu) this.music = $.PlaySoundEvent(bgmu);
 		}
@@ -197,9 +199,11 @@ class MainMenuCampaignMode {
 	static setCampaignMenuDetails() {
 		this.movie = $<Movie>('#MainMenuMovie')!;
 
-		const bgl = CampaignAPI.GetBackgroundLevel();
-		const bgm = CampaignAPI.GetBackgroundMovie();
-		const bgi = CampaignAPI.GetBackgroundImage();
+		const meta = CampaignAPI.GetCampaignMeta(null)
+		const bgm = meta["background_movie"] ?? "";
+		const bgs = meta["background_music"] ?? "";
+		const bgl = meta["background_level"] ?? "";
+		const bgi = meta["background_image"] ?? "";
 
 		MainMenu.stopMusic();
 
@@ -222,7 +226,7 @@ class MainMenuCampaignMode {
 			this.movie.Play();
 			this.movie.visible = true;
 			$.Schedule(0.001, () => {
-				this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic());
+				this.music = $.PlaySoundEvent(bgs);
 			});
 		} else if (bgi.length > 0) {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
@@ -230,7 +234,7 @@ class MainMenuCampaignMode {
 			this.imgBg.SetImage(`file://${bgi}`);
 			this.movie.visible = false;
 			$.Schedule(0.001, () => {
-				this.music = $.PlaySoundEvent(CampaignAPI.GetBackgroundMusic());
+				this.music = $.PlaySoundEvent(bgs);
 			});
 		}
 
@@ -277,7 +281,7 @@ class MainMenuCampaignMode {
 
 		this.selectedCampaign = campaign;
 		$.Msg(`Switching campaign to: ${this.selectedCampaign.id}`);
-		if (CampaignAPI.SetActiveCampaign(this.selectedCampaign.id)) {
+		if (!CampaignAPI.SetActiveCampaign(this.selectedCampaign.id)) {
 			$.Warning('JS: SetActiveCampaign failed!');
 		}
 		// TODO: Grab active campaign from API instead of this

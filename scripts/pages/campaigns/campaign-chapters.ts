@@ -45,7 +45,7 @@ class ChapterEntry {
 			}
 		}
 		if (cover) {
-			cover.SetImage(convertImagePath(this.chapter.thumbnail));
+			cover.SetImage(convertImagePath(this.chapter.meta["thumbnail"]));
 			$.Msg(`PATH TO CHAPTER IMAGE: file://${this.chapter.thumbnail}`);
 		}
 
