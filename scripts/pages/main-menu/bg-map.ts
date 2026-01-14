@@ -47,7 +47,7 @@ class MenuFeaturedBackgrounds {
 		this.staticBg.SetImage(`file://{images}/menu/featured/${this.maps[this.mapSelection]}.png`);
 		MenuAnimation.showBgImg(false);
 
-		if (!this.bgMapLoad) {
+		if (this.bgMapLoad === undefined) {
 			this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
 				'map_load_failed',
 				(mapName: string, isBackgroundMap: boolean) => {

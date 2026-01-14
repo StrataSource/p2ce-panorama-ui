@@ -92,7 +92,6 @@
 				<Panel
 					id="CampaignContainer"
 					class="campaigns__list"
-					onmouseout="CampaignSelector.hideBoxart()"
 					tabindex="auto"
 					selectionpos="auto"
 					childfocusonhover="true"
