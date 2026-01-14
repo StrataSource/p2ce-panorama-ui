@@ -295,6 +295,24 @@ $pane-move-time: 0.1s;
 		img-shadow: 0px 0px 50px 4 $base-950;
 	}
 
+	&__square-logo {
+		height: 95%;
+		width: height-percentage(1);
+		transform: translateX(-16%);
+		opacity: 0;
+		-s2-mix-blend-mode: additive;
+		horizontal-align: left;
+		vertical-align: center;
+		transition:
+			transform 0.25s ease-out 0s,
+			opacity 0.25s ease-out 0s;
+
+		&__anim {
+			transform: translateX(-15%);
+			opacity: 0.15;
+		}
+	}
+
 	&__cooltext {
 		width: 440px;
 		height: 130px;

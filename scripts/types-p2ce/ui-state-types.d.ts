@@ -16,3 +16,13 @@ declare const enum GlobalUiObjects {
 	UI_CAMPAIGN_SETTINGS = 'UiCampaignSettings',
 	UI_CAMPAIGN_SETTING_PAGE = 'UiCampaignSettingPage'
 }
+
+declare const enum CampaignMeta {
+	BOX_ART = 'box_art',
+	BTN_BG = 'btn_bg',
+	COVER = 'cover',
+	FULL_LOGO = 'full_logo',
+	SQUARE_LOGO = 'square_logo',
+	DESC = 'desc',
+	AUTHOR = 'author'
+}
