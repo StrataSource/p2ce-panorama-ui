@@ -5,7 +5,6 @@ class MainMenuCampaignMode {
 	static imgBg = $<Image>('#MainMenuBackground')!;
 
 	static logo = $<Image>('#GameFullLogo')!;
-	static campaignDevTxt = $<Label>('#DevCampaign')!;
 	static menuContent = $<Panel>('#MenuContentRoot')!;
 	static switchBlur = $<Panel>('#SwitcherBlur')!;
 	static pageInsert = $<Panel>('#PageInsert')!;
@@ -259,30 +258,9 @@ class MainMenuCampaignMode {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
-		$('#NewGameBtn')!.SetFocus(true);
+		$('#NewGameBtn')!.SetFocus();
 
-		// TODO: Set logo image appropriately
-		let saveImg = 'file://{images}/menu/portal2/full_logo.svg';
-		this.logo.visible = true;
-		switch (this.selectedCampaign.id) {
-			case 'portal1_sp':
-				saveImg = 'file://{images}/menu/portal/full_logo.svg';
-				break;
-
-			case 'hl2':
-				saveImg = 'file://{images}/menu/hl2/full_logo.svg';
-				break;
-
-			case 'episodic':
-				saveImg = 'file://{images}/menu/episodic/full_logo.svg';
-				break;
-
-			case 'ep2':
-				saveImg = 'file://{images}/menu/ep2/full_logo.svg';
-				break;
-		}
-		this.logo.SetImage(saveImg);
-		this.campaignDevTxt.text = `[DEV] Campaign: ${$.Localize(campaign.title)} (${id})`;
+		this.logo.SetImage(`file://${this.selectedCampaign.meta[CampaignMeta.FULL_LOGO]}`);
 
 		this.setContinueDetails();
 	}
@@ -310,7 +288,6 @@ class MainMenuCampaignMode {
 		$.Schedule(0.5, () => {
 			this.continueBtn.RemoveClass('mainmenu__nav__btn__no-gradient');
 			this.logo.SetImage('file://{images}/logo.svg');
-			this.campaignDevTxt.text = '[DEV] No campaign active';
 			$.GetContextPanel().RemoveClass('CampaignSelected');
 			$.DispatchEvent('ReloadBackground');
 			MainMenu.setContinueDetails();

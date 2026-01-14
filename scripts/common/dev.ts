@@ -63,7 +63,7 @@ function convertTime(date: Date, split: boolean = true) {
 }
 
 function convertImagePath(thumbPath: string) {
-	if (thumbPath.endsWith('.vtf') || thumbPath.endsWith('.png') || thumbPath.endsWith('.jpg'))
+	if (thumbPath.endsWith('.vtf') || thumbPath.endsWith('.png') || thumbPath.endsWith('.jpg') || thumbPath.endsWith('.svg'))
 		return `file://${thumbPath}`;
 	else return thumbPath;
 }
