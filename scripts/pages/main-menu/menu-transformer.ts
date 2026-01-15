@@ -265,7 +265,12 @@ class MainMenuCampaignMode {
 
 		$.GetContextPanel().AddClass('CampaignSelected');
 
-		this.logo.SetImage(`file://${this.selectedCampaign.meta[CampaignMeta.FULL_LOGO]}`);
+		const logoPath = this.selectedCampaign.meta[CampaignMeta.FULL_LOGO];
+		if (logoPath !== undefined) {
+			this.logo.SetImage(`file://${logoPath}`);
+		} else {
+			this.logo.visible = false;
+		}
 
 		this.setContinueDetails();
 
@@ -300,6 +305,7 @@ class MainMenuCampaignMode {
 
 		$.DispatchEvent('MainMenuSwitchFade');
 		$.Schedule(0.5, () => {
+			this.logo.visible = true;
 			this.continueBtn.RemoveClass('mainmenu__nav__btn__no-gradient');
 			this.logo.SetImage('file://{images}/logo.svg');
 			$.GetContextPanel().RemoveClass('CampaignSelected');
