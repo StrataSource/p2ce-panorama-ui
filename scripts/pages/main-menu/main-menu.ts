@@ -104,6 +104,12 @@ class MainMenu {
 		$.RegisterForUnhandledEvent('MainMenuSetFocus', this.setFocus.bind(this));
 		$.RegisterForUnhandledEvent('MainBackgroundLoaded', this.onBackgroundLoaded.bind(this));
 
+		$.RegisterEventHandler('ImageFailedLoad', this.imgBg, () => {
+			// defaultsrc attribute is unreliable
+			$.Warning('Could not load background image');
+			this.imgBg.SetImage(getRandomFallbackImage());
+		});
+
 		MenuAnimation.onMainMenuLoaded();
 		MainMenuCampaignMode.onMainMenuLoaded();
 		MenuFeaturedBackgrounds.onMainMenuLoaded();
@@ -593,10 +599,18 @@ class MainMenu {
 
 		if (!this.savCampaign) return;
 
-		this.menuLogo.SetImage(`file://${this.savCampaign.meta[CampaignMeta.FULL_LOGO]}`);
-		this.menuLogo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-		const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
-		this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
+		const logoPath = this.savCampaign.meta[CampaignMeta.FULL_LOGO];
+		if (logoPath !== undefined) {
+			this.menuLogo.SetImage(`file://${logoPath}`);
+			this.menuLogo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+			const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
+			this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
+		}
+		else {
+			this.menuLogo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+			const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeOut');
+			this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
+		}
 
 		if (!this.savChapter) return;
 
