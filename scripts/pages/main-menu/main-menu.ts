@@ -120,9 +120,6 @@ class MainMenu {
 
 		this.setContinueDetails();
 
-		this.showPrereleaseWarning();
-		if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
-
 		this.onMainMenuFocused();
 	}
 
@@ -562,6 +559,8 @@ class MainMenu {
 			//this.music = $.PlaySoundEvent(music);
 			$.Schedule(0.001, () => {
 				MainMenu.onMainMenuFocused();
+				this.showPrereleaseWarning();
+				if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 			});
 		}
 	}
