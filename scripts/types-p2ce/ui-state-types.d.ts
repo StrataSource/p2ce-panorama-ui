@@ -19,8 +19,8 @@ declare const enum GlobalUiObjects {
 
 declare const enum CampaignMeta {
 	BOX_ART = 'box_art',
-	BTN_BG = 'btn_bg',
-	COVER = 'cover',
+	BTN_BG = 'selector_button_background',
+	COVER = 'selector_cover',
 	FULL_LOGO = 'full_logo',
 	SQUARE_LOGO = 'square_logo',
 	DESC = 'desc',
