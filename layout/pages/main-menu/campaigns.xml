@@ -89,13 +89,7 @@
 					</DropDown>
 				</Panel>
 				<!-- Campaign list -->
-				<Panel
-					id="CampaignContainer"
-					class="campaigns__list"
-					tabindex="auto"
-					selectionpos="auto"
-					childfocusonhover="true"
-				/>
+				<Panel id="CampaignContainer" class="campaigns__list" tabindex="auto" selectionpos="auto" childfocusonhover="true" />
 			</Panel>
 			<Panel class="campaigns__right">
 				<Panel id="HoveredCampaignContainer" class="campaigns__boxart__container">

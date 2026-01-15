@@ -16,25 +16,25 @@
 }
 
 .dev-ref {
-    &__bg {
-        background-color: rgba($base-950, 0.8);
-        &__light {
-            background-color: rgba($bright-color, 0.01);
-        }
-        &__gray {
-            background-color: $base-950;
-        }
-    }
-    &__input {
-        width: 900px;
-        &__left {
-            vertical-align: center;
-            font-weight: light;
-        }
-        &__right {
-            horizontal-align: right;
-            flow-children: right;
-            height: 48px;
-        }
-    }
+	&__bg {
+		background-color: rgba($base-950, 0.8);
+		&__light {
+			background-color: rgba($bright-color, 0.01);
+		}
+		&__gray {
+			background-color: $base-950;
+		}
+	}
+	&__input {
+		width: 900px;
+		&__left {
+			vertical-align: center;
+			font-weight: light;
+		}
+		&__right {
+			horizontal-align: right;
+			flow-children: right;
+			height: 48px;
+		}
+	}
 }

@@ -6,10 +6,7 @@ class MenuFeaturedBackgrounds {
 	static bgMapLoad: uuid | undefined = undefined;
 	static loadingMap = false;
 	static mapSelection = 0;
-	static maps = [
-		'p2ce_background_laser_intro',
-		'p2ce_background_gentle_hum'
-	];
+	static maps = ['p2ce_background_laser_intro', 'p2ce_background_gentle_hum'];
 
 	static onMainMenuLoaded() {
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));

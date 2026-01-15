@@ -2,8 +2,7 @@
 
 // steaminputaction
 
-SteamInputAction
-{
+SteamInputAction {
 	visibility: collapse;
 	flow-children: right;
 	horizontal-align: center;
@@ -15,20 +14,17 @@ SteamInputAction
 	transition-timing-function: ease-out;
 }
 
-SteamInputAction.ControllerConnected
-{
+SteamInputAction.ControllerConnected {
 	visibility: visible;
 }
 
 SteamInputAction.AnalogDeadZoned,
-SteamInputAction.DigitalReleased
-{
+SteamInputAction.DigitalReleased {
 	brightness: 1;
 }
 
 SteamInputAction.AnalogThrown,
-SteamInputAction.DigitalPressed
-{
+SteamInputAction.DigitalPressed {
 	brightness: 0.5;
 	transform: translateY(1px);
 }
@@ -39,8 +35,7 @@ SteamInputAction > Label {
 	margin: 0 5px;
 }
 
-.HoldButtonToActivate .steam-button-glyph
-{
+.HoldButtonToActivate .steam-button-glyph {
 	border: 2px solid green;
 }
 
@@ -49,32 +44,27 @@ SteamInputAction > Label {
 SteamInputGlyph,
 .glyph-container,
 .steam-button-glyph,
-.steam-button-name
-{
-	horizontal-align : center;
-	vertical-align : center;
+.steam-button-name {
+	horizontal-align: center;
+	vertical-align: center;
 	width: fit-children;
 	height: fit-children;
 }
 
-.action-container
-{
+.action-container {
 	flow-children: down;
 }
 
-.glyph-container
-{
+.glyph-container {
 	flow-children: down;
 }
 
-.steam-button-glyph
-{
+.steam-button-glyph {
 	width: 32px;
 	height: 32px;
 }
 
-.steam-button-name
-{
+.steam-button-name {
 	text-align: center;
 	font-size: 20px;
 	text-transform: uppercase;
@@ -84,15 +74,13 @@ SteamInputGlyph,
 
 // steaminputactionlabel
 
-.steam-action-name
-{
-	horizontal-align : center;
-	vertical-align : center;
+.steam-action-name {
+	horizontal-align: center;
+	vertical-align: center;
 	width: fit-children;
 	height: fit-children;
 }
 
-.play-menu__playbtn SteamInputAction .steam-action-name
-{
+.play-menu__playbtn SteamInputAction .steam-action-name {
 	visibility: collapse;
 }
