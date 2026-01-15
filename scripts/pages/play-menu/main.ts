@@ -41,11 +41,11 @@ class PlayMenu {
 	}
 
 	static onDownFromCampaigns() {
-		$<Button>('#BtnSoloMaps')!.SetFocus(true);
+		$<Button>('#BtnSoloMaps')!.SetFocus();
 	}
 
 	static onUpFromPlayModes() {
-		$<Button>('#BtnCampaigns')!.SetFocus(true);
+		$<Button>('#BtnCampaigns')!.SetFocus();
 	}
 
 	// solo maps screen

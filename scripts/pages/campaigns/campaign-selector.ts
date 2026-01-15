@@ -4,23 +4,23 @@ class CampaignEntry {
 	index: number;
 	panel: Button;
 	info: CampaignInfo;
-	boxartPath: string;
-	coverPath: string;
-	iconPath: string;
-	btnBgPath: string;
-	desc: string;
-	author: string;
+	boxartPath: string | undefined;
+	coverPath: string | undefined;
+	iconPath: string | undefined;
+	btnBgPath: string | undefined;
+	desc: string | undefined;
+	author: string | undefined;
 
 	constructor(
 		index: number,
 		panel: Button,
 		info: CampaignInfo,
-		boxart: string,
-		cover: string,
-		icon: string,
-		btnBg: string,
-		desc: string,
-		author: string
+		boxart: string | undefined,
+		cover: string | undefined,
+		icon: string | undefined,
+		btnBg: string | undefined,
+		desc: string | undefined,
+		author: string | undefined
 	) {
 		this.index = index;
 		this.panel = panel;
@@ -31,6 +31,8 @@ class CampaignEntry {
 		this.btnBgPath = btnBg;
 		this.desc = desc;
 		this.author = author;
+
+		$.Msg(`${this.boxartPath}, ${this.coverPath}, ${this.iconPath}, ${this.btnBgPath}`);
 	}
 
 	update() {
@@ -52,19 +54,34 @@ class CampaignEntry {
 			title.text = $.Localize(this.info.title);
 		}
 		if (author) {
-			author.text = $.Localize(this.author);
+			if (this.author)
+				author.text = $.Localize(this.author);
+			else
+				author.visible = false;
 		}
 		if (desc) {
-			desc.text = $.Localize(this.desc);
+			if (this.desc)
+				desc.text = $.Localize(this.desc);
+			else
+				desc.visible = false;
 		}
 		if (cover) {
-			cover.SetImage(`file://${this.coverPath}`);
+			if (this.coverPath)
+				cover.SetImage(`file://${this.coverPath}`);
+			else
+				cover.SetImage(getRandomFallbackImage());
 		}
 		if (ico) {
-			ico.SetImage(`file://${this.iconPath}`);
+			if (this.iconPath)
+				ico.SetImage(`file://${this.iconPath}`);
+			else
+				ico.visible = false;
 		}
 		if (btnBg) {
-			btnBg.SetImage(`file://${this.btnBgPath}`);
+			if (this.btnBgPath)
+				btnBg.SetImage(`file://${this.btnBgPath}`);
+			else
+				btnBg.visible = false;
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
@@ -162,7 +179,10 @@ class CampaignSelector {
 		this.hoveredCampaign = e.info;
 
 		$.Schedule(switchDelay, () => {
-			this.hoverBoxart.SetImage(`file://${e.boxartPath}`);
+			if (e.boxartPath)
+				this.hoverBoxart.SetImage(`file://${e.boxartPath}`);
+			else
+				this.hoverBoxart.SetImage(getRandomFallbackImage());
 		});
 	}
 

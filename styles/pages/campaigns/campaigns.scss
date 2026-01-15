@@ -121,7 +121,7 @@
 		&__details {
 			flow-children: down;
 
-			margin-left: 23px;
+			margin-left: 22px;
 			vertical-align: middle;
 
 			&__logo {
@@ -147,23 +147,24 @@
 			&__title {
 				@include mixin.font-styles($use-header: true);
 				letter-spacing: 2px;
-				font-size: 24px;
-				text-shadow: 2px 2px 4px 2 $base-950;
+				font-size: 42px;
+				text-overflow: shrink;
 			}
 
 			&__author {
 				font-size: 14px;
 				letter-spacing: 1px;
-				text-shadow: 1px 1px 4px 2 $base-950;
+				padding-left: 3px;
+				margin-top: -5px;
 			}
 
 			&__desc {
 				margin-top: 5px;
 				font-size: 16px;
 				color: $base-200;
-				text-shadow: 1px 1px 8px 2 $base-950;
 				line-height: 22px;
 				max-height: 130px;
+				padding-left: 3px;
 			}
 		}
 	}
@@ -222,6 +223,7 @@
 		&__image {
 			width: 100%;
 			height: width-percentage(1);
+			vertical-align: center;
 		}
 
 		&__detail {
