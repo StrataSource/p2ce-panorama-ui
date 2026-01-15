@@ -68,12 +68,7 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			$.DispatchEvent('MainMenuSwitchFade');
-			$.Schedule(0.5, () => {
-				$.DispatchEvent('SetActiveUiCampaign', this.info.id);
-				$.DispatchEvent('MainMenuCloseAllPages');
-				$.DispatchEvent('ReloadBackground');
-			});
+			CampaignAPI.SetActiveCampaign(this.info.id);
 		});
 	}
 }
