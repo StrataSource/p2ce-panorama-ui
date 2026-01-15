@@ -32,11 +32,16 @@ class MainMenuCampaignMode {
 	static onMainMenuLoaded() {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onPauseMenuShown.bind(this));
-		$.RegisterForUnhandledEvent('SetActiveUiCampaign', this.onCampaignSelected.bind(this));
+		$.RegisterForUnhandledEvent('PanoramaComponent_Campaign_OnActiveCampaignChanged', this.onCampaignSelected.bind(this));
 		$.RegisterForUnhandledEvent('ReloadBackground', this.reloadBackground.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuFullBackNav', this.onFullBackNav.bind(this));
+	}
+
+	static onCampaignSwitched() {
+		this.selectedCampaign = CampaignAPI.GetActiveCampaign() ?? undefined;
+		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = this.selectedCampaign;
 	}
 
 	static onMainMenuShown() {
@@ -238,7 +243,6 @@ class MainMenuCampaignMode {
 	}
 
 	static onCampaignSelected(id: string) {
-		$.Msg(`Begin searching for campaign: ${id}`);
 		const campaign = CampaignAPI.GetAllCampaigns().find((v) => {
 			return v.id === id;
 		});
@@ -251,24 +255,30 @@ class MainMenuCampaignMode {
 		}
 
 		this.selectedCampaign = campaign;
-		$.Msg(`Switching campaign to: ${this.selectedCampaign.id}`);
-		if (!CampaignAPI.SetActiveCampaign(this.selectedCampaign.id)) {
-			$.Warning('JS: SetActiveCampaign failed!');
-		}
+
 		// TODO: Grab active campaign from API instead of this
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
-		$('#NewGameBtn')!.SetFocus();
 
 		this.logo.SetImage(`file://${this.selectedCampaign.meta[CampaignMeta.FULL_LOGO]}`);
 
 		this.setContinueDetails();
+
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
+			$.DispatchEvent('MainMenuCloseAllPages');
+			$.DispatchEvent('MainMenuSwitchFade');
+			$.Schedule(0.5, () => {
+				$.DispatchEvent('ReloadBackground');
+			});
+		}
 	}
 
 	static reloadBackground() {
 		// TODO: Grab active campaign from API instead of this
 		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
+
+		MainMenu.hideFeaturedBtn();
 
 		if (!this.setCampaignMenuDetails()) {
 			MenuAnimation.switchReverse();
