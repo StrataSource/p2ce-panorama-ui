@@ -43,8 +43,7 @@ class MainMenuCampaignMode {
 		if (this.selectedCampaign === undefined) return;
 
 		this.setContinueDetails();
-		if (this.setCampaignMenuDetails())
-			MenuAnimation.switchFade(true);
+		if (this.setCampaignMenuDetails()) MenuAnimation.switchFade(true);
 	}
 
 	static onPauseMenuShown() {
@@ -197,7 +196,9 @@ class MainMenuCampaignMode {
 						(mapName: string, isBackgroundMap: boolean) => {
 							if (!isBackgroundMap || !this.loadingMap) return;
 							this.loadingMap = false;
-							$.Warning('!!!!! Background map was specified, but it failed to load! Exiting campaign !!!!!');
+							$.Warning(
+								'!!!!! Background map was specified, but it failed to load! Exiting campaign !!!!!'
+							);
 							MainMenu.addToReturnQueue(() => {
 								UiToolkitAPI.ShowGenericPopupOk(
 									$.Localize('#Popup_CampaignBgLoadFailed'),
@@ -279,8 +280,7 @@ class MainMenuCampaignMode {
 		// must block subsequent requests to exit campaign
 		// (this only happens on controller because for some reason buttons
 		// that are disabled can still be activated if focused)
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined)
-			return;
+		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = undefined;
 		this.selectedCampaign = undefined;
 

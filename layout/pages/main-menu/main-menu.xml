@@ -30,17 +30,18 @@
 		</snippet>
 	</snippets>
 
-	<MainMenu class="InitialDisplay MainMenuRootPanel" hittest="false" onload="MainMenu.onMainMenuLoaded()" onfocus="MainMenu.onMainMenuFocused()">
+	<MainMenu
+		class="InitialDisplay MainMenuRootPanel"
+		hittest="false"
+		onload="MainMenu.onMainMenuLoaded()"
+		onfocus="MainMenu.onMainMenuFocused()"
+	>
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
 		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Movie background -->
-			<Panel
-				id="MainMenuMovieParent"
-				class="mainmenu__background MainMenuModeOnly"
-				hittest="false"
-			/>
+			<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" hittest="false" />
 			<!-- Static image background -->
 			<Image
 				id="MainMenuBackground"
@@ -80,7 +81,12 @@
 			/>
 
 			<!-- Full page blur: used to blur everything below the drawer -->
-			<Panel id="MainContainer" class="mainmenu__container mainmenu__menu" disabled="true" onfocus="MainMenu.onMainMenuFocused()">
+			<Panel
+				id="MainContainer"
+				class="mainmenu__container mainmenu__menu"
+				disabled="true"
+				onfocus="MainMenu.onMainMenuFocused()"
+			>
 				<Panel id="MenuContentRoot" class="mainmenu__content">
 					<Panel id="PageBg" class="mainmenu__page-bg" />
 
@@ -460,11 +466,27 @@
 								<Label class="button__text" text="Back" />
 							</Button>
 							<Panel class="flow-right vertical-align-center ControllerOnly">
-								<SteamInputAction id="SelectSteamAction" class="mr-1" actionset="MenuControls" action="menu_select" separatortext="/" controllernumber="1" glyphsize="large" /> 
+								<SteamInputAction
+									id="SelectSteamAction"
+									class="mr-1"
+									actionset="MenuControls"
+									action="menu_select"
+									separatortext="/"
+									controllernumber="1"
+									glyphsize="large"
+								/> 
 								<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name font-weight-bold" />
 							</Panel>
 							<Panel class="flow-right vertical-align-center ml-2 ControllerOnly">
-								<SteamInputAction class="mr-1" id="BackSteamAction" actionset="MenuControls" action="menu_cancel" separatortext="/" controllernumber="1" glyphsize="large" /> 
+								<SteamInputAction
+									class="mr-1"
+									id="BackSteamAction"
+									actionset="MenuControls"
+									action="menu_cancel"
+									separatortext="/"
+									controllernumber="1"
+									glyphsize="large"
+								/> 
 								<Label class="vertical-align-center" text="Back" />
 							</Panel>
 						</Panel>

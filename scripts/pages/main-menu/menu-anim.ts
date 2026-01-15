@@ -29,8 +29,7 @@ class MenuAnimation {
 	static hideBgImg(instant?: boolean) {
 		if (instant) {
 			this.imgBg.style.animation = 'FadeOut 0.01s linear 0s 1 normal forwards';
-		}
-		else {
+		} else {
 			this.imgBg.style.animation = 'FadeOut 2.0s ease-out 0s 1 normal forwards';
 		}
 	}
@@ -39,7 +38,7 @@ class MenuAnimation {
 		if (this.isBlurred) return;
 
 		$('#MainContainer')!.enabled = false;
-		
+
 		this.movie = $<Movie>('#MainMenuMovie')!;
 		this.movie.Stop();
 

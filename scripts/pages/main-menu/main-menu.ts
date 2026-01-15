@@ -115,7 +115,7 @@ class MainMenu {
 
 		this.setMainMenuBackground();
 		this.setMainMenuModelPanel();
-		
+
 		stripDevTagsFromLabels($.GetContextPanel());
 
 		this.setContinueDetails();
@@ -268,8 +268,7 @@ class MainMenu {
 		});
 	}
 
-	static onMapUnloaded() {
-	}
+	static onMapUnloaded() {}
 
 	static setMainMenuBackground() {
 		MenuFeaturedBackgrounds.loadBackground();
@@ -352,7 +351,9 @@ class MainMenu {
 		this.pauseAnimIn();
 		this.featuredBtn.visible = false;
 
-		$.Schedule(0.001, () => { this.onMainMenuFocused(); });
+		$.Schedule(0.001, () => {
+			this.onMainMenuFocused();
+		});
 	}
 
 	static onHidePauseMenu() {
@@ -395,7 +396,11 @@ class MainMenu {
 	// open a page, handles nested pages and receives calls via events from other pages
 	// note: page headline/tagline are set by the corresponding page script, not here
 	static navigateToPage(tab: string, xmlName: string, invokerPanel?: Panel) {
-		if (this.pages.find((v: MenuPage) => { return v.name === tab })) {
+		if (
+			this.pages.find((v: MenuPage) => {
+				return v.name === tab;
+			})
+		) {
 			$.Warning(`Page '${tab}' already exists, rejecting request to open the page.`);
 			return;
 		}
@@ -495,7 +500,12 @@ class MainMenu {
 			if (currentPage.name === 'Settings') $.DispatchEvent('SettingsSave');
 			if (currentPage.panel.IsValid()) this.reversePageAnim(currentPage.panel);
 
-			if (currentPage.invokerPanel && currentPage.invokerPanel.IsValid() && currentPage.invokerPanel.visible && currentPage.invokerPanel.enabled) {
+			if (
+				currentPage.invokerPanel &&
+				currentPage.invokerPanel.IsValid() &&
+				currentPage.invokerPanel.visible &&
+				currentPage.invokerPanel.enabled
+			) {
 				noResetFocus = true;
 				currentPage.invokerPanel.SetFocus();
 				$.Msg(`Setting focus to ${currentPage.invokerPanel.id}`);
@@ -522,8 +532,7 @@ class MainMenu {
 			this.hidePage();
 			$.DispatchEvent('MainMenuFullBackNav');
 
-			if (!noResetFocus)
-				$.DispatchEvent('MainMenuSetFocus');
+			if (!noResetFocus) $.DispatchEvent('MainMenuSetFocus');
 		}
 	}
 
@@ -551,13 +560,14 @@ class MainMenu {
 		} else {
 			//const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
 			//this.music = $.PlaySoundEvent(music);
-			$.Schedule(0.001, () => { MainMenu.onMainMenuFocused() });
+			$.Schedule(0.001, () => {
+				MainMenu.onMainMenuFocused();
+			});
 		}
 	}
 
 	static onContinueFocused() {
-		if ($.GetContextPanel().HasClass('InputController'))
-			this.onContinueMouseOver();
+		if ($.GetContextPanel().HasClass('InputController')) this.onContinueMouseOver();
 	}
 
 	static onContinueMouseOver() {
@@ -605,8 +615,7 @@ class MainMenu {
 
 		// TODO: Grab active campaign from API instead of this
 		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
-		if (campaign !== undefined)
-			return;
+		if (campaign !== undefined) return;
 
 		this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
 		this.saveBg.style.animation = `FadeOut ${instant ? 0.01 : 0.2}s ease-out 0s 1 normal forwards`;
@@ -616,9 +625,8 @@ class MainMenu {
 		this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
 		this.menuLogo.SetImage('file://{images}/logo.svg');
 
-		if (this.savCampaign)
-			this.continueText.text = $.Localize(this.savCampaign.title);
-		
+		if (this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
+
 		this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
 	}
 
