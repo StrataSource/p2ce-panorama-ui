@@ -243,14 +243,18 @@ class MainMenuCampaignMode {
 	}
 
 	static onCampaignSelected(id: string) {
+		const state = GameInterfaceAPI.GetGameUIState();
+		if (state === GameUIState.PAUSEMENU || state === GameUIState.INGAME) {
+			$.Warning('Campaign switch was triggered while in game! Blocking...');
+			CampaignAPI.SetActiveCampaign(this.selectedCampaign!.id);
+			return;
+		}
+
 		const campaign = CampaignAPI.GetAllCampaigns().find((v) => {
 			return v.id === id;
 		});
 		if (!campaign) {
 			$.Warning(`Menu: Campaign ID ${id} received but that's not a valid Campaign?`);
-			return;
-		} else if (this.selectedCampaign && this.selectedCampaign.id === id) {
-			$.Warning(`Campaign ${id} already active. Doing nothing.`);
 			return;
 		}
 
@@ -265,7 +269,7 @@ class MainMenuCampaignMode {
 
 		this.setContinueDetails();
 
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
+		if (state === GameUIState.MAINMENU) {
 			$.DispatchEvent('MainMenuCloseAllPages');
 			$.DispatchEvent('MainMenuSwitchFade');
 			$.Schedule(0.5, () => {
