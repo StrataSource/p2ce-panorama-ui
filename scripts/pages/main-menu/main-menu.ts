@@ -230,7 +230,6 @@ class MainMenu {
 					$.Localize('#Action_LoadGame'),
 					() => {
 						this.onContinueMouseOut(true);
-						$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
 						CampaignAPI.ContinueCampaign(savCampaign.id);
 					},
 					$.Localize('#UI_Cancel'),
@@ -239,7 +238,6 @@ class MainMenu {
 				);
 			} else {
 				this.onContinueMouseOut(true);
-				$.DispatchEvent('SetActiveUiCampaign', savCampaign.id);
 				CampaignAPI.ContinueCampaign(savCampaign.id);
 			}
 		});
@@ -343,10 +341,14 @@ class MainMenu {
 		this.menuContent.AddClass('mainmenu__content__anim');
 	}
 
+	static hideFeaturedBtn() {
+		this.featuredBtn.visible = false;
+	}
+
 	static onShowPauseMenu() {
 		$.GetContextPanel().AddClass('PauseMenuMode');
 		this.pauseAnimIn();
-		this.featuredBtn.visible = false;
+		this.hideFeaturedBtn();
 
 		$.Schedule(0.001, () => {
 			this.onMainMenuFocused();

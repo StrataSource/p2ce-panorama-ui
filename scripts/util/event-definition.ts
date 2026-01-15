@@ -26,7 +26,6 @@ $.DefineEvent('CampaignSettingHovered', 1, 'helpText');
 $.DefineEvent('MainMenuOpenNestedPage', 3);
 $.DefineEvent('MainMenuCloseAllPages', 0);
 $.DefineEvent('MainMenuSetPageLines', 2);
-$.DefineEvent('SetActiveUiCampaign', 1, 'campaignId');
 $.DefineEvent('MainMenuSwitchFade', 0);
 $.DefineEvent('MainMenuFullBackNav', 0);
 $.DefineEvent('MainMenuPagePreClose', 1);

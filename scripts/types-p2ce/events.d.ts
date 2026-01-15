@@ -14,7 +14,6 @@ interface GlobalEventNameMap {
 	MainMenuPagePreClose: (tab: string) => void;
 	MainMenuSetFocus: () => void;
 	CampaignSettingHovered: (helpText: string) => void;
-	SetActiveUiCampaign: (campaignId: string) => void;
 	MainMenuFullBackNav: () => void;
 	MainBackgroundLoaded: () => void;
 }
