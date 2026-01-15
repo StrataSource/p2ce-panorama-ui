@@ -11,7 +11,17 @@ class CampaignEntry {
 	desc: string;
 	author: string;
 
-	constructor(index: number, panel: Button, info: CampaignInfo, boxart: string, cover: string, icon: string, btnBg: string, desc: string, author: string) {
+	constructor(
+		index: number,
+		panel: Button,
+		info: CampaignInfo,
+		boxart: string,
+		cover: string,
+		icon: string,
+		btnBg: string,
+		desc: string,
+		author: string
+	) {
 		this.index = index;
 		this.panel = panel;
 		this.info = info;
@@ -95,53 +105,11 @@ class CampaignSelector {
 	}
 
 	static setPageLines() {
-		const playerModeStr =
-			this.playerMode === PlayerMode.SINGLEPLAYER
-				? '#MainMenu_Campaigns_CType_SP'
-				: '#MainMenu_Campaigns_CType_MP';
-
-		let headline: string;
-		let tagline: string;
-
-		switch (this.gameType) {
-			case GameType.P2CE_CAMPAIGN:
-				headline = $.Localize('#MainMenu_Campaigns_MapList_Campaigns');
-				tagline = $.Localize('#MainMenu_Campaigns_MapList_Campaigns_Tagline');
-				break;
-
-			case GameType.P2CE_MAP:
-				headline = $.Localize('#MainMenu_Campaigns_MapList');
-				tagline = $.Localize('#MainMenu_Campaigns_MapList_p2ce_Tagline');
-				break;
-
-			case GameType.PORTAL2_MAP:
-				headline = $.Localize('#MainMenu_Campaigns_MapList');
-				tagline = $.Localize('#MainMenu_Campaigns_MapList_portal2_Tagline');
-				break;
-
-			case GameType.LOOSE_MAP:
-				headline = $.Localize('#MainMenu_Campaigns_MapList_Uncategorized');
-				tagline = $.Localize('#MainMenu_Campaigns_MapList_Uncategorized_Tagline');
-				break;
-
-			default:
-				headline = tagline = '????';
-				break;
-		}
-
-		$.DispatchEvent('MainMenuSetPageLines', headline, tagline);
+		$.DispatchEvent('MainMenuSetPageLines', '', '');
 	}
 
 	static populateCampaigns() {
-		let campaigns = CampaignAPI.GetAllCampaigns();
-		campaigns = campaigns.filter((v) => {
-			if (this.playerMode === PlayerMode.SINGLEPLAYER) {
-				return !v.is_coop;
-			} else if (this.playerMode === PlayerMode.MULTIPLAYER) {
-				return v.is_coop;
-			}
-		}, this);
-
+		const campaigns = CampaignAPI.GetAllCampaigns();
 		for (let i = 0; i < campaigns.length; ++i) {
 			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
 			p.LoadLayoutSnippet('CampaignEntrySnippet');
@@ -152,17 +120,19 @@ class CampaignSelector {
 
 			const c = campaigns[i];
 
-			this.campaignEntries.push(new CampaignEntry(
-				i,
-				p,
-				c,
-				c.meta[CampaignMeta.BOX_ART],
-				c.meta[CampaignMeta.COVER],
-				c.meta[CampaignMeta.SQUARE_LOGO],
-				c.meta[CampaignMeta.BTN_BG],
-				c.meta[CampaignMeta.DESC],
-				c.meta[CampaignMeta.AUTHOR]
-			));
+			this.campaignEntries.push(
+				new CampaignEntry(
+					i,
+					p,
+					c,
+					c.meta[CampaignMeta.BOX_ART],
+					c.meta[CampaignMeta.COVER],
+					c.meta[CampaignMeta.SQUARE_LOGO],
+					c.meta[CampaignMeta.BTN_BG],
+					c.meta[CampaignMeta.DESC],
+					c.meta[CampaignMeta.AUTHOR]
+				)
+			);
 
 			p.SetPanelEvent('onmouseover', () => {
 				CampaignSelector.onCampaignHovered(this.campaignEntries[i]);

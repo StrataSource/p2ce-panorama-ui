@@ -55,7 +55,7 @@
 				saturation: 0;
 			}
 		}
-		
+
 		.InputKeyboard &:hover:not(:disabled),
 		.InputController &:focus:not(:disabled) {
 			border-color: $primary-color;

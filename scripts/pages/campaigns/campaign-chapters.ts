@@ -56,7 +56,12 @@ class ChapterEntry {
 				//CampaignChapters.actions.enabled = true;
 				CampaignChapters.selectedChapter = this.chapter;
 				UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.chapter;
-				$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings', undefined);
+				$.DispatchEvent(
+					'MainMenuOpenNestedPage',
+					'CampaignCustomization',
+					'campaigns/campaign-settings',
+					undefined
+				);
 			});
 		}
 	}
