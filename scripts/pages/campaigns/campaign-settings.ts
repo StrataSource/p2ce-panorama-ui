@@ -12,7 +12,7 @@ class CampaignSettingsTab {
 
 	static settingsPage = $<Panel>('#CampaignSettingsBase')!;
 
-	static campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] as CampaignInfo;
+	static campaign = CampaignAPI.GetActiveCampaign();
 	static chapter = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo;
 
 	static advancedOpened = false;

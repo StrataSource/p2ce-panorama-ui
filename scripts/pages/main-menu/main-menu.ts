@@ -116,9 +116,6 @@ class MainMenu {
 
 		MenuAnimation.switchFade(true);
 
-		$.Msg(GameInterfaceAPI.GetSettingString('map'));
-		$.Msg(GameInterfaceAPI.GetCurrentMap());
-
 		this.setMainMenuBackground();
 		this.setMainMenuModelPanel();
 
@@ -130,8 +127,7 @@ class MainMenu {
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
-		// TODO: Grab active campaign from API instead of this
-		if (isBackgroundMap && UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
+		if (isBackgroundMap && CampaignAPI.GetActiveCampaign() === null) {
 			this.movie = $<Movie>('#MainMenuMovie');
 			if (this.movie) this.movie.visible = false;
 			if (this.imgBg) MenuAnimation.hideBgImg(true);
@@ -151,9 +147,7 @@ class MainMenu {
 	}
 
 	static tryNavigateFeatured() {
-		// TODO: Grab active campaign from API instead of this
-		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
-		if (campaign === undefined) {
+		if (CampaignAPI.GetActiveCampaign() === null) {
 			this.featuredBtn.SetFocus();
 		}
 	}
@@ -180,7 +174,7 @@ class MainMenu {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			if (GameInterfaceAPI.GetSettingInt('maxplayers') > 1) {
 				return;
-			} else if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
+			} else if (CampaignAPI.GetActiveCampaign() === null) {
 				return;
 			}
 		}
@@ -256,10 +250,9 @@ class MainMenu {
 	}
 
 	static reloadBackground() {
-		// TODO: Grab active campaign from API instead of this
 		// checking if campaign is active, if so, block setting background as it's
 		// done by the campaign menu instead
-		if (UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] !== undefined) return;
+		if (CampaignAPI.GetActiveCampaign() !== null) return;
 
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
@@ -318,7 +311,7 @@ class MainMenu {
 
 		// TODO: this would likely be conditional based on non-linear campaigns
 		this.continueBtn.visible = true;
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) {
+		if (CampaignAPI.GetActiveCampaign() === null) {
 			MenuAnimation.switchFade(true);
 			this.setContinueDetails();
 			this.reloadBackground();
@@ -456,8 +449,7 @@ class MainMenu {
 		this.model.AddClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 
-		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] !== undefined) return;
+		if (CampaignAPI.GetActiveCampaign() !== null) return;
 
 		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 	}
@@ -475,8 +467,7 @@ class MainMenu {
 		this.model.RemoveClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
-		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] !== undefined) return;
+		if (CampaignAPI.GetActiveCampaign() !== null) return;
 
 		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 	}
@@ -584,9 +575,8 @@ class MainMenu {
 
 		this.isContinueActive = true;
 
-		// TODO: Grab active campaign from API instead of this
-		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
-		if (campaign !== undefined) {
+		const campaign = CampaignAPI.GetActiveCampaign();
+		if (campaign !== null) {
 			this.continueBox.visible = true;
 			return;
 		}
@@ -628,9 +618,8 @@ class MainMenu {
 
 		this.continueBox.visible = false;
 
-		// TODO: Grab active campaign from API instead of this
-		const campaign = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN];
-		if (campaign !== undefined) return;
+		const campaign = CampaignAPI.GetActiveCampaign();
+		if (campaign !== null) return;
 
 		this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
 		this.saveBg.style.animation = `FadeOut ${instant ? 0.01 : 0.2}s ease-out 0s 1 normal forwards`;
