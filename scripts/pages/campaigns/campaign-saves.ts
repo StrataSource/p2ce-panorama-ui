@@ -228,8 +228,7 @@ class CampaignSaves {
 
 	static saveEntries: SaveEntry[] = [];
 	static createSaveBtn: Button | null = null;
-	// FIXME: nul
-	static campaign = CampaignAPI.GetActiveCampaign();
+	static campaign = CampaignAPI.GetActiveCampaign()!;
 
 	static hideActionsOnAllSaves(excludeIndex: number) {
 		for (let i = 0; i < this.saveEntries.length; ++i) {

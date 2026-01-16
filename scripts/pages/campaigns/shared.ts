@@ -182,7 +182,7 @@ class CampaignShared {
 
 	// TODO: transmit non-default state BACK to page construction
 	static constructPage() {
-		const parent = $<Panel>('#SettingPageInsert');
+		const parent = $<Panel>('#SettingPageInsert')!;
 		const page = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTING_PAGE] as string;
 
 		const settings = CAMPAIGN_SETTINGS[page];
