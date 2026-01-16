@@ -38,8 +38,6 @@ class MainMenu {
 	static saveBg = $<Image>('#MainMenuSaveBackground')!;
 	static continueBox = $<Panel>('#ContinueBox')!;
 
-	static model = $<ModelPanel>('#MainMenuModel')!;
-
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
 
 	static menuLogo = $<Image>('#GameFullLogo')!;
@@ -117,7 +115,6 @@ class MainMenu {
 		MenuAnimation.switchFade(true);
 
 		this.setMainMenuBackground();
-		this.setMainMenuModelPanel();
 
 		stripDevTagsFromLabels($.GetContextPanel());
 
@@ -230,7 +227,10 @@ class MainMenu {
 					$.Localize('#Action_LoadGame'),
 					() => {
 						this.onContinueMouseOut(true);
-						CampaignAPI.ContinueCampaign(savCampaign.id);
+						GameInterfaceAPI.ConsoleCommand('disconnect');
+						$.Schedule(0.01, () => {
+							CampaignAPI.ContinueCampaign(savCampaign.id);
+						});
 					},
 					$.Localize('#UI_Cancel'),
 					() => {},
@@ -238,7 +238,10 @@ class MainMenu {
 				);
 			} else {
 				this.onContinueMouseOut(true);
-				CampaignAPI.ContinueCampaign(savCampaign.id);
+				GameInterfaceAPI.ConsoleCommand('disconnect');
+				$.Schedule(0.01, () => {
+					CampaignAPI.ContinueCampaign(savCampaign.id);
+				});
 			}
 		});
 
@@ -266,43 +269,6 @@ class MainMenu {
 
 	static setMainMenuBackground() {
 		MenuFeaturedBackgrounds.loadBackground();
-	}
-
-	// i think we could do something cool and have campaigns specify a model?
-	static setMainMenuModelPanel() {
-		// Assign a random model
-		const models = [
-			'models/panorama/menu/BotPoses.mdl',
-			'models/panorama/menu/sp_a2_bridge_the_gap_WHEATLEY.mdl',
-			'models/panorama/menu/sp_a1_wakeup_glados_MERGED.mdl'
-		];
-		const modelRotations = [-240, -100, -180];
-		const modelZTranslates = [0, 0, -30];
-
-		if (models.length !== modelRotations.length) {
-			$.Warning('main-menu: models & modelRotations array sizes mismatch');
-			return;
-		}
-
-		if (this.model) {
-			const index = Math.floor(Math.random() * models.length);
-			this.model.src = models[index]; // Pick a random model
-
-			this.model.SetModelRotationSpeedTarget(0, this.inSpace ? 0.02 : 0.01, this.inSpace ? 0.02 : 0);
-			this.model.SetMouseXRotationScale(0, 0.5, 0);
-			this.model.SetMouseYRotationScale(0, 0, 0);
-			this.model.SetModelRotation(0, modelRotations[index], 0);
-
-			this.model.LookAtModel();
-			this.model.SetCameraOffset(-300, 0, modelZTranslates[index]);
-			this.model.SetCameraFOV(20);
-
-			this.model.SetLightAmbient(0.2921, 0.327, 0.43);
-			this.model.SetDirectionalLightColor(1, 1.076, 1.2, 1.282);
-			this.model.SetDirectionalLightColor(0, 0.538, 0.6, 0.641);
-			this.model.SetDirectionalLightDirection(1, -50, 270, 0);
-			this.model.SetDirectionalLightDirection(0, -50, 135, 0);
-		}
 	}
 
 	static onShowMainMenu() {
@@ -446,7 +412,6 @@ class MainMenu {
 		this.gradientBar.AddClass('mainmenu__gradient-bar__anim');
 		this.page.AddClass('mainmenu__normal-page-container');
 		this.page.RemoveClass('mainmenu__wide-page-container');
-		this.model.AddClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 
 		if (CampaignAPI.GetActiveCampaign() !== null) return;
@@ -464,7 +429,6 @@ class MainMenu {
 		this.pageInsert.hittest = false;
 		this.gradientBar.RemoveClass('mainmenu__gradient-bar__anim');
 		this.controls.RemoveClass('mainmenu__nav__anim');
-		this.model.RemoveClass('hide');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
 		if (CampaignAPI.GetActiveCampaign() !== null) return;
@@ -595,8 +559,7 @@ class MainMenu {
 			this.menuLogo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
 			const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
 			this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
-		}
-		else {
+		} else {
 			this.menuLogo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 			const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeOut');
 			this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
