@@ -31,8 +31,6 @@ class CampaignEntry {
 		this.btnBgPath = btnBg;
 		this.desc = desc;
 		this.author = author;
-
-		$.Msg(`${this.boxartPath}, ${this.coverPath}, ${this.iconPath}, ${this.btnBgPath}`);
 	}
 
 	update() {
@@ -54,39 +52,31 @@ class CampaignEntry {
 			title.text = $.Localize(this.info.title);
 		}
 		if (author) {
-			if (this.author)
-				author.text = $.Localize(this.author);
-			else
-				author.visible = false;
+			if (this.author) author.text = $.Localize(this.author);
+			else author.visible = false;
 		}
 		if (desc) {
-			if (this.desc)
-				desc.text = $.Localize(this.desc);
-			else
-				desc.visible = false;
+			if (this.desc) desc.text = $.Localize(this.desc);
+			else desc.visible = false;
 		}
 		if (cover) {
-			if (this.coverPath)
-				cover.SetImage(`file://${this.coverPath}`);
-			else
-				cover.SetImage(getRandomFallbackImage());
+			if (this.coverPath) cover.SetImage(`file://${this.coverPath}`);
+			else cover.SetImage(getRandomFallbackImage());
 		}
 		if (ico) {
-			if (this.iconPath)
-				ico.SetImage(`file://${this.iconPath}`);
-			else
-				ico.visible = false;
+			if (this.iconPath) ico.SetImage(`file://${this.iconPath}`);
+			else ico.visible = false;
 		}
 		if (btnBg) {
-			if (this.btnBgPath)
-				btnBg.SetImage(`file://${this.btnBgPath}`);
-			else
-				btnBg.visible = false;
+			if (this.btnBgPath) btnBg.SetImage(`file://${this.btnBgPath}`);
+			else btnBg.visible = false;
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			$.Schedule(0.1, () => { CampaignAPI.SetActiveCampaign(this.info.id); });
+			$.Schedule(0.1, () => {
+				CampaignAPI.SetActiveCampaign(this.info.id);
+			});
 		});
 	}
 }
@@ -182,10 +172,8 @@ class CampaignSelector {
 		this.hoveredCampaign = e.info;
 
 		$.Schedule(switchDelay, () => {
-			if (e.boxartPath)
-				this.hoverBoxart.SetImage(`file://${e.boxartPath}`);
-			else
-				this.hoverBoxart.SetImage(getRandomFallbackImage());
+			if (e.boxartPath) this.hoverBoxart.SetImage(`file://${e.boxartPath}`);
+			else this.hoverBoxart.SetImage(getRandomFallbackImage());
 		});
 	}
 

@@ -428,15 +428,6 @@
 						</Panel>
 					</Panel>
 
-					<ModelPanel
-						id="MainMenuModel"
-						class="mainmenu__modelpanel MainMenuModeOnly"
-						src="models/npcs/turret/turret.mdl"
-						cubemap="cubemaps/cubemap_menu_model_bg.hdr"
-						antialias="true"
-						mouse_rotate="true"
-					/>
-
 					<Panel id="PageWrap" class="mainmenu__normal-page-container">
 						<Label
 							id="PageHeadline"

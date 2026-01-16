@@ -32,7 +32,10 @@ class MainMenuCampaignMode {
 	static onMainMenuLoaded() {
 		$.RegisterForUnhandledEvent('ShowMainMenu', this.onMainMenuShown.bind(this));
 		$.RegisterForUnhandledEvent('ShowPauseMenu', this.onPauseMenuShown.bind(this));
-		$.RegisterForUnhandledEvent('PanoramaComponent_Campaign_OnActiveCampaignChanged', this.onCampaignSelected.bind(this));
+		$.RegisterForUnhandledEvent(
+			'PanoramaComponent_Campaign_OnActiveCampaignChanged',
+			this.onCampaignSelected.bind(this)
+		);
 		$.RegisterForUnhandledEvent('ReloadBackground', this.reloadBackground.bind(this));
 		$.RegisterForUnhandledEvent('MapLoaded', this.onBackgroundMapLoaded.bind(this));
 		$.RegisterForUnhandledEvent('MapUnloaded', this.onMapUnloaded.bind(this));
@@ -41,7 +44,7 @@ class MainMenuCampaignMode {
 
 	static onMainMenuShown() {
 		if (this.selectedCampaign === undefined) return;
-		
+
 		this.setContinueDetails();
 		if (this.setCampaignMenuDetails()) MenuAnimation.switchFade(true);
 	}
