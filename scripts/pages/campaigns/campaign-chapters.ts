@@ -73,7 +73,8 @@ class CampaignChapters {
 
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: ChapterInfo;
-	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
+	// FIXME: nul handle
+	static campaign = CampaignAPI.GetActiveCampaign();
 	static chapterPage = 0;
 	static maxPages = -1;
 

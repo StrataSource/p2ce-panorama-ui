@@ -10,9 +10,6 @@ class MenuSplash {
 
 		this.menuPanel.style.animation = 'Splash_MenuFadeIn 0s linear 0s 1 reverse forwards';
 
-		// have to delay this so that the mainmenu doesnt eat the focus
-		//$.Schedule(0.001, () => { $('#SplashBtn')!.SetFocus(true) });
-
 		this.onActivated(true);
 	}
 

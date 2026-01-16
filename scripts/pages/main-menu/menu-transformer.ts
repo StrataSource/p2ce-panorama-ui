@@ -39,14 +39,9 @@ class MainMenuCampaignMode {
 		$.RegisterForUnhandledEvent('MainMenuFullBackNav', this.onFullBackNav.bind(this));
 	}
 
-	static onCampaignSwitched() {
-		this.selectedCampaign = CampaignAPI.GetActiveCampaign() ?? undefined;
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = this.selectedCampaign;
-	}
-
 	static onMainMenuShown() {
 		if (this.selectedCampaign === undefined) return;
-
+		
 		this.setContinueDetails();
 		if (this.setCampaignMenuDetails()) MenuAnimation.switchFade(true);
 	}
@@ -142,15 +137,14 @@ class MainMenuCampaignMode {
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
-		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
+		if (CampaignAPI.GetActiveCampaign() === null) return;
 
 		if (isBackgroundMap && this.loadingMap) {
 			this.loadingMap = false;
 			MenuAnimation.switchReverse();
 
 			// background maps take priority, turn these off
-			if (this.movie) this.movie.visible = false;
+			if (this.movie.IsValid()) this.movie.visible = false;
 			MenuAnimation.hideBgImg();
 
 			const meta = CampaignAPI.GetCampaignMeta(null);
@@ -225,7 +219,7 @@ class MainMenuCampaignMode {
 			MenuAnimation.hideBgImg(true);
 			this.movie.SetMovie(`file://{game}/${bgm}`);
 			this.movie.Play();
-			this.movie.visible = true;
+			if (this.movie.IsValid()) this.movie.visible = true;
 			$.Schedule(0.001, () => {
 				this.music = $.PlaySoundEvent(bgs);
 			});
@@ -233,7 +227,7 @@ class MainMenuCampaignMode {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			MenuAnimation.showBgImg(true);
 			this.imgBg.SetImage(`file://${bgi}`);
-			this.movie.visible = false;
+			if (this.movie.IsValid()) this.movie.visible = false;
 			$.Schedule(0.001, () => {
 				this.music = $.PlaySoundEvent(bgs);
 			});
@@ -242,13 +236,8 @@ class MainMenuCampaignMode {
 		return bgl.length > 0;
 	}
 
-	static onCampaignSelected(id: string) {
-		const state = GameInterfaceAPI.GetGameUIState();
-		if (state === GameUIState.PAUSEMENU || state === GameUIState.INGAME) {
-			$.Warning('Campaign switch was triggered while in game! Blocking...');
-			CampaignAPI.SetActiveCampaign(this.selectedCampaign!.id);
-			return;
-		}
+	static onCampaignSelected(id: string | null) {
+		if (id === null) return;
 
 		const campaign = CampaignAPI.GetAllCampaigns().find((v) => {
 			return v.id === id;
@@ -258,10 +247,14 @@ class MainMenuCampaignMode {
 			return;
 		}
 
-		this.selectedCampaign = campaign;
+		if (campaign.id === 'empty') {
+			$.Msg('Going to base state');
+			return;
+		}
 
-		// TODO: Grab active campaign from API instead of this
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = campaign;
+		$.Msg(`set campaign to ${id}`);
+
+		this.selectedCampaign = campaign;
 
 		$.GetContextPanel().AddClass('CampaignSelected');
 
@@ -272,20 +265,18 @@ class MainMenuCampaignMode {
 			this.logo.visible = false;
 		}
 
-		this.setContinueDetails();
-
-		if (state === GameUIState.MAINMENU) {
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
 			$.DispatchEvent('MainMenuCloseAllPages');
 			$.DispatchEvent('MainMenuSwitchFade');
 			$.Schedule(0.5, () => {
+				this.setContinueDetails();
 				$.DispatchEvent('ReloadBackground');
 			});
 		}
 	}
 
 	static reloadBackground() {
-		// TODO: Grab active campaign from API instead of this
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
+		if (CampaignAPI.GetActiveCampaign() === null) return;
 
 		MainMenu.hideFeaturedBtn();
 
@@ -295,22 +286,25 @@ class MainMenuCampaignMode {
 	}
 
 	static exitCampaign() {
-		// TODO: Grab active campaign from API instead of this
 		// must block subsequent requests to exit campaign
 		// (this only happens on controller because for some reason buttons
 		// that are disabled can still be activated if focused)
-		if (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] === undefined) return;
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CAMPAIGN] = undefined;
+		if (CampaignAPI.GetActiveCampaign() === null) return;
 		this.selectedCampaign = undefined;
-
 		$.DispatchEvent('MainMenuSwitchFade');
 		$.Schedule(0.5, () => {
-			this.logo.visible = true;
-			this.continueBtn.RemoveClass('mainmenu__nav__btn__no-gradient');
-			this.logo.SetImage('file://{images}/logo.svg');
-			$.GetContextPanel().RemoveClass('CampaignSelected');
-			$.DispatchEvent('ReloadBackground');
-			MainMenu.setContinueDetails();
+			GameInterfaceAPI.ConsoleCommand('disconnect');
+			$.Schedule(0.01, () => {
+				GameInterfaceAPI.ConsoleCommand('campaign_clear');
+				$.Schedule(0.01, () => {
+					this.logo.visible = true;
+					this.continueBtn.RemoveClass('mainmenu__nav__btn__no-gradient');
+					this.logo.SetImage('file://{images}/logo.svg');
+					$.GetContextPanel().RemoveClass('CampaignSelected');
+					$.DispatchEvent('ReloadBackground');
+					MainMenu.setContinueDetails();
+				});
+			});
 		});
 	}
 }
