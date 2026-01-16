@@ -126,13 +126,13 @@ class SaveEntry {
 				child.SetPanelEvent('onmovedown', () => {
 					const nextIndex = this.index + 1;
 					if (nextIndex < CampaignSaves.saveEntries.length) {
-						CampaignSaves.saveEntries[nextIndex].panel.SetFocus(true);
+						CampaignSaves.saveEntries[nextIndex].panel.SetFocus();
 					}
 				});
 				child.SetPanelEvent('onmoveup', () => {
 					const prevIndex = this.index - 1;
 					if (prevIndex >= 0) {
-						CampaignSaves.saveEntries[prevIndex].panel.SetFocus(true);
+						CampaignSaves.saveEntries[prevIndex].panel.SetFocus();
 					}
 				});
 			}
@@ -153,7 +153,7 @@ class SaveEntry {
 				for (let i = 0; i < children.length; ++i) {
 					const child = children[i];
 					if (child.visible) {
-						child.SetFocus(true);
+						child.SetFocus();
 						break;
 					}
 				}
@@ -228,7 +228,8 @@ class CampaignSaves {
 
 	static saveEntries: SaveEntry[] = [];
 	static createSaveBtn: Button | null = null;
-	static campaign: CampaignInfo = UiToolkitAPI.GetGlobalObject()['ActiveUiCampaign'] as CampaignInfo;
+	// FIXME: nul
+	static campaign = CampaignAPI.GetActiveCampaign();
 
 	static hideActionsOnAllSaves(excludeIndex: number) {
 		for (let i = 0; i < this.saveEntries.length; ++i) {
@@ -285,7 +286,7 @@ class CampaignSaves {
 			this.saveEntries[i].update();
 		}
 
-		if (this.saveEntries.length > 0) this.saveEntries[0].panel.SetFocus(true);
+		if (this.saveEntries.length > 0) this.saveEntries[0].panel.SetFocus();
 	}
 
 	static addCreateSaveBtn() {

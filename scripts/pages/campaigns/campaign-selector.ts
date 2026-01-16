@@ -85,7 +85,8 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			CampaignAPI.SetActiveCampaign(this.info.id);
+			GameInterfaceAPI.ConsoleCommand('disconnect');
+			$.Schedule(0.1, () => { CampaignAPI.SetActiveCampaign(this.info.id); });
 		});
 	}
 }
@@ -151,6 +152,8 @@ class CampaignSelector {
 			});
 
 			this.campaignEntries[i].update();
+
+			if (c.id === 'empty') this.campaignEntries[i].panel.visible = false;
 		}
 		stripDevTagsFromLabels(this.campaignList);
 
