@@ -1,0 +1,19 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<PopupCustomLayout class="PopupPanel Hidden generic-popup generic-popup--large" popupbackground="blur">
+		<Panel class="flow-down">
+			<!-- Disconnect dialog will have a reason attributed to it -->
+			<Label class="text-h3 mb-4 full-width text-align-left" text="#MainMenu_DisconnectDialog_Title" />
+			<Label class="mb-2" text="#MainMenu_DisconnectDialog_Message" />
+		</Panel>
+		
+		<Panel class="flow-right full-width mt-4" tabindex="auto" selectionpos="auto">
+			<Button class="button horizontal-align-right" onactivate="UiToolkitAPI.CloseAllVisiblePopups()" tabindex="auto" selectionpos="auto">
+				<Label class="button__text" text="#Common_OK" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>

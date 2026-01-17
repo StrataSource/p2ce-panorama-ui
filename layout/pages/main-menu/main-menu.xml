@@ -488,7 +488,7 @@
 			<Panel class="horizontal-align-right flow-right m-3">
 				<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly">
 					<Panel class="flow-down vertical-align-center">
-						<Label class="mainmenu__featured-bg__text" text="[HC] Background by:" />
+						<Label class="mainmenu__featured-bg__text" text="#MainMenu_Home_BackgroundCredit" />
 						<Label id="BgName" class="mainmenu__featured-bg__name" text="[PH] Author" />
 					</Panel>
 					<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
