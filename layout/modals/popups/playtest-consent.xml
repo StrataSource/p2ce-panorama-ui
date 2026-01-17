@@ -15,29 +15,15 @@
 	>
 
 		<Panel class="flow-down">
-
-			<Label class="text-h1 mb-4 full-width text-align-center" text="Welcome to the\nPortal 2: Community Edition playtest!" />
-
-			<Label
-				class="mb-2"
-				text="As a part of the playtest, the game will record a demo of your gameplay and some basic performance data."
-			/>
-			<Label
-				class="mb-3"
-				text="This data will be uploaded for our developers to review after the fact, allowing us to improve gameplay."
-			/>
-			<Label
-				class="color-error mb-3 full-width text-align-center"
-				text="NOTE: Consent can be given/revoked later in settings."
-			/>
-
+			<Label class="text-h1 mb-4 full-width text-align-center" text="#MainMenu_PlaytestDOSA_Title" />
+			<Label class="mb-2" text="#MainMenu_PlaytestDOSA_Description" />
 		</Panel>
 
 		<Panel class="flow-down" tabindex="auto" selectionpos="auto">
 
 			<!-- Localization needed  -->
 			<ToggleButton id="PlayTestConsentCheckbox" class="checkbox vertical-align-center">
-				<Label text="I consent to this." />
+				<Label text="#MainMenu_PlaytestDOSA_Consent" />
 			</ToggleButton>
 		</Panel>
 
@@ -49,7 +35,7 @@
 				tabindex="auto"
 				selectionpos="auto"
 			>
-				<Label class="button__text" text="#Common_Dontshowagain" />
+				<Label class="button__text" text="#Common_DontShowAgain" />
 			</Button>
 
 			<Button
