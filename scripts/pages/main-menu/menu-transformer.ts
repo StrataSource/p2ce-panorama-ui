@@ -140,7 +140,7 @@ class MainMenuCampaignMode {
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
-		if (CampaignAPI.GetActiveCampaign() === null) return;
+		if (!CampaignAPI.IsCampaignActive()) return;
 
 		if (isBackgroundMap && this.loadingMap) {
 			this.loadingMap = false;
@@ -279,7 +279,7 @@ class MainMenuCampaignMode {
 	}
 
 	static reloadBackground() {
-		if (CampaignAPI.GetActiveCampaign() === null) return;
+		if (!CampaignAPI.IsCampaignActive()) return;
 
 		MainMenu.hideFeaturedBtn();
 
@@ -292,7 +292,7 @@ class MainMenuCampaignMode {
 		// must block subsequent requests to exit campaign
 		// (this only happens on controller because for some reason buttons
 		// that are disabled can still be activated if focused)
-		if (CampaignAPI.GetActiveCampaign() === null) return;
+		if (!CampaignAPI.IsCampaignActive()) return;
 		this.selectedCampaign = undefined;
 		$.DispatchEvent('MainMenuSwitchFade');
 		$.Schedule(0.5, () => {
