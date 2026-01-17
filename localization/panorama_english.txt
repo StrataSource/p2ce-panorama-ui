@@ -1188,7 +1188,9 @@ This message will only be displayed once, and will not be shown again upon accep
 		
 		// generic disconnect reasons
 		"MainMenu_DisconnectDialog_Reason_TimeOut"			"The server has likely crashed or has lost network connectivity. Wait a few moments, and then try to connect again."
-		"MainMenu_DisconnectDialog_Reason_TimeOutConnect"	"Could not establish a connection to the server. The specified server IP address/host name is either invalid, or there is an issue with your network connection."
+		"MainMenu_DisconnectDialog_Reason_TimeOutConnect"	"Could not establish a connection to the server. The specified server IP address/host name is either invalid, or there is a problem with your network connection."
+		"MainMenu_DisconnectDialog_Reason_BuildTooOld"		"Portal 2: Community Edition may require an update to connect to this server. Please exit the game and check for any pending updates on the Steam client."
+		"MainMenu_DisconnectDialog_Reason_BuildTooNew"		"Your version of P2:CE is newer than the server's version. The server owner may need to update to the newest game version."
 		"MainMenu_DisconnectDialog_Reason_DSExit"			"Server shutdown initiated by owner/host."
 		"MainMenu_DisconnectDialog_Reason_Kicked"			"You have been kicked from this server."
 		"MainMenu_DisconnectDialog_Reason_KickedVote"		"You have been vote-kicked from this server."
