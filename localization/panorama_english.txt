@@ -435,88 +435,6 @@
 		"Debugger_Larger"							"▲ Larger"
 		"Debugger_ResetSize"						"Reset Size"
 
-		"SFUI_On"									"On"
-		"SFUI_Off"									"Off"
-		"SFUI_Settings_Simple_Refl"					"Simple Reflections"
-		"SFUI_Settings_Reflect_World"				"Reflect World"
-		"SFUI_Settings_Reflect_All"					"Reflect All"
-		"SFUI_Settings_Enabled"						"Enabled"
-		"SFUI_Settings_Enabled_Double"				"Double Buffered"
-		"SFUI_Settings_Enabled_Triple"				"Triple Buffered"
-		"SFUI_Settings_Disabled"					"Disabled"
-		"SFUI_Settings_None"						"None"
-		"SFUI_Settings_2X_MSAA"						"2x MSAA"
-		"SFUI_Settings_4X_MSAA"						"4x MSAA"
-		"SFUI_Settings_8X_MSAA"						"8x MSAA"
-		"SFUI_Settings_8X_CSAA"						"8x CSAA"
-		"SFUI_Settings_16X_CSAA"					"16x CSAA"
-		"SFUI_Settings_16XQ_CSAA"					"16xQ CSAA"
-		"SFUI_Settings_Bilinear"					"Bilinear"
-		"SFUI_Settings_Trilinear"					"Trilinear"
-		"SFUI_Settings_Anisotropic_2X"				"Anisotropic 2X"
-		"SFUI_Settings_Anisotropic_4X"				"Anisotropic 4X"
-		"SFUI_Settings_Anisotropic_8X"				"Anisotropic 8X"
-		"SFUI_Settings_Anisotropic_16X"				"Anisotropic 16X"
-		"SFUI_Settings_Bloom"						"Bloom"
-		"SFUI_Settings_Full"						"Full"
-		"SFUI_CSM_Low"								"Very Low"
-		"SFUI_CSM_Med"								"Low"
-		"SFUI_CSM_High"								"Medium"
-		"SFUI_CSM_VeryHigh"							"High"
-		"SFUI_FXAA_Enabled"							"Enabled"
-		"SFUI_FXAA_Disabled"						"Disabled"
-		"SFUI_MotionBlur_Enabled"					"Enabled"
-		"SFUI_MotionBlur_Disabled"					"Disabled"
-		"SFUI_Settings_Choice_Autodetect"			"Auto"
-		"SFUI_Settings_Aspect_Ratio"				"Aspect Ratio"
-		"SFUI_Settings_Widescreen_16_10"			"Widescreen 16:10"
-		"SFUI_Settings_Widescreen_16_9"				"Widescreen 16:9"   
-		"SFUI_Settings_Normal"						"Normal 4:3"
-		"SFUI_Settings_Resolution"					"Resolution"
-		"SFUI_Settings_Display_Mode"				"Display Mode"
-		"SFUI_Settings_Fullscreen"					"Fullscreen"
-		"SFUI_Settings_Windowed"					"Windowed"
-		"SFUI_Settings_Fullscreen_Windowed"			"Fullscreen Windowed"
-		"SFUI_Settings_Laptop_Power"				"Laptop Power Savings"
-		"SFUI_Settings_Vertical_Sync"				"Wait for Vertical Sync"
-		"SFUI_Settings_CSM"							"Global Shadow Quality"
-		"SFUI_Settings_Model_Texture_Detail"		"Model / Texture Detail"
-		"SFUI_Settings_Effect_Detail"				"Effect Detail"
-		"SFUI_Settings_Shader_Detail"				"Shader Detail"
-		"SFUI_Settings_Antialiasing_Mode"			"Multisampling Anti-Aliasing Mode"
-		"SFUI_Settings_FXAA"						"FXAA Anti-Aliasing"
-		"SFUI_Settings_MotionBlur"					"Motion Blur"
-		"SFUI_Settings_DynamicTonemapping"			"Tonemapping"
-		"SFUI_Settings_DisableBloom"				"Bloom"
-		"SFUI_Settings_ColorCorrection"				"Color Correction"
-		"SFUI_Settings_Audio_Device"				"Audio Device"
-		"SFUI_Settings_Filtering_Mode"				"Texture Filtering Mode"
-		"SFUI_Settings_Multicore"					"Multicore Rendering"
-		"SFUI_Settings_Enable_Audio_Background"		"Play audio when running in background"
-		"SFUI_Settings_Very_High"					"Very High"
-		"SFUI_Settings_High"						"High"
-		"SFUI_Settings_Medium"						"Medium"
-		"SFUI_Settings_Low"							"Low"
-
-		"SFUI_Settings_Shadow_Quality_Info"         "Shadow quality controls the overall resolution and view distance of shadows."
-		"SFUI_Settings_Power_Savings_Info"          "Powering saving mode runs the game at a lower framerate to conserve laptop battery life."
-		"SFUI_Settings_Antialiasing_Info"           "Anti-aliasing provides a smooth appearance at the edges of geometry, eliminating jagged edges. Increasing anti-aliasing quality can degrade graphics performance."
-		"SFUI_Settings_Filtering_Mode_Info"         "Texture filtering setting improves the appearance of textures in the game. Increasing filtering quality can degrade graphics performance."
-		"SFUI_Settings_Vertical_Sync_Info"          "VSync elimates screen tearing by ensuring each pixel of the frame is displayed at once. May result in smoother rendering, but causes minor input lag."
-		"SFUI_Settings_Queued_Mode_Info"            "Multicore rendering allows the game to utilize the multiple CPUs present in your system. The Disabled setting may provide a higher framerate but with lower visual quality."
-		"SFUI_Settings_Shader_Detail_Info"          "Shader detail controls the sophistication of the lighting and shading effects applied to surfaces in the game. Higher settings increase visual quality but can degrade graphics performance."
-		"SFUI_Settings_Effect_Detail_Info"          "Effect detail controls the complexity of certain visual effects in the game as well as the draw-distance. Decreasing the effect detail may improve performance but will also increase model pop-in artifacts."
-		"SFUI_Settings_Model_Detail_Info"           "Model / texture detail controls the resolution of textures and geometric complexity of models in the game. Decreasing this setting may improve performance on low-end systems, but will degrade image quality."
-		"SFUI_Settings_FXAA_Info"                   "Anti-aliasing provides a smooth appearance at the edges of geometry, eliminating jagged edges. Enabling FXAA can degrade graphics performance."
-		"SFUI_Settings_CSM_Info"                    "Global shadow quality controls the fidelity of the dynamic shadows cast onto surfaces in the game. Higher settings increase the visual quality but can degrade CPU and graphics performance."
-		"SFUI_Settings_Motion_Blur_Info"            "Motion Blur is a fullscreen shader effect that selectively smooths the frame during rapid changes in the camera's angle or position. The Disabled setting may result in slightly improved graphics performance."
-		"SFUI_Settings_Dynamic_Tonemapping_Info"    "HDR tonemapping is the dynamic increase or decrease of exposure of the screen depending on the displayed content. This has no impact on graphics performance."
-		"SFUI_Settings_Disable_Bloom_Info"          "HDR Bloom is the \"halo\" effect seen on very bright objects or the environment in general. This has no impact on graphics performance."
-		"SFUI_Settings_Color_Correction_Info"       "Color Correction is used in some maps to alter the color balance to achieve a certain aesthetic tone. This has no impact on graphics performance."
-		"SFUI_Settings_Triple_Monitor_Info"         "Enabling triple monitor mode restricts certain UI elements, including the HUD, to the center 33% of the display. This is useful when extending the display across three monitors."
-		"SFUI_Settings_Brightness_Info"             "Change the gamma correction of the display, adjusting overall brightness. Only available in full screen mode."
-		"SFUI_Settings_Texture_Streaming_Info"      "Texture streaming allows the game to defer loading of high-resolution textures until they are needed for rendering. Disabling this setting will result in increased texture memory consumption. On systems with slower disk access, streaming textures may be momentarily visible."
-
 		"Console_Title"								"Console"
 
 		// For Pano Loc
@@ -878,6 +796,7 @@
 		"MainMenu_Home_Resume"							"Resume Game"
 		"MainMenu_Home_Resume_Tagline"					"Close this menu and unpause the game"
 		"MainMenu_Home_Continue"						"Continue Game"
+		"MainMenu_Home_BackgroundCredit"				"Background by:"
 		"MainMenu_Loading"								"Loading..."
 
 		// socials
@@ -1039,6 +958,7 @@ Please install and mount the above games, and then restart P2:CE in order to acc
 		"MainMenu_Campaigns_DetailCard_CompletationStat1"			"Current chapter: {i:current_chapter} of {i:max_chapters}"
 		"MainMenu_Campaigns_DetailCard_CompletationStat1_CName"		"{s:current_chapter_name}" 	// Chapter name here, if specified
 		"MainMenu_Campaigns_DetailCard_CompletationStat2"			"Total playtime: {t:d:total_played}"
+		"MainMenu_Campaigns_DetailCard_CompletationStat3"			"Achievements earned: {i:num_achievements_earned}/{i:total_campaign_achievements}"
 		"MainMenu_Campaigns_DetailCard_LastPlayDate"				"Last played on: {t:l:last_played_date}"
 		"MainMenu_Campaigns_DetailCard_InstallDate"					"Installed on: {t:l:installed_date}"
 		
@@ -1108,9 +1028,6 @@ Please install and mount the above games, and then restart P2:CE in order to acc
 		"Action_NewGame_Title"										"Start Game"
 		"Action_NewGame_Description"								"Are you sure you want to start a new game?\n\nPrevious progress will be lost."
 		"Action_NewGame_CampaignSetup_Description"					"Are you sure you want to start a new game with these settings?\n\nNote that previous progress will be lost and that any gameplay modifiers cannot be reverted once a new game has started."
-		
-		// TEMP PoC STRING
-		"MainMenu_Campaigns_MM_PoC"									"Proof-of-concept only. Portal 2 chapters and saves displayed."
 
 		// campaign list
 		
@@ -1182,13 +1099,13 @@ Please install and mount the above games, and then restart P2:CE in order to acc
 		"Common_Close"								"Close"
 		"Common_Cancel"								"Cancel"
 		"Common_OK"									"OK"
+		"Common_DontShowAgain"						"Don't show this again"
 		"Common_SelectAll"							"Select All"
 		"Common_Delete"								"Delete"
 		"Common_Remove"								"Remove"
 		"Common_Create"								"Create"
 		"Common_Edit"								"Edit"
 		"Common_Refresh"							"Refresh"
-		"Common_DontShowAgain"						"Don't show again"
 		"Common_Search"								"Search"
 		"Common_By"									"By"
 		"Common_SearchEllipsis"						"Search..."
@@ -1204,7 +1121,7 @@ Please install and mount the above games, and then restart P2:CE in order to acc
 		
 		// Feature Unavailable
 		"MainMenu_Feature_Unavailable_Title"		"Feature Not Available"
-		"MainMenu_Feature_Unavailable_Description"	"This feature is currently a work-in-progress. It is not available at this time."
+		"MainMenu_Feature_Unavailable_Description"	"This feature is a work-in-progress and cannot be accessed at this time."
 		
 		// QuitPrompt
 		"Action_Quit"								"Quit"
@@ -1212,27 +1129,27 @@ Please install and mount the above games, and then restart P2:CE in order to acc
 		"Action_Quit_Message" 						"Are you sure you want to quit?"
 		"Action_Quit_InGame_Message"				"Are you sure you want to quit?\n\nUnsaved progress may be lost."
 		// quit_prompt console command
-		"MainMenu_ExitGameConfirmation_Title"		"Quit"
-		"MainMenu_ExitGameConfirmation_Message"		"Are you sure you want to quit?\n\nUnsaved progress may be lost."
+		"MainMenu_ExitGameConfirmation_Title"		"Quit Game"
+		"MainMenu_ExitGameConfirmation_Message"		"Are you sure you want to quit the game?\n\nUnsaved progress may be lost."
 		
 		// Loading Screen
 		"LoadingProgress_Connecting" 				"Connecting to server..."
 		"LoadingProgress_SpawningServer"			"Starting local game server..."
 		"LoadingProgress_BeginConnect" 				"Establishing connection to server..."
 		"LoadingProgress_Changelevel"				"Waiting for server to change maps"
-		"LoadingProgress_LoadMap"					"Loading BSP data..."
+		"LoadingProgress_LoadMap"					"Loading BSP lump data..."
 		"LoadingProgress_PrecacheWorld"				"Initializing world..."
 		"LoadingProgress_LoadResources"				"Loading resources..."
 		"LoadingProgress_ProcessServerInfo"			"Querying current server state..."
 		"LoadingProgress_SignonLocal"				"Initializing resources..."
 		"LoadingProgress_SignonDataLocal"			"Finalizing initial world state..."
 		"LoadingProgress_SignonData"				"Retrieving game data..."
-		"LoadingProgress_SendClientInfo" 			"Sending client info..."
+		"LoadingProgress_SendClientInfo" 			"Spawning client..."
 		
 		// Temp Notices
 		// Unfinished Software Reminder
 		"MainMenu_PrereleaseNotice_Title"			"This is unstable, pre-release software"
-		"MainMenu_PrereleaseNotice_Description"		"Portal 2: Community Edition is a modding framework. As it currently stands, it is also unfinished software. This preview release is intended for content creators only; some key features may be absent or are being actively developed, and significant code refactors are being worked on across the underlying game engine that completely rewrite and/or remove old, outdated legacy code to pave way for larger, better quality-of-life improvements. As a result, aspects of P2:CE and its SDK tools are potentially subject to bugs that may significantly impact your modding workflow.
+		"MainMenu_PrereleaseNotice_Description"		"Portal 2: Community Edition is a modding framework. As it currently stands, it is also unfinished software. This preview release is intended for content creators only; some key features may be absent or are being actively developed, and significant code refactors are being worked on across the underlying game engine that completely rewrite and/or remove outdated legacy code to pave way for larger quality-of-life improvements and new features. As a result, aspects of P2:CE and its SDK tools are potentially subject to bugs that may significantly impact your modding workflow.
 
 The P2:CE campaign is also not finished, and is therefore not included in this preview release.
 		
@@ -1244,13 +1161,15 @@ We encourage you to file bug reports and feature requests on P2:CE's issue track
 By clicking on \"I Understand\", you acknowledge the risks involved in using this preview release. If you choose to decline these terms, P2:CE will exit.
 
 This message will only be displayed once, and will not be shown again upon acceptance."
-												
+		
 		"MainMenu_PrereleaseNotice_Acknowledge"		"I Understand"
 		"MainMenu_PrereleaseNotice_Decline"			"Decline"
 		
 		// Playtest DOSA
 		"MainMenu_PlaytestDOSA_Title"				"Welcome to the Portal 2: Community Edition playtest!"
 		"MainMenu_PlaytestDOSA_Description"			"As a part of the playtest, the game will record a demo of your gameplay and some basic performance data. This data will be uploaded for our developers to review after the fact, allowing us to improve gameplay.\n\nNOTE: Consent can be given/revoked later in settings."
+		"MainMenu_PlaytestDOSA_Consent"				"Consent to Playtest Data Collection"
+		"MainMenu_PlaytestDOSA_Revoke"				"Revoke Consent"
 	
 		// Color Picker
 		"ColorPicker_Hue"							"H"
@@ -1262,6 +1181,19 @@ This message will only be displayed once, and will not be shown again upon accep
 		"ColorPicker_Alpha"							"A"
 		
 		// Networking Stuff!!!!!
+		// Disconnect Dialog Main
+		"MainMenu_DisconnectDialog_Title"					"Disconnected from server"
+		"MainMenu_DisconnectDialog_Message"					"You were disconnected for the following reason:\n\n{s:disconnect_reason}"
+		
+		// generic disconnect reasons
+		"MainMenu_DisconnectDialog_Reason_TimeOut"			"The server has likely crashed or has lost network connectivity. Wait a few moments, and then try to connect again."
+		"MainMenu_DisconnectDialog_Reason_TimeOutConnect"	"Could not establish a connection to the server. The specified server IP address/host name is either invalid, or there is an issue with your network connection."
+		"MainMenu_DisconnectDialog_Reason_DSExit"			"Server shutdown initiated by owner/host."
+		"MainMenu_DisconnectDialog_Reason_Kicked"			"You have been kicked from this server."
+		"MainMenu_DisconnectDialog_Reason_KickedVote"		"You have been vote-kicked from this server."
+		"MainMenu_DisconnectDialog_Reason_Banned"			"You have been banned from this server."
+		"MainMenu_DisconnectDialog_Reason_BannedVote"		"You have been vote-banned from this server."
+		
 		// Disconnect Notices - ENetworkDisconnectionReason (per matchmaking dll and cross-ref with csgo_english + dota_english)
 		// These need to be shared on here and in panorama_english for DS host reasons
 		"GameUI_Disconnect_User"							"Player disconnected from server."						// NETWORK_DISCONNECT_DISCONNECT_BY_USER
@@ -1284,7 +1216,7 @@ This message will only be displayed once, and will not be shown again upon accep
 		"GameUI_Disconnect_NoSpectators"					"This server does not support spectator mode."			// NETWORK_DISCONNECT_NOSPECTATORS
 		"GameUI_Disconnect_Kicked"							"Kicked from server."									// NETWORK_DISCONNECT_KICKED
 		"GameUI_Disconnect_BanAdded"						"Banned from server."									// NETWORK_DISCONNECT_BANADDED
-		"GameUI_Disconnect_KickBanAdded"					"Banned from server."									// NETWORK_DISCONNECT_KICKBANADDED
+		"GameUI_Disconnect_KickBanAdded"					"Banned from server."									// NETWORK_DISCONNECT_KICKBANADDED - Isn't this the same thing as BANADDED?
 		"GameUI_Disconnect_PureServer_ClientExtra"			"Content sanity check failed: Client has additional non-shared assets loaded."	// NETWORK_DISCONNECT_PURESERVER_CLIENTEXTRA
 		"GameUI_Disconnect_PureServer_Mismatch"				"Content sanity check failed: Assets on client do not match with server's version."	// NETWORK_DISCONNECT_PURESERVER_MISMATCH
 		"GameUI_Disconnect_UserCmd"							"Error in parsing user commands."						// NETWORK_DISCONNECT_USERCMD
@@ -1304,7 +1236,7 @@ This message will only be displayed once, and will not be shown again upon accep
 		"GameUI_Disconnect_SteamTimeOut"					"Failed to verify Valve Anti-Cheat (VAC) ban status."	// NETWORK_DISCONNECT_STEAM_VAC_CHECK_TIMEDOUT
 		"GameUI_Disconnect_SteamDropped"					"You are currently disconnected from the Steam network."	// NETWORK_DISCONNECT_STEAM_DROPPED
 		"GameUI_Disconnect_SteamOwnership"					"This Steam account does not own a license for Portal 2 and/or Portal 2: Community Edition."	// NETWORK_DISCONNECT_STEAM_OWNERSHIP
-		"GameUI_Disconnect_LocalProblem_ManyRelays"			"Failed to recover connection state after multiple tries with Steam Datagram Relay (SDR) servers. There may be an issue with this computer's network connectivity."		// NETWORK_DISCONNECT_SNS_LOCAL_MANYRELAYS
+		"GameUI_Disconnect_LocalProblem_ManyRelays"			"Failed to recover game state after multiple tries with Steam Datagram Relay (SDR) servers. There may be an issue with this computer's network connectivity."		// NETWORK_DISCONNECT_SNS_LOCAL_MANYRELAYS
 		"GameUI_Disconnect_LocalProblem_HostedServerPrimaryRelay"		"Server lost connection to Steam Datagram Relay (SDR) servers."		// NETWORK_DISCONNECT_SNS_LOCAL_HOSTEDSERVERPRIMARYRELAY
 		"GameUI_Disconnect_LocalProblem_NetworkConfig"		"Failed to download Steam Datagram Relay (SDR) configuration data."		// NETWORK_DISCONNECT_SNS_LOCAL_NETWORKCONFIG
 		"GameUI_Disconnect_LocalProblem_Other"				"SDR relay communication failed."						// NETWORK_DISCONNECT_SNS_LOCAL_OTHER
