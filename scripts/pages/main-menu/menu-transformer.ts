@@ -298,7 +298,7 @@ class MainMenuCampaignMode {
 		$.Schedule(0.5, () => {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			$.Schedule(0.01, () => {
-				GameInterfaceAPI.ConsoleCommand('campaign_clear');
+				CampaignAPI.SetActiveCampaign(null);
 				$.Schedule(0.01, () => {
 					this.logo.visible = true;
 					this.continueBtn.RemoveClass('mainmenu__nav__btn__no-gradient');
