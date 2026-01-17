@@ -124,7 +124,7 @@ class MainMenu {
 	}
 
 	static onBackgroundMapLoaded(map: string, isBackgroundMap: boolean) {
-		if (isBackgroundMap && CampaignAPI.GetActiveCampaign() === null) {
+		if (isBackgroundMap && !CampaignAPI.IsCampaignActive()) {
 			this.movie = $<Movie>('#MainMenuMovie');
 			if (this.movie) this.movie.visible = false;
 			if (this.imgBg) MenuAnimation.hideBgImg(true);
@@ -144,7 +144,7 @@ class MainMenu {
 	}
 
 	static tryNavigateFeatured() {
-		if (CampaignAPI.GetActiveCampaign() === null) {
+		if (!CampaignAPI.IsCampaignActive()) {
 			this.featuredBtn.SetFocus();
 		}
 	}
@@ -171,7 +171,7 @@ class MainMenu {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			if (GameInterfaceAPI.GetSettingInt('maxplayers') > 1) {
 				return;
-			} else if (CampaignAPI.GetActiveCampaign() === null) {
+			} else if (!CampaignAPI.IsCampaignActive()) {
 				return;
 			}
 		}
@@ -255,7 +255,7 @@ class MainMenu {
 	static reloadBackground() {
 		// checking if campaign is active, if so, block setting background as it's
 		// done by the campaign menu instead
-		if (CampaignAPI.GetActiveCampaign() !== null) return;
+		if (CampaignAPI.IsCampaignActive()) return;
 
 		$.Schedule(0.001, () => {
 			this.setMainMenuBackground();
@@ -277,7 +277,7 @@ class MainMenu {
 
 		// TODO: this would likely be conditional based on non-linear campaigns
 		this.continueBtn.visible = true;
-		if (CampaignAPI.GetActiveCampaign() === null) {
+		if (!CampaignAPI.IsCampaignActive()) {
 			MenuAnimation.switchFade(true);
 			this.setContinueDetails();
 			this.reloadBackground();
@@ -414,7 +414,7 @@ class MainMenu {
 		this.page.RemoveClass('mainmenu__wide-page-container');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 
-		if (CampaignAPI.GetActiveCampaign() !== null) return;
+		if (CampaignAPI.IsCampaignActive()) return;
 
 		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 	}
@@ -431,7 +431,7 @@ class MainMenu {
 		this.controls.RemoveClass('mainmenu__nav__anim');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
-		if (CampaignAPI.GetActiveCampaign() !== null) return;
+		if (CampaignAPI.IsCampaignActive()) return;
 
 		this.featuredBtn.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 	}
@@ -539,8 +539,7 @@ class MainMenu {
 
 		this.isContinueActive = true;
 
-		const campaign = CampaignAPI.GetActiveCampaign();
-		if (campaign !== null) {
+		if (CampaignAPI.IsCampaignActive()) {
 			this.continueBox.visible = true;
 			return;
 		}
@@ -581,8 +580,7 @@ class MainMenu {
 
 		this.continueBox.visible = false;
 
-		const campaign = CampaignAPI.GetActiveCampaign();
-		if (campaign !== null) return;
+		if (CampaignAPI.IsCampaignActive()) return;
 
 		this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
 		this.saveBg.style.animation = `FadeOut ${instant ? 0.01 : 0.2}s ease-out 0s 1 normal forwards`;
