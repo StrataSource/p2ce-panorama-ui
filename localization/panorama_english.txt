@@ -272,7 +272,7 @@
 		"P2COOP_SelectScreen_CourseNum"				"Course {s:coop_course_name}"
 		"P2COOP_SelectScreen_PercentComplete"		"{i:coop_completion_percentage}% COMPLETED"
 		
-		// CSGO Pano + Scaleform
+		// CSGO Pano
 		"UI_Submit"									"Submit"
 		"UI_Select"									"Select"
 		"UI_Inspect"								"Inspect"
@@ -356,7 +356,6 @@
 		"Month_October"								"October"
 		"Month_November"							"November"
 		"Month_December"							"December"
-
 
 		"Panorama_Lang_English"						"English"
 		"Panorama_Lang_Spanish"						"Spanish"
@@ -509,7 +508,9 @@
 		"Settings_AudioDevices_Speaker_51"					"5.1 Surround Sound"
 		"Settings_AudioDevices_Speaker_71"					"7.1 Surround Sound"
 		"Settings_AudioDevices_Speaker"						"Audio Output Configuration"
+		"Settings_AudioDevices_Speaker_info"				"Alters audio playback behavior based on the kind of speaker device being used."
 		"Settings_AudioDevices_Background"					"Play game audio while unfocused"
+		"Settings_AudioDevices_Background_info"				"Determines whether the game should play audio while in the background."
 		
 		// Settings - Video
 		"Settings_Video"								"Video"
