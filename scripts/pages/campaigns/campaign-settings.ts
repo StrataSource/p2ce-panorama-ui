@@ -79,6 +79,7 @@ class CampaignSettingsTab {
 				this.clear();
 				$.DispatchEvent('MainMenuCloseAllPages');
 				GameInterfaceAPI.ConsoleCommand('disconnect');
+				$.DispatchEvent('LoadingScreenClearLastMap');
 				$.Schedule(0.1, () => CampaignAPI.StartCampaign(this.campaign.id, this.chapter.id));
 			},
 			$.Localize('#UI_Cancel'),

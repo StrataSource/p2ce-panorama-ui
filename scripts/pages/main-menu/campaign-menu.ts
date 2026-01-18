@@ -7,12 +7,7 @@ class CampaignMenu {
 			headline: '#MainMenu_Campaigns_MM_NewGame',
 			tagline: '#MainMenu_Campaigns_MM_NewGame_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'NewGame',
-					'campaigns/new-game',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'campaigns/new-game', undefined);
 			}
 		},
 		{
@@ -20,6 +15,7 @@ class CampaignMenu {
 			headline: '#MainMenu_Campaigns_MM_LoadAuto',
 			tagline: '[PH] ????',
 			activated: () => {
+				$.DispatchEvent('LoadingScreenClearLastMap');
 				CampaignAPI.ContinueCampaign(CampaignAPI.GetActiveCampaign()!.id);
 			},
 			hovered: () => {
@@ -35,12 +31,7 @@ class CampaignMenu {
 			headline: '#MainMenu_SaveRestore_Load',
 			tagline: '#MainMenu_SaveRestore_Main_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'GameSaves',
-					'campaigns/saves-list',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
 			}
 		},
 		{
@@ -48,12 +39,7 @@ class CampaignMenu {
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'Settings',
-					'settings/settings',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			}
 		},
 		{
@@ -77,7 +63,9 @@ class CampaignMenu {
 					$.Localize('#Action_Quit_Message'),
 					'warning-popup',
 					$.Localize('#Action_Quit'),
-					() => { GameInterfaceAPI.ConsoleCommand('quit'); },
+					() => {
+						GameInterfaceAPI.ConsoleCommand('quit');
+					},
 					$.Localize('#Action_Return'),
 					() => {},
 					'blur'
@@ -102,7 +90,9 @@ class CampaignMenu {
 		// this is the first campaign we've booted up (this signifies
 		// that the game has taken care of the background map for us
 		// and we should do [almost] nothing)
-		const skipBgMapLoad = GameInterfaceAPI.GetSettingString('campaign_default').length > 0 && !(UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded']);
+		const skipBgMapLoad =
+			GameInterfaceAPI.GetSettingString('campaign_default').length > 0 &&
+			!UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'];
 
 		if (skipBgMapLoad) {
 			UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = true;
@@ -126,11 +116,11 @@ class CampaignMenu {
 			if (btn.id === 'CampaignContinueBtn') {
 				this.continueBtn = constructMenuButton(btn);
 				this.continueBtn.AddClass('mainmenu__nav__btn__no-gradient');
-				
+
 				const t = this.continueBtn.FindChildTraverse('CampaignContinueBtn_Tagline');
 				if (t) this.continueBtnText = t as Label;
 				else throw new Error('Cannot find Continue Button tagline!');
-				
+
 				$.DispatchEvent('MainMenuAddPreConstructedButton', this.continueBtn);
 				continue;
 			} else if (btn.id === 'LoadGameBtn') {
@@ -139,10 +129,7 @@ class CampaignMenu {
 				continue;
 			}
 
-			$.DispatchEvent(
-				'MainMenuAddButton',
-				btn
-			);
+			$.DispatchEvent('MainMenuAddButton', btn);
 		}
 
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
@@ -156,10 +143,7 @@ class CampaignMenu {
 	static setContinueDetails() {
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		$.DispatchEvent(
-			'MainMenuSetLogo',
-			c.meta[CampaignMeta.FULL_LOGO]
-		);
+		$.DispatchEvent('MainMenuSetLogo', c.meta[CampaignMeta.FULL_LOGO]);
 
 		this.continueBox.visible = false;
 
@@ -170,7 +154,7 @@ class CampaignMenu {
 			});
 
 		this.continueBtn.enabled = false;
-		this.continueBtnText.text = $.Localize('MainMenu_SaveRestore_NoSaves');
+		this.continueBtnText.text = $.Localize('#MainMenu_SaveRestore_NoSaves');
 
 		if (saves.length === 0) {
 			$.Warning('CONTINUE: No saves');
@@ -224,10 +208,10 @@ class CampaignMenu {
 		}
 
 		const ch = CampaignAPI.GetCampaignMeta(null);
-		const bgLevel = ch['background_map'] as string ?? '';
-		const bgMusic = ch['background_music'] as string ?? '';
-		const bgMovie = ch['background_movie'] as string ?? '';
-		const bgImage = ch['background_image'] as string ?? '';
+		const bgLevel = (ch['background_map'] as string) ?? '';
+		const bgMusic = (ch['background_music'] as string) ?? '';
+		const bgMovie = (ch['background_movie'] as string) ?? '';
+		const bgImage = (ch['background_image'] as string) ?? '';
 
 		if (bgLevel.length > 0) {
 			$.DispatchEvent('MainMenuSetLoadingIndicatorVisibility', true);
@@ -239,13 +223,16 @@ class CampaignMenu {
 						this.music = $.PlaySoundEvent(bgMusic);
 					}
 				} else {
-					$.Warning(`Map loaded, but it failed to pass campaign bg map check. bgLevel = ${bgLevel}, map = ${map}, bg: ${bg}`);
+					$.Warning(
+						`Map loaded, but it failed to pass campaign bg map check. bgLevel = ${bgLevel}, map = ${map}, bg: ${bg}`
+					);
 				}
 			});
 			$.DispatchEvent('MainMenuShowBackgroundImage', bgImage, false);
 			if (!skipBgMapLoad) {
 				$.Msg(`Attempting to load background map ${bgLevel}`);
-				GameInterfaceAPI.ConsoleCommand(`map_background ${bgLevel}`);
+				GameInterfaceAPI.ConsoleCommand('startupmenu');
+				//GameInterfaceAPI.ConsoleCommand(`map_background ${bgLevel}`);
 			} else {
 				$.Msg('Background map specified and default campaign specified, we will be doing nothing.');
 			}

@@ -2,8 +2,8 @@
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
-
 	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/loading-screen.ts" />
 	</scripts>
 
@@ -23,16 +23,24 @@
 
 		<!-- todo: set the logo dynamically -->
 		<!-- Pivot (26/11/2025): Re-enabling this in the hopes that custom campaigns will be able to override this -->
-		<AnimatedImageStrip
-			id="Logo"
-			class="loadingscreen__logo"
-			animating="true"
-			defaultframe="0"
-			frametime="125ms"
-			src=""
-			defaultsrc="file://{images}/menu/p2ce/spinner_strip.tga"
-			scaling="stretch-to-cover-preserve-aspect"
-		/>
+		<Panel class="loadingscreen__logo">
+			<AnimatedImageStrip
+				animating="true"
+				defaultframe="0"
+				frametime="125ms"
+				src=""
+				defaultsrc="file://{images}/menu/p2ce/spinner_strip.tga"
+				scaling="stretch-to-cover-preserve-aspect"
+			/>
+			<Image
+				id="Logo"
+				src="file://{images}/menu/portal2/logo.svg"
+				textureheight="128"
+				texturewidth="128"
+				scaling="stretch-to-fit-preserve-aspect"
+				hittest="false"
+			/>
+		</Panel>
 
 		<Panel class="loadingscreen__fade--dark" />
 		<Panel id="LoadingScreenContents" class="loadingscreen__contents" />

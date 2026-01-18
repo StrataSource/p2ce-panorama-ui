@@ -367,7 +367,7 @@ $pane-move-time: 0.1s;
 			& > Panel {
 				width: 100%;
 				height: 100%;
-				background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba($base-950, 0.5) ) );
+				background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba($base-950, 0.5)));
 			}
 		}
 

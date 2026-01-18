@@ -20,6 +20,7 @@ class SaveEntry {
 			playBtn.SetPanelEvent('onactivate', () => {
 				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
 					$.DispatchEvent('MainMenuCloseAllPages');
+					$.DispatchEvent('LoadingScreenClearLastMap');
 					$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.save.fileName}`));
 				} else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
@@ -29,6 +30,7 @@ class SaveEntry {
 						$.Localize('#Action_LoadGame'),
 						() => {
 							$.DispatchEvent('MainMenuCloseAllPages');
+							$.DispatchEvent('LoadingScreenClearLastMap');
 							$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.save.fileName}`));
 						},
 						$.Localize('#UI_Cancel'),
@@ -360,12 +362,14 @@ class CampaignSaves {
 				() => {
 					if (this.campaign) {
 						$.DispatchEvent('MainMenuCloseAllPages');
+						$.DispatchEvent('LoadingScreenClearLastMap');
 						$.Schedule(0.001, () => CampaignAPI.ContinueCampaign(this.campaign.id));
 					} else {
 						const saves = GameSavesAPI.GetGameSaves().sort(
 							(a, b) => Number(b.fileTime) - Number(a.fileTime)
 						);
 						$.DispatchEvent('MainMenuCloseAllPages');
+						$.DispatchEvent('LoadingScreenClearLastMap');
 						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`));
 					}
 				},
@@ -380,6 +384,7 @@ class CampaignSaves {
 			} else {
 				const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 				$.DispatchEvent('MainMenuCloseAllPages');
+				$.DispatchEvent('LoadingScreenClearLastMap');
 				$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`));
 			}
 		}

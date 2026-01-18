@@ -27,12 +27,7 @@ class PauseMenu {
 			headline: '#MainMenu_SaveRestore_Main',
 			tagline: '#MainMenu_SaveRestore_Main_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'GameSaves',
-					'campaigns/saves-list',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -43,12 +38,7 @@ class PauseMenu {
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'Settings',
-					'settings/settings',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -69,7 +59,9 @@ class PauseMenu {
 						$.DispatchEvent('MainMenuCloseAllPages');
 					},
 					$.Localize('#Action_QuitToDesktop'),
-					() => { GameInterfaceAPI.ConsoleCommand('quit'); },
+					() => {
+						GameInterfaceAPI.ConsoleCommand('quit');
+					},
 					$.Localize('#Action_Return'),
 					() => {},
 					'blur'
@@ -83,10 +75,7 @@ class PauseMenu {
 
 	static onLoad() {
 		for (const btn of this.buttons) {
-			$.DispatchEvent(
-				'MainMenuAddButton',
-				btn
-			);
+			$.DispatchEvent('MainMenuAddButton', btn);
 		}
 
 		$.DispatchEvent('MainMenuHideBackgroundMovie');

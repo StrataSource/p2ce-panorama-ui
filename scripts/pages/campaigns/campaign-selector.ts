@@ -73,10 +73,9 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			GameInterfaceAPI.ConsoleCommand('disconnect');
-			$.Schedule(0.1, () => {
-				CampaignAPI.SetActiveCampaign(this.info.id);
-			});
+			$.DispatchEvent('MainMenuAnimatedSwitch', this.info.id);
+			$.DispatchEvent('MainMenuSwitchFade', false, true);
+			$.DispatchEvent('MainMenuCloseAllPages');
 		});
 	}
 }

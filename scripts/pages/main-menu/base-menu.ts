@@ -7,12 +7,7 @@ class BaseMenu {
 			headline: '#MainMenu_Navigation_Developer',
 			tagline: '#MainMenu_Navigation_Developer_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'Dev',
-					'main-menu/developer',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Dev', 'main-menu/developer', undefined);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -23,12 +18,7 @@ class BaseMenu {
 			headline: '#MainMenu_Navigation_Play',
 			tagline: '#MainMenu_Navigation_Play_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'Play',
-					'play-menu/player-mode',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Play', 'play-menu/player-mode', undefined);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -40,6 +30,7 @@ class BaseMenu {
 			tagline: '[PH] ????',
 			activated: () => {
 				GameInterfaceAPI.ConsoleCommand('disconnect');
+				$.DispatchEvent('LoadingScreenClearLastMap');
 				$.Schedule(0.1, () => {
 					CampaignAPI.ContinueCampaign(this.savCampaign!.id);
 				});
@@ -92,12 +83,7 @@ class BaseMenu {
 			headline: '#MainMenu_Navigation_Addons',
 			tagline: '#MainMenu_Navigation_Addons_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'Content',
-					'main-menu/addons',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -108,12 +94,7 @@ class BaseMenu {
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
-				$.DispatchEvent(
-					'MainMenuOpenNestedPage',
-					'Settings',
-					'settings/settings',
-					undefined
-				);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -129,7 +110,9 @@ class BaseMenu {
 					$.Localize('#Action_Quit_Message'),
 					'warning-popup',
 					$.Localize('#Action_Quit'),
-					() => { GameInterfaceAPI.ConsoleCommand('quit'); },
+					() => {
+						GameInterfaceAPI.ConsoleCommand('quit');
+					},
 					$.Localize('#Action_Return'),
 					() => {},
 					'blur'
@@ -162,7 +145,7 @@ class BaseMenu {
 				const b = constructMenuButton(btn);
 				this.continueBtn = b;
 
-				const text =  b.FindChildTraverse('CampaignContinueBtn_Tagline');
+				const text = b.FindChildTraverse('CampaignContinueBtn_Tagline');
 
 				if (text) {
 					this.continueText = text as Label;
@@ -170,29 +153,42 @@ class BaseMenu {
 					throw new Error('Cannot find tagline text for resume button!');
 				}
 
-				$.DispatchEvent(
-					'MainMenuAddPreConstructedButton',
-					b
-				);
+				$.DispatchEvent('MainMenuAddPreConstructedButton', b);
 
 				continue;
 			}
-			
-			$.DispatchEvent(
-				'MainMenuAddButton',
-				btn
-			);
+
+			$.DispatchEvent('MainMenuAddButton', btn);
 		}
 
-		$.RegisterForUnhandledEvent('MainBackgroundLoaded', () =>{
+		$.RegisterForUnhandledEvent('MainBackgroundLoaded', () => {
 			this.showPrereleaseWarning();
 			if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 		});
 
-		$.DispatchEvent(
-			'MainMenuSetLogo',
-			'{images}/logo.svg'
-		);
+		$.RegisterForUnhandledEvent('MainMenuAnimatedSwitch', (c: string) => {
+			$.Msg(`MainMenuAnimSwitch ${c}`);
+			$.Schedule(0.25, () => {
+				// preload the background image for the campaign
+				// this causes a crash
+				//const ch = CampaignAPI.GetCampaignMeta(c);
+				//const bgLevel = ch['background_map'] as string ?? '';
+				//const bgImage = ch['background_image'] as string ?? '';
+				//if (bgLevel.length > 0 && bgImage.length > 0) {
+				//	$.DispatchEvent('MainMenuShowBackgroundImage', bgImage, false);
+				//}
+				$.Schedule(0.25, () => {
+					GameInterfaceAPI.ConsoleCommand('disconnect');
+					$.Schedule(0.1, () => {
+						if (!CampaignAPI.SetActiveCampaign(c)) {
+							$.Warning(`Failed to set campaign to ${c}!!!!`);
+						}
+					});
+				});
+			});
+		});
+
+		$.DispatchEvent('MainMenuSetLogo', '{images}/logo.svg');
 
 		// create Resume details
 		const p = $.CreatePanel('Panel', $.GetContextPanel(), 'MenuBackgroundLayer');
@@ -278,11 +274,10 @@ class BaseMenu {
 	static rerollMap() {
 		this.mapSelection = Math.floor(Math.random() * this.maps.length);
 		$.Msg(`Rolled background map: ${this.mapSelection}, ${this.maps[this.mapSelection]}`);
+		$.DispatchEvent('MainMenuSetBackgroundImage', `{images}/menu/featured/${this.maps[this.mapSelection]}.png`);
 	}
 
-	static loadBackground() {
-		// TODO: check for BG Map Option
-		this.rerollMap();
+	static loadNoRoll() {
 		// eslint-disable-next-line no-constant-condition
 		if (false) {
 			this.loadStaticBg();
@@ -291,8 +286,14 @@ class BaseMenu {
 		}
 	}
 
+	static loadBackground() {
+		// TODO: check for BG Map Option
+		this.rerollMap();
+		this.loadNoRoll();
+	}
+
 	static loadStaticBg() {
-		$.DispatchEvent('MainMenuShowBackgroundImage', `{images}/menu/featured/${this.maps[this.mapSelection]}.png`, true);
+		$.DispatchEvent('MainMenuShowBackgroundImage', undefined, true);
 		$.DispatchEvent('MainMenuSwitchReverse', false);
 		$.DispatchEvent('MainBackgroundLoaded');
 	}
@@ -302,7 +303,7 @@ class BaseMenu {
 		$.DispatchEvent('MainMenuSetLoadingIndicatorVisibility', true);
 
 		// set fallback
-		$.DispatchEvent('MainMenuShowBackgroundImage', `{images}/menu/featured/${this.maps[this.mapSelection]}.png`, false);
+		$.DispatchEvent('MainMenuShowBackgroundImage', undefined, false);
 
 		if (this.bgMapLoad === undefined) {
 			this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
@@ -324,11 +325,13 @@ class BaseMenu {
 				$.DispatchEvent('MainMenuSwitchReverse', false);
 				$.DispatchEvent('MainBackgroundLoaded');
 			} else {
-				$.Warning(`Map loaded, but it failed to pass base bg map check. bgLevel = ${this.maps[this.mapSelection]}, map = ${map}, bg: ${bg}`);
+				$.Warning(
+					`Map loaded, but it failed to pass base bg map check. bgLevel = ${this.maps[this.mapSelection]}, map = ${map}, bg: ${bg}`
+				);
 			}
 		});
 
-		$.Schedule(0.01, () => {
+		$.Schedule(0.1, () => {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			GameInterfaceAPI.ConsoleCommand(`map_background ${this.maps[this.mapSelection]}`);
 		});
