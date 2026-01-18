@@ -1,0 +1,32 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/main-menu/pause-menu.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="MenuBackgroundLayer">
+			<Panel class="full">
+				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+				<BaseBlurTarget
+					id="PauseMenuMainMenuBlur"
+					class="mainmenu__pause-blur"
+					blurrects="PauseMenuMainMenuContent"
+					hittest="false"
+				>
+					<!-- Backbuffer background -->
+					<BackbufferImagePanel hittest="false" class="mainmenu__background" />
+				</BaseBlurTarget>
+
+				<Panel id="PauseMenuMainMenuContent" hittest="false" class="mainmenu__pause-content-blur" />
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="full" hittest="false" onload="PauseMenu.onLoad()">
+		
+	</Panel>
+</root>
