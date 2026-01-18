@@ -40,7 +40,7 @@ class BaseMenu {
 			tagline: '[PH] ????',
 			activated: () => {
 				GameInterfaceAPI.ConsoleCommand('disconnect');
-				$.Schedule(0.01, () => {
+				$.Schedule(0.1, () => {
 					CampaignAPI.ContinueCampaign(this.savCampaign!.id);
 				});
 			},
