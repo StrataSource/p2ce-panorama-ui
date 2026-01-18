@@ -1,0 +1,74 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/main-menu/base-menu.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="MenuBackgroundLayer">
+			<Panel class="full">
+				<!-- Save background -->
+				<Image
+					id="MainMenuSaveBackground"
+					class="mainmenu__background"
+					scaling="stretch-to-cover-preserve-aspect"
+					hittest="false"
+				/>
+				<Image
+					id="ContinueSaveLogo"
+					class="mainmenu__square-logo"
+					src="file://{images}/menu/portal2/logo.svg"
+					textureheight="2048"
+					texturewidth="2048"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+				/>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="full" hittest="false" onload="BaseMenu.onLoad()">
+		<!-- This is here for alignment only -->
+		<Panel class="mainmenu__menu-space" hittest="false">
+			<Button id="FeaturedBtn" class="mainmenu__featured__wrapper" onactivate="$.Msg('blah')">
+				<Image
+					id="FeaturedImage"
+					class="mainmenu__featured__image"
+					src="file://{images}/menu/p2ce-generic.png"
+					scaling="stretch-to-fit-preserve-aspect"
+				/>
+				<Panel class="mainmenu__featured__right">
+					<Panel class="mainmenu__featured__avatar">
+						<AvatarImage id="FeaturedCarouselAvatar" />
+						<Panel />
+					</Panel>
+					<Panel class="mainmenu__featured__content">
+						<Label class="mainmenu__featured__content__header" text="FEATURED" />
+						<Label class="mainmenu__featured__content__subheader" text="[PH] Featured Title" />
+						<Label class="mainmenu__featured__content__subheader" text="[PH] Featured Author" />
+						<SteamInputAction
+							id="FeaturedBtnSelect"
+							actionset="MenuControls"
+							action="menu_select"
+							separatortext="/"
+							controllernumber="1"
+							glyphsize="large"
+						/>
+					</Panel>
+				</Panel>
+			</Button>
+		</Panel>
+
+		<!-- Background author -->
+		<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly">
+			<Panel class="flow-down vertical-align-center">
+				<Label class="mainmenu__featured-bg__text" text="#MainMenu_Home_BackgroundCredit" />
+				<Label id="BgName" class="mainmenu__featured-bg__name" text="[PH] Author" />
+			</Panel>
+			<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
+		</Panel>
+	</Panel>
+</root>

@@ -4,26 +4,6 @@
 
 $pane-move-time: 0.1s;
 
-@keyframes Splash_SplashFadeOut {
-	0% {
-		opacity: 1;
-	}
-
-	100% {
-		opacity: 0;
-	}
-}
-
-@keyframes Splash_MenuFadeIn {
-	0% {
-		opacity: 0;
-	}
-
-	100% {
-		opacity: 1;
-	}
-}
-
 .ControllerOnly {
 	visibility: collapse;
 }
@@ -78,80 +58,27 @@ $pane-move-time: 0.1s;
 	padding: 12px 14px;
 	margin: 15px;
 	margin-right: 16px;
-	color: white;
 	background-color: black;
-	font-size: 16px;
 	border-radius: 6px;
-	font-family: Verdana;
+	& > Label {
+		font-family: Verdana;
+		font-size: 16px;
+		color: white;
+	}
 }
 
 .mainmenu {
 	width: 100%;
 	height: 100%;
 
-	&__container,
 	&__background {
 		width: 100%;
 		height: 100%;
 	}
 
-	&__menu {
-		opacity: 0;
-	}
-
-	&__splash {
-		&__grid1 {
-			vertical-align: bottom;
-			opacity: 0.2;
-			-s2-mix-blend-mode: screen;
-		}
-		&__grid2 {
-			horizontal-align: right;
-			transform: scaleX(-1) scaleY(-1);
-			opacity: 0.2;
-			-s2-mix-blend-mode: screen;
-		}
-		&__logo {
-			width: 680px;
-			horizontal-align: center;
-			img-shadow: 3px 3px 5px 2 $base-950;
-		}
-		&__text {
-			font-weight: light;
-			text-transform: uppercase;
-			font-size: 32px;
-			letter-spacing: 2px;
-			text-shadow: 3px 3px 5px 2 $base-950;
-			overflow: noclip;
-		}
-		&__indicator {
-			width: 64px;
-			height: 64px;
-			background-image: url('file://{images}/menu/indicator_inactive.png');
-			img-shadow: 3px 3px 5px 2 $base-950;
-			&__inactive {
-				width: 64px;
-				height: 64px;
-				horizontal-align: center;
-				vertical-align: center;
-				background-image: url('file://{images}/menu/indicator_off.png');
-			}
-			&__left_panel {
-				flow-children: left;
-				horizontal-align: center;
-				vertical-align: center;
-				transform: translateX(680px);
-			}
-			&__right_panel {
-				flow-children: right;
-				horizontal-align: center;
-				vertical-align: center;
-				transform: translateX(-680px);
-			}
-			&__active {
-				background-image: url('file://{images}/menu/indicator_on.png');
-			}
-		}
+	&__movie {
+		width: 1920px;
+		height: 1080px;
 	}
 
 	&__pause-blur {
@@ -172,127 +99,10 @@ $pane-move-time: 0.1s;
 		}
 	}
 
-	// this should be similar to pause blur
-	// and extend out of the container and be clipped back
-	// but for some reason it's behaving differently and
-	// i can't figure out why
-	&__switcher-blur {
-		width: 100%;
-		height: 100%;
-	}
-
-	&__movie {
-		width: 1920px;
-		height: 1080px;
-	}
-
 	&__pause-content-blur {
 		width: 100%;
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.005);
-	}
-
-	&__content {
-		width: 100%;
-		height: 100%;
-		max-width: 1920px;
-		horizontal-align: center;
-		transform: translateX(0px);
-		opacity: 1;
-
-		&__t-prop {
-			transition:
-				transform 0.1s ease-out 0s,
-				opacity 0.1s ease-out 0s;
-		}
-
-		&__anim {
-			transform: translateX(-50px);
-			opacity: 0;
-		}
-	}
-
-	&__featured-bg {
-		background-color: $base-950;
-		border: $menu-pane-border;
-		padding: 10px 15px;
-		vertical-align: center;
-		flow-children: right;
-
-		&__text {
-			horizontal-align: right;
-			font-size: 12px;
-			letter-spacing: 1px;
-			color: $base-300;
-		}
-
-		&__name {
-			@include mixin.font-styles($use-header: true);
-			horizontal-align: right;
-			color: $base-300;
-			font-size: 16px;
-		}
-
-		&__avatar {
-			margin-left: 10px;
-			width: 48px;
-			height: 48px;
-			background-color: $base-950;
-			border: $menu-pane-border;
-		}
-	}
-
-	&__devtext {
-		margin: 15px;
-		font-size: 16px;
-		color: $base-300;
-		font-weight: bold;
-		letter-spacing: 1px;
-		vertical-align: bottom;
-		horizontal-align: right;
-	}
-
-	&__gradient-bar {
-		width: 672px;
-		height: 100%;
-		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
-
-		// murdered bc JJ doesn't like it sadge :(
-		// transform: translateX(125px);
-		// transition: transform $pane-move-time ease-out 0s;
-		// &__anim {
-		// 	transform: translateX(0px);
-		// }
-
-		&__grid1 {
-			vertical-align: top;
-			horizontal-align: left;
-			transform: scaleY(-1) translateX(-1px) translateY(-1px);
-			opacity: 0.25;
-		}
-
-		&__grid2 {
-			vertical-align: bottom;
-			horizontal-align: left;
-			transform: translateX(-1px) translateY(1px);
-			opacity: 0.25;
-		}
-	}
-
-	&__modelpanel {
-		width: 960px;
-		height: 100%;
-		transform: translateX(-30px);
-		horizontal-align: right;
-		vertical-align: center;
-		opacity: 0;
-	}
-
-	&__logo {
-		width: 540px;
-		height: 130px;
-		horizontal-align: center;
-		img-shadow: 0px 0px 50px 4 $base-950;
 	}
 
 	&__square-logo {
@@ -313,16 +123,64 @@ $pane-move-time: 0.1s;
 		}
 	}
 
-	&__cooltext {
-		width: 440px;
+	&__menu {
+		width: 100%;
+		height: 100%;
+
+		&__t-prop {
+			transition:
+				transform 0.1s ease-out 0s,
+				opacity 0.1s ease-out 0s;
+		}
+
+		&__anim {
+			transform: translateX(-50px);
+			opacity: 0;
+		}
+	}
+
+	&__menu-space {
+		width: 672px;
+		height: 100%;
+	}
+
+	&__page-bg {
+		width: 100%;
+		height: 100%;
+		//background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
+	}
+
+	&__gradient-bar {
+		width: 672px;
+		height: 100%;
+		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
+	}
+
+	&__grid1 {
+		vertical-align: top;
+		horizontal-align: left;
+		transform: scaleY(-1) translateX(-1px) translateY(-1px);
+		opacity: 0.25;
+	}
+
+	&__grid2 {
+		vertical-align: bottom;
+		horizontal-align: left;
+		transform: translateX(-1px) translateY(1px);
+		opacity: 0.25;
+	}
+
+	&__logo {
+		width: 540px;
 		height: 130px;
 		horizontal-align: center;
-		img-shadow: 0px 0px 100px 4 $base-950;
-		visibility: collapse;
+		img-shadow: 0px 0px 50px 4 $base-950;
+		margin-bottom: 100px;
 	}
 
 	&__nav {
-		width: 100%;
+		width: 672px;
+		padding-bottom: 100px;
 		vertical-align: center;
 		flow-children: down;
 
@@ -361,9 +219,8 @@ $pane-move-time: 0.1s;
 		&__btn {
 			flow-children: right;
 			width: 100%;
-			min-height: 65px;
+			min-height: 70px;
 			padding-left: 75px;
-			margin: 2px 0;
 
 			$this: &;
 
@@ -436,14 +293,14 @@ $pane-move-time: 0.1s;
 	&__featured {
 		$this: &;
 
-		&__button {
+		&__wrapper {
+			width: 448px;
 			border: $menu-pane-border;
-			width: 512px;
-			height: 160px;
-			vertical-align: bottom;
 			horizontal-align: center;
+			vertical-align: bottom;
+			flow-children: right;
 			background-color: $base-950;
-			margin-bottom: 50px;
+			margin-bottom: 25px;
 
 			.InputController &:focus,
 			.InputKeyboard &:hover {
@@ -452,73 +309,85 @@ $pane-move-time: 0.1s;
 
 				#{$this}__image {
 					opacity: 0.9;
+					border-color: $primary-color;
 				}
 
-				#{$this}__overlay {
-					background-color: gradient(linear, 0% 100%, 0% 0%, from($primary-950), to(rgba(0, 0, 0, 0)));
+				#{$this}__avatar {
+					visibility: collapse;
 				}
 			}
 
-			& > SteamInputAction {
+			& SteamInputAction {
 				vertical-align: top;
 				horizontal-align: right;
 				margin: 5px;
-				& Image {
-					img-shadow: 3px 3px 5px 2 $base-950;
-					overflow: noclip;
-				}
-				& Label {
-					text-shadow: 3px 3px 5px 2 $base-950;
-					overflow: noclip;
-				}
 			}
-			& > SteamInputAction.ControllerConnected {
+			& SteamInputAction.ControllerConnected {
 				visibility: collapse;
 			}
 			.InputController &:focus:not(:disabled) {
-				& > SteamInputAction {
+				& SteamInputAction {
 					visibility: visible;
 				}
 			}
 		}
 
-		&__image {
-			height: 100%;
+		&__grid1 {
 			width: 100%;
+			height: 100%;
+			background-image: url('file://{images}/menu/menu_grid5.png');
+			background-repeat: no-repeat;
+			background-position: left top -1px;
+			background-img-opacity: 0.1;
+			transform: scaleX(-1);
 		}
 
-		&__overlay {
-			width: 100%;
+		&__image {
+			width: 128px;
+			height: 128px;
+			border-right: $menu-pane-border;
+		}
+
+		&__right {
+			width: fill-parent-flow(1);
 			height: 100%;
-			background-color: gradient(linear, 0% 100%, 0% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
+		}
+
+		&__avatar {
+			horizontal-align: right;
+			height: 100%;
+			width: height-percentage(100%);
+
+			& > AvatarImage {
+				width: 100%;
+				height: 100%;
+				opacity: 0.1;
+			}
+
+			& > Panel {
+				width: 100%;
+				height: 100%;
+				background-color: gradient( linear, 0% 0%, 100% 0%, from( $base-950 ), to( rgba($base-950, 0.5) ) );
+			}
 		}
 
 		&__content {
-			width: 100%;
-			vertical-align: bottom;
-			flow-children: right;
-			padding: 10px;
-
-			&__avatar {
-				width: 48px;
-				height: 48px;
-				margin-right: 10px;
-				background-color: $base-950;
-				border: $menu-pane-border;
-			}
+			horizontal-align: center;
+			vertical-align: center;
+			flow-children: down;
 
 			&__header {
 				@include mixin.font-styles($use-header: true);
 				font-size: 18px;
-				text-shadow: 2px 2px 2px 2 $base-950;
+				horizontal-align: center;
 			}
 
 			&__subheader {
 				font-size: 14px;
 				letter-spacing: 1px;
-				text-shadow: 1px 1px 4px 2 $base-950;
 				font-weight: light;
 				color: $base-200;
+				horizontal-align: center;
 			}
 		}
 	}
@@ -536,7 +405,7 @@ $pane-move-time: 0.1s;
 		}
 		&__details {
 			width: 100%;
-			height: 94px;
+			height: 62px;
 			background-color: $base-950;
 			background-image: url('file://{images}/menu/menu_grid4.png');
 			background-repeat: no-repeat;
@@ -557,16 +426,10 @@ $pane-move-time: 0.1s;
 		}
 		&__tagline {
 			color: $base-300;
-			font-weight: light;
 			letter-spacing: 1px;
 			font-size: 16px;
+			vertical-align: center;
 		}
-	}
-
-	&__page-bg {
-		width: 100%;
-		height: 100%;
-		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
 	}
 
 	&__normal-page-container {
@@ -575,6 +438,21 @@ $pane-move-time: 0.1s;
 		max-height: 2160px;
 		flow-children: down;
 		padding: 30px;
+	}
+
+	&__page-head {
+		@include mixin.font-styles($use-header: true);
+		font-size: 38px;
+		text-shadow: 2px 2px 2px 2 $base-950;
+	}
+
+	&__page-tagline {
+		font-size: 24px;
+		color: $base-300;
+		font-weight: light;
+		letter-spacing: 1px;
+		margin-bottom: 15px;
+		text-shadow: 1px 1px 2px 2 $base-950;
 	}
 
 	&__page-insert {
@@ -608,6 +486,21 @@ $pane-move-time: 0.1s;
 		}
 	}
 
+	&__page-actions {
+		height: $button-height;
+		width: 100%;
+		margin-top: 15px;
+		flow-children: right;
+		&__button {
+			@at-root .InputController .mainmenu__page-actions__button {
+				visibility: collapse;
+			}
+			& Label {
+				transform: translateY(-1px);
+			}
+		}
+	}
+
 	&__page-controls {
 		opacity: 0;
 		transform: translateX(50px);
@@ -634,37 +527,48 @@ $pane-move-time: 0.1s;
 		}
 	}
 
-	&__page-head {
-		@include mixin.font-styles($use-header: true);
-		font-size: 38px;
-		text-shadow: 2px 2px 2px 2 $base-950;
-	}
-
-	&__page-tagline {
-		font-size: 24px;
-		color: $base-300;
-		font-weight: light;
-		letter-spacing: 1px;
-		margin-bottom: 15px;
-		text-shadow: 1px 1px 2px 2 $base-950;
-	}
-
-	&__page-actions {
-		height: $button-height;
-		width: 100%;
-		margin-top: 15px;
+	&__featured-bg {
+		background-color: $base-950;
+		border: $menu-pane-border;
+		padding: 10px 15px;
+		horizontal-align: right;
+		margin: 15px;
 		flow-children: right;
-		&__button {
-			@at-root .InputController .mainmenu__page-actions__button {
-				visibility: collapse;
-			}
-			& Label {
-				transform: translateY(-1px);
-			}
+
+		&__text {
+			horizontal-align: right;
+			font-size: 12px;
+			letter-spacing: 1px;
+			color: $base-300;
+		}
+
+		&__name {
+			@include mixin.font-styles($use-header: true);
+			horizontal-align: right;
+			color: $base-300;
+			font-size: 16px;
+		}
+
+		&__avatar {
+			margin-left: 10px;
+			width: 48px;
+			height: 48px;
+			background-color: $base-950;
+			border: $menu-pane-border;
 		}
 	}
 
 	&__version {
-		margin-left: 15px;
+		horizontal-align: right;
+		vertical-align: bottom;
+	}
+
+	// this should be similar to pause blur
+	// and extend out of the container and be clipped back
+	// but for some reason it's behaving differently and
+	// i can't figure out why
+	&__switcher-blur {
+		width: 100%;
+		height: 100%;
 	}
 }
