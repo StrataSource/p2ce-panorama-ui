@@ -26,3 +26,15 @@ declare const enum CampaignMeta {
 	DESC = 'desc',
 	AUTHOR = 'author'
 }
+
+type MenuButton = {
+	id: string,
+	headline: string,
+	tagline: string,
+	oncreated?: () => void,
+	activated?: () => void,
+	hovered?: () => void,
+	unhovered?: () => void,
+	focused?: () => void,
+	focusIsHover?: boolean
+}

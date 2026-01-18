@@ -3,7 +3,8 @@
 class MenuAnimation {
 	static movie = $<Movie>('#MainMenuMovie')!;
 	static imgBg = $<Image>('#MainMenuBackground')!;
-	static menuContent = $<Panel>('#MenuContentRoot')!;
+	static menuContent = $<Panel>('#MenuMainContent')!;
+	static menuForeground = $<Panel>('#MenuModeForegroundLayer')!;
 	static switchBlur = $<Panel>('#SwitcherBlur')!;
 	static pageInsert = $<Panel>('#PageInsert')!;
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
@@ -11,14 +12,42 @@ class MenuAnimation {
 	static isBlurred = false;
 
 	// constants
-	static BACKGROUND_IMAGE_FADE_IN_TIME = 0.25;
+	static BACKGROUND_IMAGE_FADE_IN_TIME = 0.5;
 
-	static onMainMenuLoaded() {
+	static init() {
+		$.RegisterForUnhandledEvent('MainMenuSetLoadingIndicatorVisibility', (visible: boolean) => {
+			this.loadingIndicator.visible = visible;
+		});
+		
 		$.RegisterForUnhandledEvent('MainMenuSwitchFade', this.switchFade.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuSwitchReverse', this.switchReverse.bind(this));
+
+		$.RegisterForUnhandledEvent('MainMenuShowBackgroundImage', this.showBgImg.bind(this));
+		$.RegisterForUnhandledEvent('MainMenuHideBackgroundImage', this.hideBgImg.bind(this));
+
+		$.RegisterForUnhandledEvent('MainMenuShowBackgroundMovie', (src: string) => {
+			$.Msg(`Set movie to file://{game}/${src}`);
+			this.movie.SetMovie(`file://{game}/${src}`);
+			this.movie.Play();
+			this.movie.visible = true;
+		});
+		$.RegisterForUnhandledEvent('MainMenuHideBackgroundMovie', () => {
+			this.movie.Stop();
+			this.movie.visible = false;
+		});
+
+		$.RegisterEventHandler('ImageFailedLoad', this.imgBg, () => {
+			this.imgBg.SetImage(getRandomFallbackImage());
+		});
+
+		this.movie.visible = false;
 		this.loadingIndicator.visible = false;
 	}
 
-	static showBgImg(instant?: boolean) {
+	static showBgImg(img?: string, instant?: boolean) {
+		if (img) {
+			this.imgBg.SetImage(`file://${img}`);
+		}
 		if (instant) {
 			this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';
 		} else {
@@ -34,20 +63,33 @@ class MenuAnimation {
 		}
 	}
 
-	static switchFade(instant?: boolean) {
+	static switchFade(instantFade?: boolean, instantMenu?: boolean) {
 		if (this.isBlurred) return;
 
-		$('#MainContainer')!.enabled = false;
+		$('#MenuNav')!.enabled = false;
 
 		this.movie = $<Movie>('#MainMenuMovie')!;
 		this.movie.Stop();
 
-		this.menuContent.AddClass('mainmenu__content__t-prop');
-		this.menuContent.AddClass('mainmenu__content__anim');
 		this.switchBlur.RemoveClass('anim-main-menu-switch-reverse');
 
-		if (instant) this.switchBlur.AddClass('anim-main-menu-blur');
-		else this.switchBlur.AddClass('anim-main-menu-switch');
+		this.menuForeground.hittestchildren = false;
+		this.menuForeground.enabled = false;
+
+		if (instantMenu) {
+			this.menuContent.style.animation = 'FadeOut 0.01s ease-in-out 0s 1 normal forwards';
+			this.menuForeground.style.animation = 'FadeOut 0.01s ease-in-out 0s 1 normal forwards';
+		} else {
+			this.menuContent.style.animation = 'FadeOut 0.5s ease-in-out 0s 1 normal forwards';
+			this.menuForeground.style.animation = 'FadeOut 0.5s ease-in-out 0s 1 normal forwards';
+		}
+
+		if (instantFade) {
+			this.switchBlur.AddClass('anim-main-menu-blur');
+		}
+		else {
+			this.switchBlur.AddClass('anim-main-menu-switch');
+		}
 
 		this.isBlurred = true;
 	}
@@ -57,10 +99,14 @@ class MenuAnimation {
 
 		if (!this.isBlurred) return;
 
-		$('#MainContainer')!.enabled = true;
+		$('#MenuNav')!.enabled = true;
 
-		this.menuContent.RemoveClass('mainmenu__content__t-prop');
-		this.menuContent.RemoveClass('mainmenu__content__anim');
+		this.menuForeground.hittestchildren = true;
+		this.menuForeground.enabled = true;
+
+		this.menuContent.style.animation = 'FadeIn 0.5s ease-in-out 0s 1 normal forwards';
+		this.menuForeground.style.animation = 'FadeIn 0.5s ease-in-out 0s 1 normal forwards';
+
 		this.switchBlur.RemoveClass('anim-main-menu-blur');
 		this.switchBlur.RemoveClass('anim-main-menu-switch');
 		this.switchBlur.AddClass('anim-main-menu-switch-reverse');

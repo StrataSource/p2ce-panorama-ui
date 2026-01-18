@@ -4,537 +4,144 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/pages/main-menu/main-menu.ts" />
-		<include src="file://{scripts}/pages/main-menu/menu-transformer.ts" />
-		<include src="file://{scripts}/pages/main-menu/menu-splash.ts" />
+		<include src="file://{scripts}/pages/main-menu/menu-manager.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-anim.ts" />
-		<include src="file://{scripts}/pages/main-menu/bg-map.ts" />
-		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
-	<snippets>
-		<snippet name="MainMenuMovieSnippet">
-			<Panel>
-				<Movie
-					id="MainMenuMovie"
-					class="mainmenu__movie MainMenuModeOnly"
-					src=""
-					sound=""
-					controls="none"
-					repeat="true"
-					hittest="false"
-				>
-				</Movie>
-			</Panel>
-		</snippet>
-	</snippets>
-
-	<MainMenu
-		class="InitialDisplay MainMenuRootPanel"
-		hittest="false"
-		onload="MainMenu.onMainMenuLoaded()"
-		onfocus="MainMenu.onMainMenuFocused()"
-	>
+	<MainMenu class="InitialDisplay MainMenuRootPanel" onload="MenuManager.onLoaded()">
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
 		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Movie background -->
-			<Panel id="MainMenuMovieParent" class="mainmenu__background MainMenuModeOnly" hittest="false" />
+			<Movie
+				id="MainMenuMovie"
+				class="mainmenu__movie z-0"
+				src=""
+				sound=""
+				controls="none"
+				repeat="true"
+				hittest="false"
+			/>
 			<!-- Static image background -->
 			<Image
 				id="MainMenuBackground"
-				class="mainmenu__background MainMenuModeOnly"
+				class="mainmenu__background z-0"
 				scaling="stretch-to-cover-preserve-aspect"
 				hittest="false"
 			/>
 
-			<!-- Save background -->
-			<Image
-				id="MainMenuSaveBackground"
-				class="mainmenu__background MainMenuModeOnly"
-				scaling="stretch-to-cover-preserve-aspect"
-				hittest="false"
-			/>
+			<Panel id="MenuModeBackgroundLayer" class="full z-0" hittest="false" />
 
-			<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
-			<BaseBlurTarget
-				id="PauseMenuMainMenuBlur"
-				class="mainmenu__pause-blur PauseMenuModeOnly"
-				blurrects="PauseMenuMainMenuContent"
-				hittest="false"
-			>
-				<!-- Backbuffer background -->
-				<BackbufferImagePanel hittest="false" class="mainmenu__background PauseMenuModeOnly" />
-			</BaseBlurTarget>
-
-			<Panel id="PauseMenuMainMenuContent" hittest="false" class="mainmenu__pause-content-blur" />
-
-			<Image
-				id="ContinueSaveLogo"
-				class="mainmenu__square-logo"
-				src="file://{images}/menu/portal2/logo.svg"
-				textureheight="2048"
-				texturewidth="2048"
-				scaling="stretch-to-fit-preserve-aspect"
-			/>
-
-			<!-- Full page blur: used to blur everything below the drawer -->
-			<Panel
-				id="MainContainer"
-				class="mainmenu__container mainmenu__menu"
-				disabled="true"
-				onfocus="MainMenu.onMainMenuFocused()"
-			>
-				<Panel id="MenuContentRoot" class="mainmenu__content">
-					<Panel id="PageBg" class="mainmenu__page-bg" />
-
-					<Panel id="GradientBar" class="mainmenu__gradient-bar">
-						<Image
-							class="mainmenu__gradient-bar__grid1"
-							src="file://{images}/menu/menu_grid1.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							hittest="false"
-						/>
-						<Image
-							class="mainmenu__gradient-bar__grid2"
-							src="file://{images}/menu/menu_grid2.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							hittest="false"
-						/>
-						<Panel id="HomeControls" class="mainmenu__nav">
-							<Panel class="mainmenu__nav__top">
-								<Image
-									id="GameFullLogo"
-									class="mainmenu__logo"
-									src="file://{images}/logo.svg"
-									scaling="stretch-to-fit-preserve-aspect"
-								/>
-							</Panel>
-							<Panel class="mainmenu__nav__controls__wrapper">
-								<Panel id="MenuBtnList" class="mainmenu__nav__controls" childfocusonhover="true">
-									<Button
-										id="DevBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.navigateToPage('Dev', 'main-menu/developer', $('#DevBtn'))"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Developer" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Developer_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="DevBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Play/Select Campaign/Gamemode (NOT Campaign Mode / Main Menu) -->
-									<Button
-										id="PlayBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.navigateToPage('Play', 'play-menu/player-mode', $('#PlayBtn'))"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Play" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Play_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="PlayBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Resume Game (in-game) -->
-									<Button
-										id="ResumeBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined PauseMenuModeOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="$.DispatchEvent('MainMenuResumeGame');"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Home_Resume" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Home_Resume_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="ResumeBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Start New Game (Campaign Mode) -->
-									<Button
-										id="NewGameBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.navigateToPage('NewGame', 'campaigns/new-game', $('#NewGameBtn'))"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Campaigns_MM_NewGame" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Campaigns_MM_NewGame_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="NewGameBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Continue Latest Save -->
-									<!-- When not in Campaign mode, it picks the latest save by time -->
-									<!-- When in Campaign mode, it picks latest save filtered by current Campaign -->
-									<Button
-										id="CampaignContinueBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined"
-										onfocus="MainMenu.onContinueFocused()"
-										onmouseover="MainMenu.onContinueMouseOver()"
-										onmouseout="MainMenu.onContinueMouseOut(false)"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text MainMenuModeOnly CampaignSelectedOnly" text="#MainMenu_Campaigns_MM_LoadAuto" />
-											<Label class="mainmenu__nav__btn__text MainMenuModeOnly NoCampaignSelectedOnly" text="#MainMenu_Campaigns_MM_Resume" />
-											<Label id="ContinueCampaignText" class="mainmenu__nav__btn__small-text MainMenuModeOnly" text="[PH] ????" />
-											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto" />
-											<Label class="mainmenu__nav__btn__small-text PauseMenuModeOnly" text="#MainMenu_SaveRestore_LoadAuto_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="CampaignContinueBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Save/Load Game (Campaign Mode / in-game) -->
-									<Button
-										id="LoadGameBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined CampaignSelectedOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.navigateToPage('GameSaves', 'campaigns/saves-list', $('#LoadGameBtn'))"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text MainMenuModeOnly" text="#MainMenu_SaveRestore_Load" />
-											<Label class="mainmenu__nav__btn__text PauseMenuModeOnly" text="#MainMenu_SaveRestore_Main" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_SaveRestore_Main_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="LoadGameBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Addons/Mounts -->
-									<Button
-										id="AddonsBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly NoCampaignSelectedOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.navigateToPage('Content', 'main-menu/addons', $('#AddonsBtn'))"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Addons" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Addons_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="AddonsBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Settings -->
-									<Button
-										id="SettingsBtn"
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.navigateToPage('Settings', 'settings/settings', $('#SettingsBtn'))"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Options" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Options_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="SettingsBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Exit Campaign Mode -->
-									<Button
-										class="mainmenu__nav__btn mainmenu__nav__btn__lined MainMenuModeOnly CampaignSelectedOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenuCampaignMode.exitCampaign()"
-										tabindex="auto"
-										selectionpos="auto"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Disconnect" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Disconnect_CM_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="ExitCampaignSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<!-- Quit/Disconnect -->
-									<Button
-										id="QuitBtn"
-										class="mainmenu__nav__btn NoCampaignSelectedOnly MainMenuModeOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.onQuitButtonPressed()"
-										tabindex="auto"
-										selectionpos="auto"
-										onmovedown="MainMenu.tryNavigateFeatured()"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_QuitGame" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_QuitGame_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="QuitBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-									<Button
-										id="DisconnectBtn"
-										class="mainmenu__nav__btn PauseMenuModeOnly"
-										onfocus="MainMenu.onContinueMouseOut(false)"
-										onactivate="MainMenu.onQuitButtonPressed()"
-										tabindex="auto"
-										selectionpos="auto"
-										onmovedown="MainMenu.tryNavigateFeatured()"
-									>
-										<Panel class="vertical-align-center flow-down">
-											<Label class="mainmenu__nav__btn__text" text="#MainMenu_Navigation_Disconnect" />
-											<Label class="mainmenu__nav__btn__small-text" text="#MainMenu_Navigation_Disconnect_Tagline" />
-										</Panel>
-										<SteamInputAction
-											id="DisconnectBtnSelect"
-											actionset="MenuControls"
-											action="menu_select"
-											separatortext="/"
-											controllernumber="1"
-											glyphsize="large"
-										/>
-									</Button>
-								</Panel>
-							</Panel>
-						</Panel>
-						<Button
-							id="FeaturedBtn"
-							class="mainmenu__featured__button"
-							onfocus="MainMenu.onContinueMouseOut(false)"
-							onactivate="MainMenu.navigateToPage('Featured', 'featured/main', $('#FeaturedBtn'))"
-							tabindex="auto"
-							selectionpos="auto"
-							onmoveup="MainMenu.tryNavigateUpFeatured()"
-						>
-							<Image
-								id="FeaturedImage"
-								class="mainmenu__featured__image"
-								src="file://{images}/menu/p2ce-generic.png"
-								scaling="stretch-to-cover-preserve-aspect"
-							/>
-							<Panel class="mainmenu__featured__overlay" />
-							<Panel class="mainmenu__featured__content">
-								<AvatarImage id="FeaturedAvatar" class="mainmenu__featured__content__avatar" />
-								<Panel class="flow-down vertical-align-center">
-									<Label class="mainmenu__featured__content__header" text="[PH] Major Feature" />
-									<Label class="mainmenu__featured__content__subheader" text="[PH] Author" />
-								</Panel>
-							</Panel>
-							<SteamInputAction
-								id="FeaturedBtnSelect"
-								actionset="MenuControls"
-								action="menu_select"
-								separatortext="/"
-								controllernumber="1"
-								glyphsize="large"
-							/>
-						</Button>
-					</Panel>
-
-					<Panel id="ContinueBox" class="mainmenu__display-box" hittest="false" hittestchildren="false">
-						<Panel>
-							<Image
-								id="ContinueSaveThumb"
-								class="mainmenu__display-box__img"
-								src="file://{images}/menu/p2ce/random4.png"
-								textureheight="1920"
-								texturewidth="1080"
-								scaling="stretch-to-cover-preserve-aspect"
-							/>
-							<!--
-							<Image
-								id="ContinueSaveLogo" 
-								class="mainmenu__display-box__logo"
-								src="file://{images}/menu/portal2/logo.svg"
-								textureheight="64"
-								texturewidth="64"
-								scaling="stretch-to-cover-preserve-aspect"
-							/>
-							-->
-						</Panel>
-						<Panel class="mainmenu__display-box__details">
-							<Panel class="vertical-align-center flow-down ml-3">
-								<Label id="ContinueSaveHeadline" class="mainmenu__display-box__head" text="[PH] Head" />
-								<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
-							</Panel>
-						</Panel>
-					</Panel>
-
-					<Panel id="PageWrap" class="mainmenu__normal-page-container">
-						<Label
-							id="PageHeadline"
-							class="mainmenu__page-head mainmenu__page-controls mainmenu__page-controls__t-prop"
-							text="[PH] Page Headline"
-						/>
-						<Label
-							id="PageTagline"
-							class="mainmenu__page-tagline mainmenu__page-controls mainmenu__page-controls__t-prop"
-							text="[PH] Page Tagline"
-						/>
-
-						<Panel id="PageInsert" class="mainmenu__page-insert" tabindex="auto" selectionpos="auto" />
-
-						<Panel
-							id="PageActions"
-							class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop"
-							tabindex="auto"
-							selectionpos="auto"
-						>
-							<Button
-								class="button mainmenu__page-actions__button"
-								onactivate="MainMenu.navigateBack()"
-								tabindex="auto"
-								selectionpos="auto"
-							>
-								<Label class="button__text" text="Back" />
-							</Button>
-							<Panel class="flow-right vertical-align-center ControllerOnly">
-								<SteamInputAction
-									id="SelectSteamAction"
-									class="mr-1"
-									actionset="MenuControls"
-									action="menu_select"
-									separatortext="/"
-									controllernumber="1"
-									glyphsize="large"
-								/> 
-								<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name font-weight-bold" />
-							</Panel>
-							<Panel class="flow-right vertical-align-center ml-2 ControllerOnly">
-								<SteamInputAction
-									class="mr-1"
-									id="BackSteamAction"
-									actionset="MenuControls"
-									action="menu_cancel"
-									separatortext="/"
-									controllernumber="1"
-									glyphsize="large"
-								/> 
-								<Label class="vertical-align-center" text="Back" />
-							</Panel>
-						</Panel>
+			<Panel id="MenuMainContent" class="mainmenu__menu z-1">
+				<Panel id="PageBg" class="mainmenu__page-bg" hittest="false" />
+				<Panel id="GradientBar" class="mainmenu__gradient-bar" hittest="false" />
+				<Image
+					class="mainmenu__grid1"
+					src="file://{images}/menu/menu_grid1.svg"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+				/>
+				<Image
+					class="mainmenu__grid2"
+					src="file://{images}/menu/menu_grid2.svg"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+				/>
+				<Panel id="MenuRootControls" class="mainmenu__nav">
+					<Image
+						id="GameFullLogo"
+						class="mainmenu__logo"
+						src="file://{images}/logo.svg"
+						scaling="stretch-to-fit-preserve-aspect"
+						hittest="false"
+					/>
+					<Panel id="MenuNav" class="flow-down full-width">
+						<!-- Dynamically populated -->
 					</Panel>
 				</Panel>
 			</Panel>
-			
-			<Panel class="horizontal-align-right flow-right m-3">
-				<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly">
-					<Panel class="flow-down vertical-align-center">
-						<Label class="mainmenu__featured-bg__text" text="#MainMenu_Home_BackgroundCredit" />
-						<Label id="BgName" class="mainmenu__featured-bg__name" text="[PH] Author" />
+
+			<Panel id="MenuModeForegroundLayer" class="full z-1" hittest="false" hittestchildren="true" />
+
+			<VersionInfo class="mainmenu__version z-1" />
+
+			<Panel id="PageWrap" class="mainmenu__normal-page-container z-1" hittest="false" hittestchildren="false">
+				<Label
+					id="PageHeadline"
+					class="mainmenu__page-head mainmenu__page-controls mainmenu__page-controls__t-prop"
+					text="[PH] Page Headline"
+				/>
+				<Label
+					id="PageTagline"
+					class="mainmenu__page-tagline mainmenu__page-controls mainmenu__page-controls__t-prop"
+					text="[PH] Page Tagline"
+				/>
+				<Panel id="PageInsert" class="mainmenu__page-insert" tabindex="auto" selectionpos="auto" />
+				<Panel
+					id="PageActions"
+					class="mainmenu__page-actions mainmenu__page-controls mainmenu__page-controls__t-prop"
+					tabindex="auto"
+					selectionpos="auto"
+				>
+					<Button
+						class="button mainmenu__page-actions__button"
+						onactivate="MenuManager.navigateBack()"
+						tabindex="auto"
+						selectionpos="auto"
+					>
+						<Label class="button__text" text="Back" />
+					</Button>
+					<Panel class="flow-right vertical-align-center ControllerOnly">
+						<SteamInputAction
+							id="SelectSteamAction"
+							class="mr-1"
+							actionset="MenuControls"
+							action="menu_select"
+							separatortext="/"
+							controllernumber="1"
+							glyphsize="large"
+						/> 
+						<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name font-weight-bold" />
 					</Panel>
-					<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
+					<Panel class="flow-right vertical-align-center ml-2 ControllerOnly">
+						<SteamInputAction
+							class="mr-1"
+							id="BackSteamAction"
+							actionset="MenuControls"
+							action="menu_cancel"
+							separatortext="/"
+							controllernumber="1"
+							glyphsize="large"
+						/> 
+						<Label class="vertical-align-center" text="Back" />
+					</Panel>
 				</Panel>
-				<VersionInfo class="mainmenu__version" />
 			</Panel>
 
 			<!-- Backbuffer blur: used to blur the backbuffer when switching campaigns -->
 			<BaseBlurTarget
 				id="SwitcherBlur"
-				class="mainmenu__switcher-blur MainMenuModeOnly"
+				class="mainmenu__switcher-blur z-2"
 				blurrects="SwitcherBlurContent"
 				hittest="false"
 			>
 				<!-- Backbuffer background -->
-				<BackbufferImagePanel class="mainmenu__background MainMenuModeOnly" hittest="false" />
+				<BackbufferImagePanel class="mainmenu__background" hittest="false" />
 			</BaseBlurTarget>
-
-			<Panel id="SwitcherBlurContent" class="mainmenu__pause-content-blur" hittest="false" />
-			<Label id="LoadingIndicator" class="loading-indicator" text="#MainMenu_Loading" />
-
-			<!-- Splash screen -->
-			<Panel id="SplashContainer" class="mainmenu__container mainmenu__splash">
-				<Button id="SplashBtn" class="full-width full-height" onactivate="MenuSplash.onActivated()" />
-				<Panel class="horizontal-align-center vertical-align-center flow-down">
-					<Image
-						id="SplashLogo"
-						class="mainmenu__splash__logo"
-						src="file://{images}/logo.svg"
-						scaling="stretch-to-fit-preserve-aspect"
-						texturewidth="880"
-						textureheight="259"
-					/>
-					<Panel class="mt-5 flow-right horizontal-align-center">
-						<Label class="mainmenu__splash__text" text="Press any button" />
-					</Panel>
-				</Panel>
+			<Panel id="SwitcherBlurContent" class="mainmenu__pause-content-blur z-2" hittest="false" />
+			<Panel id="LoadingIndicator" class="loading-indicator z-2">
+				<Label text="#MainMenu_Loading" />
 			</Panel>
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
-		<PopupManager id="PopupManager" onpopupsdismissed="" />
-		<ContextMenuManager id="ContextMenuManager" />
-		<TooltipManager id="TooltipManager" hittest="false" />
+		<PopupManager id="PopupManager" class="z-2" onpopupsdismissed="" />
+		<ContextMenuManager id="ContextMenuManager" class="z-2" />
+		<TooltipManager id="TooltipManager" class="z-2" hittest="false" />
 
 		<!-- Doesn't actually include the notifications, but we use its position to figure out where to show them -->
-		<Panel id="SteamNotificationsPlaceholder" hittest="false" />
+		<Panel id="SteamNotificationsPlaceholder" class="z-2" hittest="false" />
 	</MainMenu>
 </root>

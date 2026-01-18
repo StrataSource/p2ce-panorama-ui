@@ -1,0 +1,29 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/main-menu/campaign-menu.ts" />
+	</scripts>
+
+	<Panel class="full" hittest="false" hittestchildren="false" onload="CampaignMenu.onLoad()">
+		<Panel id="ContinueBox" class="mainmenu__display-box">
+			<Panel>
+				<Image
+					id="ContinueSaveThumb"
+					class="mainmenu__display-box__img"
+					src="file://{images}/menu/p2ce/random4.png"
+					textureheight="1920"
+					texturewidth="1080"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
+			</Panel>
+			<Panel class="mainmenu__display-box__details">
+				<Panel class="vertical-align-center flow-down ml-3">
+					<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

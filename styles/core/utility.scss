@@ -232,6 +232,14 @@ $s: list.join((0px), $spacers);
 	}
 }
 
+$z: (-2, -1, 0);
+@each $z-index in $z {
+	$index: list.index($z, $z-index) - 1;
+	.z-#{$index} {
+		z-index: $z-index;
+	}
+}
+
 // ================
 // DEBUG
 // ================
