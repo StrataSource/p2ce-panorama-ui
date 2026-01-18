@@ -15,16 +15,26 @@ class MenuAnimation {
 	static BACKGROUND_IMAGE_FADE_IN_TIME = 0.5;
 
 	static init() {
+		// loading indicator
 		$.RegisterForUnhandledEvent('MainMenuSetLoadingIndicatorVisibility', (visible: boolean) => {
 			this.loadingIndicator.visible = visible;
 		});
-		
+
+		// blur switcher
 		$.RegisterForUnhandledEvent('MainMenuSwitchFade', this.switchFade.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuSwitchReverse', this.switchReverse.bind(this));
 
+		// background image
+		$.RegisterForUnhandledEvent('MainMenuSetBackgroundImage', (img: string) => {
+			this.imgBg.SetImage(`file://${img}`);
+		});
 		$.RegisterForUnhandledEvent('MainMenuShowBackgroundImage', this.showBgImg.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuHideBackgroundImage', this.hideBgImg.bind(this));
+		$.RegisterEventHandler('ImageFailedLoad', this.imgBg, () => {
+			this.imgBg.SetImage(getRandomFallbackImage());
+		});
 
+		// background movie
 		$.RegisterForUnhandledEvent('MainMenuShowBackgroundMovie', (src: string) => {
 			$.Msg(`Set movie to file://{game}/${src}`);
 			this.movie.SetMovie(`file://{game}/${src}`);
@@ -34,10 +44,6 @@ class MenuAnimation {
 		$.RegisterForUnhandledEvent('MainMenuHideBackgroundMovie', () => {
 			this.movie.Stop();
 			this.movie.visible = false;
-		});
-
-		$.RegisterEventHandler('ImageFailedLoad', this.imgBg, () => {
-			this.imgBg.SetImage(getRandomFallbackImage());
 		});
 
 		this.movie.visible = false;
@@ -86,8 +92,7 @@ class MenuAnimation {
 
 		if (instantFade) {
 			this.switchBlur.AddClass('anim-main-menu-blur');
-		}
-		else {
+		} else {
 			this.switchBlur.AddClass('anim-main-menu-switch');
 		}
 

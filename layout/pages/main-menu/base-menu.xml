@@ -39,7 +39,7 @@
 					id="FeaturedImage"
 					class="mainmenu__featured__image"
 					src="file://{images}/menu/p2ce-generic.png"
-					scaling="stretch-to-fit-preserve-aspect"
+					scaling="stretch-to-cover-preserve-aspect"
 				/>
 				<Panel class="mainmenu__featured__right">
 					<Panel class="mainmenu__featured__avatar">

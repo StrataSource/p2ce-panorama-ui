@@ -28,13 +28,13 @@ declare const enum CampaignMeta {
 }
 
 type MenuButton = {
-	id: string,
-	headline: string,
-	tagline: string,
-	oncreated?: () => void,
-	activated?: () => void,
-	hovered?: () => void,
-	unhovered?: () => void,
-	focused?: () => void,
-	focusIsHover?: boolean
-}
+	id: string;
+	headline: string;
+	tagline: string;
+	oncreated?: () => void;
+	activated?: () => void;
+	hovered?: () => void;
+	unhovered?: () => void;
+	focused?: () => void;
+	focusIsHover?: boolean;
+};

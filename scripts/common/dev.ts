@@ -77,64 +77,49 @@ function constructMenuButton(btn: MenuButton) {
 	// constructed manually because LoadLayoutString HATES ME!!!
 
 	// create the button
-	const b = $.CreatePanel(
-		'Button',
-		$.GetContextPanel(),
-		btn.id,
-		{
-			'class': 'mainmenu__nav__btn',
-			'tabindex': 'auto',
-			'selectionpos': 'auto'
-		}
-	);
+	const b = $.CreatePanel('Button', $.GetContextPanel(), btn.id, {
+		class: 'mainmenu__nav__btn',
+		tabindex: 'auto',
+		selectionpos: 'auto'
+	});
 
 	b.SetReadyForDisplay(false);
 
 	// create the panel for texts
 	const bp = $.CreatePanel('Panel', b, `${btn.id}_Panel`, {
-		'class': 'vertical-align-center flow-down'
+		class: 'vertical-align-center flow-down'
 	});
 
 	// create the texts
 	$.CreatePanel('Label', bp, `${btn.id}_Headline`, {
-		'class': 'mainmenu__nav__btn__text',
-		'text': $.Localize(btn.headline)
+		class: 'mainmenu__nav__btn__text',
+		text: $.Localize(btn.headline)
 	});
 
 	$.CreatePanel('Label', bp, `${btn.id}_Tagline`, {
-		'class': 'mainmenu__nav__btn__small-text',
-		'text': $.Localize(btn.tagline)
+		class: 'mainmenu__nav__btn__small-text',
+		text: $.Localize(btn.tagline)
 	});
 
 	// set up events
-	if (btn.activated)
-		b.SetPanelEvent('onactivate', btn.activated);
+	if (btn.activated) b.SetPanelEvent('onactivate', btn.activated);
 
-	if (btn.hovered)
-		b.SetPanelEvent('onmouseover', btn.hovered);
+	if (btn.hovered) b.SetPanelEvent('onmouseover', btn.hovered);
 
-	if (btn.unhovered)
-		b.SetPanelEvent('onmouseout', btn.unhovered);
+	if (btn.unhovered) b.SetPanelEvent('onmouseout', btn.unhovered);
 
-	if (btn.focusIsHover && btn.hovered)
-		b.SetPanelEvent('onfocus', btn.hovered);
-	else if (btn.focused)
-		b.SetPanelEvent('onfocus', btn.focused);
+	if (btn.focusIsHover && btn.hovered) b.SetPanelEvent('onfocus', btn.hovered);
+	else if (btn.focused) b.SetPanelEvent('onfocus', btn.focused);
 
 	// add Steam Input glyph
 	// FIXME: add Steam Input elements to types
-	$.CreatePanel(
-		'SteamInputAction',
-		b,
-		`${btn.id}_Action`,
-		{
-			'actionset': 'MenuControls',
-			'action': 'menu_select',
-			'separatortext': '/',
-			'controllernumber': '1',
-			'glyphsize': 'large'
-		}
-	);
+	$.CreatePanel('SteamInputAction', b, `${btn.id}_Action`, {
+		actionset: 'MenuControls',
+		action: 'menu_select',
+		separatortext: '/',
+		controllernumber: '1',
+		glyphsize: 'large'
+	});
 
 	return b;
 }

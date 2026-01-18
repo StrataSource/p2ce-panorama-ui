@@ -14,15 +14,7 @@
 
 		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Movie background -->
-			<Movie
-				id="MainMenuMovie"
-				class="mainmenu__movie z-0"
-				src=""
-				sound=""
-				controls="none"
-				repeat="true"
-				hittest="false"
-			/>
+			<Movie id="MainMenuMovie" class="mainmenu__movie z-0" src="" sound="" controls="none" repeat="true" hittest="false" />
 			<!-- Static image background -->
 			<Image
 				id="MainMenuBackground"
@@ -120,12 +112,7 @@
 			</Panel>
 
 			<!-- Backbuffer blur: used to blur the backbuffer when switching campaigns -->
-			<BaseBlurTarget
-				id="SwitcherBlur"
-				class="mainmenu__switcher-blur z-2"
-				blurrects="SwitcherBlurContent"
-				hittest="false"
-			>
+			<BaseBlurTarget id="SwitcherBlur" class="mainmenu__switcher-blur z-2" blurrects="SwitcherBlurContent" hittest="false">
 				<!-- Backbuffer background -->
 				<BackbufferImagePanel class="mainmenu__background" hittest="false" />
 			</BaseBlurTarget>
