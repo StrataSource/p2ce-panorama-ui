@@ -62,7 +62,7 @@ class CampaignMenu {
 			tagline: '#MainMenu_Navigation_Disconnect_CM_Tagline',
 			activated: () => {
 				GameInterfaceAPI.ConsoleCommand('disconnect');
-				$.Schedule(0.01, () => {
+				$.Schedule(0.1, () => {
 					CampaignAPI.SetActiveCampaign(null);
 				});
 			}
