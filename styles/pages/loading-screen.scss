@@ -3,7 +3,12 @@
 .loadingscreen {
 	width: 100%;
 	height: 100%;
-	background-color: rgba(255, 255, 255, 0.01);
+	background-color: black;
+	// do we want to display an image at all? maybe some campaigns prefer no screen.
+	// also affects hl2 campaign unless we change it
+	background-image: url('file://{images}/menu/p2ce-generic.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 	transform: scale3d(1, 1, 1);
 	opacity: 1;
 
@@ -39,9 +44,24 @@
 	&__logo {
 		vertical-align: top;
 		horizontal-align: right;
+		height: 100px;
 		width: 100px;
 		margin-right: 52px;
 		margin-top: 52px;
+
+		& > AnimatedImageStrip {
+			width: 100%;
+			height: 100%;
+		}
+
+		// i really don't know about this but i'm gonna leave it for now
+		// some of the logos look really awkward in the spinner
+		& > #Logo {
+			width: 55px;
+			height: 55px;
+			horizontal-align: center;
+			vertical-align: center;
+		}
 	}
 
 	&__backgroundhideanim {

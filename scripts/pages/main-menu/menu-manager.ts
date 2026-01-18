@@ -40,110 +40,73 @@ class MenuManager {
 		// this is for campaign-menu, see there for more info
 		UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = false;
 
-		$.RegisterForUnhandledEvent(
-			'MainMenuAddButton',
-			(btn: MenuButton) => {
-				const b = constructMenuButton(btn);
-				b.SetParent(this.menuNav);
-				b.SetReadyForDisplay(true);
-				this.updateFocus();
+		$.RegisterForUnhandledEvent('MainMenuAddButton', (btn: MenuButton) => {
+			const b = constructMenuButton(btn);
+			b.SetParent(this.menuNav);
+			b.SetReadyForDisplay(true);
+			this.updateFocus();
+		});
+
+		$.RegisterForUnhandledEvent('MainMenuAddPreConstructedButton', (btn: GenericPanel) => {
+			btn.SetParent(this.menuNav);
+			btn.SetReadyForDisplay(true);
+			this.updateFocus();
+		});
+
+		$.RegisterForUnhandledEvent('MainMenuAddBgPanel', (panel: Panel) => {
+			panel.SetParent(this.menuBackground);
+			panel.SetReadyForDisplay(true);
+		});
+
+		$.RegisterForUnhandledEvent('ShowMainMenu', () => {
+			this.menuContent.AddClass('mainmenu__menu__t-prop');
+			this.menuContent.RemoveClass('mainmenu__menu__anim');
+			this.openMenuMode();
+		});
+
+		$.RegisterForUnhandledEvent('HideMainMenu', () => {
+			this.deleteMenus();
+			this.menuContent.RemoveClass('mainmenu__menu__t-prop');
+			this.menuContent.AddClass('mainmenu__menu__anim');
+		});
+
+		$.RegisterForUnhandledEvent('ShowPauseMenu', () => {
+			this.menuContent.AddClass('mainmenu__menu__t-prop');
+			this.menuContent.RemoveClass('mainmenu__menu__anim');
+			this.openMenuMode();
+		});
+
+		$.RegisterForUnhandledEvent('HidePauseMenu', () => {
+			this.deleteMenus();
+			this.menuContent.RemoveClass('mainmenu__menu__t-prop');
+			this.menuContent.AddClass('mainmenu__menu__anim');
+		});
+
+		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
+
+		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
+
+		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
+
+		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), () => {
+			// Resume game in pause menu mode
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+				// Has to be on the root menu in order to resume
+				if (this.pages.length > 0) this.navigateBack();
+				else $.DispatchEvent('MainMenuResumeGame');
+			} else {
+				// Exit current page
+				this.navigateBack();
 			}
-		);
+		});
 
-		$.RegisterForUnhandledEvent(
-			'MainMenuAddPreConstructedButton',
-			(btn: GenericPanel) => {
-				btn.SetParent(this.menuNav);
-				btn.SetReadyForDisplay(true);
-				this.updateFocus();
+		$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
+			if (logo.length > 0) {
+				this.logo.SetImage(`file://${logo}`);
+			} else {
+				this.logo.SetImage(getRandomFallbackImage());
 			}
-		);
-
-		$.RegisterForUnhandledEvent(
-			'MainMenuAddBgPanel',
-			(panel: Panel) => {
-				panel.SetParent(this.menuBackground);
-				panel.SetReadyForDisplay(true);
-			}
-		);
-
-		$.RegisterForUnhandledEvent(
-			'ShowMainMenu',
-			() => {
-				this.menuContent.AddClass('mainmenu__menu__t-prop');
-				this.menuContent.RemoveClass('mainmenu__menu__anim');
-				this.openMenuMode();
-			}
-		)
-
-		$.RegisterForUnhandledEvent(
-			'HideMainMenu',
-			() => {
-				this.deleteMenus();
-				this.menuContent.RemoveClass('mainmenu__menu__t-prop');
-				this.menuContent.AddClass('mainmenu__menu__anim');
-			}
-		);
-
-		$.RegisterForUnhandledEvent(
-			'ShowPauseMenu',
-			() => {
-				this.menuContent.AddClass('mainmenu__menu__t-prop');
-				this.menuContent.RemoveClass('mainmenu__menu__anim');
-				this.openMenuMode();
-			}
-		);
-
-		$.RegisterForUnhandledEvent(
-			'HidePauseMenu',
-			() => {
-				this.deleteMenus();
-				this.menuContent.RemoveClass('mainmenu__menu__t-prop');
-				this.menuContent.AddClass('mainmenu__menu__anim');
-			}
-		);
-
-		$.RegisterForUnhandledEvent(
-			'MainMenuOpenNestedPage',
-			this.navigateToPage.bind(this)
-		);
-
-		$.RegisterForUnhandledEvent(
-			'MainMenuSetPageLines',
-			this.onMenuSetPageLines.bind(this)
-		);
-
-		$.RegisterForUnhandledEvent(
-			'MainMenuCloseAllPages',
-			this.closePages.bind(this)
-		);
-
-		$.RegisterEventHandler(
-			'Cancelled',
-			$.GetContextPanel(),
-			() => {
-				// Resume game in pause menu mode
-				if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-					// Has to be on the root menu in order to resume
-					if (this.pages.length > 0) this.navigateBack();
-					else $.DispatchEvent('MainMenuResumeGame');
-				} else {
-					// Exit current page
-					this.navigateBack();
-				}
-			}
-		);
-
-		$.RegisterForUnhandledEvent(
-			'MainMenuSetLogo',
-			(logo: string) => {
-				if (logo.length > 0) {
-					this.logo.SetImage(`file://${logo}`);
-				} else {
-					this.logo.SetImage(getRandomFallbackImage());
-				}
-			}
-		);
+		});
 
 		MenuAnimation.init();
 
@@ -151,9 +114,11 @@ class MenuManager {
 		$.DispatchEvent('MainMenuSwitchFade', true, true);
 
 		if (GameInterfaceAPI.GetSettingString('campaign_default').length === 0) {
+			$.Msg('Registering event');
 			$.RegisterForUnhandledEvent(
 				'PanoramaComponent_Campaign_OnActiveCampaignChanged',
 				(campaign: string | null) => {
+					$.Msg(`Change campaign: ${campaign}`);
 					this.closePages();
 					$.DispatchEvent('MainMenuSwitchFade', false, true);
 					this.deleteMenus();
@@ -192,28 +157,26 @@ class MenuManager {
 
 	static openMenuMode() {
 		switch (GameInterfaceAPI.GetGameUIState()) {
-			case GameUIState.MAINMENU:
-				{
-					if (!CampaignAPI.IsCampaignActive()) {
-						const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MainMenu');
-						p.LoadLayout('file://{resources}/layout/pages/main-menu/base-menu.xml', false, false);
-						p.SetReadyForDisplay(true);
-					} else {
-						const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_CampaignMenu');
-						p.LoadLayout('file://{resources}/layout/pages/main-menu/campaign-menu.xml', false, false);
-						p.SetReadyForDisplay(true);
-					}
-					break;
-				}
-
-			case GameUIState.PAUSEMENU:
-				{
-					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
-					p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
+			case GameUIState.MAINMENU: {
+				if (!CampaignAPI.IsCampaignActive()) {
+					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MainMenu');
+					p.LoadLayout('file://{resources}/layout/pages/main-menu/base-menu.xml', false, false);
 					p.SetReadyForDisplay(true);
-					break;
+				} else {
+					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_CampaignMenu');
+					p.LoadLayout('file://{resources}/layout/pages/main-menu/campaign-menu.xml', false, false);
+					p.SetReadyForDisplay(true);
 				}
-		
+				break;
+			}
+
+			case GameUIState.PAUSEMENU: {
+				const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
+				p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
+				p.SetReadyForDisplay(true);
+				break;
+			}
+
 			default:
 				$.Warning("Don't know which menu to open for this UI state! Doing nothing!");
 				break;

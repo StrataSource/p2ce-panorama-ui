@@ -21,6 +21,7 @@ interface GlobalEventNameMap {
 	MainMenuAddButton: (btn: MenuButton) => void;
 	MainMenuSetLogo: (logo: string) => void;
 	MainMenuSetLoadingIndicatorVisibility: (visible: boolean) => void;
+	MainMenuSetBackgroundImage: (img: string) => void;
 	MainMenuShowBackgroundImage: (img?: string, instant?: boolean) => void;
 	MainMenuHideBackgroundImage: (instant?: boolean) => void;
 	MainMenuShowBackgroundMovie: (src: string) => void;
@@ -28,4 +29,6 @@ interface GlobalEventNameMap {
 	MainMenuHideNav: (instant?: boolean) => void;
 	MainMenuShowNav: (instant?: boolean) => void;
 	MainMenuAddBgPanel: (panel: Panel) => void;
+	MainMenuAnimatedSwitch: (campaign: string) => void;
+	LoadingScreenClearLastMap: () => void;
 }

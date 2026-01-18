@@ -11,7 +11,12 @@
 		</Panel>
 		
 		<Panel class="flow-right full-width mt-4" tabindex="auto" selectionpos="auto">
-			<Button class="button horizontal-align-right" onactivate="UiToolkitAPI.CloseAllVisiblePopups()" tabindex="auto" selectionpos="auto">
+			<Button
+				class="button horizontal-align-right"
+				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
 				<Label class="button__text" text="#Common_OK" />
 			</Button>
 		</Panel>
