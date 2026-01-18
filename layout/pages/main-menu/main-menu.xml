@@ -6,7 +6,6 @@
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-manager.ts" />
 		<include src="file://{scripts}/pages/main-menu/menu-anim.ts" />
-		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
 	<MainMenu class="InitialDisplay MainMenuRootPanel" onload="MenuManager.onLoaded()">
