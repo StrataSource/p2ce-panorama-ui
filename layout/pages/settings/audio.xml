@@ -180,7 +180,7 @@
 
 				<SettingsEnumDropDown
 					text="#Settings_AudioDevices_Speaker"
-					text="#Settings_AudioDevices_Speaker_info"
+					infomessage="#Settings_AudioDevices_Speaker_info"
 					convar="snd_surround_speakers"
 					oninputsubmit="BaseSpeakerConfigurationChanged()"
 					hasdocspage="false"
