@@ -184,6 +184,11 @@ class BaseMenu {
 			);
 		}
 
+		$.RegisterForUnhandledEvent('MainBackgroundLoaded', () =>{
+			this.showPrereleaseWarning();
+			if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
+		});
+
 		$.DispatchEvent(
 			'MainMenuSetLogo',
 			'{images}/logo.svg'
@@ -327,5 +332,29 @@ class BaseMenu {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
 			GameInterfaceAPI.ConsoleCommand(`map_background ${this.maps[this.mapSelection]}`);
 		});
+	}
+
+	/**
+	 * Shows playtest consent form
+	 */
+	static showPlaytestConsentPopup() {
+		if (!DosaHandler.checkDosa('playtestConsent'))
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'',
+				'file://{resources}/layout/modals/popups/playtest-consent.xml',
+				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent'
+			);
+	}
+
+	/**
+	 * Shows prerelease notice form
+	 */
+	static showPrereleaseWarning() {
+		if (!DosaHandler.checkDosa('prereleaseAck'))
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'',
+				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
+				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck'
+			);
 	}
 }

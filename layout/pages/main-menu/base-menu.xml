@@ -5,6 +5,7 @@
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/main-menu/base-menu.ts" />
+		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
 	<snippets>
