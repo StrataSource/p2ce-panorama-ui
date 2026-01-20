@@ -36,11 +36,11 @@ class CampaignSettingsTab {
 		this.show();
 
 		const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
-		if (thumb) this.chImage.SetImage(`file://${thumb}`);
+		if (thumb) this.chImage.SetImage(`file://{game}/${thumb}`);
 		else this.chImage.SetImage(getRandomFallbackImage());
 
 		const logo = this.campaign.meta[CampaignMeta.SQUARE_LOGO];
-		if (logo) this.logoImage.SetImage(`file://${logo}`);
+		if (logo) this.logoImage.SetImage(`file://{game}/${logo}`);
 		else this.logoImage.visible = false;
 
 		this.chText.text = $.Localize(this.chapter.title);
