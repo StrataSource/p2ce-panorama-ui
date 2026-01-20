@@ -69,7 +69,7 @@ function convertImagePath(thumbPath: string) {
 		thumbPath.endsWith('.jpg') ||
 		thumbPath.endsWith('.svg')
 	)
-		return `file://${thumbPath}`;
+		return `file://{game}/${thumbPath}`;
 	else return thumbPath;
 }
 

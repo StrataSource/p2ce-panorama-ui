@@ -159,7 +159,7 @@ class CampaignMenu {
 	static setContinueDetails() {
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		$.DispatchEvent('MainMenuSetLogo', c.meta[CampaignMeta.FULL_LOGO]);
+		$.DispatchEvent('MainMenuSetLogo', `{game}/${c.meta[CampaignMeta.FULL_LOGO]}`);
 
 		this.continueBox.visible = false;
 
