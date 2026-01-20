@@ -8,7 +8,11 @@
 		<include src="file://{scripts}/pages/main-menu/menu-anim.ts" />
 	</scripts>
 
-	<MainMenu class="InitialDisplay MainMenuRootPanel" onload="MenuManager.onLoaded()">
+	<MainMenu
+		class="InitialDisplay MainMenuRootPanel"
+		onload="MenuManager.onLoaded()"
+		onfocus="MenuManager.onMenuFocused()"
+	>
 		<!-- Vanity is not used but the engine needs this to exist -->
 		<Panel id="MainMenuVanityParent" />
 
@@ -48,7 +52,7 @@
 						scaling="stretch-to-fit-preserve-aspect"
 						hittest="false"
 					/>
-					<Panel id="MenuNav" class="flow-down full-width">
+					<Panel id="MenuNav" class="mainmenu__nav__inner">
 						<!-- Dynamically populated -->
 					</Panel>
 				</Panel>
@@ -82,7 +86,7 @@
 						tabindex="auto"
 						selectionpos="auto"
 					>
-						<Label class="button__text" text="Back" />
+						<Label class="button__text" text="[HC] Back" />
 					</Button>
 					<Panel class="flow-right vertical-align-center ControllerOnly">
 						<SteamInputAction
@@ -106,7 +110,7 @@
 							controllernumber="1"
 							glyphsize="large"
 						/> 
-						<Label class="vertical-align-center" text="Back" />
+						<Label class="vertical-align-center" text="[HC] Back" />
 					</Panel>
 				</Panel>
 			</Panel>

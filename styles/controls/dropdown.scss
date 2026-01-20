@@ -46,8 +46,8 @@
 		}
 	}
 
-	&:focus,
-	&:hover:not(:disabled):not(:parentdisabled) {
+	.InputController &:focus:not(:disabled):not(:parentdisabled),
+	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled) {
 		background-color: $dropdown-button-background-hover;
 		border: $dropdown-button-border-hover;
 		sound: 'UIPanorama.P2CE.MenuSelect';
@@ -134,7 +134,8 @@
 
 		$this: &;
 
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: $dropdown-item-background-hover;
 			color: $dropdown-item-color;
 			//sound: "UIPanorama.submenu_rollover";

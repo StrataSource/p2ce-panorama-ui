@@ -8,6 +8,9 @@ class CampaignMenu {
 			tagline: '#MainMenu_Campaigns_MM_NewGame_Tagline',
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'campaigns/new-game', undefined);
+			},
+			focused: () => {
+				this.continueBox.visible = false;
 			}
 		},
 		{
@@ -19,7 +22,7 @@ class CampaignMenu {
 				CampaignAPI.ContinueCampaign(CampaignAPI.GetActiveCampaign()!.id);
 			},
 			hovered: () => {
-				this.continueBox.visible = true;
+				if (this.continueBtn.enabled) this.continueBox.visible = true;
 			},
 			unhovered: () => {
 				this.continueBox.visible = false;
@@ -32,6 +35,9 @@ class CampaignMenu {
 			tagline: '#MainMenu_SaveRestore_Main_Tagline',
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
+			},
+			focused: () => {
+				this.continueBox.visible = false;
 			}
 		},
 		{
@@ -40,6 +46,9 @@ class CampaignMenu {
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
+			},
+			focused: () => {
+				this.continueBox.visible = false;
 			}
 		},
 		{
@@ -51,6 +60,9 @@ class CampaignMenu {
 				$.Schedule(0.1, () => {
 					CampaignAPI.SetActiveCampaign(null);
 				});
+			},
+			focused: () => {
+				this.continueBox.visible = false;
 			}
 		},
 		{
@@ -70,6 +82,9 @@ class CampaignMenu {
 					() => {},
 					'blur'
 				);
+			},
+			focused: () => {
+				this.continueBox.visible = false;
 			}
 		}
 	];
@@ -201,7 +216,16 @@ class CampaignMenu {
 					$.Warning('!!!!! Could not load Campaign background map !!!!!');
 					$.Schedule(0.001, () => {
 						$.DispatchEvent('MainMenuSwitchReverse', false);
-						$.DispatchEvent('MainBackgroundLoaded');
+						GameInterfaceAPI.ConsoleCommand('disconnect');
+						$.Schedule(0.1, () => {
+							CampaignAPI.SetActiveCampaign(null);
+							UiToolkitAPI.ShowGenericPopupOk(
+								$.Localize('#Popup_CampaignBgLoadFailed'),
+								$.Localize('#Popup_CampaignBgLoadFailed_Message'),
+								'bad-popup',
+								() => {}
+							);
+						});
 					});
 				}
 			);

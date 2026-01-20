@@ -65,6 +65,13 @@ class LoadingScreenController {
 			// get relevant information
 			const campaign = CampaignAPI.GetActiveCampaign()!;
 
+			if (this.logo) {
+				const pad = Number(campaign.meta[CampaignMeta.LOADING_LOGO_PAD]);
+				if (!isNaN(pad)) {
+					this.logo.style.padding = `${pad}px`;
+				}
+			}
+
 			// this implicitly exists if chapter can be found
 			let mapInfo: ChapterMap;
 
@@ -116,8 +123,8 @@ class LoadingScreenController {
 				return img;
 			};
 
-			setImg(this.bgImage1, findImg('transition_screen', 'loading_screen'));
-			setImg(this.bgImage2, findImg('transition_screen_2', 'loading_screen_2'));
+			setImg(this.bgImage1, findImg(CampaignMeta.TRANSITION_SCREEN_A, CampaignMeta.LOADING_SCREEN_A));
+			setImg(this.bgImage2, findImg(CampaignMeta.TRANSITION_SCREEN_B, CampaignMeta.LOADING_SCREEN_B));
 
 			$.Schedule(0.125, this.updateLoadingScreenInfoRepeater.bind(this));
 		} else {

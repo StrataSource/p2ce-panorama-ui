@@ -187,21 +187,34 @@ RadioButton.button-mono {
 		}
 	}
 
-	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
+	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
 	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		border-color: $primary-color;
 		background-color: $button-background-hover;
+		#{$this}__icon,
+		#{$this}__icon-right {
+			wash-color: $bright-color;
+		}
+
+		#{$this}__text-panel__header,
+		#{$this}__text-panel__subheader {
+			color: $bright-color;
+		}
 	}
 
-	&:selected {
+	&:selected,
+	.InputKeyboard &:hover:selected:not(:disabled):not(:parentdisabled) {
 		border-color: $primary-color;
 		background-color: $primary-color;
 
 		#{$this}__icon,
-		#{$this}__icon-right,
+		#{$this}__icon-right {
+			wash-color: $base-950;
+		}
+
 		#{$this}__text-panel__header,
 		#{$this}__text-panel__subheader {
-			wash-color: $base-950;
+			color: $base-950;
 		}
 	}
 

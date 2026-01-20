@@ -44,7 +44,7 @@ class SaveEntry {
 		// OVERWRITE THE SAVE
 		const saveBtn = this.panel.FindChildTraverse('SaveOverwrite');
 		if (saveBtn) {
-			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
+			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU || !CampaignAPI.IsCampaignActive()) {
 				saveBtn.visible = false;
 			} else {
 				const disableSave = GameInterfaceAPI.GetSettingBool('map_wants_save_disable') || this.save.isAutoSave;
@@ -163,13 +163,16 @@ class SaveEntry {
 		});
 
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
-		const savChapter = CampaignSaves.campaign.chapters.find((ch) => {
-			return (
-				ch.maps.find((map) => {
-					return map.name === this.save.mapName || map.name === `${this.save.mapName}.bsp`;
-				}) !== undefined
-			);
-		});
+		const savChapter = CampaignSaves.campaign
+			? CampaignSaves.campaign.chapters.find((ch) => {
+					return (
+						ch.maps.find((map) => {
+							return map.name === this.save.mapName || map.name === `${this.save.mapName}.bsp`;
+						}) !== undefined
+					);
+				})
+			: undefined;
+
 		if (title) {
 			if (!savChapter) {
 				$.Warning('CONTINUE: Chapter could not be found for this map');
@@ -190,7 +193,7 @@ class SaveEntry {
 			if (!savChapter) {
 				bg.visible = false;
 			} else {
-				bg.SetImage(convertImagePath(savChapter.meta['thumbnail']));
+				bg.SetImage(convertImagePath(savChapter.meta[CampaignMeta.CHAPTER_THUMBNAIL]));
 			}
 		}
 
@@ -230,7 +233,8 @@ class CampaignSaves {
 
 	static saveEntries: SaveEntry[] = [];
 	static createSaveBtn: Button | null = null;
-	static campaign = CampaignAPI.GetActiveCampaign()!;
+	static campaign = CampaignAPI.GetActiveCampaign();
+	static saveGroup = '';
 
 	static hideActionsOnAllSaves(excludeIndex: number) {
 		for (let i = 0; i < this.saveEntries.length; ++i) {
@@ -248,7 +252,7 @@ class CampaignSaves {
 	}
 
 	static init() {
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU && CampaignAPI.IsCampaignActive()) {
 			this.addCreateSaveBtn();
 			$.DispatchEvent(
 				'MainMenuSetPageLines',
@@ -271,10 +275,21 @@ class CampaignSaves {
 	}
 
 	static populateSaves() {
+		if (CampaignAPI.IsCampaignActive()) {
+			this.saveGroup = this.campaign!.id;
+		} else {
+			UiToolkitAPI.ShowGenericPopupOk(
+				'[HC] WARNING: Not in Content Group',
+				'[HC] You are currently not playing within a content group (e.g. Campaign or Workshop Group). This can happen if you are launching a map through the console, or through the Hammer Editor.\n\nYou will not be able to create manual saves, but you will see saves created by maps (e.g. autosaves/quicksaves) while playing outside of a content group.\n\nPlaying outside of a content group is considered to be for advanced or developer cases only. It is recommended that you return to the menu and play normally.\n\nThis warning will appear every time you open this menu.',
+				'bad-popup',
+				() => {}
+			);
+		}
+
 		const saves = GameSavesAPI.GetGameSaves()
 			.filter((v: GameSave) => {
 				$.Msg(`${v.mapGroup}, ${v.mapName}, ${v.chapter}`);
-				return v.mapGroup === this.campaign.id;
+				return v.mapGroup === this.saveGroup;
 			})
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
@@ -350,43 +365,5 @@ class CampaignSaves {
 	static removeCreateSaveBtn() {
 		if (this.createSaveBtn) this.createSaveBtn.DeleteAsync(0);
 		this.createSaveBtn = null;
-	}
-
-	static loadLatest() {
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				$.Localize('#Action_LoadGame_Confirm'),
-				$.Localize('#Action_LoadGame_Auto_Message'),
-				'warning-popup',
-				$.Localize('#Action_LoadGame'),
-				() => {
-					if (this.campaign) {
-						$.DispatchEvent('MainMenuCloseAllPages');
-						$.DispatchEvent('LoadingScreenClearLastMap');
-						$.Schedule(0.001, () => CampaignAPI.ContinueCampaign(this.campaign.id));
-					} else {
-						const saves = GameSavesAPI.GetGameSaves().sort(
-							(a, b) => Number(b.fileTime) - Number(a.fileTime)
-						);
-						$.DispatchEvent('MainMenuCloseAllPages');
-						$.DispatchEvent('LoadingScreenClearLastMap');
-						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`));
-					}
-				},
-				$.Localize('#UI_Cancel'),
-				() => {},
-				'blur'
-			);
-		} else {
-			if (this.campaign) {
-				$.DispatchEvent('MainMenuCloseAllPages');
-				$.Schedule(0.001, () => CampaignAPI.ContinueCampaign(this.campaign.id));
-			} else {
-				const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
-				$.DispatchEvent('MainMenuCloseAllPages');
-				$.DispatchEvent('LoadingScreenClearLastMap');
-				$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${saves[0].fileName}`));
-			}
-		}
 	}
 }

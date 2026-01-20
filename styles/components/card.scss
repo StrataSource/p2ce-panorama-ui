@@ -54,18 +54,15 @@
 		border-top: $menu-pane-border;
 
 		&__no-bg {
-			background-color: rgba(0, 0, 0, 0);
-			border-color: rgba(0, 0, 0, 0);
+			background-color: $base-950;
 		}
 
 		&__header {
 			@include mixin.font-styles($use-header: true);
 			font-size: 20px;
-			text-shadow: 2px 2px 4px 2 $base-950;
 
 			&__dark {
 				color: $base-950;
-				text-shadow: none;
 			}
 		}
 
@@ -73,7 +70,6 @@
 			color: $base-200;
 			font-size: 14px;
 			letter-spacing: 1px;
-			text-shadow: 1px 1px 8px 2 $base-950;
 		}
 	}
 
@@ -96,7 +92,7 @@
 
 			&__header,
 			&__subheader {
-				text-shadow: none;
+				color: $bright-color;
 			}
 		}
 	}

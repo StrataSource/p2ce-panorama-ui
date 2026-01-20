@@ -175,12 +175,10 @@ $pane-move-time: 0.1s;
 		height: 130px;
 		horizontal-align: center;
 		img-shadow: 0px 0px 50px 4 $base-950;
-		margin-bottom: 100px;
 	}
 
 	&__nav {
 		width: 672px;
-		padding-bottom: 100px;
 		vertical-align: center;
 		flow-children: down;
 
@@ -199,9 +197,10 @@ $pane-move-time: 0.1s;
 			blur: gaussian(10, 10, 2);
 		}
 
-		&__top {
-			horizontal-align: center;
-			overflow: noclip;
+		&__inner {
+			width: 100%;
+			flow-children: down;
+			margin: 100px 0;
 		}
 
 		&__controls {
@@ -300,7 +299,8 @@ $pane-move-time: 0.1s;
 			vertical-align: bottom;
 			flow-children: right;
 			background-color: $base-950;
-			margin-bottom: 25px;
+			margin-bottom: 30px;
+			visibility: collapse;
 
 			.InputController &:focus,
 			.InputKeyboard &:hover {
@@ -561,6 +561,8 @@ $pane-move-time: 0.1s;
 	&__version {
 		horizontal-align: right;
 		vertical-align: bottom;
+		background-color: $base-950;
+		border: $menu-pane-border;
 	}
 
 	// this should be similar to pause blur

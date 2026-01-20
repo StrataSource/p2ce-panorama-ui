@@ -79,12 +79,15 @@
 			&__title {
 				@include mixin.font-styles($use-header: true);
 				font-size: 22px;
+				text-overflow: shrink;
 			}
 
 			&__desc {
 				margin-top: 5px;
 				font-size: 16px;
 				color: $base-200;
+				text-overflow: ellipsis;
+				max-height: 60px;
 			}
 
 			&__source {
@@ -92,6 +95,7 @@
 				color: $base-400;
 				font-weight: light;
 				letter-spacing: 1px;
+				text-overflow: shrink;
 			}
 		}
 
