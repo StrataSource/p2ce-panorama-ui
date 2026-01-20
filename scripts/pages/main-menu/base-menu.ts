@@ -97,7 +97,10 @@ class BaseMenu {
 					'warning-popup',
 					$.Localize('#Action_Quit'),
 					() => {
-						GameInterfaceAPI.ConsoleCommand('quit');
+						this.reparent();
+						$.Schedule(0.01, () => {
+							GameInterfaceAPI.ConsoleCommand('quit');
+						});
 					},
 					$.Localize('#Action_Return'),
 					() => {},
@@ -362,6 +365,8 @@ class BaseMenu {
 
 		this.isContinueActive = false;
 
+		if (!this.continueImg.IsValid()) return;
+
 		this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
 		//this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 		this.continueImg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
@@ -370,5 +375,10 @@ class BaseMenu {
 		if (this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
 
 		this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
+	}
+
+	// prevents crash by bringing back the panels that were placed outside of this layout file
+	static reparent() {
+		this.continueBtn.SetParent($.GetContextPanel());
 	}
 }
