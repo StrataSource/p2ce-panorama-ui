@@ -23,6 +23,19 @@ $primary-700: #b73817 !default;
 $primary-800: #922e1a !default;
 $primary-900: #762818 !default;
 $primary-950: #40120a !default;
+$colors-p2ce-primary: (
+	'primary-50': $primary-50,
+	'primary-100': $primary-100,
+	'primary-200': $primary-200,
+	'primary-300': $primary-300,
+	'primary-400': $primary-400,
+	'primary-500': $primary-500,
+	'primary-600': $primary-600,
+	'primary-700': $primary-700,
+	'primary-800': $primary-800,
+	'primary-900': $primary-900,
+	'primary-950': $primary-950
+) !default;
 
 // Base colors
 $base-50: #fbfbfb !default;
@@ -36,6 +49,19 @@ $base-700: #555555 !default;
 $base-800: #3c3c3c !default;
 $base-900: #222222 !default;
 $base-950: #181818 !default;
+$colors-p2ce-base: (
+	'base-50': $base-50,
+	'base-100': $base-100,
+	'base-200': $base-200,
+	'base-300': $base-300,
+	'base-400': $base-400,
+	'base-500': $base-500,
+	'base-600': $base-600,
+	'base-700': $base-700,
+	'base-800': $base-800,
+	'base-900': $base-900,
+	'base-950': $base-950
+) !default;
 
 //===========================
 // COLORS
@@ -599,8 +625,8 @@ $tooltip-image-size: 20px !default;
 // ================
 
 $popup-min-width: 600px !default;
-$popup-max-width: 800px !default;
-$popup-wide: 800px !default;
+$popup-max-width: 900px !default;
+$popup-wide: 900px !default;
 $popup-large-max-width: 1200px !default;
 $popup-background: $base-950 !default;
 $popup-padding: 25px 30px !default;

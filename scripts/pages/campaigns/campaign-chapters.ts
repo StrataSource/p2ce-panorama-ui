@@ -45,8 +45,9 @@ class ChapterEntry {
 			}
 		}
 		if (cover) {
-			cover.SetImage(convertImagePath(this.chapter.meta['thumbnail']));
-			$.Msg(`PATH TO CHAPTER IMAGE: file://${this.chapter.meta['thumbnail']}`);
+			const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
+			if (thumb) cover.SetImage(`file://${thumb}`);
+			else cover.SetImage(getRandomFallbackImage());
 		}
 
 		if (this.locked) {

@@ -2,6 +2,7 @@
 
 class CampaignSettingsTab {
 	static page = $.GetContextPanel();
+	static logoImage = $<Image>('#CampaignSettingsBoxLogo')!;
 	static chImage = $<Image>('#CampaignSettingsChapterImage')!;
 	static chText = $<Label>('#CampaignSettingsChapter')!;
 	static mapText = $<Label>('#CampaignSettingsMap')!;
@@ -33,7 +34,14 @@ class CampaignSettingsTab {
 		});
 
 		this.show();
-		this.chImage.SetImage(convertImagePath(this.chapter.meta['thumbnail']));
+
+		const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
+		if (thumb) this.chImage.SetImage(`file://${thumb}`);
+		else this.chImage.SetImage(getRandomFallbackImage());
+
+		const logo = this.campaign.meta[CampaignMeta.SQUARE_LOGO];
+		if (logo) this.logoImage.SetImage(`file://${logo}`);
+		else this.logoImage.visible = false;
 
 		this.chText.text = $.Localize(this.chapter.title);
 		this.mapText.text = this.chapter.maps[0].name;

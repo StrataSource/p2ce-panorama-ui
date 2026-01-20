@@ -74,7 +74,6 @@ class CampaignEntry {
 
 		this.panel.SetPanelEvent('onactivate', () => {
 			$.DispatchEvent('MainMenuAnimatedSwitch', this.info.id);
-			$.DispatchEvent('MainMenuSwitchFade', false, true);
 			$.DispatchEvent('MainMenuCloseAllPages');
 		});
 	}
@@ -137,6 +136,9 @@ class CampaignSelector {
 			);
 
 			p.SetPanelEvent('onmouseover', () => {
+				CampaignSelector.onCampaignHovered(this.campaignEntries[i]);
+			});
+			p.SetPanelEvent('onfocus', () => {
 				CampaignSelector.onCampaignHovered(this.campaignEntries[i]);
 			});
 

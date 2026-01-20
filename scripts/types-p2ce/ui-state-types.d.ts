@@ -22,15 +22,22 @@ declare const enum CampaignMeta {
 	BTN_BG = 'selector_button_background',
 	COVER = 'selector_cover',
 	FULL_LOGO = 'full_logo',
+	LOADING_LOGO_PAD = 'loading_square_logo_padding',
 	SQUARE_LOGO = 'square_logo',
 	DESC = 'desc',
-	AUTHOR = 'author'
+	AUTHOR = 'author',
+	TRANSITION_SCREEN_A = 'transition_screen',
+	TRANSITION_SCREEN_B = 'transition_screen_2',
+	LOADING_SCREEN_A = 'loading_screen',
+	LOADING_SCREEN_B = 'loading_screen_2',
+	CHAPTER_THUMBNAIL = 'thumbnail'
 }
 
 type MenuButton = {
 	id: string;
 	headline: string;
 	tagline: string;
+	dev?: boolean;
 	oncreated?: () => void;
 	activated?: () => void;
 	hovered?: () => void;

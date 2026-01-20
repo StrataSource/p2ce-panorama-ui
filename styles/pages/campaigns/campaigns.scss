@@ -174,7 +174,6 @@
 		// is handled by a container panel while the actual style is a child of this
 		// panel. yes, the layout is horribly nested but w/e this works for the time being.
 		&__container {
-			height: 900px;
 			width: 474px;
 			horizontal-align: right;
 			vertical-align: center;
@@ -215,13 +214,12 @@
 
 		&__top {
 			width: 100%;
-			height: fill-parent-flow(1);
-			border-bottom: $menu-pane-border;
+			//border-bottom: $menu-pane-border;
 		}
 
 		&__image {
-			width: 100%;
-			height: width-percentage(1);
+			width: 472px;
+			height: 708px;
 			vertical-align: center;
 		}
 
