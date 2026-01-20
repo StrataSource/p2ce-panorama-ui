@@ -1,7 +1,15 @@
 @use '../config' as *;
 @use '../abstract/function';
 
-$colors: function.map-collect($colors-primary, $colors-state, $color-grays, $color-light-bgs, $color-dark-bgs);
+$colors: function.map-collect(
+	$colors-primary,
+	$colors-state,
+	$color-grays,
+	$color-light-bgs,
+	$color-dark-bgs,
+	$colors-p2ce-primary,
+	$colors-p2ce-base
+);
 
 @each $name, $color in $colors {
 	.color-#{$name} {

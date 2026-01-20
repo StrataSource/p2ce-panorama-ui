@@ -79,11 +79,16 @@ class PauseMenu {
 		}
 
 		$.DispatchEvent('MainMenuHideBackgroundMovie');
+		$.DispatchEvent('MainMenuHideBackgroundImage', true);
 
 		const p = $.CreatePanel('Panel', $.GetContextPanel(), 'MenuBackgroundLayer');
 		p.SetReadyForDisplay(false);
 		p.LoadLayoutSnippet('MenuBackgroundLayer');
 		$.DispatchEvent('MainMenuAddBgPanel', p);
 		p.FindChildTraverse('PauseMenuMainMenuBlur')!.AddClass('mainmenu__pause-blur__anim');
+
+		if (!CampaignAPI.IsCampaignActive()) {
+			$.DispatchEvent('MainMenuSetLogo', '');
+		}
 	}
 }

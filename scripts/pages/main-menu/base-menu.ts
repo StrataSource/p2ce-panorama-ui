@@ -6,12 +6,13 @@ class BaseMenu {
 			id: 'DevBtn',
 			headline: '#MainMenu_Navigation_Developer',
 			tagline: '#MainMenu_Navigation_Developer_Tagline',
+			dev: true,
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Dev', 'main-menu/developer', undefined);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			focused: () => {
+				this.hideContinueDetails();
+			}
 		},
 		{
 			id: 'PlayBtn',
@@ -20,9 +21,9 @@ class BaseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Play', 'play-menu/player-mode', undefined);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			focused: () => {
+				this.hideContinueDetails();
+			}
 		},
 		{
 			id: 'CampaignContinueBtn',
@@ -44,17 +45,13 @@ class BaseMenu {
 				this.isContinueActive = true;
 				this.continueImg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 				//this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
-				//this.bgCredit.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+				this.bgCredit.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
 				const logoPath = this.savCampaign.meta[CampaignMeta.FULL_LOGO];
 				if (logoPath !== undefined) {
 					$.DispatchEvent('MainMenuSetLogo', logoPath);
-					//this.menuLogo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-					//const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
-					//this.menuLogo.UpdateCurrentAnimationKeyframes(kfs);
 				} else {
-					// TODO: hide logo
-					$.Msg('Hide logo');
+					$.DispatchEvent('MainMenuSetLogo', '');
 				}
 
 				const date = new Date(Number(this.latestSave.fileTime));
@@ -63,18 +60,7 @@ class BaseMenu {
 				this.continueLogo.AddClass('mainmenu__square-logo__anim');
 			},
 			unhovered: () => {
-				if (!this.isContinueActive) return;
-
-				this.isContinueActive = false;
-
-				///this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-				//this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
-				this.continueImg.style.animation = 'FadeOut  0.2s ease-out 0s 1 normal forwards';
-				$.DispatchEvent('MainMenuSetLogo', '{images}/logo.svg');
-
-				if (this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
-
-				this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
+				this.hideContinueDetails();
 			},
 			focusIsHover: true
 		},
@@ -85,9 +71,9 @@ class BaseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			focused: () => {
+				this.hideContinueDetails();
+			}
 		},
 		{
 			id: 'SettingsBtn',
@@ -96,9 +82,9 @@ class BaseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			focused: () => {
+				this.hideContinueDetails();
+			}
 		},
 		{
 			id: 'QuitBtn',
@@ -118,9 +104,9 @@ class BaseMenu {
 					'blur'
 				);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			focused: () => {
+				this.hideContinueDetails();
+			}
 		}
 	];
 
@@ -134,10 +120,13 @@ class BaseMenu {
 	static continueLogo: Image;
 	static continueText: Label;
 
+	static bgCredit = $<Panel>('#BgCredit')!;
+
 	static bgMapLoad: uuid | undefined = undefined;
 
 	static mapSelection = 0;
 	static maps = ['p2ce_background_laser_intro', 'p2ce_background_gentle_hum'];
+	static music;
 
 	static onLoad() {
 		for (const btn of this.buttons) {
@@ -164,26 +153,26 @@ class BaseMenu {
 		$.RegisterForUnhandledEvent('MainBackgroundLoaded', () => {
 			this.showPrereleaseWarning();
 			if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
+
+			const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 2) + 1}`;
+			this.music = $.PlaySoundEvent(music);
+		});
+
+		$.RegisterForUnhandledEvent('MapUnloaded', () => {
+			if (this.music) $.StopSoundEvent(this.music);
+			this.music = undefined;
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuAnimatedSwitch', (c: string) => {
-			$.Msg(`MainMenuAnimSwitch ${c}`);
-			$.Schedule(0.25, () => {
-				// preload the background image for the campaign
-				// this causes a crash
-				//const ch = CampaignAPI.GetCampaignMeta(c);
-				//const bgLevel = ch['background_map'] as string ?? '';
-				//const bgImage = ch['background_image'] as string ?? '';
-				//if (bgLevel.length > 0 && bgImage.length > 0) {
-				//	$.DispatchEvent('MainMenuShowBackgroundImage', bgImage, false);
-				//}
-				$.Schedule(0.25, () => {
-					GameInterfaceAPI.ConsoleCommand('disconnect');
-					$.Schedule(0.1, () => {
-						if (!CampaignAPI.SetActiveCampaign(c)) {
-							$.Warning(`Failed to set campaign to ${c}!!!!`);
-						}
-					});
+			// this should be changed in the future for more fluid animation swap
+			// but because of how things work right now, we'll just do it "instantly"
+			GameInterfaceAPI.ConsoleCommand('disconnect');
+			$.Schedule(0.01, () => {
+				$.DispatchEvent('MainMenuSwitchFade', true, true);
+				$.Schedule(0.01, () => {
+					if (!CampaignAPI.SetActiveCampaign(c)) {
+						$.Warning(`Failed to set campaign to ${c}!!!!`);
+					}
 				});
 			});
 		});
@@ -228,20 +217,27 @@ class BaseMenu {
 		this.savChapter = undefined;
 
 		if (saves.length === 0) {
-			$.Warning('CONTINUE: No saves');
+			$.Warning('RESUME: No saves');
 			return;
 		}
 
-		this.latestSave = saves[0];
-
 		const campaigns = CampaignAPI.GetAllCampaigns();
-		const savCampaign = campaigns.find((v) => {
-			return v.id === this.latestSave.mapGroup;
-		});
+		let savCampaign;
+		for (const save of saves) {
+			savCampaign = campaigns.find((v) => {
+				return v.id === save.mapGroup;
+			});
+			if (!savCampaign) {
+				$.Warning('RESUME: Newer save found without a map group. Skipping.');
+			} else {
+				$.Msg(`RESUME: Eligible save found: ${save.fileName}, ${save.mapName}, ${save.mapGroup}`);
+				this.latestSave = save;
+				break;
+			}
+		}
 
 		if (!savCampaign) {
-			$.Warning('CONTINUE: Save exists, but the campaign it belongs to cannot be found.');
-			$.Warning(`Group: ${this.latestSave.mapGroup}`);
+			$.Warning('RESUME: Could not find an eligible latest save');
 			return;
 		}
 
@@ -254,7 +250,7 @@ class BaseMenu {
 		});
 
 		if (!savChapter) {
-			$.Warning('CONTINUE: Map could not be found for Campaign');
+			$.Warning('RESUME: Map could not be found for Campaign');
 			return;
 		}
 
@@ -278,8 +274,9 @@ class BaseMenu {
 	}
 
 	static loadNoRoll() {
+		// TODO: check for BG Map Option
 		// eslint-disable-next-line no-constant-condition
-		if (false) {
+		if (true) {
 			this.loadStaticBg();
 		} else {
 			this.loadLiveBg();
@@ -287,7 +284,6 @@ class BaseMenu {
 	}
 
 	static loadBackground() {
-		// TODO: check for BG Map Option
 		this.rerollMap();
 		this.loadNoRoll();
 	}
@@ -359,5 +355,20 @@ class BaseMenu {
 				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
 				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck'
 			);
+	}
+
+	static hideContinueDetails() {
+		if (!this.isContinueActive) return;
+
+		this.isContinueActive = false;
+
+		this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+		//this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+		this.continueImg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+		$.DispatchEvent('MainMenuSetLogo', '{images}/logo.svg');
+
+		if (this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
+
+		this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
 	}
 }

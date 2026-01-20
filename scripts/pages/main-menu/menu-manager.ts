@@ -5,7 +5,7 @@ class MenuPage {
 	panel: Panel;
 	headline?: string;
 	tagline?: string;
-	invokerPanel?: Panel;
+	invokerPanel?: GenericPanel;
 
 	constructor(name: string, panel: Panel) {
 		this.name = name;
@@ -41,6 +41,10 @@ class MenuManager {
 		UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = false;
 
 		$.RegisterForUnhandledEvent('MainMenuAddButton', (btn: MenuButton) => {
+			if (btn.dev && !GameInterfaceAPI.GetSettingBool('developer')) {
+				return;
+			}
+
 			const b = constructMenuButton(btn);
 			b.SetParent(this.menuNav);
 			b.SetReadyForDisplay(true);
@@ -61,6 +65,7 @@ class MenuManager {
 		$.RegisterForUnhandledEvent('ShowMainMenu', () => {
 			this.menuContent.AddClass('mainmenu__menu__t-prop');
 			this.menuContent.RemoveClass('mainmenu__menu__anim');
+			$.DispatchEvent('MainMenuSwitchFade', true, true);
 			this.openMenuMode();
 		});
 
@@ -101,10 +106,15 @@ class MenuManager {
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
-			if (logo.length > 0) {
+			if (logo && logo.length > 0) {
+				this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+				const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
+				this.logo.UpdateCurrentAnimationKeyframes(kfs);
 				this.logo.SetImage(`file://${logo}`);
 			} else {
-				this.logo.SetImage(getRandomFallbackImage());
+				this.logo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+				const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeOut');
+				this.logo.UpdateCurrentAnimationKeyframes(kfs);
 			}
 		});
 
@@ -113,8 +123,7 @@ class MenuManager {
 		this.loadingIndicator.visible = true;
 		$.DispatchEvent('MainMenuSwitchFade', true, true);
 
-		if (GameInterfaceAPI.GetSettingString('campaign_default').length === 0) {
-			$.Msg('Registering event');
+		const registerCampaignSwitch = () => {
 			$.RegisterForUnhandledEvent(
 				'PanoramaComponent_Campaign_OnActiveCampaignChanged',
 				(campaign: string | null) => {
@@ -126,18 +135,12 @@ class MenuManager {
 				}
 			);
 			this.openMenuMode();
+		};
+		if (GameInterfaceAPI.GetSettingString('campaign_default').length === 0) {
+			registerCampaignSwitch();
 		} else {
 			$.Schedule(0.1, () => {
-				$.RegisterForUnhandledEvent(
-					'PanoramaComponent_Campaign_OnActiveCampaignChanged',
-					(campaign: string | null) => {
-						this.closePages();
-						$.DispatchEvent('MainMenuSwitchFade', false, true);
-						this.deleteMenus();
-						this.openMenuMode();
-					}
-				);
-				this.openMenuMode();
+				registerCampaignSwitch();
 			});
 		}
 	}
@@ -238,7 +241,18 @@ class MenuManager {
 		// create the new page
 		const newPanel = $.CreatePanel('Panel', this.pageInsert, tab);
 		const newPage = new MenuPage(tab, newPanel);
-		newPage.invokerPanel = invokerPanel;
+
+		if (invokerPanel) {
+			newPage.invokerPanel = invokerPanel;
+		} else if (this.pages.length === 0) {
+			for (const btn of this.menuNav.Children()) {
+				if (btn.HasKeyFocus()) {
+					newPage.invokerPanel = btn;
+					break;
+				}
+			}
+		}
+
 		this.pages.push(newPage);
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
 		newPanel.RegisterForReadyEvents(true);
@@ -351,6 +365,13 @@ class MenuManager {
 	static closePages() {
 		while (this.pages.length > 0) {
 			this.navigateBack();
+		}
+	}
+
+	static onMenuFocused() {
+		const c = this.menuNav.Children();
+		if (c.length > 0) {
+			c[0].SetFocus();
 		}
 	}
 }

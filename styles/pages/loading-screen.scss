@@ -44,10 +44,10 @@
 	&__logo {
 		vertical-align: top;
 		horizontal-align: right;
-		height: 100px;
-		width: 100px;
-		margin-right: 52px;
-		margin-top: 52px;
+		height: 160px;
+		width: 160px;
+		margin-right: 30px;
+		margin-top: 25px;
 
 		& > AnimatedImageStrip {
 			width: 100%;
@@ -57,8 +57,8 @@
 		// i really don't know about this but i'm gonna leave it for now
 		// some of the logos look really awkward in the spinner
 		& > #Logo {
-			width: 55px;
-			height: 55px;
+			width: 90px;
+			height: 90px;
 			horizontal-align: center;
 			vertical-align: center;
 		}

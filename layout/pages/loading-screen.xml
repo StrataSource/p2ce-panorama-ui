@@ -35,8 +35,8 @@
 			<Image
 				id="Logo"
 				src="file://{images}/menu/portal2/logo.svg"
-				textureheight="128"
-				texturewidth="128"
+				textureheight="256"
+				texturewidth="256"
 				scaling="stretch-to-fit-preserve-aspect"
 				hittest="false"
 			/>
