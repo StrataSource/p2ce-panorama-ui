@@ -33,7 +33,7 @@ class LoadingScreenController {
 				const c = CampaignAPI.GetActiveCampaign()!;
 				const img = c.meta[CampaignMeta.SQUARE_LOGO];
 				if (img) {
-					this.logo.SetImage(`file://${img}`);
+					this.logo.SetImage(`file://{game}/${img}`);
 				} else {
 					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
 				}
@@ -96,7 +96,7 @@ class LoadingScreenController {
 			const setImg = (panel: Image, path: unknown) => {
 				if (path) {
 					panel.visible = true;
-					panel.SetImage(`file://${path}`);
+					panel.SetImage(`file://{game}/${path}`);
 				} else {
 					panel.visible = false;
 				}
@@ -111,13 +111,22 @@ class LoadingScreenController {
 				const asset = useTransitScreen ? transit : loading;
 
 				let img = mapInfo.meta[asset];
-				if (img) return img;
+				if (img) {
+					$.Msg(`Asset found at the map level: '${img}'`);
+					return img;
+				}
 
 				img = chapter.meta[asset];
-				if (img) return img;
+				if (img) {
+					$.Msg(`Asset found at the chapter level: '${img}'`);
+					return img;
+				}
 
 				img = campaign.meta[asset];
-				if (img) return img;
+				if (img) {
+					$.Msg(`Asset found at the campaign level: '${img}'`);
+					return img;
+				}
 
 				$.Warning(`${asset} asset was not found.`);
 				return img;

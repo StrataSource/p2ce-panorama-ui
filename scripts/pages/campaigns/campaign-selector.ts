@@ -60,15 +60,15 @@ class CampaignEntry {
 			else desc.visible = false;
 		}
 		if (cover) {
-			if (this.coverPath) cover.SetImage(`file://${this.coverPath}`);
+			if (this.coverPath) cover.SetImage(`file://{game}/${this.coverPath}`);
 			else cover.SetImage(getRandomFallbackImage());
 		}
 		if (ico) {
-			if (this.iconPath) ico.SetImage(`file://${this.iconPath}`);
+			if (this.iconPath) ico.SetImage(`file://{game}/${this.iconPath}`);
 			else ico.visible = false;
 		}
 		if (btnBg) {
-			if (this.btnBgPath) btnBg.SetImage(`file://${this.btnBgPath}`);
+			if (this.btnBgPath) btnBg.SetImage(`file://{game}/${this.btnBgPath}`);
 			else btnBg.visible = false;
 		}
 
@@ -173,7 +173,7 @@ class CampaignSelector {
 		this.hoveredCampaign = e.info;
 
 		$.Schedule(switchDelay, () => {
-			if (e.boxartPath) this.hoverBoxart.SetImage(`file://${e.boxartPath}`);
+			if (e.boxartPath) this.hoverBoxart.SetImage(`file://{game}/${e.boxartPath}`);
 			else this.hoverBoxart.SetImage(getRandomFallbackImage());
 		});
 	}
