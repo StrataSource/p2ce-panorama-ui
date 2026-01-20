@@ -76,7 +76,8 @@ class CampaignMenu {
 					'warning-popup',
 					$.Localize('#Action_Quit'),
 					() => {
-						GameInterfaceAPI.ConsoleCommand('quit');
+						this.reparent();
+						$.Schedule(0.01, () => { GameInterfaceAPI.ConsoleCommand('quit'); });
 					},
 					$.Localize('#Action_Return'),
 					() => {},
@@ -285,5 +286,10 @@ class CampaignMenu {
 
 	static onMapUnloaded() {
 		this.stopMusic();
+	}
+
+	static reparent() {
+		this.continueBtn.SetParent($.GetContextPanel());
+		this.loadGameBtn.SetParent($.GetContextPanel());
 	}
 }
