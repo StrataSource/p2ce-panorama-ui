@@ -84,48 +84,65 @@ class WeaponSwitcher {
 		});
 	}
 
+	static moveSelectorNext() {
+		if (this.weapons?.length === 0) {
+			$.Warning('No weapons');
+		}
+
+		this.selectedIndex[1] += 1;
+		if (this.selectedIndex[1] >= this.bucketedWeapons[this.selectedIndex[0]].length) {
+			this.selectedIndex[0] += 1;
+			this.selectedIndex[1] = 0;
+			if (this.selectedIndex[0] >= this.bucketedWeapons.length) {
+				this.selectedIndex[0] = 0;
+			}
+		}
+	}
+
+	static moveSelectorBack() {
+		if (this.weapons?.length === 0) {
+			$.Warning('No weapons');
+		}
+
+		this.selectedIndex[1] -= 1;
+		if (this.selectedIndex[1] < 0) {
+			this.selectedIndex[0] -= 1;
+			if (this.selectedIndex[0] < 0) {
+				this.selectedIndex[0] = this.bucketedWeapons.length - 1;
+			}
+			this.selectedIndex[1] = this.bucketedWeapons[this.selectedIndex[0]].length - 1;
+		}
+	}
+
+	static selectWeapon() {
+		const weapon = this.bucketedWeapons[this.selectedIndex[0]][this.selectedIndex[1]].weapon;
+		this.setIndexSelectionState(true);
+		if (!WeaponsAPI.SwitchToWeapon(WeaponsAPI.GetWeaponIndexFromClass(weapon.classname))) {
+			$.Warning(`Weapon switch to '${weapon.classname}' was rejected!`);
+		}
+		this.fadeOutTimer();
+	}
+
 	static weaponSelected(action: WeaponSelectAction) {
 		$.Msg(`WeaponSelect: ${action}`);
-		if (!this.weapons) return;
-		//$.Msg(`${JSON.stringify(WeaponsAPI.GetWeapons())}`);
+		if (!this.weapons || this.weapons.length <= 1) return;
+		this.updateWeaponsInfo();
 		this.show();
 		$.PlaySoundEvent('Player.WeaponSelectionMoveSlot');
 		switch (action) {
 			case WeaponSelectAction.NEXT:
 				{
 					this.setIndexSelectionState(false);
-					this.selectedIndex[1] += 1;
-					if (this.selectedIndex[1] >= this.bucketedWeapons[this.selectedIndex[0]].length) {
-						this.selectedIndex[0] += 1;
-						this.selectedIndex[1] = 0;
-						if (this.selectedIndex[0] >= this.bucketedWeapons.length) {
-							this.selectedIndex[0] = 0;
-						}
-					}
-					const weapon = this.bucketedWeapons[this.selectedIndex[0]][this.selectedIndex[1]].weapon;
-					$.Msg(`Select Weapon: ${weapon.classname}`);
-					this.setIndexSelectionState(true);
-					WeaponsAPI.SwitchToWeapon(WeaponsAPI.GetWeaponIndexFromClass(weapon.classname));
-					this.fadeOutTimer();
+					this.moveSelectorNext();
+					this.selectWeapon();
 					break;
 				}
 
 			case WeaponSelectAction.PREV:
 				{
 					this.setIndexSelectionState(false);
-					this.selectedIndex[1] -= 1;
-					if (this.selectedIndex[1] < 0) {
-						this.selectedIndex[0] -= 1;
-						if (this.selectedIndex[0] < 0) {
-							this.selectedIndex[0] = this.bucketedWeapons.length - 1;
-						}
-						this.selectedIndex[1] = this.bucketedWeapons[this.selectedIndex[0]].length - 1;
-					}
-					const weapon = this.bucketedWeapons[this.selectedIndex[0]][this.selectedIndex[1]].weapon;
-					$.Msg(`Select Weapon: ${weapon.classname}`);
-					this.setIndexSelectionState(true);
-					WeaponsAPI.SwitchToWeapon(WeaponsAPI.GetWeaponIndexFromClass(weapon.classname));
-					this.fadeOutTimer();
+					this.moveSelectorBack();
+					this.selectWeapon();
 					break;
 				}
 		
@@ -146,6 +163,24 @@ class WeaponSwitcher {
 			default:
 				break;
 		}
+	}
+
+	static updateWeaponsInfo() {
+		this.bucketedWeapons.forEach((group: SwitcherData[], i: number) => {
+			group.forEach((data: SwitcherData, j: number) => {
+				const weapon = data.weapon;
+				if (data.panel && data.panel.IsValid()) {
+					if (weapon.primary.usesClips || weapon.secondary.usesClips) {
+						$.Msg(`${weapon.classname} => (primary clips = ${weapon.primary.usesClips}, secondary clips = ${weapon.secondary.usesClips}) ${weapon.primary.clipAmmo} / ${weapon.primary.ammo}, ${weapon.secondary.clipAmmo} / ${weapon.secondary.ammo}`);
+						data.panel.SetHasClass(
+							'weapons__bucket__entry__red',
+							weapon.primary.ammo <= 0 && weapon.secondary.ammo <= 0 &&
+							weapon.primary.clipAmmo <= 0 && weapon.secondary.clipAmmo <= 0
+						);
+					}
+				}
+			});
+		});
 	}
 
 	static updateWeapons() {
@@ -188,6 +223,8 @@ class WeaponSwitcher {
 		} catch {
 			$.Msg(`Current weapon selection updated to: [${this.selectedIndex[0]}, ${this.selectedIndex[1]}]`);
 		}
+
+		this.updateWeaponsInfo();
 	}
 
 	static constructPanels() {
