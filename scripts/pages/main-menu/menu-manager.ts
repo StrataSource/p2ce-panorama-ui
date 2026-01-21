@@ -181,7 +181,7 @@ class MenuManager {
 			}
 
 			default:
-				$.Warning("Don't know which menu to open for this UI state! Doing nothing!");
+				$.Warning("MENU MANAGER: Don't know which menu to open for this UI state! Doing nothing!");
 				break;
 		}
 	}
@@ -225,7 +225,7 @@ class MenuManager {
 				return v.name === tab;
 			})
 		) {
-			$.Warning(`Page '${tab}' already exists, rejecting request to open the page.`);
+			$.Warning(`MENU MANAGER: Page '${tab}' already exists, rejecting request to open the page.`);
 			return;
 		}
 

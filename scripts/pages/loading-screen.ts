@@ -24,7 +24,7 @@ class LoadingScreenController {
 		if (this.logo) {
 			if (!this.logoEvent) {
 				this.logoEvent = $.RegisterEventHandler('ImageFailedLoad', this.logo, () => {
-					$.Warning('Loading screen logo was specified, but cannot be found.');
+					$.Warning('LOADING SCREEN: Square logo was specified, but could not be loaded.');
 					this.logo!.SetImage('file://{images}/menu/p2ce/logo.png');
 				});
 			}
@@ -86,7 +86,7 @@ class LoadingScreenController {
 			});
 
 			if (!chapter) {
-				$.Warning(`Chapter information for map '${mapName}' cannot be found!`);
+				$.Warning(`LOADING SCREEN: Chapter information for map '${mapName}' cannot be found! Is the map a part of this campaign?`);
 				this.bgImage1.SetImage(getRandomFallbackImage());
 				return;
 			}
@@ -112,23 +112,23 @@ class LoadingScreenController {
 
 				let img = mapInfo.meta[asset];
 				if (img) {
-					$.Msg(`Asset found at the map level: '${img}'`);
+					$.Msg(`LOADING SCREEN: Asset found at the map level: '${img}'`);
 					return img;
 				}
 
 				img = chapter.meta[asset];
 				if (img) {
-					$.Msg(`Asset found at the chapter level: '${img}'`);
+					$.Msg(`LOADING SCREEN: Asset found at the chapter level: '${img}'`);
 					return img;
 				}
 
 				img = campaign.meta[asset];
 				if (img) {
-					$.Msg(`Asset found at the campaign level: '${img}'`);
+					$.Msg(`LOADING SCREEN: Asset found at the campaign level: '${img}'`);
 					return img;
 				}
 
-				$.Warning(`${asset} asset was not found.`);
+				$.Warning(`LOADING SCREEN: ${asset} asset was not found.`);
 				return img;
 			};
 

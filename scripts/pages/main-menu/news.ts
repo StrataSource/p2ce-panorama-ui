@@ -51,7 +51,7 @@ class NewsReel {
 				complete: this.onNewsRequestResponse.bind(this)
 			});
 		} catch (error) {
-			$.Warning(`AsyncWebRequest for news reel failed: ${error}`);
+			$.Warning(`NEWS: AsyncWebRequest for news reel failed: ${error}`);
 			this.onNewsRequestFailed();
 		}
 	}

@@ -175,7 +175,7 @@ class SaveEntry {
 
 		if (title) {
 			if (!savChapter) {
-				$.Warning('CONTINUE: Chapter could not be found for this map');
+				$.Warning('CAMPAIGN SAVES: Chapter could not be found for this map');
 				title.text = this.save.mapName;
 			} else {
 				title.text = $.Localize(savChapter.title);

@@ -227,7 +227,7 @@ class CampaignShared {
 
 			if (setting.panelType === 'DropDown') {
 				if (!setting.dropDownValues) {
-					$.Warning(`Campaign setting ${setting.id} is of type DropDown but does not specify any values.`);
+					$.Warning(`CAMPAIGN SETTINGS: Campaign setting ${setting.id} is of type DropDown but does not specify any values.`);
 					throw new Error(
 						`Campaign setting ${setting.id} is of type DropDown but does not specify any values.`
 					);

@@ -174,7 +174,7 @@ class BaseMenu {
 				$.DispatchEvent('MainMenuSwitchFade', true, true);
 				$.Schedule(0.01, () => {
 					if (!CampaignAPI.SetActiveCampaign(c)) {
-						$.Warning(`Failed to set campaign to ${c}!!!!`);
+						$.Warning(`BASE MENU: Failed to set campaign to ${c}!!!!`);
 					}
 				});
 			});
@@ -334,7 +334,7 @@ class BaseMenu {
 				$.DispatchEvent('MainBackgroundLoaded');
 			} else {
 				$.Warning(
-					`Map loaded, but it failed to pass base bg map check. bgLevel = ${this.maps[this.mapSelection]}, map = ${map}, bg: ${bg}`
+					`BASE MENU: Map loaded, but it failed to pass base bg map check. bgLevel = ${this.maps[this.mapSelection]}, map = ${map}, bg: ${bg}`
 				);
 			}
 		});
