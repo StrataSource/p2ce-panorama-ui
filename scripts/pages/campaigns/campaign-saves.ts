@@ -279,8 +279,8 @@ class CampaignSaves {
 			this.saveGroup = this.campaign!.id;
 		} else {
 			UiToolkitAPI.ShowGenericPopupOk(
-				'[HC] WARNING: Not in Content Group',
-				'[HC] You are currently not playing within a content group (e.g. Campaign or Workshop Group). This can happen if you are launching a map through the console, or through the Hammer Editor.\n\nYou will not be able to create manual saves, but you will see saves created by maps (e.g. autosaves/quicksaves) while playing outside of a content group.\n\nPlaying outside of a content group is considered to be for advanced or developer cases only. It is recommended that you return to the menu and play normally.\n\nThis warning will appear every time you open this menu.',
+				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Title'),
+				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Desc'),
 				'bad-popup',
 				() => {}
 			);
