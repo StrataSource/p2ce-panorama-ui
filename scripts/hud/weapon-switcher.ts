@@ -85,31 +85,31 @@ class WeaponSwitcher {
 	}
 
 	static moveSelectorNext() {
-		if (this.weapons?.length === 0) {
-			$.Warning('No weapons');
-		}
+		if (this.weapons?.length === 0) return;
 
 		this.selectedIndex[1] += 1;
 		if (this.selectedIndex[1] >= this.bucketedWeapons[this.selectedIndex[0]].length) {
-			this.selectedIndex[0] += 1;
+			do {
+				this.selectedIndex[0] += 1;
+				if (this.selectedIndex[0] >= this.bucketedWeapons.length) {
+					this.selectedIndex[0] = 0;
+				}
+			} while (!this.bucketedWeapons[this.selectedIndex[0]]);
 			this.selectedIndex[1] = 0;
-			if (this.selectedIndex[0] >= this.bucketedWeapons.length) {
-				this.selectedIndex[0] = 0;
-			}
 		}
 	}
 
 	static moveSelectorBack() {
-		if (this.weapons?.length === 0) {
-			$.Warning('No weapons');
-		}
-
+		if (this.weapons?.length === 0) return;
+		
 		this.selectedIndex[1] -= 1;
 		if (this.selectedIndex[1] < 0) {
-			this.selectedIndex[0] -= 1;
-			if (this.selectedIndex[0] < 0) {
-				this.selectedIndex[0] = this.bucketedWeapons.length - 1;
-			}
+			do {
+				this.selectedIndex[0] -= 1;
+				if (this.selectedIndex[0] < 0) {
+					this.selectedIndex[0] = this.bucketedWeapons.length - 1;
+				}
+			} while (!this.bucketedWeapons[this.selectedIndex[0]]);
 			this.selectedIndex[1] = this.bucketedWeapons[this.selectedIndex[0]].length - 1;
 		}
 	}
@@ -119,6 +119,9 @@ class WeaponSwitcher {
 		this.setIndexSelectionState(true);
 		if (!WeaponsAPI.SwitchToWeapon(WeaponsAPI.GetWeaponIndexFromClass(weapon.classname))) {
 			$.Warning(`Weapon switch to '${weapon.classname}' was rejected!`);
+			$.PlaySoundEvent('Player.DenyWeaponSelection');
+		} else {
+			$.PlaySoundEvent('Player.WeaponSelectionMoveSlot');
 		}
 		this.fadeOutTimer();
 	}
@@ -128,7 +131,6 @@ class WeaponSwitcher {
 		if (!this.weapons || this.weapons.length <= 1) return;
 		this.updateWeaponsInfo();
 		this.show();
-		$.PlaySoundEvent('Player.WeaponSelectionMoveSlot');
 		switch (action) {
 			case WeaponSelectAction.NEXT:
 				{
