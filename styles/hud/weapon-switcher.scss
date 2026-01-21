@@ -42,6 +42,10 @@
 			&__selected {
 				border: 1px solid $hl2-yellow;
 
+				&.weapons__bucket__entry__red {
+					border-color: $hl2-red;
+				}
+
 				#{$this}__name,
 				#{$this}__icon-label {
 					
