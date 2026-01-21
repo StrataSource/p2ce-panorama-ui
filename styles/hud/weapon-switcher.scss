@@ -1,0 +1,84 @@
+@use '../config' as *;
+
+.weapons {
+	margin-top: 50px;
+	horizontal-align: center;
+	flow-children: right;
+
+	&__bucket {
+		margin: 0 10px;
+		flow-children: down;
+
+		&__entry {
+			border: 1px solid rgba(0,0,0,0);
+			width: 64px;
+			height: 64px;
+			background-color: rgba(0,0,0,0.5);
+			margin-bottom: 10px;
+			padding: 15px;
+			border-radius: 6px;
+
+			$this: &;
+
+			&__sub {
+				visibility: collapse;
+
+				#{$this}__expanded {
+					visibility: visible;
+				}
+			}
+
+			&__expanded {
+				width: 256px;
+				height: 200px;
+				visibility: visible;
+
+				#{$this}__name,
+				#{$this}__icon-label {
+					visibility: visible;
+				}
+			}
+
+			&__selected {
+				border: 1px solid $hl2-yellow;
+
+				#{$this}__name,
+				#{$this}__icon-label {
+					
+				}
+			}
+
+			&__icon {
+
+			}
+
+			&__name {
+				visibility: collapse;
+				horizontal-align: center;
+				vertical-align: bottom;
+				max-width: 100%;
+				font-family: $font-halflife2-hud;
+				font-size: 14px;
+				text-transform: uppercase;
+				color: $hl2-yellow;
+			}
+
+			&__num {
+				font-family: $font-halflife2-hud;
+				font-size: 18px;
+				font-weight: bold;
+				text-transform: uppercase;
+				color: $hl2-yellow;
+			}
+
+			&__icon-label {
+				visibility: collapse;
+				font-size: 118px;
+				font-family: 'HalfLife2';
+				horizontal-align: center;
+				vertical-align: center;
+				color: $hl2-yellow;
+			}
+		}
+	}
+}

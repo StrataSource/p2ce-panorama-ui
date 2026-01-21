@@ -39,6 +39,8 @@
 
 		<!-- Anchored in top right corner of screen, laid out from top-to-bottom -->
 		<Panel id="HudTopRight" hittest="false" hittestchildren="false">
+			<HudShowPos />
+			<HudBoneCounts />
 		</Panel>
 
 		<!-- HUD anchored to top center of screen, laid out vertically top-to-bottom
@@ -49,8 +51,6 @@
 		-->
 		<Panel id="HudTopCenter" hittest="false">
 			<WeaponSwitcher />
-			<HudShowPos />
-			<HudBoneCounts />
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
