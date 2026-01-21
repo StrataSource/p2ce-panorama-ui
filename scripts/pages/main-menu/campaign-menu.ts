@@ -152,6 +152,26 @@ class CampaignMenu {
 			this.stopMusic();
 		});
 
+		$.RegisterForUnhandledEvent('MainMenuModeRequestCleanup', () => {
+			this.stopMusic();
+		});
+
+		$.RegisterForUnhandledEvent('UnloadLoadingScreenAndReinit', () => {
+			$.DispatchEvent('MainMenuSwitchFade', true, true);
+			$.DispatchEvent('MainMenuSetLoadingIndicatorVisibility', true);
+		});
+
+		$.RegisterForUnhandledEvent('MapLoaded', (map: string, bg: boolean) => {
+			const ch = CampaignAPI.GetCampaignMeta(null);
+			const bgMusic = (ch['background_music'] as string) ?? '';
+			$.DispatchEvent('MainMenuHideBackgroundImage', false);
+			$.DispatchEvent('MainMenuSwitchReverse', false);
+			$.DispatchEvent('MainMenuHideBackgroundMovie');
+			if (bgMusic.length > 0) {
+				this.music = $.PlaySoundEvent(bgMusic);
+			}
+		});
+
 		this.setContinueDetails();
 		this.setCampaignBackground(skipBgMapLoad);
 	}
@@ -240,19 +260,6 @@ class CampaignMenu {
 
 		if (bgLevel.length > 0) {
 			$.DispatchEvent('MainMenuSetLoadingIndicatorVisibility', true);
-			$.RegisterForUnhandledEvent('MapLoaded', (map: string, bg: boolean) => {
-				if (bg && map === `maps\\${bgLevel}.bsp`) {
-					$.DispatchEvent('MainMenuHideBackgroundImage', false);
-					$.DispatchEvent('MainMenuSwitchReverse', false);
-					if (bgMusic.length > 0) {
-						this.music = $.PlaySoundEvent(bgMusic);
-					}
-				} else {
-					$.Warning(
-						`Map loaded, but it failed to pass campaign bg map check. bgLevel = ${bgLevel}, map = ${map}, bg: ${bg}`
-					);
-				}
-			});
 			$.DispatchEvent('MainMenuShowBackgroundImage', bgImage, false);
 			if (!skipBgMapLoad) {
 				$.Msg(`Attempting to load background map ${bgLevel}`);
