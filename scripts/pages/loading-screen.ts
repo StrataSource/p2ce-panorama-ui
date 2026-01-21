@@ -33,7 +33,7 @@ class LoadingScreenController {
 				const c = CampaignAPI.GetActiveCampaign()!;
 				const img = c.meta[CampaignMeta.SQUARE_LOGO];
 				if (img) {
-					this.logo.SetImage(`file://{game}/${img}`);
+					this.logo.SetImage(`file://${img}`);
 				} else {
 					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
 				}
@@ -96,7 +96,7 @@ class LoadingScreenController {
 			const setImg = (panel: Image, path: unknown) => {
 				if (path) {
 					panel.visible = true;
-					panel.SetImage(`file://{game}/${path}`);
+					panel.SetImage(`file://${path}`);
 				} else {
 					panel.visible = false;
 				}
