@@ -241,8 +241,8 @@ class CampaignMenu {
 						$.Schedule(0.1, () => {
 							CampaignAPI.SetActiveCampaign(null);
 							UiToolkitAPI.ShowGenericPopupOk(
-								$.Localize('#Popup_CampaignBgLoadFailed'),
-								$.Localize('#Popup_CampaignBgLoadFailed_Message'),
+								$.Localize('#MainMenu_Campaigns_BgLoadFailed_Title'),
+								$.Localize('#MainMenu_Campaigns_BgLoadFailed_Description'),
 								'bad-popup',
 								() => {}
 							);

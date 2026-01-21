@@ -86,7 +86,7 @@
 						tabindex="auto"
 						selectionpos="auto"
 					>
-						<Label class="button__text" text="#Common_Back" />
+						<Label class="button__text" text="#Action_Back" />
 					</Button>
 					<Panel class="flow-right vertical-align-center ControllerOnly">
 						<SteamInputAction
@@ -110,7 +110,7 @@
 							controllernumber="1"
 							glyphsize="large"
 						/> 
-						<Label class="vertical-align-center" text="#Common_Back" />
+						<Label class="vertical-align-center" text="#Action_Back" />
 					</Panel>
 				</Panel>
 			</Panel>
