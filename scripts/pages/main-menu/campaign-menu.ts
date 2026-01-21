@@ -10,7 +10,8 @@ class CampaignMenu {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'campaigns/new-game', undefined);
 			},
 			focused: () => {
-				this.continueBox.visible = false;
+				if (this.continueBox.IsValid())
+					this.continueBox.visible = false;
 			}
 		},
 		{
@@ -25,7 +26,8 @@ class CampaignMenu {
 				if (this.continueBtn.enabled) this.continueBox.visible = true;
 			},
 			unhovered: () => {
-				this.continueBox.visible = false;
+				if (this.continueBox.IsValid())
+					this.continueBox.visible = false;
 			},
 			focusIsHover: true
 		},
@@ -37,7 +39,8 @@ class CampaignMenu {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
 			},
 			focused: () => {
-				this.continueBox.visible = false;
+				if (this.continueBox.IsValid())
+					this.continueBox.visible = false;
 			}
 		},
 		{
@@ -48,7 +51,8 @@ class CampaignMenu {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
 			focused: () => {
-				this.continueBox.visible = false;
+				if (this.continueBox.IsValid())
+					this.continueBox.visible = false;
 			}
 		},
 		{
@@ -62,7 +66,8 @@ class CampaignMenu {
 				});
 			},
 			focused: () => {
-				this.continueBox.visible = false;
+				if (this.continueBox.IsValid())
+					this.continueBox.visible = false;
 			}
 		},
 		{
@@ -85,7 +90,8 @@ class CampaignMenu {
 				);
 			},
 			focused: () => {
-				this.continueBox.visible = false;
+				if (this.continueBox.IsValid())
+					this.continueBox.visible = false;
 			}
 		}
 	];
