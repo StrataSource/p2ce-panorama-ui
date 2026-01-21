@@ -162,8 +162,11 @@ class BaseMenu {
 		});
 
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
-			if (this.music) $.StopSoundEvent(this.music);
-			this.music = undefined;
+			this.stopMusic();
+		});
+
+		$.RegisterForUnhandledEvent('MainMenuModeRequestCleanup', () => {
+			this.stopMusic();
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuAnimatedSwitch', (c: string) => {
@@ -208,6 +211,11 @@ class BaseMenu {
 
 		// load featured Background
 		this.loadBackground();
+	}
+
+	static stopMusic() {
+		if (this.music) $.StopSoundEvent(this.music);
+		this.music = undefined;
 	}
 
 	static setContinueDetails() {

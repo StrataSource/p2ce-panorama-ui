@@ -31,4 +31,5 @@ interface GlobalEventNameMap {
 	MainMenuAddBgPanel: (panel: Panel) => void;
 	MainMenuAnimatedSwitch: (campaign: string) => void;
 	LoadingScreenClearLastMap: () => void;
+	MainMenuModeRequestCleanup: () => void;
 }
