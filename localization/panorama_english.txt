@@ -936,7 +936,11 @@
 		"MainMenu_Campaigns_MissingMount_Title"						"Unable to Load Campaign"
 		"MainMenu_Campaigns_MissingMount_Description"				"This campaign cannot be loaded because the following games are not mounted:
 {s:missing_mounts_list}
-Please install and mount the above games, and then restart P2:CE in order to access this campaign."
+Please install and mount the above games first to access this campaign."
+
+		// Warn the user if playing on map or server with no active campaign and attempting a save
+		"MainMenu_Campaigns_NoActiveCampaign_Warning_Title"			"Warning: Not in Content Group"
+		"MainMenu_Campaigns_NoActiveCampaign_Warning_Desc"			"You are currently not playing inside of a content group (e.g.: Campaigns or Workshop groups). This can happen if you launched a map via the developer console or through the Run Map dialog in the Hammer level editor.\n\nCreating and loading save files will still work in this state, but these files will not be displayed inside of the main menu.\n\nPlaying outside of a content group is intended for development purposes only; it is highly recommended that you return to the menu and play normally.\n\nThis warning will appear every time this menu is opened."
 		
 		// dependency game names
 		"MainMenu_Campaigns_Mounts_AppId_630"						"Alien Swarm (630)"
@@ -1079,7 +1083,7 @@ Please install and mount the above games, and then restart P2:CE in order to acc
 		"MainMenu_Mounts_UnmountGame"				"Unmount"
 		"MainMenu_Mounts_TooMany"					"Too Many Mounted Games"
 		"MainMenu_Mounts_TooMany_Desc"				"There are currently {i:num_mounted_games} games mounted on this P2:CE install. Only 10 games from your mounts file will be displayed at this time due to technical limitations."
-		"MainMenu_Mounts_Game_MaxTagline"			"Maximum number of visible mounted games reached"
+		"MainMenu_Mounts_Game_MaxTagline"			"Maximum number of visible mounted games reached."
 		"MainMenu_Mounts_WIP_Title"					"Mount configuration is a work-in-progress and is currently unavailable."
 		"MainMenu_Mounts_WIP_Tagline"				"Click here to learn more about configuring mounts in Portal 2: Community Edition."
 
@@ -1115,6 +1119,7 @@ Please install and mount the above games, and then restart P2:CE in order to acc
 		"Action_No"									"No"
 		"Action_Yes"								"Yes"
 		"Action_Confirm"							"Confirm"
+		"Action_Back"								"Back"
 		"Action_Return"								"Return"
 		"Action_ReturnToMenu"						"Exit to Menu"
 		"Action_Apply"								"Apply"
