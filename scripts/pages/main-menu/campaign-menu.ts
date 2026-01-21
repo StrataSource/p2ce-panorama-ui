@@ -173,7 +173,7 @@ class CampaignMenu {
 		this.continueBtnText.text = $.Localize('#MainMenu_SaveRestore_NoSaves');
 
 		if (saves.length === 0) {
-			$.Warning('CONTINUE: No saves');
+			$.Warning('CAMPAIGN MENU: No saves');
 			this.loadGameBtn.enabled = false;
 			return;
 		}
@@ -191,7 +191,7 @@ class CampaignMenu {
 		});
 
 		if (!savChapter) {
-			$.Warning('CONTINUE: Map could not be found for Campaign');
+			$.Warning('CAMPAIGN MENU: Map could not be found for Campaign');
 			return;
 		}
 
@@ -275,7 +275,7 @@ class CampaignMenu {
 				this.music = $.PlaySoundEvent(bgMusic);
 			}
 		} else {
-			$.Warning('No background has been specified!');
+			$.Warning('CAMPAIGN MENU: No background has been specified!');
 		}
 	}
 

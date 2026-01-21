@@ -23,7 +23,7 @@ class ChapterEntry {
 		$.RegisterEventHandler('ImageFailedLoad', this.panel, () => {
 			const c = this.panel.FindChildTraverse<Image>('ChapterCover');
 			// defaultsrc attribute is unreliable
-			$.Warning('Could not load chapter image');
+			$.Warning('CAMPAIGN CHAPTERS: Could not load chapter image');
 			c?.SetImage(getRandomFallbackImage());
 		});
 

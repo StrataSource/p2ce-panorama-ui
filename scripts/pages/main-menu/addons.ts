@@ -448,7 +448,7 @@ class MountManager {
 					complete: this.onAppRequestResponse.bind(this)
 				});
 			} catch (error) {
-				$.Warning(`AsyncWebRequest for Mount ${this.steamApps[i]} failed: ${error}`);
+				$.Warning(`ADDONS: AsyncWebRequest for Mount ${this.steamApps[i]} failed: ${error}`);
 				this.onAppRequestFailed();
 			}
 		}
@@ -473,7 +473,7 @@ class MountManager {
 	}
 
 	static onAppRequestFailed(appId?: number) {
-		$.Warning('Failed to retrieve App ID details.');
+		$.Warning('ADDONS: Failed to retrieve App ID details.');
 
 		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
 		p.LoadLayoutSnippet('MountEntrySnippet');
