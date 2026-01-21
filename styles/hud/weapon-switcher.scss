@@ -48,6 +48,14 @@
 				}
 			}
 
+			&__red {
+				#{$this}__name,
+				#{$this}__icon-label,
+				#{$this}__num {
+					color: $hl2-red;
+				}
+			}
+
 			&__icon {
 
 			}
