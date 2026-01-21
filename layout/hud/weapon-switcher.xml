@@ -7,12 +7,6 @@
 		<include src="file://{scripts}/hud/weapon-switcher.ts" />
 	</scripts>
 
-	<Panel onload="WeaponSwitcher.onLoad()">
-		<Image
-			class="hide"
-			src="file://{images}/menu/portal2/logo.svg"
-			texturewidth="128"
-			textureheight="128"
-		/>
+	<Panel class="weapons" onload="WeaponSwitcher.onLoad()">
 	</Panel>
 </root>
