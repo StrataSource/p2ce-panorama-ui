@@ -48,6 +48,7 @@
 		-        while HudTeamCounter is visible
 		-->
 		<Panel id="HudTopCenter" hittest="false">
+			<WeaponSwitcher />
 			<HudShowPos />
 			<HudBoneCounts />
 		</Panel>
