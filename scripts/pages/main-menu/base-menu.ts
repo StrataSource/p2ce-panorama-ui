@@ -49,7 +49,7 @@ class BaseMenu {
 
 				const logoPath = this.savCampaign.meta[CampaignMeta.FULL_LOGO];
 				if (logoPath !== undefined) {
-					$.DispatchEvent('MainMenuSetLogo', `{game}/${logoPath}`);
+					$.DispatchEvent('MainMenuSetLogo', `${logoPath}`);
 				} else {
 					$.DispatchEvent('MainMenuSetLogo', '');
 				}
@@ -267,7 +267,7 @@ class BaseMenu {
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
-		this.continueLogo.SetImage(`file://{game}/${savCampaign.meta[CampaignMeta.SQUARE_LOGO]}`);
+		this.continueLogo.SetImage(`file://${savCampaign.meta[CampaignMeta.SQUARE_LOGO]}`);
 
 		this.continueText.text = `${$.Localize(savCampaign.title)}`;
 
