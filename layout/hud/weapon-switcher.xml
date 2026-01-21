@@ -1,0 +1,18 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/hud/weapon-switcher.ts" />
+	</scripts>
+
+	<Panel onload="WeaponSwitcher.onLoad()">
+		<Image
+			class="hide"
+			src="file://{images}/menu/portal2/logo.svg"
+			texturewidth="128"
+			textureheight="128"
+		/>
+	</Panel>
+</root>
