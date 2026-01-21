@@ -7,3 +7,4 @@
 UiToolkitAPI.RegisterPanel2d('LineGraph', 'file://{resources}/layout/components/graphs/line-graph.xml');
 UiToolkitAPI.RegisterPanel2d('VersionInfo', 'file://{resources}/layout/components/version-info.xml');
 UiToolkitAPI.RegisterPanel2d('NewsReel', 'file://{resources}/layout/pages/main-menu/news.xml');
+UiToolkitAPI.RegisterHUDPanel2d('WeaponSwitcher', 'file://{resources}/layout/hud/weapon-switcher.xml');
