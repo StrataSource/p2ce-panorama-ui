@@ -7,6 +7,6 @@
 		<include src="file://{scripts}/hud/weapon-switcher.ts" />
 	</scripts>
 
-	<Panel class="weapons" onload="WeaponSwitcher.onLoad()">
+	<Panel class="weapons" onload="WeaponSwitcher.onLoad()" hittest="false" hittestchildren="false">
 	</Panel>
 </root>

@@ -86,7 +86,9 @@ class LoadingScreenController {
 			});
 
 			if (!chapter) {
-				$.Warning(`LOADING SCREEN: Chapter information for map '${mapName}' cannot be found! Is the map a part of this campaign?`);
+				$.Warning(
+					`LOADING SCREEN: Chapter information for map '${mapName}' cannot be found! Is the map a part of this campaign?`
+				);
 				this.bgImage1.SetImage(getRandomFallbackImage());
 				return;
 			}

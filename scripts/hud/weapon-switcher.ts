@@ -31,8 +31,7 @@ class WeaponSwitcher {
 	static selectedIndex: number[] = [0, 0];
 	static fadeTimer: uuid | undefined = undefined;
 
-	static onLoad() {
-	}
+	static onLoad() {}
 
 	static onLevelInit() {
 		// force refresh, for saved games
@@ -103,7 +102,7 @@ class WeaponSwitcher {
 
 	static moveSelectorBack() {
 		if (this.weapons?.length === 0) return;
-		
+
 		this.selectedIndex[1] -= 1;
 		if (this.selectedIndex[1] < 0) {
 			do {
@@ -129,27 +128,24 @@ class WeaponSwitcher {
 	}
 
 	static weaponSelected(action: WeaponSelectAction) {
-		$.Msg(`WeaponSelect: ${action}`);
 		if (!this.weapons || this.weapons.length <= 1) return;
 		this.updateWeaponsInfo();
 		this.show();
 		switch (action) {
-			case WeaponSelectAction.NEXT:
-				{
-					this.setIndexSelectionState(false);
-					this.moveSelectorNext();
-					this.selectWeapon();
-					break;
-				}
+			case WeaponSelectAction.NEXT: {
+				this.setIndexSelectionState(false);
+				this.moveSelectorNext();
+				this.selectWeapon();
+				break;
+			}
 
-			case WeaponSelectAction.PREV:
-				{
-					this.setIndexSelectionState(false);
-					this.moveSelectorBack();
-					this.selectWeapon();
-					break;
-				}
-		
+			case WeaponSelectAction.PREV: {
+				this.setIndexSelectionState(false);
+				this.moveSelectorBack();
+				this.selectWeapon();
+				break;
+			}
+
 			default:
 				break;
 		}
@@ -163,7 +159,7 @@ class WeaponSwitcher {
 			case WeaponStateMode.PICKUP:
 				this.updateWeapons();
 				break;
-		
+
 			default:
 				break;
 		}
@@ -173,10 +169,7 @@ class WeaponSwitcher {
 		this.bucketedWeapons.forEach((group: SwitcherData[], i: number) => {
 			group.forEach((data: SwitcherData, j: number) => {
 				if (data.panel && data.panel.IsValid()) {
-					data.panel.SetHasClass(
-						'weapons__bucket__entry__red',
-						!WeaponsAPI.CanSwitchToWeapon(data.id)
-					);
+					data.panel.SetHasClass('weapons__bucket__entry__red', !WeaponsAPI.CanSwitchToWeapon(data.id));
 				}
 			});
 		});
@@ -248,7 +241,9 @@ class WeaponSwitcher {
 				this.bucketedWeapons[index][weaponIndex].panel = weaponPanel;
 
 				if (weaponIndex === 0) {
-					const bucketLabel = $.CreatePanel('Label', weaponPanel, `Bucket${index}-NumLabel`, { 'text': `${index + 1}` });
+					const bucketLabel = $.CreatePanel('Label', weaponPanel, `Bucket${index}-NumLabel`, {
+						text: `${index + 1}`
+					});
 					bucketLabel.AddClass('weapons__bucket__entry__num');
 				}
 
@@ -293,7 +288,9 @@ class WeaponSwitcher {
 						break;
 				}
 
-				const weaponLabel = $.CreatePanel('Label', weaponPanel, `${weapon.classname}-Label`, { 'text': `${weapon.classname}` });
+				const weaponLabel = $.CreatePanel('Label', weaponPanel, `${weapon.classname}-Label`, {
+					text: `${weapon.classname}`
+				});
 				weaponLabel.AddClass('weapons__bucket__entry__name');
 			});
 		});

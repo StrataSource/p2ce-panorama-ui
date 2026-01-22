@@ -69,9 +69,8 @@ $colors-p2ce-base: (
 
 $hl2-bg: rgba(0, 0, 0, 0.4) !default;
 $hl2-yellow: rgba(255, 220, 0, 0.4) !default;
-// FIXME: get value from HL2 vgui res
-$hl2-bright-yellow: $hl2-yellow !default;
-$hl2-red: red !default;
+$hl2-bright-yellow: rgba(255, 220, 0, 0.9) !default;
+$hl2-red: rgba(220, 0, 0, 0.9) !default;
 
 $blue: #1896d3 !default;
 $mid-blue: #57c8ff !default;
