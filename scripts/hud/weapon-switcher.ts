@@ -1,10 +1,12 @@
 'use strict';
 
 class SwitcherData {
+	id: uint32;
 	weapon: Weapon;
 	panel: Panel | undefined = undefined;
 
-	constructor(w: Weapon) {
+	constructor(id: uint32, w: Weapon) {
+		this.id = id;
 		this.weapon = w;
 	}
 
@@ -115,10 +117,10 @@ class WeaponSwitcher {
 	}
 
 	static selectWeapon() {
-		const weapon = this.bucketedWeapons[this.selectedIndex[0]][this.selectedIndex[1]].weapon;
+		const data = this.bucketedWeapons[this.selectedIndex[0]][this.selectedIndex[1]];
 		this.setIndexSelectionState(true);
-		if (!WeaponsAPI.SwitchToWeapon(WeaponsAPI.GetWeaponIndexFromClass(weapon.classname))) {
-			$.Warning(`Weapon switch to '${weapon.classname}' was rejected!`);
+		if (!WeaponsAPI.SwitchToWeapon(data.id)) {
+			$.Warning(`Weapon switch to '${data.weapon.classname}' was rejected!`);
 			$.PlaySoundEvent('Player.DenyWeaponSelection');
 		} else {
 			$.PlaySoundEvent('Player.WeaponSelectionMoveSlot');
@@ -170,16 +172,11 @@ class WeaponSwitcher {
 	static updateWeaponsInfo() {
 		this.bucketedWeapons.forEach((group: SwitcherData[], i: number) => {
 			group.forEach((data: SwitcherData, j: number) => {
-				const weapon = data.weapon;
 				if (data.panel && data.panel.IsValid()) {
-					if (weapon.primary.usesClips || weapon.secondary.usesClips) {
-						$.Msg(`${weapon.classname} => (primary clips = ${weapon.primary.usesClips}, secondary clips = ${weapon.secondary.usesClips}) ${weapon.primary.clipAmmo} / ${weapon.primary.ammo}, ${weapon.secondary.clipAmmo} / ${weapon.secondary.ammo}`);
-						data.panel.SetHasClass(
-							'weapons__bucket__entry__red',
-							weapon.primary.ammo <= 0 && weapon.secondary.ammo <= 0 &&
-							weapon.primary.clipAmmo <= 0 && weapon.secondary.clipAmmo <= 0
-						);
-					}
+					data.panel.SetHasClass(
+						'weapons__bucket__entry__red',
+						!WeaponsAPI.CanSwitchToWeapon(data.id)
+					);
 				}
 			});
 		});
@@ -189,13 +186,14 @@ class WeaponSwitcher {
 		$.Msg('Updating weapons...');
 
 		this.bucketedWeapons = [];
+		this.weapons = [];
 		this.weapons = WeaponsAPI.GetWeapons();
-		if (this.weapons === undefined) {
-			$.Warning('Weapons array is undefined');
+		if (this.weapons === null) {
+			$.Warning('Weapons array is null');
 			return;
 		}
 
-		$.Msg(`${this.weapons.length} weapons`);
+		$.Msg(`${WeaponsAPI.GetWeaponCount()} weapons`);
 
 		for (const weapon of this.weapons) {
 			if (!weapon) continue;
@@ -204,7 +202,9 @@ class WeaponSwitcher {
 				$.Msg(`Create new bucket at index: ${weapon.slot}`);
 				this.bucketedWeapons[weapon.slot] = [];
 			}
-			this.bucketedWeapons[weapon.slot].push(new SwitcherData(weapon));
+			this.bucketedWeapons[weapon.slot].push(
+				new SwitcherData(WeaponsAPI.GetWeaponIndexFromClass(weapon.classname), weapon)
+			);
 		}
 
 		this.constructPanels();
