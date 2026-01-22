@@ -10,8 +10,7 @@ class CampaignMenu {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'campaigns/new-game', undefined);
 			},
 			focused: () => {
-				if (this.continueBox.IsValid())
-					this.continueBox.visible = false;
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			}
 		},
 		{
@@ -26,8 +25,7 @@ class CampaignMenu {
 				if (this.continueBtn.enabled) this.continueBox.visible = true;
 			},
 			unhovered: () => {
-				if (this.continueBox.IsValid())
-					this.continueBox.visible = false;
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			},
 			focusIsHover: true
 		},
@@ -39,8 +37,7 @@ class CampaignMenu {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
 			},
 			focused: () => {
-				if (this.continueBox.IsValid())
-					this.continueBox.visible = false;
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			}
 		},
 		{
@@ -51,8 +48,7 @@ class CampaignMenu {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
 			focused: () => {
-				if (this.continueBox.IsValid())
-					this.continueBox.visible = false;
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			}
 		},
 		{
@@ -66,8 +62,7 @@ class CampaignMenu {
 				});
 			},
 			focused: () => {
-				if (this.continueBox.IsValid())
-					this.continueBox.visible = false;
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			}
 		},
 		{
@@ -82,7 +77,9 @@ class CampaignMenu {
 					$.Localize('#Action_Quit'),
 					() => {
 						this.reparent();
-						$.Schedule(0.01, () => { GameInterfaceAPI.ConsoleCommand('quit'); });
+						$.Schedule(0.01, () => {
+							GameInterfaceAPI.ConsoleCommand('quit');
+						});
 					},
 					$.Localize('#Action_Return'),
 					() => {},
@@ -90,8 +87,7 @@ class CampaignMenu {
 				);
 			},
 			focused: () => {
-				if (this.continueBox.IsValid())
-					this.continueBox.visible = false;
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			}
 		}
 	];
