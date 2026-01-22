@@ -156,7 +156,7 @@ class MenuManager {
 
 	static deleteMenus() {
 		$.DispatchEvent('MainMenuModeRequestCleanup');
-		
+
 		this.menuNav.RemoveAndDeleteChildren();
 		this.menuBackground.RemoveAndDeleteChildren();
 		this.menuForeground.RemoveAndDeleteChildren();

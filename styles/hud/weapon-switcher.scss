@@ -6,17 +6,16 @@
 	flow-children: right;
 
 	&__bucket {
-		margin: 0 10px;
+		margin: 0 9px;
 		flow-children: down;
 
 		&__entry {
-			border: 1px solid rgba(0,0,0,0);
-			width: 64px;
-			height: 64px;
-			background-color: rgba(0,0,0,0.5);
-			margin-bottom: 10px;
+			width: 72px;
+			height: 72px;
+			background-color: $hl2-bg;
+			margin-bottom: 18px;
 			padding: 15px;
-			border-radius: 6px;
+			border-radius: 10px;
 
 			$this: &;
 
@@ -29,26 +28,31 @@
 			}
 
 			&__expanded {
-				width: 256px;
-				height: 200px;
+				width: 252px;
+				height: 189px;
 				visibility: visible;
 
-				#{$this}__name,
 				#{$this}__icon-label {
 					visibility: visible;
 				}
 			}
 
 			&__selected {
-				border: 1px solid $hl2-yellow;
-
 				&.weapons__bucket__entry__red {
-					border-color: $hl2-red;
+					#{$this}__num,
+					#{$this}__name,
+					#{$this}__icon-label {
+						text-shadow: 0px 0px 8px 1 $hl2-red;
+					}
 				}
 
+				#{$this}__num,
 				#{$this}__name,
 				#{$this}__icon-label {
-					
+					visibility: visible;
+					text-shadow: 0px 0px 8px 1 rgba($hl2-bright-yellow, 0.4);
+					overflow: noclip;
+					color: $hl2-bright-yellow;
 				}
 			}
 
@@ -61,10 +65,11 @@
 			}
 
 			&__icon {
-
 			}
 
 			&__name {
+				width: 100%;
+				text-align: center;
 				visibility: collapse;
 				horizontal-align: center;
 				vertical-align: bottom;
@@ -72,7 +77,7 @@
 				font-family: $font-halflife2-hud;
 				font-size: 14px;
 				text-transform: uppercase;
-				color: $hl2-yellow;
+				color: rgba($hl2-yellow, 0.4);
 			}
 
 			&__num {
@@ -84,12 +89,14 @@
 			}
 
 			&__icon-label {
+				width: 100%;
+				text-align: center;
 				visibility: collapse;
 				font-size: 118px;
 				font-family: 'HalfLife2';
 				horizontal-align: center;
 				vertical-align: center;
-				color: $hl2-yellow;
+				color: rgba($hl2-yellow, 0.4);
 			}
 		}
 	}
