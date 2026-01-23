@@ -26,7 +26,7 @@ class MenuAnimation {
 
 		// background image
 		$.RegisterForUnhandledEvent('MainMenuSetBackgroundImage', (img: string) => {
-			this.imgBg.SetImage(`file://${img}`);
+			this.imgBg.SetImage(img);
 		});
 		$.RegisterForUnhandledEvent('MainMenuShowBackgroundImage', this.showBgImg.bind(this));
 		$.RegisterForUnhandledEvent('MainMenuHideBackgroundImage', this.hideBgImg.bind(this));
@@ -52,7 +52,7 @@ class MenuAnimation {
 
 	static showBgImg(img?: string, instant?: boolean) {
 		if (img) {
-			this.imgBg.SetImage(`file://${img}`);
+			this.imgBg.SetImage(img);
 		}
 		if (instant) {
 			this.imgBg.style.animation = 'FadeOut 0.01s ease-out 0s 1 reverse forwards';

@@ -62,17 +62,6 @@ function convertTime(date: Date, split: boolean = true) {
 	})}`;
 }
 
-function convertImagePath(thumbPath: string) {
-	if (
-		thumbPath.endsWith('.vtf') ||
-		thumbPath.endsWith('.png') ||
-		thumbPath.endsWith('.jpg') ||
-		thumbPath.endsWith('.svg')
-	)
-		return `file://{game}/${thumbPath}`;
-	else return thumbPath;
-}
-
 function constructMenuButton(btn: MenuButton) {
 	// constructed manually because LoadLayoutString HATES ME!!!
 
@@ -122,4 +111,20 @@ function constructMenuButton(btn: MenuButton) {
 	});
 
 	return b;
+}
+
+function getCampaignAssetPath(campaign: CampaignInfo) {
+	const addonInfo = WorkshopAPI.GetAddonMeta(campaign.addon_id);
+	if (addonInfo) {
+		let assetPath = addonInfo.thumb;
+		assetPath = assetPath.substring(0, assetPath.lastIndexOf('/'));
+		if (!assetPath.endsWith('.assets')) {
+			assetPath += '/.assets';
+		}
+		assetPath += '/';
+		$.Msg(assetPath);
+		return assetPath;
+	} else {
+		return 'file://{game}';
+	}
 }

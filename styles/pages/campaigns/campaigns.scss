@@ -109,7 +109,7 @@
 		&__bg-image {
 			horizontal-align: right;
 			width: 960px;
-			opacity: 0.05;
+			opacity: 0.15;
 		}
 
 		&__cover {
@@ -129,6 +129,14 @@
 				width: 48px;
 				vertical-align: bottom;
 				margin: 10px;
+
+				&__bg {
+					height: 48px;
+					width: 48px;
+					padding: 5px;
+					background-color: black;
+					border-radius: 5px;
+				}
 			}
 
 			&__status {
