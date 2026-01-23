@@ -48,10 +48,19 @@
 
 				</Panel>
 
-				<SettingsSlider text="#Settings_Volume_Game" min="0" max="1" percentage="true" convar="volume" hasdocspage="false" />
+				<SettingsSlider
+					text="#Settings_Volume_Game"
+					infomessage="#Settings_Volume_Game_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="volume"
+					hasdocspage="false"
+				/>
 
 				<SettingsSlider
 					text="#Settings_Volume_Music"
+					infomessage="#Settings_Volume_Music_info"
 					min="0"
 					max="1"
 					percentage="true"
@@ -62,6 +71,7 @@
 
 				<SettingsSlider
 					text="#Settings_Volume_Ambient"
+					infomessage="#Settings_Volume_Ambient_info"
 					min="0"
 					max="1"
 					percentage="true"
@@ -72,26 +82,29 @@
 
 				<SettingsSlider
 					text="#Settings_Volume_PlayerWeapon"
+					infomessage="#Settings_Volume_PlayerWeapon_info"
 					min="0"
 					max="1"
 					percentage="true"
 					convar="snd_volume_weapon_localplayer"
-					tags="weapon"
+					tags="weapon,player"
 					hasdocspage="false"
 				/>
 
 				<SettingsSlider
 					text="#Settings_Volume_OverallWeapon"
+					infomessage="#Settings_Volume_OverallWeapon_info"
 					min="0"
 					max="1"
 					percentage="true"
 					convar="snd_volume_weapon"
-					tags="overall"
+					tags="weapon,global,overall"
 					hasdocspage="false"
 				/>
 
 				<SettingsSlider
 					text="#Settings_Volume_UI"
+					infomessage="#Settings_Volume_UI_info"
 					min="0"
 					max="1"
 					percentage="true"
@@ -102,6 +115,7 @@
 
 				<SettingsSlider
 					text="#Settings_Volume_Physics"
+					infomessage="#Settings_Volume_Physics_info"
 					min="0"
 					max="1"
 					percentage="true"
@@ -112,6 +126,7 @@
 
 				<SettingsSlider
 					text="#Settings_Volume_Footsteps"
+					infomessage="#Settings_Volume_Footsteps_info"
 					min="0"
 					max="1"
 					percentage="true"
@@ -131,11 +146,22 @@
 
 					<Label class="settings-group__title" text="#Settings_ClosedCaptions_Title" tags="audio,sound,closedcaptions" />
 
-					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-						<Button class="button" onactivate="SettingsShared.resetSettings('AudioClosedCaptionsSubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
+
+						<Button
+							class="button mr-3"
+							onactivate="SettingsShared.showImportExportDialogue('Settings_ClosedCaptions_Title', 'AudioClosedCaptionsSubSection')"
+						>
+							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
 						</Button>
-					</TooltipPanel>
+						
+						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+							<Button class="button" onactivate="SettingsShared.resetSettings('AudioClosedCaptionsSubSection');">
+								<Image class="button__icon" src="file://{images}/reset.svg" />
+							</Button>
+						</TooltipPanel>
+
+					</Panel>
 
 				</Panel>
 
@@ -170,11 +196,22 @@
 
 					<Label class="settings-group__title" text="#Settings_AudioDevices_Title" tags="audio,sound,devices" />
 
-					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-						<Button class="button" onactivate="SettingsShared.resetSettings('AudioDevicesSubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
+
+						<Button
+							class="button mr-3"
+							onactivate="SettingsShared.showImportExportDialogue('Settings_AudioDevices_Title', 'AudioDevicesSubSection')"
+						>
+							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
 						</Button>
-					</TooltipPanel>
+						
+						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+							<Button class="button" onactivate="SettingsShared.resetSettings('AudioDevicesSubSection');">
+								<Image class="button__icon" src="file://{images}/reset.svg" />
+							</Button>
+						</TooltipPanel>
+
+					</Panel>
 
 				</Panel>
 
@@ -189,7 +226,8 @@
 					<Label text="#Settings_AudioDevices_Speaker_StereoSpeakers" id="speakerconfig2" value="2" />
 					<Label text="#Settings_AudioDevices_Speaker_Quad" id="speakerconfig3" value="4" />
 					<Label text="#Settings_AudioDevices_Speaker_51" id="speakerconfig4" value="5" />
-					<Label text="#Settings_AudioDevices_Speaker_71" id="speakerconfig5" value="7" />
+					<!-- 7.1 apparently unsupported in CS:GO and Strata? -->
+					<!-- <Label text="#Settings_AudioDevices_Speaker_71" id="speakerconfig5" value="7" /> -->
 				</SettingsEnumDropDown>
 
 				<SettingsEnumDropDown
