@@ -108,7 +108,7 @@
 					<Image
 						id="CampaignSettingsBoxLogo"
 						class="campaign-settings__box-logo"
-						src="file://{images}/menu/portal2/logo.svg"
+						src="file://{images}/campaigns/portal2/logo.svg"
 						scaling="stretch-to-fit-preserve-aspect"
 						texturewidth="128"
 						textureheight="128"

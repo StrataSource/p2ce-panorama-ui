@@ -46,7 +46,7 @@ class ChapterEntry {
 		}
 		if (cover) {
 			const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
-			if (thumb) cover.SetImage(`file://${thumb}`);
+			if (thumb) cover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
 			else cover.SetImage(getRandomFallbackImage());
 		}
 

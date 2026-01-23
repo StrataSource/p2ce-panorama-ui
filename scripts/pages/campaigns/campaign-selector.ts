@@ -41,6 +41,8 @@ class CampaignEntry {
 		const ico = this.panel.FindChildTraverse<Image>('CampaignLogo');
 		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
+		const basePath = getCampaignAssetPath(this.info);
+
 		// eject out into the action bar
 		if (this.index === 0) {
 			this.panel.SetPanelEvent('onmoveup', () => {
@@ -60,15 +62,24 @@ class CampaignEntry {
 			else desc.visible = false;
 		}
 		if (cover) {
-			if (this.coverPath) cover.SetImage(`file://${this.coverPath}`);
+			$.RegisterEventHandler('ImageFailedLoad', cover, () => {
+				cover.SetImage(getRandomFallbackImage());
+			});
+			if (this.coverPath) cover.SetImage(`${basePath}${this.coverPath}`);
 			else cover.SetImage(getRandomFallbackImage());
 		}
 		if (ico) {
-			if (this.iconPath) ico.SetImage(`file://${this.iconPath}`);
+			if (this.iconPath) {
+				const useLogoBg = this.info.meta[CampaignMeta.SELECTOR_LOGO_BG];
+				ico.SetImage(`${basePath}${this.iconPath}`);
+				$.Msg(useLogoBg);
+				if (useLogoBg)
+					ico.AddClass('campaigns__entry__details__logo__bg');
+			}
 			else ico.visible = false;
 		}
 		if (btnBg) {
-			if (this.btnBgPath) btnBg.SetImage(`file://${this.btnBgPath}`);
+			if (this.btnBgPath) btnBg.SetImage(`${basePath}${this.btnBgPath}`);
 			else btnBg.visible = false;
 		}
 
@@ -98,6 +109,10 @@ class CampaignSelector {
 
 	static init() {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
+
+		$.RegisterEventHandler('ImageFailedLoad', this.hoverBoxart, () => {
+			this.hoverBoxart.SetImage(getRandomFallbackImage());
+		});
 
 		this.gameType = UiToolkitAPI.GetGlobalObject()['GameType'] as GameType;
 		this.playerMode = UiToolkitAPI.GetGlobalObject()['PlayerMode'] as PlayerMode;
@@ -156,7 +171,7 @@ class CampaignSelector {
 	static onCampaignHovered(e: CampaignEntry) {
 		let switchDelay = 0;
 
-		if (!this.hoverContainer.HasClass('campaigns__boxart__container__show')) {
+		if (this.hoverContainer.IsValid() && !this.hoverContainer.HasClass('campaigns__boxart__container__show')) {
 			this.hoverContainer.AddClass('campaigns__boxart__container__show');
 
 			if (e.info === this.hoveredCampaign) return;
@@ -173,7 +188,8 @@ class CampaignSelector {
 		this.hoveredCampaign = e.info;
 
 		$.Schedule(switchDelay, () => {
-			if (e.boxartPath) this.hoverBoxart.SetImage(`file://${e.boxartPath}`);
+			const basePath = getCampaignAssetPath(e.info);
+			if (e.boxartPath) this.hoverBoxart.SetImage(`${basePath}${e.boxartPath}`);
 			else this.hoverBoxart.SetImage(getRandomFallbackImage());
 		});
 	}

@@ -112,7 +112,7 @@ class MenuManager {
 				this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
 				const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
 				this.logo.UpdateCurrentAnimationKeyframes(kfs);
-				this.logo.SetImage(`file://${logo}`);
+				this.logo.SetImage(logo);
 			} else {
 				this.logo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 				const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeOut');

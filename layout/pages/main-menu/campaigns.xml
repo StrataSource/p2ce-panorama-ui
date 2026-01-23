@@ -99,7 +99,6 @@
 								<Image
 									id="HoveredCampaignBoxart"
 									class="campaigns__boxart__image"
-									src="file://{images}/menu/portal2/sp_boxart.png"
 									scaling="stretch-to-cover-preserve-aspect"
 									texturewidth="600"
 									textureheight="900"

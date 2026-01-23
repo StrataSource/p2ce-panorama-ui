@@ -178,7 +178,8 @@ class SaveEntry {
 				$.Warning('CAMPAIGN SAVES: Chapter could not be found for this map');
 				title.text = this.save.mapName;
 			} else {
-				title.text = $.Localize(savChapter.title);
+				const chapterName = $.Localize(savChapter.title);
+				title.text = chapterName.replace('\n', ': ');
 			}
 		}
 
@@ -193,7 +194,8 @@ class SaveEntry {
 			if (!savChapter) {
 				bg.visible = false;
 			} else {
-				bg.SetImage(convertImagePath(savChapter.meta[CampaignMeta.CHAPTER_THUMBNAIL]));
+				const basePath = getCampaignAssetPath(CampaignSaves.campaign!);
+				bg.SetImage(`${basePath}${savChapter.meta[CampaignMeta.CHAPTER_THUMBNAIL]}`);
 			}
 		}
 

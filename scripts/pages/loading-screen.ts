@@ -4,6 +4,7 @@ class LoadingScreenController {
 	static lastLoadedMapName = '';
 	static logoEvent: number | undefined = undefined;
 	static bgEvent: number | undefined = undefined;
+	static bgEvent2: number | undefined = undefined;
 
 	static progressBar = $('#ProgressBar') as ProgressBar;
 	static bgImage1 = $('#BackgroundMapImage1') as Image;
@@ -19,6 +20,9 @@ class LoadingScreenController {
 			this.bgEvent = $.RegisterEventHandler('ImageFailedLoad', this.bgImage1, () => {
 				this.bgImage1.SetImage(getRandomFallbackImage());
 			});
+			this.bgEvent2 = $.RegisterEventHandler('ImageFailedLoad', this.bgImage1, () => {
+				this.bgImage2.visible = false;
+			});
 		}
 
 		if (this.logo) {
@@ -33,7 +37,7 @@ class LoadingScreenController {
 				const c = CampaignAPI.GetActiveCampaign()!;
 				const img = c.meta[CampaignMeta.SQUARE_LOGO];
 				if (img) {
-					this.logo.SetImage(`file://${img}`);
+					this.logo.SetImage(`${getCampaignAssetPath(c)}${img}`);
 				} else {
 					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
 				}
@@ -98,7 +102,7 @@ class LoadingScreenController {
 			const setImg = (panel: Image, path: unknown) => {
 				if (path) {
 					panel.visible = true;
-					panel.SetImage(`file://${path}`);
+					panel.SetImage(`${getCampaignAssetPath(campaign)}${path}`);
 				} else {
 					panel.visible = false;
 				}
@@ -134,10 +138,21 @@ class LoadingScreenController {
 				return img;
 			};
 
-			setImg(this.bgImage1, findImg(CampaignMeta.TRANSITION_SCREEN_A, CampaignMeta.LOADING_SCREEN_A));
-			setImg(this.bgImage2, findImg(CampaignMeta.TRANSITION_SCREEN_B, CampaignMeta.LOADING_SCREEN_B));
+			const path = findImg(CampaignMeta.TRANSITION_SCREEN, CampaignMeta.LOADING_SCREEN);
+			if (path) {
+				const split = (path as string).split('.');
+				let join = '';
+				for (let i = 0; i < split.length - 1; ++i) {
+					join += split[i];
+				}
+				setImg(this.bgImage1, join + '_1.' + split[split.length - 1]);
+				setImg(this.bgImage2, join + '_2.' + split[split.length - 1]);
 
-			$.Schedule(0.125, this.updateLoadingScreenInfoRepeater.bind(this));
+				$.Schedule(0.125, this.updateLoadingScreenInfoRepeater.bind(this));
+			} else {
+				this.bgImage1.visible = false;
+				this.bgImage2.visible = false;
+			}
 		} else {
 			this.bgImage1.visible = false;
 			this.bgImage2.visible = false;
