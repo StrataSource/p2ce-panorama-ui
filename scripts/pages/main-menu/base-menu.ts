@@ -49,13 +49,14 @@ class BaseMenu {
 
 				const logoPath = this.savCampaign.meta[CampaignMeta.FULL_LOGO];
 				if (logoPath !== undefined) {
-					$.DispatchEvent('MainMenuSetLogo', `${logoPath}`);
+					$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(this.savCampaign)}${logoPath}`);
 				} else {
 					$.DispatchEvent('MainMenuSetLogo', '');
 				}
 
 				const date = new Date(Number(this.latestSave.fileTime));
-				this.continueText.text = `${$.Localize(this.savChapter.title)} [${convertTime(date, false)}]`;
+				const chapterName = $.Localize(this.savChapter.title);
+				this.continueText.text = `${chapterName.replace('\n', ': ')} [${convertTime(date, false)}]`;
 
 				this.continueLogo.AddClass('mainmenu__square-logo__anim');
 			},
@@ -183,7 +184,7 @@ class BaseMenu {
 			});
 		});
 
-		$.DispatchEvent('MainMenuSetLogo', '{images}/logo.svg');
+		$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 
 		// create Resume details
 		const p = $.CreatePanel('Panel', $.GetContextPanel(), 'MenuBackgroundLayer');
@@ -267,7 +268,7 @@ class BaseMenu {
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
-		this.continueLogo.SetImage(`file://${savCampaign.meta[CampaignMeta.SQUARE_LOGO]}`);
+		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${savCampaign.meta[CampaignMeta.SQUARE_LOGO]}`);
 
 		this.continueText.text = `${$.Localize(savCampaign.title)}`;
 
@@ -281,7 +282,7 @@ class BaseMenu {
 	static rerollMap() {
 		this.mapSelection = Math.floor(Math.random() * this.maps.length);
 		$.Msg(`Rolled background map: ${this.mapSelection}, ${this.maps[this.mapSelection]}`);
-		$.DispatchEvent('MainMenuSetBackgroundImage', `{images}/menu/featured/${this.maps[this.mapSelection]}.png`);
+		$.DispatchEvent('MainMenuSetBackgroundImage', `file://{images}/menu/featured/${this.maps[this.mapSelection]}.png`);
 	}
 
 	static loadNoRoll() {
@@ -387,7 +388,7 @@ class BaseMenu {
 		this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
 		//this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 		this.continueImg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
-		$.DispatchEvent('MainMenuSetLogo', '{images}/logo.svg');
+		$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 
 		if (this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
 

@@ -23,13 +23,12 @@ declare const enum CampaignMeta {
 	COVER = 'selector_cover',
 	FULL_LOGO = 'full_logo',
 	LOADING_LOGO_PAD = 'loading_square_logo_padding',
+	SELECTOR_LOGO_BG = 'selector_logo_background',
 	SQUARE_LOGO = 'square_logo',
 	DESC = 'desc',
 	AUTHOR = 'author',
-	TRANSITION_SCREEN_A = 'transition_screen',
-	TRANSITION_SCREEN_B = 'transition_screen_2',
-	LOADING_SCREEN_A = 'loading_screen',
-	LOADING_SCREEN_B = 'loading_screen_2',
+	TRANSITION_SCREEN = 'transition_screen',
+	LOADING_SCREEN = 'loading_screen',
 	CHAPTER_THUMBNAIL = 'thumbnail'
 }
 

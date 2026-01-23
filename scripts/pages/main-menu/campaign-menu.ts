@@ -181,7 +181,7 @@ class CampaignMenu {
 	static setContinueDetails() {
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		$.DispatchEvent('MainMenuSetLogo', `${c.meta[CampaignMeta.FULL_LOGO]}`);
+		$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${c.meta[CampaignMeta.FULL_LOGO]}`);
 
 		this.continueBox.visible = false;
 
@@ -224,7 +224,8 @@ class CampaignMenu {
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueBoxText.text = convertTime(date);
-		this.continueBtnText.text = $.Localize(savChapter.title);
+		const chapterName = $.Localize(savChapter.title);
+		this.continueBtnText.text = chapterName.replace('\n', ': ');
 
 		this.continueBtn.enabled = true;
 	}
@@ -259,10 +260,11 @@ class CampaignMenu {
 		const bgMusic = (ch['background_music'] as string) ?? '';
 		const bgMovie = (ch['background_movie'] as string) ?? '';
 		const bgImage = (ch['background_image'] as string) ?? '';
+		const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
 
 		if (bgLevel.length > 0) {
 			$.DispatchEvent('MainMenuSetLoadingIndicatorVisibility', true);
-			$.DispatchEvent('MainMenuShowBackgroundImage', bgImage, false);
+			$.DispatchEvent('MainMenuShowBackgroundImage', `${basePath}${bgImage}`, false);
 			if (!skipBgMapLoad) {
 				$.Msg(`Attempting to load background map ${bgLevel}`);
 				GameInterfaceAPI.ConsoleCommand('startupmenu');
@@ -279,7 +281,7 @@ class CampaignMenu {
 			}
 		} else if (bgImage.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
-			$.DispatchEvent('MainMenuShowBackgroundImage', bgImage, true);
+			$.DispatchEvent('MainMenuShowBackgroundImage', `${basePath}${bgImage}`, true);
 			if (bgMusic.length > 0) {
 				this.music = $.PlaySoundEvent(bgMusic);
 			}

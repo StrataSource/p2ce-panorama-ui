@@ -35,15 +35,17 @@ class CampaignSettingsTab {
 
 		this.show();
 
+		const basePath = getCampaignAssetPath(this.campaign);
 		const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
-		if (thumb) this.chImage.SetImage(`file://${thumb}`);
+		if (thumb) this.chImage.SetImage(`${basePath}${thumb}`);
 		else this.chImage.SetImage(getRandomFallbackImage());
 
 		const logo = this.campaign.meta[CampaignMeta.SQUARE_LOGO];
-		if (logo) this.logoImage.SetImage(`file://${logo}`);
+		if (logo) this.logoImage.SetImage(`${basePath}${logo}`);
 		else this.logoImage.visible = false;
 
-		this.chText.text = $.Localize(this.chapter.title);
+		const chapterName = $.Localize(this.chapter.title);
+		this.chText.text = chapterName.replace('\n', ': ');
 		this.mapText.text = this.chapter.maps[0].name;
 
 		this.clear();
