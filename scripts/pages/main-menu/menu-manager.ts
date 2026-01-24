@@ -72,6 +72,7 @@ class MenuManager {
 		$.RegisterForUnhandledEvent('HideMainMenu', () => {
 			// ensure that no kind of loading blur can be active when we disappear
 			$.DispatchEvent('MainMenuSwitchReverse', true);
+			this.closePages();
 			this.deleteMenus();
 			this.menuContent.RemoveClass('mainmenu__menu__t-prop');
 			this.menuContent.AddClass('mainmenu__menu__anim');
@@ -84,6 +85,7 @@ class MenuManager {
 		});
 
 		$.RegisterForUnhandledEvent('HidePauseMenu', () => {
+			this.closePages();
 			this.deleteMenus();
 			this.menuContent.RemoveClass('mainmenu__menu__t-prop');
 			this.menuContent.AddClass('mainmenu__menu__anim');

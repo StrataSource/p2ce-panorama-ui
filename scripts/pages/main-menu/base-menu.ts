@@ -390,7 +390,7 @@ class BaseMenu {
 		this.continueImg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 		$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 
-		if (this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
+		if (this.continueText.IsValid() && this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
 
 		this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
 	}
