@@ -110,7 +110,7 @@ class CampaignChapters {
 		
 			case ChapterDisplayMode.GRID:
 				$.GetContextPanel().AddClass('ChapterModeGrid');
-				this.maxEntryPerPage = 15;
+				this.maxEntryPerPage = 100;
 				this.list.AddClass('chapters__grid');
 				break;
 
