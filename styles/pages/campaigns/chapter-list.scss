@@ -34,11 +34,9 @@
 		horizontal-align: center;
 		flow-children: right-wrap;
 		overflow: squish scroll;
-		margin: 25px 0;
 		padding: 0 15px;
-
 		#{$root}__entry {
-			margin: 10px;
+			margin: 0 2px 5px 2px;
 		}
 	}
 
@@ -95,11 +93,6 @@
 	&__wrapper {
 		horizontal-align: center;
 		vertical-align: center;
-
-		.ChapterModeGrid & {
-			border: $menu-pane-border;
-			background-color: $base-950;
-		}
 	}
 
 	&__nav {
