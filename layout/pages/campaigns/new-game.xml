@@ -27,25 +27,36 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="mainmenu__page" onload="CampaignChapters.populateChapters(0)">
-		<Panel class="flow-right vertical-align-center horizontal-align-center m-3">
-			<Button
-				class="button mr-2 vertical-align-center"
-				onactivate="CampaignChapters.backPage()"
-				tabindex="auto"
-				selectionpos="auto"
-			>
-				<Label class="button__text" text="&lt;" />
-			</Button>
-			<Panel id="CampaignChapters" class="chapters__list" tabindex="auto" selectionpos="auto" />
-			<Button
-				class="button ml-2 vertical-align-center"
-				onactivate="CampaignChapters.forwardPage()"
-				tabindex="auto"
-				selectionpos="auto"
-			>
-				<Label class="button__text" text="&gt;" />
-			</Button>
+	<Panel class="mainmenu__page" onload="CampaignChapters.init()" tabindex="auto" selectionpos="auto">
+		<Panel id="ChaptersContainer" class="chapters__container" tabindex="auto" selectionpos="auto">
+			<Panel id="CampaignChaptersWrap" class="chapters__wrapper">
+				<Panel id="CampaignChapters" tabindex="auto" selectionpos="auto" />
+			</Panel>
+			<Panel id="ChaptersNav" class="chapters__nav" tabindex="auto" selectionpos="auto">
+				<Panel id="NavControls" class="chapters__nav__controls" tabindex="auto" selectionpos="auto">
+					<Button
+						id="ChaptersBack"
+						class="button"
+						onactivate="CampaignChapters.backPage()"
+						tabindex="auto"
+						selectionpos="auto"
+					>
+						<Label class="button__text" text="&lt;" />
+					</Button>
+					<Label id="PageCounter" class="chapters__nav__label" text="??? / ???" />
+					<Button
+						id="ChaptersNext"
+						class="button"
+						onactivate="CampaignChapters.forwardPage()"
+						tabindex="auto"
+						selectionpos="auto"
+					>
+						<Label class="button__text" text="&gt;" />
+					</Button>
+				</Panel>
+				<Panel id="ChaptersPips" class="chapters__nav__pips" tabindex="auto" selectionpos="auto">
+				</Panel>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

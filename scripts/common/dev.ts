@@ -122,7 +122,6 @@ function getCampaignAssetPath(campaign: CampaignInfo) {
 			assetPath += '/.assets';
 		}
 		assetPath += '/';
-		$.Msg(assetPath);
 		return assetPath;
 	} else {
 		return 'file://{game}';

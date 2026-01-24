@@ -29,7 +29,15 @@ declare const enum CampaignMeta {
 	AUTHOR = 'author',
 	TRANSITION_SCREEN = 'transition_screen',
 	LOADING_SCREEN = 'loading_screen',
-	CHAPTER_THUMBNAIL = 'thumbnail'
+	CHAPTER_THUMBNAIL = 'thumbnail',
+	CHAPTER_DISPLAY_MODE = 'chapter_display_mode'
+}
+
+declare const enum ChapterDisplayMode {
+	CLASSIC = 'classic',
+	LIST = 'list',
+	GRID = 'grid',
+	SUPER = 'super'
 }
 
 type MenuButton = {
