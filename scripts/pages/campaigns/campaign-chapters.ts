@@ -1,7 +1,5 @@
 'use strict';
 
-const CHAPTER_PAGE_ENTRIES = 3;
-
 class ChapterEntry {
 	num: number;
 	panel: Button;
@@ -46,7 +44,13 @@ class ChapterEntry {
 		}
 		if (cover) {
 			const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
-			if (thumb) cover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
+			if (thumb) {
+				if ((thumb as string).startsWith('http')) {
+					cover.SetImage(thumb);
+				} else {
+					cover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
+				}
+			}
 			else cover.SetImage(getRandomFallbackImage());
 		}
 
@@ -70,13 +74,100 @@ class ChapterEntry {
 
 class CampaignChapters {
 	static list = $<Panel>('#CampaignChapters')!;
+	static listWrapper = $<Panel>('#CampaignChaptersWrap')!;
 	static actions = $<Panel>('#CampaignStarterPanel')!;
+	static container = $<Panel>('#ChaptersContainer')!;
+	static counterLabel = $<Label>('#PageCounter')!;
+	static nav = $<Panel>('#ChaptersNav')!;
+	static navControls = $<Panel>('#NavControls')!;
+	static pips = $<Panel>('#ChaptersPips')!;
 
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: ChapterInfo;
 	static campaign = CampaignAPI.GetActiveCampaign()!;
 	static chapterPage = 0;
 	static maxPages = -1;
+	static maxEntryPerPage = 3;
+	static displayMode = ChapterDisplayMode.CLASSIC;
+
+	static {
+		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
+			this.init();
+		});
+	}
+
+	static init() {
+		this.displayMode = this.campaign.meta[CampaignMeta.CHAPTER_DISPLAY_MODE];
+
+		if (!this.displayMode) this.displayMode = ChapterDisplayMode.CLASSIC;
+
+		switch (this.displayMode) {
+			case ChapterDisplayMode.LIST:
+				$.GetContextPanel().AddClass('ChapterModeList');
+				this.maxEntryPerPage = 100;
+				this.list.AddClass('chapters__list');
+				break;
+		
+			case ChapterDisplayMode.GRID:
+				$.GetContextPanel().AddClass('ChapterModeGrid');
+				this.maxEntryPerPage = 15;
+				this.list.AddClass('chapters__grid');
+				break;
+
+			case ChapterDisplayMode.CLASSIC:
+				$.GetContextPanel().AddClass('ChapterModeClassic');
+				this.maxEntryPerPage = 3;
+				this.list.AddClass('chapters__classic');
+				break;
+
+			case ChapterDisplayMode.SUPER:
+				$.GetContextPanel().AddClass('ChapterModeSuper');
+				this.maxEntryPerPage = 1;
+				this.list.AddClass('chapters__super');
+				break;
+		}
+
+		if (this.maxPages === -1) this.maxPages = Math.ceil(this.campaign.chapters.length / this.maxEntryPerPage);
+
+		if (this.maxPages === 1) {
+			this.nav.visible = false;
+		}
+
+		$.Msg(`Pages: ${this.chapterPage}/${this.maxPages}`);
+
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			$.Localize('#MainMenu_Campaigns_MM_Start_Title'),
+			$.Localize('#MainMenu_Campaigns_MM_Start_Tagline')
+		);
+
+		this.populatePips();
+		this.populateChapters();
+
+		if (this.list.GetChildCount() > 0) {
+			this.list.Children()[0].SetFocus();
+		}
+	}
+
+	static populatePips() {
+		for (let i = 0; i < this.maxPages; ++i) {
+			const pip = $.CreatePanel(
+				'RadioButton',
+				this.pips,
+				`Pip${i}`,
+				{
+					'group': 'ChaptersPipGroup',
+					'tabindex': 'auto',
+					'selectionpos': 'auto'
+				}
+			);
+			pip.AddClass('chapters__nav__pips__entry');
+			pip.SetPanelEvent('onactivate', () => {
+				this.chapterPage = i;
+				this.populateChapters();
+			});
+		}
+	}
 
 	static backPage() {
 		this.chapterPage -= 1;
@@ -91,32 +182,28 @@ class CampaignChapters {
 	}
 
 	static populateChapters() {
-		if (this.maxPages === -1) this.maxPages = Math.ceil(this.campaign.chapters.length / CHAPTER_PAGE_ENTRIES);
+		(this.pips.Children()[this.chapterPage] as RadioButton).SetSelected(true);
+		
+		if (this.displayMode === ChapterDisplayMode.GRID) {
+			this.counterLabel.text = `${this.chapterPage + 1}\n/\n${this.maxPages}`
+		} else {
+			this.counterLabel.text = `${this.chapterPage + 1} / ${this.maxPages}`;
+		}
 
-		$.Msg(`Pages: ${this.chapterPage}/${this.maxPages}`);
-
-		$.DispatchEvent(
-			'MainMenuSetPageLines',
-			$.Localize('#MainMenu_Campaigns_MM_Start_Title'),
-			$.Localize('#MainMenu_Campaigns_MM_Start_Tagline')
-		);
-
-		const chapters = this.campaign.chapters;
 		const prog = CampaignAPI.GetCampaignUnlockProgress(this.campaign.id);
-		$.Msg(`Campaign progress: ${prog}`);
-
+		const chapters = this.campaign.chapters;
 		this.list.RemoveAndDeleteChildren();
 		this.chapterEntries = [];
 
 		for (
 			let i = 0;
-			i < Math.min(CHAPTER_PAGE_ENTRIES, chapters.length - this.chapterPage * CHAPTER_PAGE_ENTRIES);
+			i < Math.min(this.maxEntryPerPage, chapters.length - this.chapterPage * this.maxEntryPerPage);
 			++i
 		) {
 			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
 			p.LoadLayoutSnippet('ChapterEntrySnippet');
 
-			const idx = this.chapterPage * CHAPTER_PAGE_ENTRIES + i;
+			const idx = this.chapterPage * this.maxEntryPerPage + i;
 
 			this.chapterEntries.push(new ChapterEntry(idx, p, chapters[idx], prog < idx));
 

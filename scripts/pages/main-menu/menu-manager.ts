@@ -110,12 +110,12 @@ class MenuManager {
 		$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
 			if (logo && logo.length > 0) {
 				this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-				const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeIn');
+				const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeIn');
 				this.logo.UpdateCurrentAnimationKeyframes(kfs);
 				this.logo.SetImage(logo);
 			} else {
 				this.logo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
-				const kfs = this.pageHeadline.CreateCopyOfCSSKeyframes('FadeOut');
+				const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeOut');
 				this.logo.UpdateCurrentAnimationKeyframes(kfs);
 			}
 		});

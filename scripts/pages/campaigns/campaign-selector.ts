@@ -180,9 +180,11 @@ class CampaignSelector {
 
 			switchDelay = 0.0;
 
-			this.hoverInfo.AddClass('campaigns__boxart__bg__switch');
-			const kfs = this.hoverInfo.CreateCopyOfCSSKeyframes('FadeIn');
-			this.hoverInfo.UpdateCurrentAnimationKeyframes(kfs);
+			if (this.hoverContainer.IsValid()) {
+				this.hoverInfo.AddClass('campaigns__boxart__bg__switch');
+				const kfs = this.hoverInfo.CreateCopyOfCSSKeyframes('FadeIn');
+				this.hoverInfo.UpdateCurrentAnimationKeyframes(kfs);
+			}
 		}
 
 		this.hoveredCampaign = e.info;

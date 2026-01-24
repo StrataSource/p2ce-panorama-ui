@@ -2,15 +2,212 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
+// .ChapterModeClassic .ChapterModeList .ChapterModeGrid .ChapterModeSuper
+
+.ChapterModeClassic #ChaptersBack,
+.ChapterModeList #ChaptersBack,
+.ChapterModeSuper #ChaptersBack {
+	margin-right: 15px;
+	vertical-align: center;
+}
+
+.ChapterModeClassic #ChaptersNext,
+.ChapterModeList #ChaptersNext,
+.ChapterModeSuper #ChaptersNext {
+	margin-left: 15px;
+	vertical-align: center;
+}
+
+.ChapterModeGrid #ChaptersBack,
+.ChapterModeGrid #ChaptersNext {
+	visibility: collapse;
+}
+
 .chapters {
+	$root: &;
+
 	&__list {
+		flow-children: down;
+	}
+
+	&__grid {
 		horizontal-align: center;
+		flow-children: right-wrap;
+		overflow: squish scroll;
+		margin: 25px 0;
+		padding: 0 15px;
+
+		#{$root}__entry {
+			margin: 10px;
+		}
+	}
+
+	&__classic {
 		flow-children: right;
+
+		#{$root}__entry {
+			margin: 0 10px;
+		}
+	}
+
+	&__super {
+		#{$root}__entry {
+			width: 960px;
+
+			&__cover {
+				height: 540px;
+			}
+
+			&__details {
+				&__title {
+					font-size: 32px;
+					color: $base-200;
+					letter-spacing: 1px;
+				}
+
+				&__desc {
+					padding: 0 10px;
+					letter-spacing: 1px;
+					font-size: 36px;
+					font-weight: bold;
+					max-height: 42px;
+					text-overflow: shrink;
+				}
+			}
+		}
+	}
+
+	&__container {
+		horizontal-align: center;
+		vertical-align: center;
+
+		.ChapterModeList &,
+		.ChapterModeGrid & {
+			flow-children: left;
+		}
+
+		.ChapterModeClassic &,
+		.ChapterModeSuper & {
+			flow-children: down;
+		}
+	}
+
+	&__wrapper {
+		horizontal-align: center;
+		vertical-align: center;
+
+		.ChapterModeGrid & {
+			border: $menu-pane-border;
+			background-color: $base-950;
+		}
+	}
+
+	&__nav {
+		.ChapterModeClassic &,
+		.ChapterModeSuper &,
+		.ChapterModeList & {
+			padding: 15px;
+			flow-children: down;
+		}
+
+		.ChapterModeGrid & {
+			padding: 10px;
+		}
+
+		.ChapterModeClassic &,
+		.ChapterModeSuper & {
+			width: 100%;
+		}
+
+		.ChapterModeList &,
+		.ChapterModeGrid & {
+			flow-children: down;
+			vertical-align: bottom;
+		}
+
+		.ChapterModeGrid & {
+			vertical-align: bottom;
+			flow-children: right;
+			background-color: $base-950;
+			border: $menu-pane-border;
+			border-right-width: 0;
+		}
+
+		&__controls {
+			.ChapterModeList &,
+			.ChapterModeClassic &,
+			.ChapterModeSuper & {
+				horizontal-align: center;
+				flow-children: right;
+			}
+
+			.ChapterModeGrid & {
+				flow-children: down;
+				vertical-align: center;
+			}
+		}
+
+		&__pips {
+			horizontal-align: center;
+
+			.ChapterModeList &,
+			.ChapterModeClassic &,
+			.ChapterModeSuper & {
+				margin-top: 5px;
+				flow-children: right;
+			}
+
+			.ChapterModeGrid & {
+				flow-children: down;
+			}
+
+			&__entry {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				tooltip-position: right;
+				tooltip-body-position: 0% 50%;
+				background-image: url('file://{images}/menu/indicator_inactive.png');
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: 125%;
+				& .RadioBox {
+					visibility: collapse;
+				}
+				.InputKeyboard &:hover:not(:selected),
+				.InputController &:focus:not(:selected) {
+					background-image: url('file://{images}/menu/indicator_off.png');
+				}
+
+				.InputController &:focus {
+					border: 1px solid $primary-color;
+				}
+
+				&:selected {
+					background-image: url('file://{images}/menu/indicator_on.png');
+				}
+			}
+		}
+
+		&__label {
+			text-align: center;
+			text-shadow: 2px 2px 2px 3.0 $base-950;
+			font-size: 24px;
+			font-weight: bold;
+			letter-spacing: 2px;
+			margin: 0 15px;
+			vertical-align: center;
+
+			.ChapterModeList &,
+			.ChapterModeClassic &,
+			.ChapterModeSuper & {
+				min-width: 128px;
+			}
+		}
 	}
 
 	&__entry {
 		width: 480px;
-		margin: 0 10px;
 		flow-children: down;
 		background-color: $base-950;
 		border: $menu-pane-border;
@@ -39,6 +236,7 @@
 			}
 
 			&__desc {
+				letter-spacing: 1px;
 				font-size: 18px;
 				font-weight: bold;
 				max-height: 23px;
@@ -48,7 +246,7 @@
 
 		&:disabled,
 		&:parentdisabled {
-			opacity: 0.5;
+			opacity: 0.25;
 
 			#{$this}__cover {
 				blur: fastgaussian(15, 15, 4);

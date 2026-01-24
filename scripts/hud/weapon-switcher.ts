@@ -181,8 +181,8 @@ class WeaponSwitcher {
 		this.bucketedWeapons = [];
 		this.weapons = [];
 		this.weapons = WeaponsAPI.GetWeapons();
-		if (this.weapons === null) {
-			$.Warning('Weapons array is null');
+		if (this.weapons === null || WeaponsAPI.GetWeaponCount() === -1) {
+			$.Warning('Weapons array is invalid');
 			return;
 		}
 
