@@ -124,6 +124,6 @@ function getCampaignAssetPath(campaign: CampaignInfo) {
 		assetPath += '/';
 		return assetPath;
 	} else {
-		return 'file://{game}';
+		return 'file://';
 	}
 }
