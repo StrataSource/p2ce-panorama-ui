@@ -82,10 +82,10 @@
 						<!-- <Panel class="DropDownIcon"/> -->
 						<Label text="#MainMenu_Campaigns_Search_SortBy_NewSubs" id="CampaignSortMode1" value="1" />
 						<Label text="#MainMenu_Campaigns_Search_SortBy_AtoZ" id="CampaignSortMode2" value="2" />
-						<Label text="#MainMenu_Campaigns_Search_SortBy_ZtoA" id="CampaignSortMode2" value="3" />
-						<Label text="#MainMenu_Campaigns_Search_SortBy_Last" id="CampaignSortMode3" value="4" />
-						<Label text="#MainMenu_Campaigns_Search_SortBy_Completion" id="CampaignSortMode4" value="5" />
-						<Label text="#MainMenu_Campaigns_Search_SortBy_CampaignSrc" id="CampaignSortMode5" value="6" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_ZtoA" id="CampaignSortMode3" value="3" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_Last" id="CampaignSortMode4" value="4" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_Completion" id="CampaignSortMode5" value="5" />
+						<Label text="#MainMenu_Campaigns_Search_SortBy_CampaignSrc" id="CampaignSortMode6" value="6" />
 					</DropDown>
 				</Panel>
 				<!-- Campaign list -->
