@@ -32,6 +32,19 @@
 			<Panel id="CampaignChaptersWrap" class="chapters__wrapper">
 				<Panel id="CampaignChapters" tabindex="auto" selectionpos="auto" />
 			</Panel>
+			<Panel class="ChapterModeListOnly chapters__list__right">
+				<Panel class="chapters__list__right__wrap">
+					<Image
+						id="ChapterListCover"
+						class="chapters__list__cover"
+						defaultsrc="file://{images}/menu/p2ce-generic.png"
+						texturewidth="1920"
+						textureheight="1080"
+						scaling="stretch-to-cover-preserve-aspect"
+					/>
+					<Label id="ChapterListTitle" class="chapters__list__title" text="#MainMenu_Campaigns_MM_ChapterNum" />
+				</Panel>
+			</Panel>
 			<Panel id="ChaptersNav" class="chapters__nav" tabindex="auto" selectionpos="auto">
 				<Panel id="NavControls" class="chapters__nav__controls" tabindex="auto" selectionpos="auto">
 					<Button
