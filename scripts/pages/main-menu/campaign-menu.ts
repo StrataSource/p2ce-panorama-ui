@@ -263,6 +263,11 @@ class CampaignMenu {
 		const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
 
 		if (bgLevel.length > 0) {
+			if (GameInterfaceAPI.GetCurrentMap() === bgLevel) {
+				$.Warning('Background map already active. Do nothing.');
+				$.DispatchEvent('MapLoaded', bgLevel, true);
+				return;
+			}
 			$.DispatchEvent('MainMenuSetLoadingIndicatorVisibility', true);
 			$.DispatchEvent('MainMenuShowBackgroundImage', `${basePath}${bgImage}`, false);
 			if (!skipBgMapLoad) {

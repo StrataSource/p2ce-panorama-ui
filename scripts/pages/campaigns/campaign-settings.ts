@@ -37,8 +37,16 @@ class CampaignSettingsTab {
 
 		const basePath = getCampaignAssetPath(this.campaign);
 		const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
-		if (thumb) this.chImage.SetImage(`${basePath}${thumb}`);
-		else this.chImage.SetImage(getRandomFallbackImage());
+		if (thumb) {
+			if ((thumb as string).startsWith('http')) {
+				this.chImage.SetImage(thumb);
+			} else {
+				this.chImage.SetImage(`${basePath}${thumb}`);
+			}
+		}
+		else {
+			this.chImage.SetImage(getRandomFallbackImage());
+		}
 
 		const logo = this.campaign.meta[CampaignMeta.SQUARE_LOGO];
 		if (logo) this.logoImage.SetImage(`${basePath}${logo}`);
