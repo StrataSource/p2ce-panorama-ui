@@ -36,23 +36,14 @@ class MenuManager {
 
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
+	static eventsRegistered = false;
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
-			this.isLoaded = false;
-			
 			this.closePages();
 			this.deleteMenus();
-			
-			const check = () => {
-				if (this.menuForeground.GetChildCount() > 0) {
-					$.Schedule(0.01, () => { check(); });
-				} else {
-					this.onLoaded();
-				}
-			};
-
-			$.Schedule(0.01, () => { check(); });
+			this.isLoaded = false;
+			this.onLoaded();
 		});
 	}
 
@@ -60,116 +51,119 @@ class MenuManager {
 		if (this.isLoaded) return;
 		this.isLoaded = true;
 
-		// this is for campaign-menu, see there for more info
-		UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = false;
+		if (!this.eventsRegistered) {
+			// this is for campaign-menu, see there for more info
+			UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = false;
 
-		$.RegisterForUnhandledEvent('MainMenuAddButton', (btn: MenuButton) => {
-			if (btn.dev && !GameInterfaceAPI.GetSettingBool('developer')) {
-				return;
-			}
-
-			const b = constructMenuButton(btn);
-			b.SetParent(this.menuNav);
-			b.SetReadyForDisplay(true);
-			this.updateFocus();
-		});
-
-		$.RegisterForUnhandledEvent('MainMenuAddPreConstructedButton', (btn: GenericPanel) => {
-			btn.SetParent(this.menuNav);
-			btn.SetReadyForDisplay(true);
-			this.updateFocus();
-		});
-
-		$.RegisterForUnhandledEvent('MainMenuAddBgPanel', (panel: Panel) => {
-			panel.SetParent(this.menuBackground);
-			panel.SetReadyForDisplay(true);
-		});
-
-		$.RegisterForUnhandledEvent('ShowMainMenu', () => {
-			this.menuContent.AddClass('mainmenu__menu__t-prop');
-			this.menuContent.RemoveClass('mainmenu__menu__anim');
-			$.DispatchEvent('MainMenuSwitchFade', true, true);
-			this.openMenuMode();
-		});
-
-		$.RegisterForUnhandledEvent('HideMainMenu', () => {
-			// ensure that no kind of loading blur can be active when we disappear
-			$.DispatchEvent('MainMenuSwitchReverse', true);
-			this.closePages();
-			this.deleteMenus();
-			this.menuContent.RemoveClass('mainmenu__menu__t-prop');
-			this.menuContent.AddClass('mainmenu__menu__anim');
-		});
-
-		$.RegisterForUnhandledEvent('ShowPauseMenu', () => {
-			this.menuContent.AddClass('mainmenu__menu__t-prop');
-			this.menuContent.RemoveClass('mainmenu__menu__anim');
-			this.openMenuMode();
-		});
-
-		$.RegisterForUnhandledEvent('HidePauseMenu', () => {
-			this.closePages();
-			this.deleteMenus();
-			this.menuContent.RemoveClass('mainmenu__menu__t-prop');
-			this.menuContent.AddClass('mainmenu__menu__anim');
-		});
-
-		$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
-
-		$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
-
-		$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
-
-		$.RegisterEventHandler('Cancelled', $.GetContextPanel(), () => {
-			// Resume game in pause menu mode
-			if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
-				// Has to be on the root menu in order to resume
-				if (this.pages.length > 0) this.navigateBack();
-				else $.DispatchEvent('MainMenuResumeGame');
+			$.RegisterForUnhandledEvent('MainMenuAddButton', (btn: MenuButton) => {
+				if (btn.dev && !GameInterfaceAPI.GetSettingBool('developer')) {
+					return;
+				}
+	
+				const b = constructMenuButton(btn);
+				b.SetParent(this.menuNav);
+				b.SetReadyForDisplay(true);
+				this.updateFocus();
+			});
+			$.RegisterForUnhandledEvent('MainMenuAddPreConstructedButton', (btn: GenericPanel) => {
+				btn.SetParent(this.menuNav);
+				btn.SetReadyForDisplay(true);
+				this.updateFocus();
+			});
+	
+			$.RegisterForUnhandledEvent('MainMenuAddBgPanel', (panel: Panel) => {
+				panel.SetParent(this.menuBackground);
+				panel.SetReadyForDisplay(true);
+			});
+	
+			$.RegisterForUnhandledEvent('ShowMainMenu', () => {
+				this.menuContent.AddClass('mainmenu__menu__t-prop');
+				this.menuContent.RemoveClass('mainmenu__menu__anim');
+				$.DispatchEvent('MainMenuSwitchFade', true, true);
+				this.openMenuMode();
+			});
+	
+			$.RegisterForUnhandledEvent('HideMainMenu', () => {
+				// ensure that no kind of loading blur can be active when we disappear
+				$.DispatchEvent('MainMenuSwitchReverse', true);
+				this.closePages();
+				this.deleteMenus();
+				this.menuContent.RemoveClass('mainmenu__menu__t-prop');
+				this.menuContent.AddClass('mainmenu__menu__anim');
+			});
+	
+			$.RegisterForUnhandledEvent('ShowPauseMenu', () => {
+				this.menuContent.AddClass('mainmenu__menu__t-prop');
+				this.menuContent.RemoveClass('mainmenu__menu__anim');
+				this.openMenuMode();
+			});
+	
+			$.RegisterForUnhandledEvent('HidePauseMenu', () => {
+				this.closePages();
+				this.deleteMenus();
+				this.menuContent.RemoveClass('mainmenu__menu__t-prop');
+				this.menuContent.AddClass('mainmenu__menu__anim');
+			});
+	
+			$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
+	
+			$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
+	
+			$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
+	
+			$.RegisterEventHandler('Cancelled', $.GetContextPanel(), () => {
+				// Resume game in pause menu mode
+				if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+					// Has to be on the root menu in order to resume
+					if (this.pages.length > 0) this.navigateBack();
+					else $.DispatchEvent('MainMenuResumeGame');
+				} else {
+					// Exit current page
+					this.navigateBack();
+				}
+			});
+	
+			$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
+				if (logo && logo.length > 0) {
+					this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+					const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeIn');
+					this.logo.UpdateCurrentAnimationKeyframes(kfs);
+					this.logo.SetImage(logo);
+				} else {
+					this.logo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
+					const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeOut');
+					this.logo.UpdateCurrentAnimationKeyframes(kfs);
+				}
+			});
+			const registerCampaignSwitch = () => {
+				$.RegisterForUnhandledEvent(
+					'PanoramaComponent_Campaign_OnActiveCampaignChanged',
+					(campaign: string | null) => {
+						$.Msg(`Change campaign: ${campaign}`);
+						this.closePages();
+						$.DispatchEvent('MainMenuSwitchFade', false, true);
+						this.deleteMenus();
+						this.openMenuMode();
+					}
+				);
+			};
+			if (GameInterfaceAPI.GetSettingString('campaign_default').length === 0) {
+				registerCampaignSwitch();
 			} else {
-				// Exit current page
-				this.navigateBack();
+				$.Schedule(0.1, () => {
+					registerCampaignSwitch();
+				});
 			}
-		});
+			
+			MenuAnimation.init();
 
-		$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
-			if (logo && logo.length > 0) {
-				this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-				const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeIn');
-				this.logo.UpdateCurrentAnimationKeyframes(kfs);
-				this.logo.SetImage(logo);
-			} else {
-				this.logo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
-				const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeOut');
-				this.logo.UpdateCurrentAnimationKeyframes(kfs);
-			}
-		});
-
-		MenuAnimation.init();
+			this.eventsRegistered = true;
+		}
 
 		this.loadingIndicator.visible = true;
 		$.DispatchEvent('MainMenuSwitchFade', true, true);
 
-		const registerCampaignSwitch = () => {
-			$.RegisterForUnhandledEvent(
-				'PanoramaComponent_Campaign_OnActiveCampaignChanged',
-				(campaign: string | null) => {
-					$.Msg(`Change campaign: ${campaign}`);
-					this.closePages();
-					$.DispatchEvent('MainMenuSwitchFade', false, true);
-					this.deleteMenus();
-					this.openMenuMode();
-				}
-			);
-			this.openMenuMode();
-		};
-		if (GameInterfaceAPI.GetSettingString('campaign_default').length === 0) {
-			registerCampaignSwitch();
-		} else {
-			$.Schedule(0.1, () => {
-				registerCampaignSwitch();
-			});
-		}
+		this.openMenuMode();
 	}
 
 	static updateFocus() {
