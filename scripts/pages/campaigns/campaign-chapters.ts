@@ -69,6 +69,31 @@ class ChapterEntry {
 				);
 			});
 		}
+
+		if (CampaignChapters.displayMode === ChapterDisplayMode.LIST) {
+			const setBigImage = () => {
+				if (this.locked) return;
+
+				if (chTitleSplit.length === 2) {
+					CampaignChapters.chapterListModeTitle.text = chTitleSplit[1];
+				} else {
+					CampaignChapters.chapterListModeTitle.text = chTitleSplit[0];
+				}
+
+				const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
+				if (thumb) {
+					if ((thumb as string).startsWith('http')) {
+						CampaignChapters.chapterListModeCover.SetImage(thumb);
+					} else {
+						CampaignChapters.chapterListModeCover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
+					}
+				}
+				else CampaignChapters.chapterListModeCover.SetImage(getRandomFallbackImage());
+			};
+
+			this.panel.SetPanelEvent('onmouseover', () => { setBigImage(); });
+			this.panel.SetPanelEvent('onfocus', () => { setBigImage(); });
+		}
 	}
 }
 
@@ -81,6 +106,8 @@ class CampaignChapters {
 	static nav = $<Panel>('#ChaptersNav')!;
 	static navControls = $<Panel>('#NavControls')!;
 	static pips = $<Panel>('#ChaptersPips')!;
+	static chapterListModeCover = $<Image>('#ChapterListCover')!;
+	static chapterListModeTitle = $<Label>('#ChapterListTitle')!;
 
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: ChapterInfo;
@@ -104,7 +131,7 @@ class CampaignChapters {
 		switch (this.displayMode) {
 			case ChapterDisplayMode.LIST:
 				$.GetContextPanel().AddClass('ChapterModeList');
-				this.maxEntryPerPage = 100;
+				this.maxEntryPerPage = 1000000;
 				this.list.AddClass('chapters__list');
 				break;
 		
