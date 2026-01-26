@@ -35,8 +35,31 @@ class MenuManager {
 	static menuContent = $<Panel>('#MenuMainContent')!;
 
 	static pages: MenuPage[] = [];
+	static isLoaded = false;
+
+	static {
+		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
+			this.isLoaded = false;
+			
+			this.closePages();
+			this.deleteMenus();
+			
+			const check = () => {
+				if (this.menuForeground.GetChildCount() > 0) {
+					$.Schedule(0.01, () => { check(); });
+				} else {
+					this.onLoaded();
+				}
+			};
+
+			$.Schedule(0.01, () => { check(); });
+		});
+	}
 
 	static onLoaded() {
+		if (this.isLoaded) return;
+		this.isLoaded = true;
+
 		// this is for campaign-menu, see there for more info
 		UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = false;
 
@@ -165,6 +188,11 @@ class MenuManager {
 	}
 
 	static openMenuMode() {
+		if (this.menuForeground.GetChildCount() > 0 || this.menuBackground.GetChildCount() > 0) {
+			$.Warning('MENU MANAGER: Menus are still active. Deleting them.');
+			this.deleteMenus();
+		}
+
 		switch (GameInterfaceAPI.GetGameUIState()) {
 			case GameUIState.MAINMENU: {
 				if (!CampaignAPI.IsCampaignActive()) {

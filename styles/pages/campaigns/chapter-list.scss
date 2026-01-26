@@ -123,7 +123,6 @@
 			flow-children: right;
 			background-color: $base-950;
 			border: $menu-pane-border;
-			border-right-width: 0;
 		}
 
 		&__controls {
@@ -152,6 +151,7 @@
 
 			.ChapterModeGrid & {
 				flow-children: down;
+				vertical-align: center;
 			}
 
 			&__entry {
