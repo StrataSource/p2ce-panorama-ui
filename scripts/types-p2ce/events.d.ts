@@ -7,7 +7,7 @@ interface GlobalEventNameMap {
 	SettingsSave: () => void;
 	ColorPickerSave: (color) => void;
 	ColorPickerCancel: () => void;
-	MainMenuOpenNestedPage: (tab: string, xmlName: string, invokerPanel: Panel | undefined) => void;
+	MainMenuOpenNestedPage: (tab: string, xmlName: string, invokerPanel: GenericPanel | undefined) => void;
 	MainMenuCloseAllPages: () => void;
 	MainMenuSetPageLines: (headline: string, tagline: string) => void;
 	MainMenuSwitchFade: (instantFade?: boolean, instantMenu?: boolean) => void;
