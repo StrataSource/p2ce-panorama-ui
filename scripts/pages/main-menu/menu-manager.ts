@@ -247,7 +247,7 @@ class MenuManager {
 
 	// open a page, handles nested pages and receives calls via events from other pages
 	// note: page headline/tagline are set by the corresponding page script, not here
-	static navigateToPage(tab: string, xmlName: string, invokerPanel?: Panel) {
+	static navigateToPage(tab: string, xmlName: string, invokerPanel?: GenericPanel) {
 		if (
 			this.pages.find((v: MenuPage) => {
 				return v.name === tab;
@@ -379,7 +379,9 @@ class MenuManager {
 			// restore the lower level page
 			nowPage.panel.RemoveClass('mainmenu__page__back-anim');
 			this.flashPageLines();
-			nowPage.panel.SetFocus();
+
+			if (!currentPage || !currentPage.invokerPanel)
+				nowPage.panel.SetFocus();
 		} else {
 			// no more pages
 			this.hidePage();
