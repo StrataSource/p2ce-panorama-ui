@@ -65,7 +65,7 @@ class ChapterEntry {
 					'MainMenuOpenNestedPage',
 					'CampaignCustomization',
 					'campaigns/campaign-settings',
-					undefined
+					this.panel
 				);
 			});
 		}
