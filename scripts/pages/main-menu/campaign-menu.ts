@@ -230,7 +230,7 @@ class CampaignMenu {
 		this.continueBtn.enabled = true;
 	}
 
-	static setCampaignBackground(skipBgMapLoad: boolean) {
+	static setCampaignBackground(skipBgMapLoad: boolean, doFallbackImage?: boolean) {
 		// TODO: obey background map setting
 		if (this.bgMapLoad === undefined) {
 			this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
@@ -239,17 +239,18 @@ class CampaignMenu {
 					if (!isBackgroundMap) return;
 					$.Warning('!!!!! Could not load Campaign background map !!!!!');
 					$.Schedule(0.001, () => {
-						$.DispatchEvent('MainMenuSwitchReverse', false);
-						GameInterfaceAPI.ConsoleCommand('disconnect');
-						$.Schedule(0.1, () => {
-							CampaignAPI.SetActiveCampaign(null);
-							UiToolkitAPI.ShowGenericPopupOk(
-								$.Localize('#MainMenu_Campaigns_BgLoadFailed_Title'),
-								$.Localize('#MainMenu_Campaigns_BgLoadFailed_Description'),
-								'bad-popup',
-								() => {}
-							);
-						});
+						this.setCampaignBackground(false, true);
+						//$.DispatchEvent('MainMenuSwitchReverse', false);
+						//GameInterfaceAPI.ConsoleCommand('disconnect');
+						//$.Schedule(0.1, () => {
+						//	CampaignAPI.SetActiveCampaign(null);
+						//	UiToolkitAPI.ShowGenericPopupOk(
+						//		$.Localize('#MainMenu_Campaigns_BgLoadFailed_Title'),
+						//		$.Localize('#MainMenu_Campaigns_BgLoadFailed_Description'),
+						//		'bad-popup',
+						//		() => {}
+						//	);
+						//});
 					});
 				}
 			);
@@ -262,7 +263,7 @@ class CampaignMenu {
 		const bgImage = (ch['background_image'] as string) ?? '';
 		const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
 
-		if (bgLevel.length > 0) {
+		if (!doFallbackImage && bgLevel.length > 0) {
 			if (GameInterfaceAPI.GetCurrentMap() === bgLevel) {
 				$.Warning('Background map already active. Do nothing.');
 				$.DispatchEvent('MapLoaded', bgLevel, true);
@@ -277,7 +278,7 @@ class CampaignMenu {
 			} else {
 				$.Msg('Background map specified and default campaign specified, we will be doing nothing.');
 			}
-		} else if (bgMovie.length > 0) {
+		} else if (!doFallbackImage && bgMovie.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuHideBackgroundImage', true);
 			$.DispatchEvent('MainMenuShowBackgroundMovie', bgMovie);
@@ -287,6 +288,13 @@ class CampaignMenu {
 		} else if (bgImage.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuShowBackgroundImage', `${basePath}${bgImage}`, true);
+			if (bgMusic.length > 0) {
+				this.music = $.PlaySoundEvent(bgMusic);
+			}
+		} else if (doFallbackImage) {
+			$.Warning('CAMPAIGN MENU: No background was specified, and fallback was requested!');
+			$.DispatchEvent('MainMenuSwitchReverse', false);
+			$.DispatchEvent('MainMenuShowBackgroundImage', getRandomFallbackImage(), true);
 			if (bgMusic.length > 0) {
 				this.music = $.PlaySoundEvent(bgMusic);
 			}
