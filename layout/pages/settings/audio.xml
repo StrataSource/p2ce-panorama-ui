@@ -255,8 +255,8 @@
 					convar="snd_mute_losefocus"
 					hasdocspage="false"
 				>
-					<RadioButton group="losefocus" text="#Common_Off" value="0" />
-					<RadioButton group="losefocus" text="#Common_On" value="1" />
+					<RadioButton group="losefocus" text="#Common_Off" value="1" />
+					<RadioButton group="losefocus" text="#Common_On" value="0" />
 				</SettingsEnum>
 
 			</Panel>
