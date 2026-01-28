@@ -135,6 +135,15 @@ class MenuManager {
 					this.logo.UpdateCurrentAnimationKeyframes(kfs);
 				}
 			});
+
+			$.RegisterEventHandler(
+				'ImageFailedLoad',
+				this.logo,
+				() => {
+					this.logo.SetImage(getRandomFallbackImage());
+				}
+			);
+
 			const registerCampaignSwitch = () => {
 				$.RegisterForUnhandledEvent(
 					'PanoramaComponent_Campaign_OnActiveCampaignChanged',
