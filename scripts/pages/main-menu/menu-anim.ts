@@ -36,8 +36,8 @@ class MenuAnimation {
 
 		// background movie
 		$.RegisterForUnhandledEvent('MainMenuShowBackgroundMovie', (src: string) => {
-			$.Msg(`Set movie to file://{game}/${src}`);
-			this.movie.SetMovie(`file://{game}/${src}`);
+			$.Msg(`Set movie to ${src}`);
+			this.movie.SetMovie(src);
 			this.movie.Play();
 			this.movie.visible = true;
 		});
