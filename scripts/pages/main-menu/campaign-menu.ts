@@ -181,7 +181,12 @@ class CampaignMenu {
 	static setContinueDetails() {
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${c.meta[CampaignMeta.FULL_LOGO]}`);
+		const logo = c.meta[CampaignMeta.FULL_LOGO];
+		if (logo) {
+			$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);
+		} else {
+			$.DispatchEvent('MainMenuSetLogo', '');
+		}
 
 		this.continueBox.visible = false;
 
@@ -281,7 +286,7 @@ class CampaignMenu {
 		} else if (!doFallbackImage && bgMovie.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuHideBackgroundImage', true);
-			$.DispatchEvent('MainMenuShowBackgroundMovie', bgMovie);
+			$.DispatchEvent('MainMenuShowBackgroundMovie', `${basePath}${bgMovie}`);
 			if (bgMusic.length > 0) {
 				this.music = $.PlaySoundEvent(bgMusic);
 			}
