@@ -47,3 +47,4 @@ $.DefineEvent('MainMenuAddBgPanel', 1);
 $.DefineEvent('MainMenuAnimatedSwitch', 1);
 $.DefineEvent('LoadingScreenClearLastMap', 0);
 $.DefineEvent('MainMenuModeRequestCleanup', 0);
+$.DefineEvent('MainMenuPageClosed', 2);

@@ -391,12 +391,24 @@ class MenuManager {
 
 			if (!currentPage || !currentPage.invokerPanel)
 				nowPage.panel.SetFocus();
+			
+			$.DispatchEvent(
+				'MainMenuPageClosed',
+				currentPage ? currentPage.panel.id : undefined,
+				nowPage.panel.id
+			);
 		} else {
 			// no more pages
 			this.hidePage();
 			$.DispatchEvent('MainMenuFullBackNav');
 
 			if (!noResetFocus) $.DispatchEvent('MainMenuSetFocus');
+
+			$.DispatchEvent(
+				'MainMenuPageClosed',
+				currentPage ? currentPage.panel.id : undefined,
+				undefined
+			);
 		}
 	}
 
