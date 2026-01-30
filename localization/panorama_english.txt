@@ -684,6 +684,9 @@
 		"Keybind_Toggle_Jump"							"Toggle Jump"
 		"Keybind_Toggle_Duck"							"Toggle Crouch/Duck"
 		"Keybind_Toggle_Sprint"							"Toggle Sprint"
+		"Keybind_Zoom_Toggle"							"Toggle Zoom"
+		"Keybind_Zoom_In"								"Zoom In"
+		"Keybind_Zoom_Out"								"Zoom Out"
 		
 		"Settings_Keybinds_Weapons"						"Weapons"
 		"Keybind_Attack_Primary"						"Primary attack"

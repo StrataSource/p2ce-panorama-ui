@@ -135,6 +135,9 @@
 				<SettingsKeyBinder text="#Keybind_Sprint" bind="+speed" tags="sprint,run,speed" />
 				<SettingsKeyBinder text="#Keybind_Toggle_Sprint" bind="toggle_speed" tags="toggle,sprint,run,speed" />
 				<SettingsKeyBinder text="#Keybind_Walk" bind="+walk" tags="walk" />
+				<SettingsKeyBinder text="#Keybind_Zoom_Toggle" bind="+zoom" tags="zoom" />
+				<SettingsKeyBinder text="#Keybind_Zoom_In" bind="+zoom_in" tags="zoom" />
+				<SettingsKeyBinder text="#Keybind_Zoom_Out" bind="+zoom_out" tags="zoom" />
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Weapons" />
 
