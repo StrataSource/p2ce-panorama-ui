@@ -177,6 +177,7 @@ class BaseMenu {
 			$.Schedule(0.01, () => {
 				$.DispatchEvent('MainMenuSwitchFade', true, true);
 				$.Schedule(0.01, () => {
+					$.Msg('BASE MENU: Switching campaign');
 					if (!CampaignAPI.SetActiveCampaign(c)) {
 						$.Warning(`BASE MENU: Failed to set campaign to ${c}!!!!`);
 					}
@@ -281,7 +282,7 @@ class BaseMenu {
 
 	static rerollMap() {
 		this.mapSelection = Math.floor(Math.random() * this.maps.length);
-		$.Msg(`Rolled background map: ${this.mapSelection}, ${this.maps[this.mapSelection]}`);
+		$.Msg(`BASE MENU: Rolled background map: ${this.mapSelection}, ${this.maps[this.mapSelection]}`);
 		$.DispatchEvent('MainMenuSetBackgroundImage', `file://{images}/menu/featured/${this.maps[this.mapSelection]}.png`);
 	}
 
@@ -306,7 +307,7 @@ class BaseMenu {
 
 		$.RegisterForUnhandledEvent('MapLoaded', (map: string, bg: boolean) => {
 			if (bg) {
-				$.Msg('Background map load detected. Turning off background image/movie.');
+				$.Msg('BASE MENU: Background map load detected. Turning off background image/movie.');
 				$.DispatchEvent('MainMenuHideBackgroundImage', undefined);
 				$.DispatchEvent('MainMenuHideBackgroundMovie');
 			}

@@ -116,13 +116,7 @@ function constructMenuButton(btn: MenuButton) {
 function getCampaignAssetPath(campaign: CampaignInfo) {
 	const addonInfo = WorkshopAPI.GetAddonMeta(campaign.addon_id);
 	if (addonInfo) {
-		let assetPath = addonInfo.thumb;
-		assetPath = assetPath.substring(0, assetPath.lastIndexOf('/'));
-		if (!assetPath.endsWith('.assets')) {
-			assetPath += '/.assets';
-		}
-		assetPath += '/';
-		return assetPath;
+		return `file://${WorkshopAPI.GetAddonNamedPath(campaign.addon_id)}/.assets/`;
 	} else {
 		return 'file://';
 	}
