@@ -160,7 +160,7 @@ class CampaignChapters {
 			this.nav.visible = false;
 		}
 
-		$.Msg(`Pages: ${this.chapterPage}/${this.maxPages}`);
+		$.Msg(`CHAPTER SCREEN: Pages: ${this.chapterPage}/${this.maxPages}`);
 
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
