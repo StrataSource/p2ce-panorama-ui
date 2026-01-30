@@ -138,7 +138,7 @@
 		border-top-width: 0;
 		border-bottom-width: 0;
 		flow-children: down;
-		padding: 15px 10px;
+		padding: 10px 15px;
 
 		&__header {
 			@include mixin.font-styles($use-header: true, $light-header: false);

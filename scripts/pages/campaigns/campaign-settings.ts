@@ -7,7 +7,6 @@ class CampaignSettingsTab {
 	static chText = $<Label>('#CampaignSettingsChapter')!;
 	static mapText = $<Label>('#CampaignSettingsMap')!;
 	static summaryPanel = $<Panel>('#CampaignSettingsSummaryPanel')!;
-	static subPage = $<Panel>('#CampaignSettingsSubpage')!;
 	static helpPage = $<Panel>('#CampaignSettingsHelp')!;
 	static helpTxt = $<Label>('#CampaignSettingsHelpText')!;
 
@@ -18,9 +17,7 @@ class CampaignSettingsTab {
 
 	static advancedOpened = false;
 
-	static activeSubpage = '';
-
-	static init() {
+	static init() {		
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
@@ -57,6 +54,10 @@ class CampaignSettingsTab {
 		this.mapText.text = this.chapter.maps[0].name;
 
 		this.clear();
+
+		$.RegisterForUnhandledEvent('MainMenuPageClosed', () => {
+			this.updateSummary();
+		});
 	}
 
 	static show() {
@@ -64,25 +65,22 @@ class CampaignSettingsTab {
 	}
 
 	static stepBack() {
-		if (this.activeSubpage) {
-			this.closeSettingsSubpage();
-		} else {
-			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				$.Localize('#MainMenu_Campaigns_Setup_Discard_Title'),
-				$.Localize('#MainMenu_Campaigns_Setup_Discard_Description'),
-				'warning-popup',
-				$.Localize('#UI_Yes'),
-				() => {
-					this.clear();
-				},
-				$.Localize('#UI_Cancel'),
-				() => {},
-				'blur'
-			);
-		}
+		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+			$.Localize('#MainMenu_Campaigns_Setup_Discard_Title'),
+			$.Localize('#MainMenu_Campaigns_Setup_Discard_Description'),
+			'warning-popup',
+			$.Localize('#UI_Yes'),
+			() => {
+				this.clear();
+			},
+			$.Localize('#UI_Cancel'),
+			() => {},
+			'blur'
+		);
 	}
 
 	static clear() {
+		CampaignShared.setup();
 		this.closeSettingsSubpage();
 	}
 
@@ -119,135 +117,92 @@ class CampaignSettingsTab {
 		else $.DispatchEvent('MainMenuOpenNestedPage', tab, 'campaigns/settings-base', undefined);
 
 		$.DispatchEvent('MainMenuSetPageLines', $.Localize(locH), $.Localize(locS));
-
-		//$.DispatchEvent('MainMenuOpenNestedPage', tab, `campaigns/${xml}`);
-
-		/*
-
-		//this.setHeaderText($.Localize(locH), $.Localize(locS));
-
-		// Check for existence
-		if (!this.subPage.FindChildTraverse(tab)) {
-			const p = $.CreatePanel('Panel', this.subPage, tab);
-
-			p.LoadLayout(`file://{resources}/layout/pages/campaigns/${xml}.xml`, false, false);
-			p.SetAttributeString('settings.category', tab);
-			p.SetAttributeString('settings.name', locH);
-			p.RegisterForReadyEvents(true);
-
-			stripDevTagsFromLabels(p);
-		}
-
-		// Check active subtab
-		// Generally this shouldn't happen but there might be cases
-		// where code forces open a subtab when we're already in one
-		if (this.activeSubpage !== tab) {
-			if (this.activeSubpage) {
-				const hide = this.subPage.FindChildTraverse(this.activeSubpage);
-				if (hide) hide.visible = false;
-			}
-
-			this.activeSubpage = tab;
-			const active = this.subPage.FindChildTraverse(tab);
-			if (active) {
-				active.visible = true;
-				active.SetReadyForDisplay(true);
-			}
-		}
-
-		this.helpPage.visible = true;
-		*/
 	}
 
 	static closeSettingsSubpage() {
-		this.activeSubpage = '';
-
 		this.updateSummary();
 	}
 
 	static updateSummary() {
-		/*
-		const subpages = this.subPage.Children();
-
 		this.summaryPanel.RemoveAndDeleteChildren();
 
-		// iterate through all setting subpages
-		// TODO: do in specific order (order of buttons)
-		for (let i = 0; i < subpages.length; ++i) {
-			const subpage = subpages[i];
-			const cat = subpage.GetAttributeString('settings.category', 'none');
+		const allSettings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
 
-			// skip these ones, they're not helpful
-			if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
-
-			$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
+		Object.entries(allSettings).forEach((v: [string, Record<string, CampaignSetting>], i: number) => {
+			const p = $.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
 				class: 'campaign-settings__summary__header',
-				text: `${subpage.GetAttributeString('settings.name', 'NOT FOUND')}`
+				text: v[0]
 			});
 
-			// fetch page settings
-			const settings = CampaignShared.FetchPageSettings(subpage);
-
-			// iterate through each one and determine if they've changed
-			// if they have, display that
 			let applied = 0;
+			const settings = Object.values(v[1]);
 			for (let j = 0; j < settings.length; ++j) {
+				// iterate through each one and determine if they've changed
+				// if they have, display that
 				const entry = settings[j];
-
-				if (entry.defaultVal === entry.actual) {
+	
+				// eslint-disable-next-line eqeqeq
+				if (entry.currentValue == entry.def) {
 					// skip values that are exactly the same
 					continue;
 				}
-
+	
 				$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
 					class: 'campaign-settings__summary__text',
 					html: true,
-					text: `<b>- ${entry.name}:</b> ${entry.actual}`
+					text: `<b>${entry.name}:</b> ${entry.currentValue}`
 				});
-
+	
 				++applied;
 			}
 
 			// no changes applied to this section
 			if (applied === 0) {
-				$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
-					class: 'campaign-settings__summary__text',
-					html: true,
-					text: '<b>#MainMenu_Campaigns_Setup_Summary_NoChanges</b>'
-				});
+				p.visible = false;
+				//$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
+				//	class: 'campaign-settings__summary__text',
+				//	html: true,
+				//	text: `<b>${$.Localize('#MainMenu_Campaigns_Setup_Summary_NoChanges')}</b>`
+				//});
 			}
-		}
-		*/
+		});
 	}
 
 	static applySettings() {
-		/*
-		const subpages = this.subPage.Children();
-		for (let i = 0; i < subpages.length; ++i) {
-			const subpage = subpages[i];
-			const cat = subpage.GetAttributeString('settings.category', 'none');
-
-			// skip these ones, they're not helpful
-			if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
-
-			// fetch page settings
-			const settings = CampaignShared.FetchPageSettings(subpage);
-
-			// iterate through each one and determine if they've changed
-			// if they have, display that
-			for (let j = 0; j < settings.length; ++j) {
-				const entry = settings[j];
-
-				if (entry.defaultVal === entry.actual) {
+		const allSettings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
+		
+		for (const group of Object.values(allSettings)) {
+			for (const setting of Object.values(group)) {
+				// eslint-disable-next-line eqeqeq
+				if (setting.currentValue == setting.def) {
 					// skip values that are exactly the same
 					continue;
 				}
 
-				$.Msg(`Execute ${entry.command} ${entry.actual}`);
-				GameInterfaceAPI.ConsoleCommand(`${entry.command} ${entry.actual}`);
+				$.Msg(`Execute ${setting.command} ${setting.currentValue}`);
+				GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.currentValue}`);
 			}
 		}
-		*/
+
+		//for (let i = 0; i < subpages.length; ++i) {
+		//	const subpage = subpages[i];
+		//	const cat = subpage.GetAttributeString('settings.category', 'none');
+		//	// skip these ones, they're not helpful
+		//	if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
+		//	// fetch page settings
+		//	const settings = CampaignShared.FetchPageSettings(subpage);
+		//	// iterate through each one and determine if they've changed
+		//	// if they have, display that
+		//	for (let j = 0; j < settings.length; ++j) {
+		//		const entry = settings[j];
+		//		if (entry.defaultVal === entry.actual) {
+		//			// skip values that are exactly the same
+		//			continue;
+		//		}
+		//		$.Msg(`Execute ${entry.command} ${entry.actual}`);
+		//		GameInterfaceAPI.ConsoleCommand(`${entry.command} ${entry.actual}`);
+		//	}
+		//}
 	}
 
 	static onCampaignSettingHovered(helpText) {
