@@ -72,7 +72,6 @@ class CampaignEntry {
 			if (this.iconPath) {
 				const useLogoBg = this.info.meta[CampaignMeta.SELECTOR_LOGO_BG];
 				ico.SetImage(`${basePath}${this.iconPath}`);
-				$.Msg(useLogoBg);
 				if (useLogoBg)
 					ico.AddClass('campaigns__entry__details__logo__bg');
 			}

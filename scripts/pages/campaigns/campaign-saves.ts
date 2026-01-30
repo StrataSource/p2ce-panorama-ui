@@ -290,7 +290,7 @@ class CampaignSaves {
 
 		const saves = GameSavesAPI.GetGameSaves()
 			.filter((v: GameSave) => {
-				$.Msg(`${v.mapGroup}, ${v.mapName}, ${v.chapter}`);
+				$.Msg(`SAVED GAMES: ${v.mapGroup}, ${v.mapName}, ${v.chapter}`);
 				return v.mapGroup === this.saveGroup;
 			})
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));

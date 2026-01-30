@@ -58,6 +58,7 @@ class CampaignMenu {
 			activated: () => {
 				GameInterfaceAPI.ConsoleCommand('disconnect');
 				$.Schedule(0.1, () => {
+					$.Msg('CAMPAIGN MENU: Clearing active campaign');
 					CampaignAPI.SetActiveCampaign(null);
 				});
 			},
@@ -277,11 +278,11 @@ class CampaignMenu {
 			$.DispatchEvent('MainMenuSetLoadingIndicatorVisibility', true);
 			$.DispatchEvent('MainMenuShowBackgroundImage', `${basePath}${bgImage}`, false);
 			if (!skipBgMapLoad) {
-				$.Msg(`Attempting to load background map ${bgLevel}`);
+				$.Msg(`CAMPAIGN MENU: Attempting to load background map ${bgLevel}`);
 				GameInterfaceAPI.ConsoleCommand('startupmenu');
 				//GameInterfaceAPI.ConsoleCommand(`map_background ${bgLevel}`);
 			} else {
-				$.Msg('Background map specified and default campaign specified, we will be doing nothing.');
+				$.Msg('CAMPAIGN MENU: Background map specified and default campaign specified, we will be doing nothing.');
 			}
 		} else if (!doFallbackImage && bgMovie.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
@@ -304,7 +305,9 @@ class CampaignMenu {
 				this.music = $.PlaySoundEvent(bgMusic);
 			}
 		} else {
-			$.Warning('CAMPAIGN MENU: No background has been specified!');
+			$.Warning('CAMPAIGN MENU: No background has been specified! Fix this now!!!');
+			$.DispatchEvent('MainMenuSwitchReverse', false);
+			$.DispatchEvent('MainMenuShowBackgroundImage', getRandomFallbackImage(), true);
 		}
 	}
 

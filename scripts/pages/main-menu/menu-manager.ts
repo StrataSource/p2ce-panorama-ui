@@ -148,7 +148,7 @@ class MenuManager {
 				$.RegisterForUnhandledEvent(
 					'PanoramaComponent_Campaign_OnActiveCampaignChanged',
 					(campaign: string | null) => {
-						$.Msg(`Change campaign: ${campaign}`);
+						$.Msg(`MENU MANAGER: Campaign switch event recognized, changing to: ${campaign}`);
 						this.closePages();
 						$.DispatchEvent('MainMenuSwitchFade', false, true);
 						this.deleteMenus();
@@ -370,7 +370,7 @@ class MenuManager {
 			) {
 				noResetFocus = true;
 				currentPage.invokerPanel.SetFocus();
-				$.Msg(`Setting focus to ${currentPage.invokerPanel.id}`);
+				$.Msg(`MENU MANAGER: Setting focus to ${currentPage.invokerPanel.id}`);
 			}
 		}
 
