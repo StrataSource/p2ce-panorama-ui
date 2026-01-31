@@ -5,7 +5,7 @@ class CampaignSettingsTab {
 	static logoImage = $<Image>('#CampaignSettingsBoxLogo')!;
 	static chImage = $<Image>('#CampaignSettingsChapterImage')!;
 	static chText = $<Label>('#CampaignSettingsChapter')!;
-	static mapText = $<Label>('#CampaignSettingsMap')!;
+	//static mapText = $<Label>('#CampaignSettingsMap')!;
 	static summaryPanel = $<Panel>('#CampaignSettingsSummaryPanel')!;
 	static helpPage = $<Panel>('#CampaignSettingsHelp')!;
 	static helpTxt = $<Label>('#CampaignSettingsHelpText')!;
@@ -17,7 +17,7 @@ class CampaignSettingsTab {
 
 	static advancedOpened = false;
 
-	static init() {		
+	static init() {
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
@@ -51,12 +51,18 @@ class CampaignSettingsTab {
 
 		const chapterName = $.Localize(this.chapter.title);
 		this.chText.text = chapterName.replace('\n', ': ');
-		this.mapText.text = this.chapter.maps[0].name;
+
+		const mapSelBtn = $<Button>('#MapSelectionButton');
+		if (mapSelBtn && this.chapter.maps.length === 1) {
+			mapSelBtn.visible = false;
+		}
 
 		this.clear();
 
+		//this.mapText.text = CampaignShared.getMap();
+
 		$.RegisterForUnhandledEvent('MainMenuPageClosed', () => {
-			this.updateSummary();
+			this.closeSettingsSubpage();
 		});
 	}
 
@@ -92,11 +98,24 @@ class CampaignSettingsTab {
 			$.Localize('#UI_Yes'),
 			() => {
 				this.applySettings();
-				this.clear();
 				$.DispatchEvent('MainMenuCloseAllPages');
 				GameInterfaceAPI.ConsoleCommand('disconnect');
 				$.DispatchEvent('LoadingScreenClearLastMap');
-				$.Schedule(0.1, () => CampaignAPI.StartCampaign(this.campaign.id, this.chapter.id));
+
+				// FIXME: StartCampaign should be expanded to include which map to play
+				// map command doesn't play very nice with the system. when that gets in
+				// change this accordingly
+				$.Schedule(0.1, () => {
+					const desiredMap = CampaignShared.getMap();
+					if (desiredMap === this.chapter.maps[0].name) {
+						CampaignAPI.StartCampaign(this.campaign.id, this.chapter.id);
+						this.clear();
+					} else {
+						$.Warning(`CAMPAIGN SETTINGS: JUMPING TO SPECIFIC MAP IN CHAPTER! DON'T FORGET TO CHANGE THIS! ${desiredMap}`);
+						GameInterfaceAPI.ConsoleCommand(`map ${desiredMap}`);
+						this.clear();
+					}
+				});
 			},
 			$.Localize('#UI_Cancel'),
 			() => {},
@@ -111,8 +130,6 @@ class CampaignSettingsTab {
 	}
 
 	static openSettingsSubpage(tab: string, locH: string, locS: string, xml?: string) {
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTING_PAGE] = tab;
-
 		if (xml) $.DispatchEvent('MainMenuOpenNestedPage', tab, `campaigns/${xml}`, undefined);
 		else $.DispatchEvent('MainMenuOpenNestedPage', tab, 'campaigns/settings-base', undefined);
 
@@ -121,6 +138,7 @@ class CampaignSettingsTab {
 
 	static closeSettingsSubpage() {
 		this.updateSummary();
+		//this.mapText.text = CampaignShared.getMap();
 	}
 
 	static updateSummary() {
@@ -173,11 +191,16 @@ class CampaignSettingsTab {
 		
 		for (const group of Object.values(allSettings)) {
 			for (const setting of Object.values(group)) {
-				// eslint-disable-next-line eqeqeq
-				if (setting.currentValue == setting.def) {
-					// skip values that are exactly the same
+				if (setting.command.length === 0) {
+					// skip settings that do not specify a command
 					continue;
 				}
+
+				// we execute commands that are at their default anyway to
+				// reset any of these convars back to their original state,
+				// in case they were ever overridden. simple enough.
+				// doesn't reset them if the player enters a map on their
+				// own manually, but, WHATEVER!
 
 				$.Msg(`Execute ${setting.command} ${setting.currentValue}`);
 				GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.currentValue}`);
