@@ -48,6 +48,7 @@
 					</Panel>
 				</Button>
 				<Button
+					id="MapSelectionButton"
 					class="campaign-settings__button"
 					onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc', 'map-select')"
 				>
@@ -113,9 +114,9 @@
 						texturewidth="128"
 						textureheight="128"
 					/>
-					<Panel class="flow-down fill-width">
+					<Panel class="flow-down fill-width full-height">
 						<Label id="CampaignSettingsChapter" class="campaign-settings__chapter-text" text="[PH] Campaign Chapter" />
-						<Label id="CampaignSettingsMap" class="campaign-settings__map-text" text="[PH] Campaign Map" />
+						<!-- <Label id="CampaignSettingsMap" class="campaign-settings__map-text" text="[PH] Campaign Map" /> -->
 					</Panel>
 				</Panel>
 				<Image

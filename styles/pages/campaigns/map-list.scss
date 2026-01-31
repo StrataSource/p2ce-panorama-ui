@@ -1,0 +1,101 @@
+@use '../../config' as *;
+
+.campaign-maps {
+	height: 100%;
+	flow-children: right-wrap;
+	overflow: squish scroll;
+
+	$root: &;
+
+	&__list {
+		flow-children: down;
+		#{$root}__entry {
+			margin: 5px;
+		}
+	}
+
+	&__entry {
+		margin: 10px;
+		width: 480px;
+		flow-children: down;
+		background-color: $base-950;
+		border: $menu-pane-border;
+
+		$this: &;
+
+		&__lined {
+		}
+
+		&__no-img {
+			#{$this}__cover {
+				visibility: collapse;
+			}
+			#{$this}__details {
+				border-top-style: none;
+			}
+		}
+
+		&__cover {
+			width: 100%;
+			height: 270px;
+		}
+
+		&__details {
+			width: 100%;
+			margin-left: 0;
+			padding: 15px;
+			border-top: $menu-pane-border;
+			flow-children: down;
+
+			&__title {
+				font-size: 16px;
+				letter-spacing: 1px;
+			}
+		}
+
+		&:disabled,
+		&:parentdisabled {
+			opacity: 0.25;
+
+			#{$this}__cover {
+				blur: fastgaussian(15, 15, 4);
+				saturation: 0;
+			}
+		}
+
+		.InputKeyboard &:hover:not(:disabled):not(:selected),
+		.InputController &:focus:not(:disabled) {
+			border-color: $primary-color;
+			background-color: $button-background-hover;
+
+			#{$this}__cover {
+				opacity: 0.9;
+			}
+
+			#{$this}__details {
+				border-color: $primary-color;
+			}
+		}
+
+		.InputKeyboard .ChapterModeList &:hover:not(:disabled),
+		.InputController .ChapterModeList &:focus:not(:disabled) {
+			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0,0,0,0) ) );
+		}
+
+		&:selected {
+			background-color: $primary-color;
+			border-color: $primary-color;
+			#{$this}__cover {
+				opacity: 0.95;
+			}
+			#{$this}__details {
+				wash-color: $base-950;
+
+				&__title,
+				&__desc {
+					text-shadow: none;
+				}
+			}
+		}
+	}
+}

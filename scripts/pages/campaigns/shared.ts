@@ -12,7 +12,7 @@ class CampaignSetting {
 	// see the skill setting for example
 	def: unknown;
 	command: string;
-	panelType: keyof PanelTagNameMap;
+	panelType: keyof PanelTagNameMap | undefined;
 	dropDownValues?: Array<CampaignDropDownValue>;
 	currentValue: unknown | undefined;
 
@@ -21,7 +21,7 @@ class CampaignSetting {
 		helpText: string,
 		def: unknown,
 		command: string,
-		panelType: keyof PanelTagNameMap,
+		panelType: keyof PanelTagNameMap | undefined,
 		dropDownValues?: Array<CampaignDropDownValue>,
 	) {
 		this.name = name;
@@ -59,6 +59,12 @@ class CampaignShared {
 	static inputFields: Array<CampaignSettingField> = [];
 
 	static setup() {
+		// this is a global object that gets set every time the main campaign settings screen is invoked
+		// separated by category, this holds a record of all adjustable convars
+		//
+		// NOTE: this is a prototype only and will likely not make it into the final version, as a more "concrete"
+		// system in the backend will probably sit in place of this. for this reason, DO NOT LOCALIZE.
+		// for now though, for fun, this works fine
 		(UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>) = {
 			'GameplayBase': {
 				'mirrorWorld': {
@@ -184,10 +190,20 @@ class CampaignShared {
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				}
+			},
+			'Map': {
+				'map': {
+					name: 'Map',
+					helpText: '[HC] Map',
+					def: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0].name,
+					command: '',
+					panelType: undefined,
+					currentValue: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0].name
+				}
 			}
 		};
 
-		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Array<CampaignSetting>>);
+		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
 		for (const group of Object.values(settings)) {
 			for (const setting of Object.values(group)) {
 				setting.currentValue = setting.def;
@@ -203,6 +219,8 @@ class CampaignShared {
 		Object.entries(settings).forEach((v: [string, CampaignSetting], i: number) => {
 			const id = v[0];
 			const setting = v[1];
+
+			if (setting.panelType === undefined) return;
 
 			const wrapper = $.CreatePanel('Panel', parent, `${id}_Wrapper`, {
 				class: 'campaign-setting__entry'
@@ -326,5 +344,15 @@ class CampaignShared {
 
 			$.Msg(`Setting '${s.command}' is now [VALUE: '${s.currentValue}', DEFAULT: '${s.def}']`);
 		}
+	}
+
+	static setMap(map: string) {
+		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
+		settings['Map']['map'].currentValue = map;
+	}
+
+	static getMap() {
+		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
+		return settings['Map']['map'].currentValue as string;
 	}
 }
