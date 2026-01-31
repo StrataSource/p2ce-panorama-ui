@@ -98,7 +98,8 @@
 		.InputController &:focus,
 		&:hover:not(:disabled):not(:selected) {
 			border-color: $primary-color;
-			background-color: rgba($button-background-hover, 0.9);
+			background-color: $button-background-hover;
+			//background-color: rgba($button-background-hover-color, 0.9);
 
 			#{$this}__cover {
 				border-color: $primary-color;

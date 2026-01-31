@@ -63,6 +63,9 @@ $colors-p2ce-base: (
 	'base-950': $base-950
 ) !default;
 
+$base-gradient: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $base-900 ), to( $base-950 ) ) !default;
+$base-gradient-subtle: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( #1b1b1b ), to( $base-950 ) ) !default;
+
 //===========================
 // COLORS
 //===========================
@@ -343,9 +346,11 @@ $spacers: (5px, 10px, 15px, 25px, 35px) !default;
 // BUTTON
 // ================
 
-$button-background-base: $base-950 !default;
+$button-background-base-color: $base-950 !default;
+$button-background-base: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $base-900 ), to( $base-950 ) ) !default;
 $button-background: $button-background-base !default;
-$button-background-hover: $primary-700 !default;
+$button-background-hover-color: $primary-700 !default;
+$button-background-hover: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $primary-500 ), to( $primary-700 ) ) !default;
 $button-background-selected: $primary-color !default; // Used by Radiobuttons + Togglebuttons
 $button-background-disabled: rgba($base-950, 0.5) !default;
 
@@ -400,14 +405,15 @@ $checkbox-gap: 8px !default;
 // RADIOBUTTON
 // ================
 
-$radiobutton-background: $checkbox-background !default;
+// THESE CANNOT BE GRADIENT COLOR, IT WILL BREAK THE ROUND STYLING IN RADIO-BUTTON.SCSS
+$radiobutton-background: $button-background-base-color !default;
 $radiobutton-background-disabled: $checkbox-background-disabled !default;
 $radiobutton-background-disabled-selected: color.scale(
 	$radiobutton-background-disabled,
 	$lightness: -50%,
 	$alpha: 20%
 ) !default;
-$radiobutton-background-hover: $checkbox-background-hover !default;
+$radiobutton-background-hover: $button-background-hover-color !default;
 $radiobutton-background-selected: $bright-color !default;
 
 $radiobox-width: 25px !default;
@@ -630,7 +636,7 @@ $popup-min-width: 600px !default;
 $popup-max-width: 900px !default;
 $popup-wide: 900px !default;
 $popup-large-max-width: 1200px !default;
-$popup-background: $base-950 !default;
+$popup-background: $base-gradient-subtle !default;
 $popup-padding: 25px 30px !default;
 $popup-border: 1px solid $base-700 !default;
 $popup-radius: 0px !default;

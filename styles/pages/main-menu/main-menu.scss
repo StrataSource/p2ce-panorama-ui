@@ -82,20 +82,22 @@ $pane-move-time: 0.1s;
 	}
 
 	&__pause-blur {
-		width: 125%;
-		height: 125%;
+		width: 100%;
+		height: 100%;
 		saturation: 1;
 		brightness: 1;
-		blur: fastgaussian(2, 2, 2);
+		blur: fastanimgaussian(0,0,0);
 		overflow: noclip;
 
 		transition:
 			saturation 0.2s ease-out 0s,
-			brightness 0.2s ease-out 0s;
+			brightness 0.2s ease-out 0s,
+			blur 0.2s ease-out 0s;
 
 		&__anim {
 			saturation: 0.7;
-			brightness: 0.4;
+			brightness: 0.2;
+			blur: fastgaussian(3,3,3);
 		}
 	}
 
@@ -153,7 +155,7 @@ $pane-move-time: 0.1s;
 	&__gradient-bar {
 		width: 672px;
 		height: 100%;
-		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
+		//background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
 	}
 
 	&__grid1 {
@@ -161,6 +163,7 @@ $pane-move-time: 0.1s;
 		horizontal-align: left;
 		transform: scaleY(-1) translateX(-1px) translateY(-1px);
 		opacity: 0.25;
+		visibility: collapse;
 	}
 
 	&__grid2 {
@@ -168,13 +171,14 @@ $pane-move-time: 0.1s;
 		horizontal-align: left;
 		transform: translateX(-1px) translateY(1px);
 		opacity: 0.25;
+		visibility: collapse;
 	}
 
 	&__logo {
 		width: 540px;
 		height: 130px;
 		horizontal-align: center;
-		img-shadow: 0px 0px 50px 4 $base-950;
+		//img-shadow: 0px 0px 50px 4 $base-950;
 	}
 
 	&__nav {
@@ -261,7 +265,7 @@ $pane-move-time: 0.1s;
 					linear,
 					0% 0%,
 					100% 0%,
-					from($button-background-hover),
+					from($button-background-hover-color),
 					to(rgba(0, 0, 0, 0))
 				);
 
@@ -274,7 +278,7 @@ $pane-move-time: 0.1s;
 			&__no-gradient {
 				.InputKeyboard &:hover:not(:disabled),
 				.InputController &:focus:not(:disabled) {
-					background-color: $button-background-hover;
+					background-color: $button-background-hover-color;
 				}
 			}
 
@@ -397,7 +401,7 @@ $pane-move-time: 0.1s;
 		width: 480px;
 		flow-children: down;
 		border: $menu-pane-border;
-		border-color: $button-background-hover;
+		border-color: $button-background-hover-color;
 		vertical-align: center;
 		&__img {
 			width: 480px;
@@ -406,13 +410,13 @@ $pane-move-time: 0.1s;
 		&__details {
 			width: 100%;
 			height: 62px;
-			background-color: $base-950;
+			background-color: $base-gradient-subtle;
 			background-image: url('file://{images}/menu/menu_grid4.png');
 			background-repeat: no-repeat;
 			background-position: right top;
 			background-img-opacity: 0.1;
 			border-top: $menu-pane-border;
-			border-color: $button-background-hover;
+			border-color: $button-background-hover-color;
 			flow-children: down;
 		}
 		&__logo {
@@ -528,7 +532,7 @@ $pane-move-time: 0.1s;
 	}
 
 	&__featured-bg {
-		background-color: $base-950;
+		background-color: $base-gradient;
 		border: $menu-pane-border;
 		padding: 10px 15px;
 		horizontal-align: right;
@@ -561,7 +565,7 @@ $pane-move-time: 0.1s;
 	&__version {
 		horizontal-align: right;
 		vertical-align: bottom;
-		background-color: $base-950;
+		background-color: $base-gradient;
 		border: $menu-pane-border;
 	}
 

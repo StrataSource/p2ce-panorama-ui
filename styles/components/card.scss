@@ -7,7 +7,7 @@
 	height: fill-parent-flow(1);
 	vertical-align: center;
 
-	background-color: $base-950;
+	background-color: $button-background;
 	border: $menu-pane-border;
 
 	$this: &;
@@ -25,7 +25,7 @@
 		margin: 5px;
 		width: 96px;
 		height: 96px;
-		background-color: $base-950;
+		background-color: $button-background;
 		border: $menu-pane-border;
 	}
 
@@ -54,7 +54,7 @@
 		border-top: $menu-pane-border;
 
 		&__no-bg {
-			background-color: $base-950;
+			background-color: $button-background;
 		}
 
 		&__header {

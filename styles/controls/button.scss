@@ -36,7 +36,6 @@
 	&:parentdisabled,
 	&:parentdisabled &:hover {
 		background-color: $button-background-disabled;
-		border-color: $button-text-disabled;
 		border: $button-border-disabled;
 	}
 
@@ -107,8 +106,8 @@
 			}
 		}
 
-		background-color: list.nth($value, 1);
-		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( list.nth($value, 1) ), to( color.scale(list.nth($value, 1), $lightness: -50%) ) );
+		border-color: color.scale(list.nth($value, 1), $lightness: -80%);
 
 		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
 		.InputController &:focus:not(:disabled):not(:parentdisabled) {
@@ -146,7 +145,7 @@ RadioButton.button-mono {
 	flow-children: right;
 
 	padding: 0 15px;
-	background-color: $base-950;
+	background-color: $button-background;
 	border: $menu-pane-border;
 
 	$this: &;
