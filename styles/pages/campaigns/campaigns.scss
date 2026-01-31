@@ -42,7 +42,7 @@
 			color: $bright-color;
 			height: fit-children;
 			border: $menu-pane-border;
-			background-color: $base-950;
+			background-color: $button-background;
 
 			#PlaceholderText {
 				color: rgba($bright-color, 0.25);
@@ -50,7 +50,7 @@
 
 			.InputKeyboard &:hover:not(:disabled),
 			.InputController &:focus:not(:disabled) {
-				background-color: $base-950;
+				background-color: $button-background;
 				color: $bright-color;
 			}
 
@@ -64,7 +64,7 @@
 		width: 100%;
 		height: 256px;
 
-		background-color: $base-950;
+		background-color: $button-background;
 		border: $menu-pane-border;
 
 		$this: &;

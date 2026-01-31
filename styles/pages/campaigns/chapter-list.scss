@@ -268,7 +268,7 @@
 	&__entry {
 		width: 480px;
 		flow-children: down;
-		background-color: $base-950;
+		background-color: $button-background;
 		border: $menu-pane-border;
 
 		$this: &;
@@ -286,6 +286,7 @@
 			margin-left: 0;
 			padding: 15px;
 			border-top: $menu-pane-border;
+			background-color: $button-background;
 			flow-children: down;
 
 			&__title {
@@ -323,13 +324,14 @@
 			}
 
 			#{$this}__details {
+				background-color: $button-background-hover;
 				border-color: $primary-color;
 			}
 		}
 
 		.InputKeyboard .ChapterModeList &:hover:not(:disabled),
 		.InputController .ChapterModeList &:focus:not(:disabled) {
-			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover ), to( rgba(0,0,0,0) ) );
+			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover-color ), to( rgba(0,0,0,0) ) );
 		}
 
 		&:selected {
