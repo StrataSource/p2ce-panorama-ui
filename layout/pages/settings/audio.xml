@@ -32,7 +32,7 @@
 					<Panel class="flow-right horizontal-align-right vertical-align-center">
 
 						<Button
-							class="button mr-3"
+							class="button mr-3 hide"
 							onactivate="SettingsShared.showImportExportDialogue('Settings_Volume_Title', 'VolumeSubSection')"
 						>
 							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
@@ -149,7 +149,7 @@
 					<Panel class="flow-right horizontal-align-right vertical-align-center">
 
 						<Button
-							class="button mr-3"
+							class="button mr-3 hide"
 							onactivate="SettingsShared.showImportExportDialogue('Settings_ClosedCaptions_Title', 'AudioClosedCaptionsSubSection')"
 						>
 							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
@@ -199,7 +199,7 @@
 					<Panel class="flow-right horizontal-align-right vertical-align-center">
 
 						<Button
-							class="button mr-3"
+							class="button mr-3 hide"
 							onactivate="SettingsShared.showImportExportDialogue('Settings_AudioDevices_Title', 'AudioDevicesSubSection')"
 						>
 							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
