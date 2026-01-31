@@ -43,7 +43,7 @@
 	&__button {
 		width: 100%;
 		border: $menu-pane-border;
-		background-color: $base-950;
+		background-color: $button-background;
 		padding: 10px 15px;
 		margin-bottom: 5px;
 
@@ -105,6 +105,7 @@
 		font-size: 24px;
 		text-shadow: 2px 2px 4px 2 $base-950;
 		transform: translateY(-2px);
+		vertical-align: center;
 	}
 
 	&__map-text {
@@ -125,7 +126,7 @@
 		width: 100%;
 		flow-children: right;
 		padding: 15px;
-		background-color: $base-950;
+		background-color: $base-gradient;
 		border: $menu-pane-border;
 		border-bottom-width: 0px;
 	}
@@ -193,7 +194,7 @@
 
 		&:hover {
 			animation: OpacityFlicker 12s linear 0s infinite normal forwards;
-			background-color: gradient(linear, 0% 0%, 100% 0%, from(rgba(0, 0, 0, 0)), to($button-background-hover));
+			background-color: gradient(linear, 0% 0%, 100% 0%, from(rgba(0, 0, 0, 0)), to($button-background-hover-color));
 		}
 
 		&__text {
@@ -214,7 +215,7 @@
 
 			.TickBox {
 				margin-right: 0;
-				background-color: $base-950;
+				background-color: $button-background;
 				border: $menu-pane-border;
 				horizontal-align: right;
 			}
@@ -230,7 +231,7 @@
 			font-family: $font-monospace;
 			color: $bright-color;
 			border: 1px solid $base-700;
-			background-color: $base-950;
+			background-color: $button-background;
 
 			&:focus {
 				background-color: $base-900;
@@ -247,7 +248,7 @@
 			width: 447px;
 			height: 38px;
 
-			background-color: $base-950;
+			background-color: $button-background;
 			border: $menu-pane-border;
 			&:hover:not(:disabled):not(:parentdisabled) {
 				background-color: $base-900;

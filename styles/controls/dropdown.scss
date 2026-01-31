@@ -178,7 +178,7 @@ DropDownMenuBackground {
 .dropdown-mono {
 	@extend .dropdown;
 
-	background-color: $base-950;
+	background-color: $button-background;
 	border: $menu-pane-border;
 
 	&:hover:not(:disabled):not(:parentdisabled) {

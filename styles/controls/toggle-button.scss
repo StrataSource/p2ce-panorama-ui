@@ -64,7 +64,7 @@
 	&:disabled .TickBox,
 	&:disabled:hover .TickBox {
 		background-color: $checkbox-background-disabled;
-		border-color: $button-text-disabled;
+		border: $button-border-disabled;
 	}
 
 	&:selected .TickBox {
@@ -101,8 +101,8 @@
 			}
 		}
 
-		background-color: list.nth($value, 1);
-		border-color: color.scale(list.nth($value, 1), $lightness: -60%);
+		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( list.nth($value, 1) ), to( color.scale(list.nth($value, 1), $lightness: -50%) ) );
+		border-color: color.scale(list.nth($value, 1), $lightness: -80%);
 
 		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
 			border-color: list.nth($value, 1);
