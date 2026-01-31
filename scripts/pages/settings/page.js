@@ -55,10 +55,7 @@ class SettingsShared {
 
 	static resetControls(panelID) {
 		this.showConfirmResetSettings($.Localize('#Settings_General_ResetControls'), () => {
-			// TODO: remove this out once api is ported
-			typeof OptionsMenuAPI !== typeof undefined
-				? OptionsMenuAPI.RestoreKeybdMouseBindingDefaults()
-				: $.Msg('Keybinds resetting not yet implemented! Gimme the API!! Grr!!!!');
+			OptionsMenuAPI.RestoreKeybdMouseBindingDefaults();
 			this.resetSettingsRecursive($.GetContextPanel().FindChildTraverse(panelID));
 		});
 	}

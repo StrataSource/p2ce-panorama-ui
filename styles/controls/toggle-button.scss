@@ -106,7 +106,7 @@
 
 		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
 			border-color: list.nth($value, 1);
-			background-color: color.scale(list.nth($value, 1), $lightness: -60%);
+			background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( color.scale(list.nth($value, 1), $lightness: -20%) ), to( color.scale(list.nth($value, 1), $lightness: -80%) ) );
 
 			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
 				& Label {
