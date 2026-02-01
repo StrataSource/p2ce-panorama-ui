@@ -3,6 +3,7 @@
 .slider {
 	#SliderTrack {
 		align: center bottom;
+		border: $menu-pane-border;
 		background-color: $slider-track;
 		box-shadow: $slider-track-shadow;
 		z-index: 2;
@@ -10,7 +11,6 @@
 
 	#SliderTrackProgress {
 		align: center bottom;
-		border-bottom: $slider-track-progress-border;
 		z-index: 3;
 	}
 

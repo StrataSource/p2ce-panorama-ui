@@ -112,30 +112,16 @@
 
 		width: 24px;
 		height: 24px;
-		wash-color: $tooltip-background;
+		wash-color: $tooltip-arrow-color;
+	}
+
+	&__contents {
+		border: $tooltip-border;
 	}
 
 	$tooltip-directions: ('top', 'left', 'bottom', 'right');
 	@for $i from 1 through list.length($tooltip-directions) {
 		$dir: list.nth($tooltip-directions, $i);
-
-		// create a border in the opposite direction of the arrow
-		// don't work :(
-		// $opp: math.max(($i + 2) % 4, 1);
-		&__contents {
-			#{$root}.TopArrowVisible & {
-				border-bottom: $tooltip-border;
-			}
-			#{$root}.RightArrowVisible & {
-				border-left: $tooltip-border;
-			}
-			#{$root}.BottomArrowVisible & {
-				border-top: $tooltip-border;
-			}
-			#{$root}.LeftArrowVisible & {
-				border-right: $tooltip-border;
-			}
-		}
 
 		&__#{$dir}-arrow {
 			background-image: url('file://{images}/tooltips/#{$dir}-arrow.svg');
