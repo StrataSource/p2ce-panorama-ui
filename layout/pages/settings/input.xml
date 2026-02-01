@@ -20,6 +20,20 @@
 
 		<Panel id="SettingsPageContainer" class="settings-page__container">
 
+
+			<Panel id="ControllerSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="[HC] Controller" tags="controller,input" />
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
+						<Button class="button horizontal-align-right vertical-align-center" onactivate="OptionsMenuAPI.ShowSteamControllerBindingsPanel()">
+							<Label class="button__text" text="[HC] Open Steam Input Settings" />
+						</Button>
+					</Panel>
+				</Panel>
+			</Panel>
+			
+			<Panel class="settings-page__spacer" />
+
 			<Panel id="MouseSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
