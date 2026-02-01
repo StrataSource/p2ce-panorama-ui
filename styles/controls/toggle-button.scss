@@ -10,7 +10,7 @@
 		visibility: collapse;
 	}
 
-	&:hover {
+	&:hover:not(:selected) {
 		background-color: $button-background-hover;
 	}
 
@@ -56,13 +56,15 @@
 		}
 	}
 
-	&:hover .TickBox {
+	.InputKeyboard &:hover .TickBox,
+	.InputController &:focus .TickBox {
 		background-color: $checkbox-background-hover;
 		border: $checkbox-border-hover;
 	}
 
 	&:disabled .TickBox,
-	&:disabled:hover .TickBox {
+	.InputKeyboard &:disabled:hover .TickBox,
+	.InputController &:disabled:focus .TickBox {
 		background-color: $checkbox-background-disabled;
 		border: $button-border-disabled;
 	}
@@ -78,7 +80,8 @@
 		background-position: center;
 	}
 
-	&:selected:hover .TickBox {
+	.InputKeyboard &:selected:hover .TickBox,
+	.InputController &:selected:focus .TickBox {
 		background-color: $checkbox-background-selected-hover;
 	}
 
@@ -99,25 +102,43 @@
 			& Label {
 				color: $base-950;
 			}
+			& Image {
+				wash-color: $base-950;
+			}
+
+			.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+			.InputController &:focus:not(:disabled):not(:parentdisabled) {
+				& Label {
+					color: $bright-color;
+				}
+				& Image {
+					wash-color: $bright-color;
+				}
+			}
+
+			.InputKeyboard &:selected,
+			.InputController &:selected {
+				& Label {
+					color: $base-950;
+				}
+				& Image {
+					wash-color: $base-950;
+				}
+			}
 		}
 
 		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( list.nth($value, 1) ), to( color.scale(list.nth($value, 1), $lightness: -50%) ) );
 		border-color: color.scale(list.nth($value, 1), $lightness: -80%);
 
-		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
+		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
+		.InputController &:focus:not(:disabled):not(:parentdisabled) {
 			border-color: list.nth($value, 1);
 			background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( color.scale(list.nth($value, 1), $lightness: -20%) ), to( color.scale(list.nth($value, 1), $lightness: -80%) ) );
-
-			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
-				& Label {
-					color: $bright-color;
-				}
-			}
 		}
 
 		&:selected {
-			background-color: color.scale(list.nth($value, 2), $lightness: -60%);
-			border-color: color.scale(list.nth($value, 2), $lightness: -60%);
+			background-color: list.nth($value, 2);
+			border-color: list.nth($value, 2);
 		}
 	}
 }

@@ -60,9 +60,9 @@
 
 		&__right {
 			border-left: $menu-pane-border;
-			height: 100%;
 			margin: 15px 0;
 			padding: 15px 15px;
+			vertical-align: center;
 
 			&__wrap {
 				vertical-align: center;
@@ -221,29 +221,26 @@
 			}
 
 			&__entry {
-				width: 32px;
-				height: 32px;
+				margin: 0 3px;
+				width: 24px;
+				height: 24px;
 				border-radius: 50%;
 				tooltip-position: right;
 				tooltip-body-position: 0% 50%;
-				background-image: url('file://{images}/menu/indicator_inactive.png');
-				background-position: center;
-				background-repeat: no-repeat;
-				background-size: 125%;
+				background-color: $button-background;
+				border: 1px solid $base-900;
 				& .RadioBox {
 					visibility: collapse;
 				}
 				.InputKeyboard &:hover:not(:selected),
-				.InputController &:focus:not(:selected) {
-					background-image: url('file://{images}/menu/indicator_off.png');
-				}
-
 				.InputController &:focus {
-					border: 1px solid $primary-color;
+					background-color: $base-gradient-bright;
+					border-color: $base-50;
 				}
 
 				&:selected {
-					background-image: url('file://{images}/menu/indicator_on.png');
+					background-color: $button-background-hover;
+					border-color: $primary-color;
 				}
 			}
 		}
@@ -270,6 +267,7 @@
 		flow-children: down;
 		background-color: $button-background;
 		border: $menu-pane-border;
+		vertical-align: center;
 
 		$this: &;
 
@@ -326,6 +324,10 @@
 			#{$this}__details {
 				background-color: $button-background-hover;
 				border-color: $primary-color;
+				&__title,
+				&__desc {
+					color: $bright-color;
+				}
 			}
 		}
 
