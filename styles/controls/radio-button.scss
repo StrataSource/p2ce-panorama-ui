@@ -13,6 +13,19 @@
 		background-color: $button-background-selected;
 		border-color: $primary-color;
 	}
+
+	.InputKeyboard &:hover:selected:not(:disabled):not(:parentdisabled) {
+		background-color: $button-background-selected;
+		border-color: $primary-color;
+
+		& Label {
+			color: $button-text-hover;
+		}
+
+		& Image {
+			wash-color: $button-text-hover;
+		}
+	}
 }
 
 .radiobutton-classic {
@@ -25,14 +38,7 @@
 		height: $radiobox-width;
 		margin-right: $radiobutton-gap;
 		border-radius: $radiobox-radius;
-		background-color: gradient(
-			radial,
-			50% 50%,
-			0% 0%,
-			50% 50%,
-			from($radiobutton-background),
-			to($radiobutton-background)
-		);
+		background-color: $radiobutton-background;
 		box-shadow: $radiobox-shadow;
 	}
 
@@ -42,26 +48,12 @@
 	}
 
 	&:hover .RadioBox {
-		background-color: gradient(
-			radial,
-			50% 50%,
-			0% 0%,
-			50% 50%,
-			from($radiobutton-background-hover),
-			to($radiobutton-background-hover)
-		);
+		background-color: $radiobutton-background-hover;
 	}
 
 	&:disabled .RadioBox,
 	&:disabled:hover .RadioBox {
-		background-color: gradient(
-			radial,
-			50% 50%,
-			0% 0%,
-			50% 50%,
-			from($radiobutton-background-disabled),
-			to($radiobutton-background-disabled)
-		);
+		background-color: $radiobutton-background-disabled;
 	}
 
 	&:disabled &__text {
@@ -69,29 +61,11 @@
 	}
 
 	&:selected .RadioBox {
-		background-color: gradient(
-			radial,
-			50% 50%,
-			0% 0%,
-			50% 50%,
-			from($radiobutton-background-selected),
-			color-stop(0.4, $radiobutton-background-selected),
-			color-stop(0.45, $radiobutton-background),
-			to($radiobutton-background)
-		);
+		background-color: $radiobutton-background-selected;
 	}
 
 	&:disabled:selected .RadioBox {
-		background-color: gradient(
-			radial,
-			50% 50%,
-			0% 0%,
-			50% 50%,
-			from($radiobutton-background-disabled),
-			color-stop(0.4, $radiobutton-background-disabled),
-			color-stop(0.45, $radiobutton-background-disabled-selected),
-			to($radiobutton-background-disabled-selected)
-		);
+		background-color: $radiobutton-background-disabled-selected;
 	}
 }
 
@@ -160,35 +134,48 @@
 
 @each $name, $value in $gradients-primary {
 	.radiobutton--#{$name} {
+		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( list.nth($value, 1) ), to( color.scale(list.nth($value, 1), $lightness: -50%) ) );
+		border-color: color.scale(list.nth($value, 1), $lightness: -80%);
+
 		@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
 			& Label {
 				color: $base-950;
 			}
+			& Image {
+				wash-color: $base-950;
+			}
+
+			.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+			.InputController &:focus:not(:disabled):not(:parentdisabled) {
+				& Label {
+					color: $bright-color;
+				}
+				& Image {
+					wash-color: $bright-color;
+				}
+			}
+
+			.InputKeyboard &:selected,
+			.InputController &:selected {
+				& Label {
+					color: $bright-color;
+				}
+				& Image {
+					wash-color: $bright-color;
+				}
+			}
 		}
 
-		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( list.nth($value, 1) ), to( color.scale(list.nth($value, 1), $lightness: -50%) ) );
-		border-color: color.scale(list.nth($value, 1), $lightness: -80%);
-
-		&:hover:not(:disabled):not(:parentdisabled):not(:selected) {
+		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+		.InputController &:focus:not(:disabled):not(:parentdisabled) {
 			border-color: list.nth($value, 1);
 			background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( color.scale(list.nth($value, 1), $lightness: -20%) ), to( color.scale(list.nth($value, 1), $lightness: -80%) ) );
-
-			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
-				& Label {
-					color: $bright-color;
-				}
-			}
 		}
 
+		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):selected,
 		&:selected {
-			background-color: color.scale(list.nth($value, 2), $lightness: -60%);
-			border-color: color.scale(list.nth($value, 2), $lightness: -60%);
-
-			@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
-				& Label {
-					color: $bright-color;
-				}
-			}
+			background-color: color.scale(list.nth($value, 2));
+			border-color: color.scale(list.nth($value, 2));
 		}
 	}
 }

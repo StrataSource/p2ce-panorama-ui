@@ -99,6 +99,24 @@
 	.button--#{$name} {
 		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( list.nth($value, 1) ), to( color.scale(list.nth($value, 1), $lightness: -50%) ) );
 		border-color: color.scale(list.nth($value, 1), $lightness: -80%);
+		@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
+			& Label {
+				color: $base-950;
+			}
+			& Image {
+				wash-color: $base-950;
+			}
+
+			.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
+			.InputController &:focus:not(:disabled):not(:parentdisabled) {
+				& Label {
+					color: $bright-color;
+				}
+				& Image {
+					wash-color: $bright-color;
+				}
+			}
+		}
 
 		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
 		.InputController &:focus:not(:disabled):not(:parentdisabled) {

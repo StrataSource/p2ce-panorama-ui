@@ -103,60 +103,79 @@
 
 		"HL2_Enable_Commentary"				"Enable commentary track"
 
+		"portal2_Chapter1"					"Chapter 1\nThe Courtesy Call"
 		"portal2_Chapter1_Title"			"Chapter 1"
 		"portal2_Chapter1_Subtitle"			"The Courtesy Call"
+
+		"portal2_Chapter2"					"Chapter 2\nThe Cold Boot"
 		"portal2_Chapter2_Title"			"Chapter 2"
 		"portal2_Chapter2_Subtitle"			"The Cold Boot"
+
+		"portal2_Chapter3"					"Chapter 3\nThe Return"
 		"portal2_Chapter3_Title"			"Chapter 3"
 		"portal2_Chapter3_Subtitle"			"The Return"
+
+		"portal2_Chapter4"					"Chapter 4\nThe Surprise"
 		"portal2_Chapter4_Title"			"Chapter 4"
 		"portal2_Chapter4_Subtitle"			"The Surprise"
+
+		"portal2_Chapter5"					"Chapter 5\nThe Escape"
 		"portal2_Chapter5_Title"			"Chapter 5"
 		"portal2_Chapter5_Subtitle"			"The Escape"
+
+		"portal2_Chapter6"					"Chapter 6\nThe Fall"
 		"portal2_Chapter6_Title"			"Chapter 6"
 		"portal2_Chapter6_Subtitle"			"The Fall"
+		
+		"portal2_Chapter7"					"Chapter 7\nThe Reunion"
 		"portal2_Chapter7_Title"			"Chapter 7"
 		"portal2_Chapter7_Subtitle"			"The Reunion"
+
+		"portal2_Chapter8"					"Chapter 8\nThe Itch"
 		"portal2_Chapter8_Title"			"Chapter 8"
 		"portal2_Chapter8_Subtitle"			"The Itch"
+
+		"portal2_Chapter9"					"Chapter 9\nThe Part Where He Kills You"
 		"portal2_Chapter9_Title"			"Chapter 9"
 		"portal2_Chapter9_Subtitle"			"The Part Where He Kills You"
+
+		"portal2_Chapter10"					"Chapter 10\nThe Credits"
 		"portal2_Chapter10_Title"			"Chapter 10"
 		"portal2_Chapter10_Subtitle"		"The Credits"
 
 		// hl2/episodic compat
 		// base game hl2
-		"HL2_Chapter1_Title"				"Point Insertion"
+		"HL2_Chapter1_Title"				"Chapter 1\nPoint Insertion"
 		"HL2_Chapter2_Title"				"\"A Red Letter Day\""
-		"HL2_Chapter3_Title"				"Route Kanal"
-		"HL2_Chapter4_Title"				"Water Hazard"
-		"HL2_Chapter5_Title"				"Black Mesa East"
-		"HL2_Chapter6_Title"				"\"We Don't Go To Ravenholm...\""
-		"HL2_Chapter7_Title"				"Highway 17"
-		"HL2_Chapter8_Title"				"Sandtraps"
-		"HL2_Chapter9_Title"				"Nova Prospekt"
-		"HL2_Chapter9a_Title"				"Entanglement"
-		"HL2_Chapter10_Title"				"Anticitizen One"
-		"HL2_Chapter11_Title"				"\"Follow Freeman!\""
-		"HL2_Chapter12_Title"				"Our Benefactors"
-		"HL2_Chapter13_Title"				"Dark Energy"
-		"HL2_Chapter14_Title"				"Credits"
+		"HL2_Chapter3_Title"				"Chapter 3\nRoute Kanal"
+		"HL2_Chapter4_Title"				"Chapter 4\nWater Hazard"
+		"HL2_Chapter5_Title"				"Chapter 5\nBlack Mesa East"
+		"HL2_Chapter6_Title"				"Chapter 6\n\"We Don't Go To Ravenholm...\""
+		"HL2_Chapter7_Title"				"Chapter 7\nHighway 17"
+		"HL2_Chapter8_Title"				"Chapter 8\nSandtraps"
+		"HL2_Chapter9_Title"				"Chapter 9\nNova Prospekt"
+		"HL2_Chapter9a_Title"				"Chapter 9a\nEntanglement"
+		"HL2_Chapter10_Title"				"Chapter 10\nAnticitizen One"
+		"HL2_Chapter11_Title"				"Chapter 11\n\"Follow Freeman!\""
+		"HL2_Chapter12_Title"				"Chapter 12\nOur Benefactors"
+		"HL2_Chapter13_Title"				"Chapter 13\nDark Energy"
+		"HL2_Chapter14_Title"				"Chapter 14\nCredits"
 
 		// episodic
-		"episodic_Chapter1_Title"			"Undue Alarm"
-		"episodic_Chapter2_Title"			"Direct Intervention"
-		"episodic_Chapter3_Title"			"Lowlife"
-		"episodic_Chapter4_Title"			"Urban Flight"
-		"episodic_Chapter5_Title"			"Exit 17"
+		"episodic_Chapter1_Title"			"Chapter 1\nUndue Alarm"
+		"episodic_Chapter2_Title"			"Chapter 2\nDirect Intervention"
+		"episodic_Chapter3_Title"			"Chapter 3\nLowlife"
+		"episodic_Chapter4_Title"			"Chapter 4\nUrban Flight"
+		"episodic_Chapter5_Title"			"Chapter 5\nExit 17"
 
 		// ep2
-		"ep2_Chapter1_Title"				"To The White Forest"
-		"ep2_Chapter2_Title"				"This Vortal Coil"
-		"ep2_Chapter3_Title"				"Freeman Pontifex"
-		"ep2_Chapter4_Title"				"Riding Shotgun"
-		"ep2_Chapter5_Title"				"Under the Radar"
-		"ep2_Chapter6_Title"				"Our Mutual Friend"
-		"ep2_Chapter7_Title"				"T-Minus One"
+		"ep2_Chapter1_Title"				"Chapter 1\nTo The White Forest"
+		"ep2_Chapter2_Title"				"Chapter 2\nThis Vortal Coil"
+		"ep2_Chapter3_Title"				"Chapter 3\nFreeman Pontifex"
+		"ep2_Chapter4_Title"				"Chapter 4\nRiding Shotgun"
+		"ep2_Chapter5_Title"				"Chapter 5\nUnder the Radar"
+		"ep2_Chapter6_Title"				"Chapter 6\nOur Mutual Friend"
+		"ep2_Chapter7_Title"				"Chapter 7\nT-Minus One"
 		
 		// portal
 		"Portal_Chapter1_Title"				"Test Chamber 00"

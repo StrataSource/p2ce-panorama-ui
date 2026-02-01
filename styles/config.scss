@@ -65,6 +65,7 @@ $colors-p2ce-base: (
 
 $base-gradient: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $base-900 ), to( $base-950 ) ) !default;
 $base-gradient-subtle: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( #1b1b1b ), to( $base-950 ) ) !default;
+$base-gradient-bright: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $base-400 ), to( $base-800 ) ) !default;
 
 //===========================
 // COLORS
@@ -384,7 +385,7 @@ $button-icon-shadow: none !default;
 
 $checkbox-background: $button-background !default;
 $checkbox-background-disabled: $button-background-disabled !default;
-$checkbox-background-disabled-selected: $base-900 !default;
+$checkbox-background-disabled-selected: $button-background-selected !default;
 $checkbox-background-hover: $button-background-hover !default;
 $checkbox-background-selected: $button-background-selected !default;
 $checkbox-background-selected-hover: $button-background-hover !default;
@@ -405,16 +406,11 @@ $checkbox-gap: 8px !default;
 // RADIOBUTTON
 // ================
 
-// THESE CANNOT BE GRADIENT COLOR, IT WILL BREAK THE ROUND STYLING IN RADIO-BUTTON.SCSS
-$radiobutton-background: $button-background-base-color !default;
+$radiobutton-background: $button-background-base !default;
 $radiobutton-background-disabled: $checkbox-background-disabled !default;
-$radiobutton-background-disabled-selected: color.scale(
-	$radiobutton-background-disabled,
-	$lightness: -50%,
-	$alpha: 20%
-) !default;
-$radiobutton-background-hover: $button-background-hover-color !default;
-$radiobutton-background-selected: $bright-color !default;
+$radiobutton-background-disabled-selected: rgba($primary-color, 0.5) !default;
+$radiobutton-background-hover: $button-background-hover !default;
+$radiobutton-background-selected: $primary-color !default;
 
 $radiobox-width: 25px !default;
 $radiobox-radius: 50% !default;
@@ -460,7 +456,7 @@ $dropdown-button-text-shadow: $button-text-shadow;
 $dropdown-button-padding: 5px 20px !default;
 $dropdown-button-icon-width: 24px !default;
 
-$dropdown-menu-background: $base-950 !default;
+$dropdown-menu-background: $base-gradient !default;
 $dropdown-menu-padding-y: 0px !default;
 $dropdown-menu-shadow: none !default;
 $dropdown-menu-border: 1px solid $primary-color !default;
@@ -557,25 +553,24 @@ $textentry-placeholder-hover-color: color.scale($textentry-text-color, $alpha: 3
 // ================
 
 $slider-padding-height: 8px !default;
-$slider-track-height: 25px !default;
+$slider-track-height: 20px !default;
 
-$slider-thumb-color: $primary-color !default;
-$slider-thumb-color-hover: $primary-700 !default;
-$slider-thumb-width: 5px !default;
-$slider-thumb-height: 25px !default;
+$slider-thumb-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $primary-500 ), to( $primary-700 ) ) !default;
+$slider-thumb-color-hover: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $primary-700 ), to( $primary-800 ) ) !default;
+$slider-thumb-width: 20px !default;
+$slider-thumb-height: 20px !default;
 $slider-thumb-radius: 0px !default;
 $slider-thumb-shadow: none !default;
 
-$slider-track: $base-800 !default;
+$slider-track: $base-gradient !default;
 $slider-track-shadow: none !default;
-$slider-track-progress-height: 25px !default;
-$slider-track-transform: translateX(5px) translateY(5px) !default;
-$slider-track-progress-horizontal: $primary-800 !default;
+$slider-track-progress-height: 20px !default;
+$slider-track-progress-horizontal: $primary-color !default;
 $slider-track-progress-vertical: $primary-color !default;
 $slider-track-progress-border: 2px solid $slider-thumb-color !default;
 
 $slider-default-color: $base-500 !default;
-$slider-default-width: 4px !default;
+$slider-default-width: 8px !default;
 $slider-default-height: 8px !default;
 $slider-default-radius: 0px !default;
 $slider-default-shadow: none !default;
@@ -599,7 +594,7 @@ $scrollbar-hover-opacity: 0.9 !default;
 $progressbar-width: 100% !default;
 $progressbar-height: 25px !default;
 $progressbar-border: 1px solid $primary-color !default;
-$progressbar-background: $base-900 !default;
+$progressbar-background: $base-gradient !default;
 $progressbar-background-disabled: gradient(
 	linear,
 	0% 0%,
@@ -615,17 +610,18 @@ $progressbar-shadow: none !default;
 // TOOLTIPS
 // ================
 
-$tooltip-background: $base-900 !default;
+$tooltip-background: gradient( radial, 50% 50%, 0% 0%, 100% 100%, from( $base-900 ), to( $base-950 ) ) !default;
+$tooltip-arrow-color: $base-700 !default;
 $tooltip-padding: 20px 25px !default;
-$tooltip-border: 2px solid $primary-color !default;
+$tooltip-border: 1px solid $base-700 !default;
 $tooltip-radius: 0px !default;
 $tooltip-margin: 0px !default;
 $tooltip-text-color: $bright-color !default;
 
 $tooltip-title-use-header-font: true !default;
-$tooltip-title-font-size: 36px !default;
+$tooltip-title-font-size: 32px !default;
 $tooltip-text-use-header-font: false !default;
-$tooltip-text-font-size: 18px !default;
+$tooltip-text-font-size: 16px !default;
 $tooltip-image-size: 20px !default;
 
 // ================
