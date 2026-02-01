@@ -5,6 +5,7 @@ const SettingsTabs = {
 		xml: 'input',
 		radioid: 'InputRadio',
 		children: {
+			ControllerSubSection: 'ControllerRadio',
 			MouseSubSection: 'MouseRadio',
 			KeybindSubSection: 'KeybindRadio'
 		}
