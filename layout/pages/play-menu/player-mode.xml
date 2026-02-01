@@ -4,7 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/pages/play-menu/main.ts" />
+		<include src="file://{scripts}/pages/play-menu/player-mode.ts" />
 	</scripts>
 
 	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setPlayerMenuLines()">
