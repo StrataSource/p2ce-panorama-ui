@@ -673,12 +673,9 @@
 		"Settings_Mouse_Filter_Info"					"Averages mouse movement over 2 frames."
 
 		"Settings_Mouse_Raw"							"Raw Input"
-		"Settings_Mouse_Raw_Info"						"Raw Input reads mouse data directly from the device, bypassing operating system settings and providing more accurate movement.
-
-		<h2>On (Frame-aligned)</h2>The original method used in other Source Engine games
-		<h2>(Tick-aligned)</h2>An improved method which is more precise and less dependent on the game frame rate"
-		"Settings_Mouse_Raw_On_Old" "On (Frame-aligned)"
-		"Settings_Mouse_Raw_On_New" "On (Tick-aligned)"
+		"Settings_Mouse_Raw_Info"						"Raw Input reads mouse data directly from the device, bypassing operating system settings and providing more accurate movement.\n<h2>On (Frame-aligned)</h2>\nThe original method used in other Source Engine games\n<h2>(Tick-aligned)</h2>\nAn improved method which is more precise and less dependent on the game frame rate"
+		"Settings_Mouse_Raw_On_Old"						"On (Frame-aligned)"
+		"Settings_Mouse_Raw_On_New"						"On (Tick-aligned)"
 
 		"Settings_Mouse_Reverse"						"Reverse Mouse"
 		"Settings_Mouse_Reverse_Info"					"Reverses the direction of mouse movement. A great way to ruin your day."
@@ -690,6 +687,8 @@
 		"Settings_Keybinds_Title"						"Keybinds"
 		"Settings_Keybinds_Movement"					"Movement"
 		"Settings_Input_Keybinds_Movement"				"Movement"
+		
+		// KBM Mappings
 		"Keybind_Move_Forward"							"Move forward"
 		"Keybind_Move_Back"								"Move back"
 		"Keybind_Turn_Left"								"Turn left"
@@ -737,6 +736,9 @@
 		"Keybind_Screenshot"							"Take a screenshot"
 		"Keybind_Quit"									"Quit game"
 		"Keybind_Quit_Prompt"							"Quit with Prompt"
+		
+		// Settings - Controller
+		"Settings_Controller_SteamInputButton"			"Open Steam Input Settings"
 
 		// Settings - UI
 		"Settings_Interface"							"Interface / HUD"
@@ -752,7 +754,7 @@
 		"Settings_Portal1_compat" 						"Portal 1 Compatibility Mode"
 		"Settings_Portal1_compat_info" 					"Enables backwards compatibility with Portal 1 maps."
 		"Settings_Portal1_xhair" 						"Crosshair Style"
-		"Settings_Portal1_xhair_info" 					"Changes portal gun crosshair behavior.\n\n<h2>Portal 2 Style</h2>\nWill only display placed portals.\n\n<h2>Portal 1 Style</h2>\nWill display placed portals and a circular marker determining whether portals can be placed on a specific surface."
+		"Settings_Portal1_xhair_info" 					"Changes portal gun crosshair behavior.\n<h2>Portal 2 Style</h2>\nWill only display placed portals.\n<h2>Portal 1 Style</h2>\nWill display placed portals and a circular marker determining whether portals can be placed on a specific surface."
 		"Settings_Portal1_xhair_p2" 					"Portal 2 Style"
 		"Settings_portal1_xhair_p1" 					"Portal 1 Style"
 		
@@ -792,9 +794,9 @@
 		"Settings_Video_PreventThreadSleep_Info"		"Prevent the main game thread from sleeping when at maximum FPS limit. Enabling this option may result in smoother performance, but causes higher CPU usage."
 		
 		"Settings_Menu_Console"							"Enable Developer Console"
-		"Settings_Menu_Console_info"					"This setting determines the enablement state of the developer console, which allows users to send internal commands to the game engine.\n\nThe developer console is a powerful tool intended for advanced users (such as map makers), and is not required for normal play. Some of the commands present in the Source engine are dangerous and (if misused) can potentially crash the game, cause saved progress to be lost, and/or render certain gameplay elements inoperable."
+		"Settings_Menu_Console_info"					"This setting determines the enablement state of the developer console, which allows users to send internal commands to the game engine.\nThe developer console is a powerful tool intended for advanced users (such as map makers), and is not required for normal play. Some of the commands present in the Source engine are dangerous and (if misused) can potentially crash the game, cause saved progress to be lost, and/or render certain gameplay elements inoperable."
 		"Settings_Menu_Sentry"							"Sentry Crash Reporting"
-		"Settings_Menu_Sentry_info"						"Controls submission of crash dumps, processed via Sentry.\n\nThe data used in crash reports contain a complete call stack containing the last few moments of the engine prior to the crash (including the last few lines of developer console log output), the current Steam build ID, and your Steam Community profile ID. No other data is sent to the P2:CE team.\n\nThis feature is optional and can be turned on or off at any time."
+		"Settings_Menu_Sentry_info"						"Controls submission of crash dumps, processed via Sentry.\nThe data used in crash reports contain a complete call stack containing the last few moments of the engine prior to the crash (including the last few lines of developer console log output), the current Steam build ID, and your Steam Community profile ID. No other data is sent to the P2:CE team.\nThis feature is optional and can be turned on or off at any time."
 		"Settings_Menu_DiscordIntegration"				"Discord Rich Presence"
 		"Settings_Menu_DiscordIntegration_info"			"Enables Discord rich presence integration with P2:CE by displaying the current game state as an activity.\n\nThis toggle does not alter Discord rich presence enablement in SDK tools such as Hammer."
 		
@@ -1042,18 +1044,38 @@ Please install and mount the above games first to access this campaign."
 		
 		// campaign setup - server settings
 		
-		// gameplay-base
+		// GameplayBase
 		"MainMenu_Campaigns_Setup_Var_cl_mirror_world"				"Flip World"
-		"MainMenu_Campaigns_Setup_Var_cl_mirror_world_Description"	"Flips the world horizontally."
-		"MainMenu_Campaigns_Setup_Var_sv_cheats"					"Enable Server Cheats"
-		"MainMenu_Campaigns_Setup_Var_sv_cheats_Description"		"Enables access to special commands flagged as \"cheats\", such as \"noclip\", \"impulse\" and \"ent_fire\"."
+		"MainMenu_Campaigns_Setup_Var_cl_mirror_world_Description"	"Flips the world horizontally. A great way to ruin somebody's day.\n\nDefault: Off"
 		"MainMenu_Campaigns_Setup_Var_sv_gravity"					"World Gravity"
-		"MainMenu_Campaigns_Setup_Var_sv_gravity_Description"		"Controls downward gravitational force from the world. This is measured in Hammer units (HU), equivalent to a real-world inch (or 2.54 centimeters)."
+		"MainMenu_Campaigns_Setup_Var_sv_gravity_Description"		"Controls downward gravitational force from the world. This is measured in Hammer units (HU), equivalent to a real-world inch (or 2.54 centimeters).\n\nThe default gravity is 600 HU/s."
 		"MainMenu_Campaigns_Setup_Var_skill"						"Game Difficulty"
-		"MainMenu_Campaigns_Setup_Var_skill_Description"			"Changes behavior of damage modifiers and pickups. Higher difficulties will have increasingly difficult enemies and more ammo scarcity."
+		"MainMenu_Campaigns_Setup_Var_skill_Description"			"Changes behavior of damage modifiers and pickups. Higher difficulties will have increasingly difficult enemies and more ammo scarcity.\n\nThis does not apply to Portal campaigns.\n\nDefault: Normal"
 		"MainMenu_Campaigns_Setup_Var_skill_1"						"Easy"
 		"MainMenu_Campaigns_Setup_Var_skill_2"						"Normal"
 		"MainMenu_Campaigns_Setup_Var_skill_3"						"Hard"
+		"MainMenu_Campaigns_Setup_Var_player_throwforce"					"Enable Throwing Objects"
+		"MainMenu_Campaigns_Setup_Var_player_throwenable_Description"		"Enables Half-Life 2-style pickup behavior, allowing objects to be thrown at will.\n\nDefault: Off"
+		"MainMenu_Campaigns_Setup_Var_player_throwforce"					"Object Throw Force"
+		"MainMenu_Campaigns_Setup_Var_player_throwforce_Description"		"The initial strength of throw objects, in Hammer units (HU). Requires \"Enable Throwing Objects\"."
+		"MainMenu_Campaigns_Setup_Var_mv_bhop"						"\"Bunny-hop\" Speed Boost Bug"
+		"MainMenu_Campaigns_Setup_Var_mv_bhop_Description"			"Enables a \"bunny-hopping\" bug that allows players to gain extra momentum by abusing broken movement behavior, as depicted in legacy versions of Source engine games.\n\nDefault: Off"
+		"MainMenu_Campaigns_Setup_Var_mv_duckjump"					"Allow Crouch Jumping"
+		"MainMenu_Campaigns_Setup_Var_mv_duckjump_Description"		"Allows the player to jump while crouched/ducked. This is a requirement for maps making use of specific Half-Life 2 movement behavior.\n\nDefault: Off"
+		
+		// ServerSettings
+		"MainMenu_Campaigns_Setup_Var_hostname"						"Server Name"
+		"MainMenu_Campaigns_Setup_Var_hostname_Description"			"The searchable name of this server, as shown in the server browser. Not applicable for single-player games."
+		"MainMenu_Campaigns_Setup_Var_sv_tags"						"Server Tags"
+		"MainMenu_Campaigns_Setup_Var_sv_tags_Description"			"Keywords to use when searching for servers with specific customizations or gamemodes. Not applicable for single-player games.\n\nDefault: None"
+		"MainMenu_Campaigns_Setup_Var_maxplayers"					"Maximum Player Count"
+		"MainMenu_Campaigns_Setup_Var_maxplayers_Description"		"The maximum number of players that can connect to this server at once. Setting this to 1 forces single-player mode.\n\nDefault: 1"
+		"MainMenu_Campaigns_Setup_Var_maxplayers"					"Server Password"
+		"MainMenu_Campaigns_Setup_Var_maxplayers_Description"		"A password/code players can use to join this server. Ideal for hosting private sessions and LAN parties.\n\nDefault: None"
+		"MainMenu_Campaigns_Setup_Var_sv_cheats"					"Enable Server Cheats"
+		"MainMenu_Campaigns_Setup_Var_sv_cheats_Description"		"Enables access to special commands flagged as \"cheats\", such as <pre>noclip</pre>, <pre>impulse</pre> and <pre>ent_fire</pre>.\n\nDefault: Off"
+		"MainMenu_Campaigns_Setup_Var_p2p"							"Use Steam Networking"
+		"MainMenu_Campaigns_Setup_Var_p2p_Description"				"Uses the <a href="https://partner.steamgames.com/doc/features/multiplayer/steamdatagramrelay">Steam Datagram Relay</a> to enable hosting peer-to-peer (P2P) and dedicated servers over the Internet with minimal technical setup. Game traffic is sent to Valve relay servers to anonymize player information and protect the server host."
 		
 		// CampaignSetupDiscardDialog
 		"MainMenu_Campaigns_Setup_Discard_Title"					"Discard Changes"

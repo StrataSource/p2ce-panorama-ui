@@ -68,16 +68,16 @@ class CampaignShared {
 		(UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>) = {
 			'GameplayBase': {
 				'mirrorWorld': {
-					name: 'Mirror World',
-					helpText: '[HC] Flips the world horizontally.\n\nDefault: FALSE',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_cl_mirror_world'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_cl_mirror_world_Description'),
 					def: false,
 					command: 'cl_mirror_world',
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
 				'gravity': {
-					name: 'Gravity',
-					helpText: '[HC] Adjust the world gravity.\n\ndefault: 600',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_gravity'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_gravity_Description'),
 					def: 600,
 					command: 'sv_gravity',
 					// numberentry only supports integers
@@ -85,55 +85,55 @@ class CampaignShared {
 					currentValue: undefined
 				},
 				'skill': {
-					name: 'Difficulty',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_skill'),
 					helpText:
-						'[HC] Sets the skill level and affects how much damage is dealt/taken. Does not apply to Portal campaigns.\n\ndefault: Normal',
+						$.Localize('#MainMenu_Campaigns_Setup_Var_skill_Description'),
 					def: '1',
 					command: 'skill',
 					panelType: 'DropDown',
 					dropDownValues: [
 						{
-							text: 'Easy',
+							text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_1'),
 							value: '1'
 						},
 						{
-							text: 'Medium',
+							text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_2'),
 							value: '2'
 						},
 						{
-							text: 'Hard',
+							text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_3'),
 							value: '3'
 						}
 					],
 					currentValue: undefined
 				},
 				'throw': {
-					name: 'Enable Throw',
-					helpText: '[HC] Enable throw',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwenable'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwenable_Description'),
 					def: false,
 					command: 'player_throwenable',
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
 				'throwForce': {
-					name: 'Throw Force',
-					helpText: '[HC] Throw',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwforce'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwforce_Description'),
 					def: '1000',
 					command: 'player_throwforce',
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
 				'bhop': {
-					name: 'Enable Bunnyhop Speed Boost',
-					helpText: '[HC] Enable bhop speed',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_bhop'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_bhop_Description'),
 					def: false,
 					command: 'mv_bhop',
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
 				'crouchJump': {
-					name: 'Enable Crouch Jumping',
-					helpText: '[HC] Enable duckjump',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_duckjump'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_duckjump_Description'),
 					def: false,
 					command: 'mv_duckjump',
 					panelType: 'ToggleButton',
@@ -142,49 +142,48 @@ class CampaignShared {
 			},
 			'ServerSettings': {
 				'hostname': {
-					name: 'Server Name',
-					helpText: '[HC] Server Name',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_hostname'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_hostname_Description'),
 					def: `${FriendsAPI.GetLocalPlayerName()}'s game`,
 					command: 'hostname',
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
+				'tags': {
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_tags'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_tags_Description'),
+					def: '',
+					command: 'sv_tags',
+					panelType: 'TextEntry',
+					currentValue: undefined
+				},
 				'maxplayers': {
-					name: 'Maximum Player Count',
-					helpText: '[HC] Max players',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_maxplayers'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_maxplayers_Description'),
 					def: '1',
 					command: 'maxplayers',
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
 				'password': {
-					name: 'Server Password',
-					helpText: '[HC] Server password',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_password'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_password_Description'),
 					def: '',
 					command: 'sv_password',
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
 				'lan': {
-					name: 'LAN Only',
-					helpText: '[HC] LAN',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_lan'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_lan_Description'),
 					def: false,
 					command: 'sv_lan',
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
-				'tags': {
-					name: 'Server Browser Tags',
-					helpText: '[HC] Tags',
-					def: '',
-					command: 'sv_tags',
-					panelType: 'TextEntry',
-					currentValue: undefined
-				},
 				'cheats': {
-					name: 'Server Cheats',
-					helpText:
-						'[HC] Enable <pre>sv_cheats 1</pre> and allow the usage of commands that require it, such as <pre>noclip</pre>.\n\nDefault: false',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_cheats'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_cheats_Description'),
 					def: false,
 					command: 'sv_cheats',
 					panelType: 'ToggleButton',
