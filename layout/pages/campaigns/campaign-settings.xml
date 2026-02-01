@@ -114,7 +114,7 @@
 						texturewidth="128"
 						textureheight="128"
 					/>
-					<Panel class="flow-down fill-width full-height">
+					<Panel class="flow-down fill-width vertical-align-center">
 						<Label id="CampaignSettingsChapter" class="campaign-settings__chapter-text" text="[PH] Campaign Chapter" />
 						<!-- <Label id="CampaignSettingsMap" class="campaign-settings__map-text" text="[PH] Campaign Map" /> -->
 					</Panel>
