@@ -76,7 +76,7 @@
 									group="SettingsSubNav"
 									onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'ControllerSubSection')"
 								>
-									<Label class="settings-nav__subitem-label" text="[HC] Controller" />
+									<Label class="settings-nav__subitem-label" text="#Settings_Controller_SteamInputButton" />
 								</RadioButton>
 
 								<RadioButton
