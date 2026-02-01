@@ -97,8 +97,6 @@ class CampaignSelector {
 	static campaignEntries: CampaignEntry[] = [];
 	static hoveredCampaign: CampaignInfo | null = null;
 
-	// campaigns, p2ce ws, p2 ws
-	static gameType: GameType;
 	// filters by SP or MP
 	static playerMode: PlayerMode;
 
@@ -113,14 +111,8 @@ class CampaignSelector {
 			this.hoverBoxart.SetImage(getRandomFallbackImage());
 		});
 
-		this.gameType = UiToolkitAPI.GetGlobalObject()['GameType'] as GameType;
-		this.playerMode = UiToolkitAPI.GetGlobalObject()['PlayerMode'] as PlayerMode;
-		this.setPageLines();
+		this.playerMode = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SELECTOR_TYPE] as PlayerMode;
 		this.reloadList();
-	}
-
-	static setPageLines() {
-		$.DispatchEvent('MainMenuSetPageLines', '', '');
 	}
 
 	static populateCampaigns() {

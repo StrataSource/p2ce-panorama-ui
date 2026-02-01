@@ -13,7 +13,8 @@ declare const enum GameType {
 declare const enum GlobalUiObjects {
 	UI_ACTIVE_CHAPTER = 'ActiveUiChapter',
 	UI_ACTIVE_CAMPAIGN = 'ActiveUiCampaign',
-	UI_CAMPAIGN_SETTINGS = 'UiCampaignSettings'
+	UI_CAMPAIGN_SETTINGS = 'UiCampaignSettings',
+	UI_CAMPAIGN_SELECTOR_TYPE = 'PlayerMode'
 }
 
 declare const enum CampaignMeta {

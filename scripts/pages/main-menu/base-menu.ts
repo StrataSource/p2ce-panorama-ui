@@ -43,9 +43,6 @@ class BaseMenu {
 				if (!this.savChapter) return;
 
 				this.isContinueActive = true;
-				this.continueImg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
-				//this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
-				this.bgCredit.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 
 				const logoPath = this.savCampaign.meta[CampaignMeta.FULL_LOGO];
 				if (logoPath !== undefined) {
@@ -54,11 +51,8 @@ class BaseMenu {
 					$.DispatchEvent('MainMenuSetLogo', '');
 				}
 
-				const date = new Date(Number(this.latestSave.fileTime));
-				const chapterName = $.Localize(this.savChapter.title);
-				this.continueText.text = `${chapterName.replace('\n', ': ')} [${convertTime(date, false)}]`;
-
 				this.continueLogo.AddClass('mainmenu__square-logo__anim');
+				this.continueBox.visible = true;
 			},
 			unhovered: () => {
 				this.hideContinueDetails();
@@ -119,12 +113,12 @@ class BaseMenu {
 	static savChapter: ChapterInfo | undefined = undefined;
 	static isContinueActive: boolean = false;
 
-	static continueImg: Image;
 	static continueBtn: Button;
 	static continueLogo: Image;
 	static continueText: Label;
-
-	static bgCredit = $<Panel>('#BgCredit')!;
+	static continueBox = $<Panel>('#ContinueBox')!;
+	static continueBoxText = $<Label>('#ContinueSaveTagline')!;
+	static continueImg = $<Image>('#ContinueSaveThumb')!;
 
 	static bgMapLoad: uuid | undefined = undefined;
 
@@ -137,6 +131,7 @@ class BaseMenu {
 			if (btn.id === 'CampaignContinueBtn') {
 				const b = constructMenuButton(btn);
 				this.continueBtn = b;
+				this.continueBtn.AddClass('mainmenu__nav__btn__no-gradient');
 
 				const text = b.FindChildTraverse('CampaignContinueBtn_Tagline');
 
@@ -193,14 +188,7 @@ class BaseMenu {
 		p.LoadLayoutSnippet('MenuBackgroundLayer');
 		$.DispatchEvent('MainMenuAddBgPanel', p);
 
-		const bg = p.FindChildTraverse('MainMenuSaveBackground');
 		const logo = p.FindChildTraverse('ContinueSaveLogo');
-		if (bg) {
-			this.continueImg = bg as Image;
-			this.continueImg.style.animation = 'FadeOut 0.01s ease-out 0s 1 normal forwards';
-		} else {
-			throw new Error('MainMenuSaveBackground could not be found.');
-		}
 		if (logo) {
 			this.continueLogo = logo as Image;
 		} else {
@@ -223,6 +211,7 @@ class BaseMenu {
 	static setContinueDetails() {
 		this.continueBtn.enabled = false;
 		this.continueBtn.visible = false;
+		this.continueBox.visible = false;
 
 		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
@@ -235,7 +224,7 @@ class BaseMenu {
 		}
 
 		const campaigns = CampaignAPI.GetAllCampaigns();
-		let savCampaign;
+		let savCampaign: CampaignInfo | undefined;
 		for (const save of saves) {
 			savCampaign = campaigns.find((v) => {
 				return v.id === save.mapGroup;
@@ -254,7 +243,7 @@ class BaseMenu {
 			return;
 		}
 
-		const savChapter = savCampaign.chapters.find((ch) => {
+		const savChapter: ChapterInfo | undefined = savCampaign.chapters.find((ch) => {
 			return (
 				ch.maps.find((map) => {
 					return map.name === this.latestSave.mapName || map.name === `${this.latestSave.mapName}.bsp`;
@@ -272,6 +261,11 @@ class BaseMenu {
 		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${savCampaign.meta[CampaignMeta.SQUARE_LOGO]}`);
 
 		this.continueText.text = `${$.Localize(savCampaign.title)}`;
+
+		const date = new Date(Number(this.latestSave.fileTime));
+		const chapterName = $.Localize(savChapter.title);
+
+		this.continueBoxText.text = `${chapterName.replace('\n', ': ')}\n${convertTime(date, false)}`;
 
 		this.continueBtn.enabled = true;
 		this.continueBtn.visible = true;
@@ -384,14 +378,11 @@ class BaseMenu {
 
 		this.isContinueActive = false;
 
-		if (!this.continueImg.IsValid()) return;
+		if (!this.continueBox.IsValid()) return;
 
-		this.bgCredit.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-		//this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
-		this.continueImg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 		$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 
-		if (this.continueText.IsValid() && this.savCampaign) this.continueText.text = $.Localize(this.savCampaign.title);
+		this.continueBox.visible = false;
 
 		this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
 	}
