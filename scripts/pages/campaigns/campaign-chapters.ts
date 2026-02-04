@@ -3,10 +3,10 @@
 class ChapterEntry {
 	num: number;
 	panel: Button;
-	chapter: ChapterInfo;
+	chapter: ChapterInfo | undefined;
 	locked: boolean;
 
-	constructor(num: number, panel: Button, chapter: ChapterInfo, locked: boolean) {
+	constructor(num: number, panel: Button, chapter: ChapterInfo | undefined, locked: boolean) {
 		this.num = num;
 		this.panel = panel;
 		this.chapter = chapter;
@@ -17,6 +17,14 @@ class ChapterEntry {
 		const title = this.panel.FindChildTraverse<Label>('ChapterTitle');
 		const desc = this.panel.FindChildTraverse<Label>('ChapterDesc');
 		const cover = this.panel.FindChildTraverse<Image>('ChapterCover');
+
+		if (this.chapter === undefined) {
+			if (title) title.style.opacity = 0;
+			if (desc) desc.style.opacity = 0;
+			if (cover) cover.style.opacity = 0;
+			this.panel.enabled = false;
+			return;
+		}
 
 		$.RegisterEventHandler('ImageFailedLoad', this.panel, () => {
 			const c = this.panel.FindChildTraverse<Image>('ChapterCover');
@@ -59,7 +67,7 @@ class ChapterEntry {
 		} else {
 			this.panel.SetPanelEvent('onactivate', () => {
 				//CampaignChapters.actions.enabled = true;
-				CampaignChapters.selectedChapter = this.chapter;
+				CampaignChapters.selectedChapter = this.chapter!;
 				UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.chapter;
 				$.DispatchEvent(
 					'MainMenuOpenNestedPage',
@@ -80,7 +88,7 @@ class ChapterEntry {
 					CampaignChapters.chapterListModeTitle.text = chTitleSplit[0];
 				}
 
-				const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
+				const thumb = this.chapter!.meta[CampaignMeta.CHAPTER_THUMBNAIL];
 				if (thumb) {
 					if ((thumb as string).startsWith('http')) {
 						CampaignChapters.chapterListModeCover.SetImage(thumb);
@@ -224,7 +232,9 @@ class CampaignChapters {
 
 		for (
 			let i = 0;
-			i < Math.min(this.maxEntryPerPage, chapters.length - this.chapterPage * this.maxEntryPerPage);
+			this.displayMode === ChapterDisplayMode.CLASSIC ?
+				i < this.maxEntryPerPage :
+				i < Math.min(this.maxEntryPerPage, chapters.length - this.chapterPage * this.maxEntryPerPage);
 			++i
 		) {
 			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
@@ -232,7 +242,14 @@ class CampaignChapters {
 
 			const idx = this.chapterPage * this.maxEntryPerPage + i;
 
-			this.chapterEntries.push(new ChapterEntry(idx, p, chapters[idx], prog < idx));
+			this.chapterEntries.push(
+				new ChapterEntry(
+					idx,
+					p,
+					idx < chapters.length ? chapters[idx] : undefined,
+					prog < idx
+				)
+			);
 
 			this.chapterEntries[i].update();
 		}
