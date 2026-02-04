@@ -612,7 +612,7 @@ $progressbar-shadow: none !default;
 
 $tooltip-background: gradient( radial, 50% 50%, 0% 0%, 100% 100%, from( $base-900 ), to( $base-950 ) ) !default;
 $tooltip-arrow-color: $base-700 !default;
-$tooltip-padding: 20px 25px !default;
+$tooltip-padding: 10px 15px !default;
 $tooltip-border: 1px solid $base-700 !default;
 $tooltip-radius: 0px !default;
 $tooltip-margin: 0px !default;
@@ -633,7 +633,7 @@ $popup-max-width: 900px !default;
 $popup-wide: 900px !default;
 $popup-large-max-width: 1200px !default;
 $popup-background: $base-gradient-subtle !default;
-$popup-padding: 25px 30px !default;
+$popup-padding: 30px 30px !default;
 $popup-border: 1px solid $base-700 !default;
 $popup-radius: 0px !default;
 
