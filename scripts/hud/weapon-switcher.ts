@@ -31,6 +31,11 @@ class WeaponSwitcher {
 	static selectedIndex: number[] = [0, 0];
 	static fadeTimer: uuid | undefined = undefined;
 
+	// how many buckets should ALWAYS appear
+	// if no weapons exist in them, it's blank
+	// similar to hl2 behavior
+	static MIN_NUM_BUCKETS = 6;
+
 	static onLoad() {}
 
 	static onLevelInit() {
@@ -225,24 +230,35 @@ class WeaponSwitcher {
 	static constructPanels() {
 		$.GetContextPanel().RemoveAndDeleteChildren();
 
-		this.bucketedWeapons.forEach((weapons: SwitcherData[], index: number) => {
-			const bucketPanel = $.CreatePanel('Panel', $.GetContextPanel(), `Bucket${index}`);
+		const bucketCount = Math.max(this.bucketedWeapons.length, this.MIN_NUM_BUCKETS);
+		for (let i = 0; i < bucketCount; ++i) {
+			const weapons = this.bucketedWeapons[i];
+
+			// always create a bucket (empty looking one)
+			const bucketPanel = $.CreatePanel('Panel', $.GetContextPanel(), `Bucket${i}`);
 			bucketPanel.AddClass('weapons__bucket');
+
+			if (!weapons) {
+				const fakeWeapon = $.CreatePanel('Panel', bucketPanel, `Bucket${i}-EMPTY`);
+				fakeWeapon.AddClass('weapons__bucket__entry');
+				fakeWeapon.AddClass('weapons__bucket__entry__empty');
+				continue;
+			}
 
 			weapons.forEach((data: SwitcherData, weaponIndex: number) => {
 				const weapon = data.weapon;
-				const weaponPanel = $.CreatePanel('Panel', bucketPanel, `Bucket${index}-${weapon.classname}`);
+				const weaponPanel = $.CreatePanel('Panel', bucketPanel, `Bucket${i}-${weapon.classname}`);
 				weaponPanel.AddClass('weapons__bucket__entry');
 
 				if (weaponIndex !== 0) {
 					weaponPanel.AddClass('weapons__bucket__entry__sub');
 				}
 
-				this.bucketedWeapons[index][weaponIndex].panel = weaponPanel;
+				this.bucketedWeapons[i][weaponIndex].panel = weaponPanel;
 
 				if (weaponIndex === 0) {
-					const bucketLabel = $.CreatePanel('Label', weaponPanel, `Bucket${index}-NumLabel`, {
-						text: `${index + 1}`
+					const bucketLabel = $.CreatePanel('Label', weaponPanel, `Bucket${i}-NumLabel`, {
+						text: `${i + 1}`
 					});
 					bucketLabel.AddClass('weapons__bucket__entry__num');
 				}
@@ -284,7 +300,8 @@ class WeaponSwitcher {
 						weaponIcon.text = 'j';
 						break;
 					default:
-						weaponIcon.text = 'A';
+						weaponIcon.AddClass('weapons__bucket__entry__icon-label__unknown');
+						weaponIcon.text = '?';
 						break;
 				}
 
@@ -293,6 +310,6 @@ class WeaponSwitcher {
 				});
 				weaponLabel.AddClass('weapons__bucket__entry__name');
 			});
-		});
+		}
 	}
 }
