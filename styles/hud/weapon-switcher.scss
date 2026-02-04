@@ -27,12 +27,17 @@
 				}
 			}
 
+			&__empty {
+				background-color: rgba($hl2-bg, 0.2);
+			}
+
 			&__expanded {
 				width: 252px;
 				height: 189px;
 				visibility: visible;
 
-				#{$this}__icon-label {
+				#{$this}__icon-label,
+				#{$this}__icon {
 					visibility: visible;
 				}
 			}
@@ -44,6 +49,9 @@
 					#{$this}__icon-label {
 						text-shadow: 0px 0px 8px 1 $hl2-red;
 					}
+					#{$this}__icon {
+						img-shadow: 0px 0px 8px 1 $hl2-red;
+					}
 				}
 
 				#{$this}__num,
@@ -54,6 +62,12 @@
 					overflow: noclip;
 					color: $hl2-bright-yellow;
 				}
+				#{$this}__icon {
+					visibility: visible;
+					img-shadow: 0px 0px 8px 1 rgba($hl2-bright-yellow, 0.4);
+					wash-color: $hl2-bright-yellow;
+					opacity: 1;
+				}
 			}
 
 			&__red {
@@ -62,9 +76,20 @@
 				#{$this}__num {
 					color: $hl2-red;
 				}
+				#{$this}__icon {
+					wash-color: $hl2-red;
+				}
 			}
 
 			&__icon {
+				width: 100%;
+				height: 100%;
+				align: center center;
+				visibility: collapse;
+				wash-color: $hl2-full-yellow;
+				opacity: 0.4;
+				padding: 25px;
+				img-shadow: 0px 0px 8px 1 rgba($hl2-bright-yellow, 0.4);
 			}
 
 			&__name {
@@ -97,6 +122,10 @@
 				horizontal-align: center;
 				vertical-align: center;
 				color: rgba($hl2-yellow, 0.4);
+				&__unknown {
+					font-family: $font-halflife2-hud;
+					font-weight: bold;
+				}
 			}
 		}
 	}
