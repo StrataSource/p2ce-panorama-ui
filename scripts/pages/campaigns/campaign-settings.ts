@@ -196,6 +196,13 @@ class CampaignSettingsTab {
 					continue;
 				}
 
+				if (setting.command === 'sv_cheats') {
+					if (GameInterfaceAPI.GetSettingInt('developer') > 0 || GameInterfaceAPI.GetSettingBool('sv_cheats')) {
+						$.Warning('Developer mode enabled or sv_cheats is already 1. Not applying sv_cheats setting.');
+						continue;
+					}
+				}
+
 				// we execute commands that are at their default anyway to
 				// reset any of these convars back to their original state,
 				// in case they were ever overridden. simple enough.
