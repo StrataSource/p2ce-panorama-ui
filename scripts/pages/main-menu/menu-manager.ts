@@ -44,6 +44,11 @@ class MenuManager {
 			this.deleteMenus();
 			this.isLoaded = false;
 			this.onLoaded();
+			$.Schedule(0.1,
+				() => {
+					$.DispatchEvent('MainMenuSwitchReverse', true);
+				}
+			);
 		});
 	}
 
