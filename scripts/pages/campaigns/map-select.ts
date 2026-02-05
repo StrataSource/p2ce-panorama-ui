@@ -7,7 +7,7 @@ class CampaignMapSelect {
 		const chapter = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo;
 
 		// determine if any of these maps use an image, if they are, enable img grid mode
-		let useImages = false;
+		let useImages = true;
 		for (const map of chapter.maps) {
 			const img = map.meta['img'];
 			if (img) {
@@ -42,6 +42,7 @@ class CampaignMapSelect {
 			p.SetPanelEvent('onactivate', () => {
 				CampaignShared.setMap(map.name);
 				$.Msg(`CAMPAIGN MAP SELECTOR: Set map to ${map.name}`)
+				$.DispatchEvent('CampaignMenuRefreshUserSettings');
 			});
 		}
 	}

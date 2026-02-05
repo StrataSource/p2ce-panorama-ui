@@ -45,7 +45,10 @@
 		border: $menu-pane-border;
 		background-color: $button-background;
 		padding: 10px 15px;
-		margin-bottom: 5px;
+
+		&__sub {
+			margin-top: 10px;
+		}
 
 		&__icon {
 			width: 32px;
@@ -67,6 +70,20 @@
 		&:hover {
 			border-color: $primary-color;
 			background-color: $button-background-hover;
+			& Label {
+				color: $bright-color;
+			}
+		}
+
+		&:selected {
+			border-color: $primary-color;
+			background-color: $primary-color;
+			& Label {
+				color: $base-950;
+			}
+			& Image {
+				wash-color: $base-950;
+			}
 		}
 	}
 
@@ -180,27 +197,43 @@
 			text-transform: uppercase;
 		}
 	}
+
+	&__grouper {
+		&__bg {
+			width: 100%;
+			height: fill-parent-flow(1);
+			background-color: $base-gradient-subtle;
+			border: 1px solid $primary-color;
+			border-top-width: 0;
+		}
+	}
 }
 
 .campaign-setting {
+	&__tooltip {
+		width: 100%;
+		height: 50px;
+		tooltip-position: left;
+	}
 	&__entry {
 		width: 100%;
 		height: 50px;
 		padding: 0 15px;
 		flow-children: right;
+		border-bottom: 1px solid $base-900;
 
 		&__odd {
 		}
 
 		&:hover {
 			animation: OpacityFlicker 12s linear 0s infinite normal forwards;
-			background-color: gradient(linear, 0% 0%, 100% 0%, from(rgba(0, 0, 0, 0)), to($button-background-hover-color));
+			background-color: $primary-900;
 		}
 
 		&__text {
 			@include mixin.font-styles($use-header: true);
 			width: fill-parent-flow(0.5);
-			font-size: 20px;
+			font-size: 16px;
 			vertical-align: center;
 			transform: translateY(-2px);
 		}
@@ -245,7 +278,6 @@
 		}
 
 		&__dropdown {
-			width: 447px;
 			height: 38px;
 
 			background-color: $button-background;
@@ -257,7 +289,7 @@
 				}
 			}
 			.DropDownIcon {
-				border-left: $menu-pane-border;
+				border-left-width: 0px;
 			}
 			&:not(:parentdisabled) .DropDownIcon {
 				wash-color: $bright-color;
