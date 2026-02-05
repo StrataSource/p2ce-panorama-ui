@@ -536,8 +536,8 @@
 		// "Settings_AudioDevices_Speaker_71"				"7.1 Surround Sound"	// Unsupported by CSGO and Strata?
 		"Settings_AudioDevices_Speaker"						"Audio Output Configuration"
 		"Settings_AudioDevices_Speaker_info"				"Alters audio playback behavior by allocating specific sound channels to individual speakers based on a specific device configuration."
-		"Settings_AudioDevices_Background"					"Play game audio while unfocused"
-		"Settings_AudioDevices_Background_info"				"Determines whether the game should play audio while in the background."
+		"Settings_AudioDevices_Background"					"Lower volume while unfocused"
+		"Settings_AudioDevices_Background_info"				"Determines how much the game should reduce the volume of audio while in the background."
 		
 		// Settings - Video
 		"Settings_Video"								"Video"
