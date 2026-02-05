@@ -135,6 +135,17 @@
 					hasdocspage="false"
 				/>
 
+				<SettingsSlider
+					text="#Settings_Volume_Background"
+					infomessage="#Settings_Volume_Background_info"
+					min="0"
+					max="1"
+					invert="true"
+					percentage="true"
+					convar="snd_mute_losefocus"
+					hasdocspage="false"
+				/>
+
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
@@ -248,16 +259,6 @@
 					<Label id="device7" text="XXXXXX 7" />
 					<Label id="device8" text="XXXXXX 8" />
 				</SettingsEnumDropDown>
-
-				<SettingsSlider
-					text="#Settings_AudioDevices_Background"
-					infomessage="#Settings_AudioDevices_Background_info"
-					min="0"
-					max="1"
-					percentage="true"
-					convar="snd_mute_losefocus"
-					hasdocspage="false"
-				/>
 
 			</Panel>
 
