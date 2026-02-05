@@ -86,9 +86,5 @@ class PauseMenu {
 		p.LoadLayoutSnippet('MenuBackgroundLayer');
 		$.DispatchEvent('MainMenuAddBgPanel', p);
 		p.FindChildTraverse('PauseMenuMainMenuBlur')!.AddClass('mainmenu__pause-blur__anim');
-
-		if (!CampaignAPI.IsCampaignActive()) {
-			$.DispatchEvent('MainMenuSetLogo', '');
-		}
 	}
 }

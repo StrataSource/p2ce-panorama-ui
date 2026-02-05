@@ -221,7 +221,17 @@ class CampaignShared {
 
 			if (setting.panelType === undefined) return;
 
-			const wrapper = $.CreatePanel('Panel', parent, `${id}_Wrapper`, {
+			const helpWrapper = $.CreatePanel(
+				'TooltipPanel',
+				parent,
+				`${id}_TT`,
+				{
+					'tooltip': setting.helpText
+				}
+			);
+			helpWrapper.AddClass('campaign-setting__tooltip');
+
+			const wrapper = $.CreatePanel('Panel', helpWrapper, `${id}_Wrapper`, {
 				class: 'campaign-setting__entry'
 			});
 
@@ -280,15 +290,23 @@ class CampaignShared {
 			switch (setting.panelType) {
 				case 'ToggleButton':
 					(inputter as ToggleButton).SetSelected(setting.currentValue as boolean);
+					inputter.SetPanelEvent('onactivate', () => {
+						this.onPreClose($.GetContextPanel().id);
+					});
 					break;
 
 				case 'TextEntry':
 					(inputter as TextEntry).text = setting.currentValue as string;
-					(inputter as TextEntry).RaiseChangeEvents(true);
+					inputter.SetPanelEvent('ontextentrysubmit', () => {
+						this.onPreClose($.GetContextPanel().id);
+					});
 					break;
 
 				case 'DropDown':
 					(inputter as DropDown).SetSelectedIndex(Number(setting.currentValue));
+					inputter.SetPanelEvent('oninputsubmit', () => {
+						this.onPreClose($.GetContextPanel().id);
+					});
 					break;
 
 				default:
@@ -315,8 +333,6 @@ class CampaignShared {
 			return;
 		}
 
-		$.Msg('Collecting setting changes...');
-
 		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Array<CampaignSetting>>);
 
 		for (const field of this.inputFields) {
@@ -324,25 +340,39 @@ class CampaignShared {
 			const p = field.panel;
 			switch (p.paneltype) {
 				case 'ToggleButton':
-					s.currentValue = Number((p as ToggleButton).IsSelected());
+				{
+					const newValue = Number((p as ToggleButton).IsSelected());
+					if (s.currentValue !== newValue)
+						$.Msg(`Setting '${s.command}' is now [VALUE: '${newValue}', DEFAULT: '${s.def}']`);
+					s.currentValue = newValue;
 					break;
+				}
 
 				case 'TextEntry':
-					s.currentValue = (p as TextEntry).text;
+				{
+					const newValue = (p as TextEntry).text;
+					if (s.currentValue !== newValue)
+						$.Msg(`Setting '${s.command}' is now [VALUE: '${newValue}', DEFAULT: '${s.def}']`);
+					s.currentValue = newValue;
 					break;
+				}
 
 				case 'DropDown':
-					s.currentValue = (p as DropDown).GetSelected().GetAttributeInt('index', -1);
+				{
+					const newValue = (p as DropDown).GetSelected().GetAttributeInt('index', -1);
+					if (s.currentValue !== newValue)
+						$.Msg(`Setting '${s.command}' is now [VALUE: '${newValue}', DEFAULT: '${s.def}']`);
+					s.currentValue = newValue;
 					if (field.value === -1) throw new Error('Unable to retrieve index from DropDown Field');
 					break;
-
+				}
 				default:
 					throw new Error('This panel type is not supported as a setting widget.');
 					break;
 			}
-
-			$.Msg(`Setting '${s.command}' is now [VALUE: '${s.currentValue}', DEFAULT: '${s.def}']`);
 		}
+
+		$.DispatchEvent('CampaignMenuRefreshUserSettings');
 	}
 
 	static setMap(map: string) {
