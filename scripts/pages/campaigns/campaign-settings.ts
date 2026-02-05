@@ -17,6 +17,8 @@ class CampaignSettingsTab {
 
 	static advancedOpened = false;
 
+	static openSettingsPage: Panel | undefined = undefined;
+
 	static init() {
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
 		$.DispatchEvent(
@@ -61,8 +63,8 @@ class CampaignSettingsTab {
 
 		//this.mapText.text = CampaignShared.getMap();
 
-		$.RegisterForUnhandledEvent('MainMenuPageClosed', () => {
-			this.closeSettingsSubpage();
+		$.RegisterForUnhandledEvent('CampaignMenuRefreshUserSettings', () => {
+			this.updateSummary();
 		});
 	}
 
@@ -87,7 +89,7 @@ class CampaignSettingsTab {
 
 	static clear() {
 		CampaignShared.setup();
-		this.closeSettingsSubpage();
+		this.updateSummary();
 	}
 
 	static finishSettings() {
@@ -129,16 +131,21 @@ class CampaignSettingsTab {
 		this.settingsPage.visible = this.advancedOpened;
 	}
 
-	static openSettingsSubpage(tab: string, locH: string, locS: string, xml?: string) {
-		if (xml) $.DispatchEvent('MainMenuOpenNestedPage', tab, `campaigns/${xml}`, undefined);
-		else $.DispatchEvent('MainMenuOpenNestedPage', tab, 'campaigns/settings-base', undefined);
+	static openSettingsSubpage(tab: string, invoker: Button, locH: string, locS: string, xml?: string) {
+		if (this.openSettingsPage) {
+			this.openSettingsPage.RemoveAndDeleteChildren();
+			this.openSettingsPage.DeleteAsync(0);
+		}
 
-		$.DispatchEvent('MainMenuSetPageLines', $.Localize(locH), $.Localize(locS));
-	}
+		const newPanel = $.CreatePanel('Panel', this.settingsPage, tab);
+		this.settingsPage.MoveChildAfter(newPanel, invoker);
 
-	static closeSettingsSubpage() {
-		this.updateSummary();
-		//this.mapText.text = CampaignShared.getMap();
+		const layoutFile = xml ? xml : 'settings-base';
+		newPanel.LoadLayout(`file://{resources}/layout/pages/campaigns/${layoutFile}.xml`, false, false);
+		newPanel.RegisterForReadyEvents(true);
+		newPanel.SetFocus();
+
+		this.openSettingsPage = newPanel;
 	}
 
 	static updateSummary() {
@@ -164,11 +171,20 @@ class CampaignSettingsTab {
 					// skip values that are exactly the same
 					continue;
 				}
+
+				let displayText = '';
+				if (entry.panelType === 'ToggleButton') {
+					displayText = `<b>${entry.name}</b>`;
+				} else if (entry.panelType === 'DropDown') {
+					displayText = `<b>${entry.name}:</b> ${entry.dropDownValues![Number(entry.currentValue)].text}`;
+				} else {
+					displayText = `<b>${entry.name}:</b> ${entry.currentValue}`;
+				}
 	
 				$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
 					class: 'campaign-settings__summary__text',
 					html: true,
-					text: `<b>${entry.name}:</b> ${entry.currentValue}`
+					text: displayText
 				});
 	
 				++applied;
@@ -209,10 +225,17 @@ class CampaignSettingsTab {
 				// doesn't reset them if the player enters a map on their
 				// own manually, but, WHATEVER!
 
-				$.Msg(`Execute ${setting.command} ${setting.currentValue}`);
-				GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.currentValue}`);
+				if (setting.panelType === 'DropDown') {
+					$.Msg(`Execute ${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`);
+					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`);
+				} else {
+					$.Msg(`Execute ${setting.command} ${setting.currentValue}`);
+					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.currentValue}`);
+				}
 			}
 		}
+
+		GameInterfaceAPI.ConsoleCommand('skill 3');
 
 		//for (let i = 0; i < subpages.length; ++i) {
 		//	const subpage = subpages[i];

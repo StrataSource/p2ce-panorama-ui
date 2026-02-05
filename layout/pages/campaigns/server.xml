@@ -8,7 +8,5 @@
 	<Panel class="mainmenu__page flow-right">
 		<Panel id="SettingPageInsert" class="fill-width full-height flow-down mr-1">
 		</Panel>
-
-		<Panel id="HelpInsert" class="fill-width full-height flow-down ml-1" />
 	</Panel>
 </root>

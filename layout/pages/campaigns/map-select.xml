@@ -24,7 +24,7 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="mainmenu__page" onload="CampaignMapSelect.onLoad()">
+	<Panel class="campaign-settings__grouper__bg" onload="CampaignMapSelect.onLoad()">
 		<Panel id="SettingPageInsert" class="campaign-maps">
 
 		</Panel>

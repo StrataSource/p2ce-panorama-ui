@@ -5,10 +5,9 @@
 	<scripts>
 	</scripts>
 
-	<Panel class="mainmenu__page flow-right">
-		<Panel id="SettingPageInsert" class="fill-width full-height flow-down mr-1">
+	<Panel class="campaign-settings__grouper__bg">
+		<Panel id="SettingPageInsert" class="fill-width full-height flow-down">
+			<Label class="horizontal-align-center vertical-align-center text-weight-bold text-xl" text="#MainMenu_PH_Note" />
 		</Panel>
-
-		<Panel id="HelpInsert" class="fill-width full-height flow-down ml-1" />
 	</Panel>
 </root>
