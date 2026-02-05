@@ -249,15 +249,15 @@
 					<Label id="device8" text="XXXXXX 8" />
 				</SettingsEnumDropDown>
 
-				<SettingsEnum
+				<SettingsSlider
 					text="#Settings_AudioDevices_Background"
-					infomessage="Settings_AudioDevices_Background_info"
+					infomessage="#Settings_AudioDevices_Background_info"
+					min="0"
+					max="1"
+					percentage="true"
 					convar="snd_mute_losefocus"
 					hasdocspage="false"
-				>
-					<RadioButton group="losefocus" text="#Common_Off" value="1" />
-					<RadioButton group="losefocus" text="#Common_On" value="0" />
-				</SettingsEnum>
+				/>
 
 			</Panel>
 
