@@ -226,6 +226,16 @@
 
 				</Panel>
 
+				<SettingsEnum
+					text="[HC] Threaded Audio"
+					infomessage="[HC] Threaded Audio Description"
+					convar="snd_hrtf_async"
+					hasdocspage="false"
+				>
+					<RadioButton group="snd_hrtf_async" text="#Common_Off" value="0" />
+					<RadioButton group="snd_hrtf_async" text="#Common_On" value="1" />
+				</SettingsEnum>
+
 				<SettingsEnumDropDown
 					text="#Settings_AudioDevices_Speaker"
 					infomessage="#Settings_AudioDevices_Speaker_info"
