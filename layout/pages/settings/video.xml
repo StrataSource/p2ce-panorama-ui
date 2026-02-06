@@ -161,6 +161,17 @@
 					<Label text="#Settings_General_Disabled" value="1" id="preventthreadsleep1" />
 					<Label text="#Settings_General_Enabled" value="0" id="preventthreadsleep0" />
 				</SettingsEnumDropDown>
+				<SettingsEnumDropDown
+					text="[HC] Splitscreen Direction"
+					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
+					id="PowerSavingsMode"
+					convar="ss_splitmode"
+					infomessage="[HC] Splitscreen Direction Description"
+				>
+					<Label text="[HC] Automatic" value="0" id="splitmode0" />
+					<Label text="[HC] Horizontal" value="1" id="splitmode1" />
+					<Label text="[HC] Vertical" value="2" id="splitmode2" />
+				</SettingsEnumDropDown>
 				
 			</Panel>
 
@@ -169,9 +180,19 @@
 			<Panel id="AdvancedVideoSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
-					<Label class="settings-group__title" text="#Settings_Render_Title" />
-
+					<Label class="settings-group__title vertical-align-center" text="#Settings_Render_Title" />
+				</Panel>
+				
+				<Panel class="settings-group__subtitle">
+					<Label class="settings-enum-dropdown__title ml-3" text="[HC] Quality Presets (NO IMPLEMENTATION)" />
+					<DropDown id="PresetDropdown" class="dropdown mr-3" menuclass="dropdown-menu">
+						<Label text="[HC] Custom" id="PresetDropdown0" value="0" />
+						<Label text="#Settings_General_Low" id="PresetDropdown1" value="1" />
+						<Label text="#Settings_General_Medium" id="PresetDropdown2" value="2" />
+						<Label text="#Settings_General_High" id="PresetDropdown3" value="3" />
+						<Label text="#Settings_General_VeryHigh" id="PresetDropdown4" value="4" />
+						<Label text="[HC] Stupidly Ludicrous" id="PresetDropdown5" value="5" />
+					</DropDown>
 				</Panel>
 
 				<SettingsEnumDropDown
@@ -185,6 +206,19 @@
 					<Label text="#Settings_General_High" value="2" id="csmqualitylevel2" />
 					<Label text="#Settings_General_VeryHigh" value="3" id="csmqualitylevel3" />
 					<Label text="#Settings_General_Autodetect" value="9999999" id="csmqualitylevel4" />
+				</SettingsEnumDropDown>
+
+				<SettingsEnumDropDown
+					text="[HC] mat_picmip"
+					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
+					id="mat_picmip"
+					convar="mat_picmip"
+					infomessage="[HC] mat_picmip"
+				>
+					<Label text="#Settings_General_Low" value="1" id="mat_picmip1" />
+					<Label text="#Settings_General_Medium" value="0" id="mat_picmip0" />
+					<Label text="#Settings_General_High" value="-1" id="mat_picmip-1" />
+					<Label text="#Settings_General_VeryHigh" value="-10" id="mat_picmip-10" />
 				</SettingsEnumDropDown>
 
 				<SettingsEnumDropDown
