@@ -8,16 +8,16 @@
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
-    <Panel class="settings-page">
+	<Panel class="settings-page">
 		<Panel class="settings-page__header">
 			<Label class="settings-page__title" text="#Settings_Customization" />
 		</Panel>
-        <Panel id="SettingsPageContainer" class="settings-page__container">
-            <Panel id="Portal1SubSection" class="settings-group">
-                <Panel class="settings-group__header">
-                    <Label class="settings-group__title" text="#Settings_Portal1_Title" tags="menu,ui,portal1" />
-                </Panel>
-                <SettingsEnum
+		<Panel id="SettingsPageContainer" class="settings-page__container">
+			<Panel id="Portal1SubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_Portal1_Title" tags="menu,ui,portal1" />
+				</Panel>
+				<SettingsEnum
 					text="#Settings_Portal1_compat"
 					convar="sv_portal_legacy_compat"
 					infomessage="#Settings_Portal1_compat_info"
@@ -25,9 +25,9 @@
 				>
 					<RadioButton group="portal1_compat" text="#Common_Off" value="0" />
 					<RadioButton group="portal1_compat" text="#Common_On" value="1" />
-                </SettingsEnum>
+				</SettingsEnum>
 
-                <SettingsEnum
+				<SettingsEnum
 					text="#Settings_Portal1_xhair"
 					convar="cl_portal_crosshair_mode"
 					infomessage="#Settings_Portal1_xhair_info"
@@ -35,8 +35,8 @@
 				>
 					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
 					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
-                </SettingsEnum>
-            </Panel>
+				</SettingsEnum>
+			</Panel>
 
 			<Panel class="settings-page__spacer" />
 
@@ -44,6 +44,16 @@
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Portals_Title" tags="portals, portal, color, customization" />
 				</Panel>
+
+				<SettingsEnum
+					text="[HC] Portal Funneling"
+					convar="sv_player_funnel_into_portals"
+					infomessage="[HC] sv_player_funnel_into_portals"
+					hasdocspage="false"
+				>
+					<RadioButton group="sv_player_funnel_into_portals" text="#Common_Off" value="0" />
+					<RadioButton group="sv_player_funnel_into_portals" text="#Common_On" value="1" />
+				</SettingsEnum>
 
 				<SettingsEnum
 					text="#Settings_Portals_dlight"
@@ -171,6 +181,6 @@
 					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
 				</SettingsEnum>
 			</Panel>
-        </Panel>
-    </Panel>
+		</Panel>
+	</Panel>
 </root>
