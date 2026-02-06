@@ -46,26 +46,6 @@
 					<RadioButton group="enableconsole" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<SettingsEnum
-					text="#Settings_Menu_Movie"
-					psvar="settings.mainMenuMovie"
-					infomessage="#Settings_Menu_Movie_Info"
-					tags="background,video,movie"
-				>
-					<RadioButton
-						group="mainmenuvideo"
-						text="#Common_Off"
-						value="0"
-						activateoverride="$.DispatchEvent('ReloadBackground');"
-					/>
-					<RadioButton
-						group="mainmenuvideo"
-						text="#Common_On"
-						value="1"
-						activateoverride="$.DispatchEvent('ReloadBackground');"
-					/>
-				</SettingsEnum>
-
 				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
 				<SettingsEnum
 					id="SentryReporting"
