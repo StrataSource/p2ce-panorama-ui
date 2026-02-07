@@ -22,7 +22,9 @@
 					</Panel>
 				</Panel>
 				<Panel class="addons__entry__right">
-					<ToggleButton id="AddonEnable" class="checkbox addons__entry__checkbox" />
+					<TooltipPanel tooltip="[HC] Toggle addon enabled state">
+						<ToggleButton id="AddonEnable" class="checkbox addons__entry__checkbox" />
+					</TooltipPanel>
 				</Panel>
 			</RadioButton>
 		</snippet>
@@ -83,25 +85,29 @@
 			</Panel>
 			<Panel id="AddonsPage" class="addons" onload="AddonManager.init()" tabindex="auto" selectionpos="auto">
 				<Panel class="addons__action-bar">
-					<Button
-						id="ReloadAll"
-						class="button mr-2"
-						onactivate="AddonManager.reloadAddonList()"
-						tabindex="auto"
-						selectionpos="auto"
-					>
-						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/refresh.svg" />
-					</Button>
-					<ToggleButton
-						id="ToggleAll"
-						class="button togglebutton"
-						onactivate="AddonManager.toggleAll()"
-						tabindex="auto"
-						selectionpos="auto"
-					>
-						<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg" />
-					</ToggleButton>
-
+					<TooltipPanel tooltip="[HC] Change addon list sorting/filters">
+						<Button
+							id="ViewFilters"
+							class="button mr-2"
+							onactivate="AddonManager.changeFilters()"
+							tabindex="auto"
+							selectionpos="auto"
+						>
+							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/filter-menu.svg" />
+						</Button>
+					</TooltipPanel>
+					<TooltipPanel tooltip="[HC] Toggle listed addons off/on">
+						<ToggleButton
+							id="ToggleAll"
+							class="button togglebutton mr-2"
+							onactivate="AddonManager.toggleAll()"
+							tabindex="auto"
+							selectionpos="auto"
+						>
+							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg" />
+						</ToggleButton>
+					</TooltipPanel>
+					<TextEntry id="SearchAddonsEntry" class="textentry fill-width mr-2" placeholder="[HC] Search all addons..." />
 					<Panel class="horizontal-align-right flow-right" tabindex="auto" selectionpos="auto">
 						<Button
 							onactivate="AddonManager.apply()"
