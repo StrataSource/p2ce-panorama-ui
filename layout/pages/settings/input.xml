@@ -23,10 +23,10 @@
 
 			<Panel id="ControllerSubSection" class="settings-group">
 				<Panel class="settings-group__header">
-					<Label class="settings-group__title" text="[HC] Controller" tags="controller,input" />
+					<Label class="settings-group__title" text="#Settings_Controller_Title" tags="controller,input" />
 					<Panel class="flow-right horizontal-align-right vertical-align-center">
 						<Button class="button horizontal-align-right vertical-align-center" onactivate="OptionsMenuAPI.ShowSteamControllerBindingsPanel()">
-							<Label class="button__text" text="[HC] Open Steam Input Settings" />
+							<Label class="button__text" text="#Settings_Controller_SteamInputButton" />
 						</Button>
 					</Panel>
 				</Panel>
