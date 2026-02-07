@@ -27,16 +27,8 @@
 							class="campaigns__entry__cover"
 							src="file://{images}/menu/p2ce-generic.png"
 							scaling="stretch-to-cover-preserve-aspect"
-							textureheight="1920"
-							texturewidth="1080"
-						/>
-						<Image
-							id="CampaignLogo"
-							class="campaigns__entry__details__logo"
-							src="file://{images}/menu/missing-cover.png"
-							scaling="stretch-to-cover-preserve-aspect"
-							textureheight="64"
-							texturewidth="64"
+							textureheight="460"
+							texturewidth="215"
 						/>
 						<Image
 							id="CampaignStatus"
