@@ -738,6 +738,7 @@
 		"Keybind_Quit_Prompt"							"Quit with Prompt"
 		
 		// Settings - Controller
+		"Settings_Controller_Title"						"Controller"
 		"Settings_Controller_SteamInputButton"			"Open Steam Input Settings"
 
 		// Settings - UI
@@ -1073,9 +1074,9 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Setup_Var_sv_password"					"Server Password"
 		"MainMenu_Campaigns_Setup_Var_sv_password_Description"		"A password/code players can use to join this server. Ideal for hosting private sessions and LAN parties.\n\nDefault: None"
 		"MainMenu_Campaigns_Setup_Var_sv_lan"						"Host on LAN"
-		"MainMenu_Campaigns_Setup_Var_sv_lan_Description"			"Host on LAN"
+		"MainMenu_Campaigns_Setup_Var_sv_lan_Description"			"Limits inbound connections to this server only those originating from the current local network. Recommended for private sessions and LAN parties."
 		"MainMenu_Campaigns_Setup_Var_sv_cheats"					"Enable Server Cheats"
-		"MainMenu_Campaigns_Setup_Var_sv_cheats_Description"		"Enables access to special commands flagged as \"cheats\", such as <pre>noclip</pre>, <pre>impulse</pre> and <pre>ent_fire</pre>.\n\nDefault: Off"
+		"MainMenu_Campaigns_Setup_Var_sv_cheats_Description"		"Enables access to special commands flagged as \"cheats\", such as <pre>noclip</pre>, <pre>impulse</pre>, and <pre>ent_fire</pre>.\n\nDefault: Off"
 		"MainMenu_Campaigns_Setup_Var_p2p"							"Use Steam Networking"
 		"MainMenu_Campaigns_Setup_Var_p2p_Description"				"Uses the <a href="https://partner.steamgames.com/doc/features/multiplayer/steamdatagramrelay">Steam Datagram Relay</a> to enable hosting peer-to-peer (P2P) and dedicated servers over the Internet with minimal technical setup. Game traffic is sent to Valve relay servers to anonymize player information and protect the server host."
 		
