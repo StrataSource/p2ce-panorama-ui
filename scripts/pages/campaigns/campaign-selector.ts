@@ -17,7 +17,6 @@ class CampaignEntry {
 		info: CampaignInfo,
 		boxart: string | undefined,
 		cover: string | undefined,
-		icon: string | undefined,
 		btnBg: string | undefined,
 		desc: string | undefined,
 		author: string | undefined
@@ -27,7 +26,6 @@ class CampaignEntry {
 		this.info = info;
 		this.boxartPath = boxart;
 		this.coverPath = cover;
-		this.iconPath = icon;
 		this.btnBgPath = btnBg;
 		this.desc = desc;
 		this.author = author;
@@ -38,7 +36,6 @@ class CampaignEntry {
 		const author = this.panel.FindChildTraverse<Label>('CampaignAuthor');
 		const desc = this.panel.FindChildTraverse<Label>('CampaignDesc');
 		const cover = this.panel.FindChildTraverse<Image>('CampaignCover');
-		const ico = this.panel.FindChildTraverse<Image>('CampaignLogo');
 		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
 		const basePath = getCampaignAssetPath(this.info);
@@ -67,15 +64,6 @@ class CampaignEntry {
 			});
 			if (this.coverPath) cover.SetImage(`${basePath}${this.coverPath}`);
 			else cover.SetImage(getRandomFallbackImage());
-		}
-		if (ico) {
-			if (this.iconPath) {
-				const useLogoBg = this.info.meta[CampaignMeta.SELECTOR_LOGO_BG];
-				ico.SetImage(`${basePath}${this.iconPath}`);
-				if (useLogoBg)
-					ico.AddClass('campaigns__entry__details__logo__bg');
-			}
-			else ico.visible = false;
 		}
 		if (btnBg) {
 			if (this.btnBgPath) btnBg.SetImage(`${basePath}${this.btnBgPath}`);
@@ -134,7 +122,6 @@ class CampaignSelector {
 					c,
 					c.meta[CampaignMeta.BOX_ART],
 					c.meta[CampaignMeta.COVER],
-					c.meta[CampaignMeta.SQUARE_LOGO],
 					c.meta[CampaignMeta.BTN_BG],
 					c.meta[CampaignMeta.DESC],
 					c.meta[CampaignMeta.AUTHOR]
