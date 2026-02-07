@@ -34,11 +34,16 @@ TextEntry {
 		transition-duration: 0.1s;
 	}
 
-	&:hover {
+	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
+	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		background-color: $textentry-background-hover;
 		box-shadow: $textentry-shadow-hover;
 		border: $textentry-border-hover;
 		color: $textentry-hover-text-color;
+	}
+
+	.InputController &:focus {
+		border: $textentry-border-hover;
 	}
 
 	&:focus {

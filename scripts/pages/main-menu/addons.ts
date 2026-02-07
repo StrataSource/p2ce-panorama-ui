@@ -79,6 +79,18 @@ class AddonEntry {
 	}
 }
 
+// Main addons
+
+class Addon {
+	index: number;
+	meta: AddonMeta;
+
+	constructor(index: number, meta: AddonMeta) {
+		this.index = index;
+		this.meta = meta;
+	}
+}
+
 class AddonManager {
 	static addonContainer = $<Panel>('#AddonContainer')!;
 	static addonPanel = $<Panel>('#SelectedAddonPanel')!;
@@ -96,6 +108,9 @@ class AddonManager {
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');
 	static toggleAllButton = $<ToggleButton>('#ToggleAll');
+
+	static searchBar = $<TextEntry>('#SearchAddonsEntry')!;
+	static filtersBtn = $<Button>('#ViewFilters')!;
 
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
@@ -163,6 +178,23 @@ class AddonManager {
 
 		// If any addons are enabled, we'll default the "select all" button to true
 		if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
+
+		this.updateAddons();
+	}
+
+	static createPredefinedAddonEntries(addons: Addon[]) {
+		if (!this.addonContainer) return;
+
+		this.purgeAddonList();
+
+		for (const addon of addons) {
+			$.Msg(`Create addon: ${addon.index}, ${addon.meta.title}`);
+			const panel = $.CreatePanel('RadioButton', this.addonContainer, 'addon' + addon.index);
+			panel.SetPanelEvent('onactivate', () => this.addonSelected(addon.index));
+			panel.LoadLayoutSnippet('AddonEntrySnippet');
+
+			this.addons.push(new AddonEntry(addon.index, panel));
+		}
 
 		this.updateAddons();
 	}
@@ -300,9 +332,15 @@ class AddonManager {
 	static markDirty(dirty: boolean = true) {
 		this.dirty = dirty;
 
+		this.searchBar.enabled = !dirty;
+
 		if (this.cancelButton) this.cancelButton.enabled = this.dirty;
 
 		if (this.applyButton) this.applyButton.enabled = this.dirty;
+	}
+
+	static changeFilters() {
+		UiToolkitAPI.ShowCustomLayoutPopup('FiltersMenu', 'file://{resources}/layout/modals/popups/filters.xml');
 	}
 
 	/**
@@ -369,7 +407,97 @@ class AddonManager {
 		this.purgeAddonList();
 		this.createAddonEntries();
 	}
+
+	// TODO: this should create an array that respects the user's
+	// filtering settings. this is used in conjunction with the search
+	// request as well. for now, we will return everything.
+	//
+	// TODO: also make this as part of the addonmanager class instead
+	// of reconstructing it on every call, that's yikes!
+	static getFilteredAddonsArray() {
+		const addons: Addon[] = [];
+		const count = WorkshopAPI.GetAddonCount();
+		for (let i = 0; i < count; ++i) {
+			const info = WorkshopAPI.GetAddonMeta(i);
+			addons.push(new Addon(i, info));
+		}
+		return addons;
+	}
 }
+
+// Searching
+
+class SearchMatch {
+	addon: Addon;
+	matchedWith: unknown;
+
+	constructor(addon: Addon, matchedWith: unknown) {
+		this.addon = addon;
+		this.matchedWith = matchedWith;
+	}
+}
+
+class AddonSearch {
+	static searchBar = $<TextEntry>('#SearchAddonsEntry')!;
+	static strings: string[] = [];
+	static matches: SearchMatch[] = [];
+
+	static {
+		this.searchBar.RaiseChangeEvents(true);
+		$.RegisterEventHandler(
+			'TextEntryChanged',
+			this.searchBar,
+			this.onSearchTextChanged.bind(this)
+		);
+	}
+
+	static onSearchTextChanged() {
+		const search = this.searchBar.text;
+		// check empty
+		if (!/.*\S.*/.test(search)) {
+			$.Warning('Search bar is now empty.');
+			AddonManager.reloadAddonList();
+			return;
+		}
+
+		// split
+		this.strings = search.split(/\s/).filter((s) => /^\w+$/.test(s));
+
+		// don't show one char words
+		if (!this.strings.some((str) => str.length > 1)) return;
+
+		this.matches = [];
+
+		const addons = AddonManager.getFilteredAddonsArray();
+		for (const searchPart of this.strings) {
+			if (!searchPart) {
+				break;
+			}
+
+			for (const addon of addons) {
+				const testLower = addon.meta.title.toLowerCase();
+				$.Msg(`===== Try testing '${searchPart}' against '${testLower}'`);
+				const index = testLower.indexOf(searchPart.toLowerCase());
+
+				if (index === -1) {
+					$.Warning('Unsuccessful');
+					continue;
+				}
+
+				$.Msg('Found!');
+				this.matches.push(new SearchMatch(addon, undefined));
+			}
+		}
+
+		const sendAddons: Addon[] = [];
+		for (const match of this.matches) {
+			sendAddons.push(match.addon);
+		}
+		AddonManager.createPredefinedAddonEntries(sendAddons);
+	}
+}
+
+// Mounting
 
 class MountEntry {
 	panel: Panel;
