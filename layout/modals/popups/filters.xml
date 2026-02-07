@@ -1,0 +1,35 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/modals/popups/prerelease-warn-dialog.js" />
+		<include src="file://{scripts}/util/dosa.ts" />
+	</scripts>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup generic-popup--large"
+		popupbackground="blur"
+		onload="$('#DeclineBtn').SetFocus()"
+	>
+		<Panel class="flow-down">
+			<Label class="text-h2 mb-4 text-align-center" text="[HC] Filtering &amp; Sorting Options" />
+		</Panel>
+		
+		<Panel class="flow-right full-width mt-4" tabindex="auto" selectionpos="auto">
+			<Button class="button fill-width mr-1" onactivate="" tabindex="auto" selectionpos="auto">
+				<Label class="button__text" text="[HC] Confirm" />
+			</Button>
+			<Button
+				id="DeclineBtn"
+				class="button button--red fill-width ml-1"
+				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
+				<Label class="button__text" text="[HC] Cancel" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>
