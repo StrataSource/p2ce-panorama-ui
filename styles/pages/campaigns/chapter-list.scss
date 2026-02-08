@@ -106,6 +106,7 @@
 
 		#{$root}__entry {
 			margin: 0 10px;
+			vertical-align: center;
 		}
 	}
 
@@ -267,7 +268,6 @@
 		flow-children: down;
 		background-color: $button-background;
 		border: $menu-pane-border;
-		vertical-align: center;
 
 		$this: &;
 
