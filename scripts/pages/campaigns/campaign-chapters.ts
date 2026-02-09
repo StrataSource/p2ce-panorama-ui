@@ -216,7 +216,7 @@ class CampaignChapters {
 	}
 
 	static populateChapters() {
-		(this.pips.Children()[this.chapterPage] as RadioButton).SetSelected(true);
+		if (this.pips.Children().length > 0) (this.pips.Children()[this.chapterPage] as RadioButton).SetSelected(true);
 
 		if (this.displayMode === ChapterDisplayMode.GRID) {
 			this.counterLabel.text = `${this.chapterPage + 1}\n/\n${this.maxPages}`;

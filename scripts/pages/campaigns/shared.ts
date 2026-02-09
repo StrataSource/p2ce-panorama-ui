@@ -196,12 +196,10 @@ class CampaignShared {
 				map: {
 					name: 'Map',
 					helpText: '[HC] Map',
-					def: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0]
-						.name,
+					def: '',
 					command: '',
 					panelType: undefined,
-					currentValue: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo)
-						.maps[0].name
+					currentValue: ''
 				}
 			}
 		};
@@ -215,6 +213,10 @@ class CampaignShared {
 				setting.currentValue = setting.def;
 			}
 		}
+
+		const map = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0] ?? '';
+		settings['Map']['map'].def = map;
+		settings['Map']['map'].currentValue = map;
 	}
 
 	static constructPage() {
