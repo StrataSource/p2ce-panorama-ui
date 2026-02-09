@@ -45,7 +45,9 @@ class BaseMenu {
 				this.isContinueActive = true;
 
 				const meta = CampaignAPI.GetCampaignMeta(this.savCampaign.campaign.id) ?? new Map<string, string>();
-				if (meta.size === 0) { $.Warning('BASE MENU: Meta is invalid!'); }
+				if (meta.size === 0) {
+					$.Warning('BASE MENU: Meta is invalid!');
+				}
 				const logoPath = meta.get(CampaignMeta.FULL_LOGO);
 				if (logoPath !== undefined) {
 					$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(this.savCampaign)}${logoPath}`);
@@ -271,7 +273,9 @@ class BaseMenu {
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
 		const meta = CampaignAPI.GetCampaignMeta(savCampaign.campaign.id) ?? new Map<string, string>();
-		if (meta.size === 0) { $.Warning('BASE MENU: Meta is invalid!'); }
+		if (meta.size === 0) {
+			$.Warning('BASE MENU: Meta is invalid!');
+		}
 		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${meta.get(CampaignMeta.SQUARE_LOGO)}`);
 
 		this.continueText.text = `${$.Localize(savCampaign.campaign.title)}`;
@@ -291,7 +295,10 @@ class BaseMenu {
 	static rerollMap() {
 		this.mapSelection = Math.floor(Math.random() * this.maps.length);
 		$.Msg(`BASE MENU: Rolled background map: ${this.mapSelection}, ${this.maps[this.mapSelection]}`);
-		$.DispatchEvent('MainMenuSetBackgroundImage', `file://{images}/menu/featured/${this.maps[this.mapSelection]}.png`);
+		$.DispatchEvent(
+			'MainMenuSetBackgroundImage',
+			`file://{images}/menu/featured/${this.maps[this.mapSelection]}.png`
+		);
 	}
 
 	static loadNoRoll() {

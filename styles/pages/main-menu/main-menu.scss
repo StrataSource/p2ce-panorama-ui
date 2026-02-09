@@ -94,7 +94,7 @@ $pane-move-time: 0.1s;
 		height: 100%;
 		saturation: 1;
 		brightness: 1;
-		blur: fastanimgaussian(0,0,0);
+		blur: fastanimgaussian(0, 0, 0);
 		overflow: noclip;
 
 		transition:
@@ -105,7 +105,7 @@ $pane-move-time: 0.1s;
 		&__anim {
 			saturation: 0.7;
 			brightness: 0.2;
-			blur: fastgaussian(3,3,3);
+			blur: fastgaussian(3, 3, 3);
 		}
 	}
 

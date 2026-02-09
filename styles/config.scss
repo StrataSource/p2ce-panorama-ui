@@ -63,9 +63,9 @@ $colors-p2ce-base: (
 	'base-950': $base-950
 ) !default;
 
-$base-gradient: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $base-900 ), to( $base-950 ) ) !default;
-$base-gradient-subtle: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( #1b1b1b ), to( $base-950 ) ) !default;
-$base-gradient-bright: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $base-400 ), to( $base-800 ) ) !default;
+$base-gradient: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($base-900), to($base-950)) !default;
+$base-gradient-subtle: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from(#1b1b1b), to($base-950)) !default;
+$base-gradient-bright: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($base-400), to($base-800)) !default;
 
 //===========================
 // COLORS
@@ -349,10 +349,10 @@ $spacers: (5px, 10px, 15px, 25px, 35px) !default;
 // ================
 
 $button-background-base-color: $base-950 !default;
-$button-background-base: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $base-900 ), to( $base-950 ) ) !default;
+$button-background-base: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($base-900), to($base-950)) !default;
 $button-background: $button-background-base !default;
 $button-background-hover-color: $primary-700 !default;
-$button-background-hover: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $primary-500 ), to( $primary-700 ) ) !default;
+$button-background-hover: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($primary-500), to($primary-700)) !default;
 $button-background-selected: $primary-color !default; // Used by Radiobuttons + Togglebuttons
 $button-background-disabled: rgba($base-950, 0.5) !default;
 
@@ -556,8 +556,8 @@ $textentry-placeholder-hover-color: color.scale($textentry-text-color, $alpha: 3
 $slider-padding-height: 8px !default;
 $slider-track-height: 20px !default;
 
-$slider-thumb-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $primary-500 ), to( $primary-700 ) ) !default;
-$slider-thumb-color-hover: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $primary-700 ), to( $primary-800 ) ) !default;
+$slider-thumb-color: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($primary-500), to($primary-700)) !default;
+$slider-thumb-color-hover: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($primary-700), to($primary-800)) !default;
 $slider-thumb-width: 20px !default;
 $slider-thumb-height: 20px !default;
 $slider-thumb-radius: 0px !default;
@@ -611,7 +611,7 @@ $progressbar-shadow: none !default;
 // TOOLTIPS
 // ================
 
-$tooltip-background: gradient( radial, 50% 50%, 0% 0%, 100% 100%, from( $base-900 ), to( $base-950 ) ) !default;
+$tooltip-background: gradient(radial, 50% 50%, 0% 0%, 100% 100%, from($base-900), to($base-950)) !default;
 $tooltip-arrow-color: $base-700 !default;
 $tooltip-padding: 10px 15px !default;
 $tooltip-border: 1px solid $base-700 !default;

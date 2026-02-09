@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 class CampaignMapSelect {
 	static list = $<Panel>('#SettingPageInsert')!;
@@ -41,7 +41,7 @@ class CampaignMapSelect {
 			}
 			p.SetPanelEvent('onactivate', () => {
 				CampaignShared.setMap(map.name);
-				$.Msg(`CAMPAIGN MAP SELECTOR: Set map to ${map.name}`)
+				$.Msg(`CAMPAIGN MAP SELECTOR: Set map to ${map.name}`);
 				$.DispatchEvent('CampaignMenuRefreshUserSettings');
 			});
 		}

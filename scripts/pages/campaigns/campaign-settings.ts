@@ -42,8 +42,7 @@ class CampaignSettingsTab {
 			} else {
 				this.chImage.SetImage(`${basePath}${thumb}`);
 			}
-		}
-		else {
+		} else {
 			this.chImage.SetImage(getRandomFallbackImage());
 		}
 
@@ -113,7 +112,9 @@ class CampaignSettingsTab {
 						CampaignAPI.StartCampaign(this.campaign.campaign.id, this.chapter.id);
 						this.clear();
 					} else {
-						$.Warning(`CAMPAIGN SETTINGS: JUMPING TO SPECIFIC MAP IN CHAPTER! DON'T FORGET TO CHANGE THIS! ${desiredMap}`);
+						$.Warning(
+							`CAMPAIGN SETTINGS: JUMPING TO SPECIFIC MAP IN CHAPTER! DON'T FORGET TO CHANGE THIS! ${desiredMap}`
+						);
 						GameInterfaceAPI.ConsoleCommand(`map ${desiredMap}`);
 						this.clear();
 					}
@@ -151,7 +152,10 @@ class CampaignSettingsTab {
 	static updateSummary() {
 		this.summaryPanel.RemoveAndDeleteChildren();
 
-		const allSettings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
+		const allSettings = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+			string,
+			Record<string, CampaignSetting>
+		>;
 
 		Object.entries(allSettings).forEach((v: [string, Record<string, CampaignSetting>], i: number) => {
 			const p = $.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
@@ -165,7 +169,7 @@ class CampaignSettingsTab {
 				// iterate through each one and determine if they've changed
 				// if they have, display that
 				const entry = settings[j];
-	
+
 				// eslint-disable-next-line eqeqeq
 				if (entry.currentValue == entry.def) {
 					// skip values that are exactly the same
@@ -180,13 +184,13 @@ class CampaignSettingsTab {
 				} else {
 					displayText = `<b>${entry.name}:</b> ${entry.currentValue}`;
 				}
-	
+
 				$.CreatePanel('Label', this.summaryPanel, `SummaryHeading${i}`, {
 					class: 'campaign-settings__summary__text',
 					html: true,
 					text: displayText
 				});
-	
+
 				++applied;
 			}
 
@@ -203,8 +207,11 @@ class CampaignSettingsTab {
 	}
 
 	static applySettings() {
-		const allSettings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
-		
+		const allSettings = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+			string,
+			Record<string, CampaignSetting>
+		>;
+
 		for (const group of Object.values(allSettings)) {
 			for (const setting of Object.values(group)) {
 				if (setting.command.length === 0) {
@@ -213,7 +220,10 @@ class CampaignSettingsTab {
 				}
 
 				if (setting.command === 'sv_cheats') {
-					if (GameInterfaceAPI.GetSettingInt('developer') > 0 || GameInterfaceAPI.GetSettingBool('sv_cheats')) {
+					if (
+						GameInterfaceAPI.GetSettingInt('developer') > 0 ||
+						GameInterfaceAPI.GetSettingBool('sv_cheats')
+					) {
 						$.Warning('Developer mode enabled or sv_cheats is already 1. Not applying sv_cheats setting.');
 						continue;
 					}
@@ -227,7 +237,9 @@ class CampaignSettingsTab {
 
 				if (setting.panelType === 'DropDown') {
 					$.Msg(`Execute ${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`);
-					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`);
+					GameInterfaceAPI.ConsoleCommand(
+						`${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`
+					);
 				} else {
 					$.Msg(`Execute ${setting.command} ${setting.currentValue}`);
 					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.currentValue}`);

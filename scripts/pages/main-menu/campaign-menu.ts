@@ -294,7 +294,9 @@ class CampaignMenu {
 				GameInterfaceAPI.ConsoleCommand('startupmenu');
 				//GameInterfaceAPI.ConsoleCommand(`map_background ${bgLevel}`);
 			} else {
-				$.Msg('CAMPAIGN MENU: Background map specified and default campaign specified, we will be doing nothing.');
+				$.Msg(
+					'CAMPAIGN MENU: Background map specified and default campaign specified, we will be doing nothing.'
+				);
 			}
 		} else if (!doFallbackImage && bgMovie.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
@@ -318,7 +320,9 @@ class CampaignMenu {
 			}
 		} else {
 			$.Warning('CAMPAIGN MENU: No background has been specified! Fix this now!!!');
-			$.Warning(`Fields:\nbgLevel = ${bgLevel}\nbgMusic = ${bgMusic}\nbgMovie = ${bgMovie}\nbgImage = ${bgImage}\nbasePath = ${basePath}`);
+			$.Warning(
+				`Fields:\nbgLevel = ${bgLevel}\nbgMusic = ${bgMusic}\nbgMovie = ${bgMovie}\nbgImage = ${bgImage}\nbasePath = ${basePath}`
+			);
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuShowBackgroundImage', getRandomFallbackImage(), true);
 		}

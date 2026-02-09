@@ -118,12 +118,14 @@ class CampaignSelector {
 				const p = $.CreatePanel('Button', this.campaignList, `Campaign_${campaign.id}`);
 				p.LoadLayoutSnippet('CampaignEntrySnippet');
 				p.AddClass('campaigns__entry__spaced');
-	
+
 				const m = CampaignAPI.GetCampaignMeta(`${bucket.id}/${campaign.id}`) ?? new Map<string, string>();
 				if (m.size === 0) {
-					$.Warning(`Campaign meta map for '${bucket.id}/${campaign.id}' couldn't be retrieved, or it was empty.`);
+					$.Warning(
+						`Campaign meta map for '${bucket.id}/${campaign.id}' couldn't be retrieved, or it was empty.`
+					);
 				}
-	
+
 				this.campaignEntries.push(
 					new CampaignEntry(
 						campaignIndex,
@@ -136,9 +138,9 @@ class CampaignSelector {
 						m.get(CampaignMeta.AUTHOR)
 					)
 				);
-	
+
 				this.campaignEntries[campaignIndex].update();
-	
+
 				campaignIndex += 1;
 			}
 		}

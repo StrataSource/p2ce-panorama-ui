@@ -44,11 +44,9 @@ class MenuManager {
 			this.deleteMenus();
 			this.isLoaded = false;
 			this.onLoaded();
-			$.Schedule(0.1,
-				() => {
-					$.DispatchEvent('MainMenuSwitchReverse', true);
-				}
-			);
+			$.Schedule(0.1, () => {
+				$.DispatchEvent('MainMenuSwitchReverse', true);
+			});
 		});
 	}
 
@@ -64,7 +62,7 @@ class MenuManager {
 				if (btn.dev && !GameInterfaceAPI.GetSettingBool('developer')) {
 					return;
 				}
-	
+
 				const b = constructMenuButton(btn);
 				b.SetParent(this.menuNav);
 				b.SetReadyForDisplay(true);
@@ -75,19 +73,19 @@ class MenuManager {
 				btn.SetReadyForDisplay(true);
 				this.updateFocus();
 			});
-	
+
 			$.RegisterForUnhandledEvent('MainMenuAddBgPanel', (panel: Panel) => {
 				panel.SetParent(this.menuBackground);
 				panel.SetReadyForDisplay(true);
 			});
-	
+
 			$.RegisterForUnhandledEvent('ShowMainMenu', () => {
 				this.menuContent.AddClass('mainmenu__menu__t-prop');
 				this.menuContent.RemoveClass('mainmenu__menu__anim');
 				$.DispatchEvent('MainMenuSwitchFade', true, true);
 				this.openMenuMode();
 			});
-	
+
 			$.RegisterForUnhandledEvent('HideMainMenu', () => {
 				// ensure that no kind of loading blur can be active when we disappear
 				$.DispatchEvent('MainMenuSwitchReverse', true);
@@ -96,26 +94,26 @@ class MenuManager {
 				this.menuContent.RemoveClass('mainmenu__menu__t-prop');
 				this.menuContent.AddClass('mainmenu__menu__anim');
 			});
-	
+
 			$.RegisterForUnhandledEvent('ShowPauseMenu', () => {
 				this.menuContent.AddClass('mainmenu__menu__t-prop');
 				this.menuContent.RemoveClass('mainmenu__menu__anim');
 				this.openMenuMode();
 			});
-	
+
 			$.RegisterForUnhandledEvent('HidePauseMenu', () => {
 				this.closePages();
 				this.deleteMenus();
 				this.menuContent.RemoveClass('mainmenu__menu__t-prop');
 				this.menuContent.AddClass('mainmenu__menu__anim');
 			});
-	
+
 			$.RegisterForUnhandledEvent('MainMenuOpenNestedPage', this.navigateToPage.bind(this));
-	
+
 			$.RegisterForUnhandledEvent('MainMenuSetPageLines', this.onMenuSetPageLines.bind(this));
-	
+
 			$.RegisterForUnhandledEvent('MainMenuCloseAllPages', this.closePages.bind(this));
-	
+
 			$.RegisterEventHandler('Cancelled', $.GetContextPanel(), () => {
 				// Resume game in pause menu mode
 				if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
@@ -127,7 +125,7 @@ class MenuManager {
 					this.navigateBack();
 				}
 			});
-	
+
 			$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
 				if (logo && logo.length > 0) {
 					this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
@@ -141,13 +139,9 @@ class MenuManager {
 				}
 			});
 
-			$.RegisterEventHandler(
-				'ImageFailedLoad',
-				this.logo,
-				() => {
-					this.logo.SetImage(getRandomFallbackImage());
-				}
-			);
+			$.RegisterEventHandler('ImageFailedLoad', this.logo, () => {
+				this.logo.SetImage(getRandomFallbackImage());
+			});
 
 			const registerCampaignSwitch = () => {
 				$.RegisterForUnhandledEvent(
@@ -168,7 +162,7 @@ class MenuManager {
 					registerCampaignSwitch();
 				});
 			}
-			
+
 			MenuAnimation.init();
 
 			this.eventsRegistered = true;
@@ -394,14 +388,9 @@ class MenuManager {
 			nowPage.panel.RemoveClass('mainmenu__page__back-anim');
 			this.flashPageLines();
 
-			if (!currentPage || !currentPage.invokerPanel)
-				nowPage.panel.SetFocus();
-			
-			$.DispatchEvent(
-				'MainMenuPageClosed',
-				currentPage ? currentPage.panel.id : undefined,
-				nowPage.panel.id
-			);
+			if (!currentPage || !currentPage.invokerPanel) nowPage.panel.SetFocus();
+
+			$.DispatchEvent('MainMenuPageClosed', currentPage ? currentPage.panel.id : undefined, nowPage.panel.id);
 		} else {
 			// no more pages
 			this.hidePage();
@@ -409,11 +398,7 @@ class MenuManager {
 
 			if (!noResetFocus) $.DispatchEvent('MainMenuSetFocus');
 
-			$.DispatchEvent(
-				'MainMenuPageClosed',
-				currentPage ? currentPage.panel.id : undefined,
-				undefined
-			);
+			$.DispatchEvent('MainMenuPageClosed', currentPage ? currentPage.panel.id : undefined, undefined);
 		}
 	}
 
