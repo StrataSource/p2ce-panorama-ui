@@ -47,13 +47,7 @@
 			</Panel>
 			<Panel id="ChaptersNav" class="chapters__nav" tabindex="auto" selectionpos="auto">
 				<Panel id="NavControls" class="chapters__nav__controls" tabindex="auto" selectionpos="auto">
-					<Button
-						id="ChaptersBack"
-						class="button"
-						onactivate="CampaignChapters.backPage()"
-						tabindex="auto"
-						selectionpos="auto"
-					>
+					<Button id="ChaptersBack" class="button" onactivate="CampaignChapters.backPage()" tabindex="auto" selectionpos="auto">
 						<Label class="button__text" text="&lt;" />
 					</Button>
 					<Label id="PageCounter" class="chapters__nav__label" text="??? / ???" />

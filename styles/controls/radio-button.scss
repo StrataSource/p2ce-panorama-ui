@@ -154,7 +154,14 @@
 
 @each $name, $value in $gradients-primary {
 	.radiobutton--#{$name} {
-		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( list.nth($value, 1) ), to( color.scale(list.nth($value, 1), $lightness: -50%) ) );
+		background-color: gradient(
+			radial,
+			50% 50%,
+			0% 0%,
+			70% 70%,
+			from(list.nth($value, 1)),
+			to(color.scale(list.nth($value, 1), $lightness: -50%))
+		);
 		border-color: color.scale(list.nth($value, 1), $lightness: -80%);
 
 		@if color.channel(color.to-space(list.nth($value, 1), hsl), 'lightness') > 50% {
@@ -189,7 +196,14 @@
 		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
 		.InputController &:focus:not(:disabled):not(:parentdisabled) {
 			border-color: list.nth($value, 1);
-			background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( color.scale(list.nth($value, 1), $lightness: -20%) ), to( color.scale(list.nth($value, 1), $lightness: -80%) ) );
+			background-color: gradient(
+				radial,
+				50% 50%,
+				0% 0%,
+				70% 70%,
+				from(color.scale(list.nth($value, 1), $lightness: -20%)),
+				to(color.scale(list.nth($value, 1), $lightness: -80%))
+			);
 		}
 
 		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):selected,

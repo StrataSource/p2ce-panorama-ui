@@ -85,7 +85,13 @@
 
 		.InputKeyboard .ChapterModeList &:hover:not(:disabled),
 		.InputController .ChapterModeList &:focus:not(:disabled) {
-			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover-color ), to( rgba(0,0,0,0) ) );
+			background-color: gradient(
+				linear,
+				0% 0%,
+				100% 0%,
+				from($button-background-hover-color),
+				to(rgba(0, 0, 0, 0))
+			);
 		}
 
 		&:selected {

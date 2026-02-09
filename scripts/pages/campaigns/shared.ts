@@ -22,7 +22,7 @@ class CampaignSetting {
 		def: unknown,
 		command: string,
 		panelType: keyof PanelTagNameMap | undefined,
-		dropDownValues?: Array<CampaignDropDownValue>,
+		dropDownValues?: Array<CampaignDropDownValue>
 	) {
 		this.name = name;
 		this.helpText = helpText;
@@ -65,9 +65,12 @@ class CampaignShared {
 		// NOTE: this is a prototype only and will likely not make it into the final version, as a more "concrete"
 		// system in the backend will probably sit in place of this. for this reason, DO NOT LOCALIZE.
 		// for now though, for fun, this works fine
-		(UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>) = {
-			'GameplayBase': {
-				'mirrorWorld': {
+		(UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+			string,
+			Record<string, CampaignSetting>
+		>) = {
+			GameplayBase: {
+				mirrorWorld: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_cl_mirror_world'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_cl_mirror_world_Description'),
 					def: false,
@@ -75,7 +78,7 @@ class CampaignShared {
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
-				'gravity': {
+				gravity: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_gravity'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_gravity_Description'),
 					def: 600,
@@ -84,10 +87,9 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
-				'skill': {
+				skill: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_skill'),
-					helpText:
-						$.Localize('#MainMenu_Campaigns_Setup_Var_skill_Description'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_Description'),
 					def: '1',
 					command: 'skill',
 					panelType: 'DropDown',
@@ -107,7 +109,7 @@ class CampaignShared {
 					],
 					currentValue: undefined
 				},
-				'throw': {
+				throw: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwenable'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwenable_Description'),
 					def: false,
@@ -115,7 +117,7 @@ class CampaignShared {
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
-				'throwForce': {
+				throwForce: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwforce'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwforce_Description'),
 					def: '1000',
@@ -123,7 +125,7 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
-				'bhop': {
+				bhop: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_bhop'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_bhop_Description'),
 					def: false,
@@ -131,7 +133,7 @@ class CampaignShared {
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
-				'crouchJump': {
+				crouchJump: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_duckjump'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_duckjump_Description'),
 					def: false,
@@ -140,8 +142,8 @@ class CampaignShared {
 					currentValue: undefined
 				}
 			},
-			'ServerSettings': {
-				'hostname': {
+			ServerSettings: {
+				hostname: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_hostname'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_hostname_Description'),
 					def: `${FriendsAPI.GetLocalPlayerName()}'s game`,
@@ -149,7 +151,7 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
-				'tags': {
+				tags: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_tags'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_tags_Description'),
 					def: '',
@@ -157,7 +159,7 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
-				'maxplayers': {
+				maxplayers: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_maxplayers'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_maxplayers_Description'),
 					def: '1',
@@ -165,7 +167,7 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
-				'password': {
+				password: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_password'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_password_Description'),
 					def: '',
@@ -173,7 +175,7 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
-				'lan': {
+				lan: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_lan'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_lan_Description'),
 					def: false,
@@ -181,7 +183,7 @@ class CampaignShared {
 					panelType: 'ToggleButton',
 					currentValue: undefined
 				},
-				'cheats': {
+				cheats: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_cheats'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_cheats_Description'),
 					def: false,
@@ -190,19 +192,24 @@ class CampaignShared {
 					currentValue: undefined
 				}
 			},
-			'Map': {
-				'map': {
+			Map: {
+				map: {
 					name: 'Map',
 					helpText: '[HC] Map',
-					def: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0].name,
+					def: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0]
+						.name,
 					command: '',
 					panelType: undefined,
-					currentValue: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0].name
+					currentValue: (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo)
+						.maps[0].name
 				}
 			}
 		};
 
-		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
+		const settings = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+			string,
+			Record<string, CampaignSetting>
+		>;
 		for (const group of Object.values(settings)) {
 			for (const setting of Object.values(group)) {
 				setting.currentValue = setting.def;
@@ -213,7 +220,12 @@ class CampaignShared {
 	static constructPage() {
 		const parent = $<Panel>('#SettingPageInsert')!;
 
-		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Array<CampaignSetting>>)[$.GetContextPanel().id];
+		const settings = (
+			UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+				string,
+				Array<CampaignSetting>
+			>
+		)[$.GetContextPanel().id];
 
 		Object.entries(settings).forEach((v: [string, CampaignSetting], i: number) => {
 			const id = v[0];
@@ -221,14 +233,9 @@ class CampaignShared {
 
 			if (setting.panelType === undefined) return;
 
-			const helpWrapper = $.CreatePanel(
-				'TooltipPanel',
-				parent,
-				`${id}_TT`,
-				{
-					'tooltip': setting.helpText
-				}
-			);
+			const helpWrapper = $.CreatePanel('TooltipPanel', parent, `${id}_TT`, {
+				tooltip: setting.helpText
+			});
 			helpWrapper.AddClass('campaign-setting__tooltip');
 
 			const wrapper = $.CreatePanel('Panel', helpWrapper, `${id}_Wrapper`, {
@@ -271,9 +278,7 @@ class CampaignShared {
 					$.Warning(
 						`CAMPAIGN SETTINGS: Campaign setting ${id} is of type DropDown but does not specify any values.`
 					);
-					throw new Error(
-						`Campaign setting ${id} is of type DropDown but does not specify any values.`
-					);
+					throw new Error(`Campaign setting ${id} is of type DropDown but does not specify any values.`);
 				}
 
 				for (let i = 0; i < setting.dropDownValues.length; ++i) {
@@ -315,13 +320,7 @@ class CampaignShared {
 			}
 
 			this.inputFields.push(
-				new CampaignSettingField(
-					id,
-					setting.name,
-					setting.command,
-					inputter,
-					setting.currentValue
-				)
+				new CampaignSettingField(id, setting.name, setting.command, inputter, setting.currentValue)
 			);
 		});
 
@@ -333,14 +332,16 @@ class CampaignShared {
 			return;
 		}
 
-		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Array<CampaignSetting>>);
+		const settings = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+			string,
+			Array<CampaignSetting>
+		>;
 
 		for (const field of this.inputFields) {
-			const s = (settings[$.GetContextPanel().id][field.id] as CampaignSetting);
+			const s = settings[$.GetContextPanel().id][field.id] as CampaignSetting;
 			const p = field.panel;
 			switch (p.paneltype) {
-				case 'ToggleButton':
-				{
+				case 'ToggleButton': {
 					const newValue = Number((p as ToggleButton).IsSelected());
 					if (s.currentValue !== newValue)
 						$.Msg(`Setting '${s.command}' is now [VALUE: '${newValue}', DEFAULT: '${s.def}']`);
@@ -348,8 +349,7 @@ class CampaignShared {
 					break;
 				}
 
-				case 'TextEntry':
-				{
+				case 'TextEntry': {
 					const newValue = (p as TextEntry).text;
 					if (s.currentValue !== newValue)
 						$.Msg(`Setting '${s.command}' is now [VALUE: '${newValue}', DEFAULT: '${s.def}']`);
@@ -357,8 +357,7 @@ class CampaignShared {
 					break;
 				}
 
-				case 'DropDown':
-				{
+				case 'DropDown': {
 					const newValue = (p as DropDown).GetSelected().GetAttributeInt('index', -1);
 					if (s.currentValue !== newValue)
 						$.Msg(`Setting '${s.command}' is now [VALUE: '${newValue}', DEFAULT: '${s.def}']`);
@@ -376,12 +375,18 @@ class CampaignShared {
 	}
 
 	static setMap(map: string) {
-		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
+		const settings = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+			string,
+			Record<string, CampaignSetting>
+		>;
 		settings['Map']['map'].currentValue = map;
 	}
 
 	static getMap() {
-		const settings = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<string, Record<string, CampaignSetting>>);
+		const settings = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
+			string,
+			Record<string, CampaignSetting>
+		>;
 		return settings['Map']['map'].currentValue as string;
 	}
 }
