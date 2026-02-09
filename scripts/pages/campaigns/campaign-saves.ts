@@ -164,7 +164,7 @@ class SaveEntry {
 
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
 		const savChapter = CampaignSaves.campaign
-			? CampaignSaves.campaign.chapters.find((ch) => {
+			? CampaignSaves.campaign.campaign.chapters.find((ch) => {
 					return (
 						ch.maps.find((map) => {
 							return map.name === this.save.mapName || map.name === `${this.save.mapName}.bsp`;
@@ -194,8 +194,8 @@ class SaveEntry {
 			if (!savChapter) {
 				bg.visible = false;
 			} else {
-				const basePath = getCampaignAssetPath(CampaignSaves.campaign!);
-				bg.SetImage(`${basePath}${savChapter.meta[CampaignMeta.CHAPTER_THUMBNAIL]}`);
+				const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
+				bg.SetImage(`${basePath}${savChapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL)}`);
 			}
 		}
 
@@ -278,7 +278,7 @@ class CampaignSaves {
 
 	static populateSaves() {
 		if (CampaignAPI.IsCampaignActive()) {
-			this.saveGroup = this.campaign!.id;
+			this.saveGroup = this.campaign!.campaign.id;
 		} else {
 			UiToolkitAPI.ShowGenericPopupOk(
 				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Title'),

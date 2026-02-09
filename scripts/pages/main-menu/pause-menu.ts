@@ -34,15 +34,22 @@ class PauseMenu {
 			focused: () => {}
 		},
 		{
-			id: 'SettingsBtn',
+			id: 'SettingsKeyboardBtn',
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			additionalClasses: 'KeyboardOnly'
+		},
+		{
+			id: 'SettingsControllerBtn',
+			headline: '#MainMenu_Navigation_Options',
+			tagline: '[DEV] CONTROLLER-SPECIALIZED LAYOUT',
+			activated: () => {
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings-controller', undefined);
+			},
+			additionalClasses: 'ControllerOnly'
 		},
 		{
 			id: 'QuitBtn',
@@ -80,6 +87,7 @@ class PauseMenu {
 
 		$.DispatchEvent('MainMenuHideBackgroundMovie');
 		$.DispatchEvent('MainMenuHideBackgroundImage', true);
+		$.DispatchEvent('MainMenuSwitchReverse', true);
 
 		const p = $.CreatePanel('Panel', $.GetContextPanel(), 'MenuBackgroundLayer');
 		p.SetReadyForDisplay(false);

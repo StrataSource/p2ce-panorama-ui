@@ -35,7 +35,7 @@ class CampaignSettingsTab {
 		this.show();
 
 		const basePath = getCampaignAssetPath(this.campaign);
-		const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
+		const thumb = this.chapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
 		if (thumb) {
 			if ((thumb as string).startsWith('http')) {
 				this.chImage.SetImage(thumb);
@@ -47,7 +47,7 @@ class CampaignSettingsTab {
 			this.chImage.SetImage(getRandomFallbackImage());
 		}
 
-		const logo = this.campaign.meta[CampaignMeta.SQUARE_LOGO];
+		const logo = CampaignAPI.GetCampaignMeta(this.campaign.campaign.id).get(CampaignMeta.SQUARE_LOGO);
 		if (logo) this.logoImage.SetImage(`${basePath}${logo}`);
 		else this.logoImage.visible = false;
 
@@ -110,7 +110,7 @@ class CampaignSettingsTab {
 				$.Schedule(0.1, () => {
 					const desiredMap = CampaignShared.getMap();
 					if (desiredMap === this.chapter.maps[0].name) {
-						CampaignAPI.StartCampaign(this.campaign.id, this.chapter.id);
+						CampaignAPI.StartCampaign(this.campaign.campaign.id, this.chapter.id);
 						this.clear();
 					} else {
 						$.Warning(`CAMPAIGN SETTINGS: JUMPING TO SPECIFIC MAP IN CHAPTER! DON'T FORGET TO CHANGE THIS! ${desiredMap}`);

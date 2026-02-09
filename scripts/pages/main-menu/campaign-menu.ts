@@ -19,7 +19,7 @@ class CampaignMenu {
 			tagline: '[PH] ????',
 			activated: () => {
 				$.DispatchEvent('LoadingScreenClearLastMap');
-				CampaignAPI.ContinueCampaign(CampaignAPI.GetActiveCampaign()!.id);
+				CampaignAPI.ContinueCampaign(CampaignAPI.GetActiveCampaign()!.campaign.id);
 			},
 			hovered: () => {
 				if (this.continueBtn.enabled) this.continueBox.visible = true;
@@ -41,7 +41,7 @@ class CampaignMenu {
 			}
 		},
 		{
-			id: 'SettingsBtn',
+			id: 'SettingsKeyboardBtn',
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
@@ -49,7 +49,20 @@ class CampaignMenu {
 			},
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			}
+			},
+			additionalClasses: 'KeyboardOnly'
+		},
+		{
+			id: 'SettingsControllerBtn',
+			headline: '#MainMenu_Navigation_Options',
+			tagline: '[DEV] CONTROLLER-SPECIALIZED LAYOUT',
+			activated: () => {
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings-controller', undefined);
+			},
+			focused: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			},
+			additionalClasses: 'ControllerOnly'
 		},
 		{
 			id: 'ExitCampaignBtn',
@@ -182,7 +195,7 @@ class CampaignMenu {
 	static setContinueDetails() {
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		const logo = c.meta[CampaignMeta.FULL_LOGO];
+		const logo = CampaignAPI.GetCampaignMeta(c.campaign.id).get(CampaignMeta.FULL_LOGO);
 		if (logo) {
 			$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);
 		} else {
@@ -194,7 +207,7 @@ class CampaignMenu {
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
 			.filter((a) => {
-				return a.mapGroup === c.id;
+				return a.mapGroup === c.campaign.id;
 			});
 
 		this.continueBtn.enabled = false;
@@ -210,7 +223,7 @@ class CampaignMenu {
 
 		this.latestSave = saves[0];
 
-		const savChapter = c.chapters.find((ch) => {
+		const savChapter = c.campaign.chapters.find((ch) => {
 			return (
 				ch.maps.find((map) => {
 					return map.name === this.latestSave.mapName || map.name === `${this.latestSave.mapName}.bsp`;
@@ -263,12 +276,11 @@ class CampaignMenu {
 		}
 
 		const ch = CampaignAPI.GetCampaignMeta(null);
-		const bgLevel = (ch['background_map'] as string) ?? '';
-		const bgMusic = (ch['background_music'] as string) ?? '';
-		const bgMovie = (ch['background_movie'] as string) ?? '';
-		const bgImage = (ch['background_image'] as string) ?? '';
+		const bgLevel = (ch.get(CampaignMeta.BG_MAP) as string) ?? '';
+		const bgMusic = (ch.get(CampaignMeta.BG_MUSIC) as string) ?? '';
+		const bgMovie = (ch.get(CampaignMeta.BG_MOVIE) as string) ?? '';
+		const bgImage = (ch.get(CampaignMeta.BG_IMG) as string) ?? '';
 		const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
-
 		if (!doFallbackImage && bgLevel.length > 0) {
 			if (GameInterfaceAPI.GetCurrentMap() === bgLevel) {
 				$.Warning('Background map already active. Do nothing.');
@@ -306,6 +318,7 @@ class CampaignMenu {
 			}
 		} else {
 			$.Warning('CAMPAIGN MENU: No background has been specified! Fix this now!!!');
+			$.Warning(`Fields:\nbgLevel = ${bgLevel}\nbgMusic = ${bgMusic}\nbgMovie = ${bgMovie}\nbgImage = ${bgImage}\nbasePath = ${basePath}`);
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuShowBackgroundImage', getRandomFallbackImage(), true);
 		}

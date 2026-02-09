@@ -340,7 +340,7 @@ class AddonManager {
 	}
 
 	static changeFilters() {
-		UiToolkitAPI.ShowCustomLayoutPopup('FiltersMenu', 'file://{resources}/layout/modals/popups/filters.xml');
+		UiToolkitAPI.ShowCustomLayoutPopup('FiltersMenu', 'file://{resources}/layout/modals/popups/addon-filters.xml');
 	}
 
 	/**

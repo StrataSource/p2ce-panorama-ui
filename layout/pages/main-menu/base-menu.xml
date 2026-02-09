@@ -72,6 +72,12 @@
 			<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
 		</Panel>
 
+		<Panel class="ControllerOnly fancy-orange p-3 flow-down vertical-align-bottom m-3">
+			<Label class="text-l text-weight-bold horizontal-align-center" text="[HC] Notice for Controllers" />
+			<Label class="horizontal-align-center" text="[HC] Controller input for the menu interface is experimental." />
+			<Label class="horizontal-align-center" text="[HC] Submit issues to our tracker if you encounter bugs or have feedback!" />
+		</Panel>
+
 		<Panel id="ContinueBox" class="mainmenu__display-box">
 			<Panel>
 				<Image
