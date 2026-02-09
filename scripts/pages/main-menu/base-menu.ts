@@ -44,7 +44,9 @@ class BaseMenu {
 
 				this.isContinueActive = true;
 
-				const logoPath = CampaignAPI.GetCampaignMeta(this.savCampaign.campaign.id).get(CampaignMeta.FULL_LOGO);
+				const meta = CampaignAPI.GetCampaignMeta(this.savCampaign.campaign.id) ?? new Map<string, string>();
+				if (meta.size === 0) { $.Warning('BASE MENU: Meta is invalid!'); }
+				const logoPath = meta.get(CampaignMeta.FULL_LOGO);
 				if (logoPath !== undefined) {
 					$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(this.savCampaign)}${logoPath}`);
 				} else {
@@ -268,7 +270,9 @@ class BaseMenu {
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
-		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${CampaignAPI.GetCampaignMeta(savCampaign.campaign.id).get(CampaignMeta.SQUARE_LOGO)}`);
+		const meta = CampaignAPI.GetCampaignMeta(savCampaign.campaign.id) ?? new Map<string, string>();
+		if (meta.size === 0) { $.Warning('BASE MENU: Meta is invalid!'); }
+		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${meta.get(CampaignMeta.SQUARE_LOGO)}`);
 
 		this.continueText.text = `${$.Localize(savCampaign.campaign.title)}`;
 
