@@ -46,7 +46,7 @@ class CampaignSettingsTab {
 			this.chImage.SetImage(getRandomFallbackImage());
 		}
 
-		const logo = CampaignAPI.GetCampaignMeta(this.campaign.campaign.id).get(CampaignMeta.SQUARE_LOGO);
+		const logo = CampaignAPI.GetCampaignMeta(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`).get(CampaignMeta.SQUARE_LOGO);
 		if (logo) this.logoImage.SetImage(`${basePath}${logo}`);
 		else this.logoImage.visible = false;
 
