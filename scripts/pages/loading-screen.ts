@@ -35,7 +35,7 @@ class LoadingScreenController {
 
 			if (CampaignAPI.IsCampaignActive()) {
 				const c = CampaignAPI.GetActiveCampaign()!;
-				const img = c.meta[CampaignMeta.SQUARE_LOGO];
+				const img = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.SQUARE_LOGO);
 				if (img) {
 					this.logo.SetImage(`${getCampaignAssetPath(c)}${img}`);
 				} else {
@@ -70,31 +70,11 @@ class LoadingScreenController {
 			const campaign = CampaignAPI.GetActiveCampaign()!;
 
 			if (this.logo) {
-				const pad = Number(campaign.meta[CampaignMeta.LOADING_LOGO_PAD]);
+				const pad = Number(CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.LOADING_LOGO_PAD));
 				if (!isNaN(pad)) {
+					$.Msg(`LOADING SCREEN: Set logo padding to ${pad}px`);
 					this.logo.style.padding = `${pad}px`;
 				}
-			}
-
-			// this implicitly exists if chapter can be found
-			let mapInfo: ChapterMap;
-
-			const chapter = campaign.chapters.find((ch) => {
-				const map = ch.maps.find((map) => {
-					return map.name === mapName || map.name === `${mapName}.bsp`;
-				});
-
-				if (map) mapInfo = map;
-
-				return map !== undefined;
-			});
-
-			if (!chapter) {
-				$.Warning(
-					`LOADING SCREEN: Chapter information for map '${mapName}' cannot be found! Is the map a part of this campaign?`
-				);
-				this.bgImage1.SetImage(getRandomFallbackImage());
-				return;
 			}
 
 			// applies image and sets panel if it's valid
@@ -108,34 +88,9 @@ class LoadingScreenController {
 				}
 			};
 
-			// finds the deepest level image:
-			// map specification takes priority if it exists,
-			// then chapter,
-			// then campaign,
-			// then warning
 			const findImg = (transit: string, loading: string): unknown => {
 				const asset = useTransitScreen ? transit : loading;
-
-				let img = mapInfo.meta[asset];
-				if (img) {
-					$.Msg(`LOADING SCREEN: Asset found at the map level: '${img}'`);
-					return img;
-				}
-
-				img = chapter.meta[asset];
-				if (img) {
-					$.Msg(`LOADING SCREEN: Asset found at the chapter level: '${img}'`);
-					return img;
-				}
-
-				img = campaign.meta[asset];
-				if (img) {
-					$.Msg(`LOADING SCREEN: Asset found at the campaign level: '${img}'`);
-					return img;
-				}
-
-				$.Warning(`LOADING SCREEN: ${asset} asset was not found.`);
-				return img;
+				return CampaignAPI.GetCampaignMeta(null).get(asset);
 			};
 
 			const path = findImg(CampaignMeta.TRANSITION_SCREEN, CampaignMeta.LOADING_SCREEN);

@@ -12,6 +12,14 @@ $pane-move-time: 0.1s;
 	visibility: visible;
 }
 
+.KeyboardOnly {
+	visibility: collapse;
+}
+
+.InputKeyboard .KeyboardOnly {
+	visibility: visible;
+}
+
 #TooltipManager,
 #ContextMenuManager,
 #PopupManager,

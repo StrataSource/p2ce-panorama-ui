@@ -67,7 +67,7 @@ function constructMenuButton(btn: MenuButton) {
 
 	// create the button
 	const b = $.CreatePanel('Button', $.GetContextPanel(), btn.id, {
-		class: 'mainmenu__nav__btn',
+		class: `mainmenu__nav__btn${btn.additionalClasses ? ` ${btn.additionalClasses}` : ''}`,
 		tabindex: 'auto',
 		selectionpos: 'auto'
 	});
@@ -113,10 +113,10 @@ function constructMenuButton(btn: MenuButton) {
 	return b;
 }
 
-function getCampaignAssetPath(campaign: CampaignInfo) {
-	const addonInfo = WorkshopAPI.GetAddonMeta(campaign.addon_id);
+function getCampaignAssetPath(pair: CampaignPair) {
+	const addonInfo = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
 	if (addonInfo) {
-		return `file://${WorkshopAPI.GetAddonNamedPath(campaign.addon_id)}/.assets/`;
+		return `file://${WorkshopAPI.GetAddonNamedPath(pair.bucket.addon_id)}/.assets/`;
 	} else {
 		return 'file://';
 	}

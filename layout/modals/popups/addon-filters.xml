@@ -1,0 +1,112 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/modals/popups/addon-filters.ts" />
+		<include src="file://{scripts}/util/dosa.ts" />
+	</scripts>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup generic-popup--large"
+		popupbackground="blur"
+		onload="$('#DeclineBtn').SetFocus()"
+	>
+		<Panel class="flow-down full-width">
+			<Label class="text-h2 mb-2 horizontal-align-center" text="[HC] Filtering &amp; Sorting Options" />
+		</Panel>
+
+		<Panel class="flow-right mb-2">
+			<Panel class="flow-down fill-width mr-1 bg-base-950 border-base-900 p-2">
+				<Label class="text-h6 mb-1" text="[HC] Sort By" />
+				<Panel class="flow-right">
+					<Button class="button mr-1">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/down-arrow.svg" />
+					</Button>
+					<DropDown class="dropdown horizontal-align-left fill-width" menuclass="dropdown-menu">
+						<Label text="Time Subscribed/Added" id="SortBy0" value="0" />
+						<Label text="Alphabetical" id="SortBy1" value="0" />
+						<Label text="Time Publicized on Steam" id="SortBy2" value="0" />
+					</DropDown>
+				</Panel>
+			</Panel>
+			<Panel class="flow-down fill-width ml-1 bg-base-950 border-base-900 p-2">
+				<Label class="text-h6 mb-1" text="[HC] Addon Source" />
+				<Panel class="flow-right">
+					<ToggleButton class="button togglebutton fill-width mr-1">
+						<Image class="button__icon button__icon--left" texturewidth="64" textureheight="64" src="file://{images}/download.svg" />
+						<Label class="button__text button__text--right" text="Local" />
+					</ToggleButton>
+					<ToggleButton class="button togglebutton fill-width ml-1">
+						<Image class="button__icon button__icon--left" texturewidth="64" textureheight="64" src="file://{images}/icons/steam.svg" />
+						<Label class="button__text button__text--right" text="Steam Workshop" />
+					</ToggleButton>
+				</Panel>
+				<!--
+				<DropDown class="dropdown fill-width" menuclass="dropdown-menu">
+					<Label text="All" class="IconLabel" id="AddonType0" value="2">
+						<Image texturewidth="64" textureheight="64" src="file://{images}/units.svg" />
+					</Label>
+					<Label text="Steam Workshop" class="IconLabel" id="AddonType1" value="2">
+						<Image texturewidth="64" textureheight="64" src="file://{images}/units.svg" />
+					</Label>
+					<Label text="Local Addons" class="IconLabel" id="AddonType2" value="2">
+						<Image texturewidth="64" textureheight="64" src="file://{images}/units.svg" />
+					</Label>
+				</DropDown>
+				-->
+			</Panel>
+		</Panel>
+
+		<Panel class="horizontal-separator" />
+
+		<Panel class="flow-right mt-2">
+			<Panel class="flow-down fill-width mr-1 bg-base-950 border-base-900 p-2">
+				<Label class="text-h6" text="[HC] Addon Tags" />
+				<Panel class="flow-down">
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="Singleplayer" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="Cooperative" />
+					</Panel>
+				</Panel>
+			</Panel>
+			<Panel class="flow-down fill-width ml-1 bg-base-950 border-base-900 p-2">
+				<Label class="text-h6" text="[HC] Campaign/Map Tags" />
+				<Panel class="flow-down">
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="Models" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="Materials/Textures" />
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+		
+		<Panel class="flow-right full-width mt-2" tabindex="auto" selectionpos="auto">
+			<Button class="button fill-width mr-1" onactivate="" tabindex="auto" selectionpos="auto">
+				<Label class="button__text" text="[HC] Confirm" />
+			</Button>
+			<Button
+				id="DeclineBtn"
+				class="button button--red fill-width ml-1"
+				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
+				<Label class="button__text" text="[HC] Cancel" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>
