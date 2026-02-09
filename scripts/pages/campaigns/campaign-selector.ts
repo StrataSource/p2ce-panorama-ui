@@ -3,7 +3,7 @@
 class CampaignEntry {
 	index: number;
 	panel: Button;
-	info: CampaignInfo;
+	info: CampaignPair;
 	boxartPath: string | undefined;
 	coverPath: string | undefined;
 	iconPath: string | undefined;
@@ -14,7 +14,7 @@ class CampaignEntry {
 	constructor(
 		index: number,
 		panel: Button,
-		info: CampaignInfo,
+		info: CampaignPair,
 		boxart: string | undefined,
 		cover: string | undefined,
 		btnBg: string | undefined,
@@ -48,7 +48,7 @@ class CampaignEntry {
 		}
 
 		if (title) {
-			title.text = $.Localize(this.info.title);
+			title.text = $.Localize(this.info.campaign.title);
 		}
 		if (author) {
 			if (this.author) author.text = $.Localize(this.author);
@@ -71,8 +71,14 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			$.DispatchEvent('MainMenuAnimatedSwitch', this.info.id);
+			$.DispatchEvent('MainMenuAnimatedSwitch', this.info.campaign.id);
 			$.DispatchEvent('MainMenuCloseAllPages');
+		});
+		this.panel.SetPanelEvent('onmouseover', () => {
+			CampaignSelector.onCampaignHovered(this);
+		});
+		this.panel.SetPanelEvent('onfocus', () => {
+			CampaignSelector.onCampaignHovered(this);
 		});
 	}
 }
@@ -104,41 +110,39 @@ class CampaignSelector {
 	}
 
 	static populateCampaigns() {
-		const campaigns = CampaignAPI.GetAllCampaigns();
-		for (let i = 0; i < campaigns.length; ++i) {
-			const p = $.CreatePanel('Button', this.campaignList, 'campaign' + i);
-			p.LoadLayoutSnippet('CampaignEntrySnippet');
+		const buckets = CampaignAPI.GetAllCampaignBuckets();
+		let campaignIndex = 0;
 
-			if (i < campaigns.length - 1) {
+		for (const bucket of buckets) {
+			for (const campaign of bucket.campaigns) {
+				const p = $.CreatePanel('Button', this.campaignList, `Campaign_${campaign.id}`);
+				p.LoadLayoutSnippet('CampaignEntrySnippet');
 				p.AddClass('campaigns__entry__spaced');
+	
+				const m = CampaignAPI.GetCampaignMeta(`${bucket.id}/${campaign.id}`) ?? new Map<string, string>();
+				if (m.size === 0) {
+					$.Warning(`Campaign meta map for '${bucket.id}/${campaign.id}' couldn't be retrieved, or it was empty.`);
+				}
+	
+				this.campaignEntries.push(
+					new CampaignEntry(
+						campaignIndex,
+						p,
+						{ bucket: bucket, campaign: campaign },
+						m.get(CampaignMeta.BOX_ART),
+						m.get(CampaignMeta.COVER),
+						m.get(CampaignMeta.BTN_BG),
+						m.get(CampaignMeta.DESC),
+						m.get(CampaignMeta.AUTHOR)
+					)
+				);
+	
+				this.campaignEntries[campaignIndex].update();
+	
+				campaignIndex += 1;
 			}
-
-			const c = campaigns[i];
-
-			this.campaignEntries.push(
-				new CampaignEntry(
-					i,
-					p,
-					c,
-					c.meta[CampaignMeta.BOX_ART],
-					c.meta[CampaignMeta.COVER],
-					c.meta[CampaignMeta.BTN_BG],
-					c.meta[CampaignMeta.DESC],
-					c.meta[CampaignMeta.AUTHOR]
-				)
-			);
-
-			p.SetPanelEvent('onmouseover', () => {
-				CampaignSelector.onCampaignHovered(this.campaignEntries[i]);
-			});
-			p.SetPanelEvent('onfocus', () => {
-				CampaignSelector.onCampaignHovered(this.campaignEntries[i]);
-			});
-
-			this.campaignEntries[i].update();
-
-			if (c.id === 'empty') this.campaignEntries[i].panel.visible = false;
 		}
+
 		stripDevTagsFromLabels(this.campaignList);
 
 		if (this.campaignEntries.length > 0) {
@@ -147,14 +151,19 @@ class CampaignSelector {
 	}
 
 	static onCampaignHovered(e: CampaignEntry) {
+		if (!e) {
+			$.Warning('Dont do that');
+			return;
+		}
+
 		let switchDelay = 0;
 
 		if (this.hoverContainer.IsValid() && !this.hoverContainer.HasClass('campaigns__boxart__container__show')) {
 			this.hoverContainer.AddClass('campaigns__boxart__container__show');
 
-			if (e.info === this.hoveredCampaign) return;
+			if (e.info.campaign === this.hoveredCampaign) return;
 		} else {
-			if (e.info === this.hoveredCampaign) return;
+			if (e.info.campaign === this.hoveredCampaign) return;
 
 			switchDelay = 0.0;
 
@@ -165,7 +174,7 @@ class CampaignSelector {
 			}
 		}
 
-		this.hoveredCampaign = e.info;
+		this.hoveredCampaign = e.info.campaign;
 
 		$.Schedule(switchDelay, () => {
 			const basePath = getCampaignAssetPath(e.info);
@@ -184,12 +193,6 @@ class CampaignSelector {
 	}
 
 	static hideBoxart() {
-		// there is a specific scenario where this can be invalid
-		//
-		// if boxart is shown, and then the game is closed (via OS taskbar or
-		// or some other way without letting the mouse leave the campaign list),
-		// then the campaign list onmouseout event fires this function, but
-		// the UI stuff is being deleted at this point
 		if (this.hoverContainer.IsValid()) {
 			this.hoverContainer.RemoveClass('campaigns__boxart__container__show');
 		}

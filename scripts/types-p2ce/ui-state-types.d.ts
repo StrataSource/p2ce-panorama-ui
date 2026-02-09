@@ -30,7 +30,13 @@ declare const enum CampaignMeta {
 	TRANSITION_SCREEN = 'transition_screen',
 	LOADING_SCREEN = 'loading_screen',
 	CHAPTER_THUMBNAIL = 'thumbnail',
-	CHAPTER_DISPLAY_MODE = 'chapter_display_mode'
+	CHAPTER_DISPLAY_MODE = 'chapter_display_mode',
+	BG_MAP = 'background_map',
+	BG_MUSIC = 'background_music',
+	BG_MOVIE = 'background_movie',
+	BG_IMG = 'background_image',
+	MAP_LIST_IMG = 'img',
+	MAP_LIST_TITLE = 'title'
 }
 
 declare const enum ChapterDisplayMode {
@@ -51,4 +57,5 @@ type MenuButton = {
 	unhovered?: () => void;
 	focused?: () => void;
 	focusIsHover?: boolean;
+	additionalClasses?: string;
 };

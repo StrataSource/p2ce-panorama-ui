@@ -33,7 +33,7 @@ class BaseMenu {
 				GameInterfaceAPI.ConsoleCommand('disconnect');
 				$.DispatchEvent('LoadingScreenClearLastMap');
 				$.Schedule(0.1, () => {
-					CampaignAPI.ContinueCampaign(this.savCampaign!.id);
+					CampaignAPI.ContinueCampaign(this.savCampaign!.campaign.id);
 				});
 			},
 			hovered: () => {
@@ -44,7 +44,7 @@ class BaseMenu {
 
 				this.isContinueActive = true;
 
-				const logoPath = this.savCampaign.meta[CampaignMeta.FULL_LOGO];
+				const logoPath = CampaignAPI.GetCampaignMeta(this.savCampaign.campaign.id).get(CampaignMeta.FULL_LOGO);
 				if (logoPath !== undefined) {
 					$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(this.savCampaign)}${logoPath}`);
 				} else {
@@ -71,7 +71,7 @@ class BaseMenu {
 			}
 		},
 		{
-			id: 'SettingsBtn',
+			id: 'SettingsKeyboardBtn',
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
@@ -79,7 +79,20 @@ class BaseMenu {
 			},
 			focused: () => {
 				this.hideContinueDetails();
-			}
+			},
+			additionalClasses: 'KeyboardOnly'
+		},
+		{
+			id: 'SettingsControllerBtn',
+			headline: '#MainMenu_Navigation_Options',
+			tagline: '[DEV] CONTROLLER-SPECIALIZED LAYOUT',
+			activated: () => {
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings-controller', undefined);
+			},
+			focused: () => {
+				this.hideContinueDetails();
+			},
+			additionalClasses: 'ControllerOnly'
 		},
 		{
 			id: 'QuitBtn',
@@ -109,7 +122,7 @@ class BaseMenu {
 	];
 
 	static latestSave: GameSave;
-	static savCampaign: CampaignInfo | undefined = undefined;
+	static savCampaign: CampaignPair | undefined = undefined;
 	static savChapter: ChapterInfo | undefined = undefined;
 	static isContinueActive: boolean = false;
 
@@ -223,12 +236,9 @@ class BaseMenu {
 			return;
 		}
 
-		const campaigns = CampaignAPI.GetAllCampaigns();
-		let savCampaign: CampaignInfo | undefined;
+		let savCampaign: CampaignPair | undefined;
 		for (const save of saves) {
-			savCampaign = campaigns.find((v) => {
-				return v.id === save.mapGroup;
-			});
+			savCampaign = CampaignAPI.FindCampaign(save.mapGroup) ?? undefined;
 			if (!savCampaign) {
 				$.Warning('RESUME: Newer save found without a map group. Skipping.');
 			} else {
@@ -243,7 +253,7 @@ class BaseMenu {
 			return;
 		}
 
-		const savChapter: ChapterInfo | undefined = savCampaign.chapters.find((ch) => {
+		const savChapter: ChapterInfo | undefined = savCampaign.campaign.chapters.find((ch) => {
 			return (
 				ch.maps.find((map) => {
 					return map.name === this.latestSave.mapName || map.name === `${this.latestSave.mapName}.bsp`;
@@ -258,9 +268,9 @@ class BaseMenu {
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
-		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${savCampaign.meta[CampaignMeta.SQUARE_LOGO]}`);
+		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${CampaignAPI.GetCampaignMeta(savCampaign.campaign.id).get(CampaignMeta.SQUARE_LOGO)}`);
 
-		this.continueText.text = `${$.Localize(savCampaign.title)}`;
+		this.continueText.text = `${$.Localize(savCampaign.campaign.title)}`;
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		const chapterName = $.Localize(savChapter.title);

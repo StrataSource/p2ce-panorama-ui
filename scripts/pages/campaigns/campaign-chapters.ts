@@ -51,12 +51,14 @@ class ChapterEntry {
 			}
 		}
 		if (cover) {
-			const thumb = this.chapter.meta[CampaignMeta.CHAPTER_THUMBNAIL];
+			const thumb = this.chapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
 			if (thumb) {
 				if ((thumb as string).startsWith('http')) {
 					cover.SetImage(thumb);
 				} else {
-					cover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
+					cover.SetImage(
+						`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`
+					);
 				}
 			}
 			else cover.SetImage(getRandomFallbackImage());
@@ -88,12 +90,14 @@ class ChapterEntry {
 					CampaignChapters.chapterListModeTitle.text = chTitleSplit[0];
 				}
 
-				const thumb = this.chapter!.meta[CampaignMeta.CHAPTER_THUMBNAIL];
+				const thumb = this.chapter!.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
 				if (thumb) {
 					if ((thumb as string).startsWith('http')) {
 						CampaignChapters.chapterListModeCover.SetImage(thumb);
 					} else {
-						CampaignChapters.chapterListModeCover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
+						CampaignChapters.chapterListModeCover.SetImage(
+							`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`
+						);
 					}
 				}
 				else CampaignChapters.chapterListModeCover.SetImage(getRandomFallbackImage());
@@ -119,11 +123,11 @@ class CampaignChapters {
 
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: ChapterInfo;
-	static campaign = CampaignAPI.GetActiveCampaign()!;
+	static campaign = CampaignAPI.GetActiveCampaign()!.campaign;
 	static chapterPage = 0;
 	static maxPages = -1;
 	static maxEntryPerPage = 3;
-	static displayMode = ChapterDisplayMode.CLASSIC;
+	static displayMode: ChapterDisplayMode | string = ChapterDisplayMode.CLASSIC;
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
@@ -132,7 +136,7 @@ class CampaignChapters {
 	}
 
 	static init() {
-		this.displayMode = this.campaign.meta[CampaignMeta.CHAPTER_DISPLAY_MODE];
+		this.displayMode = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
 
 		if (!this.displayMode) this.displayMode = ChapterDisplayMode.CLASSIC;
 
