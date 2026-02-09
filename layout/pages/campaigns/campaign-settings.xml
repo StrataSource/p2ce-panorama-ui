@@ -12,8 +12,14 @@
 		<Panel class="campaign-settings">
 			<Panel id="CampaignSettingsBase" class="campaign-settings__left">
 				<Panel class="fancy-red full-width p-3 flow-down mb-2">
-					<Label class="text-l text-weight-bold horizontal-align-center" text="[HC] This system is a prototype experiment and may be changed or removed in the future." />
-					<Label class="horizontal-align-center" text="[HC] Changed convars through this system will not persist in saves. They will also not be reverted upon exiting a campaign." />
+					<Label
+						class="text-l text-weight-bold horizontal-align-center"
+						text="[HC] This system is a prototype experiment and may be changed or removed in the future."
+					/>
+					<Label
+						class="horizontal-align-center"
+						text="[HC] Changed convars through this system will not persist in saves. They will also not be reverted upon exiting a campaign."
+					/>
 				</Panel>
 				<RadioButton
 					id="PresetsBtn"

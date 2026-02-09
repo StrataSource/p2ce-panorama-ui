@@ -56,12 +56,9 @@ class ChapterEntry {
 				if ((thumb as string).startsWith('http')) {
 					cover.SetImage(thumb);
 				} else {
-					cover.SetImage(
-						`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`
-					);
+					cover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
 				}
-			}
-			else cover.SetImage(getRandomFallbackImage());
+			} else cover.SetImage(getRandomFallbackImage());
 		}
 
 		if (this.locked) {
@@ -99,12 +96,15 @@ class ChapterEntry {
 							`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`
 						);
 					}
-				}
-				else CampaignChapters.chapterListModeCover.SetImage(getRandomFallbackImage());
+				} else CampaignChapters.chapterListModeCover.SetImage(getRandomFallbackImage());
 			};
 
-			this.panel.SetPanelEvent('onmouseover', () => { setBigImage(); });
-			this.panel.SetPanelEvent('onfocus', () => { setBigImage(); });
+			this.panel.SetPanelEvent('onmouseover', () => {
+				setBigImage();
+			});
+			this.panel.SetPanelEvent('onfocus', () => {
+				setBigImage();
+			});
 		}
 	}
 }
@@ -146,7 +146,7 @@ class CampaignChapters {
 				this.maxEntryPerPage = 1000000;
 				this.list.AddClass('chapters__list');
 				break;
-		
+
 			case ChapterDisplayMode.GRID:
 				$.GetContextPanel().AddClass('ChapterModeGrid');
 				this.maxEntryPerPage = 100;
@@ -190,16 +190,11 @@ class CampaignChapters {
 
 	static populatePips() {
 		for (let i = 0; i < this.maxPages; ++i) {
-			const pip = $.CreatePanel(
-				'RadioButton',
-				this.pips,
-				`Pip${i}`,
-				{
-					'group': 'ChaptersPipGroup',
-					'tabindex': 'auto',
-					'selectionpos': 'auto'
-				}
-			);
+			const pip = $.CreatePanel('RadioButton', this.pips, `Pip${i}`, {
+				group: 'ChaptersPipGroup',
+				tabindex: 'auto',
+				selectionpos: 'auto'
+			});
 			pip.AddClass('chapters__nav__pips__entry');
 			pip.SetPanelEvent('onactivate', () => {
 				this.chapterPage = i;
@@ -222,9 +217,9 @@ class CampaignChapters {
 
 	static populateChapters() {
 		(this.pips.Children()[this.chapterPage] as RadioButton).SetSelected(true);
-		
+
 		if (this.displayMode === ChapterDisplayMode.GRID) {
-			this.counterLabel.text = `${this.chapterPage + 1}\n/\n${this.maxPages}`
+			this.counterLabel.text = `${this.chapterPage + 1}\n/\n${this.maxPages}`;
 		} else {
 			this.counterLabel.text = `${this.chapterPage + 1} / ${this.maxPages}`;
 		}
@@ -236,9 +231,9 @@ class CampaignChapters {
 
 		for (
 			let i = 0;
-			this.displayMode === ChapterDisplayMode.CLASSIC ?
-				i < this.maxEntryPerPage :
-				i < Math.min(this.maxEntryPerPage, chapters.length - this.chapterPage * this.maxEntryPerPage);
+			this.displayMode === ChapterDisplayMode.CLASSIC
+				? i < this.maxEntryPerPage
+				: i < Math.min(this.maxEntryPerPage, chapters.length - this.chapterPage * this.maxEntryPerPage);
 			++i
 		) {
 			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
@@ -247,12 +242,7 @@ class CampaignChapters {
 			const idx = this.chapterPage * this.maxEntryPerPage + i;
 
 			this.chapterEntries.push(
-				new ChapterEntry(
-					idx,
-					p,
-					idx < chapters.length ? chapters[idx] : undefined,
-					prog < idx
-				)
+				new ChapterEntry(idx, p, idx < chapters.length ? chapters[idx] : undefined, prog < idx)
 			);
 
 			this.chapterEntries[i].update();

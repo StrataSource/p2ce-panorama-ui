@@ -444,11 +444,7 @@ class AddonSearch {
 
 	static {
 		this.searchBar.RaiseChangeEvents(true);
-		$.RegisterEventHandler(
-			'TextEntryChanged',
-			this.searchBar,
-			this.onSearchTextChanged.bind(this)
-		);
+		$.RegisterEventHandler('TextEntryChanged', this.searchBar, this.onSearchTextChanged.bind(this));
 	}
 
 	static onSearchTextChanged() {

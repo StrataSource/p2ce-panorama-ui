@@ -28,7 +28,14 @@ $colors: function.map-collect(
 	}
 
 	.fancy-#{$name} {
-		background-color: gradient( radial, 50% 50%, 0% 0%, 70% 70%, from( $color ), to( color.scale($color, $lightness: -50%) ) );
+		background-color: gradient(
+			radial,
+			50% 50%,
+			0% 0%,
+			70% 70%,
+			from($color),
+			to(color.scale($color, $lightness: -50%))
+		);
 		border: 1px solid $color;
 		@if color.channel(color.to-space($color, hsl), 'lightness') > 50% {
 			& Label {

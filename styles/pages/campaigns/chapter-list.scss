@@ -46,7 +46,7 @@
 		max-height: 768px;
 
 		#{$root}__entry {
-			background-color: rgba(0,0,0,0);
+			background-color: rgba(0, 0, 0, 0);
 			border-style: none;
 
 			&__details {
@@ -78,7 +78,7 @@
 		&__title {
 			width: 100%;
 			letter-spacing: 2px;
-			text-shadow: 2px 2px 1px 3.0 $base-950;
+			text-shadow: 2px 2px 1px 3 $base-950;
 			font-weight: bold;
 			font-size: 32px;
 			max-height: 80px;
@@ -86,7 +86,7 @@
 			vertical-align: bottom;
 			text-align: right;
 			padding: 15px 25px;
-			background-color: gradient( linear, 100% 0%, 0% 0%, from( $base-950 ), to( rgba(0,0,0,0) ) );
+			background-color: gradient(linear, 100% 0%, 0% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
 			transform: translateX(-1px) translateY(-1px);
 		}
 	}
@@ -248,7 +248,7 @@
 
 		&__label {
 			text-align: center;
-			text-shadow: 2px 2px 2px 3.0 $base-950;
+			text-shadow: 2px 2px 2px 3 $base-950;
 			font-size: 24px;
 			font-weight: bold;
 			letter-spacing: 2px;
@@ -333,7 +333,13 @@
 
 		.InputKeyboard .ChapterModeList &:hover:not(:disabled),
 		.InputController .ChapterModeList &:focus:not(:disabled) {
-			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover-color ), to( rgba(0,0,0,0) ) );
+			background-color: gradient(
+				linear,
+				0% 0%,
+				100% 0%,
+				from($button-background-hover-color),
+				to(rgba(0, 0, 0, 0))
+			);
 		}
 
 		&:selected {

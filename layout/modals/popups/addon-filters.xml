@@ -35,11 +35,21 @@
 				<Label class="text-h6 mb-1" text="[HC] Addon Source" />
 				<Panel class="flow-right">
 					<ToggleButton class="button togglebutton fill-width mr-1">
-						<Image class="button__icon button__icon--left" texturewidth="64" textureheight="64" src="file://{images}/download.svg" />
+						<Image
+							class="button__icon button__icon--left"
+							texturewidth="64"
+							textureheight="64"
+							src="file://{images}/download.svg"
+						/>
 						<Label class="button__text button__text--right" text="Local" />
 					</ToggleButton>
 					<ToggleButton class="button togglebutton fill-width ml-1">
-						<Image class="button__icon button__icon--left" texturewidth="64" textureheight="64" src="file://{images}/icons/steam.svg" />
+						<Image
+							class="button__icon button__icon--left"
+							texturewidth="64"
+							textureheight="64"
+							src="file://{images}/icons/steam.svg"
+						/>
 						<Label class="button__text button__text--right" text="Steam Workshop" />
 					</ToggleButton>
 				</Panel>
