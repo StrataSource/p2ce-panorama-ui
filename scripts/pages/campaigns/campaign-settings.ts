@@ -92,6 +92,15 @@ class CampaignSettingsTab {
 	}
 
 	static finishSettings() {
+		if (this.chapter.maps.length === 0) {
+			UiToolkitAPI.ShowGenericPopupOk(
+				'[HC] Error',
+				'[HC] This chapter does not define any maps. Cannot start.',
+				'warning-popup',
+				() => {}
+			)
+			return;
+		}
 		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 			$.Localize('#Action_NewGame_Title'),
 			$.Localize('#Action_NewGame_CampaignSetup_Description'),
