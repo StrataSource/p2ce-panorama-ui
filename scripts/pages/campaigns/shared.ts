@@ -215,8 +215,8 @@ class CampaignShared {
 		}
 
 		const map = (UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo).maps[0] ?? '';
-		settings['Map']['map'].def = map;
-		settings['Map']['map'].currentValue = map;
+		settings['Map']['map'].def = map.name;
+		settings['Map']['map'].currentValue = map.name;
 	}
 
 	static constructPage() {
@@ -389,6 +389,6 @@ class CampaignShared {
 			string,
 			Record<string, CampaignSetting>
 		>;
-		return settings['Map']['map'].currentValue as string;
+		return String(settings['Map']['map'].currentValue);
 	}
 }
