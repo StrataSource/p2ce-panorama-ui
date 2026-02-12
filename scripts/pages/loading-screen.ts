@@ -34,10 +34,9 @@ class LoadingScreenController {
 			}
 
 			if (CampaignAPI.IsCampaignActive()) {
-				const c = CampaignAPI.GetActiveCampaign()!;
 				const img = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.SQUARE_LOGO);
 				if (img) {
-					this.logo.SetImage(`${getCampaignAssetPath(c)}${img}`);
+					this.logo.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${img}`);
 				} else {
 					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
 				}
@@ -67,14 +66,26 @@ class LoadingScreenController {
 
 		if (CampaignAPI.IsCampaignActive()) {
 			// get relevant information
-			const campaign = CampaignAPI.GetActiveCampaign()!;
+			const c = CampaignAPI.GetActiveCampaign()!;
 
 			if (this.logo) {
 				const pad = Number(CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.LOADING_LOGO_PAD));
 				if (!isNaN(pad)) {
-					$.Msg(`LOADING SCREEN: Set logo padding to ${pad}px`);
 					this.logo.style.padding = `${pad}px`;
 				}
+			}
+
+			const index = CampaignAPI.GetCampaignChapterFromMap(null, mapName);
+			
+			const chapter = index > -1 ? c.campaign.chapters[index] : undefined;
+			const mapInfo = chapter ? chapter.maps.find((v: ChapterMap) => { return v.name === mapName }) : undefined;
+
+			if (!chapter) {
+				$.Warning(
+					`LOADING SCREEN: Chapter information for map '${mapName}' cannot be found! Is the map a part of this campaign?`
+				);
+				this.bgImage1.SetImage(getRandomFallbackImage());
+				return;
 			}
 
 			// applies image and sets panel if it's valid
@@ -82,18 +93,47 @@ class LoadingScreenController {
 			const setImg = (panel: Image, path: unknown) => {
 				if (path) {
 					panel.visible = true;
-					panel.SetImage(`${getCampaignAssetPath(campaign)}${path}`);
+					panel.SetImage(`${getCampaignAssetPath(c)}${path}`);
 				} else {
 					panel.visible = false;
 				}
 			};
 
+			// finds the deepest level image:
+			// map specification takes priority if it exists,
+			// then chapter,
+			// then campaign,
+			// then warning
 			const findImg = (transit: string, loading: string): unknown => {
 				const asset = useTransitScreen ? transit : loading;
-				return CampaignAPI.GetCampaignMeta(null).get(asset);
+
+				let img: string | undefined = undefined;
+				if (mapInfo) {
+					img = mapInfo.meta.get(asset);
+					if (img) {
+						$.Msg(`LOADING SCREEN: Asset found at the map level: '${img}'`);
+						return img;
+					}
+				}
+
+				img = chapter.meta.get(asset);
+				if (img) {
+					$.Msg(`LOADING SCREEN: Asset found at the chapter level: '${img}'`);
+					return img;
+				}
+
+				img = c.campaign.meta.get(asset);
+				if (img) {
+					$.Msg(`LOADING SCREEN: Asset found at the campaign level: '${img}'`);
+					return img;
+				}
+
+				$.Warning(`LOADING SCREEN: ${asset} asset was not found.`);
+				return img;
 			};
 
 			const path = findImg(CampaignMeta.TRANSITION_SCREEN, CampaignMeta.LOADING_SCREEN);
+			$.Msg(`Image asset path: ${path}`);
 			if (path) {
 				const split = (path as string).split('.');
 				let join = '';
