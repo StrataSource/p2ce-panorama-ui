@@ -227,8 +227,8 @@
 				</Panel>
 
 				<SettingsEnum
-					text="[HC] Threaded Audio"
-					infomessage="[HC] Threaded Audio Description"
+					text="#Settings_Audio_HRTF_Async_Title"
+					infomessage="#Settings_Audio_HRTF_Async_Desc"
 					convar="snd_hrtf_async"
 					hasdocspage="false"
 				>

@@ -93,12 +93,25 @@ class CampaignSettingsTab {
 
 	static finishSettings() {
 		if (this.chapter.maps.length === 0) {
+			const badCampaignId = this.campaign.campaign.id;
+			const badChapterId = this.chapter.id;
+
+			// Kick to menu
+			this.clear();
+			$.DispatchEvent('MainMenuCloseAllPages');
+
+			// Display invalid map error message to user and log to console
+			$.Warning(
+				`Chapter index ${badChapterId} in campaign ${badCampaignId} has no maps defined in its corresponding KV3 data. Kicking to menu.`
+			);
 			UiToolkitAPI.ShowGenericPopupOk(
-				'[HC] Error',
-				'[HC] This chapter does not define any maps. Cannot start.',
+				$.Localize('#MainMenu_Campaigns_Error_InvalidChapterMapData_Title'),
+				$.Localize('#MainMenu_Campaigns_Error_InvalidChapterMapData_Desc'),
 				'warning-popup',
-				() => {}
+				() => {},
+				'blur'
 			)
+			
 			return;
 		}
 		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
