@@ -313,7 +313,7 @@ class AddonManager {
 		const map = selected.GetAttributeString('value', 'null');
 		if (map === null || map === 'null') return;
 
-		GameInterfaceAPI.ConsoleCommand(`map ${map}`);
+		GameInterfaceAPI.ConsoleCommand(`map "${map}"`);
 	}
 
 	/**
