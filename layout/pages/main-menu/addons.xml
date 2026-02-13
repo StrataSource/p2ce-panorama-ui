@@ -22,7 +22,7 @@
 					</Panel>
 				</Panel>
 				<Panel class="addons__entry__right">
-					<TooltipPanel tooltip="[HC] Toggle addon enabled state">
+					<TooltipPanel tooltip="#MainMenu_Addons_ToggleAddon">
 						<ToggleButton id="AddonEnable" class="checkbox addons__entry__checkbox" />
 					</TooltipPanel>
 				</Panel>
@@ -85,7 +85,7 @@
 			</Panel>
 			<Panel id="AddonsPage" class="addons" onload="AddonManager.init()" tabindex="auto" selectionpos="auto">
 				<Panel class="addons__action-bar">
-					<TooltipPanel tooltip="[HC] Change addon list sorting/filters">
+					<TooltipPanel tooltip="#MainMenu_Addons_Filtering_Edit_Tooltip">
 						<Button
 							id="ViewFilters"
 							class="button mr-2"
@@ -96,7 +96,7 @@
 							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/filter-menu.svg" />
 						</Button>
 					</TooltipPanel>
-					<TooltipPanel tooltip="[HC] Toggle listed addons off/on">
+					<TooltipPanel tooltip="#MainMenu_Addons_Filtering_EnableAddons_Tooltip">
 						<ToggleButton
 							id="ToggleAll"
 							class="button togglebutton mr-2"
@@ -107,7 +107,7 @@
 							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg" />
 						</ToggleButton>
 					</TooltipPanel>
-					<TextEntry id="SearchAddonsEntry" class="textentry fill-width mr-2" placeholder="[HC] Search all addons..." />
+					<TextEntry id="SearchAddonsEntry" class="textentry fill-width mr-2" placeholder="#MainMenu_Addons_SearchBox_FillerText" />
 					<Panel class="horizontal-align-right flow-right" tabindex="auto" selectionpos="auto">
 						<Button
 							onactivate="AddonManager.apply()"
