@@ -162,15 +162,15 @@
 					<Label text="#Settings_General_Enabled" value="0" id="preventthreadsleep0" />
 				</SettingsEnumDropDown>
 				<SettingsEnumDropDown
-					text="[HC] Splitscreen Direction"
+					text="#Settings_Portal_Coop_SS_SplitMode"
+					infomessage="#Settings_Portal_Coop_SS_SplitMode_info"
 					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="PowerSavingsMode"
+					id="CoopSplitMode"
 					convar="ss_splitmode"
-					infomessage="[HC] Splitscreen Direction Description"
 				>
-					<Label text="[HC] Automatic" value="0" id="splitmode0" />
-					<Label text="[HC] Horizontal" value="1" id="splitmode1" />
-					<Label text="[HC] Vertical" value="2" id="splitmode2" />
+					<Label text="#Settings_Portal_Coop_SS_SplitMode_horiz" value="1" id="splitmode1" />
+					<Label text="Settings_Portal_Coop_SS_SplitMode_vert" value="2" id="splitmode2" />
+					<Label text="#Settings_Portal_Coop_SS_SplitMode_auto" value="0" id="splitmode0" />
 				</SettingsEnumDropDown>
 				
 			</Panel>
@@ -184,14 +184,15 @@
 				</Panel>
 				
 				<Panel class="settings-group__subtitle">
-					<Label class="settings-enum-dropdown__title ml-3" text="[HC] Quality Presets (NO IMPLEMENTATION)" />
+					<Label class="settings-enum-dropdown__title ml-3" text="#Settings_Video_Presets" />
 					<DropDown id="PresetDropdown" class="dropdown mr-3" menuclass="dropdown-menu">
 						<Label text="[HC] Custom" id="PresetDropdown0" value="0" />
-						<Label text="#Settings_General_Low" id="PresetDropdown1" value="1" />
-						<Label text="#Settings_General_Medium" id="PresetDropdown2" value="2" />
-						<Label text="#Settings_General_High" id="PresetDropdown3" value="3" />
-						<Label text="#Settings_General_VeryHigh" id="PresetDropdown4" value="4" />
-						<Label text="[HC] Stupidly Ludicrous" id="PresetDropdown5" value="5" />
+						<Label text="#Settings_General_EngineersToast" id="PresetDropdown1" value="1" />
+						<Label text="#Settings_General_Low" id="PresetDropdown2" value="2" />
+						<Label text="#Settings_General_Medium" id="PresetDropdown3" value="3" />
+						<Label text="#Settings_General_High" id="PresetDropdown4" value="4" />
+						<Label text="#Settings_General_VeryHigh" id="PresetDropdown5" value="5" />
+						<Label text="#Settings_General_StupidlyLudricous" id="PresetDropdown6" value="6" />
 					</DropDown>
 				</Panel>
 
@@ -209,27 +210,29 @@
 				</SettingsEnumDropDown>
 
 				<SettingsEnumDropDown
-					text="[HC] mat_picmip"
+					text="#Settings_Render_Texture"
+					infomessage="#Settings_Render_Texture_Info"
 					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="mat_picmip"
+					id="TextureQuality"
 					convar="mat_picmip"
-					infomessage="[HC] mat_picmip"
 				>
-					<Label text="#Settings_General_Low" value="1" id="mat_picmip1" />
-					<Label text="#Settings_General_Medium" value="0" id="mat_picmip0" />
-					<Label text="#Settings_General_High" value="-1" id="mat_picmip-1" />
-					<Label text="#Settings_General_VeryHigh" value="-10" id="mat_picmip-10" />
+					<Label text="#Settings_General_Low" value="1" id="TextureQuality1" />
+					<Label text="#Settings_General_Medium" value="0" id="TextureQuality2" />
+					<Label text="#Settings_General_High" value="-1" id="TextureQuality3" />
+					<Label text="#Settings_General_VeryHigh" value="-10" id="TextureQuality4" />
 				</SettingsEnumDropDown>
 
 				<SettingsEnumDropDown
-					text="#Settings_Render_ModelTexture"
+					text="#Settings_Render_Model"
+					infomessage="#Settings_Render_Model_Info"
 					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="ModelTextureDetail"
-					infomessage="#Settings_Render_ModelTexture_Info"
+					id="ModelDetail"
+					convar="r_lod"
 				>
-					<Label text="#Settings_General_Low" value="0" id="gpumemlevel0" />
-					<Label text="#Settings_General_Medium" value="1" id="gpumemlevel1" />
-					<Label text="#Settings_General_High" value="2" id="gpumemlevel2" />
+					<Label text="#Settings_General_Low" value="-3" id="gpumemlevel0" />
+					<Label text="#Settings_General_Medium" value="-2" id="gpumemlevel1" />
+					<Label text="#Settings_General_High" value="-1" id="gpumemlevel2" />
+					<Label text="#Settings_General_VeryHigh" value="0" id="gpumemlevel3" />
 					<Label text="#Settings_General_Autodetect" value="9999999" id="gpumemlevel3" />
 				</SettingsEnumDropDown>
 

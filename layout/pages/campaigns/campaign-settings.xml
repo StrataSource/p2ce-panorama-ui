@@ -14,11 +14,11 @@
 				<Panel class="fancy-red full-width p-3 flow-down mb-2">
 					<Label
 						class="text-l text-weight-bold horizontal-align-center"
-						text="[HC] This system is a prototype experiment and may be changed or removed in the future."
+						text="#MainMenu_Campaigns_Setup_Proto_Title"
 					/>
 					<Label
 						class="horizontal-align-center"
-						text="[HC] Changed convars through this system will not persist in saves. They will also not be reverted upon exiting a campaign."
+						text="#MainMenu_Campaigns_Setup_Proto_Desc"
 					/>
 				</Panel>
 				<RadioButton

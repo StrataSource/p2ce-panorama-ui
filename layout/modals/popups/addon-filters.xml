@@ -14,25 +14,25 @@
 		onload="$('#DeclineBtn').SetFocus()"
 	>
 		<Panel class="flow-down full-width">
-			<Label class="text-h2 mb-2 horizontal-align-center" text="[HC] Filtering &amp; Sorting Options" />
+			<Label class="text-h2 mb-2 horizontal-align-center" text="#MainMenu_Addons_Filtering_Title" />
 		</Panel>
 
 		<Panel class="flow-right mb-2">
 			<Panel class="flow-down fill-width mr-1 bg-base-950 border-base-900 p-2">
-				<Label class="text-h6 mb-1" text="[HC] Sort By" />
+				<Label class="text-h6 mb-1" text="#MainMenu_Addons_Filtering_Sort_Title" />
 				<Panel class="flow-right">
 					<Button class="button mr-1">
 						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/down-arrow.svg" />
 					</Button>
 					<DropDown class="dropdown horizontal-align-left fill-width" menuclass="dropdown-menu">
-						<Label text="Time Subscribed/Added" id="SortBy0" value="0" />
-						<Label text="Alphabetical" id="SortBy1" value="0" />
-						<Label text="Time Publicized on Steam" id="SortBy2" value="0" />
+						<Label text="#MainMenu_Addons_Filtering_Sort_TimeInstalled" id="SortBy0" value="0" />
+						<Label text="#MainMenu_Addons_Filtering_Sort_Alpha" id="SortBy1" value="0" />
+						<Label text="#MainMenu_Addons_Filtering_Sort_TimePublished" id="SortBy2" value="0" />
 					</DropDown>
 				</Panel>
 			</Panel>
 			<Panel class="flow-down fill-width ml-1 bg-base-950 border-base-900 p-2">
-				<Label class="text-h6 mb-1" text="[HC] Addon Source" />
+				<Label class="text-h6 mb-1" text="#MainMenu_Addons_Filtering_Sort_InstallSrc" />
 				<Panel class="flow-right">
 					<ToggleButton class="button togglebutton fill-width mr-1">
 						<Image
@@ -41,7 +41,7 @@
 							textureheight="64"
 							src="file://{images}/download.svg"
 						/>
-						<Label class="button__text button__text--right" text="Local" />
+						<Label class="button__text button__text--right" text="#MainMenu_Addons_Filtering_Sort_InstallSrc_Local" />
 					</ToggleButton>
 					<ToggleButton class="button togglebutton fill-width ml-1">
 						<Image
@@ -50,7 +50,7 @@
 							textureheight="64"
 							src="file://{images}/icons/steam.svg"
 						/>
-						<Label class="button__text button__text--right" text="Steam Workshop" />
+						<Label class="button__text button__text--right" text="#MainMenu_Addons_Filtering_Sort_InstallSrc_UGC" />
 					</ToggleButton>
 				</Panel>
 				<!--
@@ -73,32 +73,72 @@
 
 		<Panel class="flow-right mt-2">
 			<Panel class="flow-down fill-width mr-1 bg-base-950 border-base-900 p-2">
-				<Label class="text-h6" text="[HC] Addon Tags" />
+				<Label class="text-h6" text="#MainMenu_Addons_Filtering_Sort_CampaignTags" />
 				<Panel class="flow-down">
 					<Panel class="flow-right mt-1">
 						<ToggleButton class="checkbox" />
 						<ToggleButton class="checkbox x-box" />
-						<Label class="vertical-align-center" text="Singleplayer" />
+						<Label class="vertical-align-center" text="MainMenu_Addons_Filtering_Sort_CampaignTags_SP" />
 					</Panel>
 					<Panel class="flow-right mt-1">
 						<ToggleButton class="checkbox" />
 						<ToggleButton class="checkbox x-box" />
-						<Label class="vertical-align-center" text="Cooperative" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_CampaignTags_COOP" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_CampaignTags_CUSTOM" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_CampaignTags_LSHORT" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_CampaignTags_LMED" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_CampaignTags_LLONG" />
 					</Panel>
 				</Panel>
 			</Panel>
 			<Panel class="flow-down fill-width ml-1 bg-base-950 border-base-900 p-2">
-				<Label class="text-h6" text="[HC] Campaign/Map Tags" />
+				<Label class="text-h6" text="#MainMenu_Addons_Filtering_Sort_AddonTags" />
 				<Panel class="flow-down">
 					<Panel class="flow-right mt-1">
 						<ToggleButton class="checkbox" />
 						<ToggleButton class="checkbox x-box" />
-						<Label class="vertical-align-center" text="Models" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_AddonTags_Model" />
 					</Panel>
 					<Panel class="flow-right mt-1">
 						<ToggleButton class="checkbox" />
 						<ToggleButton class="checkbox x-box" />
-						<Label class="vertical-align-center" text="Materials/Textures" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_AddonTags_Mats" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_AddonTags_Scripts" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_AddonTags_Instance" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_AddonTags_Theme" />
+					</Panel>
+					<Panel class="flow-right mt-1">
+						<ToggleButton class="checkbox" />
+						<ToggleButton class="checkbox x-box" />
+						<Label class="vertical-align-center" text="#MainMenu_Addons_Filtering_Sort_AddonTags_Ported" />
 					</Panel>
 				</Panel>
 			</Panel>
@@ -106,7 +146,7 @@
 		
 		<Panel class="flow-right full-width mt-2" tabindex="auto" selectionpos="auto">
 			<Button class="button fill-width mr-1" onactivate="" tabindex="auto" selectionpos="auto">
-				<Label class="button__text" text="[HC] Confirm" />
+				<Label class="button__text" text="#Action_Confirm" />
 			</Button>
 			<Button
 				id="DeclineBtn"
@@ -115,7 +155,7 @@
 				tabindex="auto"
 				selectionpos="auto"
 			>
-				<Label class="button__text" text="[HC] Cancel" />
+				<Label class="button__text" text="#Action_Cancel" />
 			</Button>
 		</Panel>
 	</PopupCustomLayout>

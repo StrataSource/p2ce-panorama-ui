@@ -46,9 +46,9 @@
 				</Panel>
 
 				<SettingsEnum
-					text="[HC] Portal Funneling"
+					text="#Settings_Portals_PlayerFunnel"
 					convar="sv_player_funnel_into_portals"
-					infomessage="[HC] sv_player_funnel_into_portals"
+					infomessage="#Settings_Portals_PlayerFunnel_info"
 					hasdocspage="false"
 				>
 					<RadioButton group="sv_player_funnel_into_portals" text="#Common_Off" value="0" />

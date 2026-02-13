@@ -468,12 +468,14 @@
 		"Settings_General_Enabled"						"Enabled"
 		"Settings_General_Disabled"						"Disabled"
 		"Settings_General_Autodetect"					"Auto-Detect"
+		"Settings_General_EngineersToast"				"The Engineer's Toaster"	// YEAH, TOAST!!!!!!
 		"Settings_General_VeryLow"						"Very Low"
 		"Settings_General_Low"							"Low"
 		"Settings_General_Medium"						"Medium"
 		"Settings_General_High"							"High"
 		"Settings_General_VeryHigh"						"Very High"
-		"Settings_General_ViewDocs"						"View Docs Page"
+		"Settings_General_StupidlyLudricous"			"Enable Server Explosion Mode"	// SERVER EXPLOSION IMMINENT
+		"Settings_General_ViewDocs"						"View Documentation Page"
 		"Settings_General_MapReload"					"A map reload is required for this setting change to take effect."
 		"Settings_General_Command"						"Command"
 		"Settings_General_Convar"						"Console Variable"
@@ -528,6 +530,9 @@
 		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
 		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled."
 		
+		"Settings_Audio_HRTF_Async_Title"					"Threaded Audio"
+		"Settings_Audio_HRTF_Async_Desc"					"Splits individual audio channels into multiple CPU threads to improve performance."
+		
 		"Settings_AudioDevices_Title"						"Audio Device Configuration"
 		"Settings_AudioDevices_Device"						"Audio Playback Device"
 		"Settings_AudioDevices_Device_info"					"Determines which sound device the game's audio should be coming from."
@@ -544,6 +549,9 @@
 		"Settings_Video_Title"							"Video Settings"
 
 		"Settings_Render_Title"							"Rendering"
+		
+		"Settings_Video_Presets"						"Quality Presets"
+		"Settings_Video_Presets_info"					"Video settings will be set based on a pre-determined set of variables in this list, from low to high."
 
 		"Settings_Video_AspectRatio"					"Aspect Ratio"
 		"Settings_Video_AspectRatio_Normal"				"Standard (4:3)"
@@ -614,8 +622,11 @@
 		"Settings_Render_EffectDetail"					"Effect Detail"
 		"Settings_Render_EffectDetail_Info"				"Effect detail controls the complexity of certain visual effects in the game as well as the draw-distance. Decreasing the effect detail may improve performance but will also increase model pop-in artifacts."
 
-		"Settings_Render_ModelTexture"					"Model/Texture Detail"
-		"Settings_Render_ModelTexture_Info"				"The Model/Texture Detail setting controls the resolution of textures and geometric complexity of models in the game. Decreasing this setting may improve performance on low-end systems, but will degrade image quality."
+		"Settings_Render_Model"							"Model Detail"
+		"Settings_Render_Model_Info"					"The Model Detail setting controls the geometric complexity of models in the game. Decreasing this setting may improve performance on low-end systems, but will degrade image quality."
+
+		"Settings_Render_Texture"						"Texture Quality"
+		"Settings_Render_Texture_Info"					"The Texture Quality setting controls the resolution of textures in the game. Decreasing this setting may significantly improve performance on low-end systems, but will degrade image quality."
 
 		"Settings_Render_ShadowQuality"					"Global Shadow Quality"
 		"Settings_Render_ShadowQuality_Info"			"Global shadow quality controls the fidelity of the dynamic shadows cast onto surfaces in the game. Higher settings increase the visual quality but can degrade CPU and graphics performance."
@@ -663,6 +674,12 @@
 		"Settings_TextureReplace_Texture_Grid"			"Grid"
 		"Settings_TextureReplace_Texture_GridWithNoise"	"Grid with Noise"
 		"Settings_TextureReplace_Texture_Custom"		"Custom"
+		
+		"Settings_Portal_Coop_SS_SplitMode"				"Split-Screen Direction"
+		"Settings_Portal_Coop_SS_SplitMode_info"		"Determines which direction should both split-screen players' view be split into.\n<h2>Horizontal</h2>\nThe players' views will be split across a horizontal line with both views located at the top and bottom side of the screen, respectively.\n<h2>Vertical</h2>\nThe players' views will be split across a vertical line with both views located at the left- and right-hand side of the screen, respectively.\n<h2>Automatic</h2>\nThe game will automatically determine which mode to select, based off the monitor's screen resolution and aspect ratio."
+		"Settings_Portal_Coop_SS_SplitMode_auto"		"Automatic"
+		"Settings_Portal_Coop_SS_SplitMode_horiz"		"Horizontal"
+		"Settings_Portal_Coop_SS_SplitMode_vert"		"Vertical"
 
 		// Settings - Keyboard/Mouse
 		"Settings_Input"								"Input"
@@ -760,6 +777,8 @@
 		"Settings_portal1_xhair_p1" 					"Portal 1 Style"
 		
 		"Settings_Portals_Title" 						"Portals"
+		"Settings_Portals_PlayerFunnel"					"Portal Funneling"
+		"Settings_Portals_PlayerFunnel_info"			"When flinging into portals, the game will attempt to correct the player's position and trajectory to avoid collision with adjacent surfaces."
 		"Settings_Portals_dlight" 						"Portal Dynamic Lighting"
 		"Settings_Portals_dlight_info" 					"Allows portals to emit light."
 		"Settings_Portals_light_intensity" 				"Portal Lighting Intensity"
@@ -803,6 +822,8 @@
 		
 		// Main Menu
 		"MainMenu_PH_Note"								"This page is a work-in-progress."
+		"MainMenu_ControllerUI_Note_Title"				"Controller Support Notice"
+		"MainMenu_ControllerUI_Note_Desc"				"Controller input support for the menu interface is experimental.\n\nPlease submit issues to the P2:CE issue tracker if you encounter bugs or have feedback about this mode."
 		
 		// Main Menu - Header Tabs
 		"MainMenu_Navigation_Developer"					"Developer"
@@ -974,6 +995,11 @@ Please install and mount the above games first to access this campaign."
 		// Bad Campaign
 		"MainMenu_Campaigns_BgLoadFailed_Title"						"Failed to Load Content"
 		"MainMenu_Campaigns_BgLoadFailed_Description"				"The campaign you tried to run has specified a background map that could not be loaded. Ensure that the required content has been downloaded and mounted correctly."
+		"MainMenu_Campaigns_Error_Generic_Title"					"Error"
+		"MainMenu_Campaigns_Error_InvalidKV3_Title"					"Cannot Start Campaign"
+		"MainMenu_Campaigns_Error_InvalidKV3_Desc"					"This campaign cannot start because the data specified in its script file is invalid.\n\nPlease report this issue and the corresponding error log to the addon's author."
+		"MainMenu_Campaigns_Error_InvalidChapterMapData_Title"		"Cannot Start Chapter"
+		"MainMenu_Campaigns_Error_InvalidChapterMapData_Desc"		"The campaign cannot start because there are no maps defined in the chapter you have selected.\n\nPlease report this issue and the corresponding error log to the addon's author."
 		
 		// dependency game names
 		"MainMenu_Campaigns_Mounts_AppId_630"						"Alien Swarm (630)"
@@ -1043,8 +1069,11 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title"		"Gameplay Modifiers"
 		"MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc"		"Select custom features and scripts that change how the game behaves"
 		
-		// campaign setup - server settings
+		// proto
+		"MainMenu_Campaigns_Setup_Proto_Title"						"This system is a prototype experiment and may be changed or removed in the future."
+		"MainMenu_Campaigns_Setup_Proto_Desc"						"Convars changed through this system will not persist in saves. They will also not be reverted upon exiting a campaign."
 		
+		// campaign setup - server settings
 		// GameplayBase
 		"MainMenu_Campaigns_Setup_Var_cl_mirror_world"				"Flip World"
 		"MainMenu_Campaigns_Setup_Var_cl_mirror_world_Description"	"Flips the world horizontally. A great way to ruin somebody's day.\n\nDefault: Off"
@@ -1131,7 +1160,8 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_Category_WS_Tagline"		"Workshop subscriptions and locally-installed content"
 		"MainMenu_Addons_Category_Mounts"			"Mounted Games"
 		"MainMenu_Addons_Category_Mounts_Tagline"	"Content from other installed Source engine games"
-		"MainMenu_Addons_SearchBox_FillerText"		"Search for addons..."
+		
+		"MainMenu_Addons_ToggleAddon"				"Toggle addon's enablement state"
 		
 		// Main Menu - Mounts
 		"MainMenu_Mounts_MountGame"					"Mount"
@@ -1146,6 +1176,43 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_MapDropdown_Select"		"Select a map..."
 		"MainMenu_Addons_LaunchMap_Multi"			"Launch Selected Map"
 		"MainMenu_Addons_LaunchMap_Single"			"Play Map"
+		
+		// Filtering
+		// Filtering - Time
+		"MainMenu_Addons_SearchBox_FillerText"				"Search for addons..."
+		"MainMenu_Addons_Filtering_Title"					"Filtering and Sorting Options"
+		"MainMenu_Addons_Filtering_Edit_Tooltip"			"Change the way how addons are filtered and sorted by in the addon list."
+		"MainMenu_Addons_Filtering_EnableAddons_Tooltip"	"Enable or disable all addons in this list."
+		"MainMenu_Addons_Filtering_Sort_Title"				"Sort by:"
+		"MainMenu_Addons_Filtering_Sort_TimeInstalled"		"Time Subscribed/Added"
+		"MainMenu_Addons_Filtering_Sort_Alpha"				"Alphabetical"
+		"MainMenu_Addons_Filtering_Sort_TimePublished"		"Upload/Published Date"
+		"MainMenu_Addons_Filtering_Sort_TimeLastUpdate"		"Last Updated Date"
+		
+		// Filtering - Source Type
+		"MainMenu_Addons_Filtering_Sort_InstallSrc"			"Addon Source Type"
+		"MainMenu_Addons_Filtering_Sort_InstallSrc_Local"	"Local Install"
+		"MainMenu_Addons_Filtering_Sort_InstallSrc_UGC"		"Steam Workshop"
+		
+		// Filtering - Campaigns
+		// These are sourced from the internal tags in workshop.kv3
+		"MainMenu_Addons_Filtering_Sort_CampaignTags"			"Campaign/Map Tags"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_SP"		"Singleplayer"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_COOP"		"Co-op"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_CUSTOM"	"Custom Story"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_LSHORT"	"Short (1-3 maps)"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_LMED"		"Medium (4-7 maps)"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_LLONG"		"Long (8+ maps)"
+		
+		// Filtering - Addon Tags
+		// These are sourced from the internal tags in workshop.kv3
+		"MainMenu_Addons_Filtering_Sort_AddonTags"				"Addon Tags"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Model"		"Models"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Mats"			"Materials/Textures"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Scripts"		"Scripts"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Instance"		"Instances/Prefabs"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Theme"		"Theme"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Ported"		"Game Port"
 
 		// General Actions
 		"Common_On"									"On"
@@ -1171,8 +1238,9 @@ Please install and mount the above games first to access this campaign."
 		"Common_SearchEllipsis"						"Search..."
 		"Common_Multiplayer"						"Multiplayer"
 		
-		"Action_No"									"No"
 		"Action_Yes"								"Yes"
+		"Action_No"									"No"
+		"Action_Cancel"								"Cancel"
 		"Action_Confirm"							"Confirm"
 		"Action_Back"								"Back"
 		"Action_Return"								"Return"
