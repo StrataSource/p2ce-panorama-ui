@@ -17,7 +17,8 @@ class CampaignMapSelect {
 		}
 		this.list.SetHasClass('campaign-maps__list', !useImages);
 
-		for (const map of chapter.maps) {
+		for (let i = 0; i < chapter.maps.length; ++i) {
+			const map = chapter.maps[i];
 			const p = $.CreatePanel('RadioButton', this.list, `Map_${map.name}`);
 			p.LoadLayoutSnippet('MapEntrySnippet');
 			p.SetHasClass('campaign-maps__entry__no-img', !useImages);
@@ -35,12 +36,12 @@ class CampaignMapSelect {
 				if (text) title.text = text;
 				else title.text = map.name;
 			}
-			const curMap = CampaignShared.getMap();
+			const curMap = CampaignShared.getMap().mapname;
 			if (curMap === map.name) {
 				p.SetSelected(true);
 			}
 			p.SetPanelEvent('onactivate', () => {
-				CampaignShared.setMap(map.name);
+				CampaignShared.setMap(map.name, i);
 				$.Msg(`CAMPAIGN MAP SELECTOR: Set map to ${map.name}`);
 				$.DispatchEvent('CampaignMenuRefreshUserSettings');
 			});

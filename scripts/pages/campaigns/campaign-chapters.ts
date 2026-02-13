@@ -249,27 +249,6 @@ class CampaignChapters {
 		}
 	}
 
-	static startChapter() {
-		if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
-			$.DispatchEvent('MainMenuCloseAllPages');
-			$.Schedule(0.001, () => CampaignAPI.StartCampaign(this.campaign.id, this.selectedChapter.id));
-		} else {
-			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				$.Localize('#Action_NewGame_Title'),
-				$.Localize('#Action_NewGame_Description'),
-				'warning-popup',
-				$.Localize('#UI_Yes'),
-				() => {
-					$.DispatchEvent('MainMenuCloseAllPages');
-					$.Schedule(0.001, () => CampaignAPI.StartCampaign(this.campaign.id, this.selectedChapter.id));
-				},
-				$.Localize('#UI_Cancel'),
-				() => {},
-				'blur'
-			);
-		}
-	}
-
 	static customizeChapter() {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
 		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings', undefined);
