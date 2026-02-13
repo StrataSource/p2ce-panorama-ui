@@ -124,7 +124,7 @@ class CampaignSettingsTab {
 						$.Warning(
 							`CAMPAIGN SETTINGS: JUMPING TO SPECIFIC MAP IN CHAPTER! DON'T FORGET TO CHANGE THIS! ${desiredMap}`
 						);
-						GameInterfaceAPI.ConsoleCommand(`map ${desiredMap}`);
+						GameInterfaceAPI.ConsoleCommand(`map "${desiredMap}"`);
 						this.clear();
 					}
 				});
@@ -255,8 +255,6 @@ class CampaignSettingsTab {
 				}
 			}
 		}
-
-		GameInterfaceAPI.ConsoleCommand('skill 3');
 
 		//for (let i = 0; i < subpages.length; ++i) {
 		//	const subpage = subpages[i];
