@@ -75,10 +75,17 @@ class LoadingScreenController {
 				}
 			}
 
-			const index = CampaignAPI.GetCampaignChapterFromMap(null, mapName);
-			
-			const chapter = index > -1 ? c.campaign.chapters[index] : undefined;
-			const mapInfo = chapter ? chapter.maps.find((v: ChapterMap) => { return v.name === mapName }) : undefined;
+			let mapInfo: ChapterMap | undefined = undefined;
+			const chapter = c.campaign.chapters.find(
+				(ch) => {
+					return ch.maps.find((map) => {
+						if (map.name === mapName) {
+							mapInfo = map;
+							return true;
+						}
+					}) !== undefined;
+				}
+			);
 
 			if (!chapter) {
 				$.Warning(

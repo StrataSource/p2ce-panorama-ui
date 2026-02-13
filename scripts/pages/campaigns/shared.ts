@@ -15,6 +15,7 @@ class CampaignSetting {
 	panelType: keyof PanelTagNameMap | undefined;
 	dropDownValues?: Array<CampaignDropDownValue>;
 	currentValue: unknown | undefined;
+	extra?: unknown;
 
 	constructor(
 		name: string,
@@ -376,12 +377,14 @@ class CampaignShared {
 		$.DispatchEvent('CampaignMenuRefreshUserSettings');
 	}
 
-	static setMap(map: string) {
+	static setMap(map: string, index: number) {
 		const settings = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SETTINGS] as Record<
 			string,
 			Record<string, CampaignSetting>
 		>;
-		settings['Map']['map'].currentValue = map;
+		const setting = settings['Map']['map'];
+		setting.currentValue = map;
+		setting.extra = index;
 	}
 
 	static getMap() {
@@ -389,6 +392,10 @@ class CampaignShared {
 			string,
 			Record<string, CampaignSetting>
 		>;
-		return String(settings['Map']['map'].currentValue);
+		const setting = settings['Map']['map'];
+		return {
+			mapname: String(setting.currentValue),
+			index: Number(setting.extra)
+		};
 	}
 }

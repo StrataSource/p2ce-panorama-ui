@@ -108,9 +108,8 @@ class CampaignSettingsTab {
 				$.Localize('#MainMenu_Campaigns_Error_InvalidChapterMapData_Title'),
 				$.Localize('#MainMenu_Campaigns_Error_InvalidChapterMapData_Desc'),
 				'warning-popup',
-				() => {},
-				'blur'
-			)
+				() => {}
+			);
 			
 			return;
 		}
@@ -125,19 +124,13 @@ class CampaignSettingsTab {
 				GameInterfaceAPI.ConsoleCommand('disconnect');
 				$.DispatchEvent('LoadingScreenClearLastMap');
 
-				// FIXME: StartCampaign should be expanded to include which map to play
-				// map command doesn't play very nice with the system. when that gets in
-				// change this accordingly
 				$.Schedule(0.1, () => {
 					const desiredMap = CampaignShared.getMap();
-					if (desiredMap === this.chapter.maps[0].name) {
-						CampaignAPI.StartCampaign(this.campaign.campaign.id, this.chapter.id);
+					if (desiredMap.index > 0) {
+						CampaignAPI.StartCampaign(this.campaign.campaign.id, this.chapter.id, desiredMap.index);
 						this.clear();
 					} else {
-						$.Warning(
-							`CAMPAIGN SETTINGS: JUMPING TO SPECIFIC MAP IN CHAPTER! DON'T FORGET TO CHANGE THIS! ${desiredMap}`
-						);
-						GameInterfaceAPI.ConsoleCommand(`map "${desiredMap}"`);
+						CampaignAPI.StartCampaign(this.campaign.campaign.id, this.chapter.id, 0);
 						this.clear();
 					}
 				});
