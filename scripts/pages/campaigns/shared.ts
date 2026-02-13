@@ -87,28 +87,28 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
-				skill: {
-					name: $.Localize('#MainMenu_Campaigns_Setup_Var_skill'),
-					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_Description'),
-					def: '1',
-					command: 'skill',
-					panelType: 'DropDown',
-					dropDownValues: [
-						{
-							text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_1'),
-							value: '1'
-						},
-						{
-							text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_2'),
-							value: '2'
-						},
-						{
-							text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_3'),
-							value: '3'
-						}
-					],
-					currentValue: undefined
-				},
+				//skill: {
+				//	name: $.Localize('#MainMenu_Campaigns_Setup_Var_skill'),
+				//	helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_Description'),
+				//	def: '1',
+				//	command: 'skill',
+				//	panelType: 'DropDown',
+				//	dropDownValues: [
+				//		{
+				//			text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_1'),
+				//			value: '1'
+				//		},
+				//		{
+				//			text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_2'),
+				//			value: '2'
+				//		},
+				//		{
+				//			text: $.Localize('#MainMenu_Campaigns_Setup_Var_skill_3'),
+				//			value: '3'
+				//		}
+				//	],
+				//	currentValue: undefined
+				//},
 				throw: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwenable'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_player_throwenable_Description'),

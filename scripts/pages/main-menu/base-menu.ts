@@ -364,7 +364,7 @@ class BaseMenu {
 
 		$.Schedule(0.1, () => {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			GameInterfaceAPI.ConsoleCommand(`map_background ${this.maps[this.mapSelection]}`);
+			GameInterfaceAPI.ConsoleCommand(`map_background "${this.maps[this.mapSelection]}"`);
 		});
 	}
 
