@@ -32,9 +32,7 @@ class BaseMenu {
 			activated: () => {
 				GameInterfaceAPI.ConsoleCommand('disconnect');
 				$.DispatchEvent('LoadingScreenClearLastMap');
-				$.Schedule(0.1, () => {
-					CampaignAPI.ContinueCampaign(this.savCampaign!.campaign.id);
-				});
+				CampaignAPI.ContinueCampaign(this.savCampaign!.campaign.id);
 			},
 			hovered: () => {
 				if (this.isContinueActive) return;
