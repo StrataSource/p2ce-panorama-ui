@@ -9,16 +9,33 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuResumeGame');
 			},
-			hovered: () => {},
+			hovered: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			},
 			unhovered: () => {},
-			focused: () => {}
+			focusIsHover: true
 		},
 		{
 			id: 'CampaignContinueBtn',
 			headline: '#MainMenu_SaveRestore_LoadAuto',
 			tagline: '#MainMenu_SaveRestore_LoadAuto_Tagline',
 			activated: () => {
-				
+				if (!this.latestSave) return;
+
+				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+					$.Localize('#Action_LoadGame_Confirm'),
+					$.Localize('#Action_LoadGame_Auto_Message'),
+					'warning-popup',
+					$.Localize('#Action_LoadGame'),
+					() => {
+						$.DispatchEvent('MainMenuCloseAllPages');
+						$.DispatchEvent('LoadingScreenClearLastMap');
+						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.latestSave.fileName}`));
+					},
+					$.Localize('#UI_Cancel'),
+					() => {},
+					'blur'
+				);
 			},
 			hovered: () => {
 				if (this.continueBtn.enabled) this.continueBox.visible = true;
@@ -35,9 +52,10 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			hovered: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			},
+			focusIsHover: true
 		},
 		{
 			id: 'SettingsKeyboardBtn',
@@ -46,7 +64,11 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
-			additionalClasses: 'KeyboardOnly'
+			hovered: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			},
+			additionalClasses: 'KeyboardOnly',
+			focusIsHover: true
 		},
 		{
 			id: 'SettingsControllerBtn',
@@ -55,7 +77,11 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings-controller', undefined);
 			},
-			additionalClasses: 'ControllerOnly'
+			hovered: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			},
+			additionalClasses: 'ControllerOnly',
+			focusIsHover: true
 		},
 		{
 			id: 'QuitBtn',
@@ -80,9 +106,10 @@ class PauseMenu {
 					'blur'
 				);
 			},
-			hovered: () => {},
-			unhovered: () => {},
-			focused: () => {}
+			hovered: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			},
+			focusIsHover: true
 		}
 	];
 
