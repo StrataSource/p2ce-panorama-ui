@@ -96,8 +96,7 @@
 		}
 
 		.InputController &:focus,
-		.InputController &:descendantfocus,
-		&:hover:not(:disabled):not(:selected) {
+		.InputKeyboard &:hover:not(:disabled):not(:selected) {
 			border-color: $primary-color;
 			background-color: $button-background-hover;
 			//background-color: rgba($button-background-hover-color, 0.9);

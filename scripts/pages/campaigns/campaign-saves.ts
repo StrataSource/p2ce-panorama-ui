@@ -135,6 +135,10 @@ class SaveEntry {
 					const prevIndex = this.index - 1;
 					if (prevIndex >= 0) {
 						CampaignSaves.saveEntries[prevIndex].panel.SetFocus();
+					} else {
+						if (CampaignSaves.createSaveBtn) {
+							CampaignSaves.createSaveBtn.FindChildTraverse('SaveAction')!.SetFocus();
+						}
 					}
 				});
 			}
@@ -143,6 +147,10 @@ class SaveEntry {
 		mainPanel.SetPanelEvent('onfocus', () => {
 			showActionPanel();
 			CampaignSaves.hideActionsOnAllSaves(this.index);
+			this.panel.ScrollParentToMakePanelFit(3, false);
+			if (playBtn) {
+				playBtn.SetFocus();
+			}
 		});
 		mainPanel.SetPanelEvent('onmouseout', () => {
 			if (this.actionPanel) {

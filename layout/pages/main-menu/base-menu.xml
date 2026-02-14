@@ -72,9 +72,9 @@
 			<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
 		</Panel>
 
-		<Panel class="ControllerOnly fancy-orange p-3 flow-down vertical-align-bottom m-3">
+		<Panel class="ControllerOnly fancy-orange p-3 flow-down vertical-align-bottom m-3" style="max-width: 512px;">
 			<Label class="text-l text-weight-bold horizontal-align-center" text="#MainMenu_ControllerUI_Note_Title" />
-			<Label class="horizontal-align-center" text="#MainMenu_ControllerUI_Note_Desc" />
+			<Label class="horizontal-align-center text-align-center" text="#MainMenu_ControllerUI_Note_Desc" />
 		</Panel>
 
 		<Panel id="ContinueBox" class="mainmenu__display-box">
