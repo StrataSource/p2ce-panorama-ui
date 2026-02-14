@@ -207,7 +207,7 @@ class CampaignMenu {
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
 			.filter((a) => {
-				return a.mapGroup === c.campaign.id;
+				return a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
 			});
 
 		this.continueBtn.enabled = false;
