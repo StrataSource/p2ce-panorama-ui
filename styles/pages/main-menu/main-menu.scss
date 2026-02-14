@@ -163,7 +163,7 @@ $pane-move-time: 0.1s;
 	&__gradient-bar {
 		width: 672px;
 		height: 100%;
-		//background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
+		background-color: gradient(linear, 0% 0%, 100% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
 	}
 
 	&__grid1 {
@@ -171,7 +171,6 @@ $pane-move-time: 0.1s;
 		horizontal-align: left;
 		transform: scaleY(-1) translateX(-1px) translateY(-1px);
 		opacity: 0.25;
-		visibility: collapse;
 	}
 
 	&__grid2 {
@@ -179,7 +178,6 @@ $pane-move-time: 0.1s;
 		horizontal-align: left;
 		transform: translateX(-1px) translateY(1px);
 		opacity: 0.25;
-		visibility: collapse;
 	}
 
 	&__logo {
