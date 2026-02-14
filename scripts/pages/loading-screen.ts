@@ -67,32 +67,13 @@ class LoadingScreenController {
 		if (CampaignAPI.IsCampaignActive()) {
 			// get relevant information
 			const c = CampaignAPI.GetActiveCampaign()!;
+			const meta = CampaignAPI.GetCampaignMeta(null);
 
 			if (this.logo) {
-				const pad = Number(CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.LOADING_LOGO_PAD));
+				const pad = Number(meta.get(CampaignMeta.LOADING_LOGO_PAD));
 				if (!isNaN(pad)) {
 					this.logo.style.padding = `${pad}px`;
 				}
-			}
-
-			let mapInfo: ChapterMap | undefined = undefined;
-			const chapter = c.campaign.chapters.find(
-				(ch) => {
-					return ch.maps.find((map) => {
-						if (map.name === mapName) {
-							mapInfo = map;
-							return true;
-						}
-					}) !== undefined;
-				}
-			);
-
-			if (!chapter) {
-				$.Warning(
-					`LOADING SCREEN: Chapter information for map '${mapName}' cannot be found! Is the map a part of this campaign?`
-				);
-				this.bgImage1.SetImage(getRandomFallbackImage());
-				return;
 			}
 
 			// applies image and sets panel if it's valid
@@ -106,40 +87,8 @@ class LoadingScreenController {
 				}
 			};
 
-			// finds the deepest level image:
-			// map specification takes priority if it exists,
-			// then chapter,
-			// then campaign,
-			// then warning
-			const findImg = (transit: string, loading: string): unknown => {
-				const asset = useTransitScreen ? transit : loading;
-
-				let img: string | undefined = undefined;
-				if (mapInfo) {
-					img = mapInfo.meta.get(asset);
-					if (img) {
-						$.Msg(`LOADING SCREEN: Asset found at the map level: '${img}'`);
-						return img;
-					}
-				}
-
-				img = chapter.meta.get(asset);
-				if (img) {
-					$.Msg(`LOADING SCREEN: Asset found at the chapter level: '${img}'`);
-					return img;
-				}
-
-				img = c.campaign.meta.get(asset);
-				if (img) {
-					$.Msg(`LOADING SCREEN: Asset found at the campaign level: '${img}'`);
-					return img;
-				}
-
-				$.Warning(`LOADING SCREEN: ${asset} asset was not found.`);
-				return img;
-			};
-
-			const path = findImg(CampaignMeta.TRANSITION_SCREEN, CampaignMeta.LOADING_SCREEN);
+			const path = meta.get(useTransitScreen ? CampaignMeta.TRANSITION_SCREEN : CampaignMeta.LOADING_SCREEN);
+			
 			$.Msg(`Image asset path: ${path}`);
 			if (path) {
 				const split = (path as string).split('.');
