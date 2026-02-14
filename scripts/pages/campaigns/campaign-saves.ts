@@ -195,7 +195,12 @@ class SaveEntry {
 				bg.visible = false;
 			} else {
 				const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
-				bg.SetImage(`${basePath}${savChapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL)}`);
+				const thumb = savChapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
+				if (thumb?.startsWith('http')) {
+					bg.SetImage(thumb);
+				} else {
+					bg.SetImage(`${basePath}${thumb}`);
+				}
 			}
 		}
 
@@ -278,7 +283,7 @@ class CampaignSaves {
 
 	static populateSaves() {
 		if (CampaignAPI.IsCampaignActive()) {
-			this.saveGroup = this.campaign!.campaign.id;
+			this.saveGroup = `${this.campaign!.bucket.id}/${this.campaign!.campaign.id}`;
 		} else {
 			UiToolkitAPI.ShowGenericPopupOk(
 				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Title'),
