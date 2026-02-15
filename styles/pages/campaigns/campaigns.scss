@@ -76,6 +76,7 @@
 		.InputKeyboard &:hover:not(:disabled),
 		.InputController &:focus:not(:disabled) {
 			border-color: $primary-color;
+			sound: 'UIPanorama.P2CE.MenuSelect';
 
 			#{$this}__inner {
 				background-color: $button-background-hover;
@@ -97,6 +98,7 @@
 
 		&:selected {
 			background-color: $primary-800;
+			sound: 'UIPanorama.P2CE.MenuAccept';
 		}
 
 		&__inner {
@@ -335,6 +337,7 @@
 
 			&:hover:not(:disabled):not(:parentdisabled) {
 				background-color: $button-background-hover;
+				sound: 'UIPanorama.P2CE.MenuSelect';
 			}
 		}
 	}
