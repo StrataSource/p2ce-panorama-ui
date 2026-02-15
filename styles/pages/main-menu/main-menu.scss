@@ -274,6 +274,7 @@ $pane-move-time: 0.1s;
 					from($button-background-hover-color),
 					to(rgba(0, 0, 0, 0))
 				);
+				sound: 'UIPanorama.P2CE.MenuSelect';
 
 				#{$this}__text,
 				#{$this}__small-text {
@@ -316,6 +317,7 @@ $pane-move-time: 0.1s;
 			.InputKeyboard &:hover {
 				border-color: $primary-color;
 				background-color: $button-background-hover;
+				sound: 'UIPanorama.P2CE.MenuSelect';
 
 				#{$this}__image {
 					opacity: 0.9;
