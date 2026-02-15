@@ -21,6 +21,7 @@
 	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		background-color: $button-background-hover;
 		border: $button-border-hover;
+		sound: 'UIPanorama.P2CE.MenuFocus';
 
 		#{$this}__text {
 			color: $button-text-hover;
@@ -31,12 +32,32 @@
 		}
 	}
 
+	&:selected,
+	.InputKeyboard &:hover:selected:not(:disabled):not(:parentdisabled) {
+		border-color: $primary-color;
+		background-color: $primary-color;
+		sound-out: 'UIPanorama.P2CE.MenuAccept';
+
+		#{$this}__icon,
+		#{$this}__icon-right {
+			wash-color: $base-950;
+		}
+
+		#{$this}__text-panel__header,
+		#{$this}__text-panel__subheader {
+			color: $base-950;
+		}
+	}
+
 	&:disabled,
-	&:disabled &:hover,
-	&:parentdisabled,
-	&:parentdisabled &:hover {
+	&:parentdisabled {
 		background-color: $button-background-disabled;
 		border: $button-border-disabled;
+	}
+	
+	&:disabled &:hover,
+	&:parentdisabled &:hover {
+		sound: 'UIPanorama.P2CE.MenuError';
 	}
 
 	&:disabled &__text,
@@ -136,6 +157,7 @@
 				from(color.scale(list.nth($value, 1), $lightness: -20%)),
 				to(color.scale(list.nth($value, 1), $lightness: -80%))
 			);
+			sound: 'UIPanorama.P2CE.MenuFocus';
 		}
 	}
 }
@@ -204,6 +226,7 @@ RadioButton.button-mono {
 	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		border-color: $primary-color;
 		background-color: $button-background-hover;
+		sound: 'UIPanorama.P2CE.MenuFocus';
 		#{$this}__icon,
 		#{$this}__icon-right {
 			wash-color: $bright-color;
@@ -219,6 +242,7 @@ RadioButton.button-mono {
 	.InputKeyboard &:hover:selected:not(:disabled):not(:parentdisabled) {
 		border-color: $primary-color;
 		background-color: $primary-color;
+		sound-out: 'UIPanorama.P2CE.MenuAccept';
 
 		#{$this}__icon,
 		#{$this}__icon-right {
@@ -232,11 +256,14 @@ RadioButton.button-mono {
 	}
 
 	&:disabled,
-	&:disabled &:hover,
-	&:parentdisabled,
-	&:parentdisabled &:hover {
+	&:parentdisabled {
 		background-color: $button-background-disabled;
 		border-color: $base-800;
+	}
+	
+	&:disabled &:hover,
+	&:parentdisabled &:hover {
+		sound: 'UIPanorama.P2CE.MenuError';
 	}
 
 	&:disabled &__text,

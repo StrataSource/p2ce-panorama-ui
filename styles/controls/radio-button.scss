@@ -17,6 +17,7 @@
 	.InputKeyboard &:hover:selected:not(:disabled):not(:parentdisabled) {
 		background-color: $button-background-selected;
 		border-color: $primary-color;
+		sound: 'UIPanorama.P2CE.MenuSelect';
 
 		& Label {
 			color: $button-text-hover;
@@ -49,6 +50,7 @@
 
 	&:hover .RadioBox {
 		background-color: $radiobutton-background-hover;
+		sound: 'UIPanorama.P2CE.MenuSelect';
 	}
 
 	&:disabled .RadioBox,
@@ -71,6 +73,7 @@
 			color-stop(0.65, $base-900),
 			to($base-950)
 		);
+		sound: 'UIPanorama.P2CE.MenuSelect';
 		//background-color: $radiobutton-background-selected;
 	}
 

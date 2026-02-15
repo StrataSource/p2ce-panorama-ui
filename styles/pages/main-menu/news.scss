@@ -24,11 +24,14 @@
 			& .RadioBox {
 				visibility: collapse;
 			}
-			&:hover:not(:selected) {
+			.InputKeyboard &:hover:not(:selected),
+			.InputController &:focus:not(:selected) {
 				background-image: url('file://{images}/menu/indicator_off.png');
+				sound: 'UIPanorama.P2CE.MenuFocus';
 			}
 			&:selected {
 				background-image: url('file://{images}/menu/indicator_on.png');
+				sound: 'UIPanorama.P2CE.MenuSelect';
 			}
 		}
 	}
@@ -47,8 +50,10 @@
 				transform: scaleX(-1);
 			}
 		}
-		&:hover:not(:parentdisabled) {
+		.InputKeyboard &:hover:not(:parentdisabled),
+		.InputController &:focus:not(:parentdisabled) {
 			background-color: $button-background-hover;
+			sound: 'UIPanorama.P2CE.MenuFocus';
 		}
 	}
 	&__content {
@@ -106,8 +111,10 @@
 				background-color: $progressbar-background-progress;
 			}
 		}
-		&:hover:not(:parentdisabled) {
+		.InputKeyboard &:hover:not(:parentdisabled),
+		.InputController &:focus:not(:parentdisabled) {
 			border-color: $primary-color;
+			sound: 'UIPanorama.P2CE.MenuFocus';
 			#{$this}__container {
 				background-color: $button-background-hover;
 			}

@@ -97,5 +97,9 @@ TextEntryAutocomplete {
 		&:focus {
 			background-color: $base-700;
 		}
+		
+		&:hover, &:focus {
+			sound: 'UIPanorama.P2CE.MenuFocus';
+		}
 	}
 }
