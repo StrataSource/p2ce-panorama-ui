@@ -189,7 +189,7 @@ class CampaignMenu {
 		});
 
 		this.setContinueDetails();
-		this.setCampaignBackground(skipBgMapLoad);
+		this.setCampaignBackground(skipBgMapLoad, false);
 	}
 
 	static setContinueDetails() {
@@ -249,7 +249,7 @@ class CampaignMenu {
 		this.continueBtn.enabled = true;
 	}
 
-	static setCampaignBackground(skipBgMapLoad: boolean, doFallbackImage?: boolean) {
+	static setCampaignBackground(skipBgMapLoad: boolean, doFallbackImage: boolean) {
 		// TODO: obey background map setting
 		if (this.bgMapLoad === undefined) {
 			this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
@@ -276,6 +276,7 @@ class CampaignMenu {
 		}
 
 		const ch = CampaignAPI.GetCampaignMeta(null);
+		$.Msg(`${JSON.stringify(ch)}`);
 		const bgLevel = (ch.get(CampaignMeta.BG_MAP) as string) ?? '';
 		const bgMusic = (ch.get(CampaignMeta.BG_MUSIC) as string) ?? '';
 		const bgMovie = (ch.get(CampaignMeta.BG_MOVIE) as string) ?? '';
