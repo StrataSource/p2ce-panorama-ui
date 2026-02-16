@@ -127,7 +127,7 @@ class CampaignChapters {
 	static chapterPage = 0;
 	static maxPages = -1;
 	static maxEntryPerPage = 3;
-	static displayMode: ChapterDisplayMode | string = ChapterDisplayMode.CLASSIC;
+	static displayMode: ChapterDisplayMode | string = ChapterDisplayMode.LIST;
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
@@ -138,7 +138,7 @@ class CampaignChapters {
 	static init() {
 		this.displayMode = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
 
-		if (!this.displayMode) this.displayMode = ChapterDisplayMode.CLASSIC;
+		if (!this.displayMode) this.displayMode = ChapterDisplayMode.LIST;
 
 		switch (this.displayMode) {
 			case ChapterDisplayMode.LIST:
