@@ -275,13 +275,14 @@ class CampaignMenu {
 			);
 		}
 
+		const c = CampaignAPI.GetActiveCampaign()!;
 		const ch = CampaignAPI.GetCampaignMeta(null);
 		$.Msg(`${JSON.stringify(ch)}`);
 		const bgLevel = (ch.get(CampaignMeta.BG_MAP) as string) ?? '';
 		const bgMusic = (ch.get(CampaignMeta.BG_MUSIC) as string) ?? '';
 		const bgMovie = (ch.get(CampaignMeta.BG_MOVIE) as string) ?? '';
 		const bgImage = (ch.get(CampaignMeta.BG_IMG) as string) ?? '';
-		const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
+		const basePath = getCampaignAssetPath(c);
 		if (!doFallbackImage && bgLevel.length > 0) {
 			if (GameInterfaceAPI.GetCurrentMap() === bgLevel) {
 				$.Warning('Background map already active. Do nothing.');
@@ -302,7 +303,17 @@ class CampaignMenu {
 		} else if (!doFallbackImage && bgMovie.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuHideBackgroundImage', true);
-			$.DispatchEvent('MainMenuShowBackgroundMovie', `${basePath}${bgMovie}`);
+
+			const addonInfo = WorkshopAPI.GetAddonMeta(c.bucket.addon_id);
+			let mediaPath = 'file://';
+			if (addonInfo) {
+				mediaPath += `${WorkshopAPI.GetAddonNamedPath(c.bucket.addon_id)}/media/`;
+			} else {
+				mediaPath += '{media}/';
+			}
+			mediaPath += bgMovie;
+			$.DispatchEvent('MainMenuShowBackgroundMovie', mediaPath);
+			
 			if (bgMusic.length > 0) {
 				this.music = $.PlaySoundEvent(bgMusic);
 			}
