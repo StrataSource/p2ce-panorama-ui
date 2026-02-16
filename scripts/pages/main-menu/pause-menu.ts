@@ -154,6 +154,13 @@ class PauseMenu {
 	}
 
 	static setContinueDetails() {
+		if (!CampaignAPI.IsCampaignActive()) {
+			this.continueBox.visible = false;
+			this.continueBtn.enabled = false;
+			this.continueBtnText.text = $.Localize('#MainMenu_SaveRestore_NoSaves');
+			return;
+		}
+
 		const c = CampaignAPI.GetActiveCampaign()!;
 
 		const logo = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`).get(CampaignMeta.FULL_LOGO);
