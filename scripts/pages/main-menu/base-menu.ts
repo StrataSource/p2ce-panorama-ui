@@ -255,13 +255,9 @@ class BaseMenu {
 			return;
 		}
 
-		const savChapter: ChapterInfo | undefined = savCampaign.campaign.chapters.find((ch) => {
-			return (
-				ch.maps.find((map) => {
-					return map.name === this.latestSave.mapName || map.name === `${this.latestSave.mapName}.bsp`;
-				}) !== undefined
-			);
-		});
+		const savChapter: ChapterInfo | undefined = this.latestSave.chapter < savCampaign.campaign.chapters.length
+			? savCampaign.campaign.chapters[this.latestSave.chapter]
+			: undefined;
 
 		if (!savChapter) {
 			$.Warning('RESUME: Map could not be found for Campaign');
