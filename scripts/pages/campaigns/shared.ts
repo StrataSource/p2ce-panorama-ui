@@ -345,7 +345,7 @@ class CampaignShared {
 			const p = field.panel;
 			switch (p.paneltype) {
 				case 'ToggleButton': {
-					const newValue = Number((p as ToggleButton).IsSelected());
+					const newValue = (p as ToggleButton).IsSelected() ? 1 : 0;
 					if (s.currentValue !== newValue)
 						$.Msg(`Setting '${s.command}' is now [VALUE: '${newValue}', DEFAULT: '${s.def}']`);
 					s.currentValue = newValue;
