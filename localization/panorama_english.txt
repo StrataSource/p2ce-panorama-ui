@@ -484,6 +484,7 @@
 		"Settings_General_Search_Results"				"Search Results"
 		"Settings_General_Search_EmptyHeader"			"No Results Found"
 		"Settings_General_Search_EmptyNoResults"		"Your search query did not match any results in the Settings menu."
+		"Settings_General_Search_MatchedEnglishTag"		"Matches "
 		
 		// Settings - Import/Export
 		"Settings_ImportExport_Title"					"Import/Export %thing% Settings"
