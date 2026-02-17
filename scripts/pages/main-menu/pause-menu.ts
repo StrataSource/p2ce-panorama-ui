@@ -190,13 +190,9 @@ class PauseMenu {
 
 		this.latestSave = saves[0];
 
-		const savChapter = c.campaign.chapters.find((ch) => {
-			return (
-				ch.maps.find((map) => {
-					return map.name === this.latestSave.mapName || map.name === `${this.latestSave.mapName}.bsp`;
-				}) !== undefined
-			);
-		});
+		const savChapter: ChapterInfo | undefined = this.latestSave.chapter < c.campaign.chapters.length
+			? c.campaign.chapters[this.latestSave.chapter]
+			: undefined;
 
 		if (!savChapter) {
 			$.Warning('PAUSE MENU: Map could not be found for Campaign');

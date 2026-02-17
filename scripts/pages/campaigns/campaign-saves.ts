@@ -171,14 +171,8 @@ class SaveEntry {
 		});
 
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
-		const savChapter = CampaignSaves.campaign
-			? CampaignSaves.campaign.campaign.chapters.find((ch) => {
-					return (
-						ch.maps.find((map) => {
-							return map.name === this.save.mapName || map.name === `${this.save.mapName}.bsp`;
-						}) !== undefined
-					);
-				})
+		const savChapter: ChapterInfo | undefined  = CampaignSaves.campaign && this.save.chapter < CampaignSaves.campaign.campaign.chapters.length
+			? CampaignSaves.campaign.campaign.chapters[this.save.chapter]
 			: undefined;
 
 		if (title) {
