@@ -623,6 +623,11 @@ class MountManager {
 		const appId = Object.keys(response)[0];
 		const appInfo = response[Object.keys(response)[0]]['data'];
 
+		if (appInfo === undefined) {
+			this.onAppRequestFailed(appId ? Number(appId) : undefined);
+			return;
+		}
+
 		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
 		p.LoadLayoutSnippet('MountEntrySnippet');
 
