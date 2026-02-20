@@ -599,7 +599,7 @@
 
 			<Label class="text-h3 mt-3" text="Context Menus" />
 			<Panel class="row my-3">
-				<Button class="button" onactivate="ControlsLibrary.OnSimpleContextMenu();">
+				<Button class="button" onactivate="ControlsLibrary.onSimpleContextMenu();">
 					<Label class="button__text" text="Simple Context Menu" />
 				</Button>
 			</Panel>
@@ -632,7 +632,7 @@
 							'No',
 							function(){$('#ControlsLibraryPanel').ToggleClass('very-useful-class');},
 							'No',
-							function(){function a(p){if(typeof p.Children==='function')p.Children().forEach(c=>{if(c.hasOwnProperty(text))c.text='burger';a(c)})}a($('#ControlsLibraryPanel'))},
+							function(){},
 							'blur'
 						);"
 				>
