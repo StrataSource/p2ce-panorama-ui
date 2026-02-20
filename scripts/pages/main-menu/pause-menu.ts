@@ -158,6 +158,7 @@ class PauseMenu {
 			this.continueBox.visible = false;
 			this.continueBtn.enabled = false;
 			this.continueBtnText.text = $.Localize('#MainMenu_SaveRestore_NoSaves');
+			$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 			return;
 		}
 
