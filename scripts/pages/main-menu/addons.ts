@@ -188,7 +188,6 @@ class AddonManager {
 		this.purgeAddonList();
 
 		for (const addon of addons) {
-			$.Msg(`Create addon: ${addon.index}, ${addon.meta.title}`);
 			const panel = $.CreatePanel('RadioButton', this.addonContainer, 'addon' + addon.index);
 			panel.SetPanelEvent('onactivate', () => this.addonSelected(addon.index));
 			panel.LoadLayoutSnippet('AddonEntrySnippet');
@@ -451,7 +450,6 @@ class AddonSearch {
 		const search = this.searchBar.text;
 		// check empty
 		if (!/.*\S.*/.test(search)) {
-			$.Warning('Search bar is now empty.');
 			AddonManager.reloadAddonList();
 			return;
 		}
@@ -472,15 +470,12 @@ class AddonSearch {
 
 			for (const addon of addons) {
 				const testLower = addon.meta.title.toLowerCase();
-				$.Msg(`===== Try testing '${searchPart}' against '${testLower}'`);
 				const index = testLower.indexOf(searchPart.toLowerCase());
 
 				if (index === -1) {
-					$.Warning('Unsuccessful');
 					continue;
 				}
 
-				$.Msg('Found!');
 				this.matches.push(new SearchMatch(addon, undefined));
 			}
 		}
