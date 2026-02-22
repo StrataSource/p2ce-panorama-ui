@@ -162,6 +162,16 @@
 					convar="stick_paint_color"
 					hasdocspage="false"
 				/>
+				
+				<SettingsEnum
+					text="#Settings_Gels_force_conversion_props"
+					convar="paint_prop_show_conversion"
+					infomessage="#Settings_Gels_force_conversion_props_Unforced"
+					hasdocspage="false"
+				>
+					<RadioButton group="paint_prop_portal" text="#Common_Off" value="0" />
+					<RadioButton group="paint_prop_portal" text="#Common_On" value="1" />
+				</SettingsEnum>
 			</Panel>
 
 			<Panel class="settings-page__spacer" />

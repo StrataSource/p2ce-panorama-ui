@@ -805,6 +805,9 @@
 		"Settings_Gels_reflection_color_Info"			"The alternate color to use for Reflection Gel (reflect paint)."
 		"Settings_Gels_adhesion_color"					"Adhesion Gel Color (Stick)"
 		"Settings_Gels_adhesion_color_Info"				"The alternate color to use for Adhesion Gel (stick paint)."
+		"Settings_Gels_force_conversion_props"			"Show Conversion Gel On Cubes"
+		"Settings_Gels_force_conversion_props_Unforced"	"Always show Conversion Gel on cubes and other paintable objects, even though this normally does nothing. This may be forced on by map makers."
+		"Settings_Gels_force_conversion_props_Forced"	"Always show Conversion Gel on cubes and other paintable objects, even though this normally does nothing. The current map forces this to be enabled."
 		
 		// Settings - Miscellaneous
 		"Settings_Misc_Title" 							"Miscellaneous"
