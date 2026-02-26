@@ -29,7 +29,8 @@ class AddonEntry {
 		title.text = info.title;
 
 		const desc = this.panel.FindChildTraverse('AddonDesc') as Label;
-		desc.text = info.description.split('\n')[0];
+		// This looks real stupid but let me explain, it take the first line of the description, strips the BBCode, then strips the trailing r that occurs due to improper stripping by WorkshopAPI.GetAddonMeta.
+		desc.text = info.description.split('\n')[0].replace(/\[\/?\w+.*?\]/g, '').replace(/r\s*$/, '');
 
 		if (this.addonEnableCheck) {
 			this.addonEnableCheck.SetSelected(WorkshopAPI.GetAddonEnabled(this.index));
@@ -115,7 +116,7 @@ class AddonManager {
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
 	static selectedAddon: number = -1;
-	static gameMaps: string[] = [];
+	static gameMaps: Set<string> = new Set();
 
 	static init() {
 		this.addonsPage.visible = false;
@@ -212,18 +213,27 @@ class AddonManager {
 		this.findMaps();
 	}
 
-	static findMaps() {
-		this.gameMaps = [];
+	static findMaps()
+	{
 		const maps = GameInterfaceAPI.GetMaps();
+		this.gameMaps.clear();
 
-		for (let i = 0; i < maps.length; ++i) {
-			if (!maps[i].valid) continue;
+		for (const { valid, name } of maps)
+		{
+			if (!valid)
+				continue;
 
-			const rawMap: string = maps[i].name;
-			const mapName: string = rawMap.substring(5, rawMap.length - 4);
-			if (mapName.startsWith('workshop/') || mapName.startsWith('puzzlemaker')) continue;
+			if (!name.startsWith('maps/') || !name.endsWith('.bsp'))
+				continue;
 
-			this.gameMaps.push(mapName);
+			// Slide the "maps/" and ".bsp" parts out, keeps subdirs.
+			const mapName = name.slice('maps/'.length, -'.bsp'.length);
+
+			// Don't add puzzlemaker and workshop maps to the list.
+			if (mapName.startsWith('workshop/') || mapName.startsWith('puzzlemaker'))
+				continue;
+
+			this.gameMaps.add(mapName);
 		}
 	}
 
@@ -237,9 +247,32 @@ class AddonManager {
 		if (this.addonCover)
 			this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
-		if (this.addonTitle) this.addonTitle.text = info.title;
+		if (this.addonTitle)
+		{
+			// This will remove trailing 'r's at the end of the line and any 'r' if it's the only one in the line.
+			// This should only remove a single r if there happens to be a sentence that ends in multiple.
+			// Issue many stems from WorkshopAPI.GetAddonMeta not properly dealing with stripping \r's, once that is fixed this can be removed.
+			const cleaned = info.title.replace(/r\s*$/, '');
+			this.addonTitle.text = $.BBCodeToHTML(cleaned);
+		}
 
-		if (this.addonDesc) this.addonDesc.text = $.BBCodeToHTML(info.description);
+		if (this.addonDesc)
+		{
+			// This will remove trailing 'r's at the end of the line and any 'r' if it's the only one in the line.
+			// This should only remove a single r if there happens to be a sentence that ends in multiple.
+			// Issue many stems from WorkshopAPI.GetAddonMeta not properly dealing with stripping \r's, once that is fixed this can be removed.
+			const cleaned = info.description.split('\n').map(line => {
+				line = line.replace(/r\s*$/, '');
+
+				if (line.trim() === 'r')
+					return '';
+
+				return line;
+			}).join('\n');
+
+			this.addonDesc.text = $.BBCodeToHTML(cleaned);
+		}
+
 
 		if (info.authors.length > 0 && this.addonAuthors) {
 			this.addonAuthors.text = 'by ' + info.authors.join(', ');
@@ -254,37 +287,42 @@ class AddonManager {
 		this.updateSelectedAddonMaps();
 	}
 
-	static updateSelectedAddonMaps() {
-		if (this.selectedAddon === -1) return;
-
-		const info = WorkshopAPI.GetAddonMeta(this.selectedAddon);
+	static updateSelectedAddonMaps()
+	{
+		if (this.selectedAddon === -1)
+			return;
 
 		if (!WorkshopAPI.GetAddonEnabled(this.selectedAddon)) {
 			this.addonMapsPanel.visible = false;
 			return;
 		}
 
-		// i dont like this, but...
-		const words = info.description.split(/[^a-zA-Z0-9_/]/);
-		const matchingMaps: string[] = [];
-		for (let i = 0; i < words.length; ++i) {
-			const word: string = words[i].trim();
-			const result = this.gameMaps.find((value: string, index: number) => {
-				return value === `${word}` || `${value}r` === `${word}`;
-			});
+		// Find all the maps that exist in the description. Must end in .bsp, supports subdirs.
+		// eslint-disable-next-line no-useless-escape
+		const matches = this.addonDesc.text.match(/\b[a-zA-Z0-9_\/-]+\.bsp\b/gi);
 
-			if (result) {
-				if (matchingMaps.includes(result)) continue;
-				matchingMaps.push(result);
-			}
+		if (!matches)
+		{
+			this.addonMapsPanel.visible = false;
+			return;
+		}
+
+		const matchingMaps = new Set<string>();
+
+		for (const word of matches)
+		{
+			const mapName = word.slice(0, -'.bsp'.length).trim();
+
+			if (this.gameMaps.has(mapName))
+				matchingMaps.add(mapName);
 		}
 
 		this.addonMapsDropdown.RemoveAllOptions();
 
-		const hasMaps = matchingMaps.length > 0;
+		const hasMaps = matchingMaps.size > 0;
 
-		for (let i = 0; i < matchingMaps.length; ++i) {
-			const map = matchingMaps[i];
+		for (const map of matchingMaps)
+		{
 			const entry = $.CreatePanel('Label', this.addonMapsDropdown, `AddonMap${map}`, { text: map, value: map });
 			this.addonMapsDropdown.AddOption(entry);
 		}
@@ -292,7 +330,7 @@ class AddonManager {
 		this.addonMapsDropdown.SetSelectedIndex(0);
 
 		// don't bother showing the dropdown if there's only one map, save space
-		const multiMaps = matchingMaps.length > 1;
+		const multiMaps = matchingMaps.size > 1;
 		this.addonMapsDropdown.visible = multiMaps;
 		this.addonMapsLaunch.SetHasClass('fill-width', !multiMaps);
 		if (multiMaps) {
