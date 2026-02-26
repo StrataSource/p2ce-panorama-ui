@@ -42,7 +42,9 @@ class BaseMenu {
 
 				this.isContinueActive = true;
 
-				const meta = CampaignAPI.GetCampaignMeta(`${this.savCampaign.bucket.id}/${this.savCampaign.campaign.id}`) ?? new Map<string, string>();
+				const meta =
+					CampaignAPI.GetCampaignMeta(`${this.savCampaign.bucket.id}/${this.savCampaign.campaign.id}`) ??
+					new Map<string, string>();
 				if (meta.size === 0) {
 					$.Warning('BASE MENU: Meta is invalid!');
 				}
@@ -255,9 +257,10 @@ class BaseMenu {
 			return;
 		}
 
-		const savChapter: ChapterInfo | undefined = this.latestSave.chapter < savCampaign.campaign.chapters.length
-			? savCampaign.campaign.chapters[this.latestSave.chapter]
-			: undefined;
+		const savChapter: ChapterInfo | undefined =
+			this.latestSave.chapter < savCampaign.campaign.chapters.length
+				? savCampaign.campaign.chapters[this.latestSave.chapter]
+				: undefined;
 
 		if (!savChapter) {
 			$.Warning('RESUME: Map could not be found for Campaign');
@@ -266,7 +269,9 @@ class BaseMenu {
 
 		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
 		this.continueImg.SetImage(thumb);
-		const meta = CampaignAPI.GetCampaignMeta(`${savCampaign.bucket.id}/${savCampaign.campaign.id}`) ?? new Map<string, string>();
+		const meta =
+			CampaignAPI.GetCampaignMeta(`${savCampaign.bucket.id}/${savCampaign.campaign.id}`) ??
+			new Map<string, string>();
 		if (meta.size === 0) {
 			$.Warning('BASE MENU: Meta is invalid!');
 		}

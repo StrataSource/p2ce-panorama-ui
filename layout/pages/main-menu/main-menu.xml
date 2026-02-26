@@ -19,18 +19,18 @@
 
 		<Panel id="MainMenuInput" class="mainmenu">
 			<!-- Movie background -->
-			<Movie id="MainMenuMovie" class="mainmenu__movie z-0" src="" sound="" controls="none" repeat="true" hittest="false" />
+			<Movie id="MainMenuMovie" class="mainmenu__movie" src="" sound="" controls="none" repeat="true" hittest="false" />
 			<!-- Static image background -->
 			<Image
 				id="MainMenuBackground"
-				class="mainmenu__background z-0"
+				class="mainmenu__background"
 				scaling="stretch-to-cover-preserve-aspect"
 				hittest="false"
 			/>
 
-			<Panel id="MenuModeBackgroundLayer" class="full z-0" hittest="false" />
+			<Panel id="MenuModeBackgroundLayer" class="full" hittest="false" />
 
-			<Panel id="MenuMainContent" class="mainmenu__menu z-1">
+			<Panel id="MenuMainContent" class="mainmenu__menu">
 				<Panel id="PageBg" class="mainmenu__page-bg" hittest="false" />
 				<Panel id="GradientBar" class="mainmenu__gradient-bar" hittest="false" />
 				<Image
@@ -59,11 +59,11 @@
 				</Panel>
 			</Panel>
 
-			<Panel id="MenuModeForegroundLayer" class="full z-1" hittest="false" hittestchildren="true" />
+			<Panel id="MenuModeForegroundLayer" class="full" hittest="false" hittestchildren="true" />
 
-			<VersionInfo class="mainmenu__version z-1" />
+			<VersionInfo class="mainmenu__version" />
 
-			<Panel id="PageWrap" class="mainmenu__normal-page-container z-1" hittest="false" hittestchildren="false">
+			<Panel id="PageWrap" class="mainmenu__normal-page-container" hittest="false" hittestchildren="false">
 				<Label
 					id="PageHeadline"
 					class="mainmenu__page-head mainmenu__page-controls mainmenu__page-controls__t-prop"
@@ -117,22 +117,22 @@
 			</Panel>
 
 			<!-- Backbuffer blur: used to blur the backbuffer when switching campaigns -->
-			<BaseBlurTarget id="SwitcherBlur" class="mainmenu__switcher-blur z-2" blurrects="SwitcherBlurContent" hittest="false">
+			<BaseBlurTarget id="SwitcherBlur" class="mainmenu__switcher-blur" blurrects="SwitcherBlurContent" hittest="false">
 				<!-- Backbuffer background -->
 				<BackbufferImagePanel class="mainmenu__background" hittest="false" />
 			</BaseBlurTarget>
-			<Panel id="SwitcherBlurContent" class="mainmenu__pause-content-blur z-2" hittest="false" />
-			<Panel id="LoadingIndicator" class="loading-indicator z-2">
+			<Panel id="SwitcherBlurContent" class="mainmenu__pause-content-blur" hittest="false" />
+			<Panel id="LoadingIndicator" class="loading-indicator">
 				<Label text="#MainMenu_Loading" />
 			</Panel>
 		</Panel>
 
 		<!-- Make sure these are at the bottom to get the z-order right -->
-		<PopupManager id="PopupManager" class="z-2" onpopupsdismissed="" />
-		<ContextMenuManager id="ContextMenuManager" class="z-2" />
-		<TooltipManager id="TooltipManager" class="z-2" hittest="false" />
+		<PopupManager id="PopupManager" onpopupsdismissed="" />
+		<ContextMenuManager id="ContextMenuManager" />
+		<TooltipManager id="TooltipManager" hittest="false" />
 
 		<!-- Doesn't actually include the notifications, but we use its position to figure out where to show them -->
-		<Panel id="SteamNotificationsPlaceholder" class="z-2" hittest="false" />
+		<Panel id="SteamNotificationsPlaceholder" hittest="false" />
 	</MainMenu>
 </root>

@@ -12,14 +12,8 @@
 		<Panel class="campaign-settings">
 			<Panel id="CampaignSettingsBase" class="campaign-settings__left">
 				<Panel class="fancy-red full-width p-3 flow-down mb-2">
-					<Label
-						class="text-l text-weight-bold horizontal-align-center"
-						text="#MainMenu_Campaigns_Setup_Proto_Title"
-					/>
-					<Label
-						class="horizontal-align-center"
-						text="#MainMenu_Campaigns_Setup_Proto_Desc"
-					/>
+					<Label class="text-l text-weight-bold horizontal-align-center" text="#MainMenu_Campaigns_Setup_Proto_Title" />
+					<Label class="horizontal-align-center" text="#MainMenu_Campaigns_Setup_Proto_Desc" />
 				</Panel>
 				<RadioButton
 					id="PresetsBtn"
