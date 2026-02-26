@@ -20,5 +20,5 @@ To use this tool, you will need to do 3 things:
 
 1. Install Node.js, the newest possible stable version should be the best.
 2. Open a command prompt inside this directory, and run `npm install`.
-3. Whenever you want to check your code for errors, run `npm run check`.
-   You can also run `npm run format` to attempt to automatically fix any errors found.
+3. Whenever you want to check your code for errors, run `npm run format:check`.
+   You can also run `npm run format:fix` to attempt to automatically fix any errors found.
