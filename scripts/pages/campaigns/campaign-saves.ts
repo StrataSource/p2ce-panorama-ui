@@ -171,9 +171,10 @@ class SaveEntry {
 		});
 
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
-		const savChapter: ChapterInfo | undefined  = CampaignSaves.campaign && this.save.chapter < CampaignSaves.campaign.campaign.chapters.length
-			? CampaignSaves.campaign.campaign.chapters[this.save.chapter]
-			: undefined;
+		const savChapter: ChapterInfo | undefined =
+			CampaignSaves.campaign && this.save.chapter < CampaignSaves.campaign.campaign.chapters.length
+				? CampaignSaves.campaign.campaign.chapters[this.save.chapter]
+				: undefined;
 
 		if (title) {
 			if (!savChapter) {

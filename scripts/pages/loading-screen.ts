@@ -88,7 +88,7 @@ class LoadingScreenController {
 			};
 
 			const path = meta.get(useTransitScreen ? CampaignMeta.TRANSITION_SCREEN : CampaignMeta.LOADING_SCREEN);
-			
+
 			$.Msg(`Image asset path: ${path}`);
 			if (path) {
 				const split = (path as string).split('.');
