@@ -1,0 +1,46 @@
+@use '../config' as *;
+@use '../abstract/function';
+@use '../abstract/mixin';
+
+.closecaptions {
+	&__outer {
+		background-color: rgba(0, 0, 0, 0.75);
+		opacity: 0;
+		border-radius: 5px;
+		horizontal-align: center;
+		vertical-align: bottom;
+		margin-bottom: 10%;
+		flow-children: down;
+		padding: 15px 25px;
+		transition:
+			opacity 0.3s ease-in-out 0s,
+			height 0.1s ease-in-out 0s;
+	}
+
+	&__inner {
+		horizontal-align: center;
+		vertical-align: bottom;
+		margin-bottom: 10%;
+		flow-children: down;
+		padding: 15px 25px;
+		height: fit-children;
+	}
+
+	&__text {
+		margin: 2px 0px;
+		vertical-align: center;
+		font-size: 20px;
+		font-family: 'GorDIN';
+		line-height: 24px;
+		transition: opacity 0.5s ease-in-out 0s, height 0.15s linear 0s, transform 0.5s ease-out 0s, ui-scale-y 0.15s linear 0s;
+		transform-origin: 0% 100%;
+		height: 0px;
+		opacity: 0;
+	}
+
+	&__dummy {
+		opacity: 1;
+		height: 0px;
+		transition: height 0.15s ease-in-out 0s;
+	}
+}
