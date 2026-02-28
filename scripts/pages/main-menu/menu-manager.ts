@@ -390,7 +390,9 @@ class MenuManager {
 
 			if (!currentPage || !currentPage.invokerPanel) nowPage.panel.SetFocus();
 
-			$.DispatchEvent('MainMenuPageClosed', currentPage ? currentPage.panel.id : undefined, nowPage.panel.id);
+			if (currentPage?.panel.IsValid()) {
+				$.DispatchEvent('MainMenuPageClosed', currentPage ? currentPage.panel.id : undefined, nowPage.panel.id);
+			}
 		} else {
 			// no more pages
 			this.hidePage();
@@ -398,7 +400,9 @@ class MenuManager {
 
 			if (!noResetFocus) $.DispatchEvent('MainMenuSetFocus');
 
-			$.DispatchEvent('MainMenuPageClosed', currentPage ? currentPage.panel.id : undefined, undefined);
+			if (currentPage?.panel.IsValid()) {
+				$.DispatchEvent('MainMenuPageClosed', currentPage ? currentPage.panel.id : undefined, undefined);
+			}
 		}
 	}
 
