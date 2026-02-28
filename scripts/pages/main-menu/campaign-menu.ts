@@ -116,6 +116,7 @@ class CampaignMenu {
 
 	static bgMapLoad: uuid | undefined = undefined;
 	static music: uuid | undefined = undefined;
+	static mapLoadEvent: uuid | undefined = undefined;
 
 	static onLoad() {
 		// check to see if we specified default campaign AND
@@ -295,6 +296,13 @@ class CampaignMenu {
 				$.Msg(
 					'CAMPAIGN MENU: Background map specified and default campaign specified, we will be doing nothing.'
 				);
+			}
+			if (!this.mapLoadEvent) {
+				this.mapLoadEvent = $.RegisterForUnhandledEvent('MapLoaded', (map: string) => {
+					if (bgMusic.length > 0) {
+						this.music = $.PlaySoundEvent(bgMusic);
+					}
+				});
 			}
 		} else if (!doFallbackImage && bgMovie.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
