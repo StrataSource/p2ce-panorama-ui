@@ -18,8 +18,12 @@ class CampaignMenu {
 			headline: '#MainMenu_Campaigns_MM_LoadAuto',
 			tagline: '[PH] ????',
 			activated: () => {
+				const c = CampaignAPI.GetActiveCampaign()!;
+				const id = `${c.bucket.id}/${c.campaign.id}`;
+
 				$.DispatchEvent('LoadingScreenClearLastMap');
-				CampaignAPI.ContinueCampaign(CampaignAPI.GetActiveCampaign()!.campaign.id);
+				GameInterfaceAPI.ConsoleCommand('disconnect');
+				CampaignAPI.ContinueCampaign(id);
 			},
 			hovered: () => {
 				if (this.continueBtn.enabled) this.continueBox.visible = true;
