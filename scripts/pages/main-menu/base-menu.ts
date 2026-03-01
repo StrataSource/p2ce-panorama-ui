@@ -30,9 +30,12 @@ class BaseMenu {
 			headline: '#MainMenu_Campaigns_MM_Resume',
 			tagline: '[PH] ????',
 			activated: () => {
-				GameInterfaceAPI.ConsoleCommand('disconnect');
+				const c = this.savCampaign!;
+				const id = `${c.bucket.id}/${c.campaign.id}`;
+
 				$.DispatchEvent('LoadingScreenClearLastMap');
-				CampaignAPI.ContinueCampaign(this.savCampaign!.campaign.id);
+				GameInterfaceAPI.ConsoleCommand('disconnect');
+				CampaignAPI.ContinueCampaign(id);
 			},
 			hovered: () => {
 				if (this.isContinueActive) return;
