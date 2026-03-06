@@ -21,7 +21,7 @@
 				<Image
 					id="ContinueSaveLogo"
 					class="mainmenu__square-logo"
-					src="file://{images}/campaigns/portal2/logo.svg"
+					src="file://{images}/menu/p2ce/logo.svg"
 					textureheight="2048"
 					texturewidth="2048"
 					scaling="stretch-to-fit-preserve-aspect"
