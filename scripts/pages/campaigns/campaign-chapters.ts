@@ -123,7 +123,7 @@ class CampaignChapters {
 
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: ChapterInfo;
-	static campaign = CampaignAPI.GetActiveCampaign()!.campaign;
+	static campaign = CampaignAPI.GetActiveCampaign()!;
 	static chapterPage = 0;
 	static maxPages = -1;
 	static maxEntryPerPage = 3;
@@ -166,7 +166,7 @@ class CampaignChapters {
 				break;
 		}
 
-		if (this.maxPages === -1) this.maxPages = Math.ceil(this.campaign.chapters.length / this.maxEntryPerPage);
+		if (this.maxPages === -1) this.maxPages = Math.ceil(this.campaign.campaign.chapters.length / this.maxEntryPerPage);
 
 		if (this.maxPages === 1) {
 			this.nav.visible = false;
@@ -224,8 +224,8 @@ class CampaignChapters {
 			this.counterLabel.text = `${this.chapterPage + 1} / ${this.maxPages}`;
 		}
 
-		const prog = CampaignAPI.GetCampaignUnlockProgress(this.campaign.id);
-		const chapters = this.campaign.chapters;
+		const prog = CampaignAPI.GetCampaignUnlockProgress(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`);
+		const chapters = this.campaign.campaign.chapters;
 		this.list.RemoveAndDeleteChildren();
 		this.chapterEntries = [];
 

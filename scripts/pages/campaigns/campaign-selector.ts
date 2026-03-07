@@ -71,7 +71,7 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			$.DispatchEvent('MainMenuAnimatedSwitch', this.info.campaign.id);
+			$.DispatchEvent('MainMenuAnimatedSwitch', `${this.info.bucket.id}/${this.info.campaign.id}`);
 			$.DispatchEvent('MainMenuCloseAllPages');
 		});
 		this.panel.SetPanelEvent('onmouseover', () => {
