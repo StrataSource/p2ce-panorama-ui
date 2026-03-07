@@ -1,0 +1,13 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/hud/center-print.ts" />
+	</scripts>
+	<Panel class="center-print" hittest="false">
+		<Panel id="CenterPrint" class="center-print__container">
+			<Label id="CenterPrintLabel" class="center-print__label" html="true" />
+		</Panel>
+	</Panel>
+</root>

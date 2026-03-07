@@ -1,0 +1,34 @@
+@use '../config' as *;
+
+.center-print {
+	horizontal-align: center;
+	vertical-align: center;
+	width: 100%;
+
+	&__container {
+		horizontal-align: center;
+		opacity: 0;
+		transition-property: opacity;
+		transition-duration: 1.5s;
+		transition-timing-function: ease-in-out;
+	}
+
+	&__container.center-print--visible {
+		opacity: 1;
+		transition-duration: 0.5s;
+	}
+
+	&__container.center-print--hidden {
+		opacity: 0;
+		transition-duration: 1.5s;
+	}
+
+	&__label {
+		horizontal-align: center;
+		color: $white;
+		font-size: 28px;
+		font-weight: medium;
+		text-align: center;
+		text-shadow-fast: 2px 2px 4px $dark-300;
+	}
+}
