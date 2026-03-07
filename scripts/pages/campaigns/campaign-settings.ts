@@ -129,10 +129,10 @@ class CampaignSettingsTab {
 				$.Schedule(0.1, () => {
 					const desiredMap = CampaignShared.getMap();
 					if (desiredMap.index > 0) {
-						CampaignAPI.StartCampaign(this.campaign.campaign.id, this.chapter.id, desiredMap.index);
+						CampaignAPI.StartCampaign(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`, this.chapter.id, desiredMap.index);
 						this.clear();
 					} else {
-						CampaignAPI.StartCampaign(this.campaign.campaign.id, this.chapter.id, 0);
+						CampaignAPI.StartCampaign(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`, this.chapter.id, 0);
 						this.clear();
 					}
 				});
