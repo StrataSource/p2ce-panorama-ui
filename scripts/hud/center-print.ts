@@ -14,15 +14,11 @@ class CenterPrint {
 
 			const token = '#' + message;
 			const localized = $.Localize(token);
-			CenterPrint.label.text =
-				localized && localized !== token ? localized : message;
+			CenterPrint.label.text = localized && localized !== token ? localized : message;
 			CenterPrint.panel.RemoveClass('center-print--hidden');
 			CenterPrint.panel.AddClass('center-print--visible');
 
-			CenterPrint.hideSchedule = $.Schedule(
-				CenterPrint.HOLD_TIME,
-				CenterPrint.hide
-			);
+			CenterPrint.hideSchedule = $.Schedule(CenterPrint.HOLD_TIME, CenterPrint.hide);
 		} catch (e) {
 			$.Warning('CenterPrint error: ' + e);
 		}
@@ -49,9 +45,6 @@ class CenterPrint {
 		CenterPrint.panel = $('#CenterPrint') as Panel;
 		CenterPrint.label = $('#CenterPrintLabel') as Label;
 
-		$.RegisterForUnhandledEvent(
-			'ShowCenterPrintText',
-			CenterPrint.onShowCenterPrintText
-		);
+		$.RegisterForUnhandledEvent('ShowCenterPrintText', CenterPrint.onShowCenterPrintText);
 	}
 }
