@@ -4,7 +4,7 @@ class CenterPrint {
 	static readonly HOLD_TIME = 5;
 	static readonly FADE_TIME = 1.5;
 
-	static hideSchedule: number | null = null;
+	static hideSchedule: uuid | null = null;
 	static panel: Panel;
 	static label: Label;
 
@@ -33,7 +33,7 @@ class CenterPrint {
 	static cancelPending() {
 		if (CenterPrint.hideSchedule !== null) {
 			try {
-				$.CancelScheduled(CenterPrint.hideSchedule as any);
+				$.CancelScheduled(CenterPrint.hideSchedule);
 			} catch (e) {
 				// Ignore
 			}
