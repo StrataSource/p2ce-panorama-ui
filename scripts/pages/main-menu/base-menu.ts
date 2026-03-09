@@ -57,6 +57,9 @@ class BaseMenu {
 					
 					const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
 					$.DispatchEvent('MainMenuSetLogoSize', s);
+				} else if (isBucketSingleWsCampaign(this.savCampaign.bucket)) {
+					$.DispatchEvent('MainMenuSetLogo', 'file://{images}/campaigns/p2ce_ws/full_logo.svg');
+					$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 				} else {
 					$.DispatchEvent('MainMenuSetLogo', '');
 				}
