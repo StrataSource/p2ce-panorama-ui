@@ -139,6 +139,21 @@ class MenuManager {
 				}
 			});
 
+			$.RegisterForUnhandledEvent('MainMenuSetLogoSize', (size: string) => {
+				switch (size) {
+					default:
+						$.Warning(`Cannot determine logo size! Was given: '${size}'`);
+					// eslint-disable-next-line no-fallthrough
+					case CampaignLogoSizePreset.STANDARD:
+						this.logo.style.height = '130px';
+						break;
+				
+					case CampaignLogoSizePreset.LARGE:
+						this.logo.style.height = '240px';
+						break;
+				}
+			});
+
 			$.RegisterEventHandler('ImageFailedLoad', this.logo, () => {
 				this.logo.SetImage(getRandomFallbackImage());
 			});

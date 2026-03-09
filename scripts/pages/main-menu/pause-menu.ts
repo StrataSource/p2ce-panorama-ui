@@ -159,16 +159,22 @@ class PauseMenu {
 			this.continueBtn.enabled = false;
 			this.continueBtnText.text = $.Localize('#MainMenu_SaveRestore_NoSaves');
 			$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
+			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 			return;
 		}
 
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		const logo = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`).get(CampaignMeta.FULL_LOGO);
+		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`);
+		const logo = meta.get(CampaignMeta.FULL_LOGO);
 		if (logo) {
 			$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);
+
+			const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
+			$.DispatchEvent('MainMenuSetLogoSize', s);
 		} else {
 			$.DispatchEvent('MainMenuSetLogo', '');
+			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 		}
 
 		this.continueBox.visible = false;

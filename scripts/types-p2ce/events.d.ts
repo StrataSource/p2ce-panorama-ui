@@ -20,6 +20,7 @@ interface GlobalEventNameMap {
 	MainMenuAddPreConstructedButton: (panel: GenericPanel) => void;
 	MainMenuAddButton: (btn: MenuButton) => void;
 	MainMenuSetLogo: (logo: string) => void;
+	MainMenuSetLogoSize: (type: string) => void;
 	MainMenuSetLoadingIndicatorVisibility: (visible: boolean) => void;
 	MainMenuSetBackgroundImage: (img: string) => void;
 	MainMenuShowBackgroundImage: (img?: string, instant?: boolean) => void;

@@ -36,7 +36,13 @@ declare const enum CampaignMeta {
 	BG_MOVIE = 'background_movie',
 	BG_IMG = 'background_image',
 	MAP_LIST_IMG = 'img',
-	MAP_LIST_TITLE = 'title'
+	MAP_LIST_TITLE = 'title',
+	LOGO_HEIGHT = 'full_logo_size_preset'
+}
+
+declare const enum CampaignLogoSizePreset {
+	STANDARD = 'standard',
+	LARGE = 'large'
 }
 
 declare const enum ChapterDisplayMode {
@@ -44,6 +50,10 @@ declare const enum ChapterDisplayMode {
 	LIST = 'list',
 	GRID = 'grid',
 	SUPER = 'super'
+}
+
+declare const enum SpecialString {
+	P2CE_SP_WS_CAMPAIGN = 'base/p2ce_sp_ws'
 }
 
 type MenuButton = {
