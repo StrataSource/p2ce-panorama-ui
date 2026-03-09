@@ -46,13 +46,15 @@
 					hittest="false"
 				/>
 				<Panel id="MenuRootControls" class="mainmenu__nav">
-					<Image
-						id="GameFullLogo"
-						class="mainmenu__logo"
-						src="file://{images}/logo.svg"
-						scaling="stretch-to-fit-preserve-aspect"
-						hittest="false"
-					/>
+					<Panel class="mainmenu__logo-space">
+						<Image
+							id="GameFullLogo"
+							class="mainmenu__logo"
+							src="file://{images}/logo.svg"
+							scaling="stretch-to-fit-preserve-aspect"
+							hittest="false"
+						/>
+					</Panel>
 					<Panel id="MenuNav" class="mainmenu__nav__inner">
 						<!-- Dynamically populated -->
 					</Panel>

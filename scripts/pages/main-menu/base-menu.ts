@@ -54,6 +54,9 @@ class BaseMenu {
 				const logoPath = meta.get(CampaignMeta.FULL_LOGO);
 				if (logoPath !== undefined) {
 					$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(this.savCampaign)}${logoPath}`);
+					
+					const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
+					$.DispatchEvent('MainMenuSetLogoSize', s);
 				} else {
 					$.DispatchEvent('MainMenuSetLogo', '');
 				}
@@ -201,6 +204,7 @@ class BaseMenu {
 		});
 
 		$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
+		$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 
 		// create Resume details
 		const p = $.CreatePanel('Panel', $.GetContextPanel(), 'MenuBackgroundLayer');
@@ -404,6 +408,7 @@ class BaseMenu {
 		if (!this.continueBox.IsValid()) return;
 
 		$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
+		$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 
 		this.continueBox.visible = false;
 

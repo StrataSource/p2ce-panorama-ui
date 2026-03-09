@@ -200,11 +200,16 @@ class CampaignMenu {
 	static setContinueDetails() {
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		const logo = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`).get(CampaignMeta.FULL_LOGO);
+		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`);
+		const logo = meta.get(CampaignMeta.FULL_LOGO);
 		if (logo) {
 			$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);
+
+			const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
+			$.DispatchEvent('MainMenuSetLogoSize', s);
 		} else {
 			$.DispatchEvent('MainMenuSetLogo', '');
+			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 		}
 
 		this.continueBox.visible = false;
@@ -278,7 +283,6 @@ class CampaignMenu {
 		}
 
 		const ch = CampaignAPI.GetCampaignMeta(null);
-		$.Msg(`${JSON.stringify(ch)}`);
 		const bgLevel = (ch.get(CampaignMeta.BG_MAP) as string) ?? '';
 		const bgMusic = (ch.get(CampaignMeta.BG_MUSIC) as string) ?? '';
 		const bgMovie = (ch.get(CampaignMeta.BG_MOVIE) as string) ?? '';

@@ -35,6 +35,7 @@ $.DefineEvent('MainBackgroundLoaded', 0);
 $.DefineEvent('MainMenuAddPreConstructedButton', 1);
 $.DefineEvent('MainMenuAddButton', 1);
 $.DefineEvent('MainMenuSetLogo', 1);
+$.DefineEvent('MainMenuSetLogoSize', 1);
 $.DefineEvent('MainMenuSetLoadingIndicatorVisibility', 1);
 $.DefineEvent('MainMenuSetBackgroundImage', 1);
 $.DefineEvent('MainMenuShowBackgroundImage', 2);
