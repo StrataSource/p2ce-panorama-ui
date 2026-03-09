@@ -18,12 +18,9 @@ class CampaignMenu {
 			headline: '#MainMenu_Campaigns_MM_LoadAuto',
 			tagline: '[PH] ????',
 			activated: () => {
-				const c = CampaignAPI.GetActiveCampaign()!;
-				const id = `${c.bucket.id}/${c.campaign.id}`;
-
 				$.DispatchEvent('LoadingScreenClearLastMap');
 				GameInterfaceAPI.ConsoleCommand('disconnect');
-				CampaignAPI.ContinueCampaign(id);
+				CampaignAPI.ContinueCampaign(this.latestSave.mapGroup);
 			},
 			hovered: () => {
 				if (this.continueBtn.enabled) this.continueBox.visible = true;
@@ -206,7 +203,7 @@ class CampaignMenu {
 	}
 
 	static setContinueDetails() {
-		const c = CampaignAPI.GetActiveCampaign()!;
+		let c = CampaignAPI.GetActiveCampaign()!;
 
 		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`);
 		const logo = meta.get(CampaignMeta.FULL_LOGO);
@@ -220,12 +217,14 @@ class CampaignMenu {
 			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 		}
 
+		const isWsSingle = isSpecialSingleWsCampaign(c);
+
 		this.continueBox.visible = false;
 
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
 			.filter((a) => {
-				return a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
+				return isWsSingle ? a.mapGroup.startsWith(SpecialString.AUTO_WS) : a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
 			});
 
 		this.continueBtn.enabled = false;
@@ -241,10 +240,19 @@ class CampaignMenu {
 
 		this.latestSave = saves[0];
 
-		const savChapter: ChapterInfo | undefined =
-			this.latestSave.chapter < c.campaign.chapters.length
-				? c.campaign.chapters[this.latestSave.chapter]
-				: undefined;
+		if (isWsSingle) {
+			const realCampaign = CampaignAPI.FindCampaign(this.latestSave.mapGroup);
+			if (realCampaign) {
+				c = realCampaign!;
+			} else {
+				$.Warning(`Associated campaign ID ${this.latestSave.mapGroup} could not be found`);
+			}
+		}
+
+		const savChapter: ChapterInfo | undefined = 
+			this.latestSave.chapter < c.campaign.chapters.length ?
+			c.campaign.chapters[this.latestSave.chapter] :
+			undefined;
 
 		if (!savChapter) {
 			$.Warning('CAMPAIGN MENU: Map could not be found for Campaign');
@@ -258,7 +266,7 @@ class CampaignMenu {
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueBoxText.text = convertTime(date);
-		const chapterName = $.Localize(savChapter.title);
+		const chapterName = isWsSingle ? c.campaign.title : $.Localize(savChapter.title);
 		this.continueBtnText.text = chapterName.replace('\n', ': ');
 
 		this.continueBtn.enabled = true;
