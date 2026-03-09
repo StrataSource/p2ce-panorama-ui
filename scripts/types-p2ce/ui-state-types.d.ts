@@ -53,7 +53,8 @@ declare const enum ChapterDisplayMode {
 }
 
 declare const enum SpecialString {
-	P2CE_SP_WS_CAMPAIGN = 'base/p2ce_sp_ws'
+	P2CE_SP_WS_CAMPAIGN = 'base/p2ce_sp_ws',
+	AUTO_WS = 'workshop_auto'
 }
 
 type MenuButton = {
