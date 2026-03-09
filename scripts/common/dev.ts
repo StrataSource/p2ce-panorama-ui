@@ -121,3 +121,11 @@ function getCampaignAssetPath(pair: CampaignPair) {
 		return 'file://';
 	}
 }
+
+function isSingleWsCampaign(c: CampaignPair) {
+	return c.bucket.id.startsWith(SpecialString.AUTO_WS);
+}
+
+function isBucketSingleWsCampaign(b: CampaignBucket) {
+	return b.id.startsWith(SpecialString.AUTO_WS);
+}
