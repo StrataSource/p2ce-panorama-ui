@@ -3,14 +3,14 @@
 class ChapterEntry {
 	num: number;
 	panel: Button;
-	chapter: ChapterInfo | undefined;
-	locked: boolean;
+	chapter: VirtualChapter | undefined;
+	unlocked: boolean;
 
-	constructor(num: number, panel: Button, chapter: ChapterInfo | undefined, locked: boolean) {
+	constructor(num: number, panel: Button, chapter: ChapterInfo | undefined, unlocked: boolean) {
 		this.num = num;
 		this.panel = panel;
 		this.chapter = chapter;
-		this.locked = locked;
+		this.unlocked = unlocked;
 	}
 
 	update() {
@@ -43,7 +43,7 @@ class ChapterEntry {
 			}
 		}
 		if (desc) {
-			if (this.locked) desc.text = '????';
+			if (!this.unlocked) desc.text = '????';
 			else if (chTitleSplit.length === 2) {
 				desc.text = chTitleSplit[1];
 			} else {
@@ -51,17 +51,14 @@ class ChapterEntry {
 			}
 		}
 		if (cover) {
-			const thumb = this.chapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
-			if (thumb) {
-				if ((thumb as string).startsWith('http')) {
-					cover.SetImage(thumb);
-				} else {
-					cover.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${thumb}`);
-				}
-			} else cover.SetImage(getRandomFallbackImage());
+			const thumb = getChapterThumbnail(
+				CampaignAPI.GetActiveCampaign()!,
+				this.chapter
+			);
+			cover.SetImage(thumb);
 		}
 
-		if (this.locked) {
+		if (!this.unlocked) {
 			this.panel.enabled = false;
 		} else {
 			this.panel.SetPanelEvent('onactivate', () => {
@@ -79,7 +76,7 @@ class ChapterEntry {
 
 		if (CampaignChapters.displayMode === ChapterDisplayMode.LIST) {
 			const setBigImage = () => {
-				if (this.locked) return;
+				if (!this.unlocked) return;
 
 				if (chTitleSplit.length === 2) {
 					CampaignChapters.chapterListModeTitle.text = chTitleSplit[1];
@@ -128,6 +125,7 @@ class CampaignChapters {
 	static maxPages = -1;
 	static maxEntryPerPage = 3;
 	static displayMode: ChapterDisplayMode | string = ChapterDisplayMode.LIST;
+	static chapterCache: VirtualChapter[] = [];
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
@@ -136,9 +134,13 @@ class CampaignChapters {
 	}
 
 	static init() {
-		this.displayMode = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
-
-		if (!this.displayMode) this.displayMode = ChapterDisplayMode.LIST;
+		const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
+		if (isSingleWsCampaign) {
+			this.displayMode = ChapterDisplayMode.SQUARE_GRID;
+		} else {
+			this.displayMode = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
+			if (!this.displayMode) this.displayMode = ChapterDisplayMode.LIST;
+		}
 
 		switch (this.displayMode) {
 			case ChapterDisplayMode.LIST:
@@ -151,6 +153,12 @@ class CampaignChapters {
 				$.GetContextPanel().AddClass('ChapterModeGrid');
 				this.maxEntryPerPage = 100;
 				this.list.AddClass('chapters__grid');
+				break;
+
+			case ChapterDisplayMode.SQUARE_GRID:
+				$.GetContextPanel().AddClass('ChapterModeSquareGrid');
+				this.maxEntryPerPage = 100;
+				this.list.AddClass('chapters__square-grid');
 				break;
 
 			case ChapterDisplayMode.CLASSIC:
@@ -166,7 +174,35 @@ class CampaignChapters {
 				break;
 		}
 
-		if (this.maxPages === -1) this.maxPages = Math.ceil(this.campaign.campaign.chapters.length / this.maxEntryPerPage);
+		if (isSingleWsCampaign) {
+			const buckets = CampaignAPI.GetAllCampaignBuckets().filter((v: CampaignBucket) => { return isBucketSingleWsCampaign(v) });
+
+			this.chapterCache = [];
+
+			for (const bucket of buckets) {
+				for (const campaign of bucket.campaigns) {
+					// assuming the system isn't gaslighting us
+					// an autogen'd campaign should have 1 chapter with at least 1 map
+					// i dont really care if it has multiple maps
+					// you really should make a campaign if you have multiple maps
+					// it's just BETTER!
+					const addon = WorkshopAPI.GetAddonMeta(bucket.addon_id).thumb;
+					const fakeMap = new VirtualMap(campaign.chapters[0].maps[0].name);
+					const fakeCh = new VirtualChapter(
+						`${bucket.id}/${campaign.id}`,
+						campaign.title,
+						[fakeMap],
+						addon
+					);
+
+					this.chapterCache.push(fakeCh);
+				}
+			}
+		} else {
+			this.chapterCache = this.campaign.campaign.chapters;
+		}
+
+		if (this.maxPages === -1) this.maxPages = Math.ceil(this.chapterCache.length / this.maxEntryPerPage);
 
 		if (this.maxPages === 1) {
 			this.nav.visible = false;
@@ -225,7 +261,8 @@ class CampaignChapters {
 		}
 
 		const prog = CampaignAPI.GetCampaignUnlockProgress(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`);
-		const chapters = this.campaign.campaign.chapters;
+		const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
+		
 		this.list.RemoveAndDeleteChildren();
 		this.chapterEntries = [];
 
@@ -233,7 +270,7 @@ class CampaignChapters {
 			let i = 0;
 			this.displayMode === ChapterDisplayMode.CLASSIC
 				? i < this.maxEntryPerPage
-				: i < Math.min(this.maxEntryPerPage, chapters.length - this.chapterPage * this.maxEntryPerPage);
+				: i < Math.min(this.maxEntryPerPage, this.chapterCache.length - this.chapterPage * this.maxEntryPerPage);
 			++i
 		) {
 			const p = $.CreatePanel('Button', this.list, 'chapter' + i);
@@ -242,7 +279,12 @@ class CampaignChapters {
 			const idx = this.chapterPage * this.maxEntryPerPage + i;
 
 			this.chapterEntries.push(
-				new ChapterEntry(idx, p, idx < chapters.length ? chapters[idx] : undefined, prog < idx)
+				new ChapterEntry(
+					idx,
+					p,
+					idx < this.chapterCache.length ? this.chapterCache[idx] : undefined,
+					isSingleWsCampaign || prog > idx
+				)
 			);
 
 			this.chapterEntries[i].update();

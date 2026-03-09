@@ -13,14 +13,20 @@ class CampaignSettingsTab {
 	static settingsPage = $<Panel>('#CampaignSettingsBase')!;
 
 	static campaign = CampaignAPI.GetActiveCampaign()!;
-	static chapter = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as ChapterInfo;
+	static chapter = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as VirtualChapter;
 
 	static advancedOpened = false;
 
 	static openSettingsPage: Panel | undefined = undefined;
 
 	static init() {
+		$.GetContextPanel().SetHasClass(
+			'P2CESingleCampaign',
+			this.chapter.type !== CampaignDataType.REAL_CAMPAIGN
+		);
+
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
+		
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
 			$.Localize('#MainMenu_Campaigns_Setup_Title'),
@@ -35,16 +41,8 @@ class CampaignSettingsTab {
 		this.show();
 
 		const basePath = getCampaignAssetPath(this.campaign);
-		const thumb = this.chapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
-		if (thumb) {
-			if ((thumb as string).startsWith('http')) {
-				this.chImage.SetImage(thumb);
-			} else {
-				this.chImage.SetImage(`${basePath}${thumb}`);
-			}
-		} else {
-			this.chImage.SetImage(getRandomFallbackImage());
-		}
+		const thumb = getChapterThumbnail(this.campaign, this.chapter);
+		this.chImage.SetImage(thumb);
 
 		const logo = CampaignAPI.GetCampaignMeta(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`).get(
 			CampaignMeta.SQUARE_LOGO
@@ -128,13 +126,26 @@ class CampaignSettingsTab {
 
 				$.Schedule(0.1, () => {
 					const desiredMap = CampaignShared.getMap();
-					if (desiredMap.index > 0) {
-						CampaignAPI.StartCampaign(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`, this.chapter.id, desiredMap.index);
-						this.clear();
-					} else {
-						CampaignAPI.StartCampaign(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`, this.chapter.id, 0);
-						this.clear();
+					const mapIdx = desiredMap.index > 0 ? desiredMap.index : 0;
+
+					let campaignId: string;
+					let chapterId: string;
+					if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
+						campaignId = this.chapter.id;
+						chapterId = 'auto';
 					}
+					else {
+						campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
+						chapterId = this.chapter.id;
+					}
+
+					CampaignAPI.StartCampaign(
+						campaignId,
+						chapterId,
+						mapIdx
+					);
+
+					this.clear();
 				});
 			},
 			$.Localize('#UI_Cancel'),
