@@ -18,11 +18,12 @@
 	}
 
 	&__background-image1 {
-		z-index: -1;
+		z-index: -2;
 	}
 
 	&__background-image2 {
-		z-index: -2;
+		z-index: -1;
+		opacity: 0;
 	}
 
 	&__contents {
@@ -64,8 +65,8 @@
 		}
 	}
 
-	&__backgroundhideanim {
-		animation-name: loading-screen-background-hide-anim;
+	&__backgroundshowanim {
+		animation-name: loading-screen-background-show-anim;
 		animation-duration: 0.33s;
 		animation-timing-function: linear;
 		animation-iteration-count: 1;
@@ -189,5 +190,15 @@
 
 	100% {
 		opacity: 0;
+	}
+}
+
+@keyframes loading-screen-background-show-anim {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
 	}
 }

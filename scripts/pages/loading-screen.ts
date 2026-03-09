@@ -10,15 +10,20 @@ class LoadingScreenController {
 	static bgImage1 = $('#BackgroundMapImage1') as Image;
 	static bgImage2 = $('#BackgroundMapImage2') as Image;
 	static logo = $<Image>('#Logo');
+	static beBlankIfInvalid = false;
 
 	static init() {
 		this.progressBar.value = 0;
 
-		this.bgImage1.RemoveClass('loadingscreen__backgroundhideanim');
+		this.bgImage2.RemoveClass('loadingscreen__backgroundshowanim');
 
 		if (!this.bgEvent) {
 			this.bgEvent = $.RegisterEventHandler('ImageFailedLoad', this.bgImage1, () => {
-				this.bgImage1.SetImage(getRandomFallbackImage());
+				if (this.beBlankIfInvalid) {
+					this.bgImage1.visible = false;
+				} else {
+					this.bgImage1.SetImage(getRandomFallbackImage());
+				}
 			});
 			this.bgEvent2 = $.RegisterEventHandler('ImageFailedLoad', this.bgImage1, () => {
 				this.bgImage2.visible = false;
@@ -51,7 +56,7 @@ class LoadingScreenController {
 
 		// Progress bar will be 1.0 when loading finishes and is then reset to 0.0
 		if (this.progressBar.value >= 0.25) {
-			this.bgImage1.AddClass('loadingscreen__backgroundhideanim');
+			this.bgImage2.AddClass('loadingscreen__backgroundshowanim');
 			return;
 		}
 
@@ -78,19 +83,25 @@ class LoadingScreenController {
 
 			// applies image and sets panel if it's valid
 			// otherwise, make it invisible
-			const setImg = (panel: Image, path: unknown) => {
-				if (path) {
+			const setImg = (panel: Image, path: string) => {
+				if (path && path.length > 0) {
 					panel.visible = true;
 					panel.SetImage(`${getCampaignAssetPath(c)}${path}`);
 				} else {
 					panel.visible = false;
 				}
 			};
-
-			const path = meta.get(useTransitScreen ? CampaignMeta.TRANSITION_SCREEN : CampaignMeta.LOADING_SCREEN);
+ 
+			let path: string;
+			this.beBlankIfInvalid = isSingleWsCampaign(c);
+			if (this.beBlankIfInvalid) {
+				path = useTransitScreen ? 'transition_screen.png' : 'loading_screen.png';
+			} else {
+				path = meta.get(useTransitScreen ? CampaignMeta.TRANSITION_SCREEN : CampaignMeta.LOADING_SCREEN) ?? '';
+			}
 
 			$.Msg(`Image asset path: ${path}`);
-			if (path) {
+			if (path && path.length > 0) {
 				const split = (path as string).split('.');
 				let join = '';
 				for (let i = 0; i < split.length - 1; ++i) {
