@@ -2,7 +2,7 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
-// .ChapterModeClassic .ChapterModeList .ChapterModeGrid .ChapterModeSuper
+// .ChapterModeClassic .ChapterModeList .ChapterModeGrid .ChapterModeSuper .ChapterModeSquareGrid 
 
 .ChapterModeClassic #ChaptersBack,
 .ChapterModeList #ChaptersBack,
@@ -18,11 +18,14 @@
 	vertical-align: center;
 }
 
+.ChapterModeSquareGrid #ChaptersBack,
+.ChapterModeSquareGrid #ChaptersNext,
 .ChapterModeGrid #ChaptersBack,
 .ChapterModeGrid #ChaptersNext {
 	visibility: collapse;
 }
 
+.ChapterModeSquareGridOnly,
 .ChapterModeGridOnly,
 .ChapterModeClassicOnly,
 .ChapterModeListOnly,
@@ -30,6 +33,7 @@
 	visibility: collapse;
 }
 
+.ChapterModeSquareGrid .ChapterModeSquareGridOnly,
 .ChapterModeGrid .ChapterModeGridOnly,
 .ChapterModeClassic .ChapterModeClassicOnly,
 .ChapterModeList .ChapterModeListOnly,
@@ -91,6 +95,7 @@
 		}
 	}
 
+	&__square-grid,
 	&__grid {
 		horizontal-align: center;
 		flow-children: right-wrap;
@@ -98,6 +103,17 @@
 		padding: 0 15px;
 		#{$root}__entry {
 			margin: 0 2px 5px 2px;
+		}
+	}
+
+	&__square-grid {
+		padding: 15px 15px;
+		#{$root}__entry {
+			width: 384px;
+			margin: 0 5px 10px 5px;
+			&__cover {
+				height: 384px;
+			}
 		}
 	}
 
@@ -147,6 +163,7 @@
 			border: $menu-pane-border;
 		}
 
+		.ChapterModeSquareGrid &,
 		.ChapterModeGrid & {
 			flow-children: left;
 		}
@@ -170,6 +187,7 @@
 			flow-children: down;
 		}
 
+		.ChapterModeSquareGrid &,
 		.ChapterModeGrid & {
 			padding: 10px;
 		}
@@ -180,11 +198,13 @@
 		}
 
 		.ChapterModeList &,
+		.ChapterModeSquareGrid &,
 		.ChapterModeGrid & {
 			flow-children: down;
 			vertical-align: bottom;
 		}
 
+		.ChapterModeSquareGrid &,
 		.ChapterModeGrid & {
 			vertical-align: bottom;
 			flow-children: right;
@@ -200,6 +220,7 @@
 				flow-children: right;
 			}
 
+			.ChapterModeSquareGrid &,
 			.ChapterModeGrid & {
 				flow-children: down;
 				vertical-align: center;
@@ -216,6 +237,7 @@
 				flow-children: right;
 			}
 
+			.ChapterModeSquareGrid &,
 			.ChapterModeGrid & {
 				flow-children: down;
 				vertical-align: center;

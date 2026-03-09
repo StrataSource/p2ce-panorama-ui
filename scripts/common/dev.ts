@@ -122,10 +122,72 @@ function getCampaignAssetPath(pair: CampaignPair) {
 	}
 }
 
+function isSpecialSingleWsCampaign(c: CampaignPair) {
+	return `${c.bucket.id}/${c.campaign.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN;
+}
+
 function isSingleWsCampaign(c: CampaignPair) {
 	return c.bucket.id.startsWith(SpecialString.AUTO_WS);
 }
 
 function isBucketSingleWsCampaign(b: CampaignBucket) {
 	return b.id.startsWith(SpecialString.AUTO_WS);
+}
+
+function getChapterThumbnail(p: CampaignPair, ch: VirtualChapter) {
+	const basePath = getCampaignAssetPath(p);
+	const thumb = ch.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
+	if (thumb) {
+		if ((thumb as string).startsWith('http')) {
+			return thumb;
+		} else if (ch.type !== CampaignDataType.REAL_CAMPAIGN) {
+			return thumb;
+		} else {
+			return `${basePath}${thumb}`;
+		}
+	} else {
+		return getRandomFallbackImage();
+	}
+}
+
+class VirtualMap implements ChapterMap {
+	name: string;
+	meta: Map<string, string>;
+
+	constructor(name: string) {
+		this.name = name;
+		this.meta = new Map<string, string>();
+	}
+}
+
+class VirtualChapter implements ChapterInfo {
+	id: string;
+	title: string;
+	maps: ChapterMap[];
+	meta: Map<string, string>;
+	type?: CampaignDataType = CampaignDataType.REAL_CAMPAIGN;
+
+	constructor(id: string, title: string, maps: ChapterMap[], thumb: string) {
+		this.id = id;
+		this.title = title;
+		this.maps = maps;
+		this.meta = new Map<string, string>();
+		this.meta.set(CampaignMeta.CHAPTER_THUMBNAIL, thumb);
+		this.type = CampaignDataType.P2CE_SINGLE_WS_SPECIAL;
+	}
+}
+
+class VirtualCampaign implements CampaignInfo {
+	id: string; 
+	title: string; 
+	chapters: ChapterInfo[];
+
+	meta: Map<string, string>;
+
+	constructor(id: string, title: string, chapters: ChapterInfo[]) {
+		this.id = id;
+		this.title = title;
+		this.chapters = chapters;
+		this.meta = new Map<string, string>();
+	}
 }

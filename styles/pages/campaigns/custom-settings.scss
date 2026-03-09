@@ -100,6 +100,8 @@
 	&__right {
 		height: 100%;
 		flow-children: down;
+		background-color: $base-950;
+		border: $menu-pane-border;
 	}
 
 	&__chapter-overlay {
@@ -135,8 +137,13 @@
 	&__chapter-img {
 		width: 640px;
 		height: 360px;
-		border: $menu-pane-border;
 		background-color: $base-950;
+	}
+
+	.P2CESingleCampaign &__chapter-img {
+		width: 384px;
+		height: 384px;
+		horizontal-align: center;
 	}
 
 	&__header {
@@ -144,19 +151,20 @@
 		flow-children: right;
 		padding: 15px;
 		background-color: $base-gradient;
-		border: $menu-pane-border;
-		border-bottom-width: 0px;
+		border-bottom: $menu-pane-border;
+	}
+
+	.P2CESingleCampaign &__summary {
+		width: 640px;
 	}
 
 	&__summary {
 		width: 100%;
 		height: fill-parent-flow(1);
 		background-color: $base-900;
-		border: $menu-pane-border;
-		border-top-width: 0;
-		border-bottom-width: 0;
 		flow-children: down;
 		padding: 10px 15px;
+		border-top: $menu-pane-border;
 
 		&__header {
 			@include mixin.font-styles($use-header: true, $light-header: false);
@@ -182,6 +190,7 @@
 		padding: 15px 20px;
 		tooltip-position: left;
 		tooltip-body-position: 50% 50%;
+		border-width: 0px;
 
 		&__icon {
 			width: 64px;

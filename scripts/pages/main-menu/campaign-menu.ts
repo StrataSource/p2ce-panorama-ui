@@ -135,6 +135,14 @@ class CampaignMenu {
 			UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = true;
 		}
 
+		if (isSingleWsCampaign(CampaignAPI.GetActiveCampaign()!)) {
+			$.Msg('Auto generated campaign detected! Redirecting to special...');
+			$.Schedule(0.01, () => {
+				CampaignAPI.SetActiveCampaign(SpecialString.P2CE_SP_WS_CAMPAIGN);
+			});
+			return;
+		}
+
 		for (const btn of this.buttons) {
 			if (skipBgMapLoad) {
 				// do NOT construct exit campaign button if default is provided

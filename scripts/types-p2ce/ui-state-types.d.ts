@@ -49,12 +49,18 @@ declare const enum ChapterDisplayMode {
 	CLASSIC = 'classic',
 	LIST = 'list',
 	GRID = 'grid',
-	SUPER = 'super'
+	SUPER = 'super',
+	SQUARE_GRID = 'square_grid'
 }
 
 declare const enum SpecialString {
 	P2CE_SP_WS_CAMPAIGN = 'base/p2ce_sp_ws',
 	AUTO_WS = 'workshop_auto'
+}
+
+declare const enum CampaignDataType {
+	REAL_CAMPAIGN = 0,
+	P2CE_SINGLE_WS_SPECIAL = 1
 }
 
 type MenuButton = {

@@ -109,38 +109,55 @@ class CampaignSelector {
 		this.reloadList();
 	}
 
+	static createCampaignBtn(bucket: CampaignBucket, campaign: CampaignInfo, campaignIndex: number) {
+		const p = $.CreatePanel('Button', this.campaignList, `Campaign_${campaign.id}`);
+		p.LoadLayoutSnippet('CampaignEntrySnippet');
+		p.AddClass('campaigns__entry__spaced');
+	
+		const m = CampaignAPI.GetCampaignMeta(`${bucket.id}/${campaign.id}`) ?? new Map<string, string>();
+		if (m.size === 0) {
+			$.Warning(
+				`Campaign meta map for '${bucket.id}/${campaign.id}' couldn't be retrieved, or it was empty.`
+			);
+		}
+	
+		this.campaignEntries.push(
+			new CampaignEntry(
+				campaignIndex,
+				p,
+				{ bucket: bucket, campaign: campaign },
+				m.get(CampaignMeta.BOX_ART),
+				m.get(CampaignMeta.COVER),
+				m.get(CampaignMeta.BTN_BG),
+				m.get(CampaignMeta.DESC),
+				m.get(CampaignMeta.AUTHOR)
+			)
+		);
+	
+		this.campaignEntries[campaignIndex].update();
+	}
+
 	static populateCampaigns() {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
 		let campaignIndex = 0;
+		let hasAutoCampaign = false;
 
 		for (const bucket of buckets) {
+			if (bucket.id.startsWith('workshop_auto')) {
+				hasAutoCampaign = true;
+				break;
+			}
+		}
+
+		for (const bucket of buckets) {
+			if (bucket.id.startsWith('workshop_auto')) {
+				continue;
+			}
 			for (const campaign of bucket.campaigns) {
-				const p = $.CreatePanel('Button', this.campaignList, `Campaign_${campaign.id}`);
-				p.LoadLayoutSnippet('CampaignEntrySnippet');
-				p.AddClass('campaigns__entry__spaced');
-
-				const m = CampaignAPI.GetCampaignMeta(`${bucket.id}/${campaign.id}`) ?? new Map<string, string>();
-				if (m.size === 0) {
-					$.Warning(
-						`Campaign meta map for '${bucket.id}/${campaign.id}' couldn't be retrieved, or it was empty.`
-					);
+				if (`${bucket.id}/${campaign.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN && !hasAutoCampaign) {
+					continue;
 				}
-
-				this.campaignEntries.push(
-					new CampaignEntry(
-						campaignIndex,
-						p,
-						{ bucket: bucket, campaign: campaign },
-						m.get(CampaignMeta.BOX_ART),
-						m.get(CampaignMeta.COVER),
-						m.get(CampaignMeta.BTN_BG),
-						m.get(CampaignMeta.DESC),
-						m.get(CampaignMeta.AUTHOR)
-					)
-				);
-
-				this.campaignEntries[campaignIndex].update();
-
+				this.createCampaignBtn(bucket, campaign, campaignIndex);
 				campaignIndex += 1;
 			}
 		}
