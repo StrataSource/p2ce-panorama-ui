@@ -1,16 +1,23 @@
 'use strict';
 
 class SaveEntry {
+	campaign: CampaignPair | undefined;
+	chapter: VirtualChapter | undefined;
 	index: number;
 	panel: Panel;
 	actionPanel: Panel | null;
 	save: GameSave;
+	nameOverride: string | undefined = undefined;
 
-	constructor(index: number, panel: Panel, save: GameSave) {
+	constructor(index: number, panel: Panel, save: GameSave, nameOverride?: string, campaign?: CampaignPair, chapter?: VirtualChapter) {
+		this.campaign = campaign;
 		this.index = index;
 		this.panel = panel;
 		this.save = save;
 		this.actionPanel = null;
+		this.nameOverride = nameOverride;
+		this.campaign = campaign;
+		this.chapter = chapter;
 	}
 
 	update() {
@@ -47,17 +54,24 @@ class SaveEntry {
 			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU || !CampaignAPI.IsCampaignActive()) {
 				saveBtn.visible = false;
 			} else {
-				const disableSave = GameInterfaceAPI.GetSettingBool('map_wants_save_disable') || this.save.isAutoSave;
+				const mapWantsSaveDisabled = GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
+				const isQuicksave = this.save.fileName.startsWith('quick');
+				const disableSave = mapWantsSaveDisabled || this.save.isAutoSave || isQuicksave;
 				if (disableSave) {
-					saveBtn.SetPanelEvent('onmouseover', () => {
-						UiToolkitAPI.ShowTextTooltip(
-							saveBtn.id,
-							$.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled')
-						);
-					});
-					saveBtn.SetPanelEvent('onmouseout', () => {
-						UiToolkitAPI.HideTextTooltip();
-					});
+					const saveTooltip = this.panel.FindChildTraverse('SaveOverwriteTooltip');
+					if (saveTooltip) {
+						if (mapWantsSaveDisabled) {
+							saveTooltip.SetAttributeString(
+								'tooltip',
+								$.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled')
+							);
+						} else if (this.save.isAutoSave || isQuicksave) {
+							saveTooltip.SetAttributeString(
+								'tooltip',
+								$.Localize('#MainMenu_SaveRestore_CannotOverwriteSave')
+							);
+						}
+					}
 					saveBtn.enabled = false;
 				} else {
 					saveBtn.SetPanelEvent('onactivate', () => {
@@ -171,18 +185,18 @@ class SaveEntry {
 		});
 
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
-		const savChapter: ChapterInfo | undefined =
-			CampaignSaves.campaign && this.save.chapter < CampaignSaves.campaign.campaign.chapters.length
-				? CampaignSaves.campaign.campaign.chapters[this.save.chapter]
-				: undefined;
-
+		
 		if (title) {
-			if (!savChapter) {
-				$.Warning('CAMPAIGN SAVES: Chapter could not be found for this map');
-				title.text = this.save.mapName;
+			if (this.nameOverride) {
+				title.text = this.nameOverride;
 			} else {
-				const chapterName = $.Localize(savChapter.title);
-				title.text = chapterName.replace('\n', ': ');
+				if (!this.chapter) {
+					$.Warning('CAMPAIGN SAVES: Chapter could not be found for this map');
+					title.text = this.save.mapName;
+				} else {
+					const chapterName = $.Localize(this.chapter.title);
+					title.text = chapterName.replace('\n', ': ');
+				}
 			}
 		}
 
@@ -194,15 +208,12 @@ class SaveEntry {
 
 		const bg = this.panel.FindChildTraverse<Image>('SaveBg');
 		if (bg) {
-			if (!savChapter) {
+			if (!this.campaign || !this.chapter) {
 				bg.visible = false;
 			} else {
-				const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
-				const thumb = savChapter.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
-				if (thumb?.startsWith('http')) {
-					bg.SetImage(thumb);
-				} else {
-					bg.SetImage(`${basePath}${thumb}`);
+				bg.SetImage(getChapterThumbnail(this.campaign, this.chapter));
+				if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
+					bg.style.opacity = 0.25;
 				}
 			}
 		}
@@ -285,30 +296,63 @@ class CampaignSaves {
 	}
 
 	static populateSaves() {
-		if (CampaignAPI.IsCampaignActive()) {
-			this.saveGroup = `${this.campaign!.bucket.id}/${this.campaign!.campaign.id}`;
+		const c = CampaignAPI.GetActiveCampaign();
+		const isWsSingle = CampaignAPI.IsCampaignActive() && (isSingleWsCampaign(c!) || isSpecialSingleWsCampaign(c!));
+		if (isWsSingle) {
+			this.saveGroup = SpecialString.AUTO_WS;
 		} else {
+			this.saveGroup = `${this.campaign!.bucket.id}/${this.campaign!.campaign.id}`;
+		}
+
+		if (!CampaignAPI.IsCampaignActive()) {
 			UiToolkitAPI.ShowGenericPopupOk(
 				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Title'),
 				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Desc'),
 				'bad-popup',
 				() => {}
 			);
+			this.saveGroup = '';
 		}
 
 		const saves = GameSavesAPI.GetGameSaves()
 			.filter((v: GameSave) => {
 				$.Msg(`SAVED GAMES: ${v.mapGroup}, ${v.mapName}, ${v.chapter}`);
-				return v.mapGroup === this.saveGroup;
+				return isWsSingle ? v.mapGroup.startsWith(this.saveGroup) : v.mapGroup === this.saveGroup;
 			})
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
 		for (let i = 0; i < saves.length; ++i) {
 			const p = $.CreatePanel('Panel', this.savesPanel, 'save' + i);
+			const s = saves[i];
 
 			p.LoadLayoutSnippet('SaveEntrySnippet');
 
-			this.saveEntries.push(new SaveEntry(i, p, saves[i]));
+			const realCampaign = CampaignAPI.FindCampaign(s.mapGroup);
+			const savChapter: VirtualChapter | undefined =
+			realCampaign && s.chapter < realCampaign.campaign.chapters.length
+				? realCampaign.campaign.chapters[s.chapter]
+				: undefined;
+
+			if (isWsSingle && realCampaign && savChapter) {
+				savChapter.type = CampaignDataType.P2CE_SINGLE_WS_SPECIAL;
+				savChapter.meta.set(
+					CampaignMeta.CHAPTER_THUMBNAIL,
+					WorkshopAPI.GetAddonMeta(realCampaign.bucket.addon_id).thumb
+				);
+			}
+
+			this.saveEntries.push(
+				new SaveEntry(
+					i,
+					p,
+					s,
+					isWsSingle ?
+						(realCampaign ? realCampaign.campaign.title : `MISSING: ${s.mapGroup}`) :
+						undefined,
+					realCampaign ?? undefined,
+					savChapter
+				)
+			);
 			this.saveEntries[i].update();
 		}
 
