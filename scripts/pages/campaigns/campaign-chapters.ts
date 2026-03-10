@@ -283,7 +283,7 @@ class CampaignChapters {
 					idx,
 					p,
 					idx < this.chapterCache.length ? this.chapterCache[idx] : undefined,
-					isSingleWsCampaign || prog > idx
+					isSingleWsCampaign || prog >= idx
 				)
 			);
 

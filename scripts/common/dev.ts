@@ -138,9 +138,7 @@ function getChapterThumbnail(p: CampaignPair, ch: VirtualChapter) {
 	const basePath = getCampaignAssetPath(p);
 	const thumb = ch.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
 	if (thumb) {
-		if ((thumb as string).startsWith('http')) {
-			return thumb;
-		} else if (ch.type !== CampaignDataType.REAL_CAMPAIGN) {
+		if ((thumb as string).startsWith('http') || ch.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
 			return thumb;
 		} else {
 			return `${basePath}${thumb}`;
@@ -165,7 +163,7 @@ class VirtualChapter implements ChapterInfo {
 	title: string;
 	maps: ChapterMap[];
 	meta: Map<string, string>;
-	type?: CampaignDataType = CampaignDataType.REAL_CAMPAIGN;
+	type?: CampaignDataType | undefined;
 
 	constructor(id: string, title: string, maps: ChapterMap[], thumb: string) {
 		this.id = id;
