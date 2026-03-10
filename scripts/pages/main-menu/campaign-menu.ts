@@ -243,7 +243,7 @@ class CampaignMenu {
 		if (isWsSingle) {
 			const realCampaign = CampaignAPI.FindCampaign(this.latestSave.mapGroup);
 			if (realCampaign) {
-				c = realCampaign!;
+				c = realCampaign;
 			} else {
 				$.Warning(`Associated campaign ID ${this.latestSave.mapGroup} could not be found`);
 			}

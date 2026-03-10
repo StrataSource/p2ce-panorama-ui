@@ -163,7 +163,7 @@ class PauseMenu {
 			return;
 		}
 
-		const c = CampaignAPI.GetActiveCampaign()!;
+		let c = CampaignAPI.GetActiveCampaign()!;
 
 		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`);
 		const logo = meta.get(CampaignMeta.FULL_LOGO);
@@ -182,11 +182,15 @@ class PauseMenu {
 
 		this.continueBox.visible = false;
 
+		const isWsSingle = isSingleWsCampaign(c);
+
+		const group = isWsSingle ? SpecialString.AUTO_WS : `${c.bucket.id}/${c.campaign.id}`;
+
 		const saves = GameSavesAPI.GetGameSaves()
-			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
 			.filter((a) => {
-				return a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
-			});
+				return isWsSingle ? a.mapGroup.startsWith(group) : a.mapGroup === group;
+			})
+			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
 		this.continueBtn.enabled = false;
 		this.continueBtnText.text = $.Localize('#MainMenu_SaveRestore_NoSaves');
@@ -199,6 +203,15 @@ class PauseMenu {
 		// set the continue button states
 
 		this.latestSave = saves[0];
+
+		if (isWsSingle) {
+			const realCampaign = CampaignAPI.FindCampaign(this.latestSave.mapGroup);
+			if (realCampaign) {
+				c = realCampaign;
+			} else {
+				$.Warning(`Associated campaign ID ${this.latestSave.mapGroup} could not be found`);
+			}
+		}
 
 		const savChapter: ChapterInfo | undefined =
 			this.latestSave.chapter < c.campaign.chapters.length
@@ -217,7 +230,7 @@ class PauseMenu {
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueBoxText.text = convertTime(date);
-		const chapterName = $.Localize(savChapter.title);
+		const chapterName = isWsSingle ? c.campaign.title : $.Localize(savChapter.title);
 		this.continueBtnText.text = chapterName.replace('\n', ': ');
 
 		this.continueBtn.enabled = true;
