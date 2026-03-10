@@ -180,19 +180,22 @@ class CampaignChapters {
 			this.chapterCache = [];
 
 			for (const bucket of buckets) {
+				const addon = WorkshopAPI.GetAddonMeta(bucket.addon_id);
+				if (addon.type !== 'Map') {
+					continue;
+				}
 				for (const campaign of bucket.campaigns) {
 					// assuming the system isn't gaslighting us
 					// an autogen'd campaign should have 1 chapter with at least 1 map
 					// i dont really care if it has multiple maps
 					// you really should make a campaign if you have multiple maps
 					// it's just BETTER!
-					const addon = WorkshopAPI.GetAddonMeta(bucket.addon_id).thumb;
 					const fakeMap = new VirtualMap(campaign.chapters[0].maps[0].name);
 					const fakeCh = new VirtualChapter(
 						`${bucket.id}/${campaign.id}`,
 						campaign.title,
 						[fakeMap],
-						addon
+						addon.thumb
 					);
 
 					this.chapterCache.push(fakeCh);

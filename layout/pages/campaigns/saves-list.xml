@@ -54,15 +54,17 @@
 								textureheight="48"
 							/>
 						</Button>
-						<Button id="SaveOverwrite" class="button" tabindex="auto" selectionpos="auto">
-							<Image
-								class="button__icon"
-								src="file://{images}/download.svg"
-								scaling="stretch-to-fit-preserve-aspect"
-								texturewidth="48"
-								textureheight="48"
-							/>
-						</Button>
+						<TooltipPanel id="SaveOverwriteTooltip">
+							<Button id="SaveOverwrite" class="button" tabindex="auto" selectionpos="auto">
+								<Image
+									class="button__icon"
+									src="file://{images}/download.svg"
+									scaling="stretch-to-fit-preserve-aspect"
+									texturewidth="48"
+									textureheight="48"
+								/>
+							</Button>
+						</TooltipPanel>
 						<Button id="SaveDelete" class="button button--red" tabindex="auto" selectionpos="auto">
 							<Image
 								class="button__icon"
