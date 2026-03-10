@@ -143,14 +143,14 @@ class CampaignSelector {
 		let hasAutoCampaign = false;
 
 		for (const bucket of buckets) {
-			if (bucket.id.startsWith('workshop_auto')) {
+			if (isBucketSingleWsCampaign(bucket)) {
 				hasAutoCampaign = true;
 				break;
 			}
 		}
 
 		for (const bucket of buckets) {
-			if (bucket.id.startsWith('workshop_auto')) {
+			if (isBucketSingleWsCampaign(bucket)) {
 				continue;
 			}
 			for (const campaign of bucket.campaigns) {
