@@ -22,7 +22,7 @@ class CampaignSettingsTab {
 	static init() {
 		$.GetContextPanel().SetHasClass(
 			'P2CESingleCampaign',
-			this.chapter.type !== CampaignDataType.REAL_CAMPAIGN
+			this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL
 		);
 
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));

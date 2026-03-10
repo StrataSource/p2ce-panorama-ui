@@ -59,8 +59,7 @@ declare const enum SpecialString {
 }
 
 declare const enum CampaignDataType {
-	REAL_CAMPAIGN = 0,
-	P2CE_SINGLE_WS_SPECIAL = 1
+	P2CE_SINGLE_WS_SPECIAL = 0
 }
 
 type MenuButton = {
