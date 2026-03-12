@@ -4,7 +4,7 @@
 
 .card {
 	width: fill-parent-flow(1);
-	height: fill-parent-flow(1);
+	height: 100%;
 	vertical-align: center;
 
 	background-color: $button-background;
@@ -18,7 +18,7 @@
 
 	&__image {
 		width: 100%;
-		height: fill-parent-flow(1);
+		height: 100%;
 	}
 
 	&__avatar {

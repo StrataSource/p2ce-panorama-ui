@@ -17,7 +17,7 @@
 		$this: &;
 
 		&__inner {
-			width: fill-parent-flow(1);
+			width: 100%;
 			height: fit-children;
 			flow-children: right;
 			padding: 15px;
