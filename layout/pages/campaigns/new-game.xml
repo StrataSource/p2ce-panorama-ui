@@ -9,21 +9,31 @@
 
 	<snippets>
 		<snippet name="ChapterEntrySnippet">
-			<Button group="ChaptersGroupRadio" class="chapters__entry" tabindex="auto" selectionpos="auto">
-				<!-- Chapter icon cover -->
-				<Image
-					id="ChapterCover"
-					class="chapters__entry__cover"
-					defaultsrc="file://{images}/menu/p2ce-generic.png"
-					scaling="stretch-to-cover-preserve-aspect"
-				/>
+			<Panel class="chapters__entry__outer">
+				<RadioButton id="ChapterBtn" group="ChaptersGroupRadio" class="chapters__entry" tabindex="auto" selectionpos="auto">
+					<!-- Chapter icon cover -->
+					<Image
+						id="ChapterCover"
+						class="chapters__entry__cover"
+						defaultsrc="file://{images}/menu/p2ce-generic.png"
+						scaling="stretch-to-cover-preserve-aspect"
+					/>
 
-				<!-- Chapter info; title, description, 'source' -->
-				<Panel class="chapters__entry__details">
-					<Label id="ChapterTitle" class="chapters__entry__details__title" text="#MainMenu_Campaigns_MM_ChapterNum" />
-					<Label id="ChapterDesc" class="chapters__entry__details__desc" text="#MainMenu_Campaigns_MM_ChapterDesc" />
+					<!-- Chapter info; title, description, 'source' -->
+					<Panel class="chapters__entry__details">
+						<Label id="ChapterTitle" class="chapters__entry__details__title" text="#MainMenu_Campaigns_MM_ChapterNum" />
+						<Label id="ChapterDesc" class="chapters__entry__details__desc" text="#MainMenu_Campaigns_MM_ChapterDesc" />
+					</Panel>
+				</RadioButton>
+				<Panel id="ChapterPlayPanel" class="chapters__entry__play-btns">
+					<Button id="PlayBtn" class="button fill-width mr-1">
+						<Label class="button__text" text="[HC] Play" />
+					</Button>
+					<Button id="CustomizeBtn" class="button">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
+					</Button>
 				</Panel>
-			</Button>
+			</Panel>
 		</snippet>
 	</snippets>
 
@@ -42,13 +52,24 @@
 						textureheight="1080"
 						scaling="stretch-to-cover-preserve-aspect"
 					/>
-					<Label id="ChapterListTitle" class="chapters__list__title" text="#MainMenu_Campaigns_MM_ChapterNum" />
+					<Panel class="chapters__list__title">
+						<Label id="ChapterListHeader" class="chapters__list__title__header" text="#MainMenu_Campaigns_MM_ChapterNum" />
+						<Label id="ChapterListTitle" class="chapters__list__title__text" text="#MainMenu_Campaigns_MM_ChapterNum" />
+					</Panel>
+				</Panel>
+				<Panel class="full-width flow-right mt-1">
+					<Button onactivate="CampaignChapters.startChapter()" class="button full-height fill-width mr-1">
+						<Label class="button__text" text="[HC] Play" />
+					</Button>
+					<Button onactivate="CampaignChapters.customizeChapter()" class="button">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
+					</Button>
 				</Panel>
 			</Panel>
 			<Panel id="ChaptersNav" class="chapters__nav" tabindex="auto" selectionpos="auto">
 				<Panel id="NavControls" class="chapters__nav__controls" tabindex="auto" selectionpos="auto">
 					<Button id="ChaptersBack" class="button" onactivate="CampaignChapters.backPage()" tabindex="auto" selectionpos="auto">
-						<Label class="button__text" text="&lt;" />
+						<Label class="button__text" text="&lt; Back" />
 					</Button>
 					<Label id="PageCounter" class="chapters__nav__label" text="??? / ???" />
 					<Button
@@ -58,7 +79,7 @@
 						tabindex="auto"
 						selectionpos="auto"
 					>
-						<Label class="button__text" text="&gt;" />
+						<Label class="button__text" text="Next &gt;" />
 					</Button>
 				</Panel>
 				<Panel id="ChaptersPips" class="chapters__nav__pips" tabindex="auto" selectionpos="auto">

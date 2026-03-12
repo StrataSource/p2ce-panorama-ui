@@ -48,10 +48,11 @@
 		flow-children: down;
 		overflow: squish scroll;
 		max-height: 768px;
+		border-right: $menu-pane-border;
 
 		#{$root}__entry {
 			background-color: rgba(0, 0, 0, 0);
-			border-style: none;
+			border-width: 0px;
 
 			&__details {
 				border-style: none;
@@ -60,13 +61,15 @@
 			&__cover {
 				visibility: collapse;
 			}
+			&__play-btns {
+				visibility: collapse;
+			}
 		}
 
 		&__right {
-			border-left: $menu-pane-border;
-			margin: 15px 0;
 			padding: 15px 15px;
 			vertical-align: center;
+			flow-children: down;
 
 			&__wrap {
 				vertical-align: center;
@@ -80,37 +83,50 @@
 		}
 
 		&__title {
+			padding: 15px 20px;
 			width: 100%;
-			letter-spacing: 2px;
-			text-shadow: 2px 2px 1px 3 $base-950;
-			font-weight: bold;
-			font-size: 32px;
-			max-height: 80px;
-			horizontal-align: right;
+			background-color: gradient(linear, 100% 0%, 0% 0%, from(rgba(0, 0, 0, 0)), to($base-950));
+			transform: translateX(1px) translateY(-1px);
+			flow-children: down;
 			vertical-align: bottom;
-			text-align: right;
-			padding: 15px 25px;
-			background-color: gradient(linear, 100% 0%, 0% 0%, from($base-950), to(rgba(0, 0, 0, 0)));
-			transform: translateX(-1px) translateY(-1px);
+			&__header {
+				text-shadow: 2px 2px 1px 3 $base-950;
+				font-size: 18px;
+				color: $base-200;
+				letter-spacing: 1px;
+			}
+			&__text {
+				text-shadow: 2px 2px 1px 3 $base-950;
+				font-weight: bold;
+				font-size: 24px;
+				max-height: 80px;
+			}
 		}
 	}
 
 	&__square-grid,
 	&__grid {
+		margin: 15px;
+		padding-right: 15px;
+		margin-bottom: 0px;
 		horizontal-align: center;
 		flow-children: right-wrap;
 		overflow: squish scroll;
-		padding: 0 15px;
+		height: fill-parent-flow(1);
 		#{$root}__entry {
-			margin: 0 2px 5px 2px;
+			&__outer {
+				margin: 0 2px 5px 2px;
+			}
 		}
 	}
 
 	&__square-grid {
 		padding: 15px 15px;
 		#{$root}__entry {
-			width: 384px;
-			margin: 0 5px 10px 5px;
+			&__outer {
+				width: 384px;
+				margin: 0 5px 10px 5px;
+			}
 			&__cover {
 				height: 384px;
 			}
@@ -121,14 +137,18 @@
 		flow-children: right;
 
 		#{$root}__entry {
-			margin: 0 10px;
+			&__outer {
+				margin: 0 10px;
+			}
 			vertical-align: center;
 		}
 	}
 
 	&__super {
 		#{$root}__entry {
-			width: 960px;
+			&__outer {
+				width: 960px;
+			}
 
 			&__cover {
 				height: 540px;
@@ -136,19 +156,22 @@
 
 			&__details {
 				&__title {
-					font-size: 32px;
+					font-size: 28px;
 					color: $base-200;
 					letter-spacing: 1px;
 				}
 
 				&__desc {
-					padding: 0 10px;
 					letter-spacing: 1px;
 					font-size: 36px;
 					font-weight: bold;
 					max-height: 42px;
 					text-overflow: shrink;
 				}
+			}
+
+			&__play-btns {
+				transition-duration: 0s;
 			}
 		}
 	}
@@ -177,13 +200,14 @@
 	&__wrapper {
 		horizontal-align: center;
 		vertical-align: center;
+		flow-children: down;
 	}
 
 	&__nav {
 		.ChapterModeClassic &,
 		.ChapterModeSuper &,
 		.ChapterModeList & {
-			padding: 15px;
+			padding: 10px;
 			flow-children: down;
 		}
 
@@ -261,7 +285,8 @@
 					border-color: $base-50;
 				}
 
-				&:selected {
+				&:selected,
+				&:descendantfocus {
 					background-color: $button-background-hover;
 					border-color: $primary-color;
 				}
@@ -280,20 +305,31 @@
 			.ChapterModeList &,
 			.ChapterModeClassic &,
 			.ChapterModeSuper & {
-				min-width: 128px;
+				min-width: 192px;
 			}
 		}
 	}
 
 	&__entry {
-		width: 480px;
+		width: 100%;
 		flow-children: down;
 		background-color: $button-background;
 		border: $menu-pane-border;
-
+		
 		$this: &;
+		
+		&__outer {
+			width: 480px;
+			flow-children: down;
+		}
 
-		&__lined {
+		&__play-btns {
+			width: 100%;
+			flow-children: right;
+			margin-top: 5px;
+			height: 0px;
+			// tacky af on same row
+			// transition: height 0.1s ease-in-out 0s;
 		}
 
 		&__cover {
@@ -334,8 +370,37 @@
 			}
 		}
 
-		.InputKeyboard &:hover:not(:disabled),
-		.InputController &:focus:not(:disabled) {
+		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+		.InputController &:focus:not(:disabled):not(:parentdisabled) {
+			border-color: $primary-900;
+			background-color: $primary-900;
+
+			#{$this}__cover {
+				opacity: 0.9;
+			}
+
+			#{$this}__details {
+				border-color: $primary-900;
+				background-color: $primary-900;
+				&__title,
+				&__desc {
+					color: $bright-color;
+				}
+			}
+		}
+
+		.InputKeyboard .ChapterModeList &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+		.InputController .ChapterModeList &:focus:not(:disabled):not(:parentdisabled) {
+			background-color: gradient(
+				linear,
+				0% 0%,
+				100% 0%,
+				from($button-background-hover-color),
+				to(rgba(0, 0, 0, 0))
+			);
+		}
+
+		&:selected {
 			border-color: $primary-color;
 			background-color: $button-background-hover;
 
@@ -351,23 +416,8 @@
 					color: $bright-color;
 				}
 			}
-		}
 
-		.InputKeyboard .ChapterModeList &:hover:not(:disabled),
-		.InputController .ChapterModeList &:focus:not(:disabled) {
-			background-color: gradient(
-				linear,
-				0% 0%,
-				100% 0%,
-				from($button-background-hover-color),
-				to(rgba(0, 0, 0, 0))
-			);
-		}
-
-		&:selected {
 			#{$this}__details {
-				wash-color: $base-950;
-
 				&__title,
 				&__desc {
 					text-shadow: none;

@@ -159,20 +159,5 @@
 				</Button>
 			</Panel>
 		</Panel>
-		<Button
-			id="ExpandBtn"
-			class="campaign-settings__expand-btn"
-			onactivate="CampaignSettingsTab.toggleSettingButtons()"
-			onmouseover="UiToolkitAPI.ShowTextTooltip('ExpandBtn', $.Localize('#MainMenu_Campaigns_Setup_AdvExpand'));"
-			onmouseout="UiToolkitAPI.HideTextTooltip();"
-		>
-			<Image
-				class="campaign-settings__expand-btn__icon"
-				src="file://{images}/settings.svg"
-				scaling="stretch-to-fit-preserve-aspect"
-				textureheight="64"
-				texturewidth="64"
-			/>
-		</Button>
 	</Panel>
 </root>
