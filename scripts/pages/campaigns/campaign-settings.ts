@@ -15,8 +15,6 @@ class CampaignSettingsTab {
 	static campaign = CampaignAPI.GetActiveCampaign()!;
 	static chapter = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] as VirtualChapter;
 
-	static advancedOpened = false;
-
 	static openSettingsPage: Panel | undefined = undefined;
 
 	static init() {
@@ -113,51 +111,35 @@ class CampaignSettingsTab {
 
 			return;
 		}
-		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-			$.Localize('#Action_NewGame_Title'),
-			$.Localize('#Action_NewGame_CampaignSetup_Description'),
-			'warning-popup',
-			$.Localize('#UI_Yes'),
-			() => {
-				this.applySettings();
-				$.DispatchEvent('MainMenuCloseAllPages');
-				GameInterfaceAPI.ConsoleCommand('disconnect');
-				$.DispatchEvent('LoadingScreenClearLastMap');
 
-				$.Schedule(0.1, () => {
-					const desiredMap = CampaignShared.getMap();
-					const mapIdx = desiredMap.index > 0 ? desiredMap.index : 0;
+		this.applySettings();
+		$.DispatchEvent('MainMenuCloseAllPages');
+		GameInterfaceAPI.ConsoleCommand('disconnect');
+		$.DispatchEvent('LoadingScreenClearLastMap');
 
-					let campaignId: string;
-					let chapterId: string;
-					if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
-						campaignId = this.chapter.id;
-						chapterId = 'auto';
-					}
-					else {
-						campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
-						chapterId = this.chapter.id;
-					}
+		$.Schedule(0.01, () => {
+			const desiredMap = CampaignShared.getMap();
+			const mapIdx = desiredMap.index > 0 ? desiredMap.index : 0;
 
-					CampaignAPI.StartCampaign(
-						campaignId,
-						chapterId,
-						mapIdx
-					);
+			let campaignId: string;
+			let chapterId: string;
+			if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
+				campaignId = this.chapter.id;
+				chapterId = 'auto';
+			}
+			else {
+				campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
+				chapterId = this.chapter.id;
+			}
 
-					this.clear();
-				});
-			},
-			$.Localize('#UI_Cancel'),
-			() => {},
-			'blur'
-		);
-	}
+			CampaignAPI.StartCampaign(
+				campaignId,
+				chapterId,
+				mapIdx
+			);
 
-	static toggleSettingButtons() {
-		this.advancedOpened = !this.advancedOpened;
-
-		this.settingsPage.visible = this.advancedOpened;
+			this.clear();
+		});
 	}
 
 	static openSettingsSubpage(tab: string, invoker: Button, locH: string, locS: string, xml?: string) {
