@@ -136,6 +136,9 @@ $pane-move-time: 0.1s;
 	&__menu {
 		width: 100%;
 		height: 100%;
+		max-width: 1920px;
+		max-height: 1080px;
+		align: center center;
 
 		&__t-prop {
 			transition:
