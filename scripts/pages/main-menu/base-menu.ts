@@ -136,7 +136,12 @@ class BaseMenu {
 	static bgMapLoad: uuid | undefined = undefined;
 
 	static mapSelection = 0;
-	static maps = ['p2ce_background_laser_intro', 'p2ce_background_gentle_hum'];
+	static maps = [
+		'p2ce_background_chmb18_ovg',
+		'p2ce_background_laser_intro',
+		'p2ce_background_gentle_hum',
+		'p2ce_background_mikatastrophe-dark'
+	];
 	static music;
 
 	static onLoad() {
