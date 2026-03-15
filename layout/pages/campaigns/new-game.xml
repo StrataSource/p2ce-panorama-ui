@@ -27,7 +27,7 @@
 				</RadioButton>
 				<Panel id="ChapterPlayPanel" class="chapters__entry__play-btns">
 					<Button id="PlayBtn" class="button fill-width mr-1">
-						<Label class="button__text" text="[HC] Play" />
+						<Label class="button__text" text="#MainMenu_Navigation_Play" />
 					</Button>
 					<Button id="CustomizeBtn" class="button">
 						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
@@ -58,10 +58,10 @@
 					</Panel>
 				</Panel>
 				<Panel class="full-width flow-right mt-1">
-					<Button onactivate="CampaignChapters.startChapter()" class="button full-height fill-width mr-1">
-						<Label class="button__text" text="[HC] Play" />
+					<Button id="ListPlayBtn" onactivate="CampaignChapters.startChapter()" class="button full-height fill-width mr-1">
+						<Label class="button__text" text="#MainMenu_Navigation_Play" />
 					</Button>
-					<Button onactivate="CampaignChapters.customizeChapter()" class="button">
+					<Button id="ListCustomizeBtn" onactivate="CampaignChapters.customizeChapter()" class="button">
 						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
 					</Button>
 				</Panel>
@@ -69,7 +69,7 @@
 			<Panel id="ChaptersNav" class="chapters__nav" tabindex="auto" selectionpos="auto">
 				<Panel id="NavControls" class="chapters__nav__controls" tabindex="auto" selectionpos="auto">
 					<Button id="ChaptersBack" class="button" onactivate="CampaignChapters.backPage()" tabindex="auto" selectionpos="auto">
-						<Label class="button__text" text="&lt; Back" />
+						<Label class="button__text" text="#MainMenu_ChapterNav_Back" />
 					</Button>
 					<Label id="PageCounter" class="chapters__nav__label" text="??? / ???" />
 					<Button
@@ -79,7 +79,7 @@
 						tabindex="auto"
 						selectionpos="auto"
 					>
-						<Label class="button__text" text="Next &gt;" />
+						<Label class="button__text" text="#MainMenu_ChapterNav_Next" />
 					</Button>
 				</Panel>
 				<Panel id="ChaptersPips" class="chapters__nav__pips" tabindex="auto" selectionpos="auto">
