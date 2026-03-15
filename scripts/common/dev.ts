@@ -114,9 +114,9 @@ function constructMenuButton(btn: MenuButton) {
 }
 
 function getCampaignAssetPath(pair: CampaignPair) {
-	const addonInfo = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
-	if (addonInfo) {
-		return `file://${WorkshopAPI.GetAddonNamedPath(pair.bucket.addon_id)}/.assets/`;
+	const path = WorkshopAPI.GetAddonNamedPath(pair.bucket.addon_id);
+	if (path.length > 0) {
+		return `file://${path}/.assets/`;
 	} else {
 		return 'file://';
 	}
