@@ -35,7 +35,7 @@ class SaveEntry {
 				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
 					$.DispatchEvent('MainMenuCloseAllPages');
 					$.DispatchEvent('LoadingScreenClearLastMap');
-					$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.save.fileName}`));
+					$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load "${this.save.fileName}"`));
 				} else {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 						$.Localize('#Action_LoadGame_Confirm'),
@@ -45,7 +45,7 @@ class SaveEntry {
 						() => {
 							$.DispatchEvent('MainMenuCloseAllPages');
 							$.DispatchEvent('LoadingScreenClearLastMap');
-							$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.save.fileName}`));
+							$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load "${this.save.fileName}"`));
 						},
 						$.Localize('#UI_Cancel'),
 						() => {},

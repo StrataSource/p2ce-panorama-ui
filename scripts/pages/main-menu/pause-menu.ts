@@ -30,7 +30,7 @@ class PauseMenu {
 					() => {
 						$.DispatchEvent('MainMenuCloseAllPages');
 						$.DispatchEvent('LoadingScreenClearLastMap');
-						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load ${this.latestSave.fileName}`));
+						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load "${this.latestSave.fileName}"`));
 					},
 					$.Localize('#UI_Cancel'),
 					() => {},
@@ -151,7 +151,7 @@ class PauseMenu {
 
 		let c = CampaignAPI.GetActiveCampaign()!;
 
-		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`);
+		const meta = CampaignAPI.GetCampaignMeta(null);
 		const logo = meta.get(CampaignMeta.FULL_LOGO);
 		if (logo) {
 			$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);

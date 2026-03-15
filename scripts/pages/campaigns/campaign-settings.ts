@@ -240,38 +240,18 @@ class CampaignSettingsTab {
 				if (setting.panelType === 'DropDown') {
 					$.Msg(`Execute ${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`);
 					GameInterfaceAPI.ConsoleCommand(
-						`${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`
+						`${setting.command} "${setting.dropDownValues![Number(setting.currentValue)].value}"`
 					);
 				} else if (setting.panelType === 'ToggleButton') {
 					const actualValueToApply = Number(setting.currentValue);
 					$.Msg(`Execute ${setting.command} ${actualValueToApply}`);
-					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${actualValueToApply}`);
+					GameInterfaceAPI.ConsoleCommand(`${setting.command} "${actualValueToApply}"`);
 				} else {
 					$.Msg(`Execute ${setting.command} ${setting.currentValue}`);
-					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.currentValue}`);
+					GameInterfaceAPI.ConsoleCommand(`${setting.command} "${setting.currentValue}"`);
 				}
 			}
 		}
-
-		//for (let i = 0; i < subpages.length; ++i) {
-		//	const subpage = subpages[i];
-		//	const cat = subpage.GetAttributeString('settings.category', 'none');
-		//	// skip these ones, they're not helpful
-		//	if (cat === 'none' || cat === 'Presets' || cat === 'MapSelect') continue;
-		//	// fetch page settings
-		//	const settings = CampaignShared.FetchPageSettings(subpage);
-		//	// iterate through each one and determine if they've changed
-		//	// if they have, display that
-		//	for (let j = 0; j < settings.length; ++j) {
-		//		const entry = settings[j];
-		//		if (entry.defaultVal === entry.actual) {
-		//			// skip values that are exactly the same
-		//			continue;
-		//		}
-		//		$.Msg(`Execute ${entry.command} ${entry.actual}`);
-		//		GameInterfaceAPI.ConsoleCommand(`${entry.command} ${entry.actual}`);
-		//	}
-		//}
 	}
 
 	static onCampaignSettingHovered(helpText) {
