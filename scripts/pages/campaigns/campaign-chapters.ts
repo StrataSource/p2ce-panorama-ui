@@ -339,7 +339,7 @@ class CampaignChapters {
 
 		if (this.displayMode === ChapterDisplayMode.SUPER && this.chapterEntries.length > 0) {
 			const entry = this.chapterEntries[0];
-			entry.showPlayPanel();
+			$.DispatchEvent('Activated', entry.button!, PanelEventSource.PROGRAM);
 		}
 
 		for (const entry of this.chapterEntries) {
@@ -350,7 +350,7 @@ class CampaignChapters {
 	}
 
 	static startChapter() {
-		$.DispatchEvent('MainMenuSwitchFade', false, false);
+		$.DispatchEvent('MainMenuSwitchFade', true, true);
 
 		let campaignId: string;
 		let chapterId: string;
@@ -362,7 +362,8 @@ class CampaignChapters {
 			chapterId = this.selectedChapter!.id;
 		}
 
-		$.Schedule(0.25, () => {
+		$.Schedule(0.1, () => {
+			$.DispatchEvent('LoadingScreenClearLastMap');
 			CampaignAPI.StartCampaign(campaignId, chapterId, 0);
 		});
 	}

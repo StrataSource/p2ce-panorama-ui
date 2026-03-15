@@ -887,6 +887,10 @@
 		"MainMenu_SaveRestore_Delete"						"Delete Saved Game"
 		"MainMenu_SaveRestore_Rename"						"Rename Saved Game"
 		
+		// Chapter Navigation
+		"MainMenu_ChapterNav_Back"							"< Back"
+		"MainMenu_ChapterNav_Next"							"Next >"
+
 		// SaveCreatePrompt
 		"Action_NewSave"									"Save Game"
 		"Action_NewSave_Confirm"							"Confirm Save"

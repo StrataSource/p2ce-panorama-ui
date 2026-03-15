@@ -360,6 +360,10 @@
 			}
 		}
 
+		.ChapterModeSuper &__details {
+			padding: 15px 20px;
+		}
+
 		&:disabled,
 		&:parentdisabled {
 			opacity: 0.25;
@@ -400,6 +404,24 @@
 			);
 		}
 
+		.InputKeyboard .ChapterModeSuper &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+		.InputController .ChapterModeSuper &:focus:not(:disabled):not(:parentdisabled) {
+			background-color: $button-background;
+			border-color: $base-700;
+
+			#{$this}__cover {
+				opacity: 1;
+			}
+
+			#{$this}__details {
+				border-color: $base-700;
+				background-color: $button-background;
+				&__title {
+					color: $base-200;
+				}
+			}
+		}
+
 		&:selected {
 			border-color: $primary-color;
 			background-color: $button-background-hover;
@@ -424,5 +446,39 @@
 				}
 			}
 		}
+
+		.ChapterModeSuper &:selected {
+			background-color: $button-background;
+			border-color: $base-700;
+
+			#{$this}__cover {
+				opacity: 1;
+			}
+
+			#{$this}__details {
+				border-color: $base-700;
+				background-color: $button-background;
+				&__title {
+					color: $base-200;
+				}
+			}
+		}
 	}
+}
+
+.ChapterModeSuper #PlayBtn,
+.ChapterModeSuper #CustomizeBtn,
+.ChapterModeList #ListPlayBtn,
+.ChapterModeList #ListCustomizeBtn {
+	& > Label {
+		font-size: 20px;
+		transform: translateY(-2px);
+	}
+
+	height: 48px;
+}
+
+.ChapterModeSuper #CustomizeBtn,
+.ChapterModeList #ListCustomizeBtn {
+	width: 48px;
 }
