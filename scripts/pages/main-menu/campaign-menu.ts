@@ -23,8 +23,7 @@ class CampaignMenu {
 				CampaignAPI.ContinueCampaign(this.latestSave.mapGroup);
 			},
 			hovered: () => {
-				if (this.continueBtnEnabled && this.continueBox.IsValid())
-					this.continueBox.visible = true;
+				if (this.continueBtnEnabled && this.continueBox.IsValid()) this.continueBox.visible = true;
 			},
 			unhovered: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
@@ -203,14 +202,10 @@ class CampaignMenu {
 		this.continueBtnEnabled = false;
 		let continueBtnText = $.Localize('#MainMenu_SaveRestore_NoSaves');
 
-		$.DispatchEvent(
-			'MainMenuSetButtonProps',
-			this.continueBtn,
-			{
-				taglineText: continueBtnText,
-				enabled: this.continueBtnEnabled
-			}
-		);
+		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+			taglineText: continueBtnText,
+			enabled: this.continueBtnEnabled
+		});
 
 		if (saves.length === 0) {
 			$.Warning('CAMPAIGN MENU: No saves');
@@ -253,14 +248,10 @@ class CampaignMenu {
 
 		this.continueBtnEnabled = true;
 
-		$.DispatchEvent(
-			'MainMenuSetButtonProps',
-			this.continueBtn,
-			{
-				taglineText: continueBtnText,
-				enabled: this.continueBtnEnabled
-			}
-		);
+		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+			taglineText: continueBtnText,
+			enabled: this.continueBtnEnabled
+		});
 	}
 
 	static setCampaignBackground(skipBgMapLoad: boolean, doFallbackImage: boolean) {

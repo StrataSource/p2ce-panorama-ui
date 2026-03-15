@@ -38,8 +38,7 @@ class PauseMenu {
 				);
 			},
 			hovered: () => {
-				if (this.continueBtnEnabled && this.continueBox.IsValid())
-					this.continueBox.visible = true;
+				if (this.continueBtnEnabled && this.continueBox.IsValid()) this.continueBox.visible = true;
 			},
 			unhovered: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
@@ -135,14 +134,10 @@ class PauseMenu {
 			this.continueBtnEnabled = false;
 			const continueBtnText = $.Localize('#MainMenu_SaveRestore_NoSaves');
 
-			$.DispatchEvent(
-				'MainMenuSetButtonProps',
-				this.continueBtn,
-				{
-					taglineText: continueBtnText,
-					enabled: this.continueBtnEnabled
-				}
-			);
+			$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+				taglineText: continueBtnText,
+				enabled: this.continueBtnEnabled
+			});
 
 			$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
@@ -181,14 +176,10 @@ class PauseMenu {
 		this.continueBtnEnabled = false;
 		let continueBtnText = $.Localize('#MainMenu_SaveRestore_NoSaves');
 
-		$.DispatchEvent(
-			'MainMenuSetButtonProps',
-			this.continueBtn,
-			{
-				taglineText: continueBtnText,
-				enabled: this.continueBtnEnabled
-			}
-		);
+		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+			taglineText: continueBtnText,
+			enabled: this.continueBtnEnabled
+		});
 
 		if (saves.length === 0) {
 			$.Warning('PAUSE MENU: No saves');
@@ -228,13 +219,9 @@ class PauseMenu {
 
 		this.continueBtnEnabled = true;
 
-		$.DispatchEvent(
-			'MainMenuSetButtonProps',
-			this.continueBtn,
-			{
-				taglineText: continueBtnText,
-				enabled: this.continueBtnEnabled
-			}
-		);
+		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+			taglineText: continueBtnText,
+			enabled: this.continueBtnEnabled
+		});
 	}
 }
