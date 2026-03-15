@@ -50,20 +50,7 @@ class CampaignMenu {
 			},
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
-			additionalClasses: 'KeyboardOnly'
-		},
-		{
-			id: 'SettingsControllerBtn',
-			headline: '#MainMenu_Navigation_Options',
-			tagline: '[DEV] CONTROLLER-SPECIALIZED LAYOUT',
-			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings-controller', undefined);
-			},
-			focused: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
-			additionalClasses: 'ControllerOnly'
+			}
 		},
 		{
 			id: 'ExitCampaignBtn',
