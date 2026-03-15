@@ -69,34 +69,31 @@ class MenuManager {
 				this.updateFocus();
 			});
 
-			$.RegisterForUnhandledEvent(
-				'MainMenuSetButtonProps',
-				(btn: string, props: MenuButtonProps) => {
-					if (btn.length === 0) return;
+			$.RegisterForUnhandledEvent('MainMenuSetButtonProps', (btn: string, props: MenuButtonProps) => {
+				if (btn.length === 0) return;
 
-					const btnPanel = this.menuNav.FindChild<Button>(btn);
+				const btnPanel = this.menuNav.FindChild<Button>(btn);
 
-					if (!btnPanel) {
-						$.Warning(`Can't find ${btn}`);
-						return;
-					}
+				if (!btnPanel) {
+					$.Warning(`Can't find ${btn}`);
+					return;
+				}
 
-					if (props.taglineText) {
-						const taglinePanel = btnPanel.FindChildTraverse<Label>(`${btn}_Tagline`);
-						if (taglinePanel) {
-							taglinePanel.text = props.taglineText;
-						}
-					}
-
-					if (props.enabled !== undefined) {
-						btnPanel.enabled = props.enabled;
-					}
-
-					if (props.visible !== undefined) {
-						btnPanel.visible = props.visible;
+				if (props.taglineText) {
+					const taglinePanel = btnPanel.FindChildTraverse<Label>(`${btn}_Tagline`);
+					if (taglinePanel) {
+						taglinePanel.text = props.taglineText;
 					}
 				}
-			);
+
+				if (props.enabled !== undefined) {
+					btnPanel.enabled = props.enabled;
+				}
+
+				if (props.visible !== undefined) {
+					btnPanel.visible = props.visible;
+				}
+			});
 
 			$.RegisterForUnhandledEvent('MainMenuAddBgPanel', (panel: Panel) => {
 				panel.SetParent(this.menuBackground);

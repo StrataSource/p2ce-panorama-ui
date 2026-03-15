@@ -214,14 +214,10 @@ class BaseMenu {
 		this.continueBtnVisible = false;
 		this.continueBox.visible = false;
 
-		$.DispatchEvent(
-			'MainMenuSetButtonProps',
-			this.continueBtn,
-			{
-				enabled: this.continueBtnEnabled,
-				visible: this.continueBtnVisible
-			}
-		);
+		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+			enabled: this.continueBtnEnabled,
+			visible: this.continueBtnVisible
+		});
 
 		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
@@ -280,15 +276,11 @@ class BaseMenu {
 		this.continueBtnEnabled = true;
 		this.continueBtnVisible = true;
 
-		$.DispatchEvent(
-			'MainMenuSetButtonProps',
-			this.continueBtn,
-			{
-				taglineText: continueText,
-				enabled: this.continueBtnEnabled,
-				visible: this.continueBtnVisible
-			}
-		);
+		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+			taglineText: continueText,
+			enabled: this.continueBtnEnabled,
+			visible: this.continueBtnVisible
+		});
 
 		this.savCampaign = savCampaign;
 		this.savChapter = savChapter;

@@ -80,4 +80,4 @@ type MenuButtonProps = {
 	taglineText?: string;
 	enabled?: boolean;
 	visible?: boolean;
-}
+};
