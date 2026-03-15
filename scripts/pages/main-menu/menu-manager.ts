@@ -154,9 +154,7 @@ class MenuManager {
 				}
 			});
 
-			$.RegisterEventHandler('ImageFailedLoad', this.logo, () => {
-				this.logo.SetImage(getRandomFallbackImage());
-			});
+			installImageFallbackHandler(this.logo);
 
 			const registerCampaignSwitch = () => {
 				$.RegisterForUnhandledEvent(

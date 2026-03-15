@@ -59,9 +59,7 @@ class CampaignEntry {
 			else desc.visible = false;
 		}
 		if (cover) {
-			$.RegisterEventHandler('ImageFailedLoad', cover, () => {
-				cover.SetImage(getRandomFallbackImage());
-			});
+			installImageFallbackHandler(cover);
 			if (this.coverPath) cover.SetImage(`${basePath}${this.coverPath}`);
 			else cover.SetImage(getRandomFallbackImage());
 		}
@@ -101,9 +99,7 @@ class CampaignSelector {
 	static init() {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 
-		$.RegisterEventHandler('ImageFailedLoad', this.hoverBoxart, () => {
-			this.hoverBoxart.SetImage(getRandomFallbackImage());
-		});
+		installImageFallbackHandler(this.hoverBoxart);
 
 		this.playerMode = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SELECTOR_TYPE] as PlayerMode;
 		this.reloadList();

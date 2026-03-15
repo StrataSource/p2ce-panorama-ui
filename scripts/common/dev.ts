@@ -148,6 +148,12 @@ function getChapterThumbnail(p: CampaignPair, ch: VirtualChapter) {
 	}
 }
 
+function installImageFallbackHandler(imagePanel: Image) {
+	$.RegisterEventHandler('ImageFailedLoad', imagePanel, () => {
+		imagePanel.SetImage(getRandomFallbackImage());
+	});
+}
+
 class VirtualMap implements ChapterMap {
 	name: string;
 	meta: Map<string, string>;

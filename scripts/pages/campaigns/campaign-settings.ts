@@ -31,10 +31,7 @@ class CampaignSettingsTab {
 			$.Localize('#MainMenu_Campaigns_Setup_Tagline')
 		);
 
-		$.RegisterEventHandler('ImageFailedLoad', this.chImage, () => {
-			// defaultsrc attribute is unreliable
-			this.chImage.SetImage('file://{images}/menu/p2ce-generic.png');
-		});
+		installImageFallbackHandler(this.chImage);
 
 		this.show();
 

@@ -28,13 +28,6 @@ class ChapterEntry {
 			return;
 		}
 
-		$.RegisterEventHandler('ImageFailedLoad', this.panel, () => {
-			const c = this.panel.FindChildTraverse<Image>('ChapterCover');
-			// defaultsrc attribute is unreliable
-			$.Warning('CAMPAIGN CHAPTERS: Could not load chapter image');
-			c?.SetImage(getRandomFallbackImage());
-		});
-
 		const chTitleSplit = $.Localize(this.chapter.title).split('\n');
 
 		if (title) {
@@ -53,6 +46,7 @@ class ChapterEntry {
 			}
 		}
 		if (cover) {
+			installImageFallbackHandler(cover);
 			const thumb = getChapterThumbnail(CampaignAPI.GetActiveCampaign()!, this.chapter);
 			cover.SetImage(thumb);
 		}
