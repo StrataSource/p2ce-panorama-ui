@@ -176,8 +176,8 @@ class VirtualChapter implements ChapterInfo {
 }
 
 class VirtualCampaign implements CampaignInfo {
-	id: string; 
-	title: string; 
+	id: string;
+	title: string;
 	chapters: ChapterInfo[];
 
 	meta: Map<string, string>;

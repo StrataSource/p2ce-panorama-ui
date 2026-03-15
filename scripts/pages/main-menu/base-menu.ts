@@ -54,7 +54,7 @@ class BaseMenu {
 				const logoPath = meta.get(CampaignMeta.FULL_LOGO);
 				if (logoPath !== undefined) {
 					$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(this.savCampaign)}${logoPath}`);
-					
+
 					const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
 					$.DispatchEvent('MainMenuSetLogoSize', s);
 				} else if (isBucketSingleWsCampaign(this.savCampaign.bucket)) {

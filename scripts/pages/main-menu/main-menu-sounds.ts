@@ -6,6 +6,8 @@
 // Somebody whack me with a trout already.
 // ==============================================================================================================
 
+'use strict';
+
 $.RegisterForUnhandledEvent('PopulateLoadingScreen', () => playMapLoadMusic());
 $.RegisterForUnhandledEvent('MapLoaded', () => stopMapLoadMusic());
 

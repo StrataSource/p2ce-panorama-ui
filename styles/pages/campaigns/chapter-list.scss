@@ -2,7 +2,7 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
-// .ChapterModeClassic .ChapterModeList .ChapterModeGrid .ChapterModeSuper .ChapterModeSquareGrid 
+// .ChapterModeClassic .ChapterModeList .ChapterModeGrid .ChapterModeSuper .ChapterModeSquareGrid
 
 .ChapterModeClassic #ChaptersBack,
 .ChapterModeList #ChaptersBack,
@@ -315,9 +315,9 @@
 		flow-children: down;
 		background-color: $button-background;
 		border: $menu-pane-border;
-		
+
 		$this: &;
-		
+
 		&__outer {
 			width: 480px;
 			flow-children: down;

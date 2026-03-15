@@ -9,7 +9,14 @@ class SaveEntry {
 	save: GameSave;
 	nameOverride: string | undefined = undefined;
 
-	constructor(index: number, panel: Panel, save: GameSave, nameOverride?: string, campaign?: CampaignPair, chapter?: VirtualChapter) {
+	constructor(
+		index: number,
+		panel: Panel,
+		save: GameSave,
+		nameOverride?: string,
+		campaign?: CampaignPair,
+		chapter?: VirtualChapter
+	) {
 		this.campaign = campaign;
 		this.index = index;
 		this.panel = panel;
@@ -185,7 +192,7 @@ class SaveEntry {
 		});
 
 		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
-		
+
 		if (title) {
 			if (this.nameOverride) {
 				title.text = this.nameOverride;
@@ -329,9 +336,9 @@ class CampaignSaves {
 
 			const realCampaign = CampaignAPI.FindCampaign(s.mapGroup);
 			const savChapter: VirtualChapter | undefined =
-			realCampaign && s.chapter < realCampaign.campaign.chapters.length
-				? realCampaign.campaign.chapters[s.chapter]
-				: undefined;
+				realCampaign && s.chapter < realCampaign.campaign.chapters.length
+					? realCampaign.campaign.chapters[s.chapter]
+					: undefined;
 
 			if (isWsSingle && realCampaign && savChapter) {
 				savChapter.type = CampaignDataType.P2CE_SINGLE_WS_SPECIAL;
@@ -346,9 +353,7 @@ class CampaignSaves {
 					i,
 					p,
 					s,
-					isWsSingle ?
-						(realCampaign ? realCampaign.campaign.title : `MISSING: ${s.mapGroup}`) :
-						undefined,
+					isWsSingle ? (realCampaign ? realCampaign.campaign.title : `MISSING: ${s.mapGroup}`) : undefined,
 					realCampaign ?? undefined,
 					savChapter
 				)
