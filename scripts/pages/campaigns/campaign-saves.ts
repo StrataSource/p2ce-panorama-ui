@@ -261,7 +261,6 @@ class CampaignSaves {
 
 	static saveEntries: SaveEntry[] = [];
 	static createSaveBtn: Button | null = null;
-	static campaign = CampaignAPI.GetActiveCampaign();
 	static saveGroup = '';
 
 	static hideActionsOnAllSaves(excludeIndex: number) {
@@ -304,14 +303,12 @@ class CampaignSaves {
 
 	static populateSaves() {
 		const c = CampaignAPI.GetActiveCampaign();
-		const isWsSingle = CampaignAPI.IsCampaignActive() && (isSingleWsCampaign(c!) || isSpecialSingleWsCampaign(c!));
+		const isWsSingle = c && (isSingleWsCampaign(c!) || isSpecialSingleWsCampaign(c!));
 		if (isWsSingle) {
 			this.saveGroup = SpecialString.AUTO_WS;
+		} else if (c) {
+			this.saveGroup = `${c.bucket.id}/${c.campaign.id}`;
 		} else {
-			this.saveGroup = `${this.campaign!.bucket.id}/${this.campaign!.campaign.id}`;
-		}
-
-		if (!CampaignAPI.IsCampaignActive()) {
 			UiToolkitAPI.ShowGenericPopupOk(
 				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Title'),
 				$.Localize('#MainMenu_Campaigns_NoActiveCampaign_Warning_Desc'),
@@ -334,7 +331,7 @@ class CampaignSaves {
 
 			p.LoadLayoutSnippet('SaveEntrySnippet');
 
-			const realCampaign = CampaignAPI.FindCampaign(s.mapGroup);
+			const realCampaign = isWsSingle ? CampaignAPI.FindCampaign(s.mapGroup) : c;
 			const savChapter: VirtualChapter | undefined =
 				realCampaign && s.chapter < realCampaign.campaign.chapters.length
 					? realCampaign.campaign.chapters[s.chapter]
