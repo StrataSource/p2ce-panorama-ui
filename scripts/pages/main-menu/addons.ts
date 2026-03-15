@@ -220,7 +220,7 @@ class AddonManager {
 			this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
 		if (this.addonTitle) {
-			this.addonTitle.text = $.BBCodeToHTML(info.title);
+			this.addonTitle.text = info.title;
 		}
 
 		if (this.addonDesc) {
