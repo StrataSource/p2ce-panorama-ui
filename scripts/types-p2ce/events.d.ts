@@ -17,8 +17,8 @@ interface GlobalEventNameMap {
 	CampaignSettingHovered: (helpText: string) => void;
 	MainMenuFullBackNav: () => void;
 	MainBackgroundLoaded: () => void;
-	MainMenuAddPreConstructedButton: (panel: GenericPanel) => void;
 	MainMenuAddButton: (btn: MenuButton) => void;
+	MainMenuSetButtonProps: (btn: string, props: MenuButtonProps) => void;
 	MainMenuSetLogo: (logo: string) => void;
 	MainMenuSetLogoSize: (type: string) => void;
 	MainMenuSetLoadingIndicatorVisibility: (visible: boolean) => void;

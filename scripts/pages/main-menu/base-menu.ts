@@ -39,9 +39,10 @@ class BaseMenu {
 			},
 			hovered: () => {
 				if (this.isContinueActive) return;
-				if (!this.continueBtn.enabled) return;
+				if (!this.continueBtnEnabled) return;
 				if (!this.savCampaign) return;
 				if (!this.savChapter) return;
+				if (!this.continueBox.IsValid()) return;
 
 				this.isContinueActive = true;
 
@@ -70,6 +71,7 @@ class BaseMenu {
 			unhovered: () => {
 				this.hideContinueDetails();
 			},
+			additionalClasses: 'mainmenu__nav__btn__no-gradient',
 			focusIsHover: true
 		},
 		{
@@ -105,10 +107,7 @@ class BaseMenu {
 					'warning-popup',
 					$.Localize('#Action_Quit'),
 					() => {
-						this.reparent();
-						$.Schedule(0.01, () => {
-							GameInterfaceAPI.ConsoleCommand('quit');
-						});
+						GameInterfaceAPI.ConsoleCommand('quit');
 					},
 					$.Localize('#Action_Return'),
 					() => {},
@@ -126,9 +125,10 @@ class BaseMenu {
 	static savChapter: ChapterInfo | undefined = undefined;
 	static isContinueActive: boolean = false;
 
-	static continueBtn: Button;
+	static continueBtnEnabled: boolean = false;
+	static continueBtnVisible: boolean = false;
+	static continueBtn: string = 'CampaignContinueBtn';
 	static continueLogo: Image;
-	static continueText: Label;
 	static continueBox = $<Panel>('#ContinueBox')!;
 	static continueBoxText = $<Label>('#ContinueSaveTagline')!;
 	static continueImg = $<Image>('#ContinueSaveThumb')!;
@@ -146,24 +146,6 @@ class BaseMenu {
 
 	static onLoad() {
 		for (const btn of this.buttons) {
-			if (btn.id === 'CampaignContinueBtn') {
-				const b = constructMenuButton(btn);
-				this.continueBtn = b;
-				this.continueBtn.AddClass('mainmenu__nav__btn__no-gradient');
-
-				const text = b.FindChildTraverse('CampaignContinueBtn_Tagline');
-
-				if (text) {
-					this.continueText = text as Label;
-				} else {
-					throw new Error('Cannot find tagline text for resume button!');
-				}
-
-				$.DispatchEvent('MainMenuAddPreConstructedButton', b);
-
-				continue;
-			}
-
 			$.DispatchEvent('MainMenuAddButton', btn);
 		}
 
@@ -228,9 +210,18 @@ class BaseMenu {
 	}
 
 	static setContinueDetails() {
-		this.continueBtn.enabled = false;
-		this.continueBtn.visible = false;
+		this.continueBtnEnabled = false;
+		this.continueBtnVisible = false;
 		this.continueBox.visible = false;
+
+		$.DispatchEvent(
+			'MainMenuSetButtonProps',
+			this.continueBtn,
+			{
+				enabled: this.continueBtnEnabled,
+				visible: this.continueBtnVisible
+			}
+		);
 
 		const saves = GameSavesAPI.GetGameSaves().sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
@@ -279,15 +270,25 @@ class BaseMenu {
 		}
 		this.continueLogo.SetImage(`${getCampaignAssetPath(savCampaign)}${meta.get(CampaignMeta.SQUARE_LOGO)}`);
 
-		this.continueText.text = `${$.Localize(savCampaign.campaign.title)}`;
+		const continueText = $.Localize(savCampaign.campaign.title);
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		const chapterName = $.Localize(savChapter.title);
 
 		this.continueBoxText.text = `${chapterName.replace('\n', ': ')}\n${convertTime(date, false)}`;
 
-		this.continueBtn.enabled = true;
-		this.continueBtn.visible = true;
+		this.continueBtnEnabled = true;
+		this.continueBtnVisible = true;
+
+		$.DispatchEvent(
+			'MainMenuSetButtonProps',
+			this.continueBtn,
+			{
+				taglineText: continueText,
+				enabled: this.continueBtnEnabled,
+				visible: this.continueBtnVisible
+			}
+		);
 
 		this.savCampaign = savCampaign;
 		this.savChapter = savChapter;
@@ -408,10 +409,5 @@ class BaseMenu {
 		this.continueBox.visible = false;
 
 		this.continueLogo.RemoveClass('mainmenu__square-logo__anim');
-	}
-
-	// prevents crash by bringing back the panels that were placed outside of this layout file
-	static reparent() {
-		this.continueBtn.SetParent($.GetContextPanel());
 	}
 }

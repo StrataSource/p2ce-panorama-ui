@@ -75,3 +75,9 @@ type MenuButton = {
 	focusIsHover?: boolean;
 	additionalClasses?: string;
 };
+
+type MenuButtonProps = {
+	taglineText?: string;
+	enabled?: boolean;
+	visible?: boolean;
+}

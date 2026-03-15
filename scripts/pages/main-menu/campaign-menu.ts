@@ -23,11 +23,13 @@ class CampaignMenu {
 				CampaignAPI.ContinueCampaign(this.latestSave.mapGroup);
 			},
 			hovered: () => {
-				if (this.continueBtn.enabled) this.continueBox.visible = true;
+				if (this.continueBtnEnabled && this.continueBox.IsValid())
+					this.continueBox.visible = true;
 			},
 			unhovered: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			},
+			additionalClasses: 'mainmenu__nav__btn__no-gradient',
 			focusIsHover: true
 		},
 		{
@@ -78,10 +80,7 @@ class CampaignMenu {
 					'warning-popup',
 					$.Localize('#Action_Quit'),
 					() => {
-						this.reparent();
-						$.Schedule(0.01, () => {
-							GameInterfaceAPI.ConsoleCommand('quit');
-						});
+						GameInterfaceAPI.ConsoleCommand('quit');
 					},
 					$.Localize('#Action_Return'),
 					() => {},
@@ -94,12 +93,13 @@ class CampaignMenu {
 		}
 	];
 
-	static continueBtnText = $<Label>('#ContinueSaveTagline')!;
 	static continueBox = $<Panel>('#ContinueBox')!;
 	static continueBoxText = $<Label>('#ContinueSaveTagline')!;
 	static continueImg = $<Image>('#ContinueSaveThumb')!;
-	static continueBtn: Button;
-	static loadGameBtn: Button;
+	static continueBtnEnabled: boolean = false;
+	static continueBtn: string = 'CampaignContinueBtn';
+	static loadGameBtnEnabled: boolean = false;
+	static loadGameBtn: string = 'LoadGameBtn';
 	static latestSave: GameSave;
 
 	static bgMapLoad: uuid | undefined = undefined;
@@ -140,22 +140,6 @@ class CampaignMenu {
 				if (btn.id === 'QuitBtn') {
 					continue;
 				}
-			}
-
-			if (btn.id === 'CampaignContinueBtn') {
-				this.continueBtn = constructMenuButton(btn);
-				this.continueBtn.AddClass('mainmenu__nav__btn__no-gradient');
-
-				const t = this.continueBtn.FindChildTraverse('CampaignContinueBtn_Tagline');
-				if (t) this.continueBtnText = t as Label;
-				else throw new Error('Cannot find Continue Button tagline!');
-
-				$.DispatchEvent('MainMenuAddPreConstructedButton', this.continueBtn);
-				continue;
-			} else if (btn.id === 'LoadGameBtn') {
-				this.loadGameBtn = constructMenuButton(btn);
-				$.DispatchEvent('MainMenuAddPreConstructedButton', this.loadGameBtn);
-				continue;
 			}
 
 			$.DispatchEvent('MainMenuAddButton', btn);
@@ -216,12 +200,21 @@ class CampaignMenu {
 					: a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
 			});
 
-		this.continueBtn.enabled = false;
-		this.continueBtnText.text = $.Localize('#MainMenu_SaveRestore_NoSaves');
+		this.continueBtnEnabled = false;
+		let continueBtnText = $.Localize('#MainMenu_SaveRestore_NoSaves');
+
+		$.DispatchEvent(
+			'MainMenuSetButtonProps',
+			this.continueBtn,
+			{
+				taglineText: continueBtnText,
+				enabled: this.continueBtnEnabled
+			}
+		);
 
 		if (saves.length === 0) {
 			$.Warning('CAMPAIGN MENU: No saves');
-			this.loadGameBtn.enabled = false;
+			this.loadGameBtnEnabled = false;
 			return;
 		}
 
@@ -256,9 +249,18 @@ class CampaignMenu {
 		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueBoxText.text = convertTime(date);
 		const chapterName = isWsSingle ? c.campaign.title : $.Localize(savChapter.title);
-		this.continueBtnText.text = chapterName.replace('\n', ': ');
+		continueBtnText = chapterName.replace('\n', ': ');
 
-		this.continueBtn.enabled = true;
+		this.continueBtnEnabled = true;
+
+		$.DispatchEvent(
+			'MainMenuSetButtonProps',
+			this.continueBtn,
+			{
+				taglineText: continueBtnText,
+				enabled: this.continueBtnEnabled
+			}
+		);
 	}
 
 	static setCampaignBackground(skipBgMapLoad: boolean, doFallbackImage: boolean) {
@@ -340,10 +342,5 @@ class CampaignMenu {
 
 	static onMapUnloaded() {
 		this.stopMusic();
-	}
-
-	static reparent() {
-		this.continueBtn.SetParent($.GetContextPanel());
-		this.loadGameBtn.SetParent($.GetContextPanel());
 	}
 }
