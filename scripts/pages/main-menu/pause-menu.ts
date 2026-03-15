@@ -67,20 +67,6 @@ class PauseMenu {
 			hovered: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			},
-			additionalClasses: 'KeyboardOnly',
-			focusIsHover: true
-		},
-		{
-			id: 'SettingsControllerBtn',
-			headline: '#MainMenu_Navigation_Options',
-			tagline: '[DEV] CONTROLLER-SPECIALIZED LAYOUT',
-			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings-controller', undefined);
-			},
-			hovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
-			additionalClasses: 'ControllerOnly',
 			focusIsHover: true
 		},
 		{

@@ -92,20 +92,7 @@ class BaseMenu {
 			},
 			focused: () => {
 				this.hideContinueDetails();
-			},
-			additionalClasses: 'KeyboardOnly'
-		},
-		{
-			id: 'SettingsControllerBtn',
-			headline: '#MainMenu_Navigation_Options',
-			tagline: '[DEV] CONTROLLER-SPECIALIZED LAYOUT',
-			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings-controller', undefined);
-			},
-			focused: () => {
-				this.hideContinueDetails();
-			},
-			additionalClasses: 'ControllerOnly'
+			}
 		},
 		{
 			id: 'QuitBtn',
