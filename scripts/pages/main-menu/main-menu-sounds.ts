@@ -13,7 +13,7 @@ $.RegisterForUnhandledEvent('MapLoaded', () => stopMapLoadMusic());
 
 function playMapLoadMusic() {
 	$.PlaySoundEvent('UIPanorama.P2CE.MenuFocus');
-	$.PlaySoundEvent('UIPanorama.Music.P2CE.Menu2_LOAD');
+	$.PlaySoundEvent('UIPanorama.Music.P2CE.Menu3_LOAD');
 }
 
 function stopMapLoadMusic() {
