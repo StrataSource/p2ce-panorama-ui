@@ -24,7 +24,7 @@ class CampaignSettingsTab {
 		);
 
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
-		
+
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
 			$.Localize('#MainMenu_Campaigns_Setup_Title'),
@@ -126,17 +126,12 @@ class CampaignSettingsTab {
 			if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
 				campaignId = this.chapter.id;
 				chapterId = 'auto';
-			}
-			else {
+			} else {
 				campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
 				chapterId = this.chapter.id;
 			}
 
-			CampaignAPI.StartCampaign(
-				campaignId,
-				chapterId,
-				mapIdx
-			);
+			CampaignAPI.StartCampaign(campaignId, chapterId, mapIdx);
 
 			this.clear();
 		});

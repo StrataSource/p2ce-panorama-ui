@@ -224,7 +224,9 @@ class CampaignMenu {
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
 			.filter((a) => {
-				return isWsSingle ? a.mapGroup.startsWith(SpecialString.AUTO_WS) : a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
+				return isWsSingle
+					? a.mapGroup.startsWith(SpecialString.AUTO_WS)
+					: a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
 			});
 
 		this.continueBtn.enabled = false;
@@ -249,10 +251,10 @@ class CampaignMenu {
 			}
 		}
 
-		const savChapter: ChapterInfo | undefined = 
-			this.latestSave.chapter < c.campaign.chapters.length ?
-			c.campaign.chapters[this.latestSave.chapter] :
-			undefined;
+		const savChapter: ChapterInfo | undefined =
+			this.latestSave.chapter < c.campaign.chapters.length
+				? c.campaign.chapters[this.latestSave.chapter]
+				: undefined;
 
 		if (!savChapter) {
 			$.Warning('CAMPAIGN MENU: Map could not be found for Campaign');

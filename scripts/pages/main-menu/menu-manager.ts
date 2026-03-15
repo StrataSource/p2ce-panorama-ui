@@ -147,7 +147,7 @@ class MenuManager {
 					case CampaignLogoSizePreset.STANDARD:
 						this.logo.style.height = '130px';
 						break;
-				
+
 					case CampaignLogoSizePreset.LARGE:
 						this.logo.style.height = '240px';
 						break;

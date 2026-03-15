@@ -91,7 +91,7 @@ class LoadingScreenController {
 					panel.visible = false;
 				}
 			};
- 
+
 			let path: string;
 			this.beBlankIfInvalid = isSingleWsCampaign(c);
 			if (this.beBlankIfInvalid) {

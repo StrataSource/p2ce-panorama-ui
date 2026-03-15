@@ -53,14 +53,11 @@ class ChapterEntry {
 			}
 		}
 		if (cover) {
-			const thumb = getChapterThumbnail(
-				CampaignAPI.GetActiveCampaign()!,
-				this.chapter
-			);
+			const thumb = getChapterThumbnail(CampaignAPI.GetActiveCampaign()!, this.chapter);
 			cover.SetImage(thumb);
 		}
 
-		let activationFn = () => { };
+		let activationFn = () => {};
 
 		if (CampaignChapters.displayMode === ChapterDisplayMode.LIST) {
 			activationFn = () => {
@@ -86,7 +83,10 @@ class ChapterEntry {
 					}
 				} else CampaignChapters.chapterListModeCover.SetImage(getRandomFallbackImage());
 			};
-		} else if (CampaignChapters.displayMode === ChapterDisplayMode.GRID || CampaignChapters.displayMode === ChapterDisplayMode.SQUARE_GRID) {
+		} else if (
+			CampaignChapters.displayMode === ChapterDisplayMode.GRID ||
+			CampaignChapters.displayMode === ChapterDisplayMode.SQUARE_GRID
+		) {
 			//activationFn = () => {
 			//	UiToolkitAPI.ShowGenericPopupThreeOptions(
 			//		'[HC] Choose',
@@ -130,7 +130,7 @@ class ChapterEntry {
 				CampaignChapters.selectedChapter = this.chapter!;
 
 				this.showPlayPanel();
-				
+
 				activationFn();
 			});
 		}
@@ -218,7 +218,9 @@ class CampaignChapters {
 		}
 
 		if (isSingleWsCampaign) {
-			const buckets = CampaignAPI.GetAllCampaignBuckets().filter((v: CampaignBucket) => { return isBucketSingleWsCampaign(v) });
+			const buckets = CampaignAPI.GetAllCampaignBuckets().filter((v: CampaignBucket) => {
+				return isBucketSingleWsCampaign(v);
+			});
 
 			this.chapterCache = [];
 
@@ -266,7 +268,7 @@ class CampaignChapters {
 		this.populateChapters();
 
 		if (this.list.GetChildCount() > 0) {
-			const panel = (this.list.Children()[0]);
+			const panel = this.list.Children()[0];
 			const btn = panel.FindChildTraverse<RadioButton>('ChapterBtn')!;
 			btn.SetFocus();
 
@@ -312,7 +314,7 @@ class CampaignChapters {
 
 		const prog = CampaignAPI.GetCampaignUnlockProgress(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`);
 		const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
-		
+
 		this.list.RemoveAndDeleteChildren();
 		this.chapterEntries = [];
 
@@ -320,24 +322,17 @@ class CampaignChapters {
 			let i = 0;
 			this.displayMode === ChapterDisplayMode.CLASSIC
 				? i < this.maxEntryPerPage
-				: i < Math.min(this.maxEntryPerPage, this.chapterCache.length - this.chapterPage * this.maxEntryPerPage);
+				: i <
+					Math.min(this.maxEntryPerPage, this.chapterCache.length - this.chapterPage * this.maxEntryPerPage);
 			++i
 		) {
-			
 			const p = $.CreatePanel('Panel', this.list, 'chapter' + i);
 			p.LoadLayoutSnippet('ChapterEntrySnippet');
 
 			const idx = this.chapterPage * this.maxEntryPerPage + i;
 			const ch = idx < this.chapterCache.length ? this.chapterCache[idx] : undefined;
 
-			this.chapterEntries.push(
-				new ChapterEntry(
-					idx,
-					p,
-					ch,
-					isSingleWsCampaign || prog >= idx
-				)
-			);
+			this.chapterEntries.push(new ChapterEntry(idx, p, ch, isSingleWsCampaign || prog >= idx));
 
 			this.chapterEntries[i].update();
 		}
@@ -349,11 +344,7 @@ class CampaignChapters {
 
 		for (const entry of this.chapterEntries) {
 			if (this.selectedChapter && entry.chapter && this.selectedChapter.id === entry.chapter.id) {
-				$.DispatchEvent(
-					'Activated',
-					entry.button!,
-					PanelEventSource.PROGRAM
-				);
+				$.DispatchEvent('Activated', entry.button!, PanelEventSource.PROGRAM);
 			}
 		}
 	}
@@ -366,28 +357,18 @@ class CampaignChapters {
 		if (this.selectedChapter!.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
 			campaignId = this.selectedChapter!.id;
 			chapterId = 'auto';
-		}
-		else {
+		} else {
 			campaignId = `${CampaignChapters.campaign.bucket.id}/${CampaignChapters.campaign.campaign.id}`;
 			chapterId = this.selectedChapter!.id;
 		}
 
 		$.Schedule(0.25, () => {
-			CampaignAPI.StartCampaign(
-				campaignId,
-				chapterId,
-				0
-			);
+			CampaignAPI.StartCampaign(campaignId, chapterId, 0);
 		});
 	}
 
 	static customizeChapter() {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
-		$.DispatchEvent(
-			'MainMenuOpenNestedPage',
-			'CampaignCustomization',
-			'campaigns/campaign-settings',
-			undefined
-		);
+		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings', undefined);
 	}
 }
