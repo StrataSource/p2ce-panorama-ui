@@ -110,7 +110,7 @@ class CampaignSelector {
 	}
 
 	static createCampaignBtn(bucket: CampaignBucket, campaign: CampaignInfo, campaignIndex: number) {
-		const p = $.CreatePanel('Button', this.campaignList, `Campaign_${campaign.id}`);
+		const p = $.CreatePanel('Button', this.campaignList, `Campaign_${bucket.id}-${campaign.id}`);
 		p.LoadLayoutSnippet('CampaignEntrySnippet');
 		p.AddClass('campaigns__entry__spaced');
 
