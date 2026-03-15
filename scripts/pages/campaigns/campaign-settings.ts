@@ -245,6 +245,10 @@ class CampaignSettingsTab {
 					GameInterfaceAPI.ConsoleCommand(
 						`${setting.command} ${setting.dropDownValues![Number(setting.currentValue)].value}`
 					);
+				} else if (setting.panelType === 'ToggleButton') {
+					const actualValueToApply = Number(setting.currentValue);
+					$.Msg(`Execute ${setting.command} ${actualValueToApply}`);
+					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${actualValueToApply}`);
 				} else {
 					$.Msg(`Execute ${setting.command} ${setting.currentValue}`);
 					GameInterfaceAPI.ConsoleCommand(`${setting.command} ${setting.currentValue}`);

@@ -126,6 +126,22 @@ class CampaignShared {
 					panelType: 'TextEntry',
 					currentValue: undefined
 				},
+				holdRot: {
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_enableholdrotation'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_enableholdrotation_Description'),
+					def: false,
+					command: 'sv_enableholdrotation',
+					panelType: 'ToggleButton',
+					currentValue: undefined
+				},
+				prefCarry: {
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry_Description'),
+					def: true,
+					command: 'sv_enablepreferredcarry',
+					panelType: 'ToggleButton',
+					currentValue: undefined
+				},
 				bhop: {
 					name: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_bhop'),
 					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_mv_bhop_Description'),

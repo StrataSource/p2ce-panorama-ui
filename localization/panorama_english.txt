@@ -1097,7 +1097,11 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Setup_Var_mv_bhop_Description"			"Enables a \"bunny-hopping\" bug that allows players to gain extra momentum by abusing broken movement behavior, as depicted in legacy versions of Source engine games.\n\nDefault: Off"
 		"MainMenu_Campaigns_Setup_Var_mv_duckjump"					"Allow Crouch Jumping"
 		"MainMenu_Campaigns_Setup_Var_mv_duckjump_Description"		"Allows the player to jump while crouched/ducked. This is a requirement for maps making use of specific Half-Life 2 movement behavior.\n\nDefault: Off"
-		
+		"MainMenu_Campaigns_Setup_Var_sv_enableholdrotation"				"Enable Hold Rotation"
+		"MainMenu_Campaigns_Setup_Var_sv_enableholdrotation_Description"	"Allows the player to rotate held physics objects by pressing and holding +ATTACK2.\n\nDefault: Off"
+		"MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry"				"Enable Preferred Carry"
+		"MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry_Description"	"Keep held physics objects at their preferred carry angle.\n\nDefault: On"
+
 		// ServerSettings
 		"MainMenu_Campaigns_Setup_Var_hostname"						"Server Name"
 		"MainMenu_Campaigns_Setup_Var_hostname_Description"			"The searchable name of this server, as shown in the server browser. Not applicable for single-player games."
