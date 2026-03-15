@@ -271,17 +271,6 @@ class CampaignMenu {
 					$.Warning('!!!!! Could not load Campaign background map !!!!!');
 					$.Schedule(0.001, () => {
 						this.setCampaignBackground(false, true);
-						//$.DispatchEvent('MainMenuSwitchReverse', false);
-						//GameInterfaceAPI.ConsoleCommand('disconnect');
-						//$.Schedule(0.1, () => {
-						//	CampaignAPI.SetActiveCampaign(null);
-						//	UiToolkitAPI.ShowGenericPopupOk(
-						//		$.Localize('#MainMenu_Campaigns_BgLoadFailed_Title'),
-						//		$.Localize('#MainMenu_Campaigns_BgLoadFailed_Description'),
-						//		'bad-popup',
-						//		() => {}
-						//	);
-						//});
 					});
 				}
 			);
@@ -293,6 +282,11 @@ class CampaignMenu {
 		const bgMovie = (ch.get(CampaignMeta.BG_MOVIE) as string) ?? '';
 		const bgImage = (ch.get(CampaignMeta.BG_IMG) as string) ?? '';
 		const basePath = getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!);
+		const playMusic = () => {
+			if (bgMusic.length > 0) {
+				this.music = $.PlaySoundEvent(bgMusic);
+			}
+		};
 		if (!doFallbackImage && bgLevel.length > 0) {
 			if (GameInterfaceAPI.GetCurrentMap() === bgLevel) {
 				$.Warning('Background map already active. Do nothing.');
@@ -304,7 +298,6 @@ class CampaignMenu {
 			if (!skipBgMapLoad) {
 				$.Msg(`CAMPAIGN MENU: Attempting to load background map ${bgLevel}`);
 				GameInterfaceAPI.ConsoleCommand('startupmenu');
-				//GameInterfaceAPI.ConsoleCommand(`map_background ${bgLevel}`);
 			} else {
 				$.Msg(
 					'CAMPAIGN MENU: Background map specified and default campaign specified, we will be doing nothing.'
@@ -312,31 +305,23 @@ class CampaignMenu {
 			}
 			if (!this.mapLoadEvent) {
 				this.mapLoadEvent = $.RegisterForUnhandledEvent('MapLoaded', (map: string) => {
-					if (bgMusic.length > 0) {
-						this.music = $.PlaySoundEvent(bgMusic);
-					}
+					playMusic();
 				});
 			}
 		} else if (!doFallbackImage && bgMovie.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuHideBackgroundImage', true);
 			$.DispatchEvent('MainMenuShowBackgroundMovie', `${basePath}${bgMovie}`);
-			if (bgMusic.length > 0) {
-				this.music = $.PlaySoundEvent(bgMusic);
-			}
+			playMusic();
 		} else if (bgImage.length > 0) {
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuShowBackgroundImage', `${basePath}${bgImage}`, true);
-			if (bgMusic.length > 0) {
-				this.music = $.PlaySoundEvent(bgMusic);
-			}
+			playMusic();
 		} else if (doFallbackImage) {
 			$.Warning('CAMPAIGN MENU: No background was specified, and fallback was requested!');
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuShowBackgroundImage', getRandomFallbackImage(), true);
-			if (bgMusic.length > 0) {
-				this.music = $.PlaySoundEvent(bgMusic);
-			}
+			playMusic();
 		} else {
 			$.Warning('CAMPAIGN MENU: No background has been specified! Fix this now!!!');
 			$.Warning(
@@ -344,6 +329,7 @@ class CampaignMenu {
 			);
 			$.DispatchEvent('MainMenuSwitchReverse', false);
 			$.DispatchEvent('MainMenuShowBackgroundImage', getRandomFallbackImage(), true);
+			playMusic();
 		}
 	}
 
