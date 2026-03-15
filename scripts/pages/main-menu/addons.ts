@@ -103,10 +103,6 @@ class AddonManager {
 	static addonDesc = $<Label>('#SelectedAddonDesc')!;
 	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
 	static addonSteam = $<Button>('#SelectedAddonView')!;
-	static addonMapsPanel = $<Panel>('#SelectedAddonMapLauncher')!;
-	static addonMapsDropdown = $<DropDown>('#SelectedAddonMaps')!;
-	static addonMapsLaunch = $<Button>('#SelectedAddonRunMapBtn')!;
-	static addonMapsLaunchText = $<Label>('#SelectedAddonRunMapText')!;
 	static addonsPage = $<Panel>('#AddonsPage')!;
 
 	static applyButton = $<Button>('#ApplyButton');
@@ -119,14 +115,12 @@ class AddonManager {
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
 	static selectedAddon: number = -1;
-	static gameMaps: Set<string> = new Set();
 
 	static init() {
 		this.addonsPage.visible = false;
 
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
 		this.createAddonEntries();
-		this.findMaps();
 
 		$.DispatchEvent('Activated', $<RadioButton>('#ViewAddonsBtn')!, PanelEventSource.MOUSE);
 		$.DispatchEvent(
@@ -213,26 +207,6 @@ class AddonManager {
 		this.addonPanel.AddClass('hide');
 		this.purgeAddonList();
 		this.createAddonEntries();
-		this.findMaps();
-	}
-
-	static findMaps() {
-		const maps = GameInterfaceAPI.GetMaps();
-		this.gameMaps.clear();
-
-		for (const { valid, name } of maps) {
-			if (!valid) continue;
-
-			if (!name.startsWith('maps/') || !name.endsWith('.bsp')) continue;
-
-			// Slide the "maps/" and ".bsp" parts out, keeps subdirs.
-			const mapName = name.slice('maps/'.length, -'.bsp'.length);
-
-			// Don't add puzzlemaker and workshop maps to the list.
-			if (mapName.startsWith('workshop/') || mapName.startsWith('puzzlemaker')) continue;
-
-			this.gameMaps.add(mapName);
-		}
 	}
 
 	static addonSelected(addon: number) {
@@ -246,29 +220,11 @@ class AddonManager {
 			this.addonCover.SetImage(info.thumb.length > 0 ? info.thumb : 'file://{images}/menu/missing-cover.png');
 
 		if (this.addonTitle) {
-			// This will remove trailing 'r's at the end of the line and any 'r' if it's the only one in the line.
-			// This should only remove a single r if there happens to be a sentence that ends in multiple.
-			// Issue many stems from WorkshopAPI.GetAddonMeta not properly dealing with stripping \r's, once that is fixed this can be removed.
-			const cleaned = info.title.replace(/r\s*$/, '');
-			this.addonTitle.text = $.BBCodeToHTML(cleaned);
+			this.addonTitle.text = $.BBCodeToHTML(info.title);
 		}
 
 		if (this.addonDesc) {
-			// This will remove trailing 'r's at the end of the line and any 'r' if it's the only one in the line.
-			// This should only remove a single r if there happens to be a sentence that ends in multiple.
-			// Issue many stems from WorkshopAPI.GetAddonMeta not properly dealing with stripping \r's, once that is fixed this can be removed.
-			const cleaned = info.description
-				.split('\n')
-				.map((line) => {
-					line = line.replace(/r\s*$/, '');
-
-					if (line.trim() === 'r') return '';
-
-					return line;
-				})
-				.join('\n');
-
-			this.addonDesc.text = $.BBCodeToHTML(cleaned);
+			this.addonDesc.text = $.BBCodeToHTML(info.description);
 		}
 
 		if (info.authors.length > 0 && this.addonAuthors) {
@@ -280,68 +236,6 @@ class AddonManager {
 		}
 
 		this.addonSteam.visible = !info.local;
-
-		this.updateSelectedAddonMaps();
-	}
-
-	static updateSelectedAddonMaps() {
-		if (this.selectedAddon === -1) return;
-
-		if (!WorkshopAPI.GetAddonEnabled(this.selectedAddon)) {
-			this.addonMapsPanel.visible = false;
-			return;
-		}
-
-		// Find all the maps that exist in the description. Must end in .bsp, supports subdirs.
-		// eslint-disable-next-line no-useless-escape
-		const matches = this.addonDesc.text.match(/\b[a-zA-Z0-9_\/-]+\.bsp\b/gi);
-
-		if (!matches) {
-			this.addonMapsPanel.visible = false;
-			return;
-		}
-
-		const matchingMaps = new Set<string>();
-
-		for (const word of matches) {
-			const mapName = word.slice(0, -'.bsp'.length).trim();
-
-			if (this.gameMaps.has(mapName)) matchingMaps.add(mapName);
-		}
-
-		this.addonMapsDropdown.RemoveAllOptions();
-
-		const hasMaps = matchingMaps.size > 0;
-
-		for (const map of matchingMaps) {
-			const entry = $.CreatePanel('Label', this.addonMapsDropdown, `AddonMap${map}`, { text: map, value: map });
-			this.addonMapsDropdown.AddOption(entry);
-		}
-
-		this.addonMapsDropdown.SetSelectedIndex(0);
-
-		// don't bother showing the dropdown if there's only one map, save space
-		const multiMaps = matchingMaps.size > 1;
-		this.addonMapsDropdown.visible = multiMaps;
-		this.addonMapsLaunch.SetHasClass('fill-width', !multiMaps);
-		if (multiMaps) {
-			this.addonMapsLaunchText.text = $.Localize('#MainMenu_Addons_LaunchMap_Multi');
-		} else {
-			this.addonMapsLaunchText.text = $.Localize('#MainMenu_Addons_LaunchMap_Single');
-		}
-
-		this.addonSteam.SetHasClass('full-width', hasMaps);
-		this.addonMapsPanel.visible = hasMaps;
-	}
-
-	static launchSelectedAddonMap() {
-		const selected = this.addonMapsDropdown.GetSelected();
-		if (selected === null) return;
-
-		const map = selected.GetAttributeString('value', 'null');
-		if (map === null || map === 'null') return;
-
-		GameInterfaceAPI.ConsoleCommand(`map "${map}"`);
 	}
 
 	/**
@@ -389,9 +283,6 @@ class AddonManager {
 		for (const addon of this.addons) {
 			addon.updateEnabled();
 		}
-
-		this.findMaps();
-		this.updateSelectedAddonMaps();
 	}
 
 	/**
@@ -411,8 +302,6 @@ class AddonManager {
 		this.markDirty(false);
 
 		if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
-
-		this.updateSelectedAddonMaps();
 	}
 
 	/**
