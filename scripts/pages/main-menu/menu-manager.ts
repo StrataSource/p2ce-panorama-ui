@@ -149,15 +149,16 @@ class MenuManager {
 
 			$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
 				if (logo && logo.length > 0) {
-					const date = new Date();
-					const rightDate = new Date('April 1');
-					rightDate.setFullYear(date.getFullYear());
-					if (
-						date.getMonth() === rightDate.getMonth() &&
-						date.getDay() === rightDate.getDay() &&
-						logo === 'file://{images}/logo.svg'
-					) {
-						logo = 'file://{images}/the_objectively_better_logo.png';
+					if (logo === 'file://{images}/logo.svg') {
+						const date = new Date();
+						const rightDate = new Date('April 1');
+						rightDate.setFullYear(date.getFullYear());
+						if (WorkshopAPI.IsWorkshopToolsMode()) {
+							logo = 'file://{images}/logo_sdk.svg';
+						}
+						else if (date.getMonth() === rightDate.getMonth() && date.getDay() === rightDate.getDay()) {
+							logo = 'file://{images}/the_objectively_better_logo.png';
+						}
 					}
 
 					this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
