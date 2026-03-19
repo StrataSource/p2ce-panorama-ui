@@ -342,3 +342,41 @@
 
 	blur: fastgaussian(0, 0, 0);
 }
+
+@keyframes MenuPageBlur {
+	0% {
+		blur: fastanimgaussian(0, 0, 0);
+	}
+
+	100% {
+		blur: fastanimgaussian(3, 3, 4);
+	}
+}
+
+@keyframes MenuPageBlurReverse {
+	0% {
+		blur: fastanimgaussian(3, 3, 4);
+	}
+
+	100% {
+		blur: fastanimgaussian(0, 0, 0);
+	}
+}
+
+.anim-menu-page-blur {
+	animation-name: MenuPageBlur;
+	animation-duration: 0.25s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+
+	blur: fastgaussian(3, 3, 4);
+}
+
+.anim-menu-page-blur-reverse {
+	animation-name: MenuPageBlurReverse;
+	animation-duration: 0.25s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+
+	blur: fastgaussian(0, 0, 0);
+}
