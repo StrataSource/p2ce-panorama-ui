@@ -14,9 +14,16 @@ class CaptionEntry {
 	dummy: Panel;
 	// fade once
 	bMarkedForDeletion: boolean = false;
+	bReadyToPurge: boolean = false;
+	height: number;
+	normalHeight: number;
+	paddingHeight: number;
+	token: string;
 
 	constructor(token: string, caption: Caption, lifetime: number) {
 		this.lifetime = lifetime;
+
+		this.token = token;
 
 		// create the text
 		this.panel = $.CreatePanel('Label', $<Panel>('#CaptionsBox')!, token, {
@@ -37,37 +44,58 @@ class CaptionEntry {
 		// we use the panel text here because it stripped out all the tags
 		// the width would be incorrect if we used the caption text directly since
 		// it would factor those in!
-		const height = this.panel.GetHeightForText(CloseCaptioning.CAPTION_WIDTH, this.panel.text);
+		this.height = this.panel.GetHeightForText(CloseCaptioning.CAPTION_WIDTH, this.panel.text);
 
 		// show the text
 		this.panel.style.opacity = 1;
-		this.panel.style.height = `${height}px`;
+		this.panel.style.height = `${this.height}px`;
 		// 4 comes from text margins
-		this.dummy.style.height = `${height + 4}px`;
+		this.dummy.style.height = `${this.height + 4}px`;
+
+		$.RegisterEventHandler(
+			'PropertyTransitionEnd',
+			this.panel,
+			(s: string, prop: keyof Style) => {
+				if (prop === 'opacity' && this.panel.IsTransparent()) {
+					this.dummy.style.height = '0px';
+					$.RegisterEventHandler(
+						'PropertyTransitionEnd',
+						this.dummy,
+						(s: string, prop: keyof Style) => {
+							if (prop === 'height') {
+								// assume it's 0
+								this.bReadyToPurge = true;
+							}
+						}
+					);
+				}
+			}
+		);
 	}
 
 	FadeOut() {
 		if (!this.panel.IsValid() || this.bMarkedForDeletion) return;
-		// TODO: fade out first THEN shrink the dummy!!!
 		this.panel.style.opacity = 0;
-		this.dummy.style.height = '0px';
 		this.bMarkedForDeletion = true;
 	}
 }
 
 // there's still some TODO stuff but it's pretty much functional i think...
 class CloseCaptioning {
-	static captions: Map<string, CaptionEntry> = new Map<string, CaptionEntry>();
+	static captions: Array<CaptionEntry> = [];
 	static box = $<Panel>('#CaptionsBox')!;
 	static bg = $<Panel>('#CaptionsBg')!;
 	static CAPTION_WIDTH = 1102;
 
 	static {
+		$.RegisterForUnhandledEvent('GameUIStateChanged',  (old: GameUIState, newS: GameUIState) => {
+			this.updateStyle();
+		});
+
 		// cc_emit_raw - allows users to display their own arbitrary text
 		// preprocessing not supported
 		$.RegisterEventHandler('DisplayRawCaptionRequest', $.GetContextPanel(), (text: string, lifetime: number) => {
-			this.captions.set(
-				'RAW_CAPTION',
+			this.captions.push(
 				new CaptionEntry(
 					'RAW_CAPTION',
 					{
@@ -87,18 +115,17 @@ class CloseCaptioning {
 
 		// check for captions that finished and delete them
 		$.RegisterEventHandler('CaptionTick', $.GetContextPanel(), (time: number) => {
-			for (const [key, caption] of this.captions) {
-				if (time >= caption.lifetime) {
-					if (caption.panel.IsTransparent()) {
+			for (const caption of this.captions) {
+				if (time >= caption.lifetime && caption.panel.IsValid() && caption.dummy.IsValid()) {
+					if (caption.bReadyToPurge) {
 						caption.panel.DeleteAsync(0);
 						caption.dummy.DeleteAsync(0);
-						this.captions.delete(key);
-						if (this.captions.size <= 0) {
+						this.captions.shift();
+						if (this.captions.length <= 0) {
 							this.hideBox();
 						}
 					} else {
 						caption.FadeOut();
-						this.updateVisibility();
 					}
 				} else {
 					// seems like the original behavior removed captions top down (visually)
@@ -111,8 +138,7 @@ class CloseCaptioning {
 
 		// when a caption is missing. must have cc_captiontrace
 		$.RegisterEventHandler('BadCaptionRequest', $.GetContextPanel(), (token: string, lifetime: number) => {
-			this.captions.set(
-				token,
+			this.captions.push(
 				new CaptionEntry(
 					token,
 					{
@@ -136,16 +162,16 @@ class CloseCaptioning {
 		$.RegisterEventHandler('DisplayCaptionRequest', $.GetContextPanel(), (token: string, caption: Caption, lifetime: number) => {
 			// do not display multiple of the same
 			// TODO: include norepeat field instead of blatantly disregarding refires
-			if (this.captions.has(token)) {
-				const showmissing = GameInterfaceAPI.GetSettingInt('cc_captiontrace');
-				if (showmissing > 0) {
-					$.Warning(`Ignoring refire for caption '${token}'`);
-				}
-				return;
-			}
+			//if (this.captions.has(token)) {
+			//	const showmissing = GameInterfaceAPI.GetSettingInt('cc_captiontrace');
+			//	if (showmissing > 0) {
+			//		$.Warning(`Ignoring refire for caption '${token}'`);
+			//	}
+			//	return;
+			//}
 
 			// record caption
-			this.captions.set(token, new CaptionEntry(token, caption, lifetime));
+			this.captions.push(new CaptionEntry(token, caption, lifetime));
 
 			this.showBox();
 		});
@@ -157,12 +183,18 @@ class CloseCaptioning {
 		$.RegisterForUnhandledEvent('MapLoaded', () => {
 			this.wipeCaptions();
 		});
+
+		this.updateStyle();
+	}
+
+	static updateStyle() {
+		$.GetContextPanel().SetHasClass('MainMenu', GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU);
 	}
 
 	// hide caption box when no more captions are being displayed
 	// need to make this a bit better
 	static updateVisibility() {
-		if (this.captions.size - 1 <= 0) {
+		if (this.captions.length - 1 <= 0) {
 			this.hideBox();
 		}
 	}
@@ -176,7 +208,7 @@ class CloseCaptioning {
 	}
 
 	static wipeCaptions() {
-		this.captions.clear();
+		this.captions = [];
 		this.box.RemoveAndDeleteChildren();
 		this.bg.RemoveAndDeleteChildren();
 		this.hideBox();
