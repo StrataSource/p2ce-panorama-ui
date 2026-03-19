@@ -33,6 +33,7 @@ class MenuManager {
 	static logo = $<Image>('#GameFullLogo')!;
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
 	static menuContent = $<Panel>('#MenuMainContent')!;
+	static pageBlur = $<BaseBlurTarget>('#PageBlur')!;
 
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
@@ -367,6 +368,9 @@ class MenuManager {
 		this.page.RemoveClass('mainmenu__wide-page-container');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 		this.menuForeground.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
+
+		this.pageBlur.AddClass('anim-menu-page-blur');
+		this.pageBlur.RemoveClass('anim-menu-page-blur-reverse');
 	}
 
 	// hide page container
@@ -381,6 +385,9 @@ class MenuManager {
 		this.gradientBar.RemoveClass('mainmenu__gradient-bar__anim');
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 		this.menuForeground.style.animation = 'FadeIn 0.25s linear 0s 1 normal forwards';
+
+		this.pageBlur.AddClass('anim-menu-page-blur-reverse');
+		this.pageBlur.RemoveClass('anim-menu-page-blur');
 	}
 
 	static reversePageAnim(panel: GenericPanel) {
