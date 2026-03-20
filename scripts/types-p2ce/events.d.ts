@@ -35,4 +35,5 @@ interface GlobalEventNameMap {
 	MainMenuModeRequestCleanup: () => void;
 	MainMenuPageClosed: (from: string | undefined, to: string | undefined) => void;
 	CampaignMenuRefreshUserSettings: () => void;
+	ReloadCCSettings: () => void;
 }
