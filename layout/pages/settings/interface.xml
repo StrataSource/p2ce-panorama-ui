@@ -22,17 +22,13 @@
 		<Panel id="SettingsPageContainer" class="settings-page__container">
 
 			<Panel id="UISubSection" class="settings-group">
-
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Menu_Title" tags="menu,ui" />
-
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('UISubSection');">
 							<Image class="button__icon" src="file://{images}/reset.svg" />
 						</Button>
 					</TooltipPanel>
-
 				</Panel>
 
 				<SettingsEnum
@@ -81,7 +77,7 @@
 					<RadioButton group="enableconsent" text="#Common_Off" value="0" />
 					<RadioButton group="enableconsent" text="#Common_On" value="1" />
 				</SettingsEnum>
-
+ 
 				<ConVarEnabler convar="developer" togglevisibility="true">
 					<SettingsEnum
 						id="PlaytestDOSARemove"
@@ -95,10 +91,74 @@
 						</Button>
 					</SettingsEnum>
 				</ConVarEnabler>
-
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
+
+			<Panel id="CCSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="[HC] Closed Captions" tags="menu,ui" />
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('UISubSection');">
+							<Image class="button__icon" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
+				</Panel>
+
+				<SettingsSlider
+					text="[HC] [NOT IMPLEMENTED] Background Opacity"
+					infomessage="[HC]"
+					psvar="cc.bg_opacity"
+					min="0"
+					max="1"
+					percentage="true"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsSlider
+					text="[HC] [NOT IMPLEMENTED] Font Size"
+					infomessage="[HC]"
+					psvar="cc.font_size"
+					min="18"
+					max="26"
+					increment="1"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsEnumDropDown
+					text="[HC] Font"
+					infomessage="[HC]"
+					psvar="cc.font"
+					submitoverride="$.DispatchEvent('ReloadCCSettings')"
+				>
+					<Label text="[HC] Default (GorDIN)" value="0" id="ccfont0" />
+					<Label text="[HC] Portal 2 (Univers)" value="1" id="ccfont1" />
+					<Label text="[HC] P2:CE (Lexend Deca)" value="2" id="ccfont2" />
+					<Label text="[HC] Classic (Verdana)" value="3" id="ccfont3" />
+				</SettingsEnumDropDown>
+
+				<SettingsEnum
+					text="[HC] Text Alignment"
+					infomessage="[HC]"
+					psvar="cc.text_align"
+					tags="cc,closecaption,captions,audio"
+				>
+					<RadioButton
+						group="ccalign"
+						text="[HC] Left"
+						value="0"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
+					<RadioButton
+						group="ccalign"
+						text="[HC] Center"
+						value="1"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
+				</SettingsEnum>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

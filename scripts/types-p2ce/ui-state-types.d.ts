@@ -63,6 +63,14 @@ declare const enum CampaignDataType {
 	P2CE_SINGLE_WS_SPECIAL = 0
 }
 
+declare const enum CCSetting {
+	BG_OPACITY = 'cc.bg_opacity',
+	FONT_SIZE = 'cc.font_size',
+	FONT_TYPE = 'cc.font',
+	TEXT_ALIGN = 'cc.text_align',
+	BOX_WIDTH = 'cc.box_width'
+}
+
 type MenuButton = {
 	id: string;
 	headline: string;

@@ -16,8 +16,6 @@ class CaptionEntry {
 	bMarkedForDeletion: boolean = false;
 	bReadyToPurge: boolean = false;
 	height: number;
-	normalHeight: number;
-	paddingHeight: number;
 	token: string;
 
 	constructor(token: string, caption: Caption, lifetime: number) {
@@ -25,9 +23,34 @@ class CaptionEntry {
 
 		this.token = token;
 
+		let style = `font-size: ${CloseCaptioning.settings.fontSize}px;`;
+		style += `text-align: ${CloseCaptioning.settings.textAlign === 0 ? 'left' : 'center'};`;
+		switch (CloseCaptioning.settings.fontType) {
+			default:
+			case 0:
+				style += "font-family: 'GorDIN';";
+				break;
+
+			case 1:
+				style += "font-family: 'Univers LT Std 47 Cn Lt';";
+				break;
+
+			case 2:
+				style += "font-family: 'Lexend Deca';transform: translateY(-1px);";
+				break;
+
+			case 3:
+				style += "font-family: 'Verdana';";
+				break;
+		}
+		if (CloseCaptioning.settings.bgOpacity === 0.0) {
+			style += 'text-shadow: 2px 2px 1px 2 rgb(0,0,0);';
+		}
+
 		// create the text
 		this.panel = $.CreatePanel('Label', $<Panel>('#CaptionsBox')!, token, {
 			class: 'closecaptions__text',
+			style: style,
 			// marked to process as html to
 			// support bold & italicization tags
 			html: true,
@@ -87,7 +110,56 @@ class CloseCaptioning {
 	static bg = $<Panel>('#CaptionsBg')!;
 	static CAPTION_WIDTH = 1102;
 
+	static settings = {
+		bgOpacity: 0.75,
+		fontSize: 20,
+		fontType: 0,
+		textAlign: 0,
+		boxWidth: 1102
+	}
+
+	static getVars() {
+		// FIX SETTING SLIDERS BEFORE TURNING THIS ON
+		//const bgOpacity = $.persistentStorage.getItem(CCSetting.BG_OPACITY);
+		//if (bgOpacity === null) {
+		//	$.persistentStorage.setItem(CCSetting.BG_OPACITY, this.settings.bgOpacity);
+		//} else {
+		//	this.settings.bgOpacity = Number(bgOpacity);
+		//}
+		//this.bg.style.backgroundColor = `rgba(0,0,0,${bgOpacity})`;
+
+		//const fontSize = $.persistentStorage.getItem(CCSetting.FONT_SIZE);
+		//if (fontSize === null) {
+		//	$.persistentStorage.setItem(CCSetting.FONT_SIZE, this.settings.fontSize);
+		//} else {
+		//	this.settings.fontSize = Number(fontSize);
+		//}
+
+		const fontType = $.persistentStorage.getItem(CCSetting.FONT_TYPE);
+		if (fontType === null) {
+			$.persistentStorage.setItem(CCSetting.FONT_TYPE, this.settings.fontType);
+		} else {
+			this.settings.fontType = Number(fontType);
+		}
+
+		const textAlign = $.persistentStorage.getItem(CCSetting.TEXT_ALIGN);
+		if (textAlign === null) {
+			$.persistentStorage.setItem(CCSetting.TEXT_ALIGN, this.settings.textAlign);
+		} else {
+			this.settings.textAlign = Number(textAlign);
+		}
+
+		$.Msg(`${JSON.stringify(this.settings)}`);
+	}
+
 	static {
+		this.getVars();
+
+		$.RegisterForUnhandledEvent('ReloadCCSettings', () => {
+			this.wipeCaptions();
+			this.getVars();
+		});
+
 		$.RegisterForUnhandledEvent('GameUIStateChanged',  (old: GameUIState, newS: GameUIState) => {
 			this.updateStyle();
 		});
