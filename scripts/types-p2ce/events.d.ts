@@ -38,4 +38,5 @@ interface GlobalEventNameMap {
 	MainMenuNotifFailLoad: () => void;
 	MainMenuSetPauseBlur: (doBlur: boolean) => void;
 	MainMenuFirstButtonFocus: () => void;
+	ReloadCCSettings: () => void;
 }
