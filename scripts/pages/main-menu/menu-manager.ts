@@ -156,8 +156,7 @@ class MenuManager {
 						rightDate.setFullYear(date.getFullYear());
 						if (WorkshopAPI.IsWorkshopToolsMode()) {
 							logo = 'file://{images}/logo_sdk.svg';
-						}
-						else if (date.getMonth() === rightDate.getMonth() && date.getDay() === rightDate.getDay()) {
+						} else if (date.getMonth() === rightDate.getMonth() && date.getDay() === rightDate.getDay()) {
 							logo = 'file://{images}/the_objectively_better_logo.png';
 						}
 					}
