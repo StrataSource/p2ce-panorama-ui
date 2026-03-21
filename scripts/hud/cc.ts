@@ -154,8 +154,6 @@ class CloseCaptioning {
 		} else {
 			this.settings.textAlign = Number(textAlign);
 		}
-
-		//$.Msg(`${JSON.stringify(this.settings)}`);
 	}
 
 	static {
@@ -222,6 +220,7 @@ class CloseCaptioning {
 						// animate the text out
 						caption.FadeOut();
 					}
+					break;
 				} else {
 					// seems like the original behavior removed captions top down
 					// and stopped when a caption was still playing. so when we
@@ -232,7 +231,6 @@ class CloseCaptioning {
 
 			for (const [token, life] of this.captionRecord) {
 				if (time >= life) {
-					$.Msg(`${token} is now allowed to appear again.`);
 					this.captionRecord.delete(token);
 				}
 			}
@@ -279,7 +277,6 @@ class CloseCaptioning {
 
 			// record caption
 			if (caption.nNoRepeat > 0) {
-				$.Msg(`${token} should not appear again for ${caption.nNoRepeat}s`);
 				this.captionRecord.set(token, time + caption.nNoRepeat);
 			}
 			this.captions.push(new CaptionEntry(token, caption, lifetime));
