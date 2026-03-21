@@ -139,24 +139,9 @@
 					<Label text="[HC] Classic (Verdana)" value="3" id="ccfont3" />
 				</SettingsEnumDropDown>
 
-				<SettingsEnum
-					text="[HC] Text Alignment"
-					infomessage="[HC]"
-					psvar="cc.text_align"
-					tags="cc,closecaption,captions,audio"
-				>
-					<RadioButton
-						group="ccalign"
-						text="[HC] Left"
-						value="0"
-						activateoverride="$.DispatchEvent('ReloadCCSettings')"
-					/>
-					<RadioButton
-						group="ccalign"
-						text="[HC] Center"
-						value="1"
-						activateoverride="$.DispatchEvent('ReloadCCSettings')"
-					/>
+				<SettingsEnum text="[HC] Text Alignment" infomessage="[HC]" psvar="cc.text_align" tags="cc,closecaption,captions,audio">
+					<RadioButton group="ccalign" text="[HC] Left" value="0" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
+					<RadioButton group="ccalign" text="[HC] Center" value="1" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
 				</SettingsEnum>
 			</Panel>
 		</Panel>
