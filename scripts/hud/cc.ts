@@ -79,12 +79,16 @@ class CaptionEntry {
 			'PropertyTransitionEnd',
 			this.panel,
 			(s: string, prop: keyof Style) => {
+				// when the text has fully faded out, animate the height to 0
 				if (prop === 'opacity' && this.panel.IsTransparent()) {
 					this.dummy.style.height = '0px';
 					$.RegisterEventHandler(
 						'PropertyTransitionEnd',
 						this.dummy,
 						(s: string, prop: keyof Style) => {
+							// when the height has reached 0, mark this caption
+							// as ready to be deleted, the next tick should
+							// clean it up
 							if (prop === 'height') {
 								// assume it's 0
 								this.bReadyToPurge = true;
@@ -118,6 +122,8 @@ class CloseCaptioning {
 		boxWidth: 1102
 	}
 
+	static captionRecord: Map<string, number> = new Map<string, number>();
+
 	static getVars() {
 		// FIX SETTING SLIDERS BEFORE TURNING THIS ON
 		//const bgOpacity = $.persistentStorage.getItem(CCSetting.BG_OPACITY);
@@ -149,7 +155,7 @@ class CloseCaptioning {
 			this.settings.textAlign = Number(textAlign);
 		}
 
-		$.Msg(`${JSON.stringify(this.settings)}`);
+		//$.Msg(`${JSON.stringify(this.settings)}`);
 	}
 
 	static {
@@ -188,22 +194,46 @@ class CloseCaptioning {
 		// check for captions that finished and delete them
 		$.RegisterEventHandler('CaptionTick', $.GetContextPanel(), (time: number) => {
 			for (const caption of this.captions) {
-				if (time >= caption.lifetime && caption.panel.IsValid() && caption.dummy.IsValid()) {
+				// caption has expired
+				if (time >= caption.lifetime) {
 					if (caption.bReadyToPurge) {
-						caption.panel.DeleteAsync(0);
-						caption.dummy.DeleteAsync(0);
-						this.captions.shift();
-						if (this.captions.length <= 0) {
-							this.hideBox();
+						// try to delete the text
+						if (caption.panel.IsValid()) {
+							caption.panel.DeleteAsync(0);
+						}
+						// try to delete the height reserved space in bg
+						if (caption.dummy.IsValid()) {
+							caption.dummy.DeleteAsync(0);
+						}
+						// when both are deleted, shift the caption out
+						//
+						// assuming the panels are deleted is unreliable
+						// there have been cases where panels are left orphaned
+						// and permanently stuck. probably because we are doing this
+						// every tick. so we're going to keep slamming for them to be
+						// deleted and wait for them to finish dying.
+						if (!caption.panel.IsValid() && !caption.dummy.IsValid()) {
+							this.captions.shift();
+							if (this.captions.length <= 0) {
+								this.hideBox();
+							}
 						}
 					} else {
+						// animate the text out
 						caption.FadeOut();
 					}
 				} else {
-					// seems like the original behavior removed captions top down (visually)
-					// and stopped when a caption was still playing. so when we get to a caption
-					// still living, we will stop checking this tick
+					// seems like the original behavior removed captions top down
+					// and stopped when a caption was still playing. so when we
+					// get to a caption still living, we will stop checking this tick
 					break;
+				}
+			}
+
+			for (const [token, life] of this.captionRecord) {
+				if (time >= life) {
+					$.Msg(`${token} is now allowed to appear again.`);
+					this.captionRecord.delete(token);
 				}
 			}
 		});
@@ -231,7 +261,7 @@ class CloseCaptioning {
 		});
 
 		// display standard captions via token, usually from scenes
-		$.RegisterEventHandler('DisplayCaptionRequest', $.GetContextPanel(), (token: string, caption: Caption, lifetime: number) => {
+		$.RegisterEventHandler('DisplayCaptionRequest', $.GetContextPanel(), (token: string, caption: Caption, lifetime: number, time: number) => {
 			// do not display multiple of the same
 			// TODO: include norepeat field instead of blatantly disregarding refires
 			//if (this.captions.has(token)) {
@@ -242,7 +272,16 @@ class CloseCaptioning {
 			//	return;
 			//}
 
+			if (this.captionRecord.has(token)) {
+				$.Warning(`Ignoring refire for ${token}`);
+				return;
+			}
+
 			// record caption
+			if (caption.nNoRepeat > 0) {
+				$.Msg(`${token} should not appear again for ${caption.nNoRepeat}s`);
+				this.captionRecord.set(token, time + caption.nNoRepeat);
+			}
 			this.captions.push(new CaptionEntry(token, caption, lifetime));
 
 			this.showBox();
