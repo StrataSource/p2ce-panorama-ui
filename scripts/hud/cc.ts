@@ -75,29 +75,21 @@ class CaptionEntry {
 		// 4 comes from text margins
 		this.dummy.style.height = `${this.height + 4}px`;
 
-		$.RegisterEventHandler(
-			'PropertyTransitionEnd',
-			this.panel,
-			(s: string, prop: keyof Style) => {
-				// when the text has fully faded out, animate the height to 0
-				if (prop === 'opacity' && this.panel.IsTransparent()) {
-					this.dummy.style.height = '0px';
-					$.RegisterEventHandler(
-						'PropertyTransitionEnd',
-						this.dummy,
-						(s: string, prop: keyof Style) => {
-							// when the height has reached 0, mark this caption
-							// as ready to be deleted, the next tick should
-							// clean it up
-							if (prop === 'height') {
-								// assume it's 0
-								this.bReadyToPurge = true;
-							}
-						}
-					);
-				}
+		$.RegisterEventHandler('PropertyTransitionEnd', this.panel, (s: string, prop: keyof Style) => {
+			// when the text has fully faded out, animate the height to 0
+			if (prop === 'opacity' && this.panel.IsTransparent()) {
+				this.dummy.style.height = '0px';
+				$.RegisterEventHandler('PropertyTransitionEnd', this.dummy, (s: string, prop: keyof Style) => {
+					// when the height has reached 0, mark this caption
+					// as ready to be deleted, the next tick should
+					// clean it up
+					if (prop === 'height') {
+						// assume it's 0
+						this.bReadyToPurge = true;
+					}
+				});
 			}
-		);
+		});
 	}
 
 	FadeOut() {
@@ -120,7 +112,7 @@ class CloseCaptioning {
 		fontType: 0,
 		textAlign: 0,
 		boxWidth: 1102
-	}
+	};
 
 	static captionRecord: Map<string, number> = new Map<string, number>();
 
@@ -164,7 +156,7 @@ class CloseCaptioning {
 			this.getVars();
 		});
 
-		$.RegisterForUnhandledEvent('GameUIStateChanged',  (old: GameUIState, newS: GameUIState) => {
+		$.RegisterForUnhandledEvent('GameUIStateChanged', (old: GameUIState, newS: GameUIState) => {
 			this.updateStyle();
 		});
 
@@ -220,7 +212,6 @@ class CloseCaptioning {
 						// animate the text out
 						caption.FadeOut();
 					}
-					break;
 				} else {
 					// seems like the original behavior removed captions top down
 					// and stopped when a caption was still playing. so when we
@@ -259,31 +250,35 @@ class CloseCaptioning {
 		});
 
 		// display standard captions via token, usually from scenes
-		$.RegisterEventHandler('DisplayCaptionRequest', $.GetContextPanel(), (token: string, caption: Caption, lifetime: number, time: number) => {
-			// do not display multiple of the same
-			// TODO: include norepeat field instead of blatantly disregarding refires
-			//if (this.captions.has(token)) {
-			//	const showmissing = GameInterfaceAPI.GetSettingInt('cc_captiontrace');
-			//	if (showmissing > 0) {
-			//		$.Warning(`Ignoring refire for caption '${token}'`);
-			//	}
-			//	return;
-			//}
+		$.RegisterEventHandler(
+			'DisplayCaptionRequest',
+			$.GetContextPanel(),
+			(token: string, caption: Caption, lifetime: number, time: number) => {
+				// do not display multiple of the same
+				// TODO: include norepeat field instead of blatantly disregarding refires
+				//if (this.captions.has(token)) {
+				//	const showmissing = GameInterfaceAPI.GetSettingInt('cc_captiontrace');
+				//	if (showmissing > 0) {
+				//		$.Warning(`Ignoring refire for caption '${token}'`);
+				//	}
+				//	return;
+				//}
 
-			if (this.captionRecord.has(token)) {
-				$.Warning(`Ignoring refire for ${token}`);
-				return;
+				if (this.captionRecord.has(token)) {
+					$.Warning(`Ignoring refire for ${token}`);
+					return;
+				}
+
+				// record caption
+				if (caption.nNoRepeat > 0) {
+					this.captionRecord.set(token, time + caption.nNoRepeat);
+				}
+				this.captions.push(new CaptionEntry(token, caption, lifetime));
+
+				this.showBox();
 			}
+		);
 
-			// record caption
-			if (caption.nNoRepeat > 0) {
-				this.captionRecord.set(token, time + caption.nNoRepeat);
-			}
-			this.captions.push(new CaptionEntry(token, caption, lifetime));
-
-			this.showBox();
-		});
-		
 		// clear captions
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
 			this.wipeCaptions();
