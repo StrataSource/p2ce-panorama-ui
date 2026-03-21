@@ -11,7 +11,7 @@
 		<Panel class="play-menu__main">
 			<Panel class="flow-right full-width full-height" childfocusonhover="true">
 				<Button
-					class="card fill-width mr-3"
+					class="card play-menu__card mr-3"
 					onactivate="PlayMenu.onSinglePlayerBtnPressed()"
 					tabindex="auto"
 					selectionpos="auto"
@@ -29,7 +29,7 @@
 				</Button>
 				<Button
 					disabled="true"
-					class="card fill-width"
+					class="card play-menu__card mr-3"
 					onactivate="PlayMenu.onMultiPlayerBtnPressed()"
 					tabindex="auto"
 					selectionpos="auto"
@@ -43,6 +43,23 @@
 					/>
 					<Panel class="card__details card__details__no-bg">
 						<Label class="card__details__header" text="#MainMenu_Campaigns_CType_MP" />
+					</Panel>
+				</Button>
+				<Button
+					class="card play-menu__card"
+					onactivate="PlayMenu.onSinglePlayerBtnPressed()"
+					tabindex="auto"
+					selectionpos="auto"
+				>
+					<Image
+						class="card__image"
+						src="file://{images}/menu/vertical-banner-mp.png"
+						scaling="stretch-to-cover-preserve-aspect"
+						textureheight="1839"
+						texturewidth="1002"
+					/>
+					<Panel class="card__details card__details__no-bg">
+						<Label class="card__details__header" text="[DEV] Collections" />
 					</Panel>
 				</Button>
 			</Panel>

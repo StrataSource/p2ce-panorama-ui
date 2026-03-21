@@ -27,8 +27,8 @@
 				scaling="stretch-to-cover-preserve-aspect"
 				hittest="false"
 			/>
-			
-			<VersionInfo class="mainmenu__version" />
+
+			<Panel id="MenuModeBackgroundLayer" class="full" hittest="false" />
 
 			<!-- Backbuffer blur: used to blur the backbuffer when switching campaigns -->
 			<BaseBlurTarget id="PageBlur" class="mainmenu__page-blur" blurrects="PageBlurContent" hittest="false">
@@ -37,7 +37,7 @@
 			</BaseBlurTarget>
 			<Panel id="PageBlurContent" class="mainmenu__pause-content-blur" hittest="false" />
 
-			<Panel id="MenuModeBackgroundLayer" class="full" hittest="false" />
+			<VersionInfo class="mainmenu__version" />
 
 			<Panel id="MenuMainContent" class="mainmenu__menu">
 				<Panel id="PageBg" class="mainmenu__page-bg" hittest="false" />

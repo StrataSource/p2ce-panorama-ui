@@ -27,6 +27,12 @@
 			>
 				<Label class="button__text" text="#MainMenu_Navigation_SteamInputLibrary" />
 			</Button>
+			<Button
+				class="button mt-2"
+				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'FeaturedHub', 'featured/main', undefined);"
+			>
+				<Label class="button__text" text="[DEV] Featured Hub" />
+			</Button>
 		</Panel>
 	</Panel>
 </root>
