@@ -1,6 +1,6 @@
 Portal 2: Community Edition uses the following fonts with their respective licenses below:
 
-1. Lexend Deca
+1. Lexend
 
 Copyright 2018 The Lexend Project Authors (https://github.com/googlefonts/lexend), with Reserved Font Name “RevReading Lexend”.
 

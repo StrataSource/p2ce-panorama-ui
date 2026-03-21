@@ -28,7 +28,7 @@ class CaptionEntry {
 		switch (CloseCaptioning.settings.fontType) {
 			default:
 			case 0:
-				style += "font-family: 'GorDIN';";
+				style += "font-family: 'Lexend';transform: translateY(-1px);";
 				break;
 
 			case 1:
@@ -36,7 +36,7 @@ class CaptionEntry {
 				break;
 
 			case 2:
-				style += "font-family: 'Lexend Deca';transform: translateY(-1px);";
+				style += "font-family: 'GorDIN';";
 				break;
 
 			case 3:
