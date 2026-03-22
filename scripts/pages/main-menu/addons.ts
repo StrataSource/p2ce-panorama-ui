@@ -128,6 +128,30 @@ class AddonManager {
 			$.Localize('#MainMenu_Navigation_Addons'),
 			$.Localize('#MainMenu_Navigation_Addons_Tagline')
 		);
+
+		installSearchHandling<number, Addon>(
+			this.searchBar,
+			() => {
+				AddonManager.reloadAddonList();
+			},
+			() => { },
+			() => {
+				const addons: Array<AbstractSearchData> = [];
+				for (const addon of AddonManager.getFilteredAddonsArray()) {
+					addons.push(
+						new AbstractSearchData(
+							addon,
+							addon.meta.title,
+							addon.index
+						)
+					);
+				}
+				return addons;
+			},
+			(matches: Array<Addon>) => {
+				AddonManager.createPredefinedAddonEntries(matches);
+			}
+		);
 	}
 
 	static showPage() {
@@ -339,70 +363,6 @@ class AddonManager {
 			addons.push(new Addon(i, info));
 		}
 		return addons;
-	}
-}
-
-// Searching
-
-class SearchMatch {
-	addon: Addon;
-	matchedWith: unknown;
-
-	constructor(addon: Addon, matchedWith: unknown) {
-		this.addon = addon;
-		this.matchedWith = matchedWith;
-	}
-}
-
-class AddonSearch {
-	static searchBar = $<TextEntry>('#SearchAddonsEntry')!;
-	static strings: string[] = [];
-	static matches: SearchMatch[] = [];
-
-	static {
-		this.searchBar.RaiseChangeEvents(true);
-		$.RegisterEventHandler('TextEntryChanged', this.searchBar, this.onSearchTextChanged.bind(this));
-	}
-
-	static onSearchTextChanged() {
-		const search = this.searchBar.text;
-		// check empty
-		if (!/.*\S.*/.test(search)) {
-			AddonManager.reloadAddonList();
-			return;
-		}
-
-		// split
-		this.strings = search.split(/\s/).filter((s) => /^\w+$/.test(s));
-
-		// don't show one char words
-		if (!this.strings.some((str) => str.length > 1)) return;
-
-		this.matches = [];
-
-		const addons = AddonManager.getFilteredAddonsArray();
-		for (const searchPart of this.strings) {
-			if (!searchPart) {
-				break;
-			}
-
-			for (const addon of addons) {
-				const testLower = addon.meta.title.toLowerCase();
-				const index = testLower.indexOf(searchPart.toLowerCase());
-
-				if (index === -1) {
-					continue;
-				}
-
-				this.matches.push(new SearchMatch(addon, undefined));
-			}
-		}
-
-		const sendAddons: Addon[] = [];
-		for (const match of this.matches) {
-			sendAddons.push(match.addon);
-		}
-		AddonManager.createPredefinedAddonEntries(sendAddons);
 	}
 }
 
