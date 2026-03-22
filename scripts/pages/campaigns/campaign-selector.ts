@@ -94,8 +94,7 @@ class CampaignSelector {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
 		for (const bucket of buckets) {
 			// don't search special ws
-			if (isBucketSingleWsCampaign(bucket))
-				continue;
+			if (isBucketSingleWsCampaign(bucket)) continue;
 
 			for (const campaign of bucket.campaigns) {
 				this.searchableCampaigns.push(
