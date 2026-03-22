@@ -134,17 +134,11 @@ class AddonManager {
 			() => {
 				AddonManager.reloadAddonList();
 			},
-			() => { },
+			() => {},
 			() => {
 				const addons: Array<AbstractSearchData> = [];
 				for (const addon of AddonManager.getFilteredAddonsArray()) {
-					addons.push(
-						new AbstractSearchData(
-							addon,
-							addon.meta.title,
-							addon.index
-						)
-					);
+					addons.push(new AbstractSearchData(addon, addon.meta.title, addon.index));
 				}
 				return addons;
 			},
