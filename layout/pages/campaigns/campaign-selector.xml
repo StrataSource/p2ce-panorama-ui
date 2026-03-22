@@ -4,6 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/common/searcher.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-selector.ts" />
 	</scripts>
 
