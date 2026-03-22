@@ -19,9 +19,7 @@
 					<Image
 						class="card__image"
 						src="file://{images}/menu/vertical-banner-solo.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1839"
-						texturewidth="1002"
+						scaling="stretch-to-fit-preserve-aspect"
 					/>
 					<Panel class="card__details card__details__no-bg">
 						<Label class="card__details__header" text="#MainMenu_Campaigns_CType_SP" />
@@ -34,13 +32,7 @@
 					tabindex="auto"
 					selectionpos="auto"
 				>
-					<Image
-						class="card__image"
-						src="file://{images}/menu/vertical-banner-mp.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1839"
-						texturewidth="1002"
-					/>
+					<Image class="card__image" src="file://{images}/menu/vertical-banner-mp.png" scaling="stretch-to-fit-preserve-aspect" />
 					<Panel class="card__details card__details__no-bg">
 						<Label class="card__details__header" text="#MainMenu_Campaigns_CType_MP" />
 					</Panel>
