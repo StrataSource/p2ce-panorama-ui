@@ -23,6 +23,7 @@
 	}
 
 	&__list {
+		height: fill-parent-flow(1);
 		width: 100%;
 		overflow: squish scroll;
 		flow-children: down;
