@@ -3,7 +3,7 @@
 /**
  * @member payload Data to hold in search data for your use
  * @member text Text for this data to be tested against by the engine
- * @member uid ID of this data, unique identification that prevents copies of a match being sent over, which should be consistent with all other datum that you send with each other!
+ * @member uid ID of this data, unique identification that prevents copies of a match being sent over, which should be consistent with all other data that you send with each other!
  */
 class AbstractSearchData {
 	payload: unknown;
@@ -56,31 +56,30 @@ function installSearchHandling<UIDType, MatchReturnType>(
 			return;
 		}
 
-		const matches: Array<MatchReturnType> = [];
+		// exclude copies from spaced strings
+		const matches: Map<UIDType, MatchReturnType> = new Map();
 
 		const matchAgainst = matchAgainstFn();
-		const matchRecords: Array<UIDType> = [];
+		// check each string part
 		for (const searchPart of strings) {
 			if (!searchPart) {
 				break;
 			}
 
+			// match against data text
 			for (const test of matchAgainst) {
 				const testLower = test.text.toLowerCase();
 				const index = testLower.indexOf(searchPart.toLowerCase());
 
+				// didn't find
 				if (index === -1) {
 					continue;
 				}
 
-				// exclude copies from spaced strings
-				if (!matchRecords.includes(test.uid as UIDType)) {
-					matchRecords.push(test.uid as UIDType);
-					matches.push(test.payload as MatchReturnType);
-				}
+				matches.set(test.uid as UIDType, test.payload as MatchReturnType);
 			}
 		}
 
-		returnedMatchesFn(matches);
+		returnedMatchesFn(Array.from(matches.values()));
 	});
 }
