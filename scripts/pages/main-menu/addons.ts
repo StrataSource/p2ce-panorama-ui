@@ -149,11 +149,11 @@ class AddonManager {
 
 	/**
 	 * Rebuilds search data for use with the search engine
-	 * 
+	 *
 	 * Searching is performed on the addons that match the filter,
 	 * so this needs to be rebuilt every time that filtered list is
 	 * changed.
-	 * 
+	 *
 	 * Filtering is not implemented yet, so this is only built once!
 	 */
 	static buildSearchData() {
