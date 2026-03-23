@@ -54,7 +54,7 @@ function installSearchHandling<UIDType, MatchReturnType>(
 		}
 
 		// split
-		const strings = search.split(/\s/).filter((s) => /^\w+$/.test(s));
+		const strings = search.split(/\W/).filter((s) => /^\w+$/.test(s));
 
 		// don't show one char words
 		if (!strings.some((str) => str.length > 1)) {
