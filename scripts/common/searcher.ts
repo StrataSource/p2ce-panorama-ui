@@ -2,7 +2,7 @@
 
 /**
  * @member payload Data to hold in search data for your use
- * @member text Text for this data to be tested against by the engine
+ * @member text Text for this data to be tested against by the engine. Will be transformed for the engine to properly search into.
  * @member uid ID of this data, unique identification that prevents copies of a match being sent over, which should be consistent with all other data that you send with each other!
  */
 class AbstractSearchData {
@@ -12,8 +12,14 @@ class AbstractSearchData {
 
 	constructor(payload: unknown, text: string, uid: unknown) {
 		this.payload = payload;
-		this.text = text;
 		this.uid = uid;
+
+		// make necessary adjustments so that the
+		// search engine can properly make matches
+		//
+		// on big sets of data it's probably a good idea to
+		// cache the search data instead of rebuilding it every query
+		this.text = text.toLowerCase();
 	}
 }
 
@@ -62,14 +68,10 @@ function installSearchHandling<UIDType, MatchReturnType>(
 		const matchAgainst = matchAgainstFn();
 		// check each string part
 		for (const searchPart of strings) {
-			if (!searchPart) {
-				break;
-			}
-
+			const searchPartLower = searchPart.toLowerCase();
 			// match against data text
 			for (const test of matchAgainst) {
-				const testLower = test.text.toLowerCase();
-				const index = testLower.indexOf(searchPart.toLowerCase());
+				const index = test.text.indexOf(searchPartLower);
 
 				// didn't find
 				if (index === -1) {
