@@ -126,8 +126,9 @@ class CampaignMenu {
 			return;
 		}
 
+		const defCampaign = GameInterfaceAPI.GetSettingString('campaign_default');
 		for (const btn of this.buttons) {
-			if (skipBgMapLoad) {
+			if (defCampaign.length > 0) {
 				// do NOT construct exit campaign button if default is provided
 				// this is for sourcemods / standalone mods that use p2ce as a base
 				if (btn.id === 'ExitCampaignBtn') {
