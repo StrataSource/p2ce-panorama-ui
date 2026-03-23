@@ -82,7 +82,7 @@ class CampaignSelector {
 
 	static campaignEntries: CampaignEntry[] = [];
 	static hoveredCampaign: CampaignInfo | null = null;
-	static searchableCampaigns: AbstractSearchData[] = [];
+	static searchableCampaigns: Array<AbstractSearchData> = [];
 
 	static init() {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
@@ -97,12 +97,15 @@ class CampaignSelector {
 			if (isBucketSingleWsCampaign(bucket)) continue;
 
 			for (const campaign of bucket.campaigns) {
+				const campaignId = `${bucket.id}/${campaign.id}`;
+				const campaignMeta = CampaignAPI.GetCampaignMeta(campaignId);
+				const author = campaignMeta.get(CampaignMeta.AUTHOR);
 				this.searchableCampaigns.push(
 					new AbstractSearchData(
 						// don't attach the campaign data, might be expensive!
-						`${bucket.id}/${campaign.id}`,
-						$.Localize(campaign.title),
-						`${bucket.id}/${campaign.id}`
+						campaignId,
+						`${$.Localize(campaign.title)}${author ? ` ${$.Localize(author)}` : ''}`,
+						campaignId
 					)
 				);
 			}

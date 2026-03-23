@@ -115,6 +115,8 @@ class AddonManager {
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
 	static selectedAddon: number = -1;
+	static searchableAddons: Array<AbstractSearchData> = [];
+	static searchDataDirty: boolean = true;
 
 	static init() {
 		this.addonsPage.visible = false;
@@ -136,16 +138,32 @@ class AddonManager {
 			},
 			() => {},
 			() => {
-				const addons: Array<AbstractSearchData> = [];
-				for (const addon of AddonManager.getFilteredAddonsArray()) {
-					addons.push(new AbstractSearchData(addon, addon.meta.title, addon.index));
-				}
-				return addons;
+				this.buildSearchData();
+				return this.searchableAddons;
 			},
 			(matches: Array<Addon>) => {
 				AddonManager.createPredefinedAddonEntries(matches);
 			}
 		);
+	}
+
+	/**
+	 * Rebuilds search data for use with the search engine
+	 * 
+	 * Searching is performed on the addons that match the filter,
+	 * so this needs to be rebuilt every time that filtered list is
+	 * changed.
+	 * 
+	 * Filtering is not implemented yet, so this is only built once!
+	 */
+	static buildSearchData() {
+		if (!this.searchDataDirty) return;
+
+		this.searchableAddons = [];
+		for (const addon of AddonManager.getFilteredAddonsArray()) {
+			this.searchableAddons.push(new AbstractSearchData(addon, addon.meta.title, addon.index));
+		}
+		this.searchDataDirty = false;
 	}
 
 	static showPage() {
