@@ -48,7 +48,7 @@
 					text="#Settings_Menu_Sentry"
 					infomessage="#Settings_Menu_Sentry_info"
 					hasdocspage="false"
-					tags="sentry"
+					tags="sentry, consent"
 				>
 					<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.sentryUpdateConsent()">
 						<Label class="button__text" text="#Settings_Menu_Sentry_ConsentButton" />
@@ -61,23 +61,25 @@
 					infomessage="#Settings_Menu_DiscordIntegration_info"
 					convar="cl_richpresence_enable"
 					hasdocspage="false"
-					tags="richpresence"
+					tags="richpresence, discord, rich presence"
 				>
 					<RadioButton group="enablerpc" text="#Common_Off" value="0" />
 					<RadioButton group="enablerpc" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<SettingsEnum
-					text="Playtest Consent (DO NOT LOCALIZE)"
-					infomessage="Playtest Consent (DO NOT LOCALIZE)"
-					convar="cl_playtest_enabled"
-					hasdocspage="false"
-					tags="consent"
-				>
-					<RadioButton group="enableconsent" text="#Common_Off" value="0" />
-					<RadioButton group="enableconsent" text="#Common_On" value="1" />
-				</SettingsEnum>
-
+				<ConVarEnabler convar="developer" togglevisibility="true">
+					<SettingsEnum
+						text="Playtest Consent (DO NOT LOCALIZE)"
+						infomessage="Playtest Consent (DO NOT LOCALIZE)"
+						convar="cl_playtest_enabled"
+						hasdocspage="false"
+						tags="consent"
+					>
+						<RadioButton group="enableconsent" text="#Common_Off" value="0" />
+						<RadioButton group="enableconsent" text="#Common_On" value="1" />
+					</SettingsEnum>
+				</ConVarEnabler>
+ 
 				<ConVarEnabler convar="developer" togglevisibility="true" hittest="false">
 					<SettingsEnum
 						id="PlaytestDOSARemove"
