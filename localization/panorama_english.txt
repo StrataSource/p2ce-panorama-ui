@@ -552,6 +552,25 @@
 		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
 		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled."
 		
+		// Storm - CC System Rewrite
+		"Settings_ClosedCaptions_Font"						"Font"
+		"Settings_ClosedCaptions_Font_info"					"Determines which typeface to use for on-screen subtitles and closed captions."
+		"Settings_ClosedCaptions_Font_Lexend"				"Lexend (P2:CE / Strata Source)"
+		"Settings_ClosedCaptions_Font_U0001"				"Univers (Portal 2)"
+		"Settings_ClosedCaptions_Font_GorDIN"				"DIN 1451 / GorDIN (Half-Life 2)"
+		"Settings_ClosedCaptions_Font_Verdana"				"Verdana (Legacy)"
+		"Settings_ClosedCaptions_Font_NotoSans"				"Noto Sans (Deck Gamepad UI)"
+		"Settings_ClosedCaptions_Font_Stratum2"				"Stratum2 (CS:GO)"
+		"Settings_ClosedCaptions_FontSize"					"Font Size (Unimplemented)"
+		"Settings_ClosedCaptions_FontSize_info"				"Determines how large should on-screen subtitles and closed captions appear to the user. Calculated in points per pixel (pt)."
+		"Settings_ClosedCaptions_BGOpacity"					"Background Opacity (Unimplemented)"
+		"Settings_ClosedCaptions_BGOpacity_info"			"Controls the opacity of the background panel for on-screen captions.\nLower values may result in worse visibility, and can cause legibility problems. A darker background (or pure pitch-black) is recommended for best legibility and visibility."
+		"Settings_ClosedCaptions_Alignment"					"Text Alignment"
+		"Settings_ClosedCaptions_Alignment_info"			"Aligns the position of on-screen captions."
+		"Settings_ClosedCaptions_Alignment_left"			"Left"
+		"Settings_ClosedCaptions_Alignment_center"			"Center"
+		"Settings_ClosedCaptions_Alignment_right"			"Right"
+		
 		"Settings_Audio_HRTF_Async_Title"					"Threaded Audio"
 		"Settings_Audio_HRTF_Async_Desc"					"Splits individual audio channels into multiple CPU threads to improve performance."
 		
