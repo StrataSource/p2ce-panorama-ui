@@ -24,7 +24,7 @@ class CaptionEntry {
 		this.token = token;
 
 		let style = `font-size: ${CloseCaptioning.settings.fontSize}px;`;
-		style += `text-align: ${CloseCaptioning.settings.textAlign === 0 ? 'left' : 'center'};`;
+		style += `text-align: ${CloseCaptioning.settings.textAlign === 0 ? 'left' : 2 ? 'right' : 'center'};`;
 		switch (CloseCaptioning.settings.fontType) {
 			default:
 			case 0:
@@ -41,6 +41,14 @@ class CaptionEntry {
 
 			case 3:
 				style += "font-family: 'Verdana';";
+				break;
+
+			case 4:
+				style += "font-family: 'Noto Sans';";
+				break;
+
+			case 5:
+				style += "font-family: 'Stratum2';";
 				break;
 		}
 		if (CloseCaptioning.settings.bgOpacity === 0.0) {
