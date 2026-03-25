@@ -196,6 +196,54 @@
 					<RadioButton group="cc_subtitles" text="#Common_On" value="1" />
 				</SettingsEnum>
 
+				<SettingsEnumDropDown
+					text="#Settings_ClosedCaptions_Font"
+					infomessage="#Settings_ClosedCaptions_Font_info"
+					psvar="cc.font"
+					tags="cc,closecaption,captions,audio,font"
+					submitoverride="$.DispatchEvent('ReloadCCSettings')"
+				>
+					<Label text="#Settings_ClosedCaptions_Font_Lexend" value="0" id="ccfont0" />
+					<Label text="#Settings_ClosedCaptions_Font_U0001" value="1" id="ccfont1" />
+					<Label text="#Settings_ClosedCaptions_Font_GorDIN" value="2" id="ccfont2" />
+					<Label text="#Settings_ClosedCaptions_Font_Verdana" value="3" id="ccfont3" />
+					<Label text="#Settings_ClosedCaptions_Font_NotoSans" value="4" id="ccfont4" />
+					<Label text="#Settings_ClosedCaptions_Font_Stratum2" value="5" id="ccfont5" />
+				</SettingsEnumDropDown>
+
+				<SettingsSlider
+					text="#Settings_ClosedCaptions_FontSize"
+					infomessage="#Settings_ClosedCaptions_FontSize_info"
+					psvar="cc.font_size"
+					tags="cc,closecaption,captions,audio,font,font size,size"
+					min="18"
+					max="26"
+					increment="1"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsSlider
+					text="#Settings_ClosedCaptions_BGOpacity"
+					infomessage="#Settings_ClosedCaptions_BGOpacity_info"
+					psvar="cc.bg_opacity"
+					min="0"
+					max="1"
+					percentage="true"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsEnum text="#Settings_ClosedCaptions_Alignment"
+					infomessage="#Settings_ClosedCaptions_Alignment_info"
+					psvar="cc.text_align"
+					tags="cc,closecaption,captions,audio,alignment"
+				>
+					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_left" value="0" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
+					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_center" value="1" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
+					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_right" value="2" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
+				</SettingsEnum>
+
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
