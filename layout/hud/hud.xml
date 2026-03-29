@@ -2,9 +2,20 @@
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/hud/movie-player.ts" />
+	</scripts>
 
 	<Hud hittest="false">
 		<!-- Non-interactive HUD elements have hit test disabled for efficiency -->
+
+		<Movie
+			id="HudMovie"
+			class="hud__movie"
+			controls="none"
+			hittest="false"
+			hittestchildren="false"
+		/>
 
 		<!-- In world UI is first to make sure it shows up behind all "screen-looking" UI -->
 		<Panel id="HudInWorld" hittest="false" hittestchildren="false">

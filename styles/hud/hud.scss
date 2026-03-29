@@ -75,3 +75,11 @@ Hud,
 	width: 100%;
 	height: 100%;
 }
+
+.hud {
+	&__movie {
+		width: 100%;
+		height: 100%;
+		visibility: collapse;
+	}
+}
