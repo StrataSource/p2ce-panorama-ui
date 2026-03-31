@@ -37,7 +37,8 @@ declare const enum CampaignMeta {
 	BG_IMG = 'background_image',
 	MAP_LIST_IMG = 'img',
 	MAP_LIST_TITLE = 'title',
-	LOGO_HEIGHT = 'full_logo_size_preset'
+	LOGO_HEIGHT = 'full_logo_size_preset',
+	CHAPTER_LOCKED_TITLE = 'locked_title'
 }
 
 declare const enum CampaignLogoSizePreset {
