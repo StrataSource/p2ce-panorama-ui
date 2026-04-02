@@ -122,7 +122,7 @@
 					<Image
 						id="CampaignSettingsBoxLogo"
 						class="campaign-settings__box-logo"
-						src="file://{images}/menu/p2ce/logo.svg"
+						src="file://{images}/menu/p2ce/logo.png"
 						scaling="stretch-to-fit-preserve-aspect"
 						texturewidth="128"
 						textureheight="128"
