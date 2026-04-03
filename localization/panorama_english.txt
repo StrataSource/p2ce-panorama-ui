@@ -551,7 +551,7 @@
 
 		"Settings_Render_Title"							"Rendering"
 		
-		"Settings_Video_Presets"						"Quality Presets"
+		"Settings_Video_Presets"						"Quality Presets (NOT IMPLEMENTED)"
 		"Settings_Video_Presets_info"					"Video settings will be set based on a pre-determined set of variables in this list, from low to high."
 
 		"Settings_Video_AspectRatio"					"Aspect Ratio"
@@ -1189,7 +1189,7 @@ Please install and mount the above games first to access this campaign."
 		// Filtering
 		// Filtering - Time
 		"MainMenu_Addons_SearchBox_FillerText"				"Search for addons..."
-		"MainMenu_Addons_Filtering_Title"					"Filtering and Sorting Options"
+		"MainMenu_Addons_Filtering_Title"					"Filtering and Sorting Options (NOT IMPLEMENTED)"
 		"MainMenu_Addons_Filtering_Edit_Tooltip"			"Change the way how addons are filtered and sorted by in the addon list."
 		"MainMenu_Addons_Filtering_EnableAddons_Tooltip"	"Enable or disable all addons in this list."
 		"MainMenu_Addons_Filtering_Sort_Title"				"Sort by:"
