@@ -1176,6 +1176,7 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_Category_WS_Tagline"		"Workshop subscriptions and locally-installed content"
 		"MainMenu_Addons_Category_Mounts"			"Mounted Games"
 		"MainMenu_Addons_Category_Mounts_Tagline"	"Content from other installed Source engine games"
+		"MainMenu_Addons_SteamWorkshop_Tooltip"		"Open the Steam Workshop in the overlay"
 		
 		"MainMenu_Addons_ToggleAddon"				"Toggle addon's enablement state"
 		
