@@ -24,7 +24,20 @@ class CaptionEntry {
 		this.token = token;
 
 		let style = `font-size: ${CloseCaptioning.settings.fontSize}px;`;
-		style += `text-align: ${CloseCaptioning.settings.textAlign === 0 ? 'left' : 1 ? 'center' : 2 ? 'right' : 'left'};`;
+		switch (CloseCaptioning.settings.textAlign) {
+			default:
+			case 0:
+				style += "text-align: left;"
+				break;
+
+			case 1:
+				style += "text-align: center;"
+				break;
+
+			case 2:
+				style += "text-align: right;"
+				break;
+		}
 		switch (CloseCaptioning.settings.fontType) {
 			default:
 			case 0:
