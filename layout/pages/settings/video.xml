@@ -10,11 +10,7 @@
 	<Panel class="settings-page">
 
 		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Video" />
-
 			<Panel class="settings-page__header-buttons">
-
 				<Button
 					class="button button--blue"
 					id="ApplyVideoSettingsButton"
@@ -22,7 +18,6 @@
 				>
 					<Label class="button__text" text="#Settings_General_Apply" />
 				</Button>
-
 				<Button
 					class="button button--red ml-2"
 					id="DiscardVideoSettingsButton"
@@ -30,15 +25,12 @@
 				>
 					<Label class="button__text" text="#Action_Discard" />
 				</Button>
-
 				<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 					<Button class="button ml-2" onactivate="SettingsShared.resetVideoSettings();">
 						<Image class="button__icon" src="file://{images}/reset.svg" />
 					</Button>
 				</TooltipPanel>
-
 			</Panel>
-
 		</Panel>
 
 		<VideoSettings id="SettingsPageContainer" class="settings-page__container">
@@ -341,7 +333,7 @@
 					<Label class="settings-group__title" text="#Settings_TextureReplace_Title" />
 
 					<Panel id="TextureReplaceWarningPanel" class="settings-group__reset flow-right">
-						<Label class="button__text" text="#Settings_General_MapReload" />
+						<Label text="#Settings_General_MapReload" />
 					</Panel>
 				</Panel>
 

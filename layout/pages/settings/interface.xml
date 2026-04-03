@@ -9,16 +9,6 @@
 	</scripts>
 
 	<Panel class="settings-page">
-
-		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Interface" />
-
-			<Panel class="settings-page__header-buttons">
-			</Panel>
-
-		</Panel>
-
 		<Panel id="SettingsPageContainer" class="settings-page__container">
 
 			<Panel id="UISubSection" class="settings-group">

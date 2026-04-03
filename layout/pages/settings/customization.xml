@@ -9,9 +9,6 @@
 	</scripts>
 
 	<Panel class="settings-page">
-		<Panel class="settings-page__header">
-			<Label class="settings-page__title" text="#Settings_Customization" />
-		</Panel>
 		<Panel id="SettingsPageContainer" class="settings-page__container">
 			<Panel id="Portal1SubSection" class="settings-group">
 				<Panel class="settings-group__header">

@@ -8,17 +8,6 @@
 	</scripts>
 
 	<Panel class="settings-page">
-
-		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Audio" />
-
-			<Panel class="settings-page__header-buttons">
-				<!-- Gamemode Dropdown will go here -->
-			</Panel>
-
-		</Panel>
-
 		<BaseAudioSettings id="SettingsPageContainer" class="settings-page__container">
 
 			<!-- Volume settings sub section -->
