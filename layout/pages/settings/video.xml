@@ -56,7 +56,7 @@
 					infomessage="#Settings_Video_FOV_Info"
 					min="50"
 					max="130"
-					convar="fov_desired"
+					convar="cl_fov"
 					hasdocspage="false"
 				/>
 			
@@ -234,31 +234,6 @@
 					<Label text="#Settings_General_High" value="-1" id="gpumemlevel2" />
 					<Label text="#Settings_General_VeryHigh" value="0" id="gpumemlevel3" />
 					<Label text="#Settings_General_Autodetect" value="9999999" id="gpumemlevel3" />
-				</SettingsEnumDropDown>
-
-				<SettingsEnumDropDown
-					text="#Settings_Render_EffectDetail"
-					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="EffectDetail"
-					infomessage="#Settings_Render_EffectDetail_Info"
-				>
-					<Label text="#Settings_General_Low" value="0" id="cpulevel0" />
-					<Label text="#Settings_General_Medium" value="1" id="cpulevel1" />
-					<Label text="#Settings_General_High" value="2" id="cpulevel2" />
-					<Label text="#Settings_General_Autodetect" value="9999999" id="cpulevel3" />
-				</SettingsEnumDropDown>
-
-				<SettingsEnumDropDown
-					text="#Settings_Render_ShaderDetail"
-					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="ShaderDetail"
-					infomessage="#Settings_Render_ShaderDetail_Info"
-				>
-					<Label text="#Settings_General_Low" value="0" id="gpulevel0" />
-					<Label text="#Settings_General_Medium" value="1" id="gpulevel1" />
-					<Label text="#Settings_General_High" value="2" id="gpulevel2" />
-					<Label text="#Settings_General_VeryHigh" value="3" id="gpulevel3" />
-					<Label text="#Settings_General_Autodetect" value="9999999" id="gpulevel4" />
 				</SettingsEnumDropDown>
 
 				<SettingsEnumDropDown

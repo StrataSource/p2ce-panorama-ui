@@ -180,6 +180,31 @@
 					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0" />
 					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
 				</SettingsEnum>
+
+				<SettingsSlider
+					text="#Settings_Misc_ViewmodelOffset_X"
+					infomessage="#Settings_Misc_ViewmodelOffset_X_info"
+					min="-20"
+					max="10"
+					convar="viewmodel_offset_x"
+					hasdocspage="false"
+				/>
+				<SettingsSlider
+					text="#Settings_Misc_ViewmodelOffset_Y"
+					infomessage="#Settings_Misc_ViewmodelOffset_Y_info"
+					min="-10"
+					max="10"
+					convar="viewmodel_offset_y"
+					hasdocspage="false"
+				/>
+				<SettingsSlider
+					text="#Settings_Misc_ViewmodelOffset_Z"
+					infomessage="#Settings_Misc_ViewmodelOffset_Z_info"
+					min="-5"
+					max="5"
+					convar="viewmodel_offset_z"
+					hasdocspage="false"
+				/>
 			</Panel>
 		</Panel>
 	</Panel>
