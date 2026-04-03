@@ -41,8 +41,25 @@
 	visibility: visible;
 }
 
+.ChapterModeGrid .chapters__wrapper,
+.ChapterModeSquareGrid .chapters__wrapper {
+	width: fill-parent-flow(1);
+}
+
 .chapters {
 	$root: &;
+
+	&__search {
+		width: 80%;
+		horizontal-align: center;
+		visibility: collapse;
+		@at-root .ChapterModeSquareGrid .chapters__search {
+			visibility: visible;
+		}
+		@at-root .ChapterModeGrid .chapters__search {
+			visibility: visible;
+		}
+	}
 
 	&__list {
 		flow-children: down;

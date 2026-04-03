@@ -3,6 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
+		<include src="file://{scripts}/common/searcher.ts" />
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 	</scripts>
@@ -40,6 +41,11 @@
 	<Panel class="mainmenu__page" onload="CampaignChapters.init()" tabindex="auto" selectionpos="auto">
 		<Panel id="ChaptersContainer" class="chapters__container" tabindex="auto" selectionpos="auto">
 			<Panel id="CampaignChaptersWrap" class="chapters__wrapper">
+				<TextEntry
+					id="ChapterSearchBar"
+					class="textentry chapters__search"
+					placeholder="#Common_SearchEllipsis"
+				/>
 				<Panel id="CampaignChapters" tabindex="auto" selectionpos="auto" />
 			</Panel>
 			<Panel class="ChapterModeListOnly chapters__list__right">

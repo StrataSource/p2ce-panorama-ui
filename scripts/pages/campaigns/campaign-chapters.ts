@@ -1,15 +1,13 @@
 'use strict';
 
 class ChapterEntry {
-	num: number;
 	panel: Panel;
 	chapter: VirtualChapter | undefined;
 	button: RadioButton | undefined;
 	playPanel: Panel | undefined;
 	unlocked: boolean;
 
-	constructor(num: number, panel: Panel, chapter: ChapterInfo | undefined, unlocked: boolean) {
-		this.num = num;
+	constructor(panel: Panel, chapter: ChapterInfo | undefined, unlocked: boolean) {
 		this.panel = panel;
 		this.chapter = chapter;
 		this.unlocked = unlocked;
@@ -166,6 +164,7 @@ class CampaignChapters {
 	static displayMode: ChapterDisplayMode | string = ChapterDisplayMode.LIST;
 	static chapterCache: VirtualChapter[] = [];
 	static selectedBtn: ChapterEntry | undefined = undefined;
+	static chapterSearchCache: Array<AbstractSearchData> = [];
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
@@ -271,6 +270,10 @@ class CampaignChapters {
 
 			$.DispatchEvent('Activated', btn, PanelEventSource.PROGRAM);
 		}
+
+		if (this.displayMode === ChapterDisplayMode.GRID || this.displayMode === ChapterDisplayMode.SQUARE_GRID) {
+			this.setupSearching()
+		}
 	}
 
 	static populatePips() {
@@ -329,7 +332,7 @@ class CampaignChapters {
 			const idx = this.chapterPage * this.maxEntryPerPage + i;
 			const ch = idx < this.chapterCache.length ? this.chapterCache[idx] : undefined;
 
-			this.chapterEntries.push(new ChapterEntry(idx, p, ch, isSingleWsCampaign || prog >= idx));
+			this.chapterEntries.push(new ChapterEntry(p, ch, isSingleWsCampaign || prog >= idx));
 
 			this.chapterEntries[i].update();
 		}
@@ -368,5 +371,52 @@ class CampaignChapters {
 	static customizeChapter() {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
 		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings', undefined);
+	}
+
+	static setupSearching() {
+		for (let i = 0; i < this.chapterCache.length; ++i) {
+			this.chapterSearchCache.push(
+				new AbstractSearchData(
+					// index of chapter!
+					i,
+					this.chapterCache[i].title,
+					i
+				)
+			);
+		}
+		installSearchHandling<number, number>(
+			$<TextEntry>('#ChapterSearchBar')!,
+			() => {
+				this.populateChapters();
+			},
+			() => {
+			},
+			() => {
+				return this.chapterSearchCache;
+			},
+			(matches: Array<number>) => {
+				const prog = CampaignAPI.GetCampaignUnlockProgress(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`);
+				const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
+
+				this.list.RemoveAndDeleteChildren();
+				this.chapterEntries = [];
+
+				for (let i = 0; i < matches.length; ++i) {
+					const idx = matches[i];
+					const p = $.CreatePanel('Panel', this.list, 'chapter' + i);
+					p.LoadLayoutSnippet('ChapterEntrySnippet');
+
+					this.chapterEntries.push(new ChapterEntry(p, this.chapterCache[idx], isSingleWsCampaign || prog >= idx));
+
+					this.chapterEntries[i].update();
+				}
+
+				for (const entry of this.chapterEntries) {
+					if (this.selectedChapter && entry.chapter && this.selectedChapter.id === entry.chapter.id) {
+						$.DispatchEvent('Activated', entry.button!, PanelEventSource.PROGRAM);
+					}
+				}
+			}
+		)
 	}
 }
