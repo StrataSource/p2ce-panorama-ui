@@ -36,6 +36,9 @@ class AddonEntry {
 			.replace(/r\s*$/, '');
 
 		if (this.addonEnableCheck) {
+			if (info.type.includes('Campaign') || info.type.includes('Map')) {
+				this.addonEnableCheck.visible = false;
+			}
 			this.addonEnableCheck.SetSelected(WorkshopAPI.GetAddonEnabled(this.index));
 			this.addonEnableCheck.SetPanelEvent('onactivate', () => AddonManager.markDirty());
 		}
