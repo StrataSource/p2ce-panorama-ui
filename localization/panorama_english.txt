@@ -449,8 +449,8 @@
 		"Debugger_AnimationHeader"					"Animation Keyframes"
 		"Debugger_ToggleTheme"						"Toggle Theme"
 		"Debugger_DevInfo"							"Show Dev Info"
-		"Debugger_Smaller"							"뿯▽ Smaller"
-		"Debugger_Larger"							"뿯▽ Larger"
+		"Debugger_Smaller"							"Smaller"
+		"Debugger_Larger"							"Larger"
 		"Debugger_ResetSize"						"Reset Size"
 
 		"Console_Title"								"Console"
@@ -485,6 +485,7 @@
 		"Settings_General_Search_EmptyHeader"			"No Results Found"
 		"Settings_General_Search_EmptyNoResults"		"Your search query did not match any results in the Settings menu."
 		"Settings_General_Search_MatchedEnglishTag"		"Matches "
+		"OS_Default_Device"								"System Default Output Device"
 		
 		// Settings - Import/Export
 		"Settings_ImportExport_Title"					"Import/Export %thing% Settings"
@@ -810,7 +811,13 @@
 		"Settings_Misc_Title" 							"Miscellaneous"
 		"Settings_Misc_solenergy_refract"				"Solid Energy Refractions"
 		"Settings_Misc_solenergy_refract_info"			"Enables water-like refraction effects in fizzlers."
-		
+		"#Settings_Misc_ViewmodelOffset_X"				"Viewmodel Offset (X)"
+		"#Settings_Misc_ViewmodelOffset_X_info"			"Offset the position of the Viewmodel in the X axis by this amount in Hammer Units (HU)"
+		"#Settings_Misc_ViewmodelOffset_Y"				"Viewmodel Offset (Y)"
+		"#Settings_Misc_ViewmodelOffset_Y_info"			"Offset the position of the Viewmodel in the Y axis by this amount in Hammer Units (HU)"
+		"#Settings_Misc_ViewmodelOffset_Z"				"Viewmodel Offset (Z)"
+		"#Settings_Misc_ViewmodelOffset_Z_info"			"Offset the position of the Viewmodel in the Z axis by this amount in Hammer Units (HU)"
+
 		"Settings_Video_PreventThreadSleep"				"Prevent Main Thread Sleep"
 		"Settings_Video_PreventThreadSleep_Info"		"Prevent the main game thread from sleeping when at maximum FPS limit. Enabling this option may result in smoother performance, but causes higher CPU usage."
 		
