@@ -8,7 +8,7 @@
 	height: $button-height;
 	padding: 4px 0;
 	background-color: $textentry-background;
-	border-bottom: $textentry-border;
+	border: $textentry-border;
 
 	&:hover {
 		background-color: $textentry-background-hover;

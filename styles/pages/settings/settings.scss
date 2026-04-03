@@ -7,19 +7,21 @@
 $page-width: 1920px - $rightnav-width;
 
 .settings {
-	flow-children: right;
+	flow-children: down;
 	width: 100%;
 	height: 100%;
 
 	max-width: 1920px;
 
 	&__left {
-		flow-children: down;
-		width: fill-parent-flow(0.35);
-		min-width: 210px;
+		flow-children: left;
+	}
 
-		height: 100%;
-		padding-right: 16px;
+	&__horiz {
+		width: 100%;
+		height: fill-parent-flow(1);
+		flow-children: right;
+		margin-top: 10px;
 	}
 
 	&__pages {
@@ -28,16 +30,13 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__info {
-		width: fill-parent-flow(0.35);
-
+		width: fill-parent-flow(0.60);
 		height: 100%;
 	}
 
 	&__search {
-		width: 600px;
-		height: 50px;
-		margin-bottom: 15px;
-		margin-top: 4px;
+		width: 400px;
+		height: 45px;
 	}
 
 	&__crosshair {
@@ -104,19 +103,13 @@ $page-width: 1920px - $rightnav-width;
 .settings-nav {
 	$root: &;
 
-	width: 100%;
-	height: fit-children;
-
-	background-color: $base-950;
+	background-color: $button-background;
 
 	border: $menu-pane-border;
 	flow-children: none;
 
 	&__main {
-		flow-children: down;
-		width: 100%;
-		height: fit-children;
-		overflow: squish scroll;
+		flow-children: right;
 	}
 
 	&__collapse-button {
@@ -124,6 +117,7 @@ $page-width: 1920px - $rightnav-width;
 		horizontal-align: right;
 		height: 19px;
 		width: 23px;
+		visibility: collapse;
 
 		background-color: rgba(0, 0, 0, 0.5);
 
@@ -151,11 +145,11 @@ $page-width: 1920px - $rightnav-width;
 	&__subsection {
 		flow-children: down;
 
-		width: 100%;
+		//width: 100%;
 
 		@each $child-count in (0, 1, 2, 3, 4, 5, 6, 7, 8) {
 			&--#{$child-count} {
-				height: $child-count * $subitem-height;
+				//height: $child-count * $subitem-height;
 			}
 		}
 
@@ -166,15 +160,15 @@ $page-width: 1920px - $rightnav-width;
 
 	&__item,
 	&__subitem {
-		width: 100%;
 	}
 
 	&__item {
+		background-color: $button-background;
 		flow-children: down;
+		padding: 6px 30px;
 
-		padding: 6px 0;
 		&:hover {
-			background-color: $primary-950;
+			background-color: $button-background-hover;
 		}
 
 		&:selected {
@@ -195,19 +189,15 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__item-label {
-		width: 100%;
-		padding: 0 15px;
-
 		@include mixin.font-styles($use-header: true, $light-header: false);
-		font-size: 35px;
-		max-height: 50px;
+		font-size: 26px;
 		overflow: squish;
 		text-overflow: shrink;
-		transform: translateY(-3px);
 	}
 
 	&__subitem {
 		padding: 2px 0;
+		visibility: collapse;
 
 		height: $subitem-height;
 
@@ -239,9 +229,9 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__separator {
-		width: 100%;
-		height: 2px;
-		background-color: $base-color;
+		width: 1px;
+		height: 100%;
+		background-color: $base-700;
 	}
 }
 
@@ -259,17 +249,10 @@ $page-width: 1920px - $rightnav-width;
 	&__header {
 		flow-children: right;
 		width: 100%;
-		height: 64px;
-
-		padding-left: 8px;
-		margin-top: -10px;
-		margin-bottom: 5px;
+		margin-bottom: 10px;
 
 		&-buttons {
 			flow-children: right;
-			horizontal-align: right;
-			vertical-align: bottom;
-			margin-right: 16px;
 		}
 	}
 
@@ -289,8 +272,7 @@ $page-width: 1920px - $rightnav-width;
 		width: 100%;
 		flow-children: down;
 		overflow: squish scroll;
-		margin-top: 10px;
-		padding-right: 16px;
+		padding-right: 15px;
 	}
 
 	// These are so the page distance scrolled calculations work accurately
@@ -395,10 +377,8 @@ $page-width: 1920px - $rightnav-width;
 	$this: &;
 
 	background-color: $base-950;
-	margin-left: 16px;
-	margin-top: 69px;
-	padding: 16px 10px;
 	border: $menu-pane-border;
+	margin-left: 15px;
 
 	&--hidden {
 		#{$this}__wrapper {
@@ -419,7 +399,7 @@ $page-width: 1920px - $rightnav-width;
 		flow-children: down;
 		opacity: 1;
 		overflow: squish scroll;
-		padding: 0 15px;
+		padding: 15px 20px;
 	}
 
 	&__title {
@@ -430,13 +410,13 @@ $page-width: 1920px - $rightnav-width;
 
 	&__description {
 		@include mixin.font-styles($use-header: false);
-		font-size: 17px;
+		text-overflow: clip;
 		margin-bottom: 10px;
 
 		& h2 {
 			// I wish we could use margin-top here to avoid needing \n chars in the string,
 			// but Panorama just ignores that and similar properties
-			font-weight: medium;
+			font-weight: bold;
 		}
 	}
 
