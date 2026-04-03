@@ -230,7 +230,9 @@
 				>
 					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_left" value="0" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
 					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_center" value="1" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
-					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_right" value="2" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
+					<!-- Pivot (03/04/2026): Disabled because it's not aligning to the right correctly...
+						<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_right" value="2" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
+					-->
 				</SettingsEnum>
 
 			</Panel>
