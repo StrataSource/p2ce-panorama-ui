@@ -21,7 +21,8 @@
 					id="SettingsSearchTextEntry"
 					class="textentry search__textentry"
 					maxchars="30"
-					placeholder="#Settings_General_Search_Prompt"
+					placeholder="[DEV] LOGIC NOT UPDATED, DISABLED FOR NOW #Settings_General_Search_Prompt"
+					disabled="true"
 				/>
 
 				<Panel class="fill-width" />
