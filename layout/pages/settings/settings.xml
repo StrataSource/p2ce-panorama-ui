@@ -7,7 +7,7 @@
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/common/settings.js" />
 		<include src="file://{scripts}/pages/settings/page.js" />
-		<include src="file://{scripts}/pages/settings/settings.js" />
+		<include src="file://{scripts}/pages/settings/settings.ts" />
 		<include src="file://{scripts}/pages/settings/search.js" />
 	</scripts>
 
@@ -43,32 +43,6 @@
 							selected="true"
 						>
 							<Label class="settings-nav__item-label" text="#Settings_Input_Title" />
-							<Panel class="settings-nav__subsection settings-nav__subsection--3 settings-nav__subsection--hidden">
-								<RadioButton
-									id="ControllerRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'ControllerSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Controller_SteamInputButton" />
-								</RadioButton>
-								<RadioButton
-									id="MouseRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'MouseSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Mouse_Title" />
-								</RadioButton>
-								<RadioButton
-									id="KeybindRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'KeybindSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Keybinds_Title" />
-								</RadioButton>
-							</Panel>
 						</RadioButton>
 
 						<Panel class="settings-nav__separator" />
@@ -82,33 +56,6 @@
 							onactivate="MainMenuSettings.navigateToTab('AudioSettings')"
 						>
 							<Label class="settings-nav__item-label" text="#Settings_Audio" />
-
-							<Panel class="settings-nav__subsection settings-nav__subsection--3 settings-nav__subsection--hidden">
-								<RadioButton
-									id="VolumeRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('AudioSettings', 'VolumeSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Volume_Title" />
-								</RadioButton>
-								<RadioButton
-									id="ClosedCaptionsRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('AudioSettings', 'AudioClosedCaptionsSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_ClosedCaptions_Title" />
-								</RadioButton>
-								<RadioButton
-									id="AudioDeviceRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('AudioSettings', 'AudioDevicesSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_AudioDevices_Title" />
-								</RadioButton>
-							</Panel>
 						</RadioButton>
 
 						<Panel class="settings-nav__separator" />
@@ -122,33 +69,6 @@
 							onactivate="MainMenuSettings.navigateToTab('VideoSettings')"
 						>
 							<Label class="settings-nav__item-label" text="#Settings_Video" />
-							
-							<Panel class="settings-nav__subsection settings-nav__subsection--3 settings-nav__subsection--hidden">
-								<RadioButton
-									id="VideoSubRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('VideoSettings', 'VideoSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Video_Title" />
-								</RadioButton>
-								<RadioButton
-									id="AdvancedVideoRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('VideoSettings', 'AdvancedVideoSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Render_Title" />
-								</RadioButton>
-								<RadioButton
-									id="TextureReplaceRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('VideoSettings', 'TextureReplaceSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_TextureReplace_Title" />
-								</RadioButton>
-							</Panel>
 						</RadioButton>
 
 						<Panel class="settings-nav__separator" />
@@ -162,17 +82,6 @@
 							onactivate="MainMenuSettings.navigateToTab('InterfaceSettings')"
 						>
 							<Label class="settings-nav__item-label" text="#Settings_Interface" />
-
-							<Panel class="settings-nav__subsection settings-nav__subsection--11 settings-nav__subsection--hidden">
-								<RadioButton
-									id="UIRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('InterfaceSettings', 'UISubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Menu_Title" />
-								</RadioButton>
-							</Panel>
 						</RadioButton>
 
 						<Panel class="settings-nav__separator" />
@@ -186,44 +95,42 @@
 							onactivate="MainMenuSettings.navigateToTab('CustomizationSettings')"
 						>
 							<Label class="settings-nav__item-label" text="#Settings_Customization" />
-
-							<Panel class="settings-nav__subsection settings-nav__subsection--11 settings-nav__subsection--hidden">
-								<RadioButton
-									id="Portal1Radio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'Portal1SubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Portal1_Title" />
-								</RadioButton>
-								<RadioButton
-									id="PortalsRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'PortalsSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Portals_Title" />
-								</RadioButton>
-								<RadioButton
-									id="GelsRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'GelsSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Gels_Title" />
-								</RadioButton>
-								<RadioButton
-									id="MiscRadio"
-									class="settings-nav__subitem"
-									group="SettingsSubNav"
-									onactivate="MainMenuSettings.navigateToSubsection('CustomizationSettings', 'MiscSubSection')"
-								>
-									<Label class="settings-nav__subitem-label" text="#Settings_Misc_Title" />
-								</RadioButton>
-							</Panel>
 						</RadioButton>
 					</Panel>
 				</Panel>
+			</Panel>
+
+			<Panel id="SettingsSubNav" class="settings-nav__subsection">
+				<RadioButton
+					id="ControllerRadio"
+					class="settings-nav__subitem"
+					group="SettingsSubNav"
+					onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'ControllerSubSection')"
+				>
+					<Label class="settings-nav__subitem-label" text="#Settings_Controller_Title" />
+				</RadioButton>
+
+				<Panel class="settings-nav__separator" />
+
+				<RadioButton
+					id="MouseRadio"
+					class="settings-nav__subitem"
+					group="SettingsSubNav"
+					onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'MouseSubSection')"
+				>
+					<Label class="settings-nav__subitem-label" text="#Settings_Mouse_Title" />
+				</RadioButton>
+
+				<Panel class="settings-nav__separator" />
+
+				<RadioButton
+					id="KeybindRadio"
+					class="settings-nav__subitem"
+					group="SettingsSubNav"
+					onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'KeybindSubSection')"
+				>
+					<Label class="settings-nav__subitem-label" text="#Settings_Keybinds_Title" />
+				</RadioButton>
 			</Panel>
 
 			<Panel class="settings__horiz">
@@ -231,9 +138,9 @@
 				<Panel id="SettingsInfo" class="settings__info settings-info">
 					<Panel class="settings-info__wrapper">
 						<Label id="SettingsInfoTitle" class="settings-info__title" />
-						<Label id="SettingsInfoMessage" html="true" class="settings-info__description" />
+						<Label id="SettingsInfoMessage" html="true" loadimages="true" loadmovies="true" imgscaling="stretch-to-cover-preserve-aspect" class="settings-info__description" />
 						<Label id="SettingsInfoConvar" html="true" class="settings-info__cvar" />
-						<Button id="SettingsInfoDocsButton" class="button">
+						<Button id="SettingsInfoDocsButton" class="button hide">
 							<Label class="button__text" text="#Settings_General_ViewDocs" />
 						</Button>
 					</Panel>

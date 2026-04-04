@@ -129,35 +129,22 @@ $page-width: 1920px - $rightnav-width;
 		padding: 4px;
 	}
 
-	// To animate we need to fixed height values
-	// Get the value that the subitems should be naturally in 1920x1080 and set height here.
-	// It's determined based on font-size which I don't think I can translate automatically into panel height.
-	$subitem-height: 26px;
-
 	&__subsection {
-		flow-children: down;
-
-		//width: 100%;
-
-		@each $child-count in (0, 1, 2, 3, 4, 5, 6, 7, 8) {
-			&--#{$child-count} {
-				//height: $child-count * $subitem-height;
-			}
-		}
-
-		&--hidden {
-			height: 0px;
-		}
+		background-color: $base-950;
+		border: $menu-pane-border;
+		flow-children: right;
+		margin-top: 5px;
 	}
 
-	&__item,
 	&__subitem {
+		background-color: $button-background;
+		padding: 5px 30px;
 	}
 
 	&__item {
 		background-color: $button-background;
 		flow-children: down;
-		padding: 6px 30px;
+		padding: 5px 30px;
 
 		&:hover {
 			background-color: $button-background-hover;
@@ -188,13 +175,8 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__subitem {
-		padding: 2px 0;
-		visibility: collapse;
-
-		height: $subitem-height;
-
 		&:hover {
-			background-color: $primary-800;
+			background-color: $button-background-hover;
 
 			#{$root}__subitem-label {
 				color: $bright-color;
@@ -202,22 +184,16 @@ $page-width: 1920px - $rightnav-width;
 		}
 
 		&:selected {
-			background-color: $primary-700;
+			background-color: $button-background-selected;
 
 			#{$root}__subitem-label {
-				color: $bright-color;
-			}
-
-			&:hover {
-				background-color: $primary-950;
+				color: $base-950;
 			}
 		}
 	}
 
 	&__subitem-label {
-		padding-left: 25px;
-
-		@include mixin.font-styles($use-header: true, $light-header: true);
+		@include mixin.font-styles($use-header: true, $light-header: false);
 	}
 
 	&__separator {
@@ -316,7 +292,7 @@ $page-width: 1920px - $rightnav-width;
 		font-size: 24px;
 		width: 100%;
 		padding: 10px 15px;
-		background-color: $base-900;
+		background-color: gradient(radial, 50% 50%, 0% 0%, 90% 1000%, from($base-800), to($base-950));
 		color: $bright-color;
 		transform: translateY(0px);
 	}
@@ -405,12 +381,23 @@ $page-width: 1920px - $rightnav-width;
 	&__description {
 		@include mixin.font-styles($use-header: false);
 		text-overflow: clip;
-		margin-bottom: 10px;
+		margin-bottom: 15px;
 
 		& h2 {
 			// I wish we could use margin-top here to avoid needing \n chars in the string,
 			// but Panorama just ignores that and similar properties
 			font-weight: bold;
+		}
+
+		& > .InlineImage,
+		& > .InlineMovie {
+			border: $menu-pane-border;
+			width: 455px;
+			height: 256px;
+			horizontal-align: center;
+		}
+		& > .InlineImage {
+			margin-top: 15px;
 		}
 	}
 

@@ -5,28 +5,19 @@ class MainMenuSettings {
 	static prevTab = null;
 
 	static panels = {
-		/** @type {Panel} @static */
-		content: $('#SettingsContent'),
-		/** @type {Panel} @static */
-		nav: $('#SettingsNav'),
-		/** @type {Image} @static */
-		navExpand: $('#SettingsNavCollapseIcon'),
-		/** @type {Image} @static */
-		navCollapse: $('#SettingsNavExpandIcon'),
-		/** @type {Panel} @static */
-		info: $('#SettingsInfo'),
-		/** @type {Label} @static */
-		infoTitle: $('#SettingsInfoTitle'),
-		/** @type {Label} @static */
-		infoMessage: $('#SettingsInfoMessage'),
-		/** @type {Label} @static */
-		infoConvar: $('#SettingsInfoConvar'),
-		/** @type {Button} @static */
-		infoDocsButton: $('#SettingsInfoDocsButton')
+		content: $<Panel>('#SettingsContent')!,
+		nav: $<Panel>('#SettingsNav')!,
+		navExpand: $<Image>('#SettingsNavCollapseIcon')!,
+		navCollapse: $<Image>('#SettingsNavExpandIcon')!,
+		info: $<Panel>('#SettingsInfo')!,
+		infoTitle: $<Label>('#SettingsInfoTitle')!,
+		infoMessage: $<Label>('#SettingsInfoMessage')!,
+		infoConvar: $<Label>('#SettingsInfoConvar')!,
+		infoDocsButton: $<Button>('#SettingsInfoDocsButton')!
 	};
 
 	static currentInfo = null;
-	static spacerHeight = null;
+	static spacerHeight: number | null = null;
 	static shouldLimitScroll = false;
 
 	static {
@@ -69,7 +60,8 @@ class MainMenuSettings {
 					);
 
 				// Hide the active tab
-				$.GetContextPanel().FindChildInLayoutFile(this.activeTab).RemoveClass('settings-page--active');
+				const tab = $.GetContextPanel().FindChildInLayoutFile(this.activeTab);
+				tab?.RemoveClass('settings-page--active');
 			}
 
 			// Show selected tab, store previous
@@ -77,25 +69,32 @@ class MainMenuSettings {
 			this.activeTab = tab;
 
 			// Activate the tab
-			const activePanel = $.GetContextPanel().FindChildInLayoutFile(tab);
-			activePanel.AddClass('settings-page--active');
-
-			// Force a reload of any resources since we're about to display the panel
-			activePanel.visible = true;
-			activePanel.SetReadyForDisplay(true);
+			const activePanel = $.GetContextPanel().FindChildInLayoutFile(tab)!;
+			if (activePanel) {
+				activePanel.AddClass('settings-page--active');
+				// Force a reload of any resources since we're about to display the panel
+				activePanel.visible = true;
+				activePanel.SetReadyForDisplay(true);
+			}
 
 			// Hide the info panel if it was displaying something on the previous page
 			this.hideInfo();
 
 			if (tab !== 'SearchSettings') {
 				// Call onPageScrolled to set the checked nav subsection to the page's scroll position
-				this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
+				if (activePanel)
+					this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
 
 				// Show the nav menu children of the selected tab
 				this.setNavItemCollapsed(tab, false);
 
 				// Check the radiobutton for cases where this is called from JS. CSGO Panorama fires an Activated event to the radiobutton instead but I hate that.
-				$.GetContextPanel().FindChildTraverse(SettingsTabs[tab].radioid).checked = true;
+				const tabid = SettingsTabs[tab];
+				if (tabid) {
+					const radio = $.GetContextPanel().FindChildTraverse(tabid.radioid)
+					if (radio)
+						radio.checked = true;
+				}
 			}
 
 			SettingsShared.onChangedTab(this.activeTab);
@@ -120,7 +119,7 @@ class MainMenuSettings {
 		if (tab !== 'SearchSettings') {
 			$.RegisterEventHandler(
 				'Scroll',
-				container,
+				container!,
 				// The default arg that gets passed here is the panel's ID, override with the panel itself so we don't have to do a traversal find later on
 				() => this.onPageScrolled(tab, container)
 			);
@@ -187,9 +186,11 @@ class MainMenuSettings {
 			// Don't run again for 0.05 seconds
 			this.limitScrollCheck(0.05);
 		}
-
+		
+		if (!panel) return;
+		
 		// This is 0 on initial load for some reason
-		if (!this.spacerHeight > 0) {
+		if (this.spacerHeight && this.spacerHeight > 0) {
 			this.spacerHeight =
 				$.GetContextPanel().FindChildrenWithClassTraverse('settings-page__spacer')[0].actuallayoutheight;
 		}
@@ -227,18 +228,20 @@ class MainMenuSettings {
 	}
 
 	static updateNavCollapse() {
+		return;
+
 		// Get state from PS
 		let shouldCollapse = $.persistentStorage.getItem('settings.collapseNav');
 
 		// Set to true if not set by user
-		if (typeof shouldCollapse === typeof null) {
+		if (!shouldCollapse) {
 			$.persistentStorage.setItem('settings.collapseNav', true);
 			shouldCollapse = true;
 		}
 
 		// Show the corresponding button icon
 		this.panels.navExpand.SetHasClass('hide', !shouldCollapse);
-		this.panels.navCollapse.SetHasClass('hide', shouldCollapse);
+		this.panels.navCollapse.SetHasClass('hide', Boolean(shouldCollapse));
 
 		// Update all the items
 		for (const tab of Object.keys(SettingsTabs).filter((tab) => tab !== 'SearchSettings' && tab !== this.activeTab))
@@ -247,8 +250,9 @@ class MainMenuSettings {
 
 	// Set the collapsed state of a nav item
 	static setNavItemCollapsed(tab, shouldCollapse) {
+		return;
 		this.panels.nav
-			.FindChild(SettingsTabs[tab].radioid)
+			.FindChild(SettingsTabs[tab].radioid)!
 			.FindChildrenWithClassTraverse('settings-nav__subsection')[0]
 			.SetHasClass('settings-nav__subsection--hidden', shouldCollapse);
 	}
@@ -385,7 +389,7 @@ class MainMenuSettings {
 						isKeybinder ? $.Localize('#Settings_General_Command') : $.Localize('#Settings_General_Convar')
 					}: <b>${convar}</b></i>`;
 					this.panels.infoConvar.RemoveClass('hide');
-					this.panels.infoDocsButton.SetHasClass('hide', !hasDocs || isKeybinder);
+					//this.panels.infoDocsButton.SetHasClass('hide', !hasDocs || isKeybinder);
 					// Shouldn't need to clear the panel event here as it's hidden or gets overwritten
 					this.panels.infoDocsButton.SetPanelEvent('onactivate', () =>
 						SteamOverlayAPI.OpenURLModal(`https://docs.momentum-mod.org/var/${convar}`)

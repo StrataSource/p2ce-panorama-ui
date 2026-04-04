@@ -27,21 +27,12 @@
 
 	padding: $settings-padding;
 
-	&.--even {
-		//background-color: rgba(255, 255, 255, 0.03);
+	&:hover {
+		background-color: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from(rgba($primary-500, 0.1)), to(rgba($primary-700, 0.1)));
 	}
-	&.--odd {
-		//background-color: rgba(255, 255, 255, 0.02);
-	}
-	&.--even,
-	&.--odd {
-		&:hover {
-			background-color: $primary-950;
-		}
 
-		&:disabled {
-			background-color: $base-800;
-		}
+	&:disabled {
+		background-color: $base-800;
 	}
 
 	&__title-container {
@@ -149,10 +140,6 @@
 
 .settings-keybinder {
 	$root: &;
-
-	&:hover {
-		background-color: rgba(255, 255, 255, 0.025);
-	}
 
 	&__container {
 		min-width: 75px;
