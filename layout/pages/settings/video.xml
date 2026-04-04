@@ -27,7 +27,7 @@
 				</Button>
 				<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 					<Button class="button ml-2" onactivate="SettingsShared.resetVideoSettings();">
-						<Image class="button__icon" src="file://{images}/reset.svg" />
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 					</Button>
 				</TooltipPanel>
 			</Panel>
@@ -326,9 +326,9 @@
 
 			</Panel>
 
-			<Panel class="settings-page__spacer" />
+			<Panel class="settings-page__spacer hide" />
 
-			<Panel id="TextureReplaceSubSection" class="settings-group">
+			<Panel id="TextureReplaceSubSection" class="settings-group hide">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_TextureReplace_Title" />
 

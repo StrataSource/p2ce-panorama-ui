@@ -41,7 +41,7 @@
 
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('MouseSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 
@@ -118,7 +118,7 @@
 
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 						<Button class="button" onactivate="SettingsShared.resetControls('KeybindSubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 						</Button>
 					</TooltipPanel>
 

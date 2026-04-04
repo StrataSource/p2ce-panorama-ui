@@ -29,7 +29,7 @@
 
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('VolumeSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 
@@ -157,7 +157,7 @@
 						
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('AudioClosedCaptionsSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 
@@ -203,7 +203,7 @@
 						
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('AudioDevicesSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 					</Panel>

@@ -19,7 +19,7 @@
 
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('UISubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 						</Button>
 					</TooltipPanel>
 
@@ -44,8 +44,8 @@
 					hasdocspage="false"
 					tags="sentry"
 				>
-					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
-						<Label class="button__text" text="Update Consent" />
+					<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.sentryUpdateConsent()">
+						<Label class="button__text" text="[HC] Update Consent" />
 					</Button>
 				</SettingsEnum>
 
