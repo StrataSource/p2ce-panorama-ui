@@ -15,9 +15,7 @@
 	width: 100%;
 	height: $settings-height;
 
-	border-top: 1px solid $base-900;
 	padding: $settings-padding;
-	margin-bottom: $settings-gap;
 
 	&.--even {
 		//background-color: rgba(255, 255, 255, 0.03);
@@ -32,19 +30,18 @@
 		}
 
 		&:disabled {
-			background-color: rgba(128, 128, 128, 0.1);
+			background-color: $base-800;
 		}
 	}
 
 	&__title-container {
-		width: 35%;
+		width: fill-parent-flow(0.35);
 		vertical-align: center;
-		margin-right: 10px;
 	}
 
 	&__input-container {
 		flow-children: right;
-		width: 65%;
+		width: fill-parent-flow(0.65);
 		vertical-align: center;
 	}
 
@@ -68,7 +65,7 @@
 		flow-children: right;
 		horizontal-align: right;
 		width: fit-children;
-		height: 38px;
+		height: 35px;
 		vertical-align: center;
 
 		& > RadioButton {
@@ -197,7 +194,7 @@
 		align: center center;
 		text-align: center;
 
-		transform: translateY(-2px);
+		transform: translateY(-3px);
 	}
 
 	&__clear {
