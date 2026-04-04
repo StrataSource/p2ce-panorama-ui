@@ -72,7 +72,7 @@
 					<RadioButton group="enableconsent" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<ConVarEnabler convar="developer" togglevisibility="true">
+				<ConVarEnabler convar="developer" togglevisibility="true" hittest="false">
 					<SettingsEnum
 						id="PlaytestDOSARemove"
 						text="Playtest DOSA remove (DO NOT LOCALIZE)"
@@ -80,7 +80,7 @@
 						hasdocspage="false"
 						tags="dosa"
 					>
-						<Button class="button horizontal-align-right" onactivate="SettingsShared.PlayTestDosaRemove()">
+						<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.PlayTestDosaRemove()">
 							<Label class="button__text" text="Remove DOSA" />
 						</Button>
 					</SettingsEnum>
