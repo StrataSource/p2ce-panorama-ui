@@ -509,3 +509,7 @@ $page-width: 1920px - $rightnav-width;
 		}
 	}
 }
+
+.settings-row-separator {
+	border-bottom: 1px solid $base-900;
+}
