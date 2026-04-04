@@ -50,6 +50,7 @@
 					max="130"
 					convar="cl_fov"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 			
 				<SettingsSlider
@@ -81,6 +82,7 @@
 					convar="mat_brightness"
 					infomessage="#Settings_Video_Brightness_Info"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 
 				<SettingsEnumDropDown

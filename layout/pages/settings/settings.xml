@@ -15,7 +15,7 @@
 
 		<Panel class="settings">
 
-			<Panel class="settings__left">
+			<Panel id="SettingsNav" class="settings__left">
 
 				<TextEntry
 					id="SettingsSearchTextEntry"

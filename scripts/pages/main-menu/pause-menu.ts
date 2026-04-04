@@ -125,6 +125,16 @@ class PauseMenu {
 		$.DispatchEvent('MainMenuAddBgPanel', p);
 		p.FindChildTraverse('PauseMenuMainMenuBlur')!.AddClass('mainmenu__pause-blur__anim');
 
+		$.RegisterForUnhandledEvent('MainMenuSetPauseBlur',
+			(doBlur: boolean) => {
+				if (doBlur) {
+					p.FindChildTraverse('PauseMenuMainMenuBlur')!.AddClass('mainmenu__pause-blur__anim');
+				} else {
+					p.FindChildTraverse('PauseMenuMainMenuBlur')!.RemoveClass('mainmenu__pause-blur__anim');
+				}
+			}
+		);
+
 		this.setContinueDetails();
 	}
 

@@ -43,12 +43,14 @@
 				<Panel id="PageBg" class="mainmenu__page-bg" hittest="false" />
 				<Panel id="GradientBar" class="mainmenu__gradient-bar" hittest="false" />
 				<Image
+					id="GridTexture1"
 					class="mainmenu__grid1"
 					src="file://{images}/menu/menu_grid1.svg"
 					scaling="stretch-to-fit-preserve-aspect"
 					hittest="false"
 				/>
 				<Image
+					id="GridTexture2"
 					class="mainmenu__grid2"
 					src="file://{images}/menu/menu_grid2.svg"
 					scaling="stretch-to-fit-preserve-aspect"

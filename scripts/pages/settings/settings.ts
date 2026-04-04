@@ -7,6 +7,7 @@ class MainMenuSettings {
 	static panels = {
 		content: $<Panel>('#SettingsContent')!,
 		nav: $<Panel>('#SettingsNav')!,
+		subNav: $<Panel>('#SettingsSubNav')!,
 		navExpand: $<Image>('#SettingsNavCollapseIcon')!,
 		navCollapse: $<Image>('#SettingsNavExpandIcon')!,
 		info: $<Panel>('#SettingsInfo')!,
@@ -19,6 +20,7 @@ class MainMenuSettings {
 	static currentInfo = null;
 	static spacerHeight: number | null = null;
 	static shouldLimitScroll = false;
+	static doingGameFade = false;
 
 	static {
 		// Load every tab immediately, otherwise search won't be guaranteed to find everything.
@@ -257,12 +259,7 @@ class MainMenuSettings {
 			.SetHasClass('settings-nav__subsection--hidden', shouldCollapse);
 	}
 
-	static initPanelsRecursive(panel) {
-		// Initialise info panel event handlers
-		if (this.isSettingsPanel(panel) || this.isSpeedometerPanel(panel)) {
-			this.setPanelInfoEvents(panel);
-		}
-
+	static initPanelForPersistentVariable(panel) {
 		// Initialise all the settings using persistent storage
 		// Only Enum and EnumDropDown are currently supported, others can be added when/if needed
 		const psVar = panel.GetAttributeString('psvar', '');
@@ -273,6 +270,142 @@ class MainMenuSettings {
 				this.initPersistentStorageEnumDropdown(panel, psVar);
 			}
 		}
+	}
+
+	static initPanelForGameShow(panel: GenericPanel) {
+		if (GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU) return;
+
+		const showGameVar = panel.GetAttributeString('viewgameduringedit', '');
+		if (!showGameVar) return;
+
+		if (panel.paneltype !== 'SettingsSlider') {
+			$.Warning(`Setting field has "viewgameduringedit" attribute, but that cannot be used on this (${panel.paneltype}) panel!`);
+			return;
+		}
+
+		const realSlider = panel.FindChildTraverse<Slider>('Slider')!;
+
+		realSlider.SetPanelEvent('onvaluechanged', () => {
+			if (this.doingGameFade) return;
+
+			const parent = panel.GetParent();
+
+			if (!parent) return;
+			if (!this.activeTab) return;
+
+			const page = this.panels.content.FindChildTraverse(this.activeTab);
+			if (!page) return;
+
+			const containers = page.Children();
+			if (!containers) return;
+
+			const panelsToFade: GenericPanel[] = [];
+
+			if (this.panels.info)
+				panelsToFade.push(this.panels.info);
+
+			if (this.panels.nav)
+				panelsToFade.push(this.panels.nav);
+
+			if (this.panels.subNav)
+				panelsToFade.push(this.panels.subNav);
+
+			for (const container of containers) {
+				for (const child of container.Children()) {
+					if (child.id === parent.id) {
+						continue;
+					}
+					panelsToFade.push(child);
+				}
+			}
+
+			for (const child of parent.Children()) {
+				if (child === panel) continue;
+				panelsToFade.push(child);
+			}
+
+			parent.style.backgroundColor = '#18181800';
+			parent.style.borderColor = '#00000000';
+
+			const titleLabel = panel.FindChildTraverse<Label>('Title');
+			if (titleLabel)
+				titleLabel.style.textShadowFast = '2px 2px #181818';
+
+			for (const panel of panelsToFade) {
+				panel.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
+			}
+
+			$.DispatchEvent('MainMenuSetPauseBlur', false);
+
+			this.doingGameFade = true;
+		});
+
+		panel.SetPanelEvent('onmouseout', () => {
+			if (!this.doingGameFade) return;
+
+			const parent = panel.GetParent();
+
+			if (!parent) return;
+			if (!this.activeTab) return;
+
+			const page = this.panels.content.FindChildTraverse(this.activeTab);
+			if (!page) return;
+
+			const containers = page.FindChildrenWithClassTraverse('settings-page__container');
+			if (!containers) return;
+
+			const panelsToFade: GenericPanel[] = [];
+
+			if (this.panels.info)
+				panelsToFade.push(this.panels.info);
+
+			if (this.panels.nav)
+				panelsToFade.push(this.panels.nav);
+
+			if (this.panels.subNav)
+				panelsToFade.push(this.panels.subNav);
+
+			for (const container of containers) {
+				for (const child of container.Children()) {
+					if (child.id === parent.id) {
+						continue;
+					}
+					panelsToFade.push(child);
+				}
+			}
+
+			for (const child of parent.Children()) {
+				if (child === panel) {
+					continue;
+				}
+				panelsToFade.push(child);
+			}
+
+			parent.style.backgroundColor = '#181818';
+			parent.style.borderColor = '#555555';
+
+			const titleLabel = panel.FindChildTraverse<Label>('Title');
+			if (titleLabel)
+				titleLabel.style.textShadowFast = '0px 0px #00000000';
+
+			for (const panel of panelsToFade)
+				panel.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+
+			$.DispatchEvent('MainMenuSetPauseBlur', true);
+
+			this.doingGameFade = false;
+		});
+	}
+
+	static initPanelsRecursive(panel) {
+		// Initialise info panel event handlers
+		if (this.isSettingsPanel(panel) || this.isSpeedometerPanel(panel)) {
+			this.setPanelInfoEvents(panel);
+		}
+
+		this.initPanelForPersistentVariable(panel);
+
+		this.initPanelForGameShow(panel);
 
 		// Search all children
 		for (const child of panel?.Children() ?? []) {
@@ -356,49 +489,37 @@ class MainMenuSettings {
 
 		// If the panel has a message OR a convar and the convar display option is on, show the info panel
 		if (message || showConvar) {
-			let switchDelay = 0;
-
-			// If the info panel is closed, open it. If it's already open, play the switch animation
+			// If the info panel is closed, open it.
 			if (this.panels.info.HasClass('settings-info--hidden')) {
 				this.panels.info.RemoveClass('settings-info--hidden');
-			} else {
-				switchDelay = 0.05; // This should always be half the duration of settings-info--switch
-
-				this.panels.info.AddClass('settings-info--switch');
-				const kfs = this.panels.info.CreateCopyOfCSSKeyframes('BlurFadeInOut');
-				this.panels.info.UpdateCurrentAnimationKeyframes(kfs);
 			}
 
-			// Delay changing the properties even we've just played the switch animation,
-			// to be half the length of animation, so text changes at apex of the animation
-			$.Schedule(switchDelay, () => {
-				if (message) {
-					this.panels.infoTitle.text = $.Localize(title);
-					// I don't want localisation people having to fuss with HTML tags too much so replacing newlines with <br>
-					// does linebreaks for us without requiring any <p> tags.
-					this.panels.infoMessage.text = $.Localize(message).replace(/\r\n|\r|\n/g, '<br><br>');
-					this.panels.infoTitle.RemoveClass('hide');
-					this.panels.infoMessage.RemoveClass('hide');
-				} else {
-					this.panels.infoTitle.AddClass('hide');
-					this.panels.infoMessage.AddClass('hide');
-				}
+			if (message) {
+				this.panels.infoTitle.text = $.Localize(title);
+				// I don't want localisation people having to fuss with HTML tags too much so replacing newlines with <br>
+				// does linebreaks for us without requiring any <p> tags.
+				this.panels.infoMessage.text = $.Localize(message).replace(/\r\n|\r|\n/g, '<br><br>');
+				this.panels.infoTitle.RemoveClass('hide');
+				this.panels.infoMessage.RemoveClass('hide');
+			} else {
+				this.panels.infoTitle.AddClass('hide');
+				this.panels.infoMessage.AddClass('hide');
+			}
 
-				if (showConvar) {
-					this.panels.infoConvar.text = `<i>${
-						isKeybinder ? $.Localize('#Settings_General_Command') : $.Localize('#Settings_General_Convar')
-					}: <b>${convar}</b></i>`;
-					this.panels.infoConvar.RemoveClass('hide');
-					//this.panels.infoDocsButton.SetHasClass('hide', !hasDocs || isKeybinder);
-					// Shouldn't need to clear the panel event here as it's hidden or gets overwritten
-					this.panels.infoDocsButton.SetPanelEvent('onactivate', () =>
-						SteamOverlayAPI.OpenURLModal(`https://docs.momentum-mod.org/var/${convar}`)
-					);
-				} else {
-					this.panels.infoConvar.AddClass('hide');
-					this.panels.infoDocsButton.AddClass('hide');
-				}
-			});
+			if (showConvar) {
+				this.panels.infoConvar.text = `<i>${
+					isKeybinder ? $.Localize('#Settings_General_Command') : $.Localize('#Settings_General_Convar')
+				}: <b>${convar}</b></i>`;
+				this.panels.infoConvar.RemoveClass('hide');
+				//this.panels.infoDocsButton.SetHasClass('hide', !hasDocs || isKeybinder);
+				// Shouldn't need to clear the panel event here as it's hidden or gets overwritten
+				this.panels.infoDocsButton.SetPanelEvent('onactivate', () =>
+					SteamOverlayAPI.OpenURLModal(`https://docs.momentum-mod.org/var/${convar}`)
+				);
+			} else {
+				this.panels.infoConvar.AddClass('hide');
+				this.panels.infoDocsButton.AddClass('hide');
+			}
 		} else {
 			this.hideInfo();
 		}

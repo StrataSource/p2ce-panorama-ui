@@ -36,4 +36,5 @@ interface GlobalEventNameMap {
 	MainMenuPageClosed: (from: string | undefined, to: string | undefined) => void;
 	CampaignMenuRefreshUserSettings: () => void;
 	MainMenuNotifFailLoad: () => void;
+	MainMenuSetPauseBlur: (doBlur: boolean) => void;
 }

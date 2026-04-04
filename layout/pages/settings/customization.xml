@@ -185,6 +185,7 @@
 					max="10"
 					convar="viewmodel_offset_x"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 				<SettingsSlider
 					text="#Settings_Misc_ViewmodelOffset_Y"
@@ -193,6 +194,7 @@
 					max="10"
 					convar="viewmodel_offset_y"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 				<SettingsSlider
 					text="#Settings_Misc_ViewmodelOffset_Z"
@@ -201,6 +203,16 @@
 					max="5"
 					convar="viewmodel_offset_z"
 					hasdocspage="false"
+					viewgameduringedit="true"
+				/>
+				<SettingsSlider
+					text="[HC] Crosshair Scale"
+					infomessage="[HC] Crosshair Scale Desc"
+					min="0.1"
+					max="2"
+					convar="cl_portal_crosshair_scale"
+					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 			</Panel>
 		</Panel>
