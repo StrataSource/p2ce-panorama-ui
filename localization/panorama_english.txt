@@ -485,6 +485,8 @@
 		"Settings_General_Search_EmptyHeader"			"No Results Found"
 		"Settings_General_Search_EmptyNoResults"		"Your search query did not match any results in the Settings menu."
 		"Settings_General_Search_MatchedEnglishTag"		"Matches "
+		"Settings_General_Search_VeryFull"				"{s:count} more match"
+		"Settings_General_Search_VeryFull_Plural"		"{s:count} more matches"
 		"OS_Default_Device"								"System Default Output Device"
 		
 		// Settings - Import/Export

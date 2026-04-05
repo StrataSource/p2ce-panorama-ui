@@ -146,7 +146,11 @@ $page-width: 1920px - $rightnav-width;
 		flow-children: down;
 		padding: 5px 30px;
 
-		&:hover {
+		&:parentdisabled {
+			opacity: 0.1;
+		}
+
+		&:hover:not(:parentdisabled) {
 			background-color: $button-background-hover;
 		}
 
@@ -269,6 +273,9 @@ $page-width: 1920px - $rightnav-width;
 
 	&--search {
 		padding: 15px 20px;
+		flow-children: down;
+		overflow: squish scroll;
+		width: 100%;
 	}
 
 	&--highlight {
@@ -438,20 +445,13 @@ $page-width: 1920px - $rightnav-width;
 	height: 50px;
 	padding: 0 15px;
 
-	margin: 2.5px 0;
+	border: $menu-pane-border;
 
-	border: 2px solid $base-800;
-
-	background-color: $base-900;
+	background-color: $button-background;
 
 	&:hover {
-		background-color: $primary-800;
-		border-color: rgba(0, 0, 0, 0);
-		border-bottom-color: $primary-color;
-
-		#{$root}__text--match {
-			color: $primary-300;
-		}
+		background-color: $button-background-hover;
+		border-color: $primary-color;
 	}
 
 	&__text {
@@ -470,16 +470,15 @@ $page-width: 1920px - $rightnav-width;
 		}
 
 		&--match {
-			color: $primary-color;
 		}
 	}
 
 	&__chevron {
-		width: 16px;
+		width: 32px;
 		height: 16px;
-		margin: 12px 5px;
 		vertical-align: middle;
-		opacity: 0.5;
+		opacity: 1;
+		wash-color: $base-200;
 	}
 
 	&__text,
@@ -488,11 +487,12 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__tags {
+		width: fill-parent-flow(1);
+		text-align: right;
 		vertical-align: middle;
 		font-size: 16px;
 		font-style: italic;
-		margin-left: 12px;
-		color: rgb(190, 190, 190);
+		transform: translateY(0px);
 
 		&--hidden {
 			visibility: collapse;

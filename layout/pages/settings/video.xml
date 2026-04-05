@@ -7,7 +7,7 @@
 		<include src="file://{scripts}/pages/settings/page.js" />
 	</scripts>
 
-	<Panel class="settings-page">
+	<Panel class="settings-page" searchtitle="#Settings_Video">
 
 		<Panel class="settings-page__header">
 			<Panel class="settings-page__header-buttons">

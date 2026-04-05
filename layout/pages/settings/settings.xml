@@ -32,8 +32,7 @@
 					id="SettingsSearchTextEntry"
 					class="textentry search__textentry"
 					maxchars="30"
-					placeholder="[DEV] LOGIC NOT UPDATED, DISABLED FOR NOW #Settings_General_Search_Prompt"
-					disabled="true"
+					placeholder="#Settings_General_Search_Prompt"
 				/>
 
 				<Panel class="fill-width" />
@@ -44,7 +43,7 @@
 						<Image id="SettingsNavExpandIcon" class="button__icon settings-nav__collapse-icon" src="file://{images}/subtract.svg" />
 					</Button>
 
-					<Panel id="SettingsNav" class="settings-nav__main">
+					<Panel id="SettingsNavInner" class="settings-nav__main">
 						<!-- INPUT -->
 						<RadioButton
 							id="InputRadio"

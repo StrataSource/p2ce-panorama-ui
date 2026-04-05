@@ -7,6 +7,7 @@ class MainMenuSettings {
 	static panels = {
 		content: $<Panel>('#SettingsContent')!,
 		nav: $<Panel>('#SettingsNav')!,
+		navWrap: $<Panel>('#SettingsNavInner')!,
 		subNav: $<Panel>('#SettingsSubNav')!,
 		navExpand: $<Image>('#SettingsNavCollapseIcon')!,
 		navCollapse: $<Image>('#SettingsNavExpandIcon')!,
@@ -14,7 +15,8 @@ class MainMenuSettings {
 		infoTitle: $<Label>('#SettingsInfoTitle')!,
 		infoMessage: $<Label>('#SettingsInfoMessage')!,
 		infoConvar: $<Label>('#SettingsInfoConvar')!,
-		infoDocsButton: $<Button>('#SettingsInfoDocsButton')!
+		infoDocsButton: $<Button>('#SettingsInfoDocsButton')!,
+		searchBar: $<TextEntry>('#SettingsSearchTextEntry')!
 	};
 
 	static subNavRadios: Map<string, RadioButton> = new Map();
@@ -86,8 +88,9 @@ class MainMenuSettings {
 			if (i + 1 < headers.length && groups[i + 1].visible)
 				$.CreatePanel('Panel', this.panels.subNav, `${header.id}Div`, { 'class': 'settings-nav__separator' });
 		
-			if (i === 0)
+			if (i === 0) {
 				p.SetSelected(true);
+			}
 		}
 	}
 
@@ -106,6 +109,15 @@ class MainMenuSettings {
 				// Hide the active tab
 				const tab = $.GetContextPanel().FindChildInLayoutFile(this.activeTab);
 				tab?.RemoveClass('settings-page--active');
+			}
+
+			// deselect radios
+			for (const child of this.panels.navWrap.Children()) {
+				$.Msg(`${child.id} = ${child.paneltype}`);
+				if (child.paneltype === 'RadioButton') {
+					$.Msg(`silence ${child.id}`);
+					child.SetSelected(false);
+				}
 			}
 
 			// Show selected tab, store previous
@@ -127,6 +139,8 @@ class MainMenuSettings {
 			this.hideInfo();
 
 			if (tab !== 'SearchSettings') {
+				this.panels.navWrap.enabled = true;
+
 				// Call onPageScrolled to set the checked nav subsection to the page's scroll position
 				if (activePanel)
 					this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
@@ -141,6 +155,8 @@ class MainMenuSettings {
 					if (radio)
 						radio.checked = true;
 				}
+			} else {
+				this.panels.navWrap.enabled = false;
 			}
 
 			SettingsShared.onChangedTab(this.activeTab);

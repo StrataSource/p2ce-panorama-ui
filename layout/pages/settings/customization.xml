@@ -8,7 +8,7 @@
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
-	<Panel class="settings-page">
+	<Panel class="settings-page" searchtitle="#Settings_Customization">
 		<Panel id="SettingsPageContainer" class="settings-page__container">
 			<Panel id="Portal1SubSection" class="settings-group">
 				<Panel class="settings-group__header">
