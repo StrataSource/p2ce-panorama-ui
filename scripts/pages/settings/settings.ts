@@ -17,6 +17,8 @@ class MainMenuSettings {
 		infoDocsButton: $<Button>('#SettingsInfoDocsButton')!
 	};
 
+	static subNavRadios: Map<string, RadioButton> = new Map();
+
 	static currentInfo = null;
 	static spacerHeight: number | null = null;
 	static shouldLimitScroll = false;
@@ -51,6 +53,7 @@ class MainMenuSettings {
 
 	static createSubNavBar(tab: string, pagePanel: GenericPanel) {
 		this.panels.subNav.RemoveAndDeleteChildren();
+		this.subNavRadios.clear();
 
 		const groups = pagePanel.FindChildrenWithClassTraverse<Panel>('settings-group');
 		const headers = pagePanel.FindChildrenWithClassTraverse<Label>('settings-group__title');
@@ -77,6 +80,8 @@ class MainMenuSettings {
 			p.LoadLayoutSnippet('SubNavEntry');
 			p.SetDialogVariable('Text', header.text);
 			p.SetPanelEvent('onactivate', () => this.navigateToSubsection(tab, group.id));
+
+			this.subNavRadios.set(group.id, p);
 
 			if (i + 1 < headers.length && groups[i + 1].visible)
 				$.CreatePanel('Panel', this.panels.subNav, `${header.id}Div`, { 'class': 'settings-nav__separator' });
@@ -251,9 +256,9 @@ class MainMenuSettings {
 						(child.actualyoffset + child.actuallayoutheight + this.spacerHeight) / containerHeight) ||
 				scrollOffset === 0
 			) {
-				const navChild = this.panels.nav.FindChildTraverse(SettingsTabs[tab].children[child.id]);
+				const navChild = this.subNavRadios.get(child.id);
 				if (navChild) {
-					navChild.checked = true;
+					navChild.SetSelected(true);
 				}
 				break;
 			}
