@@ -8,7 +8,7 @@
 
 	<Panel class="settings-page" searchtitle="#Settings_Input_Title">
 		<Panel id="SettingsPageContainer" class="settings-page__container">
-			<Panel id="ControllerSubSection" class="settings-group">
+			<Panel id="ControllerSubSection" class="settings-group ControllerOnly">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Controller_Title" tags="controller,input" />
 					<Panel class="flow-right horizontal-align-right vertical-align-center">
@@ -22,7 +22,7 @@
 				</Panel>
 			</Panel>
 			
-			<Panel class="settings-page__spacer" />
+			<Panel class="settings-page__spacer ControllerOnly" />
 
 			<Panel id="MouseSubSection" class="settings-group">
 
