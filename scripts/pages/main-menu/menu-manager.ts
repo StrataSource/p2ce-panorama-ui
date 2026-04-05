@@ -222,7 +222,7 @@ class MenuManager {
 					//this.pageActions.AddClass('mainmenu__page-controls__anim');
 
 					for (const grid of this.grids) {
-						grid.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+						grid.style.opacity = 0.25;
 					}
 					
 					this.showPageBlur();
@@ -234,7 +234,7 @@ class MenuManager {
 					//this.pageActions.RemoveClass('mainmenu__page-controls__anim');
 
 					for (const grid of this.grids) {
-						grid.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
+						grid.style.opacity = 0;
 					}
 
 					this.hidePageBlur();
