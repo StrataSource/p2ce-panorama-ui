@@ -247,6 +247,13 @@ $page-width: 1920px - $rightnav-width;
 		padding-right: 15px;
 	}
 
+	&__search-container {
+		height: 100%;
+		width: 100%;
+		flow-children: down;
+		padding-right: 15px;
+	}
+
 	// These are so the page distance scrolled calculations work accurately
 	&__spacer {
 		width: 100%;

@@ -22,17 +22,34 @@
 	</snippets>
 
 	<Panel class="mainmenu__page">
-
 		<Panel class="settings">
-
 			<Panel id="SettingsNav" class="settings__left">
-
-				<TextEntry
-					id="SettingsSearchTextEntry"
-					class="textentry search__textentry"
-					maxchars="30"
-					placeholder="#Settings_General_Search_Prompt"
-				/>
+				<Panel class="search settings__search">
+					<Image
+						class="search__icon"
+						src="file://{images}/search.svg"
+						texturewidth="64"
+						textureheight="64"
+					/>
+					<TextEntry
+						id="SettingsSearchTextEntry"
+						class="textentry search__textentry"
+						maxchars="30"
+						placeholder="#Settings_General_Search_Prompt"
+					/>
+					<Button
+						id="SettingsSearchClear"
+						class="search__clearbutton search__clearbutton--hidden"
+						onactivate="SettingsSearch.clearSearch()"
+					>
+						<Image
+							class="search__clearicon"
+							src="file://{images}/close.svg"
+							texturewidth="64"
+							textureheight="64"
+						/>
+					</Button>
+				</Panel>
 
 				<Panel class="fill-width" />
 

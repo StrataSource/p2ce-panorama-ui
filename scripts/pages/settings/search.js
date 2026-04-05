@@ -30,13 +30,13 @@ class SettingsSearch {
 		if (!/.*\S.*/.test(this.panels.searchTextEntry.text)) {
 			MainMenuSettings.navigateToTab(MainMenuSettings.prevTab);
 
-			//this.panels.clearButton.AddClass('search__clearbutton--hidden');
+			this.panels.clearButton.AddClass('search__clearbutton--hidden');
 
 			return;
 		}
 
 		// Show the clear button
-		//this.panels.clearButton.RemoveClass('search__clearbutton--hidden');
+		this.panels.clearButton.RemoveClass('search__clearbutton--hidden');
 
 		// Switch to search tab
 		MainMenuSettings.navigateToTab('SearchSettings');
