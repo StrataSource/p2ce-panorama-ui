@@ -1,8 +1,8 @@
 'use strict';
 
 class MainMenuSettings {
-	static activeTab = null;
-	static prevTab = null;
+	static activeTab: string | null = null;
+	static prevTab: string | null  = null;
 
 	static panels = {
 		content: $<Panel>('#SettingsContent')!,
@@ -49,6 +49,43 @@ class MainMenuSettings {
 		);
 	}
 
+	static createSubNavBar(tab: string, pagePanel: GenericPanel) {
+		this.panels.subNav.RemoveAndDeleteChildren();
+
+		const groups = pagePanel.FindChildrenWithClassTraverse<Panel>('settings-group');
+		const headers = pagePanel.FindChildrenWithClassTraverse<Label>('settings-group__title');
+
+		if (groups.length !== headers.length) {
+			$.Warning('Mismatched amount of Groups and Headers');
+			return;
+		}
+
+		for (let i = 0; i < headers.length; ++i) {
+			const group = groups[i];
+			const header = headers[i];
+
+			if (!group.visible) {
+				continue;
+			}
+
+			if (header.text.length === 0) {
+				$.Warning(`${group.id} empty`);
+				continue;
+			}
+
+			const p = $.CreatePanel('RadioButton', this.panels.subNav, `${group.id}Radio`);
+			p.LoadLayoutSnippet('SubNavEntry');
+			p.SetDialogVariable('Text', header.text);
+			p.SetPanelEvent('onactivate', () => this.navigateToSubsection(tab, group.id));
+
+			if (i + 1 < headers.length && groups[i + 1].visible)
+				$.CreatePanel('Panel', this.panels.subNav, `${header.id}Div`, { 'class': 'settings-nav__separator' });
+		
+			if (i === 0)
+				p.SetSelected(true);
+		}
+	}
+
 	static navigateToTab(tab) {
 		// If a we have a active tab and it is different from the selected tab hide it, then show the selected tab
 		if (this.activeTab !== tab) {
@@ -78,6 +115,8 @@ class MainMenuSettings {
 				activePanel.visible = true;
 				activePanel.SetReadyForDisplay(true);
 			}
+
+			this.createSubNavBar(this.activeTab!, activePanel);
 
 			// Hide the info panel if it was displaying something on the previous page
 			this.hideInfo();

@@ -11,6 +11,17 @@
 		<include src="file://{scripts}/pages/settings/search.js" />
 	</scripts>
 
+	<snippets>
+		<snippet name="SubNavEntry">
+			<RadioButton
+				class="settings-nav__subitem"
+				group="SettingsSubNav"
+			>
+				<Label class="settings-nav__subitem-label" text="{s:Text}" />
+			</RadioButton>
+		</snippet>
+	</snippets>
+
 	<Panel class="mainmenu__page">
 
 		<Panel class="settings">
@@ -100,38 +111,7 @@
 				</Panel>
 			</Panel>
 
-			<Panel id="SettingsSubNav" class="settings-nav__subsection">
-				<RadioButton
-					id="ControllerRadio"
-					class="settings-nav__subitem"
-					group="SettingsSubNav"
-					onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'ControllerSubSection')"
-				>
-					<Label class="settings-nav__subitem-label" text="#Settings_Controller_Title" />
-				</RadioButton>
-
-				<Panel class="settings-nav__separator" />
-
-				<RadioButton
-					id="MouseRadio"
-					class="settings-nav__subitem"
-					group="SettingsSubNav"
-					onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'MouseSubSection')"
-				>
-					<Label class="settings-nav__subitem-label" text="#Settings_Mouse_Title" />
-				</RadioButton>
-
-				<Panel class="settings-nav__separator" />
-
-				<RadioButton
-					id="KeybindRadio"
-					class="settings-nav__subitem"
-					group="SettingsSubNav"
-					onactivate="MainMenuSettings.navigateToSubsection('InputSettings', 'KeybindSubSection')"
-				>
-					<Label class="settings-nav__subitem-label" text="#Settings_Keybinds_Title" />
-				</RadioButton>
-			</Panel>
+			<Panel id="SettingsSubNav" class="settings-nav__subsection" />
 
 			<Panel class="settings__horiz">
 				<Panel id="SettingsContent" class="settings__pages" />
