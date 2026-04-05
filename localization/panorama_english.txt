@@ -528,7 +528,7 @@
 		
 		"Settings_ClosedCaptions_Title"						"Closed Captions and Subtitles"
 		"Settings_ClosedCaptions_Enable"					"Closed Captions"
-		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time."
+		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time.<br><img src=\"file://{images}/menu/p2ce-generic.png\" />"
 		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
 		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled."
 		
@@ -678,7 +678,7 @@
 		"Settings_TextureReplace_Texture_Custom"		"Custom"
 		
 		"Settings_Portal_Coop_SS_SplitMode"				"Split-Screen Direction"
-		"Settings_Portal_Coop_SS_SplitMode_info"		"Determines which direction should both split-screen players' view be split into.\n<h2>Horizontal</h2>The players' views will be split across a horizontal line with both views located at the top and bottom side of the screen, respectively.\n<h2>Vertical</h2>The players' views will be split across a vertical line with both views located at the left- and right-hand side of the screen, respectively.\n<h2>Automatic</h2>The game will automatically determine which mode to select, based off the monitor's screen resolution and aspect ratio."
+		"Settings_Portal_Coop_SS_SplitMode_info"		"Determines which direction should both split-screen players' view be split into.\n<h2>Horizontal</h2>The players' views will be split across a horizontal line with both views located at the top and bottom side of the screen, respectively.\n<h2>Vertical</h2>The players' views will be split across a vertical line with both views located at the left- and right-hand side of the screen, respectively.\n<h2>Automatic</h2>The game will automatically determine which mode to select, based off the monitor's screen resolution and aspect ratio.\n<movie src=\"file://{media}/sp_credits_bg.webm\" />"
 		"Settings_Portal_Coop_SS_SplitMode_auto"		"Automatic"
 		"Settings_Portal_Coop_SS_SplitMode_horiz"		"Horizontal"
 		"Settings_Portal_Coop_SS_SplitMode_vert"		"Vertical"
@@ -692,7 +692,7 @@
 		"Settings_Mouse_Filter_Info"					"Averages mouse movement over 2 frames."
 
 		"Settings_Mouse_Raw"							"Raw Input"
-		"Settings_Mouse_Raw_Info"						"Raw Input reads mouse data directly from the device, bypassing operating system settings and providing more accurate movement.\n<h2>On (Frame-aligned)</h2>The original method used in other Source Engine games\n<h2>(Tick-aligned)</h2>An improved method which is more precise and less dependent on the game frame rate"
+		"Settings_Mouse_Raw_Info"						"Raw Input reads mouse data directly from the device, bypassing operating system settings and providing more accurate movement.\n<h2>On (Frame-aligned)</h2>The original method used in other Source Engine games\n<h2>(Tick-aligned)</h2>An improved method which is more precise and less dependent on the game frame rate\n<movie src=\"file://{media}/bluescreen.webm\" />"
 		"Settings_Mouse_Raw_On_Old"						"On (Frame-aligned)"
 		"Settings_Mouse_Raw_On_New"						"On (Tick-aligned)"
 
