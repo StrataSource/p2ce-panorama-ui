@@ -333,6 +333,15 @@
 					<Label class="settings-group__title" text="[HC] Extra" />
 				</Panel>
 				<SettingsEnum
+					text="#Settings_Misc_solenergy_refract"
+					convar="mat_solidenergy_refract"
+					infomessage="#Settings_Misc_solenergy_refract_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0" />
+					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
 					text="#Settings_Portals_dlight"
 					convar="r_portal_use_dlights"
 					infomessage="#Settings_Portals_dlight_info"

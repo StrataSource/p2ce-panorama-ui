@@ -10,33 +10,6 @@
 
 	<Panel class="settings-page" searchtitle="#Settings_Customization">
 		<Panel id="SettingsPageContainer" class="settings-page__container">
-			<Panel id="Portal1SubSection" class="settings-group">
-				<Panel class="settings-group__header">
-					<Label class="settings-group__title" text="#Settings_Portal1_Title" tags="menu,ui,portal1" />
-				</Panel>
-				<SettingsEnum
-					text="#Settings_Portal1_compat"
-					convar="sv_portal_legacy_compat"
-					infomessage="#Settings_Portal1_compat_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="portal1_compat" text="#Common_Off" value="0" />
-					<RadioButton group="portal1_compat" text="#Common_On" value="1" />
-				</SettingsEnum>
-
-				<SettingsEnum
-					text="#Settings_Portal1_xhair"
-					convar="cl_portal_crosshair_mode"
-					infomessage="#Settings_Portal1_xhair_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
-					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
-				</SettingsEnum>
-			</Panel>
-
-			<Panel class="settings-page__spacer" />
-
 			<Panel id="PortalsSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Portals_Title" tags="portals, portal, color, customization" />
@@ -128,16 +101,6 @@
 					<Label class="settings-group__title" text="#Settings_Misc_Title" tags="misc, customization" />
 				</Panel>
 
-				<SettingsEnum
-					text="#Settings_Misc_solenergy_refract"
-					convar="mat_solidenergy_refract"
-					infomessage="#Settings_Misc_solenergy_refract_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0" />
-					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
-				</SettingsEnum>
-
 				<SettingsSlider
 					text="#Settings_Misc_ViewmodelOffset_X"
 					infomessage="#Settings_Misc_ViewmodelOffset_X_info"
@@ -162,15 +125,6 @@
 					min="-5"
 					max="5"
 					convar="viewmodel_offset_z"
-					hasdocspage="false"
-					viewgameduringedit="true"
-				/>
-				<SettingsSlider
-					text="[HC] Crosshair Scale"
-					infomessage="[HC] Crosshair Scale Desc"
-					min="0.1"
-					max="2"
-					convar="cl_portal_crosshair_scale"
 					hasdocspage="false"
 					viewgameduringedit="true"
 				/>
