@@ -250,6 +250,16 @@ $page-width: 1920px - $rightnav-width;
 	}
 }
 
+@keyframes SettingsGroupHighlight {
+	0% {
+		background-color: $base-500;
+	}
+
+	100% {
+		background-color: $base-950;
+	}
+}
+
 .settings-group {
 	width: 100%;
 	flow-children: down;
@@ -262,10 +272,7 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&--highlight {
-		animation-name: SettingsGroupHighlight;
-		animation-duration: 1s;
-		animation-timing-function: ease-out;
-		animation-iteration-count: 1;
+		animation: SettingsGroupHighlight 1s ease-out 0s 1 normal forwards;
 	}
 
 	&__header {
