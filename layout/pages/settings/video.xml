@@ -172,7 +172,6 @@
 			<Panel class="settings-page__spacer" />
 
 			<Panel id="AdvancedVideoSubSection" class="settings-group">
-
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title vertical-align-center" text="#Settings_Render_Title" />
 				</Panel>
@@ -325,7 +324,50 @@
 					<Label text="#Settings_General_Disabled" value="0" id="colorcorrection0" />
 					<Label text="#Settings_General_Enabled" value="1" id="colorcorrection1" />
 				</SettingsEnumDropDown>
+			</Panel>
 
+			<Panel class="settings-page__spacer" />
+
+			<Panel id="ExtraSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="[HC] Extra" />
+				</Panel>
+				<SettingsEnum
+					text="#Settings_Portals_dlight"
+					convar="r_portal_use_dlights"
+					infomessage="#Settings_Portals_dlight_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal_dlight" text="#Common_Off" value="0" />
+					<RadioButton group="portal_dlight" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsSlider
+					text="#Settings_Portals_light_intensity"
+					convar="r_portal_light_intensity"
+					infomessage="#Settings_Portals_light_intensity_info"
+					hasdocspage="false"
+					max="0.5"
+					min="0.005"
+					displayprecision="3"
+				/>
+				<SettingsEnum
+					text="#Settings_Turret_lights"
+					convar="cl_dynamic_light_turret"
+					infomessage="#Settings_Turret_lights_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="turret_lights" text="#Common_Off" value="0" />
+					<RadioButton group="turret_lights" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
+					text="#Settings_Ball_lights"
+					convar="cl_dynamic_light_energy_ball"
+					infomessage="#Settings_Ball_lights_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="ball_lights" text="#Common_Off" value="0" />
+					<RadioButton group="ball_lights" text="#Common_On" value="1" />
+				</SettingsEnum>
 			</Panel>
 
 			<Panel class="settings-page__spacer hide" />
