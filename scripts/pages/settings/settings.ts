@@ -19,8 +19,28 @@ class MainMenuSettings {
 		searchBar: $<TextEntry>('#SettingsSearchTextEntry')!
 	};
 
-	static subNavRadios: Map<string, RadioButton> = new Map();
+	static tabs = {
+		InputSettings: {
+			xml: 'input'
+		},
+		AudioSettings: {
+			xml: 'audio'
+		},
+		VideoSettings: {
+			xml: 'video'
+		},
+		InterfaceSettings: {
+			xml: 'interface'
+		},
+		CustomizationSettings: {
+			xml: 'customization'
+		},
+		SearchSettings: {
+			xml: 'search'
+		}
+	};
 
+	static subNavRadios: Map<string, RadioButton> = new Map();
 	static currentInfo = null;
 	static spacerHeight: number | null = null;
 	static shouldLimitScroll = false;
@@ -28,13 +48,10 @@ class MainMenuSettings {
 
 	static {
 		// Load every tab immediately, otherwise search won't be guaranteed to find everything.
-		for (const tab of Object.keys(SettingsTabs)) this.loadTab(tab);
+		for (const tab of Object.keys(this.tabs)) this.loadTab(tab);
 
 		// Default to input settings page
 		this.navigateToTab('InputSettings');
-
-		// Set nav panel to correct collapse state
-		this.updateNavCollapse();
 
 		// Set up event listeners
 		// Switch to a settings panel - search uses this
@@ -99,13 +116,6 @@ class MainMenuSettings {
 		if (this.activeTab !== tab) {
 			// If the tab exists then hide it
 			if (this.activeTab) {
-				// Hide the nav menu children of the active tab if we're in collapse mode
-				if (this.activeTab !== 'SearchSettings')
-					this.setNavItemCollapsed(
-						this.activeTab,
-						$.persistentStorage.getItem('settings.collapseNav') ?? true
-					);
-
 				// Hide the active tab
 				const tab = $.GetContextPanel().FindChildInLayoutFile(this.activeTab);
 				tab?.RemoveClass('settings-page--active');
@@ -145,13 +155,10 @@ class MainMenuSettings {
 				if (activePanel)
 					this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
 
-				// Show the nav menu children of the selected tab
-				this.setNavItemCollapsed(tab, false);
-
 				// Check the radiobutton for cases where this is called from JS. CSGO Panorama fires an Activated event to the radiobutton instead but I hate that.
-				const tabid = SettingsTabs[tab];
+				const tabid = this.tabs[tab];
 				if (tabid) {
-					const radio = $.GetContextPanel().FindChildTraverse(tabid.radioid)
+					const radio = $.GetContextPanel().FindChildTraverse(`${tab}Radio`);
 					if (radio)
 						radio.checked = true;
 				}
@@ -167,10 +174,7 @@ class MainMenuSettings {
 		const newPanel = $.CreatePanel('Panel', this.panels.content, tab);
 
 		// Load XML file for the page
-		newPanel.LoadLayout('file://{resources}/layout/pages/settings/' + SettingsTabs[tab].xml + '.xml', false, false);
-
-		// Set the --odd/--even classes all the children
-		this.styleAlternatingItems(newPanel);
+		newPanel.LoadLayout('file://{resources}/layout/pages/settings/' + this.tabs[tab].xml + '.xml', false, false);
 
 		// Setup all the events for all the children
 		this.initPanelsRecursive(newPanel);
@@ -279,44 +283,6 @@ class MainMenuSettings {
 				break;
 			}
 		}
-	}
-
-	static invertNavCollapse() {
-		// Invert state
-		$.persistentStorage.setItem('settings.collapseNav', !$.persistentStorage.getItem('settings.collapseNav'));
-
-		// Update the panel
-		this.updateNavCollapse();
-	}
-
-	static updateNavCollapse() {
-		return;
-
-		// Get state from PS
-		let shouldCollapse = $.persistentStorage.getItem('settings.collapseNav');
-
-		// Set to true if not set by user
-		if (!shouldCollapse) {
-			$.persistentStorage.setItem('settings.collapseNav', true);
-			shouldCollapse = true;
-		}
-
-		// Show the corresponding button icon
-		this.panels.navExpand.SetHasClass('hide', !shouldCollapse);
-		this.panels.navCollapse.SetHasClass('hide', Boolean(shouldCollapse));
-
-		// Update all the items
-		for (const tab of Object.keys(SettingsTabs).filter((tab) => tab !== 'SearchSettings' && tab !== this.activeTab))
-			this.setNavItemCollapsed(tab, shouldCollapse);
-	}
-
-	// Set the collapsed state of a nav item
-	static setNavItemCollapsed(tab, shouldCollapse) {
-		return;
-		this.panels.nav
-			.FindChild(SettingsTabs[tab].radioid)!
-			.FindChildrenWithClassTraverse('settings-nav__subsection')[0]
-			.SetHasClass('settings-nav__subsection--hidden', shouldCollapse);
 	}
 
 	static initPanelForPersistentVariable(panel) {
@@ -459,7 +425,7 @@ class MainMenuSettings {
 
 	static initPanelsRecursive(panel) {
 		// Initialise info panel event handlers
-		if (this.isSettingsPanel(panel) || this.isSpeedometerPanel(panel)) {
+		if (this.isSettingsPanel(panel)) {
 			this.setPanelInfoEvents(panel);
 		}
 
@@ -590,35 +556,6 @@ class MainMenuSettings {
 		this.panels.info.AddClass('settings-info--hidden');
 	}
 
-	static styleItem(item, n) {
-		item.AddClass(n % 2 === 0 ? '--odd' : '--even');
-	}
-
-	static styleAlternatingItems(page) {
-		// Search all groups on the page
-		for (const group of page.FindChildrenWithClassTraverse('settings-group')) {
-			let n = 1; // Start odd
-
-			const search = (panel) => {
-				for (const child of panel?.Children() || []) {
-					// If it's a settings panel or a combo panel, style it
-					if (this.isSettingsPanel(child) || child.HasClass('settings-group__combo')) {
-						this.styleItem(child, n);
-						n++;
-					}
-					// Otherwise if it's a ConVarEnabler search all its children
-					else if (child.paneltype === 'ConVarEnabler') {
-						for (const grandchild of child.Children()) search(grandchild);
-					} else {
-						search(child);
-					}
-				}
-			};
-
-			search(group);
-		}
-	}
-
 	static saveSettings() {
 		$.Msg('Writing settings to file...');
 		GameInterfaceAPI.ConsoleCommand('host_writeconfig');
@@ -633,9 +570,5 @@ class MainMenuSettings {
 			'SettingsToggle',
 			'ConVarColorDisplay'
 		].includes(panel.paneltype);
-	}
-
-	static isSpeedometerPanel(panel) {
-		return ['SpeedometersContainer', 'RangeColorProfilesContainer'].includes(panel.id);
 	}
 }

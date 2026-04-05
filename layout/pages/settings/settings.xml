@@ -5,7 +5,6 @@
 
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/common/settings.js" />
 		<include src="file://{scripts}/pages/settings/page.js" />
 		<include src="file://{scripts}/pages/settings/settings.ts" />
 		<include src="file://{scripts}/pages/settings/search.js" />
@@ -46,7 +45,7 @@
 					<Panel id="SettingsNavInner" class="settings-nav__main">
 						<!-- INPUT -->
 						<RadioButton
-							id="InputRadio"
+							id="InputSettingsRadio"
 							class="settings-nav__item"
 							group="SettingsNav"
 							onactivate="MainMenuSettings.navigateToTab('InputSettings')"
@@ -60,7 +59,7 @@
 						<!-- AUDIO -->
 
 						<RadioButton
-							id="AudioRadio"
+							id="AudioSettingsRadio"
 							class="settings-nav__item"
 							group="SettingsNav"
 							onactivate="MainMenuSettings.navigateToTab('AudioSettings')"
@@ -73,7 +72,7 @@
 						<!-- VIDEO -->
 
 						<RadioButton
-							id="VideoRadio"
+							id="VideoSettingsRadio"
 							class="settings-nav__item"
 							group="SettingsNav"
 							onactivate="MainMenuSettings.navigateToTab('VideoSettings')"
@@ -86,7 +85,7 @@
 						<!-- INTERFACE -->
 
 						<RadioButton
-							id="InterfaceRadio"
+							id="InterfaceSettingsRadio"
 							class="settings-nav__item"
 							group="SettingsNav"
 							onactivate="MainMenuSettings.navigateToTab('InterfaceSettings')"
@@ -99,7 +98,7 @@
 						<!-- CUSTOMIZATION -->
 
 						<RadioButton
-							id="CustomizationRadio"
+							id="CustomizationSettingsRadio"
 							class="settings-nav__item"
 							group="SettingsNav"
 							onactivate="MainMenuSettings.navigateToTab('CustomizationSettings')"

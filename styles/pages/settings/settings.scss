@@ -150,7 +150,7 @@ $page-width: 1920px - $rightnav-width;
 			opacity: 0.1;
 		}
 
-		&:hover:not(:parentdisabled) {
+		&:hover:not(:parentdisabled):not(:selected) {
 			background-color: $button-background-hover;
 		}
 

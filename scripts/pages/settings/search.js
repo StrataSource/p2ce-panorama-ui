@@ -67,11 +67,9 @@ class SettingsSearch {
 		this.matches = [];
 
 		// Search through each page
-		for (const tabID of Object.keys(SettingsTabs)) {
-			const tabPanel = this.panels.content.FindChildTraverse(tabID);
-			if (!tabPanel) continue;
-			const tabName = $.Localize(tabPanel.GetAttributeString('searchtitle', '[PH] Section Title'));
-			this.traverseChildren(tabID, this.panels.content.FindChildTraverse(tabID), tabName, null, null);
+		for (const child of this.panels.content.Children()) {
+			const tabName = $.Localize(child.GetAttributeString('searchtitle', '[PH] Section Title'));
+			this.traverseChildren(child.id, child, tabName, null, null);
 		}
 
 		// Populate results panel with matches
