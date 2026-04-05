@@ -248,7 +248,6 @@ class SettingsSearch {
 					);
 
 				if (match.type === MatchType.SETTING_TAG) {
-					$.Msg(`matches.tags: ${matches.tags}, tagindex: ${match.tagIndex}, inptustring: ${inputString}`);
 					tags.push(
 						matches.tags[match.tagIndex]?.replace(
 							new RegExp(`(${inputString})`, 'ig'),

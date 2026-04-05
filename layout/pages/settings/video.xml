@@ -358,6 +358,7 @@
 					max="0.5"
 					min="0.005"
 					displayprecision="3"
+					viewgameduringedit="true"
 				/>
 				<SettingsEnum
 					text="#Settings_Turret_lights"

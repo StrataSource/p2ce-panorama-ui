@@ -68,6 +68,13 @@ class MainMenuSettings {
 			$.Localize('#MainMenu_Navigation_Options'),
 			$.Localize('#MainMenu_Navigation_Options_Tagline')
 		);
+
+		// Still faded out when we leave? Undo it
+		$.RegisterForUnhandledEvent('MainMenuPagePreClose', () => {
+			if (this.doingGameFade) {
+				$.DispatchEvent('MainMenuSetPauseBlur', true);
+			}
+		});
 	}
 
 	static createSubNavBar(tab: string, pagePanel: GenericPanel) {
@@ -123,9 +130,7 @@ class MainMenuSettings {
 
 			// deselect radios
 			for (const child of this.panels.navWrap.Children()) {
-				$.Msg(`${child.id} = ${child.paneltype}`);
 				if (child.paneltype === 'RadioButton') {
-					$.Msg(`silence ${child.id}`);
 					child.SetSelected(false);
 				}
 			}
@@ -350,6 +355,7 @@ class MainMenuSettings {
 				panelsToFade.push(child);
 			}
 
+			parent.RemoveClass('settings-group--highlight');
 			parent.style.backgroundColor = '#18181800';
 			parent.style.borderColor = '#00000000';
 
@@ -377,7 +383,7 @@ class MainMenuSettings {
 			const page = this.panels.content.FindChildTraverse(this.activeTab);
 			if (!page) return;
 
-			const containers = page.FindChildrenWithClassTraverse('settings-page__container');
+			const containers = page.Children();
 			if (!containers) return;
 
 			const panelsToFade: GenericPanel[] = [];
@@ -414,8 +420,10 @@ class MainMenuSettings {
 			if (titleLabel)
 				titleLabel.style.textShadowFast = '0px 0px #00000000';
 
-			for (const panel of panelsToFade)
-				panel.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+			for (const panel of panelsToFade) {
+				if (panel.IsValid())
+					panel.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+			}
 
 			$.DispatchEvent('MainMenuSetPauseBlur', true);
 

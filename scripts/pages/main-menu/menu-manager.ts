@@ -205,12 +205,21 @@ class MenuManager {
 			});
 
 			$.RegisterForUnhandledEvent('MainMenuSetPauseBlur', (doBlur: boolean) => {
-				// I LOVE MY LIFE
 				if (doBlur) {
-					this.gradientBar.style.animation =
-					this.pageActions.style.animation = 
-					this.pageHeadline.style.animation = 
-					this.pageTagline.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+					this.gradientBar.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+
+					// FIXME:
+					// cant do this because when it fully fades out, panorama will
+					// collapse it and will reclaim the layout space, which will shove
+					// setting sliders a considerable distance
+					//
+					// for some reason changing the opacity thru an animation prop
+					// instead of a transition doesnt do this, but if i do that,
+					// the transition property loses the ability to change the
+					// opacity which is SOOOOOOOOOOOOOOOO MUCH FUN!!!!!!!!
+					//this.pageHeadline.AddClass('mainmenu__page-controls__anim');
+					//this.pageTagline.AddClass('mainmenu__page-controls__anim');
+					//this.pageActions.AddClass('mainmenu__page-controls__anim');
 
 					for (const grid of this.grids) {
 						grid.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
@@ -218,10 +227,11 @@ class MenuManager {
 					
 					this.showPageBlur();
 				} else {
-					this.gradientBar.style.animation =
-					this.pageActions.style.animation = 
-					this.pageHeadline.style.animation = 
-					this.pageTagline.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
+					this.gradientBar.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
+
+					//this.pageHeadline.RemoveClass('mainmenu__page-controls__anim');
+					//this.pageTagline.RemoveClass('mainmenu__page-controls__anim');
+					//this.pageActions.RemoveClass('mainmenu__page-controls__anim');
 
 					for (const grid of this.grids) {
 						grid.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
