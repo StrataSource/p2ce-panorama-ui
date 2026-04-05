@@ -51,7 +51,17 @@ class SettingsSearch {
 		this.strings = this.panels.searchTextEntry.text.split(/\s/).filter((s) => /^\w+$/.test(s));
 
 		// Don't bother show anything if we only have one char words, can spawn hundreds of panels.
-		if (!this.strings.some((str) => str.length > 1)) return;
+		if (!this.strings.some((str) => str.length > 1)) {
+			$.CreatePanel('Label', this.panels.results, '', {
+				class: 'settings-search__empty-header',
+				text: $.Localize('#Settings_General_Search_OneCharHeader')
+			});
+			$.CreatePanel('Label', this.panels.results, '', {
+				class: 'settings-search__empty-para',
+				text: $.Localize('#Settings_General_Search_OneCharDesc')
+			});
+			return;
+		}
 
 		// Initialise matches array
 		this.matches = [];
