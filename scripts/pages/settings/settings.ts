@@ -89,6 +89,7 @@ class MainMenuSettings {
 			return;
 		}
 
+		let didSelect = false;
 		for (let i = 0; i < headers.length; ++i) {
 			const group = groups[i];
 			const header = headers[i];
@@ -112,7 +113,8 @@ class MainMenuSettings {
 			if (i + 1 < headers.length && groups[i + 1].visible)
 				$.CreatePanel('Panel', this.panels.subNav, `${header.id}Div`, { 'class': 'settings-nav__separator' });
 		
-			if (i === 0) {
+			if (!didSelect) {
+				didSelect = true;
 				p.SetSelected(true);
 			}
 		}

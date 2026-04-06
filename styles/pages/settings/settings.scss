@@ -95,13 +95,24 @@ $page-width: 1920px - $rightnav-width;
 .settings-nav {
 	$root: &;
 
-	background-color: $button-background;
+	flow-children: right;
 
-	border: $menu-pane-border;
-	flow-children: none;
+	// top nav glyphs!
+	&__glyph {
+		width: 24px;
+		height: 24px;
+		&__left.ControllerConnected {
+			margin-right: 10px;
+		}
+		&__right.ControllerConnected {
+			margin-left: 10px;
+		}
+	}
 
 	&__main {
 		flow-children: right;
+		background-color: $button-background;
+		border: $menu-pane-border;
 	}
 
 	&__collapse-button {
@@ -130,10 +141,25 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__subsection {
-		background-color: $base-950;
-		border: $menu-pane-border;
 		flow-children: right;
 		margin-top: 5px;
+
+		&__main {
+			background-color: $base-950;
+			border: $menu-pane-border;
+			flow-children: right;
+		}
+
+		&__glyph {
+			width: 24px;
+			height: 24px;
+			&__left.ControllerConnected {
+				margin-right: 10px;
+			}
+			&__right.ControllerConnected {
+				margin-left: 10px;
+			}
+		}
 	}
 
 	&__subitem {

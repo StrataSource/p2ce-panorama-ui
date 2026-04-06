@@ -24,7 +24,7 @@
 			
 			<Panel class="settings-page__spacer ControllerOnly" />
 
-			<Panel id="MouseSubSection" class="settings-group">
+			<Panel id="MouseSubSection" class="settings-group KeyboardOnly">
 
 				<Panel class="settings-group__header">
 
@@ -108,9 +108,9 @@
 
 			</Panel>
 
-			<Panel class="settings-page__spacer" />
+			<Panel class="settings-page__spacer KeyboardOnly" />
 
-			<Panel id="KeybindSubSection" class="settings-group">
+			<Panel id="KeybindSubSection" class="settings-group KeyboardOnly">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Keybinds_Title" tags="keyboard,keybind,controls,input" />
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">

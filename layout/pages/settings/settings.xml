@@ -53,12 +53,15 @@
 
 				<Panel class="fill-width" />
 
-				<Panel class="settings__nav settings-nav">
-					<Button class="settings-nav__collapse-button" onactivate="MainMenuSettings.invertNavCollapse();">
-						<Image id="SettingsNavCollapseIcon" class="button__icon settings-nav__collapse-icon" src="file://{images}/add.svg" />
-						<Image id="SettingsNavExpandIcon" class="button__icon settings-nav__collapse-icon" src="file://{images}/subtract.svg" />
-					</Button>
-
+				<Panel class="settings-nav">
+					<SteamInputAction
+						id="SettingsNavLeft"
+						actionset="MenuControls"
+						action="menu_prev_1"
+						separatortext="/"
+						controllernumber="1"
+						class="settings-nav__glyph settings-nav__glyph__left"
+					/>
 					<Panel id="SettingsNavInner" class="settings-nav__main">
 						<!-- INPUT -->
 						<RadioButton
@@ -123,10 +126,36 @@
 							<Label class="settings-nav__item-label" text="#Settings_Customization" />
 						</RadioButton>
 					</Panel>
+					<SteamInputAction
+						id="SettingsNavRight"
+						actionset="MenuControls"
+						action="menu_next_1"
+						separatortext="/"
+						controllernumber="1"
+						class="settings-nav__glyph settings-nav__glyph__right"
+					/>
 				</Panel>
 			</Panel>
 
-			<Panel id="SettingsSubNav" class="settings-nav__subsection" />
+			<Panel class="settings-nav__subsection">
+				<SteamInputAction
+					id="SettingsSubNavLeft"
+					actionset="MenuControls"
+					action="menu_prev_2"
+					separatortext="/"
+					controllernumber="1"
+					class="settings-nav__subsection__glyph settings-nav__subsection__glyph__left"
+				/>
+				<Panel id="SettingsSubNav" class="settings-nav__subsection__main" />
+				<SteamInputAction
+					id="SettingsSubNavRight"
+					actionset="MenuControls"
+					action="menu_next_2"
+					separatortext="/"
+					controllernumber="1"
+					class="settings-nav__subsection__glyph settings-nav__subsection__glyph__right"
+				/>
+			</Panel>
 
 			<Panel class="settings__horiz">
 				<Panel id="SettingsContent" class="settings__pages" />

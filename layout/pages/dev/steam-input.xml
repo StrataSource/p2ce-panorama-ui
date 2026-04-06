@@ -254,6 +254,58 @@
 						<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name" />
 					</Panel>
 				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: menu_prev_1" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction
+							id="menu_prev_1_test"
+							actionset="MenuControls"
+							action="menu_prev_1"
+							separatortext="/"
+							controllernumber="1"
+						/> 
+						<SteamInputActionLabel actionset="MenuControls" action="menu_prev_1" class="steam-action-name" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: menu_next_1" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction
+							id="menu_next_1_test"
+							actionset="MenuControls"
+							action="menu_next_1"
+							separatortext="/"
+							controllernumber="1"
+						/> 
+						<SteamInputActionLabel actionset="MenuControls" action="menu_next_1" class="steam-action-name" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: menu_prev_2" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction
+							id="menu_prev_2_test"
+							actionset="MenuControls"
+							action="menu_prev_2"
+							separatortext="/"
+							controllernumber="1"
+						/> 
+						<SteamInputActionLabel actionset="MenuControls" action="menu_prev_2" class="steam-action-name" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-right px-3 py-1 dev-ref__input dev-ref__bg__light">
+					<Label allowrawtext="true" class="dev-ref__input__left" text="Action: menu_next_2" />
+					<Panel class="dev-ref__input__right">
+						<SteamInputAction
+							id="menu_next_2_test"
+							actionset="MenuControls"
+							action="menu_next_2"
+							separatortext="/"
+							controllernumber="1"
+						/> 
+						<SteamInputActionLabel actionset="MenuControls" action="menu_next_2" class="steam-action-name" />
+					</Panel>
+				</Panel>
 				<Panel class="dev-ref__bg__gray full-width py-3 dev-ref__input flow-down by-menu-pane">
 					<Label class="text-h3 px-3" text="P2CE Mappings" />
 					<Label class="text-h5 px-3" text="ActionSet: GameControls" />
