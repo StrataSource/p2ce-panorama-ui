@@ -4,8 +4,9 @@
 	$root: &;
 	flow-children: right;
 	vertical-align: middle;
-	width: 500px;
+	width: fill-parent-flow(0.55);
 	height: 45px;
+	margin-left: 15px;
 
 	&__icon {
 		width: 35px;
@@ -13,6 +14,7 @@
 		vertical-align: center;
 		horizontal-align: center;
 		margin-right: 5px;
+		visibility: collapse;
 	}
 
 	&__textentry {
@@ -20,6 +22,7 @@
 		height: 45px;
 		color: $textentry-text-color;
 		vertical-align: middle;
+		font-size: 20px;
 
 		&:focus {
 			color: $textentry-focus-text-color;

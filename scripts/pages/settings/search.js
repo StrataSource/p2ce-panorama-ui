@@ -80,8 +80,7 @@ class SettingsSearch {
 					p.style.marginBottom = '5px';
 				}
 			}
-		}
-		else {
+		} else {
 			$.CreatePanel('Label', this.panels.results, '', {
 				class: 'settings-search__empty-header',
 				text: $.Localize('#Settings_General_Search_EmptyHeader')
@@ -212,10 +211,8 @@ class SettingsSearch {
 				const p = $.CreatePanel('Label', this.panels.results, '', {
 					class: 'settings-search__empty-para'
 				});
-				if (left === 1)
-					p.SetLocalizationString('#Settings_General_Search_VeryFull');
-				else
-					p.SetLocalizationString('#Settings_General_Search_VeryFull_Plural');
+				if (left === 1) p.SetLocalizationString('#Settings_General_Search_VeryFull');
+				else p.SetLocalizationString('#Settings_General_Search_VeryFull_Plural');
 				p.SetDialogVariable('count', left);
 			}
 			return;

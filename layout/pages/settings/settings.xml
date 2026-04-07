@@ -12,10 +12,7 @@
 
 	<snippets>
 		<snippet name="SubNavEntry">
-			<RadioButton
-				class="settings-nav__subitem"
-				group="SettingsSubNav"
-			>
+			<RadioButton class="settings-nav__subitem" group="SettingsSubNav">
 				<Label class="settings-nav__subitem-label" text="{s:Text}" />
 			</RadioButton>
 		</snippet>
@@ -25,12 +22,7 @@
 		<Panel class="settings">
 			<Panel id="SettingsNav" class="settings__left">
 				<Panel class="search settings__search">
-					<Image
-						class="search__icon"
-						src="file://{images}/search.svg"
-						texturewidth="64"
-						textureheight="64"
-					/>
+					<Image class="search__icon" src="file://{images}/search.svg" texturewidth="64" textureheight="64" />
 					<TextEntry
 						id="SettingsSearchTextEntry"
 						class="textentry search__textentry"
@@ -42,16 +34,9 @@
 						class="search__clearbutton search__clearbutton--hidden"
 						onactivate="SettingsSearch.clearSearch()"
 					>
-						<Image
-							class="search__clearicon"
-							src="file://{images}/close.svg"
-							texturewidth="64"
-							textureheight="64"
-						/>
+						<Image class="search__clearicon" src="file://{images}/close.svg" texturewidth="64" textureheight="64" />
 					</Button>
 				</Panel>
-
-				<Panel class="fill-width" />
 
 				<Panel class="settings-nav">
 					<SteamInputAction
@@ -162,7 +147,14 @@
 				<Panel id="SettingsInfo" class="settings__info settings-info">
 					<Panel class="settings-info__wrapper">
 						<Label id="SettingsInfoTitle" class="settings-info__title" />
-						<Label id="SettingsInfoMessage" html="true" loadimages="true" loadmovies="true" imgscaling="stretch-to-cover-preserve-aspect" class="settings-info__description" />
+						<Label
+							id="SettingsInfoMessage"
+							html="true"
+							loadimages="true"
+							loadmovies="true"
+							imgscaling="stretch-to-cover-preserve-aspect"
+							class="settings-info__description"
+						/>
 						<Label id="SettingsInfoConvar" html="true" class="settings-info__cvar" />
 						<Button id="SettingsInfoDocsButton" class="button hide">
 							<Label class="button__text" text="#Settings_General_ViewDocs" />

@@ -95,12 +95,7 @@
 					</TooltipPanel>
 				</Panel>
 
-				<SettingsEnum
-					text="[HC] Show Crosshair"
-					convar="crosshair"
-					infomessage="[HC] Show Xhair Desc"
-					hasdocspage="false"
-				>
+				<SettingsEnum text="[HC] Show Crosshair" convar="crosshair" infomessage="[HC] Show Xhair Desc" hasdocspage="false">
 					<RadioButton group="showxhair" text="#Common_Off" value="0" />
 					<RadioButton group="showxhair" text="#Common_On" value="1" />
 				</SettingsEnum>

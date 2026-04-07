@@ -553,26 +553,26 @@ $textentry-placeholder-hover-color: color.scale($textentry-text-color, $alpha: 3
 // SLIDER
 // ================
 
-$slider-padding-height: 8px !default;
-$slider-track-height: 20px !default;
+$slider-padding-height: 0px !default;
+$slider-track-height: 5px !default;
 
 $slider-thumb-color: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($primary-500), to($primary-700)) !default;
 $slider-thumb-color-hover: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from($primary-700), to($primary-800)) !default;
-$slider-thumb-width: 20px !default;
+$slider-thumb-width: 15px !default;
 $slider-thumb-height: 20px !default;
 $slider-thumb-radius: 0px !default;
 $slider-thumb-shadow: none !default;
 
-$slider-track: $base-gradient !default;
+$slider-track: $base-700 !default;
 $slider-track-shadow: none !default;
-$slider-track-progress-height: 20px !default;
+$slider-track-progress-height: 10px !default;
 $slider-track-progress-horizontal: $primary-color !default;
 $slider-track-progress-vertical: $primary-color !default;
 $slider-track-progress-border: 2px solid $slider-thumb-color !default;
 
-$slider-default-color: $base-500 !default;
-$slider-default-width: 8px !default;
-$slider-default-height: 8px !default;
+$slider-default-color: $base-700 !default;
+$slider-default-width: 15px !default;
+$slider-default-height: 20px !default;
 $slider-default-radius: 0px !default;
 $slider-default-shadow: none !default;
 

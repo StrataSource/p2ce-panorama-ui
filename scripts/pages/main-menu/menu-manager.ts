@@ -34,10 +34,7 @@ class MenuManager {
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
 	static menuContent = $<Panel>('#MenuMainContent')!;
 	static pageBlur = $<BaseBlurTarget>('#PageBlur')!;
-	static grids = [
-		$<Image>('#GridTexture1')!,
-		$<Image>('#GridTexture2')!,
-	];
+	static grids = [$<Image>('#GridTexture1')!, $<Image>('#GridTexture2')!];
 
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
@@ -224,7 +221,7 @@ class MenuManager {
 					for (const grid of this.grids) {
 						grid.style.opacity = 0.25;
 					}
-					
+
 					this.showPageBlur();
 				} else {
 					this.gradientBar.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';

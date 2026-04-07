@@ -2,7 +2,7 @@
 
 class MainMenuSettings {
 	static activeTab: string | null = null;
-	static prevTab: string | null  = null;
+	static prevTab: string | null = null;
 
 	static panels = {
 		content: $<Panel>('#SettingsContent')!,
@@ -111,8 +111,8 @@ class MainMenuSettings {
 			this.subNavRadios.set(group.id, p);
 
 			if (i + 1 < headers.length && groups[i + 1].visible)
-				$.CreatePanel('Panel', this.panels.subNav, `${header.id}Div`, { 'class': 'settings-nav__separator' });
-		
+				$.CreatePanel('Panel', this.panels.subNav, `${header.id}Div`, { class: 'settings-nav__separator' });
+
 			if (!didSelect) {
 				didSelect = true;
 				p.SetSelected(true);
@@ -159,15 +159,13 @@ class MainMenuSettings {
 				this.panels.navWrap.enabled = true;
 
 				// Call onPageScrolled to set the checked nav subsection to the page's scroll position
-				if (activePanel)
-					this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
+				if (activePanel) this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
 
 				// Check the radiobutton for cases where this is called from JS. CSGO Panorama fires an Activated event to the radiobutton instead but I hate that.
 				const tabid = this.tabs[tab];
 				if (tabid) {
 					const radio = $.GetContextPanel().FindChildTraverse(`${tab}Radio`);
-					if (radio)
-						radio.checked = true;
+					if (radio) radio.checked = true;
 				}
 			} else {
 				this.panels.navWrap.enabled = false;
@@ -259,9 +257,9 @@ class MainMenuSettings {
 			// Don't run again for 0.05 seconds
 			this.limitScrollCheck(0.05);
 		}
-		
+
 		if (!panel) return;
-		
+
 		// This is 0 on initial load for some reason
 		if (this.spacerHeight && this.spacerHeight > 0) {
 			this.spacerHeight =
@@ -312,7 +310,9 @@ class MainMenuSettings {
 		if (!showGameVar) return;
 
 		if (panel.paneltype !== 'SettingsSlider') {
-			$.Warning(`Setting field has "viewgameduringedit" attribute, but that cannot be used on this (${panel.paneltype}) panel!`);
+			$.Warning(
+				`Setting field has "viewgameduringedit" attribute, but that cannot be used on this (${panel.paneltype}) panel!`
+			);
 			return;
 		}
 
@@ -334,14 +334,11 @@ class MainMenuSettings {
 
 			const panelsToFade: GenericPanel[] = [];
 
-			if (this.panels.info)
-				panelsToFade.push(this.panels.info);
+			if (this.panels.info) panelsToFade.push(this.panels.info);
 
-			if (this.panels.nav)
-				panelsToFade.push(this.panels.nav);
+			if (this.panels.nav) panelsToFade.push(this.panels.nav);
 
-			if (this.panels.subNav)
-				panelsToFade.push(this.panels.subNav);
+			if (this.panels.subNav) panelsToFade.push(this.panels.subNav);
 
 			for (const container of containers) {
 				for (const child of container.Children()) {
@@ -362,8 +359,7 @@ class MainMenuSettings {
 			parent.style.borderColor = '#00000000';
 
 			const titleLabel = panel.FindChildTraverse<Label>('Title');
-			if (titleLabel)
-				titleLabel.style.textShadowFast = '2px 2px #181818';
+			if (titleLabel) titleLabel.style.textShadowFast = '2px 2px #181818';
 
 			for (const panel of panelsToFade) {
 				panel.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
@@ -390,14 +386,11 @@ class MainMenuSettings {
 
 			const panelsToFade: GenericPanel[] = [];
 
-			if (this.panels.info)
-				panelsToFade.push(this.panels.info);
+			if (this.panels.info) panelsToFade.push(this.panels.info);
 
-			if (this.panels.nav)
-				panelsToFade.push(this.panels.nav);
+			if (this.panels.nav) panelsToFade.push(this.panels.nav);
 
-			if (this.panels.subNav)
-				panelsToFade.push(this.panels.subNav);
+			if (this.panels.subNav) panelsToFade.push(this.panels.subNav);
 
 			for (const container of containers) {
 				for (const child of container.Children()) {
@@ -419,12 +412,10 @@ class MainMenuSettings {
 			parent.style.borderColor = '#555555';
 
 			const titleLabel = panel.FindChildTraverse<Label>('Title');
-			if (titleLabel)
-				titleLabel.style.textShadowFast = '0px 0px #00000000';
+			if (titleLabel) titleLabel.style.textShadowFast = '0px 0px #00000000';
 
 			for (const panel of panelsToFade) {
-				if (panel.IsValid())
-					panel.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+				if (panel.IsValid()) panel.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
 			}
 
 			$.DispatchEvent('MainMenuSetPauseBlur', true);
@@ -500,6 +491,7 @@ class MainMenuSettings {
 		const hasDocs = !(panel.GetAttributeString('hasdocspage', '') === 'false');
 		panel.SetPanelEvent('onmouseover', () => {
 			// Set onmouseover events for all settings panels
+			panel.RemoveClass('settings-group--highlight');
 			this.showInfo(
 				// If a panel has a specific title use that, if not use the panel's name. Child ID names vary between panel types, blame Valve
 				panel.GetAttributeString('infotitle', '') ||

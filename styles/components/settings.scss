@@ -28,7 +28,14 @@
 	padding: $settings-padding;
 
 	&:hover {
-		background-color: gradient(radial, 50% 50%, 0% 0%, 70% 70%, from(rgba($primary-500, 0.1)), to(rgba($primary-700, 0.1)));
+		background-color: gradient(
+			radial,
+			50% 50%,
+			0% 0%,
+			70% 70%,
+			from(rgba($primary-500, 0.1)),
+			to(rgba($primary-700, 0.1))
+		);
 	}
 
 	&:disabled {

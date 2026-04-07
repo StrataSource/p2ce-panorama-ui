@@ -21,7 +21,7 @@ $page-width: 1920px - $rightnav-width;
 		width: 100%;
 		height: fill-parent-flow(1);
 		flow-children: right;
-		margin-top: 10px;
+		margin-top: 15px;
 	}
 
 	&__pages {
@@ -30,7 +30,7 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__info {
-		width: fill-parent-flow(0.60);
+		width: fill-parent-flow(0.55);
 		height: 100%;
 	}
 
@@ -95,12 +95,14 @@ $page-width: 1920px - $rightnav-width;
 .settings-nav {
 	$root: &;
 
+	width: fill-parent-flow(1);
 	flow-children: right;
 
 	// top nav glyphs!
 	&__glyph {
 		width: 24px;
 		height: 24px;
+		horizontal-align: left;
 		&__left.ControllerConnected {
 			margin-right: 10px;
 		}
@@ -111,8 +113,10 @@ $page-width: 1920px - $rightnav-width;
 
 	&__main {
 		flow-children: right;
-		background-color: $button-background;
-		border: $menu-pane-border;
+		padding: 0 2px;
+		border-left: $menu-pane-border;
+		border-right: $menu-pane-border;
+		//background-color: gradient( linear, 0% 0%, 0% 100%, from( rgba($base-700, 0) ), to( $base-700 ) );
 	}
 
 	&__collapse-button {
@@ -145,9 +149,11 @@ $page-width: 1920px - $rightnav-width;
 		margin-top: 5px;
 
 		&__main {
-			background-color: $base-950;
-			border: $menu-pane-border;
 			flow-children: right;
+			padding: 0 2px;
+			border-left: $menu-pane-border;
+			border-right: $menu-pane-border;
+			//background-color: gradient( linear, 0% 0%, 100% 0%, from( rgba($base-700, 0) ), to( $base-700 ) );
 		}
 
 		&__glyph {
@@ -164,13 +170,13 @@ $page-width: 1920px - $rightnav-width;
 
 	&__subitem {
 		background-color: $button-background;
-		padding: 5px 30px;
+		padding: 5px 25px;
 	}
 
 	&__item {
 		background-color: $button-background;
 		flow-children: down;
-		padding: 5px 30px;
+		padding: 5px 25px;
 
 		&:parentdisabled {
 			opacity: 0.1;
@@ -178,9 +184,11 @@ $page-width: 1920px - $rightnav-width;
 
 		&:hover:not(:parentdisabled):not(:selected) {
 			background-color: $button-background-hover;
+			border-color: $primary-color;
 		}
 
 		&:selected {
+			border-color: $primary-color;
 			background-color: $primary-color;
 
 			& > #{$root}__subitem:hover {
@@ -198,7 +206,8 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__item-label {
-		@include mixin.font-styles($use-header: true, $light-header: false);
+		font-weight: bold;
+		letter-spacing: 1px;
 		font-size: 26px;
 		overflow: squish;
 		text-overflow: shrink;
@@ -207,6 +216,7 @@ $page-width: 1920px - $rightnav-width;
 	&__subitem {
 		&:hover {
 			background-color: $button-background-hover;
+			border-color: $primary-color;
 
 			#{$root}__subitem-label {
 				color: $bright-color;
@@ -214,6 +224,7 @@ $page-width: 1920px - $rightnav-width;
 		}
 
 		&:selected {
+			border-color: $primary-color;
 			background-color: $button-background-selected;
 
 			#{$root}__subitem-label {
@@ -223,13 +234,14 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__subitem-label {
-		@include mixin.font-styles($use-header: true, $light-header: false);
+		font-weight: bold;
+		font-size: 16px;
 	}
 
 	&__separator {
-		width: 1px;
+		width: 2px;
 		height: 100%;
-		background-color: $base-700;
+		margin: 0 2px;
 	}
 }
 
@@ -283,7 +295,7 @@ $page-width: 1920px - $rightnav-width;
 	// These are so the page distance scrolled calculations work accurately
 	&__spacer {
 		width: 100%;
-		height: 16px;
+		height: 5px;
 	}
 }
 
@@ -301,7 +313,7 @@ $page-width: 1920px - $rightnav-width;
 	width: 100%;
 	flow-children: down;
 
-	background-color: $base-950;
+	background-color: $base-gradient-subtle;
 	border: $menu-pane-border;
 
 	&--search {
@@ -316,12 +328,13 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__header {
-		padding: 10px 0px;
+		padding: 5px 0;
 		padding-left: list.nth($settings-padding, 2) * 0.5;
 		padding-right: list.nth($settings-padding, 4) * 0.5;
 		flow-children: right;
 		width: 100%;
 		border-bottom: 1px solid $base-900;
+		min-height: 51px;
 	}
 
 	&__reset {
@@ -331,14 +344,15 @@ $page-width: 1920px - $rightnav-width;
 
 	&__title {
 		@include mixin.font-styles($use-header: true);
-		font-size: 34px;
+		font-size: 26px;
+		vertical-align: center;
 	}
 
 	&__subtitle {
 		@include mixin.font-styles($use-header: true);
-		font-size: 24px;
+		font-size: 20px;
 		width: 100%;
-		padding: 10px 15px;
+		padding: 8px 15px;
 		background-color: gradient(radial, 50% 50%, 0% 0%, 90% 1000%, from($base-800), to($base-950));
 		color: $bright-color;
 		transform: translateY(0px);
@@ -423,12 +437,14 @@ $page-width: 1920px - $rightnav-width;
 		@include mixin.font-styles($use-header: true, $light-header: false);
 		font-size: 36px;
 		margin-bottom: 10px;
+		text-shadow: 2px 2px 2px 1 $base-950;
 	}
 
 	&__description {
 		@include mixin.font-styles($use-header: false);
 		text-overflow: clip;
 		margin-bottom: 15px;
+		text-shadow: 2px 2px 2px 1 $base-950;
 
 		& h2 {
 			// I wish we could use margin-top here to avoid needing \n chars in the string,
@@ -452,6 +468,7 @@ $page-width: 1920px - $rightnav-width;
 		@include mixin.font-styles($use-header: false);
 		font-size: 18px;
 		margin-bottom: 16px;
+		text-shadow: 2px 2px 2px 1 $base-950;
 	}
 }
 
