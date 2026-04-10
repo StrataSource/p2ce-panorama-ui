@@ -39,8 +39,7 @@ class ChapterEntry {
 			if (!this.unlocked) {
 				const title = this.chapter.meta.get(CampaignMeta.CHAPTER_LOCKED_TITLE);
 				desc.text = title ? $.Localize(title) : '????';
-			}
-			else if (chTitleSplit.length === 2) {
+			} else if (chTitleSplit.length === 2) {
 				desc.text = chTitleSplit[1];
 			} else {
 				desc.text = chTitleSplit[0];
@@ -272,7 +271,7 @@ class CampaignChapters {
 		}
 
 		if (this.displayMode === ChapterDisplayMode.GRID || this.displayMode === ChapterDisplayMode.SQUARE_GRID) {
-			this.setupSearching()
+			this.setupSearching();
 		}
 	}
 
@@ -389,13 +388,14 @@ class CampaignChapters {
 			() => {
 				this.populateChapters();
 			},
-			() => {
-			},
+			() => {},
 			() => {
 				return this.chapterSearchCache;
 			},
 			(matches: Array<number>) => {
-				const prog = CampaignAPI.GetCampaignUnlockProgress(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`);
+				const prog = CampaignAPI.GetCampaignUnlockProgress(
+					`${this.campaign.bucket.id}/${this.campaign.campaign.id}`
+				);
 				const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
 
 				this.list.RemoveAndDeleteChildren();
@@ -406,7 +406,9 @@ class CampaignChapters {
 					const p = $.CreatePanel('Panel', this.list, 'chapter' + i);
 					p.LoadLayoutSnippet('ChapterEntrySnippet');
 
-					this.chapterEntries.push(new ChapterEntry(p, this.chapterCache[idx], isSingleWsCampaign || prog >= idx));
+					this.chapterEntries.push(
+						new ChapterEntry(p, this.chapterCache[idx], isSingleWsCampaign || prog >= idx)
+					);
 
 					this.chapterEntries[i].update();
 				}
@@ -417,6 +419,6 @@ class CampaignChapters {
 					}
 				}
 			}
-		)
+		);
 	}
 }

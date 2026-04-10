@@ -41,11 +41,7 @@
 	<Panel class="mainmenu__page" onload="CampaignChapters.init()" tabindex="auto" selectionpos="auto">
 		<Panel id="ChaptersContainer" class="chapters__container" tabindex="auto" selectionpos="auto">
 			<Panel id="CampaignChaptersWrap" class="chapters__wrapper">
-				<TextEntry
-					id="ChapterSearchBar"
-					class="textentry chapters__search"
-					placeholder="#Common_SearchEllipsis"
-				/>
+				<TextEntry id="ChapterSearchBar" class="textentry chapters__search" placeholder="#Common_SearchEllipsis" />
 				<Panel id="CampaignChapters" tabindex="auto" selectionpos="auto" />
 			</Panel>
 			<Panel class="ChapterModeListOnly chapters__list__right">
