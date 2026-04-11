@@ -19,7 +19,6 @@ class CampaignMenu {
 			tagline: '[PH] ????',
 			activated: () => {
 				$.DispatchEvent('LoadingScreenClearLastMap');
-				GameInterfaceAPI.ConsoleCommand('disconnect');
 				CampaignAPI.ContinueCampaign(this.latestSave.mapGroup);
 			},
 			hovered: () => {

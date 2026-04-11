@@ -111,7 +111,6 @@ class CampaignSettingsTab {
 
 		this.applySettings();
 		$.DispatchEvent('MainMenuCloseAllPages');
-		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.DispatchEvent('LoadingScreenClearLastMap');
 
 		const desiredMap = CampaignShared.getMap();
