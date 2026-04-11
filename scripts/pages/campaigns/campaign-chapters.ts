@@ -39,7 +39,7 @@ class ChapterEntry {
 		if (desc) {
 			if (!this.unlocked) {
 				const title = this.chapter.meta.get(CampaignMeta.CHAPTER_LOCKED_TITLE);
-				desc.text = title ? $.Localize(title) : '????';
+				desc.text = title && title.length > 0 ? $.Localize(title) : '????';
 			} else if (chTitleSplit.length === 2) {
 				desc.text = chTitleSplit[1];
 			} else {
