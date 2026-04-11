@@ -4,6 +4,7 @@ class ChapterEntry {
 	panel: Panel;
 	chapter: VirtualChapter | undefined;
 	button: RadioButton | undefined;
+	settingsButton: Button | undefined;
 	playPanel: Panel | undefined;
 	unlocked: boolean;
 
@@ -76,6 +77,8 @@ class ChapterEntry {
 						);
 					}
 				} else CampaignChapters.chapterListModeCover.SetImage(getRandomFallbackImage());
+
+				if (this.chapter) CampaignChapters.listCustomizeBtn.visible = this.chapter.maps.length !== 1;
 			};
 		} else if (
 			CampaignChapters.displayMode === ChapterDisplayMode.GRID ||
@@ -108,6 +111,7 @@ class ChapterEntry {
 				CampaignChapters.customizeChapter();
 			});
 			this.playPanel.enabled = false;
+			this.settingsButton = this.panel.FindChildTraverse<Button>('CustomizeBtn')!;
 
 			if (CampaignChapters.displayMode === ChapterDisplayMode.SUPER) {
 				this.button.hittest = false;
@@ -127,6 +131,10 @@ class ChapterEntry {
 
 				activationFn();
 			});
+
+			if (this.settingsButton && this.chapter.maps.length === 1) {
+				this.settingsButton.visible = false;
+			}
 		}
 	}
 
@@ -153,6 +161,7 @@ class CampaignChapters {
 	static chapterListModeCover = $<Image>('#ChapterListCover')!;
 	static chapterListModeTitle = $<Label>('#ChapterListTitle')!;
 	static chapterListModeHeader = $<Label>('#ChapterListHeader')!;
+	static listCustomizeBtn = $<Button>('#ListCustomizeBtn')!;
 
 	static chapterEntries: ChapterEntry[] = [];
 	static selectedChapter: VirtualChapter | undefined = undefined;

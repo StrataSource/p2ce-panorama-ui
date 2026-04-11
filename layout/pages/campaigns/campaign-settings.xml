@@ -11,110 +11,105 @@
 	<Panel class="mainmenu__page flow-right" onload="CampaignSettingsTab.init()">
 		<Panel class="campaign-settings">
 			<Panel id="CampaignSettingsBase" class="campaign-settings__left">
-				<Panel class="fancy-red full-width p-3 flow-down mb-2">
-					<Label class="text-l text-weight-bold horizontal-align-center" text="#MainMenu_Campaigns_Setup_Proto_Title" />
-					<Label class="horizontal-align-center" text="#MainMenu_Campaigns_Setup_Proto_Desc" />
+				<Panel class="hide">
+					<Panel class="fancy-red full-width p-3 flow-down mb-2">
+						<Label class="text-l text-weight-bold horizontal-align-center" text="#MainMenu_Campaigns_Setup_Proto_Title" />
+						<Label class="horizontal-align-center" text="#MainMenu_Campaigns_Setup_Proto_Desc" />
+					</Panel>
+					<RadioButton
+						id="PresetsBtn"
+						class="campaign-settings__button"
+						group="CampaignSettingsGroup"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', $('#PresetsBtn'), '#MainMenu_Campaigns_Setup_PanelButton_Presets_Title', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc', 'setting-presets')"
+					>
+						<Panel class="vertical-align-center flow-right">
+							<Image
+								class="campaign-settings__button__icon"
+								src="file://{images}/cancel.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="128"
+								textureheight="128"
+							/>
+							<Panel class="flow-down">
+								<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Title" />
+								<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc" />
+							</Panel>
+						</Panel>
+					</RadioButton>
+					<RadioButton
+						id="ServerSettingsBtn"
+						class="campaign-settings__button campaign-settings__button__sub"
+						group="CampaignSettingsGroup"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', $('#ServerSettingsBtn'), '#MainMenu_Campaigns_Setup_PanelButton_Admin_Title', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc')"
+					>
+						<Panel class="vertical-align-center flow-right">
+							<Image
+								class="campaign-settings__button__icon"
+								src="file://{images}/cancel.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="128"
+								textureheight="128"
+							/>
+							<Panel class="flow-down">
+								<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Title" />
+								<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc" />
+							</Panel>
+						</Panel>
+					</RadioButton>
+					<RadioButton
+						id="GameplayBaseBtn"
+						class="campaign-settings__button campaign-settings__button__sub"
+						group="CampaignSettingsGroup"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', $('#GameplayBaseBtn'), '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc')"
+					>
+						<Panel class="vertical-align-center flow-right">
+							<Image
+								class="campaign-settings__button__icon"
+								src="file://{images}/cancel.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="128"
+								textureheight="128"
+							/>
+							<Panel class="flow-down">
+								<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title" />
+								<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc" />
+							</Panel>
+						</Panel>
+					</RadioButton>
+					<RadioButton
+						id="GameplayAddonsBtn"
+						class="campaign-settings__button campaign-settings__button__sub"
+						group="CampaignSettingsGroup"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', $('#GameplayAddonsBtn'), '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc', 'gameplay-addons')"
+					>
+						<Panel class="vertical-align-center flow-right">
+							<Image
+								class="campaign-settings__button__icon"
+								src="file://{images}/cancel.svg"
+								scaling="stretch-to-fit-preserve-aspect"
+								texturewidth="128"
+								textureheight="128"
+							/>
+							<Panel class="flow-down">
+								<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title" />
+								<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc" />
+							</Panel>
+						</Panel>
+					</RadioButton>
 				</Panel>
-				<RadioButton
-					id="PresetsBtn"
-					class="campaign-settings__button"
-					group="CampaignSettingsGroup"
-					onactivate="CampaignSettingsTab.openSettingsSubpage('Presets', $('#PresetsBtn'), '#MainMenu_Campaigns_Setup_PanelButton_Presets_Title', '#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc', 'setting-presets')"
-				>
-					<Panel class="vertical-align-center flow-right">
-						<Image
-							class="campaign-settings__button__icon"
-							src="file://{images}/cancel.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="128"
-							textureheight="128"
-						/>
-						<Panel class="flow-down">
-							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Title" />
-							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Presets_Desc" />
-						</Panel>
-					</Panel>
-				</RadioButton>
-				<RadioButton
-					id="ServerSettingsBtn"
-					class="campaign-settings__button campaign-settings__button__sub"
-					group="CampaignSettingsGroup"
-					onactivate="CampaignSettingsTab.openSettingsSubpage('ServerSettings', $('#ServerSettingsBtn'), '#MainMenu_Campaigns_Setup_PanelButton_Admin_Title', '#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc')"
-				>
-					<Panel class="vertical-align-center flow-right">
-						<Image
-							class="campaign-settings__button__icon"
-							src="file://{images}/cancel.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="128"
-							textureheight="128"
-						/>
-						<Panel class="flow-down">
-							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Title" />
-							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Admin_Desc" />
-						</Panel>
-					</Panel>
-				</RadioButton>
-				<RadioButton
-					id="MapSelectionButton"
-					class="campaign-settings__button campaign-settings__button__sub"
-					group="CampaignSettingsGroup"
-					onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', $('#MapSelectionButton'), '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc', 'map-select')"
-				>
-					<Panel class="vertical-align-center flow-right">
-						<Image
-							class="campaign-settings__button__icon"
-							src="file://{images}/cancel.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="128"
-							textureheight="128"
-						/>
+				<Panel class="campaign-settings__left__header">
+					<RadioButton
+						id="MapSelectionButton"
+						class="campaign-settings__button"
+						group="CampaignSettingsGroup"
+						onactivate="CampaignSettingsTab.openSettingsSubpage('MapSelect', $('#MapSelectionButton'), '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title', '#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc', 'map-select')"
+					>
 						<Panel class="flow-down">
 							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title" />
 							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc" />
 						</Panel>
-					</Panel>
-				</RadioButton>
-				<RadioButton
-					id="GameplayBaseBtn"
-					class="campaign-settings__button campaign-settings__button__sub"
-					group="CampaignSettingsGroup"
-					onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayBase', $('#GameplayBaseBtn'), '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title', '#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc')"
-				>
-					<Panel class="vertical-align-center flow-right">
-						<Image
-							class="campaign-settings__button__icon"
-							src="file://{images}/cancel.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="128"
-							textureheight="128"
-						/>
-						<Panel class="flow-down">
-							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title" />
-							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc" />
-						</Panel>
-					</Panel>
-				</RadioButton>
-				<RadioButton
-					id="GameplayAddonsBtn"
-					class="campaign-settings__button campaign-settings__button__sub"
-					group="CampaignSettingsGroup"
-					onactivate="CampaignSettingsTab.openSettingsSubpage('GameplayAddons', $('#GameplayAddonsBtn'), '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title', '#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc', 'gameplay-addons')"
-				>
-					<Panel class="vertical-align-center flow-right">
-						<Image
-							class="campaign-settings__button__icon"
-							src="file://{images}/cancel.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="128"
-							textureheight="128"
-						/>
-						<Panel class="flow-down">
-							<Label class="campaign-settings__button__text" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title" />
-							<Label class="campaign-settings__button__subtext" text="#MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc" />
-						</Panel>
-					</Panel>
-				</RadioButton>
+					</RadioButton>
+				</Panel>
 			</Panel>
 			<!-- Summary panel -->
 			<Panel class="campaign-settings__right">

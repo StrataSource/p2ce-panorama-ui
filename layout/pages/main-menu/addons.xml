@@ -96,7 +96,7 @@
 							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/icons/steam.svg" />
 						</Button>
 					</TooltipPanel>
-					<TooltipPanel tooltip="#MainMenu_Addons_Filtering_Edit_Tooltip">
+					<TooltipPanel class="hide" tooltip="#MainMenu_Addons_Filtering_Edit_Tooltip">
 						<Button
 							id="ViewFilters"
 							class="button mr-2"

@@ -183,7 +183,7 @@
 					<Label class="settings-group__title vertical-align-center" text="#Settings_Render_Title" />
 				</Panel>
 				
-				<Panel class="settings-group__subtitle">
+				<Panel class="settings-group__subtitle hide">
 					<Label class="settings-enum-dropdown__title ml-3" text="#Settings_Video_Presets" />
 					<DropDown id="PresetDropdown" class="dropdown mr-3" menuclass="dropdown-menu">
 						<Label text="[HC] Custom" id="PresetDropdown0" value="0" />

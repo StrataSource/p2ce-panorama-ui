@@ -37,10 +37,16 @@
 		height: 100%;
 		flow-children: down;
 		margin-left: 10px;
+
+		&__header {
+			width: 100%;
+			flow-children: right;
+			margin-bottom: 5px;
+		}
 	}
 
 	&__button {
-		width: 100%;
+		width: fill-parent-flow(1);
 		border: $menu-pane-border;
 		background-color: $button-background;
 		padding: 10px 15px;
@@ -212,8 +218,7 @@
 			width: 100%;
 			height: fill-parent-flow(1);
 			background-color: $base-gradient-subtle;
-			border: 1px solid $primary-color;
-			border-top-width: 0;
+			border: $menu-pane-border;
 		}
 	}
 }

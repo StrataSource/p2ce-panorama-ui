@@ -27,7 +27,7 @@
 				</Button>
 				<Button
 					disabled="true"
-					class="card play-menu__card mr-3"
+					class="card play-menu__card"
 					onactivate="PlayMenu.onMultiPlayerBtnPressed()"
 					tabindex="auto"
 					selectionpos="auto"
@@ -39,7 +39,7 @@
 				</Button>
 				<Button
 					disabled="true"
-					class="card play-menu__card"
+					class="card play-menu__card ml-3 hide"
 					onactivate="PlayMenu.onSinglePlayerBtnPressed()"
 					tabindex="auto"
 					selectionpos="auto"
