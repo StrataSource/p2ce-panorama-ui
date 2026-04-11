@@ -96,6 +96,19 @@ class MenuManager {
 				}
 			});
 
+			// FIXME: I HATE YOU UITOOLKITAPI YOU SUCK MAJOR ????
+			// JS Context's panel is not getting assigned correctly causing nullptr crash
+			$.RegisterForUnhandledEvent('MainMenuNotifFailLoad', () => {
+				$.DispatchEvent('MainMenuSwitchReverse', true);
+				$.DispatchEvent('MainMenuCloseAllPages');
+				UiToolkitAPI.ShowGenericPopupOk(
+					$.Localize('#MainMenu_Campaigns_LoadFailed_Title'),
+					$.Localize('#MainMenu_Campaigns_LoadFailed_Description'),
+					'generic-popup',
+					() => {}
+				);
+			});
+
 			$.RegisterForUnhandledEvent('MainMenuAddBgPanel', (panel: Panel) => {
 				panel.SetParent(this.menuBackground);
 				panel.SetReadyForDisplay(true);

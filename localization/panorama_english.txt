@@ -1007,6 +1007,8 @@ Please install and mount the above games first to access this campaign."
 		// Bad Campaign
 		"MainMenu_Campaigns_BgLoadFailed_Title"						"Failed to Load Content"
 		"MainMenu_Campaigns_BgLoadFailed_Description"				"The campaign you tried to run has specified a background map that could not be loaded. Ensure that the required content has been downloaded and mounted correctly."
+		"MainMenu_Campaigns_LoadFailed_Title"						"Failed to Start Campaign!"
+		"MainMenu_Campaigns_LoadFailed_Description"					"The campaign failed to start. Check the console for details."
 		"MainMenu_Campaigns_Error_Generic_Title"					"Error"
 		"MainMenu_Campaigns_Error_InvalidKV3_Title"					"Cannot Start Campaign"
 		"MainMenu_Campaigns_Error_InvalidKV3_Desc"					"This campaign cannot start because the data specified in its script file is invalid.\n\nPlease report this issue and the corresponding error log to the addon's author."

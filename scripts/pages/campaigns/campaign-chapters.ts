@@ -279,7 +279,8 @@ class CampaignChapters {
 			$.DispatchEvent('Activated', btn, PanelEventSource.PROGRAM);
 		}
 
-		if (this.displayMode === ChapterDisplayMode.GRID || this.displayMode === ChapterDisplayMode.SQUARE_GRID) {
+		if (isSingleWsCampaign && this.displayMode === ChapterDisplayMode.SQUARE_GRID) {
+			$.Msg('blah');
 			this.setupSearching();
 		}
 	}
@@ -370,10 +371,10 @@ class CampaignChapters {
 			chapterId = this.selectedChapter!.id;
 		}
 
-		$.Schedule(0.1, () => {
-			$.DispatchEvent('LoadingScreenClearLastMap');
-			CampaignAPI.StartCampaign(campaignId, chapterId, 0);
-		});
+		$.DispatchEvent('LoadingScreenClearLastMap');
+		if (!CampaignAPI.StartCampaign(campaignId, chapterId, 0)) {
+			$.DispatchEvent('MainMenuNotifFailLoad');
+		}
 	}
 
 	static customizeChapter() {

@@ -114,24 +114,24 @@ class CampaignSettingsTab {
 		GameInterfaceAPI.ConsoleCommand('disconnect');
 		$.DispatchEvent('LoadingScreenClearLastMap');
 
-		$.Schedule(0.01, () => {
-			const desiredMap = CampaignShared.getMap();
-			const mapIdx = desiredMap.index > 0 ? desiredMap.index : 0;
+		const desiredMap = CampaignShared.getMap();
+		const mapIdx = desiredMap.index > 0 ? desiredMap.index : 0;
 
-			let campaignId: string;
-			let chapterId: string;
-			if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
-				campaignId = this.chapter.id;
-				chapterId = 'auto';
-			} else {
-				campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
-				chapterId = this.chapter.id;
-			}
+		let campaignId: string;
+		let chapterId: string;
+		if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
+			campaignId = this.chapter.id;
+			chapterId = 'auto';
+		} else {
+			campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
+			chapterId = this.chapter.id;
+		}
 
-			CampaignAPI.StartCampaign(campaignId, chapterId, mapIdx);
+		if (!CampaignAPI.StartCampaign(campaignId, chapterId, mapIdx)) {
+			$.DispatchEvent('MainMenuNotifFailLoad');
+		}
 
-			this.clear();
-		});
+		this.clear();
 	}
 
 	static openSettingsSubpage(tab: string, invoker: Button, locH: string, locS: string, xml?: string) {

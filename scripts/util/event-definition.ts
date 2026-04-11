@@ -50,3 +50,4 @@ $.DefineEvent('LoadingScreenClearLastMap', 0);
 $.DefineEvent('MainMenuModeRequestCleanup', 0);
 $.DefineEvent('MainMenuPageClosed', 2);
 $.DefineEvent('CampaignMenuRefreshUserSettings', 0);
+$.DefineEvent('MainMenuNotifFailLoad', 0);
