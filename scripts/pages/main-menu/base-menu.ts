@@ -34,7 +34,6 @@ class BaseMenu {
 				const id = `${c.bucket.id}/${c.campaign.id}`;
 
 				$.DispatchEvent('LoadingScreenClearLastMap');
-				GameInterfaceAPI.ConsoleCommand('disconnect');
 				CampaignAPI.ContinueCampaign(id);
 			},
 			hovered: () => {

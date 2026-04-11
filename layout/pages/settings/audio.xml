@@ -202,13 +202,9 @@
 			<!-- Audio Devices Section -->
 
 			<Panel id="AudioDevicesSubSection" class="settings-group">
-
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_AudioDevices_Title" tags="audio,sound,devices" />
-
 					<Panel class="flow-right horizontal-align-right vertical-align-center">
-
 						<Button
 							class="button mr-3 hide"
 							onactivate="SettingsShared.showImportExportDialogue('Settings_AudioDevices_Title', 'AudioDevicesSubSection')"
@@ -221,20 +217,8 @@
 								<Image class="button__icon" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
-
 					</Panel>
-
 				</Panel>
-
-				<SettingsEnum
-					text="#Settings_Audio_HRTF_Async_Title"
-					infomessage="#Settings_Audio_HRTF_Async_Desc"
-					convar="snd_hrtf_async"
-					hasdocspage="false"
-				>
-					<RadioButton group="snd_hrtf_async" text="#Common_Off" value="0" />
-					<RadioButton group="snd_hrtf_async" text="#Common_On" value="1" />
-				</SettingsEnum>
 
 				<SettingsEnumDropDown
 					text="#Settings_AudioDevices_Speaker"

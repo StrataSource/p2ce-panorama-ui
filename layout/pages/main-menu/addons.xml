@@ -4,6 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/common/searcher.ts" />
 		<include src="file://{scripts}/pages/main-menu/addons.ts" />
 	</scripts>
 
@@ -85,7 +86,17 @@
 			</Panel>
 			<Panel id="AddonsPage" class="addons" onload="AddonManager.init()" tabindex="auto" selectionpos="auto">
 				<Panel class="addons__action-bar">
-					<TooltipPanel tooltip="#MainMenu_Addons_Filtering_Edit_Tooltip">
+					<TooltipPanel tooltip="#MainMenu_Addons_SteamWorkshop_Tooltip">
+						<Button
+							class="button mr-2"
+							onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/app/440000/workshop/')"
+							tabindex="auto"
+							selectionpos="auto"
+						>
+							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/icons/steam.svg" />
+						</Button>
+					</TooltipPanel>
+					<TooltipPanel class="hide" tooltip="#MainMenu_Addons_Filtering_Edit_Tooltip">
 						<Button
 							id="ViewFilters"
 							class="button mr-2"

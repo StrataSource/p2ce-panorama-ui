@@ -3,6 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
+		<include src="file://{scripts}/common/searcher.ts" />
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/pages/campaigns/campaign-chapters.ts" />
 	</scripts>
@@ -26,10 +27,10 @@
 					</Panel>
 				</RadioButton>
 				<Panel id="ChapterPlayPanel" class="chapters__entry__play-btns">
-					<Button id="PlayBtn" class="button fill-width mr-1">
+					<Button id="PlayBtn" class="button fill-width">
 						<Label class="button__text" text="#MainMenu_Navigation_Play" />
 					</Button>
-					<Button id="CustomizeBtn" class="button">
+					<Button id="CustomizeBtn" class="button ml-1">
 						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
 					</Button>
 				</Panel>
@@ -40,6 +41,7 @@
 	<Panel class="mainmenu__page" onload="CampaignChapters.init()" tabindex="auto" selectionpos="auto">
 		<Panel id="ChaptersContainer" class="chapters__container" tabindex="auto" selectionpos="auto">
 			<Panel id="CampaignChaptersWrap" class="chapters__wrapper">
+				<TextEntry id="ChapterSearchBar" class="textentry chapters__search" placeholder="#Common_SearchEllipsis" />
 				<Panel id="CampaignChapters" tabindex="auto" selectionpos="auto" />
 			</Panel>
 			<Panel class="ChapterModeListOnly chapters__list__right">
@@ -58,10 +60,10 @@
 					</Panel>
 				</Panel>
 				<Panel class="full-width flow-right mt-1">
-					<Button id="ListPlayBtn" onactivate="CampaignChapters.startChapter()" class="button full-height fill-width mr-1">
+					<Button id="ListPlayBtn" onactivate="CampaignChapters.startChapter()" class="button full-height fill-width">
 						<Label class="button__text" text="#MainMenu_Navigation_Play" />
 					</Button>
-					<Button id="ListCustomizeBtn" onactivate="CampaignChapters.customizeChapter()" class="button">
+					<Button id="ListCustomizeBtn" onactivate="CampaignChapters.customizeChapter()" class="button ml-1">
 						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
 					</Button>
 				</Panel>

@@ -1,7 +1,6 @@
 'use strict';
 
 class CampaignEntry {
-	index: number;
 	panel: Button;
 	info: CampaignPair;
 	boxartPath: string | undefined;
@@ -12,7 +11,6 @@ class CampaignEntry {
 	author: string | undefined;
 
 	constructor(
-		index: number,
 		panel: Button,
 		info: CampaignPair,
 		boxart: string | undefined,
@@ -21,7 +19,6 @@ class CampaignEntry {
 		desc: string | undefined,
 		author: string | undefined
 	) {
-		this.index = index;
 		this.panel = panel;
 		this.info = info;
 		this.boxartPath = boxart;
@@ -29,6 +26,8 @@ class CampaignEntry {
 		this.btnBgPath = btnBg;
 		this.desc = desc;
 		this.author = author;
+
+		this.update();
 	}
 
 	update() {
@@ -39,13 +38,6 @@ class CampaignEntry {
 		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
 		const basePath = getCampaignAssetPath(this.info);
-
-		// eject out into the action bar
-		if (this.index === 0) {
-			this.panel.SetPanelEvent('onmoveup', () => {
-				CampaignSelector.focusActionBar();
-			});
-		}
 
 		if (title) {
 			title.text = $.Localize(this.info.campaign.title);
@@ -82,30 +74,75 @@ class CampaignEntry {
 }
 
 class CampaignSelector {
+	static searchBar = $<TextEntry>('#SearchBar')!;
 	static campaignList = $<Panel>('#CampaignContainer')!;
 	static hoverContainer = $<Panel>('#HoveredCampaignContainer')!;
 	static hoverInfo = $<Panel>('#HoveredCampaignInfo')!;
 	static hoverBoxart = $<Image>('#HoveredCampaignBoxart')!;
+
 	static campaignEntries: CampaignEntry[] = [];
 	static hoveredCampaign: CampaignInfo | null = null;
-
-	// filters by SP or MP
-	static playerMode: PlayerMode;
-
-	static focusActionBar() {
-		$('#SearchBar')!.SetFocus();
-	}
+	static searchableCampaigns: Array<AbstractSearchData> = [];
 
 	static init() {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 
 		installImageFallbackHandler(this.hoverBoxart);
 
-		this.playerMode = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SELECTOR_TYPE] as PlayerMode;
 		this.reloadList();
+
+		const buckets = CampaignAPI.GetAllCampaignBuckets();
+		for (const bucket of buckets) {
+			// don't search special ws
+			if (isBucketSingleWsCampaign(bucket)) continue;
+
+			for (const campaign of bucket.campaigns) {
+				const campaignId = `${bucket.id}/${campaign.id}`;
+				const campaignMeta = CampaignAPI.GetCampaignMeta(campaignId);
+				const author = campaignMeta.get(CampaignMeta.AUTHOR);
+				this.searchableCampaigns.push(
+					new AbstractSearchData(
+						// don't attach the campaign data, might be expensive!
+						campaignId,
+						`${$.Localize(campaign.title)}${author ? ` ${$.Localize(author)}` : ''}`,
+						campaignId
+					)
+				);
+			}
+		}
+
+		this.searchableCampaigns.sort((a, b) => a.text.localeCompare(b.text));
+
+		installSearchHandling<string, string>(
+			this.searchBar,
+			() => {
+				this.reloadList();
+			},
+			() => {},
+			() => {
+				// don't want to reconstruct this every time!
+				return this.searchableCampaigns;
+			},
+			// matching against campaign IDs directly
+			(matches: Array<string>) => {
+				this.clearCampaigns();
+				for (const id of matches) {
+					const data = CampaignAPI.FindCampaign(id);
+					if (!data) {
+						$.Warning(`Found a match for '${id}', but the data is not accessible!!`);
+						continue;
+					}
+					this.createCampaignBtn(data.bucket, data.campaign);
+				}
+			}
+		);
+
+		if (this.campaignEntries.length > 0) {
+			this.campaignEntries[0].panel.SetFocus();
+		}
 	}
 
-	static createCampaignBtn(bucket: CampaignBucket, campaign: CampaignInfo, campaignIndex: number) {
+	static createCampaignBtn(bucket: CampaignBucket, campaign: CampaignInfo) {
 		const p = $.CreatePanel('Button', this.campaignList, `Campaign_${bucket.id}-${campaign.id}`);
 		p.LoadLayoutSnippet('CampaignEntrySnippet');
 		p.AddClass('campaigns__entry__spaced');
@@ -117,7 +154,6 @@ class CampaignSelector {
 
 		this.campaignEntries.push(
 			new CampaignEntry(
-				campaignIndex,
 				p,
 				{ bucket: bucket, campaign: campaign },
 				m.get(CampaignMeta.BOX_ART),
@@ -127,13 +163,16 @@ class CampaignSelector {
 				m.get(CampaignMeta.AUTHOR)
 			)
 		);
+	}
 
-		this.campaignEntries[campaignIndex].update();
+	static clearCampaigns() {
+		this.campaignList.RemoveAndDeleteChildren();
+		this.campaignEntries = [];
+		this.hoveredCampaign = null;
 	}
 
 	static populateCampaigns() {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
-		let campaignIndex = 0;
 		let hasAutoCampaign = false;
 
 		for (const bucket of buckets) {
@@ -143,24 +182,26 @@ class CampaignSelector {
 			}
 		}
 
+		const campaigns: Array<{info: CampaignInfo, bucket: CampaignBucket}> = [];
 		for (const bucket of buckets) {
 			if (isBucketSingleWsCampaign(bucket)) {
 				continue;
 			}
 			for (const campaign of bucket.campaigns) {
-				if (`${bucket.id}/${campaign.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN && !hasAutoCampaign) {
-					continue;
-				}
-				this.createCampaignBtn(bucket, campaign, campaignIndex);
-				campaignIndex += 1;
+				campaigns.push({ info: campaign, bucket: bucket });
 			}
 		}
 
-		stripDevTagsFromLabels(this.campaignList);
+		campaigns.sort((a, b) => a.info.title.localeCompare(b.info.title));
 
-		if (this.campaignEntries.length > 0) {
-			this.campaignEntries[0].panel.SetFocus();
+		for (const pair of campaigns) {
+			if (`${pair.bucket.id}/${pair.info.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN && !hasAutoCampaign) {
+				continue;
+			}
+			this.createCampaignBtn(pair.bucket, pair.info);
 		}
+
+		stripDevTagsFromLabels(this.campaignList);
 	}
 
 	static onCampaignHovered(e: CampaignEntry) {
@@ -196,12 +237,8 @@ class CampaignSelector {
 		});
 	}
 
-	static purgeCampaignList() {
-		while (this.campaignEntries.length > 0) this.campaignEntries.pop()?.panel.DeleteAsync(0);
-	}
-
 	static reloadList() {
-		this.purgeCampaignList();
+		this.clearCampaigns();
 		this.populateCampaigns();
 	}
 

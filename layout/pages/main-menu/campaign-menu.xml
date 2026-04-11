@@ -13,7 +13,7 @@
 				<Image
 					id="ContinueSaveThumb"
 					class="mainmenu__display-box__img"
-					src="file://{images}/menu/p2ce/random4.png"
+					src="file://{images}/menu/fallback/programmer_art_logo.png"
 					textureheight="1920"
 					texturewidth="1080"
 					scaling="stretch-to-cover-preserve-aspect"

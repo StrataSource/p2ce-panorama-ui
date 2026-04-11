@@ -21,7 +21,7 @@
 				<Image
 					id="ContinueSaveLogo"
 					class="mainmenu__square-logo"
-					src="file://{images}/menu/p2ce/logo.svg"
+					src="file://{images}/menu/p2ce/logo.png"
 					textureheight="2048"
 					texturewidth="2048"
 					scaling="stretch-to-fit-preserve-aspect"
@@ -64,7 +64,7 @@
 		</Panel>
 
 		<!-- Background author -->
-		<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly">
+		<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly hide">
 			<Panel class="flow-down vertical-align-center">
 				<Label class="mainmenu__featured-bg__text" text="#MainMenu_Home_BackgroundCredit" />
 				<Label id="BgName" class="mainmenu__featured-bg__name" text="[PH] Author" />
@@ -82,7 +82,7 @@
 				<Image
 					id="ContinueSaveThumb"
 					class="mainmenu__display-box__img"
-					src="file://{images}/menu/p2ce/random4.png"
+					src="file://{images}/menu/fallback/programmer_art_logo.png"
 					textureheight="1920"
 					texturewidth="1080"
 					scaling="stretch-to-cover-preserve-aspect"

@@ -36,6 +36,9 @@ class AddonEntry {
 			.replace(/r\s*$/, '');
 
 		if (this.addonEnableCheck) {
+			if (info.type.includes('Campaign') || info.type.includes('Map')) {
+				this.addonEnableCheck.visible = false;
+			}
 			this.addonEnableCheck.SetSelected(WorkshopAPI.GetAddonEnabled(this.index));
 			this.addonEnableCheck.SetPanelEvent('onactivate', () => AddonManager.markDirty());
 		}
@@ -115,6 +118,8 @@ class AddonManager {
 	static addons: AddonEntry[] = [];
 	static dirty: boolean = false;
 	static selectedAddon: number = -1;
+	static searchableAddons: Array<AbstractSearchData> = [];
+	static searchDataDirty: boolean = true;
 
 	static init() {
 		this.addonsPage.visible = false;
@@ -128,6 +133,40 @@ class AddonManager {
 			$.Localize('#MainMenu_Navigation_Addons'),
 			$.Localize('#MainMenu_Navigation_Addons_Tagline')
 		);
+
+		installSearchHandling<number, Addon>(
+			this.searchBar,
+			() => {
+				AddonManager.reloadAddonList();
+			},
+			() => {},
+			() => {
+				this.buildSearchData();
+				return this.searchableAddons;
+			},
+			(matches: Array<Addon>) => {
+				AddonManager.createPredefinedAddonEntries(matches);
+			}
+		);
+	}
+
+	/**
+	 * Rebuilds search data for use with the search engine
+	 *
+	 * Searching is performed on the addons that match the filter,
+	 * so this needs to be rebuilt every time that filtered list is
+	 * changed.
+	 *
+	 * Filtering is not implemented yet, so this is only built once!
+	 */
+	static buildSearchData() {
+		if (!this.searchDataDirty) return;
+
+		this.searchableAddons = [];
+		for (const addon of AddonManager.getFilteredAddonsArray()) {
+			this.searchableAddons.push(new AbstractSearchData(addon, addon.meta.title, addon.index));
+		}
+		this.searchDataDirty = false;
 	}
 
 	static showPage() {
@@ -339,70 +378,6 @@ class AddonManager {
 			addons.push(new Addon(i, info));
 		}
 		return addons;
-	}
-}
-
-// Searching
-
-class SearchMatch {
-	addon: Addon;
-	matchedWith: unknown;
-
-	constructor(addon: Addon, matchedWith: unknown) {
-		this.addon = addon;
-		this.matchedWith = matchedWith;
-	}
-}
-
-class AddonSearch {
-	static searchBar = $<TextEntry>('#SearchAddonsEntry')!;
-	static strings: string[] = [];
-	static matches: SearchMatch[] = [];
-
-	static {
-		this.searchBar.RaiseChangeEvents(true);
-		$.RegisterEventHandler('TextEntryChanged', this.searchBar, this.onSearchTextChanged.bind(this));
-	}
-
-	static onSearchTextChanged() {
-		const search = this.searchBar.text;
-		// check empty
-		if (!/.*\S.*/.test(search)) {
-			AddonManager.reloadAddonList();
-			return;
-		}
-
-		// split
-		this.strings = search.split(/\s/).filter((s) => /^\w+$/.test(s));
-
-		// don't show one char words
-		if (!this.strings.some((str) => str.length > 1)) return;
-
-		this.matches = [];
-
-		const addons = AddonManager.getFilteredAddonsArray();
-		for (const searchPart of this.strings) {
-			if (!searchPart) {
-				break;
-			}
-
-			for (const addon of addons) {
-				const testLower = addon.meta.title.toLowerCase();
-				const index = testLower.indexOf(searchPart.toLowerCase());
-
-				if (index === -1) {
-					continue;
-				}
-
-				this.matches.push(new SearchMatch(addon, undefined));
-			}
-		}
-
-		const sendAddons: Addon[] = [];
-		for (const match of this.matches) {
-			sendAddons.push(match.addon);
-		}
-		AddonManager.createPredefinedAddonEntries(sendAddons);
 	}
 }
 

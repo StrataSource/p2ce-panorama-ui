@@ -449,8 +449,8 @@
 		"Debugger_AnimationHeader"					"Animation Keyframes"
 		"Debugger_ToggleTheme"						"Toggle Theme"
 		"Debugger_DevInfo"							"Show Dev Info"
-		"Debugger_Smaller"							"뿯▽ Smaller"
-		"Debugger_Larger"							"뿯▽ Larger"
+		"Debugger_Smaller"							"Smaller"
+		"Debugger_Larger"							"Larger"
 		"Debugger_ResetSize"						"Reset Size"
 
 		"Console_Title"								"Console"
@@ -485,6 +485,7 @@
 		"Settings_General_Search_EmptyHeader"			"No Results Found"
 		"Settings_General_Search_EmptyNoResults"		"Your search query did not match any results in the Settings menu."
 		"Settings_General_Search_MatchedEnglishTag"		"Matches "
+		"OS_Default_Device"								"System Default Output Device"
 		
 		// Settings - Import/Export
 		"Settings_ImportExport_Title"					"Import/Export %thing% Settings"
@@ -551,7 +552,7 @@
 
 		"Settings_Render_Title"							"Rendering"
 		
-		"Settings_Video_Presets"						"Quality Presets"
+		"Settings_Video_Presets"						"Quality Presets (NOT IMPLEMENTED)"
 		"Settings_Video_Presets_info"					"Video settings will be set based on a pre-determined set of variables in this list, from low to high."
 
 		"Settings_Video_AspectRatio"					"Aspect Ratio"
@@ -810,7 +811,13 @@
 		"Settings_Misc_Title" 							"Miscellaneous"
 		"Settings_Misc_solenergy_refract"				"Solid Energy Refractions"
 		"Settings_Misc_solenergy_refract_info"			"Enables water-like refraction effects in fizzlers."
-		
+		"Settings_Misc_ViewmodelOffset_X"				"Viewmodel Offset (X)"
+		"Settings_Misc_ViewmodelOffset_X_info"			"Offset the position of the Viewmodel in the X axis by this amount in Hammer Units (HU)"
+		"Settings_Misc_ViewmodelOffset_Y"				"Viewmodel Offset (Y)"
+		"Settings_Misc_ViewmodelOffset_Y_info"			"Offset the position of the Viewmodel in the Y axis by this amount in Hammer Units (HU)"
+		"Settings_Misc_ViewmodelOffset_Z"				"Viewmodel Offset (Z)"
+		"Settings_Misc_ViewmodelOffset_Z_info"			"Offset the position of the Viewmodel in the Z axis by this amount in Hammer Units (HU)"
+
 		"Settings_Video_PreventThreadSleep"				"Prevent Main Thread Sleep"
 		"Settings_Video_PreventThreadSleep_Info"		"Prevent the main game thread from sleeping when at maximum FPS limit. Enabling this option may result in smoother performance, but causes higher CPU usage."
 		
@@ -1000,6 +1007,8 @@ Please install and mount the above games first to access this campaign."
 		// Bad Campaign
 		"MainMenu_Campaigns_BgLoadFailed_Title"						"Failed to Load Content"
 		"MainMenu_Campaigns_BgLoadFailed_Description"				"The campaign you tried to run has specified a background map that could not be loaded. Ensure that the required content has been downloaded and mounted correctly."
+		"MainMenu_Campaigns_LoadFailed_Title"						"Failed to Start Campaign!"
+		"MainMenu_Campaigns_LoadFailed_Description"					"The campaign failed to start. Check the console for details."
 		"MainMenu_Campaigns_Error_Generic_Title"					"Error"
 		"MainMenu_Campaigns_Error_InvalidKV3_Title"					"Cannot Start Campaign"
 		"MainMenu_Campaigns_Error_InvalidKV3_Desc"					"This campaign cannot start because the data specified in its script file is invalid.\n\nPlease report this issue and the corresponding error log to the addon's author."
@@ -1169,6 +1178,7 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_Category_WS_Tagline"		"Workshop subscriptions and locally-installed content"
 		"MainMenu_Addons_Category_Mounts"			"Mounted Games"
 		"MainMenu_Addons_Category_Mounts_Tagline"	"Content from other installed Source engine games"
+		"MainMenu_Addons_SteamWorkshop_Tooltip"		"Open the Steam Workshop in the overlay"
 		
 		"MainMenu_Addons_ToggleAddon"				"Toggle addon's enablement state"
 		
@@ -1189,7 +1199,7 @@ Please install and mount the above games first to access this campaign."
 		// Filtering
 		// Filtering - Time
 		"MainMenu_Addons_SearchBox_FillerText"				"Search for addons..."
-		"MainMenu_Addons_Filtering_Title"					"Filtering and Sorting Options"
+		"MainMenu_Addons_Filtering_Title"					"Filtering and Sorting Options (NOT IMPLEMENTED)"
 		"MainMenu_Addons_Filtering_Edit_Tooltip"			"Change the way how addons are filtered and sorted by in the addon list."
 		"MainMenu_Addons_Filtering_EnableAddons_Tooltip"	"Enable or disable all addons in this list."
 		"MainMenu_Addons_Filtering_Sort_Title"				"Sort by:"
