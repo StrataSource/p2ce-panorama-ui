@@ -145,7 +145,7 @@
 				>
 					<Image
 						class="button-mono__icon campaign-settings__start__icon"
-						src="file://{images}/cancel.svg"
+						src="file://{images}/play.svg"
 						scaling="stretch-to-fit-preserve-aspect"
 						texturewidth="64"
 						textureheight="64"
