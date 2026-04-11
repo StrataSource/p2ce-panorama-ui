@@ -111,6 +111,8 @@ class CampaignSelector {
 			}
 		}
 
+		this.searchableCampaigns.sort((a, b) => a.text.localeCompare(b.text));
+
 		installSearchHandling<string, string>(
 			this.searchBar,
 			() => {
@@ -180,16 +182,23 @@ class CampaignSelector {
 			}
 		}
 
+		const campaigns: Array<{info: CampaignInfo, bucket: CampaignBucket}> = [];
 		for (const bucket of buckets) {
 			if (isBucketSingleWsCampaign(bucket)) {
 				continue;
 			}
 			for (const campaign of bucket.campaigns) {
-				if (`${bucket.id}/${campaign.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN && !hasAutoCampaign) {
-					continue;
-				}
-				this.createCampaignBtn(bucket, campaign);
+				campaigns.push({ info: campaign, bucket: bucket });
 			}
+		}
+
+		campaigns.sort((a, b) => a.info.title.localeCompare(b.info.title));
+
+		for (const pair of campaigns) {
+			if (`${pair.bucket.id}/${pair.info.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN && !hasAutoCampaign) {
+				continue;
+			}
+			this.createCampaignBtn(pair.bucket, pair.info);
 		}
 
 		stripDevTagsFromLabels(this.campaignList);
