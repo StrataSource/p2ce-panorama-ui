@@ -34,6 +34,7 @@ class MenuManager {
 	static loadingIndicator = $<Label>('#LoadingIndicator')!;
 	static menuContent = $<Panel>('#MenuMainContent')!;
 	static pageBlur = $<BaseBlurTarget>('#PageBlur')!;
+	static grids = [$<Image>('#GridTexture1')!, $<Image>('#GridTexture2')!];
 
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
@@ -197,6 +198,43 @@ class MenuManager {
 					case CampaignLogoSizePreset.LARGE:
 						this.logo.style.height = '240px';
 						break;
+				}
+			});
+
+			$.RegisterForUnhandledEvent('MainMenuSetPauseBlur', (doBlur: boolean) => {
+				if (doBlur) {
+					this.gradientBar.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+
+					// FIXME:
+					// cant do this because when it fully fades out, panorama will
+					// collapse it and will reclaim the layout space, which will shove
+					// setting sliders a considerable distance
+					//
+					// for some reason changing the opacity thru an animation prop
+					// instead of a transition doesnt do this, but if i do that,
+					// the transition property loses the ability to change the
+					// opacity which is SOOOOOOOOOOOOOOOO MUCH FUN!!!!!!!!
+					//this.pageHeadline.AddClass('mainmenu__page-controls__anim');
+					//this.pageTagline.AddClass('mainmenu__page-controls__anim');
+					//this.pageActions.AddClass('mainmenu__page-controls__anim');
+
+					for (const grid of this.grids) {
+						grid.style.opacity = 0.25;
+					}
+
+					this.showPageBlur();
+				} else {
+					this.gradientBar.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
+
+					//this.pageHeadline.RemoveClass('mainmenu__page-controls__anim');
+					//this.pageTagline.RemoveClass('mainmenu__page-controls__anim');
+					//this.pageActions.RemoveClass('mainmenu__page-controls__anim');
+
+					for (const grid of this.grids) {
+						grid.style.opacity = 0;
+					}
+
+					this.hidePageBlur();
 				}
 			});
 
@@ -365,6 +403,16 @@ class MenuManager {
 		}
 	}
 
+	static showPageBlur() {
+		this.pageBlur.AddClass('anim-menu-page-blur');
+		this.pageBlur.RemoveClass('anim-menu-page-blur-reverse');
+	}
+
+	static hidePageBlur() {
+		this.pageBlur.AddClass('anim-menu-page-blur-reverse');
+		this.pageBlur.RemoveClass('anim-menu-page-blur');
+	}
+
 	// show page container
 	static showPage() {
 		this.controls.AddClass('mainmenu__nav__anim');
@@ -381,8 +429,7 @@ class MenuManager {
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 reverse forwards';
 		this.menuForeground.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
 
-		this.pageBlur.AddClass('anim-menu-page-blur');
-		this.pageBlur.RemoveClass('anim-menu-page-blur-reverse');
+		this.showPageBlur();
 	}
 
 	// hide page container
@@ -398,8 +445,7 @@ class MenuManager {
 		this.pageBg.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 		this.menuForeground.style.animation = 'FadeIn 0.25s linear 0s 1 normal forwards';
 
-		this.pageBlur.AddClass('anim-menu-page-blur-reverse');
-		this.pageBlur.RemoveClass('anim-menu-page-blur');
+		this.hidePageBlur();
 	}
 
 	static reversePageAnim(panel: GenericPanel) {

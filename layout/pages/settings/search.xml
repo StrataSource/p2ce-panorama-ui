@@ -30,12 +30,13 @@
 	</snippets>
 
 	<Panel class="settings-page">
-		<Panel class="settings-page__header">
-			<Label class="settings-page__title" text="#Settings_General_Search_Results" />
-		</Panel>
-
-		<Panel id="SettingsPageContainer" class="settings-page__container settings-search">
-			<Panel id="SearchResultsContainer" class="settings-group settings-group--search" />
+		<Panel id="SettingsPageContainer" class="settings-page__search-container">
+			<Panel class="settings-group settings-search">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_General_Search_Results" />
+				</Panel>
+				<Panel id="SearchResultsContainer" class="settings-group--search" />
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

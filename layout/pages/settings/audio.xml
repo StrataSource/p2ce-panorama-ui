@@ -7,18 +7,7 @@
 		<include src="file://{scripts}/pages/settings/page.js" />
 	</scripts>
 
-	<Panel class="settings-page">
-
-		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Audio" />
-
-			<Panel class="settings-page__header-buttons">
-				<!-- Gamemode Dropdown will go here -->
-			</Panel>
-
-		</Panel>
-
+	<Panel class="settings-page" searchtitle="#Settings_Audio">
 		<BaseAudioSettings id="SettingsPageContainer" class="settings-page__container">
 
 			<!-- Volume settings sub section -->
@@ -40,7 +29,7 @@
 
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('VolumeSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 
@@ -168,7 +157,7 @@
 						
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('AudioClosedCaptionsSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 
@@ -214,7 +203,7 @@
 						
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('AudioDevicesSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 					</Panel>

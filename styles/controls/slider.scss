@@ -3,7 +3,7 @@
 .slider {
 	#SliderTrack {
 		align: center bottom;
-		border: $menu-pane-border;
+		border-bottom: $menu-pane-border;
 		background-color: $slider-track;
 		box-shadow: $slider-track-shadow;
 		z-index: 2;

@@ -7,44 +7,49 @@
 .settings-enum,
 .settings-enum-dropdown,
 .settings-slider,
+.colordisplay {
+	width: 100%;
+	height: $settings-height;
+}
+
+.settings-keybinder {
+	width: fill-parent-flow(1);
+	height: 60px;
+}
+
+.settings-enum,
+.settings-enum-dropdown,
+.settings-slider,
 .settings-keybinder,
 .colordisplay {
 	flow-children: right;
 	align: center center;
 
-	width: 100%;
-	height: $settings-height;
-
-	border-top: 1px solid $base-900;
 	padding: $settings-padding;
-	margin-bottom: $settings-gap;
 
-	&.--even {
-		//background-color: rgba(255, 255, 255, 0.03);
+	&:hover {
+		background-color: gradient(
+			radial,
+			50% 50%,
+			0% 0%,
+			70% 70%,
+			from(rgba($primary-500, 0.1)),
+			to(rgba($primary-700, 0.1))
+		);
 	}
-	&.--odd {
-		//background-color: rgba(255, 255, 255, 0.02);
-	}
-	&.--even,
-	&.--odd {
-		&:hover {
-			background-color: $primary-950;
-		}
 
-		&:disabled {
-			background-color: rgba(128, 128, 128, 0.1);
-		}
+	&:disabled {
+		background-color: $base-800;
 	}
 
 	&__title-container {
-		width: 35%;
+		width: fill-parent-flow(0.35);
 		vertical-align: center;
-		margin-right: 10px;
 	}
 
 	&__input-container {
 		flow-children: right;
-		width: 65%;
+		width: fill-parent-flow(0.65);
 		vertical-align: center;
 	}
 
@@ -68,7 +73,7 @@
 		flow-children: right;
 		horizontal-align: right;
 		width: fit-children;
-		height: 38px;
+		height: 35px;
 		vertical-align: center;
 
 		& > RadioButton {
@@ -78,7 +83,7 @@
 			width: fit-children;
 			min-width: 140px;
 			height: 100%;
-			margin-left: 6px;
+			margin-left: 5px;
 
 			&:hover:not(:disabled):not(:selected) {
 				& > Label {
@@ -115,7 +120,7 @@
 	&__slider {
 		width: fill-parent-flow(1);
 		vertical-align: center;
-		margin: 0 12px;
+		margin: 0 10px;
 	}
 
 	&__textentry {
@@ -142,10 +147,6 @@
 
 .settings-keybinder {
 	$root: &;
-
-	&:hover {
-		background-color: rgba(255, 255, 255, 0.025);
-	}
 
 	&__container {
 		min-width: 75px;
@@ -197,7 +198,7 @@
 		align: center center;
 		text-align: center;
 
-		transform: translateY(-2px);
+		transform: translateY(-3px);
 	}
 
 	&__clear {

@@ -1,43 +1,57 @@
 'use strict';
 
 class MainMenuSettings {
-	static activeTab = null;
-	static prevTab = null;
+	static activeTab: string | null = null;
+	static prevTab: string | null = null;
 
 	static panels = {
-		/** @type {Panel} @static */
-		content: $('#SettingsContent'),
-		/** @type {Panel} @static */
-		nav: $('#SettingsNav'),
-		/** @type {Image} @static */
-		navExpand: $('#SettingsNavCollapseIcon'),
-		/** @type {Image} @static */
-		navCollapse: $('#SettingsNavExpandIcon'),
-		/** @type {Panel} @static */
-		info: $('#SettingsInfo'),
-		/** @type {Label} @static */
-		infoTitle: $('#SettingsInfoTitle'),
-		/** @type {Label} @static */
-		infoMessage: $('#SettingsInfoMessage'),
-		/** @type {Label} @static */
-		infoConvar: $('#SettingsInfoConvar'),
-		/** @type {Button} @static */
-		infoDocsButton: $('#SettingsInfoDocsButton')
+		content: $<Panel>('#SettingsContent')!,
+		nav: $<Panel>('#SettingsNav')!,
+		navWrap: $<Panel>('#SettingsNavInner')!,
+		subNav: $<Panel>('#SettingsSubNav')!,
+		navExpand: $<Image>('#SettingsNavCollapseIcon')!,
+		navCollapse: $<Image>('#SettingsNavExpandIcon')!,
+		info: $<Panel>('#SettingsInfo')!,
+		infoTitle: $<Label>('#SettingsInfoTitle')!,
+		infoMessage: $<Label>('#SettingsInfoMessage')!,
+		infoConvar: $<Label>('#SettingsInfoConvar')!,
+		infoDocsButton: $<Button>('#SettingsInfoDocsButton')!,
+		searchBar: $<TextEntry>('#SettingsSearchTextEntry')!
 	};
 
+	static tabs = {
+		InputSettings: {
+			xml: 'input'
+		},
+		AudioSettings: {
+			xml: 'audio'
+		},
+		VideoSettings: {
+			xml: 'video'
+		},
+		InterfaceSettings: {
+			xml: 'interface'
+		},
+		CustomizationSettings: {
+			xml: 'customization'
+		},
+		SearchSettings: {
+			xml: 'search'
+		}
+	};
+
+	static subNavRadios: Map<string, RadioButton> = new Map();
 	static currentInfo = null;
-	static spacerHeight = null;
+	static spacerHeight: number | null = null;
 	static shouldLimitScroll = false;
+	static doingGameFade = false;
 
 	static {
 		// Load every tab immediately, otherwise search won't be guaranteed to find everything.
-		for (const tab of Object.keys(SettingsTabs)) this.loadTab(tab);
+		for (const tab of Object.keys(this.tabs)) this.loadTab(tab);
 
 		// Default to input settings page
 		this.navigateToTab('InputSettings');
-
-		// Set nav panel to correct collapse state
-		this.updateNavCollapse();
 
 		// Set up event listeners
 		// Switch to a settings panel - search uses this
@@ -54,6 +68,56 @@ class MainMenuSettings {
 			$.Localize('#MainMenu_Navigation_Options'),
 			$.Localize('#MainMenu_Navigation_Options_Tagline')
 		);
+
+		// Still faded out when we leave? Undo it
+		$.RegisterForUnhandledEvent('MainMenuPagePreClose', () => {
+			if (this.doingGameFade) {
+				$.DispatchEvent('MainMenuSetPauseBlur', true);
+			}
+		});
+	}
+
+	static createSubNavBar(tab: string, pagePanel: GenericPanel) {
+		this.panels.subNav.RemoveAndDeleteChildren();
+		this.subNavRadios.clear();
+
+		const groups = pagePanel.FindChildrenWithClassTraverse<Panel>('settings-group');
+		const headers = pagePanel.FindChildrenWithClassTraverse<Label>('settings-group__title');
+
+		if (groups.length !== headers.length) {
+			$.Warning('Mismatched amount of Groups and Headers');
+			return;
+		}
+
+		let didSelect = false;
+		for (let i = 0; i < headers.length; ++i) {
+			const group = groups[i];
+			const header = headers[i];
+
+			if (!group.visible) {
+				continue;
+			}
+
+			if (header.text.length === 0) {
+				$.Warning(`${group.id} empty`);
+				continue;
+			}
+
+			const p = $.CreatePanel('RadioButton', this.panels.subNav, `${group.id}Radio`);
+			p.LoadLayoutSnippet('SubNavEntry');
+			p.SetDialogVariable('Text', header.text);
+			p.SetPanelEvent('onactivate', () => this.navigateToSubsection(tab, group.id));
+
+			this.subNavRadios.set(group.id, p);
+
+			if (i + 1 < headers.length && groups[i + 1].visible)
+				$.CreatePanel('Panel', this.panels.subNav, `${header.id}Div`, { class: 'settings-nav__separator' });
+
+			if (!didSelect) {
+				didSelect = true;
+				p.SetSelected(true);
+			}
+		}
 	}
 
 	static navigateToTab(tab) {
@@ -61,15 +125,16 @@ class MainMenuSettings {
 		if (this.activeTab !== tab) {
 			// If the tab exists then hide it
 			if (this.activeTab) {
-				// Hide the nav menu children of the active tab if we're in collapse mode
-				if (this.activeTab !== 'SearchSettings')
-					this.setNavItemCollapsed(
-						this.activeTab,
-						$.persistentStorage.getItem('settings.collapseNav') ?? true
-					);
-
 				// Hide the active tab
-				$.GetContextPanel().FindChildInLayoutFile(this.activeTab).RemoveClass('settings-page--active');
+				const tab = $.GetContextPanel().FindChildInLayoutFile(this.activeTab);
+				tab?.RemoveClass('settings-page--active');
+			}
+
+			// deselect radios
+			for (const child of this.panels.navWrap.Children()) {
+				if (child.paneltype === 'RadioButton') {
+					child.SetSelected(false);
+				}
 			}
 
 			// Show selected tab, store previous
@@ -77,25 +142,33 @@ class MainMenuSettings {
 			this.activeTab = tab;
 
 			// Activate the tab
-			const activePanel = $.GetContextPanel().FindChildInLayoutFile(tab);
-			activePanel.AddClass('settings-page--active');
+			const activePanel = $.GetContextPanel().FindChildInLayoutFile(tab)!;
+			if (activePanel) {
+				activePanel.AddClass('settings-page--active');
+				// Force a reload of any resources since we're about to display the panel
+				activePanel.visible = true;
+				activePanel.SetReadyForDisplay(true);
+			}
 
-			// Force a reload of any resources since we're about to display the panel
-			activePanel.visible = true;
-			activePanel.SetReadyForDisplay(true);
+			this.createSubNavBar(this.activeTab!, activePanel);
 
 			// Hide the info panel if it was displaying something on the previous page
 			this.hideInfo();
 
 			if (tab !== 'SearchSettings') {
-				// Call onPageScrolled to set the checked nav subsection to the page's scroll position
-				this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
+				this.panels.navWrap.enabled = true;
 
-				// Show the nav menu children of the selected tab
-				this.setNavItemCollapsed(tab, false);
+				// Call onPageScrolled to set the checked nav subsection to the page's scroll position
+				if (activePanel) this.onPageScrolled(tab, activePanel.FindChildTraverse('SettingsPageContainer'));
 
 				// Check the radiobutton for cases where this is called from JS. CSGO Panorama fires an Activated event to the radiobutton instead but I hate that.
-				$.GetContextPanel().FindChildTraverse(SettingsTabs[tab].radioid).checked = true;
+				const tabid = this.tabs[tab];
+				if (tabid) {
+					const radio = $.GetContextPanel().FindChildTraverse(`${tab}Radio`);
+					if (radio) radio.checked = true;
+				}
+			} else {
+				this.panels.navWrap.enabled = false;
 			}
 
 			SettingsShared.onChangedTab(this.activeTab);
@@ -106,10 +179,7 @@ class MainMenuSettings {
 		const newPanel = $.CreatePanel('Panel', this.panels.content, tab);
 
 		// Load XML file for the page
-		newPanel.LoadLayout('file://{resources}/layout/pages/settings/' + SettingsTabs[tab].xml + '.xml', false, false);
-
-		// Set the --odd/--even classes all the children
-		this.styleAlternatingItems(newPanel);
+		newPanel.LoadLayout('file://{resources}/layout/pages/settings/' + this.tabs[tab].xml + '.xml', false, false);
 
 		// Setup all the events for all the children
 		this.initPanelsRecursive(newPanel);
@@ -120,7 +190,7 @@ class MainMenuSettings {
 		if (tab !== 'SearchSettings') {
 			$.RegisterEventHandler(
 				'Scroll',
-				container,
+				container!,
 				// The default arg that gets passed here is the panel's ID, override with the panel itself so we don't have to do a traversal find later on
 				() => this.onPageScrolled(tab, container)
 			);
@@ -188,8 +258,10 @@ class MainMenuSettings {
 			this.limitScrollCheck(0.05);
 		}
 
+		if (!panel) return;
+
 		// This is 0 on initial load for some reason
-		if (!this.spacerHeight > 0) {
+		if (this.spacerHeight && this.spacerHeight > 0) {
 			this.spacerHeight =
 				$.GetContextPanel().FindChildrenWithClassTraverse('settings-page__spacer')[0].actuallayoutheight;
 		}
@@ -209,56 +281,16 @@ class MainMenuSettings {
 						(child.actualyoffset + child.actuallayoutheight + this.spacerHeight) / containerHeight) ||
 				scrollOffset === 0
 			) {
-				const navChild = this.panels.nav.FindChildTraverse(SettingsTabs[tab].children[child.id]);
+				const navChild = this.subNavRadios.get(child.id);
 				if (navChild) {
-					navChild.checked = true;
+					navChild.SetSelected(true);
 				}
 				break;
 			}
 		}
 	}
 
-	static invertNavCollapse() {
-		// Invert state
-		$.persistentStorage.setItem('settings.collapseNav', !$.persistentStorage.getItem('settings.collapseNav'));
-
-		// Update the panel
-		this.updateNavCollapse();
-	}
-
-	static updateNavCollapse() {
-		// Get state from PS
-		let shouldCollapse = $.persistentStorage.getItem('settings.collapseNav');
-
-		// Set to true if not set by user
-		if (typeof shouldCollapse === typeof null) {
-			$.persistentStorage.setItem('settings.collapseNav', true);
-			shouldCollapse = true;
-		}
-
-		// Show the corresponding button icon
-		this.panels.navExpand.SetHasClass('hide', !shouldCollapse);
-		this.panels.navCollapse.SetHasClass('hide', shouldCollapse);
-
-		// Update all the items
-		for (const tab of Object.keys(SettingsTabs).filter((tab) => tab !== 'SearchSettings' && tab !== this.activeTab))
-			this.setNavItemCollapsed(tab, shouldCollapse);
-	}
-
-	// Set the collapsed state of a nav item
-	static setNavItemCollapsed(tab, shouldCollapse) {
-		this.panels.nav
-			.FindChild(SettingsTabs[tab].radioid)
-			.FindChildrenWithClassTraverse('settings-nav__subsection')[0]
-			.SetHasClass('settings-nav__subsection--hidden', shouldCollapse);
-	}
-
-	static initPanelsRecursive(panel) {
-		// Initialise info panel event handlers
-		if (this.isSettingsPanel(panel) || this.isSpeedometerPanel(panel)) {
-			this.setPanelInfoEvents(panel);
-		}
-
+	static initPanelForPersistentVariable(panel) {
 		// Initialise all the settings using persistent storage
 		// Only Enum and EnumDropDown are currently supported, others can be added when/if needed
 		const psVar = panel.GetAttributeString('psvar', '');
@@ -269,6 +301,138 @@ class MainMenuSettings {
 				this.initPersistentStorageEnumDropdown(panel, psVar);
 			}
 		}
+	}
+
+	static initPanelForGameShow(panel: GenericPanel) {
+		if (GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU) return;
+
+		const showGameVar = panel.GetAttributeString('viewgameduringedit', '');
+		if (!showGameVar) return;
+
+		if (panel.paneltype !== 'SettingsSlider') {
+			$.Warning(
+				`Setting field has "viewgameduringedit" attribute, but that cannot be used on this (${panel.paneltype}) panel!`
+			);
+			return;
+		}
+
+		const realSlider = panel.FindChildTraverse<Slider>('Slider')!;
+
+		realSlider.SetPanelEvent('onvaluechanged', () => {
+			if (this.doingGameFade) return;
+
+			const parent = panel.GetParent();
+
+			if (!parent) return;
+			if (!this.activeTab) return;
+
+			const page = this.panels.content.FindChildTraverse(this.activeTab);
+			if (!page) return;
+
+			const containers = page.Children();
+			if (!containers) return;
+
+			const panelsToFade: GenericPanel[] = [];
+
+			if (this.panels.info) panelsToFade.push(this.panels.info);
+
+			if (this.panels.nav) panelsToFade.push(this.panels.nav);
+
+			if (this.panels.subNav) panelsToFade.push(this.panels.subNav);
+
+			for (const container of containers) {
+				for (const child of container.Children()) {
+					if (child.id === parent.id) {
+						continue;
+					}
+					panelsToFade.push(child);
+				}
+			}
+
+			for (const child of parent.Children()) {
+				if (child === panel) continue;
+				panelsToFade.push(child);
+			}
+
+			parent.RemoveClass('settings-group--highlight');
+			parent.style.backgroundColor = '#18181800';
+			parent.style.borderColor = '#00000000';
+
+			const titleLabel = panel.FindChildTraverse<Label>('Title');
+			if (titleLabel) titleLabel.style.textShadowFast = '2px 2px #181818';
+
+			for (const panel of panelsToFade) {
+				panel.style.animation = 'FadeOut 0.1s linear 0s 1 normal forwards';
+			}
+
+			$.DispatchEvent('MainMenuSetPauseBlur', false);
+
+			this.doingGameFade = true;
+		});
+
+		panel.SetPanelEvent('onmouseout', () => {
+			if (!this.doingGameFade) return;
+
+			const parent = panel.GetParent();
+
+			if (!parent) return;
+			if (!this.activeTab) return;
+
+			const page = this.panels.content.FindChildTraverse(this.activeTab);
+			if (!page) return;
+
+			const containers = page.Children();
+			if (!containers) return;
+
+			const panelsToFade: GenericPanel[] = [];
+
+			if (this.panels.info) panelsToFade.push(this.panels.info);
+
+			if (this.panels.nav) panelsToFade.push(this.panels.nav);
+
+			if (this.panels.subNav) panelsToFade.push(this.panels.subNav);
+
+			for (const container of containers) {
+				for (const child of container.Children()) {
+					if (child.id === parent.id) {
+						continue;
+					}
+					panelsToFade.push(child);
+				}
+			}
+
+			for (const child of parent.Children()) {
+				if (child === panel) {
+					continue;
+				}
+				panelsToFade.push(child);
+			}
+
+			parent.style.backgroundColor = '#181818';
+			parent.style.borderColor = '#555555';
+
+			const titleLabel = panel.FindChildTraverse<Label>('Title');
+			if (titleLabel) titleLabel.style.textShadowFast = '0px 0px #00000000';
+
+			for (const panel of panelsToFade) {
+				if (panel.IsValid()) panel.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
+			}
+
+			$.DispatchEvent('MainMenuSetPauseBlur', true);
+
+			this.doingGameFade = false;
+		});
+	}
+
+	static initPanelsRecursive(panel) {
+		// Initialise info panel event handlers
+		if (this.isSettingsPanel(panel)) {
+			this.setPanelInfoEvents(panel);
+		}
+
+		this.initPanelForPersistentVariable(panel);
+
+		this.initPanelForGameShow(panel);
 
 		// Search all children
 		for (const child of panel?.Children() ?? []) {
@@ -327,6 +491,7 @@ class MainMenuSettings {
 		const hasDocs = !(panel.GetAttributeString('hasdocspage', '') === 'false');
 		panel.SetPanelEvent('onmouseover', () => {
 			// Set onmouseover events for all settings panels
+			panel.RemoveClass('settings-group--highlight');
 			this.showInfo(
 				// If a panel has a specific title use that, if not use the panel's name. Child ID names vary between panel types, blame Valve
 				panel.GetAttributeString('infotitle', '') ||
@@ -352,49 +517,37 @@ class MainMenuSettings {
 
 		// If the panel has a message OR a convar and the convar display option is on, show the info panel
 		if (message || showConvar) {
-			let switchDelay = 0;
-
-			// If the info panel is closed, open it. If it's already open, play the switch animation
+			// If the info panel is closed, open it.
 			if (this.panels.info.HasClass('settings-info--hidden')) {
 				this.panels.info.RemoveClass('settings-info--hidden');
-			} else {
-				switchDelay = 0.05; // This should always be half the duration of settings-info--switch
-
-				this.panels.info.AddClass('settings-info--switch');
-				const kfs = this.panels.info.CreateCopyOfCSSKeyframes('BlurFadeInOut');
-				this.panels.info.UpdateCurrentAnimationKeyframes(kfs);
 			}
 
-			// Delay changing the properties even we've just played the switch animation,
-			// to be half the length of animation, so text changes at apex of the animation
-			$.Schedule(switchDelay, () => {
-				if (message) {
-					this.panels.infoTitle.text = $.Localize(title);
-					// I don't want localisation people having to fuss with HTML tags too much so replacing newlines with <br>
-					// does linebreaks for us without requiring any <p> tags.
-					this.panels.infoMessage.text = $.Localize(message).replace(/\r\n|\r|\n/g, '<br><br>');
-					this.panels.infoTitle.RemoveClass('hide');
-					this.panels.infoMessage.RemoveClass('hide');
-				} else {
-					this.panels.infoTitle.AddClass('hide');
-					this.panels.infoMessage.AddClass('hide');
-				}
+			if (message) {
+				this.panels.infoTitle.text = $.Localize(title);
+				// I don't want localisation people having to fuss with HTML tags too much so replacing newlines with <br>
+				// does linebreaks for us without requiring any <p> tags.
+				this.panels.infoMessage.text = $.Localize(message).replace(/\r\n|\r|\n/g, '<br><br>');
+				this.panels.infoTitle.RemoveClass('hide');
+				this.panels.infoMessage.RemoveClass('hide');
+			} else {
+				this.panels.infoTitle.AddClass('hide');
+				this.panels.infoMessage.AddClass('hide');
+			}
 
-				if (showConvar) {
-					this.panels.infoConvar.text = `<i>${
-						isKeybinder ? $.Localize('#Settings_General_Command') : $.Localize('#Settings_General_Convar')
-					}: <b>${convar}</b></i>`;
-					this.panels.infoConvar.RemoveClass('hide');
-					this.panels.infoDocsButton.SetHasClass('hide', !hasDocs || isKeybinder);
-					// Shouldn't need to clear the panel event here as it's hidden or gets overwritten
-					this.panels.infoDocsButton.SetPanelEvent('onactivate', () =>
-						SteamOverlayAPI.OpenURLModal(`https://docs.momentum-mod.org/var/${convar}`)
-					);
-				} else {
-					this.panels.infoConvar.AddClass('hide');
-					this.panels.infoDocsButton.AddClass('hide');
-				}
-			});
+			if (showConvar) {
+				this.panels.infoConvar.text = `<i>${
+					isKeybinder ? $.Localize('#Settings_General_Command') : $.Localize('#Settings_General_Convar')
+				}: <b>${convar}</b></i>`;
+				this.panels.infoConvar.RemoveClass('hide');
+				//this.panels.infoDocsButton.SetHasClass('hide', !hasDocs || isKeybinder);
+				// Shouldn't need to clear the panel event here as it's hidden or gets overwritten
+				this.panels.infoDocsButton.SetPanelEvent('onactivate', () =>
+					SteamOverlayAPI.OpenURLModal(`https://docs.momentum-mod.org/var/${convar}`)
+				);
+			} else {
+				this.panels.infoConvar.AddClass('hide');
+				this.panels.infoDocsButton.AddClass('hide');
+			}
 		} else {
 			this.hideInfo();
 		}
@@ -403,35 +556,6 @@ class MainMenuSettings {
 	static hideInfo() {
 		// Hide the info panel
 		this.panels.info.AddClass('settings-info--hidden');
-	}
-
-	static styleItem(item, n) {
-		item.AddClass(n % 2 === 0 ? '--odd' : '--even');
-	}
-
-	static styleAlternatingItems(page) {
-		// Search all groups on the page
-		for (const group of page.FindChildrenWithClassTraverse('settings-group')) {
-			let n = 1; // Start odd
-
-			const search = (panel) => {
-				for (const child of panel?.Children() || []) {
-					// If it's a settings panel or a combo panel, style it
-					if (this.isSettingsPanel(child) || child.HasClass('settings-group__combo')) {
-						this.styleItem(child, n);
-						n++;
-					}
-					// Otherwise if it's a ConVarEnabler search all its children
-					else if (child.paneltype === 'ConVarEnabler') {
-						for (const grandchild of child.Children()) search(grandchild);
-					} else {
-						search(child);
-					}
-				}
-			};
-
-			search(group);
-		}
 	}
 
 	static saveSettings() {
@@ -448,9 +572,5 @@ class MainMenuSettings {
 			'SettingsToggle',
 			'ConVarColorDisplay'
 		].includes(panel.paneltype);
-	}
-
-	static isSpeedometerPanel(panel) {
-		return ['SpeedometersContainer', 'RangeColorProfilesContainer'].includes(panel.id);
 	}
 }

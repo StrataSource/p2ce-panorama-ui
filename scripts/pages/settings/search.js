@@ -51,22 +51,36 @@ class SettingsSearch {
 		this.strings = this.panels.searchTextEntry.text.split(/\s/).filter((s) => /^\w+$/.test(s));
 
 		// Don't bother show anything if we only have one char words, can spawn hundreds of panels.
-		if (!this.strings.some((str) => str.length > 1)) return;
+		if (!this.strings.some((str) => str.length > 1)) {
+			$.CreatePanel('Label', this.panels.results, '', {
+				class: 'settings-search__empty-header',
+				text: $.Localize('#Settings_General_Search_OneCharHeader')
+			});
+			$.CreatePanel('Label', this.panels.results, '', {
+				class: 'settings-search__empty-para',
+				text: $.Localize('#Settings_General_Search_OneCharDesc')
+			});
+			return;
+		}
 
 		// Initialise matches array
 		this.matches = [];
 
 		// Search through each page
-		for (const tabID of Object.keys(SettingsTabs)) {
-			const tabPanel = this.panels.content.FindChildTraverse(tabID);
-			const tabName = $.Localize(tabPanel.GetFirstChild().GetFirstChild().text);
-			this.traverseChildren(tabID, this.panels.content.FindChildTraverse(tabID), tabName, null, null);
+		for (const child of this.panels.content.Children()) {
+			const tabName = $.Localize(child.GetAttributeString('searchtitle', '[PH] Section Title'));
+			this.traverseChildren(child.id, child, tabName, null, null);
 		}
 
 		// Populate results panel with matches
-		if (this.matches.length > 0)
-			for (const matchingPanel of this.matches) this.createSearchResultPanel(matchingPanel);
-		else {
+		if (this.matches.length > 0) {
+			for (let i = 0; i < this.matches.length; ++i) {
+				const p = this.createSearchResultPanel(this.matches[i]);
+				if (p && i + 1 < this.matches.length) {
+					p.style.marginBottom = '5px';
+				}
+			}
+		} else {
 			$.CreatePanel('Label', this.panels.results, '', {
 				class: 'settings-search__empty-header',
 				text: $.Localize('#Settings_General_Search_EmptyHeader')
@@ -192,11 +206,15 @@ class SettingsSearch {
 	 */
 	static createSearchResultPanel(matches) {
 		if (this.panels.results.Children().length >= MAX_MATCHES) {
-			if (this.panels.results.Children().length === MAX_MATCHES)
-				$.CreatePanel('Label', this.panels.results, '', {
-					class: 'settings-search__empty-para',
-					text: $.Localize('#Settings_General_Search_VeryFull')
+			if (this.panels.results.Children().length === MAX_MATCHES) {
+				const left = this.matches.length - MAX_MATCHES;
+				const p = $.CreatePanel('Label', this.panels.results, '', {
+					class: 'settings-search__empty-para'
 				});
+				if (left === 1) p.SetLocalizationString('#Settings_General_Search_VeryFull');
+				else p.SetLocalizationString('#Settings_General_Search_VeryFull_Plural');
+				p.SetDialogVariable('count', left);
+			}
 			return;
 		}
 
@@ -227,7 +245,6 @@ class SettingsSearch {
 					);
 
 				if (match.type === MatchType.SETTING_TAG) {
-					$.Msg(`matches.tags: ${matches.tags}, tagindex: ${match.tagIndex}, inptustring: ${inputString}`);
 					tags.push(
 						matches.tags[match.tagIndex]?.replace(
 							new RegExp(`(${inputString})`, 'ig'),
@@ -257,10 +274,29 @@ class SettingsSearch {
 				[...new Set([...groupTags, ...tags])].join(', ');
 		else tagList.AddClass('settings-search-result__tags--hidden');
 
+		searchResult.SetPanelEvent('onmouseover', () => {
+			const panel = matches.panel;
+			const message = panel.GetAttributeString('infomessage', '');
+			// Default to true if not set
+			const hasDocs = !(panel.GetAttributeString('hasdocspage', '') === 'false');
+			MainMenuSettings.showInfo(
+				// If a panel has a specific title use that, if not use the panel's name. Child ID names vary between panel types, blame Valve
+				panel.GetAttributeString('infotitle', '') ||
+					panel.FindChildTraverse('Title')?.text ||
+					panel.FindChildTraverse('title')?.text,
+				message,
+				panel.convar ?? panel.bind,
+				hasDocs,
+				panel.paneltype
+			);
+		});
+
 		searchResult.SetPanelEvent('onactivate', () => {
 			this.clearSearch();
 			$.DispatchEvent('SettingsNavigateToPanel', matches.tabID, matches.panel);
 		});
+
+		return searchResult;
 	}
 
 	static clearSearch() {

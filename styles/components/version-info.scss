@@ -2,11 +2,11 @@
 
 .VersionInfo {
 	flow-children: down;
-	margin: 15px;
-	padding: 10px 15px;
+	margin: 5px;
+	padding: 8px 14px;
 
 	.VersionInfoText {
-		font-size: 14px;
+		font-size: 12px;
 		font-family: $font-monospace;
 		text-shadow-fast: 2px 2px $base-950;
 	}

@@ -484,7 +484,11 @@
 		"Settings_General_Search_Results"				"Search Results"
 		"Settings_General_Search_EmptyHeader"			"No Results Found"
 		"Settings_General_Search_EmptyNoResults"		"Your search query did not match any results in the Settings menu."
+		"Settings_General_Search_OneCharHeader"			"Incomplete Query"
+		"Settings_General_Search_OneCharDesc"			"Your search query contains one letter words."
 		"Settings_General_Search_MatchedEnglishTag"		"Matches "
+		"Settings_General_Search_VeryFull"				"{s:count} more match"
+		"Settings_General_Search_VeryFull_Plural"		"{s:count} more matches"
 		"OS_Default_Device"								"System Default Output Device"
 		
 		// Settings - Import/Export
@@ -528,7 +532,7 @@
 		
 		"Settings_ClosedCaptions_Title"						"Closed Captions and Subtitles"
 		"Settings_ClosedCaptions_Enable"					"Closed Captions"
-		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time."
+		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time.<br><img src=\"file://{images}/menu/p2ce-generic.png\" />"
 		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
 		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled."
 		
@@ -583,7 +587,7 @@
 		"Settings_Video_ColorMode_TV"					"Television"
 
 		"Settings_Render_VSync"							"V-Sync"
-		"Settings_Render_VSync_Info"					"Vertical sync (V-sync) elimates screen tearing by ensuring each pixel of the frame is displayed at once.\n\nMay result in smoother rendering on some monitors, but causes minor input lag and is therefore not recommended.\n\nOnly applicable to fullscreen mode."
+		"Settings_Render_VSync_Info"					"Vertical sync (V-sync) elimates screen tearing by ensuring each pixel of the frame is displayed at once.\nMay result in smoother rendering on some monitors, but causes minor input lag and is therefore not recommended.\nOnly applicable to fullscreen mode."
 		"Settings_Render_VSync_Double"					"Double-Buffered"
 		"Settings_Render_VSync_Triple"					"Triple-Buffered"
 		
@@ -678,7 +682,7 @@
 		"Settings_TextureReplace_Texture_Custom"		"Custom"
 		
 		"Settings_Portal_Coop_SS_SplitMode"				"Split-Screen Direction"
-		"Settings_Portal_Coop_SS_SplitMode_info"		"Determines which direction should both split-screen players' view be split into.\n<h2>Horizontal</h2>\nThe players' views will be split across a horizontal line with both views located at the top and bottom side of the screen, respectively.\n<h2>Vertical</h2>\nThe players' views will be split across a vertical line with both views located at the left- and right-hand side of the screen, respectively.\n<h2>Automatic</h2>\nThe game will automatically determine which mode to select, based off the monitor's screen resolution and aspect ratio."
+		"Settings_Portal_Coop_SS_SplitMode_info"		"Determines which direction should both split-screen players' view be split into.\n<h2>Horizontal</h2>The players' views will be split across a horizontal line with both views located at the top and bottom side of the screen, respectively.\n<h2>Vertical</h2>The players' views will be split across a vertical line with both views located at the left- and right-hand side of the screen, respectively.\n<h2>Automatic</h2>The game will automatically determine which mode to select, based off the monitor's screen resolution and aspect ratio.\n<movie src=\"file://{media}/sp_credits_bg.webm\" />"
 		"Settings_Portal_Coop_SS_SplitMode_auto"		"Automatic"
 		"Settings_Portal_Coop_SS_SplitMode_horiz"		"Horizontal"
 		"Settings_Portal_Coop_SS_SplitMode_vert"		"Vertical"
@@ -692,7 +696,7 @@
 		"Settings_Mouse_Filter_Info"					"Averages mouse movement over 2 frames."
 
 		"Settings_Mouse_Raw"							"Raw Input"
-		"Settings_Mouse_Raw_Info"						"Raw Input reads mouse data directly from the device, bypassing operating system settings and providing more accurate movement.\n<h2>On (Frame-aligned)</h2>\nThe original method used in other Source Engine games\n<h2>(Tick-aligned)</h2>\nAn improved method which is more precise and less dependent on the game frame rate"
+		"Settings_Mouse_Raw_Info"						"Raw Input reads mouse data directly from the device, bypassing operating system settings and providing more accurate movement.\n<h2>On (Frame-aligned)</h2>The original method used in other Source Engine games\n<h2>(Tick-aligned)</h2>An improved method which is more precise and less dependent on the game frame rate\n<movie src=\"file://{media}/bluescreen.webm\" />"
 		"Settings_Mouse_Raw_On_Old"						"On (Frame-aligned)"
 		"Settings_Mouse_Raw_On_New"						"On (Tick-aligned)"
 
@@ -774,7 +778,7 @@
 		"Settings_Portal1_compat" 						"Portal 1 Compatibility Mode"
 		"Settings_Portal1_compat_info" 					"Enables backwards compatibility with Portal 1 maps."
 		"Settings_Portal1_xhair" 						"Crosshair Style"
-		"Settings_Portal1_xhair_info" 					"Changes portal gun crosshair behavior.\n<h2>Portal 2 Style</h2>\nWill only display placed portals.\n<h2>Portal 1 Style</h2>\nWill display placed portals and a circular marker determining whether portals can be placed on a specific surface."
+		"Settings_Portal1_xhair_info" 					"Changes portal gun crosshair behavior.\n<h2>Portal 2 Style</h2>Will only display placed portals.\n<h2>Portal 1 Style</h2>Will display placed portals and a circular marker determining whether portals can be placed on a specific surface."
 		"Settings_Portal1_xhair_p2" 					"Portal 2 Style"
 		"Settings_portal1_xhair_p1" 					"Portal 1 Style"
 		
@@ -826,7 +830,7 @@
 		"Settings_Menu_Sentry"							"Sentry Crash Reporting"
 		"Settings_Menu_Sentry_info"						"Controls submission of crash dumps, processed via Sentry.\nThe data used in crash reports contain a complete call stack containing the last few moments of the engine prior to the crash (including the last few lines of developer console log output), the current Steam build ID, and your Steam Community profile ID. No other data is sent to the P2:CE team.\nThis feature is optional and can be turned on or off at any time."
 		"Settings_Menu_DiscordIntegration"				"Discord Rich Presence"
-		"Settings_Menu_DiscordIntegration_info"			"Enables Discord rich presence integration with P2:CE by displaying the current game state as an activity.\n\nThis toggle does not alter Discord rich presence enablement in SDK tools such as Hammer."
+		"Settings_Menu_DiscordIntegration_info"			"Enables Discord rich presence integration with P2:CE by displaying the current game state as an activity.\nThis toggle does not alter Discord rich presence enablement in SDK tools such as Hammer."
 		
 		// Main Menu
 		"MainMenu_PH_Note"								"This page is a work-in-progress."

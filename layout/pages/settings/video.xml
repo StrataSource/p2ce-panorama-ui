@@ -7,14 +7,10 @@
 		<include src="file://{scripts}/pages/settings/page.js" />
 	</scripts>
 
-	<Panel class="settings-page">
+	<Panel class="settings-page" searchtitle="#Settings_Video">
 
 		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Video" />
-
 			<Panel class="settings-page__header-buttons">
-
 				<Button
 					class="button button--blue"
 					id="ApplyVideoSettingsButton"
@@ -22,7 +18,6 @@
 				>
 					<Label class="button__text" text="#Settings_General_Apply" />
 				</Button>
-
 				<Button
 					class="button button--red ml-2"
 					id="DiscardVideoSettingsButton"
@@ -30,15 +25,12 @@
 				>
 					<Label class="button__text" text="#Action_Discard" />
 				</Button>
-
 				<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 					<Button class="button ml-2" onactivate="SettingsShared.resetVideoSettings();">
-						<Image class="button__icon" src="file://{images}/reset.svg" />
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 					</Button>
 				</TooltipPanel>
-
 			</Panel>
-
 		</Panel>
 
 		<VideoSettings id="SettingsPageContainer" class="settings-page__container">
@@ -58,6 +50,7 @@
 					max="130"
 					convar="cl_fov"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 			
 				<SettingsSlider
@@ -89,6 +82,7 @@
 					convar="mat_brightness"
 					infomessage="#Settings_Video_Brightness_Info"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 
 				<SettingsEnumDropDown
@@ -178,7 +172,6 @@
 			<Panel class="settings-page__spacer" />
 
 			<Panel id="AdvancedVideoSubSection" class="settings-group">
-
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title vertical-align-center" text="#Settings_Render_Title" />
 				</Panel>
@@ -331,17 +324,70 @@
 					<Label text="#Settings_General_Disabled" value="0" id="colorcorrection0" />
 					<Label text="#Settings_General_Enabled" value="1" id="colorcorrection1" />
 				</SettingsEnumDropDown>
-
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
 
-			<Panel id="TextureReplaceSubSection" class="settings-group">
+			<Panel id="ExtraSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="[HC] Extra" />
+				</Panel>
+				<SettingsEnum
+					text="#Settings_Misc_solenergy_refract"
+					convar="mat_solidenergy_refract"
+					infomessage="#Settings_Misc_solenergy_refract_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0" />
+					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
+					text="#Settings_Portals_dlight"
+					convar="r_portal_use_dlights"
+					infomessage="#Settings_Portals_dlight_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal_dlight" text="#Common_Off" value="0" />
+					<RadioButton group="portal_dlight" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsSlider
+					text="#Settings_Portals_light_intensity"
+					convar="r_portal_light_intensity"
+					infomessage="#Settings_Portals_light_intensity_info"
+					hasdocspage="false"
+					max="0.5"
+					min="0.005"
+					displayprecision="3"
+					viewgameduringedit="true"
+				/>
+				<SettingsEnum
+					text="#Settings_Turret_lights"
+					convar="cl_dynamic_light_turret"
+					infomessage="#Settings_Turret_lights_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="turret_lights" text="#Common_Off" value="0" />
+					<RadioButton group="turret_lights" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
+					text="#Settings_Ball_lights"
+					convar="cl_dynamic_light_energy_ball"
+					infomessage="#Settings_Ball_lights_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="ball_lights" text="#Common_Off" value="0" />
+					<RadioButton group="ball_lights" text="#Common_On" value="1" />
+				</SettingsEnum>
+			</Panel>
+
+			<Panel class="settings-page__spacer hide" />
+
+			<Panel id="TextureReplaceSubSection" class="settings-group hide">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_TextureReplace_Title" />
 
 					<Panel id="TextureReplaceWarningPanel" class="settings-group__reset flow-right">
-						<Label class="button__text" text="#Settings_General_MapReload" />
+						<Label text="#Settings_General_MapReload" />
 					</Panel>
 				</Panel>
 

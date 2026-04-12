@@ -8,31 +8,17 @@
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
-	<Panel class="settings-page">
-
-		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Interface" />
-
-			<Panel class="settings-page__header-buttons">
-			</Panel>
-
-		</Panel>
-
+	<Panel class="settings-page" searchtitle="#Settings_Interface">
 		<Panel id="SettingsPageContainer" class="settings-page__container">
 
-			<Panel id="UISubSection" class="settings-group">
-
+			<Panel id="MenuUISubSection" class="settings-group">
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Menu_Title" tags="menu,ui" />
-
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('UISubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('MenuUISubSection');">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 						</Button>
 					</TooltipPanel>
-
 				</Panel>
 
 				<SettingsEnum
@@ -54,8 +40,8 @@
 					hasdocspage="false"
 					tags="sentry"
 				>
-					<Button class="button horizontal-align-right" onactivate="SettingsShared.sentryUpdateConsent()">
-						<Label class="button__text" text="Update Consent" />
+					<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.sentryUpdateConsent()">
+						<Label class="button__text" text="[HC] Update Consent" />
 					</Button>
 				</SettingsEnum>
 
@@ -82,7 +68,7 @@
 					<RadioButton group="enableconsent" text="#Common_On" value="1" />
 				</SettingsEnum>
 
-				<ConVarEnabler convar="developer" togglevisibility="true">
+				<ConVarEnabler convar="developer" togglevisibility="true" hittest="false">
 					<SettingsEnum
 						id="PlaytestDOSARemove"
 						text="Playtest DOSA remove (DO NOT LOCALIZE)"
@@ -90,15 +76,50 @@
 						hasdocspage="false"
 						tags="dosa"
 					>
-						<Button class="button horizontal-align-right" onactivate="SettingsShared.PlayTestDosaRemove()">
+						<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.PlayTestDosaRemove()">
 							<Label class="button__text" text="Remove DOSA" />
 						</Button>
 					</SettingsEnum>
 				</ConVarEnabler>
-
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
+
+			<Panel id="GameUISubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="[HC] In-Game Interface" tags="ingame,game,ui" />
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('GameUISubSection');">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
+				</Panel>
+
+				<SettingsEnum text="[HC] Show Crosshair" convar="crosshair" infomessage="[HC] Show Xhair Desc" hasdocspage="false">
+					<RadioButton group="showxhair" text="#Common_Off" value="0" />
+					<RadioButton group="showxhair" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<SettingsEnum
+					text="#Settings_Portal1_xhair"
+					convar="cl_portal_crosshair_mode"
+					infomessage="#Settings_Portal1_xhair_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
+				</SettingsEnum>
+
+				<SettingsSlider
+					text="[HC] Crosshair Scale"
+					infomessage="[HC] Crosshair Scale Desc"
+					min="0.1"
+					max="2"
+					convar="cl_portal_crosshair_scale"
+					hasdocspage="false"
+					viewgameduringedit="true"
+				/>
+			</Panel>
 		</Panel>
 	</Panel>
 </root>

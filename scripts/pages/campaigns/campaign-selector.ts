@@ -182,7 +182,7 @@ class CampaignSelector {
 			}
 		}
 
-		const campaigns: Array<{info: CampaignInfo, bucket: CampaignBucket}> = [];
+		const campaigns: Array<{ info: CampaignInfo; bucket: CampaignBucket }> = [];
 		for (const bucket of buckets) {
 			if (isBucketSingleWsCampaign(bucket)) {
 				continue;

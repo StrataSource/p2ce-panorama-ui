@@ -8,38 +8,8 @@
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
-	<Panel class="settings-page">
-		<Panel class="settings-page__header">
-			<Label class="settings-page__title" text="#Settings_Customization" />
-		</Panel>
+	<Panel class="settings-page" searchtitle="#Settings_Customization">
 		<Panel id="SettingsPageContainer" class="settings-page__container">
-			<Panel id="Portal1SubSection" class="settings-group">
-				<Panel class="settings-group__header">
-					<Label class="settings-group__title" text="#Settings_Portal1_Title" tags="menu,ui,portal1" />
-				</Panel>
-				<SettingsEnum
-					text="#Settings_Portal1_compat"
-					convar="sv_portal_legacy_compat"
-					infomessage="#Settings_Portal1_compat_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="portal1_compat" text="#Common_Off" value="0" />
-					<RadioButton group="portal1_compat" text="#Common_On" value="1" />
-				</SettingsEnum>
-
-				<SettingsEnum
-					text="#Settings_Portal1_xhair"
-					convar="cl_portal_crosshair_mode"
-					infomessage="#Settings_Portal1_xhair_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
-					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
-				</SettingsEnum>
-			</Panel>
-
-			<Panel class="settings-page__spacer" />
-
 			<Panel id="PortalsSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Portals_Title" tags="portals, portal, color, customization" />
@@ -53,46 +23,6 @@
 				>
 					<RadioButton group="sv_player_funnel_into_portals" text="#Common_Off" value="0" />
 					<RadioButton group="sv_player_funnel_into_portals" text="#Common_On" value="1" />
-				</SettingsEnum>
-
-				<SettingsEnum
-					text="#Settings_Portals_dlight"
-					convar="r_portal_use_dlights"
-					infomessage="#Settings_Portals_dlight_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="portal_dlight" text="#Common_Off" value="0" />
-					<RadioButton group="portal_dlight" text="#Common_On" value="1" />
-				</SettingsEnum>
-
-				<SettingsSlider
-					text="#Settings_Portals_light_intensity"
-					convar="r_portal_light_intensity"
-					infomessage="#Settings_Portals_light_intensity_info"
-					hasdocspage="false"
-					max="0.5"
-					min="0.005"
-					displayprecision="3"
-				/>
-
-				<SettingsEnum
-					text="#Settings_Turret_lights"
-					convar="cl_dynamic_light_turret"
-					infomessage="#Settings_Turret_lights_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="turret_lights" text="#Common_Off" value="0" />
-					<RadioButton group="turret_lights" text="#Common_On" value="1" />
-				</SettingsEnum>
-
-				<SettingsEnum
-					text="#Settings_Ball_lights"
-					convar="cl_dynamic_light_energy_ball"
-					infomessage="#Settings_Ball_lights_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="ball_lights" text="#Common_Off" value="0" />
-					<RadioButton group="ball_lights" text="#Common_On" value="1" />
 				</SettingsEnum>
 
 				<SettingsEnum
@@ -127,7 +57,7 @@
 
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('GelsSubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 						</Button>
 					</TooltipPanel>
 				</Panel>
@@ -171,16 +101,6 @@
 					<Label class="settings-group__title" text="#Settings_Misc_Title" tags="misc, customization" />
 				</Panel>
 
-				<SettingsEnum
-					text="#Settings_Misc_solenergy_refract"
-					convar="mat_solidenergy_refract"
-					infomessage="#Settings_Misc_solenergy_refract_info"
-					hasdocspage="false"
-				>
-					<RadioButton group="misc_solidenergy" text="#Common_Off" value="0" />
-					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
-				</SettingsEnum>
-
 				<SettingsSlider
 					text="#Settings_Misc_ViewmodelOffset_X"
 					infomessage="#Settings_Misc_ViewmodelOffset_X_info"
@@ -188,6 +108,7 @@
 					max="10"
 					convar="viewmodel_offset_x"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 				<SettingsSlider
 					text="#Settings_Misc_ViewmodelOffset_Y"
@@ -196,6 +117,7 @@
 					max="10"
 					convar="viewmodel_offset_y"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 				<SettingsSlider
 					text="#Settings_Misc_ViewmodelOffset_Z"
@@ -204,6 +126,7 @@
 					max="5"
 					convar="viewmodel_offset_z"
 					hasdocspage="false"
+					viewgameduringedit="true"
 				/>
 			</Panel>
 		</Panel>

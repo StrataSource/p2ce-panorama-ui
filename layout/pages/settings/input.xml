@@ -6,22 +6,9 @@
 		<include src="file://{scripts}/pages/settings/page.js" />
 	</scripts>
 
-	<Panel class="settings-page">
-
-		<Panel class="settings-page__header">
-
-			<Label class="settings-page__title" text="#Settings_Input" />
-
-			<Panel class="settings-page__header-buttons">
-				<!-- Gamemode Dropdown will go here -->
-			</Panel>
-
-		</Panel>
-
+	<Panel class="settings-page" searchtitle="#Settings_Input_Title">
 		<Panel id="SettingsPageContainer" class="settings-page__container">
-
-
-			<Panel id="ControllerSubSection" class="settings-group">
+			<Panel id="ControllerSubSection" class="settings-group ControllerOnly">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Controller_Title" tags="controller,input" />
 					<Panel class="flow-right horizontal-align-right vertical-align-center">
@@ -35,9 +22,9 @@
 				</Panel>
 			</Panel>
 			
-			<Panel class="settings-page__spacer" />
+			<Panel class="settings-page__spacer ControllerOnly" />
 
-			<Panel id="MouseSubSection" class="settings-group">
+			<Panel id="MouseSubSection" class="settings-group KeyboardOnly">
 
 				<Panel class="settings-group__header">
 
@@ -54,7 +41,7 @@
 
 						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 							<Button class="button" onactivate="SettingsShared.resetSettings('MouseSubSection');">
-								<Image class="button__icon" src="file://{images}/reset.svg" />
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 							</Button>
 						</TooltipPanel>
 
@@ -121,91 +108,124 @@
 
 			</Panel>
 
-			<Panel class="settings-page__spacer" />
+			<Panel class="settings-page__spacer KeyboardOnly" />
 
-			<Panel id="KeybindSubSection" class="settings-group">
-
+			<Panel id="KeybindSubSection" class="settings-group KeyboardOnly">
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Keybinds_Title" tags="keyboard,keybind,controls,input" />
-
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 						<Button class="button" onactivate="SettingsShared.resetControls('KeybindSubSection');">
-							<Image class="button__icon" src="file://{images}/reset.svg" />
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
 						</Button>
 					</TooltipPanel>
-
 				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Movement" />
 
-				<SettingsKeyBinder text="#Keybind_Move_Forward" bind="+forward" tags="forward" />
-				<SettingsKeyBinder text="#Keybind_Move_Back" bind="+back" tags="backwards" />
-				<SettingsKeyBinder text="#Keybind_Move_Left" bind="+moveleft" tags="left,strafe" />
-				<SettingsKeyBinder text="#Keybind_Move_Right" bind="+moveright" tags="right,strafe" />
-				<SettingsKeyBinder text="#Keybind_Turn_Right" bind="+right" tags="right,turnbind" />
-				<SettingsKeyBinder text="#Keybind_Turn_Left" bind="+left" tags="left,turnbind" />
-				<SettingsKeyBinder text="#Keybind_Jump" bind="+jump" tags="jump" />
-				<SettingsKeyBinder text="#Keybind_Toggle_Jump" bind="toggle_jump" tags="toggle,jump" />
-				<SettingsKeyBinder text="#Keybind_Duck" bind="+duck" tags="duck,crouch" />
-				<SettingsKeyBinder text="#Keybind_Toggle_Duck" bind="toggle_duck" tags="toggle,duck,crouch" />
-				<SettingsKeyBinder text="#Keybind_Sprint" bind="+speed" tags="sprint,run,speed" />
-				<SettingsKeyBinder text="#Keybind_Toggle_Sprint" bind="toggle_speed" tags="toggle,sprint,run,speed" />
-				<SettingsKeyBinder text="#Keybind_Walk" bind="+walk" tags="walk" />
-				<SettingsKeyBinder text="#Keybind_Zoom_Toggle" bind="+zoom" tags="zoom" />
-				<SettingsKeyBinder text="#Keybind_Zoom_In" bind="+zoom_in" tags="zoom" />
-				<SettingsKeyBinder text="#Keybind_Zoom_Out" bind="+zoom_out" tags="zoom" />
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Move_Forward" bind="+forward" tags="forward" />
+					<SettingsKeyBinder text="#Keybind_Move_Back" bind="+back" tags="backwards" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Move_Left" bind="+moveleft" tags="left,strafe" />
+					<SettingsKeyBinder text="#Keybind_Move_Right" bind="+moveright" tags="right,strafe" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Turn_Right" bind="+right" tags="right,turnbind" />
+					<SettingsKeyBinder text="#Keybind_Turn_Left" bind="+left" tags="left,turnbind" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Jump" bind="+jump" tags="jump" />
+					<SettingsKeyBinder text="#Keybind_Toggle_Jump" bind="toggle_jump" tags="toggle,jump" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Duck" bind="+duck" tags="duck,crouch" />
+					<SettingsKeyBinder text="#Keybind_Toggle_Duck" bind="toggle_duck" tags="toggle,duck,crouch" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Sprint" bind="+speed" tags="sprint,run,speed" />
+					<SettingsKeyBinder text="#Keybind_Toggle_Sprint" bind="toggle_speed" tags="toggle,sprint,run,speed" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Walk" bind="+walk" tags="walk" />
+					<SettingsKeyBinder text="#Keybind_Zoom_Toggle" bind="+zoom" tags="zoom" />
+				</Panel>
+				<Panel class="full-width flow-right">
+					<SettingsKeyBinder text="#Keybind_Zoom_In" bind="+zoom_in" tags="zoom" />
+					<SettingsKeyBinder text="#Keybind_Zoom_Out" bind="+zoom_out" tags="zoom" />
+				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Weapons" />
 
-				<SettingsKeyBinder text="#Keybind_Attack_Primary" bind="+attack" tags="attack,primary,fire" />
-				<SettingsKeyBinder text="#Keybind_Attack_Secondary" bind="+attack2" tags="attack,secondary,fire" />
-				<SettingsKeyBinder text="#Keybind_Use_Items" bind="+use" tags="use,interact" />
-				<SettingsKeyBinder text="#Keybind_Weapon_Category_1" bind="slot1" tags="slot1" />
-				<SettingsKeyBinder text="#Keybind_Weapon_Category_2" bind="slot2" tags="slot2" />
-				<SettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
-				<SettingsKeyBinder text="#Keybind_Weapon_Category_4" bind="slot4" tags="slot4" />
-				<SettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
-				<SettingsKeyBinder text="#Keybind_Weapon_Category_6" bind="slot6" tags="slot6" />
-				
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Attack_Primary" bind="+attack" tags="attack,primary,fire" />
+					<SettingsKeyBinder text="#Keybind_Attack_Secondary" bind="+attack2" tags="attack,secondary,fire" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Use_Items" bind="+use" tags="use,interact" />
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_1" bind="slot1" tags="slot1" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_2" bind="slot2" tags="slot2" />
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_4" bind="slot4" tags="slot4" />
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
+				</Panel>
+				<Panel class="full-width flow-right">
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_6" bind="slot6" tags="slot6" />
+					<Panel class="fill-width" />
+				</Panel>
+
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_MP_COOP" />
 
-				<SettingsKeyBinder text="#Keybind_Chat_Message" bind="say" tags="coop,chat,talk" />
-				<SettingsKeyBinder text="#Keybind_Chat_Message_TeamOnly" bind="say_team" tags="coop,chat,talk" />
-				<SettingsKeyBinder text="#Keybind_Chat_Voice" bind="+voicerecord" tags="coop,voice,chat,push,talk" />
-				<SettingsKeyBinder
-					text="#Keybind_Coop_RemoteView"
-					infomessage="Keybind_Coop_RemoteView_Info"
-					bind="+remote_view"
-					tags="coop,remote,view"
-				/>
-				<SettingsKeyBinder
-					text="#Keybind_Coop_PingTool"
-					infomessage="Keybind_Coop_PingTool_Info"
-					bind="+mouse_menu"
-					tags="coop,ping,tool,radial"
-				/>
-				<SettingsKeyBinder
-					text="#Keybind_Coop_Taunt"
-					infomessage="Keybind_Coop_Taunt_Info"
-					bind="+mouse_menu_taunt"
-					tags="coop,gesture,taunt"
-				/>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Chat_Message" bind="say" tags="coop,chat,talk" />
+					<SettingsKeyBinder text="#Keybind_Chat_Message_TeamOnly" bind="say_team" tags="coop,chat,talk" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Chat_Voice" bind="+voicerecord" tags="coop,voice,chat,push,talk" />
+					<SettingsKeyBinder
+						text="#Keybind_Coop_RemoteView"
+						infomessage="Keybind_Coop_RemoteView_Info"
+						bind="+remote_view"
+						tags="coop,remote,view"
+					/>
+				</Panel>
+				<Panel class="full-width flow-right">
+					<SettingsKeyBinder
+						text="#Keybind_Coop_PingTool"
+						infomessage="Keybind_Coop_PingTool_Info"
+						bind="+mouse_menu"
+						tags="coop,ping,tool,radial"
+					/>
+					<SettingsKeyBinder
+						text="#Keybind_Coop_Taunt"
+						infomessage="Keybind_Coop_Taunt_Info"
+						bind="+mouse_menu_taunt"
+						tags="coop,gesture,taunt"
+					/>
+				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
 
-				<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />
+				<Panel class="full-width flow-right">
+					<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />
+					<Panel class="fill-width" />
+				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Input_Keybinds_Misc" />
 
-				<SettingsKeyBinder text="#Keybind_Console" bind="toggleconsole" tags="console" />
-				<SettingsKeyBinder text="#Keybind_Screenshot" bind="jpeg" tags="screenshot" />
-				<SettingsKeyBinder text="#Keybind_Quit_Prompt" bind="quit_prompt" tags="quit,close" />
-				<SettingsKeyBinder text="#Keybind_Quit" bind="quit" tags="quit,close" />
-
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Console" bind="toggleconsole" tags="console" />
+					<SettingsKeyBinder text="#Keybind_Screenshot" bind="jpeg" tags="screenshot" />
+				</Panel>
+				<Panel class="full-width flow-right">
+					<SettingsKeyBinder text="#Keybind_Quit_Prompt" bind="quit_prompt" tags="quit,close" />
+					<SettingsKeyBinder text="#Keybind_Quit" bind="quit" tags="quit,close" />
+				</Panel>
 			</Panel>
-
 		</Panel>
-
 	</Panel>
 </root>
