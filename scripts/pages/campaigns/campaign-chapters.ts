@@ -185,7 +185,7 @@ class CampaignChapters {
 		if (isSingleWsCampaign) {
 			this.displayMode = ChapterDisplayMode.SQUARE_GRID;
 		} else {
-			this.displayMode = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
+			this.displayMode = CampaignAPI.GetCampaignMeta(null)!.get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
 			if (!this.displayMode) this.displayMode = ChapterDisplayMode.LIST;
 		}
 

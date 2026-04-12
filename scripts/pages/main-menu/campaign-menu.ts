@@ -158,7 +158,7 @@ class CampaignMenu {
 		});
 
 		$.RegisterForUnhandledEvent('MapLoaded', (map: string, bg: boolean) => {
-			const ch = CampaignAPI.GetCampaignMeta(null);
+			const ch = CampaignAPI.GetCampaignMeta(null)!;
 			const bgMusic = (ch['background_music'] as string) ?? '';
 			$.DispatchEvent('MainMenuHideBackgroundImage', false);
 			$.DispatchEvent('MainMenuSwitchReverse', false);
@@ -175,7 +175,7 @@ class CampaignMenu {
 	static setContinueDetails() {
 		let c = CampaignAPI.GetActiveCampaign()!;
 
-		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`);
+		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`)!;
 		const logo = meta.get(CampaignMeta.FULL_LOGO);
 		if (logo) {
 			$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);
@@ -269,7 +269,7 @@ class CampaignMenu {
 			);
 		}
 
-		const ch = CampaignAPI.GetCampaignMeta(null);
+		const ch = CampaignAPI.GetCampaignMeta(null)!;
 		const bgLevel = (ch.get(CampaignMeta.BG_MAP) as string) ?? '';
 		const bgMusic = (ch.get(CampaignMeta.BG_MUSIC) as string) ?? '';
 		const bgMovie = (ch.get(CampaignMeta.BG_MOVIE) as string) ?? '';

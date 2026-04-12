@@ -39,7 +39,7 @@ class CampaignSettingsTab {
 		const thumb = getChapterThumbnail(this.campaign, this.chapter);
 		this.chImage.SetImage(thumb);
 
-		const logo = CampaignAPI.GetCampaignMeta(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`).get(
+		const logo = CampaignAPI.GetCampaignMeta(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`)!.get(
 			CampaignMeta.SQUARE_LOGO
 		);
 		if (logo) this.logoImage.SetImage(`${basePath}${logo}`);
