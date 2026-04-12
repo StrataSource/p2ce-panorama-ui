@@ -64,15 +64,15 @@ class LoadingScreenController {
 		$.Schedule(0.125, this.updateLoadingScreenInfoRepeater.bind(this));
 	}
 
-	static updateLoadingScreenInfo(mapName: string) {
+	static updateLoadingScreenInfo(mapName: string, mapGroup: string) {
 		const useTransitScreen = this.lastLoadedMapName.length > 0;
 
 		if (mapName.length > 0) this.lastLoadedMapName = mapName;
 
-		if (CampaignAPI.IsCampaignActive()) {
+		const c: CampaignPair|null = CampaignAPI.FindCampaign(mapGroup);
+		const meta = CampaignAPI.GetCampaignMeta(mapGroup); // SLOW
+		if (c && meta) {
 			// get relevant information
-			const c = CampaignAPI.GetActiveCampaign()!;
-			const meta = CampaignAPI.GetCampaignMeta(null);
 
 			if (this.logo) {
 				const pad = Number(meta.get(CampaignMeta.LOADING_LOGO_PAD));
