@@ -99,6 +99,7 @@ class CampaignSelector {
 			for (const campaign of bucket.campaigns) {
 				const campaignId = `${bucket.id}/${campaign.id}`;
 				const campaignMeta = CampaignAPI.GetCampaignMeta(campaignId);
+				if (!campaignMeta) continue;
 				const author = campaignMeta.get(CampaignMeta.AUTHOR);
 				this.searchableCampaigns.push(
 					new AbstractSearchData(

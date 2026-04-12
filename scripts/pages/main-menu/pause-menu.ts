@@ -153,17 +153,18 @@ class PauseMenu {
 		}
 
 		let c = CampaignAPI.GetActiveCampaign()!;
+		if (c) {
+			const meta = CampaignAPI.GetCampaignMeta(null)!;
+			const logo = meta.get(CampaignMeta.FULL_LOGO);
+			if (logo) {
+				$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);
 
-		const meta = CampaignAPI.GetCampaignMeta(null);
-		const logo = meta.get(CampaignMeta.FULL_LOGO);
-		if (logo) {
-			$.DispatchEvent('MainMenuSetLogo', `${getCampaignAssetPath(c)}${logo}`);
-
-			const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
-			$.DispatchEvent('MainMenuSetLogoSize', s);
-		} else if (isSingleWsCampaign(c)) {
-			$.DispatchEvent('MainMenuSetLogo', 'file://{images}/campaigns/p2ce_ws/full_logo.svg');
-			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
+				const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
+				$.DispatchEvent('MainMenuSetLogoSize', s);
+			} else if (isSingleWsCampaign(c)) {
+				$.DispatchEvent('MainMenuSetLogo', 'file://{images}/campaigns/p2ce_ws/full_logo.svg');
+				$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
+			}
 		} else {
 			$.DispatchEvent('MainMenuSetLogo', '');
 			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
