@@ -37,17 +37,6 @@ class LoadingScreenController {
 					this.logo!.SetImage('file://{images}/menu/p2ce/logo.png');
 				});
 			}
-
-			if (CampaignAPI.IsCampaignActive()) {
-				const img = CampaignAPI.GetCampaignMeta(null).get(CampaignMeta.SQUARE_LOGO);
-				if (img) {
-					this.logo.SetImage(`${getCampaignAssetPath(CampaignAPI.GetActiveCampaign()!)}${img}`);
-				} else {
-					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
-				}
-			} else {
-				this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
-			}
 		}
 	}
 
@@ -69,8 +58,25 @@ class LoadingScreenController {
 
 		if (mapName.length > 0) this.lastLoadedMapName = mapName;
 
-		const c: CampaignPair|null = CampaignAPI.FindCampaign(mapGroup);
+		const c: CampaignPair | null = CampaignAPI.FindCampaign(mapGroup);
 		const meta = CampaignAPI.GetCampaignMeta(mapGroup); // SLOW
+
+		// set spinner
+		if (c) {
+			const img = meta ? meta.get(CampaignMeta.SQUARE_LOGO) : undefined;
+			if (this.logo) {
+				if (img) {
+					this.logo.SetImage(`${getCampaignAssetPath(c)}${img}`);
+				} else {
+					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
+				}
+			}
+		} else {
+			if (this.logo) {
+				this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
+			}
+		}
+
 		if (c && meta) {
 			// get relevant information
 
