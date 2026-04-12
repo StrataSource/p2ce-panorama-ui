@@ -193,7 +193,8 @@ class CampaignSelector {
 			}
 		}
 
-		campaigns.sort((a, b) => a.info.title.localeCompare(b.info.title));
+		// FIXME: cases of Portal 2 not appearing where it should!
+		// campaigns.sort((a, b) => a.info.title.localeCompare(b.info.title));
 
 		for (const pair of campaigns) {
 			if (`${pair.bucket.id}/${pair.info.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN && !hasAutoCampaign) {
