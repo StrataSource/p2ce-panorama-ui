@@ -81,8 +81,7 @@ class ChapterEntry {
 				if (this.chapter) CampaignChapters.listCustomizeBtn.visible = this.chapter.maps.length !== 1;
 			};
 		} else if (
-			CampaignChapters.displayMode === ChapterDisplayMode.GRID ||
-			CampaignChapters.displayMode === ChapterDisplayMode.SQUARE_GRID
+			CampaignChapters.displayMode === ChapterDisplayMode.GRID
 		) {
 			//activationFn = () => {
 			//	UiToolkitAPI.ShowGenericPopupThreeOptions(
@@ -181,13 +180,8 @@ class CampaignChapters {
 	}
 
 	static init() {
-		const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
-		if (isSingleWsCampaign) {
-			this.displayMode = ChapterDisplayMode.SQUARE_GRID;
-		} else {
-			this.displayMode = CampaignAPI.GetCampaignMeta(null)!.get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
-			if (!this.displayMode) this.displayMode = ChapterDisplayMode.LIST;
-		}
+		this.displayMode = CampaignAPI.GetCampaignMeta(null)!.get(CampaignMeta.CHAPTER_DISPLAY_MODE) ?? '';
+		if (!this.displayMode) this.displayMode = ChapterDisplayMode.LIST;
 
 		switch (this.displayMode) {
 			case ChapterDisplayMode.LIST:
@@ -200,12 +194,6 @@ class CampaignChapters {
 				$.GetContextPanel().AddClass('ChapterModeGrid');
 				this.maxEntryPerPage = 100;
 				this.list.AddClass('chapters__grid');
-				break;
-
-			case ChapterDisplayMode.SQUARE_GRID:
-				$.GetContextPanel().AddClass('ChapterModeSquareGrid');
-				this.maxEntryPerPage = 100;
-				this.list.AddClass('chapters__square-grid');
 				break;
 
 			case ChapterDisplayMode.CLASSIC:
@@ -221,38 +209,7 @@ class CampaignChapters {
 				break;
 		}
 
-		if (isSingleWsCampaign) {
-			const buckets = CampaignAPI.GetAllCampaignBuckets().filter((v: CampaignBucket) => {
-				return isBucketSingleWsCampaign(v);
-			});
-
-			this.chapterCache = [];
-
-			for (const bucket of buckets) {
-				const addon = WorkshopAPI.GetAddonMeta(bucket.addon_id);
-				if (addon.type !== 'Map') {
-					continue;
-				}
-				for (const campaign of bucket.campaigns) {
-					// assuming the system isn't gaslighting us
-					// an autogen'd campaign should have 1 chapter with at least 1 map
-					// i dont really care if it has multiple maps
-					// you really should make a campaign if you have multiple maps
-					// it's just BETTER!
-					const fakeMap = new VirtualMap(campaign.chapters[0].maps[0].name);
-					const fakeCh = new VirtualChapter(
-						`${bucket.id}/${campaign.id}`,
-						campaign.title,
-						[fakeMap],
-						addon.thumb
-					);
-
-					this.chapterCache.push(fakeCh);
-				}
-			}
-		} else {
-			this.chapterCache = this.campaign.campaign.chapters;
-		}
+		this.chapterCache = this.campaign.campaign.chapters;
 
 		if (this.maxPages === -1) this.maxPages = Math.ceil(this.chapterCache.length / this.maxEntryPerPage);
 
@@ -277,10 +234,6 @@ class CampaignChapters {
 			btn.SetFocus();
 
 			$.DispatchEvent('Activated', btn, PanelEventSource.PROGRAM);
-		}
-
-		if (isSingleWsCampaign && this.displayMode === ChapterDisplayMode.SQUARE_GRID) {
-			this.setupSearching();
 		}
 	}
 
@@ -321,7 +274,6 @@ class CampaignChapters {
 		}
 
 		const prog = CampaignAPI.GetCampaignUnlockProgress(`${this.campaign.bucket.id}/${this.campaign.campaign.id}`);
-		const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
 
 		this.list.RemoveAndDeleteChildren();
 		this.chapterEntries = [];
@@ -340,7 +292,7 @@ class CampaignChapters {
 			const idx = this.chapterPage * this.maxEntryPerPage + i;
 			const ch = idx < this.chapterCache.length ? this.chapterCache[idx] : undefined;
 
-			this.chapterEntries.push(new ChapterEntry(p, ch, isSingleWsCampaign || prog >= idx));
+			this.chapterEntries.push(new ChapterEntry(p, ch, prog >= idx));
 
 			this.chapterEntries[i].update();
 		}
@@ -360,15 +312,8 @@ class CampaignChapters {
 	static startChapter() {
 		$.DispatchEvent('MainMenuSwitchFade', true, true);
 
-		let campaignId: string;
-		let chapterId: string;
-		if (this.selectedChapter!.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
-			campaignId = this.selectedChapter!.id;
-			chapterId = 'auto';
-		} else {
-			campaignId = `${CampaignChapters.campaign.bucket.id}/${CampaignChapters.campaign.campaign.id}`;
-			chapterId = this.selectedChapter!.id;
-		}
+		const campaignId = `${CampaignChapters.campaign.bucket.id}/${CampaignChapters.campaign.campaign.id}`;
+		const chapterId = this.selectedChapter!.id;
 
 		$.DispatchEvent('LoadingScreenClearLastMap');
 		if (!CampaignAPI.StartCampaign(campaignId, chapterId, 0)) {
@@ -379,55 +324,5 @@ class CampaignChapters {
 	static customizeChapter() {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
 		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'campaigns/campaign-settings', undefined);
-	}
-
-	static setupSearching() {
-		for (let i = 0; i < this.chapterCache.length; ++i) {
-			this.chapterSearchCache.push(
-				new AbstractSearchData(
-					// index of chapter!
-					i,
-					this.chapterCache[i].title,
-					i
-				)
-			);
-		}
-		installSearchHandling<number, number>(
-			$<TextEntry>('#ChapterSearchBar')!,
-			() => {
-				this.populateChapters();
-			},
-			() => {},
-			() => {
-				return this.chapterSearchCache;
-			},
-			(matches: Array<number>) => {
-				const prog = CampaignAPI.GetCampaignUnlockProgress(
-					`${this.campaign.bucket.id}/${this.campaign.campaign.id}`
-				);
-				const isSingleWsCampaign = isSpecialSingleWsCampaign(this.campaign);
-
-				this.list.RemoveAndDeleteChildren();
-				this.chapterEntries = [];
-
-				for (let i = 0; i < matches.length; ++i) {
-					const idx = matches[i];
-					const p = $.CreatePanel('Panel', this.list, 'chapter' + i);
-					p.LoadLayoutSnippet('ChapterEntrySnippet');
-
-					this.chapterEntries.push(
-						new ChapterEntry(p, this.chapterCache[idx], isSingleWsCampaign || prog >= idx)
-					);
-
-					this.chapterEntries[i].update();
-				}
-
-				for (const entry of this.chapterEntries) {
-					if (this.selectedChapter && entry.chapter && this.selectedChapter.id === entry.chapter.id) {
-						$.DispatchEvent('Activated', entry.button!, PanelEventSource.PROGRAM);
-					}
-				}
-			}
-		);
 	}
 }

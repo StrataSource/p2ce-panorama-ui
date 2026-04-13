@@ -51,7 +51,6 @@ declare const enum ChapterDisplayMode {
 	LIST = 'list',
 	GRID = 'grid',
 	SUPER = 'super',
-	SQUARE_GRID = 'square_grid'
 }
 
 declare const enum SpecialString {
