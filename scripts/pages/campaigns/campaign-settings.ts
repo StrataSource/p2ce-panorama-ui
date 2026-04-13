@@ -18,11 +18,6 @@ class CampaignSettingsTab {
 	static openSettingsPage: Panel | undefined = undefined;
 
 	static init() {
-		$.GetContextPanel().SetHasClass(
-			'P2CESingleCampaign',
-			this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL
-		);
-
 		$.RegisterForUnhandledEvent('CampaignSettingHovered', this.onCampaignSettingHovered.bind(this));
 
 		$.DispatchEvent(
@@ -116,15 +111,8 @@ class CampaignSettingsTab {
 		const desiredMap = CampaignShared.getMap();
 		const mapIdx = desiredMap.index > 0 ? desiredMap.index : 0;
 
-		let campaignId: string;
-		let chapterId: string;
-		if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
-			campaignId = this.chapter.id;
-			chapterId = 'auto';
-		} else {
-			campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
-			chapterId = this.chapter.id;
-		}
+		const campaignId = `${this.campaign.bucket.id}/${this.campaign.campaign.id}`;
+		const chapterId = this.chapter.id;
 
 		if (!CampaignAPI.StartCampaign(campaignId, chapterId, mapIdx)) {
 			$.DispatchEvent('MainMenuNotifFailLoad');

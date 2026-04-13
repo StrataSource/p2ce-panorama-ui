@@ -162,7 +162,7 @@ class PauseMenu {
 				const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
 				$.DispatchEvent('MainMenuSetLogoSize', s);
 			} else if (isSingleWsCampaign(c)) {
-				$.DispatchEvent('MainMenuSetLogo', 'file://{images}/campaigns/p2ce_ws/full_logo.svg');
+				$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 				$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 			}
 		} else {
