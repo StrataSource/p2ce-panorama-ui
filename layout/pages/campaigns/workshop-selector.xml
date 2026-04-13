@@ -1,0 +1,39 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/common/searcher.ts" />
+		<include src="file://{scripts}/pages/campaigns/workshop-selector.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="WorkshopEntrySnippet">
+			<Button group="WorkshopGroupRadio" class="workshop__entry" tabindex="auto" selectionpos="auto">
+				<Image
+					id="Cover"
+					class="workshop__entry__cover"
+					src="{s:src}"
+					defaultsrc="file://{images}/menu/fallback/dead-atlas.png"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
+				<Panel class="workshop__entry__details">
+					<Label class="workshop__entry__details__desc" text="{s:name}" />
+				</Panel>
+			</Button>
+		</snippet>
+	</snippets>
+
+	<Panel class="mainmenu__page" onload="WorkshopSelector.init()">
+		<Panel class="workshop__top-bar">
+			<TextEntry id="SearchBar" class="textentry workshop__search" placeholder="#Common_SearchEllipsis" />
+		</Panel>
+		<Panel id="EntryInsert" class="workshop__entries" />
+		<Panel class="workshop__action-bar">
+			<Button class="button">
+				<Label class="button__text" text="[HC] Play" />
+			</Button>
+		</Panel>
+	</Panel>
+</root>

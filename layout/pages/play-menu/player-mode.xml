@@ -38,21 +38,20 @@
 					</Panel>
 				</Button>
 				<Button
-					disabled="true"
-					class="card play-menu__card ml-3 hide"
-					onactivate="PlayMenu.onSinglePlayerBtnPressed()"
+					class="card play-menu__card ml-3"
+					onactivate="PlayMenu.onCampaignBtnPressed()"
 					tabindex="auto"
 					selectionpos="auto"
 				>
 					<Image
 						class="card__image"
-						src="file://{images}/menu/fallback/programmer_art_text.png"
+						src="file://{images}/menu/vertical-banner-cores.png"
 						scaling="stretch-to-cover-preserve-aspect"
 						textureheight="1920"
 						texturewidth="1080"
 					/>
 					<Panel class="card__details card__details__no-bg">
-						<Label class="card__details__header" text="[HC] Collections" />
+						<Label class="card__details__header" text="[HC] Campaigns" />
 					</Panel>
 				</Button>
 			</Panel>
