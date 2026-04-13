@@ -42,6 +42,17 @@ class CampaignMenu {
 			}
 		},
 		{
+			id: 'AddonsBtn',
+			headline: '#MainMenu_Navigation_Addons',
+			tagline: '#MainMenu_Navigation_Addons_Tagline',
+			activated: () => {
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);
+			},
+			focused: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			}
+		},
+		{
 			id: 'SettingsKeyboardBtn',
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
