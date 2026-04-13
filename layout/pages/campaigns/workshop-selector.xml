@@ -11,11 +11,21 @@
 	<snippets>
 		<snippet name="WorkshopEntrySnippet">
 			<Button group="WorkshopGroupRadio" class="workshop__entry" tabindex="auto" selectionpos="auto">
-				<Image
-					id="Cover"
-					class="workshop__entry__cover"
-					scaling="stretch-to-cover-preserve-aspect"
-				/>
+				<Panel class="workshop__entry__top">
+					<Image
+						id="Cover"
+						class="workshop__entry__cover"
+						scaling="stretch-to-cover-preserve-aspect"
+					/>
+					<Panel id="Indicator" class="workshop__entry__indicator fancy-red hide">
+						<Image
+							scaling="stretch-to-fit-preserve-aspect"
+							src="file://{images}/alert-octagon.svg"
+							texturewidth="64"
+							textureheight="64"
+						/>
+					</Panel>
+				</Panel>
 				<Panel class="workshop__entry__details">
 					<Label class="workshop__entry__details__desc" text="{s:name}" />
 				</Panel>

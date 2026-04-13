@@ -43,16 +43,45 @@ class WorkshopSelector {
 		p.SetDialogVariable('name', pair.campaign.title);
 
 		const meta = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
-		const img = p.FindChild<Image>('Cover')!;
+		const img = p.FindChildTraverse<Image>('Cover')!;
 		installImageFallbackHandler(img);
 		img.SetImage(meta.thumb);
 
+		const deps = WorkshopAPI.GetAddonDependenciesMissing(pair.bucket.addon_id);
+		const hasMissing = deps !== null && deps.length > 0;
+
+		p.FindChildTraverse<Panel>('Indicator')!.SetHasClass('hide', !hasMissing);
+
 		p.SetPanelEvent('onactivate', () => {
-			CampaignAPI.StartCampaign(
-				`${pair.bucket.id}/${pair.campaign.id}`,
-				pair.campaign.chapters[0].id,
-				0
-			);
+			if (hasMissing) {
+				UiToolkitAPI.ShowGenericPopupThreeOptions(
+					'[HC] Missing dependencies',
+					'[HC] The map you are trying to launch depends on addons you do not have installed. You can continue without downloading, but expect issues with this map.',
+					'warning',
+					'[HC] View in Workshop',
+					() => {
+						SteamOverlayAPI.OpenURLModal(
+							`https://steamcommunity.com/sharedfiles/filedetails/?id=${meta.workshopid}`
+						);
+					},
+					'[HC] Continue Anyway',
+					() => {
+						CampaignAPI.StartCampaign(
+							`${pair.bucket.id}/${pair.campaign.id}`,
+							pair.campaign.chapters[0].id,
+							0
+						);
+					},
+					'[HC] Cancel',
+					() => {}
+				);
+			} else {
+				CampaignAPI.StartCampaign(
+					`${pair.bucket.id}/${pair.campaign.id}`,
+					pair.campaign.chapters[0].id,
+					0
+				);
+			}
 		});
 	}
 
