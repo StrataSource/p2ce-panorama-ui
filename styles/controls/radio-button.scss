@@ -75,6 +75,10 @@
 		);
 		sound: 'UIPanorama.P2CE.MenuSelect';
 		//background-color: $radiobutton-background-selected;
+
+		&__text {
+			color: $button-text-selected;
+		}
 	}
 
 	&:disabled:selected .RadioBox {

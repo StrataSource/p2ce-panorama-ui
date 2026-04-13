@@ -55,6 +55,9 @@
 						/>
 					</Panel>
 				</Panel>
+				<Panel id="NewIndicator" class="campaigns__entry__indicator hide">
+					<Label class="campaigns__entry__indicator__text" text="[HC] UNPLAYED" />
+				</Panel>
 			</Button>
 		</snippet>
 	</snippets>

@@ -19,11 +19,11 @@
 		border-color: $primary-color;
 
 		& .button__text {
-			color: $button-text-hover;
+			color: $button-text-selected;
 		}
 
 		& .button__icon {
-			wash-color: $button-text-hover;
+			wash-color: $button-text-selected;
 		}
 	}
 }
