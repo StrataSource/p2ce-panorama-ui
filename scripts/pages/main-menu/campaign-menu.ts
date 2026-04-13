@@ -129,9 +129,8 @@ class CampaignMenu {
 		}
 
 		if (isSingleWsCampaign(CampaignAPI.GetActiveCampaign()!)) {
-			$.Msg('Auto generated campaign detected! Redirecting to special...');
 			$.Schedule(0.01, () => {
-				CampaignAPI.SetActiveCampaign(SpecialString.P2CE_SP_WS_CAMPAIGN);
+				CampaignAPI.SetActiveCampaign(null);
 			});
 			return;
 		}
@@ -184,8 +183,7 @@ class CampaignMenu {
 	}
 
 	static setContinueDetails() {
-		let c = CampaignAPI.GetActiveCampaign()!;
-
+		const c = CampaignAPI.GetActiveCampaign()!;
 		const meta = CampaignAPI.GetCampaignMeta(`${c.bucket.id}/${c.campaign.id}`)!;
 		const logo = meta.get(CampaignMeta.FULL_LOGO);
 		if (logo) {
@@ -198,16 +196,12 @@ class CampaignMenu {
 			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 		}
 
-		const isWsSingle = isSpecialSingleWsCampaign(c);
-
 		this.continueBox.visible = false;
 
 		const saves = GameSavesAPI.GetGameSaves()
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime))
 			.filter((a) => {
-				return isWsSingle
-					? a.mapGroup.startsWith(SpecialString.AUTO_WS)
-					: a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
+				return a.mapGroup === `${c.bucket.id}/${c.campaign.id}`;
 			});
 
 		this.continueBtnEnabled = false;
@@ -228,15 +222,6 @@ class CampaignMenu {
 
 		this.latestSave = saves[0];
 
-		if (isWsSingle) {
-			const realCampaign = CampaignAPI.FindCampaign(this.latestSave.mapGroup);
-			if (realCampaign) {
-				c = realCampaign;
-			} else {
-				$.Warning(`Associated campaign ID ${this.latestSave.mapGroup} could not be found`);
-			}
-		}
-
 		const savChapter: ChapterInfo | undefined =
 			this.latestSave.chapter < c.campaign.chapters.length
 				? c.campaign.chapters[this.latestSave.chapter]
@@ -254,7 +239,7 @@ class CampaignMenu {
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueBoxText.text = convertTime(date);
-		const chapterName = isWsSingle ? c.campaign.title : $.Localize(savChapter.title);
+		const chapterName = $.Localize(savChapter.title);
 		continueBtnText = chapterName.replace('\n', ': ');
 
 		this.continueBtnEnabled = true;
