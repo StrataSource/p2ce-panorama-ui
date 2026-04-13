@@ -28,8 +28,16 @@
 
 		$this: &;
 
+		&__top {
+
+		}
 		&__cover {
 			height: 384px;
+		}
+		&__indicator {
+			horizontal-align: right;
+			vertical-align: top;
+			margin: 5px;
 		}
 		&__details {
 			width: 100%;
