@@ -9,15 +9,15 @@ class PlayMenu {
 		);
 	}
 
-	static onSinglePlayerBtnPressed() {
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SELECTOR_TYPE] = PlayerMode.SINGLEPLAYER;
-
+	static onCampaignBtnPressed() {
 		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'campaigns/campaign-selector', undefined);
 	}
 
-	static onMultiPlayerBtnPressed() {
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SELECTOR_TYPE] = PlayerMode.MULTIPLAYER;
+	static onSinglePlayerBtnPressed() {
+		$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayerWorkshop', 'campaigns/workshop-selector', undefined);
+	}
 
-		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'campaigns/campaign-selector', undefined);
+	static onMultiPlayerBtnPressed() {
+		$.DispatchEvent('MainMenuOpenNestedPage', 'MultiPlayerWorkshop', 'campaigns/workshop-selector', undefined);
 	}
 }
