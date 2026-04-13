@@ -178,6 +178,20 @@
 				padding-left: 3px;
 			}
 		}
+
+		&__indicator {
+			horizontal-align: right;
+			padding: 6px 10px;
+			background-color: $button-background-hover;
+			border: 1px solid $primary-color;
+			margin: 5px;
+			&__text {
+				text-transform: uppercase;
+				font-weight: bold;
+				letter-spacing: 1px;
+				font-size: 14px;
+			}
+		}
 	}
 
 	&__boxart {

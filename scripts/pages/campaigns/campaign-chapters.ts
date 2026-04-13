@@ -280,7 +280,6 @@ class CampaignChapters {
 		}
 
 		if (isSingleWsCampaign && this.displayMode === ChapterDisplayMode.SQUARE_GRID) {
-			$.Msg('blah');
 			this.setupSearching();
 		}
 	}
