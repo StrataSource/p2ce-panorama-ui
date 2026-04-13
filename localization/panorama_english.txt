@@ -846,7 +846,7 @@
 		"MainMenu_Navigation_SteamInputLibrary"			"[DEV] Steam Input Library"
 		"MainMenu_Navigation_Home"						"Home"
 		"MainMenu_Navigation_Play"						"Play"
-		"MainMenu_Navigation_Play_Tagline"				"Start a new experience"
+		"MainMenu_Navigation_Play_Tagline"				"Begin testing"
 		"MainMenu_Navigation_Play_Modes"				"Select a singleplayer or multiplayer map"
 		"MainMenu_Navigation_Play_MapTypes"				"Select a P2:CE or Portal 2 Workshop map"
 		"MainMenu_Navigation_Featured"					"Featured Items"
