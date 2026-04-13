@@ -14,8 +14,6 @@
 				<Image
 					id="Cover"
 					class="workshop__entry__cover"
-					src="{s:src}"
-					defaultsrc="file://{images}/menu/fallback/dead-atlas.png"
 					scaling="stretch-to-cover-preserve-aspect"
 				/>
 				<Panel class="workshop__entry__details">
@@ -28,6 +26,20 @@
 	<Panel class="mainmenu__page" onload="WorkshopSelector.init()">
 		<Panel class="workshop__top-bar">
 			<TextEntry id="SearchBar" class="textentry workshop__search" placeholder="#Common_SearchEllipsis" />
+			<Button
+				class="button ml-2"
+				onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/workshop/browse/?appid=440000&amp;browsesort=trend&amp;section=readytouseitems&amp;p=1&amp;num_per_page=30&amp;days=7&amp;requiredtags%5B%5D=Map')"
+				tabindex="auto"
+				selectionpos="auto"
+			>
+				<Image
+					class="button__icon button__icon--left"
+					texturewidth="64"
+					textureheight="64"
+					src="file://{images}/icons/steam.svg"
+				/>
+				<Label class="button__text button__text--right" text="#MainMenu_Campaigns_OpenWS" />
+			</Button>
 		</Panel>
 		<Panel id="EntryInsert" class="workshop__entries" />
 		<Panel class="workshop__action-bar">
