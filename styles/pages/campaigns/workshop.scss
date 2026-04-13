@@ -5,9 +5,10 @@
 		width: 100%;
 		max-width: 1024px;
 		horizontal-align: center;
+		flow-children: right;
 	}
 	&__search {
-		width: 100%;
+		width: fill-parent-flow(1);
 		horizontal-align: center;
 	}
 	&__entries {

@@ -2,9 +2,35 @@
 
 class WorkshopSelector {
 	static insert = $<Panel>('#EntryInsert')!;
+	static searchBar = $<TextEntry>('#SearchBar')!;
+	static campaignStrings: Array<AbstractSearchData> = [];
 
 	static init() {
+		this.cacheSearch();
 		this.populate();
+
+		installSearchHandling<string, string>(
+			this.searchBar,
+			() => {
+				this.deleteEntries();
+				this.populate();
+			},
+			() => {},
+			() => {
+				return this.campaignStrings;
+			},
+			(matches: string[]) => {
+				this.deleteEntries();
+				for (const match of matches) {
+					this.createBtnFromString(match);
+				}
+			}
+		);
+
+		$.RegisterForUnhandledEvent('PanoramaComponent_Campaign_OnRefreshList', () => {
+			this.searchBar.text = '';
+			this.reloadList();
+		});
 	}
 
 	static createBtn(pair: CampaignPair) {
@@ -18,6 +44,7 @@ class WorkshopSelector {
 
 		const meta = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
 		const img = p.FindChild<Image>('Cover')!;
+		installImageFallbackHandler(img);
 		img.SetImage(meta.thumb);
 
 		p.SetPanelEvent('onactivate', () => {
@@ -29,6 +56,32 @@ class WorkshopSelector {
 		});
 	}
 
+	static createBtnFromString(campaign: string) {
+		const c = CampaignAPI.FindCampaign(campaign);
+		if (c) {
+			this.createBtn(c);
+		} else {
+			$.Warning(`Can't find '${campaign}'`);
+		}
+	}
+
+	static cacheSearch() {
+		const buckets = CampaignAPI.GetAllCampaignBuckets();
+		for (const bucket of buckets) {
+			if (bucket.id.startsWith('auto_')) {
+				const meta = WorkshopAPI.GetAddonMeta(bucket.addon_id);
+				const id = `${bucket.id}/${bucket.campaigns[0].id}`;
+				this.campaignStrings.push(
+					new AbstractSearchData(
+						id,
+						meta.title,
+						id
+					)
+				);
+			}
+		}
+	}
+
 	static populate() {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
 		for (const bucket of buckets) {
@@ -38,7 +91,17 @@ class WorkshopSelector {
 		}
 	}
 
-	static clear() {
+	static clearCache() {
+		this.campaignStrings = [];
+	}
 
+	static deleteEntries() {
+		this.insert.RemoveAndDeleteChildren();
+	}
+	
+	static reloadList() {
+		this.clearCache();
+		this.deleteEntries();
+		this.populate();
 	}
 }
