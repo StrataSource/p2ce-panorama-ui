@@ -1,9 +1,94 @@
 'use strict';
 
+class WorkshopEntry {
+	button: Button;
+	hasMissing: boolean;
+	// shut up i dont care
+	// eslint-disable-next-line camelcase
+	addonId: AddonIndex_t;
+	campaignId: string;
+	startId: string;
+	indicatorOverlay: Panel;
+
+	constructor(pair: CampaignPair) {
+		this.button = $.CreatePanel(
+			'Button',
+			WorkshopSelector.insert,
+			pair.bucket.id,
+		);
+
+		this.button.LoadLayoutSnippet('WorkshopEntrySnippet');
+		this.button.SetDialogVariable('name', pair.campaign.title);
+
+		this.addonId = pair.bucket.addon_id;
+		this.campaignId = `${pair.bucket.id}/${pair.campaign.id}`;
+
+		const meta = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
+		const img = this.button.FindChildTraverse<Image>('Cover')!;
+		installImageFallbackHandler(img);
+		img.SetImage(meta.thumb);
+
+		this.indicatorOverlay = this.button.FindChildTraverse<Panel>('Indicator')!;
+
+		// SHUT UPPPPPPPPPPP!!!!!!
+		this.hasMissing = false;
+		this.updateDependencies();
+
+		this.startId = pair.campaign.chapters[0].id;
+
+		this.button.SetPanelEvent('onactivate', () => {
+			if (this.hasMissing) {
+				UiToolkitAPI.ShowGenericPopupThreeOptions(
+					'[HC] Missing dependencies',
+					'[HC] The map you are trying to launch depends on addons you do not have installed. You can continue without downloading, but expect issues with this map.',
+					'warning',
+					'[HC] View in Workshop',
+					() => {
+						SteamOverlayAPI.OpenURLModal(
+							`https://steamcommunity.com/sharedfiles/filedetails/?id=${meta.workshopid}`
+						);
+					},
+					'[HC] Continue Anyway',
+					() => {
+						CampaignAPI.StartCampaign(
+							this.campaignId,
+							this.startId,
+							0
+						);
+					},
+					'[HC] Cancel',
+					() => {}
+				);
+			} else {
+				CampaignAPI.StartCampaign(
+					this.campaignId,
+					this.startId,
+					0
+				);
+			}
+		});
+	}
+
+	updateDependencies() {
+		const deps = WorkshopAPI.GetAddonDependenciesMissing(this.addonId);
+		this.hasMissing = deps !== null && deps.length > 0;
+		if (this.hasMissing) {
+			$.Msg(`${this.campaignId} MISSING DEPENDENCIES (${deps!.length})`);
+			for (const dep of deps!) {
+				$.Msg(`     ${dep}`);
+			}
+		} else {
+			$.Msg(`${this.campaignId} OK`);
+		}
+		this.indicatorOverlay.SetHasClass('hide', !this.hasMissing);
+	}
+}
+
 class WorkshopSelector {
 	static insert = $<Panel>('#EntryInsert')!;
 	static searchBar = $<TextEntry>('#SearchBar')!;
 	static campaignStrings: Array<AbstractSearchData> = [];
+	static entries: Array<WorkshopEntry> = [];
 
 	static init() {
 		this.cacheSearch();
@@ -31,58 +116,28 @@ class WorkshopSelector {
 			this.searchBar.text = '';
 			this.reloadList();
 		});
+
+		// FIXME: event not firing?
+		$.RegisterForUnhandledEvent(
+			'PanoramaComponent_Workshop_OnAddonInstalled',
+			() => {
+				$.Msg('Addon installation detected!');
+				for (const entry of this.entries) {
+					if (entry.hasMissing) {
+						$.Msg(`Checking dependencies of ${entry.campaignId} again...`);
+						entry.updateDependencies();
+					}
+				}
+			}
+		);
 	}
 
 	static createBtn(pair: CampaignPair) {
-		const p = $.CreatePanel(
-			'Button',
-			this.insert,
-			pair.bucket.id,
+		this.entries.push(
+			new WorkshopEntry(
+				pair
+			)
 		);
-		p.LoadLayoutSnippet('WorkshopEntrySnippet');
-		p.SetDialogVariable('name', pair.campaign.title);
-
-		const meta = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
-		const img = p.FindChildTraverse<Image>('Cover')!;
-		installImageFallbackHandler(img);
-		img.SetImage(meta.thumb);
-
-		const deps = WorkshopAPI.GetAddonDependenciesMissing(pair.bucket.addon_id);
-		const hasMissing = deps !== null && deps.length > 0;
-
-		p.FindChildTraverse<Panel>('Indicator')!.SetHasClass('hide', !hasMissing);
-
-		p.SetPanelEvent('onactivate', () => {
-			if (hasMissing) {
-				UiToolkitAPI.ShowGenericPopupThreeOptions(
-					'[HC] Missing dependencies',
-					'[HC] The map you are trying to launch depends on addons you do not have installed. You can continue without downloading, but expect issues with this map.',
-					'warning',
-					'[HC] View in Workshop',
-					() => {
-						SteamOverlayAPI.OpenURLModal(
-							`https://steamcommunity.com/sharedfiles/filedetails/?id=${meta.workshopid}`
-						);
-					},
-					'[HC] Continue Anyway',
-					() => {
-						CampaignAPI.StartCampaign(
-							`${pair.bucket.id}/${pair.campaign.id}`,
-							pair.campaign.chapters[0].id,
-							0
-						);
-					},
-					'[HC] Cancel',
-					() => {}
-				);
-			} else {
-				CampaignAPI.StartCampaign(
-					`${pair.bucket.id}/${pair.campaign.id}`,
-					pair.campaign.chapters[0].id,
-					0
-				);
-			}
-		});
 	}
 
 	static createBtnFromString(campaign: string) {
@@ -125,6 +180,7 @@ class WorkshopSelector {
 	}
 
 	static deleteEntries() {
+		this.entries = [];
 		this.insert.RemoveAndDeleteChildren();
 	}
 	
