@@ -11,7 +11,7 @@
 	<snippets>
 		<snippet name="DependencyEntry">
 			<Button class="addon-deps__entry">
-				<Panel class="addon-deps__entry__left hide">
+				<Panel class="addon-deps__entry__left">
 					<Image
 						id="DependencyAddonImage"
 						class="addon-deps__entry__image"
