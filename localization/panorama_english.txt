@@ -1335,6 +1335,7 @@ This message will only be displayed once, and will not be shown again upon accep
 		"ColorPicker_Alpha"							"A"
 
 		// Dependency Warning
+		"DependencyWarning_Generic"					"You are missing one or more addons that this relies upon to function properly."
 		"DependencyWarning_Header"					"Missing Dependencies"
 		"DependencyWarning_Desc"					"The content you are trying to launch depends on addons that could not be found. The addons you are missing can be found below. Click on an addon to open its Steam Workshop page in the Steam Overlay. You can ignore this warning and continue anyway, but expect issues such as missing textures or models."
 		"DependencyWarning_Loading"					"Retrieving Details..."
