@@ -65,6 +65,12 @@ class WorkshopSelector {
 		this.cacheSearch();
 		this.populate();
 
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			$.Localize('#MainMenu_Navigation_Workshop'),
+			$.Localize('#MainMenu_Navigation_Workshop_Tagline')
+		);
+
 		installSearchHandling<string, string>(
 			this.searchBar,
 			() => {
@@ -140,6 +146,12 @@ class WorkshopSelector {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
 		const newItems: Array<CampaignPair> = [];
 		const otherItems: Array<CampaignPair> = [];
+
+		if (buckets.filter((v) => v.id.startsWith('auto_')).length === 0) {
+			const p = $.CreatePanel('Panel', this.insert, 'None');
+			p.LoadLayoutSnippet('WorkshopNoneSnippet');
+			return;
+		}
 
 		for (const bucket of buckets) {
 			if (bucket.id.startsWith('auto_')) {

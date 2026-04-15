@@ -98,6 +98,12 @@ class CampaignSelector {
 
 		installImageFallbackHandler(this.hoverBoxart);
 
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			$.Localize('#MainMenu_Navigation_Campaign'),
+			$.Localize('#MainMenu_Navigation_Campaign_Tagline')
+		);
+
 		this.reloadList();
 
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
@@ -240,6 +246,12 @@ class CampaignSelector {
 		const allNewCampaigns: Array<CampaignPair> = newBaseCampaigns.concat(newLocalCampaigns, newWorkshopCampaigns);
 		const allOtherCampaigns: Array<CampaignPair> = oldBaseCampaigns.concat(oldLocalCampaigns, oldWorkshopCampaigns);
 		*/
+
+		if (buckets.filter((v) => !v.id.startsWith('auto_')).length === 0) {
+			const p = $.CreatePanel('Panel', this.campaignList, 'None');
+			p.LoadLayoutSnippet('CampaignNoneSnippet');
+			return;
+		}
 
 		const doAddButtons = (array: Array<CampaignPair>, hasSaveData: boolean) => {
 			for (const pair of array) {

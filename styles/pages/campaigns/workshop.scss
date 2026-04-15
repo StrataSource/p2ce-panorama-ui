@@ -19,6 +19,23 @@
 		padding: 0 15px;
 		margin-top: 10px;
 	}
+	&__none {
+		width: fill-parent-flow(1);
+		height: 100%;
+		background-color: rgba(0,0,0,0.8);
+		& > Panel {
+			horizontal-align: center;
+			vertical-align: center;
+			flow-children: down;
+
+			& > Label {
+				horizontal-align: center;
+			}
+			& > Button {
+				horizontal-align: center;
+			}
+		}
+	}
 	&__entry {
 		margin: 10px;
 		width: 384px;
