@@ -17,14 +17,18 @@
 						class="workshop__entry__cover"
 						scaling="stretch-to-cover-preserve-aspect"
 					/>
-					<Panel id="Indicator" class="workshop__entry__indicator fancy-red hide">
+					<TooltipPanel
+						id="Indicator"
+						class="workshop__entry__indicator fancy-red hide"
+						tooltip="#DependencyWarning_Generic"
+					>
 						<Image
 							scaling="stretch-to-fit-preserve-aspect"
 							src="file://{images}/alert-octagon.svg"
 							texturewidth="64"
 							textureheight="64"
 						/>
-					</Panel>
+					</TooltipPanel>
 				</Panel>
 				<Panel class="workshop__entry__details">
 					<Label class="workshop__entry__details__desc" text="{s:name}" />
