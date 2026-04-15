@@ -744,6 +744,8 @@
 		"Settings_Keybinds_Utility"						"Utility"
 		"Keybind_Use_Items"								"Use object (buttons, machines, etc.)"
 		"Keybind_Flashlight"							"Flashlight"
+		"Keybind_Quicksave"								"Quicksave"
+		"Keybind_Quickload"								"Quickload"
 		
 		"Settings_Keybinds_MP_COOP"						"Multiplayer / Cooperative"
 		"Keybind_Chat_Message"							"Text chat"
