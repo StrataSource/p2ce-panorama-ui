@@ -210,14 +210,14 @@
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
 
-				<Panel class="full-width flow-right">
-					<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />
-					<Panel class="fill-width" />
-				</Panel>
-
 				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Quicksave" bind="save quick" tags="quick,save,quicksave" />
 					<SettingsKeyBinder text="#Keybind_Quickload" bind="load quick" tags="quick,load,quickload" />
+				</Panel>
+
+				<Panel class="full-width flow-right">
+					<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />
+					<Panel class="fill-width" />
 				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Input_Keybinds_Misc" />

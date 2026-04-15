@@ -467,8 +467,10 @@
 		"Settings_General_ResetSomething"				"Reset"
 		"Settings_General_Enabled"						"Enabled"
 		"Settings_General_Disabled"						"Disabled"
+		"Settings_General_Auto"							"Auto"
 		"Settings_General_Autodetect"					"Auto-Detect"
 		"Settings_General_EngineersToast"				"The Engineer's Toaster"	// YEAH, TOAST!!!!!!
+		"Settings_General_Potato"						"Potato"
 		"Settings_General_VeryLow"						"Very Low"
 		"Settings_General_Low"							"Low"
 		"Settings_General_Medium"						"Medium"

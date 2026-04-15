@@ -50,7 +50,7 @@
 	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled) {
 		background-color: $dropdown-button-background-hover;
 		border: $dropdown-button-border-hover;
-		sound: 'UIPanorama.P2CE.MenuFocus';
+		sound: 'UIPanorama.P2CE.MenuSelect';
 
 		& Label {
 			color: $dropdown-button-text-hover-color;
@@ -138,7 +138,6 @@
 		&:focus {
 			background-color: $dropdown-item-background-hover;
 			color: $dropdown-item-color;
-			sound: 'UIPanorama.P2CE.MenuFocus';
 
 			& > Image {
 				wash-color: $dropdown-item-color;
@@ -164,8 +163,6 @@
 		border-radius: $button-radius;
 
 		max-height: 444px;
-		sound: 'UIPanorama.P2CE.MenuSelect';
-		sound-out: 'UIPanorama.P2CE.MenuAccept';
 	}
 }
 

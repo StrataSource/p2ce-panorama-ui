@@ -49,6 +49,8 @@
 					min="50"
 					max="130"
 					convar="cl_fov"
+					snaptoincrement="true"
+					increment="0.0125"
 					hasdocspage="false"
 					viewgameduringedit="true"
 				/>
@@ -140,8 +142,10 @@
 					convar="r_portal_stencil_depth"
 					id="PStencilDepth"
 					infomessage="#Settings_Video_PStencilDepth_Info"
+					snaptoincrement="true"
+					increment="0.1"
 					min="0"
-					max="8"
+					max="10"
 				>
 				</SettingsSlider>
 
@@ -209,10 +213,11 @@
 					id="TextureQuality"
 					convar="mat_picmip"
 				>
-					<Label text="#Settings_General_Low" value="1" id="TextureQuality1" />
-					<Label text="#Settings_General_Medium" value="0" id="TextureQuality2" />
-					<Label text="#Settings_General_High" value="-1" id="TextureQuality3" />
-					<Label text="#Settings_General_VeryHigh" value="-10" id="TextureQuality4" />
+					<Label text="#Settings_General_Potato" value="4" id="TextureQuality1" />
+					<Label text="#Settings_General_Low" value="1" id="TextureQuality2" />
+					<Label text="#Settings_General_Medium" value="0" id="TextureQuality3" />
+					<Label text="#Settings_General_High" value="-1" id="TextureQuality4" />
+					<Label text="#Settings_General_VeryHigh" value="-10" id="TextureQuality5" />
 				</SettingsEnumDropDown>
 
 				<SettingsEnumDropDown
@@ -222,11 +227,9 @@
 					id="ModelDetail"
 					convar="r_lod"
 				>
-					<Label text="#Settings_General_Low" value="-3" id="gpumemlevel0" />
-					<Label text="#Settings_General_Medium" value="-2" id="gpumemlevel1" />
-					<Label text="#Settings_General_High" value="-1" id="gpumemlevel2" />
-					<Label text="#Settings_General_VeryHigh" value="0" id="gpumemlevel3" />
-					<Label text="#Settings_General_Autodetect" value="9999999" id="gpumemlevel3" />
+					<Label text="#Settings_General_Potato" value="2" id="gpumemlevel0" />
+					<Label text="#Settings_General_High" value="0" id="gpumemlevel2" />
+					<Label text="#Settings_General_Auto" value="-1" id="gpumemlevel3" />
 				</SettingsEnumDropDown>
 
 				<SettingsEnumDropDown
