@@ -40,7 +40,7 @@
 				<Image
 					id="Cover"
 					class="workshop-campaign__cover__image"
-					src="file://{images}/menu/featured/p2ce_background_gentle_hum.png"
+					src="file://{images}/menu/missing-cover.png"
 					scaling="stretch-to-cover-preserve-aspect"
 				/>
 				<AvatarImage />
@@ -57,7 +57,7 @@
 						<RadioButton id="Downvote" class="button mr-2" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(2)">
 							<Label class="button__text" text="#UI_Downvote" />
 						</RadioButton>
-						<RadioButton id="Nonevote" class="button" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(0)">
+						<RadioButton id="Nonevote" class="button hide" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(0)">
 							<Label class="button__text" text="#UI_Novote" />
 						</RadioButton>
 					</Panel>
@@ -79,6 +79,10 @@
 			</Panel>
 		</Panel>
 		<Panel class="flow-right mt-2">
+			<Button class="button fill-width mr-2" onactivate="WorkshopCampaignFlyout.close()">
+				<Image class="button__icon button__icon--left" texturewidth="32" textureheight="32" src="file://{images}/close.svg" />
+				<Label class="button__text button__text--right" text="#Common_Close" />
+			</Button>
 			<Button class="button fill-width" onactivate="WorkshopCampaignFlyout.play()">
 				<Image class="button__icon button__icon--left" texturewidth="32" textureheight="32" src="file://{images}/play.svg" />
 				<Label class="button__text button__text--right" text="#MainMenu_Navigation_Play" />

@@ -157,4 +157,8 @@ class WorkshopCampaignFlyout {
 	static changeVote(vote: AddonRating) {
 		WorkshopAPI.SetAddonUserRating(this.addonId, vote);
 	}
+
+	static close() {
+		$.DispatchEvent('Cancelled', $.GetContextPanel(), PanelEventSource.PROGRAM);
+	}
 }
