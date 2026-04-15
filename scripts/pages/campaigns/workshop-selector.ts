@@ -10,7 +10,7 @@ class WorkshopEntry {
 	startId: string;
 	indicatorOverlay: Panel;
 
-	constructor(pair: CampaignPair) {
+	constructor(pair: CampaignPair, isNew: boolean) {
 		this.button = $.CreatePanel(
 			'Button',
 			WorkshopSelector.insert,
@@ -37,20 +37,15 @@ class WorkshopEntry {
 		this.startId = pair.campaign.chapters[0].id;
 
 		this.button.SetPanelEvent('onactivate', () => {
-			if (this.hasMissing) {
-				UiToolkitAPI.ShowCustomLayoutPopupParameters(
-					'dependencies',
-					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-					`addon=${this.addonId}&action=0&campaignId=${this.campaignId}&chapterId=${this.startId}&map=0`
-				);
-			} else {
-				CampaignAPI.StartCampaign(
-					this.campaignId,
-					this.startId,
-					0
-				);
-			}
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'flyout',
+				'file://{resources}/layout/modals/flyouts/workshop-campaign.xml',
+				`addon=${this.addonId}&campaign=${pair.bucket.id}/${pair.campaign.id}&chapter=${pair.campaign.chapters[0].id}`
+			);
 		});
+
+		const indicator = this.button.FindChildTraverse<Panel>('NewIndicator')!;
+		indicator.SetHasClass('hide', !isNew);
 	}
 
 	updateDependencies() {
@@ -106,10 +101,11 @@ class WorkshopSelector {
 		);
 	}
 
-	static createBtn(pair: CampaignPair) {
+	static createBtn(pair: CampaignPair, isNew: boolean) {
 		this.entries.push(
 			new WorkshopEntry(
-				pair
+				pair,
+				isNew
 			)
 		);
 	}
@@ -117,7 +113,7 @@ class WorkshopSelector {
 	static createBtnFromString(campaign: string) {
 		const c = CampaignAPI.FindCampaign(campaign);
 		if (c) {
-			this.createBtn(c);
+			this.createBtn(c, false);
 		} else {
 			$.Warning(`Can't find '${campaign}'`);
 		}
@@ -142,11 +138,24 @@ class WorkshopSelector {
 
 	static populate() {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
+		const newItems: Array<CampaignPair> = [];
+		const otherItems: Array<CampaignPair> = [];
+
 		for (const bucket of buckets) {
 			if (bucket.id.startsWith('auto_')) {
-				this.createBtn({ bucket: bucket, campaign: bucket.campaigns[0] });
+				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${bucket.campaigns[0].id}`) ? otherItems : newItems;
+				array.push({ bucket: bucket, campaign: bucket.campaigns[0] });
 			}
 		}
+
+		const makeBtns = (array: Array<CampaignPair>, isNew: boolean) => {
+			for (const item of array) {
+				this.createBtn(item, isNew);
+			}
+		};
+
+		makeBtns(newItems, true);
+		makeBtns(otherItems, false);
 	}
 
 	static clearCache() {

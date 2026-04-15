@@ -1,0 +1,30 @@
+@use '../../config' as *;
+@use '../../abstract/mixin';
+@use '../../controls/button';
+
+.FlyoutPanel {
+	flow-children: down;
+	vertical-align: middle;
+	horizontal-align: right;
+	height: 100%;
+	min-width: 50%;
+	max-width: 960px;
+	padding: $popup-padding;
+	border-left: $popup-border;
+	border-radius: $popup-radius;
+	background-color: $popup-background;
+	background-image: url('file://{images}/menu/menu_grid4.png');
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	background-img-opacity: 0.1;
+	opacity: 1;
+	transition-property: opacity, transform;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-out;
+	transform: translateX(0px);
+
+	&.Hidden {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+}

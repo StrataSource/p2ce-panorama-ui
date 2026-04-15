@@ -997,6 +997,10 @@
 		"MainMenu_Campaigns_Search_SortBy_Last"						"Last played time"
 		"MainMenu_Campaigns_Search_SortBy_Completion"				"Overall completion"
 		"MainMenu_Campaigns_Search_SortBy_CampaignSrc"				"Campaign source"
+
+		"MainMenu_Content_Unplayed"									"Unplayed"
+		"MainMenu_Content_InProgress"								"In Progress"
+		"MainMenu_Content_Completed"								"Completed"
 		
 		// this is used if a campaign requires an appid they don't have mounted
 		"MainMenu_Campaigns_MissingMount_Title"						"Unable to Load Campaign"
@@ -1342,6 +1346,12 @@ This message will only be displayed once, and will not be shown again upon accep
 		"DependencyWarning_Action_Cancel"			"Cancel"
 		"DependencyWarning_Resolved_Header"			"Dependencies Resolved"
 		"DependencyWarning_Resolved_Desc"			"All addon dependencies have been resolved!"
+
+		"UI_Upvote"									"Upvote"
+		"UI_Downvote"								"Downvote"
+		"UI_Novote"									"None"
+		"UI_Dependencies"							"Dependencies"
+		"UI_Description"							"Description"
 		
 		// Networking Stuff!!!!!
 		// Disconnect Dialog Main

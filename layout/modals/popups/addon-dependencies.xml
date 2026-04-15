@@ -66,7 +66,6 @@
 				class="button button--red mr-2"
 				tabindex="auto"
 				selectionpos="auto"
-				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
 			>
 				<Label id="ContinueText" class="button__text" text="#DependencyWarning_Action_Ignore" />
 			</Button>
@@ -74,7 +73,7 @@
 				class="button"
 				tabindex="auto"
 				selectionpos="auto"
-				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
+				onactivate="AddonDependencies.close()"
 			>
 				<Label class="button__text" text="#DependencyWarning_Action_Cancel" />
 			</Button>
