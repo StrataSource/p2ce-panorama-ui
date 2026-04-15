@@ -38,6 +38,28 @@
 				</Panel>
 			</Button>
 		</snippet>
+		<snippet name="WorkshopNoneSnippet">
+			<Panel class="workshop__none">
+				<Panel class="horizontal-align-center vertical-align-center">
+					<Label
+						class="text-h5 mb-2"
+						text="#MainMenu_Maps_None"
+					/>
+					<Button
+						onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/workshop/browse/?appid=440000&amp;browsesort=trend&amp;section=readytouseitems&amp;p=1&amp;num_per_page=30&amp;days=7&amp;requiredtags%5B%5D=Map')"
+						class="button button-2x"
+					>
+						<Image
+							class="button__icon button__icon--left my-1"
+							texturewidth="64"
+							textureheight="64"
+							src="file://{images}/icons/steam.svg"
+						/>
+						<Label class="button__text button__text--right ml-1" text="#MainMenu_Campaigns_OpenWS" />
+					</Button>
+				</Panel>
+			</Panel>
+		</snippet>
 	</snippets>
 
 	<Panel class="mainmenu__page" onload="WorkshopSelector.init()">
@@ -59,10 +81,5 @@
 			</Button>
 		</Panel>
 		<Panel id="EntryInsert" class="workshop__entries" />
-		<Panel class="workshop__action-bar">
-			<Button class="button">
-				<Label class="button__text" text="[HC] Play" />
-			</Button>
-		</Panel>
 	</Panel>
 </root>

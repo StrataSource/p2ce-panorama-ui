@@ -158,24 +158,8 @@ class AddonDependencies {
 
 			loader.visible = false;
 			cover.SetImage('file://{images}/menu/fallback/dead_atlas.png');
-			title.text = '[HC] Failed to retrieve details.';
+			title.text = $.Localize('#DependencyWarning_Failed');
 		}
-	}
-
-	static subscribeSelected() {
-		UiToolkitAPI.ShowGenericPopupYesNo(
-			'[HC] Confirmation',
-			'[HC] Please confirm this list for accuracy. You are about to subscribe to the following addons on the Steam Workshop:\n\n[LIST GOES HERE]',
-			'blur',
-			() => {
-			},
-			() => {
-			}
-		)
-	}
-
-	static subscribeAll() {
-		this.subscribeSelected();
 	}
 	
 	static close() {
