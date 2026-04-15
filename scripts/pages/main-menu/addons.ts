@@ -35,10 +35,13 @@ class AddonEntry {
 			.replace(/\[\/?\w+.*?\]/g, '')
 			.replace(/r\s*$/, '');
 
+		const buckets = CampaignAPI.GetAllCampaignBuckets();
+		const forceShow = WorkshopAPI.IsWorkshopToolsMode() || AddonManager.advancedMode;
+		if (!forceShow && !WorkshopAPI.GetAddonEnabled(this.index) && (buckets.some((v: CampaignBucket) => v.addon_id === this.index))) {
+			this.panel.visible = false;
+		}
+
 		if (this.addonEnableCheck) {
-			if (info.type.includes('Campaign') || info.type.includes('Map')) {
-				this.addonEnableCheck.visible = false;
-			}
 			this.addonEnableCheck.SetSelected(WorkshopAPI.GetAddonEnabled(this.index));
 			this.addonEnableCheck.SetPanelEvent('onactivate', () => AddonManager.markDirty());
 		}
@@ -121,6 +124,8 @@ class AddonManager {
 	static searchableAddons: Array<AbstractSearchData> = [];
 	static searchDataDirty: boolean = true;
 
+	static advancedMode = false;
+
 	static init() {
 		this.addonsPage.visible = false;
 
@@ -148,6 +153,12 @@ class AddonManager {
 				AddonManager.createPredefinedAddonEntries(matches);
 			}
 		);
+
+		$.RegisterForUnhandledEvent('PanoramaComponent_Campaign_OnRefreshList', () => {
+			$.Msg('ADDON MENU: Refreshing list');
+			this.searchBar.text = '';
+			this.createAddonEntries();
+		});
 	}
 
 	/**
@@ -287,6 +298,12 @@ class AddonManager {
 		SteamOverlayAPI.OpenURL(`https://steamcommunity.com/sharedfiles/filedetails/?id=${info.workshopid}`);
 	}
 
+	static toggleAdvanced() {
+		this.advancedMode = !this.advancedMode;
+		this.searchBar.text = '';
+		this.createAddonEntries();
+	}
+
 	/**
 	 * Signal that a change to the addon list has been made
 	 */
@@ -351,7 +368,9 @@ class AddonManager {
 
 		const enable = this.toggleAllButton.IsSelected();
 		for (const addon of this.addons) {
-			addon.setAddonEnabled(enable);
+			if (addon.panel.visible) {
+				addon.setAddonEnabled(enable);
+			}
 		}
 	}
 

@@ -96,6 +96,16 @@
 							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/icons/steam.svg" />
 						</Button>
 					</TooltipPanel>
+					<TooltipPanel tooltip="#MainMenu_Addons_Advanced_Tooltip">
+						<ToggleButton
+							class="button togglebutton mr-2"
+							onactivate="AddonManager.toggleAdvanced()"
+							tabindex="auto"
+							selectionpos="auto"
+						>
+							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/spectatingIcon.svg" />
+						</ToggleButton>
+					</TooltipPanel>
 					<TooltipPanel class="hide" tooltip="#MainMenu_Addons_Filtering_Edit_Tooltip">
 						<Button
 							id="ViewFilters"

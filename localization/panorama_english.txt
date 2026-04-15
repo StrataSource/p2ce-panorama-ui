@@ -1176,7 +1176,7 @@ Please install and mount the above games first to access this campaign."
 		
 		// Main Menu - Addons
 		"MainMenu_Addons_Refresh"					"Refresh Addon List"
-		"MainMenu_Addons_Apply"						"Apply Changes"
+		"MainMenu_Addons_Apply"						"Apply"
 		"MainMenu_Addons_Discard"					"Discard"
 		"MainMenu_Addons_ToggleAll"					"Enable/Disable All Addons"
 		"MainMenu_Addons_ViewOnWS"					"View Workshop Page"			// DO NOT DISPLAY THIS IF IT IS A LOCAL ADDON
@@ -1185,6 +1185,7 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_Category_Mounts"			"Mounted Games"
 		"MainMenu_Addons_Category_Mounts_Tagline"	"Content from other installed Source engine games"
 		"MainMenu_Addons_SteamWorkshop_Tooltip"		"Open the Steam Workshop in the overlay"
+		"MainMenu_Addons_Advanced_Tooltip"			"Toggle visibility of all addon types for advanced users"
 		
 		"MainMenu_Addons_ToggleAddon"				"Toggle addon's enablement state"
 		
