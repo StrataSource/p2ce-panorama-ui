@@ -149,7 +149,7 @@ class BaseMenu {
 			this.showPrereleaseWarning();
 			if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
-			const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 7) + 1}`;
+			const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 9) + 1}`;
 			this.music = $.PlaySoundEvent(music);
 		});
 
