@@ -25,5 +25,8 @@
 				</Panel>
 			</Panel>
 		</Panel>
+		<Panel id="LegacyWarning" class="fancy-red p-3 flow-down horizontal-align-right m-3 hide" style="max-width: 768px;">
+			<Label class="horizontal-align-center text-align-center" html="true" text="#MainMenu_Compat_Warning" />
+		</Panel>
 	</Panel>
 </root>
