@@ -165,12 +165,9 @@ class MenuManager {
 			$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
 				if (logo && logo.length > 0) {
 					if (logo === 'file://{images}/logo.svg') {
-						const date = new Date();
-						const rightDate = new Date('April 1');
-						rightDate.setFullYear(date.getFullYear());
 						if (WorkshopAPI.IsWorkshopToolsMode()) {
 							logo = 'file://{images}/logo_sdk.svg';
-						} else if (date.getMonth() === rightDate.getMonth() && date.getDay() === rightDate.getDay()) {
+						} else if (Math.random() < 0.001) {
 							logo = 'file://{images}/the_objectively_better_logo.png';
 						}
 					}
