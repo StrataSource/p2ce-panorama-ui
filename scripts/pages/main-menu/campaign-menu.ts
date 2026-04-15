@@ -128,11 +128,53 @@ class CampaignMenu {
 			UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = true;
 		}
 
-		if (isSingleWsCampaign(CampaignAPI.GetActiveCampaign()!)) {
+		const c = CampaignAPI.GetActiveCampaign()!;
+
+		if (isSingleWsCampaign(c)) {
 			$.Schedule(0.01, () => {
 				CampaignAPI.SetActiveCampaign(null);
 			});
 			return;
+		}
+
+		let showWarning = false;
+
+		if (c.campaign.id === 'portal1_sp') {
+			showWarning = true;
+			if (!GameInterfaceAPI.GetMountedSteamApps().includes(400)) {
+				UiToolkitAPI.ShowGenericPopupTwoOptions(
+					$.Localize('#MainMenu_Campaigns_MountRequired_Header'),
+					$.Localize('#MainMenu_Campaigns_MountRequired_400'),
+					'blur',
+					$.Localize('#Common_Wiki'),
+					() => {
+						SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts');
+					},
+					$.Localize('#Common_OK'),
+					() => {}
+				)
+			}
+		}
+
+		if (c.campaign.id === 'hl2' || c.campaign.id === 'episodic' || c.campaign.id === 'ep2') {
+			showWarning = true;
+			if (!GameInterfaceAPI.GetMountedSteamApps().includes(220)) {
+				UiToolkitAPI.ShowGenericPopupTwoOptions(
+					$.Localize('#MainMenu_Campaigns_MountRequired_Header'),
+					$.Localize('#MainMenu_Campaigns_MountRequired_220'),
+					'blur',
+					$.Localize('#Common_Wiki'),
+					() => {
+						SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts');
+					},
+					$.Localize('#Common_OK'),
+					() => {}
+				)
+			}
+		}
+
+		if (showWarning) {
+			$<Panel>('#LegacyWarning')!.RemoveClass('hide');
 		}
 
 		const defCampaign = GameInterfaceAPI.GetSettingString('campaign_default');
