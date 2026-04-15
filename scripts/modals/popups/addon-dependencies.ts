@@ -53,7 +53,33 @@ class AddonDependencies {
 		this.continueBtn.SetPanelEvent(
 			'onactivate',
 			() => {
-				const addon: AddonIndex_t = $.GetContextPanel().GetAttributeInt('addon', 0);
+				const ctx = $.GetContextPanel();
+				const action = ctx.GetAttributeInt('action', 0);
+				switch (action) {
+					case 0:
+						{
+							const cid = ctx.GetAttributeString('campaignId', '');
+							const chid = ctx.GetAttributeString('chapterId', '');
+							const map = ctx.GetAttributeInt('map', 0);
+
+							if (cid.length === 0 || chid.length === 0) {
+								$.Warning('Action is invalid.');
+								return;
+							}
+
+							CampaignAPI.StartCampaign(
+								cid,
+								chid,
+								map
+							);
+						}
+						break;
+				
+					default:
+						break;
+				}
+
+				UiToolkitAPI.CloseAllVisiblePopups();
 			}
 		);
 	}
@@ -108,7 +134,8 @@ class AddonDependencies {
 		const loader = entry.FindChildTraverse<Panel>('Loader')!;
 
 		loader.visible = false;
-		cover.SetImage('file://{images}/menu/fallback/dead_atlas.png');
+		// FIXME: get url!
+		// cover.SetImage('file://{images}/menu/fallback/dead_atlas.png');
 		title.text = name;
 
 		if (desc.length > 0) {
