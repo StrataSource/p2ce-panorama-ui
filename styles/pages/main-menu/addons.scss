@@ -52,12 +52,12 @@
 		&:hover,
 		&:focus {
 			background-color: $primary-950;
-			sound: 'UIPanorama.P2CE.MenuFocus';
+			sound: 'UIPanorama.P2CE.MenuSelect';
 		}
 
 		&:selected {
 			background-color: $primary-800;
-			sound: 'UIPanorama.P2CE.MenuSelect';
+			sound: 'UIPanorama.P2CE.MenuFocus';
 		}
 
 		&__left {
@@ -105,7 +105,7 @@
 		}
 
 		&__checkbox {
-			height: 32px;
+			height: 48px;
 
 			margin-left: 10px;
 			& > .TickBox {
