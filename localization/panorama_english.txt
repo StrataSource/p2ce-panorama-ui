@@ -1046,6 +1046,11 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Mounts_AppId_550"						"Left 4 Dead 2 (550)"
 		"MainMenu_Campaigns_Mounts_AppId_240"						"Counter-Strike: Source (240)"
 		"MainMenu_Campaigns_Mounts_AppId_730"						"Counter-Strike: Global Offensive - Legacy Source 1 Build (730)"
+
+		// temp for better solution
+		"MainMenu_Campaigns_MountRequired_Header"					"Game Mount Missing"
+		"MainMenu_Campaigns_MountRequired_220"						"This campaign requires Half-Life 2 (20th Anniversary Edition) to be owned and mounted. Consult the wiki for instructions on changing game mounts."
+		"MainMenu_Campaigns_MountRequired_400"						"This campaign requires Portal to be owned and mounted. Consult the wiki for instructions on changing game mounts."
 		
 		// campaign details card
 		"MainMenu_Campaigns_DetailCard_CompletionPercentage"		"{i:campaign_completion}% completed"
@@ -1273,6 +1278,7 @@ Please install and mount the above games first to access this campaign."
 		"Common_By"									"By"
 		"Common_SearchEllipsis"						"Search..."
 		"Common_Multiplayer"						"Multiplayer"
+		"Common_Wiki"								"Open Wiki in Overlay"
 		
 		"Action_Yes"								"Yes"
 		"Action_No"									"No"
@@ -1326,7 +1332,10 @@ We encourage you to file bug reports and feature requests on P2:CE's issue track
 By clicking on \"I Understand\", you acknowledge the risks involved in using this preview release. If you choose to decline these terms, P2:CE will exit.
 
 This message will only be displayed once, and will not be shown again upon acceptance."
-		
+
+		"MainMenu_Compat_Warning_Header"			"Compatibility Warning"
+		"MainMenu_Compat_Warning"					"<b>Portal 1 and Half-Life 2 currently do not have full functionality on P2:CE.</b> You may experience issues like missing or replaced textures, broken animations, crashing, missing gameplay elements crucial for progression, and more. While we plan to fix some of these issues in the future, it is not a high priority. <b>Please do not report bugs related to Portal 1/Half-Life 2.</b>"
+
 		"MainMenu_PrereleaseNotice_Acknowledge"		"I Understand"
 		"MainMenu_PrereleaseNotice_Decline"			"Decline"
 		
