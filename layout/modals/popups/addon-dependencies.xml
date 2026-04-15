@@ -1,0 +1,83 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/common/dev.ts" />
+		<include src="file://{resources}/scripts/modals/popups/addon-dependencies.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="DependencyEntry">
+			<Button class="addon-deps__entry">
+				<Panel class="addon-deps__entry__left">
+					<Image
+						id="DependencyAddonImage"
+						class="addon-deps__entry__image"
+						scaling="stretch-to-cover-preserve-aspect"
+					/>
+					<Panel id="Loader" class="addon-deps__entry__loader">
+						<AnimatedImageStrip
+							animating="true"
+							defaultframe="0"
+							frametime="125ms"
+							src="file://{images}/menu/p2ce/spinner_strip.tga"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<Image
+							class="addon-deps__entry__loader__logo"
+							src="file://{images}/icons/steam.svg"
+							textureheight="128"
+							texturewidth="128"
+							scaling="stretch-to-fit-preserve-aspect"
+							hittest="false"
+						/>
+					</Panel>
+				</Panel>
+				<Panel class="addon-deps__entry__right">
+					<Panel class="vertical-align-center flow-down">
+						<Label id="DependencyAddonTitle" class="addon-deps__entry__text__dependency" text="#DependencyWarning_Loading" />
+						<Label id="DependencyAddonDesc" class="addon-deps__entry__text__desc hide" text="#DependencyWarning_Loading" />
+					</Panel>
+				</Panel>
+			</Button>
+		</snippet>
+	</snippets>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup generic-popup--large full-width"
+		popupbackground="blur"
+		onload="AddonDependencies.onLoad()"
+	>
+		<Panel class="flow-down mb-3 full-width">
+			<Label id="Header" class="text-h2 mb-1 full-width text-align-center" text="#DependencyWarning_Header" />
+			<Label id="Desc" class="text-align-center" text="#DependencyWarning_Desc" />
+		</Panel>
+
+		<Panel class="addon-deps">
+			<Panel id="DependenciesPanel" class="addon-deps__inner">
+			</Panel>
+		</Panel>
+		
+		<Panel class="flow-right horizontal-align-right" tabindex="auto" selectionpos="auto">
+			<Button
+				id="ContinueButton"
+				class="button button--red mr-2"
+				tabindex="auto"
+				selectionpos="auto"
+				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
+			>
+				<Label id="ContinueText" class="button__text" text="#DependencyWarning_Action_Ignore" />
+			</Button>
+			<Button
+				class="button"
+				tabindex="auto"
+				selectionpos="auto"
+				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
+			>
+				<Label class="button__text" text="#DependencyWarning_Action_Cancel" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>

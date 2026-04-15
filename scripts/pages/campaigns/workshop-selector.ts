@@ -38,26 +38,10 @@ class WorkshopEntry {
 
 		this.button.SetPanelEvent('onactivate', () => {
 			if (this.hasMissing) {
-				UiToolkitAPI.ShowGenericPopupThreeOptions(
-					'[HC] Missing dependencies',
-					'[HC] The map you are trying to launch depends on addons you do not have installed. You can continue without downloading, but expect issues with this map.',
-					'warning',
-					'[HC] View in Workshop',
-					() => {
-						SteamOverlayAPI.OpenURLModal(
-							`https://steamcommunity.com/sharedfiles/filedetails/?id=${meta.workshopid}`
-						);
-					},
-					'[HC] Continue Anyway',
-					() => {
-						CampaignAPI.StartCampaign(
-							this.campaignId,
-							this.startId,
-							0
-						);
-					},
-					'[HC] Cancel',
-					() => {}
+				UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					'dependencies',
+					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+					`addon=${this.addonId}&action='CampaignAPI.StartCampaign(${this.campaignId}, ${this.startId}, 0)'`
 				);
 			} else {
 				CampaignAPI.StartCampaign(
@@ -72,14 +56,6 @@ class WorkshopEntry {
 	updateDependencies() {
 		const deps = WorkshopAPI.GetAddonDependenciesMissing(this.addonId);
 		this.hasMissing = deps !== null && deps.length > 0;
-		if (this.hasMissing) {
-			$.Msg(`${this.campaignId} MISSING DEPENDENCIES (${deps!.length})`);
-			for (const dep of deps!) {
-				$.Msg(`     ${dep}`);
-			}
-		} else {
-			$.Msg(`${this.campaignId} OK`);
-		}
 		this.indicatorOverlay.SetHasClass('hide', !this.hasMissing);
 	}
 }
@@ -121,10 +97,8 @@ class WorkshopSelector {
 		$.RegisterForUnhandledEvent(
 			'PanoramaComponent_Workshop_OnAddonInstalled',
 			() => {
-				$.Msg('Addon installation detected!');
 				for (const entry of this.entries) {
 					if (entry.hasMissing) {
-						$.Msg(`Checking dependencies of ${entry.campaignId} again...`);
 						entry.updateDependencies();
 					}
 				}
