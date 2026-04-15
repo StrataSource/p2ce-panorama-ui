@@ -51,7 +51,7 @@
 						texturewidth="1080"
 					/>
 					<Panel class="card__details card__details__no-bg">
-						<Label class="card__details__header" text="[HC] Campaigns" />
+						<Label class="card__details__header" text="#MainMenu_Navigation_Campaign" />
 					</Panel>
 				</Button>
 			</Panel>

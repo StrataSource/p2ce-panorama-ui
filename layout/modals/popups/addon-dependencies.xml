@@ -52,7 +52,7 @@
 	>
 		<Panel class="flow-down mb-3 full-width">
 			<Label id="Header" class="text-h2 mb-1 full-width text-align-center" text="#DependencyWarning_Header" />
-			<Label id="Desc" class="text-align-center" text="#DependencyWarning_Desc" />
+			<Label id="Desc" class="horizontal-align-center text-align-center" text="#DependencyWarning_Desc" />
 		</Panel>
 
 		<Panel class="addon-deps">
