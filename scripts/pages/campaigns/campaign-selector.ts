@@ -188,7 +188,7 @@ class CampaignSelector {
 
 	static populateCampaigns() {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
-		
+		/*
 		const baseCampaigns: Array<CampaignPair> = [];
 		const localCampaigns: Array<CampaignPair> = [];
 		const workshopCampaigns: Array<CampaignPair> = [];
@@ -236,10 +236,24 @@ class CampaignSelector {
 
 		const allNewCampaigns: Array<CampaignPair> = newBaseCampaigns.concat(newLocalCampaigns, newWorkshopCampaigns);
 		const allOtherCampaigns: Array<CampaignPair> = oldBaseCampaigns.concat(oldLocalCampaigns, oldWorkshopCampaigns);
+		*/
 
 		const doAddButtons = (array: Array<CampaignPair>, hasSaveData: boolean) => {
 			for (const pair of array) {
 				this.createCampaignBtn(pair.bucket, pair.campaign, hasSaveData);
+			}
+		}
+
+		const allNewCampaigns: Array<CampaignPair> = [];
+		const allOtherCampaigns: Array<CampaignPair> = [];
+
+		for (const bucket of buckets) {
+			if (bucket.id.startsWith('auto_')) {
+				continue;
+			}
+			for (const campaign of bucket.campaigns) {
+				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${campaign.id}`) ? allOtherCampaigns : allNewCampaigns;
+				array.push({ bucket: bucket, campaign: campaign });
 			}
 		}
 

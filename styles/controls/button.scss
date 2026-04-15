@@ -162,6 +162,11 @@
 	}
 }
 
+// this is misleading :)
+.button-2x {
+	height: calc($button-height * 1.35);
+}
+
 RadioButton.button-mono {
 	& .RadioBox {
 		visibility: collapse;
