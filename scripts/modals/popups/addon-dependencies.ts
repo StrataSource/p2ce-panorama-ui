@@ -75,6 +75,11 @@ class AddonDependencies {
 							);
 						}
 						break;
+
+					case 1:
+						$.DispatchEvent('MainMenuCloseAllPages');
+						$.DispatchEvent('MainMenuAnimatedSwitch', ctx.GetAttributeString('campaign', ''));
+						break;
 				
 					default:
 						break;

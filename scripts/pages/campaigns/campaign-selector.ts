@@ -67,8 +67,11 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			$.DispatchEvent('MainMenuAnimatedSwitch', `${this.info.bucket.id}/${this.info.campaign.id}`);
-			$.DispatchEvent('MainMenuCloseAllPages');
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'dependencies',
+				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+				`addon=${this.info.bucket.addon_id}&action=1&campaign=${this.info.bucket.id}/${this.info.campaign.id}`
+			);
 		});
 		this.panel.SetPanelEvent('onmouseover', () => {
 			CampaignSelector.onCampaignHovered(this);
