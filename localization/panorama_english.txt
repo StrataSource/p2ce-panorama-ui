@@ -1333,6 +1333,15 @@ This message will only be displayed once, and will not be shown again upon accep
 		"ColorPicker_Green"							"G"
 		"ColorPicker_Blue"							"B"
 		"ColorPicker_Alpha"							"A"
+
+		// Dependency Warning
+		"DependencyWarning_Header"					"Missing Dependencies"
+		"DependencyWarning_Desc"					"The content you are trying to launch depends on addons that could not be found. The addons you are missing can be found below. Click on an addon to open its Steam Workshop page in the Steam Overlay. You can ignore this warning and continue anyway, but expect issues such as missing textures or models."
+		"DependencyWarning_Loading"					"Retrieving Details..."
+		"DependencyWarning_Action_Ignore"			"Continue Anyway"
+		"DependencyWarning_Action_Cancel"			"Cancel"
+		"DependencyWarning_Resolved_Header"			"Dependencies Resolved"
+		"DependencyWarning_Resolved_Desc"			"All addon dependencies have been resolved!"
 		
 		// Networking Stuff!!!!!
 		// Disconnect Dialog Main
