@@ -21,7 +21,7 @@
 	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		background-color: $button-background-hover;
 		border: $button-border-hover;
-		sound: 'UIPanorama.P2CE.MenuFocus';
+		sound: 'UIPanorama.P2CE.MenuSelect';
 
 		#{$this}__text {
 			color: $button-text-hover;
@@ -226,7 +226,7 @@ RadioButton.button-mono {
 	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		border-color: $primary-color;
 		background-color: $button-background-hover;
-		sound: 'UIPanorama.P2CE.MenuFocus';
+		sound: 'UIPanorama.P2CE.MenuSelect';
 		#{$this}__icon,
 		#{$this}__icon-right {
 			wash-color: $bright-color;
