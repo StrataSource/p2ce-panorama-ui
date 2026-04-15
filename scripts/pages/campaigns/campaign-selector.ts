@@ -67,11 +67,18 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			UiToolkitAPI.ShowCustomLayoutPopupParameters(
-				'dependencies',
-				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-				`addon=${this.info.bucket.addon_id}&action=1&campaign=${this.info.bucket.id}/${this.info.campaign.id}`
-			);
+			const deps = WorkshopAPI.GetAddonDependenciesMissing(this.info.bucket.addon_id);
+			const campaign = `${this.info.bucket.id}/${this.info.campaign.id}`;
+			if (deps && deps.length > 0) {
+				UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					'dependencies',
+					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+					`addon=${this.info.bucket.addon_id}&action=1&campaign=${campaign}`
+				);
+			} else {
+				$.DispatchEvent('MainMenuAnimatedSwitch', campaign);
+				$.DispatchEvent('MainMenuCloseAllPages');
+			}
 		});
 		this.panel.SetPanelEvent('onmouseover', () => {
 			CampaignSelector.onCampaignHovered(this);
