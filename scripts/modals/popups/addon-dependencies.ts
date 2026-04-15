@@ -113,14 +113,14 @@ class AddonDependencies {
 				}
 
 				for (const item of data) {
-					this.setEntry(item.m_nPublishedFileId, item.m_rgchTitle, item.m_rgchDescription);
+					this.setEntry(item.m_nPublishedFileId, item.m_rgchTitle, item.m_rgchDescription, item.m_rgchPreviewUrl);
 				}
 			},
 			deps
 		);
 	}
 
-	static setEntry(addon: PublishedFileId_t, name: string, desc: string) {
+	static setEntry(addon: PublishedFileId_t, name: string, desc: string, coverURL: string) {
 		const entry = this.entries.get(addon);
 
 		if (!entry) {
@@ -134,8 +134,7 @@ class AddonDependencies {
 		const loader = entry.FindChildTraverse<Panel>('Loader')!;
 
 		loader.visible = false;
-		// FIXME: get url!
-		// cover.SetImage('file://{images}/menu/fallback/dead_atlas.png');
+		cover.SetImage(coverURL);
 		title.text = name;
 
 		if (desc.length > 0) {
