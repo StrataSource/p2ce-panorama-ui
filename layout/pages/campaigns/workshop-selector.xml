@@ -17,6 +17,9 @@
 						class="workshop__entry__cover"
 						scaling="stretch-to-cover-preserve-aspect"
 					/>
+					<Panel id="NewIndicator" class="workshop__entry__new-indicator hide">
+						<Label class="workshop__entry__new-indicator__text" text="#MainMenu_Content_Unplayed" />
+					</Panel>
 					<TooltipPanel
 						id="Indicator"
 						class="workshop__entry__indicator fancy-red hide"

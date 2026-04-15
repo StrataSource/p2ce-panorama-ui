@@ -43,6 +43,7 @@ class AddonDependencies {
 	}
 
 	static onLoad() {
+		$.GetContextPanel().SetFocus();
 		this.checkAddons();
 		$.RegisterForUnhandledEvent(
 			'PanoramaComponent_Workshop_OnAddonInstalled',
@@ -91,7 +92,7 @@ class AddonDependencies {
 
 		if (deps === null || deps.length === 0) {
 			$.Warning(`Addon ${addon} has no missing dependencies!`);
-			UiToolkitAPI.CloseAllVisiblePopups();
+			$.DispatchEvent('Cancelled', $.GetContextPanel(), PanelEventSource.PROGRAM);
 			return;
 		}
 
@@ -170,5 +171,9 @@ class AddonDependencies {
 
 	static subscribeAll() {
 		this.subscribeSelected();
+	}
+	
+	static close() {
+		$.DispatchEvent('Cancelled', $.GetContextPanel(), PanelEventSource.PROGRAM);
 	}
 }

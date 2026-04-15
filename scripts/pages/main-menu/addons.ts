@@ -36,7 +36,7 @@ class AddonEntry {
 			.replace(/r\s*$/, '');
 
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
-		const forceShow = WorkshopAPI.IsWorkshopToolsMode() || AddonManager.advancedMode;
+		const forceShow = WorkshopAPI.IsWorkshopToolsMode() || AddonManager.advancedMode || GameInterfaceAPI.GetSettingInt('developer') > 0;
 		if (!forceShow && !WorkshopAPI.GetAddonEnabled(this.index) && (buckets.some((v: CampaignBucket) => v.addon_id === this.index))) {
 			this.panel.visible = false;
 		}
