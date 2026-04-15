@@ -41,7 +41,7 @@ class WorkshopEntry {
 				UiToolkitAPI.ShowCustomLayoutPopupParameters(
 					'dependencies',
 					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-					`addon=${this.addonId}&action='CampaignAPI.StartCampaign(${this.campaignId}, ${this.startId}, 0)'`
+					`addon=${this.addonId}&action=0&campaignId=${this.campaignId}&chapterId=${this.startId}&map=0`
 				);
 			} else {
 				CampaignAPI.StartCampaign(
