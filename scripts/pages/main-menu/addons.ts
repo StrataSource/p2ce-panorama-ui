@@ -36,8 +36,7 @@ class AddonEntry {
 			.replace(/r\s*$/, '');
 
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
-		const forceShow = WorkshopAPI.IsWorkshopToolsMode() || AddonManager.advancedMode || GameInterfaceAPI.GetSettingInt('developer') > 0;
-		if (!forceShow && !WorkshopAPI.GetAddonEnabled(this.index) && (buckets.some((v: CampaignBucket) => v.addon_id === this.index))) {
+		if (!AddonManager.advancedMode && (buckets.some((v: CampaignBucket) => v.addon_id === this.index))) {
 			this.panel.visible = false;
 		}
 
@@ -110,6 +109,7 @@ class AddonManager {
 	static addonAuthors = $<Label>('#SelectedAddonAuthors')!;
 	static addonSteam = $<Button>('#SelectedAddonView')!;
 	static addonsPage = $<Panel>('#AddonsPage')!;
+	static addonsAdvancedCheck = $<ToggleButton>('#AdvancedCheck')!;
 
 	static applyButton = $<Button>('#ApplyButton');
 	static cancelButton = $<Button>('#CancelButton');
@@ -128,6 +128,9 @@ class AddonManager {
 
 	static init() {
 		this.addonsPage.visible = false;
+
+		this.advancedMode = WorkshopAPI.IsWorkshopToolsMode() || GameInterfaceAPI.GetSettingInt('developer') > 0;
+		this.addonsAdvancedCheck.SetSelected(this.advancedMode);
 
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
 		this.createAddonEntries();

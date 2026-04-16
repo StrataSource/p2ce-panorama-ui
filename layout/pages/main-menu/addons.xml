@@ -98,6 +98,7 @@
 					</TooltipPanel>
 					<TooltipPanel tooltip="#MainMenu_Addons_Advanced_Tooltip">
 						<ToggleButton
+							id="AdvancedCheck"
 							class="button togglebutton mr-2"
 							onactivate="AddonManager.toggleAdvanced()"
 							tabindex="auto"
