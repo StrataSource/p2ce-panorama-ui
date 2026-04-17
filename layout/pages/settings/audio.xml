@@ -223,14 +223,30 @@
 					changeoverride="$.DispatchEvent('ReloadCCSettings')"
 				/>
 
-				<SettingsEnum text="#Settings_ClosedCaptions_Alignment"
+				<SettingsEnum
+					text="#Settings_ClosedCaptions_Alignment"
 					infomessage="#Settings_ClosedCaptions_Alignment_info"
 					psvar="cc.text_align"
 					tags="cc,closecaption,captions,audio,alignment"
 				>
-					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_left" value="0" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
-					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_center" value="1" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
-					<RadioButton group="ccalign" text="#Settings_ClosedCaptions_Alignment_right" value="2" activateoverride="$.DispatchEvent('ReloadCCSettings')" />
+					<RadioButton
+						group="ccalign"
+						text="#Settings_ClosedCaptions_Alignment_left"
+						value="0"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
+					<RadioButton
+						group="ccalign"
+						text="#Settings_ClosedCaptions_Alignment_center"
+						value="1"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
+					<RadioButton
+						group="ccalign"
+						text="#Settings_ClosedCaptions_Alignment_right"
+						value="2"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
 				</SettingsEnum>
 
 			</Panel>
