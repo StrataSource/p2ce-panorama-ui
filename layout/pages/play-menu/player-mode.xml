@@ -45,7 +45,7 @@
 				>
 					<Image
 						class="card__image"
-						src="file://{images}/menu/vertical-banner-cores.png"
+						src="file://{images}/menu/vertical-banner-campaigns.png"
 						scaling="stretch-to-cover-preserve-aspect"
 						textureheight="1920"
 						texturewidth="1080"
