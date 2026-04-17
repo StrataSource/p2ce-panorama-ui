@@ -27,15 +27,15 @@ class CaptionEntry {
 		switch (CloseCaptioning.settings.textAlign) {
 			default:
 			case 0:
-				style += "text-align: left;"
+				style += 'text-align: left;';
 				break;
 
 			case 1:
-				style += "text-align: center;"
+				style += 'text-align: center;';
 				break;
 
 			case 2:
-				style += "text-align: right;"
+				style += 'text-align: right;';
 				break;
 		}
 		switch (CloseCaptioning.settings.fontType) {
