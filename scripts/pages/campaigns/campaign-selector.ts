@@ -45,6 +45,10 @@ class CampaignEntry {
 		const newIndicator = this.panel.FindChildTraverse<Panel>('NewIndicator')!;
 		newIndicator.SetHasClass('hide', this.hasSaveData);
 
+		const missingIndicator = this.panel.FindChildTraverse<Panel>('MissingIndicator')!;
+		const missing = WorkshopAPI.GetAddonDependenciesMissing(this.info.bucket.addon_id);
+		missingIndicator.SetHasClass('hide', !(missing !== null && missing.length > 0));
+
 		if (title) {
 			title.text = $.Localize(this.info.campaign.title);
 		}
