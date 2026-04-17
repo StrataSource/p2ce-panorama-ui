@@ -96,7 +96,10 @@
 		</Panel>
 
 		<Panel class="horizontal-align-right flow-down m-3">
-			<Panel class="horizontal-align-right flow-right">
+			<Panel class="bordered-window p-3" style="max-width: 512px;">
+				<Label class="horizontal-align-center text-align-center" html="true" text="#MainMenu_Graphics_Notice" />
+			</Panel>
+			<Panel class="horizontal-align-right flow-right mt-1">
 				<TooltipPanel tooltip="#MainMenu_Socials_GitHub">
 					<Button class="button button-2x" onactivate="SteamOverlayAPI.OpenURL('https://p2ce.org/issues')">
 						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/social/github.svg" />
