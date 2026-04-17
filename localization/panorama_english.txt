@@ -842,7 +842,10 @@
 		"MainMenu_PH_Note"								"This page is a work-in-progress."
 		"MainMenu_ControllerUI_Note_Title"				"Controller Support Notice"
 		"MainMenu_ControllerUI_Note_Desc"				"Controller input support for the menu interface is experimental.\n\nPlease submit issues to the P2:CE issue tracker if you encounter bugs or have feedback about this mode."
-		
+		"MainMenu_Graphics_Notice"						"NOTICE: If you experience graphical issues, try switching to the 'stable' game branch in Steam."
+		"MainMenu_Socials_GitHub"						"Open the GitHub Bug Reporter in the Steam Overlay"
+		"MainMenu_Socials_Discord"						"Open Discord in the Steam Overlay"
+
 		// Main Menu - Header Tabs
 		"MainMenu_Navigation_Developer"					"Developer"
 		"MainMenu_Navigation_Developer_Tagline"			"Reference library"
