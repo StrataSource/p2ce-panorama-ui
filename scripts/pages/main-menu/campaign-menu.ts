@@ -152,7 +152,7 @@ class CampaignMenu {
 					},
 					$.Localize('#Common_OK'),
 					() => {}
-				)
+				);
 			}
 		}
 
@@ -169,7 +169,7 @@ class CampaignMenu {
 					},
 					$.Localize('#Common_OK'),
 					() => {}
-				)
+				);
 			}
 		}
 

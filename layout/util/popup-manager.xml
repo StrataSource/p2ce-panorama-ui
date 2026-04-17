@@ -7,8 +7,16 @@
 	</scripts>
 
 	<PopupManager hittest="false">
-		<Button id="DimBackground" onactivate="PopupManager.onPopupBackgroundClicked()" onfocus="PopupManager.onPopupBackgroundClicked()" />
-		<Button id="BlurBackground" onactivate="PopupManager.onPopupBackgroundClicked()" onfocus="PopupManager.onPopupBackgroundClicked()" />
+		<Button
+			id="DimBackground"
+			onactivate="PopupManager.onPopupBackgroundClicked()"
+			onfocus="PopupManager.onPopupBackgroundClicked()"
+		/>
+		<Button
+			id="BlurBackground"
+			onactivate="PopupManager.onPopupBackgroundClicked()"
+			onfocus="PopupManager.onPopupBackgroundClicked()"
+		/>
 		<!-- Popups are added here dynamically -->
 	</PopupManager>
 </root>

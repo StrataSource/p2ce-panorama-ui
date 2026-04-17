@@ -36,7 +36,7 @@ class AddonEntry {
 			.replace(/r\s*$/, '');
 
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
-		if (!AddonManager.advancedMode && (buckets.some((v: CampaignBucket) => v.addon_id === this.index))) {
+		if (!AddonManager.advancedMode && buckets.some((v: CampaignBucket) => v.addon_id === this.index)) {
 			this.panel.visible = false;
 		}
 

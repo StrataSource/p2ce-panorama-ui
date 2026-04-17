@@ -12,11 +12,7 @@
 		<snippet name="DependencyEntry">
 			<Button class="addon-deps__entry">
 				<Panel class="addon-deps__entry__left">
-					<Image
-						id="DependencyAddonImage"
-						class="addon-deps__entry__image"
-						scaling="stretch-to-cover-preserve-aspect"
-					/>
+					<Image id="DependencyAddonImage" class="addon-deps__entry__image" scaling="stretch-to-cover-preserve-aspect" />
 					<Panel id="Loader" class="addon-deps__entry__loader">
 						<AnimatedImageStrip
 							animating="true"
@@ -61,20 +57,10 @@
 		</Panel>
 		
 		<Panel class="flow-right horizontal-align-right" tabindex="auto" selectionpos="auto">
-			<Button
-				id="ContinueButton"
-				class="button button--red mr-2"
-				tabindex="auto"
-				selectionpos="auto"
-			>
+			<Button id="ContinueButton" class="button button--red mr-2" tabindex="auto" selectionpos="auto">
 				<Label id="ContinueText" class="button__text" text="#DependencyWarning_Action_Ignore" />
 			</Button>
-			<Button
-				class="button"
-				tabindex="auto"
-				selectionpos="auto"
-				onactivate="AddonDependencies.close()"
-			>
+			<Button class="button" tabindex="auto" selectionpos="auto" onactivate="AddonDependencies.close()">
 				<Label class="button__text" text="#DependencyWarning_Action_Cancel" />
 			</Button>
 		</Panel>

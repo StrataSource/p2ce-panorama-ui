@@ -12,19 +12,11 @@
 		<snippet name="WorkshopEntrySnippet">
 			<Button group="WorkshopGroupRadio" class="workshop__entry" tabindex="auto" selectionpos="auto">
 				<Panel class="workshop__entry__top">
-					<Image
-						id="Cover"
-						class="workshop__entry__cover"
-						scaling="stretch-to-cover-preserve-aspect"
-					/>
+					<Image id="Cover" class="workshop__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
 					<Panel id="NewIndicator" class="workshop__entry__new-indicator hide">
 						<Label class="workshop__entry__new-indicator__text" text="#MainMenu_Content_Unplayed" />
 					</Panel>
-					<TooltipPanel
-						id="Indicator"
-						class="workshop__entry__indicator fancy-red hide"
-						tooltip="#DependencyWarning_Generic"
-					>
+					<TooltipPanel id="Indicator" class="workshop__entry__indicator fancy-red hide" tooltip="#DependencyWarning_Generic">
 						<Image
 							scaling="stretch-to-fit-preserve-aspect"
 							src="file://{images}/alert-octagon.svg"
@@ -41,10 +33,7 @@
 		<snippet name="WorkshopNoneSnippet">
 			<Panel class="workshop__none">
 				<Panel class="horizontal-align-center vertical-align-center">
-					<Label
-						class="text-h5 mb-2"
-						text="#MainMenu_Maps_None"
-					/>
+					<Label class="text-h5 mb-2" text="#MainMenu_Maps_None" />
 					<Button
 						onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/workshop/browse/?appid=440000&amp;browsesort=trend&amp;section=readytouseitems&amp;p=1&amp;num_per_page=30&amp;days=7&amp;requiredtags%5B%5D=Map')"
 						class="button button-2x"
