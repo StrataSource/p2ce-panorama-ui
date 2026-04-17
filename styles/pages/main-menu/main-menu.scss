@@ -603,3 +603,8 @@ $pane-move-time: 0.1s;
 		height: 100%;
 	}
 }
+
+.bordered-window {
+	background-color: $button-background;
+	border: $menu-pane-border;
+}

@@ -94,5 +94,20 @@
 				</Panel>
 			</Panel>
 		</Panel>
+
+		<Panel class="horizontal-align-right flow-down m-3">
+			<Panel class="horizontal-align-right flow-right">
+				<TooltipPanel tooltip="#MainMenu_Socials_GitHub">
+					<Button class="button button-2x" onactivate="SteamOverlayAPI.OpenURL('https://p2ce.org/issues')">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/social/github.svg" />
+					</Button>
+				</TooltipPanel>
+				<TooltipPanel class="ml-2" tooltip="#MainMenu_Socials_Discord">
+					<Button class="button button-2x" onactivate="SteamOverlayAPI.OpenURL('https://p2ce.org/discord')">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/social/discord.svg" />
+					</Button>
+				</TooltipPanel>
+			</Panel>
+		</Panel>
 	</Panel>
 </root>
