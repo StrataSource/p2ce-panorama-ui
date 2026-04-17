@@ -39,6 +39,18 @@
 							textureheight="128"
 							texturewidth="128"
 						/>
+						<TooltipPanel
+							id="MissingIndicator"
+							class="workshop__entry__indicator fancy-red hide"
+							tooltip="#DependencyWarning_Generic"
+						>
+							<Image
+								scaling="stretch-to-fit-preserve-aspect"
+								src="file://{images}/alert-octagon.svg"
+								texturewidth="64"
+								textureheight="64"
+							/>
+						</TooltipPanel>
 					</Panel>
 					<!-- Campaign info; title, description, 'source' -->
 					<Panel class="campaigns__entry__details">
