@@ -11,11 +11,7 @@ class WorkshopEntry {
 	indicatorOverlay: Panel;
 
 	constructor(pair: CampaignPair, isNew: boolean) {
-		this.button = $.CreatePanel(
-			'Button',
-			WorkshopSelector.insert,
-			pair.bucket.id,
-		);
+		this.button = $.CreatePanel('Button', WorkshopSelector.insert, pair.bucket.id);
 
 		this.button.LoadLayoutSnippet('WorkshopEntrySnippet');
 		this.button.SetDialogVariable('name', pair.campaign.title);
@@ -95,25 +91,17 @@ class WorkshopSelector {
 		});
 
 		// FIXME: event not firing?
-		$.RegisterForUnhandledEvent(
-			'PanoramaComponent_Workshop_OnAddonInstalled',
-			() => {
-				for (const entry of this.entries) {
-					if (entry.hasMissing) {
-						entry.updateDependencies();
-					}
+		$.RegisterForUnhandledEvent('PanoramaComponent_Workshop_OnAddonInstalled', () => {
+			for (const entry of this.entries) {
+				if (entry.hasMissing) {
+					entry.updateDependencies();
 				}
 			}
-		);
+		});
 	}
 
 	static createBtn(pair: CampaignPair, isNew: boolean) {
-		this.entries.push(
-			new WorkshopEntry(
-				pair,
-				isNew
-			)
-		);
+		this.entries.push(new WorkshopEntry(pair, isNew));
 	}
 
 	static createBtnFromString(campaign: string) {
@@ -131,13 +119,7 @@ class WorkshopSelector {
 			if (bucket.id.startsWith('auto_')) {
 				const meta = WorkshopAPI.GetAddonMeta(bucket.addon_id);
 				const id = `${bucket.id}/${bucket.campaigns[0].id}`;
-				this.campaignStrings.push(
-					new AbstractSearchData(
-						id,
-						meta.title,
-						id
-					)
-				);
+				this.campaignStrings.push(new AbstractSearchData(id, meta.title, id));
 			}
 		}
 	}
@@ -155,7 +137,9 @@ class WorkshopSelector {
 
 		for (const bucket of buckets) {
 			if (bucket.id.startsWith('auto_')) {
-				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${bucket.campaigns[0].id}`) ? otherItems : newItems;
+				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${bucket.campaigns[0].id}`)
+					? otherItems
+					: newItems;
 				array.push({ bucket: bucket, campaign: bucket.campaigns[0] });
 			}
 		}
@@ -178,7 +162,7 @@ class WorkshopSelector {
 		this.entries = [];
 		this.insert.RemoveAndDeleteChildren();
 	}
-	
+
 	static reloadList() {
 		this.clearCache();
 		this.deleteEntries();

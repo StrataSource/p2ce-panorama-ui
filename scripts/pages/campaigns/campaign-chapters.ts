@@ -80,9 +80,7 @@ class ChapterEntry {
 
 				if (this.chapter) CampaignChapters.listCustomizeBtn.visible = this.chapter.maps.length !== 1;
 			};
-		} else if (
-			CampaignChapters.displayMode === ChapterDisplayMode.GRID
-		) {
+		} else if (CampaignChapters.displayMode === ChapterDisplayMode.GRID) {
 			//activationFn = () => {
 			//	UiToolkitAPI.ShowGenericPopupThreeOptions(
 			//		'[HC] Choose',

@@ -7,7 +7,7 @@ class DependencyWrap {
 	title: string;
 	image: string;
 
-	constructor (workshopid: number, title: string, image: string) {
+	constructor(workshopid: number, title: string, image: string) {
 		this.workshopid = workshopid;
 		this.title = title;
 		this.image = image;
@@ -29,7 +29,7 @@ class AddonDependencies {
 		const entry = this.entries.get(meta.workshopid);
 		if (!entry) {
 			return;
-		};
+		}
 		entry.enabled = false;
 		entry.AddClass('addon-deps__downloaded');
 		this.downloadCount += 1;
@@ -45,49 +45,39 @@ class AddonDependencies {
 	static onLoad() {
 		$.GetContextPanel().SetFocus();
 		this.checkAddons();
-		$.RegisterForUnhandledEvent(
-			'PanoramaComponent_Workshop_OnAddonInstalled',
-			(addon: AddonIndex_t) => {
-				this.newAddonInstalled(addon);
-			}
-		);
-		this.continueBtn.SetPanelEvent(
-			'onactivate',
-			() => {
-				const ctx = $.GetContextPanel();
-				const action = ctx.GetAttributeInt('action', 0);
-				switch (action) {
-					case 0:
-						{
-							const cid = ctx.GetAttributeString('campaignId', '');
-							const chid = ctx.GetAttributeString('chapterId', '');
-							const map = ctx.GetAttributeInt('map', 0);
+		$.RegisterForUnhandledEvent('PanoramaComponent_Workshop_OnAddonInstalled', (addon: AddonIndex_t) => {
+			this.newAddonInstalled(addon);
+		});
+		this.continueBtn.SetPanelEvent('onactivate', () => {
+			const ctx = $.GetContextPanel();
+			const action = ctx.GetAttributeInt('action', 0);
+			switch (action) {
+				case 0:
+					{
+						const cid = ctx.GetAttributeString('campaignId', '');
+						const chid = ctx.GetAttributeString('chapterId', '');
+						const map = ctx.GetAttributeInt('map', 0);
 
-							if (cid.length === 0 || chid.length === 0) {
-								$.Warning('Action is invalid.');
-								return;
-							}
-
-							CampaignAPI.StartCampaign(
-								cid,
-								chid,
-								map
-							);
+						if (cid.length === 0 || chid.length === 0) {
+							$.Warning('Action is invalid.');
+							return;
 						}
-						break;
 
-					case 1:
-						$.DispatchEvent('MainMenuCloseAllPages');
-						$.DispatchEvent('MainMenuAnimatedSwitch', ctx.GetAttributeString('campaign', ''));
-						break;
-				
-					default:
-						break;
-				}
+						CampaignAPI.StartCampaign(cid, chid, map);
+					}
+					break;
 
-				UiToolkitAPI.CloseAllVisiblePopups();
+				case 1:
+					$.DispatchEvent('MainMenuCloseAllPages');
+					$.DispatchEvent('MainMenuAnimatedSwitch', ctx.GetAttributeString('campaign', ''));
+					break;
+
+				default:
+					break;
 			}
-		);
+
+			UiToolkitAPI.CloseAllVisiblePopups();
+		});
 	}
 
 	static checkAddons() {
@@ -111,19 +101,16 @@ class AddonDependencies {
 			this.entries.set(dep, p);
 		}
 
-		WorkshopAPI.CreateQueryUGCDetailsRequest(
-			(success: boolean, data: Array<SteamUGCDetails_t> | null) => {
-				if (!success || !data) {
-					this.markAllFailed();
-					return;
-				}
+		WorkshopAPI.CreateQueryUGCDetailsRequest((success: boolean, data: Array<SteamUGCDetails_t> | null) => {
+			if (!success || !data) {
+				this.markAllFailed();
+				return;
+			}
 
-				for (const item of data) {
-					this.setEntry(item.m_nPublishedFileId, item.m_rgchTitle, item.m_rgchDescription, item.m_rgchPreviewUrl);
-				}
-			},
-			deps
-		);
+			for (const item of data) {
+				this.setEntry(item.m_nPublishedFileId, item.m_rgchTitle, item.m_rgchDescription, item.m_rgchPreviewUrl);
+			}
+		}, deps);
 	}
 
 	static setEntry(addon: PublishedFileId_t, name: string, desc: string, coverURL: string) {
@@ -148,7 +135,7 @@ class AddonDependencies {
 			descP.text = $.BBCodeToHTML(desc);
 		}
 	}
-	
+
 	static markAllFailed() {
 		$.Warning('Could not retrieve details');
 		for (const [addon, entry] of this.entries) {
@@ -161,7 +148,7 @@ class AddonDependencies {
 			title.text = $.Localize('#DependencyWarning_Failed');
 		}
 	}
-	
+
 	static close() {
 		$.DispatchEvent('Cancelled', $.GetContextPanel(), PanelEventSource.PROGRAM);
 	}

@@ -30,11 +30,7 @@
 		</snippet>
 	</snippets>
 
-	<PopupCustomLayout
-		class="FlyoutPanel Hidden"
-		popupbackground="blur"
-		onload="WorkshopCampaignFlyout.onLoad()"
-	>
+	<PopupCustomLayout class="FlyoutPanel Hidden" popupbackground="blur" onload="WorkshopCampaignFlyout.onLoad()">
 		<Panel class="flow-right">
 			<Panel class="workshop-campaign__cover">
 				<Image
@@ -89,7 +85,12 @@
 				<Label class="button__text button__text--right" text="#MainMenu_Navigation_Play" />
 			</Button>
 			<Button class="button fill-width ml-2" onactivate="WorkshopCampaignFlyout.openInSteam()">
-				<Image class="button__icon button__icon--left" texturewidth="32" textureheight="32" src="file://{images}/icons/steam.svg" />
+				<Image
+					class="button__icon button__icon--left"
+					texturewidth="32"
+					textureheight="32"
+					src="file://{images}/icons/steam.svg"
+				/>
 				<Label class="button__text button__text--right" text="#MainMenu_Addons_ViewOnWS" />
 			</Button>
 		</Panel>
