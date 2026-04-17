@@ -46,7 +46,12 @@
 				<AvatarImage />
 			</Panel>
 			<Panel class="flow-down full-height ml-3">
-				<Label id="Title" class="workshop-campaign__title" text="[PH] Map Title" />
+				<Panel class="flow-right">
+					<Label id="Title" class="workshop-campaign__title" text="[PH] Map Title" />
+					<Button class="button button-2x button--red" onactivate="WorkshopCampaignFlyout.close()">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/close.svg" />
+					</Button>
+				</Panel>
 				<Label id="Author" class="workshop-campaign__author" text="[PH] Map Author" />
 				<Panel class="flow-down vertical-align-bottom">
 					<!-- TODO: replace these with upvote icons! -->
@@ -79,11 +84,7 @@
 			</Panel>
 		</Panel>
 		<Panel class="flow-right mt-2">
-			<Button class="button fill-width mr-2" onactivate="WorkshopCampaignFlyout.close()">
-				<Image class="button__icon button__icon--left" texturewidth="32" textureheight="32" src="file://{images}/close.svg" />
-				<Label class="button__text button__text--right" text="#Common_Close" />
-			</Button>
-			<Button class="button fill-width" onactivate="WorkshopCampaignFlyout.play()">
+			<Button class="button button--orange fill-width" onactivate="WorkshopCampaignFlyout.play()">
 				<Image class="button__icon button__icon--left" texturewidth="32" textureheight="32" src="file://{images}/play.svg" />
 				<Label class="button__text button__text--right" text="#MainMenu_Navigation_Play" />
 			</Button>
