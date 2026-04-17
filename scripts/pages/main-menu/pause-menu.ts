@@ -78,7 +78,7 @@ class PauseMenu {
 				UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
 					$.Localize('#Action_Quit'),
 					$.Localize('#Action_Quit_InGame_Message'),
-					'warning-2-popup',
+					'quit-popup',
 					$.Localize('#Action_ReturnToMenu'),
 					() => {
 						GameInterfaceAPI.ConsoleCommand('disconnect');

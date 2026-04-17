@@ -99,6 +99,15 @@
 	}
 }
 
+.quit-popup {
+	#Button0 {
+		@extend .button--orange;
+	}
+	#Button1 {
+		@extend .button--red;
+	}
+}
+
 .ok-cancel-popup {
 	#Button0 {
 		@extend .button--blue;
