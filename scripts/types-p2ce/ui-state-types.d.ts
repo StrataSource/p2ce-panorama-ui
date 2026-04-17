@@ -50,7 +50,7 @@ declare const enum ChapterDisplayMode {
 	CLASSIC = 'classic',
 	LIST = 'list',
 	GRID = 'grid',
-	SUPER = 'super',
+	SUPER = 'super'
 }
 
 declare const enum SpecialString {

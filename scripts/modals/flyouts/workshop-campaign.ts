@@ -9,18 +9,14 @@ class WorkshopCampaignFlyout {
 	static author = $<Label>('#Author')!;
 	static desc = $<Label>('#Description')!;
 	static cover = $<Image>('#Cover')!;
-	static votePanels = [
-		$<RadioButton>('#Nonevote')!,
-		$<RadioButton>('#Upvote')!,
-		$<RadioButton>('#Downvote')!,
-	];
+	static votePanels = [$<RadioButton>('#Nonevote')!, $<RadioButton>('#Upvote')!, $<RadioButton>('#Downvote')!];
 
 	static addonId: number = 0;
 	static workshopId: PublishedFileId_t = 0n;
 	static campaign: string = '';
 	static chapter: string = '';
 	static hasMissing: boolean = false;
-	static depsPanels: Map<PublishedFileId_t, {btn: Button, img: Image, loader: Panel}> = new Map();
+	static depsPanels: Map<PublishedFileId_t, { btn: Button; img: Image; loader: Panel }> = new Map();
 
 	static onLoad() {
 		const ctx = $.GetContextPanel();
@@ -56,15 +52,12 @@ class WorkshopCampaignFlyout {
 			for (const dep of missingDeps) {
 				this.addDep(`${dep}`, dep, true);
 			}
-			WorkshopAPI.CreateQueryUGCDetailsRequest(
-				(success: boolean, data: Array<SteamUGCDetails_t> | null) => {
-					if (!success || data === null) return;
-					for (const dep of data) {
-						this.setDep(dep.m_nPublishedFileId, dep.m_rgchPreviewUrl);
-					}
-				},
-				missingDeps
-			);
+			WorkshopAPI.CreateQueryUGCDetailsRequest((success: boolean, data: Array<SteamUGCDetails_t> | null) => {
+				if (!success || data === null) return;
+				for (const dep of data) {
+					this.setDep(dep.m_nPublishedFileId, dep.m_rgchPreviewUrl);
+				}
+			}, missingDeps);
 		}
 		if (haveDeps) {
 			for (const dep of haveDeps) {
@@ -86,29 +79,20 @@ class WorkshopCampaignFlyout {
 	}
 
 	static addDep(id: string, workshopId: PublishedFileId_t, isMissing: boolean) {
-		const b = $.CreatePanel(
-			'Button',
-			this.deps,
-			id,
-			{ class: `workshop-campaign__dep__cover${isMissing ? ' workshop-campaign__dep__cover__missing' : ''}` }
-		);
+		const b = $.CreatePanel('Button', this.deps, id, {
+			class: `workshop-campaign__dep__cover${isMissing ? ' workshop-campaign__dep__cover__missing' : ''}`
+		});
 
 		b.SetPanelEvent('onactivate', () => {
 			SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${workshopId}`);
 		});
 
-		const img = $.CreatePanel(
-			'Image',
-			b,
-			`${id}_Image`,
-			{ class: 'workshop-campaign__dep__cover__image', scaling: 'stretch-to-cover-preserve-aspect' }
-		);
+		const img = $.CreatePanel('Image', b, `${id}_Image`, {
+			class: 'workshop-campaign__dep__cover__image',
+			scaling: 'stretch-to-cover-preserve-aspect'
+		});
 
-		const loader = $.CreatePanel(
-			'Panel',
-			b,
-			'Loader'
-		);
+		const loader = $.CreatePanel('Panel', b, 'Loader');
 		loader.LoadLayoutSnippet('Loader');
 
 		this.depsPanels.set(workshopId, { btn: b, img: img, loader: loader });
@@ -141,11 +125,7 @@ class WorkshopCampaignFlyout {
 				`addon=${this.addonId}&action=0&campaignId=${this.campaign}&chapterId=${this.chapter}&map=0`
 			);
 		} else {
-			CampaignAPI.StartCampaign(
-				this.campaign,
-				this.chapter,
-				0
-			);
+			CampaignAPI.StartCampaign(this.campaign, this.chapter, 0);
 			UiToolkitAPI.CloseAllVisiblePopups();
 		}
 	}

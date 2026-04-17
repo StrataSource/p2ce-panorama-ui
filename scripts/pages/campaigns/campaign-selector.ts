@@ -268,7 +268,7 @@ class CampaignSelector {
 			for (const pair of array) {
 				this.createCampaignBtn(pair.bucket, pair.campaign, hasSaveData);
 			}
-		}
+		};
 
 		const allNewCampaigns: Array<CampaignPair> = [];
 		const allOtherCampaigns: Array<CampaignPair> = [];
@@ -278,7 +278,9 @@ class CampaignSelector {
 				continue;
 			}
 			for (const campaign of bucket.campaigns) {
-				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${campaign.id}`) ? allOtherCampaigns : allNewCampaigns;
+				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${campaign.id}`)
+					? allOtherCampaigns
+					: allNewCampaigns;
 				array.push({ bucket: bucket, campaign: campaign });
 			}
 		}
