@@ -90,7 +90,8 @@ class SaveEntry {
 							() => {
 								// TODO: Replace this with other save API
 								const savFile: string = this.save.fileName;
-								SaveRestoreAPI.SaveGame(savFile.substring(0, savFile.length - 4));
+								const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
+								SaveRestoreAPI.SaveGame(nameWithoutExt);
 
 								CampaignSaves.purgeSaveList();
 
@@ -119,7 +120,8 @@ class SaveEntry {
 					() => {
 						// TODO: Replace this with other save API
 						const savFile: string = this.save.fileName;
-						SaveRestoreAPI.DeleteSave(savFile.substring(0, savFile.length - 4));
+						const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
+						SaveRestoreAPI.DeleteSave(nameWithoutExt);
 
 						CampaignSaves.purgeSaveList();
 
