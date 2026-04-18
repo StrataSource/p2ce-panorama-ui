@@ -507,7 +507,15 @@ class MountManager {
 			return;
 		}
 
-		const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+		// Updated this (same line in news.ts) to be safer.
+		let response;
+		try {
+			response = JSON.parse(data.responseText.trim());
+		} catch (e) {
+			console.error('Falling back to less safe method. Error:', e);
+			response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+		}
+
 		const appId = Object.keys(response)[0];
 		const appInfo = response[Object.keys(response)[0]]['data'];
 
