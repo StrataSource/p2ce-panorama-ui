@@ -76,7 +76,14 @@ class NewsReel {
 
 		// using the responseText on its own results in a parsing error
 		// might be some invisible terminating character or something
-		const response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+		// Updated with try/catch to make it safer ^^^
+		let response;
+		try {
+			response = JSON.parse(data.responseText.trim());
+		} catch (e) {
+			console.error('Falling back to less safe method. Error:', e);
+			response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
+		}
 		const allNews = response['appnews']['newsitems'];
 
 		for (let i = 0; i < this.NEWS_COUNT; ++i) {
