@@ -15,6 +15,17 @@ class BaseMenu {
 			}
 		},
 		{
+			id: 'FeaturedBtn',
+			headline: '[HC] Featured',
+			tagline: '[HC] Featured',
+			activated: () => {
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Featured', 'featured/main', undefined);
+			},
+			focused: () => {
+				this.hideContinueDetails();
+			}
+		},
+		{
 			id: 'PlayBtn',
 			headline: '#MainMenu_Navigation_Play',
 			tagline: '#MainMenu_Navigation_Play_Tagline',

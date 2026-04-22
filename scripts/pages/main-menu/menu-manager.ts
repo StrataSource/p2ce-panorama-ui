@@ -35,6 +35,7 @@ class MenuManager {
 	static menuContent = $<Panel>('#MenuMainContent')!;
 	static pageBlur = $<BaseBlurTarget>('#PageBlur')!;
 	static grids = [$<Image>('#GridTexture1')!, $<Image>('#GridTexture2')!];
+	static featuredOverlayImg = $<Image>('#MainMenuFeaturedOverlay')!;
 
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
@@ -56,6 +57,7 @@ class MenuManager {
 	static onLoaded() {
 		if (this.isLoaded) return;
 		this.isLoaded = true;
+		this.featuredOverlayImg.style.animation = 'AnimOutRight 0.01s ease-in-out 0s 1 normal forwards';
 
 		this.currentLogo = '';
 
@@ -208,6 +210,15 @@ class MenuManager {
 						this.logo.style.height = '240px';
 						break;
 				}
+			});
+
+			$.RegisterForUnhandledEvent('MainMenuShowFeaturedOverlay', (image: string) => {
+				this.featuredOverlayImg.SetImage(image);
+				this.featuredOverlayImg.style.animation = 'FeaturedOverlayIn 0.25s ease-in-out 0s 1 normal forwards';
+			});
+
+			$.RegisterForUnhandledEvent('MainMenuHideFeaturedOverlay', () => {
+				this.featuredOverlayImg.style.animation = 'FeaturedOverlayOut 0.25s ease-in-out 0s 1 normal forwards';
 			});
 
 			// CC

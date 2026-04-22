@@ -5,6 +5,28 @@
 
 $pane-move-time: 0.1s;
 
+@keyframes FeaturedOverlayIn {
+	0% {
+		transform: translateX(25px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes FeaturedOverlayOut {
+	0% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(25px);
+		opacity: 0;
+	}
+}
+
 .ControllerOnly {
 	visibility: collapse;
 }
@@ -83,6 +105,14 @@ $pane-move-time: 0.1s;
 	&__background {
 		width: 100%;
 		height: 100%;
+	}
+
+	&__featured-overlay {
+		width: 1440px;
+		height: 100%;
+		opacity-mask: url('file://{images}/menu/featured/gallery/mask.png');
+		horizontal-align: right;
+		opacity: 1;
 	}
 
 	&__movie {

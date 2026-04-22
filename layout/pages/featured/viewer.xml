@@ -1,0 +1,65 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/featured/shared.js" />
+		<include src="file://{scripts}/pages/featured/viewer.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="ActionBarEntrySnippet">
+			<RadioButton group="ActionBarRadio" class="button radiobutton mr-1">
+				<Label class="button__text" text="{s:text}" />
+			</RadioButton>
+		</snippet>
+		<snippet name="EntrySnippet">
+			<Button group="WorkshopGroupRadio" class="featured__addon" tabindex="auto" selectionpos="auto">
+				<Panel class="featured__addon__top">
+					<Image id="Cover" class="featured__addon__cover" scaling="stretch-to-cover-preserve-aspect" />
+					<Panel id="NewIndicator" class="featured__addon__new-indicator hide">
+						<Label class="featured__addon__new-indicator__text" text="#MainMenu_Content_Unplayed" />
+					</Panel>
+					<TooltipPanel id="Indicator" class="featured__addon__indicator fancy-red hide" tooltip="#DependencyWarning_Generic">
+						<Image
+							scaling="stretch-to-fit-preserve-aspect"
+							src="file://{images}/alert-octagon.svg"
+							texturewidth="64"
+							textureheight="64"
+						/>
+					</TooltipPanel>
+					<Panel id="Loader" class="featured__addon__loader">
+						<AnimatedImageStrip
+							class="featured__addon__loader__spinner"
+							animating="true"
+							defaultframe="0"
+							frametime="125ms"
+							src="file://{images}/menu/p2ce/spinner_strip.tga"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<Image
+							class="featured__addon__loader__logo"
+							src="file://{images}/icons/steam.svg"
+							textureheight="128"
+							texturewidth="128"
+							scaling="stretch-to-fit-preserve-aspect"
+							hittest="false"
+						/>
+					</Panel>
+				</Panel>
+				<Panel class="featured__addon__details">
+					<Label class="featured__addon__details__desc" text="{s:name}" />
+				</Panel>
+			</Button>
+		</snippet>
+		<snippet name="ContentChildSnippet">
+			<Panel class="horizontal-align-center flow-right-wrap overflow-vscroll hide" />
+		</snippet>
+	</snippets>
+
+	<Panel class="mainmenu__page flow-down" onload="FeaturedSubMenu.onLoad()">
+		<Panel id="ActionBar" class="horizontal-align-center flow-right mb-2" />
+		<Panel id="ContentChild" class="horizontal-align-center" />
+	</Panel>
+</root>

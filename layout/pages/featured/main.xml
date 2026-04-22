@@ -4,68 +4,42 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/featured/shared.js" />
 		<include src="file://{scripts}/pages/featured/main.ts" />
 	</scripts>
 
 	<Panel class="mainmenu__page flow-right" onload="FeaturedMenu.onLoad()">
-		<Panel class="featured-pane">
-			<Button class="card card__occupy" onactivate="">
-				<Panel class="full-width fill-height">
-					<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
-					<AvatarImage id="MainFeatureAvatar" class="card__avatar" />
-				</Panel>
-				<Panel class="card__details">
-					<Label class="card__details__header" text="[PH] Major Feature" />
-					<Label class="card__details__subheader" text="[PH] Author" />
+		<Panel class="featured__scroller">
+			<Button class="featured__entry" onactivate="FeaturedMenu.open(0)">
+				<Image
+					class="featured__entry__boxart"
+					scaling="stretch-to-cover-preserve-aspect"
+					src="file://{images}/menu/featured/gallery/00_winter-2024.png"
+				/>
+				<Panel class="featured__entry__details">
+					<Label class="featured__entry__details__text" text="[HC] Holiday Mapping Competition 2024" />
 				</Panel>
 			</Button>
-		</Panel>
-		<Panel class="featured-pane ml-2">
-			<!-- TODO: procedurally generate these -->
-			<Panel class="fill-height flow-right">
-				<Button class="card card__occupy" onactivate="">
-					<Panel class="full-width fill-height">
-						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
-						<AvatarImage id="MinorFeature01Avatar" class="card__avatar" />
-					</Panel>
-					<Panel class="card__details">
-						<Label class="card__details__header" text="[PH] Minor Feature" />
-						<Label class="card__details__subheader" text="[PH] Author" />
-					</Panel>
-				</Button>
-				<Button class="card card__occupy ml-2" onactivate="">
-					<Panel class="full-width fill-height">
-						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
-						<AvatarImage id="MinorFeature02Avatar" class="card__avatar" />
-					</Panel>
-					<Panel class="card__details">
-						<Label class="card__details__header" text="[PH] Minor Feature" />
-						<Label class="card__details__subheader" text="[PH] Author" />
-					</Panel>
-				</Button>
-			</Panel>
-			<Panel class="fill-height flow-right mt-2">
-				<Button class="card card__occupy" onactivate="">
-					<Panel class="full-width fill-height">
-						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
-						<AvatarImage id="MinorFeature03Avatar" class="card__avatar" />
-					</Panel>
-					<Panel class="card__details">
-						<Label class="card__details__header" text="[PH] Minor Feature" />
-						<Label class="card__details__subheader" text="[PH] Author" />
-					</Panel>
-				</Button>
-				<Button class="card card__occupy ml-2" onactivate="">
-					<Panel class="full-width fill-height">
-						<Image class="card__image" src="file://{images}/menu/p2ce-generic.png" scaling="stretch-to-cover-preserve-aspect" />
-						<AvatarImage id="MinorFeature04Avatar" class="card__avatar" />
-					</Panel>
-					<Panel class="card__details">
-						<Label class="card__details__header" text="[PH] Minor Feature" />
-						<Label class="card__details__subheader" text="[PH] Author" />
-					</Panel>
-				</Button>
-			</Panel>
+			<Button class="featured__entry" onactivate="FeaturedMenu.open(1)">
+				<Image
+					class="featured__entry__boxart"
+					scaling="stretch-to-cover-preserve-aspect"
+					src="file://{images}/menu/featured/gallery/01_open-beta.png"
+				/>
+				<Panel class="featured__entry__details">
+					<Label class="featured__entry__details__text" text="[HC] Open Beta 2026" />
+				</Panel>
+			</Button>
+			<Button disabled="true" class="featured__entry">
+				<Image
+					class="featured__entry__boxart"
+					scaling="stretch-to-cover-preserve-aspect"
+					src="file://{images}/menu/banner-multiverse.png"
+				/>
+				<Panel class="featured__entry__details">
+					<Label class="featured__entry__details__text" text="[HC] Coming Soon..." />
+				</Panel>
+			</Button>
 		</Panel>
 	</Panel>
 </root>

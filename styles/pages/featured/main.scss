@@ -1,6 +1,169 @@
-.featured-pane {
-	width: fill-parent-flow(0.5);
-	max-width: 960px;
-	height: 100%;
-	flow-children: down;
+@use '../../config' as *;
+
+.featured {
+	&__scroller {
+		vertical-align: center;
+		horizontal-align: center;
+		overflow: scroll squish;
+		flow-children: right;
+		padding-bottom: 20px;
+	}
+
+	&__spacer {
+		margin: 0 15px;
+		width: 480px;
+		height: 720px;
+	}
+
+	&__entry {
+		border: $menu-pane-border;
+		background-color: $button-background;
+		flow-children: down;
+		margin: 0 10px;
+
+		$this: &;
+
+		&__boxart {
+			width: 480px;
+			height: 720px;
+		}
+		&__details {
+			width: 100%;
+			padding: 15px;
+			border-top: $menu-pane-border;
+			&__text {
+				font-weight: bold;
+				font-size: 20px;
+				letter-spacing: 1px;
+				width: 100%;
+				max-height: 24px;
+				text-overflow: shrink;
+			}
+		}
+
+		&:hover:not(:disabled) {
+			border-color: $primary-color;
+			background-color: $button-background-hover;
+			sound: 'UIPanorama.P2CE.MenuSelect';
+
+			#{$this}__details {
+				background-color: $button-background-hover;
+				border-color: $primary-color;
+				&__text {
+					color: $bright-color;
+					text-shadow: none;
+				}
+			}
+
+			#{$this}__boxart {
+				opacity: 0.9;
+			}
+		}
+
+		&:disabled {
+			opacity: 0.1;
+			saturation: 0.0;
+		}
+	}
+
+	&__addon {
+		width: 384px;
+		flow-children: down;
+		background-color: $button-background;
+		border: $menu-pane-border;
+		margin-right: 15px;
+		margin-bottom: 15px;
+
+		$this: &;
+
+		&__new-indicator {
+			horizontal-align: left;
+			padding: 6px 10px;
+			background-color: $button-background-hover;
+			border: 1px solid $primary-color;
+			margin: 5px;
+			&__text {
+				text-transform: uppercase;
+				font-weight: bold;
+				letter-spacing: 1px;
+				font-size: 14px;
+			}
+		}
+		&__top {
+			width: 100%;
+		}
+		&__cover {
+			width: 100%;
+			height: 384px;
+		}
+		&__indicator {
+			horizontal-align: right;
+			vertical-align: top;
+			margin: 5px;
+		}
+		&__loader {
+			width: 128px;
+			height: 128px;
+			border: $menu-pane-border;
+			background-color: gradient( radial, 50% 50%, 0% 0%, 50% 50%, from( #00000000 ), to( #000000 ) );
+			border-radius: 100%;
+			vertical-align: center;
+			horizontal-align: center;
+			&__spinner {
+				width: 100%;
+				height: 100%;
+				img-shadow: 2px 2px 8px 3.0 #000000;
+			}
+			&__logo {
+				width: 64px;
+				height: 64px;
+				vertical-align: center;
+				horizontal-align: center;
+				img-shadow: 2px 2px 8px 3.0 #000000;
+			}
+		}
+		&__details {
+			width: 100%;
+			margin-left: 0;
+			padding: 15px;
+			border-top: $menu-pane-border;
+			background-color: $button-background;
+			flow-children: down;
+
+			&__desc {
+				letter-spacing: 1px;
+				font-size: 18px;
+				font-weight: bold;
+				max-height: 23px;
+				text-overflow: shrink;
+			}
+		}
+		&:disabled,
+		&:parentdisabled {
+			opacity: 0.25;
+
+			#{$this}__cover {
+				blur: fastgaussian(15, 15, 4);
+				saturation: 0;
+			}
+		}
+		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+		.InputController &:focus:not(:disabled):not(:parentdisabled) {
+			border-color: $primary-color;
+			background-color: $button-background-hover;
+
+			#{$this}__cover {
+				opacity: 0.9;
+			}
+
+			#{$this}__details {
+				border-color: $primary-color;
+				background-color: $button-background-hover;
+				&__title,
+				&__desc {
+					color: $bright-color;
+				}
+			}
+		}
+	}
 }

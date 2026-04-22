@@ -37,6 +37,14 @@
 			</BaseBlurTarget>
 			<Panel id="PageBlurContent" class="mainmenu__pause-content-blur" hittest="false" />
 
+			<Image
+				id="MainMenuFeaturedOverlay"
+				class="mainmenu__featured-overlay"
+				scaling="stretch-to-cover-preserve-aspect"
+				hittest="false"
+				src="file://{images}/menu/featured/gallery/01_open-beta.png"
+			/>
+
 			<VersionInfo class="mainmenu__version" />
 
 			<Panel id="MenuMainContent" class="mainmenu__menu" hittest="false" hittestchildren="true">
