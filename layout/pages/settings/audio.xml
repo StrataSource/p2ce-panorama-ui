@@ -203,11 +203,12 @@
 				<SettingsSlider
 					text="#Settings_ClosedCaptions_FontSize"
 					infomessage="#Settings_ClosedCaptions_FontSize_info"
-					psvar="cc.font_size"
+					convar="cc_panorama_font_size"
 					tags="cc,closecaption,captions,audio,font,font size,size"
 					min="18"
 					max="26"
-					increment="1"
+					snaptoincrement="true"
+					increment="0.125"
 					hasdocspage="false"
 					changeoverride="$.DispatchEvent('ReloadCCSettings')"
 				/>
@@ -215,10 +216,22 @@
 				<SettingsSlider
 					text="#Settings_ClosedCaptions_BGOpacity"
 					infomessage="#Settings_ClosedCaptions_BGOpacity_info"
-					psvar="cc.bg_opacity"
+					convar="cc_panorama_bg_opacity"
 					min="0"
 					max="1"
-					percentage="true"
+					displayprecision="2"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsSlider
+					text="[HC] Text Margin"
+					infomessage="[HC] Text Margin"
+					convar="cc_panorama_entry_margin"
+					min="2"
+					max="10"
+					snaptoincrement="true"
+					increment="0.125"
 					hasdocspage="false"
 					changeoverride="$.DispatchEvent('ReloadCCSettings')"
 				/>
