@@ -1,0 +1,22 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/save-indicator.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/hud/save-indicator.ts" />
+	</scripts>
+
+	<Panel class="save-indicator">
+		<AnimatedImageStrip
+			id="Spinner"
+			animating="true"
+			defaultframe="0"
+			frametime="100ms"
+			src="file://{images}/hud/spinner_saving_strip.tga"
+			scaling="stretch-to-cover-preserve-aspect"
+		/>
+		<Label class="save-indicator__label" id="StatusLabel" text="#PORTAL2_Hud_GameSaved" />
+	</Panel>
+</root>

@@ -135,6 +135,11 @@
 					hasdocspage="false"
 					viewgameduringedit="true"
 				/>
+
+				<SettingsEnum text="#Settings_Hud_Autosave" convar="save_hud_autosave" infomessage="#Settings_Hud_Autosave_Info" hasdocspage="false">
+					<RadioButton group="hudautosave" text="#Common_Off" value="0" />
+					<RadioButton group="hudautosave" text="#Common_On" value="1" />
+				</SettingsEnum>
 			</Panel>
 		</Panel>
 	</Panel>
