@@ -7,9 +7,16 @@
 	width: fit-children;
 
 	&__label {
+		color: $bright-color;
 		font-size: 30px;
+
+		// Alternate style that matches Portal 2
+		// color: #dddddd;
+		// font-family: 'Univers LT Std 57 Cn';
+		// font-size: 34px;
+		
 		vertical-align: center;
-		margin-left: 15px;
+		margin-left: 12px;
 	}
 
 	& > AnimatedImageStrip {
