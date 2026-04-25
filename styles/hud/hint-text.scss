@@ -1,35 +1,66 @@
+@use '../config' as *;
+
 .hud-hint {
-	width: 750px;
 	flow-children: none;
 	opacity: 0;
-	horizontal-align: center;
-	background-color: black;
+	horizontal-align: right;
+	background-color: $hl2-bg;
+	border-radius: 10px;
+	margin-right: 50px;
 
-	&--visible {
-		opacity: 1;
+	&__show {
+		animation-name: hint-text-show-anim;
+		animation-duration: 0.5s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: 1;
+		animation-fill-mode: both;
 	}
 
-	&--priority {
+	&__hide {
+		animation-name: hint-text-hide-anim;
+		animation-duration: 0.5s;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: 1;
+		animation-fill-mode: both;
 	}
 
 	&__label {
 		horizontal-align: center;
+		text-align: center;
 		height: fit-children;
-		color: #ffffff;
-
-		font-size: 20px;
-		font-weight: bold;
-		text-shadow-fast: 1px 1px #00000088;
+		color: $hl2-yellow;
+		margin: 15px;
+		font-family: $font-halflife2-hud;
+		font-size: 24px;
 		text-overflow: shrink;
 	}
 
 	&__text {
 		flow-children: down;
-
 		vertical-align: middle;
 		horizontal-align: center;
 		height: fit-children;
 		padding-top: 8px;
 		padding-bottom: 8px;
+	}
+}
+
+@keyframes hint-text-show-anim {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes hint-text-hide-anim {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
 	}
 }

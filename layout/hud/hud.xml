@@ -23,7 +23,7 @@
 		<!-- misleading name, not 'bottom-center' but 'below center' -->
 		<Panel id="HudBottomCenter" hittest="false" hittestchildren="false">
 			<!-- TODO: Fixup hint text stuff, we currently don't have any hints and it's annoying -->
-			<!--ChaosHudHintText id="HudHintText" /-->
+			<HudHintText id="HintPanel"/>
 		</Panel>
 
 		<!-- Anchored to the bottom-left corner of the screen, laid out from top to bottom -->

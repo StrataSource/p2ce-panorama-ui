@@ -243,6 +243,14 @@
 
 		"Valve_Hint_CarryTurret"			"or use Gravity Gun to pick up Turret"
 		"Valve_Hint_CROSSBOW"				"Crossbow Zoom"
+		
+		"Valve_Hint_Alt_Weapon_SMG1"		"{s:bind1}\tFIRE SMG GRENADE"
+		"Valve_Hint_Alt_Weapon_Crossbow"	"{s:bind2}\tCROSSBOW SCOPE"
+		"Valve_Hint_Alt_Weapon_AR2"			"{s:bind1}\tCHARGED PULSE"
+		"Valve_Hint_Alt_Weapon_Shotgun"		"{s:bind1}\tFIRE ONE BARREL\n{s:bind2}\tFIRE BOTH BARRELS"
+		"Valve_Hint_Alt_Weapon_Frag"		"{s:bind1}\tTHROW GRENADE\n{s:bind2}\tDROP GRENADE"
+		"Valve_Hint_Alt_Weapon_Bugbait"		"{s:bind1}\tTHROW PHEROPOD\n{s:bind2}\tSQUEEZE PHEROPOD"
+		"Valve_Hint_Alt_Weapon_Physcannon"	"{s:bind1}\tLAUNCH OBJECT\n{s:bind2}\tGRAB OBJECT"
 
 		// PORTAL 2 INSTRUCTOR HINTS
 		"PORTAL2_HINT_GESTURE"				"Gesture"

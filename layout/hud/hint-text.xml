@@ -8,7 +8,13 @@
 <root>
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/hint-text.scss" />
 	</styles>
+	
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/hud/hint-text.ts" />
+	</scripts>
 
 	<HudHintText hittest="false" class="hud-hint">
 		<Panel class="hud-hint__text">
