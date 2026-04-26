@@ -41,7 +41,7 @@
 					tags="sentry"
 				>
 					<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.sentryUpdateConsent()">
-						<Label class="button__text" text="[HC] Update Consent" />
+						<Label class="button__text" text="#Settings_Menu_Sentry_ConsentButton" />
 					</Button>
 				</SettingsEnum>
 
@@ -87,7 +87,7 @@
 
 			<Panel id="GameUISubSection" class="settings-group">
 				<Panel class="settings-group__header">
-					<Label class="settings-group__title" text="[HC] In-Game Interface" tags="ingame,game,ui" />
+					<Label class="settings-group__title" text="#Settings_Interface_InGame_Title" tags="ingame,game,ui" />
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('GameUISubSection');">
 							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
@@ -95,7 +95,7 @@
 					</TooltipPanel>
 				</Panel>
 
-				<SettingsEnum text="[HC] Show Crosshair" convar="crosshair" infomessage="[HC] Show Xhair Desc" hasdocspage="false">
+				<SettingsEnum text="#Settings_Interface_InGame_Xhair" convar="crosshair" infomessage="#Settings_Interface_InGame_Xhair_Info" hasdocspage="false">
 					<RadioButton group="showxhair" text="#Common_Off" value="0" />
 					<RadioButton group="showxhair" text="#Common_On" value="1" />
 				</SettingsEnum>
@@ -111,8 +111,8 @@
 				</SettingsEnum>
 
 				<SettingsSlider
-					text="[HC] Crosshair Scale"
-					infomessage="[HC] Crosshair Scale Desc"
+					text="#Settings_Portal1_xhair_scale"
+					infomessage="#Settings_Portal1_xhair_scale_info"
 					min="0.1"
 					max="2"
 					convar="cl_portal_crosshair_scale"
