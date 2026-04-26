@@ -431,7 +431,7 @@
 		"Panorama_Lang_Footer_Turkish"				"TURKISH"
 		"Panorama_Lang_Footer_Ukrainian"			"UKRAINIAN"
 
-		"Panorama_MoviePlaybackError"				"An error ocurred during video playback"
+		"Panorama_MoviePlaybackError"				"An error occurred during video playback"
 
 		"Debugger_PaintInfo"						"Show Paint Info"
 		"Debugger_Style"							"Style"
