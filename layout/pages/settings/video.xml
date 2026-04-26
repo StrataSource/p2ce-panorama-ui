@@ -183,7 +183,7 @@
 				<Panel class="settings-group__subtitle hide">
 					<Label class="settings-enum-dropdown__title ml-3" text="#Settings_Video_Presets" />
 					<DropDown id="PresetDropdown" class="dropdown mr-3" menuclass="dropdown-menu">
-						<Label text="[HC] Custom" id="PresetDropdown0" value="0" />
+						<Label text="#Settings_General_CustomPreset" id="PresetDropdown0" value="0" />
 						<Label text="#Settings_General_EngineersToast" id="PresetDropdown1" value="1" />
 						<Label text="#Settings_General_Low" id="PresetDropdown2" value="2" />
 						<Label text="#Settings_General_Medium" id="PresetDropdown3" value="3" />
@@ -333,7 +333,7 @@
 
 			<Panel id="ExtraSubSection" class="settings-group">
 				<Panel class="settings-group__header">
-					<Label class="settings-group__title" text="[HC] Extra" />
+					<Label class="settings-group__title" text="#Settings_Misc_Title" />
 				</Panel>
 				<SettingsEnum
 					text="#Settings_Misc_solenergy_refract"
@@ -383,9 +383,10 @@
 				</SettingsEnum>
 			</Panel>
 
-			<Panel class="settings-page__spacer hide" />
+			<Panel class="settings-page__spacer" />
 
-			<Panel id="TextureReplaceSubSection" class="settings-group hide">
+			<!-- Pivot (26/04/2026): Unhiding this section as it seems to work fine on Pano UI on staging now, given that we now ship the correct assets in engine -->
+			<Panel id="TextureReplaceSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_TextureReplace_Title" />
 
@@ -410,14 +411,12 @@
 							<Label text="#Settings_TextureReplace_1" id="materrortype1" value="1" />
 						</SettingsEnumDropDown>
 
-						<!--
-						https://github.com/ChaosInitiative/Chaos-Source/issues/368
+						<!-- Pivot (26/04/2026): Uncommenting this as Engine#368 was fixed several years ago -->
 						<SettingsEnumDropDown text="#Settings_TextureReplace_TypeCubemap" convar="mat_error_texture_type_cubemap" infomessage="#Settings_TextureReplace_TypeCubemap_Info">
 							<Label text="#Settings_TextureReplace_TypeCubemap_0" id="materrortypecubemap0" value="0"/>
 							<Label text="#Settings_TextureReplace_TypeCubemap_1" id="materrortypecubemap1" value="1"/>
 							<Label text="#Settings_TextureReplace_TypeCubemap_2" id="materrortypecubemap2" value="2"/>
 						</SettingsEnumDropDown>
-						-->
 
 						<SettingsEnumDropDown
 							text="#Settings_TextureReplace_Advanced"
