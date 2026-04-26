@@ -198,6 +198,32 @@ class MenuManager {
 				}
 			});
 
+			$.RegisterForUnhandledEvent(
+				'PanoramaComponent_Campaign_OnCampaignEvaluationRequested',
+				(campaign: string) => {
+					GameInterfaceAPI.ConsoleCommand('disconnect');
+					//$.DispatchEvent('MainMenuPauseGame');
+					//$.Msg(campaign);
+					//UiToolkitAPI.ShowGenericPopupThreeOptions(
+					//	'[PH] Evaluate Chamber',
+					//	'[PH] What did you think?\n(Pretend there are upvote/downvote icons here!)',
+					//	'blur',
+					//	'[HC] Next Test Chamber',
+					//	() => {
+					//		CampaignAPI.MoveToNextMap();
+					//	},
+					//	() => {
+					//	'[HC] Return to Queue',
+					//		GameInterfaceAPI.ConsoleCommand('disconnect');
+					//	'[HC] View in Workshop',
+					//	},
+					//	() => {
+					//		$.Msg('pretend that this works!');
+					//	}
+					//)
+				}
+			);
+
 			$.RegisterForUnhandledEvent('MainMenuSetPauseBlur', (doBlur: boolean) => {
 				if (doBlur) {
 					this.gradientBar.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
