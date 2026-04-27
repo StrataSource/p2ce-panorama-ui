@@ -101,61 +101,90 @@
 
 	flow-children: right;
 
-	background-color: $tab-background;
-	box-shadow: $tab-shadow;
+	&__border {
+		width: 1px;
+		background-color: $base-700;
+		height: 45px;
 
-	$border: $tab-border-width solid $tab-border-color;
-	border: $border;
-	border-bottom: 0px none;
+		&__left {
+			margin-left: 2px;
+		}
+		&__right {
+			margin-right: 2px;
+		}
+	}
 
-	&__tab {
-		padding: $tab-padding;
+	&__item {
+		background-color: $button-background;
+		flow-children: down;
+		&__inner {
+			padding: 5px 25px;
+			height: 45px;
+		}
 
-		border-bottom: $tab-lower-border-height solid $tab-lower-border-color;
+		&:parentdisabled,
+		&:disabled {
+			opacity: 0.1;
+		}
 
-		&:hover {
-			background-color: $tab-background-hover;
-			border-bottom: $tab-lower-border-height solid $tab-lower-border-hover-color;
+		&:hover:not(:parentdisabled):not(:disabled):not(:selected),
+		&:focus:not(:parentdisabled):not(:disabled) {
+			background-color: $button-background-hover;
+			border-color: $primary-color;
 		}
 
 		&:selected {
-			background-color: $tab-background-selected;
-			border-bottom: $tab-lower-border-height solid $tab-lower-border-selected-color;
-		}
+			border-color: $primary-color;
+			background-color: $primary-color;
 
-		&:disabled {
-			background-color: $tab-background-disabled;
+			& > #{$root}__subitem:hover {
+				background-color: $primary-950;
+			}
+
+			#{$root}__item-label {
+				color: $base-950;
+			}
+
+			#{$root}__subitem-label {
+				color: $base-950;
+			}
 		}
+	}
+
+	&__item-label {
+		font-weight: bold;
+		letter-spacing: 1px;
+		font-size: 26px;
+		overflow: squish;
+		text-overflow: shrink;
+		vertical-align: center;
+		transform: translateY(-2px);
 	}
 
 	&__gap {
-		width: $tab-border-width;
+		width: 2px;
 		height: 100%;
-		background-color: $tab-border-color;
-		border-bottom: $tab-lower-border-height solid $tab-lower-gap-color;
-	}
-
-	&__text {
-		@include mixin.font-styles($use-header: $tab-use-header-font, $light-header: $tab-light-header);
-		font-size: $tab-font-size;
-		vertical-align: center;
-		horizontal-align: center;
-		margin: 0px;
-		padding: $tab-text-padding;
-		opacity: 0.9;
-
-		#{$root}__tab:hover &,
-		#{$root}__tab:selected & {
-			opacity: 1;
-		}
-
-		#{$root}__tab:disabled & {
-			opacity: 0.2;
-		}
+		margin: 0 2px;
 	}
 
 	.RadioBox {
 		visibility: collapse;
+	}
+
+	&__indicator {
+		width: 100%;
+		height: 35px;
+		background-color: $button-background-hover;
+		border-bottom: 1px solid $primary-color;
+		border-top: 1px solid $primary-color;
+		&__text {
+			text-transform: uppercase;
+			font-weight: bold;
+			letter-spacing: 1px;
+			font-size: 16px;
+			horizontal-align: center;
+			vertical-align: center;
+		}
 	}
 }
 

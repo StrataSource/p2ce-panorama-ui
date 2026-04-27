@@ -1,0 +1,31 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/campaigns/content-selector-main.ts" />
+	</scripts>
+
+	<Panel class="mainmenu__page" onload="ContentSelector.onLoad()">
+		<Panel class="tabs">
+			<Panel class="tabs__border tabs__border__right" />
+			<RadioButton id="CampaignsBtn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(0)">
+				<Panel class="tabs__item__inner">
+					<Label class="tabs__item-label" text="#MainMenu_Navigation_Campaign" />
+				</Panel>
+				<Panel class="tabs__indicator hide">
+					<Label class="tabs__indicator__text" text="#MainMenu_Content_New" />
+				</Panel>
+			</RadioButton>
+			<Panel class="tabs__gap" />
+			<RadioButton id="MapsBtn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(1)">
+				<Panel class="tabs__item__inner">
+					<Label class="tabs__item-label" text="#MainMenu_Navigation_Workshop" />
+				</Panel>
+			</RadioButton>
+			<Panel class="tabs__border tabs__border__left" />
+		</Panel>
+		<Panel id="Insert" class="mt-2" />
+	</Panel>
+</root>

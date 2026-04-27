@@ -37,23 +37,6 @@
 						<Label class="card__details__header" text="#MainMenu_Campaigns_CType_MP" />
 					</Panel>
 				</Button>
-				<Button
-					class="card play-menu__card ml-3"
-					onactivate="PlayMenu.onCampaignBtnPressed()"
-					tabindex="auto"
-					selectionpos="auto"
-				>
-					<Image
-						class="card__image"
-						src="file://{images}/menu/vertical-banner-campaigns.png"
-						scaling="stretch-to-cover-preserve-aspect"
-						textureheight="1920"
-						texturewidth="1080"
-					/>
-					<Panel class="card__details card__details__no-bg">
-						<Label class="card__details__header" text="#MainMenu_Navigation_Campaign" />
-					</Panel>
-				</Button>
 			</Panel>
 		</Panel>
 	</Panel>
