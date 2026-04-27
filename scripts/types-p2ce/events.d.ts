@@ -37,4 +37,5 @@ interface GlobalEventNameMap {
 	CampaignMenuRefreshUserSettings: () => void;
 	MainMenuNotifFailLoad: () => void;
 	MainMenuSetPauseBlur: (doBlur: boolean) => void;
+	MainMenuFirstButtonFocus: () => void;
 }
