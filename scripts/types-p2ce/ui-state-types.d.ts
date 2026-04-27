@@ -62,6 +62,10 @@ declare const enum CampaignDataType {
 	P2CE_SINGLE_WS_SPECIAL = 0
 }
 
+declare const enum MiscStorageKeys {
+	CONTENT_TAB = 'misc.last_content_tab',
+}
+
 type MenuButton = {
 	id: string;
 	headline: string;
