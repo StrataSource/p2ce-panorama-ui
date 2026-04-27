@@ -433,6 +433,7 @@ class MenuManager {
 		newPanel.SetFocus();
 
 		stripDevTagsFromLabels(newPanel);
+		setExperimentalFeatures(newPanel);
 
 		// hide menu elements, only done on root level
 		if (this.pages.length === 1) {

@@ -154,6 +154,27 @@ function installImageFallbackHandler(imagePanel: Image) {
 	});
 }
 
+function setExperimentalFeatures(panel: GenericPanel) {
+	const psAllowExperiments = $.persistentStorage.getItem(MiscStorageKeys.EXPERIMENTS);
+	let allowExperiments = 0;
+	if (psAllowExperiments === null) {
+		$.persistentStorage.setItem(MiscStorageKeys.EXPERIMENTS, 0);
+	} else {
+		allowExperiments = Number(psAllowExperiments);
+	}
+	
+	if (panel.HasClass('ExperimentalOnly')) {
+		if (allowExperiments === 0) {
+			panel.DeleteAsync(0);
+			return;
+		}
+	}
+
+	for (const child of panel?.Children() ?? []) {
+		setExperimentalFeatures(child);
+	}
+}
+
 class VirtualMap implements ChapterMap {
 	name: string;
 	meta: Map<string, string>;

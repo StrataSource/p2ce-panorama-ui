@@ -117,6 +117,15 @@
 	&__item {
 		background-color: $button-background;
 		flow-children: down;
+		
+		$this: &;
+
+		&__taller {
+			#{$this}__inner {
+				height: 60px;
+			}
+		}
+
 		&__inner {
 			padding: 5px 25px;
 			height: 45px;
