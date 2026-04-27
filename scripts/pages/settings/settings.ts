@@ -503,8 +503,8 @@ class MainMenuSettings {
 				panel.paneltype
 			);
 		}
-		panel.SetPanelEvent('onmouseover', () => showInfoFunc);
-		panel.SetPanelEvent('onfocus', () => showInfoFunc);
+		panel.SetPanelEvent('onmouseover', () => { showInfoFunc(); });
+		panel.SetPanelEvent('onfocus', () => { showInfoFunc(); });
 	}
 
 	static showInfo(title, message, convar, hasDocs, paneltype) {

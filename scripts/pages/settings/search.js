@@ -274,7 +274,7 @@ class SettingsSearch {
 				[...new Set([...groupTags, ...tags])].join(', ');
 		else tagList.AddClass('settings-search-result__tags--hidden');
 
-		const showInfoEvent = () => {
+		const showInfoFunc = () => {
 			const panel = matches.panel;
 			const message = panel.GetAttributeString('infomessage', '');
 			// Default to true if not set
@@ -290,8 +290,8 @@ class SettingsSearch {
 				panel.paneltype
 			);
 		};
-		searchResult.SetPanelEvent('onmouseover', () => showInfoEvent);
-		searchResult.SetPanelEvent('onfocus', () => showInfoEvent);
+		searchResult.SetPanelEvent('onmouseover', () => { showInfoFunc(); });
+		searchResult.SetPanelEvent('onfocus', () => { showInfoFunc(); });
 
 		searchResult.SetPanelEvent('onactivate', () => {
 			this.clearSearch();
