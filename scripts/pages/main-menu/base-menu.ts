@@ -368,7 +368,7 @@ class BaseMenu {
 			UiToolkitAPI.ShowCustomLayoutPopupParameters(
 				'',
 				'file://{resources}/layout/modals/popups/playtest-consent.xml',
-				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent'
+				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent&cancelAllowed=false'
 			);
 	}
 
@@ -380,7 +380,7 @@ class BaseMenu {
 			UiToolkitAPI.ShowCustomLayoutPopupParameters(
 				'',
 				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
-				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck'
+				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck&cancelAllowed=false'
 			);
 	}
 

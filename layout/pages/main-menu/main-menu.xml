@@ -39,7 +39,7 @@
 
 			<VersionInfo class="mainmenu__version" />
 
-			<Panel id="MenuMainContent" class="mainmenu__menu">
+			<Panel id="MenuMainContent" class="mainmenu__menu" hittest="false" hittestchildren="true">
 				<Panel id="PageBg" class="mainmenu__page-bg" hittest="false" />
 				<Panel id="GradientBar" class="mainmenu__gradient-bar" hittest="false" />
 				<Image

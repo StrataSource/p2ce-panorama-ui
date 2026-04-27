@@ -1,13 +1,38 @@
 @use '../config' as *;
 
 .VersionInfo {
-	flow-children: down;
+	flow-children: right;
 	margin: 5px;
 	padding: 8px 14px;
+	background-color: $button-background-base;
+	border: $menu-pane-border;
+
+	&__Icon {
+		margin-right: 10px;
+	}
+
+	&__AltPadding {
+		padding: 10px 15px;
+	}
+
+	&:hover {
+		background-color: $button-background-hover;
+		border-color: $primary-color;
+	}
 
 	.VersionInfoText {
 		font-size: 12px;
 		font-family: $font-monospace;
-		text-shadow-fast: 2px 2px $base-950;
+
+		&__Bigger {
+			font-size: 18px;
+			font-family: $font-primary;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
+		&__NonDev {
+			width: 100%;
+			font-size: 14px;
+		}
 	}
 }
