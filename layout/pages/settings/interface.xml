@@ -133,6 +133,7 @@
 					infomessage="#Settings_Portal1_xhair_scale_info"
 					min="0.1"
 					max="2"
+					displayprecision="2"
 					convar="cl_portal_crosshair_scale"
 					hasdocspage="false"
 					viewgameduringedit="true"
