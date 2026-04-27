@@ -51,6 +51,7 @@
 								textureheight="64"
 							/>
 						</TooltipPanel>
+						<SourceIndicator class="hide" id="SourceIndicator" />
 					</Panel>
 					<!-- Campaign info; title, description, 'source' -->
 					<Panel class="campaigns__entry__details">
@@ -93,14 +94,28 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="mainmenu__page no-flow" onload="CampaignSelector.init()">
+	<Panel class="fill" onload="CampaignSelector.init()">
 		<!-- CAMPAIGN SELECTOR -->
 		<Panel id="CampaignSelector" class="campaigns">
 			<Panel class="campaigns__left">
 				<Panel class="campaigns__action-bar" tabindex="auto" selectionpos="auto">
+					<Button
+						class="button mr-2"
+						onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/workshop/browse/?appid=440000&amp;childpublishedfileid=0&amp;browsesort=trend&amp;section=readytouseitems&amp;requiredtags%5B%5D=Campaign&amp;created_date_range_filter_start=0&amp;created_date_range_filter_end=0&amp;updated_date_range_filter_start=0&amp;updated_date_range_filter_end=0')"
+						tabindex="auto"
+						selectionpos="auto"
+					>
+						<Image
+							class="button__icon button__icon--left"
+							texturewidth="64"
+							textureheight="64"
+							src="file://{images}/icons/steam.svg"
+						/>
+						<Label class="button__text button__text--right" text="#MainMenu_Campaigns_OpenWS" />
+					</Button>
 					<TextEntry
 						id="SearchBar"
-						class="textentry campaigns__action-bar__textentry fill-width"
+						class="textentry full-height fill-width"
 						placeholder="#MainMenu_Campaigns_Search_FillerText"
 						tabindex="auto"
 						selectionpos="auto"
@@ -120,20 +135,6 @@
 						<Label text="#MainMenu_Campaigns_Search_SortBy_Completion" id="CampaignSortMode5" value="5" />
 						<Label text="#MainMenu_Campaigns_Search_SortBy_CampaignSrc" id="CampaignSortMode6" value="6" />
 					</DropDown>
-					<Button
-						class="button ml-2"
-						onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/workshop/browse/?appid=440000&amp;childpublishedfileid=0&amp;browsesort=trend&amp;section=readytouseitems&amp;requiredtags%5B%5D=Campaign&amp;created_date_range_filter_start=0&amp;created_date_range_filter_end=0&amp;updated_date_range_filter_start=0&amp;updated_date_range_filter_end=0')"
-						tabindex="auto"
-						selectionpos="auto"
-					>
-						<Image
-							class="button__icon button__icon--left"
-							texturewidth="64"
-							textureheight="64"
-							src="file://{images}/icons/steam.svg"
-						/>
-						<Label class="button__text button__text--right" text="#MainMenu_Campaigns_OpenWS" />
-					</Button>
 				</Panel>
 				<!-- Campaign list -->
 				<Panel id="CampaignContainer" class="campaigns__list" tabindex="auto" selectionpos="auto" childfocusonhover="true" />

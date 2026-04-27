@@ -8,3 +8,4 @@ UiToolkitAPI.RegisterPanel2d('LineGraph', 'file://{resources}/layout/components/
 UiToolkitAPI.RegisterPanel2d('VersionInfo', 'file://{resources}/layout/components/version-info.xml');
 UiToolkitAPI.RegisterPanel2d('NewsReel', 'file://{resources}/layout/pages/main-menu/news.xml');
 UiToolkitAPI.RegisterHUDPanel2d('WeaponSwitcher', 'file://{resources}/layout/hud/weapon-switcher.xml');
+UiToolkitAPI.RegisterPanel2d('SourceIndicator', 'file://{resources}/layout/components/item-source.xml');

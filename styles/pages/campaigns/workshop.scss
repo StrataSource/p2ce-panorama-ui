@@ -3,21 +3,17 @@
 .workshop {
 	&__top-bar {
 		width: 100%;
-		max-width: 1024px;
-		horizontal-align: center;
 		flow-children: right;
 	}
 	&__search {
 		width: fill-parent-flow(1);
-		horizontal-align: center;
 	}
 	&__entries {
-		horizontal-align: center;
 		overflow: squish scroll;
 		height: fill-parent-flow(1);
 		flow-children: right-wrap;
-		padding: 0 15px;
 		margin-top: 10px;
+		padding-right: 5px;
 	}
 	&__none {
 		width: fill-parent-flow(1);
@@ -37,7 +33,8 @@
 		}
 	}
 	&__entry {
-		margin: 10px;
+		margin-bottom: 10px;
+		margin-right: 10px;
 		width: 384px;
 		flow-children: down;
 		background-color: $button-background;

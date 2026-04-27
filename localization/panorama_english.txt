@@ -875,7 +875,7 @@
 		"MainMenu_Navigation_Play"						"Play"
 		"MainMenu_Navigation_Play_Tagline"				"Begin testing"
 		"MainMenu_Navigation_Play_Modes"				"Choose what to play"
-		"MainMenu_Navigation_Workshop"					"Workshop Maps"
+		"MainMenu_Navigation_Workshop"					"Maps"
 		"MainMenu_Navigation_Workshop_Tagline"			"Select a Workshop map to play"
 		"MainMenu_Navigation_Campaign"					"Campaigns"
 		"MainMenu_Navigation_Campaign_Tagline"			"Select a Campaign to play"
@@ -1033,6 +1033,7 @@
 		"MainMenu_Campaigns_Search_SortBy_Completion"				"Overall completion"
 		"MainMenu_Campaigns_Search_SortBy_CampaignSrc"				"Campaign source"
 
+		"MainMenu_Content_New"										"New"
 		"MainMenu_Content_Unplayed"									"Unplayed"
 		"MainMenu_Content_InProgress"								"In Progress"
 		"MainMenu_Content_Completed"								"Completed"
@@ -1390,6 +1391,8 @@ This message will only be displayed once, and will not be shown again upon accep
 		"UI_Novote"									"None"
 		"UI_Dependencies"							"Dependencies"
 		"UI_Description"							"Description"
+		"UI_Source_Steam"							"This item is from the Steam Workshop"
+		"UI_Source_Local"							"This item is from your local addons"
 		
 		// Networking Stuff!!!!!
 		// Disconnect Dialog Main

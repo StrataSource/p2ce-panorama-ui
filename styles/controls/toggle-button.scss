@@ -69,14 +69,14 @@
 		}
 	}
 
-	.InputKeyboard &:hover .TickBox,
+	.InputKeyboard &:hover:not(:disabled) .TickBox,
 	.InputController &:focus .TickBox {
 		background-color: $checkbox-background-hover;
 		border: $checkbox-border-hover;
 	}
 
 	&:disabled .TickBox,
-	.InputKeyboard &:disabled:hover .TickBox,
+	.InputKeyboard &:disabled:hover:not(:selected) .TickBox,
 	.InputController &:disabled:focus .TickBox {
 		background-color: $checkbox-background-disabled;
 		border: $button-border-disabled;
@@ -93,7 +93,7 @@
 		background-position: center;
 	}
 
-	.InputKeyboard &:selected:hover .TickBox,
+	.InputKeyboard &:selected:hover:not(:disabled) .TickBox,
 	.InputController &:selected:focus .TickBox {
 		background-color: $checkbox-background-selected-hover;
 	}

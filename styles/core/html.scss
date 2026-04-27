@@ -2,7 +2,7 @@
 @use '../abstract/mixin';
 
 a {
-	color: blue;
+	color: $blue;
 
 	&:hover {
 		text-decoration: underline;

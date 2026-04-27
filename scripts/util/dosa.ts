@@ -92,7 +92,7 @@ class DosaHandler {
 	 * @param {String} nameToken
 	 * @returns {Boolean} Whether a DoSA was added
 	 */
-	static handleDosaButton(panel: Panel, key: string, nameToken: string): boolean {
+	static handleDosaButton(panel: Panel, key?: string, nameToken?: string): boolean {
 		key ??= panel.GetAttributeString('dosaKey', '');
 		nameToken ??= panel.GetAttributeString('dosaNameToken', '');
 

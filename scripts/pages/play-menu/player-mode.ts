@@ -9,15 +9,11 @@ class PlayMenu {
 		);
 	}
 
-	static onCampaignBtnPressed() {
-		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'campaigns/campaign-selector', undefined);
-	}
-
 	static onSinglePlayerBtnPressed() {
-		$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayerWorkshop', 'campaigns/workshop-selector', undefined);
+		$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'campaigns/content-selector-main', undefined);
 	}
 
 	static onMultiPlayerBtnPressed() {
-		$.DispatchEvent('MainMenuOpenNestedPage', 'MultiPlayerWorkshop', 'campaigns/workshop-selector', undefined);
+		$.DispatchEvent('MainMenuOpenNestedPage', 'MultiPlayer', 'campaigns/content-selector-main', undefined);
 	}
 }
