@@ -269,7 +269,12 @@ class MenuManager {
 					(campaign: string | null) => {
 						$.Msg(`MENU MANAGER: Campaign switch event recognized, changing to: ${campaign}`);
 						this.closePages();
-						$.DispatchEvent('MainMenuSwitchFade', false, true);
+						// dont play the fade animation if it's an autogen'd campaign
+						// we jump into it directly and this would cause the unblur anim
+						// to play when we open the pause menu
+						if (campaign === null || !campaign.startsWith('auto_')) {
+							$.DispatchEvent('MainMenuSwitchFade', false, true);
+						}
 						this.deleteMenus();
 						this.openMenuMode();
 					}
