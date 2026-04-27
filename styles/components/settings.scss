@@ -27,7 +27,8 @@
 
 	padding: $settings-padding;
 
-	&:hover {
+	&:hover,
+	&:descendantfocus {
 		background-color: gradient(
 			radial,
 			50% 50%,

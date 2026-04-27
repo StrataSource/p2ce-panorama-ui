@@ -274,7 +274,7 @@ class SettingsSearch {
 				[...new Set([...groupTags, ...tags])].join(', ');
 		else tagList.AddClass('settings-search-result__tags--hidden');
 
-		searchResult.SetPanelEvent('onmouseover', () => {
+		const showInfoEvent = () => {
 			const panel = matches.panel;
 			const message = panel.GetAttributeString('infomessage', '');
 			// Default to true if not set
@@ -289,7 +289,9 @@ class SettingsSearch {
 				hasDocs,
 				panel.paneltype
 			);
-		});
+		};
+		searchResult.SetPanelEvent('onmouseover', () => showInfoEvent);
+		searchResult.SetPanelEvent('onfocus', () => showInfoEvent);
 
 		searchResult.SetPanelEvent('onactivate', () => {
 			this.clearSearch();

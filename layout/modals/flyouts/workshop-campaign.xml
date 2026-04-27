@@ -30,7 +30,7 @@
 		</snippet>
 	</snippets>
 
-	<PopupCustomLayout class="FlyoutPanel Hidden" popupbackground="blur" onload="WorkshopCampaignFlyout.onLoad()">
+	<PopupCustomLayout class="FlyoutPanel Hidden" popupbackground="blur" onload="WorkshopCampaignFlyout.onLoad()" tabindex="auto" selectionpos="auto">
 		<Panel class="flow-right">
 			<Panel class="workshop-campaign__cover">
 				<Image
@@ -80,7 +80,7 @@
 			</Panel>
 		</Panel>
 		<Panel class="flow-right mt-2">
-			<Button class="button button--orange fill-width" onactivate="WorkshopCampaignFlyout.play()">
+			<Button id="PlayBtn" class="button button--orange fill-width" onactivate="WorkshopCampaignFlyout.play()">
 				<Image class="button__icon button__icon--left" texturewidth="32" textureheight="32" src="file://{images}/play.svg" />
 				<Label class="button__text button__text--right" text="#MainMenu_Navigation_Play" />
 			</Button>

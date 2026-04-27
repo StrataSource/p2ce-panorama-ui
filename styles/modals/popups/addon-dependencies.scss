@@ -80,7 +80,8 @@
 		&__tooltip {
 		}
 
-		&:hover:not(:disabled) {
+		&:hover:not(:disabled),
+		&:focus {
 			background-color: $button-background-hover;
 
 			#{$root}__text {

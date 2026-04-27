@@ -20,7 +20,12 @@ class WorkshopCampaignFlyout {
 
 	static onLoad() {
 		const ctx = $.GetContextPanel();
-		ctx.SetFocus();
+		$('#PlayBtn')!.SetFocus();
+
+		ctx.SetPanelEvent('onfocus', () => {
+			$('#PlayBtn')!.SetFocus();
+		});
+
 		// MUST CHANGE IF ADDON REPRESENTATION CHANGES!!!!!
 		this.addonId = ctx.GetAttributeInt('addon', 0);
 		this.campaign = ctx.GetAttributeString('campaign', '');
