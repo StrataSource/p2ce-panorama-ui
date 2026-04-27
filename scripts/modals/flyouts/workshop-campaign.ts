@@ -74,12 +74,13 @@ class WorkshopCampaignFlyout {
 		this.depsWrapper.SetHasClass('hide', !hasDeps);
 
 		$.RegisterForUnhandledEvent('PanoramaComponent_Workshop_OnAddonInstalled', (addon: AddonIndex_t) => {
-			$.Msg('download!');
 			const meta = WorkshopAPI.GetAddonMeta(addon);
 			const panels = this.depsPanels.get(meta.workshopid);
 			if (!panels) return;
-			$.Msg(`got: ${meta.title}`);
 			panels.btn.RemoveClass('workshop-campaign__dep__cover__missing');
+
+			const missingDeps = WorkshopAPI.GetAddonDependenciesMissing(this.addonId);
+			this.hasMissing = missingDeps !== null && missingDeps.length > 0;
 		});
 	}
 
