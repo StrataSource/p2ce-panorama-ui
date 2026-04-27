@@ -55,6 +55,8 @@ class CampaignSettingsTab {
 		$.RegisterForUnhandledEvent('CampaignMenuRefreshUserSettings', () => {
 			this.updateSummary();
 		});
+
+		$('#CampaignSettingsStart')!.SetFocus();
 	}
 
 	static show() {

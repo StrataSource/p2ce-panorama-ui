@@ -852,6 +852,8 @@
 		
 		"Settings_Menu_Console"							"Enable Developer Console"
 		"Settings_Menu_Console_info"					"This setting determines the enablement state of the developer console, which allows users to send internal commands to the game engine.\nThe developer console is a powerful tool intended for advanced users (such as map makers), and is not required for normal play. Some of the commands present in the Source engine are dangerous and (if misused) can potentially crash the game, cause saved progress to be lost, and/or render certain gameplay elements inoperable."
+		"Settings_Menu_Experimental"					"Enable Experimental UI Features"
+		"Settings_Menu_Experimental_info"				"Allows experimental features to appear in various places where applicable. These features are likely unstable or have additional quirks that would prevent an average player from utilizing them properly."
 		"Settings_Menu_Sentry"							"Sentry Crash Reporting"
 		"Settings_Menu_Sentry_info"						"Controls submission of crash dumps, processed via Sentry.\nThe data used in crash reports contain a complete call stack containing the last few moments of the engine prior to the crash (including the last few lines of developer console log output), the current Steam build ID, and your Steam Community profile ID. No other data is sent to the P2:CE team.\nThis feature is optional and can be turned on or off at any time."
 		"Settings_Menu_Sentry_ConsentButton"			"Update Consent"
@@ -1123,9 +1125,9 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Setup_AdvExpand"						"Advanced Game Settings and Custom Options"
 		"MainMenu_Campaigns_Setup_PanelButton_Presets_Title"		"Presets"
 		"MainMenu_Campaigns_Setup_PanelButton_Presets_Desc"			"Apply a pre-defined set of customizations"
-		"MainMenu_Campaigns_Setup_PanelButton_Admin_Title"			"Server settings"
+		"MainMenu_Campaigns_Setup_PanelButton_Admin_Title"			"Server Settings"
 		"MainMenu_Campaigns_Setup_PanelButton_Admin_Desc"			"Administrative settings; player counts, lockdown, demo recording..."
-		"MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title"		"Map selection"
+		"MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title"		"Map Selection"
 		"MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc"		"Start at a specific map within this chapter"
 		"MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title"	"Basic Gameplay"
 		"MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc"	"Simple configurable constraints"
@@ -1133,7 +1135,7 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc"		"Select custom features and scripts that change how the game behaves"
 		
 		// proto
-		"MainMenu_Campaigns_Setup_Proto_Title"						"This system is a prototype experiment and may be changed or removed in the future."
+		"MainMenu_Campaigns_Setup_Proto_Title"						"This system is experimental and may be changed or removed in the future."
 		"MainMenu_Campaigns_Setup_Proto_Desc"						"Convars changed through this system will not persist in saves. They will also not be reverted upon exiting a campaign."
 		
 		// campaign setup - server settings
