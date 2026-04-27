@@ -115,6 +115,10 @@ class PauseMenu {
 			$.DispatchEvent('MainMenuAddButton', btn);
 		}
 
+		// style doesnt update when the focus is set from the above event
+		// so adding another event to just do it again because THE GAME HATES ME!!!!!!!
+		$.DispatchEvent('MainMenuFirstButtonFocus');
+
 		$.DispatchEvent('MainMenuHideBackgroundMovie');
 		$.DispatchEvent('MainMenuHideBackgroundImage', true);
 		$.DispatchEvent('MainMenuSwitchReverse', true);
