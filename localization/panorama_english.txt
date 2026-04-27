@@ -1359,9 +1359,9 @@ We encourage you to file bug reports and feature requests on P2:CE's issue track
 	• https://github.com/StrataSource/Portal-2-Community-Edition
 	• https://github.com/StrataSource/Engine
 		
-By clicking on \"I Understand\", you acknowledge the risks involved in using this preview release. If you choose to decline these terms, P2:CE will exit.
+By proceeding, you acknowledge the risks involved in using this preview release. If you choose to decline these terms, P2:CE will exit.
 
-This message will only be displayed once, and will not be shown again upon acceptance."
+This message will not appear again after you acknowledge the risks, however, you can view this again by clicking on the Open Beta version banner in the bottom right corner of the menu."
 
 		"MainMenu_Compat_Warning_Header"			"Compatibility Warning"
 		"MainMenu_Compat_Warning"					"<b>Portal 1 and Half-Life 2 currently do not have full functionality on P2:CE.</b> You may experience issues like missing or replaced textures, broken animations, crashing, missing gameplay elements crucial for progression, and more. While we plan to fix some of these issues in the future, it is not a high priority. <b>Please do not report bugs related to Portal 1/Half-Life 2.</b>"

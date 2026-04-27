@@ -4,27 +4,32 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{scripts}/modals/popups/prerelease-warn-dialog.js" />
+		<include src="file://{scripts}/modals/popups/prerelease-warn-dialog.ts" />
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
 
 	<PopupCustomLayout
 		class="PopupPanel Hidden generic-popup generic-popup--large"
 		popupbackground="blur"
-		onload="$('#DeclineBtn').SetFocus()"
+		onload="PrereleaseAck.onLoad()"
 	>
 		<Panel class="flow-down">
-			<Label class="text-h2 mb-4 full-width text-align-center" text="#MainMenu_PrereleaseNotice_Title" />
+			<Label class="text-h2 mb-2 full-width text-align-center" text="#MainMenu_PrereleaseNotice_Title" />
 			<Label class="mb-2" text="#MainMenu_PrereleaseNotice_Description" />
 		</Panel>
 		
-		<Panel class="flow-right full-width mt-4" tabindex="auto" selectionpos="auto">
-			<Button class="button horizontal-align-left" onactivate="PrereleaseAck.onDOSA()" tabindex="auto" selectionpos="auto">
-				<Label class="button__text" text="#MainMenu_PrereleaseNotice_Acknowledge" />
-			</Button>
+		<Panel class="flow-right full-width mt-1" tabindex="auto" selectionpos="auto">
+			<Panel class="flow-down">
+				<ToggleButton id="Checkbox" onactivate="PrereleaseAck.checkboxChanged()" class="checkbox mb-1">
+					<Label text="#MainMenu_PrereleaseNotice_Acknowledge" />
+				</ToggleButton>
+				<Button id="ContinueButton" class="button horizontal-align-left" onactivate="PrereleaseAck.onDOSA()" tabindex="auto" selectionpos="auto">
+					<Label class="button__text" text="#UI_OK" />
+				</Button>
+			</Panel>
 			<Button
 				id="DeclineBtn"
-				class="button button--red horizontal-align-right"
+				class="button button--red horizontal-align-right vertical-align-bottom"
 				onactivate="GameInterfaceAPI.ConsoleCommand('quit')"
 				tabindex="auto"
 				selectionpos="auto"
