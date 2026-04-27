@@ -43,7 +43,7 @@ class AddonDependencies {
 	}
 
 	static onLoad() {
-		$.GetContextPanel().SetFocus();
+		$('#CancelButton')!.SetFocus();
 		this.checkAddons();
 		$.RegisterForUnhandledEvent('PanoramaComponent_Workshop_OnAddonInstalled', (addon: AddonIndex_t) => {
 			this.newAddonInstalled(addon);

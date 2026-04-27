@@ -51,18 +51,20 @@
 			<Label id="Desc" class="horizontal-align-center text-align-center" text="#DependencyWarning_Desc" />
 		</Panel>
 
-		<Panel class="addon-deps">
-			<Panel id="DependenciesPanel" class="addon-deps__inner">
+		<Panel class="flow-down full-width" tabindex="auto" selectionpos="auto">
+			<Panel class="addon-deps">
+				<Panel id="DependenciesPanel" class="addon-deps__inner">
+				</Panel>
 			</Panel>
-		</Panel>
-		
-		<Panel class="flow-right horizontal-align-right" tabindex="auto" selectionpos="auto">
-			<Button id="ContinueButton" class="button button--red mr-2" tabindex="auto" selectionpos="auto">
-				<Label id="ContinueText" class="button__text" text="#DependencyWarning_Action_Ignore" />
-			</Button>
-			<Button class="button" tabindex="auto" selectionpos="auto" onactivate="AddonDependencies.close()">
-				<Label class="button__text" text="#DependencyWarning_Action_Cancel" />
-			</Button>
+			
+			<Panel class="flow-right horizontal-align-right">
+				<Button id="ContinueButton" class="button button--red mr-2" tabindex="auto" selectionpos="auto">
+					<Label id="ContinueText" class="button__text" text="#DependencyWarning_Action_Ignore" />
+				</Button>
+				<Button id="CancelButton" class="button" tabindex="auto" selectionpos="auto" onactivate="AddonDependencies.close()">
+					<Label class="button__text" text="#DependencyWarning_Action_Cancel" />
+				</Button>
+			</Panel>
 		</Panel>
 	</PopupCustomLayout>
 </root>

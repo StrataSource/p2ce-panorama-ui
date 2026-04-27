@@ -5,12 +5,12 @@
 .FlyoutPanel {
 	flow-children: down;
 	vertical-align: middle;
-	horizontal-align: right;
+	horizontal-align: left;
 	height: 100%;
 	min-width: 50%;
 	max-width: 960px;
 	padding: $popup-padding;
-	border-left: $popup-border;
+	border-right: $popup-border;
 	border-radius: $popup-radius;
 	background-color: $popup-background;
 	background-image: url('file://{images}/menu/menu_grid4.png');
@@ -25,6 +25,6 @@
 
 	&.Hidden {
 		opacity: 0;
-		transform: translateX(100%);
+		transform: translateX(-100%);
 	}
 }

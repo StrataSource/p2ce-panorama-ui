@@ -182,7 +182,8 @@ $page-width: 1920px - $rightnav-width;
 			opacity: 0.1;
 		}
 
-		&:hover:not(:parentdisabled):not(:selected) {
+		&:hover:not(:parentdisabled):not(:selected),
+		&:focus {
 			background-color: $button-background-hover;
 			border-color: $primary-color;
 		}
@@ -214,7 +215,8 @@ $page-width: 1920px - $rightnav-width;
 	}
 
 	&__subitem {
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: $button-background-hover;
 			border-color: $primary-color;
 
@@ -499,7 +501,8 @@ $page-width: 1920px - $rightnav-width;
 
 	background-color: $button-background;
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: $button-background-hover;
 		border-color: $primary-color;
 	}
