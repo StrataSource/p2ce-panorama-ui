@@ -39,6 +39,7 @@ class MenuManager {
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
 	static eventsRegistered = false;
+	static currentLogo = 'file://{images}/logo.svg';
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
@@ -56,6 +57,8 @@ class MenuManager {
 		if (this.isLoaded) return;
 		this.isLoaded = true;
 
+		this.currentLogo = '';
+
 		if (!this.eventsRegistered) {
 			// this is for campaign-menu, see there for more info
 			UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = false;
@@ -68,6 +71,10 @@ class MenuManager {
 				const b = constructMenuButton(btn);
 				b.SetParent(this.menuNav);
 				b.SetReadyForDisplay(true);
+				this.updateFocus();
+			});
+
+			$.RegisterForUnhandledEvent('MainMenuFirstButtonFocus', () => {
 				this.updateFocus();
 			});
 
@@ -172,14 +179,19 @@ class MenuManager {
 						}
 					}
 
-					this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-					const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeIn');
-					this.logo.UpdateCurrentAnimationKeyframes(kfs);
+					if (logo !== this.currentLogo) {
+						this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+						const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeIn');
+						this.logo.UpdateCurrentAnimationKeyframes(kfs);
+					}
+
 					this.logo.SetImage(logo);
+					this.currentLogo = logo;
 				} else {
 					this.logo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 					const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeOut');
 					this.logo.UpdateCurrentAnimationKeyframes(kfs);
+					this.currentLogo = '';
 				}
 			});
 
