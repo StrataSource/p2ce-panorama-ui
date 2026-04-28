@@ -548,13 +548,13 @@
 		
 		"Settings_ClosedCaptions_Title"						"Closed Captions and Subtitles"
 		"Settings_ClosedCaptions_Enable"					"Closed Captions"
-		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time.<br><img src=\"file://{images}/menu/p2ce-generic.png\" />"
+		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time.\n<movie src=\"file://{videos}/settings/cc.webm\" />"
 		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
-		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled."
+		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled.\n<movie src=\"file://{videos}/settings/cc_subtitles.webm\" />"
 		
 		// Storm - CC System Rewrite
 		"Settings_ClosedCaptions_Font"						"Font"
-		"Settings_ClosedCaptions_Font_info"					"Determines which typeface to use for on-screen subtitles and closed captions."
+		"Settings_ClosedCaptions_Font_info"					"Determines which typeface to use for on-screen subtitles and closed captions.\n<movie src=\"file://{videos}/settings/cc_font.webm\" />"
 		"Settings_ClosedCaptions_Font_Lexend"				"Lexend (P2:CE / Strata Source)"
 		"Settings_ClosedCaptions_Font_U0001"				"Univers (Portal 2)"
 		"Settings_ClosedCaptions_Font_GorDIN"				"DIN 1451 / GorDIN (Half-Life 2)"
@@ -1089,6 +1089,8 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Mounts_AppId_630"						"Alien Swarm (630)"
 		"MainMenu_Campaigns_Mounts_AppId_300"						"Day of Defeat: Source (300)"
 		"MainMenu_Campaigns_Mounts_AppId_220"						"Half-Life 2 (220)"
+																			 
+																			 
 		"MainMenu_Campaigns_Mounts_AppId_280"						"Half-Life: Source (280)"
 		"MainMenu_Campaigns_Mounts_AppId_400"						"Portal (400)"
 		"MainMenu_Campaigns_Mounts_AppId_660"						"Portal 2 - Sixense MotionPack (660)"
