@@ -501,6 +501,11 @@
 		"Settings_General_Search_MatchedEnglishTag"		"Matches "
 		"Settings_General_Search_VeryFull"				"{s:count} more match"
 		"Settings_General_Search_VeryFull_Plural"		"{s:count} more matches"
+		"Settings_Reset_Title"							"Confirm Reset"
+		"Settings_Reset_Message_Generic"				"Are you sure you want to reset this section's settings to their default values?"
+		"Settings_Reset_Message_Checker"				"The following settings are currently different from their default values and will be reset:"
+		"Settings_Reset_Action_Reset"					"Reset Section"
+		"Settings_Reset_Action_Cancel"					"Don't Reset"
 		
 		// Settings - Import/Export
 		"Settings_ImportExport_Title"					"Import/Export %thing% Settings"

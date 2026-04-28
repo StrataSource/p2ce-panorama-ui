@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/pages/settings/page.js" />
+		<include src="file://{scripts}/pages/settings/page.ts" />
 		<!-- Temporary -->
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>
@@ -13,6 +13,12 @@
 			<Panel id="PortalsSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Portals_Title" tags="portals, portal, color, customization" />
+
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('PortalsSubSection');">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
 				</Panel>
 
 				<SettingsEnum
@@ -99,6 +105,12 @@
 			<Panel id="MiscSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Misc_Title" tags="misc, customization" />
+
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('MiscSubSection');">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
 				</Panel>
 
 				<SettingsSlider
