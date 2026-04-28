@@ -2,7 +2,8 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
-.AspectRatio4x3 {
+.AspectRatio4x3,
+.AspectRatio5x4 {
 	.campaigns__left {
 		margin-right: 0px;
 	}

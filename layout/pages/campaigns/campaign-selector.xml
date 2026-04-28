@@ -139,7 +139,7 @@
 				<!-- Campaign list -->
 				<Panel id="CampaignContainer" class="campaigns__list" tabindex="auto" selectionpos="auto" childfocusonhover="true" />
 			</Panel>
-			<Panel class="campaigns__right DisableOn4x3">
+			<Panel class="campaigns__right DisableOn4x3 DisableOn5x4">
 				<Panel id="HoveredCampaignContainer" class="campaigns__boxart__container">
 					<Panel id="HoveredCampaignBorder" class="campaigns__boxart__border">
 						<Panel id="HoveredCampaignInfo" class="campaigns__boxart__bg">
