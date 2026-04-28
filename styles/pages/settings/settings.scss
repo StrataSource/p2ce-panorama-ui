@@ -6,7 +6,8 @@
 
 $page-width: 1920px - $rightnav-width;
 
-.AspectRatio4x3 {
+.AspectRatio4x3,
+.AspectRatio5x4 {
 	.settings__left {
 		flow-children: down;
 	}
