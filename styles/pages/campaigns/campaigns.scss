@@ -2,6 +2,12 @@
 @use '../../abstract/function';
 @use '../../abstract/mixin';
 
+.AspectRatio4x3 {
+	.campaigns__left {
+		margin-right: 0px;
+	}
+}
+
 .campaigns {
 	max-width: 1920px;
 	horizontal-align: center;
