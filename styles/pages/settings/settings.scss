@@ -6,6 +6,16 @@
 
 $page-width: 1920px - $rightnav-width;
 
+.AspectRatio4x3 {
+	.settings__left {
+		flow-children: down;
+	}
+	.settings__search {
+		margin-left: 0px;
+		margin-bottom: 10px;
+	}
+}
+
 .settings {
 	flow-children: down;
 	width: 100%;
