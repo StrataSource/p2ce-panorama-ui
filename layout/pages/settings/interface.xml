@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/pages/settings/page.js" />
+		<include src="file://{scripts}/pages/settings/page.ts" />
 		<!-- Temporary -->
 		<include src="file://{scripts}/util/dosa.ts" />
 	</scripts>

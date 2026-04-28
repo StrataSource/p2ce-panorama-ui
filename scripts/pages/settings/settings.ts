@@ -120,7 +120,7 @@ class MainMenuSettings {
 		}
 	}
 
-	static navigateToTab(tab) {
+	static navigateToTab(tab: string) {
 		// If a we have a active tab and it is different from the selected tab hide it, then show the selected tab
 		if (this.activeTab !== tab) {
 			// If the tab exists then hide it
