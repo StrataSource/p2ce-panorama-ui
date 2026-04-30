@@ -75,6 +75,10 @@
 	}
 
 	&__desc {
+		padding-right: 15px;
+		.SmallScaleMode & {
+			font-size: 22px;
+		}
 		&__wrapper {
 			flow-children: down;
 			width: 100%;

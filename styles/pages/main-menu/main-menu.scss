@@ -246,6 +246,10 @@ $pane-move-time: 0.1s;
 
 			$this: &;
 
+			.SmallScaleMode & {
+				min-height: 75px;
+			}
+
 			& > SteamInputAction {
 				horizontal-align: right;
 				margin-right: 15px;
@@ -260,6 +264,9 @@ $pane-move-time: 0.1s;
 				font-size: 20px;
 				margin-right: 15px;
 				text-shadow: 2px 2px 2px 2 $base-950;
+				.SmallScaleMode & {
+					font-size: 22px;
+				}
 			}
 
 			&__small-text {
@@ -268,6 +275,11 @@ $pane-move-time: 0.1s;
 				color: $base-300;
 				font-weight: light;
 				text-shadow: 1px 1px 2px 2 $base-950;
+
+				.SmallScaleMode & {
+					font-size: 16px;
+					letter-spacing: 1px;
+				}
 			}
 
 			.InputController &:focus:not(:disabled) {
