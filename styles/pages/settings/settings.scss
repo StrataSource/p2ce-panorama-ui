@@ -7,7 +7,8 @@
 $page-width: 1920px - $rightnav-width;
 
 .AspectRatio4x3,
-.AspectRatio5x4 {
+.AspectRatio5x4,
+.AspectRatio16x10 {
 	.settings__left {
 		flow-children: down;
 	}
@@ -223,6 +224,9 @@ $page-width: 1920px - $rightnav-width;
 		font-size: 26px;
 		overflow: squish;
 		text-overflow: shrink;
+		.SmallScaleMode & {
+			font-size: 28px;
+		}
 	}
 
 	&__subitem {
@@ -249,6 +253,10 @@ $page-width: 1920px - $rightnav-width;
 	&__subitem-label {
 		font-weight: bold;
 		font-size: 16px;
+
+		.SmallScaleMode & {
+			font-size: 22px;
+		}
 	}
 
 	&__separator {
@@ -458,6 +466,10 @@ $page-width: 1920px - $rightnav-width;
 		text-overflow: clip;
 		margin-bottom: 15px;
 		text-shadow: 2px 2px 2px 1 $base-950;
+
+		.SmallScaleMode & {
+			font-size: 20px;
+		}
 
 		& h2 {
 			// I wish we could use margin-top here to avoid needing \n chars in the string,

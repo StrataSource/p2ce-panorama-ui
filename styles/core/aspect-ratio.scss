@@ -1,4 +1,5 @@
 .AspectRatio4x3 .DisableOn4x3,
-.AspectRatio5x4 .DisableOn5x4 {
+.AspectRatio5x4 .DisableOn5x4,
+.AspectRatio16x10 .DisableOn16x10 {
 	visibility: collapse;
 }

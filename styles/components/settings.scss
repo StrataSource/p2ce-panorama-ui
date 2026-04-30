@@ -10,6 +10,9 @@
 .colordisplay {
 	width: 100%;
 	height: $settings-height;
+	.SmallScaleMode & {
+		height: $settings-height-handheld;
+	}
 }
 
 .settings-keybinder {
@@ -66,6 +69,10 @@
 		font-size: 18px;
 		overflow: squish;
 		text-overflow: shrink;
+
+		.SmallScaleMode & {
+			font-size: 20px;
+		}
 	}
 }
 
@@ -76,6 +83,10 @@
 		width: fit-children;
 		height: 35px;
 		vertical-align: center;
+
+		.SmallScaleMode & {
+			height: 40px;
+		}
 
 		& > RadioButton {
 			@extend .button;
@@ -107,6 +118,10 @@
 
 		& > RadioButton > Label {
 			@extend .button__text;
+
+			.SmallScaleMode & {
+				font-size: 20px;
+			}
 		}
 	}
 }
