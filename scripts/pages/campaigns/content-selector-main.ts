@@ -2,6 +2,7 @@
 
 class ContentSelector {
 	static insert = $<Panel>('#Insert')!;
+	static tabs = $<Panel>('#Tabs')!;
 	static pages = [
 		'campaigns/campaign-selector',
 		'campaigns/workshop-selector',
@@ -12,6 +13,12 @@ class ContentSelector {
 	]
 
 	static onLoad() {
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			this.tabs.visible = false;
+			this.onTabSelected(1, false);
+			return;
+		}
+
 		const lastTab = $.persistentStorage.getItem(MiscStorageKeys.CONTENT_TAB);
 		let tabNumber = 0;
 		if (lastTab === null) {
@@ -30,10 +37,12 @@ class ContentSelector {
 		$.DispatchEvent('Activated', btn, PanelEventSource.PROGRAM);
 	}
 
-	static onTabSelected(index: number) {
+	static onTabSelected(index: number, bSave: boolean) {
 		this.insert.RemoveAndDeleteChildren();
 		const p = $.CreatePanel('Panel', this.insert, `Page${index}`);
 		p.LoadLayout(`file://{resources}/layout/pages/${this.pages[index]}.xml`, false, false);
-		$.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, index);
+
+		if (bSave)
+			$.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, index);
 	}
 }
