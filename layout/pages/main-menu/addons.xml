@@ -10,7 +10,7 @@
 
 	<snippets>
 		<snippet name="AddonEntrySnippet">
-			<RadioButton class="addons__entry" group="AddonRadio" tabindex="auto" selectionpos="auto">
+			<Button class="addons__entry" group="AddonRadio" tabindex="auto" selectionpos="auto">
 				<Panel class="addons__entry__left">
 					<!-- Addon icon cover -->
 					<Image id="AddonCover" class="addons__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
@@ -27,7 +27,7 @@
 						<ToggleButton id="AddonEnable" class="checkbox addons__entry__checkbox" />
 					</TooltipPanel>
 				</Panel>
-			</RadioButton>
+			</Button>
 		</snippet>
 		<snippet name="MountEntrySnippet">
 			<Panel class="mounts__entry">
@@ -88,6 +88,7 @@
 				<Panel class="addons__action-bar">
 					<TooltipPanel tooltip="#MainMenu_Addons_SteamWorkshop_Tooltip">
 						<Button
+							id="WorkshopBtn"
 							class="button mr-2"
 							onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/app/440000/workshop/')"
 							tabindex="auto"
@@ -131,14 +132,14 @@
 					</TooltipPanel>
 					<TextEntry
 						id="SearchAddonsEntry"
-						class="textentry fill-width mr-2"
+						class="textentry fill-width"
 						placeholder="#MainMenu_Addons_SearchBox_FillerText"
 					/>
 					<Panel class="horizontal-align-right flow-right" tabindex="auto" selectionpos="auto">
 						<Button
 							onactivate="AddonManager.apply()"
 							id="ApplyButton"
-							class="button mr-2"
+							class="button mr-2 ml-2"
 							disabled="true"
 							tabindex="auto"
 							selectionpos="auto"
@@ -156,6 +157,9 @@
 							<Label class="button__text" text="#MainMenu_Addons_Discard" />
 						</Button>
 					</Panel>
+				</Panel>
+				<Panel id="InGameBanner" class="fancy-red-noborder addons__action-bar addons__action-bar__red hide">
+					<Label class="horizontal-align-center text-weight-bold" text="[HC] The addons listed below are currently mounted and cannot be changed while in-game." />
 				</Panel>
 
 				<!-- Addon list -->

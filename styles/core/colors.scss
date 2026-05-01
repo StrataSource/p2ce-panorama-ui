@@ -46,4 +46,23 @@ $colors: function.map-collect(
 			}
 		}
 	}
+
+	.fancy-#{$name}-noborder {
+		background-color: gradient(
+			radial,
+			50% 50%,
+			0% 0%,
+			70% 70%,
+			from($color),
+			to(color.scale($color, $lightness: -50%))
+		);
+		@if color.channel(color.to-space($color, hsl), 'lightness') > 50% {
+			& Label {
+				color: $base-950;
+			}
+			& Image {
+				wash-color: $base-950;
+			}
+		}
+	}
 }
