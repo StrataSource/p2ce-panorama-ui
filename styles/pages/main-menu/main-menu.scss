@@ -1,6 +1,7 @@
 @use '../../config' as *;
 @use '../../abstract/function';
 @use '../../abstract/mixin';
+@use 'sass:color';
 
 $pane-move-time: 0.1s;
 
@@ -600,6 +601,153 @@ $pane-move-time: 0.1s;
 	&__page-blur {
 		width: 100%;
 		height: 100%;
+	}
+
+	&__addon {
+		width: 512px;
+		height: 896px;
+		horizontal-align: right;
+		margin: 15px;
+		&__back {
+			overflow: noclip;
+		}
+		&__bg {
+			border: $menu-pane-border;
+			background-color: $base-950;
+			background-image: url('file://{images}/menu/menu_grid6.png');
+			background-img-opacity: 0.05;
+		}
+		&__overflow {
+			transform: translateX(-128px);
+			flow-children: right;
+			overflow: noclip;
+			margin-bottom: 10px;
+		}
+		&__cover {
+			width: 384px;
+			height: 384px;
+			border: $menu-pane-border;
+			background-color: black;
+			box-shadow: fill rgba($base-950, 0.5) -16px 16px 32px 16px;
+		}
+		&__avatar {
+			width: 128px;
+			height: 128px;
+			border: $menu-pane-border;
+		}
+		&__title {
+			max-width: 460px;
+			font-size: 32px;
+			font-weight: bold;
+			margin-left: 15px;
+			text-shadow: 0px 0px 8px 1 #000000;
+			max-height: 84px;
+			text-overflow: ellipsis;
+		}
+		&__desc {
+			max-width: 460px;
+			font-size: 18px;
+			font-weight: light;
+			color: $base-300;
+			margin-left: 15px;
+			text-shadow: 0px 0px 8px 1 #000000;
+			max-height: 24px;
+		}
+		&__bottom {
+			width: 100%;
+			vertical-align: bottom;
+			flow-children: down;
+			height: 64px;
+			margin: 0 15px;
+		}
+		&__voters {
+			flow-children: right;
+			horizontal-align: center;
+			vertical-align: bottom;
+			margin-bottom: 128px;
+		}
+		&__vote {
+			width: 128px;
+			height: 128px;
+			background-color: $button-background;
+			border: $menu-pane-border;
+			&__icon {
+				horizontal-align: center;
+				vertical-align: center;
+				width: 96px;
+				height: 96px;
+			}
+		}
+		&__upvote {
+			&:hover {
+				background-color: gradient(
+					radial,
+					50% 50%,
+					0% 0%,
+					70% 70%,
+					from($base-950),
+					to(color.scale($p2-blue, $lightness: -80%))
+				);
+				border-color: $p2-blue;
+				Image {
+					wash-color: $p2-blue;
+				}
+			}
+			&:selected {
+				background-color: gradient(
+					radial,
+					50% 50%,
+					0% 0%,
+					70% 70%,
+					from($p2-blue),
+					to(color.scale($p2-blue, $lightness: -50%))
+				);
+				border-color: $p2-blue;
+				Image {
+					wash-color: $base-950;
+				}
+			}
+		}
+		&__downvote {
+			&:hover {
+				background-color: gradient(
+					radial,
+					50% 50%,
+					0% 0%,
+					70% 70%,
+					from($base-950),
+					to(color.scale($p2-orange, $lightness: -80%))
+				);
+				border-color: $p2-orange;
+				Image {
+					wash-color: $p2-orange;
+				}
+			}
+			&:selected {
+				background-color: gradient(
+					radial,
+					50% 50%,
+					0% 0%,
+					70% 70%,
+					from($p2-orange),
+					to(color.scale($p2-orange, $lightness: -50%))
+				);
+				border-color: $p2-orange;
+				Image {
+					wash-color: $base-950;
+				}
+			}
+		}
+		&__favorite {
+			&:hover {
+				background-color: $button-background-hover;
+				border-color: $primary-color;
+			}
+			&:selected {
+				background-color: $button-background-selected;
+				border-color: $primary-color;
+			}
+		}
 	}
 }
 

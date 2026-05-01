@@ -26,8 +26,8 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="full" hittest="false" hittestchildren="false" onload="PauseMenu.onLoad()">
-		<Panel id="ContinueBox" class="mainmenu__display-box">
+	<Panel class="full" hittest="false" onload="PauseMenu.onLoad()">
+		<Panel id="ContinueBox" class="mainmenu__display-box" hittest="false" hittestchildren="false">
 			<Panel>
 				<Image
 					id="ContinueSaveThumb"
@@ -41,6 +41,61 @@
 			<Panel class="mainmenu__display-box__details">
 				<Panel class="vertical-align-center flow-down ml-3">
 					<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
+				</Panel>
+			</Panel>
+		</Panel>
+
+		<Panel id="MapPanel" hittest="false" class="full">
+			<Panel class="mainmenu__addon" hittest="false">
+				<Panel class="full mainmenu__addon__bg" />
+			</Panel>
+			<Panel class="mainmenu__addon" hittest="false">
+				<Panel id="VoteBox" class="mainmenu__addon__voters">
+					<RadioButton group="vote" id="MapUpvote" class="mainmenu__addon__vote mainmenu__addon__upvote" onactivate="PauseMenu.setMapVote(1)">
+						<Image
+							class="mainmenu__addon__vote__icon"
+							texturewidth="96"
+							textureheight="96"
+							src="file://{images}/icons/p2_upvote.png"
+						/>
+					</RadioButton>
+					<RadioButton group="vote" id="MapDownvote" class="mainmenu__addon__vote mainmenu__addon__downvote" onactivate="PauseMenu.setMapVote(2)">
+						<Image
+							class="mainmenu__addon__vote__icon"
+							texturewidth="96"
+							textureheight="96"
+							src="file://{images}/icons/p2_downvote.png"
+						/>
+					</RadioButton>
+					<ToggleButton id="MapFavorite" class="mainmenu__addon__vote mainmenu__addon__favorite" onactivate="PauseMenu.toggleMapFavorite()">
+						<Image
+							class="mainmenu__addon__vote__icon"
+							texturewidth="128"
+							textureheight="128"
+							src="file://{images}/star.svg"
+						/>
+					</ToggleButton>
+				</Panel>
+				<Panel id="AddonBottom" class="mainmenu__addon__bottom">
+					<Button class="button full-width vertical-align-center" onactivate="PauseMenu.openMapWorkshop()">
+						<Image
+							class="button__icon button__icon--left"
+							texturewidth="32"
+							textureheight="32"
+							src="file://{images}/icons/steam.svg"
+						/>
+						<Label class="button__text button__text--right" text="#MainMenu_Addons_ViewOnWS" />
+					</Button>
+				</Panel>
+			</Panel>
+			<Panel class="mainmenu__addon mainmenu__addon__back" hittest="false">
+				<Panel class="flow-down overflow-noclip">
+					<Panel class="mainmenu__addon__overflow">
+						<Image id="MapImage" class="mainmenu__addon__cover" />
+						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar" />
+					</Panel>
+					<Label id="MapTitle" class="mainmenu__addon__title" text="[PH] Map Title" />
+					<Label id="MapDesc" class="mainmenu__addon__desc" text="[PH] Map Author" />
 				</Panel>
 			</Panel>
 		</Panel>

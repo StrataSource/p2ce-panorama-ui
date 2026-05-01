@@ -16,6 +16,19 @@ class PauseMenu {
 			focusIsHover: true
 		},
 		{
+			id: 'QueueBtn',
+			headline: '[HC] View Queue',
+			tagline: '[HC] View and play other workshop maps',
+			activated: () => {
+				$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'campaigns/content-selector-main', undefined);
+			},
+			hovered: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			},
+			unhovered: () => {},
+			focusIsHover: true
+		},
+		{
 			id: 'CampaignContinueBtn',
 			headline: '#MainMenu_SaveRestore_LoadAuto',
 			tagline: '#MainMenu_SaveRestore_LoadAuto_Tagline',
@@ -57,6 +70,17 @@ class PauseMenu {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			},
 			focusIsHover: true
+		},
+		{
+			id: 'AddonsBtn',
+			headline: '#MainMenu_Navigation_Addons',
+			tagline: '[HC] View currently mounted content',
+			activated: () => {
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);
+			},
+			hovered: () => {
+				if (this.continueBox.IsValid()) this.continueBox.visible = false;
+			}
 		},
 		{
 			id: 'SettingsKeyboardBtn',
@@ -108,10 +132,32 @@ class PauseMenu {
 	static continueBtnEnabled: boolean = false;
 	static continueBtn: string = 'CampaignContinueBtn';
 
+	// map panel
+	static mapPane = $<Panel>('#MapPanel')!;
+	static mapImage = $<Image>('#MapImage')!;
+	static mapTitle = $<Label>('#MapTitle')!;
+	static mapDesc = $<Label>('#MapDesc')!;
+	static mapUpvote = $<Button>('#MapUpvote')!;
+	static mapDownvote = $<Button>('#MapDownvote')!;
+	static mapFavorite = $<Button>('#MapFavorite')!;
+	static mapAvatar = $<AvatarImage>('#MapAvatar')!;
+	static mapVoteBox = $<Panel>('#VoteBox')!;
+	static mapWorkshopBtm = $<Panel>('#AddonBottom')!;
+	static votePanels = [undefined, $<RadioButton>('#MapUpvote')!, $<RadioButton>('#MapDownvote')!];
+
+	static workshopId: bigint;
+	static addonId: number;
+
 	static latestSave: GameSave;
 
 	static onLoad() {
+		const c = CampaignAPI.GetActiveCampaign();
 		for (const btn of this.buttons) {
+			if (btn.id === 'QueueBtn') {
+				if (!c || !c.bucket.id.startsWith('auto_')) {
+					continue;
+				}
+			}
 			$.DispatchEvent('MainMenuAddButton', btn);
 		}
 
@@ -138,6 +184,8 @@ class PauseMenu {
 		});
 
 		this.setContinueDetails();
+
+		this.setMapPanel();
 	}
 
 	static setContinueDetails() {
@@ -236,5 +284,55 @@ class PauseMenu {
 			taglineText: continueBtnText,
 			enabled: this.continueBtnEnabled
 		});
+	}
+
+	static setMapPanel() {
+		const c = CampaignAPI.GetActiveCampaign();
+		if (!c || !c.bucket.id.startsWith('auto_')) {
+			this.mapPane.visible = false;
+			return;
+		}
+
+		this.addonId = c.bucket.addon_id;
+		const addon = WorkshopAPI.GetAddonMeta(this.addonId);
+
+		this.mapTitle.text = addon.title;
+		this.mapImage.SetImage(addon.thumb);
+		let string = '';
+		for (let i = 0; i < addon.authors.length; ++i)
+			string += i === addon.authors.length - 1 ? addon.authors[i] : `${addon.authors[i]}, `;
+		this.mapDesc.text = string;
+
+		if (addon.local) {
+			this.mapVoteBox.visible = this.mapWorkshopBtm.visible = false;
+		} else {
+			//NEEDS TO BE ADDED TO BACKEND API
+			//WorkshopAPI.CreateQueryUGCDetailsRequest(
+			//	(success: boolean, data: Array<SteamUGCDetails_t> | null) => {
+			//		if (!success || data === null) return;
+			//		this.mapAvatar.steamid = `${data[0].m_ulSteamIDOwner}`;
+			//	},
+			//	[ addon.workshopid ]
+			//);
+			this.workshopId = addon.workshopid;
+			const votePanel = this.votePanels[WorkshopAPI.GetAddonUserRating(this.addonId)];
+			if (votePanel)
+				votePanel.SetSelected(true);
+		}
+		
+	}
+
+	static setMapVote(vote: AddonRating) {
+		WorkshopAPI.SetAddonUserRating(this.addonId, vote);
+	}
+
+	static toggleMapFavorite() {
+		$.Warning('Not implemented!');
+	}
+
+	static openMapWorkshop() {
+		SteamOverlayAPI.OpenURLModal(
+			`https://steamcommunity.com/sharedfiles/filedetails/?id=${this.workshopId}`
+		);
 	}
 }

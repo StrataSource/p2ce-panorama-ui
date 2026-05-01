@@ -8,9 +8,9 @@
 	</scripts>
 
 	<Panel class="mainmenu__page" onload="ContentSelector.onLoad()">
-		<Panel class="tabs">
+		<Panel id="Tabs" class="tabs mb-2">
 			<Panel class="tabs__border tabs__border__right" />
-			<RadioButton id="CampaignsBtn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(0)">
+			<RadioButton id="CampaignsBtn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(0, true)">
 				<Panel class="tabs__item__inner">
 					<Label class="tabs__item-label" text="#MainMenu_Navigation_Campaign" />
 				</Panel>
@@ -19,13 +19,13 @@
 				</Panel>
 			</RadioButton>
 			<Panel class="tabs__gap" />
-			<RadioButton id="MapsBtn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(1)">
+			<RadioButton id="MapsBtn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(1, true)">
 				<Panel class="tabs__item__inner">
 					<Label class="tabs__item-label" text="#MainMenu_Navigation_Workshop" />
 				</Panel>
 			</RadioButton>
 			<Panel class="tabs__border tabs__border__left" />
 		</Panel>
-		<Panel id="Insert" class="mt-2" />
+		<Panel id="Insert" />
 	</Panel>
 </root>
