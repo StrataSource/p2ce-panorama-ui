@@ -4,7 +4,7 @@
 
 .content {
 	&__left {
-		width: 960px;
+		width: 1088px;
 		height: 100%;
 		flow-children: down;
 	}
@@ -30,6 +30,10 @@
 		border-bottom: $menu-pane-border;
 		background-color: $base-950;
 		padding: 15px;
+
+		&__red {
+			border-color: $red;
+		}
 	}
 
 	&__list {
@@ -39,6 +43,17 @@
 		flow-children: down;
 
 		background-color: $base-950;
+	}
+
+	&__divider {
+		width: 100%;
+		height: fit-children;
+		flow-children: right;
+
+		border-top: 1px solid $orange;
+		border-bottom: 1px solid $orange;
+		background-color: $base-950;
+		padding: 15px;
 	}
 
 	&__entry {

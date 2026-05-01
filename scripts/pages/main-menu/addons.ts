@@ -2,13 +2,13 @@
 
 class AddonEntry {
 	index: number;
-	panel: RadioButton;
+	panel: Button;
 
 	enableText: Label | null = null;
 	subText: Label | null = null;
 	addonEnableCheck: ToggleButton | null = null;
 
-	constructor(index: number, panel: RadioButton) {
+	constructor(index: number, panel: Button) {
 		this.index = index;
 		this.panel = panel;
 
@@ -43,6 +43,8 @@ class AddonEntry {
 		if (this.addonEnableCheck) {
 			this.addonEnableCheck.SetSelected(WorkshopAPI.GetAddonEnabled(this.index));
 			this.addonEnableCheck.SetPanelEvent('onactivate', () => AddonManager.markDirty());
+
+			this.addonEnableCheck.visible = GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU;
 		}
 
 		if (this.subText) this.subText.text = WorkshopAPI.GetAddonSubscribed(this.index) ? 'Unsubscribe' : 'Subscribe';
@@ -130,17 +132,11 @@ class AddonManager {
 		this.addonsPage.visible = false;
 
 		this.advancedMode = WorkshopAPI.IsWorkshopToolsMode() || GameInterfaceAPI.GetSettingInt('developer') > 0;
-		this.addonsAdvancedCheck.SetSelected(this.advancedMode);
 
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.reloadCallback.bind(this));
 		this.createAddonEntries();
 
 		$.DispatchEvent('Activated', $<RadioButton>('#ViewAddonsBtn')!, PanelEventSource.MOUSE);
-		$.DispatchEvent(
-			'MainMenuSetPageLines',
-			$.Localize('#MainMenu_Navigation_Addons'),
-			$.Localize('#MainMenu_Navigation_Addons_Tagline')
-		);
 
 		installSearchHandling<number, Addon>(
 			this.searchBar,
@@ -162,6 +158,29 @@ class AddonManager {
 			this.searchBar.text = '';
 			this.createAddonEntries();
 		});
+
+		let desc = '';
+
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			this.applyButton!.visible = false;
+			this.cancelButton!.visible = false;
+			this.toggleAllButton!.visible = false;
+			this.addonsAdvancedCheck!.visible = false;
+			$('#WorkshopBtn')!.visible = false;
+			$('#InGameBanner')!.visible = true;
+			this.advancedMode = true;
+			desc = '[HC] View currently mounted content';
+		} else {
+			desc = $.Localize('#MainMenu_Navigation_Addons_Tagline');
+		}
+
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			$.Localize('#MainMenu_Navigation_Addons'),
+			desc
+		);
+
+		this.addonsAdvancedCheck.SetSelected(this.advancedMode);
 	}
 
 	/**
@@ -193,12 +212,6 @@ class AddonManager {
 		this.addonPanel.AddClass('hide');
 
 		const addonChildren = this.addonContainer.Children();
-		for (let i = 0; i < addonChildren.length; ++i) {
-			const child = addonChildren[i];
-
-			if (child.paneltype !== 'RadioButton') continue;
-			(child as RadioButton).SetSelected(false);
-		}
 	}
 
 	static updateAddons() {
@@ -215,16 +228,56 @@ class AddonManager {
 
 		this.purgeAddonList();
 
-		const addonCount = WorkshopAPI.GetAddonCount();
 		let anyEnabled = false;
-		for (let i = 0; i < addonCount; ++i) {
-			const panel = $.CreatePanel('RadioButton', this.addonContainer, 'addon' + i);
-			panel.SetPanelEvent('onactivate', () => this.addonSelected(i));
-			panel.LoadLayoutSnippet('AddonEntrySnippet');
 
-			if (WorkshopAPI.GetAddonEnabled(i)) anyEnabled = true;
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			const activeAddons = WorkshopAPI.GetActiveMountList();
+			const campaign = CampaignAPI.GetActiveCampaign();
+			for (let i = 0; i < activeAddons.length; ++i) {
+				const addon = activeAddons[i];
 
-			this.addons.push(new AddonEntry(i, panel));
+				if (campaign && campaign.bucket.addon_id === addon) {
+					const p = $.CreatePanel('Panel', this.addonContainer, 'ContentDivider');
+					p.AddClass('addons__divider');
+					p.AddClass('fancy-orange-noborder');
+					p.AddClass('addons__divider__orange');
+					$.CreatePanel('Label', p, 'ContentDividerText', {
+						text: '[HC] The following addons are required by in-game content.',
+						class: 'horizontal-align-center text-weight-bold'
+					});
+				}
+
+				const panel = $.CreatePanel('Button', this.addonContainer, 'addon' + addon);
+				panel.SetPanelEvent('onactivate', () => {
+					UiToolkitAPI.ShowCustomLayoutPopupParameters(
+						'flyout',
+						'file://{resources}/layout/modals/flyouts/addon.xml',
+						`addon=${addon}`
+					);
+				});
+				panel.LoadLayoutSnippet('AddonEntrySnippet');
+	
+				if (WorkshopAPI.GetAddonEnabled(addon)) anyEnabled = true;
+	
+				this.addons.push(new AddonEntry(addon, panel));
+			}
+		} else {
+			const addonCount = WorkshopAPI.GetAddonCount();
+			for (let i = 0; i < addonCount; ++i) {
+				const panel = $.CreatePanel('Button', this.addonContainer, 'addon' + i);
+				panel.SetPanelEvent('onactivate', () => {
+					UiToolkitAPI.ShowCustomLayoutPopupParameters(
+						'flyout',
+						'file://{resources}/layout/modals/flyouts/addon.xml',
+						`addon=${i}`
+					);
+				});
+				panel.LoadLayoutSnippet('AddonEntrySnippet');
+	
+				if (WorkshopAPI.GetAddonEnabled(i)) anyEnabled = true;
+	
+				this.addons.push(new AddonEntry(i, panel));
+			}
 		}
 
 		// If any addons are enabled, we'll default the "select all" button to true
@@ -239,7 +292,7 @@ class AddonManager {
 		this.purgeAddonList();
 
 		for (const addon of addons) {
-			const panel = $.CreatePanel('RadioButton', this.addonContainer, 'addon' + addon.index);
+			const panel = $.CreatePanel('Button', this.addonContainer, 'addon' + addon.index);
 			panel.SetPanelEvent('onactivate', () => this.addonSelected(addon.index));
 			panel.LoadLayoutSnippet('AddonEntrySnippet');
 
@@ -379,6 +432,7 @@ class AddonManager {
 
 	static purgeAddonList() {
 		while (this.addons.length > 0) this.addons.pop()?.panel.DeleteAsync(0);
+		this.addonContainer.RemoveAndDeleteChildren();
 	}
 
 	static reloadAddonList() {
@@ -393,6 +447,16 @@ class AddonManager {
 	// TODO: also make this as part of the addonmanager class instead
 	// of reconstructing it on every call, that's yikes!
 	static getFilteredAddonsArray() {
+		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
+			const addons: Addon[] = [];
+			const addonIds = WorkshopAPI.GetActiveMountList();
+			for (let i = 0; i < addonIds.length; ++i) {
+				const info = WorkshopAPI.GetAddonMeta(addonIds[i]);
+				addons.push(new Addon(addonIds[i], info));
+			}
+			return addons;
+		}
+
 		const addons: Addon[] = [];
 		const count = WorkshopAPI.GetAddonCount();
 		for (let i = 0; i < count; ++i) {
@@ -534,7 +598,6 @@ class MountManager {
 		try {
 			response = JSON.parse(data.responseText.trim());
 		} catch (e) {
-			console.error('Falling back to less safe method. Error:', e);
 			response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
 		}
 		const appId = Object.keys(response)[0];

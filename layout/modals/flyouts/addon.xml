@@ -1,0 +1,100 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/common/dev.ts" />
+		<include src="file://{resources}/scripts/modals/flyouts/addon.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="Loader">
+			<Panel class="addon-deps__entry__loader">
+				<AnimatedImageStrip
+					animating="true"
+					defaultframe="0"
+					frametime="125ms"
+					src="file://{images}/menu/p2ce/spinner_strip.tga"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
+				<Image
+					class="addon-deps__entry__loader__logo"
+					src="file://{images}/icons/steam.svg"
+					textureheight="128"
+					texturewidth="128"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+				/>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<PopupCustomLayout class="FlyoutPanel Hidden" popupbackground="blur" onload="AddonFlyout.onLoad()" tabindex="auto" selectionpos="auto">
+		<Panel class="flow-right">
+			<Panel class="addon-flyout__cover">
+				<Image
+					id="Cover"
+					class="addon-flyout__cover__image"
+					src="file://{images}/menu/missing-cover.png"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
+				<AvatarImage />
+			</Panel>
+			<Panel class="flow-down full-height ml-3">
+				<Panel class="flow-right">
+					<Label id="Title" class="addon-flyout__title" text="[PH] Addon Title" />
+					<Button class="button button-2x button--red" onactivate="AddonFlyout.close()">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/close.svg" />
+					</Button>
+				</Panel>
+				<Label id="Author" class="addon-flyout__author" text="[PH] Addon Author" />
+				<Panel class="flow-down vertical-align-bottom">
+					<!-- TODO: replace these with upvote icons! -->
+					<Panel class="flow-right mb-1">
+						<RadioButton id="Upvote" class="button mr-2" group="Voting" onactivate="AddonFlyout.changeVote(1)">
+							<Label class="button__text" text="#UI_Upvote" />
+						</RadioButton>
+						<RadioButton id="Downvote" class="button mr-2" group="Voting" onactivate="AddonFlyout.changeVote(2)">
+							<Label class="button__text" text="#UI_Downvote" />
+						</RadioButton>
+						<RadioButton id="Nonevote" class="button hide" group="Voting" onactivate="AddonFlyout.changeVote(0)">
+							<Label class="button__text" text="#UI_Novote" />
+						</RadioButton>
+					</Panel>
+					<Button class="button button-2x hide" onactivate="AddonFlyout.openInSteam()">
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/star.svg" />
+					</Button>
+					
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel id="DependenciesWrapper" class="addon-flyout__deps__wrapper mt-2">
+			<Label class="addon-flyout__section-header" text="#UI_Dependencies" />
+			<Panel id="Dependencies" class="overflow-hscroll full-width flow-right">
+			</Panel>
+		</Panel>
+		<Panel class="addon-flyout__desc__wrapper mt-2">
+			<Label class="addon-flyout__section-header" text="#UI_Description" />
+			<Panel class="overflow-vscroll full">
+				<Label id="Description" html="true" loadimages="true" class="addon-flyout__desc" text="[PH] Map Description" />
+			</Panel>
+		</Panel>
+		<Panel class="flow-right mt-2">
+			<!-- TODO! -->
+			<Button class="button button--green fill-width hide" onactivate="AddonFlyout.openInSteam()">
+				<Label class="button__text" text="[HC] Enable" />
+			</Button>
+			<Panel id="ControlSpacer" class="mx-1 hide" />
+			<Button class="button fill-width" onactivate="AddonFlyout.openInSteam()">
+				<Image
+					class="button__icon button__icon--left"
+					texturewidth="32"
+					textureheight="32"
+					src="file://{images}/icons/steam.svg"
+				/>
+				<Label class="button__text button__text--right" text="#MainMenu_Addons_ViewOnWS" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>

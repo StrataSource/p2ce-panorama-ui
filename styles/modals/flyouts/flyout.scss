@@ -13,10 +13,8 @@
 	border-right: $popup-border;
 	border-radius: $popup-radius;
 	background-color: $popup-background;
-	background-image: url('file://{images}/menu/menu_grid4.png');
 	background-repeat: no-repeat;
 	background-position: right bottom;
-	background-img-opacity: 0.1;
 	opacity: 1;
 	transition-property: opacity, transform;
 	transition-duration: 0.25s;
