@@ -732,6 +732,8 @@
 		"Settings_Keybinds_Weapons"						"Weapons"
 		"Keybind_Attack_Primary"						"Primary attack"
 		"Keybind_Attack_Secondary"						"Secondary attack"
+		"Keybind_Paintgun_NextPaint"					"Paint Gun: Select next paint" 
+		"Keybind_Paintgun_PrevPaint"					"Paint Gun: Select previous paint" 
 		"Keybind_Weapon_Category_1"						"Weapon category 1"
 		"Keybind_Weapon_Category_2"						"Weapon category 2"
 		"Keybind_Weapon_Category_3"						"Weapon category 3"
