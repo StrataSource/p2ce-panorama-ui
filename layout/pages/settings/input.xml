@@ -163,6 +163,10 @@
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Use_Items" bind="+use" tags="use,interact" />
+					<SettingsKeyBinder text="#Keybind_Paintgun_NextPaint" bind="nextpaint" tags="attack,use,interact" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Paintgun_PrevPaint" bind="prevpaint" tags="attack,use,interact" />
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_1" bind="slot1" tags="slot1" />
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
