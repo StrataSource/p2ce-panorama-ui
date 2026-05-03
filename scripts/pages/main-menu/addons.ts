@@ -249,11 +249,12 @@ class AddonManager {
 
 				const panel = $.CreatePanel('Button', this.addonContainer, 'addon' + addon);
 				panel.SetPanelEvent('onactivate', () => {
-					UiToolkitAPI.ShowCustomLayoutPopupParameters(
-						'flyout',
-						'file://{resources}/layout/modals/flyouts/addon.xml',
-						`addon=${addon}`
-					);
+					this.addonSelected(addon);
+					//UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					//	'flyout',
+					//	'file://{resources}/layout/modals/flyouts/addon.xml',
+					//	`addon=${addon}`
+					//);
 				});
 				panel.LoadLayoutSnippet('AddonEntrySnippet');
 	
@@ -266,11 +267,12 @@ class AddonManager {
 			for (let i = 0; i < addonCount; ++i) {
 				const panel = $.CreatePanel('Button', this.addonContainer, 'addon' + i);
 				panel.SetPanelEvent('onactivate', () => {
-					UiToolkitAPI.ShowCustomLayoutPopupParameters(
-						'flyout',
-						'file://{resources}/layout/modals/flyouts/addon.xml',
-						`addon=${i}`
-					);
+					this.addonSelected(i);
+					//UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					//	'flyout',
+					//	'file://{resources}/layout/modals/flyouts/addon.xml',
+					//	`addon=${i}`
+					//);
 				});
 				panel.LoadLayoutSnippet('AddonEntrySnippet');
 	
