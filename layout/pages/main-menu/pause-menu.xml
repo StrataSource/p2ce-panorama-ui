@@ -67,7 +67,7 @@
 							src="file://{images}/icons/p2_downvote.png"
 						/>
 					</RadioButton>
-					<ToggleButton id="MapFavorite" class="mainmenu__addon__vote mainmenu__addon__favorite" onactivate="PauseMenu.toggleMapFavorite()">
+					<ToggleButton id="MapFavorite" class="mainmenu__addon__vote mainmenu__addon__favorite" disabled="true" onactivate="PauseMenu.toggleMapFavorite()">
 						<Image
 							class="mainmenu__addon__vote__icon"
 							texturewidth="128"

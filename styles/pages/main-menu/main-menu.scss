@@ -751,11 +751,14 @@ $pane-move-time: 0.1s;
 			}
 		}
 		&__favorite {
-			&:hover {
+			&:disabled {
+				opacity: 0.1;
+			}
+			&:hover:not(:disabled) {
 				background-color: $button-background-hover;
 				border-color: $primary-color;
 			}
-			&:selected {
+			&:selected:not(:disabled) {
 				background-color: $button-background-selected;
 				border-color: $primary-color;
 			}
