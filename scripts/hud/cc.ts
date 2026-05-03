@@ -38,7 +38,7 @@ class CaptionEntry {
 		switch (CloseCaptioning.settings.fontType) {
 			default:
 			case 0:
-				style += "font-family: 'Lexend';transform: translateY(-1px);";
+				style += "font-family: 'Lexend';transform: translateY(-2px);";
 				break;
 
 			case 1:
@@ -46,7 +46,7 @@ class CaptionEntry {
 				break;
 
 			case 2:
-				style += "font-family: 'GorDIN';line-height: 24px;";
+				style += `font-family: 'GorDIN';line-height: ${Math.ceil((CloseCaptioning.settings.fontSize / 20) * 24)}px`;
 				break;
 
 			case 3:
@@ -172,7 +172,7 @@ class CloseCaptioning {
 		this.showBox();
 	}
 
-	static checkSizeAndPopIfNecessary(bIsNewLowPriority: boolean) : boolean {
+	static checkSizeAndPopIfNecessary(bIsNewLowPriority: boolean): boolean {
 		return true;
 		const lowestTimeGlobal = { token: '', emitTime: 999999999 };
 		const lowestTimeLowPriority = { token: '', emitTime: 999999999 };
@@ -199,16 +199,20 @@ class CloseCaptioning {
 			// replace lowest priority ones if there are any
 			if (lowPriorityCount > 0) {
 				// existence of lowestTimeLowPriority is implicit
-				$.Msg(`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), removing: '${lowestTimeLowPriority.token}'`);
+				$.Msg(
+					`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), removing: '${lowestTimeLowPriority.token}'`
+				);
 				ClosedCaptionsAPI.RemoveCaption(lowestTimeLowPriority.token);
 				return true;
-			// if the incoming caption is low priority and there's no space, give up
+				// if the incoming caption is low priority and there's no space, give up
 			} else if (bIsNewLowPriority) {
 				$.Warning(`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), no space for any more!`);
 				return false;
 			}
 			// for everything else, get rid of the least lifetime one
-			$.Msg(`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), removing: '${lowestTimeGlobal.token}'`);
+			$.Msg(
+				`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), removing: '${lowestTimeGlobal.token}'`
+			);
 			ClosedCaptionsAPI.RemoveCaption(lowestTimeGlobal.token);
 			return true;
 		}
@@ -231,32 +235,37 @@ class CloseCaptioning {
 			const captionList = this.captions.get(token);
 			if (!captionList) {
 				return;
-			};
+			}
 			if (captionList.length === 0) {
 				return;
-			};
+			}
 			const caption = captionList[0];
 			caption.FadeOut();
 		});
 
 		// when a caption is missing. must have cc_captiontrace
-		$.RegisterEventHandler('BadCaption', $.GetContextPanel(), (token: string, lifetime: number, emitTime: number) => {
-			this.addCaption(token,
-				new CaptionEntry(
+		$.RegisterEventHandler(
+			'BadCaption',
+			$.GetContextPanel(),
+			(token: string, lifetime: number, emitTime: number) => {
+				this.addCaption(
 					token,
-					{
-						bLowPriority: false,
-						bSFX: false,
-						nNoRepeat: 0,
-						nDelay: 0,
-						flLifetimeOverride: -1.0,
-						text: `[MISSING] ${token}`,
-						options: new Map<string, string>()
-					},
-					emitTime
-				)
-			);
-		});
+					new CaptionEntry(
+						token,
+						{
+							bLowPriority: false,
+							bSFX: false,
+							nNoRepeat: 0,
+							nDelay: 0,
+							flLifetimeOverride: -1.0,
+							text: `[MISSING] ${token}`,
+							options: new Map<string, string>()
+						},
+						emitTime
+					)
+				);
+			}
+		);
 
 		// display standard captions via token, usually from scenes
 		$.RegisterEventHandler(
@@ -285,8 +294,7 @@ class CloseCaptioning {
 	// hide caption box when no more captions are being displayed
 	static updateVisibility() {
 		for (const [token, list] of this.captions) {
-			if (list.length > 0)
-				return;
+			if (list.length > 0) return;
 		}
 		this.hideBox();
 	}
