@@ -23,7 +23,13 @@
 				<ToggleButton id="Checkbox" onactivate="PrereleaseAck.checkboxChanged()" class="checkbox mb-1">
 					<Label text="#MainMenu_PrereleaseNotice_Acknowledge" />
 				</ToggleButton>
-				<Button id="ContinueButton" class="button horizontal-align-left" onactivate="PrereleaseAck.onDOSA()" tabindex="auto" selectionpos="auto">
+				<Button
+					id="ContinueButton"
+					class="button horizontal-align-left"
+					onactivate="PrereleaseAck.onDOSA()"
+					tabindex="auto"
+					selectionpos="auto"
+				>
 					<Label class="button__text" text="#UI_OK" />
 				</Button>
 			</Panel>

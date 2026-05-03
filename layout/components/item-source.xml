@@ -3,10 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<Panel class="m-1 vertical-align-bottom">
-		<TooltipPanel
-			class="fancy-blue p-1"
-			tooltip="#UI_Source_Steam"
-		>
+		<TooltipPanel class="fancy-blue p-1" tooltip="#UI_Source_Steam">
 			<Image
 				scaling="stretch-to-fit-preserve-aspect"
 				src="file://{images}/icons/steam.svg"

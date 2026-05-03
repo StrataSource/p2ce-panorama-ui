@@ -79,7 +79,8 @@ class SettingsShared {
 			return;
 		}
 
-		if (panel.paneltype === 'SettingsSlider' ||
+		if (
+			panel.paneltype === 'SettingsSlider' ||
 			panel.paneltype === 'SettingsEnumDropDown' ||
 			panel.paneltype === 'ConVarColorDisplay' /* ||
 			panel.paneltype === 'SettingsEnum' */

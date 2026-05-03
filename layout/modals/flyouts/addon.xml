@@ -30,7 +30,13 @@
 		</snippet>
 	</snippets>
 
-	<PopupCustomLayout class="FlyoutPanel Hidden" popupbackground="blur" onload="AddonFlyout.onLoad()" tabindex="auto" selectionpos="auto">
+	<PopupCustomLayout
+		class="FlyoutPanel Hidden"
+		popupbackground="blur"
+		onload="AddonFlyout.onLoad()"
+		tabindex="auto"
+		selectionpos="auto"
+	>
 		<Panel class="flow-right">
 			<Panel class="addon-flyout__cover">
 				<Image

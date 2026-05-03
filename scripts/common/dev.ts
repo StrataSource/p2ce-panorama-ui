@@ -162,7 +162,7 @@ function setExperimentalFeatures(panel: GenericPanel) {
 	} else {
 		allowExperiments = Number(psAllowExperiments);
 	}
-	
+
 	if (panel.HasClass('ExperimentalOnly')) {
 		if (allowExperiments === 0) {
 			panel.DeleteAsync(0);

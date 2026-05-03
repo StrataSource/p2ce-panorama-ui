@@ -64,7 +64,7 @@ declare const enum CampaignDataType {
 
 declare const enum MiscStorageKeys {
 	CONTENT_TAB = 'misc.last_content_tab',
-	EXPERIMENTS = 'misc.enable_experimental_features',
+	EXPERIMENTS = 'misc.enable_experimental_features'
 }
 
 type MenuButton = {
