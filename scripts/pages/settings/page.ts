@@ -80,8 +80,8 @@ class SettingsShared {
 		}
 
 		if (panel.paneltype === 'SettingsSlider' ||
-			panel.paneltype === 'SettingsEnumDropDown' /* ||
-			panel.paneltype === 'ConVarColorDisplay' ||
+			panel.paneltype === 'SettingsEnumDropDown' ||
+			panel.paneltype === 'ConVarColorDisplay' /* ||
 			panel.paneltype === 'SettingsEnum' */
 		) {
 			panel.RestoreCVarDefault();
