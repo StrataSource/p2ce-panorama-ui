@@ -213,24 +213,15 @@ class MenuManager {
 			// CC
 			// This is here because CC panel reconstructs itself
 			// which will re register these events. Don't want that!
-			$.RegisterConVarChangeListener(
-				'cc_panorama_entry_margin',
-				(value: string) => {
-					$.DispatchEvent('ReloadCCSettings');
-				}
-			);
-			$.RegisterConVarChangeListener(
-				'cc_panorama_font_size',
-				(value: string) => {
-					$.DispatchEvent('ReloadCCSettings');
-				}
-			);
-			$.RegisterConVarChangeListener(
-				'cc_panorama_bg_opacity',
-				(value: string) => {
-					$.DispatchEvent('ReloadCCSettings');
-				}
-			);
+			$.RegisterConVarChangeListener('cc_panorama_entry_margin', (value: string) => {
+				$.DispatchEvent('ReloadCCSettings');
+			});
+			$.RegisterConVarChangeListener('cc_panorama_font_size', (value: string) => {
+				$.DispatchEvent('ReloadCCSettings');
+			});
+			$.RegisterConVarChangeListener('cc_panorama_bg_opacity', (value: string) => {
+				$.DispatchEvent('ReloadCCSettings');
+			});
 
 			$.RegisterForUnhandledEvent(
 				'PanoramaComponent_Campaign_OnCampaignEvaluationRequested',
