@@ -5,7 +5,7 @@
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/common/searcher.ts" />
-		<include src="file://{scripts}/pages/campaigns/workshop-selector.ts" />
+		<include src="file://{scripts}/pages/campaigns/automap-selector.ts" />
 	</scripts>
 
 	<snippets>
@@ -52,7 +52,7 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="flow-down" onload="WorkshopSelector.init()">
+	<Panel class="flow-down" onload="AutoMapSelector.init()">
 		<Panel class="workshop__top-bar">
 			<Button
 				class="button mr-2"

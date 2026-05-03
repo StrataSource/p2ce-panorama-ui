@@ -1,6 +1,6 @@
 'use strict';
 
-class WorkshopEntry {
+class AutoMapEntry {
 	button: Button;
 	hasMissing: boolean;
 	// shut up i dont care
@@ -11,7 +11,7 @@ class WorkshopEntry {
 	indicatorOverlay: Panel;
 
 	constructor(pair: CampaignPair, isNew: boolean) {
-		this.button = $.CreatePanel('Button', WorkshopSelector.insert, pair.bucket.id);
+		this.button = $.CreatePanel('Button', AutoMapSelector.insert, pair.bucket.id);
 
 		this.button.LoadLayoutSnippet('WorkshopEntrySnippet');
 		this.button.SetDialogVariable('name', pair.campaign.title);
@@ -51,11 +51,11 @@ class WorkshopEntry {
 	}
 }
 
-class WorkshopSelector {
+class AutoMapSelector {
 	static insert = $<Panel>('#EntryInsert')!;
 	static searchBar = $<TextEntry>('#SearchBar')!;
 	static campaignStrings: Array<AbstractSearchData> = [];
-	static entries: Array<WorkshopEntry> = [];
+	static entries: Array<AutoMapEntry> = [];
 
 	static init() {
 		this.cacheSearch();
@@ -100,7 +100,7 @@ class WorkshopSelector {
 	}
 
 	static createBtn(pair: CampaignPair, isNew: boolean) {
-		this.entries.push(new WorkshopEntry(pair, isNew));
+		this.entries.push(new AutoMapEntry(pair, isNew));
 	}
 
 	static createBtnFromString(campaign: string) {
