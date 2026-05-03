@@ -3,7 +3,7 @@
 class ContentSelector {
 	static insert = $<Panel>('#Insert')!;
 	static tabs = $<Panel>('#Tabs')!;
-	static pages = ['campaigns/campaign-selector', 'campaigns/workshop-selector'];
+	static pages = ['campaigns/campaign-selector', 'campaigns/automap-selector'];
 	static btns = [$<RadioButton>('#CampaignsBtn')!, $<RadioButton>('#MapsBtn')!];
 
 	static onLoad() {
