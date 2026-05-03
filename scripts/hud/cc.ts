@@ -38,7 +38,7 @@ class CaptionEntry {
 		switch (CloseCaptioning.settings.fontType) {
 			default:
 			case 0:
-				style += "font-family: 'Lexend';transform: translateY(-1px);";
+				style += "font-family: 'Lexend';transform: translateY(-2px);";
 				break;
 
 			case 1:
@@ -46,7 +46,7 @@ class CaptionEntry {
 				break;
 
 			case 2:
-				style += "font-family: 'GorDIN';line-height: 24px;";
+				style += `font-family: 'GorDIN';line-height: ${Math.ceil(CloseCaptioning.settings.fontSize / 20 * 24)}px`;
 				break;
 
 			case 3:
@@ -86,7 +86,8 @@ class CaptionEntry {
 		// show the text
 		this.panel.style.opacity = 1;
 		this.height = this.panel.GetHeightForText(CloseCaptioning.CAPTION_WIDTH, this.panel.text);
-		this.backer.style.height = `${this.height + CloseCaptioning.settings.margin}px`;
+		//this.backer.style.height = `${this.height + CloseCaptioning.settings.margin}px`;
+		this.backer.style.padding = `${Math.floor(CloseCaptioning.settings.margin / 2)}px 0`;
 
 		$.RegisterEventHandler('PropertyTransitionEnd', this.panel, (s: string, prop: keyof Style) => {
 			// when the text has fully faded out, animate the height to 0
