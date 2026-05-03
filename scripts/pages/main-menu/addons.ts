@@ -224,7 +224,6 @@ class AddonManager {
 
 		this.purgeAddonList();
 
-		let anyEnabled = false;
 
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			const activeAddons = WorkshopAPI.GetActiveMountList();
@@ -254,12 +253,11 @@ class AddonManager {
 				});
 				panel.LoadLayoutSnippet('AddonEntrySnippet');
 
-				if (WorkshopAPI.GetAddonEnabled(addon)) anyEnabled = true;
-
 				this.addons.push(new AddonEntry(addon, panel));
 			}
 		} else {
 			const addonCount = WorkshopAPI.GetAddonCount();
+			let anyEnabled = false;
 			for (let i = 0; i < addonCount; ++i) {
 				const panel = $.CreatePanel('Button', this.addonContainer, 'addon' + i);
 				panel.SetPanelEvent('onactivate', () => {
@@ -276,10 +274,11 @@ class AddonManager {
 
 				this.addons.push(new AddonEntry(i, panel));
 			}
+			// If any addons are enabled, we'll default the "select all" button to true
+			if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
 		}
 
-		// If any addons are enabled, we'll default the "select all" button to true
-		if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
+		
 
 		this.updateAddons();
 	}
