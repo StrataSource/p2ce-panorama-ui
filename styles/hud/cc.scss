@@ -13,8 +13,7 @@
 		background-color: rgba(0, 0, 0, 0.75);
 		border-radius: 5px;
 		width: 1152px;
-		transition:
-			opacity 0.25s ease-in-out 0s;
+		transition: opacity 0.25s ease-in-out 0s;
 		opacity: 0;
 
 		.MainMenu & {
@@ -28,8 +27,7 @@
 		vertical-align: center;
 		font-size: 20px;
 		font-family: 'GorDIN';
-		transition:
-			opacity 0.25s ease-in-out 0s;
+		transition: opacity 0.25s ease-in-out 0s;
 		opacity: 0;
 		width: 100%;
 		text-overflow: noclip;
