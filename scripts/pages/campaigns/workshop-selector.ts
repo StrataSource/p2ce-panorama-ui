@@ -90,7 +90,6 @@ class WorkshopSelector {
 			this.reloadList();
 		});
 
-		// FIXME: event not firing?
 		$.RegisterForUnhandledEvent('PanoramaComponent_Workshop_OnAddonInstalled', () => {
 			for (const entry of this.entries) {
 				if (entry.hasMissing) {
