@@ -304,22 +304,22 @@ class PauseMenu {
 		this.mapDesc.text = string;
 
 		if (addon.local) {
-			this.mapVoteBox.visible = this.mapWorkshopBtm.visible = false;
+			this.mapVoteBox.visible = false;
+			this.mapWorkshopBtm.visible = false;
 		} else {
-			//NEEDS TO BE ADDED TO BACKEND API
-			//WorkshopAPI.CreateQueryUGCDetailsRequest(
-			//	(success: boolean, data: Array<SteamUGCDetails_t> | null) => {
-			//		if (!success || data === null) return;
-			//		this.mapAvatar.steamid = `${data[0].m_ulSteamIDOwner}`;
-			//	},
-			//	[ addon.workshopid ]
-			//);
+			WorkshopAPI.CreateQueryUGCDetailsRequest(
+				// eslint-disable-next-line camelcase
+				(success: boolean, data: Array<SteamUGCDetails_t> | null) => {
+					if (!success || data === null) return;
+					this.mapAvatar.steamid = `${data[0].m_ulSteamIDOwner}`;
+				},
+				[ addon.workshopid ]
+			);
 			this.workshopId = addon.workshopid;
 			const votePanel = this.votePanels[WorkshopAPI.GetAddonUserRating(this.addonId)];
 			if (votePanel)
 				votePanel.SetSelected(true);
 		}
-		
 	}
 
 	static setMapVote(vote: AddonRating) {
