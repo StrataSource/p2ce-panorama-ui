@@ -290,8 +290,12 @@ class SettingsSearch {
 				panel.paneltype
 			);
 		};
-		searchResult.SetPanelEvent('onmouseover', () => { showInfoFunc(); });
-		searchResult.SetPanelEvent('onfocus', () => { showInfoFunc(); });
+		searchResult.SetPanelEvent('onmouseover', () => {
+			showInfoFunc();
+		});
+		searchResult.SetPanelEvent('onfocus', () => {
+			showInfoFunc();
+		});
 
 		searchResult.SetPanelEvent('onactivate', () => {
 			this.clearSearch();

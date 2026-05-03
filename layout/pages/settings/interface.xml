@@ -38,16 +38,8 @@
 					psvar="misc.enable_experimental_features"
 					tags="experimental,interface,map,settings"
 				>
-					<RadioButton
-						group="experiments"
-						text="#Common_Off"
-						value="0"
-					/>
-					<RadioButton
-						group="experiments"
-						text="#Common_On"
-						value="1"
-					/>
+					<RadioButton group="experiments" text="#Common_Off" value="0" />
+					<RadioButton group="experiments" text="#Common_On" value="1" />
 				</SettingsEnum>
 
 				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
@@ -113,7 +105,12 @@
 					</TooltipPanel>
 				</Panel>
 
-				<SettingsEnum text="#Settings_Interface_InGame_Xhair" convar="crosshair" infomessage="#Settings_Interface_InGame_Xhair_Info" hasdocspage="false">
+				<SettingsEnum
+					text="#Settings_Interface_InGame_Xhair"
+					convar="crosshair"
+					infomessage="#Settings_Interface_InGame_Xhair_Info"
+					hasdocspage="false"
+				>
 					<RadioButton group="showxhair" text="#Common_Off" value="0" />
 					<RadioButton group="showxhair" text="#Common_On" value="1" />
 				</SettingsEnum>

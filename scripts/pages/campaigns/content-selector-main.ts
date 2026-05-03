@@ -3,14 +3,8 @@
 class ContentSelector {
 	static insert = $<Panel>('#Insert')!;
 	static tabs = $<Panel>('#Tabs')!;
-	static pages = [
-		'campaigns/campaign-selector',
-		'campaigns/workshop-selector',
-	];
-	static btns = [
-		$<RadioButton>('#CampaignsBtn')!,
-		$<RadioButton>('#MapsBtn')!,
-	]
+	static pages = ['campaigns/campaign-selector', 'campaigns/workshop-selector'];
+	static btns = [$<RadioButton>('#CampaignsBtn')!, $<RadioButton>('#MapsBtn')!];
 
 	static onLoad() {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
@@ -42,7 +36,6 @@ class ContentSelector {
 		const p = $.CreatePanel('Panel', this.insert, `Page${index}`);
 		p.LoadLayout(`file://{resources}/layout/pages/${this.pages[index]}.xml`, false, false);
 
-		if (bSave)
-			$.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, index);
+		if (bSave) $.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, index);
 	}
 }

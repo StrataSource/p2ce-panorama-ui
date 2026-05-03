@@ -18,7 +18,7 @@ class AddonFlyout {
 
 	static onLoad() {
 		const ctx = $.GetContextPanel();
-		
+
 		// MUST CHANGE IF ADDON REPRESENTATION CHANGES!!!!!
 		this.addonId = ctx.GetAttributeInt('addon', 0);
 		const meta = WorkshopAPI.GetAddonMeta(this.addonId);

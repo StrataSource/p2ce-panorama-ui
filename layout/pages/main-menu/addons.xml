@@ -130,11 +130,7 @@
 							<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/checkmark.svg" />
 						</ToggleButton>
 					</TooltipPanel>
-					<TextEntry
-						id="SearchAddonsEntry"
-						class="textentry fill-width"
-						placeholder="#MainMenu_Addons_SearchBox_FillerText"
-					/>
+					<TextEntry id="SearchAddonsEntry" class="textentry fill-width" placeholder="#MainMenu_Addons_SearchBox_FillerText" />
 					<Panel class="horizontal-align-right flow-right" tabindex="auto" selectionpos="auto">
 						<Button
 							onactivate="AddonManager.apply()"
@@ -159,7 +155,10 @@
 					</Panel>
 				</Panel>
 				<Panel id="InGameBanner" class="fancy-red-noborder addons__action-bar addons__action-bar__red hide">
-					<Label class="horizontal-align-center text-weight-bold" text="[HC] The addons listed below are currently mounted and cannot be changed while in-game." />
+					<Label
+						class="horizontal-align-center text-weight-bold"
+						text="[HC] The addons listed below are currently mounted and cannot be changed while in-game."
+					/>
 				</Panel>
 
 				<!-- Addon list -->

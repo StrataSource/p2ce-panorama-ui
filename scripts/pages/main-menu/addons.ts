@@ -174,11 +174,7 @@ class AddonManager {
 			desc = $.Localize('#MainMenu_Navigation_Addons_Tagline');
 		}
 
-		$.DispatchEvent(
-			'MainMenuSetPageLines',
-			$.Localize('#MainMenu_Navigation_Addons'),
-			desc
-		);
+		$.DispatchEvent('MainMenuSetPageLines', $.Localize('#MainMenu_Navigation_Addons'), desc);
 
 		this.addonsAdvancedCheck.SetSelected(this.advancedMode);
 	}
@@ -257,9 +253,9 @@ class AddonManager {
 					//);
 				});
 				panel.LoadLayoutSnippet('AddonEntrySnippet');
-	
+
 				if (WorkshopAPI.GetAddonEnabled(addon)) anyEnabled = true;
-	
+
 				this.addons.push(new AddonEntry(addon, panel));
 			}
 		} else {
@@ -275,9 +271,9 @@ class AddonManager {
 					//);
 				});
 				panel.LoadLayoutSnippet('AddonEntrySnippet');
-	
+
 				if (WorkshopAPI.GetAddonEnabled(i)) anyEnabled = true;
-	
+
 				this.addons.push(new AddonEntry(i, panel));
 			}
 		}

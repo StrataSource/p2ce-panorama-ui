@@ -313,12 +313,11 @@ class PauseMenu {
 					if (!success || data === null) return;
 					this.mapAvatar.steamid = `${data[0].m_ulSteamIDOwner}`;
 				},
-				[ addon.workshopid ]
+				[addon.workshopid]
 			);
 			this.workshopId = addon.workshopid;
 			const votePanel = this.votePanels[WorkshopAPI.GetAddonUserRating(this.addonId)];
-			if (votePanel)
-				votePanel.SetSelected(true);
+			if (votePanel) votePanel.SetSelected(true);
 		}
 	}
 
@@ -331,8 +330,6 @@ class PauseMenu {
 	}
 
 	static openMapWorkshop() {
-		SteamOverlayAPI.OpenURLModal(
-			`https://steamcommunity.com/sharedfiles/filedetails/?id=${this.workshopId}`
-		);
+		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${this.workshopId}`);
 	}
 }

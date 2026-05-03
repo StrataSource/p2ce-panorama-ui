@@ -51,7 +51,12 @@
 			</Panel>
 			<Panel class="mainmenu__addon" hittest="false">
 				<Panel id="VoteBox" class="mainmenu__addon__voters">
-					<RadioButton group="vote" id="MapUpvote" class="mainmenu__addon__vote mainmenu__addon__upvote" onactivate="PauseMenu.setMapVote(1)">
+					<RadioButton
+						group="vote"
+						id="MapUpvote"
+						class="mainmenu__addon__vote mainmenu__addon__upvote"
+						onactivate="PauseMenu.setMapVote(1)"
+					>
 						<Image
 							class="mainmenu__addon__vote__icon"
 							texturewidth="96"
@@ -59,7 +64,12 @@
 							src="file://{images}/icons/p2_upvote.png"
 						/>
 					</RadioButton>
-					<RadioButton group="vote" id="MapDownvote" class="mainmenu__addon__vote mainmenu__addon__downvote" onactivate="PauseMenu.setMapVote(2)">
+					<RadioButton
+						group="vote"
+						id="MapDownvote"
+						class="mainmenu__addon__vote mainmenu__addon__downvote"
+						onactivate="PauseMenu.setMapVote(2)"
+					>
 						<Image
 							class="mainmenu__addon__vote__icon"
 							texturewidth="96"
@@ -67,13 +77,13 @@
 							src="file://{images}/icons/p2_downvote.png"
 						/>
 					</RadioButton>
-					<ToggleButton id="MapFavorite" class="mainmenu__addon__vote mainmenu__addon__favorite" disabled="true" onactivate="PauseMenu.toggleMapFavorite()">
-						<Image
-							class="mainmenu__addon__vote__icon"
-							texturewidth="128"
-							textureheight="128"
-							src="file://{images}/star.svg"
-						/>
+					<ToggleButton
+						id="MapFavorite"
+						class="mainmenu__addon__vote mainmenu__addon__favorite"
+						disabled="true"
+						onactivate="PauseMenu.toggleMapFavorite()"
+					>
+						<Image class="mainmenu__addon__vote__icon" texturewidth="128" textureheight="128" src="file://{images}/star.svg" />
 					</ToggleButton>
 				</Panel>
 				<Panel id="AddonBottom" class="mainmenu__addon__bottom">
