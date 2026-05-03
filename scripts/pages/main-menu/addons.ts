@@ -153,7 +153,7 @@ class AddonManager {
 			}
 		);
 
-		$.RegisterForUnhandledEvent('PanoramaComponent_Campaign_OnRefreshList', () => {
+		$.RegisterForUnhandledEvent('PanoramaComponent_Workshop_OnAddonInstalled', () => {
 			$.Msg('ADDON MENU: Refreshing list');
 			this.searchBar.text = '';
 			this.createAddonEntries();
