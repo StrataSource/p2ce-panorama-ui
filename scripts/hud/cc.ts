@@ -86,8 +86,7 @@ class CaptionEntry {
 		// show the text
 		this.panel.style.opacity = 1;
 		this.height = this.panel.GetHeightForText(CloseCaptioning.CAPTION_WIDTH, this.panel.text);
-		//this.backer.style.height = `${this.height + CloseCaptioning.settings.margin}px`;
-		this.backer.style.padding = `${Math.floor(CloseCaptioning.settings.margin / 2)}px 0`;
+		this.backer.style.height = `${this.height + CloseCaptioning.settings.margin}px`;
 
 		$.RegisterEventHandler('PropertyTransitionEnd', this.panel, (s: string, prop: keyof Style) => {
 			// when the text has fully faded out, animate the height to 0
