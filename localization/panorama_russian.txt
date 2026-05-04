@@ -1,0 +1,1416 @@
+"lang"
+{
+	"Language"		"Russian"
+	"Tokens"
+	{
+		// Moved from p2ce_russian.txt
+		
+		"hl2_AmmoFull"	"ПОЛОН"
+
+		"X_STRINGID_TITLENAME"	"Portal 2"
+
+		"RICHPRESENCE_IDLE"	"Бездействует"
+		"RICHPRESENCE_MAINMENU"	"Главное меню"
+		"RICHPRESENCE_SP"	"{c0}"
+		"RICHPRESENCE_COOPMENU"	"Меню совместной игры\n{c1}"
+		"RICHPRESENCE_COOPGAME"	"{c2}\n{c3}"
+		"RICHPRESENCE_COOPGAME_TRACK"	"{c2}\n{c3} {p0x10000023}/{p0x10000024}"
+		
+		"SP_PRESENCE_TEXT_DEFAULT"	"Один игрок"
+		"SP_PRESENCE_TEXT_CH1"	"Глава 1\nВизит вежливости"
+		"SP_PRESENCE_TEXT_CH2"	"Глава 2\nХолодный старт"
+		"SP_PRESENCE_TEXT_CH3"	"Глава 3\nВозвращение"
+		"SP_PRESENCE_TEXT_CH4"	"Глава 4\nСюрприз"
+		"SP_PRESENCE_TEXT_CH5"	"Глава 5\nПобег"
+		"SP_PRESENCE_TEXT_CH6"	"Глава 6\nПадение"
+		"SP_PRESENCE_TEXT_CH7"	"Глава 7\nВоссоединение"
+		"SP_PRESENCE_TEXT_CH8"	"Глава 8\nЧесотка"
+		"SP_PRESENCE_TEXT_CH9"	"Глава 9\nЧасть, в которой..."
+		"SP_PRESENCE_TEXT_CH10"	"Глава 10\nТитры"
+		
+		"COOP_PRESENCE_WAITING_DEFAULT"	"Ожидание напарника"
+		"COOP_PRESENCE_WAITING_SPLITSCREEN"	"Разделённый экран"
+		"COOP_PRESENCE_WAITING_FRIEND"	"Ожидание напарника"
+		"COOP_PRESENCE_WAITING_QUICKMATCH"	"Ожидание незнакомца"
+		
+		"COOP_PRESENCE_TAGLINE_DEFAULT"	"Совместная кампания"
+		"COOP_PRESENCE_TAGLINE_SPLITSCREEN"	"Разделённый экран"
+		"COOP_PRESENCE_TAGLINE_FRIEND"	"Играет с другом"
+		"COOP_PRESENCE_TAGLINE_QUICKMATCH"	"Играет с незнакомцем"
+		
+		"COOP_PRESENCE_TRACK_DEFAULT"	"Совместная игра"
+		"COOP_PRESENCE_TRACK_CALIBRATION"	"Калибровочный тест"
+		"COOP_PRESENCE_TRACK_HUB"	"В распределителе"
+		"COOP_PRESENCE_TRACK_TRACK1"	"Командная работа"
+		"COOP_PRESENCE_TRACK_TRACK2"	"Масса и скорость"
+		"COOP_PRESENCE_TRACK_TRACK3"	"Плотный свет"
+		"COOP_PRESENCE_TRACK_TRACK4"	"Экскурсионные пути"
+		"COOP_PRESENCE_TRACK_TRACK5"	"Ускоряющие гели"
+		
+		"COOP_PRESENCE_TRACK_CREDITS"	"Авторы"
+		"GAME_MODE_SP"	"Одиночная игра"
+		"GAME_MODE_COOP"	"Совместная игра"
+		
+		"HL2_GameOver_Object_ep2"	"ЭТО КОНЕЦ\nФРИМЕНУ НЕ УДАЛОСЬ СОХРАНИТЬ РЕСУРСЫ,\nНЕОБХОДИМЫЕ ДЛЯ ПОБЕДЫ\nПРОБЛЕСКИ НЕИЗБЕЖНОЙ СМЕРТИ ЗАТЕМНЯЮТ ВОРТ-СУЩНОСТЬ"
+		"HL2_GameOver_Ally_ep2"	"ВОТ И КОНЕЦ\nФРИМЕНУ НЕ УДАЛОСЬ СОХРАНИТЬ ЖИЗНЬ, НЕОБХОДИМУЮ ДЛЯ ПОБЕДЫ\nТАКИЕ ФОРМЫ МЫ ВИДИМ В ВОРТ-СУЩНОСТИ"
+		"HL2_GameOver_Timer_ep2"	"ВСЁ КОНЧЕНО\nНЕУДАЧА ФРИМЕНА ЗАХВАТИТЬ СКОРУЮ ПОБЕДУ\nПРИВОДИТ К ПОЛНОМУ ПОРАЖЕНИЮ"
+		"HL2_GameOver_Stuck_ep2"	"КОНТРАКТ РАСТОРГНУТ\nОБЪЕКТ: ФРИМЕН\nПРИЧИНА: НЕВЕРНАЯ ОЦЕНКА ОБСТАНОВКИ"
+		
+		"Portal_Portalgun"	"Переносное портальное устройство Aperture Science\n(портальная пушка)"
+
+		"HL2_357Handgun"	"МАГНУМ .357"
+		"HL2_Pulse_Rifle"	"ТАБЕЛЬНОЕ ОРУЖИЕ ПАТРУЛЯ\n(ИМПУЛЬСНОЕ РУЖЬЁ)"
+		"HL2_Bugbait"	"ФЕРОПОД\n(ПРИМАНКА)"
+		"HL2_Crossbow"	"АРБАЛЕТ"
+		"HL2_Crowbar"	"МОНТИРОВКА"
+		"HL2_Grenade"	"ГРАНАТА"
+		"HL2_GravityGun"	"ЭНЕРГОПУШКА НУЛЕВОГО УРОВНЯ\n(ГРАВИ-ПУШКА)"
+		"HL2_Pistol"	"ПИСТОЛЕТ 9 ММ"
+		"HL2_RPG"	"ГРАНАТОМЁТ\n(РЕАКТИВНЫЙ)"
+		"HL2_Shotgun"	"ДРОБОВИК"
+		"HL2_SMG1"	"ПП\n(ПИСТОЛЕТ-ПУЛЕМЁТ)"
+		
+		"HL2_SAVING"	"Сохранение..."
+		"HL2_Saved"	"Сохранено."
+		
+		"HL2_SetupMicrophone"	"НАСТРОЙКА ПАРАМЕТРОВ МИКРОФОНА"
+		"HL2_SetupMicrophoneSteam"	"Сообщество Steam неактивно.\nПожалуйста, активируйте сообщество Steam или настройте голосовое общение с клиенте Steam."
+		
+		"HL2_Enable_Commentary"	"Включить комментарии"
+		
+		"portal2_Chapter1"	"ГЛАВА 1\nВИЗИТ ВЕЖЛИВОСТИ"
+		"portal2_Chapter1_Title"	"ГЛАВА 1"
+		"portal2_Chapter1_Subtitle"	"ВИЗИТ ВЕЖЛИВОСТИ"
+
+		"portal2_Chapter2"	"ГЛАВА 2\nХОЛОДНЫЙ СТАРТ"
+		"portal2_Chapter2_Title"	"ГЛАВА 2"
+		"portal2_Chapter2_Subtitle"	"ХОЛОДНЫЙ СТАРТ"
+
+		"portal2_Chapter3"	"ГЛАВА 3\nВОЗВРАЩЕНИЕ"
+		"portal2_Chapter3_Title"	"ГЛАВА 3"
+		"portal2_Chapter3_Subtitle"	"ВОЗВРАЩЕНИЕ"
+
+		"portal2_Chapter4"	"ГЛАВА 4\nСЮРПРИЗ"
+		"portal2_Chapter4_Title"	"ГЛАВА 4"
+		"portal2_Chapter4_Subtitle"	"СЮРПРИЗ"
+
+		"portal2_Chapter5"	"ГЛАВА 5\nПОБЕГ"
+		"portal2_Chapter5_Title"	"ГЛАВА 5"
+		"portal2_Chapter5_Subtitle"	"ПОБЕГ"
+
+		"portal2_Chapter6"	"ГЛАВА 6\nПАДЕНИЕ"
+		"portal2_Chapter6_Title"	"ГЛАВА 6"
+		"portal2_Chapter6_Subtitle"	"ПАДЕНИЕ"
+
+		"portal2_Chapter7"	"ГЛАВА 7\nВОССОЕДИНЕНИЕ"
+		"portal2_Chapter7_Title"	"ГЛАВА 7"
+		"portal2_Chapter7_Subtitle"	"ВОССОЕДИНЕНИЕ"
+
+		"portal2_Chapter8"	"ГЛАВА 8\nЧЕСОТКА"
+		"portal2_Chapter8_Title"	"ГЛАВА 8"
+		"portal2_Chapter8_Subtitle"	"ЧЕСОТКА"
+
+		"portal2_Chapter9"	"ГЛАВА 9\nМОМЕНТ, КОГДА ОН ВАС УБИВАЕТ"
+		"portal2_Chapter9_Title"	"ГЛАВА 9"
+		"portal2_Chapter9_Subtitle"	"МОМЕНТ, КОГДА ОН ВАС УБИВАЕТ"
+
+		"portal2_Chapter10"	"ГЛАВА 10\nТИТРЫ"
+		"portal2_Chapter10_Title"	"ГЛАВА 10"
+		"portal2_Chapter10_Subtitle"	"ТИТРЫ"
+
+		"PORTAL2_CoopCommentary_Title1"	"Кооператив\nРазвитие уверенности"
+		"PORTAL2_CoopCommentary_Title2"	"Кооператив\nРаспределитель"
+		"PORTAL2_CoopCommentary_Title3"	"Кооператив\nКомната охраны"
+
+		// Skipped HL2, ep, ep2 and P1 captions
+
+		"P2_Actions_Title"	"ДЕЙСТВИЯ"
+		"P2_Coop_Title"	"СОВМЕСТНАЯ ИГРА"
+		"P2_Primary_Attack"	"Открыть синий портал"
+		"P2_Secondary_Attack"	"Открыть оранжевый портал"
+		"P2_Zoom"	"Приблизить"
+		"P2_Zoom_In"	"Приблизить"
+		"P2_Zoom_Out"	"Отдалить"
+		"P2_Romote_View"	"Вид напарника"
+		"P2_Mouse_Menu"	"Меню общения"
+		"P2_Taunt"	"Меню жестов"
+		
+		"P2_Taunt_Earned"	"Расшифрован жест"
+		
+		"P2_Scoreboard_Ping"	"Сигнал"
+		"P2_Scoreboard_Dead"	"Мертв"
+		"P2_Team_Red"	"Пи-боди"
+		"P2_Team_Blue"	"Атлас"
+		"P2_Team_RedUpper"	"ПИ-БОДИ"
+		"P2_Team_BlueUpper"	"АТЛАС"
+		
+		"P2_ScoreBoard_Player"	"%s2 — %s1"
+		"P2_ScoreBoard_Players"	"%s2 — %s1s"
+		
+		"Valve_Hint_Sprint"	"БЕГ"
+		"Valve_Hint_GravGun"	"ОТБРОСИТЬ ПРЕДМЕТ ПРИТЯНУТЬ ПРЕДМЕТ"
+		"Valve_Hint_Look_Up"	"СМОТРЕТЬ ВВЕРХ"
+		"Valve_Hint_Look_Down"	"СМОТРЕТЬ ВНИЗ"
+		"Valve_Hint_Use_Bed"	" СПАТЬ"
+		"Valve_Hint_Movement_Keys"	"ИДТИ"
+		"Valve_Hint_Say_Apple"	"СКАЗАТЬ \"ЯБЛОКО\""
+		"Valve_Hint_Talk"	"ГОВОРИТЬ"
+		"Valve_Hint_Crouch"	"ПРИГНУТЬСЯ"
+		"Valve_Hint_Uncrouch"	"ВСТАТЬ"
+		"Valve_Hint_PushButton"	"НАЖАТЬ КНОПКУ"
+		"Valve_Hint_Interact"	"ВЗАИМОДЕЙСТВОВАТЬ"
+		"Valve_Hint_Jump"	"ПОДПРЫГНУТЬ"
+		"Valve_Hint_Door"	" ОТКРЫТЬ ДВЕРЬ"
+		"Valve_Hint_Lever"	"ПОТЯНУТЬ РЫЧАГ"
+		"Valve_Hint_Zoom"	"ПРИБЛИЗИТЬ"
+		"Valve_Hint_Pickup_Glados"	"ПОДОБРАТЬ ГЛаДОС"
+		"Valve_Hint_Socket"	"АКТИВИРОВАТЬ РАЗЪЕМ"
+		"Valve_Hint_USEPickup"	"Подобрать предмет"
+		"Valve_Hint_CarryTurret"	"ИЛИ ИСП. ГРАВИ-ПУШКУ, ЧТОБЫ ПОДНЯТЬ ПУЛЕМЕТ"
+		"Valve_Hint_CROSSBOW"	"ПРИЦЕЛ АРБАЛЕТА"
+		
+		// Portal 2 instructor hints
+		"PORTAL2_HINT_GESTURE"	"Жест"
+		"PORTAL2_HINT_BUTTON_GESTURE"	"Сделать жест"
+		"PORTAL2_HINT_SEE_NEW_GESTURE"	"Посмотрите новый жест!"
+		"PORTAL2_HINT_PING"	"Используйте сигнальное устройство"
+		"PORTAL2_HINT_PING_WAIT"	"Подождите выбор вашего напарника"
+		
+		// Same but without "PORTAL2_"
+		"Instructor_Air_Taunt"	"Сделать жест в воздухе"
+		"Instructor_New_Taunt_Earned"	"Жест"
+		"Instructor_Partner_View"	"Удерживать для вида напарника"
+		"Instructor_Start_Countdown"	"Удерживать для обратного отсчета"
+		"Instructor_Return_To_Hub"	"Перейти в распределитель"
+		"Instructor_Create_Blue_Portal"	"Создать синий портал"
+		"Instructor_Create_Purple_Portal"	"Создать фиолетовый портал"
+		"Instructor_Create_Orange_Portal"	"Создать оранжевый портал"
+		"Instructor_Create_Red_Portal"	"Создать красный портал"
+		"Instructor_Walk"	"Идти"
+		"Instructor_Push_Button"	" Активация"
+		"Instructor_Pick_Up"	" Поднять"
+		"Instructor_Drop"	"Бросить"
+		"Instructor_Jump"	"Прыгать"
+		"Instructor_Unzoom"	"Отдалить"
+		"Instructor_Zoom"	"Приблизить"
+		
+		"Paint_Instructor_teach_bounce_suppression"	"Удерживайте, чтобы не отскакивать"
+		
+		"P2COOP_Invite_Title"	"Приглашение в Portal 2"
+		"P2COOP_Invite_Body"	"Вас пригласили сыграть в совместную кампанию Portal 2!"
+		
+		"P2COOP_TrackName_1"	"КОМАНДНАЯ ИГРА"
+		"P2COOP_TrackName_2"	"МАССА И СКОРОСТЬ"
+		"P2COOP_TrackName_3"	"МОСТЫ ПЛОТНОГО СВЕТА"
+		"P2COOP_TrackName_4"	"ЭКСКУРСИОННЫЕ ВОРОНКИ"
+		"P2COOP_TrackName_5"	"УСКОРЯЮЩИЕ ГЕЛИ"
+		"P2COOP_TrackName_6"	"УСЛОЖНЕННЫЕ КАМЕРЫ"
+		
+		"P2COOP_WAITINGFORPARTNER"	"ОЖИДАНИЕ НАПАРНИКА"
+		
+		"P2COOP_SelectScreen_SelectNoOption"	"Перейдите в разборочную\nкамеру."
+		"P2COOP_SelectScreen_Select"	"Выберите уровень и\nперейдите в разборочную камеру."
+		"P2COOP_SelectScreen_CourseNum"	"Курс %s1"
+		"P2COOP_SelectScreen_PercentComplete"	"%s1% ЗАВЕРШЕНО"
+		"P2COOP_Scoreboard_Disclaimer1"	"ВЫ ПОД ПОСТОЯННЫМ НАБЛЮДЕНИЕМ"
+		"P2COOP_Scoreboard_Disclaimer2"	"СТАТИСТИКА БУДЕТ ВНОСИТЬСЯ В ВЕЧНОЕ ЛИЧНОЕ ДОСЬЕ"
+		"P2COOP_Scoreboard_Disclaimer3"	"Я ВАС ВИЖУ"
+		"P2COOP_Scoreboard_Stat1"	"ШАГОВ СДЕЛАНО"
+		"P2COOP_Scoreboard_Stat2"	"ПОРТАЛОВ ОТКРЫТО"
+		"P2COOP_Scoreboard_Stat3"	"ПОРТАЛОВ ПРОЙДЕНО"
+		"P2COOP_Scoreboard_Stat4"	"ОБЪЯТИЙ"
+		"P2COOP_Scoreboard_Stat5_Part1"	"КАТАСТРОФ"
+		"P2COOP_Scoreboard_Stat5_Part2"	"ПРЕДОТВРАЩЕНО"
+		"P2COOP_Scoreboard_Stat6_Part1"	"ОЧКИ"
+		"P2COOP_Scoreboard_Stat6_Part2"	"НАУЧНОГО"
+		"P2COOP_Scoreboard_Stat6_Part3"	"СОТРУДНИЧЕСТВА"
+		"P2COOP_Scanning"	"СКАНИРОВАНИЕ ПЕРСОНАЛА..."
+		"P2COOP_Waiting"	"ОЖИДАНИЕ..."
+		"P2COOP_Scoreboard_Stat4_SubLabel_Part1"	"ЗОНА НИЗКОЙ"
+		"P2COOP_Scoreboard_Stat4_SubLabel_Part2"	"РЕЗУЛЬТАТИВНОСТИ И"
+		"P2COOP_Scoreboard_Stat4_SubLabel_Part3"	"ЗАИНТЕРЕСОВАННОСТИ"
+		
+		// There are some other captions that dont exist in panorama_english,
+		// such as closed captions, gesture localizations and Portal 2 shop tokens.
+		// Those were removed from here as well.
+
+		//
+		// CSGO Panorama localization
+		//
+		// Note: for some reason some captions are written in caps.
+		// That's how it is in csgo_russian as well
+
+		"UI_Submit"	"Подтвердить"
+		"UI_Select"	"Выбрать"
+		"UI_Unselect"	"Снять выбор"
+		"UI_Inspect"	"Осмотреть"
+		"UI_LeftStick_Short"	"LS"
+		"UI_RightStick_Short"	"RS"
+		"UI_LeftTrigger_Short"	"LT"
+		"UI_RightTrigger_Short"	"RT"
+		"UI_LeftBumper_Short"	"LB"
+		"UI_RightBumper_Short"	"RB"
+		"UI_LeftBack_Short"	"LP"
+		"UI_RightBack_Short"	"RP"
+		"UI_AButton"	"A"
+		"UI_BButton"	"B"
+		"UI_XButton"	"X"
+		"UI_YButton"	"Y"
+		"UI_Cancel"		"ОТМЕНА"
+		"UI_Dismiss" 	"СКРЫТЬ"
+		"UI_OK"		"OK"
+		"UI_Done"	"ГОТОВО"
+		"UI_Yes"	"ДА"
+		"UI_No"		"НЕТ"
+		"UI_Unknown"	"НЕИЗВЕСТНО"
+		"UI_Always"	"ВСЕГДА"
+		"UI_Select_Footer"	"ВЫБРАТЬ"
+		"UI_Cancel_Footer"	"ОТМЕНА"
+		"UI_Back_Footer" "НАЗАД"
+		"UI_Alert"		"Внимание"
+		"UI_Help" 	"Помощь"
+
+		"UI_Backspace"	"BACKSPACE"
+		"UI_Spacebar"	"ПРОБЕЛ"
+		"UI_MoveCaret"	"НАВИГАЦИЯ"
+		"UI_MoveCaretLeft"	"« КУРСОР"
+		"UI_MoveCaretRight"	"КУРСОР »"
+		"UI_InputDone"	"ГОТОВО"
+		"UI_MoreOptions"	"ДОПОЛНИТЕЛЬНО"
+		"UI_SendMessage"	"ОТПРАВИТЬ"
+		"UI_Languages"	"ЯЗЫКИ"
+		"UI_Next" "ДАЛЕЕ"
+
+		"UI_CurrentItemInGroup"	"{d:current_item} / {d:total_items}"
+
+		"UI_Today"	"Сегодня"
+		"UI_Yesterday"	"Вчера"
+		"UI_Tomorrow"	"Завтра"
+		"UI_Hours"	"ч."
+		"UI_Minutes"	"мин."
+		"UI_Seconds"	"сек."
+		"UI_Hour"	"ч."
+		"UI_Minute"	"мин."
+		"UI_Second"	"сек."
+		"UI_UnknownTime"	"Неизвестно"
+
+		"UI_Label_CopySelected"	"Скопировать выделенный текст"
+		"UI_Label_OpenLinkInBrowser" "Открыть ссылку в браузере"
+		"UI_Label_CopyURLToClipboard" "Скопировать ссылку в буфер обмена"
+			
+		"UI_TextEntry_CutToClipboard"	"Вырезать"
+		"UI_TextEntry_CopyToClipboard"	"Скопировать"
+		"UI_TextEntry_PasteClipboard"	"Вставить"
+
+		"UI_Agreements"					"Соглашения"
+		"UI_ViewAgreements"				"СОГЛАШЕНИЕ ПОДПИСЧИКА STEAM И ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ"
+		"UI_I_Agree"					"Соглашаюсь"
+		
+		"UI_ConfirmExitTitle"			"Выход"
+		"UI_ConfirmExitMessage"			"Вы уверены, что хотите выйти?"
+		"UI_Quit"						"ВЫЙТИ"
+		"UI_Return"						"НАЗАД"
+
+		"Month_January"					"января"
+		"Month_February"				"февраля"
+		"Month_March"					"марта"
+		"Month_April"					"апреля"
+		"Month_May"						"мая"
+		"Month_June"					"июня"
+		"Month_July"					"июля"
+		"Month_August"					"августа"
+		"Month_September"				"сентября"
+		"Month_October"					"октября"
+		"Month_November"				"ноября"
+		"Month_December"				"декабря"
+
+		"UI_Continue"	"Продолжить"
+		"UI_Age_Gate_Continue" "ПРОДОЛЖИТЬ"
+
+		"Panorama_Lang_English"			"Английский"
+		"Panorama_Lang_Spanish"			"Испанский"
+		"Panorama_Lang_French"			"Французский"
+		"Panorama_Lang_Italian"			"Итальянский"
+		"Panorama_Lang_German"			"Немецкий"
+		"Panorama_Lang_Greek"				"Греческий"
+		"Panorama_Lang_Korean"			"Корейский"
+		"Panorama_Lang_Simplified_Chinese"	"Упрощённый китайский"
+		"Panorama_Lang_Traditional_Chinese"	"Традиционный китайский"
+		"Panorama_Lang_Russian"		"Русский"
+		"Panorama_Lang_Thai"			"Тайский"
+		"Panorama_Lang_Japanese"		"Японский"
+		"Panorama_Lang_Portuguese"	"Португальский"
+		"Panorama_Lang_Brazilian"	 	"Бразильский португальский"
+		"Panorama_Lang_Polish"		"Польский"
+		"Panorama_Lang_Danish"		"Датский"
+		"Panorama_Lang_Dutch"			"Нидерландский"
+		"Panorama_Lang_Finnish"		"Финский"
+		"Panorama_Lang_Norwegian"		"Норвежский"
+		"Panorama_Lang_Swedish"		"Шведский"
+		"Panorama_Lang_Czech"		"Чешский"
+		"Panorama_Lang_Hungarian"		"Венгерский"
+		"Panorama_Lang_Romanian"			"Румынский"
+		"Panorama_Lang_Bulgarian"			"Болгарский"
+		"Panorama_Lang_Turkish"			"Турецкий"
+		"Panorama_Lang_Arabic"			"Арабский"
+		"Panorama_Lang_Ukrainian"			"Украинский"
+		
+		
+		"Panorama_Lang_Footer_English"			"АНГЛИЙСКИЙ"
+		"Panorama_Lang_Footer_Spanish"			"ИСПАНСКИЙ"
+		"Panorama_Lang_Footer_French"			"ФРАНЦУЗСКИЙ"
+		"Panorama_Lang_Footer_Italian"			"ИТАЛЬЯНСКИЙ"
+		"Panorama_Lang_Footer_German"			"НЕМЕЦКИЙ"
+		"Panorama_Lang_Footer_Greek"				"ГРЕЧЕСКИЙ"
+		"Panorama_Lang_Footer_Korean"			"КОРЕЙСКИЙ"
+		"Panorama_Lang_Footer_Simplified_Chinese"	"УПРОЩ. КИТАЙСКИЙ"
+		"Panorama_Lang_Footer_Traditional_Chinese"	"ТРАДИЦ. КИТАЙСКИЙ"
+		"Panorama_Lang_Footer_Russian"		"РУССКИЙ"
+		"Panorama_Lang_Footer_Thai"			"ТАЙСКИЙ"
+		"Panorama_Lang_Footer_Japanese"		"ЯПОНСКИЙ"
+		"Panorama_Lang_Footer_Portuguese"	"ПОРТУГАЛЬСКИЙ"
+		"Panorama_Lang_Footer_Brazilian"	 	"БРАЗ. ПОРТУГАЛЬСКИЙ"
+		"Panorama_Lang_Footer_Polish"		"ПОЛЬСКИЙ"
+		"Panorama_Lang_Footer_Danish"		"ДАТСКИЙ"
+		"Panorama_Lang_Footer_Dutch"			"НИДЕРЛАНДСКИЙ"
+		"Panorama_Lang_Footer_Finnish"		"ФИНСКИЙ"
+		"Panorama_Lang_Footer_Norwegian"		"НОРВЕЖСКИЙ"
+		"Panorama_Lang_Footer_Swedish"		"ШВЕДСКИЙ"
+		"Panorama_Lang_Footer_Czech"		"ЧЕШСКИЙ"
+		"Panorama_Lang_Footer_Hungarian"		"ВЕНГЕРСКИЙ"
+		"Panorama_Lang_Footer_Romanian"			"РУМЫНСКИЙ"
+		"Panorama_Lang_Footer_Bulgarian"			"БОЛГАРСКИЙ"
+		"Panorama_Lang_Footer_Turkish"			"ТУРЕЦКИЙ"
+		"Panorama_Lang_Footer_Ukrainian"			"УКРАИНСКИЙ"
+		
+		"Panorama_MoviePlaybackError"		"Во время воспроизведения произошла ошибка"
+
+		"Debugger_PaintInfo"				"Данные об окраске"
+		"Debugger_Style"				"Стиль"
+		"Debugger_Computed"				"Вычислено"
+		"Debugger_Measurements"			"Размеры:"
+		"Debugger_Misc"					"Другое:"
+		"Debugger_Properties"			"Свойства:"
+		"Debugger_StyleFileLink"		"{s:stylefile}"
+		"Debugger_LayoutFileLink"		"{s:layoutfile}"
+		"Debugger_LayoutFileLink_Code"	"Из XML или кода"	
+		"Debugger_InheritedStyleHeader"	"Унаследовано от"
+		"Debugger_Save"					"Сохранить все изменения"
+		"Debugger_Revert"				"Отменить все изменения"
+		"Debugger_PanelStyleInvalid"	"Во время редактирования изменились стили! Нажмите F5, чтобы перезагрузить отображаемые стили"
+		"Debugger_AnimationHeader"		"Ключевые кадры анимации"
+		"Debugger_DevInfo"				"Данные для разработчиков"
+		"Debugger_Smaller"				"▼ Меньше"
+		"Debugger_Larger"				"▲ Больше"
+		"Debugger_ResetSize"			"Ориг. размер"
+
+		//
+		// PORTAL 2 COMMUNITY EDITION Tokens
+		//
+		// Finally, some actual stuff to localize.
+		//
+
+		"Settings_Title"								"Настройки"
+		"Settings_General_Title"						"Настройки"
+		"Settings_General_Apply"						"Применить"
+		"Settings_General_Discard"						"Отмена"
+		"Settings_General_Reset"						"Сброс"
+		"Settings_General_Confirm"						"Подтвердить"
+		"Settings_General_ResetControls"				"Сброс"
+		"Settings_General_ResetSomething"				"Сброс"
+		"Settings_General_Enabled"						"Вкл"
+		"Settings_General_Disabled"						"Выкл"
+		"Settings_General_Auto"							"Авто"
+		"Settings_General_Autodetect"					"Авто"
+		"Settings_General_EngineersToast"				"DOOM потянет"	// Sorry doc, I didn't get it.
+		"Settings_General_Potato"						"Крайне низкий"
+		"Settings_General_VeryLow"						"Очень низкий"
+		"Settings_General_Low"							"Низкий"
+		"Settings_General_Medium"						"Средний"
+		"Settings_General_High"							"Высокий"
+		"Settings_General_VeryHigh"						"Очень Высокий"
+		"Settings_General_StupidlyLudricous"			"Тормози! ТОРМОЗИ!!!"	// A russian meme
+		"Settings_General_ViewDocs"						"Открыть веб-страницу документации"
+		"Settings_General_MapReload"					"Необходимо перезапустить карту, чтобы эффект от этой настройки вступил в силу."
+		"Settings_General_Command"						"Команда"
+		"Settings_General_Convar"						"Консольная переменная"
+		"Settings_General_OutOfBounds"					"Выставленное значение для данной настройки находится за пределами заданного диапазона. Короче говоря, что-то может сломаться."
+		"Settings_General_Search_Prompt" 				"Поиск настроек"
+		"Settings_General_Search_Results"				"Рузельтаты поиска"
+		"Settings_General_Search_EmptyHeader"			"Ничего не найдено."
+		"Settings_General_Search_EmptyNoResults"		"Ваш поисковый запрос не дал результатов в меню «Настройки»."
+		"Settings_General_Search_OneCharHeader"			"Неполный запрос"
+		"Settings_General_Search_OneCharDesc"			"Ваш поисковый запрос содержит лишь однобуквенные слова."
+		"Settings_General_Search_MatchedEnglishTag"		"Найдено "
+		"Settings_General_Search_VeryFull"				"{s:count} совпадение"
+		"Settings_General_Search_VeryFull_Plural"		"{s:count} совпадений"
+		"OS_Default_Device"								"Системное Устройство Вывода По Умолчанию"
+		
+		// Settings - Import/Export
+		"Settings_ImportExport_Title"					"Настройки Импорта / Экспорта %thing%"
+		"Settings_ImportExport_Import"					"Импорт"
+		"Settings_ImportExport_Export"					"Экспорт"
+		"Settings_ImportExport_ImportExport"			"Импорт/Экспорт"
+		"Settings_ImportExport_ImportSettings"			"Настройки импорта"
+		"Settings_ImportExport_Success"					"Успешно импортировано!"
+		"Settings_ImportExport_Success_Excluded"		"Некоторые поврежденные значения были исключены."
+		"Settings_ImportExport_Failure"					"Ошибка импортирования!"
+		"Settings_ImportExport_Failed"					"Анализатор импорта настроек выдал ошибку!"
+		"Settings_ImportExport_Invalid"					"Неверно"
+		"Settings_ImportExport_B64Mode"					"Режим Base64"
+		"Settings_ImportExport_B64Warning"				"Примечание: строки в кодировке Base64 будут повреждены при обновлении. Используйте обычный режим, если хотите, чтобы данные сохранились!"
+		"Settings_ImportExport_Error_NoCvars"			"Ввод не имеет переменных. Вероятно, вы пытаетесь конвертировать Base64?"
+		"Settings_ImportExport_Error_NoSettings"		"Настройки не найдены!"
+		"Settings_ImportExport_Error_Outdated"			"Вероятно, код устарел."
+
+		// Settings - Audio
+		"Settings_Audio"									"Аудио"
+		"Settings_Volume_Title"								"Громкость"
+		"Settings_Volume_Game"								"Громкость игры"
+		"Settings_Volume_Game_info"							"Регулирует громкость всех внутриигровых звуковых эффектов."
+		"Settings_Volume_Ambient"							"Громкость окружения"
+		"Settings_Volume_Ambient_info"						"Регулирует громкость различных внешних звуков (птиц, ветра, машин и т.д.)."
+		"Settings_Volume_Music"								"Громкость музыки"
+		"Settings_Volume_Music_info"						"Регулирует громкость музыки"
+		"Settings_Volume_UI"								"Громкость интерфейса"
+		"Settings_Volume_UI_info"							"Регулирует громкость интерфейса и меню."
+		"Settings_Volume_Physics"							"Громкость физических событий"
+		"Settings_Volume_Physics_info"						"Регулирует громкость физических взаимодействий (повреждений, ударов и т.д.)."
+		"Settings_Volume_Footsteps"							"Громкость шагов"
+		"Settings_Volume_Footsteps_info"					"Регулирует громкость шагов игрока и NPC."
+		"Settings_Volume_PlayerWeapon"						"Громкость оружия игрока"
+		"Settings_Volume_PlayerWeapon_info"					"Регулирует громкость боевых взаимодействий игрока."
+		"Settings_Volume_OverallWeapon"						"Громкость оружия"
+		"Settings_Volume_OverallWeapon_info"				"Регулирует громкость всех боевых взаимодействий на карте."
+		"Settings_Volume_Background"						"Громкость игры в свернутом режиме"
+		"Settings_Volume_Background_info"					"Устанавливает общую громкость игры, когда приложение не является основным открытым окном."
+		
+		"Settings_ClosedCaptions_Title"						"Субтитры и диалоги"
+		"Settings_ClosedCaptions_Enable"					"Субтитры"
+		"Settings_ClosedCaptions_Enable_info"				"Включает субтитры. Шумы и устная речь будут отображаться на экране в течение некоторого времени.<br><img src=\"file://{images}/menu/p2ce-generic.png\" />"
+		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
+		"Settings_ClosedCaptions_Subtitles_info"			"Если включить эту опцию, на экране будут отображаться только диалоги. Эта настройка имеет эффект только при включенном параметре «Субтитры»!"
+		
+		// Storm - CC System Rewrite
+		"Settings_ClosedCaptions_Font"						"Шрифт"
+		"Settings_ClosedCaptions_Font_info"					"Определяет, какой шрифт использовать для субтитров."
+		"Settings_ClosedCaptions_Font_Lexend"				"Lexend (П2:СЕ / Страта Source)"
+		"Settings_ClosedCaptions_Font_U0001"				"Univers (Портал 2)"
+		"Settings_ClosedCaptions_Font_GorDIN"				"DIN 1451 / GorDIN (Халф-Лайф 2)"
+		"Settings_ClosedCaptions_Font_Verdana"				"Verdana (Стандартный)"
+		"Settings_ClosedCaptions_Font_NotoSans"				"Noto Sans (Интерфейс Steam Deck)"
+		"Settings_ClosedCaptions_Font_Stratum2"				"Stratum2 (CS:GO)"
+		"Settings_ClosedCaptions_FontSize"					"Высота шрифта (НЕ РЕАЛИЗОВАНО)"
+		"Settings_ClosedCaptions_FontSize_info"				"Определяет, насколько крупными должны быть субтитры и скрытые титры на экране. Измеряется в пунктах на пиксель (pt)."
+		"Settings_ClosedCaptions_BGOpacity"					"Прозрачность фона (НЕ РЕАЛИЗОВАНО)"
+		"Settings_ClosedCaptions_BGOpacity_info"			"Регулирует непрозрачность фоновой панели для экранных подписей. \nПри более низких значениях видимость может ухудшиться, что может привести к проблемам с разборчивостью текста. Для лучшей разборчивости и видимости рекомендуется использовать более темный фон (или полностью черный)."
+		"Settings_ClosedCaptions_Alignment"					"Положение текста"
+		"Settings_ClosedCaptions_Alignment_info"			"Выравнивает положение экранных подписей в одну из сторон."
+		"Settings_ClosedCaptions_Alignment_left"			"Лево"
+		"Settings_ClosedCaptions_Alignment_center"			"Центр"
+		"Settings_ClosedCaptions_Alignment_right"			"Право"
+		
+		"Settings_Audio_HRTF_Async_Title"					"Потоковое аудио"
+		"Settings_Audio_HRTF_Async_Desc"					"Разделяет отдельные аудиоканалы на несколько потоков для повышения производительности."
+		
+		"Settings_AudioDevices_Title"						"Конфигурация аудиоустройства"
+		"Settings_AudioDevices_Device"						"Устройство для воспроизведения звука"
+		"Settings_AudioDevices_Device_info"					"Определяет аудиоустройство, которое будет использовать игра."
+		"Settings_AudioDevices_Speaker_StereoHeadphones"	"Стерео Наушники"
+		"Settings_AudioDevices_Speaker_StereoSpeakers"		"Стерео Динамики"
+		"Settings_AudioDevices_Speaker_Quad"				"Четырехкратный объемный звук"
+		"Settings_AudioDevices_Speaker_51"					"5.1 объемный звук"
+		// "Settings_AudioDevices_Speaker_71"				"7.1 объемный звук"	// Unsupported by CSGO and Strata?
+		"Settings_AudioDevices_Speaker"						"Конфигурация аудиовыхода"
+		"Settings_AudioDevices_Speaker_info"				"Изменяет поведение воспроизведения звука, распределяя определенные звуковые каналы между отдельными динамиками в зависимости от конфигурации устройства."
+		
+		// Settings - Video
+		"Settings_Video"								"Видео"
+		"Settings_Video_Title"							"Настройки видео"
+
+		"Settings_Render_Title"							"Рендеринг"
+		
+		"Settings_Video_Presets"						"Пресеты качества (НЕ РЕАЛИЗОВАНО)"
+		"Settings_Video_Presets_info"					"Настройки видео будут задаваться в соответствии с заранее определенным набором переменных из этого списка, от минимального до максимального значения."
+
+		"Settings_Video_AspectRatio"					"Соотношение сторон"
+		"Settings_Video_AspectRatio_Normal"				"КС:ГО (4:3)"
+		"Settings_Video_AspectRatio_16x9"				"Стандартный (16:9)"
+		"Settings_Video_AspectRatio_16x10"				"Широкоэкранный (16:10)"
+		
+		"Settings_Video_Resolution"						"Разрешение экрана"
+		"Settings_Video_DisplayMode"					"Режим отображения"
+		"Settings_Video_DisplayMode_Fullscreen"			"Полноэкранный"
+		"Settings_Video_DisplayMode_FullscreenWindowed"	"Полноэкранный (в окне)"		// temp until we can get this changed to SW_NoBorder below
+		"Settings_Video_DisplayMode_SW_NoBorder"		"Полноэкранный (в окне)"
+		"Settings_Video_DisplayMode_Windowed"			"Оконный"
+		
+		"Settings_Video_FOV"							"Поле зрения"
+		"Settings_Video_FOV_Info"						"Регулирует максимальный угол обзора для глаз игрока в градусах."
+
+		"Settings_Video_MaxFPS"							"Максимальное количество кадров в секунду"
+		"Settings_Video_MaxFPS_Info"					"Ограничитель FPS. 0 - без ограничений."
+		"Settings_Video_LaptopPower"					"Режим энергосбережения"
+		"Settings_Video_LaptopPower_Info"				"В режиме энергосбережения, игра намеренно уменьшает частоту кадров, чтобы продлить время автономной работы устройства."
+
+		"Settings_Video_Brightness"						"Яркость"
+		"Settings_Video_Brightness_Info"				"Изменяет гамма-коррекцию дисплея, тем самым регулируя общую яркость."
+
+		"Settings_Video_ColorMode"						"Цветовой режим"
+		"Settings_Video_ColorMode_Monitor"				"Монитор"
+		"Settings_Video_ColorMode_TV"					"Телевизор"
+
+		"Settings_Render_VSync"							"Вертикальная синхронизация"
+		"Settings_Render_VSync_Info"					"Вертикальная синхронизация (V-sync) устраняет разрывы изображения на экране, обеспечивая одновременное отображение каждого пикселя кадра. \nНа некоторых мониторах может обеспечить более плавную визуализацию, но при этом вызывает небольшую задержку ввода, поэтому не рекомендуется к использованию. \nПрименимо только к полноэкранному режиму."
+		"Settings_Render_VSync_Double"					"Двойная задержка ввода"
+		"Settings_Render_VSync_Triple"					"Тройная задержка ввода"
+		
+		"Settings_Render_FilteringMode"					"Фильтрация текстур"
+		"Settings_Render_FilteringMode_Info"			"Повышение качества фильтрации текстур улучшает их отображение в игре, но также может снизить производительность."
+		"Settings_Render_FilteringMode_Bilinear"		"Билинейная"
+		"Settings_Render_FilteringMode_Trilinear"		"Трилинейная"
+		"Settings_Render_FilteringMode_Aniso2X"			"Анизотропная (2x)"
+		"Settings_Render_FilteringMode_Aniso4X"			"Анизотропная (4x)"
+		"Settings_Render_FilteringMode_Aniso8X"			"Анизотропная (8x)"
+		"Settings_Render_FilteringMode_Aniso16X"		"Анизотропная (16x)"
+		
+		"Settings_Render_AntialiasingMode"				"Режим сглаживания (MSAA)"
+		"Settings_Render_AntialiasingMode_Info"			"Сглаживание обеспечивает плавные переходы между элементами геометрии, устраняя эффект "лесенки". Повышение качества сглаживания может привести к снижению производительности."
+		"Settings_Render_AntialiasingMode_None"			"Выкл"
+		"Settings_Render_AntialiasingMode_2x_MSAA"		"2x"
+		"Settings_Render_AntialiasingMode_4x_MSAA"		"4x"
+		"Settings_Render_AntialiasingMode_8x_MSAA"		"8x"
+
+		"Settings_Render_FXAA" 							"Режим сглаживания (FXAA)"
+		"Settings_Render_FXAA_Info"						"Сглаживание обеспечивает плавные переходы между элементами геометрии, устраняя эффект "лесенки". Повышение качества сглаживания может привести к снижению производительности."
+		
+		"Settings_Render_Bloom"							"Bloom"
+		"Settings_Render_Bloom_Info"					"HDR Bloom — это эффект &quot;ореола&quot;, возникающий при съемке очень ярких объектов или окружающей среды в целом. Это не влияет на производительность."
+
+		"Settings_Render_DynamicTonemapping"			"Тоновая компрессия HDR"
+		"Settings_Render_DynamicTonemapping_Info"		"Тоновая компрессия HDR — это динамическое увеличение или уменьшение яркости экрана в зависимости от отображаемого контента. Это не влияет на производительность."
+
+		"Settings_Render_ColorCorrection"				"Цветовая коррекция"
+		"Settings_Render_ColorCorrection_Info"			"Цветовая коррекция используется в некоторых картах для изменения цветового баланса с целью достижения определенного эстетического эффекта. Это не влияет на производительность."
+
+		"Settings_Render_Multicore"						"Многоядерный рендеринг"
+		"Settings_Render_Multicore_Info"				"Многопоточный рендеринг позволяет Portal 2: Community Edition распределять рендеринг между несколькими ядрами центрального и графического процессоров в вашей системе. Отключение этой функции может негативно сказаться на общей частоте кадров и качестве изображения, а также на ваших способностях к размышлению и принятию правильных решений. Не выключайте эту настройку!"
+
+		"Settings_Render_ShaderDetail"					"Детализация шейдеров"
+		"Settings_Render_ShaderDetail_Info"				"Детализация шейдеров определяет сложность эффектов освещения и затенения, применяемых к поверхностям в игре. Чем выше настройка, тем выше качество изображения, но тем ниже производительность."
+
+		"Settings_Render_EffectDetail"					"Детализация эффектов"
+		"Settings_Render_EffectDetail_Info"				"Детализация эффектов определяет сложность некоторых визуальных эффектов в игре, а также дальность прорисовки. Уменьшение детализации эффектов может повысить производительность, но при этом увеличится количество артефактов при прорисовке моделей."
+
+		"Settings_Render_Model"							"Детализация моделей"
+		"Settings_Render_Model_Info"					"Детализация моделей регулирует геометрическую сложность моделей в игре. Уменьшение этого параметра может повысить производительность на слабых системах, но ухудшит качество изображения."
+
+		"Settings_Render_Texture"						"Качество текстур"
+		"Settings_Render_Texture_Info"					"Качество текстур регулирует разрешение текстур в игре. Снижение этого параметра может значительно повысить производительность на слабых системах, но ухудшит качество изображения."
+
+		"Settings_Render_ShadowQuality"					"Глобальное качество теней"
+		"Settings_Render_ShadowQuality_Info"			"Глобальное качество теней определяет точность динамических теней, отбрасываемых поверхностями в игре. Чем выше настройка, тем выше качество изображения, но тем ниже производительность процессора."
+
+		"Settings_Render_MotionBlur"					"Размытие экрана"
+		"Settings_Render_MotionBlur_Info"				"Размытие в движении — это полноэкранный шейдерный эффект, который сглаживает изображение при резкой смене угла обзора или положения камеры. Если отключить этот параметр, производительность может немного повыситься."
+
+		"Settings_Video_PStencilDepth" 					"Глубина рекурсии портала"
+		"Settings_Video_PStencilDepth_Info"				"Этот параметр определяет, сколько раз порталы будут повторяться, прежде чем в них начнут рендериться 2D-изображения. При более низких значениях возможны видимые искажения."
+
+		"Settings_Video_TripleMonitor"					"Режим тройного монитора"
+		"Settings_Video_TripleMonitor_Info"				"Ограничивает пользовательский интерфейс и HUD в центральной трети экрана. Полезно для экранов, состоящих из трех мониторов."
+
+		"Settings_TextureReplace_Title"					"Загрузка текстур"
+		"Settings_TextureReplace_Type"					"Внешний вид текстуры ошибки по умолчанию"
+		"Settings_TextureReplace_Type_Info"				"Какую текстуру использовать вместо отсутствующих материалов (например если некоторые игры (например, HL2, CS:GO, TF2) не установлены и не подключены).
+		<h2>Незатенённая</h2>Незатененная фиолетово-черная текстура с шахматным узором, которую можно увидеть в других играх на движке Source. Она не предназначена для игрового процесса, но помогают авторам карт понять, если какая-то текстура отсутствует.
+		<h2>Затенённая</h2>Текстура в виде серой шахматной доски, но с затенением от освещения карты, что обеспечивает достаточно хорошую видимость в игре. Рекомендуется всем, у кого отсутствуют текстуры.
+		Чтобы изменение этой настройки вступило в силу, необходимо перезагрузить карту."
+		"Settings_TextureReplace_0"						"Незатенённая (Фиолетово-черная)"
+		"Settings_TextureReplace_1"						"Затененная (Серая)"
+		"Settings_TextureReplace_TypeCubemap"			"Внешний вид текстуры ошибки кубмапов"
+		"Settings_TextureReplace_TypeCubemap_Info"		"Какую текстуру использовать вместо отсутствующих кубических карт. Кубические карты используются для создания отражающих поверхностей. Они могут отсутствовать, если не были созданы в процессе компиляции.
+		<h2>Незатенённая (Фиолетово-Черная)</h2>Аналогично текстуре ошибок по умолчанию.
+		<h2>Незатенённая (Чёрная)</h2>Черная, не отражающая свет текстура, используемая, когда карта не разрабатывалась с учетом кубических карт. Рекомендуется всем, у кого отсутствуют текстуры кубмапов.
+		<h2>Кубическая карта движка по умолчанию</h2>Имитирует отражение от заранее сгенерированного движком отражения по умолчанию. Не выглядит реалистично и не отражает реальное местонахождение кубической карты."
+		"Settings_TextureReplace_TypeCubemap_0"			"Незатенённая (Фиолетово-Черная)"
+		"Settings_TextureReplace_TypeCubemap_1"			"Незатенённая (Чёрная)"
+		"Settings_TextureReplace_TypeCubemap_2"			"Кубическая карта по умолчанию"
+		"Settings_TextureReplace_Advanced"				"Замена текстур с учетом цветопередачи"
+		"Settings_TextureReplace_Advanced_Info"			"Use a more gameplay-friendly approach for missing textures instead of default error textures.
+		<h2>Disabled</h2>Do not use this feature and use default error textures instead.
+		<h2>Colored</h2>Missing textures will be colored based on the surface's reflectivity data. This should be similar to the overall color of the missing texture. Use this on maps where the subsequent option falsely detects surfaces as water or the like.
+		<h2>Colored and Special Overrides</h2>Missing textures will be colored, like the above option, but will also detect transparent textures and provide meaningful replacements. Recommended unless you are mapping.
+		A map reload is required for this change to take effect."
+		"Settings_TextureReplace_Advanced_0"			"Disabled"
+		"Settings_TextureReplace_Advanced_1"			"Colored"
+		"Settings_TextureReplace_Advanced_2"			"Colored and Special Overrides"
+		"Settings_TextureReplace_ReplaceTexture"		"Replacement Base Texture"
+		"Settings_TextureReplace_ReplaceTexture_Info"	"What base texture to use when 'Color-accurate Error Texture Replacements' are enabled, previewable on the left. The approximated color will then get applied to it ingame.
+		Adds definition to textures, helpful for seeing depth and distance.
+		A map reload is required for this change to take effect."
+		"Settings_TextureReplace_Texture_None"			"None"
+		"Settings_TextureReplace_Texture_Noise"			"Noise"
+		"Settings_TextureReplace_Texture_Grid"			"Grid"
+		"Settings_TextureReplace_Texture_GridWithNoise"	"Grid with Noise"
+		"Settings_TextureReplace_Texture_Custom"		"Custom"
+		
+		"Settings_Portal_Coop_SS_SplitMode"				"Направление разделения экрана"
+		"Settings_Portal_Coop_SS_SplitMode_info"		"Определяет, в каком направлении будут разделены экраны для двух игроков. \n<h2>Горизонтальное</h2>Экраны игроков будут разделены горизонтальной линией, при этом оба экрана будут расположены в верхней и нижней частях экрана соответственно. \n<h2>Вертикальное</h2>Экраны игроков будут разделены вертикальной линией, при этом оба экрана будут расположены в левой и правой частях экрана соответственно. \n<h2>Автоматически</h2>Игра автоматически определит, какой режим выбрать, исходя из разрешения экрана и соотношения сторон монитора.\n<movie src=\"file://{media}/sp_credits_bg.webm\" />"
+		"Settings_Portal_Coop_SS_SplitMode_auto"		"Автоматически"
+		"Settings_Portal_Coop_SS_SplitMode_horiz"		"Вертикальное"
+		"Settings_Portal_Coop_SS_SplitMode_vert"		"Горизонтальное"
+
+		// Settings - Keyboard/Mouse
+		"Settings_Input"								"Ввод"
+		"Settings_Input_Title"							"Ввод"
+		"Settings_Mouse_Title"							"Мышь"
+
+		"Settings_Mouse_Filter"							"Фильтрация ввода"
+		"Settings_Mouse_Filter_Info"					"Усредняет движение мыши за 2 кадра."
+
+		"Settings_Mouse_Raw"							"Прямой ввод"
+		"Settings_Mouse_Raw_Info"						"Прямой ввод мыши считывает данные напрямую с устройства, минуя настройки операционной системы, что обеспечивает более точное управление. \n<h2>Вкл (по кадру)</h2> Оригинальный метод, используемый в других играх на движке Source\n<h2>Вкл (по тику)</h2> Улучшенный метод, более точный и менее зависимый от частоты кадров в игре.\n<movie src=\"file://{media}/bluescreen.webm\" />"
+		"Settings_Mouse_Raw_On_Old"						"Вкл (по кадру)"
+		"Settings_Mouse_Raw_On_New"						"Вкл (по тику)"
+
+		"Settings_Mouse_Reverse"						"Отражение ввода"
+		"Settings_Mouse_Reverse_Info"					"Меняет направление движения мыши на противоположное. Это управление просто имба!"
+
+		"Settings_Mouse_Sens"							"Чувствительность мыши"
+
+		"Settings_Mouse_Accel"							"Ускорение мыши"
+
+		"Settings_Keybinds_Title"						"Клавиши"
+		"Settings_Keybinds_Movement"					"Передвижение"
+		"Settings_Input_Keybinds_Movement"				"Передвижение"
+		
+		// KBM Mappings
+		"Keybind_Move_Forward"							"Вперед"
+		"Keybind_Move_Back"								"Назад"
+		"Keybind_Turn_Left"								"Поворот налево"
+		"Keybind_Turn_Right"							"Поворот направо"
+		"Keybind_Move_Left"								"Стрейф влево"
+		"Keybind_Move_Right"							"Стрейф вправо"
+		"Keybind_Jump"									"Прыжок"
+		"Keybind_Duck"									"Приседание"
+		"Keybind_Sprint"								"Бег"
+		"Keybind_Walk"									"Ходьба"
+		"Keybind_Toggle_Jump"							"Прыжок (переключение)"
+		"Keybind_Toggle_Duck"							"Приседание (переключение)"
+		"Keybind_Toggle_Sprint"							"Бег (переключение)"
+		"Keybind_Zoom_Toggle"							"Зум (переключение)"
+		"Keybind_Zoom_In"								"Приближение"
+		"Keybind_Zoom_Out"								"Отдаление"
+		
+		"Settings_Keybinds_Weapons"						"Оружие"
+		"Keybind_Attack_Primary"						"Открыть синий портал"
+		"Keybind_Attack_Secondary"						"Открыть оранжевый портал"
+		"Keybind_Weapon_Category_1"						"Слот 1"
+		"Keybind_Weapon_Category_2"						"Слот 2"
+		"Keybind_Weapon_Category_3"						"Слот 3"
+		"Keybind_Weapon_Category_4"						"Слот 4"
+		"Keybind_Weapon_Category_5"						"Слот 5"
+		"Keybind_Weapon_Category_6"						"Слот 6"		// hl2:weapon_bugbait
+		
+		"Settings_Keybinds_Utility"						"Действия"
+		"Keybind_Use_Items"								"Использовать (рычаг, объект и т.п.)"
+		"Keybind_Flashlight"							"Фонарик"
+		"Keybind_Quicksave"								"Быстрое сохранение"
+		"Keybind_Quickload"								"Быстрая загрузка"
+		
+		"Settings_Keybinds_MP_COOP"						"Мультиплеер / Ко-оп"
+		"Keybind_Chat_Message"							"Меню общения"
+		"Keybind_Chat_Message_TeamOnly"					"Меню общения (команда)"
+		"Keybind_Chat_Voice"							"Микрофон"
+		"Keybind_Coop_RemoteView"						"Вид напарника"
+		"Keybind_Coop_RemoteView_Info"					"Показывает вид вашего партнера (PoV)."
+		"Keybind_Coop_PingTool"							"Меню общения (Ping tool)"
+		"Keybind_Coop_PingTool_Info"					"Открывает меню общения для сообщения вашему партнеру о конкретных действиях или местоположении."
+		"Keybind_Coop_Taunt"							"Меню жестов"
+		"Keybind_Coop_Taunt_Info"						"Меню активации кооперативных жестов."
+		
+		"Settings_Input_Keybinds_Misc"					"Разные"
+		"Keybind_Console"								"КОНСОЛЬ РАЗРАБОТЧИКА"
+		"Keybind_Screenshot"							"Скриншот"
+		"Keybind_Quit"									"Выход из игры"
+		"Keybind_Quit_Prompt"							"Открыть окно выхода из игры"
+		
+		// Settings - Controller
+		"Settings_Controller_Title"						"Контроллер"
+		"Settings_Controller_SteamInputButton"			"Откройте настройки ввода Steam"
+
+		// Settings - UI
+		"Settings_Interface"							"Интерфейс / HUD"
+		"Settings_Interface_Title"						"Настройки интерфейса"
+		"Settings_Menu_Title"							"Интерфейс меню"
+		"Settings_Menu_Movie"							"Видео в главном меню"
+		"Settings_Menu_Movie_Info"						"Включает анимированный фон главного меню. Возможно незначительное снижение производительности."
+
+		// Settings - Personalization
+		"Settings_Customization" 						"Кастомизация"
+		
+		"Settings_Portal1_Title" 						"Portal 1"
+		"Settings_Portal1_compat" 						"Режим совместимости с Portal 1."
+		"Settings_Portal1_compat_info" 					"Включает режим обратной совместимости с картами Portal 1."
+		"Settings_Portal1_xhair" 						"Стиль прицела"
+		"Settings_Portal1_xhair_info" 					"Изменяет поведение перекрестия прицела портальной пушки.\n<h2>Стиль Portal 2</h2> Будет отображать только размещенные порталы.\n<h2> Стиль Portal 1</h2> Будет отображать размещенные порталы и круговой маркер, определяющий, можно ли размещать порталы на прицеленной поверхности."
+		"Settings_Portal1_xhair_p2" 					"Portal 2"
+		"Settings_portal1_xhair_p1" 					"Portal 1"
+		
+		"Settings_Portals_Title" 						"Порталы"
+		"Settings_Portals_PlayerFunnel"					"Воронка портала"
+		"Settings_Portals_PlayerFunnel_info"			"При полете в портал, игра попытается скорректировать положение и траекторию игрока, чтобы избежать столкновения с краем портала."
+		"Settings_Portals_dlight" 						"Динамическое освещение порталов"
+		"Settings_Portals_dlight_info" 					"Включает динамический свет у порталов."
+		"Settings_Portals_light_intensity" 				"Интенсивность динамического света порталов"
+		"Settings_Portals_light_intensity_info"			"Изменяет интенсивность света, излучаемого порталом. Для работы требуется Динамическое освещение портала."
+		"Settings_Portals_altcolors" 					"Изменить цвет порталов"
+		"Settings_Portals_altcolors_info" 				"Позволяет игрокам менять цвет порталов. При этом также будут изменены пользовательские цвета порталов, заданные создателем карты (да, создатели карт могут менять цвета порталов!)"
+		"Settings_Portals_altcolors_primary" 			"Цвет первого портала"
+		"Settings_Portals_altcolors_primary_Info" 		"Альтернативный цвет для синего портала (основной огонь)."
+		"Settings_Portals_altcolors_secondary" 			"Цвет второго портала"
+		"Settings_Portals_altcolors_secondary_Info" 	"Альтернативный цвет для оранжевого портала (вторичный огонь)."
+		"Settings_Turret_lights" 						"Свет от турелей"
+		"Settings_Turret_lights_info" 					"Включает динамический свет у излучателя лазера турелей."
+		"Settings_Ball_lights" 							"Свет от энергетического шара"
+		"Settings_Ball_lights_info" 					"Включает свет и тени у высокоэнергетических частиц. В редких случаях ломает тени."
+		"Settings_Gels_Title"							"Гели"
+		"Settings_Gels_repulsion_color"					"Цвет отталкивающего геля"
+		"Settings_Gels_repulsion_color_Info"			"Альтернативный цвет для отталкивающего геля (пригучего, синего)."
+		"Settings_Gels_propulsion_color"				"Цвет ускоряющего геля"
+		"Settings_Gels_propulsion_color_Info"			"Альтернативный цвет для ускоряющего геля (скоростного, оранжевого)."
+		"Settings_Gels_conversion_color"				"Цвет портального геля"
+		"Settings_Gels_conversion_color_Info"			"Альтернативный цвет для портального геля (портального, белого)."
+		"Settings_Gels_reflection_color"				"Цвет рефлексивного геля"
+		"Settings_Gels_reflection_color_Info"			"Альтернативный цвет для отражающего геля (лазерного, серого)."
+		"Settings_Gels_adhesion_color"					"Цвет адгезийного геля"
+		"Settings_Gels_adhesion_color_Info"			"Альтернативный цвет для адгезийного геля (прилипающего, зеленого)."
+		
+		// Settings - Miscellaneous
+		"Settings_Misc_Title" 							"Разное"
+		"Settings_Misc_solenergy_refract"				"Преломление Полей Антиэспроприации"
+		"Settings_Misc_solenergy_refract_info"			"Добавляет эффект преломления света (как в воде) для физзлеров. Делает это через замену оригинальной текстуры!"
+		"Settings_Misc_ViewmodelOffset_X"				"Смещение вьюмодела (X)"
+		"Settings_Misc_ViewmodelOffset_X_info"			"Смещает положение вьюмодела по оси X на указанное расстояние в единицах Hammer (HU)"
+		"Settings_Misc_ViewmodelOffset_Y"				"Смещение вьюмодела (Y)"
+		"Settings_Misc_ViewmodelOffset_Y_info"			"Смещает положение вьюмодела по оси Y на указанное расстояние в единицах Hammer (HU)"
+		"Settings_Misc_ViewmodelOffset_Z"				"Смещение вьюмодела (Z)"
+		"Settings_Misc_ViewmodelOffset_Z_info"			"Смещает положение вьюмодела по оси Z на указанное расстояние в единицах Hammer (HU)"
+
+		"Settings_Video_PreventThreadSleep"				"Запретить переход в спяшщий режим"
+		"Settings_Video_PreventThreadSleep_Info"		"Не дает основному игровому процессу переходить в спящий режим при достижении максимального количества кадров в секунду. Включение этой опции может повысить производительность, но приведет к колоссальному увеличению нагрузки на процессор."
+		
+		"Settings_Menu_Console"							"КОНСОЛЬ РАЗРАБОТЧИКА"
+		"Settings_Menu_Console_info"					"Этот параметр определяет состояние консоли разработчика, которая позволяет пользователям отправлять команды игровому движку. \nКонсоль разработчика — это мощный инструмент, предназначенный для опытных пользователей (например, создателей карт). Для обычной игры она не требуется. Некоторые команды, присутствующие в движке Source, опасны и (при неправильном использовании) могут привести к сбою игры, потере сохраненного прогресса и/или неработоспособности некоторых элементов игрового процесса.\n\nОтключение этой настройки разделит вас и все остальное комьюнити мододелов, так что будьте аккуратны. Открывается на клавишу Ё."
+		"Settings_Menu_Sentry"							"Автоматическая отправка отчета о сбое"
+		"Settings_Menu_Sentry_info"						"Управляет отправкой аварийных дампов, обрабатываемых с помощью кастомного скрипта P2:CE. \nДанные, используемые в отчетах о сбоях, содержат полный стек вызовов за последние несколько секунд работы движка перед сбоем (включая последние несколько строк вывода консоли разработчика), текущий идентификатор сборки Steam и идентификатор вашего профиля в Steam Community. Никакие другие данные не отправляются команде P2:CE. \nЭта функция не является обязательной и может быть отключена в любой момент."
+		"Settings_Menu_DiscordIntegration"				"Discord Rich Presence"
+		"Settings_Menu_DiscordIntegration_info"			"Включает расширенную интеграцию присутствия Discord для P2:CE, отображая текущее состояние игры в виде активности. Этот переключатель не влияет на расширенное присутствие Discord в Hammer."
+		
+		// Main Menu
+		"MainMenu_PH_Note"								"Это меню находится в разработке."
+		"MainMenu_ControllerUI_Note_Title"				"Controller Support Notice"
+		"MainMenu_ControllerUI_Note_Desc"				"Controller input support for the menu interface is experimental.\n\nPlease submit issues to the P2:CE issue tracker if you encounter bugs or have feedback about this mode."
+		"MainMenu_Graphics_Notice"						"ВНИМАНИЕ: Если у вас возникли проблемы с графикой, попробуйте переключиться на &quot;stable&quot; ветку игры в Steam."
+		"MainMenu_Socials_GitHub"						"Сообщить об ошибке"
+		"MainMenu_Socials_Discord"						"Discord сервер P2:CE"
+
+		// Main Menu - Header Tabs
+		"MainMenu_Navigation_Developer"					"[DEV] Справочник"
+		"MainMenu_Navigation_Developer_Tagline"			"Топовое меню разрабов"
+		"MainMenu_Navigation_ControlsLibrary"			"[DEV] Элементы интерфейса"
+		"MainMenu_Navigation_SteamInputLibrary"			"[DEV] Библиотека клавиш ввода Steam"
+		"MainMenu_Navigation_Home"						"Домой"
+		"MainMenu_Navigation_Play"						"Играть"
+		"MainMenu_Navigation_Play_Tagline"				"Начать тестирование"
+		"MainMenu_Navigation_Play_Modes"				"Выберите, во что будете играть."
+		"MainMenu_Navigation_Workshop"					"Карты из мастерской"
+		"MainMenu_Navigation_Workshop_Tagline"			"Выберите карту из мастерской для начала игры"
+		"MainMenu_Navigation_Campaign"					"Кампании"
+		"MainMenu_Navigation_Campaign_Tagline"			"Выберите кампанию для начала игры"
+		"MainMenu_Navigation_Play_MapTypes"				"Выберите карту P2:CE или Portal 2."
+		"MainMenu_Navigation_Featured"					"Рекомендуемые дополнения"
+		"MainMenu_Navigation_Featured_Tagline"			"Изучите популярные дополнения из мастерской Steam"
+		"MainMenu_Navigation_Addons"					"Дополнения"
+		"MainMenu_Navigation_Addons_Tagline"			"Управление установленными аддонами и привязанными играми Steam."
+		"MainMenu_Navigation_Options"					"Настройки"
+		"MainMenu_Navigation_Options_Tagline"			"Различные настройки, включая режим совместимости и кастомизацию."
+		"MainMenu_Navigation_QuitGame"					"Выйти из игры"
+		"MainMenu_Navigation_QuitGame_Tagline"			"Оставить тестирование на другой день."
+		"MainMenu_Navigation_Disconnect"				"Выход"
+		"MainMenu_Navigation_Disconnect_Tagline"		"Вернуться в главное меню или выйти из игры"
+		"MainMenu_Navigation_Disconnect_CM_Tagline"		"Выйти из текущей кампании/карты"
+		
+		// Main Menu - Home Page
+		"MainMenu_Home_Resume"							"Возобновить игру"
+		"MainMenu_Home_Resume_Tagline"					"Закрыть это меню и возобновить игру"
+		"MainMenu_Home_Continue"						"Продолжить игру"
+		"MainMenu_Home_BackgroundCredit"				"Фон предоставлен "
+		"MainMenu_Loading"								"Загрузка..."
+
+		// socials
+		"MainMenu_Home_Button_MainSite"					"Сайт P2:CE"
+		"MainMenu_Home_Button_Discord"					"Discord сервер P2:CE"
+		"MainMenu_Home_Button_Github"					"Strata Source GitHub"
+		"MainMenu_Home_Button_Forums"					"Форумы сообщества Strata"
+		"MainMenu_Home_Button_Workshop"					"Мастерская Steam"
+		
+		// featured
+		"MainMenu_Featured_Title"						"Featured Item: {s:featured_item_name}"
+		"MainMenu_Featured_Title_PH"					"Querying Item Details"
+		"MainMenu_Featured_Author"						"By {s:featured_item_author}"
+		"MainMenu_Featured_Author_PH"					"Downloading information from the Steam Workshop..."
+		"MainMenu_Featured_Unavailable_Title"			"Featured Item Not Available"
+		"MainMenu_Featured_Unavailable_Description"		"Не удалось подключиться к веб-API Steam. Рекомендуемые товары временно недоступны."
+		
+		// Main Menu - News
+		// temporarily removed for the time being
+		// "MainMenu_News_Unavailable_Title"				"Новости недоступны"
+		// "MainMenu_News_Unavailable_Description"			"Не удалось подключиться к веб-API Steam. Новости временно недоступны."
+		
+		// Main Menu - Saverestore
+		"MainMenu_SaveRestore_Main"							"Сохранить/загрузить игру"
+		"MainMenu_SaveRestore_Main_Tagline"					"Управление сохранениями и их загрузка"
+		"MainMenu_SaveRestore_LoadAuto"						"Загрузить последнее сохранение"
+		"MainMenu_SaveRestore_LoadAuto_Tagline"				"Продолжить с момента последнего сохранения"
+		"MainMenu_SaveRestore_LoadQuick"					"Загрузить быстрое сохранение"
+		"MainMenu_SaveRestore_NoSaves"						"СОХРАНЕНИЙ НЕ ОБНАРУЖЕНО"
+		"MainMenu_SaveRestore_CreateSave"					"Создать новое сохранение"
+		"MainMenu_SaveRestore_Load"							"Загрузить сохранение"
+		"MainMenu_SaveRestore_Delete"						"Удалить сохранение"
+		"MainMenu_SaveRestore_Rename"						"Переименовать сохранение"
+		
+		// Chapter Navigation
+		"MainMenu_ChapterNav_Back"							"< Назад"
+		"MainMenu_ChapterNav_Next"							"Вперед >"
+
+		// SaveCreatePrompt
+		"Action_NewSave"									"Сохранить игру"
+		"Action_NewSave_Confirm"							"Подтвердите сохранение"
+		"Action_NewSave_Confirm_Message"					"Вы точно хотите создать новое сохранение?"
+		
+		// SaveLoadPrompt
+		"Action_LoadGame"									"Загрузить игру"
+		"Action_LoadGame_Confirm"							"Подтвердите загрузку"
+		"Action_LoadGame_Auto_Message"						"Вы точно хотите загрузить последнюю сохранение?\n\nНесохраненный прогресс будет утерян."
+		"Action_LoadGame_Message"							"Вы точно хотите загрузить эту сохранение?\n\nНесохраненный прогресс будет утерян."
+		
+		// SaveDeletePrompt
+		"Action_DeleteGame"									"Удалить сохранение"
+		"Action_DeleteGame_Confirm"							"Подтвердите удаление"
+		"Action_DeleteGame_Confirm_Message"					"Вы точно хотите удалить это сохранение?\n\nЭто действие нельзя отменить."
+		
+		// SaveOverwritePrompt
+		"Action_OverwriteGame"								"Overwrite Saved Game"
+		"Action_OverwriteGame_Confirm"						"Confirm Overwrite"
+		"Action_OverwriteGame_Confirm_Message"				"Do you want to overwrite this saved game?\n\nThis operation cannot be undone, and any previously saved progress may be lost."
+
+		// Autosave Handling
+		"MainMenu_SaveRestore_CannotOverwriteSave"					"Этот файл сохранения не может быть перезаписан."
+		"MainMenu_SaveRestore_SaveType_Manual"						"Ручное сохранение"
+		"MainMenu_SaveRestore_SaveType_quick"						"Быстрое сохранение"
+		"MainMenu_SaveRestore_SaveType_autosave"					"Автосохранение"
+		"MainMenu_SaveRestore_SaveType_autosavedangerous"			"Автосохранение (ОПАСНО)"
+		
+		// Bad SaveRestore
+		"MainMenu_SaveRestore_LoadFailed"							"Ошибка загрузки!"
+		"MainMenu_SaveRestore_LoadFailed_Description"				"Не удалось загрузить сохраненную игру. {s:failure_reason}"			// This will have a failure reason attached to it
+		"MainMenu_SaveRestore_SaveFailed"							"Ошибка сохранения!"
+		"MainMenu_SaveRestore_SaveFailed_Description"				"Не удалось сохранить игру. {s:failure_reason}"		// This will have a failure reason attached to it
+		
+		// Load Failure Reasons
+		// bad/malformed save data or incompatible strata map or engine version
+		"MainMenu_SaveRestore_LoadFailed_BadSave"					"Скорее всего файл поврежден, или загружаемый файл сохранения несовместим с текущей картой или версией игры."
+		// target save file nonexistent
+		"MainMenu_SaveRestore_LoadFailed_NonExistent"				"Данного сохранения нет на устройстве."
+		// no saves exist
+		"MainMenu_SaveRestore_LoadFailed_NoSavesExist"				"Почему? Потому-что сохранений нет! Что вы пытаетесь загрузить??"
+		// cloud failed sync, or something
+		"MainMenu_SaveRestore_LoadFailed_SteamCloud"				"В данный момент доступа к Steam Cloud API нет."
+		
+		// Save Failure Reasons
+		// no space available on current storage partition
+		"MainMenu_SaveRestore_SaveFailed_NoSpace"					"На диске недостаточно места для сохранения."
+		// this should only display if Windows NTFS perms (e.g.: readonly flag, account security ACLs) or linux FS permissions are wrong
+		"MainMenu_SaveRestore_SaveFailed_NoPerms"					"У P2:CE нет разрешения на доступ к каталогу сохраненных игр. Пожалуйста, измените настройки разрешений для каталога «SAVE» в вашей установке P2:CE."
+		// SOMEHOW, the game's running, but the disk isn't working right. possible disk failure or MFT corruption?
+		"MainMenu_SaveRestore_SaveFailed_DriveFail"					"Игра не смогла создать новый файл сохранения, поскольку диск, на котором установлен P2:CE, вышел из строя. \n\nПожалуйста, немедленно сделайте резервную копию всех данных на этом устройстве!"
+		// probably applies for steam cloud quota?
+		"MainMenu_SaveRestore_SaveFailed_NoMoreSlots"				"Сохраненных игровых слотов больше нет."
+		// map_wants_save_disable 1
+		"MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled"		"Создание сохранений временной выключено на этой карте."
+		"MainMenu_SaveRestore_SaveFailed_NotPartOfCampaign"			"Карта, на которой вы играете, не является частью текущей кампании. \n\nСохранение временно отключено."
+		// maxplayers >= 2 and gamemode is either coop or mp; we're either on p2p/listen or dedicated
+		"MainMenu_SaveRestore_SaveFailed_IsInMultiplayer"			"Сохранение игр не поддерживается в многопользовательском режиме."
+		
+		// universal; only used if we don't know what the fuck is going on in saverestore
+		"MainMenu_SaveRestore_UnknownFailure"						"Причина неизвестна, но скорее всего в вашем сохранении была Кэролайн. \n\nСерьёзно, это универсальное окно ошибки. Мы не знаем что могло это вызвать."
+		
+		// Main Menu - Campaigns
+		"MainMenu_Campaigns_Title"									"Кампании"
+		"MainMenu_Campaigns_Tagline"								"Сыграть в кампании, созданные комьюнити."
+		"MainMenu_Campaigns_MapList"								"{s:playerModeStr} карты"
+		"MainMenu_Campaigns_MapList_Uncategorized"					"Не категоризованные {s:playerModeStr} карты"
+		"MainMenu_Campaigns_MapList_Campaigns"						"{s:playerModeStr} кампании"
+		"MainMenu_Campaigns_MapList_Campaigns_Tagline"				"Выберите кампанию"
+		"MainMenu_Campaigns_MapList_p2ce_Tagline"					"Выберите карту из мастерской P2:CE"
+		"MainMenu_Campaigns_MapList_portal2_Tagline"				"Выберите карту из мастерской Portal 2"
+		"MainMenu_Campaigns_MapList_Uncategorized_Tagline"			"Выберите локальную карту"
+		"MainMenu_Campaigns_MapList_Tagline_NewlySubbed"			"{i:num_newly_installed_maps} новых подписок."
+		"MainMenu_Campaigns_MapList_Tagline_TotalMaps"				"{i:num_total_installed_maps} карт всего."
+		"MainMenu_Campaigns_OpenWS"									"Открыть мастерскую Steam"
+		"MainMenu_Maps_None"										"У вас нет установленных карт! Вы можете найти их в мастерской Steam."
+		"MainMenu_Campaigns_None"									"У вас нет установленных кампаний! Вы можете найти их в мастерской Steam."
+		"MainMenu_Campaigns_OpenWS_Tagline"							"Загрузка и управление контентом"
+		
+		// mode selection
+		"MainMenu_Campaigns_ModeSel_Solo_Title"						"Одиночные карты"
+		"MainMenu_Campaigns_ModeSel_Solo_Tagline"					"Приключение на 20 минут, туда и обратно."
+		"MainMenu_Campaigns_ModeSel_ServerBrowser_Title"			"Кастомные игры"
+		"MainMenu_Campaigns_ModeSel_ServerBrowser_Tagline"			"Найдите или создайте идеальную игру без ограничений"
+		"MainMenu_Campaigns_CType_SP"								"Одиночная игра"
+		"MainMenu_Campaigns_CType_MP"								"Многопользовательская игра"
+		"MainMenu_Campaigns_MapType_p2ce"							"Карты P2:CE"
+		"MainMenu_Campaigns_MapType_portal2"						"Карты Portal 2"
+		
+		// Search
+		"MainMenu_Campaigns_Search_FillerText"						"Поиск кампаний..."
+		"MainMenu_Campaigns_Search_SortBy_NewSubs"					"Недавно добавленные"
+		"MainMenu_Campaigns_Search_SortBy_AtoZ"						"Алфавитный порядок (А-Я)"
+		"MainMenu_Campaigns_Search_SortBy_ZtoA"						"Алфавитный порядок (Я-А)"
+		"MainMenu_Campaigns_Search_SortBy_Last"						"Недавно сыгранные"
+		"MainMenu_Campaigns_Search_SortBy_Completion"					"По прогрессу прохождения"
+		"MainMenu_Campaigns_Search_SortBy_CampaignSrc"					"По источнику загрузки"
+
+		"MainMenu_Content_Unplayed"									"Не сыграно"
+		"MainMenu_Content_InProgress"								"В процессе"
+		"MainMenu_Content_Completed"								"Завершено"
+		
+		// this is used if a campaign requires an appid they don't have mounted
+		"MainMenu_Campaigns_MissingMount_Title"						"Не удалось загрузить кампанию"
+		"MainMenu_Campaigns_MissingMount_Description"				"Эта кампания не может быть загружена, поскольку следующие игры не привязаны: {s:missing_mounts_list}. Пожалуйста, установите вышеуказанные игры, чтобы получить доступ к этой кампании."
+
+		// Warn the user if playing on map or server with no active campaign and attempting a save
+		"MainMenu_Campaigns_NoActiveCampaign_Warning_Title"			"Предупреждение: Вы не входите в группу кампании."
+		"MainMenu_Campaigns_NoActiveCampaign_Warning_Desc"			"В данный момент у вас не запущена ни одна кампания. Это могло произойти, если вы запустили карту через консоль разработчика или через диалоговое окно \"Запустить карту\" в редакторе уровней Hammer.\n\nВ этом состоянии создание и загрузка файлов сохранения по-прежнему будут работать, но эти файлы не будут отображаться в главном меню.\nВоспроизведение за пределами группы кампании предназначено только для целей разработки; настоятельно рекомендуется вернуться в меню и играть в обычном режиме. \n\nДанное предупреждение будет появляться при каждом открытии этого меню."
+
+		// Bad Campaign
+		"MainMenu_Campaigns_BgLoadFailed_Title"						"Не удалось загрузить фоновую карту."
+		"MainMenu_Campaigns_BgLoadFailed_Description"				"В кампании, которую вы пытались запустить, была указана фоновая карта, которую не удалось загрузить. Убедитесь, что необходимый контент был загружен и привязан к P2:CE."
+		"MainMenu_Campaigns_LoadFailed_Title"						"Кампания не запустилась!"
+		"MainMenu_Campaigns_LoadFailed_Description"					"Не удалось запустить кампанию. Подробности можно найти в консоли."
+		"MainMenu_Campaigns_Error_Generic_Title"					"	Ошибка"
+		"MainMenu_Campaigns_Error_InvalidKV3_Title"					"Кампания повреждена."
+		"MainMenu_Campaigns_Error_InvalidKV3_Desc"					"Эта кампания не может запуститься, поскольку данные, указанные в campaigns.kv3, неверны.\n\пПожалуйста, сообщите об этой проблеме автору дополнения."
+		"MainMenu_Campaigns_Error_InvalidChapterMapData_Title"		"Эта глава пуста."
+		"MainMenu_Campaigns_Error_InvalidChapterMapData_Desc"		"Кампания не может начаться, поскольку в выбранной вами главе нет карт.\n\пПожалуйста, сообщите разработчику дополнения, что он допустил ошибку."
+		
+		// dependency game names
+		"MainMenu_Campaigns_Mounts_AppId_630"						"Alien Swarm (630)"
+		"MainMenu_Campaigns_Mounts_AppId_300"						"Day of Defeat: Source (300)"
+		"MainMenu_Campaigns_Mounts_AppId_220"						"Half-Life 2 (220)"
+		"MainMenu_Campaigns_Mounts_AppId_280"						"Half-Life: Source (280)"
+		"MainMenu_Campaigns_Mounts_AppId_400"						"Portal (400)"
+		"MainMenu_Campaigns_Mounts_AppId_660"						"Portal 2 - Sixense MotionPack (660)"
+		"MainMenu_Campaigns_Mounts_AppId_247120"					"Portal 2 - Sixense Perceptual Pack (247120)"
+		"MainMenu_Campaigns_Mounts_AppId_440"						"Team Fortress 2 (440)"
+		"MainMenu_Campaigns_Mounts_AppId_500"						"Left 4 Dead (500)"
+		"MainMenu_Campaigns_Mounts_AppId_550"						"Left 4 Dead 2 (550)"
+		"MainMenu_Campaigns_Mounts_AppId_240"						"Counter-Strike: Source (240)"
+		"MainMenu_Campaigns_Mounts_AppId_4465480"					"Counter-Strike: Global Offensive (4465480)"
+
+		// temp for better solution
+		"MainMenu_Campaigns_MountRequired_Header"					"Отсутствует игра."
+		"MainMenu_Campaigns_MountRequired_220"						"Эта кампания требует Half-Life 2 (20th Anniversary Edition) для запуска. Если вы владеете данной игрой и у вас она установлена, загляните в википедию Strata за инструкциями по игровым маунтам."
+		"MainMenu_Campaigns_MountRequired_400"						"Эта кампания требует Portal для запуска. Если вы владеете данной игрой и у вас она установлена, загляните в википедию Strata за инструкциями по игровым маунтам."
+		
+		// campaign details card
+		"MainMenu_Campaigns_DetailCard_CompletionPercentage"		"{i:campaign_completion}% завершено"
+		"MainMenu_Campaigns_DetailCard_CompletationStat1"			"Текущая глава: {i:current_chapter} из {i:max_chapters}"
+		"MainMenu_Campaigns_DetailCard_CompletationStat1_CName"		"{s:current_chapter_name}" 	// Chapter name here, if specified
+		"MainMenu_Campaigns_DetailCard_CompletationStat2"			"Вы играли {t:d:total_played}"
+		"MainMenu_Campaigns_DetailCard_CompletationStat3"			"Достижений: {i:num_achievements_earned}/{i:total_campaign_achievements}"
+		"MainMenu_Campaigns_DetailCard_LastPlayDate"				"Последний запуск {t:l:last_played_date}"
+		"MainMenu_Campaigns_DetailCard_InstallDate"					"Установлено {t:l:installed_date}"
+		
+		// campaign main menu
+		"MainMenu_Campaigns_MM_LoadAuto"							"Продолжить"
+		"MainMenu_Campaigns_MM_Resume"								"Продолжить"
+		"MainMenu_Campaigns_MM_NewGame"								"Новая игра"
+		"MainMenu_Campaigns_MM_NewGame_Tagline"						"Начать прохождение кампании с чистого листа!"
+		"MainMenu_Campaigns_MM_LoadGame"							"Загрузить игру"
+		"MainMenu_Campaigns_MM_SaveGame"							"Сохранить игру"
+		"MainMenu_Campaigns_MM_ReturnToCampaignMenu"				"Вернуться к выбору компаний"
+		"MainMenu_Campaigns_MM_ReturnToCampaignMenu_InGame"			"Чтобы переключиться на другую кампанию, пожалуйста, вернитесь в главное меню."
+		"MainMenu_Campaigns_MM_Back"								"Назад"
+		"MainMenu_Campaigns_MM_CampaignName_placeholder"			"{s:campaign_name}"	// This string is for campaigns that don't have a logo
+		"MainMenu_Campaigns_MM_CampaignDescription_placeholder"		"{s:campaign_desc}"
+		"MainMenu_Campaigns_MM_CampaignAuthor"						"Создано {s:author}"
+		"MainMenu_Campaigns_MM_ChapterNum"							"Глава {i:chapter_num}"
+		"MainMenu_Campaigns_MM_ChapterName"							"{s:chapter_name}"
+		"MainMenu_Campaigns_MM_ChapterDesc"							"{s:chapter_desc}"
+		"MainMenu_Campaigns_MM_ChapterMapName"						"{s:chapter_map_name}"
+		"MainMenu_Campaigns_MM_StartCustom"							"Запустить с модификациями"
+		"MainMenu_Campaigns_MM_StartVanilla"						"Запустить без модификаций"
+		"MainMenu_Campaigns_MM_Start_Title"							"Выбор глав"
+		"MainMenu_Campaigns_MM_Start_Tagline"						"Настроить и запустить новую игру"
+		"MainMenu_Campaigns_MM_DEV_NoCampaignPH"					"Активная кампания не обнаружена."
+		
+		// campaign setup
+		"MainMenu_Campaigns_Setup_ExitNote"							"Чтобы запустить эту кампанию, внесите все оставшиеся изменения на этой странице, а затем вернитесь в основную область настройки."
+		"MainMenu_Campaigns_Setup_Summary_NoChanges"				"Изменений нет."
+		"MainMenu_Campaigns_Setup_ResetToDefaults"					"Сброс"
+		
+		// campaign setup - main panel
+		"MainMenu_Campaigns_Setup_Title"							"Настройки кампании/карты"
+		"MainMenu_Campaigns_Setup_Tagline"							"Каждую игру можно запустить по-своему!"
+		"MainMenu_Campaigns_Setup_AdvExpand"						"Расширенные настройки игры и пользовательские опции"
+		"MainMenu_Campaigns_Setup_PanelButton_Presets_Title"		"Пресеты"
+		"MainMenu_Campaigns_Setup_PanelButton_Presets_Desc"			"Применить заранее определенный набор настроек"
+		"MainMenu_Campaigns_Setup_PanelButton_Admin_Title"			"Настройки сервера"
+		"MainMenu_Campaigns_Setup_PanelButton_Admin_Desc"			"Административные настройки: количество игроков, карантин, запись демо-версии, т.п..."
+		"MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title"		"Выбор карты"
+		"MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc"		"Начать с конкретной карты в этой главе"
+		"MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title"	"Базовый геймплей"
+		"MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc"	"Простые настраиваемые ограничения"
+		"MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title"		"Модификаторы игрового процесса"
+		"MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc"		"Здесь можно настроить некоторые модификаторы игрового процесса, прежде чем запускать игру."
+		
+		// proto
+		"MainMenu_Campaigns_Setup_Proto_Title"						"Эта система является прототипом и может быть изменена или удалена в будущем."
+		"MainMenu_Campaigns_Setup_Proto_Desc"						"Команды, измененные с помощью этой системы, не сохраняются, в том числе при выходе из кампаний."
+		
+		// campaign setup - server settings
+		// GameplayBase
+		"MainMenu_Campaigns_Setup_Var_cl_mirror_world"				"Перевернуть мир"
+		"MainMenu_Campaigns_Setup_Var_cl_mirror_world_Description"	"Переворачивает мир по горизонтали. Аллан сейчас на восьмом небе от счастья. По умолчанию выключено."
+		"MainMenu_Campaigns_Setup_Var_sv_gravity"					"Гравитация"
+		"MainMenu_Campaigns_Setup_Var_sv_gravity_Description"		"Measured in Hammer units (HU), equivalent to a real-world inch (or 2.54 centimeters).\n\nThe default gravity is 600 HU/s."
+		"MainMenu_Campaigns_Setup_Var_skill"						"Сложность"
+		"MainMenu_Campaigns_Setup_Var_skill_Description"			"Изменяет поведение модификаторов урона и предметов. На более высоких уровнях сложности вас будут поджидать более сильные противники, а боеприпасов будет не хватать. \n\nЭто не относится к кампаниям Portal.\n\nПо умолчанию: Обычный"
+		"MainMenu_Campaigns_Setup_Var_skill_1"						"Легкий"
+		"MainMenu_Campaigns_Setup_Var_skill_2"						"Обычный"
+		"MainMenu_Campaigns_Setup_Var_skill_3"						"Сложный"
+		"MainMenu_Campaigns_Setup_Var_player_throwenable"					"Возможность бросать предметы"
+		"MainMenu_Campaigns_Setup_Var_player_throwenable_Description"		"Включает режим подбора предметов в стиле Half-Life 2, позволяющий бросать предметы с помощью левой кнопки мыши.\n\nПо умолчанию выключено"
+		"MainMenu_Campaigns_Setup_Var_player_throwforce"					"Сила броска"
+		"MainMenu_Campaigns_Setup_Var_player_throwforce_Description"		"Начальная сила броска в юнитах Hammer. Требуется «Возможность бросать предметы»."
+		"MainMenu_Campaigns_Setup_Var_mv_bhop"						"Банихоп"
+		"MainMenu_Campaigns_Setup_Var_mv_bhop_Description"			"Буквально включает бхоп."
+		"MainMenu_Campaigns_Setup_Var_mv_duckjump"					"Прыжок в приседе"
+		"MainMenu_Campaigns_Setup_Var_mv_duckjump_Description"		"Позволяет игроку прыгать в приседе или пригнувшись. Это необходимо для карт, использующих особенности передвижения в Half-Life 2.\n\nПо умолчанию выключено"
+		"MainMenu_Campaigns_Setup_Var_sv_enableholdrotation"				"Поворот удерживаемых предметов"
+		"MainMenu_Campaigns_Setup_Var_sv_enableholdrotation_Description"	"Позволяет игроку вращать удерживаемые физические объекты, нажимая и удерживая +ATTACK2.\n\nПо умолчанию выключено"
+		"MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry"				"Предпочтительный подбор предметов"
+		"MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry_Description"	"Позволяет держать удерживаемые физические объекты под предпочтительным (заранее указанным) углом.\n\nПо умолчанию включено"
+
+		// ServerSettings
+		"MainMenu_Campaigns_Setup_Var_hostname"						"Название сервера"
+		"MainMenu_Campaigns_Setup_Var_hostname_Description"			"Название сервера, отображаемое в поиске в браузере серверов. Не применимо к одиночным играм."
+		"MainMenu_Campaigns_Setup_Var_sv_tags"						"Тэги сервера"
+		"MainMenu_Campaigns_Setup_Var_sv_tags_Description"			"Ключевые слова для поиска серверов с определенными настройками или игровыми режимами. Не применимо к одиночным играм."
+		"MainMenu_Campaigns_Setup_Var_maxplayers"					"Максимальное количество игроков"
+		"MainMenu_Campaigns_Setup_Var_maxplayers_Description"		"Максимальное количество игроков, которые могут одновременно подключиться к этому серверу. Если установить значение 1, будет включен режим одиночной игры."
+		"MainMenu_Campaigns_Setup_Var_sv_password"					"Пароль сервера"
+		"MainMenu_Campaigns_Setup_Var_sv_password_Description"		"Пароль/код, который игроки могут использовать для подключения к этому серверу. Идеально подходит для проведения приватных сессий и полуLAN-серверов."
+		"MainMenu_Campaigns_Setup_Var_sv_lan"						"Локальный сервер"
+		"MainMenu_Campaigns_Setup_Var_sv_lan_Description"			"Ограничивает входящие подключения к этому серверу только теми, которые исходят из текущей локальной сети."
+		"MainMenu_Campaigns_Setup_Var_sv_cheats"					"Включить читы"
+		"MainMenu_Campaigns_Setup_Var_sv_cheats_Description"		"Делает доступными команды, помечеными как читы."
+		"MainMenu_Campaigns_Setup_Var_p2p"							"Сервер сети Steam"
+		"MainMenu_Campaigns_Setup_Var_p2p_Description"				"Использует Steam Datagram Relay для размещения одноранговых (P2P) и выделенных серверов в интернете с минимальной технической настройкой. Игровой трафик направляется на ретрансляционные серверы Valve для анонимизации информации об игроках и защиты хоста сервера."
+		
+		// CampaignSetupDiscardDialog
+		"MainMenu_Campaigns_Setup_Discard_Title"					"Отменить изменения?"
+		"MainMenu_Campaigns_Setup_Discard_Description"				"Вы уверены, что хотите выйти из режима настройки кампании?\n\nВсе настройки, сделанные во время настройки, будут сброшены."
+		
+		// NewGameWarningDialog
+		"Action_NewGame_Title"										"Запуск игры"
+		"Action_NewGame_Description"								"Вы уверены, что хотите начать новую игру?\n\nПредыдущий прогресс будет утерян."
+		"Action_NewGame_CampaignSetup_Description"					"Вы уверены, что хотите начать новую игру с данными настройками?\n\nПредыдущий прогресс будет утерян, а все изменения в игровом процессе нельзя будет отменить после начала новой игры."
+
+		// campaign list
+		
+		// p2ce-campaign
+		"MainMenu_Campaigns_P2CE"					"Portal 2: Community Edition"
+		"MainMenu_Campaigns_P2CE_Author"			"Команда P2:CE"
+		"MainMenu_Campaigns_P2CE_Description"		"[DEV - REPLACE ME] Не говорите разработчикам, что я воспользовался этим описанием! Но я перевел всю игру на русский язык. Мой никнейм Лавейг, и я стараюсь сделать P2:CE доступной для всех. Помимо перевода, я сделал половину бэк-энда википедии. Надеюсь, наши старания не прошли даром, и вы наслаждаетесь Portal 2: Community Edition!"
+		
+		// for valve campaigns
+		"MainMenu_Campaigns_Valve_Author"			"Valve Software"
+		
+		// portal2
+		"MainMenu_Campaigns_portal2"				"Portal 2"
+		"MainMenu_Campaigns_portal2_Description"	"В Portal 2 вы откроете для себя инновационный геймплей, сюжет и музыку, которая помогла оригиналу заработать более 70 наград в игровой индустрии и стать культовым. Одиночный режим Portal 2 представит вам нескольких новых персонажей, разнообразные неожиданные головоломки и ещё больше тестовых комнат. Игроки смогут познакомиться с неизвестными им частями лаборатории Aperture Science и снова встретятся с ГЛаДОС — порою кровожадной компьютерной компаньоншей, которая сопровождала главную героиню на протяжении первой части игры."
+		"MainMenu_Campaigns_portal2_MP"				"Portal 2 Co-op"
+		"MainMenu_Campaigns_portal2_MP_Description"	"Играя в кооперативном режиме, игроки откроют для себя абсолютно новую, независимую от оригинальной сюжетную линию с уникальными тестовыми комнатами и двумя персонажами. Здесь каждому из вас придётся проявить всё то, что вы знаете о порталах. Чтобы добиться успеха, вы будете обязаны не просто играть вместе, но и думать сообща."
+		
+		// portal
+		"MainMenu_Campaigns_portal"					"Portal"
+		"MainMenu_Campaigns_portal_Description"		"Portal, действие которого происходит в загадочных лабораториях компании Aperture, был назван одной из самых новаторских игр современности и предлагает вниманию игрока множество часов непохожей ни на что головоломки. Дизайн игры заставляет игрока изменить подход, способы взаимодействия и оценку возможностей в рамках заданного окружения, наподобие того, как гравипушка в Half-Life® 2 изменила способы обращения с объектами в разных ситуациях. Игроки должны решить физические загадки и выйти из сложных ситуаций, открывая порталы для перемещения предметов и самих себя в пространстве."
+		
+		// hl2
+		"MainMenu_Campaigns_hl2"					"Half-Life 2"
+		"MainMenu_Campaigns_hl2_Description"		"Семичасовая война проиграна. Земля признала поражение. Инцидент в Чёрной Мезе — это лишь далёкое воспоминание. Игрок вновь поднимает монтировку учёного-исследователя Гордона Фримена, обнаружившего себя на наводнённой пришельцами Земле, ресурсы которой стремительно опустошаются, а население сокращается. Фримену навязана незавидная роль спасителя человечества от зла, которое он выпустил на свободу в Чёрной Мезе. И очень многие дорогие ему люди надеются на него."
+		
+		// episodic
+		"MainMenu_Campaigns_episodic"				"Half-Life 2: Episode One"
+		"MainMenu_Campaigns_episodic_Description"	"Picking up after the events of Half-Life 2, Dr. Gordon Freeman and Alyx Vance attempt to slow an unavoidable chain reaction that will destroy City 17. Facing heavy resistance, they must evacuate the city and save its residents before all is lost."
+		
+		// ep2
+		"MainMenu_Campaigns_ep2"					"Half-Life 2: Episode Two"
+		"MainMenu_Campaigns_ep2_Description"		"With humanity scattered, alien forces continue their fight for control over Earth. Physicist Gordon Freeman and Alyx Vance must work to intercept a Combine transmission and reunite with rebel forces before humanity is destroyed."
+		
+		// Main Menu - Addons
+		"MainMenu_Addons_Refresh"					"Обновить список аддонов"
+		"MainMenu_Addons_Apply"						"Применить"
+		"MainMenu_Addons_Discard"					"Отмена"
+		"MainMenu_Addons_ToggleAll"					"Применить все аддоны"
+		"MainMenu_Addons_ViewOnWS"					"Открыть страницу в мастерской"			// stop YELLING AT ME
+		"MainMenu_Addons_Category_WS"				"Дополнения P2:CE"
+		"MainMenu_Addons_Category_WS_Tagline"		"Подписка на работы из мастерской и локально установленный контент"
+		"MainMenu_Addons_Category_Mounts"			"Привязанные игры"
+		"MainMenu_Addons_Category_Mounts_Tagline"	"Контент из других игр на движке Source, установленный на вашем устройстве."
+		"MainMenu_Addons_SteamWorkshop_Tooltip"		"Открыть мастерскую Steam."
+		"MainMenu_Addons_Advanced_Tooltip"			"Переключить видимость всех типов дополнений для опытных пользователей"
+		
+		"MainMenu_Addons_ToggleAddon"				"Включить/выключить аддон"
+		
+		// Main Menu - Mounts
+		"MainMenu_Mounts_MountGame"					"Привязать"
+		"MainMenu_Mounts_UnmountGame"				"Отвязать"
+		"MainMenu_Mounts_TooMany"					"Слишком много привязанных игр!"
+		"MainMenu_Mounts_TooMany_Desc"				"Мы ценим ваш энтузиазм, но {i:num_mounted_games} привязанных игр - это слишком много. Движок поддерживает максимум {i:max_mounts} игр, из-за технических ограничений (и чтобы не засорять список моделей дубликатами). Пожалуйста, демонтируйте несколько игр."
+		"MainMenu_Mounts_Game_MaxTagline"			"Достигнуто максимальное количество видимых привязанных игр."
+		"MainMenu_Mounts_WIP_Title"					"Конфигурация игр находится в разработке и пока недоступна."
+		"MainMenu_Mounts_WIP_Tagline"				"Пока-что добавлять игры напрямую в P2:CE можно только через mounts.kv в папке cfg. Нажмите здесь, чтобы узнать больше о настройке маунтинга в Portal 2: Community Edition."
+
+		// for non-campaign addons with maps
+		"MainMenu_Addons_MapDropdown_Select"		"Выбрать карту..."
+		"MainMenu_Addons_LaunchMap_Multi"			"Запустить выбранную карту"
+		"MainMenu_Addons_LaunchMap_Single"			"Запустить карту"
+		
+		// Filtering
+		// Filtering - Time
+		"MainMenu_Addons_SearchBox_FillerText"				"Поиск аддонов..."
+		"MainMenu_Addons_Filtering_Title"					"Параметры фильтрации и сортировки (НЕ РЕАЛИЗОВАНО)"
+		"MainMenu_Addons_Filtering_Edit_Tooltip"			"Изменяет способ фильтрации и сортировки дополнений в списке дополнений."
+		"MainMenu_Addons_Filtering_EnableAddons_Tooltip"	"Включает / выключает все аддоны из списка."
+		"MainMenu_Addons_Filtering_Sort_Title"				"Сортировать по:"
+		"MainMenu_Addons_Filtering_Sort_TimeInstalled"		"Времени подписки/добавления"
+		"MainMenu_Addons_Filtering_Sort_Alpha"				"Алфавитному порядку"
+		"MainMenu_Addons_Filtering_Sort_TimePublished"		"Дате загрузки/публикации"
+		"MainMenu_Addons_Filtering_Sort_TimeLastUpdate"		"Дате обновления"
+		
+		// Filtering - Source Type
+		"MainMenu_Addons_Filtering_Sort_InstallSrc"			"Расположение дополнения"
+		"MainMenu_Addons_Filtering_Sort_InstallSrc_Local"	"Локальное"
+		"MainMenu_Addons_Filtering_Sort_InstallSrc_UGC"		"Мастерская Steam"
+		
+		// Filtering - Campaigns
+		// These are sourced from the internal tags in workshop.kv3
+		"MainMenu_Addons_Filtering_Sort_CampaignTags"			"Теги кампании/карты"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_SP"		"Одиночная игра"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_COOP"		"Ко-оп"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_CUSTOM"	"Пользовательская история"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_LSHORT"	"Короткое (1-3 карты)"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_LMED"		"Среднее (4-7 карт)"
+		"MainMenu_Addons_Filtering_Sort_CampaignTags_LLONG"		"Длинное (8+ карт)"
+		
+		// Filtering - Addon Tags
+		// These are sourced from the internal tags in workshop.kv3
+		"MainMenu_Addons_Filtering_Sort_AddonTags"				"Теги дополнения"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Model"		"Модели"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Mats"			"Материалы/текстуры"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Scripts"		"Скрипты"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Instance"		"Инстансы/префабы"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Theme"		"Тема"
+		"MainMenu_Addons_Filtering_Sort_AddonTags_Ported"		"Порт игры"
+
+		// General Actions
+		"Common_On"									"Вкл"
+		"Common_Off"								"Выкл"
+		"Common_Update"								"Обновить"
+		"Common_ComingSoon"							"Скоро!"
+		"Common_Gamemode"							"Режим игры"
+		"Common_Game"								"Игра"
+		"Common_GameUpper"							"ИГРА"
+		"Common_Save"								"Сохранить"
+		"Common_Close"								"Закрыть"
+		"Common_Cancel"								"Отмена"
+		"Common_OK"									"ОК"
+		"Common_DontShowAgain"						"Не показыввать снова"
+		"Common_SelectAll"							"Выбрать все"
+		"Common_Delete"								"Удалить"
+		"Common_Remove"								"Убрать"
+		"Common_Create"								"Создать"
+		"Common_Edit"								"Изменить"
+		"Common_Refresh"							"Обновить"
+		"Common_Search"								"Поиск"
+		"Common_By"									"по"
+		"Common_SearchEllipsis"						"Поиск..."
+		"Common_Multiplayer"						"Мультиплеер"
+		"Common_Wiki"								"Открыть википедию Strata"
+		
+		"Action_Yes"								"Да"
+		"Action_No"									"Нет"
+		"Action_Cancel"								"Отмена"
+		"Action_Confirm"							"Подтвердить"
+		"Action_Back"								"Назад"
+		"Action_Return"								"Назад"
+		"Action_ReturnToMenu"						"Выйти в меню"
+		"Action_Apply"								"Применить"
+		"Action_Discard"							"Отменить"
+		
+		// Feature Unavailable
+		"MainMenu_Feature_Unavailable_Title"		"Функция недоступна"
+		"MainMenu_Feature_Unavailable_Description"	"Эта функция находится в стадии разработки, и в настоящее время доступ к ней невозможен."
+		
+		// QuitPrompt
+		"Action_Quit"								"Выйти"
+		"Action_QuitToDesktop"						"Выйти из игры"
+		"Action_Quit_Message" 						"Вы уверены что хотите выйти?"
+		"Action_Quit_InGame_Message"				"Данный шедевр моддинга предоставляет вам столько возможностей! \n\nНесохраненный прогресс будет уничтожен."
+		// quit_prompt console command
+		"MainMenu_ExitGameConfirmation_Title"		"Выйти из игры"
+		"MainMenu_ExitGameConfirmation_Message"		"Вы уверены что хотите выйти? Данный шедевр моддинга предоставляет вам столько возможностей! Зачем вам из него выходить?\n\n\n\nНесохраненный прогресс будет удален."
+		
+		// Loading Screen
+		"LoadingProgress_Connecting" 				"Подключение к серверу..."
+		"LoadingProgress_SpawningServer"			"Запуск локального игрового сервера..."
+		"LoadingProgress_BeginConnect" 				"Установление соединения с сервером..."
+		"LoadingProgress_Changelevel"				"Ожидание смены карт на сервере"
+		"LoadingProgress_LoadMap"					"Загрузка lump-данных BSP..."
+		"LoadingProgress_PrecacheWorld"				"Инициализация мира..."
+		"LoadingProgress_LoadResources"				"Загрузка ресурсов..."
+		"LoadingProgress_ProcessServerInfo"			"Запрашиваем текущее состояние сервера..."
+		"LoadingProgress_SignonLocal"				"Инициализация ресурсов..."
+		"LoadingProgress_SignonDataLocal"			"Финальные штрихи..."
+		"LoadingProgress_SignonData"				"Извлечение данных об игре..."
+		"LoadingProgress_SendClientInfo" 			"Спавним игрока..."
+		
+		// Temp Notices
+		// Unfinished Software Reminder
+		"MainMenu_PrereleaseNotice_Title"			"Это нестабильная, предварительная бета-версия P2:CE!"
+		"MainMenu_PrereleaseNotice_Description"		"Portal 2: Community Edition — это фреймворк для создания модификаций. Некоторые ключевые функции могут отсутствовать или находиться в стадии активной разработки, а в базовом игровом движке ведется масштабная работа по рефакторингу кода, в ходе которой устаревший код будет полностью переписан или удален, чтобы освободить место для улучшений, повышающих удобство использования функций движка. В результате, в P2:CE и инструментах SDK могут возникать ошибки, которые существенно повлияют на процесс создания модификаций. Кампания P2:CE также не завершена и поэтому не включена в эту предварительную версию. \n\nМы рекомендуем, нет, мы взываем к вам - сообщайте об ошибках, и вносите предложения по улучшению в систему отслеживания проблем P2:CE (https://github.com/StrataSource/Portal-2-Community-Edition/issues) \n\nНажимая «Я понимаю и соглашаюсь с условиями», вы соглашаетесь с рисками, связанными с использованием этой предварительной версии. Если вы не согласны с этими условиями, вы не сможете продолжить пользоваться P2:CE. Это сообщение отображается только один раз и больше не будет появляться после подтверждения."
+
+		"MainMenu_Compat_Warning_Header"			"Предупреждение о несовместимости"
+		"MainMenu_Compat_Warning"					"<b>В настоящее время Portal 1 и Half-Life 2 не полностью совместимы с P2:CE. </b> У вас могут возникать такие проблемы, как отсутствие или замена текстур, неработающая анимация, сбои, отсутствие элементов игрового процесса необходимых для продвижения, вортигонты вызывающие вылет игры, и многое другое. Мы планируем исправить некоторые из этих проблем в будущем, но это не является приоритетом. <b>Пожалуйста, не сообщайте об ошибках, связанных с Portal 1/Half-Life 2.</b>"
+
+		"MainMenu_PrereleaseNotice_Acknowledge"		"Я понимаю и соглашаюсь с условиями"
+		"MainMenu_PrereleaseNotice_Decline"			"Выйти из игры"
+		
+		// Playtest DOSA
+		"MainMenu_PlaytestDOSA_Title"				"Добро пожаловать на бета-тестирование Portal 2: Community Edition!"
+		"MainMenu_PlaytestDOSA_Description"			"В рамках тестирования, игра будет записывать демонстрацию вашего игрового процесса и соберет некоторые базовые данные о производительности. Эти данные будут переданы нашим разработчикам для анализа, что позволит нам улучшить игровой процесс. \n\nПРИМЕЧАНИЕ. Согласие об этом можно отозвать в настройках."
+		"MainMenu_PlaytestDOSA_Consent"				"Согласиться на сбор данных в рамках бета-тестирования"
+		"MainMenu_PlaytestDOSA_Revoke"				"Нет, я не согласен на сбор данных!"
+	
+		// Color Picker
+		"ColorPicker_Hue"							"H"
+		"ColorPicker_Saturation"					"S"
+		"ColorPicker_Value"							"V"
+		"ColorPicker_Red"							"R"
+		"ColorPicker_Green"							"G"
+		"ColorPicker_Blue"							"B"
+		"ColorPicker_Alpha"							"A"
+
+		// Dependency Warning
+		"DependencyWarning_Generic"					"Отсутсвуют один или нескольких дополнений, от которых зависит корректная работа этого аддона."
+		"DependencyWarning_Header"					"Отсутствующие зависимости"
+		"DependencyWarning_Desc"					"Контент, который вы пытаетесь запустить, зависит от дополнений, которые не удалось найти на вашем устройстве. Список отсутствующих дополнений приведен ниже. Нажмите на дополнение, чтобы открыть его страницу в мастерской Steam. Вы можете проигнорировать это предупреждение и продолжить запуск, но в этом случае могут возникнуть непредвиденные последствия."
+		"DependencyWarning_Loading"					"Получение информации..."
+		"DependencyWarning_Failed"					"Не удалось получить информацию!"
+		"DependencyWarning_Action_Ignore"			"Всё-равно продолжить"
+		"DependencyWarning_Action_Cancel"			"Отмена"
+		"DependencyWarning_Resolved_Header"			"Зависимости обнаружены"
+		"DependencyWarning_Resolved_Desc"			"Все зависимости данного дополнения были успешно найдены на вашем устройстве."
+
+		"UI_Upvote"									"Лайкнуть"
+		"UI_Downvote"								"Дизлайкнуть"
+		"UI_Novote"									"-"
+		"UI_Dependencies"							"Зависимости"
+		"UI_Description"							"Описание"
+		
+		// Networking Stuff!!!!!
+		// Disconnect Dialog Main
+		"MainMenu_DisconnectDialog_Title"					"Отключен от сервера"
+		"MainMenu_DisconnectDialog_Message"					"Вы были отключены от сервера по следующей причине: \n\n{s:disconnect_reason}"
+		
+		// generic disconnect reasons
+		"MainMenu_DisconnectDialog_Reason_TimeOut"			"Вероятно, сервер вышел из строя или потерял подключение к сети. Подождите несколько минут и повторите попытку подключения."
+		"MainMenu_DisconnectDialog_Reason_TimeOutConnect"	"Не удалось установить соединение с сервером. Указанный IP-адрес/имя хоста сервера недействительны, или возникли проблемы с сетевым подключением."
+		"MainMenu_DisconnectDialog_Reason_BuildTooOld"		"Ваша версия Portal 2: Community Edition устарела. Пожалуйста, выйдите из игры и проверьте наличие ожидающих установки обновлений в клиенте Steam."
+		"MainMenu_DisconnectDialog_Reason_BuildTooNew"		"Ваша версия P2:CE новее, чем версия владельца сервера. Владельцу сервера необходимо обновить игру до последней версии."
+		"MainMenu_DisconnectDialog_Reason_DSExit"			"Сервер выключен."
+		"MainMenu_DisconnectDialog_Reason_Kicked"			"Вас выгнали с этого сервера."
+		"MainMenu_DisconnectDialog_Reason_KickedVote"		"Вас выгнали голосованием с этого сервера."
+		"MainMenu_DisconnectDialog_Reason_Banned"			"Вы были забанены на этом сервере."
+		"MainMenu_DisconnectDialog_Reason_BannedVote"		"Вы были забанены голосованием."
+		
+		// Disconnect Notices - ENetworkDisconnectionReason (per matchmaking dll and cross-ref with csgo_english + dota_english)
+		// These need to be shared on here and in panorama_english for DS host reasons
+		"GameUI_Disconnect_User"							"Игрок сам покинул сервер."						// NETWORK_DISCONNECT_DISCONNECT_BY_USER
+		"GameUI_Disconnect_Server"							"Игрок был выгнан сервером."								// NETWORK_DISCONNECT_DISCONNECT_BY_SERVER
+		"GameUI_Disconnect_ConnectionLost"					"Потеряно соединение с сервером."							// NETWORK_DISCONNECT_LOST, NETWORK_DISCONNECT_SNS_CONNECTION_LOST
+		"GameUI_Disconnect_ConnectionOverflow"				"Полученный клиентом пакет данных слишком велик."				// NETWORK_DISCONNECT_OVERFLOW
+		"GameUI_Disconnect_ServerInfoOverflow"				"Полученный пакет метаданных сервера слишком велик."					// NETWORK_DISCONNECT_SERVERINFO_OVERFLOW
+		"GameUI_Disconnect_TickMessage"						"Сервер слишком долго был активен (данные о тиках слишком велики.)"								// NETWORK_DISCONNECT_TICKMSG_OVERFLOW
+		"GameUI_Disconnect_StringTableMessage"				"Данные StringTable, полученные клиентом, слишком велики."		// NETWORK_DISCONNECT_STRINGTABLEMSG_OVERFLOW
+		"GameUI_Disconnect_DeltaEntMessage"					"Данные DeltaEnt, полученные клиентом, слишком велики."		// NETWORK_DISCONNECT_DELTAENTMSG_OVERFLOW
+		"GameUI_Disconnect_TempEntMessage"					"Данные TempEnt, полученные клиентом, слишком велики."			// NETWORK_DISCONNECT_TEMPENTMSG_OVERFLOW
+		"GameUI_Disconnect_SoundsMessage"					"Слишком много звуков пытаются воспроизвестись одновременно."			// NETWORK_DISCONNECT_SOUNDSMSG_OVERFLOW
+		"GameUI_Disconnect_ReliableOverflow"				"Переполнение потока данных на стороне сервера."				// NETWORK_DISCONNECT_RELIABLEOVERFLOW
+		"GameUI_Disconnect_BadClientDeltaTick"				"Клиент получил неверную интерполяцию тиков."			// NETWORK_DISCONNECT_BADDELTATICK
+		"GameUI_Disconnect_NoMoreSplits"					"Разделенный экран больше не поддерживается."					// NETWORK_DISCONNECT_NOMORESPLITS
+		"GameUI_Disconnect_TimedOut"						"Время ожидания ответа от сервера истекло."					// NETWORK_DISCONNECT_TIMEDOUT
+		"GameUI_Disconnect_Disconnected"					"Вы отключились от сервера."			// NETWORK_DISCONNECT_DISCONNECTED
+		"GameUI_Disconnect_LeavingSplit"					"Совершен выход из режима разделенного экрана."							// NETWORK_DISCONNECT_LEAVINGSPLIT
+		"GameUI_Disconnect_DifferentClassTables"			"Структуры таблиц классов на сервере конфликтуют с клиентскими."	// NETWORK_DISCONNECT_DIFFERENTCLASSTABLES
+		"GameUI_Disconnect_NoSpectators"					"Этот сервер не поддерживает режим наблюдателя."			// NETWORK_DISCONNECT_NOSPECTATORS
+		"GameUI_Disconnect_Kicked"							"Выгнан из сервера."									// NETWORK_DISCONNECT_KICKED
+		"GameUI_Disconnect_BanAdded"						"Забанен на сервере."									// NETWORK_DISCONNECT_BANADDED
+		"GameUI_Disconnect_KickBanAdded"					"Забанен на сервере."									// NETWORK_DISCONNECT_KICKBANADDED - Isn't this the same thing as BANADDED?
+		"GameUI_Disconnect_PureServer_ClientExtra"			"Не удалось проверить целостность контента: у клиента загружены дополнительные ресурсы, конфликтующие с общими."	// NETWORK_DISCONNECT_PURESERVER_CLIENTEXTRA
+		"GameUI_Disconnect_PureServer_Mismatch"				"Не удалось проверить целостность контента: ресурсы на клиенте не соответствуют с ресурсами на сервере."	// NETWORK_DISCONNECT_PURESERVER_MISMATCH
+		"GameUI_Disconnect_UserCmd"							"Ошибка при разборе команд пользователя."						// NETWORK_DISCONNECT_USERCMD
+		"GameUI_Disconnect_RejectedByGame"					"Соединение отклонено сервером."						// NETWORK_DISCONNECT_REJECTED_BY_GAME
+		"GameUI_Disconnect_BadServerPassword"				"Неверный пароль. Попробуйте еще раз."								// NETWORK_DISCONNECT_BAD_SERVER_PASSWORD
+		"GameUI_Disconnect_ConnectionFailure"				"Не удалось подключиться к серверу."							// NETWORK_DISCONNECT_CONNECTION_FAILURE
+		"GameUI_Disconnect_ConnectionClosing"				"Соединение закрыто сервером."							// NETWORK_DISCONNECT_CONNECTION_CLOSING
+		"GameUI_Disconnect_SessionMigrated"					"Текущий матч перенесен на другой сервер."			// NETWORK_DISCONNECT_SESSION_MIGRATED
+		"GameUI_Disconnect_PlayerRemovedFromHostSession"	"Игрок выгнан администратором."								// NETWORK_DISCONNECT_PLAYER_REMOVED_FROM_HOST_SESSION
+		"GameUI_Disconnect_TooManyCommands"					"Вы отправили на сервер слишком много команд."					// NETWORK_DISCONNECT_SERVER_DOS
+		"GameUI_Disconnect_SteamIDBanned"					"Аккаунт заблокирован в сообществе Steam."			// NETWORK_DISCONNECT_STEAM_BANNED
+		"GameUI_Disconnect_SteamIDInUse"					"В данный момент ваша учетная запись Steam используется где-то еще."		// NETWORK_DISCONNECT_STEAM_INUSE
+		"GameUI_Disconnect_SteamInUse"						"В данный момент ваша учетная запись Steam используется где-то еще."		// NETWORK_DISCONNECT_STEAM_LOGGED_IN_ELSEWHERE - Why the hell is this disconnect reason duped twice?
+		"GameUI_Disconnect_SteamTicket"						"Неверный тикет входа в Steam."							// NETWORK_DISCONNECT_STEAM_TICKET
+		"GameUI_Disconnect_SteamLogon"						"Игрок спиратил игру."			// NETWORK_DISCONNECT_STEAM_LOGON, NETWORK_DISCONNECT_STEAM_AUTHCANCELLED, NETWORK_DISCONNECT_STEAM_AUTHALREADYUSED, NETWORK_DISCONNECT_STEAM_AUTHINVALID
+		"GameUI_Disconnect_SteamVAC"						"Ты читер. Посмотри на себя - куда тебя привело ВХ на официальных серверах? Ты недостоин играть в P2:CE. Выйди из игры немедленно. Позорище."		// NETWORK_DISCONNECT_STEAM_VACBANSTATE
+		"GameUI_Disconnect_SteamTimeOut"					"Не удалось проверить статус блокировки Valve Anti-Cheat (VAC)."	// NETWORK_DISCONNECT_STEAM_VAC_CHECK_TIMEDOUT
+		"GameUI_Disconnect_SteamDropped"					"В данный момент вы отключены от сети Steam."	// NETWORK_DISCONNECT_STEAM_DROPPED
+		"GameUI_Disconnect_SteamOwnership"					"Данный игрок спиратил Portal 2 и/или Portal 2: Community Edition."	// NETWORK_DISCONNECT_STEAM_OWNERSHIP
+		"GameUI_Disconnect_LocalProblem_ManyRelays"			"Не удалось восстановить состояние игры после нескольких попыток подключения к серверам Steam DR. Возможно, возникла проблема с сетевым подключением."		// NETWORK_DISCONNECT_SNS_LOCAL_MANYRELAYS
+		"GameUI_Disconnect_LocalProblem_HostedServerPrimaryRelay"		"Сервер потерял соединение с серверами Steam Datagram Relay."		// NETWORK_DISCONNECT_SNS_LOCAL_HOSTEDSERVERPRIMARYRELAY
+		"GameUI_Disconnect_LocalProblem_NetworkConfig"		"Не удалось загрузить данные конфигурации Steam Datagram Relay (SDR)."		// NETWORK_DISCONNECT_SNS_LOCAL_NETWORKCONFIG
+		"GameUI_Disconnect_LocalProblem_Other"				"Сбой ретрансляционной связи Steam Datagram Relay (SDR)."						// NETWORK_DISCONNECT_SNS_LOCAL_OTHER
+		"GameUI_Disconnect_RemoteProblem_TimeoutConnecting"	"Время ожидания подключения к серверу истекло."				// NETWORK_DISCONNECT_SNS_REMOTE_TIMEOUTCONNECTING
+		"GameUI_Disconnect_RemoteProblem_Timeout"			"Время ожидания сервера истекло."							// NETWORK_DISCONNECT_SNS_REMOTE_TIMEOUT
+		"GameUI_Disconnect_RemoteProblem_BadCrypt"			"Получены неверные/неправильно настроенные параметры криптографии сервера."		// NETWORK_DISCONNECT_SNS_REMOTE_BADCRYPT
+		"GameUI_Disconnect_RemoteProblem_BadCert"			"Недействительный сертификат шифрования, предоставленный сервером."	// NETWORK_DISCONNECT_SNS_REMOTE_BADCERT
+		"GameUI_Disconnect_ClosedByPeer_Timeout"			"Время ожидания ответа от однорангового узла истекло."			// NETWORK_DISCONNECT_SNS_CLOSEDBYPEER_TIMEOUT
+		"GameUI_Disconnect_ClosedByPeer"					"Соединение закрыто пиром."							// NETWORK_DISCONNECT_SNS_CLOSEDBYPEER_OTHER
+		"GameUI_Disconnect_InternalError"					"Произошла внутренняя ошибка связи. Подробности смотрите в консоли разработчика."	// NETWORK_DISCONNECT_SNS_INTERNALERROR
+		"GameUI_Disconnect_Unusual"							"Неопределенная ошибка при соединении клиента с сервером. Подробности смотрите в консоли разработчика."		// NETWORK_DISCONNECT_SNS_UNUSUAL
+		"GameUI_Disconnect_HLTVBadRelayPassword"			"Неверный пароль для прокси-сервера SourceTV."						// NETWORK_DISCONNECT_HLTV_BADRELAYPASSWORD
+		"GameUI_Disconnect_HLTVBadSpectatorPassword"		"Неверный пароль наблюдателя SourceTV."					// NETWORK_DISCONNECT_HLTV_BADSPECTATORPASSWORD
+		"GameUI_Disconnect_HLTVRestricted"					"Режим наблюдателя доступен только для локальной сети."				// NETWORK_DISCONNECT_HLTV_RESTRICTED
+		"GameUI_Disconnect_HLTVUnavailable"					"SourceTV недоступен на этом сервере."			// NETWORK_DISCONNECT_HLTV_UNAVAILABLE
+		"GameUI_Disconnect_HLTVStop"						"Хостинг режима наблюдателя SourceTV сейчас выключается."				// NETWORK_DISCONNECT_HLTV_STOP
+		"GameUI_Disconnect_HLTVNoRelaysAvailable"			"В настоящее время прокси-сервер SourceTV недоступен."			// NETWORK_DISCONNECT_HLTV_NO_RELAYS_AVAILABLE
+		"GameUI_Disconnect_HLTVRestrictedToLocalSpectators"	"Режим наблюдателя доступен только для локальной сети."		// NETWORK_DISCONNECT_HLTV_RESTRICTED_TO_LOCAL_SPECTATORS - Again???
+	}
+}
+
+		
