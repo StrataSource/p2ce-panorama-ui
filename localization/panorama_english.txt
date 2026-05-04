@@ -94,9 +94,6 @@
 		"HL2_Grenade"						"Fragmentation Grenade"
 		"HL2_RPG"							"RPG\n(Rocket-Propelled Grenade)"
 		"HL2_Bugbait"						"Pheropod\n(Bugbait)"
-
-		"HL2_SAVING"						"Saving..."
-		"HL2_Saved"							"Saved."
 		
 		"HL2_SetupMicrophone"				"Configure Advanced Microphone Settings"
 		"HL2_SetupMicrophoneSteam"			"The Steam Overlay is currently disabled.\nPlease enable the Steam Overlay or configure your microphone settings through the Steam client."
@@ -271,6 +268,15 @@
 		"Instructor_SS_Control"				"Press to Control Other Player"
 
 		"Paint_Instructor_teach_bounce_suppression"				"Hold to prevent bouncing"
+
+		"PORTAL2_Hud_SavingGame"							"Saving Game..."
+		"PORTAL2_Hud_GameSaved"								"Game Saved."
+
+		"PORTAL2_Hud_AutoSavingGame"						"Autosaving Game..."
+		"PORTAL2_Hud_GameAutoSaved"							"Game Autosaved."
+
+		"PORTAL2_Hud_SavingProfile"							"Saving Profile..."
+		"PORTAL2_Hud_ProfileSaved"							"Profile Saved."
 		
 		// Invites
 		"P2COOP_Invite_Title"						"Portal 2: Commnuity Edition Invite"
@@ -794,6 +800,9 @@
 		"Settings_Menu_Title"							"Menu Interface"
 		"Settings_Menu_Movie"							"Main Menu Video Background"
 		"Settings_Menu_Movie_Info"						"Enables the animated main menu background. May be a minor performance loss when the menu is open."
+
+		"Settings_Hud_Autosave"							"Autosave Indicator"
+		"Settings_Hud_Autosave_Info"					"Show an on-screen indicator when the game is automatically saved."
 
 		// Settings - Personalization
 		"Settings_Customization" 						"Customization"
