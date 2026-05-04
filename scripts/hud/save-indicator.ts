@@ -8,6 +8,13 @@ class SaveIndicator {
 		$.RegisterForUnhandledEvent('GameSaved', this.onSaveStarted.bind(this));
 		$.RegisterForUnhandledEvent('LayoutReloaded', this.hide.bind(this));
 		$.RegisterForUnhandledEvent('LevelInitPostEntity', this.hide.bind(this));
+
+		// Workaround for animation sometimes getting stuck when pausing/unpausing
+		$.RegisterForUnhandledEvent('GameUIStateChanged', (old: GameUIState, now: GameUIState) => {
+			if (now === GameUIState.INGAME) {
+				$<AnimatedImageStrip>('#Spinner')!.SetReadyForDisplay(false);
+			}
+		});
 	}
 
 	static onSaveStarted(save_name: string, save_type: SaveType) {
@@ -20,7 +27,7 @@ class SaveIndicator {
 			this.isAutoSave = false;
 		}
 
-		const label = $.GetContextPanel().FindChildInLayoutFile<Label>('StatusLabel');
+		const label = $<Label>('#StatusLabel');
 		label?.SetLocalizationString(this.isAutoSave ? "#PORTAL2_Hud_AutoSavingGame" : "#PORTAL2_Hud_SavingGame");
 
 		this.show();
@@ -40,9 +47,10 @@ class SaveIndicator {
 
 	static fadeOutTimer() {
 		if (this.fadeTimer !== undefined) $.CancelScheduled(this.fadeTimer);
+		// TODO: Remove hardcoded delay, fadeout should start after the save finishes
 		this.fadeTimer = $.Schedule(1, () => {
 			// Update the text label to say "saved"
-			const label = $.GetContextPanel().FindChildInLayoutFile<Label>('StatusLabel');
+			const label = $<Label>('#StatusLabel');
 			label?.SetLocalizationString(this.isAutoSave ? "#PORTAL2_Hud_GameAutoSaved" : "#PORTAL2_Hud_GameSaved");
 
 			$.GetContextPanel().style.animation = 'FadeOut 1s ease-out 0s 1 normal forwards';
