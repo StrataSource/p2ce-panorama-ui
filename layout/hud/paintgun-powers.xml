@@ -1,0 +1,16 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+		<include src="file://{resources}/styles/hud/paintgun.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/hud/paintgun.ts" />
+	</scripts>
+
+	<HudPaintGunPowers class="paintgun__powers">
+		<Panel class="paintgun__power mr-2" />
+		<Panel class="paintgun__power mr-2" />
+		<Panel class="paintgun__power mr-2" />
+		<Panel class="paintgun__power" />
+	</HudPaintGunPowers>
+</root>

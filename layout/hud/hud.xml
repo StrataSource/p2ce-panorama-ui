@@ -36,6 +36,7 @@
 		<Panel id="HudBottomRight" hittest="false" hittestchildren="false">
 			<PortalKeyPress />
 			<HudAmmo />
+			<HudPaintGunPowers />
 		</Panel>
 
 		<!-- Anchored in top right corner of screen, laid out from top-to-bottom -->

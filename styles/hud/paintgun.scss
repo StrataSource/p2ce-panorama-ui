@@ -1,0 +1,17 @@
+.dummy {
+	width: 100%;
+}
+
+.paintgun {
+	&__powers {
+		horizontal-align: right;
+		vertical-align: bottom;
+		flow-children: right;
+		margin: 15px;
+	}
+	&__power {
+		width: 64px;
+		height: 256px;
+		background-color: white;
+	}
+}
