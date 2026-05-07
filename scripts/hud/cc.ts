@@ -46,7 +46,7 @@ class CaptionEntry {
 				break;
 
 			case 2:
-				style += `font-family: 'GorDIN';line-height: ${Math.ceil((CloseCaptioning.settings.fontSize / 20) * 24)}px`;
+				style += `font-family: 'GorDIN';line-height: ${Math.ceil((CloseCaptioning.settings.fontSize / 20) * 24)}px;`;
 				break;
 
 			case 3:
