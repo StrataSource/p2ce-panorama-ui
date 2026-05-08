@@ -58,12 +58,34 @@
 				<Panel class="flow-down vertical-align-bottom">
 					<!-- TODO: replace these with upvote icons! -->
 					<Panel class="flow-right mb-1">
-						<RadioButton id="Upvote" class="button mr-2" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(1)">
-							<Label class="button__text" text="#UI_Upvote" />
+						<RadioButton
+							group="Voting"
+							id="Upvote"
+							class="mainmenu__addon__vote mainmenu__addon__upvote"
+							onactivate="WorkshopCampaignFlyout.changeVote(1)"
+						>
+							<Image
+								class="mainmenu__addon__vote__icon"
+								texturewidth="96"
+								textureheight="96"
+								src="file://{images}/icons/thumbup.svg"
+							/>
 						</RadioButton>
-						<RadioButton id="Downvote" class="button mr-2" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(2)">
-							<Label class="button__text" text="#UI_Downvote" />
+						<RadioButton
+							group="Voting"
+							id="Downvote"
+							class="mainmenu__addon__vote mainmenu__addon__downvote"
+							onactivate="WorkshopCampaignFlyout.changeVote(2)"
+						>
+							<Image
+								class="mainmenu__addon__vote__icon"
+								texturewidth="96"
+								textureheight="96"
+								src="file://{images}/icons/thumbdown.svg"
+							/>
 						</RadioButton>
+
+
 						<RadioButton id="Nonevote" class="button hide" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(0)">
 							<Label class="button__text" text="#UI_Novote" />
 						</RadioButton>
