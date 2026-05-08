@@ -61,7 +61,7 @@
 							class="mainmenu__addon__vote__icon"
 							texturewidth="96"
 							textureheight="96"
-							src="file://{images}/icons/p2_upvote.png"
+							src="file://{images}/icons/thumbup.svg"
 						/>
 					</RadioButton>
 					<RadioButton
@@ -74,7 +74,7 @@
 							class="mainmenu__addon__vote__icon"
 							texturewidth="96"
 							textureheight="96"
-							src="file://{images}/icons/p2_downvote.png"
+							src="file://{images}/icons/thumbdown.svg"
 						/>
 					</RadioButton>
 					<ToggleButton

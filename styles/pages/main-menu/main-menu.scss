@@ -689,6 +689,18 @@ $pane-move-time: 0.1s;
 				height: 96px;
 			}
 		}
+		&__votesmall {
+			width: 80px;
+			height: 80px;
+			background-color: $button-background;
+			border: $menu-pane-border;
+			&__icon {
+				horizontal-align: center;
+				vertical-align: center;
+				width: 24px;
+				height: 24px;
+			}
+		}
 		&__upvote {
 			&:hover {
 				background-color: gradient(
