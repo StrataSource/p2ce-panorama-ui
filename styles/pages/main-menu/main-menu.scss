@@ -642,6 +642,10 @@ $pane-move-time: 0.1s;
 			box-shadow: fill rgba($base-950, 0.5) -16px 16px 32px 16px;
 		}
 		&__avatar {
+			&:hover {
+				border-color: $orange;
+				border: 4px 4px;
+			}
 			width: 128px;
 			height: 128px;
 			border: $menu-pane-border;

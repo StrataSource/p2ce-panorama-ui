@@ -102,10 +102,18 @@
 				<Panel class="flow-down overflow-noclip">
 					<Panel class="mainmenu__addon__overflow">
 						<Image id="MapImage" class="mainmenu__addon__cover" />
-						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar" />
 					</Panel>
 					<Label id="MapTitle" class="mainmenu__addon__title" text="[PH] Map Title" />
-					<Label id="MapDesc" class="mainmenu__addon__desc" text="[PH] Map Author" />
+					<Label id="MapAuthor" class="mainmenu__addon__desc" text="[PH] Map Author" />
+					<Button
+						id="AuthSteamProfile"
+						class="ml-5"
+						onactivate="PauseMenu.openSteamProfile()"
+						onmouseover="UiToolkitAPI.ShowTextTooltip('AuthSteamProfile', '[HC] View Author\'s Steam Profile');"
+						onmouseout="UiToolkitAPI.HideTextTooltip();"
+					>
+						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar"/>
+					</Button>
 				</Panel>
 			</Panel>
 		</Panel>
