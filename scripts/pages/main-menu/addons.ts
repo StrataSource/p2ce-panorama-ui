@@ -237,7 +237,7 @@ class AddonManager {
 					p.AddClass('fancy-orange-noborder');
 					p.AddClass('addons__divider__orange');
 					$.CreatePanel('Label', p, 'ContentDividerText', {
-						text: '[HC] The following addons are required by in-game content.',
+						text: '[HC] The following addons are required by the content currently being played.',
 						class: 'horizontal-align-center text-weight-bold'
 					});
 				}
@@ -278,7 +278,7 @@ class AddonManager {
 			if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
 		}
 
-		
+
 
 		this.updateAddons();
 	}

@@ -136,7 +136,7 @@ class PauseMenu {
 	static mapPane = $<Panel>('#MapPanel')!;
 	static mapImage = $<Image>('#MapImage')!;
 	static mapTitle = $<Label>('#MapTitle')!;
-	static mapDesc = $<Label>('#MapDesc')!;
+	static mapAuthor = $<Label>('#MapAuthor')!;
 	static mapUpvote = $<Button>('#MapUpvote')!;
 	static mapDownvote = $<Button>('#MapDownvote')!;
 	static mapFavorite = $<Button>('#MapFavorite')!;
@@ -301,7 +301,7 @@ class PauseMenu {
 		let string = '';
 		for (let i = 0; i < addon.authors.length; ++i)
 			string += i === addon.authors.length - 1 ? addon.authors[i] : `${addon.authors[i]}, `;
-		this.mapDesc.text = string;
+		this.mapAuthor.text = string;
 
 		if (addon.local) {
 			this.mapVoteBox.visible = false;
@@ -331,5 +331,9 @@ class PauseMenu {
 
 	static openMapWorkshop() {
 		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${this.workshopId}`);
+	}
+
+	static openSteamProfile() {
+		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.mapAvatar.steamid}`);
 	}
 }
