@@ -60,45 +60,44 @@
 						<RadioButton
 							group="Voting"
 							id="Upvote"
-							class="mainmenu__addon__votesmall mainmenu__addon__upvote mr-2"
+							class="mainmenu__addon__vote mainmenu__addon__vote-small mainmenu__addon__upvote mr-2"
 							onactivate="WorkshopCampaignFlyout.changeVote(1)"
 						>
 							<Image
-								class="mainmenu__addon__vote__icon"
+								class="mainmenu__addon__vote__icon mainmenu__addon__vote-small__icon flip-vertical"
 								texturewidth="96"
 								textureheight="96"
-								src="file://{images}/icons/thumbup.svg"
+								src="file://{images}/icons/thumb.svg"
 							/>
 						</RadioButton>
 						
 						<RadioButton
 							group="Voting"
 							id="Downvote"
-							class="mainmenu__addon__votesmall mainmenu__addon__downvote mr-2"
+							class="mainmenu__addon__vote mainmenu__addon__vote-small mainmenu__addon__downvote mr-2"
 							onactivate="WorkshopCampaignFlyout.changeVote(2)"
 						>
 							<Image
-								class="mainmenu__addon__vote__icon"
+								class="mainmenu__addon__vote__icon mainmenu__addon__vote-small__icon"
 								texturewidth="96"
 								textureheight="96"
-								src="file://{images}/icons/thumbdown.svg"
+								src="file://{images}/icons/thumb.svg"
 							/>
 						</RadioButton>
 
-						<RadioButton
-							group="Voting"
+						<ToggleButton
 							id="Favorite"
-							class="mainmenu__addon__votesmall mainmenu__addon__favorite"
+							class="mainmenu__addon__vote mainmenu__addon__vote-small mainmenu__addon__favorite"
 							disabled="true"
 							onactivate="WorkshopCampaignFlyout.toggleMapFavorite()"
 						>
 							<Image
-								class="mainmenu__addon__vote__icon"
+								class="mainmenu__addon__vote__icon mainmenu__addon__vote-small__icon"
 								texturewidth="96"
 								textureheight="96"
 								src="file://{images}/star.svg"
 							/>
-						</RadioButton>
+						</ToggleButton>
 
 						<!-- Needed as a "default" selection when a item hasn't been voted for. -->
 						<RadioButton id="Nonevote" class="button hide" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(0)">
