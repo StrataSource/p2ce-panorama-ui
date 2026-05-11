@@ -58,10 +58,10 @@
 						onactivate="PauseMenu.setMapVote(1)"
 					>
 						<Image
-							class="mainmenu__addon__vote__icon"
+							class="mainmenu__addon__vote__icon flip-vertical"
 							texturewidth="96"
 							textureheight="96"
-							src="file://{images}/icons/thumbup.svg"
+							src="file://{images}/icons/thumb.svg"
 						/>
 					</RadioButton>
 					<RadioButton
@@ -74,7 +74,7 @@
 							class="mainmenu__addon__vote__icon"
 							texturewidth="96"
 							textureheight="96"
-							src="file://{images}/icons/thumbdown.svg"
+							src="file://{images}/icons/thumb.svg"
 						/>
 					</RadioButton>
 					<ToggleButton
