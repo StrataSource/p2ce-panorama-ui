@@ -1125,6 +1125,33 @@ Please install and mount the above games first to access this campaign."
 
 		"MainMenu_Addons_ToggleAddon"				"Toggle addon's enablement state"
 
+		"MainMenu_Mounts_App_csgo"					"Counter-Strike: Global Offensive (Legacy)"
+		"MainMenu_Mounts_App_Subtag_csgo"			"Source Legacy (4465480)"
+		"MainMenu_Mounts_App_css"					"Counter-Strike: Source"
+		"MainMenu_Mounts_App_dod"					"Day of Defeat: Source"
+		"MainMenu_Mounts_App_gmod"					"Garry's Mod"
+		"MainMenu_Mounts_App_hl2"					"Half-Life 2"
+		"MainMenu_Mounts_App_Subtag_hl2"			"20th Anniversary Edition"
+		"MainMenu_Mounts_App_hl2_lostcoast"			"Half-Life 2: Lost Coast"
+		"MainMenu_Mounts_App_Subtag_hl2_lostcoast"	"20th Anniversary Edition"
+		"MainMenu_Mounts_App_hl2_episodic"			"Half-Life 2: Episode One"
+		"MainMenu_Mounts_App_Subtag_hl2_episodic"	"20th Anniversary Edition"
+		"MainMenu_Mounts_App_hl2_ep2"				"Half-Life 2: Episode Two"
+		"MainMenu_Mounts_App_Subtag_hl2_ep2"		"20th Anniversary Edition"
+		"MainMenu_Mounts_App_hl2dm"					"Half-Life 2: Deathmatch"
+		"MainMenu_Mounts_App_hldm"					"Half-Life Deathmatch: Source"
+		"MainMenu_Mounts_App_hls"					"Half-Life: Source"
+		"MainMenu_Mounts_App_hlshd"					"Half-Life: Source HD Model Pack"
+		"MainMenu_Mounts_App_portal_full"			"Portal"
+		"MainMenu_Mounts_App_Subtag_portal_full"	"Includes requisite HL2 content"
+		"MainMenu_Mounts_App_portal_lite"			"Portal (Basic Compatibility)"
+		"MainMenu_Mounts_App_Subtag_portal_lite"	"Excludes requisite HL2 content"
+		"MainMenu_Mounts_App_sdk2013mp"				"Source SDK 2013 Multiplayer"
+		"MainMenu_Mounts_App_sdk2013sp"				"Source SDK 2013 Singleplayer"
+		"MainMenu_Mounts_App_tf2"					"Team Fortress 2"
+
+		https://youtu.be/wnyjfB4m1iU?t=4973
+
 		// Main Menu - Mounts
 		"MainMenu_Mounts_MountGame"					"Mount"
 		"MainMenu_Mounts_UnmountGame"				"Unmount"

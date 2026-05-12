@@ -34,7 +34,7 @@
 				<Image id="MountCover" class="mounts__entry__cover" scaling="stretch" />
 				<Panel class="mounts__entry__details">
 					<Label id="MountTitle" class="mounts__entry__details__title" text="[PH] Mount Title" />
-					<Label id="MountAppId" class="mounts__entry__details__appid" text="[PH] Mount AppID" />
+					<Label id="MountSubtag" class="mounts__entry__details__subtag" text="[PH] Mount Subtag" />
 				</Panel>
 			</Panel>
 		</snippet>
@@ -162,25 +162,10 @@
 				<Panel id="AddonContainer" class="addons__list" tabindex="auto" selectionpos="auto" />
 			</Panel>
 			<Panel id="MountsPage" class="mounts" onload="MountManager.init()">
-				<Panel class="mounts__disclaimer" tabindex="auto" selectionpos="auto">
-					<Panel class="horizontal-align-center vertical-align-center flow-right" tabindex="auto" selectionpos="auto">
-						<Image
-							class="mounts__disclaimer__icon"
-							src="file://{images}/info.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="32"
-							textureheight="32"
-						/>
-						<Button
-							class="vertical-align-center flow-down"
-							onactivate="SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts')"
-							tabindex="auto"
-							selectionpos="auto"
-						>
-							<Label class="mounts__disclaimer__text" text="#MainMenu_Mounts_WIP_Title" />
-							<Label class="mounts__disclaimer__small-text" text="#MainMenu_Mounts_WIP_Tagline" />
-						</Button>
-					</Panel>
+				<Panel class="addons__action-bar">
+					<Button class="vertical-align-center button">
+						<Label class="button__text" text="[HC] + Mount New Game" />
+					</Button>
 				</Panel>
 				<Panel id="MountContainer" class="mounts__list" />
 			</Panel>

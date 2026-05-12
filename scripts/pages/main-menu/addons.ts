@@ -467,25 +467,27 @@ class MountEntry {
 	panel: Panel;
 	name: string;
 	capsuleUrl: string;
-	appid: string;
+	subtag: string;
 
-	constructor(panel: Panel, name: string, capsuleUrl: string, appid: string) {
+	constructor(panel: Panel, name: string, capsuleUrl: string, subtag: string) {
 		this.panel = panel;
 		this.name = name;
 		this.capsuleUrl = capsuleUrl;
-		this.appid = appid;
+		this.subtag = subtag;
 	}
 
 	update() {
 		const title = this.panel.FindChildTraverse<Label>('MountTitle');
-		const appid = this.panel.FindChildTraverse<Label>('MountAppId');
+		const subtag = this.panel.FindChildTraverse<Label>('MountSubtag');
 		const cover = this.panel.FindChildTraverse<Image>('MountCover');
 
 		if (title) {
 			title.text = this.name;
 		}
-		if (appid) {
-			appid.text = this.appid;
+		if (subtag) {
+			if (this.subtag.length === 0)
+				subtag.visible = false;
+			subtag.text = this.subtag;
 		}
 		if (cover) {
 			cover.SetImage(this.capsuleUrl);
@@ -517,49 +519,47 @@ class MountManager {
 	}
 
 	static populateMountEntries() {
-		// don't flood the API with requests
-		const MAX_MOUNTS_DISPLAYED = 10;
-		const BASE_API_URL = 'https://store.steampowered.com/api/appdetails/?appids=';
+		const groups = GameInterfaceAPI.GetActiveSteamMountGroups();
 
-		// warn user
-		if (this.steamApps.length > MAX_MOUNTS_DISPLAYED) {
-			UiToolkitAPI.ShowGenericPopupOk(
-				'High Mount Count',
-				`You have ${this.steamApps.length} games mounted. For technical reasons, only ${MAX_MOUNTS_DISPLAYED} will be properly displayed.`,
-				'generic-popup',
-				() => {}
-			);
-		}
-
-		// make requests
-		const maxAppCount = Math.min(MAX_MOUNTS_DISPLAYED, this.steamApps.length);
-		for (let i = 0; i < maxAppCount; ++i) {
-			try {
-				$.AsyncWebRequest(`${BASE_API_URL}${this.steamApps[i]}`, {
-					type: 'GET',
-					complete: this.onAppRequestResponse.bind(this)
-				});
-			} catch (error) {
-				$.Warning(`ADDONS: AsyncWebRequest for Mount ${this.steamApps[i]} failed: ${error}`);
-				this.onAppRequestFailed();
-			}
-		}
-
-		// do the rest if there's still more
-		for (let i = maxAppCount; i < this.steamApps.length; ++i) {
-			const appId = this.steamApps[i];
-
-			const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
+		for (const group of groups) {
+			const id = `Mount${group.id}`;
+			const p = $.CreatePanel('Panel', this.mountsList, id);
 			p.LoadLayoutSnippet('MountEntrySnippet');
 
+			let paths = '';
+			for (const app of group.apps) {
+				for (const path of app.paths) {
+					paths += `${path}\n`;
+				}
+			}
+			paths = paths.trim();
+			
+			let name = $.LocalizeSafe(`#MainMenu_Mounts_App_${group.id}`);
+			if (name.length === 0)
+				name = group.fallback_name;
 			this.mountEntries.push(
 				new MountEntry(
 					p,
-					`AppID: ${appId}`,
-					'file://{images}/menu/unknown-app-header.png',
-					'Maximum displayed mount count reached.'
+					name,
+					`file://{images}/mounts/${group.id}.jpg`,
+					$.LocalizeSafe(`#MainMenu_Mounts_App_Subtag_${group.id}`)
 				)
 			);
+
+			p.SetPanelEvent(
+				'onmouseover',
+				() => {
+					UiToolkitAPI.ShowTextTooltip(id, paths);
+				}
+			);
+
+			p.SetPanelEvent(
+				'onmouseout',
+				() => {
+					UiToolkitAPI.HideTextTooltip();
+				}
+			);
+
 			this.mountEntries[this.mountEntries.length - 1].update();
 		}
 	}
