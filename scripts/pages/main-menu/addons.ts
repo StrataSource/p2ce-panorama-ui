@@ -519,10 +519,104 @@ class MountManager {
 		this.mountsPage.visible = false;
 	}
 
+	static devUnmount() {
+		const bar = $<TextEntry>('#TestBar')!;
+		const text = bar.text;
+		const apps = text.split(',');
+		GameInterfaceAPI.UnmountSteamGroups(apps);
+
+		this.mountEntries = [];
+		this.mountsList.RemoveAndDeleteChildren();
+		this.populateMountEntries();
+
+		bar.text = '';
+	}
+
+	static devMount() {
+		const bar = $<TextEntry>('#TestBar')!;
+		const text = bar.text;
+		const apps = text.split(',');
+		GameInterfaceAPI.MountSteamGroups(apps);
+		this.mountEntries = [];
+		this.mountsList.RemoveAndDeleteChildren();
+		this.populateMountEntries();
+		bar.text = '';
+	}
+
 	static populateMountEntries() {
 		// don't flood the API with requests
 		const MAX_MOUNTS_DISPLAYED = 10;
 		const BASE_API_URL = 'https://store.steampowered.com/api/appdetails/?appids=';
+
+		const available = GameInterfaceAPI.GetMountableSteamGroups();
+
+		let concat = '';
+		for (const group of available) {
+			concat += `${group}\n`;
+		}
+		const bar = $<TextEntry>('#TestBar')!;
+		bar.SetPanelEvent(
+			'onmouseover',
+			() => {
+				UiToolkitAPI.ShowTextTooltip('TestBar', `===== [DEV] VALID MOUNTS =====\n${concat.trim()}`);
+			}
+		);
+
+		bar.SetPanelEvent(
+			'onmouseout',
+			() => {
+				UiToolkitAPI.HideTextTooltip();
+			}
+		);
+
+		const groups = GameInterfaceAPI.GetMountedSteamGroups();
+
+		for (const group of groups) {
+			const id = `Mount${group.name}`;
+			const p = $.CreatePanel('Panel', this.mountsList, id);
+			p.LoadLayoutSnippet('MountEntrySnippet');
+
+			let apps = '';
+			let paths = '';
+			let pathCount = 0;
+			for (const app of group.apps) {
+				apps += `${app.appid} `;
+				for (const path of app.paths) {
+					paths += `${path}\n`;
+					pathCount += 1;
+				}
+			}
+
+			apps = apps.trim();
+			paths = paths.trim();
+			
+			this.mountEntries.push(
+				new MountEntry(
+					p,
+					`${group.name}`,
+					'file://{images}/menu/unknown-app-header.png',
+					`(${pathCount} paths) IDs: ${apps}`
+				)
+			);
+
+			p.SetPanelEvent(
+				'onmouseover',
+				() => {
+					UiToolkitAPI.ShowTextTooltip(id, paths);
+				}
+			);
+
+			p.SetPanelEvent(
+				'onmouseout',
+				() => {
+					UiToolkitAPI.HideTextTooltip();
+				}
+			);
+
+			this.mountEntries[this.mountEntries.length - 1].update();
+		}
+
+		return;
 
 		// warn user
 		if (this.steamApps.length > MAX_MOUNTS_DISPLAYED) {

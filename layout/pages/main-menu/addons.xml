@@ -165,25 +165,14 @@
 				<Panel id="AddonContainer" class="addons__list" tabindex="auto" selectionpos="auto" />
 			</Panel>
 			<Panel id="MountsPage" class="mounts" onload="MountManager.init()">
-				<Panel class="mounts__disclaimer" tabindex="auto" selectionpos="auto">
-					<Panel class="horizontal-align-center vertical-align-center flow-right" tabindex="auto" selectionpos="auto">
-						<Image
-							class="mounts__disclaimer__icon"
-							src="file://{images}/info.svg"
-							scaling="stretch-to-fit-preserve-aspect"
-							texturewidth="32"
-							textureheight="32"
-						/>
-						<Button
-							class="vertical-align-center flow-down"
-							onactivate="SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts')"
-							tabindex="auto"
-							selectionpos="auto"
-						>
-							<Label class="mounts__disclaimer__text" text="#MainMenu_Mounts_WIP_Title" />
-							<Label class="mounts__disclaimer__small-text" text="#MainMenu_Mounts_WIP_Tagline" />
-						</Button>
-					</Panel>
+				<Panel class="addons__action-bar">
+					<TextEntry id="TestBar" class="vertical-align-center textentry fill-width mr-2" placeholder="[DEV] List mount groups here delimited by commas, no spaces!" />
+					<Button class="vertical-align-center button mr-2" onactivate="MountManager.devMount()">
+						<Label class="button__text" text="[DEV] Mount" />
+					</Button>
+					<Button class="vertical-align-center button" onactivate="MountManager.devUnmount()">
+						<Label class="button__text" text="[DEV] Unmount" />
+					</Button>
 				</Panel>
 				<Panel id="MountContainer" class="mounts__list" />
 			</Panel>
