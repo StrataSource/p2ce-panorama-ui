@@ -120,7 +120,7 @@ class MainMenuSettings {
 		}
 	}
 
-	static navigateToTab(tab) {
+	static navigateToTab(tab: string) {
 		// If a we have a active tab and it is different from the selected tab hide it, then show the selected tab
 		if (this.activeTab !== tab) {
 			// If the tab exists then hide it
@@ -489,7 +489,7 @@ class MainMenuSettings {
 		const message = panel.GetAttributeString('infomessage', '');
 		// Default to true if not set
 		const hasDocs = !(panel.GetAttributeString('hasdocspage', '') === 'false');
-		panel.SetPanelEvent('onmouseover', () => {
+		const showInfoFunc = () => {
 			// Set onmouseover events for all settings panels
 			panel.RemoveClass('settings-group--highlight');
 			this.showInfo(
@@ -502,6 +502,12 @@ class MainMenuSettings {
 				hasDocs,
 				panel.paneltype
 			);
+		};
+		panel.SetPanelEvent('onmouseover', () => {
+			showInfoFunc();
+		});
+		panel.SetPanelEvent('onfocus', () => {
+			showInfoFunc();
 		});
 	}
 

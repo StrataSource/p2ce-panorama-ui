@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/pages/settings/page.js" />
+		<include src="file://{scripts}/pages/settings/page.ts" />
 	</scripts>
 
 	<Panel class="settings-page" searchtitle="#Settings_Input_Title">
@@ -24,7 +24,7 @@
 			
 			<Panel class="settings-page__spacer ControllerOnly" />
 
-			<Panel id="MouseSubSection" class="settings-group KeyboardOnly">
+			<Panel id="MouseSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
 
@@ -108,9 +108,9 @@
 
 			</Panel>
 
-			<Panel class="settings-page__spacer KeyboardOnly" />
+			<Panel class="settings-page__spacer" />
 
-			<Panel id="KeybindSubSection" class="settings-group KeyboardOnly">
+			<Panel id="KeybindSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Keybinds_Title" tags="keyboard,keybind,controls,input" />
 					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
@@ -163,6 +163,10 @@
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Use_Items" bind="+use" tags="use,interact" />
+					<SettingsKeyBinder text="#Keybind_Paintgun_NextPaint" bind="nextpaint" tags="attack,use,interact" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Paintgun_PrevPaint" bind="prevpaint" tags="attack,use,interact" />
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_1" bind="slot1" tags="slot1" />
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
@@ -209,6 +213,11 @@
 				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Utility" />
+
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Quicksave" bind="save quick" tags="quick,save,quicksave" />
+					<SettingsKeyBinder text="#Keybind_Quickload" bind="load quick" tags="quick,load,quickload" />
+				</Panel>
 
 				<Panel class="full-width flow-right">
 					<SettingsKeyBinder text="#Keybind_Flashlight" bind="impulse 100" tags="flashlight" />

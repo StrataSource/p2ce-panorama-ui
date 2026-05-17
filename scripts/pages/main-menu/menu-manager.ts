@@ -39,6 +39,7 @@ class MenuManager {
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
 	static eventsRegistered = false;
+	static currentLogo = 'file://{images}/logo.svg';
 
 	static {
 		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
@@ -56,6 +57,8 @@ class MenuManager {
 		if (this.isLoaded) return;
 		this.isLoaded = true;
 
+		this.currentLogo = '';
+
 		if (!this.eventsRegistered) {
 			// this is for campaign-menu, see there for more info
 			UiToolkitAPI.GetGlobalObject()['FirstCampaignLoaded'] = false;
@@ -68,6 +71,10 @@ class MenuManager {
 				const b = constructMenuButton(btn);
 				b.SetParent(this.menuNav);
 				b.SetReadyForDisplay(true);
+				this.updateFocus();
+			});
+
+			$.RegisterForUnhandledEvent('MainMenuFirstButtonFocus', () => {
 				this.updateFocus();
 			});
 
@@ -165,24 +172,26 @@ class MenuManager {
 			$.RegisterForUnhandledEvent('MainMenuSetLogo', (logo: string) => {
 				if (logo && logo.length > 0) {
 					if (logo === 'file://{images}/logo.svg') {
-						const date = new Date();
-						const rightDate = new Date('April 1');
-						rightDate.setFullYear(date.getFullYear());
 						if (WorkshopAPI.IsWorkshopToolsMode()) {
 							logo = 'file://{images}/logo_sdk.svg';
-						} else if (date.getMonth() === rightDate.getMonth() && date.getDay() === rightDate.getDay()) {
+						} else if (Math.random() < 0.001) {
 							logo = 'file://{images}/the_objectively_better_logo.png';
 						}
 					}
 
-					this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
-					const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeIn');
-					this.logo.UpdateCurrentAnimationKeyframes(kfs);
+					if (logo !== this.currentLogo) {
+						this.logo.style.animation = 'FadeIn 0.2s ease-out 0s 1 normal forwards';
+						const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeIn');
+						this.logo.UpdateCurrentAnimationKeyframes(kfs);
+					}
+
 					this.logo.SetImage(logo);
+					this.currentLogo = logo;
 				} else {
 					this.logo.style.animation = 'FadeOut 0.2s ease-out 0s 1 normal forwards';
 					const kfs = this.logo.CreateCopyOfCSSKeyframes('FadeOut');
 					this.logo.UpdateCurrentAnimationKeyframes(kfs);
+					this.currentLogo = '';
 				}
 			});
 
@@ -200,6 +209,32 @@ class MenuManager {
 						break;
 				}
 			});
+
+			$.RegisterForUnhandledEvent(
+				'PanoramaComponent_Campaign_OnCampaignEvaluationRequested',
+				(campaign: string) => {
+					GameInterfaceAPI.ConsoleCommand('disconnect');
+					//$.DispatchEvent('MainMenuPauseGame');
+					//$.Msg(campaign);
+					//UiToolkitAPI.ShowGenericPopupThreeOptions(
+					//	'[PH] Evaluate Chamber',
+					//	'[PH] What did you think?\n(Pretend there are upvote/downvote icons here!)',
+					//	'blur',
+					//	'[HC] Next Test Chamber',
+					//	() => {
+					//		CampaignAPI.MoveToNextMap();
+					//	},
+					//	() => {
+					//	'[HC] Return to Queue',
+					//		GameInterfaceAPI.ConsoleCommand('disconnect');
+					//	'[HC] View in Workshop',
+					//	},
+					//	() => {
+					//		$.Msg('pretend that this works!');
+					//	}
+					//)
+				}
+			);
 
 			$.RegisterForUnhandledEvent('MainMenuSetPauseBlur', (doBlur: boolean) => {
 				if (doBlur) {
@@ -246,7 +281,12 @@ class MenuManager {
 					(campaign: string | null) => {
 						$.Msg(`MENU MANAGER: Campaign switch event recognized, changing to: ${campaign}`);
 						this.closePages();
-						$.DispatchEvent('MainMenuSwitchFade', false, true);
+						// dont play the fade animation if it's an autogen'd campaign
+						// we jump into it directly and this would cause the unblur anim
+						// to play when we open the pause menu
+						if (campaign === null || !campaign.startsWith('auto_')) {
+							$.DispatchEvent('MainMenuSwitchFade', false, true);
+						}
 						this.deleteMenus();
 						this.openMenuMode();
 					}
@@ -393,6 +433,7 @@ class MenuManager {
 		newPanel.SetFocus();
 
 		stripDevTagsFromLabels(newPanel);
+		setExperimentalFeatures(newPanel);
 
 		// hide menu elements, only done on root level
 		if (this.pages.length === 1) {

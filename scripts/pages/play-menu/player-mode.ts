@@ -10,14 +10,10 @@ class PlayMenu {
 	}
 
 	static onSinglePlayerBtnPressed() {
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SELECTOR_TYPE] = PlayerMode.SINGLEPLAYER;
-
-		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'campaigns/campaign-selector', undefined);
+		$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'campaigns/content-selector-main', undefined);
 	}
 
 	static onMultiPlayerBtnPressed() {
-		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_CAMPAIGN_SELECTOR_TYPE] = PlayerMode.MULTIPLAYER;
-
-		$.DispatchEvent('MainMenuOpenNestedPage', 'Campaigns', 'campaigns/campaign-selector', undefined);
+		$.DispatchEvent('MainMenuOpenNestedPage', 'MultiPlayer', 'campaigns/content-selector-main', undefined);
 	}
 }

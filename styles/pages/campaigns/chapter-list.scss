@@ -94,6 +94,11 @@
 			width: 960px;
 			height: 540px;
 			border: $menu-pane-border;
+
+			//.AspectRatio4x3 & {
+			//	width: 640px;
+			//	height: 360px;
+			//}
 		}
 
 		&__title {
@@ -163,10 +168,16 @@
 		#{$root}__entry {
 			&__outer {
 				width: 960px;
+				.AspectRatio4x3 & {
+					width: 960px;
+				}
 			}
 
 			&__cover {
 				height: 540px;
+				.AspectRatio4x3 & {
+					height: 540px;
+				}
 			}
 
 			&__details {
@@ -335,6 +346,10 @@
 		&__outer {
 			width: 480px;
 			flow-children: down;
+
+			.AspectRatio4x3 & {
+				width: 384px;
+			}
 		}
 
 		&__play-btns {
@@ -349,6 +364,9 @@
 		&__cover {
 			width: 100%;
 			height: 270px;
+			.AspectRatio4x3 & {
+				height: 216px;
+			}
 		}
 
 		&__details {

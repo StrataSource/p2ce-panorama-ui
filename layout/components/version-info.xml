@@ -4,14 +4,24 @@
 		<include src="file://{resources}/styles/components/version-info.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/components/version-info.js" />
+		<include src="file://{scripts}/components/version-info.ts" />
 	</scripts>
 
-	<Panel class="VersionInfo" onload="VersionInfo.update()">
-        <Label class="VersionInfoText" text="P2CE (BETA) | {s:version}" />
-		<Label class="VersionInfoText" text="Graphics    | {s:graphics}" />
-		<Label class="VersionInfoText" text="Platform    | {s:platform}" />
-		<Label class="VersionInfoText" text="Branch      | {s:branch}" />
-		<Label class="VersionInfoText" text="Physics     | {s:physics}" id="PhysicsText" />
-	</Panel>
+	<Button class="VersionInfo" onload="VersionInfo.update()">
+		<Image
+			id="Logo"
+			class="VersionInfo__Icon hide"
+			src="file://{images}/menu/p2ce/logo_plain.svg"
+			scaling="stretch-to-fit-preserve-aspect"
+			texturewidth="30"
+			textureheight="43"
+		/>
+		<Panel id="TextContainer" class="flow-down vertical-align-center">
+			<Label id="BetaText" html="true" class="VersionInfoText" text="P2CE (BETA) | {s:version}" />
+			<Label id="VersionText" class="VersionInfoText" text="Graphics    | {s:graphics}" />
+			<Label class="VersionInfoText" text="Platform    | {s:platform}" />
+			<Label class="VersionInfoText" text="Branch      | {s:branch}" />
+			<Label class="VersionInfoText" text="Physics     | {s:physics}" id="PhysicsText" />
+		</Panel>
+	</Button>
 </root>

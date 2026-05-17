@@ -52,3 +52,4 @@ $.DefineEvent('MainMenuPageClosed', 2);
 $.DefineEvent('CampaignMenuRefreshUserSettings', 0);
 $.DefineEvent('MainMenuNotifFailLoad', 0);
 $.DefineEvent('MainMenuSetPauseBlur', 1);
+$.DefineEvent('MainMenuFirstButtonFocus', 0);

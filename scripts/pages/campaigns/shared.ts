@@ -211,8 +211,8 @@ class CampaignShared {
 			},
 			Map: {
 				map: {
-					name: 'Map',
-					helpText: '[HC] Map',
+					name: $.Localize('#MainMenu_Campaigns_Setup_Var_MapName'),
+					helpText: $.Localize('#MainMenu_Campaigns_Setup_Var_MapName_Description'),
 					def: '',
 					command: '',
 					panelType: undefined,

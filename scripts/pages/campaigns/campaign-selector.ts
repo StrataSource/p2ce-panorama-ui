@@ -3,6 +3,7 @@
 class CampaignEntry {
 	panel: Button;
 	info: CampaignPair;
+	hasSaveData: boolean;
 	boxartPath: string | undefined;
 	coverPath: string | undefined;
 	iconPath: string | undefined;
@@ -13,6 +14,7 @@ class CampaignEntry {
 	constructor(
 		panel: Button,
 		info: CampaignPair,
+		hasSaveData: boolean,
 		boxart: string | undefined,
 		cover: string | undefined,
 		btnBg: string | undefined,
@@ -21,6 +23,7 @@ class CampaignEntry {
 	) {
 		this.panel = panel;
 		this.info = info;
+		this.hasSaveData = hasSaveData;
 		this.boxartPath = boxart;
 		this.coverPath = cover;
 		this.btnBgPath = btnBg;
@@ -38,6 +41,13 @@ class CampaignEntry {
 		const btnBg = this.panel.FindChildTraverse<Image>('CampaignBtnBg');
 
 		const basePath = getCampaignAssetPath(this.info);
+
+		const newIndicator = this.panel.FindChildTraverse<Panel>('NewIndicator')!;
+		newIndicator.SetHasClass('hide', this.hasSaveData);
+
+		const missingIndicator = this.panel.FindChildTraverse<Panel>('MissingIndicator')!;
+		const missing = WorkshopAPI.GetAddonDependenciesMissing(this.info.bucket.addon_id);
+		missingIndicator.SetHasClass('hide', !(missing !== null && missing.length > 0));
 
 		if (title) {
 			title.text = $.Localize(this.info.campaign.title);
@@ -61,8 +71,18 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			$.DispatchEvent('MainMenuAnimatedSwitch', `${this.info.bucket.id}/${this.info.campaign.id}`);
-			$.DispatchEvent('MainMenuCloseAllPages');
+			const deps = WorkshopAPI.GetAddonDependenciesMissing(this.info.bucket.addon_id);
+			const campaign = `${this.info.bucket.id}/${this.info.campaign.id}`;
+			if (deps && deps.length > 0) {
+				UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					'dependencies',
+					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+					`addon=${this.info.bucket.addon_id}&action=1&campaign=${campaign}`
+				);
+			} else {
+				$.DispatchEvent('MainMenuAnimatedSwitch', campaign);
+				$.DispatchEvent('MainMenuCloseAllPages');
+			}
 		});
 		this.panel.SetPanelEvent('onmouseover', () => {
 			CampaignSelector.onCampaignHovered(this);
@@ -88,6 +108,12 @@ class CampaignSelector {
 		this.hoverContainer.AddClass('campaigns__boxart__container__anim');
 
 		installImageFallbackHandler(this.hoverBoxart);
+
+		$.DispatchEvent(
+			'MainMenuSetPageLines',
+			$.Localize('#MainMenu_Navigation_Campaign'),
+			$.Localize('#MainMenu_Navigation_Campaign_Tagline')
+		);
 
 		this.reloadList();
 
@@ -133,7 +159,8 @@ class CampaignSelector {
 						$.Warning(`Found a match for '${id}', but the data is not accessible!!`);
 						continue;
 					}
-					this.createCampaignBtn(data.bucket, data.campaign);
+					// dont show indicator on searches
+					this.createCampaignBtn(data.bucket, data.campaign, true);
 				}
 			}
 		);
@@ -141,9 +168,15 @@ class CampaignSelector {
 		if (this.campaignEntries.length > 0) {
 			this.campaignEntries[0].panel.SetFocus();
 		}
+
+		$.RegisterForUnhandledEvent('PanoramaComponent_Campaign_OnRefreshList', () => {
+			$.Msg('New campaigns!');
+			this.searchBar.text = '';
+			this.reloadList();
+		});
 	}
 
-	static createCampaignBtn(bucket: CampaignBucket, campaign: CampaignInfo) {
+	static createCampaignBtn(bucket: CampaignBucket, campaign: CampaignInfo, hasSaveData: boolean) {
 		const p = $.CreatePanel('Button', this.campaignList, `Campaign_${bucket.id}-${campaign.id}`);
 		p.LoadLayoutSnippet('CampaignEntrySnippet');
 		p.AddClass('campaigns__entry__spaced');
@@ -157,6 +190,7 @@ class CampaignSelector {
 			new CampaignEntry(
 				p,
 				{ bucket: bucket, campaign: campaign },
+				hasSaveData,
 				m.get(CampaignMeta.BOX_ART),
 				m.get(CampaignMeta.COVER),
 				m.get(CampaignMeta.BTN_BG),
@@ -174,34 +208,85 @@ class CampaignSelector {
 
 	static populateCampaigns() {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
-		let hasAutoCampaign = false;
+		/*
+		const baseCampaigns: Array<CampaignPair> = [];
+		const localCampaigns: Array<CampaignPair> = [];
+		const workshopCampaigns: Array<CampaignPair> = [];
 
-		for (const bucket of buckets) {
-			if (isBucketSingleWsCampaign(bucket)) {
-				hasAutoCampaign = true;
-				break;
+		for (const pair of buckets) {
+			const addToArray = (array: Array<CampaignPair>) => {
+				for (const campaign of pair.campaigns) {
+					array.push({bucket: pair, campaign: campaign});
+				}
+			}
+			if (pair.id === 'base') {
+				addToArray(baseCampaigns);
+			} else if (pair.id.startsWith('addon')) {
+				addToArray(localCampaigns);
+			} else if (pair.id.startsWith('workshop')) {
+				addToArray(workshopCampaigns);
 			}
 		}
 
-		const campaigns: Array<{ info: CampaignInfo; bucket: CampaignBucket }> = [];
+		const sortArray = (newItems: Array<CampaignPair>, oldItems: Array<CampaignPair>, array: Array<CampaignPair>) => {
+			array.forEach((v, i) => {
+				if (!CampaignAPI.CampaignHasSaveData(`${v.bucket.id}/${v.campaign.id}`)) {
+					newItems.push(v);
+				} else {
+					oldItems.push(v);
+				}
+			});
+
+			const condition = (a: CampaignPair, b: CampaignPair) => $.Localize(a.campaign.title).localeCompare($.Localize(b.campaign.title));
+
+			newItems.sort(condition);
+			oldItems.sort(condition);
+		};
+
+		const newBaseCampaigns: Array<CampaignPair> = [];
+		const oldBaseCampaigns: Array<CampaignPair> = [];
+		const newLocalCampaigns: Array<CampaignPair> = [];
+		const oldLocalCampaigns: Array<CampaignPair> = [];
+		const newWorkshopCampaigns: Array<CampaignPair> = [];
+		const oldWorkshopCampaigns: Array<CampaignPair> = [];
+
+		sortArray(newBaseCampaigns, oldBaseCampaigns, baseCampaigns);
+		sortArray(newLocalCampaigns, oldLocalCampaigns, localCampaigns);
+		sortArray(newWorkshopCampaigns, oldWorkshopCampaigns, workshopCampaigns);
+
+		const allNewCampaigns: Array<CampaignPair> = newBaseCampaigns.concat(newLocalCampaigns, newWorkshopCampaigns);
+		const allOtherCampaigns: Array<CampaignPair> = oldBaseCampaigns.concat(oldLocalCampaigns, oldWorkshopCampaigns);
+		*/
+
+		if (buckets.filter((v) => !v.id.startsWith('auto_')).length === 0) {
+			const p = $.CreatePanel('Panel', this.campaignList, 'None');
+			p.LoadLayoutSnippet('CampaignNoneSnippet');
+			return;
+		}
+
+		const doAddButtons = (array: Array<CampaignPair>, hasSaveData: boolean) => {
+			for (const pair of array) {
+				this.createCampaignBtn(pair.bucket, pair.campaign, hasSaveData);
+			}
+		};
+
+		const allNewCampaigns: Array<CampaignPair> = [];
+		const allOtherCampaigns: Array<CampaignPair> = [];
+
 		for (const bucket of buckets) {
-			if (isBucketSingleWsCampaign(bucket)) {
+			if (bucket.id.startsWith('auto_')) {
 				continue;
 			}
 			for (const campaign of bucket.campaigns) {
-				campaigns.push({ info: campaign, bucket: bucket });
+				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${campaign.id}`)
+					? allOtherCampaigns
+					: allNewCampaigns;
+				array.push({ bucket: bucket, campaign: campaign });
 			}
 		}
 
-		// FIXME: cases of Portal 2 not appearing where it should!
-		// campaigns.sort((a, b) => a.info.title.localeCompare(b.info.title));
-
-		for (const pair of campaigns) {
-			if (`${pair.bucket.id}/${pair.info.id}` === SpecialString.P2CE_SP_WS_CAMPAIGN && !hasAutoCampaign) {
-				continue;
-			}
-			this.createCampaignBtn(pair.bucket, pair.info);
-		}
+		doAddButtons(allNewCampaigns, false);
+		doAddButtons(allOtherCampaigns, true);
 
 		stripDevTagsFromLabels(this.campaignList);
 	}

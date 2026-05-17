@@ -50,8 +50,7 @@ declare const enum ChapterDisplayMode {
 	CLASSIC = 'classic',
 	LIST = 'list',
 	GRID = 'grid',
-	SUPER = 'super',
-	SQUARE_GRID = 'square_grid'
+	SUPER = 'super'
 }
 
 declare const enum SpecialString {
@@ -61,6 +60,11 @@ declare const enum SpecialString {
 
 declare const enum CampaignDataType {
 	P2CE_SINGLE_WS_SPECIAL = 0
+}
+
+declare const enum MiscStorageKeys {
+	CONTENT_TAB = 'misc.last_content_tab',
+	EXPERIMENTS = 'misc.enable_experimental_features'
 }
 
 type MenuButton = {

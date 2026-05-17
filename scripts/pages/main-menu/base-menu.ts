@@ -57,10 +57,7 @@ class BaseMenu {
 
 					const s = meta.get(CampaignMeta.LOGO_HEIGHT) ?? CampaignLogoSizePreset.STANDARD;
 					$.DispatchEvent('MainMenuSetLogoSize', s);
-				} else if (isBucketSingleWsCampaign(this.savCampaign.bucket)) {
-					$.DispatchEvent('MainMenuSetLogo', 'file://{images}/campaigns/p2ce_ws/full_logo.svg');
-					$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
-				} else {
+				} else if (!isBucketSingleWsCampaign(this.savCampaign.bucket)) {
 					$.DispatchEvent('MainMenuSetLogo', '');
 				}
 
@@ -152,7 +149,7 @@ class BaseMenu {
 			this.showPrereleaseWarning();
 			if (GameStateAPI.IsPlaytest()) this.showPlaytestConsentPopup();
 
-			const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 7) + 1}`;
+			const music = `UIPanorama.Music.P2CE.Menu${Math.floor(Math.random() * 8) + 1}`;
 			this.music = $.PlaySoundEvent(music);
 		});
 
@@ -371,7 +368,7 @@ class BaseMenu {
 			UiToolkitAPI.ShowCustomLayoutPopupParameters(
 				'',
 				'file://{resources}/layout/modals/popups/playtest-consent.xml',
-				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent'
+				'dosaKey=playtestConsent&dosaNameToken=Dosa_PlaytestConsent&cancelAllowed=false'
 			);
 	}
 
@@ -383,7 +380,7 @@ class BaseMenu {
 			UiToolkitAPI.ShowCustomLayoutPopupParameters(
 				'',
 				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
-				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck'
+				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck&cancelAllowed=false'
 			);
 	}
 

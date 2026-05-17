@@ -2,11 +2,21 @@
 	<styles>
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/util/popup-manager.ts" />
+	</scripts>
 
 	<PopupManager hittest="false">
-		<Button id="DimBackground" onactivate="PopupBackgroundClicked()" />
-		<Button id="BlurBackground" onactivate="PopupBackgroundClicked()" />
-    
+		<Button
+			id="DimBackground"
+			onactivate="PopupManager.onPopupBackgroundClicked()"
+			onfocus="PopupManager.onPopupBackgroundClicked()"
+		/>
+		<Button
+			id="BlurBackground"
+			onactivate="PopupManager.onPopupBackgroundClicked()"
+			onfocus="PopupManager.onPopupBackgroundClicked()"
+		/>
 		<!-- Popups are added here dynamically -->
 	</PopupManager>
 </root>

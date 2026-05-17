@@ -6,6 +6,18 @@
 
 $page-width: 1920px - $rightnav-width;
 
+.AspectRatio4x3,
+.AspectRatio5x4,
+.AspectRatio16x10 {
+	.settings__left {
+		flow-children: down;
+	}
+	.settings__search {
+		margin-left: 0px;
+		margin-bottom: 10px;
+	}
+}
+
 .settings {
 	flow-children: down;
 	width: 100%;
@@ -182,7 +194,8 @@ $page-width: 1920px - $rightnav-width;
 			opacity: 0.1;
 		}
 
-		&:hover:not(:parentdisabled):not(:selected) {
+		&:hover:not(:parentdisabled):not(:selected),
+		&:focus {
 			background-color: $button-background-hover;
 			border-color: $primary-color;
 		}
@@ -211,10 +224,14 @@ $page-width: 1920px - $rightnav-width;
 		font-size: 26px;
 		overflow: squish;
 		text-overflow: shrink;
+		.SmallScaleMode & {
+			font-size: 28px;
+		}
 	}
 
 	&__subitem {
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: $button-background-hover;
 			border-color: $primary-color;
 
@@ -236,6 +253,10 @@ $page-width: 1920px - $rightnav-width;
 	&__subitem-label {
 		font-weight: bold;
 		font-size: 16px;
+
+		.SmallScaleMode & {
+			font-size: 22px;
+		}
 	}
 
 	&__separator {
@@ -446,6 +467,10 @@ $page-width: 1920px - $rightnav-width;
 		margin-bottom: 15px;
 		text-shadow: 2px 2px 2px 1 $base-950;
 
+		.SmallScaleMode & {
+			font-size: 20px;
+		}
+
 		& h2 {
 			// I wish we could use margin-top here to avoid needing \n chars in the string,
 			// but Panorama just ignores that and similar properties
@@ -499,7 +524,8 @@ $page-width: 1920px - $rightnav-width;
 
 	background-color: $button-background;
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: $button-background-hover;
 		border-color: $primary-color;
 	}

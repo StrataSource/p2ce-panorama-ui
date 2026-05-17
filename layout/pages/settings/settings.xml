@@ -5,7 +5,7 @@
 
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/pages/settings/page.js" />
+		<include src="file://{scripts}/pages/settings/page.ts" />
 		<include src="file://{scripts}/pages/settings/settings.ts" />
 		<include src="file://{scripts}/pages/settings/search.js" />
 	</scripts>

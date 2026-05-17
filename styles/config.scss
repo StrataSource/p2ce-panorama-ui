@@ -77,6 +77,9 @@ $hl2-yellow: rgba(255, 220, 0, 0.4) !default;
 $hl2-bright-yellow: rgba(255, 220, 0, 0.9) !default;
 $hl2-red: rgba(220, 0, 0, 0.9) !default;
 
+$p2-blue: #74f7fc !default;
+$p2-orange: #ffa83d !default;
+
 $blue: #1896d3 !default;
 $mid-blue: #57c8ff !default;
 $light-blue: #71f0ff !default;
@@ -359,6 +362,7 @@ $button-background-disabled: rgba($base-950, 0.5) !default;
 $button-text-color: $bright-color !default;
 $button-text-disabled: $font-disabled-color !default;
 $button-text-hover: $bright-color !default;
+$button-text-selected: rgb(0, 0, 0) !default;
 
 $button-shadow: none !default;
 $button-radius: 0px !default;
@@ -662,6 +666,7 @@ $menu-pane-border: 1px solid $base-700 !default;
 // ================
 
 $settings-height: 50px !default;
+$settings-height-handheld: 60px !default;
 $settings-padding: 0 30px 0 30px !default;
 $settings-gap: 0px !default;
 
