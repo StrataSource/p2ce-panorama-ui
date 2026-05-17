@@ -410,6 +410,8 @@
 		// Finally, some actual stuff to localize.
 		//
 
+		"Console_Title"							"Консоль"
+
 		"Settings_Title"								"Настройки"
 		"Settings_General_Title"						"Настройки"
 		"Settings_General_Apply"						"Применить"
@@ -474,7 +476,7 @@
 		"Settings_Volume_Music_info"						"Регулирует громкость музыки"
 		"Settings_Volume_UI"								"Громкость интерфейса"
 		"Settings_Volume_UI_info"							"Регулирует громкость интерфейса и меню."
-		"Settings_Volume_Physics"							"Громкость физических событий"
+		"Settings_Volume_Physics"							"Громкость физики"
 		"Settings_Volume_Physics_info"						"Регулирует громкость физических взаимодействий (повреждений, ударов и т.д.)."
 		"Settings_Volume_Footsteps"							"Громкость шагов"
 		"Settings_Volume_Footsteps_info"					"Регулирует громкость шагов игрока и NPC."
@@ -488,7 +490,7 @@
 		"Settings_ClosedCaptions_Title"						"Субтитры и диалоги"
 		"Settings_ClosedCaptions_Enable"					"Субтитры"
 		"Settings_ClosedCaptions_Enable_info"				"Включает субтитры. Шумы и устная речь будут отображаться на экране в течение некоторого времени.<br><img src=\"file://{images}/menu/p2ce-generic.png\" />"
-		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
+		"Settings_ClosedCaptions_Subtitles"					"Только диалоги"
 		"Settings_ClosedCaptions_Subtitles_info"			"Если включить эту опцию, на экране будут отображаться только диалоги. Эта настройка имеет эффект только при включенном параметре «Субтитры»!"
 		
 		// Storm - CC System Rewrite
@@ -500,25 +502,25 @@
 		"Settings_ClosedCaptions_Font_Verdana"				"Verdana (Стандартный)"
 		"Settings_ClosedCaptions_Font_NotoSans"				"Noto Sans (Интерфейс Steam Deck)"
 		"Settings_ClosedCaptions_Font_Stratum2"				"Stratum2 (CS:GO)"
-		"Settings_ClosedCaptions_FontSize"					"Высота шрифта (НЕ РЕАЛИЗОВАНО)"
+		"Settings_ClosedCaptions_FontSize"					"Высота шрифта (НЕ РАБОТАЕТ)"
 		"Settings_ClosedCaptions_FontSize_info"				"Определяет, насколько крупными должны быть субтитры и скрытые титры на экране. Измеряется в пунктах на пиксель (pt)."
-		"Settings_ClosedCaptions_BGOpacity"					"Прозрачность фона (НЕ РЕАЛИЗОВАНО)"
+		"Settings_ClosedCaptions_BGOpacity"					"Прозрачность фона (НЕ РАБОТАЕТ)"
 		"Settings_ClosedCaptions_BGOpacity_info"			"Регулирует непрозрачность фоновой панели для экранных подписей. \nПри более низких значениях видимость может ухудшиться, что может привести к проблемам с разборчивостью текста. Для лучшей разборчивости и видимости рекомендуется использовать более темный фон (или полностью черный)."
-		"Settings_ClosedCaptions_Alignment"					"Положение текста"
-		"Settings_ClosedCaptions_Alignment_info"			"Выравнивает положение экранных подписей в одну из сторон."
-		"Settings_ClosedCaptions_Alignment_left"			"Лево"
+		"Settings_ClosedCaptions_Alignment"					"Положение субтитров"
+		"Settings_ClosedCaptions_Alignment_info"			"Выравнивает положение субтитров в одну из сторон."
+		"Settings_ClosedCaptions_Alignment_left"			"Слева"
 		"Settings_ClosedCaptions_Alignment_center"			"Центр"
-		"Settings_ClosedCaptions_Alignment_right"			"Право"
+		"Settings_ClosedCaptions_Alignment_right"			"Справа"
 		
-		"Settings_Audio_HRTF_Async_Title"					"Потоковое аудио"
+		"Settings_Audio_HRTF_Async_Title"					"Многопоточное аудио"
 		"Settings_Audio_HRTF_Async_Desc"					"Разделяет отдельные аудиоканалы на несколько потоков для повышения производительности."
 		
 		"Settings_AudioDevices_Title"						"Конфигурация аудиоустройства"
 		"Settings_AudioDevices_Device"						"Устройство для воспроизведения звука"
 		"Settings_AudioDevices_Device_info"					"Определяет аудиоустройство, которое будет использовать игра."
-		"Settings_AudioDevices_Speaker_StereoHeadphones"	"Стерео Наушники"
-		"Settings_AudioDevices_Speaker_StereoSpeakers"		"Стерео Динамики"
-		"Settings_AudioDevices_Speaker_Quad"				"Четырехкратный объемный звук"
+		"Settings_AudioDevices_Speaker_StereoHeadphones"	"Стерео наушники"
+		"Settings_AudioDevices_Speaker_StereoSpeakers"		"Стерео динамики"
+		"Settings_AudioDevices_Speaker_Quad"				"Четырехмерный объемный звук"
 		"Settings_AudioDevices_Speaker_51"					"5.1 объемный звук"
 		// "Settings_AudioDevices_Speaker_71"				"7.1 объемный звук"	// Unsupported by CSGO and Strata?
 		"Settings_AudioDevices_Speaker"						"Конфигурация аудиовыхода"
@@ -530,7 +532,7 @@
 
 		"Settings_Render_Title"							"Рендеринг"
 		
-		"Settings_Video_Presets"						"Пресеты качества (НЕ РЕАЛИЗОВАНО)"
+		"Settings_Video_Presets"						"Пресеты качества (НЕ РАБОТАЕТ)"
 		"Settings_Video_Presets_info"					"Настройки видео будут задаваться в соответствии с заранее определенным набором переменных из этого списка, от минимального до максимального значения."
 
 		"Settings_Video_AspectRatio"					"Соотношение сторон"
@@ -584,7 +586,7 @@
 		"Settings_Render_FXAA" 							"Режим сглаживания (FXAA)"
 		"Settings_Render_FXAA_Info"						"Сглаживание обеспечивает плавные переходы между элементами геометрии, устраняя эффект "лесенки". Повышение качества сглаживания может привести к снижению производительности."
 		
-		"Settings_Render_Bloom"							"Bloom"
+		"Settings_Render_Bloom"							"Эффект Bloom"
 		"Settings_Render_Bloom_Info"					"HDR Bloom — это эффект &quot;ореола&quot;, возникающий при съемке очень ярких объектов или окружающей среды в целом. Это не влияет на производительность."
 
 		"Settings_Render_DynamicTonemapping"			"Тоновая компрессия HDR"
@@ -761,8 +763,8 @@
 		"Settings_Portals_Title" 						"Порталы"
 		"Settings_Portals_PlayerFunnel"					"Воронка портала"
 		"Settings_Portals_PlayerFunnel_info"			"При полете в портал, игра попытается скорректировать положение и траекторию игрока, чтобы избежать столкновения с краем портала."
-		"Settings_Portals_dlight" 						"Динамическое освещение порталов"
-		"Settings_Portals_dlight_info" 					"Включает динамический свет у порталов."
+		"Settings_Portals_dlight" 						"Динамический свет от порталов"
+		"Settings_Portals_dlight_info" 					"Включает динамическое освещение у порталов."
 		"Settings_Portals_light_intensity" 				"Интенсивность динамического света порталов"
 		"Settings_Portals_light_intensity_info"			"Изменяет интенсивность света, излучаемого порталом. Для работы требуется Динамическое освещение портала."
 		"Settings_Portals_altcolors" 					"Изменить цвет порталов"
@@ -789,7 +791,7 @@
 		
 		// Settings - Miscellaneous
 		"Settings_Misc_Title" 							"Разное"
-		"Settings_Misc_solenergy_refract"				"Преломление Полей Антиэспроприации"
+		"Settings_Misc_solenergy_refract"				"Преломление полей антиэспроприации"
 		"Settings_Misc_solenergy_refract_info"			"Добавляет эффект преломления света (как в воде) для физзлеров. Делает это через замену оригинальной текстуры!"
 		"Settings_Misc_ViewmodelOffset_X"				"Смещение вьюмодела (X)"
 		"Settings_Misc_ViewmodelOffset_X_info"			"Смещает положение вьюмодела по оси X на указанное расстояние в единицах Hammer (HU)"
@@ -798,7 +800,7 @@
 		"Settings_Misc_ViewmodelOffset_Z"				"Смещение вьюмодела (Z)"
 		"Settings_Misc_ViewmodelOffset_Z_info"			"Смещает положение вьюмодела по оси Z на указанное расстояние в единицах Hammer (HU)"
 
-		"Settings_Video_PreventThreadSleep"				"Запретить переход в спяшщий режим"
+		"Settings_Video_PreventThreadSleep"				"Запретить переход в спящий режим"
 		"Settings_Video_PreventThreadSleep_Info"		"Не дает основному игровому процессу переходить в спящий режим при достижении максимального количества кадров в секунду. Включение этой опции может повысить производительность, но приведет к колоссальному увеличению нагрузки на процессор."
 		
 		"Settings_Menu_Console"							"КОНСОЛЬ РАЗРАБОТЧИКА"
@@ -1194,7 +1196,7 @@
 		// Filtering
 		// Filtering - Time
 		"MainMenu_Addons_SearchBox_FillerText"				"Поиск аддонов..."
-		"MainMenu_Addons_Filtering_Title"					"Параметры фильтрации и сортировки (НЕ РЕАЛИЗОВАНО)"
+		"MainMenu_Addons_Filtering_Title"					"Параметры фильтрации и сортировки (НЕ РАБОТАЕТ)"
 		"MainMenu_Addons_Filtering_Edit_Tooltip"			"Изменяет способ фильтрации и сортировки дополнений в списке дополнений."
 		"MainMenu_Addons_Filtering_EnableAddons_Tooltip"	"Включает / выключает все аддоны из списка."
 		"MainMenu_Addons_Filtering_Sort_Title"				"Сортировать по:"
@@ -1327,8 +1329,8 @@
 		"DependencyWarning_Resolved_Header"			"Зависимости обнаружены"
 		"DependencyWarning_Resolved_Desc"			"Все зависимости данного дополнения были успешно найдены на вашем устройстве."
 
-		"UI_Upvote"									"Лайкнуть"
-		"UI_Downvote"								"Дизлайкнуть"
+		"UI_Upvote"									"👍"
+		"UI_Downvote"								"👎"
 		"UI_Novote"									"-"
 		"UI_Dependencies"							"Зависимости"
 		"UI_Description"							"Описание"
