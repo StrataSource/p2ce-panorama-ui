@@ -239,11 +239,11 @@ class CampaignMenu {
 				enabled: false
 			});
 			$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
-				taglineText: "",
+				taglineText: '',
 				enabled: false
 			});
 			$.DispatchEvent('MainMenuSetButtonProps', this.loadGameBtn, {
-				taglineText: "",
+				taglineText: '',
 				enabled: false
 			});
 		}

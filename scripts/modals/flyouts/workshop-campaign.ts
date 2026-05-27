@@ -125,7 +125,7 @@ class WorkshopCampaignFlyout {
 
 	static play() {
 		if (this.hasMissing) {
-			$.PlaySoundEvent("UIPanorama.P2CE.MenuError");
+			$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 			UiToolkitAPI.ShowCustomLayoutPopupParameters(
 				'dependencies',
 				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
