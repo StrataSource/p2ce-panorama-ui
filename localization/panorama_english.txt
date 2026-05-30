@@ -501,6 +501,12 @@
 		"Settings_General_Search_MatchedEnglishTag"		"Matches "
 		"Settings_General_Search_VeryFull"				"{s:count} more match"
 		"Settings_General_Search_VeryFull_Plural"		"{s:count} more matches"
+
+		// Needed for Cyrillic languages. Russian has two definitions of the word "plural"; one is for
+		// exactly two matches (Search_VeryFull_Plural), another is for more than two matches (Search_VeryFull_Plural2).
+		// So this "duplicate" string exists and is used in place.
+		"Settings_General_Search_VeryFull_Plural2"		"{s:count} more matches"
+		
 		"Settings_Reset_Title"							"Confirm Reset"
 		"Settings_Reset_Message_Generic"				"Are you sure you want to reset this section's settings to their default values?"
 		"Settings_Reset_Message_Checker"				"The following settings are currently different from their default values and will be reset:"
