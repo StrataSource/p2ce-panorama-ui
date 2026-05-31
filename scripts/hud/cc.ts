@@ -154,11 +154,6 @@ class CloseCaptioning {
 	}
 
 	static addCaption(token: string, caption: CaptionEntry) {
-		if (!this.checkSizeAndPopIfNecessary(caption.bIsLowPriority)) {
-			$.Warning(`${token} rejected!`);
-			return;
-		}
-
 		let captionList = this.captions.get(token);
 
 		if (!captionList) {
@@ -170,53 +165,6 @@ class CloseCaptioning {
 
 		// display the caption box
 		this.showBox();
-	}
-
-	static checkSizeAndPopIfNecessary(bIsNewLowPriority: boolean): boolean {
-		return true;
-		const lowestTimeGlobal = { token: '', emitTime: 999999999 };
-		const lowestTimeLowPriority = { token: '', emitTime: 999999999 };
-		let captionCount = 0;
-		let lowPriorityCount = 0;
-		for (const [token, list] of this.captions) {
-			captionCount += list.length;
-			for (const caption of list) {
-				if (caption.bIsLowPriority) {
-					lowPriorityCount += 1;
-					if (caption.emitTime <= lowestTimeLowPriority.emitTime) {
-						lowestTimeLowPriority.token = token;
-						lowestTimeLowPriority.emitTime = caption.emitTime;
-					}
-				}
-				if (caption.emitTime <= lowestTimeGlobal.emitTime) {
-					lowestTimeGlobal.token = token;
-					lowestTimeGlobal.emitTime = caption.emitTime;
-				}
-			}
-		}
-		$.Msg(`${captionCount} > ${this.MAX_ENTRIES}`);
-		if (captionCount > this.MAX_ENTRIES) {
-			// replace lowest priority ones if there are any
-			if (lowPriorityCount > 0) {
-				// existence of lowestTimeLowPriority is implicit
-				$.Msg(
-					`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), removing: '${lowestTimeLowPriority.token}'`
-				);
-				ClosedCaptionsAPI.RemoveCaption(lowestTimeLowPriority.token);
-				return true;
-				// if the incoming caption is low priority and there's no space, give up
-			} else if (bIsNewLowPriority) {
-				$.Warning(`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), no space for any more!`);
-				return false;
-			}
-			// for everything else, get rid of the least lifetime one
-			$.Msg(
-				`Caption count exceeded (${captionCount} > ${this.MAX_ENTRIES}), removing: '${lowestTimeGlobal.token}'`
-			);
-			ClosedCaptionsAPI.RemoveCaption(lowestTimeGlobal.token);
-			return true;
-		}
-		return true;
 	}
 
 	static {
@@ -255,8 +203,8 @@ class CloseCaptioning {
 						{
 							bLowPriority: false,
 							bSFX: false,
-							nNoRepeat: 0,
-							nDelay: 0,
+							flNoRepeat: 0,
+							flDelay: 0,
 							flLifetimeOverride: -1.0,
 							text: `[MISSING] ${token}`,
 							options: new Map<string, string>()
@@ -282,6 +230,7 @@ class CloseCaptioning {
 		});
 		$.RegisterForUnhandledEvent('MapLoaded', () => {
 			this.wipeCaptions();
+			ClosedCaptionsAPI.SetCaptioningExpiryMethod( CloseCaptioningExpiryMethod.STACK );
 		});
 
 		this.updateStyle();
