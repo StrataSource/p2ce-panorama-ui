@@ -502,8 +502,8 @@
 		"Settings_General_Search_VeryFull"				"{s:count} more match"
 		"Settings_General_Search_VeryFull_Plural"		"{s:count} more matches"
 
-		// Needed for Cyrillic languages. Russian has two definitions of the word "plural"; one is for
-		// exactly two matches (Search_VeryFull_Plural), another is for more than two matches (Search_VeryFull_Plural2).
+		// The token below is needed for Cyrillic languages. Russian has two definitions of the word "plural";
+		// one is for 5 and more matches (Search_VeryFull_Plural), another is for less than 5 matches (Search_VeryFull_Plural2).
 		// So this "duplicate" string exists and is used in place.
 		"Settings_General_Search_VeryFull_Plural2"		"{s:count} more matches"
 		
