@@ -212,10 +212,13 @@ class SettingsSearch {
 					class: 'settings-search__empty-para'
 				});
 				if (left === 1) p.SetLocalizationString('#Settings_General_Search_VeryFull');
-				// Needed for Cyrillic languages. Russian has two definitions of the word "plural"; one is for
-				// exactly two matches (Search_VeryFull_Plural), another is for more than two matches (Search_VeryFull_Plural2).
-				// So this "duplicate" string exists and is used in place.
-				else if (left >= 5) p.SetLocalizationString('#Settings_General_Search_VeryFull_Plural2');
+
+				// Needed for Cyrillic languages.
+				// Russian has two definitions of the word "plural":
+				// one is for 5 and more matches (Search_VeryFull_Plural), another is for less than 5 matches (Search_VeryFull_Plural2).
+				//! Ideally, a check for current language should be added.
+				else if (left < 5) p.SetLocalizationString('#Settings_General_Search_VeryFull_Plural2');
+
 				else p.SetLocalizationString('#Settings_General_Search_VeryFull_Plural');
 				p.SetDialogVariable('count', left);
 			}
