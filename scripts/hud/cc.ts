@@ -255,8 +255,8 @@ class CloseCaptioning {
 						{
 							bLowPriority: false,
 							bSFX: false,
-							nNoRepeat: 0,
-							nDelay: 0,
+							flNoRepeat: 0,
+							flDelay: 0,
 							flLifetimeOverride: -1.0,
 							text: `[MISSING] ${token}`,
 							options: new Map<string, string>()
@@ -282,6 +282,7 @@ class CloseCaptioning {
 		});
 		$.RegisterForUnhandledEvent('MapLoaded', () => {
 			this.wipeCaptions();
+			ClosedCaptionsAPI.SetCaptioningExpiryMethod( CloseCaptioningExpiryMethod.STACK );
 		});
 
 		this.updateStyle();
