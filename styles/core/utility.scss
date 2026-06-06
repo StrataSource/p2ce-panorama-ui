@@ -240,6 +240,14 @@ $z: (-2, -1, 0);
 	}
 }
 
+.flip-vertical {
+	transform: scaleY(-1);
+}
+
+.flip-horizontal {
+	transform: scaleX(-1);
+}
+
 // ================
 // DEBUG
 // ================

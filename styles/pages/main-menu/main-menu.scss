@@ -642,6 +642,15 @@ $pane-move-time: 0.1s;
 			box-shadow: fill rgba($base-950, 0.5) -16px 16px 32px 16px;
 		}
 		&__avatar {
+			background-color: $base-950;
+			&:hover {
+				border-color: $orange;
+				background-color: $button-background-hover;
+
+				& > Image {
+					opacity: 0.85;
+				}
+			}
 			width: 128px;
 			height: 128px;
 			border: $menu-pane-border;
@@ -687,6 +696,14 @@ $pane-move-time: 0.1s;
 				vertical-align: center;
 				width: 96px;
 				height: 96px;
+			}
+		}
+		&__vote-small {
+			width: 80px;
+			height: 80px;
+			&__icon {
+				width: 64px;
+				height: 64px;
 			}
 		}
 		&__upvote {

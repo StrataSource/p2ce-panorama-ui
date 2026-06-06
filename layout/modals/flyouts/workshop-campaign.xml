@@ -56,21 +56,54 @@
 				</Panel>
 				<Label id="Author" class="workshop-campaign__author" text="[PH] Map Author" />
 				<Panel class="flow-down vertical-align-bottom">
-					<!-- TODO: replace these with upvote icons! -->
 					<Panel class="flow-right mb-1">
-						<RadioButton id="Upvote" class="button mr-2" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(1)">
-							<Label class="button__text" text="#UI_Upvote" />
+						<RadioButton
+							group="Voting"
+							id="Upvote"
+							class="mainmenu__addon__vote mainmenu__addon__vote-small mainmenu__addon__upvote mr-2"
+							onactivate="WorkshopCampaignFlyout.changeVote(1)"
+						>
+							<Image
+								class="mainmenu__addon__vote__icon mainmenu__addon__vote-small__icon flip-vertical"
+								texturewidth="96"
+								textureheight="96"
+								src="file://{images}/icons/thumb.svg"
+							/>
 						</RadioButton>
-						<RadioButton id="Downvote" class="button mr-2" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(2)">
-							<Label class="button__text" text="#UI_Downvote" />
+						
+						<RadioButton
+							group="Voting"
+							id="Downvote"
+							class="mainmenu__addon__vote mainmenu__addon__vote-small mainmenu__addon__downvote mr-2"
+							onactivate="WorkshopCampaignFlyout.changeVote(2)"
+						>
+							<Image
+								class="mainmenu__addon__vote__icon mainmenu__addon__vote-small__icon"
+								texturewidth="96"
+								textureheight="96"
+								src="file://{images}/icons/thumb.svg"
+							/>
 						</RadioButton>
+
+						<ToggleButton
+							id="Favorite"
+							class="mainmenu__addon__vote mainmenu__addon__vote-small mainmenu__addon__favorite"
+							disabled="true"
+							onactivate="WorkshopCampaignFlyout.toggleMapFavorite()"
+						>
+							<Image
+								class="mainmenu__addon__vote__icon mainmenu__addon__vote-small__icon"
+								texturewidth="96"
+								textureheight="96"
+								src="file://{images}/star.svg"
+							/>
+						</ToggleButton>
+
+						<!-- Needed as a "default" selection when a item hasn't been voted for. -->
 						<RadioButton id="Nonevote" class="button hide" group="Voting" onactivate="WorkshopCampaignFlyout.changeVote(0)">
 							<Label class="button__text" text="#UI_Novote" />
 						</RadioButton>
 					</Panel>
-					<Button class="button button-2x hide" onactivate="WorkshopCampaignFlyout.openInSteam()">
-						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/star.svg" />
-					</Button>
 				</Panel>
 			</Panel>
 		</Panel>

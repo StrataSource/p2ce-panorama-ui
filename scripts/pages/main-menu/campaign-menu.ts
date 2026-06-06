@@ -77,6 +77,7 @@ class CampaignMenu {
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
 			}
+
 		},
 		{
 			id: 'QuitBtn',
@@ -138,20 +139,25 @@ class CampaignMenu {
 		}
 
 		let showWarning = false;
+		let mounted = true;
 
 		if (c.campaign.id === 'portal1_sp') {
 			showWarning = true;
 			if (!GameInterfaceAPI.GetMountedSteamApps().includes(400)) {
+				mounted = false;
+				$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 				UiToolkitAPI.ShowGenericPopupTwoOptions(
 					$.Localize('#MainMenu_Campaigns_MountRequired_Header'),
 					$.Localize('#MainMenu_Campaigns_MountRequired_400'),
 					'blur',
 					$.Localize('#Common_Wiki'),
 					() => {
-						SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts');
+						this.missingMountPromptClose(true);
 					},
 					$.Localize('#Common_OK'),
-					() => {}
+					() => {
+						this.missingMountPromptClose();
+					}
 				);
 			}
 		}
@@ -159,16 +165,20 @@ class CampaignMenu {
 		if (c.campaign.id === 'hl2' || c.campaign.id === 'episodic' || c.campaign.id === 'ep2') {
 			showWarning = true;
 			if (!GameInterfaceAPI.GetMountedSteamApps().includes(220)) {
+				mounted = false;
+				$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 				UiToolkitAPI.ShowGenericPopupTwoOptions(
 					$.Localize('#MainMenu_Campaigns_MountRequired_Header'),
 					$.Localize('#MainMenu_Campaigns_MountRequired_220'),
 					'blur',
 					$.Localize('#Common_Wiki'),
 					() => {
-						SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts');
+						this.missingMountPromptClose(true);
 					},
 					$.Localize('#Common_OK'),
-					() => {}
+					() => {
+						this.missingMountPromptClose();
+					}
 				);
 			}
 		}
@@ -222,6 +232,21 @@ class CampaignMenu {
 
 		this.setContinueDetails();
 		this.setCampaignBackground(skipBgMapLoad, false);
+
+		if (!mounted) {
+			$.DispatchEvent('MainMenuSetButtonProps', 'NewGameBtn', {
+				taglineText: $.Localize('#MainMenu_Campaigns_MM_NewGame_Tagline'),
+				enabled: false
+			});
+			$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
+				taglineText: '',
+				enabled: false
+			});
+			$.DispatchEvent('MainMenuSetButtonProps', this.loadGameBtn, {
+				taglineText: '',
+				enabled: false
+			});
+		}
 	}
 
 	static setContinueDetails() {
@@ -371,5 +396,14 @@ class CampaignMenu {
 
 	static onMapUnloaded() {
 		this.stopMusic();
+	}
+
+	static missingMountPromptClose(showWiki: boolean = false) {
+		if (showWiki) {
+			SteamOverlayAPI.OpenURL('https://wiki.stratasource.org/modding/overview/mounts');
+		}
+
+		$.Msg('CAMPAIGN MENU: Clearing active campaign');
+		CampaignAPI.SetActiveCampaign(null);
 	}
 }

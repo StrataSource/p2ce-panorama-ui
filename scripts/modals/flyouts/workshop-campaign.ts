@@ -125,6 +125,7 @@ class WorkshopCampaignFlyout {
 
 	static play() {
 		if (this.hasMissing) {
+			$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 			UiToolkitAPI.ShowCustomLayoutPopupParameters(
 				'dependencies',
 				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
@@ -142,6 +143,10 @@ class WorkshopCampaignFlyout {
 
 	static changeVote(vote: AddonRating) {
 		WorkshopAPI.SetAddonUserRating(this.addonId, vote);
+	}
+
+	static toggleMapFavorite() {
+		$.Warning('Not implemented!');
 	}
 
 	static close() {
