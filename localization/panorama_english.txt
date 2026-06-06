@@ -635,15 +635,6 @@
 
 		"Settings_Render_FXAA" 							"Fast Approximate Anti-Aliasing (FXAA)"
 		"Settings_Render_FXAA_Info"						"Anti-aliasing provides a smooth appearance at the edges of geometry, eliminating jagged edges. Enabling FXAA can degrade graphics performance."
-		
-		"Settings_Render_Bloom"							"Bloom"
-		"Settings_Render_Bloom_Info"					"HDR Bloom is the &quot;halo&quot; effect seen on very bright objects or the environment in general. This has no impact on graphics performance."
-
-		"Settings_Render_DynamicTonemapping"			"HDR Tonemapping"
-		"Settings_Render_DynamicTonemapping_Info"		"HDR tonemapping is the dynamic increase or decrease of exposure of the screen depending on the displayed content. This has no impact on graphics performance."
-
-		"Settings_Render_ColorCorrection"				"Color Correction"
-		"Settings_Render_ColorCorrection_Info"			"Color Correction is used in some maps to alter the color balance to achieve a certain aesthetic tone. This has no impact on graphics performance."
 
 		"Settings_Render_Multicore"						"Multicore Rendering"
 		"Settings_Render_Multicore_Info"				"Multicore rendering allows Portal 2: Community Edition to split rendering across multiple CPU and GPU cores present on your system. The Disabled setting may negatively impact overall framerate and visual quality."

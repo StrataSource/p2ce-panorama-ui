@@ -288,36 +288,6 @@
 					<Label text="#Settings_General_Disabled" value="0" id="motionblur0" />
 					<Label text="#Settings_General_Enabled" value="1" id="motionblur1" />
 				</SettingsEnumDropDown>
-
-				<SettingsEnumDropDown
-					text="#Settings_Render_DynamicTonemapping"
-					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="DynamicTonemapping"
-					infomessage="#Settings_Render_DynamicTonemapping_Info"
-				>
-					<Label text="#Settings_General_Disabled" value="0" id="dynamictonemapping0" />
-					<Label text="#Settings_General_Enabled" value="1" id="dynamictonemapping1" />
-				</SettingsEnumDropDown>
-
-				<SettingsEnumDropDown
-					text="#Settings_Render_Bloom"
-					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="DisableBloom"
-					infomessage="#Settings_Render_Bloom_Info"
-				>
-					<Label text="#Settings_General_Disabled" value="1" id="disablebloom0" />
-					<Label text="#Settings_General_Enabled" value="0" id="disablebloom1" />
-				</SettingsEnumDropDown>
-
-				<SettingsEnumDropDown
-					text="#Settings_Render_ColorCorrection"
-					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="ColorCorrection"
-					infomessage="#Settings_Render_ColorCorrection_Info"
-				>
-					<Label text="#Settings_General_Disabled" value="0" id="colorcorrection0" />
-					<Label text="#Settings_General_Enabled" value="1" id="colorcorrection1" />
-				</SettingsEnumDropDown>
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
