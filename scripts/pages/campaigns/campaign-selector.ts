@@ -90,6 +90,8 @@ class CampaignEntry {
 		this.panel.SetPanelEvent('onfocus', () => {
 			CampaignSelector.onCampaignHovered(this);
 		});
+
+		SetSourceIndicatorFromData(this.panel.FindChildTraverse('SourceIndicator')!, this.info);
 	}
 }
 
