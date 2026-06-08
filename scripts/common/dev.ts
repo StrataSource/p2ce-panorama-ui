@@ -216,3 +216,25 @@ class VirtualCampaign implements CampaignInfo {
 		this.meta = new Map<string, string>();
 	}
 }
+
+function SetSourceIndicatorFromData(indicator: GenericPanel, campaignPair: CampaignPair) {
+	indicator.visible = GameInterfaceAPI.GetSettingInt('developer') > 0;
+	if (!indicator.visible)
+		return;
+
+	const tp = indicator.FindChild<TooltipPanel>('TooltipPanel');
+	const img = indicator.FindChildTraverse<Image>('ImagePanel');
+
+	const meta = WorkshopAPI.GetAddonMeta(campaignPair.bucket.addon_id);
+	if (meta.workshopid !== BigInt(0)) {
+		if (tp)
+			tp.AddClass('fancy-blue');
+		if (img)
+			img.SetImage('file://{images}/icons/steam.svg');
+	} else {
+		if (tp)
+			tp.AddClass('fancy-purple');
+		if (img)
+			img.SetImage('file://{images}/social/home.svg');
+	}
+}
