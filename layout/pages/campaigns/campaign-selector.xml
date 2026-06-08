@@ -51,7 +51,7 @@
 								textureheight="64"
 							/>
 						</TooltipPanel>
-						<SourceIndicator class="hide" id="SourceIndicator" />
+						<SourceIndicator id="SourceIndicator" />
 					</Panel>
 					<!-- Campaign info; title, description, 'source' -->
 					<Panel class="campaigns__entry__details">
