@@ -64,15 +64,6 @@
 					hasdocspage="false"
 				/>
 
-				<SettingsEnumDropDown
-					text="#Settings_Video_ColorMode"
-					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
-					id="ColorMode"
-				>
-					<Label text="#Settings_Video_ColorMode_Monitor" value="0" id="tvmode0" />
-					<Label text="#Settings_Video_ColorMode_TV" value="1" id="tvmode1" />
-				</SettingsEnumDropDown>
-
 				<SettingsSlider
 					id="brightness"
 					text="#Settings_Video_Brightness"
