@@ -56,6 +56,20 @@
 	}
 }
 
+@keyframes OpacityStrobe {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
 @keyframes BlurFadeInOut {
 	0% {
 		blur: gaussian(0, 0, 0);

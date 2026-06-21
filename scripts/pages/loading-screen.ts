@@ -13,6 +13,8 @@ class LoadingScreenController {
 	static beBlankIfInvalid = false;
 
 	static init() {
+		$.DispatchEvent('MainMenuHideFeaturedOverlay');
+		
 		this.progressBar.value = 0;
 
 		this.bgImage2.RemoveClass('loadingscreen__backgroundshowanim');

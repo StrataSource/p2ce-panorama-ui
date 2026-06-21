@@ -30,6 +30,8 @@ interface GlobalEventNameMap {
 	MainMenuHideNav: (instant?: boolean) => void;
 	MainMenuShowNav: (instant?: boolean) => void;
 	MainMenuAddBgPanel: (panel: Panel) => void;
+	MainMenuShowFeaturedOverlay: (image: string) => void;
+	MainMenuHideFeaturedOverlay: () => void;
 	MainMenuAnimatedSwitch: (campaign: string) => void;
 	LoadingScreenClearLastMap: () => void;
 	MainMenuModeRequestCleanup: () => void;

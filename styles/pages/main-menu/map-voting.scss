@@ -1,0 +1,224 @@
+@use '../../config' as *;
+
+.map-voting {
+	height: 580px;
+	horizontal-align: center;
+	vertical-align: center;
+	flow-children: down;
+	overflow: noclip;
+	
+	&__header {
+		font-size: 24px;
+		text-transform: uppercase;
+		font-weight: bold;
+		margin-bottom: 5px;
+		&__wrap {
+			background-color: $base-950;
+			border: $menu-pane-border;
+			border-bottom-width: 0;
+			transform: translateY(1px);
+			z-index: 1;
+			padding: 10px 25px;
+		}
+	}
+
+	&__details {
+		horizontal-align: right;
+		flow-children: down;
+	}
+	&__cover {
+		height: 360px;
+		width: 640px;
+		overflow: noclip;
+		box-shadow: 2px 2px 8px 3.0 $base-950;
+		& > Image {
+			border: $menu-pane-border;
+		}
+	}
+	&__badge {
+		horizontal-align: right;
+		vertical-align: bottom;
+		transform: translateX(210px) translateY(280px);
+		ui-scale: 75% 75%;
+		width: 512px;
+		height: 512px;
+		&__avatar {
+			margin-left: 43px;
+			margin-top: 67px;
+			width: 185px;
+			height: 185px;
+		}
+	}
+
+	&__title {
+		font-size: 24px;
+		font-weight: bold;
+		letter-spacing: 1px;
+		overflow: noclip;
+		text-shadow: 2px 2px 8px 3.0 $base-950;
+	}
+
+	&__author {
+		color: $base-200;
+		font-size: 16px;
+		font-weight: light;
+		letter-spacing: 1px;
+		overflow: noclip;
+		text-shadow: 2px 2px 8px 3.0 $base-950;
+	}
+
+	&__voters {
+		flow-children: right;
+		margin-top: 10px;
+	}
+
+	&__ratings {
+		color: $base-200;
+		font-size: 16px;
+		font-weight: light;
+		letter-spacing: 1px;
+		text-shadow: 2px 2px 8px 3.0 $base-950;
+		overflow: noclip;
+	}
+
+	&__desc {
+		width: 100%;
+		height: 100%;
+		overflow: squish scroll;
+		text-overflow: clip;
+	}
+}
+
+.score-indicator {
+	&__pip {
+		width: 16px;
+		height: 16px;
+		img-shadow: 2px 2px 8px 3.0 $base-950;
+
+		&__off {
+			background-image: url('file://{images}/menu/indicator_off.png');
+			background-size: 16px;
+		}
+	}
+}
+
+.chamber-preview {
+	width: 384px;
+	background-color: $button-background;
+	border: $menu-pane-border;
+	flow-children: down;
+	margin: 0 15px;
+	vertical-align: center;
+
+	$this: &;
+
+	&__header {
+		font-weight: bold;
+		font-size: 28px;
+		letter-spacing: 1px;
+		horizontal-align: center;
+	}
+	
+	&__portal2 {
+		width: 768px;
+		horizontal-align: right;
+		flow-children: right;
+		transition: width 0.1s ease-in-out 0.0s;
+		#{$this}__top {
+			width: 167px;
+			height: 100%;
+		}
+		#{$this}__cover {
+			width: 100%;
+			height: 100%;
+		}
+		#{$this}__details {
+			width: fill-parent-flow(1);
+			background-color: rgba(0,0,0,0);
+			border-left: $menu-pane-border;
+			border-top-width: 0px;
+			overflow: noclip;
+			&__desc {
+				font-size: 22px;
+				max-height: 28px;
+			}
+			&__title,
+			&__desc,
+			&__small,
+			&__smaller {
+				text-shadow: 1px 1px 6px 3.0 $base-950;
+				width: 100%;
+			}
+		}
+	}
+	
+	&__throbber {
+		padding: 5px;
+		width: 100%;
+		height: 100%;
+		background-color: rgba($base-950, 0.99);
+		
+		& > AnimatedImageStrip {
+			height: 100%;
+			width: height-percentage(100%);
+			horizontal-align: center;
+			vertical-align: center;
+		}
+		& > Image {
+			margin: 20px;
+			horizontal-align: center;
+			vertical-align: center;
+		}
+	}
+	
+	&__top {
+		width: 100%;
+	}
+	&__cover {
+		width: 100%;
+		height: 384px;
+	}
+	&__details {
+		width: 100%;
+		margin-left: 0;
+		padding: 15px;
+		border-top: $menu-pane-border;
+		background-color: $button-background;
+		flow-children: down;
+	
+		&__desc {
+			letter-spacing: 1px;
+			font-size: 18px;
+			font-weight: bold;
+			max-height: 23px;
+			text-overflow: shrink;
+		}
+	
+		&__small {
+			font-size: 16px;
+			text-overflow: ellipsis;
+			max-height: 20px;
+			color: $base-200;
+		}
+	
+		&__smaller {
+			font-size: 14px;
+			text-overflow: ellipsis;
+			max-height: 18px;
+			color: $base-200;
+			font-weight: light;
+		}
+	}
+	&__bg-img {
+		width: 100%;
+		height: 100%;
+		horizontal-align: right;
+		opacity-mask: url('file://{images}/masks/1080-r2l.png');
+		opacity: 0.5;
+	}
+	&__change {
+		width: 64px;
+		height: 64px;
+		vertical-align: center;
+	}
+}
