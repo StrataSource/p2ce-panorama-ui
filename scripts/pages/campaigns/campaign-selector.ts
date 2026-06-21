@@ -276,7 +276,7 @@ class CampaignSelector {
 		const allOtherCampaigns: Array<CampaignPair> = [];
 
 		for (const bucket of buckets) {
-			if (bucket.id.startsWith('auto_')) {
+			if (bucket.id.startsWith('auto_') || bucket.id === 'addon:p2ce_p2ws') {
 				continue;
 			}
 			for (const campaign of bucket.campaigns) {

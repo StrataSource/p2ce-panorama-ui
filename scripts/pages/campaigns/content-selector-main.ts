@@ -3,8 +3,8 @@
 class ContentSelector {
 	static insert = $<Panel>('#Insert')!;
 	static tabs = $<Panel>('#Tabs')!;
-	static pages = ['campaigns/campaign-selector', 'campaigns/automap-selector'];
-	static btns = [$<RadioButton>('#CampaignsBtn')!, $<RadioButton>('#MapsBtn')!];
+	static pages = ['campaigns/campaign-selector', 'campaigns/automap-selector', 'campaigns/p2-selector'];
+	static btns = [$<RadioButton>('#CampaignsBtn')!, $<RadioButton>('#MapsBtn')!, $<RadioButton>('#Portal2Btn')!];
 
 	static onLoad() {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
@@ -35,6 +35,11 @@ class ContentSelector {
 		this.insert.RemoveAndDeleteChildren();
 		const p = $.CreatePanel('Panel', this.insert, `Page${index}`);
 		p.LoadLayout(`file://{resources}/layout/pages/${this.pages[index]}.xml`, false, false);
+
+		// switched to a page that isn't the p2 selector
+		if (index !== 2) {
+			$.DispatchEvent('MainMenuHideFeaturedOverlay');
+		}
 
 		if (bSave) $.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, index);
 	}

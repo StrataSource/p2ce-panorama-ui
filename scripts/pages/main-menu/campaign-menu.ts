@@ -130,7 +130,7 @@ class CampaignMenu {
 
 		const c = CampaignAPI.GetActiveCampaign()!;
 
-		if (isSingleWsCampaign(c)) {
+		if (isSingleWsCampaign(c) || c.bucket.id.startsWith('addon:p2ce_p2ws')) {
 			$.Schedule(0.01, () => {
 				CampaignAPI.SetActiveCampaign(null);
 			});

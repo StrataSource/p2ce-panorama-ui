@@ -10,7 +10,7 @@
 
 	<snippets>
 		<snippet name="WorkshopEntrySnippet">
-			<Button group="WorkshopGroupRadio" class="workshop__entry" tabindex="auto" selectionpos="auto">
+			<Button group="WorkshopGroupRadio" class="workshop__entry workshop__entry__standard" tabindex="auto" selectionpos="auto">
 				<Panel class="workshop__entry__top">
 					<Image id="Cover" class="workshop__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
 					<Panel id="NewIndicator" class="workshop__entry__new-indicator hide">
@@ -70,6 +70,6 @@
 			</Button>
 			<TextEntry id="SearchBar" class="textentry workshop__search full-height mr-3" placeholder="#Common_SearchEllipsis" />
 		</Panel>
-		<Panel id="EntryInsert" class="workshop__entries" />
+		<Panel id="EntryInsert" class="workshop__entries mt-2" />
 	</Panel>
 </root>

@@ -223,24 +223,24 @@ class BaseMenu {
 		this.savChapter = undefined;
 
 		if (saves.length === 0) {
-			$.Warning('RESUME: No saves');
+			//$.Warning('RESUME: No saves');
 			return;
 		}
 
 		let savCampaign: CampaignPair | undefined;
 		for (const save of saves) {
 			savCampaign = CampaignAPI.FindCampaign(save.mapGroup) ?? undefined;
-			if (!savCampaign) {
-				$.Warning('RESUME: Newer save found without a map group. Skipping.');
+			if (!savCampaign || savCampaign.bucket.id.startsWith('addon:p2ce_p2ws')) {
+				continue;
 			} else {
-				$.Msg(`RESUME: Eligible save found: ${save.fileName}, ${save.mapName}, ${save.mapGroup}`);
+				//$.Msg(`RESUME: Eligible save found: ${save.fileName}, ${save.mapName}, ${save.mapGroup}`);
 				this.latestSave = save;
 				break;
 			}
 		}
 
-		if (!savCampaign) {
-			$.Warning('RESUME: Could not find an eligible latest save');
+		if (!savCampaign || !this.latestSave) {
+			//$.Warning('RESUME: Could not find an eligible latest save');
 			return;
 		}
 
@@ -250,7 +250,7 @@ class BaseMenu {
 				: undefined;
 
 		if (!savChapter) {
-			$.Warning('RESUME: Map could not be found for Campaign');
+			//$.Warning('RESUME: Map could not be found for Campaign');
 			return;
 		}
 
@@ -286,8 +286,8 @@ class BaseMenu {
 
 	static rerollMap() {
 		this.mapSelection = Math.floor(Math.random() * this.maps.length);
+		//$.Msg(`BASE MENU: Rolled background map: ${this.mapSelection}, ${this.maps[this.mapSelection]}`);
 		const map = this.maps[this.mapSelection];
-		$.Msg(`BASE MENU: Rolled background map: ${this.mapSelection}, ${map.map}`);
 		this.bgMapAuthorLabel.text = map.author.name;
 		this.bgMapAuthorImg.SetImage(`file://{images}/menu/featured/author_${map.author.image}`);
 		$.DispatchEvent(

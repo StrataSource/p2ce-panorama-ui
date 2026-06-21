@@ -35,6 +35,7 @@ class MenuManager {
 	static menuContent = $<Panel>('#MenuMainContent')!;
 	static pageBlur = $<BaseBlurTarget>('#PageBlur')!;
 	static grids = [$<Image>('#GridTexture1')!, $<Image>('#GridTexture2')!];
+	static featuredOverlayImg = $<Image>('#MainMenuFeaturedOverlay')!;
 
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
@@ -56,6 +57,7 @@ class MenuManager {
 	static onLoaded() {
 		if (this.isLoaded) return;
 		this.isLoaded = true;
+		this.featuredOverlayImg.style.animation = 'FeaturedOverlayOut 0.01s linear 0s 1 normal forwards';
 
 		this.currentLogo = '';
 
@@ -210,6 +212,16 @@ class MenuManager {
 				}
 			});
 
+			$.RegisterForUnhandledEvent('MainMenuShowFeaturedOverlay', (image: string) => {
+				this.featuredOverlayImg.style.animation = 'FeaturedOverlayOut 0.01s linear 0s 1 normal forwards';
+				this.featuredOverlayImg.SetImage(image);
+				this.featuredOverlayImg.style.animation = 'FeaturedOverlayIn 0.25s ease-in-out 0s 1 normal forwards';
+			});
+
+			$.RegisterForUnhandledEvent('MainMenuHideFeaturedOverlay', () => {
+				this.featuredOverlayImg.style.animation = 'FeaturedOverlayOut 0.25s ease-in-out 0s 1 normal forwards';
+			});
+
 			// CC
 			// This is here because CC panel reconstructs itself
 			// which will re register these events. Don't want that!
@@ -286,6 +298,13 @@ class MenuManager {
 				}
 			});
 
+			// will be undone next switch
+			$.RegisterForUnhandledEvent('MainMenuHideNav', (instant: boolean | undefined) => {
+				if (instant) {
+					this.menuContent.visible = false;
+				}
+			});
+
 			installImageFallbackHandler(this.logo);
 
 			const registerCampaignSwitch = () => {
@@ -297,7 +316,7 @@ class MenuManager {
 						// dont play the fade animation if it's an autogen'd campaign
 						// we jump into it directly and this would cause the unblur anim
 						// to play when we open the pause menu
-						if (campaign === null || !campaign.startsWith('auto_')) {
+						if (campaign === null || !campaign.startsWith('auto_') || !campaign.startsWith('addon:p2ce_p2ws')) {
 							$.DispatchEvent('MainMenuSwitchFade', false, true);
 						}
 						this.deleteMenus();
@@ -345,6 +364,8 @@ class MenuManager {
 			this.deleteMenus();
 		}
 
+		this.menuContent.visible = true;
+
 		switch (GameInterfaceAPI.GetGameUIState()) {
 			case GameUIState.MAINMENU: {
 				if (!CampaignAPI.IsCampaignActive()) {
@@ -360,9 +381,15 @@ class MenuManager {
 			}
 
 			case GameUIState.PAUSEMENU: {
-				const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
-				p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
-				p.SetReadyForDisplay(true);
+				if (Portal2WorkshopAPI.IsRatingMap()) {
+					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_VotingMenuPortal2');
+					p.LoadLayout('file://{resources}/layout/pages/main-menu/voting-p2.xml', false, false);
+					p.SetReadyForDisplay(true);
+				} else {
+					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
+					p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
+					p.SetReadyForDisplay(true);
+				}
 				break;
 			}
 
@@ -441,6 +468,11 @@ class MenuManager {
 
 		this.pages.push(newPage);
 		newPanel.LoadLayout(`file://{resources}/layout/pages/${xmlName}.xml`, false, false);
+		// this is required for animations to play correctly on pages
+		// not originally accessible via a menu
+		if (!newPanel.HasClass('mainmenu__page')) {
+			newPanel.AddClass('mainmenu__page');
+		}
 		newPanel.RegisterForReadyEvents(true);
 		newPanel.AddClass('mainmenu__page__anim');
 		newPanel.SetFocus();

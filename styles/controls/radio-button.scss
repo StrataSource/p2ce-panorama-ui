@@ -101,6 +101,20 @@
 
 	flow-children: right;
 
+	&__small {
+		#{$root}__item-label {
+			font-size: 20px;
+		}
+		#{$root}__border {
+			height: 35px;
+		}
+		#{$root}__item {
+			&__inner {
+				height: 35px;
+			}
+		}
+	}
+
 	&__border {
 		width: 1px;
 		background-color: $base-700;

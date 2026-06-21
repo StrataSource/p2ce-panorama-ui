@@ -12,9 +12,51 @@
 		overflow: squish scroll;
 		height: fill-parent-flow(1);
 		flow-children: right-wrap;
-		margin-top: 10px;
 		padding-right: 5px;
 		min-width: 1024px;
+
+		&__portal2 {
+			flow-children: down;
+		}
+
+		&__throbber {
+			width: 100%;
+			height: 100%;
+			background-color: rgba($base-950, 0.99);
+			flow-children: down;
+
+			& > Panel {
+				horizontal-align: center;
+				vertical-align: center;
+				flow-children: down;
+				& > Panel {
+					horizontal-align: center;
+					vertical-align: center;
+					width: 128px;
+					height: 128px;
+					& > AnimatedImageStrip {
+						horizontal-align: center;
+						vertical-align: center;
+					}
+					& > Image {
+						width: 64px;
+						height: 64px;
+						horizontal-align: center;
+						vertical-align: center;
+					}
+				}
+				& > Label {
+					margin-top: 10px;
+					horizontal-align: center;
+					font-weight: bold;
+					color: $base-200;
+					letter-spacing: 1px;
+					font-family: 'Univers LT Std 47 Cn Lt';
+					text-transform: uppercase;
+					font-size: 22px;
+				}
+			}
+		}
 	}
 	&__none {
 		width: fill-parent-flow(1);
@@ -42,6 +84,106 @@
 		border: $menu-pane-border;
 
 		$this: &;
+
+		&__portal2 {
+			width: 1024px;
+			horizontal-align: right;
+			margin-bottom: 5px;
+			flow-children: right;
+			transition: width 0.1s ease-in-out 0.0s;
+			#{$this}__top {
+				width: 167px;
+				height: 100%;
+			}
+			#{$this}__cover {
+				width: 100%;
+				height: 100%;
+			}
+			#{$this}__details {
+				width: fill-parent-flow(1);
+				background-color: rgba(0,0,0,0);
+				border-left: $menu-pane-border;
+				border-top-width: 0px;
+				overflow: noclip;
+				&__desc {
+					font-size: 22px;
+					max-height: 28px;
+				}
+				&__title,
+				&__desc,
+				&__small,
+				&__smaller {
+					text-shadow: 1px 1px 6px 3.0 $base-950;
+					width: 100%;
+				}
+			}
+			.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+			.InputController &:focus:not(:disabled):not(:parentdisabled) {
+				border-color: $primary-color;
+				background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover-color ), to( $base-950 ) );
+				#{$this}__cover {
+					opacity: 0.9;
+				}
+				#{$this}__details {
+					border-color: $primary-color;
+					&__title,
+					&__desc,
+					&__small,
+					&__smaller {
+						color: $bright-color;
+					}
+				}
+			}
+			&:selected {
+				width: 992px;
+				border-color: $primary-color;
+				background-color: gradient( linear, 100% 0%, 0% 0%, from( $button-background-hover-color ), to( $base-950 ) );
+				#{$this}__cover {
+					opacity: 0.9;
+				}
+				#{$this}__details {
+					border-color: $primary-color;
+					&__title,
+					&__desc,
+					&__small {
+						color: $bright-color;
+					}
+				}
+			}
+		}
+
+		&__throbber {
+			padding: 5px;
+			width: 100%;
+			height: 100%;
+			background-color: rgba($base-950, 0.99);
+			
+			& > AnimatedImageStrip {
+				height: 100%;
+				width: height-percentage(100%);
+				horizontal-align: center;
+				vertical-align: center;
+			}
+			& > Image {
+				margin: 20px;
+				horizontal-align: center;
+				vertical-align: center;
+			}
+		}
+
+		// only exists in p2 mode
+		&__controls {
+			flow-children: right;
+			vertical-align: center;
+			margin-right: 15px;
+
+			&__working.button--p2-blue,
+			&__working.button--green,
+			&__working.button--red {
+				animation: OpacityStrobe 1.0s linear 0s infinite normal forwards;
+				saturation: 0.5;
+			}
+		}
 
 		&__new-indicator {
 			horizontal-align: left;
@@ -83,31 +225,55 @@
 				max-height: 23px;
 				text-overflow: shrink;
 			}
+
+			&__small {
+				font-size: 16px;
+				text-overflow: ellipsis;
+				max-height: 20px;
+				color: $base-200;
+			}
+
+			&__smaller {
+				font-size: 14px;
+				text-overflow: ellipsis;
+				max-height: 18px;
+				color: $base-200;
+				font-weight: light;
+			}
+		}
+		&__bg-img {
+			width: 100%;
+			height: 100%;
+			horizontal-align: right;
+			opacity-mask: url('file://{images}/masks/1080-r2l.png');
+			opacity: 0.5;
 		}
 		&:disabled,
 		&:parentdisabled {
 			opacity: 0.25;
-
+			
 			#{$this}__cover {
 				blur: fastgaussian(15, 15, 4);
 				saturation: 0;
 			}
 		}
-		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
-		.InputController &:focus:not(:disabled):not(:parentdisabled) {
-			border-color: $primary-color;
-			background-color: $button-background-hover;
-
-			#{$this}__cover {
-				opacity: 0.9;
-			}
-
-			#{$this}__details {
+		&__standard {
+			.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
+			.InputController &:focus:not(:disabled):not(:parentdisabled) {
 				border-color: $primary-color;
 				background-color: $button-background-hover;
-				&__title,
-				&__desc {
-					color: $bright-color;
+	
+				#{$this}__cover {
+					opacity: 0.9;
+				}
+	
+				#{$this}__details {
+					border-color: $primary-color;
+					background-color: $button-background-hover;
+					&__title,
+					&__desc {
+						color: $bright-color;
+					}
 				}
 			}
 		}
@@ -119,5 +285,100 @@
 		& > Button {
 			width: 512px;
 		}
+	}
+	// only exists in p2 mode
+	&__detail-text {
+		font-size: 14px;
+		font-weight: light;
+		color: $base-200;
+		vertical-align: center;
+	}
+	&__pane {
+		width: 738px;
+		background-color: $base-950;
+		border: $menu-pane-border;
+		padding: 10px 0px;
+		flow-children: down;
+		height: 384px;
+		&__cover {
+			background-color: $base-950;
+			border: $menu-pane-border;
+			width: 738px;
+			height: 415px;
+			horizontal-align: center;
+			margin-bottom: 15px;
+		}
+		&__title {
+			width: 100%;
+			text-overflow: shrink;
+			font-size: 26px;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
+		&__size {
+			width: 100%;
+			font-size: 14px;
+			font-weight: light;
+			color: $base-200;
+			vertical-align: center;
+		}
+		&__updated {
+			width: 100%;
+			font-size: 14px;
+			font-weight: light;
+			color: $base-200;
+			vertical-align: center;
+		}
+		&__subscribed {
+			width: 100%;
+			font-size: 14px;
+			font-weight: light;
+			color: $base-200;
+			vertical-align: center;
+		}
+		&__avatar {
+			width: 32px;
+			height: 32px;
+			margin-right: 5px;
+			border: $menu-pane-border;
+		}
+		&__author {
+			vertical-align: center;
+		}
+		&__desc {
+			width: 100%;
+			height: 100%;
+			margin-top: 10px;
+			padding: 0 15px;
+			font-size: 16px;
+			font-weight: light;
+			// DO NOT CHANGE THIS
+			// severe lag can occur on certain descriptions because of
+			// ellipsis checks in C++ code!!! we do not need them anyway!!!
+			text-overflow: clip;
+			overflow: squish scroll;
+		}
+	}
+}
+
+@keyframes Portal2MapsPaneIn {
+	0% {
+		transform: translateX(-10px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes Portal2MapsPaneOut {
+	0% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(-10px);
+		opacity: 0;
 	}
 }

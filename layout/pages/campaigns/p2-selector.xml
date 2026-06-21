@@ -1,0 +1,217 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/common/searcher.ts" />
+		<include src="file://{scripts}/pages/campaigns/automap-selector.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="WorkshopEntrySnippet">
+			<Button group="WorkshopGroupRadio" class="workshop__entry workshop__entry__portal2" tabindex="auto" selectionpos="auto">
+				<Panel class="workshop__entry__top">
+					<Image id="Cover" class="workshop__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
+					<Panel id="NewIndicator" class="workshop__entry__new-indicator hide">
+						<Label class="workshop__entry__new-indicator__text" text="#MainMenu_Content_Unplayed" />
+					</Panel>
+					<TooltipPanel id="Indicator" class="workshop__entry__indicator fancy-red hide" tooltip="#DependencyWarning_Generic">
+						<Image
+							scaling="stretch-to-fit-preserve-aspect"
+							src="file://{images}/alert-octagon.svg"
+							texturewidth="64"
+							textureheight="64"
+						/>
+					</TooltipPanel>
+					<SourceIndicator class="hide" id="SourceIndicator" />
+					<Panel id="Throbber" class="workshop__entry__throbber hide">
+						<AnimatedImageStrip
+							animating="true"
+							defaultframe="0"
+							frametime="125ms"
+							src="file://{images}/menu/p2ce/spinner_strip.tga"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<Image
+							src="file://{images}/icons/steam.svg"
+							textureheight="64"
+							texturewidth="64"
+							scaling="stretch-to-fit-preserve-aspect"
+							hittest="false"
+						/>
+					</Panel>
+				</Panel>
+				<Panel class="full-width">
+					<Image
+						id="BtnBgImg"
+						class="workshop__entry__bg-img"
+						scaling="stretch-to-cover-preserve-aspect"
+					/>
+					<Panel class="flow-right">
+						<Panel class="workshop__entry__details">
+							<Label class="workshop__entry__details__desc" text="{s:name}" />
+							<Label class="workshop__entry__details__small" text="{s:author}" />
+							<Label class="workshop__entry__details__smaller" text="[HC] Subscribed on {s:time}" />
+						</Panel>
+						<Panel class="workshop__entry__controls">
+							<Button class="button mr-1" disabled="true">
+								<Image
+									class="button__icon"
+									scaling="stretch-to-fit-preserve-aspect"
+									src="file://{images}/star.svg"
+									texturewidth="64"
+									textureheight="64"
+								/>
+							</Button>
+							<!-- workshop__entry__controls__working -->
+							<Button id="ActionBtn" class="button--nodisable">
+								<Image
+									id="ActionImg"
+									class="button__icon"
+									scaling="stretch-to-fit-preserve-aspect"
+									src="file://{images}/download.svg"
+									texturewidth="64"
+									textureheight="64"
+								/>
+							</Button>
+						</Panel>
+					</Panel>
+				</Panel>
+			</Button>
+		</snippet>
+		<snippet name="WorkshopNoneSnippet">
+			<Panel class="workshop__none">
+				<Panel class="horizontal-align-center vertical-align-center">
+					<Label class="text-h5 mb-2" text="#MainMenu_Maps_None" />
+				</Panel>
+			</Panel>
+		</snippet>
+		<snippet name="WorkshopReloadingSnippet">
+			<Panel class="workshop__entries__throbber">
+				<Panel>
+					<Panel>
+						<AnimatedImageStrip
+							animating="true"
+							defaultframe="0"
+							frametime="125ms"
+							src="file://{images}/menu/p2ce/spinner_strip.tga"
+							scaling="stretch-to-cover-preserve-aspect"
+						/>
+						<Image
+							src="file://{images}/icons/steam.svg"
+							textureheight="64"
+							texturewidth="64"
+							scaling="stretch-to-fit-preserve-aspect"
+							hittest="false"
+						/>
+					</Panel>
+					<Label text="[HC] Reloading subscribed items..." />
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="flow-down" onload="AutoMapSelector.init()" useportal2="1">
+		<Panel class="flow-right">
+			<Panel class="flow-down">
+				<Panel class="workshop__top-bar">
+					<Button class="button mr-1" onactivate="AutoMapSelector.openPortal2Workshop()">
+						<Image
+							class="button__icon"
+							texturewidth="64"
+							textureheight="64"
+							src="file://{images}/icons/steam.svg"
+						/>
+					</Button>
+					<Button id="RefreshBtn" class="button mr-2" onactivate="AutoMapSelector.refreshPortal2Maps()">
+						<Image
+							class="button__icon"
+							texturewidth="64"
+							textureheight="64"
+							src="file://{images}/refresh.svg"
+						/>
+					</Button>
+					<TextEntry id="SearchBar" class="textentry workshop__search mr-2" placeholder="#Common_SearchEllipsis" disabled="true" />
+					<DropDown
+						id="MapFilters"
+						class="dropdown mr-3"
+						menuclass="dropdown-menu"
+						tabindex="auto"
+						selectionpos="auto"
+						disabled="true"
+					>
+						<Label text="[HC] All" id="MapFiltersMode1" value="1" />
+						<Label text="[HC] Installed" id="MapFiltersMode2" value="2" />
+						<Label text="[HC] Not Installed" id="MapFiltersMode3" value="3" />
+						<Label text="[HC] Favorited" id="MapFiltersMode4" value="4" />
+					</DropDown>
+				</Panel>
+				<Panel class="full-width border-base-900 bg-base-950 flow-right mr-3 mt-1 px-2 py-1">
+					<Label class="fill-width workshop__detail-text" text="[PH] Downloaded Item Count (Estimated Size)" />
+					<Label class="workshop__detail-text" text="[PH] Subscribed Item Count" />
+				</Panel>
+				<Panel id="EntryInsert" class="workshop__entries workshop__entries__portal2 mt-1" />
+			</Panel>
+			<Panel id="RightPane" class="horizontal-align-center vertical-align-bottom flow-down ml-2 hide">
+				<Image id="SelectedCover" class="workshop__pane__cover" scaling="stretch-to-cover-preserve-aspect" />
+				<Panel class="workshop__pane">
+					<Panel class="flow-down px-3">
+						<Label id="SelectedTitle" class="workshop__pane__title" text="[PH] Title" />
+						<Label id="SelectedSize" class="workshop__pane__size" text="[PH] File Size" />
+						<Panel class="flow-right">
+							<Panel class="flow-down fill-width">
+								<Label id="SelectedUpdateTime" class="workshop__pane__updated" text="[PH] Update Time" />
+								<Label id="SelectedSubTime" class="workshop__pane__subscribed" text="[PH] Subscribe Time" />
+							</Panel>
+							<Panel class="flow-right">
+								<AvatarImage id="SelectedAvatar" class="workshop__pane__avatar" accountid="local" />
+								<Label id="SelectedAuthor" class="workshop__pane__author" text="[PH] Author" />
+							</Panel>
+						</Panel>
+						<Panel class="full-width flow-right mt-2">
+							<Button id="SelectedSteam" class="button mr-1">
+								<Image
+									class="button__icon"
+									texturewidth="64"
+									textureheight="64"
+									src="file://{images}/icons/steam.svg"
+								/>
+							</Button>
+							<Button id="SelectedFavorite" class="button mr-1" disabled="true">
+								<Image
+									class="button__icon"
+									scaling="stretch-to-fit-preserve-aspect"
+									src="file://{images}/star.svg"
+									texturewidth="64"
+									textureheight="64"
+								/>
+							</Button>
+							<Button id="SelectedAction" class="button--nodisable button--p2-blue fill-width">
+								<Image
+									id="SelectedActionImg"
+									class="button__icon"
+									scaling="stretch-to-fit-preserve-aspect"
+									src="file://{images}/download.svg"
+									texturewidth="64"
+									textureheight="64"
+								/>
+								<Label id="SelectedActionLabel" class="button__text button__text--right" text="[HC] Download" />
+							</Button>
+							<Button id="SelectedDelete" class="button button--red ml-1">
+								<Image
+									class="button__icon"
+									scaling="stretch-to-fit-preserve-aspect"
+									src="file://{images}/delete.svg"
+									texturewidth="64"
+									textureheight="64"
+								/>
+							</Button>
+						</Panel>
+					</Panel>
+					<Label id="SelectedDescription" class="workshop__pane__desc" text="[PH] Description" html="true" loadimages="true" />
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

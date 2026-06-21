@@ -21,7 +21,13 @@
 			<Panel class="tabs__gap" />
 			<RadioButton id="MapsBtn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(1, true)">
 				<Panel class="tabs__item__inner">
-					<Label class="tabs__item-label" text="#MainMenu_Navigation_Workshop" />
+					<Label class="tabs__item-label" text="[HC] P2:CE Maps" />
+				</Panel>
+			</RadioButton>
+			<Panel class="tabs__gap" />
+			<RadioButton id="Portal2Btn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(2, true)">
+				<Panel class="tabs__item__inner">
+					<Label class="tabs__item-label" text="[HC] Portal 2 Maps" />
 				</Panel>
 			</RadioButton>
 			<Panel class="tabs__border tabs__border__left" />

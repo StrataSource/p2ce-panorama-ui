@@ -1,0 +1,148 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/main-menu/voting-p2.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="MenuBackgroundLayer">
+			<Panel class="full">
+				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+				<BaseBlurTarget
+					id="PauseMenuMainMenuBlur"
+					class="mainmenu__pause-blur"
+					blurrects="PauseMenuMainMenuContent"
+					hittest="false"
+				>
+					<!-- Backbuffer background -->
+					<BackbufferImagePanel hittest="false" class="mainmenu__background" />
+				</BaseBlurTarget>
+
+				<Panel id="PauseMenuMainMenuContent" hittest="false" class="mainmenu__pause-content-blur" />
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="full" hittest="false" onload="VotingMenuPortal2.onLoad()">
+		<Panel class="horizontal-align-center vertical-align-center flow-down overflow-noclip">
+			<Label class="map-voting__header" text="[HC] TEST CHAMBER EVALUATION" />
+			<Panel class="map-voting">
+				<Panel class="map-voting__cover">
+					<Image id="MapCover" class="full" scaling="stretch-to-cover-preserve-aspect" />
+					<Panel class="map-voting__badge">
+						<Image class="full" src="file://{images}/menu/portal2/badge.png" scaling="stretch-to-fit-preserve-aspect" />
+						<AvatarImage class="map-voting__badge__avatar" steamid="local" />
+						<Image class="full" src="file://{images}/menu/portal2/badgeoverlay.png" scaling="stretch-to-fit-preserve-aspect" />
+					</Panel>
+				</Panel>
+				<Panel class="flow-down mt-1 full-width fill-height">
+					<Label id="MapTitle" class="map-voting__title" text="[PH] Map Title" />
+					<Label id="MapAuthor" class="map-voting__author" text="[PH] Author" />
+					<Panel class="map-voting__voters fill-height">
+						<RadioButton group="vote" id="MapUpvote" class="vote vote-small upvote mr-3" onactivate="PauseMenu.setMapVote(1)">
+							<Image class="vote__icon vote-small__icon flip-vertical" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
+						</RadioButton>
+						<RadioButton group="vote" id="MapDownvote" class="vote vote-small downvote" onactivate="PauseMenu.setMapVote(2)">
+							<Image class="vote__icon vote-small__icon" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
+						</RadioButton>
+					</Panel>
+					<Panel class="flow-down horizontal-align-right">
+						<Label id="MapRatingCount" class="map-voting__ratings horizontal-align-right" text="[PH] Ratings" />
+						<Panel class="flow-right horizontal-align-right mt-1">
+							<Panel class="score-indicator__pip score-indicator__pip__off mr-1" />
+							<Panel class="score-indicator__pip score-indicator__pip__off mr-1" />
+							<Panel class="score-indicator__pip score-indicator__pip__off mr-1" />
+							<Panel class="score-indicator__pip score-indicator__pip__off mr-1" />
+							<Panel class="score-indicator__pip score-indicator__pip__off" />
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel class="flow-down horizontal-align-center vertical-align-bottom">
+			<Panel class="flow-right mx-3 mb-4 mt-1">
+				<Panel class="flow-down vertical-align-bottom">
+					<Button class="button button--red mb-2 chamber-preview__change" onactivate="VotingMenuPortal2.onQuitPressed()">
+						<Image
+							class="button__icon p-2"
+							scaling="stretch-to-fit-preserve-aspect"
+							src="file://{images}/close.svg"
+							texturewidth="96"
+							textureheight="96"
+						/>
+					</Button>
+					<Button class="button chamber-preview__change" onactivate="VotingMenuPortal2.onRestartPressed()">
+						<Image
+							class="button__icon"
+							scaling="stretch-to-fit-preserve-aspect"
+							src="file://{images}/refresh.svg"
+							texturewidth="96"
+							textureheight="96"
+						/>
+					</Button>
+				</Panel>
+				<Panel class="flow-down vertical-align-bottom">
+					<Label class="chamber-preview__header mb-1" text="[HC] NEXT TEST CHAMBER" />
+					<Panel class="chamber-preview chamber-preview__portal2" tabindex="auto" selectionpos="auto">
+						<Panel class="chamber-preview__top">
+							<Image id="Cover" class="chamber-preview__cover" scaling="stretch-to-cover-preserve-aspect" />
+							<Panel id="Throbber" class="chamber-preview__throbber hide">
+								<AnimatedImageStrip
+									animating="true"
+									defaultframe="0"
+									frametime="125ms"
+									src="file://{images}/menu/p2ce/spinner_strip.tga"
+									scaling="stretch-to-cover-preserve-aspect"
+								/>
+								<Image
+									src="file://{images}/icons/steam.svg"
+									textureheight="64"
+									texturewidth="64"
+									scaling="stretch-to-fit-preserve-aspect"
+									hittest="false"
+								/>
+							</Panel>
+						</Panel>
+						<Panel class="full-width">
+							<Image
+								id="BtnBgImg"
+								class="chamber-preview__bg-img"
+								scaling="stretch-to-cover-preserve-aspect"
+							/>
+							<Panel class="flow-right">
+								<Panel class="chamber-preview__details">
+									<Label class="chamber-preview__details__desc" text="{s:name}" />
+									<Label class="chamber-preview__details__small" text="{s:author}" />
+									<Label class="chamber-preview__details__smaller" text="[HC] Subscribed on {s:time}" />
+								</Panel>
+							</Panel>
+						</Panel>
+					</Panel>
+				</Panel>
+				<Panel class="flow-down vertical-align-bottom">
+					<Button class="button button--p2-blue mb-2 chamber-preview__change" onactivate="VotingMenuPortal2.onNextLevelPressed()">
+						<Image
+							class="button__icon"
+							scaling="stretch-to-fit-preserve-aspect"
+							src="file://{images}/play.svg"
+							texturewidth="96"
+							textureheight="96"
+						/>
+					</Button>
+					<Button class="button chamber-preview__change" onactivate="VotingMenuPortal2.onChangeLevelPressed()">
+						<Image
+							class="button__icon"
+							scaling="stretch-to-fit-preserve-aspect"
+							src="file://{images}/globe.svg"
+							texturewidth="96"
+							textureheight="96"
+						/>
+					</Button>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

@@ -92,6 +92,8 @@ $yellow: #ffae64 !default;
 $green: #7aee7a !default;
 
 $colors-primary: (
+	'p2-blue': $p2-blue,
+	'p2-orange': $p2-orange,
 	'blue': $blue,
 	'mid-blue': $mid-blue,
 	'light-blue': $light-blue,
@@ -196,6 +198,14 @@ $units: $yellow;
 // ================
 
 $gradients-primary: (
+	'p2-blue': (
+		$p2-blue,
+		color.scale($p2-blue, $lightness: -80%)
+	),
+	'p2-orange': (
+		$p2-orange
+		color.scale($p2-orange, $lightness: -80%)
+	),
 	'blue': (
 		$mid-blue,
 		$blue
