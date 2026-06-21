@@ -5,7 +5,7 @@
 @use 'sass:list';
 @use 'sass:map';
 
-.button {
+.button--nodisable {
 	height: $button-height;
 	background-color: $button-background;
 	box-shadow: $button-shadow;
@@ -15,20 +15,19 @@
 	flow-children: right;
 	tooltip-position: bottom;
 
-	$this: &;
-
 	.InputKeyboard &:hover:not(:disabled):not(:parentdisabled),
 	.InputController &:focus:not(:disabled):not(:parentdisabled) {
 		background-color: $button-background-hover;
 		border: $button-border-hover;
 		sound: 'UIPanorama.P2CE.MenuSelect';
 
-		#{$this}__text {
-			color: $button-text-hover;
-		}
-
-		#{$this}__icon {
-			wash-color: $button-text-hover;
+		@at-root .button {
+			&__text {
+				color: $button-text-hover;
+			}
+			&__icon {
+				wash-color: $button-text-hover;
+			}
 		}
 	}
 
@@ -38,17 +37,21 @@
 		background-color: $primary-color;
 		sound-out: 'UIPanorama.P2CE.MenuAccept';
 
-		#{$this}__icon,
-		#{$this}__icon-right {
-			wash-color: $base-950;
-		}
-
-		#{$this}__text-panel__header,
-		#{$this}__text-panel__subheader {
-			color: $base-950;
+		@at-root .button {
+			&__icon,
+			&__icon-right {
+				wash-color: $base-950;
+			}
+			&__text-panel__header,
+			&__text-panel__subheader {
+				color: $base-950;
+			}
 		}
 	}
+}
 
+.button {
+	@extend .button--nodisable;
 	&:disabled,
 	&:parentdisabled {
 		background-color: $button-background-disabled;
