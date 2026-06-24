@@ -63,15 +63,6 @@
 			</Button>
 		</Panel>
 
-		<!-- Background author -->
-		<Panel id="BgCredit" class="mainmenu__featured-bg MainMenuModeOnly NoCampaignSelectedOnly hide">
-			<Panel class="flow-down vertical-align-center">
-				<Label class="mainmenu__featured-bg__text" text="#MainMenu_Home_BackgroundCredit" />
-				<Label id="BgName" class="mainmenu__featured-bg__name" text="[PH] Author" />
-			</Panel>
-			<AvatarImage id="BgAvatar" class="mainmenu__featured-bg__avatar" />
-		</Panel>
-
 		<Panel class="ControllerOnly fancy-orange p-3 flow-down vertical-align-bottom m-3" style="max-width: 512px;">
 			<Label class="text-l text-weight-bold horizontal-align-center" text="#MainMenu_ControllerUI_Note_Title" />
 			<Label class="horizontal-align-center text-align-center" text="#MainMenu_ControllerUI_Note_Desc" />
@@ -96,6 +87,14 @@
 		</Panel>
 
 		<Panel class="horizontal-align-right flow-down m-3">
+			<!-- Background author -->
+			<Panel id="BgCredit" class="mainmenu__featured-bg mb-1 MainMenuModeOnly NoCampaignSelectedOnly">
+				<Panel class="flow-down vertical-align-center">
+					<Label class="mainmenu__featured-bg__text" text="#MainMenu_Home_BackgroundCredit" />
+					<Label id="BgName" class="mainmenu__featured-bg__name" text="[PH] Author" />
+				</Panel>
+				<Image id="BgAvatar" class="mainmenu__featured-bg__avatar" scaling="stretch-to-fit-preserve-aspect" />
+			</Panel>
 			<Panel class="horizontal-align-right flow-right">
 				<TooltipPanel tooltip="#MainMenu_Socials_GitHub">
 					<Button class="button button-2x" onactivate="SteamOverlayAPI.OpenURL('https://p2ce.org/issues')">

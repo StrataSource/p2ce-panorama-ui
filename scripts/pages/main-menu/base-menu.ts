@@ -130,13 +130,15 @@ class BaseMenu {
 	static continueImg = $<Image>('#ContinueSaveThumb')!;
 
 	static bgMapLoad: uuid | undefined = undefined;
+	static bgMapAuthorLabel = $<Label>('#BgName')!;
+	static bgMapAuthorImg = $<Image>('#BgAvatar')!;
 
 	static mapSelection = 0;
 	static maps = [
-		'p2ce_background_chmb18_ovg',
-		'p2ce_background_laser_intro',
-		'p2ce_background_gentle_hum',
-		'p2ce_background_mikatastrophe-dark'
+		{ map: 'p2ce_background_chmb18_ovg',         author: { name: 'Beckeroo',      image: 'beckeroo.jpg'      } },
+		{ map: 'p2ce_background_gentle_hum',         author: { name: 'Beckeroo',      image: 'beckeroo.jpg'      } },
+		{ map: 'p2ce_background_laser_intro',        author: { name: 'pivotman319',   image: 'pivotman319.jpg'   } },
+		{ map: 'p2ce_background_mikatastrophe-dark', author: { name: 'mikatastrophe', image: 'mikatastrophe.png' } },
 	];
 	static music;
 
@@ -284,10 +286,13 @@ class BaseMenu {
 
 	static rerollMap() {
 		this.mapSelection = Math.floor(Math.random() * this.maps.length);
-		$.Msg(`BASE MENU: Rolled background map: ${this.mapSelection}, ${this.maps[this.mapSelection]}`);
+		const map = this.maps[this.mapSelection];
+		$.Msg(`BASE MENU: Rolled background map: ${this.mapSelection}, ${map.map}`);
+		this.bgMapAuthorLabel.text = map.author.name;
+		this.bgMapAuthorImg.SetImage(`file://{images}/menu/featured/author_${map.author.image}`);
 		$.DispatchEvent(
 			'MainMenuSetBackgroundImage',
-			`file://{images}/menu/featured/${this.maps[this.mapSelection]}.png`
+			`file://{images}/menu/featured/${map.map}.png`
 		);
 	}
 
@@ -332,7 +337,7 @@ class BaseMenu {
 			this.bgMapLoad = GameInterfaceAPI.RegisterGameEventHandler(
 				'map_load_failed',
 				(mapName: string, isBackgroundMap: boolean) => {
-					if (!isBackgroundMap || mapName !== `maps\\${this.maps[this.mapSelection]}.bsp`) return;
+					if (!isBackgroundMap || mapName !== `maps\\${this.maps[this.mapSelection].map}.bsp`) return;
 					$.Warning('!!!!! Could not load featured background map !!!!!');
 					$.Schedule(0.001, () => {
 						$.DispatchEvent('MainMenuSwitchReverse', false);
@@ -343,7 +348,7 @@ class BaseMenu {
 		}
 
 		$.RegisterForUnhandledEvent('MapLoaded', (map: string, bg: boolean) => {
-			if (bg && map === `maps\\${this.maps[this.mapSelection]}.bsp`) {
+			if (bg && map === `maps\\${this.maps[this.mapSelection].map}.bsp`) {
 				$.DispatchEvent('MainMenuHideBackgroundImage', false);
 				$.DispatchEvent('MainMenuSwitchReverse', false);
 				$.DispatchEvent('MainBackgroundLoaded');
@@ -356,7 +361,7 @@ class BaseMenu {
 
 		$.Schedule(0.1, () => {
 			GameInterfaceAPI.ConsoleCommand('disconnect');
-			GameInterfaceAPI.ConsoleCommand(`map_background "${this.maps[this.mapSelection]}"`);
+			GameInterfaceAPI.ConsoleCommand(`map_background "${this.maps[this.mapSelection].map}"`);
 		});
 	}
 
