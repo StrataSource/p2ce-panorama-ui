@@ -9,9 +9,7 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuResumeGame');
 			},
-			hovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
+			hovered: () => {},
 			unhovered: () => {},
 			focusIsHover: true
 		},
@@ -22,41 +20,8 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'campaigns/content-selector-main', undefined);
 			},
-			hovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
+			hovered: () => {},
 			unhovered: () => {},
-			focusIsHover: true
-		},
-		{
-			id: 'CampaignContinueBtn',
-			headline: '#MainMenu_SaveRestore_LoadAuto',
-			tagline: '#MainMenu_SaveRestore_LoadAuto_Tagline',
-			activated: () => {
-				if (!this.latestSave) return;
-
-				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					$.Localize('#Action_LoadGame_Confirm'),
-					$.Localize('#Action_LoadGame_Auto_Message'),
-					'warning-popup',
-					$.Localize('#Action_LoadGame'),
-					() => {
-						$.DispatchEvent('MainMenuCloseAllPages');
-						$.DispatchEvent('LoadingScreenClearLastMap');
-						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load "${this.latestSave.fileName}"`));
-					},
-					$.Localize('#UI_Cancel'),
-					() => {},
-					'blur'
-				);
-			},
-			hovered: () => {
-				if (this.continueBtnEnabled && this.continueBox.IsValid()) this.continueBox.visible = true;
-			},
-			unhovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
-			additionalClasses: 'mainmenu__nav__btn__no-gradient',
 			focusIsHover: true
 		},
 		{
@@ -66,9 +31,7 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
 			},
-			hovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
+			hovered: () => {},
 			focusIsHover: true
 		},
 		{
@@ -78,9 +41,7 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);
 			},
-			hovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			}
+			hovered: () => {}
 		},
 		{
 			id: 'SettingsKeyboardBtn',
@@ -89,9 +50,7 @@ class PauseMenu {
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
 			},
-			hovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
+			hovered: () => {},
 			focusIsHover: true
 		},
 		{
@@ -117,20 +76,10 @@ class PauseMenu {
 					'blur'
 				);
 			},
-			hovered: () => {
-				if (this.continueBox.IsValid()) this.continueBox.visible = false;
-			},
+			hovered: () => {},
 			focusIsHover: true
 		}
 	];
-
-	// i copied and pasted this code, sue me
-	// maybe fix it up later...
-	static continueBox = $<Panel>('#ContinueBox')!;
-	static continueBoxText = $<Label>('#ContinueSaveTagline')!;
-	static continueImg = $<Image>('#ContinueSaveThumb')!;
-	static continueBtnEnabled: boolean = false;
-	static continueBtn: string = 'CampaignContinueBtn';
 
 	// map panel
 	static mapPane = $<Panel>('#MapPanel')!;
@@ -183,28 +132,12 @@ class PauseMenu {
 			}
 		});
 
-		this.setContinueDetails();
-
 		this.setMapPanel();
+		this.setLogo();
 	}
 
-	static setContinueDetails() {
-		if (!CampaignAPI.IsCampaignActive()) {
-			this.continueBox.visible = false;
-			this.continueBtnEnabled = false;
-			const continueBtnText = $.Localize('#MainMenu_SaveRestore_NoSaves');
-
-			$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
-				taglineText: continueBtnText,
-				enabled: this.continueBtnEnabled
-			});
-
-			$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
-			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
-			return;
-		}
-
-		let c = CampaignAPI.GetActiveCampaign()!;
+	static setLogo() {
+		const c = CampaignAPI.GetActiveCampaign();
 		if (c) {
 			const meta = CampaignAPI.GetCampaignMeta(null)!;
 			const logo = meta.get(CampaignMeta.FULL_LOGO);
@@ -218,72 +151,9 @@ class PauseMenu {
 				$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 			}
 		} else {
-			$.DispatchEvent('MainMenuSetLogo', '');
+			$.DispatchEvent('MainMenuSetLogo', 'file://{images}/logo.svg');
 			$.DispatchEvent('MainMenuSetLogoSize', CampaignLogoSizePreset.STANDARD);
 		}
-
-		this.continueBox.visible = false;
-
-		const isWsSingle = isSingleWsCampaign(c);
-
-		const group = isWsSingle ? SpecialString.AUTO_WS : `${c.bucket.id}/${c.campaign.id}`;
-
-		const saves = GameSavesAPI.GetGameSaves()
-			.filter((a) => {
-				return isWsSingle ? a.mapGroup.startsWith(group) : a.mapGroup === group;
-			})
-			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
-
-		this.continueBtnEnabled = false;
-		let continueBtnText = $.Localize('#MainMenu_SaveRestore_NoSaves');
-
-		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
-			taglineText: continueBtnText,
-			enabled: this.continueBtnEnabled
-		});
-
-		if (saves.length === 0) {
-			$.Warning('PAUSE MENU: No saves');
-			return;
-		}
-
-		// set the continue button states
-
-		this.latestSave = saves[0];
-
-		if (isWsSingle) {
-			const realCampaign = CampaignAPI.FindCampaign(this.latestSave.mapGroup);
-			if (realCampaign) {
-				c = realCampaign;
-			} else {
-				$.Warning(`Associated campaign ID ${this.latestSave.mapGroup} could not be found`);
-			}
-		}
-
-		const savChapter: ChapterInfo | undefined =
-			this.latestSave.chapter < c.campaign.chapters.length
-				? c.campaign.chapters[this.latestSave.chapter]
-				: undefined;
-
-		if (!savChapter) {
-			$.Warning('PAUSE MENU: Map could not be found for Campaign');
-			return;
-		}
-
-		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
-		this.continueImg.SetImage(thumb);
-
-		const date = new Date(Number(this.latestSave.fileTime));
-		this.continueBoxText.text = convertTime(date);
-		const chapterName = isWsSingle ? c.campaign.title : $.Localize(savChapter.title);
-		continueBtnText = chapterName.replace('\n', ': ');
-
-		this.continueBtnEnabled = true;
-
-		$.DispatchEvent('MainMenuSetButtonProps', this.continueBtn, {
-			taglineText: continueBtnText,
-			enabled: this.continueBtnEnabled
-		});
 	}
 
 	static setMapPanel() {
