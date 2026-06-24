@@ -224,7 +224,6 @@ class AddonManager {
 
 		this.purgeAddonList();
 
-
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			const activeAddons = WorkshopAPI.GetActiveMountList();
 			const campaign = CampaignAPI.GetActiveCampaign();
@@ -277,8 +276,6 @@ class AddonManager {
 			// If any addons are enabled, we'll default the "select all" button to true
 			if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
 		}
-
-
 
 		this.updateAddons();
 	}

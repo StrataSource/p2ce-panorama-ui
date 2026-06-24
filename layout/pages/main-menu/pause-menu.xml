@@ -51,39 +51,14 @@
 			</Panel>
 			<Panel class="mainmenu__addon" hittest="false">
 				<Panel id="VoteBox" class="mainmenu__addon__voters">
-					<RadioButton
-						group="vote"
-						id="MapUpvote"
-						class="mainmenu__addon__vote mainmenu__addon__upvote"
-						onactivate="PauseMenu.setMapVote(1)"
-					>
-						<Image
-							class="mainmenu__addon__vote__icon flip-vertical"
-							texturewidth="96"
-							textureheight="96"
-							src="file://{images}/icons/thumb.svg"
-						/>
+					<RadioButton group="vote" id="MapUpvote" class="vote upvote" onactivate="PauseMenu.setMapVote(1)">
+						<Image class="vote__icon flip-vertical" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
 					</RadioButton>
-					<RadioButton
-						group="vote"
-						id="MapDownvote"
-						class="mainmenu__addon__vote mainmenu__addon__downvote"
-						onactivate="PauseMenu.setMapVote(2)"
-					>
-						<Image
-							class="mainmenu__addon__vote__icon"
-							texturewidth="96"
-							textureheight="96"
-							src="file://{images}/icons/thumb.svg"
-						/>
+					<RadioButton group="vote" id="MapDownvote" class="vote downvote" onactivate="PauseMenu.setMapVote(2)">
+						<Image class="vote__icon" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
 					</RadioButton>
-					<ToggleButton
-						id="MapFavorite"
-						class="mainmenu__addon__vote mainmenu__addon__favorite"
-						disabled="true"
-						onactivate="PauseMenu.toggleMapFavorite()"
-					>
-						<Image class="mainmenu__addon__vote__icon" texturewidth="128" textureheight="128" src="file://{images}/star.svg" />
+					<ToggleButton id="MapFavorite" class="vote favorite" disabled="true" onactivate="PauseMenu.toggleMapFavorite()">
+						<Image class="vote__icon" texturewidth="128" textureheight="128" src="file://{images}/star.svg" />
 					</ToggleButton>
 				</Panel>
 				<Panel id="AddonBottom" class="mainmenu__addon__bottom">
@@ -112,7 +87,7 @@
 						onmouseover="UiToolkitAPI.ShowTextTooltip('AuthSteamProfile', '[HC] View Author\'s Steam Profile');"
 						onmouseout="UiToolkitAPI.HideTextTooltip();"
 					>
-						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar"/>
+						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar" />
 					</Button>
 				</Panel>
 			</Panel>
