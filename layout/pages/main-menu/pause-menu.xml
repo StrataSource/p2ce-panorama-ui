@@ -27,24 +27,6 @@
 	</snippets>
 
 	<Panel class="full" hittest="false" onload="PauseMenu.onLoad()">
-		<Panel id="ContinueBox" class="mainmenu__display-box" hittest="false" hittestchildren="false">
-			<Panel>
-				<Image
-					id="ContinueSaveThumb"
-					class="mainmenu__display-box__img"
-					src="file://{images}/menu/fallback/programmer_art_logo.png"
-					textureheight="1920"
-					texturewidth="1080"
-					scaling="stretch-to-cover-preserve-aspect"
-				/>
-			</Panel>
-			<Panel class="mainmenu__display-box__details">
-				<Panel class="vertical-align-center flow-down ml-3">
-					<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
-				</Panel>
-			</Panel>
-		</Panel>
-
 		<Panel id="MapPanel" hittest="false" class="full">
 			<Panel class="mainmenu__addon" hittest="false">
 				<Panel class="full mainmenu__addon__bg" />
