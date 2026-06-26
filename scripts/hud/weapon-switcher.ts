@@ -272,6 +272,9 @@ class WeaponSwitcher {
 					case 'weapon_physcannon':
 						weaponIcon.text = 'm';
 						break;
+					case 'weapon_portalgun':
+						weaponIcon.text = 'f';
+						break;
 					case 'weapon_pistol':
 						weaponIcon.text = 'd';
 						break;
@@ -298,6 +301,9 @@ class WeaponSwitcher {
 						break;
 					case 'weapon_bugbait':
 						weaponIcon.text = 'j';
+						break;
+					case 'weapon_stunstick':
+						weaponIcon.text = 'n';
 						break;
 					default:
 						weaponIcon.AddClass('weapons__bucket__entry__icon-label__unknown');
