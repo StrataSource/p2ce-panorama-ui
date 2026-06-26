@@ -311,9 +311,52 @@ class WeaponSwitcher {
 						break;
 				}
 
-				const weaponLabel = $.CreatePanel('Label', weaponPanel, `${weapon.classname}-Label`, {
-					text: `${weapon.classname}`
-				});
+				//len - hl2 style weapon labels
+				const weaponLabel = $.CreatePanel('Label', weaponPanel, `${weapon.classname}-Label`);
+				switch (weapon.classname) {
+					case 'weapon_crowbar':
+						weaponLabel.text = 'CROWBAR';
+						break;
+					case 'weapon_physcannon':
+						weaponLabel.text = 'ZERO-POINT ENERGY GUN\n(GRAVITY GUN)';
+						break;
+					case 'weapon_portalgun':
+						weaponLabel.text = 'HANDHELD PORTAL DEVICE\n(PORTAL GUN)';
+						break;
+					case 'weapon_pistol':
+						weaponLabel.text = '9MM PISTOL';
+						break;
+					case 'weapon_357':
+						weaponLabel.text = '.357 MAGNUM';
+						break;
+					case 'weapon_smg1':
+						weaponLabel.text = 'SMG\n(SUBMACHINE GUN)';
+						break;
+					case 'weapon_ar2':
+						weaponLabel.text = 'OVERWATCH STANDARD ISSUE\n(PULSE-RIFLE)';
+						break;
+					case 'weapon_crossbow':
+						weaponLabel.text = 'CROSSBOW';
+						break;
+					case 'weapon_shotgun':
+						weaponLabel.text = 'SHOTGUN';
+						break;
+					case 'weapon_rpg':
+						weaponLabel.text = 'RPG\n(ROCKET PROPELLED GRENADE)';
+						break;
+					case 'weapon_frag':
+						weaponLabel.text = 'GRENADE';
+						break;
+					case 'weapon_bugbait':
+						weaponLabel.text = 'PHEROPOD\n(BUGBAIT)';
+						break;
+					case 'weapon_stunstick':
+						weaponLabel.text = 'STUNSTICK';
+						break;
+					default:
+						weaponLabel.text = `${weapon.classname}`;
+						break;
+				}
 				weaponLabel.AddClass('weapons__bucket__entry__name');
 			});
 		}
