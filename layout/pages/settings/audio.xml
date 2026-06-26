@@ -185,6 +185,41 @@
 					<RadioButton group="cc_subtitles" text="#Common_On" value="1" />
 				</SettingsEnum>
 
+				<SettingsEnumDropDown
+					text="#Settings_ClosedCaptions_Lang"
+					infomessage="#Settings_ClosedCaptions_Lang_info"
+					convar="cc_lang"
+					hasdocspage="false"
+				>
+					<Label text="#Settings_ClosedCaptions_Lang_English" value="english" id="cclang_english" />
+					<Label text="#Settings_ClosedCaptions_Lang_Spanish" value="spanish" id="cclang_spanish" />
+					<Label text="#Settings_ClosedCaptions_Lang_French" value="french" id="cclang_french" />
+					<Label text="#Settings_ClosedCaptions_Lang_Italian" value="italian" id="cclang_italian" />
+					<Label text="#Settings_ClosedCaptions_Lang_German" value="german" id="cclang_german" />
+					<Label text="#Settings_ClosedCaptions_Lang_Greek" value="greek" id="cclang_greek" />
+					<Label text="#Settings_ClosedCaptions_Lang_Korean" value="koreana" id="cclang_koreana" />
+					<Label text="#Settings_ClosedCaptions_Lang_Simplified_Chinese" value="schinese" id="cclang_schinese" />
+					<Label text="#Settings_ClosedCaptions_Lang_Traditional_Chinese" value="tchinese" id="cclang_tchinese" />
+					<Label text="#Settings_ClosedCaptions_Lang_Russian" value="russian" id="cclang_russian" />
+					<Label text="#Settings_ClosedCaptions_Lang_Thai" value="thai" id="cclang_thai" />
+					<Label text="#Settings_ClosedCaptions_Lang_Japanese" value="japanese" id="cclang_japanese" />
+					<Label text="#Settings_ClosedCaptions_Lang_Portuguese" value="portuguese" id="cclang_portuguese" />
+					<Label text="#Settings_ClosedCaptions_Lang_Brazilian" value="brazilian" id="cclang_brazilian" />
+					<Label text="#Settings_ClosedCaptions_Lang_Polish" value="polish" id="cclang_polish" />
+					<Label text="#Settings_ClosedCaptions_Lang_Danish" value="danish" id="cclang_danish" />
+					<Label text="#Settings_ClosedCaptions_Lang_Dutch" value="dutch" id="cclang_dutch" />
+					<Label text="#Settings_ClosedCaptions_Lang_Finnish" value="finnish" id="cclang_finnish" />
+					<Label text="#Settings_ClosedCaptions_Lang_Norwegian" value="norwegian" id="cclang_norwegian" />
+					<Label text="#Settings_ClosedCaptions_Lang_Swedish" value="swedish" id="cclang_swedish" />
+					<Label text="#Settings_ClosedCaptions_Lang_Czech" value="czech" id="cclang_czech" />
+					<Label text="#Settings_ClosedCaptions_Lang_Hungarian" value="hungarian" id="cclang_hungarian" />
+					<Label text="#Settings_ClosedCaptions_Lang_Romanian" value="romanian" id="cclang_romanian" />
+					<Label text="#Settings_ClosedCaptions_Lang_Bulgarian" value="bulgarian" id="cclang_bulgarian" />
+					<Label text="#Settings_ClosedCaptions_Lang_Turkish" value="turkish" id="cclang_turkish" />
+					<Label text="#Settings_ClosedCaptions_Lang_Arabic" value="arabic" id="cclang_arabic" />
+					<Label text="#Settings_ClosedCaptions_Lang_Ukranian" value="ukranian" id="cclang_ukranian" />
+				</SettingsEnumDropDown>
+
 			</Panel>
 
 			<Panel class="settings-page__spacer" />
