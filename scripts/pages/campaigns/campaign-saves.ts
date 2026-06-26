@@ -88,10 +88,7 @@ class SaveEntry {
 							'warning-popup',
 							$.Localize('#Action_OverwriteGame'),
 							() => {
-								// TODO: Replace this with other save API
-								const savFile: string = this.save.fileName;
-								const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
-								SaveRestoreAPI.SaveGame(nameWithoutExt);
+								GameSavesAPI.CreateNamedSave(this.save.name);
 
 								CampaignSaves.purgeSaveList();
 
@@ -118,10 +115,7 @@ class SaveEntry {
 					'warning-popup',
 					$.Localize('#Action_DeleteGame'),
 					() => {
-						// TODO: Replace this with other save API
-						const savFile: string = this.save.fileName;
-						const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
-						SaveRestoreAPI.DeleteSave(nameWithoutExt);
+						GameSavesAPI.DeleteSaveGame(this.save.name);
 
 						CampaignSaves.purgeSaveList();
 
@@ -229,8 +223,7 @@ class SaveEntry {
 
 		const cover = this.panel.FindChildTraverse<Image>('SaveCover');
 		if (cover) {
-			const thumb = `file://{__saves}/${this.save.fileName.replace('.sav', '.tga')}`;
-			cover.SetImage(thumb);
+			cover.SetImage(this.save.screenshotPath);
 		}
 
 		const type = this.panel.FindChildTraverse<Label>('SaveType');
