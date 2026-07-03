@@ -312,9 +312,12 @@ class MenuManager {
 	}
 
 	static updateFocus() {
-		const c = this.menuNav.Children();
-		if (c.length > 0) {
-			c[0].SetFocus();
+		// Select first enabled button.
+		for (const child of this.menuNav.Children()) {
+			if (child.enabled) {
+				child.SetFocus();
+				break;
+			}
 		}
 	}
 
