@@ -230,7 +230,7 @@ class CloseCaptioning {
 		});
 		$.RegisterForUnhandledEvent('MapLoaded', () => {
 			this.wipeCaptions();
-			ClosedCaptionsAPI.SetCaptioningExpiryMethod( CloseCaptioningExpiryMethod.STACK );
+			ClosedCaptionsAPI.SetCaptioningExpiryMethod(CloseCaptioningExpiryMethod.STACK);
 		});
 
 		this.updateStyle();

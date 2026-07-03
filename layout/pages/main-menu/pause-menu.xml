@@ -27,63 +27,20 @@
 	</snippets>
 
 	<Panel class="full" hittest="false" onload="PauseMenu.onLoad()">
-		<Panel id="ContinueBox" class="mainmenu__display-box" hittest="false" hittestchildren="false">
-			<Panel>
-				<Image
-					id="ContinueSaveThumb"
-					class="mainmenu__display-box__img"
-					src="file://{images}/menu/fallback/programmer_art_logo.png"
-					textureheight="1920"
-					texturewidth="1080"
-					scaling="stretch-to-cover-preserve-aspect"
-				/>
-			</Panel>
-			<Panel class="mainmenu__display-box__details">
-				<Panel class="vertical-align-center flow-down ml-3">
-					<Label id="ContinueSaveTagline" class="mainmenu__display-box__tagline" text="[PH] Tagline" />
-				</Panel>
-			</Panel>
-		</Panel>
-
 		<Panel id="MapPanel" hittest="false" class="full">
 			<Panel class="mainmenu__addon" hittest="false">
 				<Panel class="full mainmenu__addon__bg" />
 			</Panel>
 			<Panel class="mainmenu__addon" hittest="false">
 				<Panel id="VoteBox" class="mainmenu__addon__voters">
-					<RadioButton
-						group="vote"
-						id="MapUpvote"
-						class="mainmenu__addon__vote mainmenu__addon__upvote"
-						onactivate="PauseMenu.setMapVote(1)"
-					>
-						<Image
-							class="mainmenu__addon__vote__icon"
-							texturewidth="96"
-							textureheight="96"
-							src="file://{images}/icons/p2_upvote.png"
-						/>
+					<RadioButton group="vote" id="MapUpvote" class="vote upvote" onactivate="PauseMenu.setMapVote(1)">
+						<Image class="vote__icon flip-vertical" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
 					</RadioButton>
-					<RadioButton
-						group="vote"
-						id="MapDownvote"
-						class="mainmenu__addon__vote mainmenu__addon__downvote"
-						onactivate="PauseMenu.setMapVote(2)"
-					>
-						<Image
-							class="mainmenu__addon__vote__icon"
-							texturewidth="96"
-							textureheight="96"
-							src="file://{images}/icons/p2_downvote.png"
-						/>
+					<RadioButton group="vote" id="MapDownvote" class="vote downvote" onactivate="PauseMenu.setMapVote(2)">
+						<Image class="vote__icon" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
 					</RadioButton>
-					<ToggleButton
-						id="MapFavorite"
-						class="mainmenu__addon__vote mainmenu__addon__favorite"
-						disabled="true"
-						onactivate="PauseMenu.toggleMapFavorite()"
-					>
-						<Image class="mainmenu__addon__vote__icon" texturewidth="128" textureheight="128" src="file://{images}/star.svg" />
+					<ToggleButton id="MapFavorite" class="vote favorite" disabled="true" onactivate="PauseMenu.toggleMapFavorite()">
+						<Image class="vote__icon" texturewidth="128" textureheight="128" src="file://{images}/star.svg" />
 					</ToggleButton>
 				</Panel>
 				<Panel id="AddonBottom" class="mainmenu__addon__bottom">
@@ -102,10 +59,18 @@
 				<Panel class="flow-down overflow-noclip">
 					<Panel class="mainmenu__addon__overflow">
 						<Image id="MapImage" class="mainmenu__addon__cover" />
-						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar" />
 					</Panel>
 					<Label id="MapTitle" class="mainmenu__addon__title" text="[PH] Map Title" />
-					<Label id="MapDesc" class="mainmenu__addon__desc" text="[PH] Map Author" />
+					<Label id="MapAuthor" class="mainmenu__addon__desc" text="[PH] Map Author" />
+					<Button
+						id="AuthSteamProfile"
+						class="ml-5"
+						onactivate="PauseMenu.openSteamProfile()"
+						onmouseover="UiToolkitAPI.ShowTextTooltip('AuthSteamProfile', '[HC] View Author\'s Steam Profile');"
+						onmouseout="UiToolkitAPI.HideTextTooltip();"
+					>
+						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar" />
+					</Button>
 				</Panel>
 			</Panel>
 		</Panel>

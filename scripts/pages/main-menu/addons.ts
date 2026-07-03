@@ -224,7 +224,6 @@ class AddonManager {
 
 		this.purgeAddonList();
 
-
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU) {
 			const activeAddons = WorkshopAPI.GetActiveMountList();
 			const campaign = CampaignAPI.GetActiveCampaign();
@@ -237,7 +236,7 @@ class AddonManager {
 					p.AddClass('fancy-orange-noborder');
 					p.AddClass('addons__divider__orange');
 					$.CreatePanel('Label', p, 'ContentDividerText', {
-						text: '[HC] The following addons are required by in-game content.',
+						text: '[HC] The following addons are required by the content currently being played.',
 						class: 'horizontal-align-center text-weight-bold'
 					});
 				}
@@ -277,8 +276,6 @@ class AddonManager {
 			// If any addons are enabled, we'll default the "select all" button to true
 			if (this.toggleAllButton) this.toggleAllButton.SetSelected(anyEnabled);
 		}
-
-		
 
 		this.updateAddons();
 	}
