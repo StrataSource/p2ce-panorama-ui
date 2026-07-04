@@ -252,8 +252,7 @@ class BaseMenu {
 			return;
 		}
 
-		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
-		this.continueImg.SetImage(thumb);
+		this.continueImg.SetImage(this.latestSave.screenshotPath);
 		const meta =
 			CampaignAPI.GetCampaignMeta(`${savCampaign.bucket.id}/${savCampaign.campaign.id}`) ??
 			new Map<string, string>();

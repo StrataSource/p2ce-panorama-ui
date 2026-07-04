@@ -270,8 +270,7 @@ class PauseMenu {
 			return;
 		}
 
-		const thumb = `file://{__saves}/${this.latestSave.fileName.replace('.sav', '.tga')}`;
-		this.continueImg.SetImage(thumb);
+		this.continueImg.SetImage(this.latestSave.screenshotPath);
 
 		const date = new Date(Number(this.latestSave.fileTime));
 		this.continueBoxText.text = convertTime(date);
