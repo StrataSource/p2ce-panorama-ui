@@ -81,7 +81,7 @@
         "HL2_GameOver_Timer_ep2"			"HER ŞEY BİTTİ\nFREEMAN'IN HIZLI BİR ZAFERİ ELDE ETMEKTE BAŞARISIZLIĞI\nTAMAMEN MAĞLUBİYETİMİZE YOL AÇTI"
         "HL2_GameOver_Stuck_ep2"			"GÖREV: SONLANDIRILDI\nKONU: FREEMAN\nNEDEN: AŞIRI KÖTÜ YARGI GÖSTERİMİ"
 
-		"Portal_Portalgun"					"Aperture Science Taşınabilir Portal Cihazı\n(Portal Tabancası)"
+		"Portal_Portalgun"					"Aperture Science Taşınabilir Portal Cihazı\n(Portal Silahı)"
 		
 		"HL2_Crowbar"						"Levye"
 		"HL2_GravityGun"					"Sıfır Noktası Enerji Alanı Manipülatörü\n(Gravity gun)"
@@ -197,16 +197,16 @@
 
 		"P2_Actions_Title"					"EYLEMLER"
 		"P2_Coop_Title"						"EŞLİ"
-		"P2_Primary_Attack"					"Mavi Portalı Ateşle"
-		"P2_Secondary_Attack"				"Turuncu Portalı Ateşle"
+		"P2_Primary_Attack"					"Mavi Portalı Aç"
+		"P2_Secondary_Attack"				"Turuncu Portalı AÇ"
 		"P2_Zoom"							"Zoom'u Değiştir"
-		"P2_Zoom_In"						"Yakınlaştır"
-		"P2_Zoom_Out"						"Uzaklaştır"
-		"P2_Romote_View"					"Ortak Uzaktan Görünüm"
+		"P2_Zoom_In"						"Yakınlaştırmaya Geçiş"
+		"P2_Zoom_Out"						"Uzaklaş"
+		"P2_Romote_View"					"Partner Uzaktan Görünüm"
 		"P2_Mouse_Menu"						"İletişim Menüsü"
-		"P2_Taunt"							"Taunt Menüsü"
+		"P2_Taunt"							"Jest Menüsü"
 
-		"P2_Taunt_Earned"					"Taunt Çözüldü"
+		"P2_Taunt_Earned"					"Jest Açıldı"
 
 		"P2_Scoreboard_Ping"				"Ping"
 		"P2_Scoreboard_Dead"				"Ölü"
@@ -219,7 +219,7 @@
 		"P2_ScoreBoard_Players"				"%s2 - %s1s"
 
 		"Valve_Hint_Sprint"					"Koş"
-		"Valve_Hint_GravGun"				"Nesneleri At ve Çek"
+		"Valve_Hint_GravGun"				"Nesneye Havada Vur Nesneyi Çek"
 
 		"Valve_Hint_Look_Up"				"Yukarı Bak"
 		"Valve_Hint_Look_Down"				"Aşağı Bak"
@@ -270,24 +270,24 @@
 		"Instructor_Zoom"					"Yakınlaştır"
 		"Instructor_SS_Control"				"Diğer Oyuncuyu Kontrol Etmek İçin Bas"
 
-		"Paint_Instructor_teach_bounce_suppression"				"Zıplamayı/Zıplamayı önlemek için basılı tut"
+		"Paint_Instructor_teach_bounce_suppression"				"Zıplamamak için basılı tut"
 		
 		// Invites
 		"P2COOP_Invite_Title"						"Portal 2 Daveti"
 		"P2COOP_Invite_Body"						"Bir Portal 2 eşli (co-op) oyununa davet edildiniz!"
 
 		// COOP
-		"P2COOP_TrackName_1"						"Gezinti Hunileri"
-		"P2COOP_TrackName_2"						"Hareket Jelleri"
-		"P2COOP_TrackName_3"						"Gelişmiş Test Odaları"
-		"P2COOP_TrackName_4"						"Partner Bekleniyor"
+		"P2COOP_TrackName_1"						"Takım Oluşturma"
+		"P2COOP_TrackName_2"						"Kütle ve İvme"
+		"P2COOP_TrackName_3"						"Katı Işık Yüzeyleri"
+		"P2COOP_TrackName_4"						"Gezinim"
 		"P2COOP_TrackName_5"						"Hareketlilik Jelleri"
 		"P2COOP_TrackName_6"						"Gelişmiş Odalar"
 
 		"P2COOP_WAITINGFORPARTNER"					"Partner bekleniyor"
 
-		"P2COOP_SelectScreen_SelectNoOption"		"Lütfen söküm\noktalarına ilerleyin."
-		"P2COOP_SelectScreen_Select"				"Lütfen bir seviye seçin, ardından\nsöküm odalarına ilerleyin."
+		"P2COOP_SelectScreen_SelectNoOption"		"Lütfen montaj\noktalarına ilerleyin."
+		"P2COOP_SelectScreen_Select"				"Lütfen bir görev seçin, ardından\nmontaj odalarına ilerleyin."
 		"P2COOP_SelectScreen_CourseNum"				"Aşama: {s:coop_course_name}"
 		"P2COOP_SelectScreen_PercentComplete"	    "%{i:coop_completion_percentage} TAMAMLANDI"
 		
@@ -1191,17 +1191,17 @@ Bu senaryoya erişmek için lütfen önce yukarıdaki oyunları yükleyin ve ba�
         
         // portal2
         "MainMenu_Campaigns_portal2"                "Portal 2"
-        "MainMenu_Campaigns_portal2_Description"    "Portal 2, dinamik yeni karakterlerden oluşan bir kadro, bir dizi yeni bulmaca unsuru ve çok daha büyük bir aldatıcı test odaları seti sunuyor. Oyuncular Aperture Science Laboratuvarlarının daha önce hiç görülmemiş alanlarını keşfedecek ve orijinal oyunda kendilerine rehberlik eden, zaman zaman cinayet işlemeye meyilli bilgisayar yoldaşları GLaDOS ile yeniden bir araya gelecekler."
-        "MainMenu_Campaigns_portal2_MP"                "Portal 2 Co-op"
-        "MainMenu_Campaigns_portal2_MP_Description"    "Eşli (Co-op) modu, benzersiz bir hikaye, test odaları ve iki yeni oyuncu karakteriyle tamamen ayrı bir senaryo sunar. Bu yeni mod, oyuncuları portallar hakkında bildiklerini sandıkları her şeyi yeniden düşünmeye zorlar. Başarılı olmak için sadece işbirliği içinde hareket etmeleri değil, aynı zamanda işbirliği içinde düşünmeleri de gerekecektir."
+        "MainMenu_Campaigns_portal2_Description"    "Portal 2, canlı ve yeni karakterlerden oluşan bir kadro, yeni bulmaca unsurları ve çok daha büyük, sinsice hazırlanmış deney odaları sunuyor. Oyuncular, Aperture Science Laboratuvarlarının ilk oyunda onları yönlendiren ölüm saçan bilgisayar GLaDOS ile yeniden bir araya gelecek ve daha önce görülmemiş deney odalarını keşfedecekler."
+        "MainMenu_Campaigns_portal2_MP"                "Portal 2 Eşli"
+        "MainMenu_Campaigns_portal2_MP_Description"    "Oyunun iki kişilik eşli oyun modu, eşsiz bir hikâyeye, test odalarına ve iki yeni karaktere sahip baştan aşağı ayrı bir senaryo sunuyor. Bu yeni mod, oyuncuları, portallar hakkında bildiklerini düşündükleri her şeyi tekrar düşünmeye zorlayacak. Başarıya ulaşmak için sadece birlikte hareket etmeleri değil, aynı zamanda da birlikte düşünmeleri gerekecek."
         
         // portal
         "MainMenu_Campaigns_portal"                    "Portal"
-        "MainMenu_Campaigns_portal_Description"        "Gizemli Aperture Science Laboratuvarlarında geçen oyunda oyuncular, portallar açarak nesneleri ve kendilerini uzayda manevra ettirerek fiziksel bulmacaları ve zorlukları çözmelidir."
+        "MainMenu_Campaigns_portal_Description"        "Oyun gizemli Aperture Bilim Laboratuvarlarında geçmekte, Portal evrendeki en yenilikçi oyunlarından biri olarak biliniyor ve oyunculara, oynanabilirliği saatlerce sürecek eşsiz bir oyun vaat ediyor. Oyuncular fiziksel bulmacaları çözmeli ve açılan portallar ile objelere ve kendilerine manevra vererek mücadele etmeliler."
         
         // hl2
         "MainMenu_Campaigns_hl2"                    "Half-Life 2"
-        "MainMenu_Campaigns_hl2_Description"        "Yedi Saat Savaşı kaybedildi. Dünya teslim oldu. Black Mesa olayı uzak bir anı olarak kaldı. Oyuncu, uzaylıların istila ettiği, kemiklerine kadar sömürülen, kaynakları tükenen ve nüfusu azalan bir Dünya'da kendini bulan araştırma görevlisi Dr. Gordon Freeman'ın levyeyi tekrar eline almasına tanık olur. Freeman, Black Mesa'da serbest bıraktığı kötülükten dünyayı kurtarmak gibi kıskanılmayacak bir role itilmiştir. Ve değer verdiği pek çok insan ona güvenmektedir."
+        "MainMenu_Campaigns_hl2_Description"        "Yedi Saat Savaşı kaybedildi. Dünya teslim oldu. Black Mesa kazası artık sadece eski bir anı. Oyuncular tekrar, uzaylı yaratıkların baskınına uğramış, kaynakları tükenmiş ve gittikçe azalan nüfusa sahip bir dünyada kendini bulan bilim adamı Gordon Freeman'in levyesini ellerine alıyor. Freeman dünyayı Black Mesa'da yaptığı hatanın sonuçlarından kurtarmak için kimsenin istemeyeceği bir göreve itiliyor. Değer verdiği herkes ona bu konuda güveniyor."
         
         // episodic
         "MainMenu_Campaigns_episodic"                "Half-Life 2: Episode One"
@@ -1220,7 +1220,7 @@ Bu senaryoya erişmek için lütfen önce yukarıdaki oyunları yükleyin ve ba�
         "MainMenu_Addons_Category_WS"                "P2:CE Eklentileri"
         "MainMenu_Addons_Category_WS_Tagline"        "Atölye abonelikleri ve yerel olarak yüklenmiş içerikler"
         "MainMenu_Addons_Category_Mounts"            "Bağlı Oyunlar"
-        "MainMenu_Addons_Category_Mounts_Tagline"    "Yüklü diğer Source motoru oyunlarından içerikler"
+        "MainMenu_Addons_Category_Mounts_Tagline"    "Yüklü diğer Source Motoru oyunlarından içerikler"
         "MainMenu_Addons_SteamWorkshop_Tooltip"        "Arayüzde (overlay) Steam Atölyesi'ni aç"
         "MainMenu_Addons_Advanced_Tooltip"            "İleri düzey kullanıcılar için tüm eklenti türlerinin görünürlüğünü aç/kapat"
         
