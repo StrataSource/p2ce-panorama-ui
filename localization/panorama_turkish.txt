@@ -1,0 +1,1477 @@
+"lang"
+{
+	"Language"		"turkish"
+	"Tokens"
+	{
+		// Moved from p2ce_turkish.txt
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// XLAST STRINGS
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// cfg_xboxlive_builtin_strings.cfg 
+		"X_STRINGID_TITLENAME"					"Portal 2"
+
+		// cfg_xboxlive_presence_strings.cfg 
+		"RICHPRESENCE_IDLE" 					"Boşta"
+		"RICHPRESENCE_MAINMENU" 				"Ana Menü"
+		"RICHPRESENCE_SP" 						"{c0}"
+		"RICHPRESENCE_COOPMENU" 				"Kooperatif Oynuyor\n{c1}"
+		"RICHPRESENCE_COOPGAME" 				"{c2}\n{c3}"
+		"RICHPRESENCE_COOPGAME_TRACK" 			"{c2}\n{c3} {p0x10000023}/{p0x10000024}"
+
+		"SP_PRESENCE_TEXT_DEFAULT"				"Tek oyunculu"
+		"SP_PRESENCE_TEXT_CH1"					"1. Bölüm\nNezaket Ziyareti"
+		"SP_PRESENCE_TEXT_CH2"					"2. Bölüm\nİlk Açılış"
+		"SP_PRESENCE_TEXT_CH3"					"3. Bölüm\nDönüş"
+		"SP_PRESENCE_TEXT_CH4"					"4. Bölüm\nSürpriz"
+		"SP_PRESENCE_TEXT_CH5"					"5. Bölüm\nKaçış"
+		"SP_PRESENCE_TEXT_CH6"					"6. Bölüm\nDüşüş"
+		"SP_PRESENCE_TEXT_CH7"					"7. Bölüm\nKavuşma"
+		"SP_PRESENCE_TEXT_CH8"					"8. Bölüm\nKaşıntı"
+		"SP_PRESENCE_TEXT_CH9"					"9. Bölüm\nSeni Öldürdüğü Kısım"
+		"SP_PRESENCE_TEXT_CH10"					"10. Bölüm\nJenerik"
+
+		"COOP_PRESENCE_WAITING_DEFAULT"			"Ortak Bekleniyor"
+		"COOP_PRESENCE_WAITING_SPLITSCREEN"		"Splitscreen"
+		"COOP_PRESENCE_WAITING_FRIEND"			"Ortak Bekleniyor"
+		"COOP_PRESENCE_WAITING_QUICKMATCH"		"Yabancı Bekleniyor"
+
+		"COOP_PRESENCE_TAGLINE_DEFAULT"			"Eşli Oynuyor"
+		"COOP_PRESENCE_TAGLINE_SPLITSCREEN"		"Eşli Splitscreen"
+		"COOP_PRESENCE_TAGLINE_FRIEND"			"Arkadaşla Eşli"
+		"COOP_PRESENCE_TAGLINE_QUICKMATCH"		"Yabancı ile Eşli"
+
+		"COOP_PRESENCE_TRACK_DEFAULT"			"Eşli Parkur"
+		"COOP_PRESENCE_TRACK_CALIBRATION"		"Kalibrasyon Kursu"
+		"COOP_PRESENCE_TRACK_HUB"				"Merkezin keyfini çıkarmak"
+		"COOP_PRESENCE_TRACK_TRACK1"			"Takım Oluşturma"
+        "COOP_PRESENCE_TRACK_TRACK2"			"Kütle ve İvme"
+        "COOP_PRESENCE_TRACK_TRACK3"			"Katı Işık"
+        "COOP_PRESENCE_TRACK_TRACK4"			"Gezi Boruları"
+        "COOP_PRESENCE_TRACK_TRACK5"			"Hareketlilik Jelleri"
+        "COOP_PRESENCE_TRACK_CREDITS"			"Jenerik"
+
+		// cfg_xboxlive_gamemode_strings.cfg 
+		"GAME_MODE_SP"							"Tek Oyuncu"
+		"GAME_MODE_COOP"						"Eşli"
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// END OF XLAST STRINGS
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		
+		"P2Controller_Taunt"				"Jest"
+		"P2Controller_Signal"				"İşaret Menüsü"
+		"P2Controller_RemoteView"			"Partner Görünümü"
+		"P2Controller_PortalBlue"			"Mavi Portal"
+		"P2Controller_PortalOrange"			"Turuncu Portal"
+		"P2Controller_QuickPing"			"Hızlı İşaret"
+		"P2Controller_Zoom"					"Yakınlaştır"
+
+		"HL2_GameOver_Object"				"ATAMA: SONLANDIRILDI\nKONU: FREEMAN\nNEDEN: MİSYON KRİTİK KAYNAKLARI KORUYAMAMA"
+		"HL2_GameOver_Ally"					"ATAMA: SONLANDIRILDI\nKONU: FREEMAN\nNEDEN: MİSYON KRİTİK PERSONELİ KORUYAMAMA"
+		"HL2_GameOver_Timer"				"ATAMA: SONLANDIRILDI\nKONU: FREEMAN\nNEDEN: ZAMAN KRİTİK SIRAYI ENGELLEYEMEME"
+		"HL2_GameOver_Stuck"				"ATAMA: SONLANDIRILDI\nKONU: FREEMAN\nNEDEN: AŞIRI KÖTÜ YARGI GÖSTERİMİ"
+		
+		"Episodic_GameOver_AlyxDead"		"Alyx Öldürüldü"
+
+		// figure out a way to override these strings in episodic
+		"HL2_GameOver_Object_ep2"			"BURADA BİTİYOR\nFREEMAN KAYNAKLARI KORUMADA BAŞARISIZ OLDU\nZAFER İÇİN KRİTİK OLARAK DEĞERLENDİRİLEN\nKAÇINILMAZ KÖTÜLÜK GÖRÜNTÜLERİ VORTESSENCE'İ BULANDIRIYOR"
+		"HL2_GameOver_Ally_ep2"				"VE BÖYLECE BİTİYOR\nFREEMAN, ZAFER İÇİN GEREKEN BİR HAYATI KORUMADA BAŞARISIZ OLDU\nVORTESSENCE'DE GÖRDÜĞÜMÜZ ŞEKİLLER BÖYLE"
+        "HL2_GameOver_Timer_ep2"			"HER ŞEY BİTTİ\nFREEMAN'IN HIZLI BİR ZAFERİ ELDE ETMEKTE BAŞARISIZLIĞI\nTAMAMEN MAĞLUBİYETİMİZE YOL AÇTI"
+        "HL2_GameOver_Stuck_ep2"			"GÖREV: SONLANDIRILDI\nKONU: FREEMAN\nNEDEN: AŞIRI KÖTÜ YARGI GÖSTERİMİ"
+
+		"Portal_Portalgun"					"Aperture Science Taşınabilir Portal Cihazı\n(Portal Tabancası)"
+		
+		"HL2_Crowbar"						"Levye"
+		"HL2_GravityGun"					"Sıfır Noktası Enerji Alanı Manipülatörü\n(Gravity gun)"
+		"HL2_Pistol"						"9mm Pistol"
+		"HL2_357Handgun"					"9x33mm Revolver\n(.357 Magnum)"
+		"HL2_SMG1"							"SMG\n(Alt-Makine Tüfeği)"
+		"HL2_Pulse_Rifle"					"Overwatch Standart-İşlem\n(Pulse Tüfeği)"
+		"HL2_Shotgun"						"SPAS-12\n(Tüfek)"
+		"HL2_Crossbow"						"Yaylı Tüfek"
+		"HL2_Grenade"						"Bomba"
+		"HL2_RPG"							"RPG\n(Roketle İtici Bombası)"
+		"HL2_Bugbait"						"Pheropod\n(Bugbait)"
+
+		"HL2_SAVING"						"Kaydediliyor..."
+		"HL2_Saved"							"Kaydedildi."
+		
+		"HL2_SetupMicrophone"				"Gelişmiş Mikrofon Ayarlarını Yapılandır"
+		"HL2_SetupMicrophoneSteam"			"Steam Overlay şu anda devre dışı.\nLütfen Steam Overlay'i etkinleştirin veya mikrofon ayarlarınızı Steam istemcisi üzerinden yapılandırın."
+
+		"HL2_Enable_Commentary"				"Yorum parçasını etkinleştir"
+
+		"portal2_Chapter1"					"1. Bölüm\nNazik Çağrı"
+		"portal2_Chapter1_Title"			"1. Bölüm"
+		"portal2_Chapter1_Subtitle"			"Nazik Çağrı"
+
+		"portal2_Chapter2"					"2. Bölüm\nİlk Açılış"
+		"portal2_Chapter2_Title"			"2. Bölüm"
+		"portal2_Chapter2_Subtitle"			"İlk Açılış"
+
+		"portal2_Chapter3"					"3. Bölüm\nDönüş"
+		"portal2_Chapter3_Title"			"3. Bölüm"
+		"portal2_Chapter3_Subtitle"			"Dönüş"
+
+        "portal2_Chapter4"					"4. Bölüm\nSürpriz"
+		"portal2_Chapter4_Title"			"4. Bölüm"
+		"portal2_Chapter4_Subtitle"			"Sürpriz"
+
+		"portal2_Chapter5"					"5. Bölüm\nKaçış"
+		"portal2_Chapter5_Title"			"5. Bölüm"
+		"portal2_Chapter5_Subtitle"			"Kaçış"
+
+		"portal2_Chapter6"					"6. Bölüm\nDüşüş"
+		"portal2_Chapter6_Title"			"6. Bölüm"
+		"portal2_Chapter6_Subtitle"			"Düşüş"
+		
+		"portal2_Chapter7"					"7. Bölüm\nBuluşma"
+		"portal2_Chapter7_Title"			"7. Bölüm"
+		"portal2_Chapter7_Subtitle"			"Yeniden Buluşma"
+
+		"portal2_Chapter8"					"8. Bölüm\nKaşıntı"
+		"portal2_Chapter8_Title"			"8. Bölüm"
+		"portal2_Chapter8_Subtitle"			"Kaşıntı"
+
+		"portal2_Chapter9"					"9. Bölüm\nSeni Öldürdüğü Kısım"
+		"portal2_Chapter9_Title"			"9. Bölüm"
+		"portal2_Chapter9_Subtitle"			"Seni Öldürdüğü Kısım"
+
+		"portal2_Chapter10"					"10. Bölüm\nJenerik"
+		"portal2_Chapter10_Title"			"10. Bölüm"
+		"portal2_Chapter10_Subtitle"		"Jenerik"
+
+        // hl2/episodic compat
+		// base game hl2
+		"HL2_Chapter1_Title"				"1. Bölüm\nNokta Ekleme"
+		"HL2_Chapter2_Title"				"2. Bölüm\n\"Unutulmaz Bir Gün\""
+		"HL2_Chapter3_Title"				"3. Bölüm\nRota Kanalı"
+		"HL2_Chapter4_Title"				"4. Bölüm\nSu Tehlikesi"
+		"HL2_Chapter5_Title"				"5. Bölüm\nBlack mesa East"
+		"HL2_Chapter6_Title"				"6. Bölüm\n\"Ravenholm'a Gitmiyoruz...\""
+		"HL2_Chapter7_Title"				"7. Bölüm\n17 Numaralı Otoyol"
+		"HL2_Chapter8_Title"				"8. Bölüm\nKum Tuzakları"
+		"HL2_Chapter9_Title"				"9. Bölüm\nBirinci Vatandaş Karşıtı"
+		"HL2_Chapter9a_Title"				"9. Bölüma\nDolanıklık"
+		"HL2_Chapter10_Title"				"10. Bölüm\nBirinci Vatandaş Karşıtı"
+		"HL2_Chapter11_Title"				"11. Bölüm\n\"Freeman'ı Takip Edin!\""
+		"HL2_Chapter12_Title"				"12. Bölüm\nHayırseverlerimiz"
+		"HL2_Chapter13_Title"				"13. Bölüm\nKaranlık Enerji"
+		"HL2_Chapter14_Title"				"14. Bölüm\nCredits"
+		
+		// episodik
+		"episodic_Chapter1_Title"			"1. Bölüm\nGereksiz Alarm"
+		"episodic_Chapter2_Title"			"2. Bölüm\nDoğrudan Müdahale"
+		"episodic_Chapter3_Title"			"3. Bölüm\nAşağılık"
+		"episodic_Chapter4_Title"			"4. Bölüm\nKentsel Uçuş"
+		"episodic_Chapter5_Title"			"5. Bölüm\nÇıkış 17"
+
+		// ep2
+		"ep2_Chapter1_Title"				"1. Bölüm\nBeyaz Ormana Doğru"
+		"ep2_Chapter2_Title"				"2. Bölüm\nBu Vortal Bobini"
+		"ep2_Chapter3_Title"				"3. Bölüm\nFreeman Pontifex"
+		"ep2_Chapter4_Title"				"4. Bölüm\nYan Koltukta Oturmak"
+		"ep2_Chapter5_Title"				"5. Bölüm\nRadarın Altında"
+		"ep2_Chapter6_Title"				"6. Bölüm\nOrtak Arkadaşımız"
+		"ep2_Chapter7_Title"				"7. Bölüm\nT-Minus Bir"
+		
+		// portal
+	    "Portal_Chapter1_Title"				"Test Odası 00"
+		"Portal_Chapter2_Title"				"Test Odası 04"
+		"Portal_Chapter3_Title"				"Test Odası 08"
+		"Portal_Chapter4_Title"				"Test Odası 10"
+		"Portal_Chapter5_Title"				"Test Odası 13"
+		"Portal_Chapter6_Title"				"Test Odası 14"
+		"Portal_Chapter7_Title"				"Test Odası 15"
+		"Portal_Chapter8_Title"				"Test Odası 16"
+		"Portal_Chapter9_Title"				"Test Odası 17"
+		"Portal_Chapter10_Title"			"Test Odası 18"
+		"Portal_Chapter11_Title"			"Test Odası 19"
+		"Portal_Chapter12_Title"			"Testler bitti"
+
+		"PORTAL2_CoopCommentary_Title1"		"Kooperatif\nGüven İnşası"
+		"PORTAL2_CoopCommentary_Title2"		"Kooperatif\nMerkez"
+		"PORTAL2_CoopCommentary_Title3"		"Kooperatif\nGüvenlik Odası"
+
+		"P2_Actions_Title"					"EYLEMLER"
+		"P2_Coop_Title"						"EŞLİ"
+		"P2_Primary_Attack"					"Mavi Portalı Ateşle"
+		"P2_Secondary_Attack"				"Turuncu Portalı Ateşle"
+		"P2_Zoom"							"Zoom'u Değiştir"
+		"P2_Zoom_In"						"Yakınlaştır"
+		"P2_Zoom_Out"						"Uzaklaştır"
+		"P2_Romote_View"					"Ortak Uzaktan Görünüm"
+		"P2_Mouse_Menu"						"İletişim Menüsü"
+		"P2_Taunt"							"Taunt Menüsü"
+
+		"P2_Taunt_Earned"					"Taunt Çözüldü"
+
+		"P2_Scoreboard_Ping"				"Ping"
+		"P2_Scoreboard_Dead"				"Ölü"
+		"P2_Team_Red"						"P-body"
+		"P2_Team_Blue"						"Atlas"
+		"P2_Team_RedUpper"					"P-BODY"
+		"P2_Team_BlueUpper"					"ATLAS"
+
+		"P2_ScoreBoard_Player"				"%s2 - %s1"
+		"P2_ScoreBoard_Players"				"%s2 - %s1s"
+
+		"Valve_Hint_Sprint"					"Koş"
+		"Valve_Hint_GravGun"				"Nesneleri At ve Çek"
+
+		"Valve_Hint_Look_Up"				"Yukarı Bak"
+		"Valve_Hint_Look_Down"				"Aşağı Bak"
+		"Valve_Hint_Use_Bed"				"Uyu"
+		"Valve_Hint_Movement_Keys"			"Yürü"
+		"Valve_Hint_Say_Apple"				"\"Elma\" De"
+		"Valve_Hint_Talk"					"Konuş"
+
+		"Valve_Hint_Crouch"					"Eğil"
+		"Valve_Hint_Uncrouch"				"Ayağa Kalk"
+		"Valve_Hint_PushButton"				"Butona Bas"
+		"Valve_Hint_Interact"				"Etkileşime Geç"
+		"Valve_Hint_Jump"					"Zıpla"
+		"Valve_Hint_Door"					"Kapıyı Aç"
+		"Valve_Hint_Lever"					"Kolu Çek"
+		"Valve_Hint_Zoom"					"Yakınlaştır"
+		"Valve_Hint_Pickup_Glados"			"GLaDOS'u Al"
+		"Valve_Hint_Socket"					"Soketi Aktifleştir"
+
+		"Valve_Hint_USEPickup"				"Nesneyi Al"
+
+		"Valve_Hint_CarryTurret"			"veya Tareti kaldırmak için Yerçekimi Silahı'nı kullan"
+		"Valve_Hint_CROSSBOW"				"Arbalet Yakınlaştırması"
+
+		// PORTAL 2 INSTRUCTOR HINTS
+		"PORTAL2_HINT_GESTURE"				"Jest"
+		"PORTAL2_HINT_BUTTON_GESTURE"		"Bir Jest yap"
+		"PORTAL2_HINT_SEE_NEW_GESTURE"		"Yeni jestine göz at!"
+		"PORTAL2_HINT_PING"					"İşaret Aracını Kullan"
+		"PORTAL2_HINT_PING_WAIT"			"Partnerinin seçimini bekle"
+
+		// Instructor
+		"Instructor_Air_Taunt"				"Hava'da jest"
+		"Instructor_New_Taunt_Earned"		"Jest"
+		"Instructor_Partner_View"			"Partner Görüşü için Basılı Tut"
+		"Instructor_Start_Countdown"		"Geri Sayım için Basılı Tut"
+		"Instructor_Return_To_Hub"			"Merkeze Git"
+		"Instructor_Create_Blue_Portal"		"Mavi Portal Oluştur"
+		"Instructor_Create_Purple_Portal"	"Mor Portal Oluştur"
+		"Instructor_Create_Orange_Portal"	"Turuncu Portal Oluştur"
+		"Instructor_Create_Red_Portal"		"Kırmızı Portal Oluştur"
+		"Instructor_Walk"					"Yürü"
+		"Instructor_Push_Button"			"Aktifleştir"
+		"Instructor_Pick_Up"				"Al"
+		"Instructor_Drop"					"Bırak"
+		"Instructor_Jump"					"Zıpla" 
+		"Instructor_Unzoom"					"Uzaklaştır"
+		"Instructor_Zoom"					"Yakınlaştır"
+		"Instructor_SS_Control"				"Diğer Oyuncuyu Kontrol Etmek İçin Bas"
+
+		"Paint_Instructor_teach_bounce_suppression"				"Zıplamayı/Zıplamayı önlemek için basılı tut"
+		
+		// Invites
+		"P2COOP_Invite_Title"						"Portal 2 Daveti"
+		"P2COOP_Invite_Body"						"Bir Portal 2 eşli (co-op) oyununa davet edildiniz!"
+
+		// COOP
+		"P2COOP_TrackName_1"						"Gezinti Hunileri"
+		"P2COOP_TrackName_2"						"Hareket Jelleri"
+		"P2COOP_TrackName_3"						"Gelişmiş Test Odaları"
+		"P2COOP_TrackName_4"						"Partner Bekleniyor"
+		"P2COOP_TrackName_5"						"Hareketlilik Jelleri"
+		"P2COOP_TrackName_6"						"Gelişmiş Odalar"
+
+		"P2COOP_WAITINGFORPARTNER"					"Partner bekleniyor"
+
+		"P2COOP_SelectScreen_SelectNoOption"		"Lütfen söküm\noktalarına ilerleyin."
+		"P2COOP_SelectScreen_Select"				"Lütfen bir seviye seçin, ardından\nsöküm odalarına ilerleyin."
+		"P2COOP_SelectScreen_CourseNum"				"Aşama: {s:coop_course_name}"
+		"P2COOP_SelectScreen_PercentComplete"	    "%{i:coop_completion_percentage} TAMAMLANDI"
+		
+		// CSGO Pano
+		"UI_Submit"									"Gönder"
+		"UI_Select"									"Seç"
+		"UI_Inspect"								"İncele"
+		"UI_LeftStick_Short"						"LS"
+		"UI_RightStick_Short"						"RS"
+		"UI_LeftTrigger_Short"						"LT"
+		"UI_RightTrigger_Short"						"RT"
+		"UI_LeftBumper_Short"						"LB"
+		"UI_RightBumper_Short"						"RB"
+		"UI_LeftBack_Short"							"LP"
+		"UI_RightBack_Short"						"RP"
+		"UI_AButton"								"A"
+		"UI_BButton"								"B"
+		"UI_XButton"								"X"
+		"UI_YButton"								"Y"
+		"UI_Cancel"									"İptal"
+		"UI_Dismiss" 								"YOK SAY"
+		"UI_OK"										"Tamam"
+		"UI_Done"									"TAMAMLANDI"
+		"UI_Yes"									"EVET"
+		"UI_No"										"HAYIR"
+		"UI_Unknown"								"BİLİNMEYEN"
+		"UI_Always"									"HER ZAMAN"
+		"UI_Select_Footer"							"SEÇ"
+		"UI_Cancel_Footer"							"İptal"
+		"UI_Back_Footer" 							"GERİ"
+		"UI_Alert"									"Uyarı"
+		"UI_Help" 									"Yardım"
+
+		"UI_Backspace"								"BACKSPACE"
+		"UI_Spacebar"								"SPACE"
+		"UI_MoveCaret"								"İMLECİ HAREKET ETTİR"
+		"UI_MoveCaretLeft"							"İmleci Sola Kaydır"
+		"UI_MoveCaretRight"							"İmleci Sağa Kaydır"
+		"UI_InputDone"								"BİTTİ"
+		"UI_MoreOptions"							"DAHA FAZLA SEÇENEK"
+		"UI_SendMessage"							"GÖNDER"
+		"UI_Languages"								"DİLLER"
+		"UI_Next" 									"SONRAKİ"
+
+		"UI_CurrentItemInGroup"						"{d:current_item} / {d:total_items}"
+
+		"UI_Today"									"Bugün"
+		"UI_Yesterday"								"Dün"
+		"UI_Tomorrow"								"Yarın"
+		"UI_Hours"									"saat"
+		"UI_Minutes"								"dakika"
+		"UI_Seconds"								"saniye"
+		"UI_Hour"									"saat"
+		"UI_Minute"									"dakika"
+		"UI_Second"									"saniye"
+		"UI_UnknownTime"							"Bilinmiyor"
+
+		"UI_Label_CopySelected"						"Seçili metni kopyala"
+		"UI_Label_OpenLinkInBrowser"				"Bağlantıyı tarayıcıda aç"
+		"UI_Label_CopyURLToClipboard" 				"Bağlantıyı panoya kopyala"
+
+		"UI_TextEntry_CutToClipboard"				"Kes"
+		"UI_TextEntry_CopyToClipboard"				"Kopyala"
+		"UI_TextEntry_PasteClipboard"				"Yapıştır"
+
+		"UI_Agreements"								"Sözleşmeler"
+		"UI_ViewAgreements"							"SSA (Steam Abonelik Sözleşmesi) VE GİZLİLİK POLİTİKASINI GÖRÜNTÜLE"
+		"UI_I_Agree"								"Kabul ediyorum"
+
+		"UI_ConfirmExitTitle"						"Çıkışı Onayla"
+		"UI_ConfirmExitMessage"						"Çıkmak istediğinize emin misiniz?"
+		"UI_Quit"									"ÇIK"
+		"UI_Return"									"GERİ DÖN"
+		"UI_Continue"								"Devam Et"
+
+        "Month_January"                                "Ocak"
+        "Month_February"                               "Şubat"
+        "Month_March"                                  "Mart"
+        "Month_April"                                  "Nisan"
+        "Month_May"                                    "Mayıs"
+        "Month_June"                                   "Haziran"
+        "Month_July"                                   "Temmuz"
+        "Month_August"                                 "Ağustos"
+        "Month_September"                              "Eylül"
+        "Month_October"                                "Ekim"
+        "Month_November"                               "Kasım"
+        "Month_December"                               "Aralık"
+
+		"Panorama_Lang_English"						"English"
+		"Panorama_Lang_Spanish"						"Spanish"
+		"Panorama_Lang_French"						"French"
+		"Panorama_Lang_Italian"						"Italian"
+		"Panorama_Lang_German"						"German"
+		"Panorama_Lang_Greek"						"Greek"
+		"Panorama_Lang_Korean"						"Korean"
+		"Panorama_Lang_Simplified_Chinese"			"Simplified Chinese"
+		"Panorama_Lang_Traditional_Chinese"			"Traditional Chinese"
+		"Panorama_Lang_Russian"						"Russian"
+		"Panorama_Lang_Thai"						"Thai"
+		"Panorama_Lang_Japanese"					"Japanese"
+		"Panorama_Lang_Portuguese"					"Portuguese"
+		"Panorama_Lang_Brazilian"				 	"Brazilian Portuguese"
+		"Panorama_Lang_Polish"						"Polish"
+		"Panorama_Lang_Danish"						"Danish"
+		"Panorama_Lang_Dutch"						"Dutch"
+		"Panorama_Lang_Finnish"						"Finnish"
+		"Panorama_Lang_Norwegian"					"Norwegian"
+		"Panorama_Lang_Swedish"						"Swedish"
+		"Panorama_Lang_Czech"						"Czech"
+		"Panorama_Lang_Hungarian"					"Hungarian"
+		"Panorama_Lang_Romanian"					"Romanian"
+		"Panorama_Lang_Bulgarian"					"Bulgarian"
+		"Panorama_Lang_Turkish"						"Turkish"
+		"Panorama_Lang_Arabic"						"Arabic"
+		"Panorama_Lang_Ukrainian"					"Ukrainian"
+
+		"Panorama_Lang_Footer_English"				"ENGLISH"
+		"Panorama_Lang_Footer_Spanish"				"SPANISH"
+		"Panorama_Lang_Footer_French"				"FRENCH"
+		"Panorama_Lang_Footer_Italian"				"ITALIAN"
+		"Panorama_Lang_Footer_German"				"GERMAN"
+		"Panorama_Lang_Footer_Greek"				"GREEK"
+		"Panorama_Lang_Footer_Korean"				"KOREAN"
+		"Panorama_Lang_Footer_Simplified_Chinese"	"SIM. CHINESE"
+		"Panorama_Lang_Footer_Traditional_Chinese"	"TRAD. CHINESE"
+		"Panorama_Lang_Footer_Russian"				"RUSSIAN"
+		"Panorama_Lang_Footer_Thai"					"THAI"
+		"Panorama_Lang_Footer_Japanese"				"JAPANESE"
+		"Panorama_Lang_Footer_Portuguese"			"PORTUGUESE"
+		"Panorama_Lang_Footer_Brazilian"	 		"BR-PORTUGUESE"
+		"Panorama_Lang_Footer_Polish"				"POLISH"
+		"Panorama_Lang_Footer_Danish"				"DANISH"
+		"Panorama_Lang_Footer_Dutch"				"DUTCH"
+		"Panorama_Lang_Footer_Finnish"				"FINNISH"
+		"Panorama_Lang_Footer_Norwegian"			"NORWEGIAN"
+		"Panorama_Lang_Footer_Swedish"				"SWEDISH"
+		"Panorama_Lang_Footer_Czech"				"CZECH"
+		"Panorama_Lang_Footer_Hungarian"			"HUNGARIAN"
+		"Panorama_Lang_Footer_Romanian"				"ROMANIAN"
+		"Panorama_Lang_Footer_Bulgarian"			"BULGARIAN"
+		"Panorama_Lang_Footer_Turkish"				"TURKISH"
+		"Panorama_Lang_Footer_Ukrainian"			"UKRAINIAN"
+
+        "Panorama_MoviePlaybackError"                "Video oynatılırken bir hata oluştu"
+
+        "Debugger_PaintInfo"                        "Boyama Bilgisini Göster"
+        "Debugger_Style"                            "Tarz"
+        "Debugger_Computed"                            "Hesaplanmış"
+        "Debugger_Measurements"                        "Ölçümler:"
+        "Debugger_Misc"                                "Diğer:"
+        "Debugger_Properties"                        "Özellikler:"
+        "Debugger_StyleFileLink"                    "{s:stylefile}"
+        "Debugger_LayoutFileLink"                    "{s:layoutfile}"
+        "Debugger_LayoutFileLink_Code"                "XML/Kod Kaynaklı"    
+        "Debugger_InheritedStyleHeader"                "Şuradan miras alındı: "
+        "Debugger_Save"                                "Tüm Değişiklikleri Kaydet"
+        "Debugger_Revert"                            "Tüm Değişiklikleri Geri Al"
+        "Debugger_PanelStyleInvalid"                "Düzenleme sırasında stiller değişti! Gösterilen stilleri yeniden yüklemek için F5'e basın"
+        "Debugger_AnimationHeader"                    "Animasyon Anahtar Kareleri"
+        "Debugger_ToggleTheme"                        "Temayı Değiştir"
+        "Debugger_DevInfo"                            "Geliştirici Bilgisini Göster"
+        "Debugger_Smaller"                            "Daha Küçük"
+        "Debugger_Larger"                            "Daha Büyük"
+        "Debugger_ResetSize"                        "Boyutu Sıfırla"
+
+        "Console_Title"                                "Konsol"
+
+        // For Pano Loc
+        // Settings UI
+        "Settings_Title"                                "Ayarlar"
+        "Settings_General_Title"                        "Ayarlar"
+        "Settings_General_Apply"                        "Uygula"
+        "Settings_General_Discard"                        "Değişiklikleri At"
+        "Settings_General_Reset"                        "Sıfırla"
+        "Settings_General_Confirm"                        "Onayla"
+        "Settings_General_ResetControls"                "Sıfırla"
+        "Settings_General_ResetSomething"                "Sıfırla"
+        "Settings_General_Enabled"                        "Etkin"
+        "Settings_General_Disabled"                        "Devre Dışı"
+        "Settings_General_Auto"                            "Otomatik"
+        "Settings_General_Autodetect"                    "Otomatik Algıla"
+        "Settings_General_EngineersToast"                "Mühendisin Tost Makinesi"    // YEAH, TOAST!!!!!!
+        "Settings_General_Potato"                        "Patates"
+        "Settings_General_VeryLow"                        "Çok Düşük"
+        "Settings_General_Low"                            "Düşük"
+        "Settings_General_Medium"                        "Orta"
+        "Settings_General_High"                            "Yüksek"
+        "Settings_General_VeryHigh"                        "Çok Yüksek"
+        "Settings_General_StupidlyLudricous"            "Sunucu Patlama Modunu Etkinleştir"    // SERVER EXPLOSION IMMINENT
+        "Settings_General_ViewDocs"                        "Dokümantasyon Sayfasını Görüntüle"
+        "Settings_General_MapReload"                    "Bu ayar değişikliğinin geçerli olması için haritanın yeniden yüklenmesi gerekir."
+        "Settings_General_Command"                        "Komut"
+        "Settings_General_Convar"                        "Konsol Değişkeni"
+        "Settings_General_OutOfBounds"                    "Bu ayarın mevcut değeri belirtilen aralığın dışında. Düzgün çalışmayabilir."
+        "Settings_General_Search_Prompt"                 "Ayarlarda ara..."
+        "Settings_General_Search_Results"                "Arama Sonuçları"
+        "Settings_General_Search_EmptyHeader"            "Sonuç Bulunamadı"
+        "Settings_General_Search_EmptyNoResults"        "Arama sorgunuz ayarlar menüsündeki hiçbir sonuçla eşleşmedi."
+        "Settings_General_Search_OneCharHeader"            "Eksik Sorgu"
+        "Settings_General_Search_OneCharDesc"            "Arama sorgunuz tek harfli kelimeler içeriyor."
+        "Settings_General_Search_MatchedEnglishTag"        "Şununla eşleşir: "
+        "Settings_General_Search_VeryFull"                "{s:count} eşleşme daha"
+        "Settings_General_Search_VeryFull_Plural"        "{s:count} eşleşme daha"
+        "OS_Default_Device"                                "Sistem Varsayılan Çıkış Cihazı"
+        
+        // Settings - Import/Export
+        "Settings_ImportExport_Title"                    "%thing% Ayarlarını İçe Aktar/Dışa Aktar"
+        "Settings_ImportExport_Import"                    "İçe Aktar"
+        "Settings_ImportExport_Export"                    "Dışa Aktar"
+        "Settings_ImportExport_ImportExport"            "İçe Aktar/Dışa Aktar"
+        "Settings_ImportExport_ImportSettings"            "Ayarları İçe Aktar"
+        "Settings_ImportExport_Success"                    "İçe aktarma başarılı!"
+        "Settings_ImportExport_Success_Excluded"        "Bazı geçersiz cvarlar hariç tutuldu."
+        "Settings_ImportExport_Failure"                    "İçe aktarma başarısız!"
+        "Settings_ImportExport_Failed"                    "Ayarları içe aktarma ayrıştırıcısı başarısız oldu!"
+        "Settings_ImportExport_Invalid"                    "Geçersiz"
+        "Settings_ImportExport_B64Mode"                    "Base64 Modu"
+        "Settings_ImportExport_B64Warning"                "Not: Base64 dizeleri güncellemelerle bozulabilir. Kalıcı olmasını istiyorsanız normal modu kullanın!"
+        "Settings_ImportExport_Error_NoCvars"            "Girdi hiçbir cvar içermiyor. Base64 dönüştürmeye mi çalışıyorsunuz?"
+        "Settings_ImportExport_Error_NoSettings"        "Ayar girdisi yok!"
+        "Settings_ImportExport_Error_Outdated"            "Kod muhtemelen güncel değil."
+
+        // Settings - Audio
+        "Settings_Audio"                                    "Ses"
+        "Settings_Volume_Title"                                "Ses Düzeyi"
+        "Settings_Volume_Game"                                "Oyun Ses Düzeyi"
+        "Settings_Volume_Game_info"                            "Tüm oyun içi ses efektlerinin ses düzeyini kontrol eder."
+        "Settings_Volume_Ambient"                            "Çevre Ses Düzeyi"
+        "Settings_Volume_Ambient_info"                        "Çeşitli çevre seslerinin (kuşlar, rüzgar, makineler vb.) ne kadar yüksek olacağını belirler."
+        "Settings_Volume_Music"                                "Müzik Ses Düzeyi"
+        "Settings_Volume_Music_info"                        "Müziğin ne kadar yüksek sesle çalacağını belirler."
+        "Settings_Volume_UI"                                "Arayüz Ses Düzeyi"
+        "Settings_Volume_UI_info"                            "Menü seslerinin düzeyini ayarlar."
+        "Settings_Volume_Physics"                            "Fizik Ses Düzeyi"
+        "Settings_Volume_Physics_info"                        "Fiziksel etkileşimlerin (hasar, çarpmalar vb.) ses düzeyini ayarlar."
+        "Settings_Volume_Footsteps"                            "Ayak Sesi Düzeyi"
+        "Settings_Volume_Footsteps_info"                    "Oyuncu ve NPC ayak seslerinin düzeyini ayarlar."
+        "Settings_Volume_PlayerWeapon"                        "Oyuncu Silah Ses Düzeyi"
+        "Settings_Volume_PlayerWeapon_info"                    "Oyuncunun çatışma etkileşimlerinin ses düzeyini ayarlar."
+        "Settings_Volume_OverallWeapon"                        "Genel Silah Ses Düzeyi"
+        "Settings_Volume_OverallWeapon_info"                "Dünyadaki tüm çatışma etkileşimlerinin ses düzeyini ayarlar."
+        "Settings_Volume_Background"                        "Odak Dışı Ses Düzeyi"
+        "Settings_Volume_Background_info"                    "Oyun penceresi odakta değilken oyunun genel ses düzeyini ayarlar."
+        
+        "Settings_ClosedCaptions_Title"                        "İşitme Engelli Altyazıları ve Altyazılar"
+        "Settings_ClosedCaptions_Enable"                    "İşitme Engelli Altyazıları"
+        "Settings_ClosedCaptions_Enable_info"                "İşitme engelli kullanıcılar için altyazıları açar. Sesler ve konuşulan diyaloglar bir süreliğine ekranda görüntülenir.<br><img src=\"file://{images}/menu/p2ce-generic.png\" />"
+        "Settings_ClosedCaptions_Subtitles"                    "Altyazılar"
+        "Settings_ClosedCaptions_Subtitles_info"            "Bu seçeneğin etkinleştirilmesi, diyalogların yalnızca ekranda görüntülenmesini sağlar. İşitme Engelli Altyazıları ayarının etkinleştirilmesini gerektirir."
+        
+        // Storm - CC System Rewrite
+        "Settings_ClosedCaptions_Font"                        "Yazı Tipi"
+        "Settings_ClosedCaptions_Font_info"                    "Ekrandaki altyazılar ve işitme engelli altyazıları için hangi yazı tipinin kullanılacağını belirler."
+        "Settings_ClosedCaptions_Font_Lexend"                "Lexend (P2:CE / Strata Source)"
+        "Settings_ClosedCaptions_Font_U0001"                "Univers (Portal 2)"
+        "Settings_ClosedCaptions_Font_GorDIN"                "DIN 1451 / GorDIN (Half-Life 2)"
+        "Settings_ClosedCaptions_Font_Verdana"                "Verdana (Eski)"
+        "Settings_ClosedCaptions_Font_NotoSans"                "Noto Sans (Deck Oyun Kumandası Arayüzü)"
+        "Settings_ClosedCaptions_Font_Stratum2"                "Stratum2 (CS:GO)"
+        "Settings_ClosedCaptions_FontSize"                    "Yazı Tipi Boyutu (Uygulanmadı)"
+        "Settings_ClosedCaptions_FontSize_info"                "Ekrandaki altyazıların ve işitme engelli altyazılarının kullanıcıya ne kadar büyük görüneceğini belirler. Piksel başına nokta (pt) olarak hesaplanır."
+        "Settings_ClosedCaptions_BGOpacity"                    "Arka Plan Opaklığı (Uygulanmadı)"
+        "Settings_ClosedCaptions_BGOpacity_info"            "Ekrandaki altyazıların arka plan panelinin opaklığını kontrol eder.\nDüşük değerler görünürlüğü azaltabilir ve okunabilirlik sorunlarına yol açabilir. En iyi okunabilirlik ve görünürlük için daha koyu bir arka plan (veya tamamen kapkara) önerilir."
+        "Settings_ClosedCaptions_Alignment"                    "Metin Hizalaması"
+        "Settings_ClosedCaptions_Alignment_info"            "Ekrandaki altyazıların konumunu hizalar."
+        "Settings_ClosedCaptions_Alignment_left"            "Sol"
+        "Settings_ClosedCaptions_Alignment_center"            "Orta"
+        "Settings_ClosedCaptions_Alignment_right"            "Sağ"
+        
+        "Settings_Audio_HRTF_Async_Title"                    "İş Parçacıklı Ses"
+        "Settings_Audio_HRTF_Async_Desc"                    "Performansı artırmak için bağımsız ses kanallarını birden fazla CPU iş parçacığına böler."
+        
+        "Settings_AudioDevices_Title"                        "Ses Cihazı Yapılandırması"
+        "Settings_AudioDevices_Device"                        "Ses Oynatma Cihazı"
+        "Settings_AudioDevices_Device_info"                    "Oyun sesinin hangi ses cihazından çıkacağını belirler."
+        "Settings_AudioDevices_Speaker_StereoHeadphones"    "Stereo Kulaklık"
+        "Settings_AudioDevices_Speaker_StereoSpeakers"        "Stereo Hoparlör"
+        "Settings_AudioDevices_Speaker_Quad"                "Dört Kanallı (Quad) Çevresel Ses"
+        "Settings_AudioDevices_Speaker_51"                    "5.1 Çevresel Ses"
+        // "Settings_AudioDevices_Speaker_71"                "7.1 Çevresel Ses"    // Unsupported by CSGO and Strata?
+        "Settings_AudioDevices_Speaker"                        "Ses Çıkış Yapılandırması"
+        "Settings_AudioDevices_Speaker_info"                "Belirli bir cihaz yapılandırmasına bağlı olarak belirli ses kanallarını ayrı hoparlörlere atayarak ses oynatma davranışını değiştirir."
+        
+        // Settings - Video
+        "Settings_Video"                                "Video"
+        "Settings_Video_Title"                            "Video Ayarları"
+
+        "Settings_Render_Title"                            "Grafikler"
+        
+        "Settings_Video_Presets"                        "Hazır Kalite Ayarları (UYGULANMADI)"
+        "Settings_Video_Presets_info"                    "Video ayarları, bu listedeki düşükten yükseğe doğru önceden belirlenmiş bir dizi değişkene göre ayarlanacaktır."
+
+        "Settings_Video_AspectRatio"                    "En Boy Oranı"
+        "Settings_Video_AspectRatio_Normal"                "Standart (4:3)"
+        "Settings_Video_AspectRatio_16x9"                "Geniş Ekran (16:9)"
+        "Settings_Video_AspectRatio_16x10"                "Geniş Ekran (16:10)"
+        
+        "Settings_Video_Resolution"                        "Video Çözünürlüğü"
+        "Settings_Video_DisplayMode"                    "Görüntü Modu"
+        "Settings_Video_DisplayMode_Fullscreen"            "Tam Ekran"
+        "Settings_Video_DisplayMode_FullscreenWindowed"    "Tam Ekran (Pencereli)"        // temp until we can get this changed to SW_NoBorder below
+        "Settings_Video_DisplayMode_SW_NoBorder"        "Tam Ekran (Pencereli)"
+        "Settings_Video_DisplayMode_Windowed"            "Pencereli"
+        
+        "Settings_Video_FOV"                            "Görüş Alanı (FOV)"
+        "Settings_Video_FOV_Info"                        "Oyuncunun gözlerinin maksimum görüş aralığını derece cinsinden kontrol eder."
+
+        "Settings_Video_MaxFPS"                            "Maksimum FPS"
+        "Settings_Video_MaxFPS_Info"                    "FPS sınırlayıcı. Sınırsız yapmak için 0 olarak ayarlayın."
+        "Settings_Video_LaptopPower"                    "Dizüstü Bilgisayar Güç Tasarrufu"
+        "Settings_Video_LaptopPower_Info"                "Güç Tasarrufu Modunda oyun, pil gücünü korumak amacıyla kasıtlı olarak düşük bir kare hızında çalışır ve pil gücüyle oynayabileceğiniz süreyi uzatır."
+
+        "Settings_Video_Brightness"                        "Parlaklık"
+        "Settings_Video_Brightness_Info"                "Ekranın gama düzeltmesini değiştirerek genel parlaklığı ayarlar."
+
+        "Settings_Video_ColorMode"                        "Renk Modu"
+        "Settings_Video_ColorMode_Monitor"                "Bilgisayar Monitörü"
+        "Settings_Video_ColorMode_TV"                    "Televizyon"
+
+        "Settings_Render_VSync"                            "Dikey eşitleme (V-Sync)"
+        "Settings_Render_VSync_Info"                    "Dikey eşitleme (V-sync), karenin her pikselinin aynı anda görüntülenmesini sağlayarak ekran yırtılmasını ortadan kaldırır.\nBazı monitörlerde daha akıcı bir görüntü sağlayabilir ancak küçük bir girdi gecikmesine (input lag) neden olur ve bu nedenle önerilmez.\nYalnızca tam ekran modunda geçerlidir."
+        "Settings_Render_VSync_Double"                    "İkili Arabellek"
+        "Settings_Render_VSync_Triple"                    "Üçlü Arabellek"
+        
+        "Settings_Render_FilteringMode"                    "Doku Filtreleme Modu"
+        "Settings_Render_FilteringMode_Info"            "Doku filtreleme ayarının artırılması, oyundaki dokuların görünümünü iyileştirir. Filtreleme kalitesini artırmak grafik performansını düşürebilir."
+        "Settings_Render_FilteringMode_Bilinear"        "Çift Doğrusal (Bilinear)"
+        "Settings_Render_FilteringMode_Trilinear"        "Üç Doğrusal (Trilinear)"
+        "Settings_Render_FilteringMode_Aniso2X"            "Eşyönsüz (Anisotropic 2x)"
+        "Settings_Render_FilteringMode_Aniso4X"            "Eşyönsüz (Anisotropic 4x)"
+        "Settings_Render_FilteringMode_Aniso8X"            "Eşyönsüz (Anisotropic 8x)"
+        "Settings_Render_FilteringMode_Aniso16X"        "Eşyönsüz (Anisotropic 16x)"
+        
+        "Settings_Render_AntialiasingMode"                "Çoklu Örneklemeli Kenar Yumuşatma (MSAA)"
+        "Settings_Render_AntialiasingMode_Info"            "Kenar yumuşatma, geometrinin kenarlarında pürüzsüz bir görünüm sağlayarak tırtıklı kenarları ortadan kaldırır. Kenar yumuşatma kalitesini artırmak grafik performansını düşürebilir."
+        "Settings_Render_AntialiasingMode_None"            "Devre Dışı"
+        "Settings_Render_AntialiasingMode_2x_MSAA"        "2 Örnek"
+        "Settings_Render_AntialiasingMode_4x_MSAA"        "4 Örnek"
+        "Settings_Render_AntialiasingMode_8x_MSAA"        "8 Örnek"
+
+        "Settings_Render_FXAA"                             "Hızlı Yaklaşık Kenar Yumuşatma (FXAA)"
+        "Settings_Render_FXAA_Info"                        "Kenar yumuşatma, geometrinin kenarlarında pürüzsüz bir görünüm sağlayarak tırtıklı kenarları ortadan kaldırır. FXAA'yı etkinleştirmek grafik performansını düşürebilir."
+        
+        "Settings_Render_Bloom"                            "Bloom (Işık Parlaması)"
+        "Settings_Render_Bloom_Info"                    "HDR Bloom, çok parlak nesnelerde veya genel olarak çevrede görülen &quot;hale&quot; etkisidir. Bunun grafik performansına hiçbir etkisi yoktur."
+
+        "Settings_Render_DynamicTonemapping"            "HDR Ton Eşleme (Tonemapping)"
+        "Settings_Render_DynamicTonemapping_Info"        "HDR ton eşleme, ekrandaki içeriğe bağlı olarak ekranın pozlamasının dinamik olarak artırılması veya azaltılmasıdır. Bunun grafik performansına hiçbir etkisi yoktur."
+
+        "Settings_Render_ColorCorrection"                "Renk Düzeltme"
+        "Settings_Render_ColorCorrection_Info"            "Renk Düzeltme, belirli bir estetik ton elde etmek amacıyla renk dengesini değiştirmek için bazı haritalarda kullanılır. Bunun grafik performansına hiçbir etkisi yoktur."
+
+        "Settings_Render_Multicore"                        "Çoklu Çekirdek Oluşturma (Multicore)"
+        "Settings_Render_Multicore_Info"                "Çoklu çekirdek oluşturma, Portal 2: Community Edition'ın görsel oluşturma işlemlerini sisteminizde bulunan birden fazla CPU ve GPU çekirdeğine bölmesine olanak tanır. Devre Dışı bırakılması genel kare hızını ve görsel kaliteyi olumsuz etkileyebilir."
+
+        "Settings_Render_ShaderDetail"                    "Gölgelendirici Detayı"
+        "Settings_Render_ShaderDetail_Info"                "Gölgelendirici detayı, oyundaki yüzeylere uygulanan aydınlatma ve gölgeleme efektlerinin gelişmişliğini kontrol eder. Yüksek ayarlar görsel kaliteyi artırır ancak grafik performansını düşürebilir."
+
+        "Settings_Render_EffectDetail"                    "Efekt Detayı"
+        "Settings_Render_EffectDetail_Info"                "Efekt detayı, oyundaki belirli görsel efektlerin karmaşıklığının yanı sıra çizim mesafesini kontrol eder. Efekt detayını azaltmak performansı artırabilir ancak modellerin aniden belirme (pop-in) kusurlarını da artıracaktır."
+
+        "Settings_Render_Model"                            "Model Detayı"
+        "Settings_Render_Model_Info"                    "Model Detayı ayarı, oyundaki modellerin geometrik karmaşıklığını kontrol eder. Bu ayarı azaltmak düşük donanımlı sistemlerde performansı artırabilir ancak görüntü kalitesini düşürecektir."
+
+        "Settings_Render_Texture"                        "Doku Kalitesi"
+        "Settings_Render_Texture_Info"                    "Doku Kalitesi ayarı, oyundaki dokuların çözünürlüğünü kontrol eder. Bu ayarı azaltmak düşük donanımlı sistemlerde performansı önemli ölçüde artırabilir ancak görüntü kalitesini düşürecektir."
+
+        "Settings_Render_ShadowQuality"                    "Genel Gölge Kalitesi"
+        "Settings_Render_ShadowQuality_Info"            "Genel gölge kalitesi, oyundaki yüzeylere düşen dinamik gölgelerin doğruluğunu kontrol eder. Yüksek ayarlar görsel kaliteyi artırır ancak CPU ve grafik performansını düşürebilir."
+
+        "Settings_Render_MotionBlur"                    "Hareket Bulanıklığı"
+        "Settings_Render_MotionBlur_Info"               "Hareket bulanıklığı, kameranın açısı veya konumundaki hızlı değişiklikler sırasında kareyi seçici olarak yumuşatan tam ekran bir gölgelendirici (shader) efektidir. Kapalı olması, grafik performansında hafif bir artış sağlayabilir."
+
+        "Settings_Video_PStencilDepth"                  "Portal Özyineleme Derinliği"
+        "Settings_Video_PStencilDepth_Info"             "Bu ayar, portalların içinde düşük kaliteli 2B bir görüntü oluşturulmadan önce portalların kaç kez özyineleneceğini (iç içe geçeceğini) belirler. Düşük değerler bozulmalara neden olabilir."
+
+        "Settings_Video_TripleMonitor"                  "Üçlü Monitör Modu"
+        "Settings_Video_TripleMonitor_Info"             "Arayüzü (UI) ve Gösterge Panelini (HUD) ekranın ortadaki üçte birlik kısmıyla sınırlar. Üç monitöre yayılan ekranlar için kullanışlıdır."
+
+        "Settings_TextureReplace_Title"                 "Doku Yükleme"
+        "Settings_TextureReplace_Type"                  "Varsayılan Hata Dokusu Görünümü"
+        "Settings_TextureReplace_Type_Info"             "Eksik materyaller için, belirli oyunlar (ör. HL2, CS:GO, TF2) yüklü veya bağlı olmadığında hangi yedek dokunun kullanılacağını belirler.
+        <h2>Gölgesiz</h2>Diğer Source Motoru oyunlarında görülen gölgesiz mor ve siyah hata dama tahtası dokuları. Oynanış için tasarlanmamıştır, ancak bir doku eksikse harita yapımcıları için bunu netleştirir.
+        <h2>Gölgeli</h2>Gri dama tahtası dokuları, ancak harita aydınlatmasından gelen gölgelendirmelerle birlikte; bu sayede oyun içinde makul ölçüde iyi bir görünürlük sağlamalıdır. Eksik dokularla oynayan herkese önerilir.
+        Bu değişikliğin etkili olması için haritanın yeniden yüklenmesi gerekir."
+        "Settings_TextureReplace_0"                     "Gölgesiz (Mor-Siyah)"
+        "Settings_TextureReplace_1"                     "Gölgeli (Gri)"
+        "Settings_TextureReplace_TypeCubemap"           "Yansıma Haritası (Cubemap) Hata Dokusu Görünümü"
+        "Settings_TextureReplace_TypeCubemap_Info"      "Eksik yansıma haritaları (cubemap) için hangi yedek dokunun kullanılacağını belirler. Yansıma haritaları yansıtıcı yüzeyler elde etmek için kullanılır. Eğer bir harita derleme sürecinin bir parçası olarak oluşturulmadıysa eksik olabilirler.
+        <h2>Gölgesiz (Mor-Siyah)</h2>Aynı adlı varsayılan hata dokusuna benzer.
+        <h2>Gölgesiz (Siyah)</h2>Siyah, yansıtıcı olmayan doku; bir harita yansıma haritaları düşünülerek tasarlanmadığında kullanılır. Oynanış için önerilir.
+        <h2>Varsayılan Oyun Motoru Yansıma Haritası</h2>Önceden ayarlanmış çevre yansımasını taklit eder. Gerçek harita geometrisini hesaba katmaz. Çoğu zaman inandırıcı görünmeyecektir."
+        "Settings_TextureReplace_TypeCubemap_0"         "Gölgesiz (Mor-Siyah)"
+        "Settings_TextureReplace_TypeCubemap_1"         "Gölgesiz (Siyah)"
+        "Settings_TextureReplace_TypeCubemap_2"         "Varsayılan Oyun Motoru Yansıma Haritası"
+        "Settings_TextureReplace_Advanced"              "Renk Doğruluğuna Sahip Hata Dokusu Değiştirmeleri"
+        "Settings_TextureReplace_Advanced_Info"         "Varsayılan hata dokuları yerine eksik dokular için daha oynanış dostu bir yaklaşım kullanın.
+        <h2>Kapalı</h2>Bu özelliği kullanmayın ve bunun yerine varsayılan hata dokularını kullanın.
+        <h2>Renkli</h2>Eksik dokular yüzeyin yansıtıcılık verilerine göre renklendirilecektir. Bu, eksik dokunun genel rengine benzer olmalıdır. Bunu, sonraki seçeneğin yüzeyleri yanlışlıkla su veya benzeri olarak algıladığı haritalarda kullanın.
+        <h2>Renkli ve Özel Geçersiz Kılmalar</h2>Eksik dokular yukarıdaki seçenek gibi renklendirilir, ancak aynı zamanda saydam dokuları da algılar ve anlamlı değiştirmeler sağlar. Harita yapmıyorsanız önerilir.
+        Bu değişikliğin etkili olması için haritanın yeniden yüklenmesi gerekir."
+        "Settings_TextureReplace_Advanced_0"            "Kapalı"
+        "Settings_TextureReplace_Advanced_1"            "Renkli"
+        "Settings_TextureReplace_Advanced_2"            "Renkli ve Özel Geçersiz Kılmalar"
+        "Settings_TextureReplace_ReplaceTexture"        "Yedek Temel Doku"
+        "Settings_TextureReplace_ReplaceTexture_Info"   "'Renk Doğruluğuna Sahip Hata Dokusu Değiştirmeleri' etkinleştirildiğinde hangi temel dokunun kullanılacağını belirler, solda önizlemesi yapılabilir. Yaklaşık renk daha sonra oyun içinde buna uygulanacaktır.
+        Dokulara belirginlik katar, derinlik ve mesafeyi görmede yardımcı olur.
+        Bu değişikliğin etkili olması için haritanın yeniden yüklenmesi gerekir."
+        "Settings_TextureReplace_Texture_None"          "Yok"
+        "Settings_TextureReplace_Texture_Noise"         "Parazit (Noise)"
+        "Settings_TextureReplace_Texture_Grid"          "Izgara"
+        "Settings_TextureReplace_Texture_GridWithNoise" "Parazitli Izgara"
+        "Settings_TextureReplace_Texture_Custom"        "Özel"
+        
+        "Settings_Portal_Coop_SS_SplitMode"             "Bölünmüş Ekran Yönü"
+        "Settings_Portal_Coop_SS_SplitMode_info"        "Her iki bölünmüş ekran oyuncusunun görünümünün hangi yönde bölüneceğini belirler.\n<h2>Yatay</h2>Oyuncuların görünümleri, ekranın üst ve alt tarafında yer alan yatay bir çizgi boyunca bölünecektir.\n<h2>Dikey</h2>Oyuncuların görünümleri, ekranın sol ve sağ tarafında yer alan dikey bir çizgi boyunca bölünecektir.\n<h2>Otomatik</h2>Oyun, monitörün ekran çözünürlüğüne ve en boy oranına bağlı olarak hangi modun seçileceğini otomatik olarak belirleyecektir.\n<movie src=\"file://{media}/sp_credits_bg.webm\" />"
+        "Settings_Portal_Coop_SS_SplitMode_auto"        "Otomatik"
+        "Settings_Portal_Coop_SS_SplitMode_horiz"       "Yatay"
+        "Settings_Portal_Coop_SS_SplitMode_vert"        "Dikey"
+
+        // Settings - Keyboard/Mouse
+        "Settings_Input"                                "Giriş"
+        "Settings_Input_Title"                          "Giriş"
+        "Settings_Mouse_Title"                          "Fare"
+
+        "Settings_Mouse_Filter"                         "Fare Filtreleme"
+        "Settings_Mouse_Filter_Info"                    "Fare hareketinin ortalamasını 2 kare üzerinden alır."
+
+        "Settings_Mouse_Raw"                            "Ham Giriş"
+        "Settings_Mouse_Raw_Info"                       "Ham Giriş, işletim sistemi ayarlarını atlayarak ve daha doğru hareket sağlayarak fare verilerini doğrudan cihazdan okur.\n<h2>Açık (Kare hizalı)</h2>Diğer Source Motoru oyunlarında kullanılan orijinal yöntem\n<h2>Açık (Tik hizalı)</h2>Daha kesin ve oyun kare hızına daha az bağımlı olan geliştirilmiş bir yöntem\n<movie src=\"file://{media}/bluescreen.webm\" />"
+        "Settings_Mouse_Raw_On_Old"                     "Açık (Kare hizalı)"
+        "Settings_Mouse_Raw_On_New"                     "Açık (Tik hizalı)"
+
+        "Settings_Mouse_Reverse"                        "Fareyi Ters Çevir"
+        "Settings_Mouse_Reverse_Info"                   "Fare hareketinin yönünü tersine çevirir. Gününüzü mahvetmek için harika bir yol."
+
+        "Settings_Mouse_Sens"                           "Fare Hassasiyeti"
+
+        "Settings_Mouse_Accel"                          "Fare İvmesi"
+
+        "Settings_Keybinds_Title"                       "Tuş Atamaları"
+        "Settings_Keybinds_Movement"                    "Hareket"
+        "Settings_Input_Keybinds_Movement"              "Hareket"
+        
+        // KBM Mappings
+        "Keybind_Move_Forward"                          "İleri git"
+        "Keybind_Move_Back"                             "Geri git"
+        "Keybind_Turn_Left"                             "Sola dön"
+        "Keybind_Turn_Right"                            "Sağa dön"
+        "Keybind_Move_Left"                             "Sola git (yan yürüme)"
+        "Keybind_Move_Right"                            "Sağa git (yan yürüme)"
+        "Keybind_Jump"                                  "Zıpla"
+        "Keybind_Duck"                                  "Eğil"
+        "Keybind_Sprint"                                "Koş (hızlı hareket et)"
+        "Keybind_Walk"                                  "Yürü (yavaş hareket et)"
+        "Keybind_Toggle_Jump"                           "Zıplamayı Aç/Kapat"
+        "Keybind_Toggle_Duck"                           "Eğilmeyi Aç/Kapat"
+        "Keybind_Toggle_Sprint"                         "Koşmayı Aç/Kapat"
+        "Keybind_Zoom_Toggle"                           "Yakınlaştırmayı Aç/Kapat"
+        "Keybind_Zoom_In"                               "Yakınlaş"
+        "Keybind_Zoom_Out"                              "Uzaklaş"
+        
+        "Settings_Keybinds_Weapons"                     "Silahlar"
+        "Keybind_Attack_Primary"                        "Birincil saldırı"
+        "Keybind_Attack_Secondary"                      "İkincil saldırı"
+        "Keybind_Weapon_Category_1"                     "Silah kategorisi 1"
+        "Keybind_Weapon_Category_2"                     "Silah kategorisi 2"
+        "Keybind_Weapon_Category_3"                     "Silah kategorisi 3"
+        "Keybind_Weapon_Category_4"                     "Silah kategorisi 4"
+        "Keybind_Weapon_Category_5"                     "Silah kategorisi 5"
+        "Keybind_Weapon_Category_6"                     "Silah kategorisi 6"        // hl2:weapon_bugbait
+        
+        "Settings_Keybinds_Utility"                     "Yardımcı Araçlar"
+        "Keybind_Use_Items"                             "Nesne kullan (düğmeler, makineler vb.)"
+        "Keybind_Flashlight"                            "El feneri"
+        "Keybind_Quicksave"                             "Hızlı Kaydet"
+        "Keybind_Quickload"                             "Hızlı Yükle"
+        
+        "Settings_Keybinds_MP_COOP"                     "Çok Oyunculu / Eşli (Co-op)"
+        "Keybind_Chat_Message"                          "Yazılı sohbet"
+        "Keybind_Chat_Message_TeamOnly"                 "Yazılı sohbet (sadece takım)"
+        "Keybind_Chat_Voice"                            "Bas-Konuş tuşu"
+        "Keybind_Coop_RemoteView"                       "Uzaktan Görünüm"
+        "Keybind_Coop_RemoteView_Info"                  "Partnerinizin bakış açısını (Görüş Açısı) görüntüler."
+        "Keybind_Coop_PingTool"                         "İşaretleme (Ping) Aracı"
+        "Keybind_Coop_PingTool_Info"                    "Eşli (co-op) partnerinize belirli eylemleri veya konumları iletmek için bir öneri menüsü açar."
+        "Keybind_Coop_Taunt"                            "Hareket/Alay Etme"
+        "Keybind_Coop_Taunt_Info"                       "Hareket/alay etme eylemlerini gerçekleştirir."
+        
+        "Settings_Input_Keybinds_Misc"                  "Çeşitli"
+        "Keybind_Console"                               "Geliştirici konsolunu aç/kapat"
+        "Keybind_Screenshot"                            "Ekran görüntüsü al"
+        "Keybind_Quit"                                  "Oyundan çık"
+        "Keybind_Quit_Prompt"                           "Onaylayarak Çık"
+        
+        // Settings - Controller
+        "Settings_Controller_Title"                     "Kontrolcü"
+        "Settings_Controller_SteamInputButton"          "Steam Girdi Ayarlarını Aç"
+
+        // Settings - UI
+        "Settings_Interface"                            "Arayüz / HUD"
+        "Settings_Interface_Title"                      "Arayüz Ayarları"
+        "Settings_Menu_Title"                           "Menü Arayüzü"
+        "Settings_Menu_Movie"                           "Ana Menü Arka Plan Videosu"
+        "Settings_Menu_Movie_Info"                      "Hareketli ana menü arka planını etkinleştirir. Menü açıkken performansta küçük bir düşüşe neden olabilir."
+
+        // Settings - Personalization
+        "Settings_Customization"                        "Özelleştirme"
+        
+        "Settings_Portal1_Title"                        "Portal 1"
+        "Settings_Portal1_compat"                       "Portal 1 Uyumluluk Modu"
+        "Settings_Portal1_compat_info"                  "Portal 1 haritaları için geriye dönük uyumluluk sağlar."
+        "Settings_Portal1_xhair"                        "Nişangah Stili"
+        "Settings_Portal1_xhair_info"                   "Portal silahı nişangah davranışını değiştirir.\n<h2>Portal 2 Stili</h2>Yalnızca yerleştirilen portalları görüntüler.\n<h2>Portal 1 Stili</h2>Yerleştirilen portalları ve belirli bir yüzeye portal yerleştirilip yerleştirilemeyeceğini belirleyen dairesel bir işaretleyiciyi görüntüler."
+        "Settings_Portal1_xhair_p2"                     "Portal 2 Stili"
+        "Settings_portal1_xhair_p1"                     "Portal 1 Stili"
+        
+        "Settings_Portals_Title"                        "Portallar"
+        "Settings_Portals_PlayerFunnel"                 "Portal Çekimi (Huni Etkisi)"
+        "Settings_Portals_PlayerFunnel_info"            "Portallara uçarken, oyun oyuncunun konumunu ve yörüngesini bitişik yüzeylere çarpmayı önleyecek şekilde düzeltmeye çalışır."
+        "Settings_Portals_dlight"                       "Portal Dinamik Aydınlatma"
+        "Settings_Portals_dlight_info"                  "Portalların ışık yaymasını sağlar."
+        "Settings_Portals_light_intensity"              "Portal Aydınlatma Yoğunluğu"
+        "Settings_Portals_light_intensity_info"         "Bir portalın yaydığı ışığın gücünü değiştirir. Çalışması için \"Portal Dinamik Aydınlatma\"nın açık olması gerekir."
+        "Settings_Portals_altcolors"                    "Alternatif Portal Renkleri"
+        "Settings_Portals_altcolors_info"               "Oyuncuların önceden var olan portal renklerini geçersiz kılmasına izin verir. Bu aynı zamanda harita yapımcısı tarafından tanımlanan tüm özel portal renklerini de geçersiz kılacaktır."
+        "Settings_Portals_altcolors_primary"            "Birincil Alternatif Portal Rengi"
+        "Settings_Portals_altcolors_primary_Info"       "Mavi portal (birincil atış) için kullanılacak alternatif renk."
+        "Settings_Portals_altcolors_secondary"          "İkincil Alternatif Portal Rengi"
+        "Settings_Portals_altcolors_secondary_Info"     "Turuncu portal (ikincil atış) için kullanılacak alternatif renk."
+        "Settings_Turret_lights"                        "Taret Işıkları"
+        "Settings_Turret_lights_info"                   "Taretlerin baktıkları yere ışık tutmalarını sağlar."
+        "Settings_Ball_lights"                          "Enerji Topu Işıkları"
+        "Settings_Ball_lights_info"                     "Yüksek enerjili kürelerin ışık yaymasını ve gölge oluşturmasını sağlar."
+        "Settings_Gels_Title"                           "Jeller"
+        "Settings_Gels_repulsion_color"                 "İtici Jel Rengi (Zıplama)"
+        "Settings_Gels_repulsion_color_Info"            "İtici Jel (zıplama boyası) için kullanılacak alternatif renk."
+        "Settings_Gels_propulsion_color"                "Hızlandırıcı Jel Rengi (Hız)"
+        "Settings_Gels_propulsion_color_Info"           "Hızlandırıcı Jel (hız boyası) için kullanılacak alternatif renk."
+        "Settings_Gels_conversion_color"                "Dönüştürücü Jel Rengi (Portal)"
+        "Settings_Gels_conversion_color_Info"           "Dönüştürücü Jel (portal boyası) için kullanılacak alternatif renk."
+        "Settings_Gels_reflection_color"                "Yansıtıcı Jel Rengi (Yansıma)"
+        "Settings_Gels_reflection_color_Info"           "Yansıtıcı Jel (yansıma boyası) için kullanılacak alternatif renk."
+        "Settings_Gels_adhesion_color"                  "Yapışkan Jel Rengi (Yapışma)"
+        "Settings_Gels_adhesion_color_Info"             "Yapışkan Jel (yapışma boyası) için kullanılacak alternatif renk."
+        
+        // Settings - Miscellaneous
+        "Settings_Misc_Title"                           "Çeşitli"
+        "Settings_Misc_solenergy_refract"               "Katı Enerji Kırılmaları"
+        "Settings_Misc_solenergy_refract_info"          "Yok edici alanlarda (fizzler) su benzeri kırılma efektlerini etkinleştirir."
+        "Settings_Misc_ViewmodelOffset_X"               "Görüş Modeli (Viewmodel) Kaydırması (X)"
+        "Settings_Misc_ViewmodelOffset_X_info"          "Görüş modelinin (Viewmodel) konumunu X ekseninde bu miktar kadar Hammer Birimi (HU) cinsinden kaydırır."
+        "Settings_Misc_ViewmodelOffset_Y"               "Görüş Modeli (Viewmodel) Kaydırması (Y)"
+        "Settings_Misc_ViewmodelOffset_Y_info"          "Görüş modelinin (Viewmodel) konumunu Y ekseninde bu miktar kadar Hammer Birimi (HU) cinsinden kaydırır."
+        "Settings_Misc_ViewmodelOffset_Z"               "Görüş Modeli (Viewmodel) Kaydırması (Z)"
+        "Settings_Misc_ViewmodelOffset_Z_info"          "Görüş modelinin (Viewmodel) konumunu Z ekseninde bu miktar kadar Hammer Birimi (HU) cinsinden kaydırır."
+
+        "Settings_Video_PreventThreadSleep"             "Ana İş Parçacığının Uyumasını Engelle"
+        "Settings_Video_PreventThreadSleep_Info"        "Maksimum FPS sınırındayken ana oyun iş parçacığının (thread) uyku moduna geçmesini engeller. Bu seçeneği etkinleştirmek daha akıcı bir performans sağlayabilir, ancak daha yüksek işlemci (CPU) kullanımına neden olur."
+        
+        "Settings_Menu_Console"                         "Geliştirici Konsolunu Etkinleştir"
+        "Settings_Menu_Console_info"                    "Bu ayar, kullanıcıların oyun motoruna dahili komutlar göndermesine olanak tanıyan geliştirici konsolunun etkinleştirilme durumunu belirler.\nGeliştirici konsolu, ileri düzey kullanıcılar (harita yapımcıları gibi) için tasarlanmış güçlü bir araçtır ve normal oyun için gerekli değildir. Source motorunda bulunan komutların bazıları tehlikelidir ve (yanlış kullanılırsa) oyunu çökertebilir, kaydedilmiş ilerlemelerin kaybolmasına neden olabilir ve/veya belirli oyun öğelerini çalışamaz hale getirebilir."
+        "Settings_Menu_Sentry"                          "Sentry Çökme Raporlama"
+        "Settings_Menu_Sentry_info"                     "Sentry aracılığıyla işlenen çökme dökümlerinin gönderimini kontrol eder.\nÇökme raporlarında kullanılan veriler, çökmeden önceki anlarda motorun (geliştirici konsolu günlük çıktısının son birkaç satırı dahi olmak üzere) tam bir çağrı yığınını, mevcut Steam derleme (build) kimliğini ve Steam Topluluğu profil kimliğinizi içerir. P2:CE ekibine başka hiçbir veri gönderilmez.\nBu özellik isteğe bağlıdır ve istenildiği zaman açılıp kapatılabilir."
+        "Settings_Menu_DiscordIntegration"              "Discord Rich Presence (Zengin Varlık)"
+        "Settings_Menu_DiscordIntegration_info"         "Mevcut oyun durumunu bir etkinlik olarak göstererek P2:CE ile Discord rich presence entegrasyonunu etkinleştirir.\nBu geçiş ayarı, Hammer gibi SDK araçlarındaki Discord rich presence etkinliğini değiştirmez."
+        
+        // Main Menu
+        "MainMenu_PH_Note"                              "Bu sayfa yapım aşamasındadır."
+        "MainMenu_ControllerUI_Note_Title"              "Kontrolcü Desteği Bildirimi"
+        "MainMenu_ControllerUI_Note_Desc"               "Menü arayüzü için kontrolcü giriş desteği deneyseldir.\n\nEğer hatalarla karşılaşırsanız veya bu mod hakkında geri bildiriminiz varsa lütfen sorunları P2:CE sorun izleyicisine (issue tracker) gönderin."
+        "MainMenu_Graphics_Notice"                      "DİKKAT: Eğer grafiksel sorunlar yaşarsanız, Steam üzerinden oyunun 'stable' (kararlı) sürümüne geçmeyi deneyin."
+        "MainMenu_Socials_GitHub"                       "Steam Arayüzünde GitHub Hata Bildiricisini Aç"
+        "MainMenu_Socials_Discord"                      "Steam Arayüzünde Discord'u Aç"
+
+        // Main Menu - Header Tabs
+        "MainMenu_Navigation_Developer"                 "Geliştirici"
+        "MainMenu_Navigation_Developer_Tagline"         "Referans kütüphanesi"
+        "MainMenu_Navigation_ControlsLibrary"           "[DEV] Arayüz (UI) Kontrolleri Kütüphanesi"
+        "MainMenu_Navigation_SteamInputLibrary"         "[DEV] Steam Girdisi Kütüphanesi"
+        "MainMenu_Navigation_Home"                      "Ana Sayfa"
+        "MainMenu_Navigation_Play"                      "Oyna"
+        "MainMenu_Navigation_Play_Tagline"              "Testlere devam et."
+        "MainMenu_Navigation_Play_Modes"                "Ne oynayacağınızı seçin"
+        "MainMenu_Navigation_Workshop"                  "Atölye Haritaları"
+        "MainMenu_Navigation_Workshop_Tagline"          "Oynamak için bir Atölye haritası seçin"
+        "MainMenu_Navigation_Campaign"                  "Senaryolar"
+        "MainMenu_Navigation_Campaign_Tagline"          "Oynamak için bir Senaryo seçin"
+        "MainMenu_Navigation_Play_MapTypes"             "Bir P2:CE veya Portal 2 Atölye haritası seçin"
+        "MainMenu_Navigation_Featured"                  "Öne Çıkan Öğeler"
+        "MainMenu_Navigation_Featured_Tagline"          "Steam Atölyesindeki popüler öğeleri keşfedin"
+        "MainMenu_Navigation_Addons"                    "Eklentiler"
+        "MainMenu_Navigation_Addons_Tagline"            "Yüklü eklentileri ve bağlı oyunları yönetin"
+        "MainMenu_Navigation_Options"                   "Ayarlar"
+        "MainMenu_Navigation_Options_Tagline"           "Tuş atamalarını, görsel-işitsel öğeleri ve uyumluluk ayarlarını düzenle"
+        "MainMenu_Navigation_QuitGame"                  "Oyundan Çık"
+        "MainMenu_Navigation_QuitGame_Tagline"          "Testleri başka bir güne bırak"
+        "MainMenu_Navigation_Disconnect"                "Çıkış"
+        "MainMenu_Navigation_Disconnect_Tagline"        "Ana menüye dön veya oyundan çık"
+        "MainMenu_Navigation_Disconnect_CM_Tagline"     "Mevcut senaryodan/haritadan ayrıl"
+        
+        // Main Menu - Home Page
+        "MainMenu_Home_Resume"                          "Oyuna Devam Et"
+        "MainMenu_Home_Resume_Tagline"                  "Bu menüyü kapat ve test'e devam et"
+        "MainMenu_Home_Continue"                        "Oyunu Sürdür"
+        "MainMenu_Home_BackgroundCredit"                "Arka Plan:"
+        "MainMenu_Loading"                              "Yükleniyor..."
+
+        // socials
+        "MainMenu_Home_Button_MainSite"                 "P2:CE Web Sitesi"
+        "MainMenu_Home_Button_Discord"                  "P2:CE Discord Sunucusu"
+        "MainMenu_Home_Button_Github"                   "Strata Source GitHub"
+        "MainMenu_Home_Button_Forums"                   "Steam Topluluk Forumları"
+        "MainMenu_Home_Button_Workshop"                 "Steam Atölyesi"
+        
+        // featured
+        "MainMenu_Featured_Title"                       "Öne Çıkan Öğe: {s:featured_item_name}"
+        "MainMenu_Featured_Title_PH"                    "Öğe Ayrıntıları Sorgulanıyor"
+        "MainMenu_Featured_Author"                      "Yapımcı: {s:featured_item_author}"
+        "MainMenu_Featured_Author_PH"                   "Steam Atölyesinden bilgi indiriliyor..."
+        "MainMenu_Featured_Unavailable_Title"           "Öne Çıkan Öğe Kullanılamıyor"
+        "MainMenu_Featured_Unavailable_Description"     "Steam Web API'sine ulaşılamadı veya teknik bir sorun yaşanıyor. Öne çıkan öğeler geçici olarak kullanılamıyor."
+        
+        // Main Menu - News
+        // temporarily removed for the time being
+        // "MainMenu_News_Unavailable_Title"            "News Not Available"
+        // "MainMenu_News_Unavailable_Description"      "The Steam Web API could not be reached or is experiencing a technical problem. News is temporarily unavailable."
+        
+        // Main Menu - Saverestore
+        "MainMenu_SaveRestore_Main"                     "Oyunu Kaydet/Yükle"
+        "MainMenu_SaveRestore_Main_Tagline"             "Kayıtlı oyunları yönet ve yükle"
+        "MainMenu_SaveRestore_LoadAuto"                 "Son Kaydı Yükle"
+        "MainMenu_SaveRestore_LoadAuto_Tagline"         "En son kaydedilen oyundan devam et"
+        "MainMenu_SaveRestore_LoadQuick"                "Hızlı Kaydı Yükle"
+        "MainMenu_SaveRestore_NoSaves"                  "Kayıt Bulunmuyor"
+        "MainMenu_SaveRestore_CreateSave"               "Yeni Kayıt Oluştur"
+        "MainMenu_SaveRestore_Load"                     "Kayıtlı Oyunu Yükle"
+        "MainMenu_SaveRestore_Delete"                   "Kayıtlı Oyunu Sil"
+        "MainMenu_SaveRestore_Rename"                   "Kayıtlı Oyunu Yeniden Adlandır"
+        
+        // Chapter Navigation
+        "MainMenu_ChapterNav_Back"                      "< Geri"
+        "MainMenu_ChapterNav_Next"                      "İleri >"
+
+        // SaveCreatePrompt
+        "Action_NewSave"                                "Oyunu Kaydet"
+        "Action_NewSave_Confirm"                        "Kaydı Onayla"
+        "Action_NewSave_Confirm_Message"                "Yeni bir kayıt dosyası oluşturmak istiyor musunuz?"
+        
+        // SaveLoadPrompt
+        "Action_LoadGame"                               "Oyunu Yükle"
+        "Action_LoadGame_Confirm"                       "Yüklemeyi Onayla"
+        "Action_LoadGame_Auto_Message"                  "En son kaydedilen oyunu yüklemek istiyor musunuz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
+        "Action_LoadGame_Message"                       "Bu kayıtlı oyunu yüklemek istiyor musunuz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
+        
+        // SaveDeletePrompt
+        "Action_DeleteGame"                             "Kayıtlı Oyunu Sil"
+        "Action_DeleteGame_Confirm"                     "Silmeyi Onayla"
+        "Action_DeleteGame_Confirm_Message"             "Bu kayıtlı oyunu silmek istiyor musunuz?\n\nBu işlem geri alınamaz."
+        
+        // SaveOverwritePrompt
+        "Action_OverwriteGame"                          "Kayıtlı Oyunun Üzerine Yaz"
+        "Action_OverwriteGame_Confirm"                  "Üzerine Yazmayı Onayla"
+        "Action_OverwriteGame_Confirm_Message"          "Bu kayıtlı oyunun üzerine yazmak istiyor musunuz?\n\nBu işlem geri alınamaz ve önceden kaydedilmiş tüm ilerlemeler kaybolabilir."
+
+        // Autosave Handling
+        "MainMenu_SaveRestore_CannotOverwriteSave"      "Bu kayıt dosyasının üzerine yazılamaz."
+        "MainMenu_SaveRestore_SaveType_Manual"          "Manuel Kayıt"
+        "MainMenu_SaveRestore_SaveType_quick"           "Hızlı Kayıt"
+        "MainMenu_SaveRestore_SaveType_autosave"        "Otomatik Kayıt"
+        "MainMenu_SaveRestore_SaveType_autosavedangerous" "Otomatik Kayıt (Kritik)"
+        
+        // Bad SaveRestore
+        "MainMenu_SaveRestore_LoadFailed"               "Yükleme Başarısız"
+        "MainMenu_SaveRestore_LoadFailed_Description"   "Kayıtlı oyun yüklenemedi. {s:failure_reason}"            // This will have a failure reason attached to it
+        "MainMenu_SaveRestore_SaveFailed"               "Kayıt Başarısız"
+        "MainMenu_SaveRestore_SaveFailed_Description"   "Mevcut oyun kaydedilemedi. {s:failure_reason}"        // This will have a failure reason attached to it
+        
+        // Load Failure Reasons
+        // bad/malformed save data or incompatible strata map or engine version
+        "MainMenu_SaveRestore_LoadFailed_BadSave"       "Muhtemelen bozuk veya yüklenmekte olan kayıt dosyası mevcut harita veya oyun sürümüyle uyumlu değil."
+        // target save file nonexistent
+        "MainMenu_SaveRestore_LoadFailed_NonExistent"   "Hedef kayıt dosyası bu cihazda bulunmuyor."
+        // no saves exist
+        "MainMenu_SaveRestore_LoadFailed_NoSavesExist"  "Yüklenecek mevcut bir kayıtlı oyun yok."
+        // cloud failed sync, or something
+        "MainMenu_SaveRestore_LoadFailed_SteamCloud"    "Şu anda Steam Cloud API'sine ulaşılamıyor."
+        
+        // Save Failure Reasons
+        // no space available on current storage partition
+        "MainMenu_SaveRestore_SaveFailed_NoSpace"       "P2:CE'nin yüklü olduğu depolama cihazında yeterli boş alan yok."
+        // this should only display if Windows NTFS perms (e.g.: readonly flag, account security ACLs) or linux FS permissions are wrong
+        "MainMenu_SaveRestore_SaveFailed_NoPerms"       "Oyun, kayıtlı oyunlar dizinine erişim izni olmadığı için yeni bir kayıt dosyası oluşturamadı. Lütfen P2:CE kurulumunuzdaki \"SAVE\" (kayıt) dizininin izin ayarlarını değiştirin."
+        // SOMEHOW, the game's running, but the disk isn't working right. possible disk failure or MFT corruption?
+        "MainMenu_SaveRestore_SaveFailed_DriveFail"     "P2:CE'nin yüklü olduğu depolama cihazı muhtemelen arızalandığı için oyun yeni bir kayıt dosyası oluşturamadı. Lütfen bu cihazdaki tüm verileri derhal yedekleyin."
+        // probably applies for steam cloud quota?
+        "MainMenu_SaveRestore_SaveFailed_NoMoreSlots"   "Kullanılabilir kayıtlı oyun yuvası kalmadı."
+        // map_wants_save_disable 1
+        "MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled" "Oynadığınız harita, kayıt dosyası oluşturulmasına izin vermiyor."
+        "MainMenu_SaveRestore_SaveFailed_NotPartOfCampaign"    "Oynadığınız harita mevcut senaryonun bir parçası değil.\n\nKaydetme işlemi geçici olarak devre dışı bırakıldı."
+        // maxplayers >= 2 and gamemode is either coop or mp; we're either on p2p/listen or dedicated
+        "MainMenu_SaveRestore_SaveFailed_IsInMultiplayer"      "Çok oyunculu/eşli (co-op) modda oyun kaydetme desteklenmemektedir."
+        
+        // universal; only used if we don't know what the fuck is going on in saverestore
+        "MainMenu_SaveRestore_UnknownFailure"           "Bilinmeyen bir kaydetme/yükleme hatası nedeni. Ayrıntılar için lütfen geliştirici konsolunu kontrol edin."
+        
+        // Main Menu - Campaigns
+        "MainMenu_Campaigns_Title"                      "Senaryolar"
+        "MainMenu_Campaigns_Tagline"                    "Özel olarak hazırlanmış deneyimleri oynayın"
+        "MainMenu_Campaigns_MapList"                    "{s:playerModeStr} Haritaları"
+        "MainMenu_Campaigns_MapList_Uncategorized"      "Kategorize Edilmemiş {s:playerModeStr} Haritaları"
+        "MainMenu_Campaigns_MapList_Campaigns"          "{s:playerModeStr} Senaryoları"
+        "MainMenu_Campaigns_MapList_Campaigns_Tagline"  "Oynamak için bir senaryo seçin"
+        "MainMenu_Campaigns_MapList_p2ce_Tagline"       "P2:CE Atölyesinden bir harita seçin"
+        "MainMenu_Campaigns_MapList_portal2_Tagline"    "Portal 2 Atölyesinden bir harita seçin"
+        "MainMenu_Campaigns_MapList_Uncategorized_Tagline" "Yerel olarak yüklenmiş bir harita seçin"
+        "MainMenu_Campaigns_MapList_Tagline_NewlySubbed" "{i:num_newly_installed_maps} yeni abone olundu"
+        "MainMenu_Campaigns_MapList_Tagline_TotalMaps"   "Toplam {i:num_total_installed_maps} harita"
+        "MainMenu_Campaigns_OpenWS"                     "Steam Atölyesini Aç"
+        "MainMenu_Maps_None"                            "Yüklü haritanız yok! Steam Atölyesinde birkaç tane bulabilirsiniz."
+        "MainMenu_Campaigns_None"                       "Yüklü senaryonuz yok! Steam Atölyesinde birkaç tane bulabilirsiniz."
+        "MainMenu_Campaigns_OpenWS_Tagline"             "İçerik indirin ve yönetin"
+        
+        // mode selection
+        "MainMenu_Campaigns_ModeSel_Solo_Title"         "Tek Kişilik Haritalar"
+        "MainMenu_Campaigns_ModeSel_Solo_Tagline"       "Küçük çaplı deneyimler"
+        "MainMenu_Campaigns_ModeSel_ServerBrowser_Title" "Özel Oyunlar"
+        "MainMenu_Campaigns_ModeSel_ServerBrowser_Tagline" "Kusursuz bir oyunu kısıtlama olmadan bulun veya oluşturun"
+        "MainMenu_Campaigns_CType_SP"                   "Tek Oyunculu"
+        "MainMenu_Campaigns_CType_MP"                   "Çok Oyunculu / Eşli (Co-op)"
+        "MainMenu_Campaigns_MapType_p2ce"               "P2:CE Haritaları"
+        "MainMenu_Campaigns_MapType_portal2"            "Portal 2 Haritaları"
+        
+        // Search
+        "MainMenu_Campaigns_Search_FillerText"          "Senaryolarda ara..."
+        "MainMenu_Campaigns_Search_SortBy_NewSubs"      "Son eklenenler"
+		"MainMenu_Campaigns_Search_SortBy_AtoZ"                        "Alfabetik (Azalan)"
+        "MainMenu_Campaigns_Search_SortBy_ZtoA"                        "Alfabetik (Artan)"
+        "MainMenu_Campaigns_Search_SortBy_Last"                        "Son oynanma zamanı"
+        "MainMenu_Campaigns_Search_SortBy_Completion"                "Genel tamamlama"
+        "MainMenu_Campaigns_Search_SortBy_CampaignSrc"                "Senaryo kaynağı"
+
+        "MainMenu_Content_Unplayed"                                    "Oynanmamış"
+        "MainMenu_Content_InProgress"                                "Devam Ediyor"
+        "MainMenu_Content_Completed"                                "Tamamlandı"
+        
+        // this is used if a campaign requires an appid they don't have mounted
+        "MainMenu_Campaigns_MissingMount_Title"                        "Senaryo Yüklenemedi"
+        "MainMenu_Campaigns_MissingMount_Description"                "Aşağıdaki oyunlar bağlı (mounted) olmadığı için bu senaryo yüklenemiyor:
+{s:missing_mounts_list}
+Bu senaryoya erişmek için lütfen önce yukarıdaki oyunları yükleyin ve bağlayın."
+
+        // Warn the user if playing on map or server with no active campaign and attempting a save
+        "MainMenu_Campaigns_NoActiveCampaign_Warning_Title"            "Uyarı: İçerik Grubunda Değil"
+        "MainMenu_Campaigns_NoActiveCampaign_Warning_Desc"            "Şu anda bir içerik grubu (ör. Senaryolar veya Atölye grupları) içinde oynamıyorsunuz. Bu durum, bir haritayı geliştirici konsolu aracılığıyla veya Hammer seviye editöründeki 'Haritayı Çalıştır' iletişim kutusundan başlattığınızda meydana gelebilir.\n\nBu durumda kayıt dosyaları oluşturmak ve yüklemek çalışmaya devam edecektir, ancak bu dosyalar ana menüde görüntülenmeyecektir.\n\nBir içerik grubu dışında oynamak yalnızca geliştirme amaçlıdır; menüye dönüp normal şekilde oynamanız şiddetle tavsiye edilir.\n\nBu uyarı, bu menü her açıldığında görünecektir."
+
+        // Bad Campaign
+        "MainMenu_Campaigns_BgLoadFailed_Title"                        "İçerik Yüklenemedi"
+        "MainMenu_Campaigns_BgLoadFailed_Description"                "Çalıştırmaya çalıştığınız senaryo, yüklenemeyen bir arka plan haritası belirtmiş. Gerekli içeriğin doğru bir şekilde indirildiğinden ve bağlandığından emin olun."
+        "MainMenu_Campaigns_LoadFailed_Title"                        "Senaryo Başlatılamadı!"
+        "MainMenu_Campaigns_LoadFailed_Description"                    "Senaryo başlatılamadı. Ayrıntılar için konsolu kontrol edin."
+        "MainMenu_Campaigns_Error_Generic_Title"                    "Hata"
+        "MainMenu_Campaigns_Error_InvalidKV3_Title"                    "Senaryo Başlatılamıyor"
+        "MainMenu_Campaigns_Error_InvalidKV3_Desc"                    "Betik dosyasında belirtilen veriler geçersiz olduğu için bu senaryo başlatılamıyor.\n\nLütfen bu sorunu ve ilgili hata günlüğünü eklentinin yapımcısına bildirin."
+        "MainMenu_Campaigns_Error_InvalidChapterMapData_Title"        "Bölüm Başlatılamıyor"
+        "MainMenu_Campaigns_Error_InvalidChapterMapData_Desc"        "Seçtiğiniz bölümde tanımlanmış hiçbir harita olmadığı için senaryo başlatılamıyor.\n\nLütfen bu sorunu ve ilgili hata günlüğünü eklentinin yapımcısına bildirin."
+        
+        // dependency game names
+        "MainMenu_Campaigns_Mounts_AppId_630"                        "Alien Swarm (630)"
+        "MainMenu_Campaigns_Mounts_AppId_300"                        "Day of Defeat: Source (300)"
+        "MainMenu_Campaigns_Mounts_AppId_220"                        "Half-Life 2 (220)"
+        "MainMenu_Campaigns_Mounts_AppId_280"                        "Half-Life: Source (280)"
+        "MainMenu_Campaigns_Mounts_AppId_400"                        "Portal (400)"
+        "MainMenu_Campaigns_Mounts_AppId_660"                        "Portal 2 - Sixense MotionPack (660)"
+        "MainMenu_Campaigns_Mounts_AppId_247120"                    "Portal 2 - Sixense Perceptual Pack (247120)"
+        "MainMenu_Campaigns_Mounts_AppId_440"                        "Team Fortress 2 (440)"
+        "MainMenu_Campaigns_Mounts_AppId_500"                        "Left 4 Dead (500)"
+        "MainMenu_Campaigns_Mounts_AppId_550"                        "Left 4 Dead 2 (550)"
+        "MainMenu_Campaigns_Mounts_AppId_240"                        "Counter-Strike: Source (240)"
+        "MainMenu_Campaigns_Mounts_AppId_4465480"                    "Counter-Strike: Global Offensive (4465480)"
+
+        // temp for better solution
+        "MainMenu_Campaigns_MountRequired_Header"                    "Oyun Bağlantısı (Mount) Eksik"
+        "MainMenu_Campaigns_MountRequired_220"                        "Bu senaryo, Half-Life 2'ye (20. Yıl Dönümü Sürümü) sahip olmanızı ve oyunun bağlı (mounted) olmasını gerektirir. Oyun bağlantılarını değiştirme talimatları için wiki'ye başvurun."
+        "MainMenu_Campaigns_MountRequired_400"                        "Bu senaryo, Portal'a sahip olmanızı ve oyunun bağlı (mounted) olmasını gerektirir. Oyun bağlantılarını değiştirme talimatları için wiki'ye başvurun."
+        
+        // campaign details card
+        "MainMenu_Campaigns_DetailCard_CompletionPercentage"        "%{i:campaign_completion} tamamlandı"
+        "MainMenu_Campaigns_DetailCard_CompletationStat1"            "Mevcut bölüm: {i:current_chapter} / {i:max_chapters}"
+        "MainMenu_Campaigns_DetailCard_CompletationStat1_CName"        "{s:current_chapter_name}"     // Chapter name here, if specified
+        "MainMenu_Campaigns_DetailCard_CompletationStat2"            "Toplam oynama süresi: {t:d:total_played}"
+        "MainMenu_Campaigns_DetailCard_CompletationStat3"            "Kazanılan başarımlar: {i:num_achievements_earned}/{i:total_campaign_achievements}"
+        "MainMenu_Campaigns_DetailCard_LastPlayDate"                "Son oynanma: {t:l:last_played_date}"
+        "MainMenu_Campaigns_DetailCard_InstallDate"                    "Yüklenme tarihi: {t:l:installed_date}"
+        
+        // campaign main menu
+        "MainMenu_Campaigns_MM_LoadAuto"                            "Devam Et"
+        "MainMenu_Campaigns_MM_Resume"                                "Devam et"
+        "MainMenu_Campaigns_MM_NewGame"                                "Yeni Oyun"
+        "MainMenu_Campaigns_MM_NewGame_Tagline"                        "Yeni bir oyunu yapılandırın ve başlatın"
+        "MainMenu_Campaigns_MM_LoadGame"                            "Oyun Yükle"
+        "MainMenu_Campaigns_MM_SaveGame"                            "Oyunu Kaydet"
+        "MainMenu_Campaigns_MM_ReturnToCampaignMenu"                "Senaryo Seçimine Dön"
+        "MainMenu_Campaigns_MM_ReturnToCampaignMenu_InGame"            "Başka bir senaryoya geçmek için lütfen ana menüye dönün."
+        "MainMenu_Campaigns_MM_Back"                                "Geri"
+        "MainMenu_Campaigns_MM_CampaignName_placeholder"            "{s:campaign_name}"    // This string is for campaigns that don't have a logo
+        "MainMenu_Campaigns_MM_CampaignDescription_placeholder"        "{s:campaign_desc}"
+        "MainMenu_Campaigns_MM_CampaignAuthor"                        "Yapımcı: {s:author}"
+        "MainMenu_Campaigns_MM_ChapterNum"                            "Bölüm {i:chapter_num}"
+        "MainMenu_Campaigns_MM_ChapterName"                            "{s:chapter_name}"
+        "MainMenu_Campaigns_MM_ChapterDesc"                            "{s:chapter_desc}"
+        "MainMenu_Campaigns_MM_ChapterMapName"                        "{s:chapter_map_name}"
+        "MainMenu_Campaigns_MM_StartCustom"                            "Özel Oyun Başlat"
+        "MainMenu_Campaigns_MM_StartVanilla"                        "Özelleştirmeden Başlat"
+        "MainMenu_Campaigns_MM_Start_Title"                            "Bölüm Seçimi"
+        "MainMenu_Campaigns_MM_Start_Tagline"                        "Yeni bir oyunu yapılandırın ve başlatın"
+        "MainMenu_Campaigns_MM_DEV_NoCampaignPH"                    "Aktif bir senaryo algılanmadı"
+        
+        // campaign setup
+        "MainMenu_Campaigns_Setup_ExitNote"                            "Bu senaryoyu başlatmak için bu sayfadaki tüm değişiklikleri tamamlayın ve ardından ana kurulum alanına dönün."
+        "MainMenu_Campaigns_Setup_Summary_NoChanges"                "Değişiklik algılanmadı."
+        "MainMenu_Campaigns_Setup_ResetToDefaults"                    "Varsayılanlara Sıfırla"
+        
+        // campaign setup - main panel
+        "MainMenu_Campaigns_Setup_Title"                            "Senaryo/Harita Ayarları"
+        "MainMenu_Campaigns_Setup_Tagline"                            "Oyun ayarlarını özelleştirin ve onaylayın"
+        "MainMenu_Campaigns_Setup_AdvExpand"                        "Gelişmiş Oyun Ayarları ve Özel Seçenekler"
+        "MainMenu_Campaigns_Setup_PanelButton_Presets_Title"        "Ön Ayarlar"
+        "MainMenu_Campaigns_Setup_PanelButton_Presets_Desc"            "Önceden tanımlanmış bir özelleştirme seti uygulayın"
+        "MainMenu_Campaigns_Setup_PanelButton_Admin_Title"            "Sunucu ayarları"
+        "MainMenu_Campaigns_Setup_PanelButton_Admin_Desc"            "Yönetimsel ayarlar; oyuncu sayıları, kilitleme (lockdown), demo kaydı..."
+        "MainMenu_Campaigns_Setup_PanelButton_MapSelect_Title"        "Harita seçimi"
+        "MainMenu_Campaigns_Setup_PanelButton_MapSelect_Desc"        "Bu bölüm içindeki belirli bir haritadan başlayın"
+        "MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Title"    "Temel Oynanış"
+        "MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc"    "Basit yapılandırılabilir kısıtlamalar"
+        "MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title"        "Oynanış Düzenleyiciler"
+        "MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc"        "Oyunun nasıl davranacağını değiştiren özel özellikleri ve betikleri (script) seçin"
+        
+        // proto
+        "MainMenu_Campaigns_Setup_Proto_Title"                        "Bu sistem prototip bir deneydir ve gelecekte değiştirilebilir veya kaldırılabilir."
+        "MainMenu_Campaigns_Setup_Proto_Desc"                        "Bu sistem üzerinden değiştirilen komut değişkenleri (convars) kayıtlarda kalıcı olmaz. Ayrıca bir senaryodan çıkıldığında geri alınmazlar."
+        
+        // campaign setup - server settings
+        // GameplayBase
+        "MainMenu_Campaigns_Setup_Var_cl_mirror_world"                "Dünyayı Ters Çevir"
+        "MainMenu_Campaigns_Setup_Var_cl_mirror_world_Description"    "Dünyayı yatay olarak tersine çevirir. Birinin gününü mahvetmek için harika bir yol.\n\nVarsayılan: Kapalı"
+        "MainMenu_Campaigns_Setup_Var_sv_gravity"                    "Dünya Yerçekimi"
+        "MainMenu_Campaigns_Setup_Var_sv_gravity_Description"        "Dünyanın aşağı yönlü yerçekimi kuvvetini kontrol eder. Bu, gerçek dünyadaki bir inçe (veya 2,54 santimetreye) eşdeğer olan Hammer birimi (HU) cinsinden ölçülür.\n\nVarsayılan yerçekimi 600 HU/s'dir."
+        "MainMenu_Campaigns_Setup_Var_skill"                        "Oyun Zorluğu"
+        "MainMenu_Campaigns_Setup_Var_skill_Description"            "Hasar düzenleyicilerinin ve toplanabilir eşyaların davranışını değiştirir. Yüksek zorluklar giderek daha zorlu düşmanlara ve daha fazla cephane kıtlığına sahip olacaktır.\n\nBu, Portal senaryoları için geçerli değildir.\n\nVarsayılan: Normal"
+        "MainMenu_Campaigns_Setup_Var_skill_1"                        "Kolay"
+        "MainMenu_Campaigns_Setup_Var_skill_2"                        "Normal"
+        "MainMenu_Campaigns_Setup_Var_skill_3"                        "Zor"
+        "MainMenu_Campaigns_Setup_Var_player_throwenable"                    "Nesne Fırlatmayı Etkinleştir"
+        "MainMenu_Campaigns_Setup_Var_player_throwenable_Description"        "Nesnelerin istendiği zaman fırlatılmasına izin vererek Half-Life 2 tarzı eşya alma (pickup) davranışını etkinleştirir.\n\nVarsayılan: Kapalı"
+        "MainMenu_Campaigns_Setup_Var_player_throwforce"                    "Nesne Fırlatma Gücü"
+        "MainMenu_Campaigns_Setup_Var_player_throwforce_Description"        "Hammer birimi (HU) cinsinden fırlatılan nesnelerin başlangıç gücü. \"Nesne Fırlatmayı Etkinleştir\" özelliğinin açık olmasını gerektirir."
+        "MainMenu_Campaigns_Setup_Var_mv_bhop"                        "\"Bunny-hop\" Hız Artışı Hatası"
+        "MainMenu_Campaigns_Setup_Var_mv_bhop_Description"            "Source motoru oyunlarının eski sürümlerinde gösterildiği gibi, oyuncuların bozuk hareket davranışını suistimal ederek ekstra momentum kazanmasını sağlayan bir \"bunny-hopping\" hatasını etkinleştirir.\n\nVarsayılan: Kapalı"
+        "MainMenu_Campaigns_Setup_Var_mv_duckjump"                    "Eğilerek Zıplamaya İzin Ver"
+        "MainMenu_Campaigns_Setup_Var_mv_duckjump_Description"        "Oyuncunun çömelmiş/eğilmiş haldeyken zıplamasına izin verir. Bu, belirli Half-Life 2 hareket davranışlarını kullanan haritalar için bir gerekliliktir.\n\nVarsayılan: Kapalı"
+        "MainMenu_Campaigns_Setup_Var_sv_enableholdrotation"                "Tutarak Döndürmeyi Etkinleştir"
+        "MainMenu_Campaigns_Setup_Var_sv_enableholdrotation_Description"    "Oyuncunun tutulan fiziksel nesneleri +ATTACK2 (ikincil saldırı) tuşuna basılı tutarak döndürmesine izin verir.\n\nVarsayılan: Kapalı"
+        "MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry"                "Tercih Edilen Taşıma Yönünü Etkinleştir"
+        "MainMenu_Campaigns_Setup_Var_sv_enablepreferredcarry_Description"    "Tutulan fizik nesnelerini tercih edilen taşıma açısında tutar.\n\nVarsayılan: Açık"
+
+        // ServerSettings
+        "MainMenu_Campaigns_Setup_Var_hostname"                        "Sunucu Adı"
+        "MainMenu_Campaigns_Setup_Var_hostname_Description"            "Sunucu tarayıcısında gösterildiği şekliyle bu sunucunun aranabilir adı. Tek oyunculu (single-player) oyunlar için geçerli değildir."
+        "MainMenu_Campaigns_Setup_Var_sv_tags"                        "Sunucu Etiketleri"
+        "MainMenu_Campaigns_Setup_Var_sv_tags_Description"            "Belirli özelleştirmelere veya oyun modlarına sahip sunucuları ararken kullanılacak anahtar kelimeler. Tek oyunculu oyunlar için geçerli değildir.\n\nVarsayılan: Yok"
+        "MainMenu_Campaigns_Setup_Var_maxplayers"                    "Maksimum Oyuncu Sayısı"
+        "MainMenu_Campaigns_Setup_Var_maxplayers_Description"        "Aynı anda bu sunucuya bağlanabilecek maksimum oyuncu sayısı. Bunu 1 olarak ayarlamak tek oyunculu modu zorunlu kılar.\n\nVarsayılan: 1"
+        "MainMenu_Campaigns_Setup_Var_sv_password"                    "Sunucu Şifresi"
+        "MainMenu_Campaigns_Setup_Var_sv_password_Description"        "Oyuncuların bu sunucuya katılmak için kullanabileceği bir şifre/kod. Özel (gizli) oturumlar ve LAN partileri düzenlemek için idealdir.\n\nVarsayılan: Yok"
+        "MainMenu_Campaigns_Setup_Var_sv_lan"                        "LAN Üzerinden Kur"
+        "MainMenu_Campaigns_Setup_Var_sv_lan_Description"            "Bu sunucuya gelen bağlantıları yalnızca mevcut yerel ağdan kaynaklananlarla sınırlar. Özel oturumlar ve LAN partileri için önerilir."
+        "MainMenu_Campaigns_Setup_Var_sv_cheats"                    "Sunucu Hilelerini Etkinleştir"
+        "MainMenu_Campaigns_Setup_Var_sv_cheats_Description"        "<pre>noclip</pre>, <pre>impulse</pre> ve <pre>ent_fire</pre> gibi \"hile\" olarak işaretlenmiş özel komutlara erişimi etkinleştirir.\n\nVarsayılan: Kapalı"
+        "MainMenu_Campaigns_Setup_Var_p2p"                            "Steam Ağını Kullan"
+        "MainMenu_Campaigns_Setup_Var_p2p_Description"                "Minimum teknik kurulumla internet üzerinden eşler arası (P2P) ve atanmış (dedicated) sunucular barındırmayı sağlamak için <a href=\"https://partner.steamgames.com/doc/features/multiplayer/steamdatagramrelay\">Steam Datagram Relay</a> ağını kullanır. Oyuncu bilgilerini anonimleştirmek ve sunucu sahibini korumak için oyun trafiği Valve aktarma (relay) sunucularına gönderilir."
+        
+        // CampaignSetupDiscardDialog
+        "MainMenu_Campaigns_Setup_Discard_Title"                    "Değişiklikleri Sil"
+        "MainMenu_Campaigns_Setup_Discard_Description"                "Senaryo kurulumundan ayrılmak istediğinizden emin misiniz?\n\nKurulum sırasında yapılan tüm ayarlar kaybolacaktır."
+        
+        // NewGameWarningDialog
+        "Action_NewGame_Title"                                        "Oyunu Başlat"
+        "Action_NewGame_Description"                                "Yeni bir oyuna başlamak istediğinizden emin misiniz?\n\nÖnceki ilerlemeler kaybolacaktır."
+        "Action_NewGame_CampaignSetup_Description"                    "Bu ayarlarla yeni bir oyuna başlamak istediğinizden emin misiniz?\n\nÖnceki ilerlemelerin kaybolacağını ve yeni bir oyun başladıktan sonra oynanış düzenleyicilerinin geri alınamayacağını unutmayın."
+
+        // campaign list
+        
+        // p2ce-campaign
+        "MainMenu_Campaigns_P2CE"                    "Portal 2: Community Edition"
+        "MainMenu_Campaigns_P2CE_Author"            "P2:CE Ekibi"
+        "MainMenu_Campaigns_P2CE_Description"        "[DEV - BENİ DEĞİŞTİR] Geçici P2:CE Senaryo Açıklaması"
+        
+        // for valve campaigns
+        "MainMenu_Campaigns_Valve_Author"            "Valve Software"
+        
+        // portal2
+        "MainMenu_Campaigns_portal2"                "Portal 2"
+        "MainMenu_Campaigns_portal2_Description"    "Portal 2, dinamik yeni karakterlerden oluşan bir kadro, bir dizi yeni bulmaca unsuru ve çok daha büyük bir aldatıcı test odaları seti sunuyor. Oyuncular Aperture Science Laboratuvarlarının daha önce hiç görülmemiş alanlarını keşfedecek ve orijinal oyunda kendilerine rehberlik eden, zaman zaman cinayet işlemeye meyilli bilgisayar yoldaşları GLaDOS ile yeniden bir araya gelecekler."
+        "MainMenu_Campaigns_portal2_MP"                "Portal 2 Co-op"
+        "MainMenu_Campaigns_portal2_MP_Description"    "Eşli (Co-op) modu, benzersiz bir hikaye, test odaları ve iki yeni oyuncu karakteriyle tamamen ayrı bir senaryo sunar. Bu yeni mod, oyuncuları portallar hakkında bildiklerini sandıkları her şeyi yeniden düşünmeye zorlar. Başarılı olmak için sadece işbirliği içinde hareket etmeleri değil, aynı zamanda işbirliği içinde düşünmeleri de gerekecektir."
+        
+        // portal
+        "MainMenu_Campaigns_portal"                    "Portal"
+        "MainMenu_Campaigns_portal_Description"        "Gizemli Aperture Science Laboratuvarlarında geçen oyunda oyuncular, portallar açarak nesneleri ve kendilerini uzayda manevra ettirerek fiziksel bulmacaları ve zorlukları çözmelidir."
+        
+        // hl2
+        "MainMenu_Campaigns_hl2"                    "Half-Life 2"
+        "MainMenu_Campaigns_hl2_Description"        "Yedi Saat Savaşı kaybedildi. Dünya teslim oldu. Black Mesa olayı uzak bir anı olarak kaldı. Oyuncu, uzaylıların istila ettiği, kemiklerine kadar sömürülen, kaynakları tükenen ve nüfusu azalan bir Dünya'da kendini bulan araştırma görevlisi Dr. Gordon Freeman'ın levyeyi tekrar eline almasına tanık olur. Freeman, Black Mesa'da serbest bıraktığı kötülükten dünyayı kurtarmak gibi kıskanılmayacak bir role itilmiştir. Ve değer verdiği pek çok insan ona güvenmektedir."
+        
+        // episodic
+        "MainMenu_Campaigns_episodic"                "Half-Life 2: Episode One"
+        "MainMenu_Campaigns_episodic_Description"    "Half-Life 2'deki olayların ardından Dr. Gordon Freeman ve Alyx Vance, Şehir 17'yi (City 17) yok edecek kaçınılmaz bir zincirleme reaksiyonu yavaşlatmaya çalışırlar. Ağır bir direnişle karşılaşan ikili, her şey yok olmadan önce şehri tahliye etmeli ve sakinlerini kurtarmalıdır."
+        
+        // ep2
+        "MainMenu_Campaigns_ep2"                    "Half-Life 2: Episode Two"
+        "MainMenu_Campaigns_ep2_Description"        "İnsanlığın dağılmasıyla birlikte uzaylı güçleri Dünya'nın kontrolü için savaşmaya devam etmektedir. Fizikçi Gordon Freeman ve Alyx Vance, insanlık yok edilmeden önce bir Combine yayınını engellemek ve isyancı güçlerle yeniden bir araya gelmek için çalışmalıdır."
+        
+        // Main Menu - Addons
+        "MainMenu_Addons_Refresh"                    "Eklenti Listesini Yenile"
+        "MainMenu_Addons_Apply"                        "Uygula"
+        "MainMenu_Addons_Discard"                    "İptal Et"
+        "MainMenu_Addons_ToggleAll"                    "Tüm Eklentileri Etkinleştir/Devre Dışı Bırak"
+        "MainMenu_Addons_ViewOnWS"                    "Atölye Sayfasını Görüntüle"            // DO NOT DISPLAY THIS IF IT IS A LOCAL ADDON
+        "MainMenu_Addons_Category_WS"                "P2:CE Eklentileri"
+        "MainMenu_Addons_Category_WS_Tagline"        "Atölye abonelikleri ve yerel olarak yüklenmiş içerikler"
+        "MainMenu_Addons_Category_Mounts"            "Bağlı Oyunlar"
+        "MainMenu_Addons_Category_Mounts_Tagline"    "Yüklü diğer Source motoru oyunlarından içerikler"
+        "MainMenu_Addons_SteamWorkshop_Tooltip"        "Arayüzde (overlay) Steam Atölyesi'ni aç"
+        "MainMenu_Addons_Advanced_Tooltip"            "İleri düzey kullanıcılar için tüm eklenti türlerinin görünürlüğünü aç/kapat"
+        
+        "MainMenu_Addons_ToggleAddon"                "Eklentinin etkinleştirme durumunu değiştir"
+        
+        // Main Menu - Mounts
+        "MainMenu_Mounts_MountGame"                    "Bağla"
+        "MainMenu_Mounts_UnmountGame"                "Bağlantıyı Kes"
+        "MainMenu_Mounts_TooMany"                    "Çok Fazla Bağlı Oyun Var"
+        "MainMenu_Mounts_TooMany_Desc"                "Şu anda bu P2:CE kurulumuna bağlı {i:num_mounted_games} oyun var. Teknik sınırlamalar nedeniyle bağlantı dosyanızdan yalnızca {i:max_mounts} oyun görüntülenecektir."
+        "MainMenu_Mounts_Game_MaxTagline"            "Görünür bağlı oyunların maksimum sayısına ulaşıldı."
+        "MainMenu_Mounts_WIP_Title"                    "Bağlantı yapılandırması geliştirme aşamasındadır ve şu anda kullanılamamaktadır."
+        "MainMenu_Mounts_WIP_Tagline"                "Portal 2: Community Edition'da bağlantıları yapılandırma hakkında daha fazla bilgi edinmek için buraya tıklayın."
+
+        // for non-campaign addons with maps
+        "MainMenu_Addons_MapDropdown_Select"        "Bir harita seçin..."
+        "MainMenu_Addons_LaunchMap_Multi"            "Seçili Haritayı Başlat"
+        "MainMenu_Addons_LaunchMap_Single"            "Haritayı Oyna"
+        
+        // Filtering
+        // Filtering - Time
+        "MainMenu_Addons_SearchBox_FillerText"                "Eklentilerde ara..."
+        "MainMenu_Addons_Filtering_Title"                    "Filtreleme ve Sıralama Seçenekleri (UYGULANMADI)"
+        "MainMenu_Addons_Filtering_Edit_Tooltip"            "Eklentilerin eklenti listesinde nasıl filtreleneceğini ve sıralanacağını değiştirin."
+        "MainMenu_Addons_Filtering_EnableAddons_Tooltip"    "Bu listedeki tüm eklentileri etkinleştirin veya devre dışı bırakın."
+        "MainMenu_Addons_Filtering_Sort_Title"                "Sıralama ölçütü:"
+        "MainMenu_Addons_Filtering_Sort_TimeInstalled"        "Abonelik/Ekleme Zamanı"
+        "MainMenu_Addons_Filtering_Sort_Alpha"                "Alfabetik"
+        "MainMenu_Addons_Filtering_Sort_TimePublished"        "Yükleme/Yayınlanma Tarihi"
+        "MainMenu_Addons_Filtering_Sort_TimeLastUpdate"        "Son Güncelleme Tarihi"
+        
+        // Filtering - Source Type
+        "MainMenu_Addons_Filtering_Sort_InstallSrc"            "Eklenti Kaynak Türü"
+        "MainMenu_Addons_Filtering_Sort_InstallSrc_Local"    "Yerel Kurulum"
+        "MainMenu_Addons_Filtering_Sort_InstallSrc_UGC"        "Steam Atölyesi"
+        
+        // Filtering - Campaigns
+        // These are sourced from the internal tags in workshop.kv3
+        "MainMenu_Addons_Filtering_Sort_CampaignTags"            "Senaryo/Harita Etiketleri"
+        "MainMenu_Addons_Filtering_Sort_CampaignTags_SP"        "Tek Oyunculu"
+        "MainMenu_Addons_Filtering_Sort_CampaignTags_COOP"        "Eşli (Co-op)"
+        "MainMenu_Addons_Filtering_Sort_CampaignTags_CUSTOM"    "Özel Hikaye"
+        "MainMenu_Addons_Filtering_Sort_CampaignTags_LSHORT"    "Kısa (1-3 harita)"
+        "MainMenu_Addons_Filtering_Sort_CampaignTags_LMED"        "Orta (4-7 harita)"
+        "MainMenu_Addons_Filtering_Sort_CampaignTags_LLONG"        "Uzun (8+ harita)"
+        
+        // Filtering - Addon Tags
+        // These are sourced from the internal tags in workshop.kv3
+        "MainMenu_Addons_Filtering_Sort_AddonTags"                "Eklenti Etiketleri"
+        "MainMenu_Addons_Filtering_Sort_AddonTags_Model"        "Modeller"
+        "MainMenu_Addons_Filtering_Sort_AddonTags_Mats"            "Materyaller/Dokular"
+        "MainMenu_Addons_Filtering_Sort_AddonTags_Scripts"        "Betikler (Scripts)"
+        "MainMenu_Addons_Filtering_Sort_AddonTags_Instance"        "Örnekler (Instances) / Hazır Yapılar (Prefabs)"
+        "MainMenu_Addons_Filtering_Sort_AddonTags_Theme"        "Tema"
+        "MainMenu_Addons_Filtering_Sort_AddonTags_Ported"        "Oyun Portu"
+
+        // General Actions
+        "Common_On"                                    "Açık"
+        "Common_Off"                                "Kapalı"
+        "Common_Update"                                "Güncelle"
+        "Common_ComingSoon"                            "Çok Yakında!"
+        "Common_Gamemode"                            "Oyun Modu"
+        "Common_Game"                                "Oyun"
+        "Common_GameUpper"                            "OYUN"
+        "Common_Save"                                "Kaydet"
+        "Common_Close"                                "Kapat"
+        "Common_Cancel"                                "İptal"
+        "Common_OK"                                    "Tamam"
+        "Common_DontShowAgain"                        "Bunu tekrar gösterme"
+        "Common_SelectAll"                            "Tümünü Seç"
+        "Common_Delete"                                "Sil"
+        "Common_Remove"                                "Kaldır"
+        "Common_Create"                                "Oluştur"
+        "Common_Edit"                                "Düzenle"
+        "Common_Refresh"                            "Yenile"
+        "Common_Search"                                "Ara"
+        "Common_By"                                    "Yapan:"
+        "Common_SearchEllipsis"                        "Ara..."
+        "Common_Multiplayer"                        "Çok Oyunculu"
+        "Common_Wiki"                                "Arayüzde (Overlay) Wiki'yi Aç"
+        
+        "Action_Yes"                                "Evet"
+        "Action_No"                                    "Hayır"
+        "Action_Cancel"                                "İptal"
+        "Action_Confirm"                            "Onayla"
+        "Action_Back"                                "Geri"
+        "Action_Return"                                "Geri Dön"
+        "Action_ReturnToMenu"                        "Menüye Çık"
+        "Action_Apply"                                "Uygula"
+        "Action_Discard"                            "İptal Et"
+        
+        // Feature Unavailable
+        "MainMenu_Feature_Unavailable_Title"        "Özellik Kullanılamıyor"
+        "MainMenu_Feature_Unavailable_Description"    "Bu özellik yapım aşamasındadır ve şu anda erişilemez."
+        
+        // QuitPrompt
+        "Action_Quit"                                "Çık"
+        "Action_QuitToDesktop"                        "Masaüstüne Çık"
+        "Action_Quit_Message"                         "Çıkmak istediğinizden emin misiniz?"
+        "Action_Quit_InGame_Message"                "Çıkmak istediğinizden emin misiniz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
+        // quit_prompt console command
+        "MainMenu_ExitGameConfirmation_Title"        "Oyundan Çık"
+        "MainMenu_ExitGameConfirmation_Message"        "Oyundan çıkmak istediğinizden emin misiniz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
+        
+        // Loading Screen
+        "LoadingProgress_Connecting"                 "Sunucuya bağlanılıyor..."
+        "LoadingProgress_SpawningServer"            "Yerel oyun sunucusu başlatılıyor..."
+        "LoadingProgress_BeginConnect"                 "Sunucuyla bağlantı kuruluyor..."
+        "LoadingProgress_Changelevel"                "Sunucunun harita değiştirmesi bekleniyor"
+        "LoadingProgress_LoadMap"                    "BSP veri yığınları (lump) yükleniyor..."
+        "LoadingProgress_PrecacheWorld"                "Dünya başlatılıyor..."
+        "LoadingProgress_LoadResources"                "Kaynaklar yükleniyor..."
+        "LoadingProgress_ProcessServerInfo"            "Mevcut sunucu durumu sorgulanıyor..."
+        "LoadingProgress_SignonLocal"                "Kaynaklar başlatılıyor..."
+        "LoadingProgress_SignonDataLocal"            "İlk dünya durumu sonlandırılıyor..."
+        "LoadingProgress_SignonData"                "Oyun verileri alınıyor..."
+        "LoadingProgress_SendClientInfo"             "İstemci (client) oluşturuluyor..."
+        
+        // Temp Notices
+        // Unfinished Software Reminder
+        "MainMenu_PrereleaseNotice_Title"            "Bu kararsız, yayın öncesi (pre-release) bir yazılımdır"
+        "MainMenu_PrereleaseNotice_Description"        "Portal 2: Community Edition bir modlama çerçevesidir. Şu anki haliyle aynı zamanda tamamlanmamış bir yazılımdır. Bu ön izleme (preview) sürümü yalnızca içerik üreticilerine yöneliktir; bazı temel özellikler eksik olabilir veya aktif olarak geliştirilmektedir ve altta yatan oyun motoru genelinde önemli kod yeniden düzenlemeleri (refactoring) yapılmaktadır. Bu süreçte, daha büyük yaşam kalitesi (QoL) iyileştirmelerine ve yeni özelliklere zemin hazırlamak amacıyla eski kodlar tamamen yeniden yazılmakta ve/veya kaldırılmaktadır. Sonuç olarak, P2:CE ve onun SDK araçlarının bazı yönleri modlama iş akışınızı önemli ölçüde etkileyebilecek hatalara maruz kalabilir.
+
+P2:CE senaryosu da tamamlanmamıştır ve bu nedenle bu ön izleme sürümüne dahil edilmemiştir.
+        
+Hata raporlarını ve özellik taleplerini P2:CE'nin aşağıdaki sorun izleyicilerine (issue trackers) göndermenizi öneririz:
+
+    • https://github.com/StrataSource/Portal-2-Community-Edition
+    • https://github.com/StrataSource/Engine
+        
+\"Anladım\" seçeneğine tıklayarak bu ön izleme sürümünü kullanmanın getirdiği riskleri kabul etmiş olursunuz. Bu şartları reddetmeyi seçerseniz P2:CE kapanacaktır.
+
+Bu mesaj yalnızca bir kez görüntülenecek ve kabul edildikten sonra tekrar gösterilmeyecektir."
+
+        "MainMenu_Compat_Warning_Header"            "Uyumluluk Uyarısı"
+        "MainMenu_Compat_Warning"                    "<b>Portal 1 ve Half-Life 2 şu anda P2:CE'de tam işlevselliğe sahip değildir.</b> Eksik veya değiştirilmiş dokular, bozuk animasyonlar, çökmeler, ilerleme için çok önemli olan eksik oyun unsurları ve daha fazlası gibi sorunlar yaşayabilirsiniz. Gelecekte bu sorunlardan bazılarını düzeltmeyi planlasak da, bu yüksek bir öncelik değildir. <b>Lütfen Portal 1/Half-Life 2 ile ilgili hataları bildirmeyin.</b>"
+
+        "MainMenu_PrereleaseNotice_Acknowledge"        "Anladım"
+        "MainMenu_PrereleaseNotice_Decline"            "Reddet"
+        
+        // Playtest DOSA
+        "MainMenu_PlaytestDOSA_Title"                "Portal 2: Community Edition oyun testine (playtest) hoş geldiniz!"
+        "MainMenu_PlaytestDOSA_Description"            "Oyun testinin bir parçası olarak oyun, oynanışınızın bir demosunu ve bazı temel performans verilerini kaydedecektir. Bu veriler, oyun geliştiricilerimizin daha sonra incelemesi için yüklenecek ve böylece oynanışı iyileştirmemize olanak tanıyacaktır.\n\nNOT: Onay daha sonra ayarlardan verilebilir/geri alınabilir."
+        "MainMenu_PlaytestDOSA_Consent"                "Oyun Testi Veri Toplamasına Onay Ver"
+        "MainMenu_PlaytestDOSA_Revoke"                "Onayı Geri Al"
+    
+        // Color Picker
+        "ColorPicker_Hue"                            "H"
+        "ColorPicker_Saturation"                    "S"
+        "ColorPicker_Value"                            "V"
+        "ColorPicker_Red"                            "R"
+        "ColorPicker_Green"                            "G"
+        "ColorPicker_Blue"                            "B"
+        "ColorPicker_Alpha"                            "A"
+
+        // Dependency Warning
+        "DependencyWarning_Generic"                    "Bunun düzgün çalışması için gereken bir veya daha fazla eklentiniz eksik."
+        "DependencyWarning_Header"                    "Eksik Bağımlılıklar"
+        "DependencyWarning_Desc"                    "Başlatmaya çalıştığınız içerik, bulunamayan eklentilere bağlı. Eksik olduğunuz eklentiler aşağıda bulunabilir. Bir eklentiye tıklayarak Steam Arayüzü (Overlay) üzerinden Atölye sayfasını açabilirsiniz. Bu uyarıyı yoksayabilir ve yine de devam edebilirsiniz, ancak eksik dokular veya modeller gibi sorunlarla karşılaşmayı bekleyin."
+        "DependencyWarning_Loading"                    "Ayrıntılar Alınıyor..."
+        "DependencyWarning_Failed"                    "Ayrıntılar alınamadı!"
+        "DependencyWarning_Action_Ignore"            "Yine De Devam Et"
+        "DependencyWarning_Action_Cancel"            "İptal"
+		"DependencyWarning_Resolved_Header"			"Dependencies Resolved"
+		"DependencyWarning_Resolved_Desc"			"All addon dependencies have been resolved!"
+
+"DependencyWarning_Resolved_Header"            "Bağımlılıklar Çözüldü"
+        "DependencyWarning_Resolved_Desc"            "Tüm eklenti bağımlılıkları çözüldü!"
+
+        "UI_Upvote"                                    "Olumlu Oy"
+        "UI_Downvote"                                "Olumsuz Oy"
+        "UI_Novote"                                    "Hiçbiri"
+        "UI_Dependencies"                            "Bağımlılıklar"
+        "UI_Description"                            "Açıklama"
+        
+        // Networking Stuff!!!!!
+        // Disconnect Dialog Main
+        "MainMenu_DisconnectDialog_Title"                    "Sunucu bağlantısı kesildi"
+        "MainMenu_DisconnectDialog_Message"                    "Aşağıdaki nedenden dolayı bağlantınız kesildi:\n\n{s:disconnect_reason}"
+        
+        // generic disconnect reasons
+        "MainMenu_DisconnectDialog_Reason_TimeOut"            "Sunucu muhtemelen çöktü veya ağ bağlantısı koptu. Birkaç dakika bekleyin ve ardından yeniden bağlanmayı deneyin."
+        "MainMenu_DisconnectDialog_Reason_TimeOutConnect"    "Sunucuyla bağlantı kurulamadı. Belirtilen sunucu IP adresi/ana bilgisayar adı geçersiz veya ağ bağlantınızda bir sorun var."
+        "MainMenu_DisconnectDialog_Reason_BuildTooOld"        "Portal 2: Community Edition may require an update to connect to this server. Please exit the game and check for any pending updates on the Steam client."
+        "MainMenu_DisconnectDialog_Reason_BuildTooNew"        "Your version of P2:CE is newer than the server's version. The server owner may need to update to the newest game version."
+        "MainMenu_DisconnectDialog_Reason_DSExit"            "Sunucu kapatma işlemi kurucu/sahip tarafından başlatıldı."
+        "MainMenu_DisconnectDialog_Reason_Kicked"            "Bu sunucudan atıldınız."
+        "MainMenu_DisconnectDialog_Reason_KickedVote"        "Oylama ile bu sunucudan atıldınız."
+        "MainMenu_DisconnectDialog_Reason_Banned"            "Bu sunucudan yasaklandınız."
+        "MainMenu_DisconnectDialog_Reason_BannedVote"        "Oylama ile bu sunucudan yasaklandınız."
+        
+        // Disconnect Notices - ENetworkDisconnectionReason (per matchmaking dll and cross-ref with csgo_english + dota_english)
+        // These need to be shared on here and in panorama_english for DS host reasons
+        "GameUI_Disconnect_User"                            "Oyuncu sunucudan ayrıldı."                        // NETWORK_DISCONNECT_DISCONNECT_BY_USER
+        "GameUI_Disconnect_Server"                            "Oyuncu sunucu tarafından uzaklaştırıldı."                                // NETWORK_DISCONNECT_DISCONNECT_BY_SERVER
+        "GameUI_Disconnect_ConnectionLost"                    "Sunucu bağlantısı kaybedildi."                            // NETWORK_DISCONNECT_LOST, NETWORK_DISCONNECT_SNS_CONNECTION_LOST
+        "GameUI_Disconnect_ConnectionOverflow"                "İslamci tarafından alınan paket çok büyük."                // NETWORK_DISCONNECT_OVERFLOW
+        "GameUI_Disconnect_ServerInfoOverflow"                "Sunucu meta veri paketi çok büyük."                    // NETWORK_DISCONNECT_SERVERINFO_OVERFLOW
+        "GameUI_Disconnect_TickMessage"                        "Tick verisi çok büyük."                                // NETWORK_DISCONNECT_TICKMSG_OVERFLOW
+        "GameUI_Disconnect_StringTableMessage"                "İstemci tarafından alınan StringTable verisi çok büyük."        // NETWORK_DISCONNECT_STRINGTABLEMSG_OVERFLOW
+        "GameUI_Disconnect_DeltaEntMessage"                    "İstemci tarafından alınan DeltaEnt verisi çok büyük."        // NETWORK_DISCONNECT_DELTAENTMSG_OVERFLOW
+        "GameUI_Disconnect_TempEntMessage"                    "İstemci tarafından alınan TempEnt verisi çok büyük."            // NETWORK_DISCONNECT_TEMPENTMSG_OVERFLOW
+        "GameUI_Disconnect_SoundsMessage"                    "Aynı anda çok fazla ses çalınmaya çalışılıyor."            // NETWORK_DISCONNECT_SOUNDSMSG_OVERFLOW
+        "GameUI_Disconnect_ReliableOverflow"                "Sunucu tarafında güvenilir akış taştı."                // NETWORK_DISCONNECT_RELIABLEOVERFLOW
+        "GameUI_Disconnect_BadClientDeltaTick"                "İstemci tarafından hatalı enterpolasyon tick'i alındı."            // NETWORK_DISCONNECT_BADDELTATICK
+        "GameUI_Disconnect_NoMoreSplits"                    "Daha fazla bölünmüş ekran yuvası kalmadı."                    // NETWORK_DISCONNECT_NOMORESPLITS
+        "GameUI_Disconnect_TimedOut"                        "Sunucu beklenirken zaman aşımına uğradı."                    // NETWORK_DISCONNECT_TIMEDOUT
+        "GameUI_Disconnect_Disconnected"                    "Sunucu bağlantınız kesildi."            // NETWORK_DISCONNECT_DISCONNECTED
+        "GameUI_Disconnect_LeavingSplit"                    "Bölünmüş ekran modundan çıkılıyor."                            // NETWORK_DISCONNECT_LEAVINGSPLIT
+        "GameUI_Disconnect_DifferentClassTables"            "Sunucudaki sınıf tablosu yapıları istemciyle uyuşmuyor."    // NETWORK_DISCONNECT_DIFFERENTCLASSTABLES
+        "GameUI_Disconnect_NoSpectators"                    "Bu sunucu izleyici modunu desteklemiyor."            // NETWORK_DISCONNECT_NOSPECTATORS
+        "GameUI_Disconnect_Kicked"                            "Sunucudan atıldınız."                                    // NETWORK_DISCONNECT_KICKED
+        "GameUI_Disconnect_BanAdded"                        "Sunucudan yasaklandınız."                                    // NETWORK_DISCONNECT_BANADDED
+        "GameUI_Disconnect_KickBanAdded"                    "Sunucudan yasaklandınız."                                    // NETWORK_DISCONNECT_KICKBANADDED - Isn't this the same thing as BANADDED?
+        "GameUI_Disconnect_PureServer_ClientExtra"            "İçerik bütünlük kontrolü başarısız: İstemcide paylaşıma açık olmayan ek varlıklar yüklü."    // NETWORK_DISCONNECT_PURESERVER_CLIENTEXTRA
+        "GameUI_Disconnect_PureServer_Mismatch"                "İçerik bütünlük kontrolü başarısız: İstemcideki varlıklar sunucu sürümüyle eşleşmiyor."    // NETWORK_DISCONNECT_PURESERVER_MISMATCH
+        "GameUI_Disconnect_UserCmd"                            "Kullanıcı komutları ayrıştırılırken hata oluştu."                        // NETWORK_DISCONNECT_USERCMD
+        "GameUI_Disconnect_RejectedByGame"                    "Bağlantı sunucu tarafından reddedildi."                        // NETWORK_DISCONNECT_REJECTED_BY_GAME
+        "GameUI_Disconnect_BadServerPassword"                "Geçersiz sunucu şifresi."                                // NETWORK_DISCONNECT_BAD_SERVER_PASSWORD
+        "GameUI_Disconnect_ConnectionFailure"                "Sunucuya bağlanılamadı."                            // NETWORK_DISCONNECT_CONNECTION_FAILURE
+        "GameUI_Disconnect_ConnectionClosing"                "Bağlantı sunucu tarafından kapatıldı."                            // NETWORK_DISCONNECT_CONNECTION_CLOSING
+        "GameUI_Disconnect_SessionMigrated"                    "Mevcut maç başka bir sunucuya taşındı."            // NETWORK_DISCONNECT_SESSION_MIGRATED
+        "GameUI_Disconnect_PlayerRemovedFromHostSession"    "Oyuncu kurucu tarafından uzaklaştırıldı."                                // NETWORK_DISCONNECT_PLAYER_REMOVED_FROM_HOST_SESSION
+        "GameUI_Disconnect_TooManyCommands"                    "Sunucuya çok fazla komut gönderildi."                    // NETWORK_DISCONNECT_SERVER_DOS
+        "GameUI_Disconnect_SteamIDBanned"                    "Hesap Steam Topluluğu'ndan yasaklandı."            // NETWORK_DISCONNECT_STEAM_BANNED
+        "GameUI_Disconnect_SteamIDInUse"                    "Steam hesabı şu anda başka bir yerde kullanılıyor."        // NETWORK_DISCONNECT_STEAM_INUSE
+        "GameUI_Disconnect_SteamInUse"                        "Steam hesabı şu anda başka bir yerde kullanılıyor."        // NETWORK_DISCONNECT_STEAM_LOGGED_IN_ELSEWHERE - Why the hell is this disconnect reason duped twice?
+        "GameUI_Disconnect_SteamTicket"                        "Geçersiz Steam oturum açma bileti."                            // NETWORK_DISCONNECT_STEAM_TICKET
+        "GameUI_Disconnect_SteamLogon"                        "Oyuncu Steam ağına bağlı değil."            // NETWORK_DISCONNECT_STEAM_LOGON, NETWORK_DISCONNECT_STEAM_AUTHCANCELLED, NETWORK_DISCONNECT_STEAM_AUTHALREADYUSED, NETWORK_DISCONNECT_STEAM_AUTHINVALID
+        "GameUI_Disconnect_SteamVAC"                        "Oyuncu hile yaptığı için çevrimiçi oynamaktan yasaklandı."        // NETWORK_DISCONNECT_STEAM_VACBANSTATE
+        "GameUI_Disconnect_SteamTimeOut"                    "Valve Anti-Hile (VAC) yasaklama durumu doğrulanamadı."    // NETWORK_DISCONNECT_STEAM_VAC_CHECK_TIMEDOUT
+        "GameUI_Disconnect_SteamDropped"                    "Şu anda Steam ağıyla bağlantınız kesik."    // NETWORK_DISCONNECT_STEAM_DROPPED
+        "GameUI_Disconnect_SteamOwnership"                    "Bu Steam hesabı Portal 2 ve/veya Portal 2: Community Edition lisansına sahip değil."    // NETWORK_DISCONNECT_STEAM_OWNERSHIP
+        "GameUI_Disconnect_LocalProblem_ManyRelays"            "Steam Datagram Relay (SDR) sunucularıyla yapılan birden fazla denemeden sonra oyun durumu kurtarılamadı. Bu bilgisayarın ağ bağlantısında bir sorun olabilir."        // NETWORK_DISCONNECT_SNS_LOCAL_MANYRELAYS
+        "GameUI_Disconnect_LocalProblem_HostedServerPrimaryRelay"        "Sunucunun Steam Datagram Relay (SDR) sunucularıyla bağlantısı kesildi."        // NETWORK_DISCONNECT_SNS_LOCAL_HOSTEDSERVERPRIMARYRELAY
+        "GameUI_Disconnect_LocalProblem_NetworkConfig"        "Steam Datagram Relay (SDR) yapılandırma verileri indirilemedi."        // NETWORK_DISCONNECT_SNS_LOCAL_NETWORKCONFIG
+        "GameUI_Disconnect_LocalProblem_Other"                "SDR röle iletişimi başarısız oldu."                        // NETWORK_DISCONNECT_SNS_LOCAL_OTHER
+        "GameUI_Disconnect_RemoteProblem_TimeoutConnecting"    "Sunucuya bağlanılması beklenirken zaman aşımına uğradı."                // NETWORK_DISCONNECT_SNS_REMOTE_TIMEOUTCONNECTING
+        "GameUI_Disconnect_RemoteProblem_Timeout"            "Sunucu beklenirken zaman aşımına uğradı."                            // NETWORK_DISCONNECT_SNS_REMOTE_TIMEOUT
+        "GameUI_Disconnect_RemoteProblem_BadCrypt"            "Sunucudan geçersiz/hatalı yapılandırılmış kriptografi ayarları alındı."        // NETWORK_DISCONNECT_SNS_REMOTE_BADCRYPT
+        "GameUI_Disconnect_RemoteProblem_BadCert"            "Sunucu tarafından geçersiz şifreleme sertifikası sunuldu."    // NETWORK_DISCONNECT_SNS_REMOTE_BADCERT
+        "GameUI_Disconnect_ClosedByPeer_Timeout"            "Eş yanıtı beklenirken zaman aşımına uğradı."            // NETWORK_DISCONNECT_SNS_CLOSEDBYPEER_TIMEOUT
+        "GameUI_Disconnect_ClosedByPeer"                    "Bağlantı eş tarafından kapatıldı."                            // NETWORK_DISCONNECT_SNS_CLOSEDBYPEER_OTHER
+        "GameUI_Disconnect_InternalError"                    "Dahili iletişim hatası. Ayrıntılar için geliştirici konsolunu kontrol edin."    // NETWORK_DISCONNECT_SNS_INTERNALERROR
+        "GameUI_Disconnect_Unusual"                            "İstemci/sunucu bağlantısında belirtilmeyen bir hata oluştu. Ayrıntılar için geliştirici konsolunu kontrol edin."        // NETWORK_DISCONNECT_SNS_UNUSUAL
+        "GameUI_Disconnect_HLTVBadRelayPassword"            "Geçersiz SourceTV proxy şifresi."                        // NETWORK_DISCONNECT_HLTV_BADRELAYPASSWORD
+        "GameUI_Disconnect_HLTVBadSpectatorPassword"        "Geçersiz SourceTV izleyici şifresi."                    // NETWORK_DISCONNECT_HLTV_BADSPECTATORPASSWORD
+        "GameUI_Disconnect_HLTVRestricted"                    "İzleme, LAN istemcileriyle sınırlandırılmıştır."                // NETWORK_DISCONNECT_HLTV_RESTRICTED
+        "GameUI_Disconnect_HLTVUnavailable"                    "SourceTV bu sunucu için kullanılamıyor."            // NETWORK_DISCONNECT_HLTV_UNAVAILABLE
+        "GameUI_Disconnect_HLTVStop"                        "SourceTV izleyici sunucusu kapatılıyor."                // NETWORK_DISCONNECT_HLTV_STOP
+        "GameUI_Disconnect_HLTVNoRelaysAvailable"            "Şu anda hiçbir SourceTV proxy'si mevcut değil."            // NETWORK_DISCONNECT_HLTV_NO_RELAYS_AVAILABLE
+        "GameUI_Disconnect_HLTVRestrictedToLocalSpectators"            "İzleme, LAN istemcileriyle sınırlandırılmıştır."        // NETWORK_DISCONNECT_HLTV_RESTRICTED_TO_LOCAL_SPECTATORS - Again???
+    }
+}
