@@ -15,8 +15,8 @@ class PauseMenu {
 		},
 		{
 			id: 'QueueBtn',
-			headline: '[HC] View Queue',
-			tagline: '[HC] View and play other workshop maps',
+			headline: '#MainMenu_Campaigns_MM_ShowWSQueue',
+			tagline: '#MainMenu_Campaigns_MM_ShowWSQueue_Tagline',
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'campaigns/content-selector-main', undefined);
 			},
@@ -37,7 +37,7 @@ class PauseMenu {
 		{
 			id: 'AddonsBtn',
 			headline: '#MainMenu_Navigation_Addons',
-			tagline: '[HC] View currently mounted content',
+			tagline: '#MainMenu_Navigation_Addons_Tagline_IG',
 			activated: () => {
 				$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);
 			},

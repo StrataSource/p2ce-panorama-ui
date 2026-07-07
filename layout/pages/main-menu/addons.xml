@@ -157,7 +157,7 @@
 				<Panel id="InGameBanner" class="fancy-red-noborder addons__action-bar addons__action-bar__red hide">
 					<Label
 						class="horizontal-align-center text-weight-bold"
-						text="[HC] The addons listed below are currently mounted and cannot be changed while in-game."
+						text="#MainMenu_Addons_InGameMounted"
 					/>
 				</Panel>
 

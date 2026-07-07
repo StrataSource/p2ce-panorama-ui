@@ -66,7 +66,7 @@
 						id="AuthSteamProfile"
 						class="ml-5"
 						onactivate="PauseMenu.openSteamProfile()"
-						onmouseover="UiToolkitAPI.ShowTextTooltip('AuthSteamProfile', '[HC] View Author\'s Steam Profile');"
+						onmouseover="UiToolkitAPI.ShowTextTooltip('AuthSteamProfile', $.Localize('#MainMenu_Campaigns_MM_OpenSteamProfile'));"
 						onmouseout="UiToolkitAPI.HideTextTooltip();"
 					>
 						<AvatarImage id="MapAvatar" class="mainmenu__addon__avatar" />

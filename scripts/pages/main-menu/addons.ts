@@ -169,7 +169,7 @@ class AddonManager {
 			$('#WorkshopBtn')!.visible = false;
 			$('#InGameBanner')!.visible = true;
 			this.advancedMode = true;
-			desc = '[HC] View currently mounted content';
+			desc = $.Localize('#MainMenu_Navigation_Addons_Tagline_IG');
 		} else {
 			desc = $.Localize('#MainMenu_Navigation_Addons_Tagline');
 		}
