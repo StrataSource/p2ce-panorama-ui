@@ -76,15 +76,15 @@
 		"Episodic_GameOver_AlyxDead"		"Alyx Öldürüldü"
 
 		// figure out a way to override these strings in episodic
-		"HL2_GameOver_Object_ep2"			"BURADA BİTİYOR\nFREEMAN KAYNAKLARI KORUMADA BAŞARISIZ OLDU\nZAFER İÇİN KRİTİK OLARAK DEĞERLENDİRİLEN\nKAÇINILMAZ KÖTÜLÜK GÖRÜNTÜLERİ VORTESSENCE'İ BULANDIRIYOR"
-		"HL2_GameOver_Ally_ep2"				"VE BÖYLECE BİTİYOR\nFREEMAN, ZAFER İÇİN GEREKEN BİR HAYATI KORUMADA BAŞARISIZ OLDU\nVORTESSENCE'DE GÖRDÜĞÜMÜZ ŞEKİLLER BÖYLE"
-        "HL2_GameOver_Timer_ep2"			"HER ŞEY BİTTİ\nFREEMAN'IN HIZLI BİR ZAFERİ ELDE ETMEKTE BAŞARISIZLIĞI\nTAMAMEN MAĞLUBİYETİMİZE YOL AÇTI"
-        "HL2_GameOver_Stuck_ep2"			"GÖREV: SONLANDIRILDI\nKONU: FREEMAN\nNEDEN: AŞIRI KÖTÜ YARGI GÖSTERİMİ"
+		"HL2_GameOver_Object_ep2"			"BURAYA KADAR\nFREEMAN ZAFER İÇİN ÇOK ÖNEMLİ OLAN KAYNAKLARI\nKORUMADA BAŞARISIZ OLDU\nKAÇINILMAZ KADER BULUTU VORTESSENCE ÜZERİNE ÇÖKTÜ"
+		"HL2_GameOver_Ally_ep2"				"BURAYA KADAR\nFREEMAN ZAFER İÇİN GEREKLİ BİR YAŞAMI KORUYAMADI\nTIPKI VORTESSENCE'DE GÖRDÜĞÜMÜZ GİBİ"
+        "HL2_GameOver_Timer_ep2"			"YAPILACAK BAŞKA BİR ŞEY YOK\nFREEMAN'IN ZAFER İÇİN ELİNİ ÇABUK TUTAMAMASI\nHEPİMİZİN YENİLGİSİNE NEDEN OLDU"
+        "HL2_GameOver_Stuck_ep2"			"GÖREV: FESHEDİLDİ\nÖZNE: FREEMAN\nNEDEN: VERİLEN KARARIN KÖTÜ SONUÇLAR DOĞURMASI"
 
 		"Portal_Portalgun"					"Aperture Science Taşınabilir Portal Cihazı\n(Portal Silahı)"
 		
 		"HL2_Crowbar"						"Levye"
-		"HL2_GravityGun"					"Sıfır Noktası Enerji Alanı Manipülatörü\n(Gravity gun)"
+		"HL2_GravityGun"					"Sıfır-Noktasal Enerji Silahı \n(Yerçekimi Silahı)"
 		"HL2_Pistol"						"9mm Pistol"
 		"HL2_357Handgun"					"9x33mm Revolver\n(.357 Magnum)"
 		"HL2_SMG1"							"SMG\n(Alt-Makine Tüfeği)"
@@ -93,7 +93,7 @@
 		"HL2_Crossbow"						"Yaylı Tüfek"
 		"HL2_Grenade"						"Bomba"
 		"HL2_RPG"							"RPG\n(Roketle İtici Bombası)"
-		"HL2_Bugbait"						"Pheropod\n(Bugbait)"
+		"HL2_Bugbait"						"Pheropod\n(Böcek Yemi)"
 
 		"HL2_SAVING"						"Kaydediliyor..."
 		"HL2_Saved"							"Kaydedildi."
@@ -103,9 +103,9 @@
 
 		"HL2_Enable_Commentary"				"Yorum parçasını etkinleştir"
 
-		"portal2_Chapter1"					"1. Bölüm\nNazik Çağrı"
+		"portal2_Chapter1"					"1. Bölüm\nNezaket Ziyareti"
 		"portal2_Chapter1_Title"			"1. Bölüm"
-		"portal2_Chapter1_Subtitle"			"Nazik Çağrı"
+		"portal2_Chapter1_Subtitle"			"Nezaket Ziyareti"
 
 		"portal2_Chapter2"					"2. Bölüm\nİlk Açılış"
 		"portal2_Chapter2_Title"			"2. Bölüm"
@@ -145,37 +145,37 @@
 
         // hl2/episodic compat
 		// base game hl2
-		"HL2_Chapter1_Title"				"1. Bölüm\nNokta Ekleme"
-		"HL2_Chapter2_Title"				"2. Bölüm\n\"Unutulmaz Bir Gün\""
-		"HL2_Chapter3_Title"				"3. Bölüm\nRota Kanalı"
-		"HL2_Chapter4_Title"				"4. Bölüm\nSu Tehlikesi"
-		"HL2_Chapter5_Title"				"5. Bölüm\nBlack mesa East"
-		"HL2_Chapter6_Title"				"6. Bölüm\n\"Ravenholm'a Gitmiyoruz...\""
-		"HL2_Chapter7_Title"				"7. Bölüm\n17 Numaralı Otoyol"
-		"HL2_Chapter8_Title"				"8. Bölüm\nKum Tuzakları"
-		"HL2_Chapter9_Title"				"9. Bölüm\nBirinci Vatandaş Karşıtı"
-		"HL2_Chapter9a_Title"				"9. Bölüma\nDolanıklık"
+		"HL2_Chapter1_Title"				"1. Bölüm\n Anlamlı Katışım"
+		"HL2_Chapter2_Title"				"2. Bölüm\n\"Tarihi Bir Gün\""
+		"HL2_Chapter3_Title"				"3. Bölüm\nRota Kanal"
+		"HL2_Chapter4_Title"				"4. Bölüm\nTehlikeli Sular"
+		"HL2_Chapter5_Title"				"5. Bölüm\nBlack Mesa Doğu"
+		"HL2_Chapter6_Title"				"6. Bölüm\n\"Ravenholm'a Gitmeyiz...\""
+		"HL2_Chapter7_Title"				"7. Bölüm\n17. Otoyol"
+		"HL2_Chapter8_Title"				"8. Bölüm\nKum Kapanı"
+		"HL2_Chapter9_Title"				"9. Bölüm\nNova Prospekt"
+		"HL2_Chapter9a_Title"				"9. Bölüma\nKarmaşa"
 		"HL2_Chapter10_Title"				"10. Bölüm\nBirinci Vatandaş Karşıtı"
 		"HL2_Chapter11_Title"				"11. Bölüm\n\"Freeman'ı Takip Edin!\""
 		"HL2_Chapter12_Title"				"12. Bölüm\nHayırseverlerimiz"
 		"HL2_Chapter13_Title"				"13. Bölüm\nKaranlık Enerji"
-		"HL2_Chapter14_Title"				"14. Bölüm\nCredits"
+		"HL2_Chapter14_Title"				"14. Bölüm\nJenerik"
 		
 		// episodik
-		"episodic_Chapter1_Title"			"1. Bölüm\nGereksiz Alarm"
+		"episodic_Chapter1_Title"			"1. Bölüm\nEndişeye Gerek Yok"
 		"episodic_Chapter2_Title"			"2. Bölüm\nDoğrudan Müdahale"
-		"episodic_Chapter3_Title"			"3. Bölüm\nAşağılık"
-		"episodic_Chapter4_Title"			"4. Bölüm\nKentsel Uçuş"
+		"episodic_Chapter3_Title"			"3. Bölüm\nAşağılardaki Yaşam"
+		"episodic_Chapter4_Title"			"4. Bölüm\nŞehirden Kaçış"
 		"episodic_Chapter5_Title"			"5. Bölüm\nÇıkış 17"
 
 		// ep2
-		"ep2_Chapter1_Title"				"1. Bölüm\nBeyaz Ormana Doğru"
-		"ep2_Chapter2_Title"				"2. Bölüm\nBu Vortal Bobini"
-		"ep2_Chapter3_Title"				"3. Bölüm\nFreeman Pontifex"
-		"ep2_Chapter4_Title"				"4. Bölüm\nYan Koltukta Oturmak"
-		"ep2_Chapter5_Title"				"5. Bölüm\nRadarın Altında"
-		"ep2_Chapter6_Title"				"6. Bölüm\nOrtak Arkadaşımız"
-		"ep2_Chapter7_Title"				"7. Bölüm\nT-Minus Bir"
+		"ep2_Chapter1_Title"				"1. Bölüm\nBeyaz Orman'a Doğru"
+		"ep2_Chapter2_Title"				"2. Bölüm\nVortal Kargaşa"
+		"ep2_Chapter3_Title"				"3. Bölüm\nKadim Freeman"
+		"ep2_Chapter4_Title"				"4. Bölüm\nÖn Koltukta Oturmak"
+		"ep2_Chapter5_Title"				"5. Bölüm\nRadar Altında"
+		"ep2_Chapter6_Title"				"6. Bölüm\nOrtak Düşmanımız"
+		"ep2_Chapter7_Title"				"7. Bölüm\nGeri Sayım"
 		
 		// portal
 	    "Portal_Chapter1_Title"				"Test Odası 00"
@@ -191,7 +191,7 @@
 		"Portal_Chapter11_Title"			"Test Odası 19"
 		"Portal_Chapter12_Title"			"Testler bitti"
 
-		"PORTAL2_CoopCommentary_Title1"		"Kooperatif\nGüven İnşası"
+		"PORTAL2_CoopCommentary_Title1"		"Kooperatif\nÖzgüven İnşası"
 		"PORTAL2_CoopCommentary_Title2"		"Kooperatif\nMerkez"
 		"PORTAL2_CoopCommentary_Title3"		"Kooperatif\nGüvenlik Odası"
 
@@ -199,8 +199,8 @@
 		"P2_Coop_Title"						"EŞLİ"
 		"P2_Primary_Attack"					"Mavi Portalı Aç"
 		"P2_Secondary_Attack"				"Turuncu Portalı AÇ"
-		"P2_Zoom"							"Zoom'u Değiştir"
-		"P2_Zoom_In"						"Yakınlaştırmaya Geçiş"
+		"P2_Zoom"							"Yakınlaştırmaya Geçiş"
+		"P2_Zoom_In"						"Yakınlaş"
 		"P2_Zoom_Out"						"Uzaklaş"
 		"P2_Romote_View"					"Partner Uzaktan Görünüm"
 		"P2_Mouse_Menu"						"İletişim Menüsü"
@@ -242,12 +242,12 @@
 		"Valve_Hint_USEPickup"				"Nesneyi Al"
 
 		"Valve_Hint_CarryTurret"			"veya Tareti kaldırmak için Yerçekimi Silahı'nı kullan"
-		"Valve_Hint_CROSSBOW"				"Arbalet Yakınlaştırması"
+		"Valve_Hint_CROSSBOW"				"Arbalet Dürbünü"
 
 		// PORTAL 2 INSTRUCTOR HINTS
 		"PORTAL2_HINT_GESTURE"				"Jest"
-		"PORTAL2_HINT_BUTTON_GESTURE"		"Bir Jest yap"
-		"PORTAL2_HINT_SEE_NEW_GESTURE"		"Yeni jestine göz at!"
+		"PORTAL2_HINT_BUTTON_GESTURE"		"Jest göster"
+		"PORTAL2_HINT_SEE_NEW_GESTURE"		"Yeni jestine dene!"
 		"PORTAL2_HINT_PING"					"İşaret Aracını Kullan"
 		"PORTAL2_HINT_PING_WAIT"			"Partnerinin seçimini bekle"
 
@@ -940,8 +940,8 @@
         // SaveLoadPrompt
         "Action_LoadGame"                               "Oyunu Yükle"
         "Action_LoadGame_Confirm"                       "Yüklemeyi Onayla"
-        "Action_LoadGame_Auto_Message"                  "En son kaydedilen oyunu yüklemek istiyor musunuz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
-        "Action_LoadGame_Message"                       "Bu kayıtlı oyunu yüklemek istiyor musunuz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
+        "Action_LoadGame_Auto_Message"                  "En son kaydedilen oyunu yüklemek istiyor musunuz?\n\nKaydedilmemiş ilerleme kaybolabilir."
+        "Action_LoadGame_Message"                       "Bu kayıtlı oyunu yüklemek istiyor musunuz?\n\nKaydedilmemiş ilerleme kaybolabilir."
         
         // SaveDeletePrompt
         "Action_DeleteGame"                             "Kayıtlı Oyunu Sil"
@@ -951,7 +951,7 @@
         // SaveOverwritePrompt
         "Action_OverwriteGame"                          "Kayıtlı Oyunun Üzerine Yaz"
         "Action_OverwriteGame_Confirm"                  "Üzerine Yazmayı Onayla"
-        "Action_OverwriteGame_Confirm_Message"          "Bu kayıtlı oyunun üzerine yazmak istiyor musunuz?\n\nBu işlem geri alınamaz ve önceden kaydedilmiş tüm ilerlemeler kaybolabilir."
+        "Action_OverwriteGame_Confirm_Message"          "Bu kayıtlı oyunun üzerine yazmak istiyor musunuz?\n\nBu işlem geri alınamaz ve önceden kaydedilmiş tüm ilerleme kaybolabilir."
 
         // Autosave Handling
         "MainMenu_SaveRestore_CannotOverwriteSave"      "Bu kayıt dosyasının üzerine yazılamaz."
@@ -1320,10 +1320,10 @@ Bu senaryoya erişmek için lütfen önce yukarıdaki oyunları yükleyin ve ba�
         "Action_Quit"                                "Çık"
         "Action_QuitToDesktop"                        "Masaüstüne Çık"
         "Action_Quit_Message"                         "Çıkmak istediğinizden emin misiniz?"
-        "Action_Quit_InGame_Message"                "Çıkmak istediğinizden emin misiniz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
+        "Action_Quit_InGame_Message"                "Çıkmak istediğinizden emin misiniz?\n\nKaydedilmemiş ilerleme kaybolabilir."
         // quit_prompt console command
         "MainMenu_ExitGameConfirmation_Title"        "Oyundan Çık"
-        "MainMenu_ExitGameConfirmation_Message"        "Oyundan çıkmak istediğinizden emin misiniz?\n\nKaydedilmemiş ilerlemeler kaybolabilir."
+        "MainMenu_ExitGameConfirmation_Message"        "Oyundan çıkmak istediğinizden emin misiniz?\n\nKaydedilmemiş ilerleme kaybolabilir."
         
         // Loading Screen
         "LoadingProgress_Connecting"                 "Sunucuya bağlanılıyor..."
