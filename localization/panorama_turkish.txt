@@ -771,11 +771,11 @@
         "Keybind_Chat_Message_TeamOnly"                 "Yazılı sohbet (sadece takım)"
         "Keybind_Chat_Voice"                            "Bas-Konuş tuşu"
         "Keybind_Coop_RemoteView"                       "Uzaktan Görünüm"
-        "Keybind_Coop_RemoteView_Info"                  "Partnerinizin bakış açısını (Görüş Açısı) görüntüler."
+        "Keybind_Coop_RemoteView_Info"                  "Partnerinizin bakış açısını gösterir."
         "Keybind_Coop_PingTool"                         "İşaretleme (Ping) Aracı"
         "Keybind_Coop_PingTool_Info"                    "Eşli (co-op) partnerinize belirli eylemleri veya konumları iletmek için bir öneri menüsü açar."
-        "Keybind_Coop_Taunt"                            "Hareket/Alay Etme"
-        "Keybind_Coop_Taunt_Info"                       "Hareket/alay etme eylemlerini gerçekleştirir."
+        "Keybind_Coop_Taunt"                            "Jest/Alay Etme"
+        "Keybind_Coop_Taunt_Info"                       "Jest/alay etme eylemlerini gerçekleştirir."
         
         "Settings_Input_Keybinds_Misc"                  "Çeşitli"
         "Keybind_Console"                               "Geliştirici konsolunu aç/kapat"
@@ -1356,7 +1356,7 @@ Hata raporlarını ve özellik taleplerini P2:CE'nin aşağıdaki sorun izleyici
 Bu mesaj yalnızca bir kez görüntülenecek ve kabul edildikten sonra tekrar gösterilmeyecektir."
 
         "MainMenu_Compat_Warning_Header"            "Uyumluluk Uyarısı"
-        "MainMenu_Compat_Warning"                    "<b>Portal 1 ve Half-Life 2 şu anda P2:CE'de tam işlevselliğe sahip değildir.</b> Eksik veya değiştirilmiş dokular, bozuk animasyonlar, çökmeler, ilerleme için çok önemli olan eksik oyun unsurları ve daha fazlası gibi sorunlar yaşayabilirsiniz. Gelecekte bu sorunlardan bazılarını düzeltmeyi planlasak da, bu yüksek bir öncelik değildir. <b>Lütfen Portal 1/Half-Life 2 ile ilgili hataları bildirmeyin.</b>"
+        "MainMenu_Compat_Warning"                    "<b>Portal 1 ve Half-Life 2 şu anda P2:CE'de tam işlevselliğe sahip değildir.</b> Eksik veya değiştirilmiş dokular, bozuk animasyonlar, çökmeler, ilerleme için çok önemli olan eksik oyun unsurları ve daha fazlası gibi sorunlar yaşayabilirsiniz. Gelecekte bu sorunlardan bazılarını düzeltmeyi planlasak da, şuanki önceliğimiz bu değil. <b>Lütfen Portal 1/Half-Life 2 ile ilgili hataları bildirmeyin.</b>"
 
         "MainMenu_PrereleaseNotice_Acknowledge"        "Anladım"
         "MainMenu_PrereleaseNotice_Decline"            "Reddet"
@@ -1384,10 +1384,7 @@ Bu mesaj yalnızca bir kez görüntülenecek ve kabul edildikten sonra tekrar g�
         "DependencyWarning_Failed"                    "Ayrıntılar alınamadı!"
         "DependencyWarning_Action_Ignore"            "Yine De Devam Et"
         "DependencyWarning_Action_Cancel"            "İptal"
-		"DependencyWarning_Resolved_Header"			"Dependencies Resolved"
-		"DependencyWarning_Resolved_Desc"			"All addon dependencies have been resolved!"
-
-"DependencyWarning_Resolved_Header"            "Bağımlılıklar Çözüldü"
+		"DependencyWarning_Resolved_Header"            "Bağımlılıklar Çözüldü"
         "DependencyWarning_Resolved_Desc"            "Tüm eklenti bağımlılıkları çözüldü!"
 
         "UI_Upvote"                                    "Olumlu Oy"
