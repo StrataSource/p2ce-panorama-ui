@@ -135,10 +135,10 @@ class BaseMenu {
 
 	static mapSelection = 0;
 	static maps = [
-		{ map: 'p2ce_background_chmb18_ovg',         author: { name: 'Beckeroo',      image: 'beckeroo.jpg'      } },
-		{ map: 'p2ce_background_gentle_hum',         author: { name: 'Beckeroo',      image: 'beckeroo.jpg'      } },
-		{ map: 'p2ce_background_laser_intro',        author: { name: 'pivotman319',   image: 'pivotman319.jpg'   } },
-		{ map: 'p2ce_background_mikatastrophe-dark', author: { name: 'mikatastrophe', image: 'mikatastrophe.png' } },
+		{ map: 'p2ce_background_chmb18_ovg', author: { name: 'Beckeroo', image: 'beckeroo.jpg' } },
+		{ map: 'p2ce_background_gentle_hum', author: { name: 'Beckeroo', image: 'beckeroo.jpg' } },
+		{ map: 'p2ce_background_laser_intro', author: { name: 'pivotman319', image: 'pivotman319.png' } },
+		{ map: 'p2ce_background_mikatastrophe-dark', author: { name: 'mikatastrophe', image: 'mikatastrophe.png' } }
 	];
 	static music;
 
@@ -290,10 +290,7 @@ class BaseMenu {
 		$.Msg(`BASE MENU: Rolled background map: ${this.mapSelection}, ${map.map}`);
 		this.bgMapAuthorLabel.text = map.author.name;
 		this.bgMapAuthorImg.SetImage(`file://{images}/menu/featured/author_${map.author.image}`);
-		$.DispatchEvent(
-			'MainMenuSetBackgroundImage',
-			`file://{images}/menu/featured/${map.map}.png`
-		);
+		$.DispatchEvent('MainMenuSetBackgroundImage', `file://{images}/menu/featured/${map.map}.png`);
 	}
 
 	static loadNoRoll() {

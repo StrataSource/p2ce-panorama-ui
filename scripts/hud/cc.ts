@@ -103,17 +103,16 @@ class CaptionEntry {
 		});
 	}
 
-	FadeOut() {
+	fadeOut() {
+		this.bDelete = true;
 		this.panel.style.opacity = 0;
 	}
 }
 
-// there's still some TODO stuff but it's pretty much functional i think...
 class CloseCaptioning {
 	static captions: Map<string, Array<CaptionEntry>> = new Map();
 	static box = $<Panel>('#CaptionsBox')!;
 	static CAPTION_WIDTH = 1102;
-	static MAX_ENTRIES = 4;
 
 	static settings = {
 		bgOpacity: 0.75,
@@ -187,8 +186,12 @@ class CloseCaptioning {
 			if (captionList.length === 0) {
 				return;
 			}
-			const caption = captionList[0];
-			caption.FadeOut();
+			for (const caption of captionList) {
+				if (!caption.bDelete) {
+					caption.fadeOut();
+					break;
+				}
+			}
 		});
 
 		// when a caption is missing. must have cc_captiontrace
