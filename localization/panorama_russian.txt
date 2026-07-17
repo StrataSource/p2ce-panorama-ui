@@ -455,11 +455,9 @@
 		"Debugger_Larger"				"▲ Больше"
 		"Debugger_ResetSize"			"Ориг. размер"
 
-		//
+		// ==================================
 		// PORTAL 2 COMMUNITY EDITION Tokens
-		//
-		// Finally, some actual stuff to localize.
-		//
+		// ==================================
 
 		"Console_Title"							"Консоль"
 
@@ -584,7 +582,7 @@
 
 		"Settings_Render_Title"							"Рендеринг"
 		
-		"Settings_Video_Presets"						"Пресеты качества (НЕ РАБОТАЕТ)"
+		"Settings_Video_Presets"						"Пресеты качества"
 		"Settings_Video_Presets_info"					"Настройки видео будут задаваться в соответствии с заранее определенным набором переменных из этого списка, от минимального до максимального значения."
 
 		"Settings_Video_AspectRatio"					"Соотношение сторон"
@@ -669,7 +667,7 @@
 		"Settings_Render_MotionBlur_Info"				"Размытие в движении — это полноэкранный шейдерный эффект, который сглаживает изображение при резкой смене угла обзора или положения камеры. Если отключить этот параметр, производительность может немного повыситься."
 
 		"Settings_Render_VolumetricsQuality"			"Качество волюметрики"
-		"Settings_Render_VolumetricsQuality_Info"		"Параметр «Качество волюметрики» определяет разрешение, используемое для рендеринга объемной волюметрики в игре. Чем выше значение, тем выше качество волюметрики, но при этом увеличивается использование видеопамяти и снижается производительность."
+		"Settings_Render_VolumetricsQuality_Info"		"Этот параметр определяет разрешение, используемое для рендеринга объемной волюметрики в игре. Чем выше значение, тем выше качество волюметрики, но при этом увеличивается использование видеопамяти и снижается производительность."
 
 		"Settings_Video_PStencilDepth" 					"Глубина рекурсии портала"
 		"Settings_Video_PStencilDepth_Info"				"Этот параметр определяет, сколько раз порталы будут повторяться, прежде чем в них начнут рендериться 2D-изображения. При более низких значениях возможны видимые искажения."
@@ -952,8 +950,8 @@
 		// SaveLoadPrompt
 		"Action_LoadGame"									"Загрузить игру"
 		"Action_LoadGame_Confirm"							"Подтвердите загрузку"
-		"Action_LoadGame_Auto_Message"						"Вы точно хотите загрузить последнюю сохранение?\n\nНесохраненный прогресс будет утерян."
-		"Action_LoadGame_Message"							"Вы точно хотите загрузить эту сохранение?\n\nНесохраненный прогресс будет утерян."
+		"Action_LoadGame_Auto_Message"						"Вы точно хотите загрузить последнюю сохранение?\n\nНесохраненный прогресс будет уничтожен."
+		"Action_LoadGame_Message"							"Вы точно хотите загрузить эту сохранение?\n\nНесохраненный прогресс будет уничтожен."
 		
 		// SaveDeletePrompt
 		"Action_DeleteGame"									"Удалить сохранение"
@@ -974,9 +972,9 @@
 		
 		// Bad SaveRestore
 		"MainMenu_SaveRestore_LoadFailed"							"Ошибка загрузки!"
-		"MainMenu_SaveRestore_LoadFailed_Description"				"Не удалось загрузить сохраненную игру. {s:failure_reason}"			// This will have a failure reason attached to it
+		"MainMenu_SaveRestore_LoadFailed_Description"				"Не удалось загрузить сохраненную игру. ({s:failure_reason})"			// This will have a failure reason attached to it
 		"MainMenu_SaveRestore_SaveFailed"							"Ошибка сохранения!"
-		"MainMenu_SaveRestore_SaveFailed_Description"				"Не удалось сохранить игру. {s:failure_reason}"		// This will have a failure reason attached to it
+		"MainMenu_SaveRestore_SaveFailed_Description"				"Не удалось сохранить игру. ({s:failure_reason})"		// This will have a failure reason attached to it
 		
 		// Load Failure Reasons
 		// bad/malformed save data or incompatible strata map or engine version
@@ -984,7 +982,7 @@
 		// target save file nonexistent
 		"MainMenu_SaveRestore_LoadFailed_NonExistent"				"Данного сохранения нет на устройстве."
 		// no saves exist
-		"MainMenu_SaveRestore_LoadFailed_NoSavesExist"				"Почему? Потому-что сохранений нет! Что вы пытаетесь загрузить??"
+		"MainMenu_SaveRestore_LoadFailed_NoSavesExist"				"Сохранений нет!"
 		// cloud failed sync, or something
 		"MainMenu_SaveRestore_LoadFailed_SteamCloud"				"В данный момент доступа к Steam Cloud API нет."
 		
@@ -1008,7 +1006,7 @@
 		
 		// Main Menu - Campaigns
 		"MainMenu_Campaigns_Title"									"Кампании"
-		"MainMenu_Campaigns_Tagline"								"Сыграть в кампании, созданные комьюнити."
+		"MainMenu_Campaigns_Tagline"								"Сборки карт или целые сюжеты."
 		"MainMenu_Campaigns_MapList"								"{s:playerModeStr} карты"
 		"MainMenu_Campaigns_MapList_Uncategorized"					"Не категоризованные {s:playerModeStr} карты"
 		"MainMenu_Campaigns_MapList_Campaigns"						"{s:playerModeStr} кампании"
@@ -1019,13 +1017,13 @@
 		"MainMenu_Campaigns_MapList_Tagline_NewlySubbed"			"{i:num_newly_installed_maps} новых подписок."
 		"MainMenu_Campaigns_MapList_Tagline_TotalMaps"				"{i:num_total_installed_maps} карт всего."
 		"MainMenu_Campaigns_OpenWS"									"Открыть мастерскую Steam"
-		"MainMenu_Maps_None"										"Знаете ли вы, что Portal 2: Community Edition - это среда для создания и распостранения пользовательских карт? А вы не установили ни одну из них! Вы можете найти карты в мастерской Steam."
+		"MainMenu_Maps_None"										"Portal 2: Community Edition - это среда для создания и распостранения пользовательских работ. А вы не установили ни одну из них! \nВы можете найти их в мастерской Steam."
 		"MainMenu_Campaigns_None"									"У вас нет установленных кампаний! Вы можете найти их в мастерской Steam."
 		"MainMenu_Campaigns_OpenWS_Tagline"							"Загрузка и управление контентом"
 		
 		// mode selection
 		"MainMenu_Campaigns_ModeSel_Solo_Title"						"Одиночные карты"
-		"MainMenu_Campaigns_ModeSel_Solo_Tagline"					"Приключение на 20 минут, туда и обратно."
+		"MainMenu_Campaigns_ModeSel_Solo_Tagline"					"Приключения на 20 минут, туда и обратно."
 		"MainMenu_Campaigns_ModeSel_ServerBrowser_Title"			"Кастомные игры"
 		"MainMenu_Campaigns_ModeSel_ServerBrowser_Tagline"			"Найдите или создайте идеальную игру без ограничений"
 		"MainMenu_Campaigns_CType_SP"								"Одиночная игра"
@@ -1064,7 +1062,7 @@
 		"MainMenu_Campaigns_Error_InvalidKV3_Title"					"Кампания повреждена."
 		"MainMenu_Campaigns_Error_InvalidKV3_Desc"					"Эта кампания не может запуститься, поскольку данные, указанные в campaigns.kv3, неверны.\n\пПожалуйста, сообщите об этой проблеме автору аддона!"
 		"MainMenu_Campaigns_Error_InvalidChapterMapData_Title"		"Эта глава пуста."
-		"MainMenu_Campaigns_Error_InvalidChapterMapData_Desc"		"Кампания не может начаться, поскольку в выбранной вами главе нет карт.\n\пПожалуйста, сообщите разработчику аддона, что он допустил такую ошибку!"
+		"MainMenu_Campaigns_Error_InvalidChapterMapData_Desc"		"Кампания не может начаться, поскольку в выбранной вами главе нет карт."
 		
 		// dependency game names
 		"MainMenu_Campaigns_Mounts_AppId_630"						"Alien Swarm (630)"
@@ -1219,11 +1217,11 @@
 		// Unlocalized. Reason: unused tokens.
 		// episodic
 		"MainMenu_Campaigns_episodic"				"Half-Life 2: Episode One"
-		"MainMenu_Campaigns_episodic_Description"	"Picking up after the events of Half-Life 2, Dr. Gordon Freeman and Alyx Vance attempt to slow an unavoidable chain reaction that will destroy City 17. Facing heavy resistance, they must evacuate the city and save its residents before all is lost."
+		"MainMenu_Campaigns_episodic_Description"	"После событий Half-Life 2 доктор Гордон Фримен и Аликс Вэнс пытаются замедлить неизбежную цепную реакцию, которая уничтожит Сити 17. Столкнувшись с ожесточённым сопротивлением, они должны эвакуировать город и спасти его жителей, пока не стало слишком поздно."
 		
 		// ep2
 		"MainMenu_Campaigns_ep2"					"Half-Life 2: Episode Two"
-		"MainMenu_Campaigns_ep2_Description"		"With humanity scattered, alien forces continue their fight for control over Earth. Physicist Gordon Freeman and Alyx Vance must work to intercept a Combine transmission and reunite with rebel forces before humanity is destroyed."
+		"MainMenu_Campaigns_ep2_Description"		"Пока человечество разобщено, инопланетные силы продолжают борьбу за контроль над Землей. Гордон Фримен и Аликс Вэнс должны перехватить сообщение Альянса и воссоединиться с силами повстанцев, пока человечество не уничтожено."
 		
 
 		// Main Menu - Addons
@@ -1248,7 +1246,7 @@
 		"MainMenu_Mounts_TooMany_Desc"				"Мы ценим ваш энтузиазм, но {i:num_mounted_games} привязанных игр - это слишком много. Движок поддерживает максимум {i:max_mounts} игр из-за технических ограничений (и чтобы не засорять список моделей дубликатами). Пожалуйста, отвяжите несколько игр."
 		"MainMenu_Mounts_Game_MaxTagline"			"Достигнуто максимальное количество видимых привязанных игр."
 		"MainMenu_Mounts_WIP_Title"					"Конфигурация игр находится в разработке и пока недоступна."
-		"MainMenu_Mounts_WIP_Tagline"				"Пока-что добавлять игры напрямую в P2:CE можно только через mounts.kv в папке cfg. Нажмите здесь, чтобы узнать больше о настройке маунтинга в Portal 2: Community Edition."
+		"MainMenu_Mounts_WIP_Tagline"				"Пока-что добавлять игры напрямую в P2:CE можно только через mounts.kv в папке cfg. Нажмите на этот текст, чтобы узнать больше о настройке маунтинга в Portal 2: Community Edition."
 
 		// for non-campaign addons with maps
 		"MainMenu_Addons_MapDropdown_Select"		"Выбрать карту..."
@@ -1329,13 +1327,13 @@
 		
 		// Feature Unavailable
 		"MainMenu_Feature_Unavailable_Title"		"Функция недоступна"
-		"MainMenu_Feature_Unavailable_Description"	"Эта функция находится в стадии разработки, и в настоящее время доступ к ней невозможен."
+		"MainMenu_Feature_Unavailable_Description"	"Эта функция находится в стадии разработки, и в настоящее время недоступна."
 		
 		// QuitPrompt
 		"Action_Quit"								"Выйти"
 		"Action_QuitToDesktop"						"Выйти из игры"
 		"Action_Quit_Message" 						"Вы уверены что хотите выйти?"
-		"Action_Quit_InGame_Message"				"Данный шедевр моддинга предоставляет вам столько возможностей, а вы хотите выйти! \n\nНесохраненный прогресс будет уничтожен."
+		"Action_Quit_InGame_Message"				"Вы уверены что хотите выйти? \n\nНесохраненный прогресс будет утерян!"
 		// quit_prompt console command
 		"MainMenu_ExitGameConfirmation_Title"		"Выйти из игры"
 		"MainMenu_ExitGameConfirmation_Message"		"Вы уверены что хотите выйти? Данный шедевр моддинга предоставляет вам столько возможностей! Зачем вам из него выходить?\n\n\n\nНесохраненный прогресс будет уничтожен."
@@ -1397,17 +1395,17 @@
 		"UI_Dependencies"							"Зависимости"
 		"UI_Description"							"Описание"
 		"UI_Source_Steam"							"Этот предмет взят из мастерской Steam"
-		"UI_Source_Local"							"Этот предмет находится на вашем устройстве (не опубликован)"
+		"UI_Source_Local"							"Этот предмет находится на вашем устройстве (локальный)"
 
 		// Networking Stuff!!!!!
 		// Disconnect Dialog Main
 		"MainMenu_DisconnectDialog_Title"					"Отключен от сервера"
-		"MainMenu_DisconnectDialog_Message"					"Вы были отключены от сервера по следующей причине: \n\n{s:disconnect_reason}"
+		"MainMenu_DisconnectDialog_Message"					"Вы были отключены от сервера: \n\n{s:disconnect_reason}"
 		
 		// generic disconnect reasons
 		"MainMenu_DisconnectDialog_Reason_TimeOut"			"Вероятно, сервер вышел из строя или потерял подключение к сети. Подождите несколько минут и повторите попытку подключения."
 		"MainMenu_DisconnectDialog_Reason_TimeOutConnect"	"Не удалось установить соединение с сервером. Указанный IP-адрес/имя хоста сервера недействительны, или возникли проблемы с сетевым подключением."
-		"MainMenu_DisconnectDialog_Reason_BuildTooOld"		"Ваша версия Portal 2: Community Edition устарела. Пожалуйста, выйдите из игры и проверьте наличие ожидающих установки обновлений в клиенте Steam."
+		"MainMenu_DisconnectDialog_Reason_BuildTooOld"		"Ваша версия Portal 2: Community Edition устарела. Пожалуйста, проверьте наличие ожидающих установки обновлений в клиенте Steam."
 		"MainMenu_DisconnectDialog_Reason_BuildTooNew"		"Ваша версия P2:CE новее, чем версия владельца сервера. Владельцу сервера необходимо обновить игру до последней версии."
 		"MainMenu_DisconnectDialog_Reason_DSExit"			"Сервер выключен."
 		"MainMenu_DisconnectDialog_Reason_Kicked"			"Вас выгнали с этого сервера."
@@ -1476,6 +1474,38 @@
 		"GameUI_Disconnect_HLTVStop"						"Хостинг режима наблюдателя SourceTV сейчас выключается."				// NETWORK_DISCONNECT_HLTV_STOP
 		"GameUI_Disconnect_HLTVNoRelaysAvailable"			"В настоящее время прокси-сервер SourceTV недоступен."			// NETWORK_DISCONNECT_HLTV_NO_RELAYS_AVAILABLE
 		"GameUI_Disconnect_HLTVRestrictedToLocalSpectators"	"Режим наблюдателя доступен только для локальной сети."		// NETWORK_DISCONNECT_HLTV_RESTRICTED_TO_LOCAL_SPECTATORS - Again???
+
+
+		// =============
+		// Some other stuff that is missing fsr.
+		// Localized manually.
+		// =============
+
+		// hl2 weapons
+		"weapon_357" "МАГНУМ .357"
+		"weapon_ar2" "ТАБЕЛЬНОЕ ОРУЖИЕ ПАТРУЛЯ\n(ИМПУЛЬСНАЯ ВИНТОВКА AR2)"
+		"weapon_bugbait" "ФЕРОПОД (ПРИМАНКА)"
+		"weapon_crossbow" "АРБАЛЕТ"
+		"weapon_crowbar" "МОНТИРОВКА"
+		"weapon_frag" "ГРАНАТА"
+		"weapon_physcannon" "ЭНЕРГОПУШКА НУЛЕВОГО УРОВНЯ\n(ГРАВИ-ПУШКА)"
+		"weapon_pistol" "ПИСТОЛЕТ 9MM"
+		"weapon_rpg" "ГРАНАТОМЁТ (РЕАКТИВНЫЙ)"
+		"weapon_shotgun" "ДРОБОВИК"
+		"weapon_smg1" "ПП (ПИСТОЛЕТ-ПУЛЕМЁТ)"
+
+		"weapon_alyxgun" "ПИСТОЛЕТ-ПУЛЕМЁТ АЛИКС"
+		"weapon_annabelle" "ДРОБОВИК ГРИГОРИЯ\n(АННАБЕЛЬ)"
+		"weapon_citizenpackage" "СУХПАЁК ГРАЖДАНИНА\n(НЕ ИСПОЛЬЗОВАТЬ!)"
+		"weapon_citizensuitcase" "ЧЕМОДАН ГРАЖДАНИНА\n(НЕ ИСПОЛЬЗОВАТЬ!)"
+		"weapon_oldmanharpoon" "ЧЕМОДАН ГРАЖДАНИНА\n(НЕ ИСПОЛЬЗОВАТЬ!)"		
+		
+		// p2 & ce weapons
+		"weapon_portalgun" "ПОРТАЛЬНОЕ УСТРОЙСТВО"
+		"weapon_paintgun" "ГЕЛЕВАЯ ПУШКА"
+		"weapon_physgun" "ФИЗИЧЕСКИЙ МАНИПУЛЯТОР\n(ГРАВИ-ПУШКА ИЗ ГМОДА)"
+		"weapon_portal_base" "НЕ ИСПОЛЬЗОВАТЬ!"
+		"weapon_stunstick" "ЭЛЕКТРИЧЕСКАЯ ДУБИНКА ПОЛИЦИИ АЛЬЯНСА"
 	}
 }
 
