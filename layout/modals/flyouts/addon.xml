@@ -89,7 +89,7 @@
 		<Panel class="flow-right mt-2">
 			<!-- TODO! -->
 			<Button class="button button--green fill-width hide" onactivate="AddonFlyout.openInSteam()">
-				<Label class="button__text" text="[HC] Enable" />
+				<Label class="button__text" text="#UI_Enable" />
 			</Button>
 			<Panel id="ControlSpacer" class="mx-1 hide" />
 			<Button class="button fill-width" onactivate="AddonFlyout.openInSteam()">
