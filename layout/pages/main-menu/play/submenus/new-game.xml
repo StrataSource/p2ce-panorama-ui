@@ -5,7 +5,7 @@
 	<scripts>
 		<include src="file://{scripts}/common/searcher.ts" />
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/pages/main-menu/play/campaign-chapters.ts" />
+		<include src="file://{scripts}/pages/main-menu/play/submenus/campaign-chapters.ts" />
 	</scripts>
 
 	<snippets>
