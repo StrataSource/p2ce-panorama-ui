@@ -15,6 +15,7 @@ class Console {
 	}
 
 	static onNewMessages() {
+		// TODO: This could be a ConVar or Settings option. Can get annoying when trying to scroll up with the console.
 		this.messageTarget?.ScrollToBottom();
 	}
 

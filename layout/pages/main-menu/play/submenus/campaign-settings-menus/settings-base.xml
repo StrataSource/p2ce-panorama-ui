@@ -1,0 +1,15 @@
+<!-- Fallback and base file for campaign settings submenus. -->
+
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/pages/main-menu/play/shared.ts" />
+	</scripts>
+
+	<Panel class="campaign-settings__grouper__bg" onload="CampaignShared.constructPage()">
+		<Panel id="SettingPageInsert" class="fill-width full-height flow-down">
+		</Panel>
+	</Panel>
+</root>
