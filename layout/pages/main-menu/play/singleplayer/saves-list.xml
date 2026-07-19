@@ -4,7 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/pages/main-menu/play/campaign-saves.ts" />
+		<include src="file://{scripts}/pages/main-menu/play/singleplayer/campaign-saves.ts" />
 	</scripts>
 
 	<snippets>
