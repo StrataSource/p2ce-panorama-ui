@@ -7,7 +7,7 @@ class CampaignMenu {
 			headline: '#MainMenu_Campaigns_MM_NewGame',
 			tagline: '#MainMenu_Campaigns_MM_NewGame_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'main-menu/play/new-game', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'main-menu/play/submenus/new-game', undefined);
 			},
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
