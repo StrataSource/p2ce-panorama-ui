@@ -8,7 +8,7 @@ class BaseMenu {
 			tagline: '#MainMenu_Navigation_Developer_Tagline',
 			dev: true,
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Dev', 'dev/developer', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Dev', 'main-menu/dev/developer', undefined);
 			},
 			focused: () => {
 				this.hideContinueDetails();
