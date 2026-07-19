@@ -18,7 +18,13 @@ class PauseMenu {
 			headline: '#MainMenu_Campaigns_MM_ShowWSQueue',
 			tagline: '#MainMenu_Campaigns_MM_ShowWSQueue_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'campaigns/content-selector-main', undefined);
+				const isCoop: boolean = false; // TODO: TEMPORARY! REPLACE WITH API FUNCTION WHICH GIVES IF IT'S MULTIPLAYER!
+				if (!isCoop) {
+					$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'main-menu/play/singleplayer/content-selector-sp', undefined);
+					return;
+				}
+
+				$.DispatchEvent('MainMenuOpenNestedPage', 'MultiPlayer', 'main-menu/play/multiplayer/content-selector-mp', undefined);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -29,7 +35,7 @@ class PauseMenu {
 			headline: '#MainMenu_SaveRestore_Main',
 			tagline: '#MainMenu_SaveRestore_Main_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'main-menu/play/singleplayer/saves-list', undefined);
 			},
 			hovered: () => {},
 			focusIsHover: true
@@ -48,7 +54,7 @@ class PauseMenu {
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined);
 			},
 			hovered: () => {},
 			focusIsHover: true

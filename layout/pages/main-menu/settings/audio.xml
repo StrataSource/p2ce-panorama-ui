@@ -1,0 +1,328 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/pages/main-menu/settings/page.ts" />
+	</scripts>
+
+	<Panel class="settings-page" searchtitle="#Settings_Audio">
+		<BaseAudioSettings id="SettingsPageContainer" class="settings-page__container">
+
+			<!-- Volume settings sub section -->
+
+			<Panel id="VolumeSubSection" class="settings-group">
+
+				<Panel class="settings-group__header">
+
+					<Label class="settings-group__title" text="#Settings_Volume_Title" tags="volume,sound" />
+
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
+
+						<Button
+							class="button mr-3 hide"
+							onactivate="SettingsShared.showImportExportDialogue('Settings_Volume_Title', 'VolumeSubSection')"
+						>
+							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
+						</Button>
+
+						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+							<Button class="button" onactivate="SettingsShared.resetSettings('VolumeSubSection');">
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+							</Button>
+						</TooltipPanel>
+
+					</Panel>
+
+				</Panel>
+
+				<SettingsSlider
+					text="#Settings_Volume_Game"
+					infomessage="#Settings_Volume_Game_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="volume"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_Music"
+					infomessage="#Settings_Volume_Music_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="snd_volume_music"
+					tags="music"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_Ambient"
+					infomessage="#Settings_Volume_Ambient_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="snd_volume_ambient"
+					tags="ambient"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_PlayerWeapon"
+					infomessage="#Settings_Volume_PlayerWeapon_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="snd_volume_weapon_localplayer"
+					tags="weapon,player"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_OverallWeapon"
+					infomessage="#Settings_Volume_OverallWeapon_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="snd_volume_weapon"
+					tags="weapon,global,overall"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_UI"
+					infomessage="#Settings_Volume_UI_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="snd_volume_ui"
+					tags="ui,interface"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_Physics"
+					infomessage="#Settings_Volume_Physics_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="snd_volume_physics"
+					tags="physics"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_Footsteps"
+					infomessage="#Settings_Volume_Footsteps_info"
+					min="0"
+					max="1"
+					percentage="true"
+					convar="snd_volume_footsteps"
+					tags="footsteps"
+					hasdocspage="false"
+				/>
+
+				<SettingsSlider
+					text="#Settings_Volume_Background"
+					infomessage="#Settings_Volume_Background_info"
+					min="0"
+					max="1"
+					invert="true"
+					percentage="true"
+					convar="snd_mute_losefocus"
+					hasdocspage="false"
+				/>
+
+			</Panel>
+
+			<Panel class="settings-page__spacer" />
+			<!-- Closed Captions Section -->
+
+			<Panel id="AudioClosedCaptionsSubSection" class="settings-group">
+
+				<Panel class="settings-group__header">
+
+					<Label class="settings-group__title" text="#Settings_ClosedCaptions_Title" tags="audio,sound,closedcaptions" />
+
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
+
+						<Button
+							class="button mr-3 hide"
+							onactivate="SettingsShared.showImportExportDialogue('Settings_ClosedCaptions_Title', 'AudioClosedCaptionsSubSection')"
+						>
+							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
+						</Button>
+
+						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+							<Button class="button" onactivate="SettingsShared.resetSettings('AudioClosedCaptionsSubSection');">
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+							</Button>
+						</TooltipPanel>
+
+					</Panel>
+
+				</Panel>
+
+				<SettingsEnum
+					text="#Settings_ClosedCaptions_Enable"
+					infomessage="#Settings_ClosedCaptions_Enable_info"
+					convar="closecaption"
+					hasdocspage="false"
+				>
+					<RadioButton group="closedcaptions" text="#Common_Off" value="0" />
+					<RadioButton group="closedcaptions" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<SettingsEnum
+					text="#Settings_ClosedCaptions_Subtitles"
+					infomessage="#Settings_ClosedCaptions_Subtitles_info"
+					convar="cc_subtitles"
+					hasdocspage="false"
+				>
+					<RadioButton group="cc_subtitles" text="#Common_Off" value="0" />
+					<RadioButton group="cc_subtitles" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<SettingsEnumDropDown
+					text="#Settings_ClosedCaptions_Font"
+					infomessage="#Settings_ClosedCaptions_Font_info"
+					psvar="cc.font"
+					tags="cc,closecaption,captions,audio,font"
+					submitoverride="$.DispatchEvent('ReloadCCSettings')"
+				>
+					<Label text="#Settings_ClosedCaptions_Font_Lexend" value="0" id="ccfont0" />
+					<Label text="#Settings_ClosedCaptions_Font_U0001" value="1" id="ccfont1" />
+					<Label text="#Settings_ClosedCaptions_Font_GorDIN" value="2" id="ccfont2" />
+					<Label text="#Settings_ClosedCaptions_Font_Verdana" value="3" id="ccfont3" />
+					<Label text="#Settings_ClosedCaptions_Font_NotoSans" value="4" id="ccfont4" />
+					<Label text="#Settings_ClosedCaptions_Font_Stratum2" value="5" id="ccfont5" />
+				</SettingsEnumDropDown>
+
+				<SettingsSlider
+					text="#Settings_ClosedCaptions_FontSize"
+					infomessage="#Settings_ClosedCaptions_FontSize_info"
+					convar="cc_panorama_font_size"
+					tags="cc,closecaption,captions,audio,font,font size,size"
+					min="18"
+					max="26"
+					snaptoincrement="true"
+					increment="0.125"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsSlider
+					text="#Settings_ClosedCaptions_BGOpacity"
+					infomessage="#Settings_ClosedCaptions_BGOpacity_info"
+					convar="cc_panorama_bg_opacity"
+					min="0"
+					max="1"
+					displayprecision="2"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsSlider
+					text="[HC] Text Margin"
+					infomessage="[HC] Text Margin"
+					convar="cc_panorama_entry_margin"
+					min="2"
+					max="10"
+					snaptoincrement="true"
+					increment="0.125"
+					hasdocspage="false"
+					changeoverride="$.DispatchEvent('ReloadCCSettings')"
+				/>
+
+				<SettingsEnum
+					text="#Settings_ClosedCaptions_Alignment"
+					infomessage="#Settings_ClosedCaptions_Alignment_info"
+					psvar="cc.text_align"
+					tags="cc,closecaption,captions,audio,alignment"
+				>
+					<RadioButton
+						group="ccalign"
+						text="#Settings_ClosedCaptions_Alignment_left"
+						value="0"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
+					<RadioButton
+						group="ccalign"
+						text="#Settings_ClosedCaptions_Alignment_center"
+						value="1"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
+					<RadioButton
+						group="ccalign"
+						text="#Settings_ClosedCaptions_Alignment_right"
+						value="2"
+						activateoverride="$.DispatchEvent('ReloadCCSettings')"
+					/>
+				</SettingsEnum>
+
+			</Panel>
+
+			<Panel class="settings-page__spacer" />
+			<!-- Audio Devices Section -->
+
+			<Panel id="AudioDevicesSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_AudioDevices_Title" tags="audio,sound,devices" />
+					<Panel class="flow-right horizontal-align-right vertical-align-center">
+						<Button
+							class="button mr-3 hide"
+							onactivate="SettingsShared.showImportExportDialogue('Settings_AudioDevices_Title', 'AudioDevicesSubSection')"
+						>
+							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
+						</Button>
+
+						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+							<Button class="button" onactivate="SettingsShared.resetSettings('AudioDevicesSubSection');">
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+							</Button>
+						</TooltipPanel>
+					</Panel>
+				</Panel>
+
+				<SettingsEnumDropDown
+					text="#Settings_AudioDevices_Speaker"
+					infomessage="#Settings_AudioDevices_Speaker_info"
+					convar="snd_surround_speakers"
+					oninputsubmit="BaseSpeakerConfigurationChanged()"
+					hasdocspage="false"
+				>
+					<Label text="#Settings_AudioDevices_Speaker_StereoHeadphones" id="speakerconfig1" value="0" />
+					<Label text="#Settings_AudioDevices_Speaker_StereoSpeakers" id="speakerconfig2" value="2" />
+					<Label text="#Settings_AudioDevices_Speaker_Quad" id="speakerconfig3" value="4" />
+					<Label text="#Settings_AudioDevices_Speaker_51" id="speakerconfig4" value="5" />
+					<!-- 7.1 apparently unsupported in CS:GO and Strata? -->
+					<!-- <Label text="#Settings_AudioDevices_Speaker_71" id="speakerconfig5" value="7" /> -->
+				</SettingsEnumDropDown>
+
+				<SettingsEnumDropDown
+					text="#Settings_AudioDevices_Device"
+					infomessage="#Settings_AudioDevices_Device_info"
+					id="DeviceConfigurationEnum"
+					convar="sound_device_override"
+					oninputsubmit="BaseAudioDeviceConfigurationChanged()"
+					hasdocspage="false"
+				>
+					<!--placeholder labels that will be modified in cui_audiosettingsscreen-->
+					<Label id="device1" text="XXXXXX 1" />
+					<Label id="device2" text="XXXXXX 2" />
+					<Label id="device3" text="XXXXXX 3" />
+					<Label id="device4" text="XXXXXX 4" />
+					<Label id="device5" text="XXXXXX 5" />
+					<Label id="device6" text="XXXXXX 6" />
+					<Label id="device7" text="XXXXXX 7" />
+					<Label id="device8" text="XXXXXX 8" />
+				</SettingsEnumDropDown>
+
+			</Panel>
+
+		</BaseAudioSettings>
+
+	</Panel>
+</root>

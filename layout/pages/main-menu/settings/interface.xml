@@ -1,0 +1,143 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/pages/main-menu/settings/page.ts" />
+		<!-- Temporary -->
+		<include src="file://{scripts}/util/dosa.ts" />
+	</scripts>
+
+	<Panel class="settings-page" searchtitle="#Settings_Interface">
+		<Panel id="SettingsPageContainer" class="settings-page__container">
+
+			<Panel id="MenuUISubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_Menu_Title" tags="menu,ui" />
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('MenuUISubSection');">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
+				</Panel>
+
+				<SettingsEnum
+					text="#Settings_Menu_Console"
+					infomessage="#Settings_Menu_Console_info"
+					convar="con_enable"
+					hasdocspage="false"
+					tags="console"
+				>
+					<RadioButton group="enableconsole" text="#Common_Off" value="0" />
+					<RadioButton group="enableconsole" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<SettingsEnum
+					text="#Settings_Menu_Experimental"
+					infomessage="#Settings_Menu_Experimental_info"
+					psvar="misc.enable_experimental_features"
+					tags="experimental,interface,map,settings"
+				>
+					<RadioButton group="experiments" text="#Common_Off" value="0" />
+					<RadioButton group="experiments" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<!-- TODO: LOCALISE AND MOVE THIS SOMEWHERE ELSE!!!! -->
+				<SettingsEnum
+					id="SentryReporting"
+					text="#Settings_Menu_Sentry"
+					infomessage="#Settings_Menu_Sentry_info"
+					hasdocspage="false"
+					tags="sentry, consent"
+				>
+					<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.sentryUpdateConsent()">
+						<Label class="button__text" text="#Settings_Menu_Sentry_ConsentButton" />
+					</Button>
+				</SettingsEnum>
+
+				<!-- TODO: Temp! -->
+				<SettingsEnum
+					text="#Settings_Menu_DiscordIntegration"
+					infomessage="#Settings_Menu_DiscordIntegration_info"
+					convar="cl_richpresence_enable"
+					hasdocspage="false"
+					tags="richpresence, discord, rich presence"
+				>
+					<RadioButton group="enablerpc" text="#Common_Off" value="0" />
+					<RadioButton group="enablerpc" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<ConVarEnabler convar="developer" togglevisibility="true">
+					<SettingsEnum
+						text="Playtest Consent (DO NOT LOCALIZE)"
+						infomessage="Playtest Consent (DO NOT LOCALIZE)"
+						convar="cl_playtest_enabled"
+						hasdocspage="false"
+						tags="consent"
+					>
+						<RadioButton group="enableconsent" text="#Common_Off" value="0" />
+						<RadioButton group="enableconsent" text="#Common_On" value="1" />
+					</SettingsEnum>
+				</ConVarEnabler>
+
+				<ConVarEnabler convar="developer" togglevisibility="true" hittest="false">
+					<SettingsEnum
+						id="PlaytestDOSARemove"
+						text="Playtest DOSA remove (DO NOT LOCALIZE)"
+						infomessage="Remove DOSA from playtest consent (For development purposes)"
+						hasdocspage="false"
+						tags="dosa"
+					>
+						<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.PlayTestDosaRemove()">
+							<Label class="button__text" text="Remove DOSA" />
+						</Button>
+					</SettingsEnum>
+				</ConVarEnabler>
+			</Panel>
+
+			<Panel class="settings-page__spacer" />
+
+			<Panel id="GameUISubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_Interface_InGame_Title" tags="ingame,game,ui" />
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('GameUISubSection');">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
+				</Panel>
+
+				<SettingsEnum
+					text="#Settings_Interface_InGame_Xhair"
+					convar="crosshair"
+					infomessage="#Settings_Interface_InGame_Xhair_Info"
+					hasdocspage="false"
+				>
+					<RadioButton group="showxhair" text="#Common_Off" value="0" />
+					<RadioButton group="showxhair" text="#Common_On" value="1" />
+				</SettingsEnum>
+
+				<SettingsEnum
+					text="#Settings_Portal1_xhair"
+					convar="cl_portal_crosshair_mode"
+					infomessage="#Settings_Portal1_xhair_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p2" value="0" />
+					<RadioButton group="portal1_crosshair" text="#Settings_Portal1_xhair_p1" value="1" />
+				</SettingsEnum>
+
+				<SettingsSlider
+					text="#Settings_Portal1_xhair_scale"
+					infomessage="#Settings_Portal1_xhair_scale_info"
+					min="0.1"
+					max="2"
+					displayprecision="2"
+					convar="cl_portal_crosshair_scale"
+					hasdocspage="false"
+					viewgameduringedit="true"
+				/>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>
