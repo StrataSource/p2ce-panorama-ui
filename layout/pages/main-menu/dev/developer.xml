@@ -17,19 +17,19 @@
 		<Panel class="vertical-align-center flow-down">
 			<Button
 				class="button"
-				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'dev/controls-library', undefined);"
+				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);"
 			>
 				<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 			</Button>
 			<Button
 				class="button mt-2"
-				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'SteamInput', 'dev/steam-input', undefined);"
+				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'SteamInput', 'main-menu/dev/steam-input', undefined);"
 			>
 				<Label class="button__text" text="#MainMenu_Navigation_SteamInputLibrary" />
 			</Button>
 			<Button
 				class="button mt-2"
-				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'FeaturedHub', 'dev/wip-featured', undefined);"
+				onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'FeaturedHub', 'main-menu/dev/wip-featured', undefined);"
 			>
 				<Label class="button__text" text="[DEV] Featured Hub" />
 			</Button>
