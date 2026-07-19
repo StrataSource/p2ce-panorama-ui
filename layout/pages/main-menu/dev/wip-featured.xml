@@ -4,7 +4,7 @@
 	</styles>
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
-		<include src="file://{scripts}/pages/dev/wip-featured.ts" />
+		<include src="file://{scripts}/pages/main-menu/dev/wip-featured.ts" />
 	</scripts>
 
 	<Panel class="mainmenu__page flow-right" onload="FeaturedMenu.onLoad()">
