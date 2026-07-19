@@ -7,7 +7,7 @@ class CampaignMenu {
 			headline: '#MainMenu_Campaigns_MM_NewGame',
 			tagline: '#MainMenu_Campaigns_MM_NewGame_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'campaigns/new-game', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'NewGame', 'main-menu/play/new-game', undefined);
 			},
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
@@ -35,7 +35,7 @@ class CampaignMenu {
 			headline: '#MainMenu_SaveRestore_Load',
 			tagline: '#MainMenu_SaveRestore_Main_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'campaigns/saves-list', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'main-menu/play/singleplayer/saves-list', undefined);
 			},
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;
@@ -57,7 +57,7 @@ class CampaignMenu {
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined);
 			},
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;

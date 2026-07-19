@@ -8,7 +8,7 @@ class BaseMenu {
 			tagline: '#MainMenu_Navigation_Developer_Tagline',
 			dev: true,
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Dev', 'main-menu/developer', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Dev', 'dev/developer', undefined);
 			},
 			focused: () => {
 				this.hideContinueDetails();
@@ -19,7 +19,7 @@ class BaseMenu {
 			headline: '#MainMenu_Navigation_Play',
 			tagline: '#MainMenu_Navigation_Play_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Play', 'play-menu/player-mode', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Play', 'main-menu/play/play-menu', undefined);
 			},
 			focused: () => {
 				this.hideContinueDetails();
@@ -86,7 +86,7 @@ class BaseMenu {
 			headline: '#MainMenu_Navigation_Options',
 			tagline: '#MainMenu_Navigation_Options_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'settings/settings', undefined);
+				$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined);
 			},
 			focused: () => {
 				this.hideContinueDetails();
