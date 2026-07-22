@@ -840,8 +840,8 @@
 		
 		// Settings - Miscellaneous
 		"Settings_Misc_Title" 							"Miscellaneous"
-		"Settings_Misc_solenergy_refract"				"Solid Energy Refractions"
-		"Settings_Misc_solenergy_refract_info"			"Enables water-like refraction effects in fizzlers."
+		"Settings_Misc_solenergy_refract"				"Solid Energy (Fizzler) Refractions"
+		"Settings_Misc_solenergy_refract_info"			"Enables water-like refraction effects in fizzlers. \n<h2>Disabled</h2> Completely disables the effect. May result in smoother performance, but will cause levels to not look as the author intended.\n<h2>Auto</h2> Disabled for standard fizzlers, but enabled if the map author specifically requests it.\n<h2>Enabled</h2> Enables the effect for all fizzlers and author-requested materials.\n"
 		"Settings_Misc_ViewmodelOffset_X"				"Viewmodel Offset (X)"
 		"Settings_Misc_ViewmodelOffset_X_info"			"Offset the position of the Viewmodel in the X axis by this amount in Hammer Units (HU)"
 		"Settings_Misc_ViewmodelOffset_Y"				"Viewmodel Offset (Y)"
