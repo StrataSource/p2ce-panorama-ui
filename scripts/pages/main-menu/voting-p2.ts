@@ -3,6 +3,8 @@
 class VotingMenuPortal2 {
 	static mapCover = $<Image>('#MapCover')!;
 	static mapTitleLabel = $<Label>('#MapTitle')!;
+	static authorImg = $<AvatarImage>('#MapAuthorImg')!;
+	static authorLabel = $<Label>('#MapAuthorLabel')!;
 	static bgImage = '';
 	static mapIndex = -1;
 
@@ -40,6 +42,13 @@ class VotingMenuPortal2 {
 
 		this.mapTitleLabel.text = data.map.title;
 		this.mapCover.SetImage(thumb);
+
+		const owner = meta.get('owner') ?? '';
+		let ownerName = FriendsAPI.GetNameForXUID(owner);
+		if (ownerName.length === 0 || ownerName === '[unknown]')
+			ownerName = meta.get('owner_name') ?? '[unknown]';
+		this.authorImg.steamid = owner;
+		this.authorLabel.text = ownerName;
 	}
 
 	static setMapVote(vote: number) {
