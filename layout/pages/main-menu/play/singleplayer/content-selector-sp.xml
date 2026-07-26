@@ -14,9 +14,6 @@
 				<Panel class="tabs__item__inner">
 					<Label class="tabs__item-label" text="#MainMenu_Navigation_Campaign" />
 				</Panel>
-				<Panel class="tabs__indicator hide">
-					<Label class="tabs__indicator__text" text="#MainMenu_Content_New" />
-				</Panel>
 			</RadioButton>
 			<Panel class="tabs__gap" />
 			<RadioButton id="MapsBtn" class="tabs__item" group="tabs" onactivate="ContentSelectorSP.onTabSelected(1, true)">

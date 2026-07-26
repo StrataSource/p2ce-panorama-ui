@@ -98,7 +98,7 @@
 						tabindex="auto"
 						selectionpos="auto"
 					>
-						<Label class="button__text" text="#Action_Back" />
+						<Label class="button__text" text="#Common_Back" />
 					</Button>
 					<Panel class="flow-right vertical-align-center ControllerOnly">
 						<SteamInputAction
@@ -109,7 +109,7 @@
 							separatortext="/"
 							controllernumber="1"
 							glyphsize="large"
-						/> 
+						/>
 						<SteamInputActionLabel actionset="MenuControls" action="menu_select" class="steam-action-name font-weight-bold" />
 					</Panel>
 					<Panel class="flow-right vertical-align-center ml-2 ControllerOnly">
@@ -121,8 +121,8 @@
 							separatortext="/"
 							controllernumber="1"
 							glyphsize="large"
-						/> 
-						<Label class="vertical-align-center" text="#Action_Back" />
+						/>
+						<Label class="vertical-align-center" text="#Common_Back" />
 					</Panel>
 				</Panel>
 			</Panel>
