@@ -187,8 +187,8 @@
 				/>
 
 				<SettingsSlider
-					text="[HC] Text Margin"
-					infomessage="[HC] Text Margin"
+					text="#Settings_ClosedCaptions_TextMargin"
+					infomessage="#Settings_ClosedCaptions_TextMargin_info"
 					convar="cc_panorama_entry_margin"
 					min="2"
 					max="10"
