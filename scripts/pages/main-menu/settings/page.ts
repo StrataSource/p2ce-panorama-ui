@@ -55,7 +55,7 @@ class SettingsShared {
 
 		const type = panel.paneltype;
 		let string = '';
-		
+
 		if (type === 'SettingsSlider' ||
 			type === 'SettingsEnumDropDown' ||
 			type === 'ConVarColorDisplay' ||
@@ -69,7 +69,7 @@ class SettingsShared {
 		} else {
 			for (const child of panel.Children() || []) string += `${this.getResetString(child)}`;
 		}
-		
+
 		return string;
 	}
 	*/
@@ -122,9 +122,9 @@ class SettingsShared {
 			$.Localize('#Settings_Reset_Title'),
 			message,
 			'warning-popup',
-			$.Localize('#Action_Yes'),
+			$.Localize('#Common_Yes'),
 			resetFn,
-			$.Localize('#Action_Cancel'),
+			$.Localize('#Common_Cancel'),
 			() => {},
 			'dim'
 		);
