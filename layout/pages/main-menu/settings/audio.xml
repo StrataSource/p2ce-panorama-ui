@@ -15,26 +15,7 @@
 			<Panel id="VolumeSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Volume_Title" tags="volume,sound" />
-
-					<Panel class="flow-right horizontal-align-right vertical-align-center">
-
-						<Button
-							class="button mr-3 hide"
-							onactivate="SettingsShared.showImportExportDialogue('Settings_Volume_Title', 'VolumeSubSection')"
-						>
-							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
-						</Button>
-
-						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-							<Button class="button" onactivate="SettingsShared.resetSettings('VolumeSubSection');">
-								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
-							</Button>
-						</TooltipPanel>
-
-					</Panel>
-
 				</Panel>
 
 				<SettingsSlider
@@ -143,26 +124,7 @@
 			<Panel id="AudioClosedCaptionsSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_ClosedCaptions_Title" tags="audio,sound,closedcaptions" />
-
-					<Panel class="flow-right horizontal-align-right vertical-align-center">
-
-						<Button
-							class="button mr-3 hide"
-							onactivate="SettingsShared.showImportExportDialogue('Settings_ClosedCaptions_Title', 'AudioClosedCaptionsSubSection')"
-						>
-							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
-						</Button>
-
-						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-							<Button class="button" onactivate="SettingsShared.resetSettings('AudioClosedCaptionsSubSection');">
-								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
-							</Button>
-						</TooltipPanel>
-
-					</Panel>
-
 				</Panel>
 
 				<SettingsEnum
@@ -270,20 +232,6 @@
 			<Panel id="AudioDevicesSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_AudioDevices_Title" tags="audio,sound,devices" />
-					<Panel class="flow-right horizontal-align-right vertical-align-center">
-						<Button
-							class="button mr-3 hide"
-							onactivate="SettingsShared.showImportExportDialogue('Settings_AudioDevices_Title', 'AudioDevicesSubSection')"
-						>
-							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
-						</Button>
-
-						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-							<Button class="button" onactivate="SettingsShared.resetSettings('AudioDevicesSubSection');">
-								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
-							</Button>
-						</TooltipPanel>
-					</Panel>
 				</Panel>
 
 				<SettingsEnumDropDown

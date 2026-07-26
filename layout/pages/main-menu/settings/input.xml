@@ -27,26 +27,7 @@
 			<Panel id="MouseSubSection" class="settings-group">
 
 				<Panel class="settings-group__header">
-
 					<Label class="settings-group__title" text="#Settings_Mouse_Title" tags="mouse,cursor,aim,look,input" />
-
-					<Panel class="flow-right horizontal-align-right vertical-align-center">
-
-						<Button
-							class="button mr-3 hide"
-							onactivate="SettingsShared.showImportExportDialogue('Settings_Mouse_Title', 'MouseSubSection')"
-						>
-							<Label class="button__text" text="#Settings_ImportExport_ImportExport" />
-						</Button>
-
-						<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
-							<Button class="button" onactivate="SettingsShared.resetSettings('MouseSubSection');">
-								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
-							</Button>
-						</TooltipPanel>
-
-					</Panel>
-
 				</Panel>
 
 				<SettingsSlider
