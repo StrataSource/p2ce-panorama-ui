@@ -321,6 +321,11 @@ class CampaignChapters {
 
 	static customizeChapter() {
 		UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_ACTIVE_CHAPTER] = this.selectedChapter;
-		$.DispatchEvent('MainMenuOpenNestedPage', 'CampaignCustomization', 'main-menu/play/submenus/campaign-settings', undefined);
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'CampaignCustomization',
+			'main-menu/play/submenus/campaign-settings',
+			undefined
+		);
 	}
 }

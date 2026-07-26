@@ -133,7 +133,11 @@ class CampaignSettingsTab {
 		this.settingsPage.MoveChildAfter(newPanel, invoker);
 
 		const layoutFile = xml ? xml : 'settings-base';
-		newPanel.LoadLayout(`file://{resources}/layout/pages/main-menu/play/submenus/campaign-settings-menus/${layoutFile}.xml`, false, false);
+		newPanel.LoadLayout(
+			`file://{resources}/layout/pages/main-menu/play/submenus/campaign-settings-menus/${layoutFile}.xml`,
+			false,
+			false
+		);
 		newPanel.RegisterForReadyEvents(true);
 		newPanel.SetFocus();
 

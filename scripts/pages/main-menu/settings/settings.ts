@@ -179,7 +179,11 @@ class MainMenuSettings {
 		const newPanel = $.CreatePanel('Panel', this.panels.content, tab);
 
 		// Load XML file for the page
-		newPanel.LoadLayout('file://{resources}/layout/pages/main-menu/settings/' + this.tabs[tab].xml + '.xml', false, false);
+		newPanel.LoadLayout(
+			'file://{resources}/layout/pages/main-menu/settings/' + this.tabs[tab].xml + '.xml',
+			false,
+			false
+		);
 
 		// Setup all the events for all the children
 		this.initPanelsRecursive(newPanel);

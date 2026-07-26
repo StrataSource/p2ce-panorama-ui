@@ -10,10 +10,20 @@ class PlayMenu {
 	}
 
 	static onSinglePlayerBtnPressed() {
-		$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'main-menu/play/singleplayer/content-selector-sp', undefined);
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'SinglePlayer',
+			'main-menu/play/singleplayer/content-selector-sp',
+			undefined
+		);
 	}
 
 	static onMultiPlayerBtnPressed() {
-		$.DispatchEvent('MainMenuOpenNestedPage', 'MultiPlayer', 'main-menu/play/multiplayer/content-selector-mp', undefined);
+		$.DispatchEvent(
+			'MainMenuOpenNestedPage',
+			'MultiPlayer',
+			'main-menu/play/multiplayer/content-selector-mp',
+			undefined
+		);
 	}
 }
