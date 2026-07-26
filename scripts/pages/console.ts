@@ -14,13 +14,8 @@ class Console {
 		$.DispatchEvent('ToggleConsole');
 	}
 
-	static onNewMessages() {
-		// TODO: This could be a ConVar or Settings option. Can get annoying when trying to scroll up with the console.
-		this.messageTarget?.ScrollToBottom();
-	}
-
 	static {
 		$.RegisterEventHandler('DragStart', 'MoveDragArea', Console.onMoveDragStart);
-		$.RegisterEventHandler('NewConsoleMessages', 'ConsoleMessageTarget', Console.onNewMessages.bind(this));
+		//$.RegisterEventHandler('NewConsoleMessages', 'ConsoleMessageTarget', Console.onNewMessages.bind(this));
 	}
 }
