@@ -35,7 +35,12 @@ class CampaignMenu {
 			headline: '#MainMenu_SaveRestore_Load',
 			tagline: '#MainMenu_SaveRestore_Main_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'main-menu/play/singleplayer/saves-list', undefined);
+				$.DispatchEvent(
+					'MainMenuOpenNestedPage',
+					'GameSaves',
+					'main-menu/play/singleplayer/saves-list',
+					undefined
+				);
 			},
 			focused: () => {
 				if (this.continueBox.IsValid()) this.continueBox.visible = false;

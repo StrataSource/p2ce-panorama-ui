@@ -20,11 +20,21 @@ class PauseMenu {
 			activated: () => {
 				const isCoop: boolean = false; // TODO: TEMPORARY! REPLACE WITH API FUNCTION WHICH GIVES IF IT'S MULTIPLAYER!
 				if (!isCoop) {
-					$.DispatchEvent('MainMenuOpenNestedPage', 'SinglePlayer', 'main-menu/play/singleplayer/content-selector-sp', undefined);
+					$.DispatchEvent(
+						'MainMenuOpenNestedPage',
+						'SinglePlayer',
+						'main-menu/play/singleplayer/content-selector-sp',
+						undefined
+					);
 					return;
 				}
 
-				$.DispatchEvent('MainMenuOpenNestedPage', 'MultiPlayer', 'main-menu/play/multiplayer/content-selector-mp', undefined);
+				$.DispatchEvent(
+					'MainMenuOpenNestedPage',
+					'MultiPlayer',
+					'main-menu/play/multiplayer/content-selector-mp',
+					undefined
+				);
 			},
 			hovered: () => {},
 			unhovered: () => {},
@@ -35,7 +45,12 @@ class PauseMenu {
 			headline: '#MainMenu_SaveRestore_Main',
 			tagline: '#MainMenu_SaveRestore_Main_Tagline',
 			activated: () => {
-				$.DispatchEvent('MainMenuOpenNestedPage', 'GameSaves', 'main-menu/play/singleplayer/saves-list', undefined);
+				$.DispatchEvent(
+					'MainMenuOpenNestedPage',
+					'GameSaves',
+					'main-menu/play/singleplayer/saves-list',
+					undefined
+				);
 			},
 			hovered: () => {},
 			focusIsHover: true
