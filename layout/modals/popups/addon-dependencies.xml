@@ -56,13 +56,13 @@
 				<Panel id="DependenciesPanel" class="addon-deps__inner">
 				</Panel>
 			</Panel>
-			
+
 			<Panel class="flow-right horizontal-align-right">
 				<Button id="ContinueButton" class="button button--red mr-2" tabindex="auto" selectionpos="auto">
 					<Label id="ContinueText" class="button__text" text="#DependencyWarning_Action_Ignore" />
 				</Button>
 				<Button id="CancelButton" class="button" tabindex="auto" selectionpos="auto" onactivate="AddonDependencies.close()">
-					<Label class="button__text" text="#DependencyWarning_Action_Cancel" />
+					<Label class="button__text" text="#DependencyWarning_Common_Cancel" />
 				</Button>
 			</Panel>
 		</Panel>
