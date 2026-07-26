@@ -68,7 +68,7 @@ class PauseMenu {
 					$.Localize('#Action_Quit'),
 					$.Localize('#Action_Quit_InGame_Message'),
 					'quit-popup',
-					$.Localize('#Action_ReturnToMenu'),
+					$.Localize('#Common_ReturnToMenu'),
 					() => {
 						GameInterfaceAPI.ConsoleCommand('disconnect');
 						$.DispatchEvent('MainMenuCloseAllPages');
@@ -77,7 +77,7 @@ class PauseMenu {
 					() => {
 						GameInterfaceAPI.ConsoleCommand('quit');
 					},
-					$.Localize('#Action_Return'),
+					$.Localize('#Common_Return'),
 					() => {},
 					'blur'
 				);

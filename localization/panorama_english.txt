@@ -4,62 +4,7 @@
 	"Tokens"
 	{
 		// Moved from p2ce_english.txt
-		
-		///////////////////////////////////////////////////////////////////////////////////////////////
-		// XLAST STRINGS
-		///////////////////////////////////////////////////////////////////////////////////////////////
 
-		// cfg_xboxlive_builtin_strings.cfg 
-		"X_STRINGID_TITLENAME"					"Portal 2"
-
-		// cfg_xboxlive_presence_strings.cfg 
-		"RICHPRESENCE_IDLE" 					"Idle"
-		"RICHPRESENCE_MAINMENU" 				"Main Menu"
-		"RICHPRESENCE_SP" 						"{c0}"
-		"RICHPRESENCE_COOPMENU" 				"Playing Co-op\n{c1}"
-		"RICHPRESENCE_COOPGAME" 				"{c2}\n{c3}"
-		"RICHPRESENCE_COOPGAME_TRACK" 			"{c2}\n{c3} {p0x10000023}/{p0x10000024}"
-
-		"SP_PRESENCE_TEXT_DEFAULT"				"Playing Single Player"
-		"SP_PRESENCE_TEXT_CH1"					"Chapter 1\nThe Courtesy Call"
-		"SP_PRESENCE_TEXT_CH2"					"Chapter 2\nThe Cold Boot"
-		"SP_PRESENCE_TEXT_CH3"					"Chapter 3\nThe Return"
-		"SP_PRESENCE_TEXT_CH4"					"Chapter 4\nThe Surprise"
-		"SP_PRESENCE_TEXT_CH5"					"Chapter 5\nThe Escape"
-		"SP_PRESENCE_TEXT_CH6"					"Chapter 6\nThe Fall"
-		"SP_PRESENCE_TEXT_CH7"					"Chapter 7\nThe Reunion"
-		"SP_PRESENCE_TEXT_CH8"					"Chapter 8\nThe Itch"
-		"SP_PRESENCE_TEXT_CH9"					"Chapter 9\nThe Part Where He Kills You"
-		"SP_PRESENCE_TEXT_CH10"					"Chapter 10\nThe Credits"
-
-		"COOP_PRESENCE_WAITING_DEFAULT"			"Waiting for Partner"
-		"COOP_PRESENCE_WAITING_SPLITSCREEN"		"Splitscreen"
-		"COOP_PRESENCE_WAITING_FRIEND"			"Waiting for Partner"
-		"COOP_PRESENCE_WAITING_QUICKMATCH"		"Waiting for Stranger"
-
-		"COOP_PRESENCE_TAGLINE_DEFAULT"			"Playing Co-op"
-		"COOP_PRESENCE_TAGLINE_SPLITSCREEN"		"Co-op Splitscreen"
-		"COOP_PRESENCE_TAGLINE_FRIEND"			"Co-op with Friend"
-		"COOP_PRESENCE_TAGLINE_QUICKMATCH"		"Co-op with Stranger"
-
-		"COOP_PRESENCE_TRACK_DEFAULT"			"Co-op Track"
-		"COOP_PRESENCE_TRACK_CALIBRATION"		"Calibration Course"
-		"COOP_PRESENCE_TRACK_HUB"				"Enjoying the Hub"
-		"COOP_PRESENCE_TRACK_TRACK1"			"Team Building"
-		"COOP_PRESENCE_TRACK_TRACK2"			"Mass and Velocity"
-		"COOP_PRESENCE_TRACK_TRACK3"			"Hard Light"
-		"COOP_PRESENCE_TRACK_TRACK4"			"Excursion Funnels"
-		"COOP_PRESENCE_TRACK_TRACK5"			"Mobility Gels"
-		"COOP_PRESENCE_TRACK_CREDITS"			"Credits"
-
-		// cfg_xboxlive_gamemode_strings.cfg 
-		"GAME_MODE_SP"							"Single Player"
-		"GAME_MODE_COOP"						"Cooperative"
-
-		///////////////////////////////////////////////////////////////////////////////////////////////
-		// END OF XLAST STRINGS
-		///////////////////////////////////////////////////////////////////////////////////////////////
-		
 		"P2Controller_Taunt"				"Gesture"
 		"P2Controller_Signal"				"Ping Menu"
 		"P2Controller_RemoteView"			"Partner View"
@@ -72,7 +17,7 @@
 		"HL2_GameOver_Ally"					"ASSIGNMENT: TERMINATED\nSUBJECT: FREEMAN\nREASON: FAILURE TO PRESERVE MISSION-CRITICAL PERSONNEL"
 		"HL2_GameOver_Timer"				"ASSIGNMENT: TERMINATED\nSUBJECT: FREEMAN\nREASON: FAILURE TO PREVENT TIME-CRITICAL SEQUENCE"
 		"HL2_GameOver_Stuck"				"ASSIGNMENT: TERMINATED\nSUBJECT: FREEMAN\nREASON: DEMONSTRATION OF EXCEEDINGLY POOR JUDGMENT"
-		
+
 		"Episodic_GameOver_AlyxDead"		"Alyx Died"
 
 		// figure out a way to override these strings in episodic
@@ -82,7 +27,7 @@
 		"HL2_GameOver_Stuck_ep2"			"ASSIGNMENT: TERMINATED\nSUBJECT: FREEMAN\nREASON: DEMONSTRATION OF EXCEEDINGLY POOR JUDGMENT"
 
 		"Portal_Portalgun"					"Aperture Science Handheld Portal Device\n(Portal Gun)"
-		
+
 		"HL2_Crowbar"						"Crowbar"
 		"HL2_GravityGun"					"Zero-Point Energy Field Manipulator\n(Gravity Gun)"
 		"HL2_Pistol"						"9mm Pistol"
@@ -97,9 +42,9 @@
 
 		"HL2_SAVING"						"Saving..."
 		"HL2_Saved"							"Saved."
-		
-		"HL2_SetupMicrophone"				"Configure Advanced Microphone Settings"
-		"HL2_SetupMicrophoneSteam"			"The Steam Overlay is currently disabled.\nPlease enable the Steam Overlay or configure your microphone settings through the Steam client."
+
+		"HL2_SetupMicrophone"				"Configure Advanced Microphone Settings" X
+		"HL2_SetupMicrophoneSteam"			"The Steam Overlay is currently disabled.\nPlease enable the Steam Overlay or configure your microphone settings through the Steam client." X
 
 		"HL2_Enable_Commentary"				"Enable commentary track"
 
@@ -126,7 +71,7 @@
 		"portal2_Chapter6"					"Chapter 6\nThe Fall"
 		"portal2_Chapter6_Title"			"Chapter 6"
 		"portal2_Chapter6_Subtitle"			"The Fall"
-		
+
 		"portal2_Chapter7"					"Chapter 7\nThe Reunion"
 		"portal2_Chapter7_Title"			"Chapter 7"
 		"portal2_Chapter7_Subtitle"			"The Reunion"
@@ -176,7 +121,7 @@
 		"ep2_Chapter5_Title"				"Chapter 5\nUnder the Radar"
 		"ep2_Chapter6_Title"				"Chapter 6\nOur Mutual Friend"
 		"ep2_Chapter7_Title"				"Chapter 7\nT-Minus One"
-		
+
 		// portal
 		"Portal_Chapter1_Title"				"Test Chamber 00"
 		"Portal_Chapter2_Title"				"Test Chamber 04"
@@ -206,14 +151,12 @@
 		"P2_Mouse_Menu"						"Communication Menu"
 		"P2_Taunt"							"Gesture Menu"
 
-		"P2_Taunt_Earned"					"Gesture Deciphered"
-
 		"P2_Scoreboard_Ping"				"Ping"
 		"P2_Scoreboard_Dead"				"Dead"
 		"P2_Team_Red"						"P-body"
 		"P2_Team_Blue"						"Atlas"
 		"P2_Team_RedUpper"					"P-BODY"
-		"P2_Team_BlueUpper"					"ATLAS"
+		"P2_Team_BlueUpper"		 			"ATLAS"
 
 		"P2_ScoreBoard_Player"				"%s2 - %s1"
 		"P2_ScoreBoard_Players"				"%s2 - %s1s"
@@ -271,10 +214,6 @@
 		"Instructor_SS_Control"				"Press to Control Other Player"
 
 		"Paint_Instructor_teach_bounce_suppression"				"Hold to prevent bouncing"
-		
-		// Invites
-		"P2COOP_Invite_Title"						"Portal 2: Commnuity Edition Invite"
-		"P2COOP_Invite_Body"						"You have been invited to play a cooperative game on Portal 2: Community Edition!"
 
 		// COOP
 		"P2COOP_TrackName_1"						"Team Building"
@@ -290,34 +229,16 @@
 		"P2COOP_SelectScreen_Select"				"Please select a level, then\nproceed to the disassembly chambers."
 		"P2COOP_SelectScreen_CourseNum"				"Course {s:coop_course_name}"
 		"P2COOP_SelectScreen_PercentComplete"		"{i:coop_completion_percentage}% COMPLETED"
-		
+
 		// CSGO Pano
 		"UI_Submit"									"Submit"
 		"UI_Select"									"Select"
 		"UI_Inspect"								"Inspect"
-		"UI_LeftStick_Short"						"LS"
-		"UI_RightStick_Short"						"RS"
-		"UI_LeftTrigger_Short"						"LT"
-		"UI_RightTrigger_Short"						"RT"
-		"UI_LeftBumper_Short"						"LB"
-		"UI_RightBumper_Short"						"RB"
-		"UI_LeftBack_Short"							"LP"
-		"UI_RightBack_Short"						"RP"
-		"UI_AButton"								"A"
-		"UI_BButton"								"B"
-		"UI_XButton"								"X"
-		"UI_YButton"								"Y"
 		"UI_Cancel"									"Cancel"
 		"UI_Dismiss" 								"Dismiss"
-		"UI_OK"										"OK"
 		"UI_Done"									"Done"
-		"UI_Yes"									"Yes"
-		"UI_No"										"No"
 		"UI_Unknown"								"Unknown"
 		"UI_Always"									"Always"
-		"UI_Select_Footer"							"Select"
-		"UI_Cancel_Footer"							"Cancel"
-		"UI_Back_Footer" 							"Back"
 		"UI_Alert"									"Alert"
 		"UI_Help" 									"Help"
 		"UI_Enable" 								"Enable"
@@ -355,28 +276,11 @@
 		"UI_TextEntry_CopyToClipboard"				"Copy"
 		"UI_TextEntry_PasteClipboard"				"Paste"
 
-		"UI_Agreements"								"Agreements"
-		"UI_ViewAgreements"							"View SSA and Privacy Policy"
-		"UI_I_Agree"								"I agree"
-
 		"UI_ConfirmExitTitle"						"Confirm Exit"
 		"UI_ConfirmExitMessage"						"Are you sure you want to quit?"
-		"UI_Quit"									"QUIT"
-		"UI_Return"									"RETURN"
+		"UI_Quit"									"Quit"
+		"UI_Return"									"Return"
 		"UI_Continue"								"Continue"
-
-		"Month_January"								"January"
-		"Month_February"							"February"
-		"Month_March"								"March"
-		"Month_April"								"April"
-		"Month_May"									"May"
-		"Month_June"								"June"
-		"Month_July"								"July"
-		"Month_August"								"August"
-		"Month_September"							"September"
-		"Month_October"								"October"
-		"Month_November"							"November"
-		"Month_December"							"December"
 
 		"Panorama_Lang_English"						"English"
 		"Panorama_Lang_Spanish"						"Spanish"
@@ -406,33 +310,6 @@
 		"Panorama_Lang_Arabic"						"Arabic"
 		"Panorama_Lang_Ukrainian"					"Ukrainian"
 
-		"Panorama_Lang_Footer_English"				"ENGLISH"
-		"Panorama_Lang_Footer_Spanish"				"SPANISH"
-		"Panorama_Lang_Footer_French"				"FRENCH"
-		"Panorama_Lang_Footer_Italian"				"ITALIAN"
-		"Panorama_Lang_Footer_German"				"GERMAN"
-		"Panorama_Lang_Footer_Greek"				"GREEK"
-		"Panorama_Lang_Footer_Korean"				"KOREAN"
-		"Panorama_Lang_Footer_Simplified_Chinese"	"SIM. CHINESE"
-		"Panorama_Lang_Footer_Traditional_Chinese"	"TRAD. CHINESE"
-		"Panorama_Lang_Footer_Russian"				"RUSSIAN"
-		"Panorama_Lang_Footer_Thai"					"THAI"
-		"Panorama_Lang_Footer_Japanese"				"JAPANESE"
-		"Panorama_Lang_Footer_Portuguese"			"PORTUGUESE"
-		"Panorama_Lang_Footer_Brazilian"	 		"BR-PORTUGUESE"
-		"Panorama_Lang_Footer_Polish"				"POLISH"
-		"Panorama_Lang_Footer_Danish"				"DANISH"
-		"Panorama_Lang_Footer_Dutch"				"DUTCH"
-		"Panorama_Lang_Footer_Finnish"				"FINNISH"
-		"Panorama_Lang_Footer_Norwegian"			"NORWEGIAN"
-		"Panorama_Lang_Footer_Swedish"				"SWEDISH"
-		"Panorama_Lang_Footer_Czech"				"CZECH"
-		"Panorama_Lang_Footer_Hungarian"			"HUNGARIAN"
-		"Panorama_Lang_Footer_Romanian"				"ROMANIAN"
-		"Panorama_Lang_Footer_Bulgarian"			"BULGARIAN"
-		"Panorama_Lang_Footer_Turkish"				"TURKISH"
-		"Panorama_Lang_Footer_Ukrainian"			"UKRAINIAN"
-
 		"Panorama_MoviePlaybackError"				"An error occurred during video playback"
 
 		"Debugger_PaintInfo"						"Show Paint Info"
@@ -443,7 +320,7 @@
 		"Debugger_Properties"						"Properties:"
 		"Debugger_StyleFileLink"					"{s:stylefile}"
 		"Debugger_LayoutFileLink"					"{s:layoutfile}"
-		"Debugger_LayoutFileLink_Code"				"From XML/Code"	
+		"Debugger_LayoutFileLink_Code"				"From XML/Code"
 		"Debugger_InheritedStyleHeader"				"Inherited from "
 		"Debugger_Save"								"Save All Changes"
 		"Debugger_Revert"							"Revert All Changes"
@@ -454,7 +331,7 @@
 		"Debugger_Smaller"							"Smaller"
 		"Debugger_Larger"							"Larger"
 		"Debugger_ResetSize"						"Reset Size"
-		
+
 		// Color Picker
 		"ColorPicker_Hue"							"H"
 		"ColorPicker_Saturation"					"S"
@@ -468,14 +345,8 @@
 
 		// For Pano Loc
 		// Settings UI
-		"Settings_Title"								"Settings"
 		"Settings_General_Title"						"Settings"
-		"Settings_General_Apply"						"Apply"
-		"Settings_General_Discard"						"Discard"
 		"Settings_General_Reset"						"Reset"
-		"Settings_General_Confirm"						"Confirm"
-		"Settings_General_ResetControls"				"Reset"
-		"Settings_General_ResetSomething"				"Reset"
 		"Settings_General_Enabled"						"Enabled"
 		"Settings_General_Disabled"						"Disabled"
 		"Settings_General_Auto"							"Auto"
@@ -508,29 +379,12 @@
 		// exactly two matches (Search_VeryFull_Plural), another is for more than two matches (Search_VeryFull_Plural2).
 		// So this "duplicate" string exists and is used in place.
 		"Settings_General_Search_VeryFull_Plural2"		"{s:count} more matches"
-		
+
 		"Settings_Reset_Title"							"Confirm Reset"
 		"Settings_Reset_Message_Generic"				"Are you sure you want to reset this section's settings to their default values?"
 		"Settings_Reset_Message_Checker"				"The following settings are currently different from their default values and will be reset:"
 		"Settings_Reset_Action_Reset"					"Reset Section"
 		"Settings_Reset_Action_Cancel"					"Don't Reset"
-		
-		// Settings - Import/Export
-		"Settings_ImportExport_Title"					"Import/Export %thing% Settings"
-		"Settings_ImportExport_Import"					"Import"
-		"Settings_ImportExport_Export"					"Export"
-		"Settings_ImportExport_ImportExport"			"Import/Export"
-		"Settings_ImportExport_ImportSettings"			"Import Settings"
-		"Settings_ImportExport_Success"					"Import successful!"
-		"Settings_ImportExport_Success_Excluded"		"Some invalid cvars were excluded."
-		"Settings_ImportExport_Failure"					"Import failed!"
-		"Settings_ImportExport_Failed"					"Settings import parser failed!"
-		"Settings_ImportExport_Invalid"					"Invalid"
-		"Settings_ImportExport_B64Mode"					"Base64 Mode"
-		"Settings_ImportExport_B64Warning"				"Note: Base64 strings may be broken by updates. Use regular mode if you want it to last!"
-		"Settings_ImportExport_Error_NoCvars"			"Input contains no cvars. Are you trying to convert Base64?"
-		"Settings_ImportExport_Error_NoSettings"		"No settings input!"
-		"Settings_ImportExport_Error_Outdated"			"Code is likely outdated."
 
 		// Settings - Audio
 		"Settings_Audio"									"Audio"
@@ -553,13 +407,13 @@
 		"Settings_Volume_OverallWeapon_info"				"Sets volume for all combat interactions in the world."
 		"Settings_Volume_Background"						"Unfocused Volume"
 		"Settings_Volume_Background_info"					"Sets the overall volume of the game while the window is out of focus."
-		
+
 		"Settings_ClosedCaptions_Title"						"Closed Captions and Subtitles"
 		"Settings_ClosedCaptions_Enable"					"Closed Captions"
 		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time.\n<movie src=\"file://{videos}/settings/cc.webm\" />"
 		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
 		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled.\n<movie src=\"file://{videos}/settings/cc_subtitles.webm\" />"
-		
+
 		// Storm - CC System Rewrite
 		"Settings_ClosedCaptions_Font"						"Font"
 		"Settings_ClosedCaptions_Font_info"					"Determines which typeface to use for on-screen subtitles and closed captions.\n<movie src=\"file://{videos}/settings/cc_font.webm\" />"
@@ -580,10 +434,10 @@
 		"Settings_ClosedCaptions_Alignment_left"			"Left"
 		"Settings_ClosedCaptions_Alignment_center"			"Center"
 		"Settings_ClosedCaptions_Alignment_right"			"Right"
-		
+
 		"Settings_Audio_HRTF_Async_Title"					"Threaded Audio"
 		"Settings_Audio_HRTF_Async_Desc"					"Splits individual audio channels into multiple CPU threads to improve performance."
-		
+
 		"Settings_AudioDevices_Title"						"Audio Device Configuration"
 		"Settings_AudioDevices_Device"						"Audio Playback Device"
 		"Settings_AudioDevices_Device_info"					"Determines which sound device the game's audio should be coming from."
@@ -592,19 +446,19 @@
 		"Settings_AudioDevices_Speaker_StereoSpeakers"		"Stereo Speakers"
 		"Settings_AudioDevices_Speaker_Quad"				"Quad Surround Sound"
 		"Settings_AudioDevices_Speaker_51"					"5.1 Surround Sound"
-		// "Settings_AudioDevices_Speaker_71"				"7.1 Surround Sound"	// Unsupported by CSGO and Strata?
+		"Settings_AudioDevices_Speaker_71"					"7.1 Surround Sound"	// Unsupported by CSGO and Strata?
 		"Settings_AudioDevices_Speaker"						"Audio Output Configuration"
 		"Settings_AudioDevices_Speaker_info"				"Alters audio playback behavior by allocating specific sound channels to individual speakers based on a specific device configuration."
-		
+
 		// Needs to be unhardcoded in engineaudio! Uncomment this once this is localized.
 		// "Settings_AudioDevices_Device_Disabled"			"Sound Disabled"
-		
+
 		// Settings - Video
 		"Settings_Video"								"Video"
 		"Settings_Video_Title"							"Video Settings"
 
 		"Settings_Render_Title"							"Rendering"
-		
+
 		"Settings_Video_Presets"						"Quality Presets (NOT IMPLEMENTED)"
 		"Settings_Video_Presets_info"					"Video settings will be set based on a pre-determined set of variables in this list, from low to high."
 
@@ -612,14 +466,14 @@
 		"Settings_Video_AspectRatio_Normal"				"Standard (4:3)"
 		"Settings_Video_AspectRatio_16x9"				"Widescreen (16:9)"
 		"Settings_Video_AspectRatio_16x10"				"Widescreen (16:10)"
-		
+
 		"Settings_Video_Resolution"						"Video Resolution"
 		"Settings_Video_DisplayMode"					"Display Mode"
 		"Settings_Video_DisplayMode_Fullscreen"			"Fullscreen"
 		"Settings_Video_DisplayMode_FullscreenWindowed"	"Fullscreen (Windowed)"		// temp until we can get this changed to SW_NoBorder below
 		"Settings_Video_DisplayMode_SW_NoBorder"		"Fullscreen (Windowed)"
 		"Settings_Video_DisplayMode_Windowed"			"Windowed"
-		
+
 		"Settings_Video_FOV"							"Field of View (FOV)"
 		"Settings_Video_FOV_Info"						"Controls the maximum viewing range of the player's eyes, in degrees.\n<movie src=\"file://{videos}/settings/cl_fov.webm\" />"
 
@@ -636,10 +490,10 @@
 		"Settings_Video_ColorMode_TV"					"Television"
 
 		"Settings_Render_VSync"							"V-Sync"
-		"Settings_Render_VSync_Info"					"Vertical sync (V-sync) elimates screen tearing by ensuring each pixel of the frame is displayed at once.\nMay result in smoother rendering on some monitors, but causes minor input lag and is therefore not recommended.\nOnly applicable to fullscreen mode."
+		"Settings_Render_VSync_Info"					"Vertical sync (V-sync) eliminates screen tearing by ensuring each pixel of the frame is displayed at once.\nMay result in smoother rendering on some monitors, but causes minor input lag and is therefore not recommended.\nOnly applicable to fullscreen mode."
 		"Settings_Render_VSync_Double"					"Double-Buffered"
 		"Settings_Render_VSync_Triple"					"Triple-Buffered"
-		
+
 		"Settings_Render_FilteringMode"					"Texture Filtering Mode"
 		"Settings_Render_FilteringMode_Info"			"Increasing the texture filtering setting improves the appearance of textures in the game. Increasing filtering quality can degrade graphics performance."
 		"Settings_Render_FilteringMode_Bilinear"		"Bilinear"
@@ -648,7 +502,7 @@
 		"Settings_Render_FilteringMode_Aniso4X"			"Anisotropic (4x)"
 		"Settings_Render_FilteringMode_Aniso8X"			"Anisotropic (8x)"
 		"Settings_Render_FilteringMode_Aniso16X"		"Anisotropic (16x)"
-		
+
 		"Settings_Render_AntialiasingMode"				"Multisampling Anti-Aliasing (MSAA)"
 		"Settings_Render_AntialiasingMode_Info"			"Anti-aliasing provides a smooth appearance at the edges of geometry, eliminating jagged edges. Increasing anti-aliasing quality can degrade graphics performance."
 		"Settings_Render_AntialiasingMode_None"			"Disabled"
@@ -686,14 +540,11 @@
 		"Settings_Video_PStencilDepth" 					"Portal Recursion Depth"
 		"Settings_Video_PStencilDepth_Info"				"This setting determines how many times the portals will recurse before rendering a cheap 2D image in them. Lower values may cause distortion."
 
-		"Settings_Video_TripleMonitor"					"Triple-Monitor Mode"
-		"Settings_Video_TripleMonitor_Info"				"Restrict UI and HUD to the center third of the display. Useful for displays that span three monitors."
-
 		"Settings_TextureReplace_Title"					"Texture Loading"
 		"Settings_TextureReplace_Type"					"Default Error Texture Appearance"
 		"Settings_TextureReplace_Type_Info"				"What replacement texture to use for missing materials, for when certain games (e.g. HL2, CS:GO, TF2) are not installed and mounted.
-		<h2>Unshaded</h2>Unshaded purple and black error chekerboard textures seen in other Source Engine games. Not intended for gameplay, but makes it clear to map authors if a texture is missing.
-		<h2>Shaded</h2>Grey checkerboard textures, but with shading from map lighting, so should provide reasonably good visiblity ingame. Recommended for anyone playing with missing textures.
+		<h2>Unshaded</h2>Unshaded purple and black error checkerboard textures seen in other Source Engine games. Not intended for gameplay, but makes it clear to map authors if a texture is missing.
+		<h2>Shaded</h2>Grey checkerboard textures, but with shading from map lighting, so should provide reasonably good visibility ingame. Recommended for anyone playing with missing textures.
 		A map reload is required for this change to take effect."
 		"Settings_TextureReplace_0"						"Unshaded (Purple-Black)"
 		"Settings_TextureReplace_1"						"Shaded (Grey)"
@@ -711,7 +562,6 @@
 		<h2>Colored</h2>Missing textures will be colored based on the surface's reflectivity data. This should be similar to the overall color of the missing texture. Use this on maps where the subsequent option falsely detects surfaces as water or the like.
 		<h2>Colored and Special Overrides</h2>Missing textures will be colored, like the above option, but will also detect transparent textures and provide meaningful replacements. Recommended unless you are mapping.
 		A map reload is required for this change to take effect."
-		"Settings_TextureReplace_Advanced_0"			"Disabled"
 		"Settings_TextureReplace_Advanced_1"			"Colored"
 		"Settings_TextureReplace_Advanced_2"			"Colored and Special Overrides"
 		"Settings_TextureReplace_ReplaceTexture"		"Replacement Base Texture"
@@ -723,7 +573,7 @@
 		"Settings_TextureReplace_Texture_Grid"			"Grid"
 		"Settings_TextureReplace_Texture_GridWithNoise"	"Grid with Noise"
 		"Settings_TextureReplace_Texture_Custom"		"Custom"
-		
+
 		"Settings_Portal_Coop_SS_SplitMode"				"Split-Screen Direction"
 		"Settings_Portal_Coop_SS_SplitMode_info"		"Determines which direction should both split-screen players' view be split into.\n<h2>Horizontal</h2>The players' views will be split across a horizontal line with both views located at the top and bottom side of the screen, respectively.\n<h2>Vertical</h2>The players' views will be split across a vertical line with both views located at the left- and right-hand side of the screen, respectively.\n<h2>Automatic</h2>The game will automatically determine which mode to select, based off the monitor's screen resolution and aspect ratio.\n<movie src=\"file://{videos}/settings/ss_splitmode.webm\" />"
 		"Settings_Portal_Coop_SS_SplitMode_auto"		"Automatic"
@@ -731,7 +581,6 @@
 		"Settings_Portal_Coop_SS_SplitMode_vert"		"Vertical"
 
 		// Settings - Keyboard/Mouse
-		"Settings_Input"								"Input"
 		"Settings_Input_Title"							"Input"
 		"Settings_Mouse_Title"							"Mouse"
 
@@ -752,8 +601,7 @@
 
 		"Settings_Keybinds_Title"						"Keybinds"
 		"Settings_Keybinds_Movement"					"Movement"
-		"Settings_Input_Keybinds_Movement"				"Movement"
-		
+
 		// KBM Mappings
 		"Keybind_Move_Forward"							"Move forward"
 		"Keybind_Move_Back"								"Move back"
@@ -771,25 +619,25 @@
 		"Keybind_Zoom_Toggle"							"Toggle Zoom"
 		"Keybind_Zoom_In"								"Zoom In"
 		"Keybind_Zoom_Out"								"Zoom Out"
-		
+
 		"Settings_Keybinds_Weapons"						"Weapons"
 		"Keybind_Attack_Primary"						"Primary attack"
 		"Keybind_Attack_Secondary"						"Secondary attack"
-		"Keybind_Paintgun_NextPaint"					"Paint Gun: Select next paint" 
-		"Keybind_Paintgun_PrevPaint"					"Paint Gun: Select previous paint" 
+		"Keybind_Paintgun_NextPaint"					"Paint Gun: Select next paint"
+		"Keybind_Paintgun_PrevPaint"					"Paint Gun: Select previous paint"
 		"Keybind_Weapon_Category_1"						"Weapon category 1"
 		"Keybind_Weapon_Category_2"						"Weapon category 2"
 		"Keybind_Weapon_Category_3"						"Weapon category 3"
 		"Keybind_Weapon_Category_4"						"Weapon category 4"
 		"Keybind_Weapon_Category_5"						"Weapon category 5"
 		"Keybind_Weapon_Category_6"						"Weapon category 6"		// hl2:weapon_bugbait
-		
+
 		"Settings_Keybinds_Utility"						"Utility"
 		"Keybind_Use_Items"								"Use object (buttons, machines, etc.)"
 		"Keybind_Flashlight"							"Flashlight"
 		"Keybind_Quicksave"								"Quicksave"
 		"Keybind_Quickload"								"Quickload"
-		
+
 		"Settings_Keybinds_MP_COOP"						"Multiplayer / Cooperative"
 		"Keybind_Chat_Message"							"Text chat"
 		"Keybind_Chat_Message_TeamOnly"					"Text chat (team only)"
@@ -800,13 +648,13 @@
 		"Keybind_Coop_PingTool_Info"					"Opens a suggestion menu to communicate specific actions or locations to your co-op partner."
 		"Keybind_Coop_Taunt"							"Gesture/Taunt"
 		"Keybind_Coop_Taunt_Info"						"Perform gestures/taunts."
-		
+
 		"Settings_Input_Keybinds_Misc"					"Miscellaneous"
 		"Keybind_Console"								"Toggle developer console"
 		"Keybind_Screenshot"							"Take a screenshot"
 		"Keybind_Quit"									"Quit game"
 		"Keybind_Quit_Prompt"							"Quit with Prompt"
-		
+
 		// Settings - Controller
 		"Settings_Controller_Title"						"Controller"
 		"Settings_Controller_SteamInputButton"			"Open Steam Input Settings"
@@ -820,7 +668,7 @@
 
 		// Settings - Personalization
 		"Settings_Customization" 						"Customization"
-		
+
 		"Settings_Portal1_Title" 						"Portal 1"
 		"Settings_Portal1_compat" 						"Portal 1 Compatibility Mode"
 		"Settings_Portal1_compat_info" 					"Enables backwards compatibility with Portal 1 maps."
@@ -830,7 +678,7 @@
 		"Settings_portal1_xhair_p1" 					"Portal 1 Style"
 		"Settings_Portal1_xhair_scale" 					"Crosshair Scale"
 		"Settings_Portal1_xhair_scale_info" 			"Scale multiplier for the in-game crosshair."
-		
+
 		"Settings_Portals_Title" 						"Portals"
 		"Settings_Portals_PlayerFunnel"					"Portal Funneling"
 		"Settings_Portals_PlayerFunnel_info"			"When flinging into portals, the game will attempt to correct the player's position and trajectory to avoid collision with adjacent surfaces."
@@ -859,11 +707,11 @@
 		"Settings_Gels_reflection_color_Info"			"The alternate color to use for Reflection Gel (reflect paint)."
 		"Settings_Gels_adhesion_color"					"Adhesion Gel Color (Stick)"
 		"Settings_Gels_adhesion_color_Info"				"The alternate color to use for Adhesion Gel (stick paint)."
-		
+
 		"Settings_Interface_InGame_Title"				"In-Game UI"
 		"Settings_Interface_InGame_Xhair"				"Show Crosshair"
 		"Settings_Interface_InGame_Xhair_Info"			"Displays a crosshair at the center of the player's screen to aid in landing shots more accurately."
-		
+
 		// Settings - Miscellaneous
 		"Settings_Misc_Title" 							"Miscellaneous"
 		"Settings_Misc_solenergy_refract"				"Solid Energy Refractions"
@@ -877,7 +725,7 @@
 
 		"Settings_Video_PreventThreadSleep"				"Prevent Main Thread Sleep"
 		"Settings_Video_PreventThreadSleep_Info"		"Prevent the main game thread from sleeping when at maximum FPS limit. Enabling this option may result in smoother performance, but causes higher CPU usage."
-		
+
 		"Settings_Menu_Console"							"Enable Developer Console"
 		"Settings_Menu_Console_info"					"This setting determines the enablement state of the developer console, which allows users to send internal commands to the game engine.\nThe developer console is a powerful tool intended for advanced users (such as map makers), and is not required for normal play. Some of the commands present in the Source engine are dangerous and (if misused) can potentially crash the game, cause saved progress to be lost, and/or render certain gameplay elements inoperable."
 		"Settings_Menu_Experimental"					"Enable Experimental UI Features"
@@ -887,7 +735,7 @@
 		"Settings_Menu_Sentry_ConsentButton"			"Update Consent"
 		"Settings_Menu_DiscordIntegration"				"Discord Rich Presence"
 		"Settings_Menu_DiscordIntegration_info"			"Enables Discord rich presence integration with P2:CE by displaying the current game state as an activity.\nThis toggle does not alter Discord rich presence enablement in SDK tools such as Hammer."
-		
+
 		// Main Menu
 		"MainMenu_PH_Note"								"This page is a work-in-progress."
 		"MainMenu_ControllerUI_Note_Title"				"Controller Support Notice"
@@ -922,7 +770,7 @@
 		"MainMenu_Navigation_Disconnect"				"Exit"
 		"MainMenu_Navigation_Disconnect_Tagline"		"Return to the main menu or quit the game"
 		"MainMenu_Navigation_Disconnect_CM_Tagline"		"Leave the current campaign/map"
-		
+
 		// Main Menu - Home Page
 		"MainMenu_Home_Resume"							"Resume Game"
 		"MainMenu_Home_Resume_Tagline"					"Close this menu and unpause the game"
@@ -936,7 +784,7 @@
 		"MainMenu_Home_Button_Github"					"Strata Source GitHub"
 		"MainMenu_Home_Button_Forums"					"Steam Community Forums"
 		"MainMenu_Home_Button_Workshop"					"Steam Workshop"
-		
+
 		// featured
 		"MainMenu_Featured_Title"						"Featured Item: {s:featured_item_name}"
 		"MainMenu_Featured_Title_PH"					"Querying Item Details"
@@ -944,12 +792,12 @@
 		"MainMenu_Featured_Author_PH"					"Downloading information from the Steam Workshop..."
 		"MainMenu_Featured_Unavailable_Title"			"Featured Item Not Available"
 		"MainMenu_Featured_Unavailable_Description"		"The Steam Web API could not be reached or is experiencing a technical problem. Featured items are temporarily unavailable."
-		
+
 		// Main Menu - News
 		// temporarily removed for the time being
 		// "MainMenu_News_Unavailable_Title"				"News Not Available"
 		// "MainMenu_News_Unavailable_Description"			"The Steam Web API could not be reached or is experiencing a technical problem. News is temporarily unavailable."
-		
+
 		// Main Menu - Saverestore
 		"MainMenu_SaveRestore_Main"							"Save/Load Game"
 		"MainMenu_SaveRestore_Main_Tagline"					"Manage and load saved games"
@@ -961,7 +809,7 @@
 		"MainMenu_SaveRestore_Load"							"Load Saved Game"
 		"MainMenu_SaveRestore_Delete"						"Delete Saved Game"
 		"MainMenu_SaveRestore_Rename"						"Rename Saved Game"
-		
+
 		// Chapter Navigation
 		"MainMenu_ChapterNav_Back"							"< Back"
 		"MainMenu_ChapterNav_Next"							"Next >"
@@ -970,18 +818,18 @@
 		"Action_NewSave"									"Save Game"
 		"Action_NewSave_Confirm"							"Confirm Save"
 		"Action_NewSave_Confirm_Message"					"Do you want to create a new save game?"
-		
+
 		// SaveLoadPrompt
 		"Action_LoadGame"									"Load Game"
 		"Action_LoadGame_Confirm"							"Confirm Load"
 		"Action_LoadGame_Auto_Message"						"Do you want to load the most recent saved game?\n\nUnsaved progress may be lost."
 		"Action_LoadGame_Message"							"Do you want to load this saved game?\n\nUnsaved progress may be lost."
-		
+
 		// SaveDeletePrompt
 		"Action_DeleteGame"									"Delete Saved Game"
 		"Action_DeleteGame_Confirm"							"Confirm Delete"
 		"Action_DeleteGame_Confirm_Message"					"Do you want to delete this saved game?\n\nThis operation cannot be undone."
-		
+
 		// SaveOverwritePrompt
 		"Action_OverwriteGame"								"Overwrite Saved Game"
 		"Action_OverwriteGame_Confirm"						"Confirm Overwrite"
@@ -993,13 +841,13 @@
 		"MainMenu_SaveRestore_SaveType_quick"						"Quicksave"
 		"MainMenu_SaveRestore_SaveType_autosave"					"Autosave"
 		"MainMenu_SaveRestore_SaveType_autosavedangerous"			"Autosave (Critical)"
-		
+
 		// Bad SaveRestore
 		"MainMenu_SaveRestore_LoadFailed"							"Load Failed"
 		"MainMenu_SaveRestore_LoadFailed_Description"				"The save game failed to load. {s:failure_reason}"			// This will have a failure reason attached to it
 		"MainMenu_SaveRestore_SaveFailed"							"Save Failed"
 		"MainMenu_SaveRestore_SaveFailed_Description"				"Failed to save the current game. {s:failure_reason}"		// This will have a failure reason attached to it
-		
+
 		// Load Failure Reasons
 		// bad/malformed save data or incompatible strata map or engine version
 		"MainMenu_SaveRestore_LoadFailed_BadSave"					"It is likely corrupt, or the save file that is being loaded is not compatible with the current map or game version."
@@ -1009,7 +857,7 @@
 		"MainMenu_SaveRestore_LoadFailed_NoSavesExist"				"There are no available saved games to load from."
 		// cloud failed sync, or something
 		"MainMenu_SaveRestore_LoadFailed_SteamCloud"				"The Steam Cloud API could not be reached at this time."
-		
+
 		// Save Failure Reasons
 		// no space available on current storage partition
 		"MainMenu_SaveRestore_SaveFailed_NoSpace"					"There is not enough space on the storage device where P2:CE is installed to."
@@ -1024,10 +872,10 @@
 		"MainMenu_SaveRestore_SaveFailed_NotPartOfCampaign"			"The map you are playing on is not part of the current campaign.\n\nSaving is temporarily disabled."
 		// maxplayers >= 2 and gamemode is either coop or mp; we're either on p2p/listen or dedicated
 		"MainMenu_SaveRestore_SaveFailed_IsInMultiplayer"			"Save games are not supported under multiplayer/co-op mode."
-		
+
 		// universal; only used if we don't know what the fuck is going on in saverestore
 		"MainMenu_SaveRestore_UnknownFailure"						"Unknown saverestore failure reason. Please check the developer console for details."
-		
+
 		// Main Menu - Campaigns
 		"MainMenu_Campaigns_Title"									"Campaigns"
 		"MainMenu_Campaigns_Tagline"								"Play specially-crafted experiences"
@@ -1037,24 +885,19 @@
 		"MainMenu_Campaigns_MapList_Campaigns_Tagline"				"Select a campaign to play"
 		"MainMenu_Campaigns_MapList_p2ce_Tagline"					"Select a map from the P2:CE Workshop"
 		"MainMenu_Campaigns_MapList_portal2_Tagline"				"Select a map from the Portal 2 Workshop"
-		"MainMenu_Campaigns_MapList_Uncategorized_Tagline"			"Select a locally installed map"
 		"MainMenu_Campaigns_MapList_Tagline_NewlySubbed"			"{i:num_newly_installed_maps} newly subscribed"
 		"MainMenu_Campaigns_MapList_Tagline_TotalMaps"				"{i:num_total_installed_maps} total maps"
 		"MainMenu_Campaigns_OpenWS"									"Open the Steam Workshop"
 		"MainMenu_Maps_None"										"You have no maps installed! You can find some on the Steam Workshop."
 		"MainMenu_Campaigns_None"									"You have no campaigns installed! You can find some on the Steam Workshop."
 		"MainMenu_Campaigns_OpenWS_Tagline"							"Download and manage content"
-		
+
 		// mode selection
-		"MainMenu_Campaigns_ModeSel_Solo_Title"						"Solo Maps"
-		"MainMenu_Campaigns_ModeSel_Solo_Tagline"					"Bite-sized experiences"
-		"MainMenu_Campaigns_ModeSel_ServerBrowser_Title"			"Custom Games"
-		"MainMenu_Campaigns_ModeSel_ServerBrowser_Tagline"			"Find or create a perfect game, unrestricted"
 		"MainMenu_Campaigns_CType_SP"								"Singleplayer"
-		"MainMenu_Campaigns_CType_MP"								"Multiplayer/Co-op"
+		"MainMenu_Campaigns_CType_MP"								"Multiplayer / Cooperative"
 		"MainMenu_Campaigns_MapType_p2ce"							"P2:CE Maps"
 		"MainMenu_Campaigns_MapType_portal2"						"Portal 2 Maps"
-		
+
 		// Search
 		"MainMenu_Campaigns_Search_FillerText"						"Search for campaigns..."
 		"MainMenu_Campaigns_Search_SortBy_NewSubs"					"Recently added"
@@ -1064,11 +907,10 @@
 		"MainMenu_Campaigns_Search_SortBy_Completion"				"Overall completion"
 		"MainMenu_Campaigns_Search_SortBy_CampaignSrc"				"Campaign source"
 
-		"MainMenu_Content_New"										"New"
 		"MainMenu_Content_Unplayed"									"Unplayed"
 		"MainMenu_Content_InProgress"								"In Progress"
 		"MainMenu_Content_Completed"								"Completed"
-		
+
 		// this is used if a campaign requires an appid they don't have mounted
 		"MainMenu_Campaigns_MissingMount_Title"						"Unable to Load Campaign"
 		"MainMenu_Campaigns_MissingMount_Description"				"This campaign cannot be loaded because the following games are not mounted:
@@ -1089,28 +931,26 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Error_InvalidKV3_Desc"					"This campaign cannot start because the data specified in its script file is invalid.\n\nPlease report this issue and the corresponding error log to the addon's author."
 		"MainMenu_Campaigns_Error_InvalidChapterMapData_Title"		"Cannot Start Chapter"
 		"MainMenu_Campaigns_Error_InvalidChapterMapData_Desc"		"The campaign cannot start because there are no maps defined in the chapter you have selected.\n\nPlease report this issue and the corresponding error log to the addon's author."
-		
+
 		// dependency game names
-		"MainMenu_Campaigns_Mounts_AppId_630"						"Alien Swarm (630)"
-		"MainMenu_Campaigns_Mounts_AppId_300"						"Day of Defeat: Source (300)"
 		"MainMenu_Campaigns_Mounts_AppId_220"						"Half-Life 2 (220)"
-																			 
-																			 
+		"MainMenu_Campaigns_Mounts_AppId_240"						"Counter-Strike: Source (240)"
 		"MainMenu_Campaigns_Mounts_AppId_280"						"Half-Life: Source (280)"
+		"MainMenu_Campaigns_Mounts_AppId_300"						"Day of Defeat: Source (300)"
 		"MainMenu_Campaigns_Mounts_AppId_400"						"Portal (400)"
-		"MainMenu_Campaigns_Mounts_AppId_660"						"Portal 2 - Sixense MotionPack (660)"
-		"MainMenu_Campaigns_Mounts_AppId_247120"					"Portal 2 - Sixense Perceptual Pack (247120)"
 		"MainMenu_Campaigns_Mounts_AppId_440"						"Team Fortress 2 (440)"
 		"MainMenu_Campaigns_Mounts_AppId_500"						"Left 4 Dead (500)"
 		"MainMenu_Campaigns_Mounts_AppId_550"						"Left 4 Dead 2 (550)"
-		"MainMenu_Campaigns_Mounts_AppId_240"						"Counter-Strike: Source (240)"
+		"MainMenu_Campaigns_Mounts_AppId_630"						"Alien Swarm (630)"
+		"MainMenu_Campaigns_Mounts_AppId_660"						"Portal 2 - Sixense MotionPack (660)"
+		"MainMenu_Campaigns_Mounts_AppId_247120"					"Portal 2 - Sixense Perceptual Pack (247120)"
 		"MainMenu_Campaigns_Mounts_AppId_4465480"					"Counter-Strike: Global Offensive (4465480)"
 
 		// temp for better solution
 		"MainMenu_Campaigns_MountRequired_Header"					"Game Mount Missing"
 		"MainMenu_Campaigns_MountRequired_220"						"This campaign requires Half-Life 2 (20th Anniversary Edition) to be owned and mounted. Consult the wiki for instructions on changing game mounts."
 		"MainMenu_Campaigns_MountRequired_400"						"This campaign requires Portal to be owned and mounted. Consult the wiki for instructions on changing game mounts."
-		
+
 		// campaign details card
 		"MainMenu_Campaigns_DetailCard_CompletionPercentage"		"{i:campaign_completion}% completed"
 		"MainMenu_Campaigns_DetailCard_CompletationStat1"			"Current chapter: {i:current_chapter} of {i:max_chapters}"
@@ -1119,7 +959,7 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_DetailCard_CompletationStat3"			"Achievements earned: {i:num_achievements_earned}/{i:total_campaign_achievements}"
 		"MainMenu_Campaigns_DetailCard_LastPlayDate"				"Last played on: {t:l:last_played_date}"
 		"MainMenu_Campaigns_DetailCard_InstallDate"					"Installed on: {t:l:installed_date}"
-		
+
 		// campaign main menu
 		"MainMenu_Campaigns_MM_LoadAuto"							"Continue"
 		"MainMenu_Campaigns_MM_Resume"								"Resume"
@@ -1145,12 +985,12 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_MM_Start_Title"							"Chapter Selection"
 		"MainMenu_Campaigns_MM_Start_Tagline"						"Configure and start a new game"
 		"MainMenu_Campaigns_MM_DEV_NoCampaignPH"					"No active campaign detected"
-		
+
 		// campaign setup
 		"MainMenu_Campaigns_Setup_ExitNote"							"To start this campaign, complete any remaining changes in this page and then return to the main setup area."
 		"MainMenu_Campaigns_Setup_Summary_NoChanges"				"No changes detected."
 		"MainMenu_Campaigns_Setup_ResetToDefaults"					"Reset to Defaults"
-		
+
 		// campaign setup - main panel
 		"MainMenu_Campaigns_Setup_Title"							"Campaign/Map Settings"
 		"MainMenu_Campaigns_Setup_Tagline"							"Customize and confirm game settings"
@@ -1165,11 +1005,11 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Setup_PanelButton_BaseGameplay_Desc"	"Simple configurable constraints"
 		"MainMenu_Campaigns_Setup_PanelButton_Modifiers_Title"		"Gameplay Modifiers"
 		"MainMenu_Campaigns_Setup_PanelButton_Modifiers_Desc"		"Select custom features and scripts that change how the game behaves"
-		
+
 		// proto
 		"MainMenu_Campaigns_Setup_Proto_Title"						"This system is experimental and may be changed or removed in the future."
 		"MainMenu_Campaigns_Setup_Proto_Desc"						"Convars changed through this system will not persist in saves. They will also not be reverted upon exiting a campaign."
-		
+
 		// campaign setup - server settings
 		// GameplayBase
 		"MainMenu_Campaigns_Setup_Var_cl_mirror_world"				"Flip World"
@@ -1211,48 +1051,48 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Campaigns_Setup_Var_sv_cheats_Description"		"Enables access to special commands flagged as \"cheats\", such as <pre>noclip</pre>, <pre>impulse</pre>, and <pre>ent_fire</pre>.\n\nDefault: Off"
 		"MainMenu_Campaigns_Setup_Var_p2p"							"Use Steam Networking"
 		"MainMenu_Campaigns_Setup_Var_p2p_Description"				"Uses the <a href=\"https://partner.steamgames.com/doc/features/multiplayer/steamdatagramrelay\">Steam Datagram Relay</a> to enable hosting peer-to-peer (P2P) and dedicated servers over the Internet with minimal technical setup. Game traffic is sent to Valve relay servers to anonymize player information and protect the server host."
-		
+
 		// CampaignSetupDiscardDialog
 		"MainMenu_Campaigns_Setup_Discard_Title"					"Discard Changes"
 		"MainMenu_Campaigns_Setup_Discard_Description"				"Are you sure you want to leave campaign setup?\n\nAll settings made during setup will be lost."
-		
+
 		// NewGameWarningDialog
 		"Action_NewGame_Title"										"Start Game"
 		"Action_NewGame_Description"								"Are you sure you want to start a new game?\n\nPrevious progress will be lost."
 		"Action_NewGame_CampaignSetup_Description"					"Are you sure you want to start a new game with these settings?\n\nNote that previous progress will be lost and that any gameplay modifiers cannot be reverted once a new game has started."
 
 		// campaign list
-		
+
 		// p2ce-campaign
 		"MainMenu_Campaigns_P2CE"					"Portal 2: Community Edition"
 		"MainMenu_Campaigns_P2CE_Author"			"P2:CE Team"
 		"MainMenu_Campaigns_P2CE_Description"		"[DEV - REPLACE ME] Temporary P2:CE Campaign Description"
-		
+
 		// for valve campaigns
 		"MainMenu_Campaigns_Valve_Author"			"Valve Software"
-		
+
 		// portal2
 		"MainMenu_Campaigns_portal2"				"Portal 2"
 		"MainMenu_Campaigns_portal2_Description"	"Portal 2 introduces a cast of dynamic new characters, a host of fresh puzzle elements, and a much larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science Labs and be reunited with GLaDOS, the occasionally murderous computer companion who guided them through the original game."
 		"MainMenu_Campaigns_portal2_MP"				"Portal 2 Co-op"
 		"MainMenu_Campaigns_portal2_MP_Description"	"Co-op features its own entirely separate campaign with a unique story, test chambers, and two new player characters. This new mode forces players to reconsider everything they thought they knew about portals. Success will require them to not just act cooperatively, but to think cooperatively."
-		
+
 		// portal
 		"MainMenu_Campaigns_portal"					"Portal"
 		"MainMenu_Campaigns_portal_Description"		"Set in the mysterious Aperture Science Laboratories, players must solve physical puzzles and challenges by opening portals to maneuvering objects, and themselves, through space."
-		
+
 		// hl2
 		"MainMenu_Campaigns_hl2"					"Half-Life 2"
 		"MainMenu_Campaigns_hl2_Description"		"The Seven Hour War is lost. Earth has surrendered. The Black Mesa incident is a distant memory. The player again picks up the crowbar of research scientist Dr. Gordon Freeman, who finds himself on an alien-infested Earth being picked to the bone, its resources depleted, its populace dwindling. Freeman is thrust into the unenviable role of rescuing the world from the wrong he unleashed back at Black Mesa. And a lot of people he cares about are counting on him."
-		
+
 		// episodic
 		"MainMenu_Campaigns_episodic"				"Half-Life 2: Episode One"
 		"MainMenu_Campaigns_episodic_Description"	"Picking up after the events of Half-Life 2, Dr. Gordon Freeman and Alyx Vance attempt to slow an unavoidable chain reaction that will destroy City 17. Facing heavy resistance, they must evacuate the city and save its residents before all is lost."
-		
+
 		// ep2
 		"MainMenu_Campaigns_ep2"					"Half-Life 2: Episode Two"
 		"MainMenu_Campaigns_ep2_Description"		"With humanity scattered, alien forces continue their fight for control over Earth. Physicist Gordon Freeman and Alyx Vance must work to intercept a Combine transmission and reunite with rebel forces before humanity is destroyed."
-		
+
 		// Main Menu - Addons
 		"MainMenu_Addons_Refresh"					"Refresh Addon List"
 		"MainMenu_Addons_Apply"						"Apply"
@@ -1266,24 +1106,16 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_SteamWorkshop_Tooltip"		"Open the Steam Workshop in the overlay"
 		"MainMenu_Addons_Advanced_Tooltip"			"Toggle visibility of all addon types for advanced users"
 		"MainMenu_Addons_InGameMounted"				"The addons listed below are currently mounted and cannot be changed while in-game."
-		
+
 		"MainMenu_Addons_ToggleAddon"				"Toggle addon's enablement state"
-		
+
 		// Main Menu - Mounts
 		"MainMenu_Mounts_MountGame"					"Mount"
 		"MainMenu_Mounts_UnmountGame"				"Unmount"
-		"MainMenu_Mounts_TooMany"					"Too Many Mounted Games"
-		"MainMenu_Mounts_TooMany_Desc"				"There are currently {i:num_mounted_games} games mounted on this P2:CE install. Only {i:max_mounts} games from your mounts file will be displayed due to technical limitations."
-		"MainMenu_Mounts_Game_MaxTagline"			"Maximum number of visible mounted games reached."
 		"MainMenu_Mounts_WIP_Title"					"Mount configuration is a work-in-progress and is currently unavailable."
 		"MainMenu_Mounts_WIP_Tagline"				"Click here to learn more about configuring mounts in Portal 2: Community Edition."
 		"MainMenu_Mounts_RequiredDepends"			"The following addons are required by the content currently being played."
 
-		// for non-campaign addons with maps
-		"MainMenu_Addons_MapDropdown_Select"		"Select a map..."
-		"MainMenu_Addons_LaunchMap_Multi"			"Launch Selected Map"
-		"MainMenu_Addons_LaunchMap_Single"			"Play Map"
-		
 		// Filtering
 		// Filtering - Time
 		"MainMenu_Addons_SearchBox_FillerText"				"Search for addons..."
@@ -1295,12 +1127,12 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_Filtering_Sort_Alpha"				"Alphabetical"
 		"MainMenu_Addons_Filtering_Sort_TimePublished"		"Upload/Published Date"
 		"MainMenu_Addons_Filtering_Sort_TimeLastUpdate"		"Last Updated Date"
-		
+
 		// Filtering - Source Type
 		"MainMenu_Addons_Filtering_Sort_InstallSrc"			"Addon Source Type"
 		"MainMenu_Addons_Filtering_Sort_InstallSrc_Local"	"Local Install"
 		"MainMenu_Addons_Filtering_Sort_InstallSrc_UGC"		"Steam Workshop"
-		
+
 		// Filtering - Campaigns
 		// These are sourced from the internal tags in workshop.kv3
 		"MainMenu_Addons_Filtering_Sort_CampaignTags"			"Campaign/Map Tags"
@@ -1310,7 +1142,7 @@ Please install and mount the above games first to access this campaign."
 		"MainMenu_Addons_Filtering_Sort_CampaignTags_LSHORT"	"Short (1-3 maps)"
 		"MainMenu_Addons_Filtering_Sort_CampaignTags_LMED"		"Medium (4-7 maps)"
 		"MainMenu_Addons_Filtering_Sort_CampaignTags_LLONG"		"Long (8+ maps)"
-		
+
 		// Filtering - Addon Tags
 		// These are sourced from the internal tags in workshop.kv3
 		"MainMenu_Addons_Filtering_Sort_AddonTags"				"Addon Tags"
@@ -1328,7 +1160,6 @@ Please install and mount the above games first to access this campaign."
 		"Common_ComingSoon"							"Coming Soon!"
 		"Common_Gamemode"							"Gamemode"
 		"Common_Game"								"Game"
-		"Common_GameUpper"							"GAME"
 		"Common_Save"								"Save"
 		"Common_Close"								"Close"
 		"Common_Cancel"								"Cancel"
@@ -1345,21 +1176,20 @@ Please install and mount the above games first to access this campaign."
 		"Common_SearchEllipsis"						"Search..."
 		"Common_Multiplayer"						"Multiplayer"
 		"Common_Wiki"								"Open Wiki in Overlay"
-		
-		"Action_Yes"								"Yes"
-		"Action_No"									"No"
-		"Action_Cancel"								"Cancel"
-		"Action_Confirm"							"Confirm"
-		"Action_Back"								"Back"
-		"Action_Return"								"Return"
-		"Action_ReturnToMenu"						"Exit to Menu"
-		"Action_Apply"								"Apply"
-		"Action_Discard"							"Discard"
-		
+		"Common_Yes"								"Yes"
+		"Common_No"									"No"
+		"Common_Confirm"							"Confirm"
+		"Common_Back"								"Back"
+		"Common_Return"								"Return"
+		"Common_ReturnToMenu"						"Exit to Menu"
+		"Common_Apply"								"Apply"
+		"Common_Discard"							"Discard"
+		"Common_None"								"None"
+
 		// Feature Unavailable
 		"MainMenu_Feature_Unavailable_Title"		"Feature Not Available"
 		"MainMenu_Feature_Unavailable_Description"	"This feature is a work-in-progress and cannot be accessed at this time."
-		
+
 		// QuitPrompt
 		"Action_Quit"								"Quit"
 		"Action_QuitToDesktop"						"Quit to Desktop"
@@ -1368,7 +1198,7 @@ Please install and mount the above games first to access this campaign."
 		// quit_prompt console command
 		"MainMenu_ExitGameConfirmation_Title"		"Quit Game"
 		"MainMenu_ExitGameConfirmation_Message"		"Are you sure you want to quit the game?\n\nUnsaved progress may be lost."
-		
+
 		// Loading Screen
 		"LoadingProgress_Connecting" 				"Connecting to server..."
 		"LoadingProgress_SpawningServer"			"Starting local game server..."
@@ -1382,19 +1212,19 @@ Please install and mount the above games first to access this campaign."
 		"LoadingProgress_SignonDataLocal"			"Finalizing initial world state..."
 		"LoadingProgress_SignonData"				"Retrieving game data..."
 		"LoadingProgress_SendClientInfo" 			"Spawning client..."
-		
+
 		// Temp Notices
 		// Unfinished Software Reminder
 		"MainMenu_PrereleaseNotice_Title"			"This is unstable, pre-release software"
 		"MainMenu_PrereleaseNotice_Description"		"Portal 2: Community Edition is a modding framework. As it currently stands, it is also unfinished software. Some key features in this preview release may be absent or are being actively developed, and significant code refactors are being worked on across the underlying game engine that completely rewrite and/or remove outdated legacy code to pave way for larger quality-of-life improvements and new features. As a result, aspects of P2:CE and its SDK tools are potentially subject to bugs that may significantly impact your modding workflow.
 
 The P2:CE campaign is also not finished, and is therefore not included in this preview release.
-		
+
 We encourage you to file bug reports and feature requests on P2:CE's issue trackers at:
 
 	• https://github.com/StrataSource/Portal-2-Community-Edition
 	• https://github.com/StrataSource/Engine
-		
+
 By proceeding, you acknowledge the risks involved in using this preview release. If you choose to decline these terms, P2:CE will exit.
 
 This message will not appear again after you acknowledge the risks, however, you can view this again by clicking on the Open Beta version banner in the bottom right corner of the menu."
@@ -1404,7 +1234,7 @@ This message will not appear again after you acknowledge the risks, however, you
 
 		"MainMenu_PrereleaseNotice_Acknowledge"		"I Understand"
 		"MainMenu_PrereleaseNotice_Decline"			"Decline"
-		
+
 		// Playtest DOSA
 		"MainMenu_PlaytestDOSA_Title"				"Welcome to the Portal 2: Community Edition playtest!"
 		"MainMenu_PlaytestDOSA_Description"			"As a part of the playtest, the game will record a demo of your gameplay and some basic performance data. This data will be uploaded for our developers to review after the fact, allowing us to improve gameplay.\n\nNOTE: Consent can be given/revoked later in settings."
@@ -1429,9 +1259,9 @@ This message will not appear again after you acknowledge the risks, however, you
 		"UI_Description"							"Description"
 		"UI_Source_Steam"							"This item is from the Steam Workshop"
 		"UI_Source_Local"							"This item is from your local addons"
-		
+
 		"P2WS_FailedSignalIPC"									"Failed to start request."
-		
+
 		// These are responses from Steam, EResult. Not all of these are used by us.
 		// Lifted from Steamworks Documentation.
 		"Steam_ResultOK"										"Success."
@@ -1539,23 +1369,23 @@ This message will not appear again after you acknowledge the risks, however, you
 		"Steam_GSLTExpired"										"This Game Server Login Token (GSLT) has expired."
 		"Steam_InsufficientFunds"								"User doesn't have enough wallet funds to complete the action."
 		"Steam_TooManyPending"									"There are too many of this thing pending already."
-		
+
 		// Networking Stuff!!!!!
 		// Disconnect Dialog Main
-		"MainMenu_DisconnectDialog_Title"					"Disconnected from server"
+		"MainMenu_DisconnectDialog_Title"					"Disconnected From Server"
 		"MainMenu_DisconnectDialog_Message"					"You were disconnected for the following reason:\n\n{s:disconnect_reason}"
-		
+
 		// generic disconnect reasons
 		"MainMenu_DisconnectDialog_Reason_TimeOut"			"The server has likely crashed or has lost network connectivity. Wait a few moments, and then try to connect again."
 		"MainMenu_DisconnectDialog_Reason_TimeOutConnect"	"Could not establish a connection to the server. The specified server IP address/host name is either invalid, or there is a problem with your network connection."
 		"MainMenu_DisconnectDialog_Reason_BuildTooOld"		"Portal 2: Community Edition may require an update to connect to this server. Please exit the game and check for any pending updates on the Steam client."
-		"MainMenu_DisconnectDialog_Reason_BuildTooNew"		"Your version of P2:CE is newer than the server's version. The server owner may need to update to the newest game version."
+		"MainMenu_DisconnectDialog_Reason_BuildTooNew"		"Your version of Portal 2: Community Edition is newer than the server's version. The server owner may need to update to the newest game version."
 		"MainMenu_DisconnectDialog_Reason_DSExit"			"Server shutdown initiated by owner/host."
 		"MainMenu_DisconnectDialog_Reason_Kicked"			"You have been kicked from this server."
 		"MainMenu_DisconnectDialog_Reason_KickedVote"		"You have been vote-kicked from this server."
 		"MainMenu_DisconnectDialog_Reason_Banned"			"You have been banned from this server."
 		"MainMenu_DisconnectDialog_Reason_BannedVote"		"You have been vote-banned from this server."
-		
+
 		// Disconnect Notices - ENetworkDisconnectionReason (per matchmaking dll and cross-ref with csgo_english + dota_english)
 		// These need to be shared on here and in panorama_english for DS host reasons
 		"GameUI_Disconnect_User"							"Player disconnected from server."						// NETWORK_DISCONNECT_DISCONNECT_BY_USER

@@ -91,7 +91,7 @@ class CampaignMenu {
 					() => {
 						GameInterfaceAPI.ConsoleCommand('quit');
 					},
-					$.Localize('#Action_Return'),
+					$.Localize('#Common_Return'),
 					() => {},
 					'blur'
 				);

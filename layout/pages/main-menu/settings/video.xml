@@ -16,14 +16,14 @@
 					id="ApplyVideoSettingsButton"
 					onactivate='SettingsShared.videoSettingsApplyChanges();'
 				>
-					<Label class="button__text" text="#Settings_General_Apply" />
+					<Label class="button__text" text="#Common_Apply" />
 				</Button>
 				<Button
 					class="button button--red ml-2"
 					id="DiscardVideoSettingsButton"
 					onactivate='SettingsShared.videoSettingsDiscardChanges();'
 				>
-					<Label class="button__text" text="#Action_Discard" />
+					<Label class="button__text" text="#Common_Discard" />
 				</Button>
 				<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
 					<Button class="button ml-2" onactivate="SettingsShared.resetVideoSettings();">
@@ -278,6 +278,19 @@
 				>
 					<Label text="#Settings_General_Disabled" value="0" id="motionblur0" />
 					<Label text="#Settings_General_Enabled" value="1" id="motionblur1" />
+				</SettingsEnumDropDown>
+
+				<SettingsEnumDropDown
+					text="#Settings_Render_VolumetricsQuality"
+					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"
+					id="VolumetricsQualityLevel"
+					infomessage="#Settings_Render_VolumetricsQuality_Info"
+				>
+					<Label text="#Settings_General_VeryLow" value="0" id="volumetricsqualitylevel0" />
+					<Label text="#Settings_General_Low" value="1" id="volumetricsqualitylevel1" />
+					<Label text="#Settings_General_Medium" value="2" id="volumetricsqualitylevel2" />
+					<Label text="#Settings_General_High" value="3" id="volumetricsqualitylevel3" />
+					<Label text="#Settings_General_Autodetect" value="9999999" id="volumetricqualitylevel4" />
 				</SettingsEnumDropDown>
 			</Panel>
 
