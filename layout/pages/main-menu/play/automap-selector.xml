@@ -5,32 +5,11 @@
 	<scripts>
 		<include src="file://{scripts}/common/dev.ts" />
 		<include src="file://{scripts}/common/searcher.ts" />
+		<include src="file://{scripts}/common/fancy-list.ts" />
 		<include src="file://{scripts}/pages/main-menu/play/automap-selector.ts" />
 	</scripts>
 
 	<snippets>
-		<snippet name="WorkshopEntrySnippet">
-			<Button group="WorkshopGroupRadio" class="workshop__entry workshop__entry__standard" tabindex="auto" selectionpos="auto">
-				<Panel class="workshop__entry__top">
-					<Image id="Cover" class="workshop__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
-					<Panel id="NewIndicator" class="workshop__entry__new-indicator hide">
-						<Label class="workshop__entry__new-indicator__text" text="#MainMenu_Content_Unplayed" />
-					</Panel>
-					<TooltipPanel id="Indicator" class="workshop__entry__indicator fancy-red hide" tooltip="#DependencyWarning_Generic">
-						<Image
-							scaling="stretch-to-fit-preserve-aspect"
-							src="file://{images}/alert-octagon.svg"
-							texturewidth="64"
-							textureheight="64"
-						/>
-					</TooltipPanel>
-					<SourceIndicator class="hide" id="SourceIndicator" />
-				</Panel>
-				<Panel class="workshop__entry__details">
-					<Label class="workshop__entry__details__desc" text="{s:name}" />
-				</Panel>
-			</Button>
-		</snippet>
 		<snippet name="WorkshopNoneSnippet">
 			<Panel class="workshop__none">
 				<Panel class="horizontal-align-center vertical-align-center">
@@ -50,26 +29,87 @@
 				</Panel>
 			</Panel>
 		</snippet>
+		<snippet name="Loader">
+			<Panel class="addon-deps__entry__loader">
+				<AnimatedImageStrip
+					animating="true"
+					defaultframe="0"
+					frametime="125ms"
+					src="file://{images}/menu/p2ce/spinner_strip.tga"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
+				<Image
+					class="addon-deps__entry__loader__logo"
+					src="file://{images}/icons/steam.svg"
+					textureheight="128"
+					texturewidth="128"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+				/>
+			</Panel>
+		</snippet>
 	</snippets>
 
 	<Panel class="flow-down" onload="AutoMapSelector.init()">
-		<Panel class="workshop__top-bar">
-			<Button
-				class="button mr-2"
-				onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/workshop/browse/?appid=440000&amp;browsesort=trend&amp;section=readytouseitems&amp;p=1&amp;num_per_page=30&amp;days=7&amp;requiredtags%5B%5D=Map')"
-				tabindex="auto"
-				selectionpos="auto"
-			>
-				<Image
-					class="button__icon button__icon--left"
-					texturewidth="64"
-					textureheight="64"
-					src="file://{images}/icons/steam.svg"
-				/>
-				<Label class="button__text button__text--right" text="#MainMenu_Campaigns_OpenWS" />
-			</Button>
-			<TextEntry id="SearchBar" class="textentry workshop__search full-height mr-3" placeholder="#Common_SearchEllipsis" />
+		<Panel class="flow-right">
+			<Panel class="flow-down">
+				<Panel class="workshop__top-bar">
+					<Button
+						class="button mr-1"
+						onactivate="SteamOverlayAPI.OpenURL('https://steamcommunity.com/workshop/browse/?appid=440000&amp;browsesort=trend&amp;section=readytouseitems&amp;p=1&amp;num_per_page=30&amp;days=7&amp;requiredtags%5B%5D=Map')"
+						tabindex="auto"
+						selectionpos="auto"
+					>
+						<Image
+							class="button__icon"
+							texturewidth="64"
+							textureheight="64"
+							src="file://{images}/icons/steam.svg"
+						/>
+					</Button>
+					<TextEntry id="SearchBar" class="textentry workshop__search full-height mr-3" placeholder="#Common_SearchEllipsis" />
+				</Panel>
+				<Panel id="EntryInsert" class="fancy-list__entries fancy-list__entries__square mt-2" />
+			</Panel>
+			<Panel id="RightPane" class="horizontal-align-center vertical-align-bottom flow-down ml-2 hide">
+				<Panel class="workshop__pane">
+					<Panel class="flow-down full-width px-3 mb-2">
+						<Label id="SelectedTitle" class="workshop__pane__title" text="[PH] Title" />
+						<Label id="SelectedAuthor" class="workshop__pane__author" text="[PH] Author" />
+					</Panel>
+					<Panel id="DependenciesWrapper" class="px-3 flow-down mb-2">
+						<Label class="workshop__pane__divider mb-1" text="#UI_Dependencies" />
+						<Panel id="Dependencies" class="flow-right overflow-hscroll full-width">
+						</Panel>
+					</Panel>
+					<Panel class="flow-right px-3 flow-down">
+						<Label class="workshop__pane__divider" text="#UI_Description" />
+					</Panel>
+					<Panel class="full-width fill-height mb-2">
+						<Label id="SelectedDescription" class="workshop__pane__desc px-3" text="[PH] Description" html="true" />
+					</Panel>
+					<Panel class="full-width flow-right px-3">
+						<Button id="SelectedSteam" class="button mr-1">
+							<Image
+								class="button__icon"
+								texturewidth="64"
+								textureheight="64"
+								src="file://{images}/icons/steam.svg"
+							/>
+						</Button>
+						<Button id="PlayBtn" class="button--nodisable button--green fill-width">
+							<Image
+								class="button__icon"
+								scaling="stretch-to-fit-preserve-aspect"
+								src="file://{images}/play.svg"
+								texturewidth="64"
+								textureheight="64"
+							/>
+							<Label id="SelectedActionLabel" class="button__text button__text--right" text="#MainMenu_Navigation_Play" />
+						</Button>
+					</Panel>
+				</Panel>
+			</Panel>
 		</Panel>
-		<Panel id="EntryInsert" class="workshop__entries mt-2" />
 	</Panel>
 </root>

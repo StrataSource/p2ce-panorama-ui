@@ -11,13 +11,9 @@
 	&__entries {
 		overflow: squish scroll;
 		height: fill-parent-flow(1);
-		flow-children: right-wrap;
+		flow-children: down;
 		padding-right: 5px;
 		min-width: 1024px;
-
-		&__portal2 {
-			flow-children: down;
-		}
 
 		&__throbber {
 			width: 100%;
@@ -345,6 +341,11 @@
 		}
 		&__author {
 			vertical-align: center;
+		}
+		&__divider {
+			color: $base-200;
+			font-weight: bold;
+			margin-right: 10px;
 		}
 		&__desc {
 			width: 100%;
