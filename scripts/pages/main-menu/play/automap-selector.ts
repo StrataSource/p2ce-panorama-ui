@@ -16,7 +16,7 @@ class AutoMapEntry {
 			AutoMapSelector.insert,
 			{
 				image: meta.thumb,
-				title: pair.campaign.title,
+				title: { text: pair.campaign.title },
 				genericIndicator: { text: $.Localize('#MainMenu_Content_Unplayed'), show: isNew },
 				badIndicator: { text: $.Localize('#DependencyWarning_Header'), show: this.hasMissing },
 				buttons: [

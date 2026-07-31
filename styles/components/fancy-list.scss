@@ -85,7 +85,7 @@
 			&__desc,
 			&__small,
 			&__smaller {
-				text-shadow: 1px 1px 6px 3.0 $base-950;
+				//text-shadow: 1px 1px 6px 3.0 $base-950;
 				max-width: 768px;
 			}
 		}
@@ -173,7 +173,7 @@
 		&__controls {
 			flow-children: right;
 			vertical-align: center;
-			margin-right: 15px;
+			margin-right: 20px;
 
 			&__working.button--p2-blue,
 			&__working.button--green,

@@ -22,9 +22,9 @@ type FancyListEntryBtnProps = {
 type FancyListEntry = {
 	image?: string;
 	bgImage?: string;
-	title: string;
-	subtitle?: string;
-	mini?: string;
+	title: { text: string, hasVars?: boolean };
+	subtitle?: { text: string, hasVars?: boolean };
+	mini?: { text: string, hasVars?: boolean };
 	// may only show one of each
 	genericIndicator?: { text: string, show: boolean };
 	badIndicator?: { text: string, show: boolean };
@@ -44,27 +44,42 @@ function FancyList_CreateEntries(target: Panel, entries: Array<FancyListEntry>) 
 }
 
 function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
-	const p = $.CreatePanel('RadioButton', target, entry.title);
+	const p = $.CreatePanel('RadioButton', target, entry.title.text);
 	p.LoadLayout('file://{resources}/layout/components/fancy-list-entry.xml', false, false);
-	p.SetDialogVariable('title', entry.title);
-	if (entry.onactivate)
-		p.SetPanelEvent('onactivate', entry.onactivate);
-	if (entry.subtitle)
+	if (entry.title.hasVars) {
+		const title = p.FindChildTraverse<Label>('Title')!;
+		title.SetTextWithDialogVariables(entry.title.text);
+	} else {
+		p.SetDialogVariable('title', entry.title.text);
+	}
+	if (entry.subtitle !== undefined)
 	{
-		p.SetDialogVariable('subtitle', entry.subtitle);
+		if (entry.subtitle.hasVars) {
+			const subtitle = p.FindChildTraverse<Label>('Subtitle')!;
+			subtitle.SetTextWithDialogVariables(entry.subtitle.text);
+		} else {
+			p.SetDialogVariable('subtitle', entry.subtitle.text);
+		}
 	}
 	else
 	{
 		p.FindChildTraverse('Subtitle')!.AddClass('hide');
 	}
-	if (entry.mini)
+	if (entry.mini !== undefined)
 	{
-		p.SetDialogVariable('mini', entry.mini);
+		if (entry.mini.hasVars) {
+			const mini = p.FindChildTraverse<Label>('Mini')!;
+			mini.SetTextWithDialogVariables(entry.mini.text);
+		} else {
+			p.SetDialogVariable('mini', entry.mini.text);
+		}
 	}
 	else
 	{
 		p.FindChildTraverse('Mini')!.AddClass('hide');
 	}
+	if (entry.onactivate)
+		p.SetPanelEvent('onactivate', entry.onactivate);
 	{
 		const img = p.FindChildTraverse<Image>('Cover')!;
 		installImageFallbackHandler(img);
@@ -77,7 +92,7 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
 			img.SetImage(entry.bgImage);
 	}
 	if (!entry.buttons)
-		return;
+		return p;
 	if (entry.badIndicator) {
 		const indP = p.FindChildTraverse('BadIndicator')!;
 		indP.SetHasClass('hide', !entry.badIndicator.show);
@@ -110,6 +125,7 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
 		if (props.onactivate)
 			btn.SetPanelEvent('onactivate', props.onactivate);
 	}
+	return p;
 }
 
 function FancyList_ShowEntryThrobber(list: Panel, button: number, show: boolean) {
