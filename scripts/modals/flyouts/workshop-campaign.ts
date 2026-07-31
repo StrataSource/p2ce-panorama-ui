@@ -125,17 +125,7 @@ class WorkshopCampaignFlyout {
 	}
 
 	static play() {
-		if (this.hasMissing) {
-			$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
-			UiToolkitAPI.ShowCustomLayoutPopupParameters(
-				'dependencies',
-				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-				`addon=${this.addonId}&action=0&campaignId=${this.campaign}&chapterId=${this.chapter}&map=0`
-			);
-		} else {
-			CampaignAPI.StartCampaign(this.campaign, this.chapter, 0);
-			UiToolkitAPI.CloseAllVisiblePopups();
-		}
+		
 	}
 
 	static openInSteam() {
