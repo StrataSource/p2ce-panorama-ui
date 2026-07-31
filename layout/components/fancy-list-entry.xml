@@ -1,0 +1,46 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<Button group="FancyListRadio" class="fancy-list__entry" tabindex="auto" selectionpos="auto">
+		<Panel class="fancy-list__entry__top">
+			<Image id="Cover" class="fancy-list__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
+			<Panel id="NewIndicator" class="fancy-list__entry__indicator hide">
+				<Label class="fancy-list__entry__indicator__text" text="#MainMenu_Content_Unplayed" />
+			</Panel>
+			<Panel id="Throbber" class="fancy-list__entry__throbber hide">
+				<AnimatedImageStrip
+					animating="true"
+					defaultframe="0"
+					frametime="125ms"
+					src="file://{images}/menu/p2ce/spinner_strip.tga"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
+				<Image
+					src="file://{images}/icons/steam.svg"
+					textureheight="64"
+					texturewidth="64"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+				/>
+			</Panel>
+		</Panel>
+		<Panel class="full-width">
+			<Image
+				id="BtnBgImg"
+				class="fancy-list__entry__bg-img"
+				scaling="stretch-to-cover-preserve-aspect"
+			/>
+			<Panel class="flow-right">
+				<Panel class="fancy-list__entry__details">
+					<Label class="fancy-list__entry__details__desc" text="{s:title}" />
+					<Label class="fancy-list__entry__details__small" text="{s:subtitle}" />
+					<Label class="fancy-list__entry__details__smaller" text="{s:mini}" />
+				</Panel>
+				<Panel id="Controls" class="fancy-list__entry__controls">
+				</Panel>
+			</Panel>
+		</Panel>
+	</Button>
+</root>
