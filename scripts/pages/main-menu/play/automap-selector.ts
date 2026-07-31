@@ -1,45 +1,53 @@
+/* eslint-disable camelcase */
+
 'use strict';
 
 class AutoMapEntry {
-	button: Button;
 	hasMissing = false;
-	// shut up i dont care
-	// eslint-disable-next-line camelcase
 	addonId: AddonIndex_t;
-	indicatorOverlay: Panel;
+	index: number;
 
-	constructor(pair: CampaignPair, isNew: boolean) {
-		this.button = $.CreatePanel('Button', AutoMapSelector.insert, pair.bucket.id);
-		this.button.LoadLayoutSnippet('WorkshopEntrySnippet');
-		this.addonId = pair.bucket.addon_id;
-		this.indicatorOverlay = this.button.FindChildTraverse<Panel>('Indicator')!;
-		
-		this.button.SetDialogVariable('name', pair.campaign.title);
-
-		const img = this.button.FindChildTraverse<Image>('Cover')!;
-		installImageFallbackHandler(img);
+	constructor(pair: CampaignPair, index: number, isNew: boolean) {
+		this.index = index;
 		const meta = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
-		img.SetImage(meta.thumb);
+		this.addonId = pair.bucket.addon_id;
 
+		FancyList_CreateEntry(
+			AutoMapSelector.insert,
+			{
+				image: meta.thumb,
+				title: pair.campaign.title,
+				genericIndicator: { text: $.Localize('#MainMenu_Content_Unplayed'), show: isNew },
+				badIndicator: { text: $.Localize('#DependencyWarning_Header'), show: this.hasMissing },
+				buttons: [
+					{
+						id: 'PlayAction',
+						classes: ['button', 'button--green'],
+						icon: 'file://{images}/play.svg',
+						onactivate: () => {
+							AutoMapSelector.play(`${pair.bucket.id}/${pair.campaign.id}`);
+						}
+					}
+				],
+				onactivate: () => {
+					AutoMapSelector.setDetails(`${pair.bucket.id}/${pair.campaign.id}`);
+				}
+			}
+		);
 		this.hasMissing = false;
-
 		this.updateDependencies();
-		this.button.SetPanelEvent('onactivate', () => {
-			UiToolkitAPI.ShowCustomLayoutPopupParameters(
-				'flyout',
-				'file://{resources}/layout/modals/flyouts/workshop-campaign.xml',
-				`addon=${this.addonId}&campaign=${pair.bucket.id}/${pair.campaign.id}&chapter=${pair.campaign.chapters[0].id}`
-			);
-		});
-
-		const indicator = this.button.FindChildTraverse<Panel>('NewIndicator')!;
-		indicator.SetHasClass('hide', !isNew);
 	}
 
 	updateDependencies() {
 		const deps = WorkshopAPI.GetAddonDependenciesMissing(this.addonId);
 		this.hasMissing = deps !== null && deps.length > 0;
-		this.indicatorOverlay.SetHasClass('hide', !this.hasMissing);
+		FancyList_SetEntryProps(
+			AutoMapSelector.insert,
+			this.index,
+			{
+				badIndicator: { show: this.hasMissing }
+			}
+		);
 	}
 }
 
@@ -48,6 +56,18 @@ class AutoMapSelector {
 	static searchBar = $<TextEntry>('#SearchBar')!;
 	static campaignStrings: Array<AbstractSearchData> = [];
 	static entries: Array<AutoMapEntry> = [];
+
+	static selectedTitle = $<Label>('#SelectedTitle')!;
+	static selectedAuthor = $<Label>('#SelectedAuthor')!;
+	static selectedDesc = $<Label>('#SelectedDescription')!;
+	static selectedSteam = $<Button>('#SelectedSteam')!;
+	static selectedPlay = $<Button>('#PlayBtn')!;
+	static rightPane = $<Panel>('#RightPane')!;
+
+	static depsWrapper = $<Panel>('#DependenciesWrapper')!;
+	static deps = $<Panel>('#Dependencies')!;
+	static depsPanels: Map<PublishedFileId_t, { btn: Button; img: Image; loader: Panel }> = new Map();
+	static depsId = 0;
 
 	static init() {
 		this.cacheSearch();
@@ -61,6 +81,7 @@ class AutoMapSelector {
 		installSearchHandling<string, string>(
 			this.searchBar,
 			() => {
+				this.hideDetails();
 				this.deleteEntries();
 				this.populate();
 			},
@@ -69,6 +90,7 @@ class AutoMapSelector {
 				return this.campaignStrings;
 			},
 			(matches: string[]) => {
+				this.hideDetails();
 				this.deleteEntries();
 				for (const match of matches) {
 					this.createBtnFromString(match);
@@ -89,11 +111,17 @@ class AutoMapSelector {
 			}
 		});
 
+		$.RegisterForUnhandledEvent('MainMenuPagePreClose', (tab: string) => {
+			if (tab === 'SinglePlayer' || tab === 'StandalonePortal2MapViewer') {
+				$.DispatchEvent('MainMenuHideFeaturedOverlay');
+			}
+		});
+
 		this.populate();
 	}
 
 	static createBtn(pair: CampaignPair, isNew: boolean) {
-		this.entries.push(new AutoMapEntry(pair, isNew));
+		this.entries.push(new AutoMapEntry(pair, this.entries.length, isNew));
 	}
 
 	static createBtnFromString(campaign: string) {
@@ -159,5 +187,125 @@ class AutoMapSelector {
 		this.clearCache();
 		this.deleteEntries();
 		this.populate();
+	}
+
+	static hideDetails() {
+		this.rightPane.AddClass('hide');
+		this.rightPane.style.animation = 'Portal2MapsPaneOut 0.01s ease-out 0s 1 normal forwards';
+		$.DispatchEvent('MainMenuHideFeaturedOverlay');
+	}
+
+	static setDetails(id: string) {
+		this.clearDeps();
+
+		const c = CampaignAPI.FindCampaign(id)!;
+		const meta = WorkshopAPI.GetAddonMeta(c.bucket.addon_id);
+		this.selectedTitle.text = c.campaign.title;
+		this.selectedDesc.text = $.BBCodeToHTML(meta.description);
+		this.selectedPlay.ClearPanelEvent('onactivate');
+		this.selectedPlay.SetPanelEvent('onactivate', () => {
+			this.play(id);
+		});
+		this.selectedSteam.ClearPanelEvent('onactivate');
+		this.selectedSteam.SetPanelEvent('onactivate', () => {
+			SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${meta.workshopid}`);
+		});
+		if (meta.authors.length > 0) {
+			this.selectedAuthor.visible = true;
+			for (let i = 0; i < meta.authors.length; ++i) {
+				if (i !== 0) this.selectedAuthor.text += `, ${meta.authors[i]}`;
+				else this.selectedAuthor.text = meta.authors[i];
+			}
+		} else {
+			this.selectedAuthor.visible = false;
+		}
+
+		const haveDeps = WorkshopAPI.GetAddonDependencies(c.bucket.addon_id);
+		const missingDeps = WorkshopAPI.GetAddonDependenciesMissing(c.bucket.addon_id);
+		const hasDeps = (missingDeps !== null && missingDeps.length > 0) || (haveDeps !== null && haveDeps.length > 0);
+		// Generate a random number that identifies this UGC details request
+		// If we switch selected maps BEFORE the request finishes, we will not
+		// proceed with that information, as it no longer applies!
+		const requestId = Math.floor(Math.random() * 9999);
+		this.depsId = requestId;
+		if (missingDeps && missingDeps.length > 0) {
+			for (const dep of missingDeps) {
+				this.addDep(`${dep}`, dep, true);
+			}
+			WorkshopAPI.CreateQueryUGCDetailsRequest((success: boolean, data: Array<SteamUGCDetails_t> | null) => {
+				if (!success || data === null) return;
+				if (requestId !== this.depsId) {
+					$.Warning('Dependency information is outdated.');
+					return;
+				}
+				for (const dep of data) {
+					this.setDep(dep.m_nPublishedFileId, dep.m_rgchPreviewUrl);
+				}
+			}, missingDeps);
+		}
+		if (haveDeps) {
+			for (const dep of haveDeps) {
+				const depMeta = WorkshopAPI.GetAddonMeta(dep);
+				this.addDep(`${depMeta.workshopid}`, depMeta.workshopid, false);
+				this.setDep(depMeta.workshopid, depMeta.thumb);
+			}
+		}
+		this.depsWrapper.SetHasClass('hide', !hasDeps);
+
+		$.DispatchEvent('MainMenuShowFeaturedOverlay', meta.thumb);
+
+		this.rightPane.RemoveClass('hide');
+		this.rightPane.style.animation = 'Portal2MapsPaneOut 0.01s linear 0s 1 normal forwards';
+		this.rightPane.style.animation = 'Portal2MapsPaneIn 0.2s ease-out 0s 1 normal forwards';
+	}
+
+	static play(id: string) {
+		const c = CampaignAPI.FindCampaign(id)!;
+		const deps = WorkshopAPI.GetAddonDependenciesMissing(c.bucket.addon_id);
+		if (deps !== null && deps.length > 0) {
+			$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'dependencies',
+				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+				`addon=${c.bucket.addon_id}&action=0&campaignId=${c.campaign.id}&chapterId=${c.campaign.chapters[0].id}&map=0`
+			);
+		} else {
+			CampaignAPI.StartCampaign(c.campaign.id, c.campaign.chapters[0].id, 0);
+		}
+	}
+
+	static clearDeps() {
+		this.depsPanels.clear();
+		this.deps.RemoveAndDeleteChildren();
+	}
+
+	static addDep(id: string, workshopId: PublishedFileId_t, isMissing: boolean) {
+		const b = $.CreatePanel('Button', this.deps, id, {
+			class: `workshop-campaign__dep__cover${isMissing ? ' workshop-campaign__dep__cover__missing' : ''}`
+		});
+
+		b.SetPanelEvent('onactivate', () => {
+			SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${workshopId}`);
+		});
+
+		const img = $.CreatePanel('Image', b, `${id}_Image`, {
+			class: 'workshop-campaign__dep__cover__image',
+			scaling: 'stretch-to-cover-preserve-aspect'
+		});
+
+		const loader = $.CreatePanel('Panel', b, 'Loader');
+		loader.LoadLayoutSnippet('Loader');
+
+		this.depsPanels.set(workshopId, { btn: b, img: img, loader: loader });
+	}
+
+	static setDep(workshopId: PublishedFileId_t, previewUrl: string) {
+		const panels = this.depsPanels.get(workshopId);
+		if (!panels) {
+			$.Warning(`Could not find panel for ${workshopId}`);
+			return;
+		}
+		panels.img.SetImage(previewUrl);
+		panels.loader.visible = false;
 	}
 }

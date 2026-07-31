@@ -1,4 +1,6 @@
 @use '../config' as *;
+@use '../abstract/function';
+@use 'sass:color';
 
 .fancy-list {
 	&__entries {
@@ -7,6 +9,26 @@
 		flow-children: down;
 		padding-right: 5px;
 		min-width: 1024px;
+
+		&__square {
+			& > .fancy-list__entry {
+				& > .fancy-list__entry__top {
+					width: 128px;
+					height: 128px;
+				}
+				& .fancy-list__entry__details {
+					&__desc {
+						font-size: 26px;
+						max-height: 32px;
+					}
+					&__small {
+						margin-top: 1px;
+						font-size: 18px;
+						max-height: 22px;
+					}
+				}
+			}
+		}
 	}
 
 	&__entry {
@@ -15,7 +37,7 @@
 		margin-right: 10px;
 		width: 1024px;
 		flow-children: right;
-		background-color: $button-background;
+		background-color: $base-950;
 		border: $menu-pane-border;
 		transition: width 0.1s ease-in-out 0.0s;
 
@@ -23,31 +45,26 @@
 
 		&__top {
 			width: 167px;
-			height: 100%;
+			height: 94px;
 		}
 
 		&__cover {
 			width: 100%;
 			height: 100%;
-		}
-
-		&__indicator {
-			horizontal-align: right;
-			vertical-align: top;
-			margin: 5px;
+			border-right: $menu-pane-border;
 		}
 
 		&__details {
 			width: fill-parent-flow(1);
 			margin-left: 0;
 			padding: 15px;
-			border-left: $menu-pane-border;
 			overflow: noclip;
 			flow-children: down;
+			vertical-align: center;
 			&__desc {
 				letter-spacing: 1px;
 				font-weight: bold;
-				text-overflow: shrink;
+				text-overflow: ellipsis;
 				font-size: 22px;
 				max-height: 28px;
 			}
@@ -69,16 +86,17 @@
 			&__small,
 			&__smaller {
 				text-shadow: 1px 1px 6px 3.0 $base-950;
-				width: 100%;
+				max-width: 768px;
 			}
 		}
 
 		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
 		.InputController &:focus:not(:disabled):not(:parentdisabled) {
-			border-color: $primary-color;
 			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover-color ), to( $base-950 ) );
+			border-color: $primary-color;
 			#{$this}__cover {
 				opacity: 0.9;
+				border-color: $primary-color;
 			}
 			#{$this}__details {
 				border-color: $primary-color;
@@ -93,10 +111,11 @@
 
 		&:selected {
 			width: 992px;
-			border-color: $primary-color;
 			background-color: gradient( linear, 100% 0%, 0% 0%, from( $button-background-hover-color ), to( $base-950 ) );
+			border-color: $primary-color;
 			#{$this}__cover {
 				opacity: 0.9;
+				border-color: $primary-color;
 			}
 			#{$this}__details {
 				border-color: $primary-color;
@@ -108,12 +127,23 @@
 			}
 		}
 
-		&__indicator {
-			horizontal-align: left;
-			padding: 6px 10px;
+		&__generic-indicator,
+		&__bad-indicator {
+			padding: 4px 10px;
+			margin-bottom: 2px;
+		}
+		&__generic-indicator {
 			background-color: $button-background-hover;
 			border: 1px solid $primary-color;
-			margin: 5px;
+			&__text {
+				text-transform: uppercase;
+				font-weight: bold;
+				letter-spacing: 1px;
+				font-size: 14px;
+			}
+		}
+
+		&__indicator {
 			&__text {
 				text-transform: uppercase;
 				font-weight: bold;
@@ -150,6 +180,11 @@
 			&__working.button--red {
 				animation: OpacityStrobe 1.0s linear 0s infinite normal forwards;
 				saturation: 0.5;
+			}
+
+			& > Button {
+				width: 48px;
+				height: 48px;
 			}
 		}
 

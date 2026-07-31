@@ -6,9 +6,6 @@
 	<Button group="FancyListRadio" class="fancy-list__entry" tabindex="auto" selectionpos="auto">
 		<Panel class="fancy-list__entry__top">
 			<Image id="Cover" class="fancy-list__entry__cover" scaling="stretch-to-cover-preserve-aspect" />
-			<Panel id="NewIndicator" class="fancy-list__entry__indicator hide">
-				<Label class="fancy-list__entry__indicator__text" text="#MainMenu_Content_Unplayed" />
-			</Panel>
 			<Panel id="Throbber" class="fancy-list__entry__throbber hide">
 				<AnimatedImageStrip
 					animating="true"
@@ -26,17 +23,25 @@
 				/>
 			</Panel>
 		</Panel>
-		<Panel class="full-width">
+		<Panel class="full-width full-height">
 			<Image
 				id="BtnBgImg"
 				class="fancy-list__entry__bg-img"
 				scaling="stretch-to-cover-preserve-aspect"
 			/>
-			<Panel class="flow-right">
+			<Panel class="flow-right vertical-align-center">
 				<Panel class="fancy-list__entry__details">
-					<Label class="fancy-list__entry__details__desc" text="{s:title}" />
-					<Label class="fancy-list__entry__details__small" text="{s:subtitle}" />
-					<Label class="fancy-list__entry__details__smaller" text="{s:mini}" />
+					<Panel id="Indicators" class="flow-right">
+						<Panel id="GenericIndicator" class="fancy-list__entry__generic-indicator mr-1 hide">
+							<Label class="fancy-list__entry__indicator__text" text="#MainMenu_Content_Unplayed" />
+						</Panel>
+						<Panel id="BadIndicator" class="fancy-list__entry__bad-indicator fancy-red hide" tooltip="#DependencyWarning_Generic">
+							<Label class="fancy-list__entry__indicator__text" text="[HC] Missing Dependencies!" />
+						</Panel>
+					</Panel>
+					<Label id="Title" class="fancy-list__entry__details__desc" text="{s:title}" />
+					<Label id="Subtitle" class="fancy-list__entry__details__small" text="{s:subtitle}" />
+					<Label id="Mini" class="fancy-list__entry__details__smaller" text="{s:mini}" />
 				</Panel>
 				<Panel id="Controls" class="fancy-list__entry__controls">
 				</Panel>

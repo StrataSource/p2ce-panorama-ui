@@ -100,8 +100,8 @@
 							</Panel>
 						</Panel>
 					</Panel>
-					<Panel class="full-width fill-height px-3 my-2">
-						<Label id="SelectedDescription" class="workshop__pane__desc" text="[PH] Description" html="true" />
+					<Panel class="full-width fill-height my-2">
+						<Label id="SelectedDescription" class="workshop__pane__desc px-3" text="[PH] Description" html="true" />
 					</Panel>
 					<Panel class="full-width flow-right px-3">
 						<Button id="SelectedSteam" class="button mr-1">
