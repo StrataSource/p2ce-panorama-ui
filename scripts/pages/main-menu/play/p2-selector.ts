@@ -41,14 +41,14 @@ class Portal2Entry {
 
 		this.exists = map.bFileExists;
 
-		FancyList_CreateEntry(
+		const btn = FancyList_CreateEntry(
 			Portal2MapSelector.insert,
 			{
 				image: thumb,
 				bgImage: this.previews[0].length > 0 ? this.previews[0] : thumb,
-				title: ch.title,
-				subtitle: ownerName,
-				mini: utcTimeConvert(Number(meta.get('subscribed'))),
+				title: { text: ch.title },
+				subtitle: { text: ownerName },
+				mini: { text: '[HC] Subscribed on {s:time}', hasVars: true },
 				buttons: [
 					{
 						id: `${chapter}_Action`,
@@ -61,6 +61,7 @@ class Portal2Entry {
 				}
 			}
 		);
+		btn.SetDialogVariable('time', utcTimeConvert(Number(meta.get('subscribed'))));
 
 		this.setExistsStatus(map.bFileExists, chapter);
 		this.flashEntryBtn(map.currentOperation !== MapStatus.NONE);
