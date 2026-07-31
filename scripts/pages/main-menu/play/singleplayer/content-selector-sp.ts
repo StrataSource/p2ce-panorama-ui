@@ -21,7 +21,7 @@ class ContentSelectorSP {
 			tabNumber = Number(lastTab);
 
 			// guard against future changes
-			if (tabNumber > this.btns.length) {
+			if (tabNumber > this.btns.length - 1) {
 				$.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, 0);
 				tabNumber = 0;
 			}
@@ -37,9 +37,7 @@ class ContentSelectorSP {
 		p.LoadLayout(`file://{resources}/layout/pages/${this.pages[index]}.xml`, false, false);
 
 		// switched to a page that isn't the p2 selector
-		if (index !== 2) {
-			$.DispatchEvent('MainMenuHideFeaturedOverlay');
-		}
+		$.DispatchEvent('MainMenuHideFeaturedOverlay');
 
 		if (bSave) $.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, index);
 	}
