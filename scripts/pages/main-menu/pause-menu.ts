@@ -104,7 +104,7 @@ class PauseMenu {
 					() => {
 						GameInterfaceAPI.ConsoleCommand('quit');
 					},
-					$.Localize('#Common_Return'),
+					$.Localize('#Common_Cancel'),
 					() => {},
 					'blur'
 				);
