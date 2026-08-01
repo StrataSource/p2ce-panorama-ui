@@ -280,6 +280,13 @@ class CampaignSelector {
 				continue;
 			}
 			for (const campaign of bucket.campaigns) {
+				const selectorIsMP = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_PLAYERCOUNT_TYPE];
+				// SP = false
+				// MP = true
+				// campaign.multiplayer is true when it's MP
+				// therefore, we filter out incompatible modes via this
+				if (selectorIsMP !== campaign.multiplayer)
+					continue;
 				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${campaign.id}`)
 					? allOtherCampaigns
 					: allNewCampaigns;

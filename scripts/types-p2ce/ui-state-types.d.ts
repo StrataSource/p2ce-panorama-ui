@@ -14,7 +14,9 @@ declare const enum GlobalUiObjects {
 	UI_ACTIVE_CHAPTER = 'ActiveUiChapter',
 	UI_ACTIVE_CAMPAIGN = 'ActiveUiCampaign',
 	UI_CAMPAIGN_SETTINGS = 'UiCampaignSettings',
-	UI_CAMPAIGN_SELECTOR_TYPE = 'PlayerMode'
+	UI_CAMPAIGN_SELECTOR_TYPE = 'PlayerMode',
+	// BOOLEAN, true indicates MULTIPLAYER
+	UI_PLAYERCOUNT_TYPE = 'PlayerCountType'
 }
 
 declare const enum CampaignMeta {
@@ -64,6 +66,7 @@ declare const enum CampaignDataType {
 
 declare const enum MiscStorageKeys {
 	CONTENT_TAB = 'misc.last_content_tab',
+	MP_CONTENT_TAB = 'misc.last_mp_content_tab',
 	EXPERIMENTS = 'misc.enable_experimental_features'
 }
 
