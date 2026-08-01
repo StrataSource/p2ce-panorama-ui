@@ -12,4 +12,15 @@
 	&__card {
 		width: 477px;
 	}
+
+	&__modelpanel {
+		width: 640px;
+		height: 100%;
+		margin-left: 50px;
+		vertical-align: center;
+		& > ModelPanel {
+			width: 100%;
+			height: 100%;
+		}
+	}
 }

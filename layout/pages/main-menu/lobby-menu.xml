@@ -1,0 +1,26 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/main-menu/lobby-menu.ts" />
+	</scripts>
+
+	<Panel class="full" hittest="false" onload="LobbyMenu.onLoad()">
+		<Panel class="vertical-align-bottom flow-down m-3">
+			<Label class="text-h5 wash-color-pink mb-1" text="[STAFF ONLY] DEVELOPER CONTROLS" />
+			<Panel class="flow-right mb-2">
+				<Button class="button button--pink" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+					<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
+				</Button>
+			</Panel>
+			<Label class="text-h5 mb-1" text="[DEV] MISC. PUBLIC CONTROLS" />
+			<Panel class="flow-right">
+				<Button class="button" onactivate="LobbyMenu.requestExit()">
+					<Label class="button__text" text="[HC] Exit Lobby" />
+				</Button>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>
