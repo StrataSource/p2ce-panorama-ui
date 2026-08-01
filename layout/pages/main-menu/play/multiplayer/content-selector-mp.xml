@@ -8,23 +8,53 @@
 	</scripts>
 
 	<Panel class="mainmenu__page" onload="ContentSelectorMP.onLoad()">
-		<Panel id="Tabs" class="tabs mb-2">
+		<Panel id="Tabs" class="tabs mb-1">
 			<Panel class="tabs__border tabs__border__right" />
-			<RadioButton id="CampaignsBtn" class="tabs__item" group="tabs" onactivate="ContentSelectorMP.onTabSelected(0, true)">
+			<RadioButton id="CreateBtn" class="tabs__item" group="MultiType" onactivate="ContentSelectorMP.onTopTabSelected(0, true)">
+				<Panel class="tabs__item__inner">
+					<Label class="tabs__item-label" text="[HC] Create" />
+				</Panel>
+			</RadioButton>
+			<Panel class="tabs__gap" />
+			<RadioButton id="JoinBtn" class="tabs__item" group="MultiType" onactivate="ContentSelectorMP.onTopTabSelected(1, true)">
+				<Panel class="tabs__item__inner">
+					<Label class="tabs__item-label" text="[HC] Join" />
+				</Panel>
+			</RadioButton>
+			<Panel class="tabs__border tabs__border__left" />
+		</Panel>
+		<Panel id="CreateTabs" class="tabs tabs__small mb-2 hide">
+			<Panel class="tabs__border tabs__border__right" />
+			<RadioButton id="CampaignsBtn" class="tabs__item" group="MainTabs" onactivate="ContentSelectorMP.onSubTabSelected(0)">
 				<Panel class="tabs__item__inner">
 					<Label class="tabs__item-label" text="#MainMenu_Navigation_Campaign" />
 				</Panel>
 			</RadioButton>
 			<Panel class="tabs__gap" />
-			<RadioButton id="MapsBtn" class="tabs__item" group="tabs" onactivate="ContentSelectorMP.onTabSelected(1, true)">
+			<RadioButton id="MapsBtn" class="tabs__item" group="MainTabs" onactivate="ContentSelectorMP.onSubTabSelected(1)">
 				<Panel class="tabs__item__inner">
-					<Label class="tabs__item-label" text="[HC] P2:CE Maps" />
+					<Label class="tabs__item-label" text="#MainMenu_Navigation_Workshop" />
 				</Panel>
 			</RadioButton>
 			<Panel class="tabs__gap" />
-			<RadioButton id="Portal2Btn" class="tabs__item" group="tabs" onactivate="ContentSelector.onTabSelected(2, true)">
+			<RadioButton id="Portal2Btn" class="tabs__item" group="MainTabs" onactivate="ContentSelectorMP.onSubTabSelected(2)">
 				<Panel class="tabs__item__inner">
 					<Label class="tabs__item-label" text="[HC] Portal 2 Maps" />
+				</Panel>
+			</RadioButton>
+			<Panel class="tabs__border tabs__border__left" />
+		</Panel>
+		<Panel id="JoinTabs" class="tabs tabs__small mb-2 hide">
+			<Panel class="tabs__border tabs__border__right" />
+			<RadioButton id="FriendsBtn" class="tabs__item" group="MainTabs" onactivate="ContentSelectorMP.onSubTabSelected(0)">
+				<Panel class="tabs__item__inner">
+					<Label class="tabs__item-label" text="[HC] Friends" />
+				</Panel>
+			</RadioButton>
+			<Panel class="tabs__gap" />
+			<RadioButton id="BrowserBtn" class="tabs__item" group="MainTabs" onactivate="ContentSelectorMP.onSubTabSelected(1)">
+				<Panel class="tabs__item__inner">
+					<Label class="tabs__item-label" text="[HC] Lobby Browser" />
 				</Panel>
 			</RadioButton>
 			<Panel class="tabs__border tabs__border__left" />

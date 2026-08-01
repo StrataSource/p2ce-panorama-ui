@@ -397,8 +397,14 @@ class MenuManager {
 					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_VotingMenuP2CE');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/voting-p2ce.xml', false, false);
 				} else {
-					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
-					p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
+					const c = CampaignAPI.GetActiveCampaign();
+					if (c && c.campaign.multiplayer) {
+						p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MultiPauseMenu');
+						p.LoadLayout('file://{resources}/layout/pages/main-menu/mp-pause-menu.xml', false, false);
+					} else {
+						p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
+						p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
+					}
 				}
 				break;
 			}
