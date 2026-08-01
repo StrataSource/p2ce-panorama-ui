@@ -1263,6 +1263,8 @@ This message will not appear again after you acknowledge the risks, however, you
 		"DependencyWarning_Resolved_Header"			"Dependencies Resolved"
 		"DependencyWarning_Resolved_Desc"			"All addon dependencies have been resolved."
 
+		"UI_Yes"									"Yes"
+		"UI_No"										"No"
 		"UI_Upvote"									"Upvote"
 		"UI_Downvote"								"Downvote"
 		"UI_Novote"									"None"
