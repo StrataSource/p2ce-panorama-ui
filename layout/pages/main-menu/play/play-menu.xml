@@ -7,37 +7,41 @@
 		<include src="file://{scripts}/pages/main-menu/play/play-menu.ts" />
 	</scripts>
 
-	<Panel class="mainmenu__page no-flow" onload="PlayMenu.setPlayerMenuLines()">
-		<Panel class="play-menu__main">
-			<Panel class="flow-right full-width full-height" childfocusonhover="true">
-				<Button
-					class="card play-menu__card mr-3"
-					onactivate="PlayMenu.onSinglePlayerBtnPressed()"
-					tabindex="auto"
-					selectionpos="auto"
-				>
-					<Image
-						class="card__image"
-						src="file://{images}/menu/vertical-banner-solo.png"
-						scaling="stretch-to-fit-preserve-aspect"
-					/>
-					<Panel class="card__details card__details__no-bg">
-						<Label class="card__details__header" text="#MainMenu_Campaigns_CType_SP" />
-					</Panel>
-				</Button>
-				<Button
-					disabled="true"
-					class="card play-menu__card"
-					onactivate="PlayMenu.onMultiPlayerBtnPressed()"
-					tabindex="auto"
-					selectionpos="auto"
-				>
-					<Image class="card__image" src="file://{images}/menu/vertical-banner-mp.png" scaling="stretch-to-fit-preserve-aspect" />
-					<Panel class="card__details card__details__no-bg">
-						<Label class="card__details__header" text="#MainMenu_Campaigns_CType_MP" />
-					</Panel>
-				</Button>
+	<Panel class="mainmenu__page flow-right" onload="PlayMenu.setPlayerMenuLines()">
+		<Button
+			class="card play-menu__card mr-3"
+			onactivate="PlayMenu.onSinglePlayerBtnPressed()"
+			tabindex="auto"
+			selectionpos="auto"
+		>
+			<Image
+				class="card__image"
+				src="file://{images}/menu/vertical-banner-solo.png"
+				scaling="stretch-to-fit-preserve-aspect"
+			/>
+			<Panel class="card__details card__details__no-bg">
+				<Label class="card__details__header" text="#MainMenu_Campaigns_CType_SP" />
 			</Panel>
+		</Button>
+		<Button
+			class="card play-menu__card"
+			onactivate="PlayMenu.onMultiPlayerBtnPressed()"
+			tabindex="auto"
+			selectionpos="auto"
+		>
+			<Image class="card__image" src="file://{images}/menu/vertical-banner-mp.png" scaling="stretch-to-fit-preserve-aspect" />
+			<Panel class="card__details card__details__no-bg">
+				<Label class="card__details__header" text="#MainMenu_Campaigns_CType_MP" />
+			</Panel>
+		</Button>
+		<Panel class="play-menu__modelpanel">
+			<ModelPanel
+				id="PlayerModel"
+				src="models/player.mdl"
+				sequence="nogun_run"
+				antialias="true"
+				mouse_rotate="true"
+			/>
 		</Panel>
 	</Panel>
 </root>

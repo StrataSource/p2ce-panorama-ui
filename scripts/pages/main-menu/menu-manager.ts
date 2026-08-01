@@ -372,13 +372,20 @@ class MenuManager {
 
 		switch (GameInterfaceAPI.GetGameUIState()) {
 			case GameUIState.MAINMENU: {
-				if (!CampaignAPI.IsCampaignActive()) {
+				const c = CampaignAPI.GetActiveCampaign()!;
+				if (c) {
+					if (c.campaign.multiplayer) {
+						const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_LobbyMenu');
+						p.LoadLayout('file://{resources}/layout/pages/main-menu/lobby-menu.xml', false, false);
+						p.SetReadyForDisplay(true);
+					} else {
+						const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_CampaignMenu');
+						p.LoadLayout('file://{resources}/layout/pages/main-menu/campaign-menu.xml', false, false);
+						p.SetReadyForDisplay(true);
+					}
+				} else {
 					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MainMenu');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/base-menu.xml', false, false);
-					p.SetReadyForDisplay(true);
-				} else {
-					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_CampaignMenu');
-					p.LoadLayout('file://{resources}/layout/pages/main-menu/campaign-menu.xml', false, false);
 					p.SetReadyForDisplay(true);
 				}
 				break;
