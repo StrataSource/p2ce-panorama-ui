@@ -17,4 +17,13 @@ class LobbyMenu {
 			() => {}
 		);
 	}
+
+	static staffForceStart(splitscreen: boolean) {
+		const c = CampaignAPI.GetActiveCampaign()!;
+		if (splitscreen) {
+			CampaignAPI.StartCampaign(`${c.bucket.id}/${c.campaign.id}`, '0', 0, CampaignStartFlags.SPLITSCREEN);
+		} else {
+			CampaignAPI.StartCampaign(`${c.bucket.id}/${c.campaign.id}`, '0', 0);
+		}
+	}
 }

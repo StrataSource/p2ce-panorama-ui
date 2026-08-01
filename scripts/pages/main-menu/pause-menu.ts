@@ -115,7 +115,7 @@ class PauseMenu {
 							'blur'
 						);
 					},
-					$.Localize('#Common_Return'),
+					$.Localize('#Common_Cancel'),
 					() => {},
 					'blur'
 				);
