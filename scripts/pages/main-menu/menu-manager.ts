@@ -398,9 +398,16 @@ class MenuManager {
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/voting-p2.xml', false, false);
 					p.SetReadyForDisplay(true);
 				} else {
-					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
-					p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
-					p.SetReadyForDisplay(true);
+					const c = CampaignAPI.GetActiveCampaign()!;
+					if (c && c.campaign.multiplayer) {
+						const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MultiPauseMenu');
+						p.LoadLayout('file://{resources}/layout/pages/main-menu/mp-pause-menu.xml', false, false);
+						p.SetReadyForDisplay(true);
+					} else {
+						const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
+						p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
+						p.SetReadyForDisplay(true);
+					}
 				}
 				break;
 			}
