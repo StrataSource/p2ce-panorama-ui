@@ -7,11 +7,75 @@
 		<include src="file://{scripts}/pages/main-menu/lobby-menu.ts" />
 	</scripts>
 
-	<Panel class="full" hittest="false" onload="LobbyMenu.onLoad()">
+	<snippets>
+		<snippet name="PlayerEntry">
+			<!-- TODO: Make background box larger and stretch to the right. -->
+			<Panel class="player-entry bg-gray-300">
+				<TooltipPanel tooltip="[HC] View Steam Profile">
+					<Button id="SteamProfileBtn" class="">
+						<AvatarImage id="PlayerAvatar" class="player-entry__avatar" steamid="local" />
+					</Button>
+				</TooltipPanel>
+
+				<Panel class="player-entry__body ml-2">
+					<!-- TODO: When unhidden, it messes with the spacing of the whole row. -->
+					<Panel id="MissingAddons" class="mt-2 mr-2 fancy-red" tooltip="#DependencyWarning_Generic">
+						<Label text="[HC] Missing Addons!" />
+					</Panel>
+
+					<Panel class="mt-2 flow-right vertical-align-center">
+
+						<Panel class="flow-right vertical-align-center">
+							<Image id="HostPlayerIcon" class="icon hide" texturewidth="32" textureheight="32" src="file://{images}/crown.svg" />
+							<Image id="SteamFriendIcon" class="icon hide" texturewidth="32" textureheight="32" src="file://{images}/profile.svg" />
+							<Label id="Name" text="{s:name}" class="text-h5 ml-1" />
+						</Panel>
+
+						<Panel class="flow-right vertical-align-center ml-2 mr-2">
+							<TooltipPanel tooltip="[HC] Kick Player">
+								<Button id="KickBtn" class="button mr-1">
+									<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/cancel.svg" />
+								</Button>
+							</TooltipPanel>
+							<TooltipPanel tooltip="[HC] Ban Player">
+								<Button id="BanBtn" class="button button--red">
+									<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/alert-octagon.svg" />
+								</Button>
+							</TooltipPanel>
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="full flow-down mx-4 my-4" hittest="false" onload="LobbyMenu.onLoad()">
+		<Label
+			id="LobbyHeadline"
+			class="mainmenu__page-head"
+			text="[HC] Lobby"
+		/>
+		<Label
+			id="PageTagline"
+			class="mainmenu__page-tagline"
+			text="[PH] Invite Your Friends! Oh wait, you can't yet."
+		/>
+
+		<Panel id="PlayerList" class="lobby-menu__player-list mt-5 mb-5 ml-5" />
+
 		<Panel class="vertical-align-bottom flow-down m-3">
 			<Label class="text-h5 wash-color-pink mb-1" text="[STAFF ONLY] DEVELOPER CONTROLS" />
 			<Panel class="flow-right mb-2">
-				<Button class="button button--pink mr-2" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+				<Button class="button" onactivate="LobbyMenu.playerJoin('76561198031029097')">
+					<Label class="button__text" text="Add Fake Player" />
+				</Button>
+				<Button class="button" onactivate="LobbyMenu.playerLeft('76561198031029097')">
+					<Label class="button__text" text="Remove Fake Player" />
+				</Button>
+				<Button class="button" onactivate="LobbyMenu.dumpPlayerEntries()">
+					<Label class="button__text" text="Dump Player Entry List" />
+				</Button>
+				<Button class="button button--red mr-2" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
 					<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 				</Button>
 				<Button class="button button--pink" onactivate="LobbyMenu.staffForceStart(false)">

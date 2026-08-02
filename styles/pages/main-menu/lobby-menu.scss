@@ -1,0 +1,38 @@
+@use '../../config' as *;
+
+.player-entry {
+    flow-children: right;
+    height: fit-children;
+	width: fit-children;
+    margin-bottom: 10px;
+
+    &__avatar {
+        width: 96px;
+        height: 96px;
+        &:hover {
+            border-color: $orange;
+            background-color: $button-background-hover;
+
+            & > Image {
+                opacity: 0.85;
+            }
+        }
+    }
+
+    &__body {
+        flow-children: down;
+
+
+
+        &__buttons {
+            width: fill-parent-flow(1);
+        }
+    }
+}
+
+.lobby-menu {
+    &__player-list {
+        flow-children: down;
+    }
+
+}
