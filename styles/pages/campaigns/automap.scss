@@ -21,11 +21,11 @@
 			background-color: rgba($base-950, 0.99);
 			flow-children: down;
 
-			& > Panel {
+			&__base {
 				horizontal-align: center;
 				vertical-align: center;
 				flow-children: down;
-				& > Panel {
+				&__content {
 					horizontal-align: center;
 					vertical-align: center;
 					width: 128px;
