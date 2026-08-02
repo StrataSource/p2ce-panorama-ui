@@ -294,9 +294,9 @@
 				</SettingsEnumDropDown>
 				
 				<SettingsEnum
-                    text="#Settings_Render_EnabledordisabledVolumetrics"
+                    text="#Settings_Render_VolumetricLighting"
                     convar="r_volumetrics_enable"
-                    infomessage="#Settings_Render_EnabledordisabledVolumetrics_Info"
+                    infomessage="Settings_Render_VolumetricLighting_Info"
                     hasdocspage="false"
                 >
                     <RadioButton group="r_volumetrics_enable" text="#Common_Off" value="0" />

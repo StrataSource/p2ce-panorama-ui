@@ -534,8 +534,8 @@
 		"Settings_Render_MotionBlur"					"Motion Blur"
 		"Settings_Render_MotionBlur_Info"				"Motion blur is a fullscreen shader effect that selectively smooths the frame during rapid changes in the camera's angle or position. The Disabled setting may result in slightly improved graphics performance."
 		
-		"Settings_Render_EnabledordisabledVolumetrics"			"Enables or Disable volumetric lighting"
-		"Settings_Render_EnabledordisabledVolumetrics_Info"		"Enables or Disable volumetric lighting. Disabling this setting may significantly improve performance on low-end hardware."
+		"Settings_Render_VolumetricLighting"			"Volumetric Lighting"
+		"Settings_Render_VolumetricLighting_Info"		"Enables or Disable volumetric lighting. Disabling this setting may significantly improve performance on low-end hardware."
 
 		"Settings_Render_VolumetricsQuality"			"Volumetrics Quality"
 		"Settings_Render_VolumetricsQuality_Info"		"The Volumetrics Quality setting controls the resolution used to render volumetrics (e.g.: sun shafts and fog light scattering) in the game. Higher settings increase visual quality at the expense of increasing VRAM usage and degrading graphics performance."
