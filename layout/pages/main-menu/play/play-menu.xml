@@ -36,12 +36,22 @@
 		</Button>
 		<Panel class="play-menu__modelpanel">
 			<ModelPanel
-				id="PlayerModel"
+				id="PlayerModel1"
 				src="models/player.mdl"
 				sequence="nogun_run"
 				antialias="true"
-				mouse_rotate="true"
 			/>
+			<!-- <ModelPanel
+				id="PlayerModel2"
+				src="models/player/ballbot/ballbot.mdl"
+				antialias="true"
+			/>
+			<ModelPanel
+				id="PlayerModel3"
+				src="models/player/eggbot/eggbot.mdl"
+				antialias="true"
+				mouse_rotate="true"
+			/> -->
 		</Panel>
 	</Panel>
 </root>

@@ -1,14 +1,16 @@
 'use strict';
 
 class PlayMenu {
-	static model = $<ModelPanel>('#PlayerModel')!;
+	static model1 = $<ModelPanel>('#PlayerModel1')!;
+	//static model2 = $<ModelPanel>('#PlayerModel2')!;
+	//static model3 = $<ModelPanel>('#PlayerModel3')!;
 
 	static setupModelPanel(panel: ModelPanel) {
 		panel.LookAtModel();
 		panel.SetCameraOffset(-150, 0, 0);
 		panel.SetCameraFOV(25);
 		panel.SetModelRotation(0, 220, 0);
-		panel.SetModelRotationSpeedTarget(0, 0, 0);
+		panel.SetModelRotationSpeedTarget(0, 0.05, 0);
 		panel.SetMouseXRotationScale(0, 1, 0); // By default mouse X will rotate the X axis, but we want it to spin Y axis
 		panel.SetMouseYRotationScale(0, 0, 0); // Disable mouse Y movement rotations
 		panel.SetLightAmbient(0.2921, 0.327, 0.43);
@@ -24,8 +26,11 @@ class PlayMenu {
 			$.Localize('#MainMenu_Navigation_Play'),
 			$.Localize('#MainMenu_Navigation_Play_Modes')
 		);
-		
-		this.setupModelPanel(this.model);
+
+		this.setupModelPanel(this.model1);
+		//this.setupModelPanel(this.model2);
+		//this.setupModelPanel(this.model3);
+		//this.model1.AddClass("");
 	}
 
 	static onSinglePlayerBtnPressed() {
