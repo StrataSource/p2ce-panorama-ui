@@ -280,6 +280,16 @@
 					<Label text="#Settings_General_Enabled" value="1" id="motionblur1" />
 				</SettingsEnumDropDown>
 				
+				<SettingsEnum
+                    text="#Settings_Render_EnabledordisabledVolumetrics"
+                    convar="r_volumetrics_enable "
+                    infomessage="#Settings_Render_EnabledordisabledVolumetrics_Info"
+                    hasdocspage="false"
+                >
+                    <RadioButton group="r_volumetrics_enable" text="#Common_Off" value="0" />
+                    <RadioButton group="r_volumetrics_enable" text="#Common_On" value="1" />
+                </SettingsEnum>
+				
 				<SettingsEnumDropDown
 					text="#Settings_Render_VolumetricsQuality"
 					onuserinputsubmit="SettingsShared.videoSettingsOnUserInputSubmit()"

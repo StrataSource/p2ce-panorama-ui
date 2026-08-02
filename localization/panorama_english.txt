@@ -384,7 +384,7 @@
 		"Settings_Reset_Message_Generic"				"Are you sure you want to reset this section's settings to their default values?"
 		"Settings_Reset_Message_Checker"				"The following settings are currently different from their default values and will be reset:"
 		"Settings_Reset_Action_Reset"					"Reset Section"
-		"Settings_Reset_Action_Cancel"					"Don't Reset"
+		"Settings_Reset_Common_Cancel"					"Don't Reset"
 
 		// Settings - Audio
 		"Settings_Audio"									"Audio"
@@ -533,6 +533,9 @@
 
 		"Settings_Render_MotionBlur"					"Motion Blur"
 		"Settings_Render_MotionBlur_Info"				"Motion blur is a fullscreen shader effect that selectively smooths the frame during rapid changes in the camera's angle or position. The Disabled setting may result in slightly improved graphics performance."
+		
+		"Settings_Render_EnabledordisabledVolumetrics"			"Enables or Disable volumetric lighting"
+		"Settings_Render_EnabledordisabledVolumetrics_Info"		"Enables or Disable volumetric lighting. Disabling this setting may significantly improve performance on low-end hardware."
 
 		"Settings_Render_VolumetricsQuality"			"Volumetrics Quality"
 		"Settings_Render_VolumetricsQuality_Info"		"The Volumetrics Quality setting controls the resolution used to render volumetrics (e.g.: sun shafts and fog light scattering) in the game. Higher settings increase visual quality at the expense of increasing VRAM usage and degrading graphics performance."
@@ -1248,10 +1251,12 @@ This message will not appear again after you acknowledge the risks, however, you
 		"DependencyWarning_Loading"					"Retrieving Details..."
 		"DependencyWarning_Failed"					"Failed to retrieve UGC item details!"
 		"DependencyWarning_Action_Ignore"			"Continue Anyway"
-		"DependencyWarning_Action_Cancel"			"Cancel"
+		"DependencyWarning_Common_Cancel"			"Cancel"
 		"DependencyWarning_Resolved_Header"			"Dependencies Resolved"
 		"DependencyWarning_Resolved_Desc"			"All addon dependencies have been resolved."
 
+		"UI_Yes"									"Yes"
+		"UI_No"										"No"
 		"UI_Upvote"									"Upvote"
 		"UI_Downvote"								"Downvote"
 		"UI_Novote"									"None"
