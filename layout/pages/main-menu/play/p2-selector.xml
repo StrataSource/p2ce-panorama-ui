@@ -19,8 +19,8 @@
 		</snippet>
 		<snippet name="WorkshopReloadingSnippet">
 			<Panel class="workshop__entries__throbber">
-				<Panel>
-					<Panel>
+				<Panel class="workshop__entries__throbber__base">
+					<Panel class="workshop__entries__throbber__base__content">
 						<AnimatedImageStrip
 							animating="true"
 							defaultframe="0"
