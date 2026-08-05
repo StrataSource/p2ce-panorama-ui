@@ -143,24 +143,24 @@
 					<SettingsKeyBinder text="#Keybind_Attack_Secondary" bind="+attack2" tags="attack,secondary,fire" />
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Reload" bind="+reload" tags="reload,fire,attack" />
 					<SettingsKeyBinder text="#Keybind_Use_Items" bind="+use" tags="use,interact" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Paintgun_NextPaint" bind="nextpaint" tags="attack,use,interact" />
-				</Panel>
-				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Paintgun_PrevPaint" bind="prevpaint" tags="attack,use,interact" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_1" bind="slot1" tags="slot1" />
-				</Panel>
-				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_2" bind="slot2" tags="slot2" />
-					<SettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_3" bind="slot3" tags="slot3" />
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_4" bind="slot4" tags="slot4" />
-					<SettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
 				</Panel>
-				<Panel class="full-width flow-right">
+				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_6" bind="slot6" tags="slot6" />
-					<Panel class="fill-width" />
 				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_MP_COOP" />
