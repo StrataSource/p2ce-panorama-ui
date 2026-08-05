@@ -76,8 +76,8 @@ class PauseMenu {
 		},
 		{
 			id: 'QuitBtn',
-			headline: '#MainMenu_Navigation_QuitGame',
-			tagline: '#MainMenu_Navigation_QuitGame_Tagline',
+			headline: '#MainMenu_Navigation_Disconnect',
+			tagline: '#MainMenu_Navigation_Disconnect_Tagline',
 			activated: () => {
 				UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
 					$.Localize('#Action_Quit'),

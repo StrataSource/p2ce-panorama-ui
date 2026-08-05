@@ -27,7 +27,7 @@
 	</snippets>
 
 	<Panel class="full" hittest="false" onload="PauseMenu.onLoad()">
-		<Panel id="MapPanel" hittest="false" class="full">
+		<Panel id="MapPanel" hittest="false" class="full hide">
 			<Panel class="mainmenu__addon" hittest="false">
 				<Panel class="full mainmenu__addon__bg" />
 			</Panel>
