@@ -3,13 +3,19 @@
 .player-entry {
     flow-children: right;
     height: fit-children;
-	width: fit-children;
+	width: 800px;
     margin-bottom: 10px;
+    border: 1px solid #555555;
+    background-color: #181818;
+    background-image: url("file://{images}/menu/menu_grid6.png");
+    background-img-opacity: 0.25;
+    background-size: 50%;
 
     &__avatar {
         width: 96px;
         height: 96px;
         &:hover {
+            border: 1px solid $white;
             border-color: $orange;
             background-color: $button-background-hover;
 
@@ -22,17 +28,24 @@
     &__body {
         flow-children: down;
 
-
-
         &__buttons {
-            width: fill-parent-flow(1);
+            flow-children: right;
+            vertical-align: center;
+            horizontal-align: right;
+
+            margin: 0px 10px 0px 10px;
         }
     }
+
+
 }
 
 .lobby-menu {
     &__player-list {
+        height: fill-parent-flow(1);
         flow-children: down;
+        margin: 35px 0px 35px 35px;
+        overflow: squish scroll;
     }
 
 }
