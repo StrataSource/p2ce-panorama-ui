@@ -17,7 +17,7 @@
 			<Label class="text-h2 mb-2 full-width text-align-center" text="#MainMenu_PrereleaseNotice_Title" />
 			<Label class="mb-2" text="#MainMenu_PrereleaseNotice_Description" />
 		</Panel>
-		
+
 		<Panel class="flow-right full-width mt-1" tabindex="auto" selectionpos="auto">
 			<Panel class="flow-down">
 				<ToggleButton id="Checkbox" onactivate="PrereleaseAck.checkboxChanged()" class="checkbox mb-1">
@@ -30,7 +30,7 @@
 					tabindex="auto"
 					selectionpos="auto"
 				>
-					<Label class="button__text" text="#UI_OK" />
+					<Label class="button__text" text="#Common_OK" />
 				</Button>
 			</Panel>
 			<Button
