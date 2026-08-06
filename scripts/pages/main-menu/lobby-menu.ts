@@ -1,5 +1,17 @@
 'use strict';
 
+interface PlayerInfo {
+	name: string; // Cached username
+	steamID: steamID; // User SteamID
+
+	host: boolean; // Player is host of the lobby
+	slotIndex: number; // Displayed UI slot, maybe not needed here and instead left to the UI
+
+	hasAllAddons?: boolean; // Has required installed addons
+
+	team?: Team; // Game team
+}
+
 class PlayerEntry {
 
 	playerEntryPanel: Panel;
@@ -54,7 +66,8 @@ class PlayerEntry {
 
 	kickPlayer() {
 		$.Msg(`Kicked player: ${this.playerInfo.name}`);
-		LobbyMenu.playerLeft(this.playerInfo.steamID);
+		// TODO: Kick/Ban API
+		// LobbyMenu.playerLeft(this.playerInfo.steamID);
 	}
 
 	// Currently only "bans" player during the Panels lifetime.
@@ -66,7 +79,8 @@ class PlayerEntry {
 			() => {
 				$.Msg(`Banned player: ${this.playerInfo.name}`);
 				LobbyMenu.banList.push(this.playerInfo.steamID);
-				LobbyMenu.playerLeft(this.playerInfo.steamID);
+				// TODO: Kick/Ban API
+				// LobbyMenu.playerLeft(this.playerInfo.steamID);
 			},
 			() => {}
 		);
@@ -89,52 +103,25 @@ class LobbyMenu {
 		$.DispatchEvent('MainMenuHideNav', true);
 		$.DispatchEvent('MainMenuSwitchReverse', false);
 
-		//$.RegisterForUnhandledEvent('PanoramaComponent_P2CEMatchmaking_OnPlayerJoinedLobby', this.playerJoin.bind(this));
-		//$.RegisterForUnhandledEvent('PanoramaComponent_P2CEMatchmaking_OnPlayerLeftLobby', this.playerLeft.bind(this));
+		$.RegisterForUnhandledEvent(
+			'PanoramaComponent_P2CELobby_PlayerStateChanged',
+			() => {
+				this.refreshPlayers();
+			}
+		);
 
-		// Set of test player entries.
-		this.playerJoin(UserAPI.GetXUID(), true);	// You
-		this.playerJoin('76561198046114191');		// storm
-		this.playerJoin('76561199136235250'); 		// lenship2
-		this.playerJoin('76561198827650159'); 		// D0ctorZer0 (Ash)
-		this.playerJoin('76561198031029097'); 		// Ozxybox
-		this.playerJoin('76561198132780615'); 		// JJl77
-		this.playerJoin('76561198037202538'); 		// HugoBDesigner
-		this.playerJoin('76561198110464793'); 		// Avery
-		this.playerJoin('76561198029590837'); 		// Smaed
-		this.playerJoin('76561198349038620'); 		// JoLoZ
-		this.playerJoin('76561198114725103'); 		// SCell555
-		this.playerJoin('76561198169437299'); 		// Hazel Rose
-		this.playerJoin('76561197960287930'); 		// Gabe Newell
-		this.playerJoin('76561199038901613'); 		// PhoenyxSource
-		this.playerJoin('76561198338990133'); 		// \n
+		this.refreshPlayers();
 	}
 
-	static playerJoin(steamID: steamID, isHost: boolean = false) {
-		if (steamID.length === 0) {
-			$.Warning('Received invalid SteamID!');
-			return;
+	static refreshPlayers() {
+		for (const [id, player] of this.players) {
+			player.destruct();
 		}
-
-		if (this.players.has(steamID)) {
-			return;
+		this.players.clear();
+		const players = P2CELobbyAPI.GetPlayerList();
+		for (const player of players) {
+			this.players.set(player.id, new PlayerEntry(player.id, player.owner));
 		}
-
-		// Temporary test ban list.
-		if (this.banList.find((bannedSteamID: steamID) => {
-				return bannedSteamID === steamID;
-			})
-		) {
-			$.Msg(`Player ${FriendsAPI.GetNameForXUID(steamID)}, attempted to join but are banned!`);
-			return;
-		}
-
-		this.players.set(steamID, new PlayerEntry(steamID, isHost));
-	}
-
-	static playerLeft(steamID: steamID) {
-		this.players.get(steamID)?.destruct();
-		this.players.delete(steamID);
 	}
 
 	static dumpPlayerEntries() {
@@ -153,18 +140,13 @@ class LobbyMenu {
 			'[HC] Are you sure you want to disconnect from the current lobby?',
 			'generic-popup',
 			() => {
-				CampaignAPI.SetActiveCampaign(null);
+				P2CELobbyAPI.ExitLobby();
 			},
 			() => {}
 		);
 	}
 
-	static staffForceStart(splitscreen: boolean) {
-		const c = CampaignAPI.GetActiveCampaign()!;
-		if (splitscreen) {
-			CampaignAPI.StartCampaign(`${c.bucket.id}/${c.campaign.id}`, '0', 0, CampaignStartFlags.SPLITSCREEN);
-		} else {
-			CampaignAPI.StartCampaign(`${c.bucket.id}/${c.campaign.id}`, '0', 0);
-		}
+	static staffForceStart() {
+		P2CELobbyAPI.StartGameSession();
 	}
 }

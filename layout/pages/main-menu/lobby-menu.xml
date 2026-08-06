@@ -66,25 +66,19 @@
 		<Panel id="PlayerList" class="lobby-menu__player-list" />
 
 		<Panel class="vertical-align-bottom flow-down m-3">
-			<Label class="text-h5 wash-color-pink mb-1" text="[STAFF ONLY] DEVELOPER CONTROLS" />
+			<Label class="text-h5 mb-1" text="[STAFF ONLY] DEVELOPER CONTROLS" />
 			<Panel class="flow-right mb-2">
-				<Button class="button" onactivate="LobbyMenu.playerJoin('76561198031029097')">
-					<Label class="button__text" text="Add Fake Player" />
-				</Button>
-				<Button class="button" onactivate="LobbyMenu.playerLeft('76561198031029097')">
-					<Label class="button__text" text="Remove Fake Player" />
-				</Button>
-				<Button class="button" onactivate="LobbyMenu.dumpPlayerEntries()">
+				<Button class="button mr-1" onactivate="LobbyMenu.dumpPlayerEntries()">
 					<Label class="button__text" text="Dump Player Entry List" />
 				</Button>
-				<Button class="button button--red mr-2" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
 					<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 				</Button>
-				<Button class="button button--pink" onactivate="LobbyMenu.staffForceStart(false)">
-					<Label class="button__text" text="Start ONLINE" />
+				<Button class="button mr-1" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
+					<Label class="button__text" text="Invite" />
 				</Button>
-				<Button class="button button--pink" onactivate="LobbyMenu.staffForceStart(true)">
-					<Label class="button__text" text="Start SPLITSCREEN" />
+				<Button class="button" onactivate="LobbyMenu.staffForceStart()">
+					<Label class="button__text" text="Start" />
 				</Button>
 			</Panel>
 			<Label class="text-h5 mb-1" text="[DEV] MISC. PUBLIC CONTROLS" />
