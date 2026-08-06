@@ -280,6 +280,11 @@ class MenuManager {
 				}
 			});
 
+			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyStateChanged', () => {
+				this.openMenuMode();
+				this.closePages();
+			});
+
 			installImageFallbackHandler(this.logo);
 
 			const registerCampaignSwitch = () => {
@@ -298,7 +303,6 @@ class MenuManager {
 						) {
 							$.DispatchEvent('MainMenuSwitchFade', false, true);
 						}
-						this.deleteMenus();
 						this.openMenuMode();
 					}
 				);
@@ -371,12 +375,15 @@ class MenuManager {
 		let p: Panel | undefined = undefined;
 		switch (GameInterfaceAPI.GetGameUIState()) {
 			case GameUIState.MAINMENU: {
-				if (!CampaignAPI.IsCampaignActive()) {
+				if (P2CELobbyAPI.IsInLobby()) {
+					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_LobbyMenu');
+					p.LoadLayout('file://{resources}/layout/pages/main-menu/lobby-menu.xml', false, false);
+				} else if (CampaignAPI.IsCampaignActive()) {
+					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_CampaignMenu');
+					p.LoadLayout('file://{resources}/layout/pages/main-menu/campaign-menu.xml', false, false);
+				} else {
 					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MainMenu');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/base-menu.xml', false, false);
-				} else {
-					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_CampaignMenu');
-					p.LoadLayout('file://{resources}/layout/pages/main-menu/campaign-menu.xml', false, false);
 				}
 				break;
 			}
