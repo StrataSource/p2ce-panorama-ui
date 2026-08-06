@@ -9,7 +9,6 @@
 
 	<snippets>
 		<snippet name="PlayerEntry">
-			<!-- TODO: Make background box larger and stretch to the right. -->
 			<Panel class="player-entry bg-gray-300">
 				<TooltipPanel tooltip="[HC] View Steam Profile">
 					<Button id="SteamProfileBtn" class="">
@@ -19,31 +18,34 @@
 
 				<Panel class="player-entry__body ml-2">
 					<!-- TODO: When unhidden, it messes with the spacing of the whole row. -->
-					<Panel id="MissingAddons" class="mt-2 mr-2 fancy-red" tooltip="#DependencyWarning_Generic">
+					<TooltipPanel id="MissingAddons" class="mt-2 mr-2 fancy-red" style="tooltip-position: right;" tooltip="[HC] This user is missing required addons needed to play the selected content.">
 						<Label text="[HC] Missing Addons!" />
-					</Panel>
+					</TooltipPanel>
 
 					<Panel class="mt-2 flow-right vertical-align-center">
-
 						<Panel class="flow-right vertical-align-center">
-							<Image id="HostPlayerIcon" class="icon hide" texturewidth="32" textureheight="32" src="file://{images}/crown.svg" />
-							<Image id="SteamFriendIcon" class="icon hide" texturewidth="32" textureheight="32" src="file://{images}/profile.svg" />
+							<TooltipPanel tooltip="[HC] Host">
+								<Image id="HostPlayerIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/crown-cropped.svg" />
+							</TooltipPanel>
+							<TooltipPanel tooltip="[HC] Steam Friend">
+								<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
+							</TooltipPanel>
 							<Label id="Name" text="{s:name}" class="text-h5 ml-1" />
 						</Panel>
-
-						<Panel class="flow-right vertical-align-center ml-2 mr-2">
-							<TooltipPanel tooltip="[HC] Kick Player">
-								<Button id="KickBtn" class="button mr-1">
-									<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/cancel.svg" />
-								</Button>
-							</TooltipPanel>
-							<TooltipPanel tooltip="[HC] Ban Player">
-								<Button id="BanBtn" class="button button--red">
-									<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/alert-octagon.svg" />
-								</Button>
-							</TooltipPanel>
-						</Panel>
 					</Panel>
+				</Panel>
+
+				<Panel class="player-entry__body__buttons">
+					<TooltipPanel tooltip="[HC] Kick Player">
+						<Button id="KickBtn" class="button mr-1">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/cancel.svg" />
+						</Button>
+					</TooltipPanel>
+					<TooltipPanel tooltip="[HC] Ban Player">
+						<Button id="BanBtn" class="button button--red">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/alert-octagon.svg" />
+						</Button>
+					</TooltipPanel>
 				</Panel>
 			</Panel>
 		</snippet>
@@ -61,7 +63,7 @@
 			text="[PH] Invite Your Friends! Oh wait, you can't yet."
 		/>
 
-		<Panel id="PlayerList" class="lobby-menu__player-list mt-5 mb-5 ml-5" />
+		<Panel id="PlayerList" class="lobby-menu__player-list" />
 
 		<Panel class="vertical-align-bottom flow-down m-3">
 			<Label class="text-h5 wash-color-pink mb-1" text="[STAFF ONLY] DEVELOPER CONTROLS" />
