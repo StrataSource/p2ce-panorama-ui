@@ -89,11 +89,11 @@ $pane-move-time: 0.1s;
 	padding: 12px 14px;
 	margin: 15px;
 	margin-right: 16px;
-	background-color: black;
-	border-radius: 6px;
+	background-color: #2a2a2a;
+	border: 1px solid #555555;
 	& > Label {
-		font-family: Verdana;
-		font-size: 16px;
+		font-family: Lexend;
+		font-size: 18px;
 		color: white;
 	}
 }
