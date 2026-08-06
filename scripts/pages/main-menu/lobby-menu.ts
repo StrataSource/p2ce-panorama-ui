@@ -89,8 +89,8 @@ class LobbyMenu {
 		$.DispatchEvent('MainMenuHideNav', true);
 		$.DispatchEvent('MainMenuSwitchReverse', false);
 
-		//$.RegisterForUnhandledEvent('PanoramaComponent_P2CEMatchmaking_OnPlayerJoinedLobby', this.PlayerJoin.bind(this));
-		//$.RegisterForUnhandledEvent('PanoramaComponent_P2CEMatchmaking_OnPlayerLeftLobby', this.PlayerLeft.bind(this));
+		//$.RegisterForUnhandledEvent('PanoramaComponent_P2CEMatchmaking_OnPlayerJoinedLobby', this.playerJoin.bind(this));
+		//$.RegisterForUnhandledEvent('PanoramaComponent_P2CEMatchmaking_OnPlayerLeftLobby', this.playerLeft.bind(this));
 
 		// Set of test player entries.
 		this.playerJoin(UserAPI.GetXUID(), true);	// You
@@ -98,6 +98,16 @@ class LobbyMenu {
 		this.playerJoin('76561199136235250'); 		// lenship2
 		this.playerJoin('76561198827650159'); 		// D0ctorZer0 (Ash)
 		this.playerJoin('76561198031029097'); 		// Ozxybox
+		this.playerJoin('76561198132780615'); 		// JJl77
+		this.playerJoin('76561198037202538'); 		// HugoBDesigner
+		this.playerJoin('76561198110464793'); 		// Avery
+		this.playerJoin('76561198029590837'); 		// Smaed
+		this.playerJoin('76561198349038620'); 		// JoLoZ
+		this.playerJoin('76561198114725103'); 		// SCell555
+		this.playerJoin('76561198169437299'); 		// Hazel Rose
+		this.playerJoin('76561197960287930'); 		// Gabe Newell
+		this.playerJoin('76561199038901613'); 		// PhoenyxSource
+		this.playerJoin('76561198338990133'); 		// \n
 	}
 
 	static playerJoin(steamID: steamID, isHost: boolean = false) {
