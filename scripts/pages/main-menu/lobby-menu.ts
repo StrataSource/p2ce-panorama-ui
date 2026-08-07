@@ -1,17 +1,37 @@
 'use strict';
 
-interface PlayerInfo {
-	name: string; // Cached username
-	steamID: steamID; // User SteamID
+interface LobbySettings {
+	allowInvites: boolean; // Allowing connected clients to issue invites themselves
+	maxPlayers: number
+	visibility: LobbyVisibility;
 
-	host: boolean; // Player is host of the lobby
-	slotIndex: number; // Displayed UI slot, maybe not needed here and instead left to the UI
-
-	hasAllAddons?: boolean; // Has required installed addons
-
-	team?: Team; // Game team
+	//? Should this be overridden?
+	//multiplayerCampaignSettings: CampaignMultiPlayerOptions;
 }
 
+// TODO: Have this match the Team enum.
+const TeamName:  Array<string> = [
+	// '[HC] Any',
+	// '[HC] Invalid',
+	'[HC] Unassigned',
+	'[HC] Chell/Bendy',
+	'[HC] P-Body',
+	'[HC] Atlas'
+]
+
+
+/**
+ * Information about the player that is slotted in the UI.
+ */
+interface PlayerInfo {
+	lobbyInfo: LobbyPlayer; // Server information about the player.
+	hasAllAddons: boolean; // Does the player have the required installed addons?
+	team: Team; // Game player team.
+}
+
+/**
+ * Panel for the player slot.
+ */
 class PlayerEntry {
 
 	playerEntryPanel: Panel;
@@ -22,23 +42,24 @@ class PlayerEntry {
 	banBtn: Button;
 	steamProfileBtn: Button;
 
+	//addonMissingNotice: Panel;
 	hostIcon: Image;
 	steamFriendIcon: Image;
 
-	constructor (steamID: steamID, isHost: boolean = false) {
-		this.playerEntryPanel = $.CreatePanel('Panel', LobbyMenu.playerListPanel, steamID);
+	constructor (lobbyPlayer: LobbyPlayer) {
+		this.playerEntryPanel = $.CreatePanel('Panel', LobbyMenu.playerListPanel, lobbyPlayer.id);
 		this.playerEntryPanel.LoadLayoutSnippet('PlayerEntry');
 
 		this.playerInfo = {
-			name: FriendsAPI.GetNameForXUID(steamID),
-			steamID: steamID,
-			host: isHost,
-			slotIndex: LobbyMenu.players.size
+			lobbyInfo: lobbyPlayer,
+			hasAllAddons: true, // TODO: Replace with a API function that checks if the user does in fact have needed addons/custom content.
+			team: (LobbyMenu.players.size % 2 === 0) ? Team.TEAM_ATLAS : Team.TEAM_PBODY
 		};
 
 		this.playerAvatar = this.playerEntryPanel.FindChildTraverse('PlayerAvatar')!;
-		this.playerAvatar.steamid = steamID;
-		this.playerEntryPanel.SetDialogVariable('name', this.playerInfo.name);
+		this.playerAvatar.steamid = lobbyPlayer.id;
+		this.playerEntryPanel.SetDialogVariable('name', lobbyPlayer.name);
+		this.playerEntryPanel.SetDialogVariable('teamName', TeamName[this.playerInfo.team]); // TODO: Change to team name than team index.
 
 		this.kickBtn = this.playerEntryPanel.FindChildTraverse('KickBtn')!;
 		this.kickBtn.SetPanelEvent('onactivate', this.kickPlayer.bind(this));
@@ -49,13 +70,19 @@ class PlayerEntry {
 		this.steamProfileBtn = this.playerEntryPanel.FindChildTraverse('SteamProfileBtn')!;
 		this.steamProfileBtn.SetPanelEvent('onactivate', this.openSteamProfile.bind(this));
 
+		//this.addonMissingNotice = this.playerEntryPanel.FindChildTraverse('MissingAddons')!;
 		this.hostIcon = this.playerEntryPanel.FindChildTraverse('HostPlayerIcon')!;
 		this.steamFriendIcon = this.playerEntryPanel.FindChildTraverse('SteamFriendIcon')!;
 
 		// TODO-FIXME: No proper way to check for the host yet.
-		if (this.playerInfo.host) {
+		if (lobbyPlayer.owner) {
 			this.kickBtn.AddClass('hide');
 			this.banBtn.AddClass('hide');
+			this.hostIcon.RemoveClass('hide');
+			LobbyMenu.ownerID = lobbyPlayer.id;
+		}
+
+		if (!this.playerInfo.hasAllAddons) {
 			this.hostIcon.RemoveClass('hide');
 		}
 	}
@@ -65,7 +92,7 @@ class PlayerEntry {
 	}
 
 	kickPlayer() {
-		$.Msg(`Kicked player: ${this.playerInfo.name}`);
+		$.Msg(`Kicked player: ${this.playerInfo.lobbyInfo.name}`);
 		// TODO: Kick/Ban API
 		// LobbyMenu.playerLeft(this.playerInfo.steamID);
 	}
@@ -74,11 +101,11 @@ class PlayerEntry {
 	banPlayer() {
 		UiToolkitAPI.ShowGenericPopupYesNo(
 			'[HC] Are you sure?',
-			`[HC] Are you sure you want to ban "${this.playerInfo.name}" from the current lobby?`,
+			`[HC] Are you sure you want to ban "${this.playerInfo.lobbyInfo.name}" from the current lobby?`,
 			'generic-popup',
 			() => {
-				$.Msg(`Banned player: ${this.playerInfo.name}`);
-				LobbyMenu.banList.push(this.playerInfo.steamID);
+				$.Msg(`Banned player: ${this.playerInfo.lobbyInfo.name}`);
+				LobbyMenu.banList.push(this.playerInfo.lobbyInfo.id);
 				// TODO: Kick/Ban API
 				// LobbyMenu.playerLeft(this.playerInfo.steamID);
 			},
@@ -87,21 +114,57 @@ class PlayerEntry {
 	}
 
 	openSteamProfile() {
-		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.playerInfo.steamID}`);
+		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.playerInfo.lobbyInfo.id}`);
 	}
 }
 
 
 class LobbyMenu {
 
+	static lobbySettings: LobbySettings;
+
 	static players: Map<steamID, PlayerEntry> = new Map;
+	static ownerID: steamID = ''; // SteamID of lobby owner/host.
+
 	static banList: Array<steamID> = []; // Temp test banned player array.
 
 	static playerListPanel = $<Panel>('#PlayerList')!;
+	static startButton = $<Button>('#StartButton')!;
+
+	static music: uuid | undefined = undefined;
 
 	static onLoad() {
 		$.DispatchEvent('MainMenuHideNav', true);
 		$.DispatchEvent('MainMenuSwitchReverse', false);
+		$.DispatchEvent('MainMenuHideBackgroundImage', true);
+		$.DispatchEvent('MainMenuHideBackgroundMovie');
+
+		const c = CampaignAPI.GetActiveCampaign()!;
+		if (c) {
+			const bgMusic = (c.campaign.meta.get(CampaignMeta.BG_MUSIC) as string) ?? '';
+			const bgMovie = (c.campaign.meta.get(CampaignMeta.BG_MOVIE) as string) ?? '';
+			const bgImage = (c.campaign.meta.get(CampaignMeta.BG_IMG) as string) ?? '';
+			const basePath = getCampaignAssetPath(c);
+			const playMusic = () => {
+				if (bgMusic.length > 0) {
+					this.music = $.PlaySoundEvent(bgMusic);
+				}
+			};
+			if (bgMovie.length > 0) {
+				$.DispatchEvent('MainMenuShowBackgroundMovie', `${basePath}${bgMovie}`);
+				playMusic();
+			} else if (bgImage.length > 0) {
+				$.DispatchEvent('MainMenuShowBackgroundImage', `${basePath}${bgImage}`, true);
+				playMusic();
+			} else {
+				$.Warning('CAMPAIGN MENU: No background has been specified! Fix this now!!!');
+				$.Warning(
+					`Fields:\nbgMusic = ${bgMusic}\nbgMovie = ${bgMovie}\nbgImage = ${bgImage}\nbasePath = ${basePath}`
+				);
+				$.DispatchEvent('MainMenuShowBackgroundImage', getRandomFallbackImage(), true);
+				playMusic();
+			}
+		}
 
 		$.RegisterForUnhandledEvent(
 			'PanoramaComponent_P2CELobby_PlayerStateChanged',
@@ -111,6 +174,10 @@ class LobbyMenu {
 		);
 
 		this.refreshPlayers();
+
+		if (UserAPI.GetXUID() !== this.ownerID) {
+			this.startButton.AddClass('hide');
+		}
 	}
 
 	static refreshPlayers() {
@@ -118,18 +185,18 @@ class LobbyMenu {
 			player.destruct();
 		}
 		this.players.clear();
-		const players = P2CELobbyAPI.GetPlayerList();
-		for (const player of players) {
-			this.players.set(player.id, new PlayerEntry(player.id, player.owner));
+		for (const player of P2CELobbyAPI.GetPlayerList()) {
+			this.players.set(player.id, new PlayerEntry(player));
 		}
 	}
 
 	static dumpPlayerEntries() {
-		this.players.forEach(playerEntry => {
-			$.Msg(`Player Name: ${playerEntry.playerInfo.name}`);
-			$.Msg(`Player SteamID: ${playerEntry.playerInfo.steamID}`);
-			$.Msg(`Player Is Host?: ${playerEntry.playerInfo.host}`);
-			$.Msg(`Player Slot Index: ${playerEntry.playerInfo.slotIndex}`);
+	this.players.forEach(playerEntry => {
+			$.Msg(`Player Name: ${playerEntry.playerInfo.lobbyInfo.name}`);
+			$.Msg(`Player SteamID: ${playerEntry.playerInfo.lobbyInfo.id}`);
+			$.Msg(`Player Is Host?: ${playerEntry.playerInfo.lobbyInfo.owner}`);
+			$.Msg(`Player Has All Required Addons?: ${playerEntry.playerInfo.hasAllAddons}`);
+			$.Msg(`Player Team: ${playerEntry.playerInfo.team}`);
 			$.Msg('');
 		});
 	}
@@ -140,6 +207,8 @@ class LobbyMenu {
 			'[HC] Are you sure you want to disconnect from the current lobby?',
 			'generic-popup',
 			() => {
+				if (this.music) $.StopSoundEvent(this.music);
+				this.music = undefined;
 				P2CELobbyAPI.ExitLobby();
 			},
 			() => {}
@@ -147,6 +216,10 @@ class LobbyMenu {
 	}
 
 	static staffForceStart() {
+		if (UserAPI.GetXUID() !== this.ownerID) {
+			return;
+		}
+
 		P2CELobbyAPI.StartGameSession();
 	}
 }
