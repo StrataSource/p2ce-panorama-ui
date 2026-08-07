@@ -80,7 +80,12 @@ class CampaignEntry {
 					`addon=${this.info.bucket.addon_id}&action=1&campaign=${campaign}`
 				);
 			} else {
-				P2CELobbyAPI.CreateLobby(campaign);
+				if (this.info.campaign.multiplayer) {
+					P2CELobbyAPI.CreateLobby(campaign);
+				} else {
+					$.DispatchEvent('MainMenuAnimatedSwitch', campaign);
+					$.DispatchEvent('MainMenuCloseAllPages');
+				}
 			}
 		});
 		this.panel.SetPanelEvent('onmouseover', () => {
