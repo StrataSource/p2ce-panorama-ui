@@ -184,6 +184,14 @@ class LobbyMenu {
 			}
 		);
 
+		$.RegisterForUnhandledEvent(
+			'PanoramaComponent_P2CELobby_OnClientJoiningGame',
+			() => {
+				// closes out missing addons popup
+				UiToolkitAPI.CloseAllVisiblePopups();
+			}
+		);
+
 		this.refreshPlayers();
 
 		if (UserAPI.GetXUID() !== this.ownerID) {
