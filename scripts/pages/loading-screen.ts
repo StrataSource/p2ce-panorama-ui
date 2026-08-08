@@ -53,7 +53,10 @@ class LoadingScreenController {
 		$.Schedule(0.125, this.updateLoadingScreenInfoRepeater.bind(this));
 	}
 
-	static updateLoadingScreenInfo(mapName: string, mapGroup: string) {
+	static updateLoadingScreenInfo(info: LevelLoadInfo) {
+		const mapName = info.mapName;
+		const mapGroup = info.mapGroup;
+
 		const useTransitScreen = this.lastLoadedMapName.length > 0;
 
 		if (mapName.length > 0) this.lastLoadedMapName = mapName;
