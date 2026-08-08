@@ -6,15 +6,19 @@ class LoadingScreenController {
 	static bgEvent: number | undefined = undefined;
 	static bgEvent2: number | undefined = undefined;
 
-	static progressBar = $('#ProgressBar') as ProgressBar;
-	static bgImage1 = $('#BackgroundMapImage1') as Image;
-	static bgImage2 = $('#BackgroundMapImage2') as Image;
-	static logo = $<Image>('#Logo');
+	static progressBar = $<ProgressBar>('#ProgressBar')!;
+	static progressPanel = $<Panel>('#ProgressPanel')!;
+	static bgImage1 = $<Image>('#BackgroundMapImage1')!;
+	static bgImage2 = $<Image>('#BackgroundMapImage2')!;
+	static bgMovie = $<Movie>('#BackgroundMovie')!;
+	static logo = $<Image>('#Logo')!;
+	static spinner = $<Image>('#Spinner')!;
+	static spinnerImage = $<AnimatedImageStrip>('#SpinnerStrip')!;
 	static beBlankIfInvalid = false;
 
 	static init() {
 		$.DispatchEvent('MainMenuHideFeaturedOverlay');
-		
+
 		this.progressBar.value = 0;
 
 		this.bgImage2.RemoveClass('loadingscreen__backgroundshowanim');
@@ -66,30 +70,51 @@ class LoadingScreenController {
 		const c: CampaignPair | null = CampaignAPI.FindCampaign(mapGroup);
 		const meta = CampaignAPI.GetCampaignMeta(mapGroup); // SLOW
 
-		// set spinner
-		if (c) {
-			const img = meta ? meta.get(CampaignMeta.SQUARE_LOGO) : undefined;
-			if (this.logo) {
+		if (c && meta) {
+			// get relevant information
+
+			// Show/Hide the panel for the progress bar.
+			this.progressPanel.visible = true;
+			if ((meta.get(CampaignMeta.SHOW_PROGRESS_BAR) ?? 'true').toLowerCase() === 'false') {
+				this.progressPanel.visible = false;
+			}
+
+			// Show/Hide the panel that holds the spinner.
+			this.spinner.visible = true;
+			if ((meta.get(CampaignMeta.SHOW_SPINNER) ?? 'true').toLowerCase() === 'false') {
+				this.spinner.visible = false;
+			}
+
+			// Spinner
+			{
+				const img = meta ? meta.get(CampaignMeta.SQUARE_LOGO) : undefined;
 				if (img) {
 					this.logo.SetImage(`${getCampaignAssetPath(c)}${img}`);
 				} else {
 					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
 				}
+				const spinnerImg = meta ? meta.get(CampaignMeta.SPINNER_IMAGE) : undefined;
+				if (spinnerImg)
+					this.spinnerImage.SetImage(`${getCampaignAssetPath(c)}${spinnerImg}`);
+				else
+					this.spinnerImage.SetImage('file://{images}/menu/p2ce/spinner_strip.tga');
 			}
-		} else {
-			if (this.logo) {
-				this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
-			}
-		}
 
-		if (c && meta) {
-			// get relevant information
-
-			if (this.logo) {
+			// Logo padding
+			{
 				const pad = Number(meta.get(CampaignMeta.LOADING_LOGO_PAD));
 				if (!isNaN(pad)) {
 					this.logo.style.padding = `${pad}px`;
 				}
+			}
+
+			// Get transition/loading screen movie/video to play.
+			const movie = meta.get(useTransitScreen ? CampaignMeta.TRANSITION_SCREEN_MOVIE : CampaignMeta.LOADING_SCREEN_MOVIE) ?? '';
+			if (movie.length > 0) {
+				this.bgMovie.SetMovie(`${getCampaignAssetPath(c)}${movie}`);
+				this.bgMovie.visible = true;
+			} else {
+				this.bgMovie.visible = false;
 			}
 
 			// applies image and sets panel if it's valid
@@ -127,8 +152,15 @@ class LoadingScreenController {
 				this.bgImage2.visible = false;
 			}
 		} else {
+			// No campaign, reset to default look
+			this.progressPanel.visible = true;
+			this.spinner.visible = true;
 			this.bgImage1.visible = false;
 			this.bgImage2.visible = false;
+			this.bgMovie.visible = false;
+			this.logo.style.padding = '0px';
+			this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
+			this.spinnerImage.SetImage('file://{images}/menu/p2ce/spinner_strip.tga');
 		}
 	}
 

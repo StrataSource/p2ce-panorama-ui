@@ -27,8 +27,10 @@ declare const enum CampaignMeta {
 	SQUARE_LOGO = 'square_logo',
 	DESC = 'desc',
 	AUTHOR = 'author',
-	TRANSITION_SCREEN = 'transition_screen',
 	LOADING_SCREEN = 'loading_screen',
+	TRANSITION_SCREEN = 'transition_screen',
+	LOADING_SCREEN_MOVIE = 'loading_movie',
+	TRANSITION_SCREEN_MOVIE = 'transition_movie',
 	CHAPTER_THUMBNAIL = 'thumbnail',
 	CHAPTER_DISPLAY_MODE = 'chapter_display_mode',
 	BG_MAP = 'background_map',
@@ -38,7 +40,10 @@ declare const enum CampaignMeta {
 	MAP_LIST_IMG = 'img',
 	MAP_LIST_TITLE = 'title',
 	LOGO_HEIGHT = 'full_logo_size_preset',
-	CHAPTER_LOCKED_TITLE = 'locked_title'
+	CHAPTER_LOCKED_TITLE = 'locked_title',
+	SHOW_PROGRESS_BAR = 'show_progress_bar',
+	SHOW_SPINNER = 'show_spinner',
+	SPINNER_IMAGE = 'spinner_image'
 }
 
 declare const enum CampaignLogoSizePreset {
