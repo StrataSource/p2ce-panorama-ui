@@ -20,17 +20,16 @@
 			src=""
 			scaling="stretch-to-cover-preserve-aspect"
 		/>
+		<Movie id="BackgroundMovie" class="loadingscreen__movie" controls="full" autoplay="onload" repeat="true" hittest="false" />
 
-		<!-- todo: set the logo dynamically -->
-		<!-- Pivot (26/11/2025): Re-enabling this in the hopes that custom campaigns will be able to override this -->
-		<Panel class="loadingscreen__logo">
+		<Panel id="Spinner" class="loadingscreen__logo">
 			<AnimatedImageStrip
+				id="SpinnerStrip"
 				animating="true"
 				defaultframe="0"
 				frametime="125ms"
 				src=""
-				defaultsrc="file://{images}/menu/p2ce/spinner_strip.tga"
-				scaling="stretch-to-cover-preserve-aspect"
+				scaling="stretch-to-fit-preserve-aspect"
 			/>
 			<Image
 				id="Logo"
@@ -43,12 +42,8 @@
 		</Panel>
 
 		<Panel class="loadingscreen__fade--dark" />
-		<Panel id="LoadingScreenContents" class="loadingscreen__contents" />
 
-		<Panel id="" class="full-width full-height">
-		</Panel>
-
-		<Panel class="loadingscreen__progress-panel">
+		<Panel id="ProgressPanel" class="loadingscreen__progress-panel">
 			<Panel class="loadingscreen__grid1" hittest="false" />
 			<Panel class="loadingscreen__grid2" hittest="false" />
 			<Panel class="full-width flow-down vertical-align-center">

@@ -591,11 +591,11 @@
 				<ProgressBar id="ProgressBar1" class="progressbar" min="0.0" max="1.0" style="width: 400px;" />
 			</Panel>
 
-			<!-- <Label class="text-h3 mt-3" text="Movie (WIP)" /> -->
-			<!-- <Panel class="row my-3" style="height:360px;width:1080px;">
-				<Movie src="file://{resources}/videos/backgrounds/MomentumDark.webm" autoplay="onload" controls="full" style="width:540px;"/>
-				<Movie src="file://{resources}/videos/backgrounds/MomentumDark.webm" autoplay="onload" controls="minimal" style="width:540px;"/>
-			</Panel> -->
+			<Label class="text-h3 mt-3" text="Movie (WIP)" />
+			<Panel class="row my-3" style="height:360px;width:1080px;">
+				<Movie src="file://{resources}/videos/settings/cl_fov.webm" autoplay="onload" controls="full" style="width:540px;"/>
+				<Movie src="file://{resources}/videos/settings/ss_splitmode.webm" autoplay="onload" controls="minimal" style="width:540px;"/>
+			</Panel>
 
 			<Label class="text-h3 mt-3" text="Context Menus" />
 			<Panel class="row my-3">
