@@ -173,6 +173,17 @@ class LobbyMenu {
 			}
 		);
 
+		$.RegisterForUnhandledEvent(
+			'PanoramaComponent_P2CELobby_OnStartWithAddonsMissing',
+			() => {
+				UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					'dependencies',
+					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+					'lobbymode=1&cancelAllowed=false'
+				);
+			}
+		);
+
 		this.refreshPlayers();
 
 		if (UserAPI.GetXUID() !== this.ownerID) {

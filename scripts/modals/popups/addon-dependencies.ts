@@ -43,41 +43,72 @@ class AddonDependencies {
 	}
 
 	static onLoad() {
-		$('#CancelButton')!.SetFocus();
-		this.checkAddons();
 		$.RegisterForUnhandledEvent('PanoramaComponent_Workshop_OnAddonInstalled', (addon: AddonIndex_t) => {
 			this.newAddonInstalled(addon);
 		});
-		this.continueBtn.SetPanelEvent('onactivate', () => {
-			const ctx = $.GetContextPanel();
-			const action = ctx.GetAttributeInt('action', 0);
-			switch (action) {
-				case 0:
-					{
-						const cid = ctx.GetAttributeString('campaignId', '');
-						const chid = ctx.GetAttributeString('chapterId', '');
-						const map = ctx.GetAttributeInt('map', 0);
-
-						if (cid.length === 0 || chid.length === 0) {
-							$.Warning('Action is invalid.');
-							return;
+		if ($.GetContextPanel().GetAttributeInt('lobbymode', 0)) {
+			$('#CancelButton')!.visible = false;
+			this.continueBtn.visible = false;
+			this.header.text = '[HC] Downloading...';
+			this.desc.text = '[HC] Downloading required addon content before continuing';
+			this.checkLobbyAddons();
+		} else {
+			this.checkAddons();
+			$('#CancelButton')!.SetFocus();
+			this.continueBtn.SetPanelEvent('onactivate', () => {
+				const ctx = $.GetContextPanel();
+				const action = ctx.GetAttributeInt('action', 0);
+				switch (action) {
+					case 0:
+						{
+							const cid = ctx.GetAttributeString('campaignId', '');
+							const chid = ctx.GetAttributeString('chapterId', '');
+							const map = ctx.GetAttributeInt('map', 0);
+	
+							if (cid.length === 0 || chid.length === 0) {
+								$.Warning('Action is invalid.');
+								return;
+							}
+	
+							CampaignAPI.StartCampaign(cid, chid, map);
 						}
+						break;
+	
+					case 1:
+						$.DispatchEvent('MainMenuCloseAllPages');
+						$.DispatchEvent('MainMenuAnimatedSwitch', ctx.GetAttributeString('campaign', ''));
+						break;
+	
+					default:
+						break;
+				}
+	
+				UiToolkitAPI.CloseAllVisiblePopups();
+			});
+		}
+	}
 
-						CampaignAPI.StartCampaign(cid, chid, map);
-					}
-					break;
+	static checkLobbyAddons() {
+		const deps = P2CELobbyAPI.GetMissingAddons();
+		for (const dep of deps) {
+			const p = $.CreatePanel('Button', this.list, `${dep}`);
+			p.LoadLayoutSnippet('DependencyEntry');
+			p.SetPanelEvent('onactivate', () => {
+				SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${dep}`);
+			});
 
-				case 1:
-					$.DispatchEvent('MainMenuCloseAllPages');
-					$.DispatchEvent('MainMenuAnimatedSwitch', ctx.GetAttributeString('campaign', ''));
-					break;
-
-				default:
-					break;
+			this.entries.set(dep, p);
+		}
+		WorkshopAPI.CreateQueryUGCDetailsRequest((success: boolean, data: Array<SteamUGCDetails_t> | null) => {
+			if (!success || !data) {
+				this.markAllFailed();
+				return;
 			}
 
-			UiToolkitAPI.CloseAllVisiblePopups();
-		});
+			for (const item of data) {
+				this.setEntry(item.m_nPublishedFileId, item.m_rgchTitle, item.m_rgchDescription, item.m_rgchPreviewUrl);
+			}
+		}, deps);
 	}
 
 	static checkAddons() {
