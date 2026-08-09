@@ -160,7 +160,7 @@ class MainMenuSettings {
 			// Hide the info panel if it was displaying something on the previous page
 			this.hideInfo();
 
-			if ( tab === 'AudioSettings' ) {
+			if (tab === 'AudioSettings') {
 				// Reload closed caption state from convars.
 				this.loadCloseCaptions();
 			}
@@ -516,8 +516,8 @@ class MainMenuSettings {
 		}
 		const varCC = GameInterfaceAPI.GetSettingString('closecaption') !== '0';
 		const varSubs = GameInterfaceAPI.GetSettingString('cc_subtitles') !== '0';
-		if ( varCC ) {
-			if ( varSubs ) {
+		if (varCC) {
+			if (varSubs) {
 				this.captionsRadioSubs.SetSelected(true);
 			} else {
 				this.captionsRadioFull.SetSelected(true);
