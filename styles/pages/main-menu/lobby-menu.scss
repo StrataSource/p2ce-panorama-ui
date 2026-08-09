@@ -11,6 +11,19 @@
     background-img-opacity: 0.25;
     background-size: 55% 50%;
 
+    &__empty {
+        &__icon {
+            width: 96px;
+            height: 96px;
+        }
+
+        &__text {
+            vertical-align: center;
+            horizontal-align: center;
+            margin: 15px;
+        }
+    }
+
     &__avatar {
         width: 96px;
         height: 96px;
@@ -39,10 +52,9 @@
         }
 
         &__buttons {
-            flow-children: right;
+            flow-children: down;
             vertical-align: center;
             horizontal-align: right;
-            margin: 0px 10px 0px 10px;
         }
     }
 }
@@ -53,42 +65,37 @@
 	height: 100%;
     margin: 25px 25px 25px 25px;
 
-    &__player-list {
-        flow-children: down;
-        height: fill-parent-flow(1);
-        margin: 35px 0px 35px 35px;
-        overflow: squish scroll;
-        horizontal-align: left;
-    }
+    &__base-content {
+        flow-children: right;
+        width: fill-parent-flow(1);
+        height: 880px;
 
-    &__management-panel {
-        flow-children: down;
-		width: 630px;
-		//height: 896px;
-        height: fit-children;
-		horizontal-align: right;
-		margin: 15px;
-        border: $menu-pane-border;
-        background-color: $base-950;
-        background-image: url('file://{images}/menu/menu_grid6.png');
-        background-img-opacity: 0.05;
+        &__player-list {
+            flow-children: down;
+            height: 600px;
+            margin: 25px 0px 10px 5px;
+            padding-right: 15px;
+            overflow: squish scroll;
+            horizontal-align: left;
+        }
 
-		&__cover {
-			width: 384px;
-			height: 384px;
-			border: $menu-pane-border;
-			background-color: black;
-			box-shadow: fill rgba($base-950, 0.5) -16px 16px 32px 16px;
-		}
-		&__title {
-			max-width: 460px;
-			font-size: 32px;
-			font-weight: bold;
-			margin-left: 15px;
-			text-shadow: 0px 0px 8px 1 #000000;
-			max-height: 84px;
-			//text-overflow: ellipsis;
-		}
+        &__management-panel {
+            flow-children: down;
+            width: 770px;
+            height: 900px;
+            horizontal-align: right;
+            margin: 10px;
+            border: $menu-pane-border;
+            background-color: $base-950;
+            background-image: url('file://{images}/menu/menu_grid6.png');
+            background-img-opacity: 0.05;
+
+            &__section {
+                width: 100%;
+                background-color: $base-gradient-subtle;
+                border: $menu-pane-border;
+            }
+        }
     }
 
     &__bottom {

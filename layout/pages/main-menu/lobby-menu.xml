@@ -24,23 +24,23 @@
 						<TooltipPanel tooltip="[HC] Steam Friend">
 							<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
 						</TooltipPanel>
+
 						<Label id="Name" text="{s:name}" class="text-h5 ml-1" />
-						<Label id="Team" text="{s:teamName}" class="text-h5 ml-1" />
+						<Label id="Team" text="[HC] Team: {s:teamName}" class="text-h5 ml-1" />
 					</Panel>
 
 					<TooltipPanel id="MissingAddons" class="player-entry__body__notice fancy-red hide" style="tooltip-position: right;" tooltip="[HC] This user is missing required addons needed to play the selected content.">
 						<Label text="[HC] Missing Addons!" />
 					</TooltipPanel>
 				</Panel>
-
-				<Panel class="player-entry__body__buttons">
-					<TooltipPanel tooltip="[HC] Kick Player">
-						<Button id="KickBtn" class="button mr-1">
+				<Panel class="player-entry__body__buttons mr-1">
+					<TooltipPanel tooltip="[HC] Kick Player" style="tooltip-position: right;">
+						<Button id="KickBtn" class="button mb-1 hide">
 							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/cancel.svg" />
 						</Button>
 					</TooltipPanel>
-					<TooltipPanel tooltip="[HC] Ban Player">
-						<Button id="BanBtn" class="button mr-1 button--red">
+					<TooltipPanel tooltip="[HC] Ban Player" style="tooltip-position: right;">
+						<Button id="BanBtn" class="button button--red hide">
 							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/alert-octagon.svg" />
 						</Button>
 					</TooltipPanel>
@@ -48,9 +48,11 @@
 			</Panel>
 		</snippet>
 
-		<!-- TODO: Implement these empty entries into the player list in TS when there are open slots -->
 		<snippet name="EmptyEntry">
-			<Panel class="player-entry" />
+			<Panel class="player-entry">
+				<Image class="player-entry__empty__icon" src="file://{images}/menu/icon_lobby.png" />
+				<Label class="player-entry__empty__text text-h5" text="[HC] Waiting for player..." />
+			</Panel>
 		</snippet>
 	</snippets>
 
@@ -63,51 +65,64 @@
 		<Label
 			id="PageTagline"
 			class="mainmenu__page-tagline"
-			text="[PH] Play with your friends!"
+			text="[HC] Play with your friends!"
 		/>
 
-		<!-- <Panel id="LobbyMenuBase" class="flow-right"> -->
-			<Panel id="PlayerList" class="lobby-menu__player-list" />
-
-			<Panel id="LobbyManPanel" class="lobby-menu__management-panel">
-				<Label class="text-h5 m-4" text="[PH] TEST" />
-				<Panel class="flow-right m-2">
-					<RadioButton class="button radiobutton mr-2">
+		<Panel id="LobbyMenuBaseContent" class="lobby-menu__base-content">
+			<Panel id="PlayerList" class="lobby-menu__base-content__player-list" />
+			<Panel class="fill-width" />
+			<Panel id="LobbyManPanel" class="lobby-menu__base-content__management-panel">
+				<Label class="text-h5 m-4" text="[HC] Manage Lobby" />
+				<Panel class="flow-right m-2 vertical-align-center">
+					<RadioButton class="button radiobutton mr-2" selected="true">
 						<Label class="button__text" text="[HC] Lobby Info" />
 					</RadioButton>
-					<RadioButton class="button radiobutton radiobutton mr-2">
+					<RadioButton class="button radiobutton mr-2">
 						<Label class="button__text" text="[HC] Lobby Settings" />
 					</RadioButton>
-					<RadioButton class="button radiobutton radiobutton mr-2">
-						<Label class="button__text" text="[HC] Blah" />
+					<RadioButton class="button radiobutton mr-2">
+						<Label class="button__text" text="[HC] Ban List" />
 					</RadioButton>
 				</Panel>
-				<!-- <Label class="lobby-menu__management-panel__title" text="[PH] TEST" /> -->
+				<Panel class="lobby-menu__management-panel__section fill-height" />
+				<Panel id="LobbyManPageBottom" class="fill-width flow-down m-2">
+					<Panel class="flow-right m-2">
+						<Button
+							id="StartButton"
+							class="button mr-2"
+							onactivate="LobbyMenu.startGame();"
+							onmouseover="LobbyMenu.startToolTipShow(true);"
+							onmouseout="LobbyMenu.startToolTipShow(false);"
+						>
+							<Label class="button__text" text="Start" />
+						</Button>
+						<Button class="button mr-1" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
+							<Label class="button__text" text="Invite" />
+						</Button>
+
+
+					</Panel>
+					<Panel class="flow-right mb-2">
+						<Button class="button mr-1" onactivate="LobbyMenu.dumpSlotList()">
+							<Label class="button__text" text="[DEV] Dump Player Entry List" />
+						</Button>
+						<Button class="button mr-1" onactivate="LobbyMenu.dumpBanList()">
+							<Label class="button__text" text="[DEV] Dump Banned Player List" />
+						</Button>
+						<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+							<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
+						</Button>
+					</Panel>
+				</Panel>
 			</Panel>
 
 			<Panel id="LobbyChat" class="">
 
 			</Panel>
-		<!-- </Panel> -->
+		</Panel>
 
 
-		<Panel id="LobbyMenuBottom" class="vertical-align-bottom flow-down m-3">
-			<Label class="text-h5 mb-1" text="[STAFF ONLY] DEVELOPER CONTROLS" />
-			<Panel class="flow-right mb-2">
-				<Button class="button mr-1" onactivate="LobbyMenu.dumpPlayerEntries()">
-					<Label class="button__text" text="Dump Player Entry List" />
-				</Button>
-				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
-					<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
-				</Button>
-				<Button class="button mr-1" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
-					<Label class="button__text" text="Invite" />
-				</Button>
-				<Button id="StartButton" class="button" onactivate="LobbyMenu.staffForceStart()">
-					<Label class="button__text" text="Start" />
-				</Button>
-			</Panel>
-			<Label class="text-h5 mb-1" text="[DEV] MISC. PUBLIC CONTROLS" />
+		<Panel id="LobbyMenuBottom" class="vertical-align-bottom flow-down">
 			<Panel class="flow-right">
 				<Button class="button" onactivate="LobbyMenu.requestExit()">
 					<Label class="button__text" text="[HC] Exit Lobby" />
