@@ -409,10 +409,10 @@
 		"Settings_Volume_Background_info"					"Sets the overall volume of the game while the window is out of focus."
 
 		"Settings_ClosedCaptions_Title"						"Closed Captions and Subtitles"
-		"Settings_ClosedCaptions_Enable"					"Closed Captions"
-		"Settings_ClosedCaptions_Enable_info"				"Turns on captions for hearing-impaired users. Noises and spoken dialog will be displayed on-screen for a period of time.\n<movie src=\"file://{videos}/settings/cc.webm\" />"
-		"Settings_ClosedCaptions_Subtitles"					"Subtitles"
-		"Settings_ClosedCaptions_Subtitles_info"			"Enabling this option will cause dialog to only be displayed on-screen. Requires the Closed Captions setting to be enabled.\n<movie src=\"file://{videos}/settings/cc_subtitles.webm\" />"
+		"Settings_ClosedCaptions_Mode"						"Mode"
+		"Settings_ClosedCaptions_Mode_info"					"Turns on captions for hearing-impaired users. In \"Subtitles\" mode, spoken dialog will be displayed on-screen for a period of time. \"Closed Captions\" shows all noises. \n<movie src=\"file://{videos}/settings/cc.webm\" />"
+		"Settings_ClosedCaptions_Mode_SubtitlesOnly"		"Subtitles"
+		"Settings_ClosedCaptions_Mode_Full"					"Closed Captions"
 
 		// Storm - CC System Rewrite
 		"Settings_ClosedCaptions_Font"						"Font"
