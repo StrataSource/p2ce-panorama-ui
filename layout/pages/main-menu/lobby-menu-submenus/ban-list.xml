@@ -1,0 +1,19 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<!-- <include src="file://{resources}/scripts/pages/main-menu/play/shared.ts" /> -->
+		<include src="file://{resources}/scripts/pages/main-menu/lobby-menu.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="BanEntry">
+			<Label id="BanEntryName" text="">
+		</snippet>
+	</snippets>
+
+	<Panel class="lobby-menu__management-panel__section" onload="LobbyMenu.()">
+		<Panel id="LobbyManPageInsert" class="fill-width full-height flow-down" />
+	</Panel>
+</root>
