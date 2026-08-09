@@ -127,24 +127,15 @@
 					<Label class="settings-group__title" text="#Settings_ClosedCaptions_Title" tags="audio,sound,closedcaptions" />
 				</Panel>
 
+				<!-- This controls both 'closecaption' and 'cc_subtitles' convars, via callbacks -->
 				<SettingsEnum
-					text="#Settings_ClosedCaptions_Enable"
-					infomessage="#Settings_ClosedCaptions_Enable_info"
-					convar="closecaption"
+					text="#Settings_ClosedCaptions_Mode"
+					infomessage="#Settings_ClosedCaptions_Mode_info"
 					hasdocspage="false"
 				>
-					<RadioButton group="closedcaptions" text="#Common_Off" value="0" />
-					<RadioButton group="closedcaptions" text="#Common_On" value="1" />
-				</SettingsEnum>
-
-				<SettingsEnum
-					text="#Settings_ClosedCaptions_Subtitles"
-					infomessage="#Settings_ClosedCaptions_Subtitles_info"
-					convar="cc_subtitles"
-					hasdocspage="false"
-				>
-					<RadioButton group="cc_subtitles" text="#Common_Off" value="0" />
-					<RadioButton group="cc_subtitles" text="#Common_On" value="1" />
+					<RadioButton id="AudioSettingsCCDisabled"  group="closedcaptions" text="#Settings_General_Disabled" value="0" />
+					<RadioButton id="AudioSettingsCCSubtitles" group="closedcaptions" text="#Settings_ClosedCaptions_Mode_SubtitlesOnly" value="1" />
+					<RadioButton id="AudioSettingsCCFull"      group="closedcaptions" text="#Settings_ClosedCaptions_Mode_Full" value="2" />
 				</SettingsEnum>
 
 				<SettingsEnumDropDown

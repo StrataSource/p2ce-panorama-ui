@@ -45,6 +45,11 @@ class MainMenuSettings {
 	static spacerHeight: number | null = null;
 	static shouldLimitScroll = false;
 	static doingGameFade = false;
+	// Closed captions/subtitles are controlled by 2 convars, but we want
+	// to display as a single 3-way selector. Convert back and forth in the UI.
+	static captionsRadioOff: RadioButton | null = null;
+	static captionsRadioSubs: RadioButton | null = null;
+	static captionsRadioFull: RadioButton | null = null;
 
 	static {
 		// Load every tab immediately, otherwise search won't be guaranteed to find everything.
@@ -155,6 +160,11 @@ class MainMenuSettings {
 			// Hide the info panel if it was displaying something on the previous page
 			this.hideInfo();
 
+			if ( tab === 'AudioSettings' ) {
+				// Reload closed caption state from convars.
+				this.loadCloseCaptions();
+			}
+
 			if (tab !== 'SearchSettings') {
 				this.panels.navWrap.enabled = true;
 
@@ -198,6 +208,16 @@ class MainMenuSettings {
 				// The default arg that gets passed here is the panel's ID, override with the panel itself so we don't have to do a traversal find later on
 				() => this.onPageScrolled(tab, container)
 			);
+		}
+
+		if (tab === 'AudioSettings') {
+			// Fetch the three radio buttons, and bind events to make them set both convars appropriately.
+			this.captionsRadioOff = newPanel.FindChildTraverse('AudioSettingsCCDisabled');
+			this.captionsRadioSubs = newPanel.FindChildTraverse('AudioSettingsCCSubtitles');
+			this.captionsRadioFull = newPanel.FindChildTraverse('AudioSettingsCCFull');
+			this.captionsRadioOff?.SetPanelEvent('onactivate', () => this.onCloseCaptionsChanged(false, false));
+			this.captionsRadioSubs?.SetPanelEvent('onactivate', () => this.onCloseCaptionsChanged(true, true));
+			this.captionsRadioFull?.SetPanelEvent('onactivate', () => this.onCloseCaptionsChanged(true, false));
 		}
 
 		// Handler that catches OnPropertyTransitionEndEvent event for this panel and closes it
@@ -487,6 +507,29 @@ class MainMenuSettings {
 			$.persistentStorage.setItem(storageKey, dropdown.GetSelected().GetAttributeInt('value', -1));
 			if (overrideString) submitFn();
 		});
+	}
+
+	static loadCloseCaptions() {
+		if (this.captionsRadioOff === null || this.captionsRadioSubs === null || this.captionsRadioFull === null) {
+			$.Warning('No captions radio buttons?');
+			return;
+		}
+		const varCC = GameInterfaceAPI.GetSettingString('closecaption') !== '0';
+		const varSubs = GameInterfaceAPI.GetSettingString('cc_subtitles') !== '0';
+		if ( varCC ) {
+			if ( varSubs ) {
+				this.captionsRadioSubs.SetSelected(true);
+			} else {
+				this.captionsRadioFull.SetSelected(true);
+			}
+		} else {
+			this.captionsRadioOff.SetSelected(true);
+		}
+	}
+
+	static onCloseCaptionsChanged(captions: boolean, subtitles: boolean) {
+		GameInterfaceAPI.ConsoleCommand(`closecaption ${captions ? 1 : 0}`);
+		GameInterfaceAPI.ConsoleCommand(`cc_subtitles ${subtitles ? 1 : 0}`);
 	}
 
 	static setPanelInfoEvents(panel) {
