@@ -10,7 +10,11 @@
 	<snippets>
 	</snippets>
 
-	<Panel class="lobby-menu__management-panel__section" onload="LobbyMenu.()">
-		<Panel id="LobbyManPageInsert" class="fill-width full-height flow-down" />
+	<Panel class="lobby-menu__management-panel__section" onload="LobbyManPanel.onLoadInfoSubMenu()">
+        <Label class="text-h5" text="[HC] Players {i:curplayers}/{i:maxplayers}" />
+        <Panel class="mt-1 mb-1" />
+        <Label class="text-h5" text="[HC] Required Players To Start {i:curplayers}/{i:requiredplayers}" />
+		<!-- <Panel id="LobbyManInfoPage" class="fill-width full-height flow-down"> -->
+        <!-- </Panel> -->
 	</Panel>
 </root>
