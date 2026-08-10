@@ -41,7 +41,7 @@ class PlayerEntry {
 	teamIcon: Image;
 
 	constructor (lobbyPlayer: LobbyPlayer) {
-		this.playerEntryPanel = $.CreatePanel('Panel', LobbyMenu.playerListPanel, `slot_{lobbyPlayer.id}`);
+		this.playerEntryPanel = $.CreatePanel('Panel', LobbyMenu.playerListPanel, `playerslot_${lobbyPlayer.id}`);
 		this.playerEntryPanel.LoadLayoutSnippet('PlayerEntry');
 
 		this.playerInfo = {
