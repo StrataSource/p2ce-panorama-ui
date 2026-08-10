@@ -51,6 +51,19 @@
             margin: 10px 10px 0px 0px;
         }
 
+        &__team-icon {
+            margin: 10px;
+            vertical-align: center;
+            horizontal-align: center;
+            border: $menu-pane-border;
+            tooltip-position: right;
+
+            & > Image {
+                width: 64px;
+                height: 64px;
+            }
+        }
+
         &__buttons {
             flow-children: down;
             vertical-align: center;
@@ -91,10 +104,12 @@
             background-img-opacity: 0.05;
 
             &__section {
-                width: 100%;
+                margin-left: 10px;
+                margin-right: 10px;
                 background-color: $base-gradient-subtle;
                 border: $menu-pane-border;
             }
+
         }
     }
 

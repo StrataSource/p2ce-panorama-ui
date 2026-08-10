@@ -26,13 +26,19 @@
 						</TooltipPanel>
 
 						<Label id="Name" text="{s:name}" class="text-h5 ml-1" />
-						<Label id="Team" text="[HC] Team: {s:teamName}" class="text-h5 ml-1" />
+						<!-- <Label id="Team" text="[HC] Team: {s:teamName}" class="text-h5 ml-1" /> -->
 					</Panel>
 
-					<TooltipPanel id="MissingAddons" class="player-entry__body__notice fancy-red hide" style="tooltip-position: right;" tooltip="[HC] This user is missing required addons needed to play the selected content.">
-						<Label text="[HC] Missing Addons!" />
+					<TooltipPanel id="MissingAddons" class="player-entry__body__notice fancy-red hide" style="tooltip-position: bottom;" tooltip="[HC] This user is missing required addons needed to play the selected content.">
+						<Label text="[HC] Missing Addons" />
 					</TooltipPanel>
 				</Panel>
+
+				<Panel class="fill-width" />
+				<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" style="" tooltip="{s:teamName}">
+					<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
+				</TooltipPanel>
+
 				<Panel class="player-entry__body__buttons mr-1">
 					<TooltipPanel tooltip="[HC] Kick Player" style="tooltip-position: right;">
 						<Button id="KickBtn" class="button mb-1 hide">
@@ -50,7 +56,7 @@
 
 		<snippet name="EmptyEntry">
 			<Panel class="player-entry">
-				<Image class="player-entry__empty__icon" src="file://{images}/menu/icon_lobby.png" />
+				<Image id="EmptyEntryAvatar" class="player-entry__empty__icon" />
 				<Label class="player-entry__empty__text text-h5" text="[HC] Waiting for player..." />
 			</Panel>
 		</snippet>
@@ -72,19 +78,19 @@
 			<Panel id="PlayerList" class="lobby-menu__base-content__player-list" />
 			<Panel class="fill-width" />
 			<Panel id="LobbyManPanel" class="lobby-menu__base-content__management-panel">
-				<Label class="text-h5 m-4" text="[HC] Manage Lobby" />
-				<Panel class="flow-right m-2 vertical-align-center">
-					<RadioButton class="button radiobutton mr-2" selected="true">
+				<Label class="text-h4 m-4" text="[HC] Manage Lobby" />
+				<Panel class="flow-right m-2 vertical-align-center horizontal-align-center">
+					<RadioButton class="button radiobutton mr-2" selected="true" onactivate="LobbyManPanel.loadSubMenu('lobby-info')">
 						<Label class="button__text" text="[HC] Lobby Info" />
 					</RadioButton>
 					<RadioButton class="button radiobutton mr-2">
-						<Label class="button__text" text="[HC] Lobby Settings" />
+						<Label class="button__text" text="[HC] Lobby Settings" onactivate="LobbyManPanel.loadSubMenu('lobby-settings')"/>
 					</RadioButton>
 					<RadioButton class="button radiobutton mr-2">
-						<Label class="button__text" text="[HC] Ban List" />
+						<Label class="button__text" text="[HC] Ban List" onactivate="LobbyManPanel.loadSubMenu('ban-list')"/>
 					</RadioButton>
 				</Panel>
-				<Panel class="lobby-menu__management-panel__section fill-height" />
+				<Panel id="LobbyManSubMenuInsert" class="lobby-menu__management-panel__section fill-width fill-height" />
 				<Panel id="LobbyManPageBottom" class="fill-width flow-down m-2">
 					<Panel class="flow-right m-2">
 						<Button
@@ -94,13 +100,11 @@
 							onmouseover="LobbyMenu.startToolTipShow(true);"
 							onmouseout="LobbyMenu.startToolTipShow(false);"
 						>
-							<Label class="button__text" text="Start" />
+							<Label class="button__text" text="[HC] Start Game" />
 						</Button>
 						<Button class="button mr-1" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
-							<Label class="button__text" text="Invite" />
+							<Label class="button__text" text="[HC] Invite Players" />
 						</Button>
-
-
 					</Panel>
 					<Panel class="flow-right mb-2">
 						<Button class="button mr-1" onactivate="LobbyMenu.dumpSlotList()">
@@ -126,6 +130,9 @@
 			<Panel class="flow-right">
 				<Button class="button" onactivate="LobbyMenu.requestExit()">
 					<Label class="button__text" text="[HC] Exit Lobby" />
+				</Button>
+				<Button id="ClientInviteButton" class="button ml-2 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
+					<Label class="button__text" text="[HC] Invite Players" />
 				</Button>
 			</Panel>
 		</Panel>

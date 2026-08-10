@@ -45,7 +45,25 @@ declare const enum CampaignMeta {
 	CHAPTER_LOCKED_TITLE = 'locked_title',
 	SHOW_PROGRESS_BAR = 'show_progress_bar',
 	SHOW_SPINNER = 'show_spinner',
-	SPINNER_IMAGE = 'spinner_image'
+	SPINNER_IMAGE = 'spinner_image',
+
+	// TODO: THE BELOW KEYS SHOULD BE MOVED TO 'multiplayer_options` INSTEAD OF BEING A CAMPAIGN META KEY!
+	// TODO: IT'S HERE RIGHT NOW FOR TESTING SINCE 'multiplayer_options` IS HARDCODED INTO THE ENGINE!
+	MAX_NUM_TEAMS = 'max_num_teams',
+
+	EMPTY_SLOT_AVATAR_IMG = 'empty_slot_avatar_img',
+
+	TEAM_SPECTATOR_NAME = 'team_spectator_name',
+	TEAM_RED_NAME = 'team_red_name',
+	TEAM_BLUE_NAME = 'team_blue_name',
+	// TEAM_GREEN_NAME = 'team_green_name',
+	// TEAM_YELLOW_NAME = 'team_yellow_name',
+
+	TEAM_SPECTATOR_IMG = 'team_spectator_img',
+	TEAM_RED_IMG = 'team_red_img',
+	TEAM_BLUE_IMG = 'team_blue_img',
+	// TEAM_GREEN_IMG = 'team_blue_img',
+	// TEAM_YELLOW_IMG = 'team_blue_img',
 }
 
 declare const enum CampaignLogoSizePreset {
