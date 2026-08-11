@@ -117,7 +117,7 @@
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Jump" bind="+jump" tags="jump" />
-					<SettingsKeyBinder text="#Keybind_Toggle_Jump" bind="toggle_jump" tags="toggle,jump" />
+					<SettingsKeyBinder text="#Keybind_Walk" bind="+walk" tags="walk" />
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Duck" bind="+duck" tags="duck,crouch" />
@@ -128,12 +128,12 @@
 					<SettingsKeyBinder text="#Keybind_Toggle_Sprint" bind="toggle_speed" tags="toggle,sprint,run,speed" />
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
-					<SettingsKeyBinder text="#Keybind_Walk" bind="+walk" tags="walk" />
-					<SettingsKeyBinder text="#Keybind_Zoom_Toggle" bind="+zoom" tags="zoom" />
-				</Panel>
-				<Panel class="full-width flow-right">
 					<SettingsKeyBinder text="#Keybind_Zoom_In" bind="+zoom_in" tags="zoom" />
 					<SettingsKeyBinder text="#Keybind_Zoom_Out" bind="+zoom_out" tags="zoom" />
+				</Panel>
+				<Panel class="full-width flow-right">
+					<SettingsKeyBinder text="#Keybind_Zoom_Toggle" bind="+zoom" tags="zoom" />
+					<Panel class="fill-width" />
 				</Panel>
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_Weapons" />
