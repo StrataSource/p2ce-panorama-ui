@@ -147,6 +147,10 @@
 					<SettingsKeyBinder text="#Keybind_Use_Items" bind="+use" tags="use,interact" />
 				</Panel>
 				<Panel class="full-width flow-right settings-row-separator">
+					<SettingsKeyBinder text="#Keybind_Next_Weapon" bind="panorama_weapon_next" tags="attack,use,interact" />
+					<SettingsKeyBinder text="#Keybind_Prev_Weapon" bind="panorama_weapon_prev" tags="attack,use,interact" />
+				</Panel>
+				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Paintgun_NextPaint" bind="nextpaint" tags="attack,use,interact" />
 					<SettingsKeyBinder text="#Keybind_Paintgun_PrevPaint" bind="prevpaint" tags="attack,use,interact" />
 				</Panel>
