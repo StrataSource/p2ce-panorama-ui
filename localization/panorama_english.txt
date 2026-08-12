@@ -624,6 +624,8 @@
 		"Keybind_Attack_Primary"						"Primary attack"
 		"Keybind_Attack_Secondary"						"Secondary attack"
 		"Keybind_Reload"								"Reload"
+		"Keybind_Next_Weapon"							"Select Next weapon" 
+		"Keybind_Prev_Weapon"							"Select Previous weapon" 
 		"Keybind_Paintgun_NextPaint"					"Paint Gun: Select next paint"
 		"Keybind_Paintgun_PrevPaint"					"Paint Gun: Select previous paint"
 		"Keybind_Weapon_Category_1"						"Weapon category 1"
