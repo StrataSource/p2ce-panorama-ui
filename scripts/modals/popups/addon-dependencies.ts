@@ -101,16 +101,15 @@ class AddonDependencies {
 			this.entries.set(dep, p);
 		}
 
-		WorkshopAPI.CreateQueryUGCDetailsRequest((success: boolean, data: Array<SteamUGCDetails_t> | null) => {
-			if (!success || !data) {
-				this.markAllFailed();
-				return;
-			}
-
+		WorkshopAPI.CreateQueryUGCDetailsRequest(deps).then((data: Array<SteamUGCDetails_t|null>) => {
 			for (const item of data) {
-				this.setEntry(item.m_nPublishedFileId, item.m_rgchTitle, item.m_rgchDescription, item.m_rgchPreviewUrl);
+				if(item === null)
+					continue;
+				this.setEntry(item.nPublishedFileId, item.rgchTitle, item.rgchDescription, item.previews[0]);
 			}
-		}, deps);
+		}).catch(() => {
+			this.markAllFailed();
+		});
 	}
 
 	static setEntry(addon: PublishedFileId_t, name: string, desc: string, coverURL: string) {
