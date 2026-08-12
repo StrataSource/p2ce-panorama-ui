@@ -198,14 +198,12 @@ class PauseMenu {
 			this.mapVoteBox.visible = false;
 			this.mapWorkshopBtm.visible = false;
 		} else {
-			WorkshopAPI.CreateQueryUGCDetailsRequest(
-				// eslint-disable-next-line camelcase
-				(success: boolean, data: Array<SteamUGCDetails_t> | null) => {
-					if (!success || data === null) return;
-					this.mapAvatar.steamid = `${data[0].m_ulSteamIDOwner}`;
-				},
-				[addon.workshopid]
-			);
+			
+			WorkshopAPI.CreateQueryUGCDetailsRequest([addon.workshopid]).then((data: Array<SteamUGCDetails_t|null>) => {
+				if (data.length == 0 || data[0] === null) return;
+				this.mapAvatar.steamid = `${data[0].ulSteamIDOwner}`;
+			});
+
 			this.workshopId = addon.workshopid;
 			const votePanel = this.votePanels[WorkshopAPI.GetAddonUserRating(this.addonId)];
 			if (votePanel) votePanel.SetSelected(true);

@@ -48,12 +48,13 @@ class AddonFlyout {
 			for (const dep of missingDeps) {
 				this.addDep(`${dep}`, dep, true);
 			}
-			WorkshopAPI.CreateQueryUGCDetailsRequest((success: boolean, data: Array<SteamUGCDetails_t> | null) => {
-				if (!success || data === null) return;
+			WorkshopAPI.CreateQueryUGCDetailsRequest(missingDeps).then((data: Array<SteamUGCDetails_t|null>) => {
 				for (const dep of data) {
-					this.setDep(dep.m_nPublishedFileId, dep.m_rgchPreviewUrl);
+					if(dep === null)
+						continue;
+					this.setDep(dep.nPublishedFileId, dep.previews[0]);
 				}
-			}, missingDeps);
+			});
 		}
 		if (haveDeps) {
 			for (const dep of haveDeps) {
