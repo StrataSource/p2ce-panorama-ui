@@ -53,7 +53,7 @@ class Portal2Entry {
 					{
 						id: `${chapter}_Action`,
 						classes: ['button--nodisable'],
-						icon: 'file://{images}/download.svg'
+						icon: map.bFileExists ? 'file://{images}/play.svg' : 'file://{images}/download.svg'
 					}
 				],
 				onactivate: () => {
@@ -115,8 +115,7 @@ class Portal2Entry {
 			0,
 			{
 				enabled: !flash,
-				conditionalClasses: [{ cls: 'workshop__entry__controls__working', cond: flash }],
-				icon: 'file://{images}/download.svg'
+				conditionalClasses: [{ cls: 'workshop__entry__controls__working', cond: flash }]
 			}
 		);
 	}
