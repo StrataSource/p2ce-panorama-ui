@@ -85,8 +85,19 @@ class PauseMenu {
 					'quit-popup',
 					$.Localize('#Common_ReturnToMenu'),
 					() => {
-						GameInterfaceAPI.ConsoleCommand('disconnect');
-						$.DispatchEvent('MainMenuCloseAllPages');
+						const c = CampaignAPI.GetActiveCampaign();
+						// No campaign? Not an auto campaign? Not an addon? Local addon? Has been rated?
+						// SKIP AND LEAVE!
+						if (!c ||
+							!c.bucket.id.startsWith('auto_') ||
+							c.bucket.addon_id === -1 ||
+							WorkshopAPI.GetAddonMeta(c.bucket.addon_id).local ||
+							WorkshopAPI.GetAddonUserRating(c.bucket.addon_id) !== 0
+						) {
+							GameInterfaceAPI.ConsoleCommand('disconnect');
+							return;
+						}
+						CampaignAPI.OpenRatingMenu();
 					},
 					$.Localize('#Action_QuitToDesktop'),
 					() => {
@@ -198,9 +209,8 @@ class PauseMenu {
 			this.mapVoteBox.visible = false;
 			this.mapWorkshopBtm.visible = false;
 		} else {
-			
 			WorkshopAPI.CreateQueryUGCDetailsRequest([addon.workshopid]).then((data: Array<SteamUGCDetails_t|null>) => {
-				if (data.length == 0 || data[0] === null) return;
+				if (data.length === 0 || data[0] === null) return;
 				this.mapAvatar.steamid = `${data[0].ulSteamIDOwner}`;
 			});
 

@@ -1,0 +1,58 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/main-menu/voting-p2ce.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="MenuBackgroundLayer">
+			<Panel class="full">
+				<!-- Backbuffer blur: used to blur the backbuffer in the pause menu -->
+				<BaseBlurTarget
+					id="PauseMenuMainMenuBlur"
+					class="mainmenu__pause-blur"
+					blurrects="PauseMenuMainMenuContent"
+					hittest="false"
+				>
+					<!-- Backbuffer background -->
+					<BackbufferImagePanel hittest="false" class="mainmenu__background" />
+				</BaseBlurTarget>
+
+				<Panel id="PauseMenuMainMenuContent" hittest="false" class="mainmenu__pause-content-blur" />
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<Panel class="vertical-align-center full-width flow-down m-5" hittest="false" onload="VotingMenuP2CE.onLoad()">
+		<Panel class="flow-down full-width">
+			<Label id="MapTitle" class="map-voting__title" text="[PH] Map Title" />
+			<Panel class="flow-right">
+				<AvatarImage id="MapAuthorImg" class="map-voting__avatar" steamid="local" />
+				<Label id="MapAuthorLabel" class="map-voting__author" text="[PH] Author" />
+			</Panel>
+			<Image id="MapCover" class="map-voting__square-cover" scaling="stretch-to-cover-preserve-aspect" />
+			<Panel class="map-voting__voters">
+				<RadioButton group="vote" id="MapUpvote" class="vote upvote mr-3" onactivate="VotingMenuP2CE.setMapVote(1)">
+					<Image class="vote__icon flip-vertical" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
+				</RadioButton>
+				<RadioButton group="vote" id="MapDownvote" class="vote downvote" onactivate="VotingMenuP2CE.setMapVote(2)">
+					<Image class="vote__icon" texturewidth="96" textureheight="96" src="file://{images}/icons/thumb.svg" />
+				</RadioButton>
+			</Panel>
+		</Panel>
+		<Panel class="flow-right mt-2">
+			<Button class="button button--red mr-1" onactivate="VotingMenuP2CE.onQuitPressed()">
+				<Label class="button__text" text="#MainMenu_Navigation_Disconnect" />
+			</Button>
+			<Button id="RestartBtn" class="button button--orange mr-1" onactivate="VotingMenuP2CE.onRestartPressed()">
+				<Label class="button__text" text="#MainMenu_Navigation_Restart" />
+			</Button>
+			<Button id="QueueBtn" class="button" onactivate="VotingMenuP2CE.onChangeLevelPressed()">
+				<Label class="button__text" text="#MainMenu_Campaigns_MM_ShowWSQueue" />
+			</Button>
+		</Panel>
+	</Panel>
+</root>

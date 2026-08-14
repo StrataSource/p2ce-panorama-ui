@@ -29,6 +29,12 @@
 		border: $menu-pane-border;
 		margin: 10px 0;
 	}
+	&__square-cover {
+		width: 512px;
+		height: 512px;
+		border: $menu-pane-border;
+		margin: 10px 0;
+	}
 	&__voters {
 		flow-children: right;
 	}

@@ -134,7 +134,7 @@ class AutoMapSelector {
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuPagePreClose', (tab: string) => {
-			if (tab === 'SinglePlayer' || tab === 'StandalonePortal2MapViewer') {
+			if (tab === 'SinglePlayer' || tab === 'StandaloneP2CEMapViewer') {
 				$.DispatchEvent('MainMenuHideFeaturedOverlay');
 			}
 		});

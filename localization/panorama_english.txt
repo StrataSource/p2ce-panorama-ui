@@ -781,6 +781,7 @@
 		"MainMenu_Navigation_Disconnect"				"Exit"
 		"MainMenu_Navigation_Disconnect_Tagline"		"Return to the main menu or quit the game"
 		"MainMenu_Navigation_Disconnect_CM_Tagline"		"Leave the current campaign/map"
+		"MainMenu_Navigation_Restart"					"Restart"
 
 		// Main Menu - Home Page
 		"MainMenu_Home_Resume"							"Resume Game"
@@ -1071,6 +1072,10 @@ Please install and mount the above games first to access this campaign."
 		"Action_NewGame_Title"										"Start Game"
 		"Action_NewGame_Description"								"Are you sure you want to start a new game?\n\nPrevious progress will be lost."
 		"Action_NewGame_CampaignSetup_Description"					"Are you sure you want to start a new game with these settings?\n\nNote that previous progress will be lost and that any gameplay modifiers cannot be reverted once a new game has started."
+
+		// Restart Chamber
+		"Action_Restart_Title"										"Restart Test Chamber"
+		"Action_Restart_Description"								"Are you sure you want to restart the current Test Chamber?"
 
 		// campaign list
 

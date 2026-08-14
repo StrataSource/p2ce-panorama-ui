@@ -314,7 +314,7 @@
 			}
 
 			&__square-image {
-				width: 415px;
+				width: 417px; // compensating for border on left/right side
 				height: 415px;
 				horizontal-align: center;
 				border: $menu-pane-border;
