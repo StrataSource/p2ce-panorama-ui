@@ -296,7 +296,7 @@ class Portal2MapSelector {
 		const fileId = meta.get('file_id');
 		this.steamBtn.SetPanelEvent('onactivate', () => {
 			if (fileId) {
-				SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${fileId}`);
+				OpenWorkshopPageFromID(fileId);
 			}
 		});
 		Portal2MapSelector.portal2selected = chapter;

@@ -95,7 +95,7 @@ class AddonDependencies {
 			const p = $.CreatePanel('Button', this.list, `${dep}`);
 			p.LoadLayoutSnippet('DependencyEntry');
 			p.SetPanelEvent('onactivate', () => {
-				SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${dep}`);
+				OpenWorkshopPageFromID(dep);
 			});
 
 			this.entries.set(dep, p);

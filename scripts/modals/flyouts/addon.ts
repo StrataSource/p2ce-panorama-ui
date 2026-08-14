@@ -82,7 +82,7 @@ class AddonFlyout {
 		});
 
 		b.SetPanelEvent('onactivate', () => {
-			SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${workshopId}`);
+			OpenWorkshopPageFromID(workshopId);
 		});
 
 		const img = $.CreatePanel('Image', b, `${id}_Image`, {
@@ -116,7 +116,7 @@ class AddonFlyout {
 	}
 
 	static openInSteam() {
-		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${this.workshopId}`);
+		OpenWorkshopPageFromID(this.workshopId);
 	}
 
 	static changeVote(vote: AddonRating) {

@@ -219,7 +219,7 @@ class PauseMenu {
 	}
 
 	static openMapWorkshop() {
-		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${this.workshopId}`);
+		OpenWorkshopPageFromID(this.workshopId);
 	}
 
 	static openSteamProfile() {
