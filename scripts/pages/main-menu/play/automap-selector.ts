@@ -12,11 +12,13 @@ class AutoMapEntry {
 		const meta = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
 		this.addonId = pair.bucket.addon_id;
 
+		const isFromWorkshop = meta.workshopid !== BigInt(0);
 		FancyList_CreateEntry(
 			AutoMapSelector.insert,
 			{
-				image: meta.thumb,
+				image: meta.thumb.length > 0 ? meta.thumb : getRandomFallbackImage(),
 				title: { text: pair.campaign.title },
+				mini: { text: isFromWorkshop ? '' : $.Localize('#MainMenu_Addons_Filtering_Sort_InstallSrc_Local') },
 				genericIndicator: { text: $.Localize('#MainMenu_Content_Unplayed'), show: isNew },
 				badIndicator: { text: $.Localize('#DependencyWarning_Header'), show: this.hasMissing },
 				buttons: [
@@ -62,6 +64,11 @@ class AutoMapSelector {
 	static selectedDesc = $<Label>('#SelectedDescription')!;
 	static selectedSteam = $<Button>('#SelectedSteam')!;
 	static selectedPlay = $<Button>('#PlayBtn')!;
+	static selectedBg = $<Image>('#SelectedCoverBg')!;
+	static selectedCover = $<Image>('#SelectedCover')!;
+	static steamBtns = $<Panel>('#Steam')!;
+	static upvoteBtn = $<RadioButton>('#UpvoteBtn')!;
+	static downvoteBtn = $<RadioButton>('#DownvoteBtn')!;
 	static rightPane = $<Panel>('#RightPane')!;
 
 	static depsWrapper = $<Panel>('#DependenciesWrapper')!;
@@ -118,6 +125,7 @@ class AutoMapSelector {
 			}
 		});
 
+		installImageFallbackHandler(this.selectedCover);
 		this.populate();
 	}
 
@@ -218,6 +226,8 @@ class AutoMapSelector {
 		this.selectedSteam.SetPanelEvent('onactivate', () => {
 			OpenWorkshopPageFromID(meta.workshopid);
 		});
+		this.selectedBg.SetImage(meta.thumb);
+		this.selectedCover.SetImage(meta.thumb.length > 0 ? meta.thumb : 'file://{images}/menu/fallback/square_programmer_art_text.png');
 		if (meta.authors.length > 0) {
 			this.selectedAuthor.visible = true;
 			this.selectedAuthor.text = meta.authors[0];
@@ -260,6 +270,30 @@ class AutoMapSelector {
 			}
 		}
 		this.depsWrapper.SetHasClass('hide', !hasDeps);
+		this.steamBtns.SetHasClass('hide', meta.workshopid === BigInt(0));
+
+		// AddonRating
+		switch (WorkshopAPI.GetAddonUserRating(c.bucket.addon_id)) {
+			default:
+			case 0:
+				this.upvoteBtn.SetSelected(false);
+				this.downvoteBtn.SetSelected(false);
+				break;
+			case 1:
+				this.upvoteBtn.SetSelected(true);
+				break;
+			case 2:
+				this.downvoteBtn.SetSelected(true);
+				break;
+		}
+		this.upvoteBtn.ClearPanelEvent('onactivate');
+		this.downvoteBtn.ClearPanelEvent('onactivate');
+		this.upvoteBtn.SetPanelEvent('onactivate', () => {
+			WorkshopAPI.SetAddonUserRating(c.bucket.addon_id, 1);
+		});
+		this.downvoteBtn.SetPanelEvent('onactivate', () => {
+			WorkshopAPI.SetAddonUserRating(c.bucket.addon_id, 2);
+		});
 
 		$.DispatchEvent('MainMenuShowFeaturedOverlay', meta.thumb);
 

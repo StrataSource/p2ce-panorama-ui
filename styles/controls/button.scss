@@ -160,7 +160,6 @@
 				from(color.scale(list.nth($value, 1), $lightness: -20%)),
 				to(color.scale(list.nth($value, 1), $lightness: -80%))
 			);
-			sound: 'UIPanorama.P2CE.MenuFocus';
 		}
 	}
 }

@@ -1,4 +1,5 @@
 @use '../config' as *;
+@use '../controls/button' as *;
 @use 'sass:color';
 
 .vote {
@@ -13,14 +14,27 @@
 		height: 96px;
 	}
 }
-.vote-small {
-	width: 80px;
-	height: 80px;
+
+.vote--small {
+	width: 40px;
+	height: 40px;
+	background-color: $button-background;
+	border: $menu-pane-border;
 	&__icon {
-		width: 64px;
-		height: 64px;
+		width: 100%;
+		height: 100%;
+		margin: 5px;
+	}
+
+	&:hover {
+		sound: 'UIPanorama.P2CE.MenuSelect';
+	}
+
+	&:selected {
+		sound: 'UIPanorama.P2CE.MenuAccept';
 	}
 }
+
 .upvote {
 	&:hover {
 		background-color: gradient(
