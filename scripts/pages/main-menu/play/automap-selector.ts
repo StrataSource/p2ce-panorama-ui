@@ -216,9 +216,9 @@ class AutoMapSelector {
 		});
 		if (meta.authors.length > 0) {
 			this.selectedAuthor.visible = true;
-			for (let i = 0; i < meta.authors.length; ++i) {
-				if (i !== 0) this.selectedAuthor.text += `, ${meta.authors[i]}`;
-				else this.selectedAuthor.text = meta.authors[i];
+			this.selectedAuthor.text = meta.authors[0];
+			for (let i = 1; i < meta.authors.length; ++i) {
+				this.selectedAuthor.text += `, ${meta.authors[i]}`;
 			}
 		} else {
 			this.selectedAuthor.visible = false;
