@@ -52,7 +52,7 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
 	} else {
 		p.SetDialogVariable('title', entry.title.text);
 	}
-	if (entry.subtitle !== undefined)
+	if (entry.subtitle !== undefined && entry.subtitle.text.length > 0)
 	{
 		if (entry.subtitle.hasVars) {
 			const subtitle = p.FindChildTraverse<Label>('Subtitle')!;
@@ -65,7 +65,7 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
 	{
 		p.FindChildTraverse('Subtitle')!.AddClass('hide');
 	}
-	if (entry.mini !== undefined)
+	if (entry.mini !== undefined && entry.mini.text.length > 0)
 	{
 		if (entry.mini.hasVars) {
 			const mini = p.FindChildTraverse<Label>('Mini')!;
@@ -115,13 +115,14 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
 				btn.AddClass(cls);
 			}
 		}
-		$.CreatePanel('Image', btn, 'Icon', {
+		const img = $.CreatePanel('Image', btn, 'Icon', {
 			class: 'button__icon',
 			scaling: 'stretch-to-fit-preserve-aspect',
 			src: props.icon,
 			texturewidth: '96',
 			textureheight: '96'
 		});
+		installImageFallbackHandler(img);
 		if (props.onactivate)
 			btn.SetPanelEvent('onactivate', props.onactivate);
 	}

@@ -72,6 +72,10 @@
 				<Panel id="EntryInsert" class="fancy-list__entries fancy-list__entries__square mt-2" />
 			</Panel>
 			<Panel id="RightPane" class="horizontal-align-center vertical-align-bottom flow-down ml-2 hide">
+				<Panel class="workshop__pane__cover">
+					<Image id="SelectedCoverBg" class="workshop__pane__cover__blur" scaling="stretch-to-cover-preserve-aspect" />
+					<Image id="SelectedCover" class="workshop__pane__cover__square-image" scaling="stretch-to-fit-x-preserve-aspect" />
+				</Panel>
 				<Panel class="workshop__pane">
 					<Panel class="flow-down full-width px-3 mb-2">
 						<Label id="SelectedTitle" class="workshop__pane__title" text="[PH] Title" />
@@ -89,14 +93,33 @@
 						<Label id="SelectedDescription" class="workshop__pane__desc px-3" text="[PH] Description" html="true" />
 					</Panel>
 					<Panel class="full-width flow-right px-3">
-						<Button id="SelectedSteam" class="button mr-1">
-							<Image
-								class="button__icon"
-								texturewidth="64"
-								textureheight="64"
-								src="file://{images}/icons/steam.svg"
-							/>
-						</Button>
+						<Panel id="Steam" class="flow-right">
+							<Button id="SelectedSteam" class="button mr-1">
+								<Image
+									class="button__icon"
+									texturewidth="64"
+									textureheight="64"
+									src="file://{images}/icons/steam.svg"
+								/>
+							</Button>
+							<RadioButton
+								id="UpvoteBtn" group="detailsvote" class="vote--small upvote mr-1">
+								<Image
+									class="button__icon flip-vertical"
+									texturewidth="64"
+									textureheight="64"
+									src="file://{images}/icons/thumb.svg"
+								/>
+							</RadioButton>
+							<RadioButton id="DownvoteBtn" group="detailsvote" class="vote--small downvote mr-1">
+								<Image
+									class="button__icon"
+									texturewidth="64"
+									textureheight="64"
+									src="file://{images}/icons/thumb.svg"
+								/>
+							</RadioButton>
+						</Panel>
 						<Button id="PlayBtn" class="button--nodisable button--green fill-width">
 							<Image
 								class="button__icon"
