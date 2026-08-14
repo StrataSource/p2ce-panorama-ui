@@ -233,3 +233,7 @@ function SetSourceIndicatorFromData(indicator: GenericPanel, campaignPair: Campa
 		if (img) img.SetImage('file://{images}/social/home.svg');
 	}
 }
+
+function OpenWorkshopPageFromID(id: bigint | string) {
+	SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${id}`);
+}

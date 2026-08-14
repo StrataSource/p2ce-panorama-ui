@@ -198,7 +198,11 @@ class AutoMapSelector {
 	static setDetails(id: string) {
 		this.clearDeps();
 
-		const c = CampaignAPI.FindCampaign(id)!;
+		const c = CampaignAPI.FindCampaign(id);
+		if (!c) {
+			return;
+		}
+
 		const meta = WorkshopAPI.GetAddonMeta(c.bucket.addon_id);
 		this.selectedTitle.text = c.campaign.title;
 		this.selectedDesc.text = $.BBCodeToHTML(meta.description);
@@ -208,7 +212,7 @@ class AutoMapSelector {
 		});
 		this.selectedSteam.ClearPanelEvent('onactivate');
 		this.selectedSteam.SetPanelEvent('onactivate', () => {
-			SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${meta.workshopid}`);
+			OpenWorkshopPageFromID(meta.workshopid);
 		});
 		if (meta.authors.length > 0) {
 			this.selectedAuthor.visible = true;
@@ -285,7 +289,7 @@ class AutoMapSelector {
 		});
 
 		b.SetPanelEvent('onactivate', () => {
-			SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${workshopId}`);
+			OpenWorkshopPageFromID(workshopId);
 		});
 
 		const img = $.CreatePanel('Image', b, `${id}_Image`, {
