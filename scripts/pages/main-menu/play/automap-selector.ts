@@ -284,10 +284,10 @@ class AutoMapSelector {
 					`addon=${c.bucket.addon_id}&action=0&campaignId=${c.campaign.id}&chapterId=${c.campaign.chapters[0].id}&map=0`
 				);
 			} else {
-				CampaignAPI.StartCampaign(c.campaign.id, c.campaign.chapters[0].id, 0);
+				CampaignAPI.StartCampaign(id, c.campaign.chapters[0].id, 0);
 			}
 		} else {
-			CampaignAPI.StartCampaign(c.campaign.id, c.campaign.chapters[0].id, 0);
+			CampaignAPI.StartCampaign(id, c.campaign.chapters[0].id, 0);
 		}
 	}
 
