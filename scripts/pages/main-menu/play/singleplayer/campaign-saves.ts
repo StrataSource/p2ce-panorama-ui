@@ -1,30 +1,171 @@
 'use strict';
 
 class SaveEntry {
-	campaign: CampaignPair | undefined;
-	chapter: VirtualChapter | undefined;
 	index: number;
 	panel: Panel;
-	actionPanel: Panel | null;
 	save: GameSave;
-	nameOverride: string | undefined = undefined;
 
 	constructor(
 		index: number,
-		panel: Panel,
-		save: GameSave,
-		nameOverride?: string,
-		campaign?: CampaignPair,
-		chapter?: VirtualChapter
+		save: GameSave
 	) {
-		this.campaign = campaign;
 		this.index = index;
-		this.panel = panel;
 		this.save = save;
-		this.actionPanel = null;
-		this.nameOverride = nameOverride;
-		this.campaign = campaign;
-		this.chapter = chapter;
+
+		const c = CampaignAPI.FindCampaign(save.mapGroup);
+		const thumb = `file://{__saves}/${this.save.fileName.replace('.sav', '.tga')}`;
+		const ch = c ? c.campaign.chapters[save.chapter] : undefined;
+		let bg: string | undefined = undefined;
+		if (c) {
+			const part = ch!.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
+			const basePath = getCampaignAssetPath(c);
+			bg = `${basePath}${part}`;
+		}
+
+		const chapter = c ? c.campaign.chapters[save.chapter] : undefined;
+		let chapterName = chapter ? chapter.title : undefined;
+		if (chapterName) {
+			if (chapterName.startsWith('#')) {
+				chapterName = $.Localize(chapterName);
+			}
+			const chapterNameSplits = chapterName.split('\n');
+			if (chapterName.length > 1) {
+				chapterName = chapterNameSplits[1];
+			}
+		}
+
+		let mapName: string | undefined = undefined;
+		let automapCampaign = false;
+		if (ch) {
+			if (isSingleWsCampaign(c!)) {
+				const meta = WorkshopAPI.GetAddonMeta(c!.bucket.addon_id);
+				const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
+				const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+				mapName = convertTime(new Date(Number(this.save.fileTime)), false);
+				bg = previews[Math.floor(Math.random() * previews.length)];
+				automapCampaign = true;
+			} else {
+				for (const map of ch.maps) {
+					if (map.name === save.mapName) {
+						mapName = map.meta.get(CampaignMeta.MAP_LIST_TITLE) ?? save.mapName;
+					}
+				}
+			}
+		}
+
+		let indicatorText = '';
+		const isQuicksave = this.save.fileName.includes('quick');
+		const isAuto = this.save.isAutoSave;
+		if (isQuicksave) {
+			indicatorText = $.Localize('#MainMenu_SaveRestore_SaveType_quick');
+		} else if (isAuto) {
+			indicatorText = $.Localize('#MainMenu_SaveRestore_SaveType_autosave');
+		}
+
+		const btns: FancyListEntryBtn[] = [
+			{
+				id: 'LoadSave',
+				icon: 'file://{images}/play.svg',
+				classes: [ 'button' ],
+				onactivate: () => {
+					const loadSave = () => {
+						$.DispatchEvent('MainMenuCloseAllPages');
+						$.DispatchEvent('LoadingScreenClearLastMap');
+						$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load "${this.save.fileName}"`));
+					};
+					if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
+						loadSave();
+					} else {
+						UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+							$.Localize('#Action_LoadGame_Confirm'),
+							$.Localize('#Action_LoadGame_Message'),
+							'warning-popup',
+							$.Localize('#Action_LoadGame'),
+							() => { loadSave(); },
+							$.Localize('#UI_Cancel'),
+							() => {},
+							'blur'
+						);
+					}
+				}
+			},
+			{
+				id: 'OverwriteSave',
+				icon: 'file://{images}/download.svg',
+				classes: [ 'button' ],
+				onactivate: () => {
+					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+						$.Localize('#Action_OverwriteGame_Confirm'),
+						$.Localize('#Action_OverwriteGame_Confirm_Message'),
+						'warning-popup',
+						$.Localize('#Action_OverwriteGame'),
+						() => {
+							// TODO: Replace this with other save API
+							const savFile: string = this.save.fileName;
+							const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
+							SaveRestoreAPI.SaveGame(nameWithoutExt);
+							CampaignSaves.purgeSaveList();
+							$.Schedule(1, () => {
+								CampaignSaves.populateSaves();
+							});
+						},
+						$.Localize('#UI_Cancel'),
+						() => {},
+						'blur'
+					);
+				}
+			},
+			{
+				id: 'DeleteSave',
+				icon: 'file://{images}/delete.svg',
+				classes: [ 'button', 'button--red' ],
+				onactivate: () => {
+					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+						$.Localize('#Action_DeleteGame_Confirm'),
+						$.Localize('#Action_DeleteGame_Confirm_Message'),
+						'warning-popup',
+						$.Localize('#Action_DeleteGame'),
+						() => {
+							// TODO: Replace this with other save API
+							const savFile: string = this.save.fileName;
+							const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
+							SaveRestoreAPI.DeleteSave(nameWithoutExt);
+							
+							CampaignSaves.purgeSaveList();
+
+							$.Schedule(0.001, () => {
+								CampaignSaves.populateSaves();
+							});
+						},
+						$.Localize('#UI_Cancel'),
+						() => {},
+						'blur'
+					);
+				}
+			},
+		];
+
+
+		if (
+			GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU ||
+			CampaignSaves.saveGroup.length === 0
+		) {
+			btns.splice(1, 1);
+		}
+
+		this.panel = FancyList_CreateEntry(
+			CampaignSaves.savesPanel,
+			{
+				genericIndicator: { text: indicatorText, show: indicatorText.length > 0 },
+				image: thumb,
+				bgImage: bg,
+				title: { text: mapName ? mapName : save.mapName },
+				subtitle: chapterName ? { text: chapterName } : undefined,
+				mini: !automapCampaign ? { text: convertTime(new Date(Number(this.save.fileTime)), false) } : undefined,
+				buttons: btns
+			},
+			'Panel'
+		) as Panel;
 	}
 
 	update() {
@@ -32,26 +173,7 @@ class SaveEntry {
 		const playBtn = this.panel.FindChildTraverse('SaveLoad');
 		if (playBtn) {
 			playBtn.SetPanelEvent('onactivate', () => {
-				if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU) {
-					$.DispatchEvent('MainMenuCloseAllPages');
-					$.DispatchEvent('LoadingScreenClearLastMap');
-					$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load "${this.save.fileName}"`));
-				} else {
-					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-						$.Localize('#Action_LoadGame_Confirm'),
-						$.Localize('#Action_LoadGame_Message'),
-						'warning-popup',
-						$.Localize('#Action_LoadGame'),
-						() => {
-							$.DispatchEvent('MainMenuCloseAllPages');
-							$.DispatchEvent('LoadingScreenClearLastMap');
-							$.Schedule(0.001, () => GameInterfaceAPI.ConsoleCommand(`load "${this.save.fileName}"`));
-						},
-						$.Localize('#UI_Cancel'),
-						() => {},
-						'blur'
-					);
-				}
+				
 			});
 		}
 
@@ -82,27 +204,7 @@ class SaveEntry {
 					saveBtn.enabled = false;
 				} else {
 					saveBtn.SetPanelEvent('onactivate', () => {
-						UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-							$.Localize('#Action_OverwriteGame_Confirm'),
-							$.Localize('#Action_OverwriteGame_Confirm_Message'),
-							'warning-popup',
-							$.Localize('#Action_OverwriteGame'),
-							() => {
-								// TODO: Replace this with other save API
-								const savFile: string = this.save.fileName;
-								const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
-								SaveRestoreAPI.SaveGame(nameWithoutExt);
-
-								CampaignSaves.purgeSaveList();
-
-								$.Schedule(1, () => {
-									CampaignSaves.populateSaves();
-								});
-							},
-							$.Localize('#UI_Cancel'),
-							() => {},
-							'blur'
-						);
+						
 					});
 				}
 			}
@@ -112,27 +214,7 @@ class SaveEntry {
 		const del = this.panel.FindChildTraverse<Button>('SaveDelete');
 		if (del) {
 			del.SetPanelEvent('onactivate', () => {
-				UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-					$.Localize('#Action_DeleteGame_Confirm'),
-					$.Localize('#Action_DeleteGame_Confirm_Message'),
-					'warning-popup',
-					$.Localize('#Action_DeleteGame'),
-					() => {
-						// TODO: Replace this with other save API
-						const savFile: string = this.save.fileName;
-						const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
-						SaveRestoreAPI.DeleteSave(nameWithoutExt);
-
-						CampaignSaves.purgeSaveList();
-
-						$.Schedule(0.001, () => {
-							CampaignSaves.populateSaves();
-						});
-					},
-					$.Localize('#UI_Cancel'),
-					() => {},
-					'blur'
-				);
+				
 			});
 		}
 
@@ -258,8 +340,7 @@ class SaveEntry {
 
 class CampaignSaves {
 	static savesPanel = $<Panel>('#CampaignSaves')!;
-	static backBtn = $<Button>('#CampaignBackScreen')!;
-	static stickyPanel = $<Panel>('#CampaignSaveCreateSticky')!;
+	static savesBtn = $<Button>('#CreateSaveBtn')!;
 
 	static saveEntries: SaveEntry[] = [];
 	static createSaveBtn: Button | null = null;
@@ -282,13 +363,14 @@ class CampaignSaves {
 
 	static init() {
 		if (GameInterfaceAPI.GetGameUIState() === GameUIState.PAUSEMENU && CampaignAPI.IsCampaignActive()) {
-			this.addCreateSaveBtn();
+			this.setCreateSaveState();
 			$.DispatchEvent(
 				'MainMenuSetPageLines',
 				$.Localize('#MainMenu_SaveRestore_Main'),
 				$.Localize('#MainMenu_SaveRestore_Main_Tagline')
 			);
 		} else {
+			this.savesBtn.visible = false;
 			$.DispatchEvent(
 				'MainMenuSetPageLines',
 				$.Localize('#MainMenu_SaveRestore_Load'),
@@ -305,10 +387,7 @@ class CampaignSaves {
 
 	static populateSaves() {
 		const c = CampaignAPI.GetActiveCampaign();
-		const isWsSingle = c && (isSingleWsCampaign(c!) || isSpecialSingleWsCampaign(c!));
-		if (isWsSingle) {
-			this.saveGroup = SpecialString.AUTO_WS;
-		} else if (c) {
+		if (c) {
 			this.saveGroup = `${c.bucket.id}/${c.campaign.id}`;
 		} else {
 			UiToolkitAPI.ShowGenericPopupOk(
@@ -322,84 +401,22 @@ class CampaignSaves {
 
 		const saves = GameSavesAPI.GetGameSaves()
 			.filter((v: GameSave) => {
-				$.Msg(`SAVED GAMES: ${v.mapGroup}, ${v.mapName}, ${v.chapter}`);
-				return isWsSingle ? v.mapGroup.startsWith(this.saveGroup) : v.mapGroup === this.saveGroup;
+				return v.mapGroup === this.saveGroup;
 			})
 			.sort((a, b) => Number(b.fileTime) - Number(a.fileTime));
 
 		for (let i = 0; i < saves.length; ++i) {
-			const p = $.CreatePanel('Panel', this.savesPanel, 'save' + i);
 			const s = saves[i];
-
-			p.LoadLayoutSnippet('SaveEntrySnippet');
-
-			const realCampaign = isWsSingle ? CampaignAPI.FindCampaign(s.mapGroup) : c;
-			const savChapter: VirtualChapter | undefined =
-				realCampaign && s.chapter < realCampaign.campaign.chapters.length
-					? realCampaign.campaign.chapters[s.chapter]
-					: undefined;
-
-			if (isWsSingle && realCampaign && savChapter) {
-				savChapter.type = CampaignDataType.P2CE_SINGLE_WS_SPECIAL;
-				savChapter.meta.set(
-					CampaignMeta.CHAPTER_THUMBNAIL,
-					WorkshopAPI.GetAddonMeta(realCampaign.bucket.addon_id).thumb
-				);
-			}
-
 			this.saveEntries.push(
 				new SaveEntry(
 					i,
-					p,
-					s,
-					isWsSingle ? (realCampaign ? realCampaign.campaign.title : `MISSING: ${s.mapGroup}`) : undefined,
-					realCampaign ?? undefined,
-					savChapter
+					s
 				)
 			);
-			this.saveEntries[i].update();
 		}
-
-		if (this.saveEntries.length > 0) this.saveEntries[0].panel.SetFocus();
 	}
 
-	static addCreateSaveBtn() {
-		// create the button
-		this.createSaveBtn = $.CreatePanel('Button', this.stickyPanel, 'CreateSave');
-		this.createSaveBtn.LoadLayoutSnippet('CreateSaveSnippet');
-
-		// set save action
-		this.createSaveBtn.SetPanelEvent('onactivate', () => {
-			UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
-				$.Localize('#Action_NewSave_Confirm'),
-				$.Localize('#Action_NewSave_Confirm_Message'),
-				'generic-popup',
-				$.Localize('#UI_Yes'),
-				() => {
-					CampaignSaves.purgeSaveList();
-					GameSavesAPI.CreateSaveGame();
-
-					const checkSaving = () => {
-						$.Schedule(0.001, () => {
-							if (GameSavesAPI.IsSaveInProgress() || GameSavesAPI.IsAutosaveInProgress()) {
-								$.Schedule(0.001, checkSaving);
-								return;
-							}
-
-							CampaignSaves.populateSaves();
-						});
-					};
-
-					checkSaving();
-				},
-				$.Localize('#UI_Cancel'),
-				() => {},
-				'blur'
-			);
-		});
-
-		// disable save creation if desired
-
+	static setCreateSaveState() {
 		const noSave = GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
 		if (!noSave) return;
 
@@ -419,9 +436,32 @@ class CampaignSaves {
 			});
 		}
 	}
+	
+	static save() {
+		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+			$.Localize('#Action_NewSave_Confirm'),
+			$.Localize('#Action_NewSave_Confirm_Message'),
+			'generic-popup',
+			$.Localize('#UI_Yes'),
+			() => {
+				CampaignSaves.purgeSaveList();
+				GameSavesAPI.CreateSaveGame();
 
-	static removeCreateSaveBtn() {
-		if (this.createSaveBtn) this.createSaveBtn.DeleteAsync(0);
-		this.createSaveBtn = null;
+				const checkSaving = () => {
+					$.Schedule(1, () => {
+						if (GameSavesAPI.IsSaveInProgress() || GameSavesAPI.IsAutosaveInProgress()) {
+							$.Schedule(0.001, checkSaving);
+							return;
+						}
+						CampaignSaves.populateSaves();
+					});
+				};
+
+				checkSaving();
+			},
+			$.Localize('#UI_Cancel'),
+			() => {},
+			'blur'
+		);
 	}
 }

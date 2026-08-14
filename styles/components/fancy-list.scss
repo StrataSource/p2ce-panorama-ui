@@ -29,6 +29,26 @@
 				}
 			}
 		}
+
+		&__saves {
+			& > .fancy-list__entry {
+				& > .fancy-list__entry__top {
+					width: 228px;
+					height: 128px;
+				}
+				& .fancy-list__entry__details {
+					padding-left: 20px;
+					&__desc {
+						font-size: 24px;
+						max-height: 32px;
+					}
+					&__small {
+						font-size: 18px;
+						max-height: 22px;
+					}
+				}
+			}
+		}
 	}
 
 	&__entry {

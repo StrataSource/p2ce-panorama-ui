@@ -43,8 +43,8 @@ function FancyList_CreateEntries(target: Panel, entries: Array<FancyListEntry>) 
 	}
 }
 
-function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
-	const p = $.CreatePanel('RadioButton', target, entry.title.text);
+function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: keyof PanelTagNameMap = 'RadioButton') {
+	const p = $.CreatePanel(entryType, target, entry.title.text);
 	p.LoadLayout('file://{resources}/layout/components/fancy-list-entry.xml', false, false);
 	if (entry.title.hasVars) {
 		const title = p.FindChildTraverse<Label>('Title')!;
@@ -88,8 +88,9 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry) {
 	{
 		const img = p.FindChildTraverse<Image>('BtnBgImg')!;
 		installImageFallbackHandler(img);
-		if (entry.bgImage)
+		if (entry.bgImage) {
 			img.SetImage(entry.bgImage);
+		}
 	}
 	if (!entry.buttons)
 		return p;
