@@ -385,7 +385,13 @@ class MenuManager {
 			}
 
 			case GameUIState.PAUSEMENU: {
-				if (Portal2WorkshopAPI.IsRatingMap()) {
+				// HACKKKKKKK OH MY GOD!!!!
+				let newApiPresent = false;
+				try {
+					Portal2WorkshopAPI.GetNumMaps();
+					newApiPresent = true;
+				} catch (error) { }
+				if (newApiPresent && Portal2WorkshopAPI.IsRatingMap()) {
 					$.GetContextPanel().AddClass('menutype__voting-portal2');
 					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_VotingMenuPortal2');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/voting-p2.xml', false, false);
