@@ -89,14 +89,15 @@ class CaptionEntry {
 		this.backer.style.height = `${this.height + CloseCaptioning.settings.margin}px`;
 
 		$.RegisterEventHandler('PropertyTransitionEnd', this.panel, (s: string, prop: keyof Style) => {
-			// when the text has fully faded out, animate the height to 0
 			if (prop === 'opacity' && this.panel.IsTransparent()) {
+				// when the text has fully faded out, animate the height to 0
 				this.backer.style.height = '0px';
+				CloseCaptioning.deleteToken(token);
+				// start fading out the background box if this is the last token disappearing
+				CloseCaptioning.updateVisibility();
 				$.RegisterEventHandler('PropertyTransitionEnd', this.backer, (s: string, prop: keyof Style) => {
 					if (prop === 'height') {
 						this.panel.DeleteAsync(0);
-						CloseCaptioning.deleteToken(token);
-						CloseCaptioning.updateVisibility();
 					}
 				});
 			}
