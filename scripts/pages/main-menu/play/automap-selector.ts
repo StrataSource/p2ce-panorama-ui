@@ -266,15 +266,21 @@ class AutoMapSelector {
 	}
 
 	static play(id: string) {
-		const c = CampaignAPI.FindCampaign(id)!;
-		const deps = WorkshopAPI.GetAddonDependenciesMissing(c.bucket.addon_id);
-		if (deps !== null && deps.length > 0) {
-			$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
-			UiToolkitAPI.ShowCustomLayoutPopupParameters(
-				'dependencies',
-				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-				`addon=${c.bucket.addon_id}&action=0&campaignId=${c.campaign.id}&chapterId=${c.campaign.chapters[0].id}&map=0`
-			);
+		const c = CampaignAPI.FindCampaign(id);
+		if (!c) {
+			$.Warning('Cannot find map to start.');
+			return;
+		}
+		if (c.bucket.addon_id !== -1) {
+			const deps = WorkshopAPI.GetAddonDependenciesMissing(c.bucket.addon_id);
+			if (deps !== null && deps.length > 0) {
+				$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
+				UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					'dependencies',
+					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+					`addon=${c.bucket.addon_id}&action=0&campaignId=${c.campaign.id}&chapterId=${c.campaign.chapters[0].id}&map=0`
+				);
+			}
 		} else {
 			CampaignAPI.StartCampaign(c.campaign.id, c.campaign.chapters[0].id, 0);
 		}
