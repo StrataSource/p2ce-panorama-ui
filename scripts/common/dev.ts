@@ -134,6 +134,10 @@ function isBucketSingleWsCampaign(b: CampaignBucket) {
 	return b.id.startsWith(SpecialString.AUTO_WS);
 }
 
+function isP2WS(c: CampaignPair) {
+	return c.bucket.id.startsWith('addon:p2ce_p2ws');
+}
+
 function getChapterThumbnail(p: CampaignPair, ch: VirtualChapter) {
 	const thumb = ch.meta.get(CampaignMeta.CHAPTER_THUMBNAIL);
 	if (thumb) {

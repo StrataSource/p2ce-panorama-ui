@@ -157,6 +157,9 @@ class AutoMapSelector {
 		}
 
 		for (const bucket of buckets) {
+			// We want auto generated campaigns from map addons
+			// We do NOT want auto generated campaign from P2WS (can happen if you delete
+			// the addon's campaign script)
 			if (bucket.id.startsWith('auto_') && !bucket.id.startsWith('auto_addon:p2ce_p2ws')) {
 				const array = CampaignAPI.CampaignHasSaveData(`${bucket.id}/${bucket.campaigns[0].id}`)
 					? otherItems
@@ -280,6 +283,8 @@ class AutoMapSelector {
 					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
 					`addon=${c.bucket.addon_id}&action=0&campaignId=${c.campaign.id}&chapterId=${c.campaign.chapters[0].id}&map=0`
 				);
+			} else {
+				CampaignAPI.StartCampaign(c.campaign.id, c.campaign.chapters[0].id, 0);
 			}
 		} else {
 			CampaignAPI.StartCampaign(c.campaign.id, c.campaign.chapters[0].id, 0);

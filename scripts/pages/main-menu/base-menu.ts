@@ -230,7 +230,7 @@ class BaseMenu {
 		let savCampaign: CampaignPair | undefined;
 		for (const save of saves) {
 			savCampaign = CampaignAPI.FindCampaign(save.mapGroup) ?? undefined;
-			if (!savCampaign || savCampaign.bucket.id.startsWith('addon:p2ce_p2ws')) {
+			if (!savCampaign || isP2WS(savCampaign)) {
 				continue;
 			} else {
 				//$.Msg(`RESUME: Eligible save found: ${save.fileName}, ${save.mapName}, ${save.mapGroup}`);
