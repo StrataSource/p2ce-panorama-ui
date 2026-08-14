@@ -68,6 +68,7 @@ class AutoMapSelector {
 	static deps = $<Panel>('#Dependencies')!;
 	static depsPanels: Map<PublishedFileId_t, { btn: Button; img: Image; loader: Panel }> = new Map();
 	static depsId = 0;
+	static depsIdCounter = 0;
 
 	static init() {
 		this.cacheSearch();
@@ -227,25 +228,26 @@ class AutoMapSelector {
 		const haveDeps = WorkshopAPI.GetAddonDependencies(c.bucket.addon_id);
 		const missingDeps = WorkshopAPI.GetAddonDependenciesMissing(c.bucket.addon_id);
 		const hasDeps = (missingDeps !== null && missingDeps.length > 0) || (haveDeps !== null && haveDeps.length > 0);
-		// Generate a random number that identifies this UGC details request
+		// Identifies this UGC details request
 		// If we switch selected maps BEFORE the request finishes, we will not
 		// proceed with that information, as it no longer applies!
-		const requestId = Math.floor(Math.random() * 9999);
+		const requestId = this.depsIdCounter++;
 		this.depsId = requestId;
 		if (missingDeps && missingDeps.length > 0) {
 			for (const dep of missingDeps) {
 				this.addDep(`${dep}`, dep, true);
 			}
-			WorkshopAPI.CreateQueryUGCDetailsRequest((success: boolean, data: Array<SteamUGCDetails_t> | null) => {
-				if (!success || data === null) return;
+			WorkshopAPI.CreateQueryUGCDetailsRequest(missingDeps).then((data: Array<SteamUGCDetails_t|null>) => {
 				if (requestId !== this.depsId) {
 					$.Warning('Dependency information is outdated.');
 					return;
 				}
-				for (const dep of data) {
-					this.setDep(dep.m_nPublishedFileId, dep.m_rgchPreviewUrl);
+				for (const item of data) {
+					if(item === null)
+						continue;
+					this.setDep(item.nPublishedFileId, item.previews[0]);
 				}
-			}, missingDeps);
+			}).catch(() => { });
 		}
 		if (haveDeps) {
 			for (const dep of haveDeps) {
