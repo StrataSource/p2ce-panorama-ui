@@ -21,7 +21,7 @@ class ContentSelectorSP {
 			tabNumber = Number(lastTab);
 
 			// guard against future changes
-			if (tabNumber > this.btns.length - 1) {
+			if (tabNumber >= this.btns.length) {
 				$.persistentStorage.setItem(MiscStorageKeys.CONTENT_TAB, 0);
 				tabNumber = 0;
 			}
@@ -29,6 +29,15 @@ class ContentSelectorSP {
 		const btn = this.btns[tabNumber];
 		btn.SetFocus();
 		$.DispatchEvent('Activated', btn, PanelEventSource.PROGRAM);
+
+		// HACK!!!!
+		try {
+			Portal2WorkshopAPI.GetNumMaps();
+		} catch (error) {
+			$.Warning('P2WS is unavailable in this build.');
+			this.btns[2].visible = false;
+			$<Panel>('#Portal2BtnGap')!.visible = false;
+		}
 	}
 
 	static onTabSelected(index: number, bSave: boolean) {
