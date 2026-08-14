@@ -85,8 +85,20 @@ class PauseMenu {
 					'quit-popup',
 					$.Localize('#Common_ReturnToMenu'),
 					() => {
-						GameInterfaceAPI.ConsoleCommand('disconnect');
-						$.DispatchEvent('MainMenuCloseAllPages');
+						const c = CampaignAPI.GetActiveCampaign();
+						// No campaign? Not an auto campaign? Not an addon? Local addon? Has been rated?
+						// SKIP AND LEAVE!
+						if (
+							!c ||
+							!c.bucket.id.startsWith('auto_') ||
+							c.bucket.addon_id === -1 ||
+							WorkshopAPI.GetAddonMeta(c.bucket.addon_id).local ||
+							WorkshopAPI.GetAddonUserRating(c.bucket.addon_id) !== 0
+						) {
+							GameInterfaceAPI.ConsoleCommand('disconnect');
+							return;
+						}
+						CampaignAPI.OpenRatingMenu();
 					},
 					$.Localize('#Action_QuitToDesktop'),
 					() => {
@@ -124,7 +136,7 @@ class PauseMenu {
 		const c = CampaignAPI.GetActiveCampaign();
 		for (const btn of this.buttons) {
 			if (btn.id === 'QueueBtn') {
-				if (!c || !c.bucket.id.startsWith('auto_')) {
+				if (!c || !isSingleWsCampaign(c)) {
 					continue;
 				}
 			}
@@ -179,7 +191,7 @@ class PauseMenu {
 
 	static setMapPanel() {
 		const c = CampaignAPI.GetActiveCampaign();
-		if (!c || !c.bucket.id.startsWith('auto_')) {
+		if (!c || !isSingleWsCampaign(c)) {
 			this.mapPane.visible = false;
 			return;
 		}

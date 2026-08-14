@@ -104,6 +104,10 @@ $pane-move-time: 0.1s;
 			saturation: 0.65;
 			brightness: 0.1;
 		}
+		@at-root .menutype__voting-p2ce #MainMenuBackground {
+			saturation: 0.65;
+			brightness: 0.1;
+		}
 	}
 
 	&__featured-overlay {

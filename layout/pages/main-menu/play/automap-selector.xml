@@ -69,7 +69,7 @@
 			<Panel id="RightPane" class="horizontal-align-center vertical-align-bottom flow-down ml-2 hide">
 				<Panel class="workshop__pane__cover">
 					<Image id="SelectedCoverBg" class="workshop__pane__cover__blur" scaling="stretch-to-cover-preserve-aspect" />
-					<Image id="SelectedCover" class="workshop__pane__cover__square-image" scaling="stretch-to-fit-x-preserve-aspect" />
+					<Image id="SelectedCover" class="workshop__pane__cover__square-image" scaling="stretch-to-cover-preserve-aspect" />
 				</Panel>
 				<Panel class="workshop__pane">
 					<Panel class="flow-down full-width px-3 mb-2">

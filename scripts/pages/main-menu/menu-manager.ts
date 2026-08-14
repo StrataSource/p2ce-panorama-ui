@@ -235,32 +235,6 @@ class MenuManager {
 				$.DispatchEvent('ReloadCCSettings');
 			});
 
-			$.RegisterForUnhandledEvent(
-				'PanoramaComponent_Campaign_OnCampaignEvaluationRequested',
-				(campaign: string) => {
-					GameInterfaceAPI.ConsoleCommand('disconnect');
-					//$.DispatchEvent('MainMenuPauseGame');
-					//$.Msg(campaign);
-					//UiToolkitAPI.ShowGenericPopupThreeOptions(
-					//	'[PH] Evaluate Chamber',
-					//	'[PH] What did you think?\n(Pretend there are upvote/downvote icons here!)',
-					//	'blur',
-					//	'[HC] Next Test Chamber',
-					//	() => {
-					//		CampaignAPI.MoveToNextMap();
-					//	},
-					//	() => {
-					//	'[HC] Return to Queue',
-					//		GameInterfaceAPI.ConsoleCommand('disconnect');
-					//	'[HC] View in Workshop',
-					//	},
-					//	() => {
-					//		$.Msg('pretend that this works!');
-					//	}
-					//)
-				}
-			);
-
 			$.RegisterForUnhandledEvent('MainMenuSetPauseBlur', (doBlur: boolean) => {
 				if (doBlur) {
 					this.gradientBar.style.animation = 'FadeIn 0.1s linear 0s 1 normal forwards';
@@ -373,17 +347,17 @@ class MenuManager {
 
 		this.menuContent.visible = true;
 		$.GetContextPanel().RemoveClass('menutype__voting-portal2');
+		$.GetContextPanel().RemoveClass('menutype__voting-p2ce');
 
+		let p: Panel | undefined = undefined;
 		switch (GameInterfaceAPI.GetGameUIState()) {
 			case GameUIState.MAINMENU: {
 				if (!CampaignAPI.IsCampaignActive()) {
-					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MainMenu');
+					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_MainMenu');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/base-menu.xml', false, false);
-					p.SetReadyForDisplay(true);
 				} else {
 					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_CampaignMenu');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/campaign-menu.xml', false, false);
-					p.SetReadyForDisplay(true);
 				}
 				break;
 			}
@@ -397,13 +371,15 @@ class MenuManager {
 				} catch (error) {}
 				if (newApiPresent && Portal2WorkshopAPI.IsRatingMap()) {
 					$.GetContextPanel().AddClass('menutype__voting-portal2');
-					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_VotingMenuPortal2');
+					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_VotingMenuPortal2');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/voting-p2.xml', false, false);
-					p.SetReadyForDisplay(true);
+				} else if (CampaignAPI.IsRatingCampaign()) {
+					$.GetContextPanel().AddClass('menutype__voting-p2ce');
+					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_VotingMenuP2CE');
+					p.LoadLayout('file://{resources}/layout/pages/main-menu/voting-p2ce.xml', false, false);
 				} else {
-					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
+					p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_PauseMenu');
 					p.LoadLayout('file://{resources}/layout/pages/main-menu/pause-menu.xml', false, false);
-					p.SetReadyForDisplay(true);
 				}
 				break;
 			}
@@ -411,6 +387,9 @@ class MenuManager {
 			default:
 				$.Warning("MENU MANAGER: Don't know which menu to open for this UI state! Doing nothing!");
 				break;
+		}
+		if (p) {
+			p.SetReadyForDisplay(true);
 		}
 	}
 
