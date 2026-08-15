@@ -297,6 +297,15 @@
 					<RadioButton group="misc_solidenergy" text="#Common_On" value="1" />
 				</SettingsEnum>
 				<SettingsEnum
+					text="#Settings_Portals_ghost"
+					convar="portal_draw_ghosting"
+					infomessage="#Settings_Portals_ghost_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="portal_ghost" text="#Common_Off" value="0" />
+					<RadioButton group="portal_ghost" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
 					text="#Settings_Portals_dlight"
 					convar="r_portal_use_dlights"
 					infomessage="#Settings_Portals_dlight_info"

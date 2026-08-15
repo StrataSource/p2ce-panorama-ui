@@ -687,6 +687,8 @@
 		"Settings_Portals_PlayerFunnel_info"			"When flinging into portals, the game will attempt to correct the player's position and trajectory to avoid collision with adjacent surfaces."
 		"Settings_Portals_dlight" 						"Portal Dynamic Lighting"
 		"Settings_Portals_dlight_info" 					"Allows portals to emit light."
+		"Settings_Portals_ghost"						"Show Portal Ghosts"
+		"Settings_Portals_ghost_info"					"Show a \"ghost\" outline on a portal's position when it is obstructed from view."
 		"Settings_Portals_light_intensity" 				"Portal Lighting Intensity"
 		"Settings_Portals_light_intensity_info"			"Modifies the strength of the light given off by a portal. Requires \"Portal Dynamic Lighting\" to function."
 		"Settings_Portals_altcolors" 					"Alternate Portal Colors"
