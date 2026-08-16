@@ -20,6 +20,7 @@ type FancyListEntryBtnProps = {
 };
 
 type FancyListEntry = {
+	id?: string;
 	image?: string;
 	bgImage?: string;
 	title: { text: string, hasVars?: boolean };
@@ -44,7 +45,7 @@ function FancyList_CreateEntries(target: Panel, entries: Array<FancyListEntry>) 
 }
 
 function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: keyof PanelTagNameMap = 'RadioButton') {
-	const p = $.CreatePanel(entryType, target, entry.title.text);
+	const p = $.CreatePanel(entryType, target, entry.id ? entry.id : entry.title.text);
 	p.LoadLayout('file://{resources}/layout/components/fancy-list-entry.xml', false, false);
 	if (entry.title.hasVars) {
 		const title = p.FindChildTraverse<Label>('Title')!;
@@ -107,7 +108,7 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: 
 	const controls = p.FindChildTraverse('Controls')!;
 	for (let i = 0; i < entry.buttons.length; ++i) {
 		const props = entry.buttons[i];
-		const btn = $.CreatePanel('Button', controls, props.id);
+		const btn = $.CreatePanel('Button', controls, entry.id ? entry.id + props.id : props.id );
 		if (i !== entry.buttons.length - 1) {
 			btn.AddClass('mr-1');
 		}
@@ -124,6 +125,14 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: 
 			textureheight: '96'
 		});
 		installImageFallbackHandler(img);
+		if (props.tooltip) {
+			btn.SetPanelEvent('onmouseover', () => {
+				UiToolkitAPI.ShowTextTooltip(entry.id ? entry.id + props.id : props.id, $.Localize(props.tooltip as string));
+			});
+			btn.SetPanelEvent('onmouseout', () => {
+				UiToolkitAPI.HideTextTooltip();
+			});
+		}
 		if (props.onactivate)
 			btn.SetPanelEvent('onactivate', props.onactivate);
 	}
