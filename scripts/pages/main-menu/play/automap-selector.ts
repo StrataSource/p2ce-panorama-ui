@@ -6,17 +6,22 @@ class AutoMapEntry {
 	hasMissing = false;
 	addonId: AddonIndex_t;
 	index: number;
+	panel: RadioButton;
 
 	constructor(pair: CampaignPair, index: number, isNew: boolean) {
 		this.index = index;
 		const meta = WorkshopAPI.GetAddonMeta(pair.bucket.addon_id);
 		this.addonId = pair.bucket.addon_id;
 
+		const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
+		const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+		const bgImg = previews[0];
 		const isFromWorkshop = meta.workshopid !== BigInt(0);
-		FancyList_CreateEntry(
+		this.panel = FancyList_CreateEntry(
 			AutoMapSelector.insert,
 			{
 				image: meta.thumb.length > 0 ? meta.thumb : getRandomFallbackImage(),
+				bgImage: bgImg.length > 0 ? bgImg : undefined,
 				title: { text: pair.campaign.title },
 				mini: { text: isFromWorkshop ? '' : $.Localize('#MainMenu_Addons_Filtering_Sort_InstallSrc_Local') },
 				genericIndicator: { text: $.Localize('#MainMenu_Content_Unplayed'), show: isNew },
@@ -35,7 +40,7 @@ class AutoMapEntry {
 					AutoMapSelector.setDetails(`${pair.bucket.id}/${pair.campaign.id}`);
 				}
 			}
-		);
+		) as RadioButton;
 		this.hasMissing = false;
 		this.updateDependencies();
 	}
@@ -50,6 +55,15 @@ class AutoMapEntry {
 				badIndicator: { show: this.hasMissing }
 			}
 		);
+	}
+
+	updateImage() {
+		const meta = WorkshopAPI.GetAddonMeta(this.addonId);
+		const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
+		const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+		const bgImg = previews[0];
+		const img = this.panel.FindChildTraverse<Image>('BtnBgImg')!;
+		img.SetImage(bgImg);
 	}
 }
 
@@ -78,7 +92,7 @@ class AutoMapSelector {
 	static depsIdCounter = 0;
 
 	static init() {
-		this.cacheSearch();
+		this.cacheDetails();
 
 		$.DispatchEvent(
 			'MainMenuSetPageLines',
@@ -142,14 +156,45 @@ class AutoMapSelector {
 		}
 	}
 
-	static cacheSearch() {
+	static cacheDetails() {
 		const buckets = CampaignAPI.GetAllCampaignBuckets();
+		const items: bigint[] = [];
+		let globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
+		if (globalCache === undefined) {
+			UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] = new Map<bigint, string[]>();
+			globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]>;
+		}
 		for (const bucket of buckets) {
 			if (bucket.id.startsWith('auto_')) {
+				// Search cache
 				const meta = WorkshopAPI.GetAddonMeta(bucket.addon_id);
 				const id = `${bucket.id}/${bucket.campaigns[0].id}`;
 				this.campaignStrings.push(new AbstractSearchData(id, meta.title, id));
+
+				// Previews cache
+				if (bucket.addon_id !== -1 &&
+					!meta.local &&
+					meta.workshopid !== BigInt(0) &&
+					!globalCache.has(meta.workshopid)
+				) {
+					items.push(meta.workshopid);
+				}
 			}
+		}
+		if (items.length > 0) {
+			WorkshopAPI.CreateQueryUGCDetailsRequest(items)
+				.then((items) => {
+					for (const item of items) {
+						if (item === null)
+							continue;
+						globalCache.set(item.nPublishedFileId, item.previews);
+					}
+
+					for (const entry of this.entries) {
+						entry.updateImage();
+					}
+				}
+			);
 		}
 	}
 
@@ -226,8 +271,10 @@ class AutoMapSelector {
 		this.selectedSteam.SetPanelEvent('onactivate', () => {
 			OpenWorkshopPageFromID(meta.workshopid);
 		});
+
 		this.selectedBg.SetImage(meta.thumb);
 		this.selectedCover.SetImage(meta.thumb.length > 0 ? meta.thumb : 'file://{images}/menu/fallback/square_programmer_art_text.png');
+		
 		if (meta.authors.length > 0) {
 			this.selectedAuthor.visible = true;
 			this.selectedAuthor.text = meta.authors[0];
@@ -295,7 +342,9 @@ class AutoMapSelector {
 			WorkshopAPI.SetAddonUserRating(c.bucket.addon_id, 2);
 		});
 
-		$.DispatchEvent('MainMenuShowFeaturedOverlay', meta.thumb);
+		const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
+		const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+		$.DispatchEvent('MainMenuShowFeaturedOverlay', previews[0]);
 
 		this.rightPane.RemoveClass('hide');
 		this.rightPane.style.animation = 'Portal2MapsPaneOut 0.01s linear 0s 1 normal forwards';
@@ -315,7 +364,7 @@ class AutoMapSelector {
 				UiToolkitAPI.ShowCustomLayoutPopupParameters(
 					'dependencies',
 					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-					`addon=${c.bucket.addon_id}&action=0&campaignId=${c.campaign.id}&chapterId=${c.campaign.chapters[0].id}&map=0`
+					`addon=${c.bucket.addon_id}&action=0&campaignId=${id}&chapterId=${c.campaign.chapters[0].id}&map=0`
 				);
 			} else {
 				CampaignAPI.StartCampaign(id, c.campaign.chapters[0].id, 0);
