@@ -66,7 +66,8 @@ class SaveEntry {
 			{
 				id: 'LoadSave',
 				icon: 'file://{images}/play.svg',
-				classes: [ 'button' ],
+				classes: ['button'],
+				tooltip: '#MainMenu_SaveRestore_Load',
 				onactivate: () => {
 					const loadSave = () => {
 						$.DispatchEvent('MainMenuCloseAllPages');
@@ -91,8 +92,9 @@ class SaveEntry {
 			},
 			{
 				id: 'OverwriteSave',
-				icon: 'file://{images}/download.svg',
-				classes: [ 'button' ],
+				icon: 'file://{images}/save-overwrite.svg',
+				classes: ['button'],
+				tooltip: '#Action_OverwriteGame',
 				onactivate: () => {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 						$.Localize('#Action_OverwriteGame_Confirm'),
@@ -118,7 +120,8 @@ class SaveEntry {
 			{
 				id: 'DeleteSave',
 				icon: 'file://{images}/delete.svg',
-				classes: [ 'button', 'button--red' ],
+				classes: ['button', 'button--red'],
+				tooltip: '#Action_DeleteGame',
 				onactivate: () => {
 					UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 						$.Localize('#Action_DeleteGame_Confirm'),
@@ -130,7 +133,7 @@ class SaveEntry {
 							const savFile: string = this.save.fileName;
 							const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
 							SaveRestoreAPI.DeleteSave(nameWithoutExt);
-							
+
 							CampaignSaves.purgeSaveList();
 
 							$.Schedule(0.001, () => {
@@ -156,6 +159,7 @@ class SaveEntry {
 		this.panel = FancyList_CreateEntry(
 			CampaignSaves.savesPanel,
 			{
+				id: this.save.fileName,
 				genericIndicator: { text: indicatorText, show: indicatorText.length > 0 },
 				image: thumb,
 				bgImage: bg,
@@ -166,175 +170,6 @@ class SaveEntry {
 			},
 			'Panel'
 		) as Panel;
-	}
-
-	update() {
-		// LOAD THE SAVE
-		const playBtn = this.panel.FindChildTraverse('SaveLoad');
-		if (playBtn) {
-			playBtn.SetPanelEvent('onactivate', () => {
-				
-			});
-		}
-
-		// OVERWRITE THE SAVE
-		const saveBtn = this.panel.FindChildTraverse('SaveOverwrite');
-		if (saveBtn) {
-			if (GameInterfaceAPI.GetGameUIState() === GameUIState.MAINMENU || !CampaignAPI.IsCampaignActive()) {
-				saveBtn.visible = false;
-			} else {
-				const mapWantsSaveDisabled = GameInterfaceAPI.GetSettingBool('map_wants_save_disable');
-				const isQuicksave = this.save.fileName.startsWith('quick');
-				const disableSave = mapWantsSaveDisabled || this.save.isAutoSave || isQuicksave;
-				if (disableSave) {
-					const saveTooltip = this.panel.FindChildTraverse('SaveOverwriteTooltip');
-					if (saveTooltip) {
-						if (mapWantsSaveDisabled) {
-							saveTooltip.SetAttributeString(
-								'tooltip',
-								$.Localize('#MainMenu_SaveRestore_SaveFailed_MapWantsSaveDisabled')
-							);
-						} else if (this.save.isAutoSave || isQuicksave) {
-							saveTooltip.SetAttributeString(
-								'tooltip',
-								$.Localize('#MainMenu_SaveRestore_CannotOverwriteSave')
-							);
-						}
-					}
-					saveBtn.enabled = false;
-				} else {
-					saveBtn.SetPanelEvent('onactivate', () => {
-						
-					});
-				}
-			}
-		}
-
-		// DELETE THE SAVE
-		const del = this.panel.FindChildTraverse<Button>('SaveDelete');
-		if (del) {
-			del.SetPanelEvent('onactivate', () => {
-				
-			});
-		}
-
-		// SELECTION STUFF
-		const mainPanel = this.panel.FindChildTraverse('SaveAction')!;
-		this.actionPanel = this.panel.FindChildTraverse<Panel>('SaveControls');
-		const showActionPanel = () => {
-			if (this.actionPanel) {
-				this.actionPanel.visible = true;
-			}
-		};
-		if (this.actionPanel) {
-			const children = this.actionPanel.Children();
-			for (let i = 0; i < children.length; ++i) {
-				const child = children[i];
-				child.SetPanelEvent('onmovedown', () => {
-					const nextIndex = this.index + 1;
-					if (nextIndex < CampaignSaves.saveEntries.length) {
-						CampaignSaves.saveEntries[nextIndex].panel.SetFocus();
-					}
-				});
-				child.SetPanelEvent('onmoveup', () => {
-					const prevIndex = this.index - 1;
-					if (prevIndex >= 0) {
-						CampaignSaves.saveEntries[prevIndex].panel.SetFocus();
-					} else {
-						if (CampaignSaves.createSaveBtn) {
-							CampaignSaves.createSaveBtn.FindChildTraverse('SaveAction')!.SetFocus();
-						}
-					}
-				});
-			}
-		}
-		mainPanel.SetPanelEvent('onmouseover', showActionPanel);
-		mainPanel.SetPanelEvent('onfocus', () => {
-			showActionPanel();
-			CampaignSaves.hideActionsOnAllSaves(this.index);
-			this.panel.ScrollParentToMakePanelFit(3, false);
-			if (playBtn) {
-				playBtn.SetFocus();
-			}
-		});
-		mainPanel.SetPanelEvent('onmouseout', () => {
-			if (this.actionPanel) {
-				this.actionPanel.visible = false;
-			}
-		});
-		mainPanel.SetPanelEvent('onmoveright', () => {
-			if (this.actionPanel) {
-				const children = this.actionPanel.Children();
-				for (let i = 0; i < children.length; ++i) {
-					const child = children[i];
-					if (child.visible) {
-						child.SetFocus();
-						break;
-					}
-				}
-			}
-		});
-
-		const title = this.panel.FindChildTraverse<Label>('SaveTitle');
-
-		if (title) {
-			if (this.nameOverride) {
-				title.text = this.nameOverride;
-			} else {
-				if (!this.chapter) {
-					$.Warning('CAMPAIGN SAVES: Chapter could not be found for this map');
-					title.text = this.save.mapName;
-				} else {
-					const chapterName = $.Localize(this.chapter.title);
-					title.text = chapterName.replace('\n', ': ');
-				}
-			}
-		}
-
-		const desc = this.panel.FindChildTraverse<Label>('SaveDesc');
-		if (desc) {
-			const date = new Date(Number(this.save.fileTime));
-			desc.text = convertTime(date);
-		}
-
-		const bg = this.panel.FindChildTraverse<Image>('SaveBg');
-		if (bg) {
-			if (!this.campaign || !this.chapter) {
-				bg.visible = false;
-			} else {
-				bg.SetImage(getChapterThumbnail(this.campaign, this.chapter));
-				if (this.chapter.type === CampaignDataType.P2CE_SINGLE_WS_SPECIAL) {
-					bg.style.opacity = 0.25;
-				}
-			}
-		}
-
-		const cover = this.panel.FindChildTraverse<Image>('SaveCover');
-		if (cover) {
-			const thumb = `file://{__saves}/${this.save.fileName.replace('.sav', '.tga')}`;
-			cover.SetImage(thumb);
-		}
-
-		const type = this.panel.FindChildTraverse<Label>('SaveType');
-		if (type) {
-			const isQuicksave = this.save.fileName.includes('quick');
-			const isAuto = this.save.isAutoSave;
-
-			type.visible = isQuicksave || isAuto;
-
-			if (isQuicksave) {
-				type.text = $.Localize('#MainMenu_SaveRestore_SaveType_quick');
-			} else if (isAuto) {
-				type.text = $.Localize('#MainMenu_SaveRestore_SaveType_autosave');
-			}
-		}
-
-		const cloud = this.panel.FindChildTraverse<Image>('SaveCloud');
-		if (cloud) {
-			if (!this.save.isSavedInCloud) {
-				cloud.SetImage('file://{images}/save.svg');
-			}
-		}
 	}
 }
 
@@ -436,7 +271,7 @@ class CampaignSaves {
 			});
 		}
 	}
-	
+
 	static save() {
 		UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 			$.Localize('#Action_NewSave_Confirm'),
