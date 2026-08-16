@@ -22,8 +22,7 @@ class SaveEntry {
 			bg = `${basePath}${part}`;
 		}
 
-		const chapter = c ? c.campaign.chapters[save.chapter] : undefined;
-		let chapterName = chapter ? chapter.title : undefined;
+		let chapterName = ch ? ch.title : undefined;
 		if (chapterName) {
 			if (chapterName.startsWith('#')) {
 				chapterName = $.Localize(chapterName);
