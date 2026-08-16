@@ -154,7 +154,7 @@
 					<SettingsKeyBinder text="#Keybind_Paintgun_NextPaint" bind="nextpaint" tags="attack,use,interact" />
 					<SettingsKeyBinder text="#Keybind_Paintgun_PrevPaint" bind="prevpaint" tags="attack,use,interact" />
 				</Panel>
-				<Panel class="full-width flow-right settings-row-separator">
+				<!-- <Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_1" bind="slot1" tags="slot1" />
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_2" bind="slot2" tags="slot2" />
 				</Panel>
@@ -165,7 +165,7 @@
 				<Panel class="full-width flow-right settings-row-separator">
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_5" bind="slot5" tags="slot5" />
 					<SettingsKeyBinder text="#Keybind_Weapon_Category_6" bind="slot6" tags="slot6" />
-				</Panel>
+				</Panel> -->
 
 				<Label class="settings-group__subtitle" text="#Settings_Keybinds_MP_COOP" />
 
