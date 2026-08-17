@@ -142,11 +142,11 @@ class PlayerEntry {
 
 		const isThisClientEntry = lobbyPlayer.id === UserAPI.GetXUID();
 
+		this.teamSwitchBtn.enabled = false;
 		// TODO: Remove when the team icon placement is not influenced by the visibility of the ban and kick buttons on the host.
 		if (P2CELobbyAPI.IsLobbyOwner() && !lobbyPlayer.owner) {
 			this.kickBtn.visible = true;
 			this.banBtn.visible = true;
-			this.teamSwitchBtn.enabled = true;
 		}
 		// TODO: Temporary disabled until the team icon placement is done better.
 		// this.playerEntryPanel.SetPanelEvent('onmouseover', () => {
@@ -159,6 +159,10 @@ class PlayerEntry {
 		// 	this.kickBtn.visible = false;
 		// 	this.banBtn.visible = false;
 		// });
+
+		if (LobbyMenu.lobbySettings.canSwitchTeams) {
+			this.teamSwitchBtn.enabled = true;
+		}
 
 		this.addonMissingNotice = this.playerEntryPanel.FindChildTraverse('MissingAddons')!;
 		this.hostIcon = this.playerEntryPanel.FindChildTraverse('HostPlayerIcon')!;
@@ -489,14 +493,15 @@ class LobbyMenu {
 			}
 
 			$.Msg('------------------');
-			$.Msg('');
 			$.Msg(`basePath: ${basePath}`);
-			$.Msg(`${this.lobbySettings.maxPlayers}`);
-			$.Msg(`${this.lobbySettings.requiredPlayers}`);
-			$.Msg(`${this.lobbySettings.maxTeams}`);
-			$.Msg(`${this.lobbySettings.requiredNumTeamPlayers}`);
-			$.Msg(`${this.lobbySettings.canSwitchTeams}`);
-			$.Msg(`${this.lobbySettings.hasSpectatorMode}`);
+			$.Msg('');
+			$.Msg('Lobby Settings:');
+			$.Msg(`maxPlayers: ${this.lobbySettings.maxPlayers}`);
+			$.Msg(`requiredPlayers: ${this.lobbySettings.requiredPlayers}`);
+			$.Msg(`maxTeams: ${this.lobbySettings.maxTeams}`);
+			$.Msg(`requiredNumTeamPlayers: ${this.lobbySettings.requiredNumTeamPlayers}`);
+			$.Msg(`canSwitchTeams: ${this.lobbySettings.canSwitchTeams}`);
+			$.Msg(`hasSpectatorMode: ${this.lobbySettings.hasSpectatorMode}`);
 			$.Msg(`emptySlotAvatarSrc: ${this.emptySlotAvatarSrc}`);
 			$.Msg('Team Names:');
 			$.Msg(`${this.teamMeta[Team.TEAM_SPECTATOR].name.src}`);
