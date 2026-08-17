@@ -3,7 +3,7 @@
 .player-entry {
     flow-children: right;
     height: fit-children;
-	width: 800px;
+	width: 700px;
     margin-bottom: 10px;
     border: 1px solid #555555;
     background-color: #2a2a2a;
@@ -58,7 +58,7 @@
             border: $menu-pane-border;
             tooltip-position: right;
 
-            & > Image {
+            & > Button {
                 width: 64px;
                 height: 64px;
             }

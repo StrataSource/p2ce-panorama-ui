@@ -50,6 +50,10 @@ declare const enum CampaignMeta {
 	// TODO: THE BELOW KEYS SHOULD BE MOVED TO 'multiplayer_options` INSTEAD OF BEING A CAMPAIGN META KEY!
 	// TODO: IT'S HERE RIGHT NOW FOR TESTING SINCE 'multiplayer_options` IS HARDCODED INTO THE ENGINE!
 	MAX_NUM_TEAMS = 'max_num_teams',
+	REQUIRED_NUM_TEAM_PLAYERS = 'required_num_team_players',
+	ALLOW_CLIENT_INVITES = 'allow_client_invites',
+	CAN_SWITCH_TEAMS = 'can_switch_teams',
+	HAS_SPECTATOR_MODE = 'has_spectator_mode',
 
 	EMPTY_SLOT_AVATAR_IMG = 'empty_slot_avatar_img',
 
@@ -64,6 +68,23 @@ declare const enum CampaignMeta {
 	TEAM_BLUE_IMG = 'team_blue_img',
 	// TEAM_GREEN_IMG = 'team_blue_img',
 	// TEAM_YELLOW_IMG = 'team_blue_img',
+
+	// Clientside team based specific assets, spectator just uses red team.
+
+	TEAM_RED_BG_MUSIC = 'team_red_background_music',
+	TEAM_BLUE_BG_MUSIC = 'team_blue_background_music',
+	// TEAM_GREEN_BG_MUSIC = 'team_green_background_music',
+	// TEAM_YELLOW_BG_MUSIC = 'team_yellow_background_music'
+
+	TEAM_RED_BG_MOVIE = 'team_red_background_movie',
+	TEAM_BLUE_BG_MOVIE = 'team_blue_background_movie',
+	// TEAM_GREEN_BG_MOVIE = 'team_green_background_movie',
+	// TEAM_YELLOW_BG_MOVIE = 'team_yellow_background_movie'
+
+	TEAM_RED_BG_IMG = 'team_red_background_image',
+	TEAM_BLUE_BG_IMG = 'team_blue_background_image',
+	// TEAM_GREEN_BG_IMG = 'team_green_background_image',
+	// TEAM_YELLOW_BG_IMG = 'team_yellow_background_image'
 }
 
 declare const enum CampaignLogoSizePreset {

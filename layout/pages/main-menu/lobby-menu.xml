@@ -26,7 +26,6 @@
 						</TooltipPanel>
 
 						<Label id="Name" text="{s:name}" class="text-h5 ml-1" />
-						<!-- <Label id="Team" text="[HC] Team: {s:teamName}" class="text-h5 ml-1" /> -->
 					</Panel>
 
 					<TooltipPanel id="MissingAddons" class="player-entry__body__notice fancy-red hide" style="tooltip-position: bottom;" tooltip="[HC] This user is missing required addons needed to play the selected content.">
@@ -35,8 +34,10 @@
 				</Panel>
 
 				<Panel class="fill-width" />
-				<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" style="" tooltip="{s:teamName}">
-					<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
+				<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" style="tooltip-position: right;" tooltip="{s:teamName}">
+					<Button id="TeamSwitchBtn" enabled="false">
+						<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
+					</Button>
 				</TooltipPanel>
 
 				<Panel class="player-entry__body__buttons mr-1">
