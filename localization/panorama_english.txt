@@ -416,12 +416,12 @@
 
 		// Storm - CC System Rewrite
 		"Settings_ClosedCaptions_Font"						"Font"
-		"Settings_ClosedCaptions_Font_info"					"Determines which typeface to use for on-screen subtitles and closed captions. 
-		<font class=\"settings-font-lexend\"><h2>Lexend (P2:CE / Strata Source)</h2>It's been a long time. How have you been?</font> 
-		<font class=\"settings-font-univers\"><h2>Univers (Portal 2)</h2>I've been really busy being dead. You know, after you MURDERED ME.</font> 
+		"Settings_ClosedCaptions_Font_info"					"Determines which typeface to use for on-screen subtitles and closed captions.
+		<font class=\"settings-font-lexend\"><h2>Lexend (P2:CE / Strata Source)</h2>It's been a long time. How have you been?</font>
+		<font class=\"settings-font-univers\"><h2>Univers (Portal 2)</h2>I've been really busy being dead. You know, after you MURDERED ME.</font>
 		<font class=\"settings-font-gordin\"><h2>DIN 1451 / GorDIN (Half-Life 2)</h2>Okay. Look. We both said a lot of things that you're going to regret.</font>
-		<font class=\"settings-font-verdana\"><h2>Verdana (Legacy)</h2>But I think we can put our differences behind us. For science. You monster.</font> 
-		<font class=\"settings-font-notosans\"><h2>Noto Sans (Deck Gamepad UI)</h2>I will say, though, that since you went to all the trouble of waking me up, you must really, really love to test.</font> 
+		<font class=\"settings-font-verdana\"><h2>Verdana (Legacy)</h2>But I think we can put our differences behind us. For science. You monster.</font>
+		<font class=\"settings-font-notosans\"><h2>Noto Sans (Deck Gamepad UI)</h2>I will say, though, that since you went to all the trouble of waking me up, you must really, really love to test.</font>
 		<font class=\"settings-font-stratum2\"><h2>Stratum2 (CS:GO)</h2>I love it too. There's just one small thing we need to take care of first.</font>\n "
 		"Settings_ClosedCaptions_Font_Lexend"				"Lexend (P2:CE / Strata Source)"
 		"Settings_ClosedCaptions_Font_U0001"				"Univers (Portal 2)"
@@ -630,8 +630,8 @@
 		"Keybind_Attack_Primary"						"Primary attack"
 		"Keybind_Attack_Secondary"						"Secondary attack"
 		"Keybind_Reload"								"Reload"
-		"Keybind_Next_Weapon"							"Select Next weapon" 
-		"Keybind_Prev_Weapon"							"Select Previous weapon" 
+		"Keybind_Next_Weapon"							"Select Next weapon"
+		"Keybind_Prev_Weapon"							"Select Previous weapon"
 		"Keybind_Paintgun_NextPaint"					"Paint Gun: Select next paint"
 		"Keybind_Paintgun_PrevPaint"					"Paint Gun: Select previous paint"
 		"Keybind_Weapon_Category_1"						"Weapon category 1"
