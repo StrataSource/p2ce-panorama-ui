@@ -60,12 +60,7 @@
 						tabindex="auto"
 						selectionpos="auto"
 					>
-						<Image
-							class="button__icon"
-							texturewidth="64"
-							textureheight="64"
-							src="file://{images}/icons/steam.svg"
-						/>
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/steam.svg" />
 					</Button>
 					<TextEntry id="SearchBar" class="textentry workshop__search full-height mr-3" placeholder="#Common_SearchEllipsis" />
 				</Panel>
@@ -95,29 +90,13 @@
 					<Panel class="full-width flow-right px-3">
 						<Panel id="Steam" class="flow-right">
 							<Button id="SelectedSteam" class="button mr-1">
-								<Image
-									class="button__icon"
-									texturewidth="64"
-									textureheight="64"
-									src="file://{images}/icons/steam.svg"
-								/>
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/steam.svg" />
 							</Button>
-							<RadioButton
-								id="UpvoteBtn" group="detailsvote" class="vote--small upvote mr-1">
-								<Image
-									class="button__icon flip-vertical"
-									texturewidth="64"
-									textureheight="64"
-									src="file://{images}/icons/thumb.svg"
-								/>
+							<RadioButton id="UpvoteBtn" group="detailsvote" class="vote--small upvote mr-1">
+								<Image class="button__icon flip-vertical" texturewidth="64" textureheight="64" src="file://{images}/icons/thumb.svg" />
 							</RadioButton>
 							<RadioButton id="DownvoteBtn" group="detailsvote" class="vote--small downvote mr-1">
-								<Image
-									class="button__icon"
-									texturewidth="64"
-									textureheight="64"
-									src="file://{images}/icons/thumb.svg"
-								/>
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/thumb.svg" />
 							</RadioButton>
 						</Panel>
 						<Button id="PlayBtn" class="button--nodisable button--green fill-width">

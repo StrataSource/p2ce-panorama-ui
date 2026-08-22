@@ -20,7 +20,14 @@
 			src=""
 			scaling="stretch-to-cover-preserve-aspect"
 		/>
-		<Movie id="BackgroundMovie" class="loadingscreen__movie" controls="full" autoplay="onload" repeat="true" hittest="false" />
+		<Movie
+			id="BackgroundMovie"
+			class="loadingscreen__movie"
+			controls="full"
+			autoplay="onload"
+			repeat="true"
+			hittest="false"
+		/>
 
 		<Panel id="Spinner" class="loadingscreen__logo">
 			<AnimatedImageStrip

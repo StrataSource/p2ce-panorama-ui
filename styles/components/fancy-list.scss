@@ -59,7 +59,7 @@
 		flow-children: right;
 		background-color: $base-950;
 		border: $menu-pane-border;
-		transition: width 0.1s ease-in-out 0.0s;
+		transition: width 0.1s ease-in-out 0s;
 
 		$this: &;
 
@@ -112,7 +112,7 @@
 
 		.InputKeyboard &:hover:not(:disabled):not(:parentdisabled):not(:selected),
 		.InputController &:focus:not(:disabled):not(:parentdisabled) {
-			background-color: gradient( linear, 0% 0%, 100% 0%, from( $button-background-hover-color ), to( $base-950 ) );
+			background-color: gradient(linear, 0% 0%, 100% 0%, from($button-background-hover-color), to($base-950));
 			border-color: $primary-color;
 			#{$this}__cover {
 				opacity: 0.9;
@@ -131,7 +131,7 @@
 
 		&:selected {
 			width: 992px;
-			background-color: gradient( linear, 100% 0%, 0% 0%, from( $button-background-hover-color ), to( $base-950 ) );
+			background-color: gradient(linear, 100% 0%, 0% 0%, from($button-background-hover-color), to($base-950));
 			border-color: $primary-color;
 			#{$this}__cover {
 				opacity: 0.9;
@@ -198,7 +198,7 @@
 			&__working.button--p2-blue,
 			&__working.button--green,
 			&__working.button--red {
-				animation: OpacityStrobe 1.0s linear 0s infinite normal forwards;
+				animation: OpacityStrobe 1s linear 0s infinite normal forwards;
 				saturation: 0.5;
 			}
 
@@ -219,7 +219,7 @@
 		&:disabled,
 		&:parentdisabled {
 			opacity: 0.25;
-			
+
 			#{$this}__cover {
 				blur: fastgaussian(15, 15, 4);
 				saturation: 0;

@@ -198,11 +198,13 @@ class PauseMenu {
 			this.mapVoteBox.visible = false;
 			this.mapWorkshopBtm.visible = false;
 		} else {
-			
-			WorkshopAPI.CreateQueryUGCDetailsRequest([addon.workshopid]).then((data: Array<SteamUGCDetails_t|null>) => {
-				if (data.length == 0 || data[0] === null) return;
-				this.mapAvatar.steamid = `${data[0].ulSteamIDOwner}`;
-			});
+			WorkshopAPI.CreateQueryUGCDetailsRequest([addon.workshopid]).then(
+				// eslint-disable-next-line camelcase
+				(data: Array<SteamUGCDetails_t | null>) => {
+					if (data.length === 0 || data[0] === null) return;
+					this.mapAvatar.steamid = `${data[0].ulSteamIDOwner}`;
+				}
+			);
 
 			this.workshopId = addon.workshopid;
 			const votePanel = this.votePanels[WorkshopAPI.GetAddonUserRating(this.addonId)];

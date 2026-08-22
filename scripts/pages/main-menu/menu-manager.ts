@@ -316,7 +316,11 @@ class MenuManager {
 						// dont play the fade animation if it's an autogen'd campaign
 						// we jump into it directly and this would cause the unblur anim
 						// to play when we open the pause menu
-						if (campaign === null || !campaign.startsWith('auto_') || !campaign.startsWith('addon:p2ce_p2ws')) {
+						if (
+							campaign === null ||
+							!campaign.startsWith('auto_') ||
+							!campaign.startsWith('addon:p2ce_p2ws')
+						) {
 							$.DispatchEvent('MainMenuSwitchFade', false, true);
 						}
 						this.deleteMenus();
@@ -390,7 +394,7 @@ class MenuManager {
 				try {
 					Portal2WorkshopAPI.GetNumMaps();
 					newApiPresent = true;
-				} catch (error) { }
+				} catch (error) {}
 				if (newApiPresent && Portal2WorkshopAPI.IsRatingMap()) {
 					$.GetContextPanel().AddClass('menutype__voting-portal2');
 					const p = $.CreatePanel('Panel', this.menuForeground, 'MenuMode_VotingMenuPortal2');

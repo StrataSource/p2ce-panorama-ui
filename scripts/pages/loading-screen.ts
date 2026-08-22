@@ -94,10 +94,8 @@ class LoadingScreenController {
 					this.logo.SetImage('file://{images}/menu/p2ce/logo.png');
 				}
 				const spinnerImg = meta ? meta.get(CampaignMeta.SPINNER_IMAGE) : undefined;
-				if (spinnerImg)
-					this.spinnerImage.SetImage(`${getCampaignAssetPath(c)}${spinnerImg}`);
-				else
-					this.spinnerImage.SetImage('file://{images}/menu/p2ce/spinner_strip.tga');
+				if (spinnerImg) this.spinnerImage.SetImage(`${getCampaignAssetPath(c)}${spinnerImg}`);
+				else this.spinnerImage.SetImage('file://{images}/menu/p2ce/spinner_strip.tga');
 			}
 
 			// Logo padding
@@ -109,7 +107,9 @@ class LoadingScreenController {
 			}
 
 			// Get transition/loading screen movie/video to play.
-			const movie = meta.get(useTransitScreen ? CampaignMeta.TRANSITION_SCREEN_MOVIE : CampaignMeta.LOADING_SCREEN_MOVIE) ?? '';
+			const movie =
+				meta.get(useTransitScreen ? CampaignMeta.TRANSITION_SCREEN_MOVIE : CampaignMeta.LOADING_SCREEN_MOVIE) ??
+				'';
 			if (movie.length > 0) {
 				this.bgMovie.SetMovie(`${getCampaignAssetPath(c)}${movie}`);
 				this.bgMovie.visible = true;

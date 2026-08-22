@@ -203,8 +203,7 @@ $gradients-primary: (
 		color.scale($p2-blue, $lightness: -80%)
 	),
 	'p2-orange': (
-		$p2-orange
-		color.scale($p2-orange, $lightness: -80%)
+		$p2-orange color.scale($p2-orange, $lightness: -80%)
 	),
 	'blue': (
 		$mid-blue,
