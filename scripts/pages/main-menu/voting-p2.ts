@@ -21,8 +21,7 @@ class VotingMenuPortal2 {
 		$.DispatchEvent('MainMenuSwitchReverse', false);
 
 		const data = Portal2WorkshopAPI.GetVotingData();
-		if (data.mapIndex === -1)
-			return;
+		if (data.mapIndex === -1) return;
 
 		this.mapIndex = data.mapIndex;
 
@@ -45,8 +44,7 @@ class VotingMenuPortal2 {
 
 		const owner = meta.get('owner') ?? '';
 		let ownerName = FriendsAPI.GetNameForXUID(owner);
-		if (ownerName.length === 0 || ownerName === '[unknown]')
-			ownerName = meta.get('owner_name') ?? '[unknown]';
+		if (ownerName.length === 0 || ownerName === '[unknown]') ownerName = meta.get('owner_name') ?? '[unknown]';
 		this.authorImg.steamid = owner;
 		this.authorLabel.text = ownerName;
 	}
@@ -83,9 +81,7 @@ class VotingMenuPortal2 {
 		);
 	}
 
-	static onNextLevelPressed() {
-
-	}
+	static onNextLevelPressed() {}
 
 	static onChangeLevelPressed() {
 		$.DispatchEvent(

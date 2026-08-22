@@ -14,33 +14,30 @@ class AutoMapEntry {
 		this.addonId = pair.bucket.addon_id;
 
 		const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
-		const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+		const previews = globalCache ? (globalCache.get(meta.workshopid) ?? [meta.thumb]) : [meta.thumb];
 		const bgImg = previews[0];
 		const isFromWorkshop = meta.workshopid !== BigInt(0);
-		this.panel = FancyList_CreateEntry(
-			AutoMapSelector.insert,
-			{
-				image: meta.thumb.length > 0 ? meta.thumb : getRandomFallbackImage(),
-				bgImage: bgImg.length > 0 ? bgImg : undefined,
-				title: { text: pair.campaign.title },
-				mini: { text: isFromWorkshop ? '' : $.Localize('#MainMenu_Addons_Filtering_Sort_InstallSrc_Local') },
-				genericIndicator: { text: $.Localize('#MainMenu_Content_Unplayed'), show: isNew },
-				badIndicator: { text: $.Localize('#DependencyWarning_Header'), show: this.hasMissing },
-				buttons: [
-					{
-						id: 'PlayAction',
-						classes: ['button', 'button--green'],
-						icon: 'file://{images}/play.svg',
-						onactivate: () => {
-							AutoMapSelector.play(`${pair.bucket.id}/${pair.campaign.id}`);
-						}
+		this.panel = FancyList_CreateEntry(AutoMapSelector.insert, {
+			image: meta.thumb.length > 0 ? meta.thumb : getRandomFallbackImage(),
+			bgImage: bgImg.length > 0 ? bgImg : undefined,
+			title: { text: pair.campaign.title },
+			mini: { text: isFromWorkshop ? '' : $.Localize('#MainMenu_Addons_Filtering_Sort_InstallSrc_Local') },
+			genericIndicator: { text: $.Localize('#MainMenu_Content_Unplayed'), show: isNew },
+			badIndicator: { text: $.Localize('#DependencyWarning_Header'), show: this.hasMissing },
+			buttons: [
+				{
+					id: 'PlayAction',
+					classes: ['button', 'button--green'],
+					icon: 'file://{images}/play.svg',
+					onactivate: () => {
+						AutoMapSelector.play(`${pair.bucket.id}/${pair.campaign.id}`);
 					}
-				],
-				onactivate: () => {
-					AutoMapSelector.setDetails(`${pair.bucket.id}/${pair.campaign.id}`);
 				}
+			],
+			onactivate: () => {
+				AutoMapSelector.setDetails(`${pair.bucket.id}/${pair.campaign.id}`);
 			}
-		) as RadioButton;
+		}) as RadioButton;
 		this.hasMissing = false;
 		this.updateDependencies();
 	}
@@ -48,19 +45,15 @@ class AutoMapEntry {
 	updateDependencies() {
 		const deps = WorkshopAPI.GetAddonDependenciesMissing(this.addonId);
 		this.hasMissing = deps !== null && deps.length > 0;
-		FancyList_SetEntryProps(
-			AutoMapSelector.insert,
-			this.index,
-			{
-				badIndicator: { show: this.hasMissing }
-			}
-		);
+		FancyList_SetEntryProps(AutoMapSelector.insert, this.index, {
+			badIndicator: { show: this.hasMissing }
+		});
 	}
 
 	updateImage() {
 		const meta = WorkshopAPI.GetAddonMeta(this.addonId);
 		const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
-		const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+		const previews = globalCache ? (globalCache.get(meta.workshopid) ?? [meta.thumb]) : [meta.thumb];
 		const bgImg = previews[0];
 		const img = this.panel.FindChildTraverse<Image>('BtnBgImg')!;
 		img.SetImage(bgImg);
@@ -172,7 +165,8 @@ class AutoMapSelector {
 				this.campaignStrings.push(new AbstractSearchData(id, meta.title, id));
 
 				// Previews cache
-				if (bucket.addon_id !== -1 &&
+				if (
+					bucket.addon_id !== -1 &&
 					!meta.local &&
 					meta.workshopid !== BigInt(0) &&
 					!globalCache.has(meta.workshopid)
@@ -182,19 +176,16 @@ class AutoMapSelector {
 			}
 		}
 		if (items.length > 0) {
-			WorkshopAPI.CreateQueryUGCDetailsRequest(items)
-				.then((items) => {
-					for (const item of items) {
-						if (item === null)
-							continue;
-						globalCache.set(item.nPublishedFileId, item.previews);
-					}
-
-					for (const entry of this.entries) {
-						entry.updateImage();
-					}
+			WorkshopAPI.CreateQueryUGCDetailsRequest(items).then((items) => {
+				for (const item of items) {
+					if (item === null) continue;
+					globalCache.set(item.nPublishedFileId, item.previews);
 				}
-			);
+
+				for (const entry of this.entries) {
+					entry.updateImage();
+				}
+			});
 		}
 	}
 
@@ -273,8 +264,10 @@ class AutoMapSelector {
 		});
 
 		this.selectedBg.SetImage(meta.thumb);
-		this.selectedCover.SetImage(meta.thumb.length > 0 ? meta.thumb : 'file://{images}/menu/fallback/square_programmer_art_text.png');
-		
+		this.selectedCover.SetImage(
+			meta.thumb.length > 0 ? meta.thumb : 'file://{images}/menu/fallback/square_programmer_art_text.png'
+		);
+
 		if (meta.authors.length > 0) {
 			this.selectedAuthor.visible = true;
 			this.selectedAuthor.text = meta.authors[0];
@@ -297,17 +290,18 @@ class AutoMapSelector {
 			for (const dep of missingDeps) {
 				this.addDep(`${dep}`, dep, true);
 			}
-			WorkshopAPI.CreateQueryUGCDetailsRequest(missingDeps).then((data: Array<SteamUGCDetails_t|null>) => {
-				if (requestId !== this.depsId) {
-					$.Warning('Dependency information is outdated.');
-					return;
-				}
-				for (const item of data) {
-					if(item === null)
-						continue;
-					this.setDep(item.nPublishedFileId, item.previews[0]);
-				}
-			}).catch(() => { });
+			WorkshopAPI.CreateQueryUGCDetailsRequest(missingDeps)
+				.then((data: Array<SteamUGCDetails_t | null>) => {
+					if (requestId !== this.depsId) {
+						$.Warning('Dependency information is outdated.');
+						return;
+					}
+					for (const item of data) {
+						if (item === null) continue;
+						this.setDep(item.nPublishedFileId, item.previews[0]);
+					}
+				})
+				.catch(() => {});
 		}
 		if (haveDeps) {
 			for (const dep of haveDeps) {
@@ -343,7 +337,7 @@ class AutoMapSelector {
 		});
 
 		const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
-		const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+		const previews = globalCache ? (globalCache.get(meta.workshopid) ?? [meta.thumb]) : [meta.thumb];
 		$.DispatchEvent('MainMenuShowFeaturedOverlay', previews[0]);
 
 		this.rightPane.RemoveClass('hide');

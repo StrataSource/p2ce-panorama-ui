@@ -5,16 +5,16 @@ function utcTimeConvert(time: number) {
 	const date = new Date(0);
 	date.setUTCSeconds(time);
 	return `${date.toLocaleDateString(undefined, {
-				weekday: undefined,
-				month: '2-digit',
-				day: '2-digit',
-				// only display the year if we are in a different year
-				year: currentDate.getFullYear() !== date.getFullYear() ? 'numeric' : undefined
-			})} @ ${date.toLocaleTimeString(undefined, {
-				hour: '2-digit',
-				minute: '2-digit',
-				second: undefined
-			})}`;
+		weekday: undefined,
+		month: '2-digit',
+		day: '2-digit',
+		// only display the year if we are in a different year
+		year: currentDate.getFullYear() !== date.getFullYear() ? 'numeric' : undefined
+	})} @ ${date.toLocaleTimeString(undefined, {
+		hour: '2-digit',
+		minute: '2-digit',
+		second: undefined
+	})}`;
 }
 
 class Portal2Entry {
@@ -34,33 +34,29 @@ class Portal2Entry {
 		const owner = meta.get('owner') ?? '';
 		const thumb = meta.get('thumbnail') ?? '';
 		let ownerName = FriendsAPI.GetNameForXUID(owner);
-		if (ownerName.length === 0 || ownerName === '[unknown]')
-			ownerName = meta.get('owner_name') ?? '[unknown]';
+		if (ownerName.length === 0 || ownerName === '[unknown]') ownerName = meta.get('owner_name') ?? '[unknown]';
 		const previewsString = meta.get('previews') ?? '';
 		this.previews = previewsString.split(' ');
 
 		this.exists = map.bFileExists;
 
-		const btn = FancyList_CreateEntry(
-			Portal2MapSelector.insert,
-			{
-				image: thumb,
-				bgImage: this.previews[0].length > 0 ? this.previews[0] : thumb,
-				title: { text: ch.title },
-				subtitle: { text: ownerName },
-				mini: { text: '[HC] Subscribed on {s:time}', hasVars: true },
-				buttons: [
-					{
-						id: `${chapter}_Action`,
-						classes: ['button--nodisable'],
-						icon: map.bFileExists ? 'file://{images}/play.svg' : 'file://{images}/download.svg'
-					}
-				],
-				onactivate: () => {
-					Portal2MapSelector.setDetailsPanel(this.entryIndex);
+		const btn = FancyList_CreateEntry(Portal2MapSelector.insert, {
+			image: thumb,
+			bgImage: this.previews[0].length > 0 ? this.previews[0] : thumb,
+			title: { text: ch.title },
+			subtitle: { text: ownerName },
+			mini: { text: '[HC] Subscribed on {s:time}', hasVars: true },
+			buttons: [
+				{
+					id: `${chapter}_Action`,
+					classes: ['button--nodisable'],
+					icon: map.bFileExists ? 'file://{images}/play.svg' : 'file://{images}/download.svg'
 				}
+			],
+			onactivate: () => {
+				Portal2MapSelector.setDetailsPanel(this.entryIndex);
 			}
-		);
+		});
 		btn.SetDialogVariable('time', utcTimeConvert(Number(meta.get('subscribed'))));
 
 		this.setExistsStatus(map.bFileExists, chapter);
@@ -70,62 +66,42 @@ class Portal2Entry {
 
 	setExistsStatus(newExists: boolean, chapter: number) {
 		if (newExists) {
-			FancyList_SetEntryControlProps(
-				Portal2MapSelector.insert,
-				this.entryIndex,
-				0,
-				{
-					removeClasses: ['button--p2-blue'],
-					addClasses: ['button--green'],
-					icon: 'file://{images}/play.svg',
-					onactivate: () => {
-						if (Portal2WorkshopAPI.IsRatingMap())
-							Portal2WorkshopAPI.VotingCompleted();
-						$.DispatchEvent('LoadingScreenClearLastMap');
-						CampaignAPI.StartCampaign('addon:p2ce_p2ws/p2ws_sp', this.startId, 0);
-					}
+			FancyList_SetEntryControlProps(Portal2MapSelector.insert, this.entryIndex, 0, {
+				removeClasses: ['button--p2-blue'],
+				addClasses: ['button--green'],
+				icon: 'file://{images}/play.svg',
+				onactivate: () => {
+					if (Portal2WorkshopAPI.IsRatingMap()) Portal2WorkshopAPI.VotingCompleted();
+					$.DispatchEvent('LoadingScreenClearLastMap');
+					CampaignAPI.StartCampaign('addon:p2ce_p2ws/p2ws_sp', this.startId, 0);
 				}
-			);
+			});
 		} else {
-			FancyList_SetEntryControlProps(
-				Portal2MapSelector.insert,
-				this.entryIndex,
-				0,
-				{
-					removeClasses: ['button--red', 'button--green'],
-					addClasses: ['button--p2-blue'],
-					icon: 'file://{images}/download.svg',
-					onactivate: () => {
-						Portal2WorkshopAPI.DownloadMap(chapter);
-						this.flashEntryBtn(true);
-						this.showThrobber(true);
-						if (Portal2MapSelector.portal2selected === chapter)
-							Portal2MapSelector.setDetailsActionBtn(true, '[HC] Downloading...');
-					}
+			FancyList_SetEntryControlProps(Portal2MapSelector.insert, this.entryIndex, 0, {
+				removeClasses: ['button--red', 'button--green'],
+				addClasses: ['button--p2-blue'],
+				icon: 'file://{images}/download.svg',
+				onactivate: () => {
+					Portal2WorkshopAPI.DownloadMap(chapter);
+					this.flashEntryBtn(true);
+					this.showThrobber(true);
+					if (Portal2MapSelector.portal2selected === chapter)
+						Portal2MapSelector.setDetailsActionBtn(true, '[HC] Downloading...');
 				}
-			);
+			});
 		}
 		this.exists = newExists;
 	}
 
 	flashEntryBtn(flash: boolean) {
-		FancyList_SetEntryControlProps(
-			Portal2MapSelector.insert,
-			this.entryIndex,
-			0,
-			{
-				enabled: !flash,
-				conditionalClasses: [{ cls: 'workshop__entry__controls__working', cond: flash }]
-			}
-		);
+		FancyList_SetEntryControlProps(Portal2MapSelector.insert, this.entryIndex, 0, {
+			enabled: !flash,
+			conditionalClasses: [{ cls: 'workshop__entry__controls__working', cond: flash }]
+		});
 	}
 
 	showThrobber(show: boolean) {
-		FancyList_ShowEntryThrobber(
-			Portal2MapSelector.insert,
-			this.entryIndex,
-			show
-		);
+		FancyList_ShowEntryThrobber(Portal2MapSelector.insert, this.entryIndex, show);
 	}
 
 	setUninstall() {
@@ -135,17 +111,12 @@ class Portal2Entry {
 		Portal2MapSelector.actionLabel.text = '[HC] Deleting...';
 		Portal2MapSelector.actionBtn.ClearPanelEvent('onactivate');
 		Portal2MapSelector.deleteBtn.ClearPanelEvent('onactivate');
-		FancyList_SetEntryControlProps(
-			Portal2MapSelector.insert,
-			this.entryIndex,
-			0,
-			{
-				removeClasses: ['button--green'],
-				addClasses: ['button--red'],
-				icon: 'file://{images}/delete.svg',
-				onactivate: () => {}
-			}
-		);
+		FancyList_SetEntryControlProps(Portal2MapSelector.insert, this.entryIndex, 0, {
+			removeClasses: ['button--green'],
+			addClasses: ['button--red'],
+			icon: 'file://{images}/delete.svg',
+			onactivate: () => {}
+		});
 	}
 }
 
@@ -188,8 +159,7 @@ class Portal2MapSelector {
 		$.RegisterForUnhandledEvent('MainMenuPagePreClose', (tab: string) => {
 			if (tab === 'SinglePlayer' || tab === 'StandalonePortal2MapViewer') {
 				$.DispatchEvent('MainMenuHideFeaturedOverlay');
-				if (this.portal2mapAsync)
-					$.CancelScheduled(this.portal2mapAsync);
+				if (this.portal2mapAsync) $.CancelScheduled(this.portal2mapAsync);
 			}
 		});
 		$.RegisterForUnhandledEvent(
@@ -209,32 +179,23 @@ class Portal2MapSelector {
 				}
 			}
 		);
-		$.RegisterForUnhandledEvent(
-			'PanoramaComponent_Portal2Workshop_OnMapsRefreshed',
-			() => {
-				$.Msg('Maps updated');
-				this.rightPane.AddClass('hide');
-				this.rightPane.style.animation = 'Portal2MapsPaneOut 0.01s ease-out 0s 1 normal forwards';
-				$.DispatchEvent('MainMenuHideFeaturedOverlay');
-				this.reloadList();
-			}
-		);
-		$.RegisterForUnhandledEvent(
-			'PanoramaComponent_Portal2Workshop_OnAsyncActionFailed',
-			(reasonLoc: string) => {
-				UiToolkitAPI.ShowGenericPopup(
-					'[HC] Action Failed',
-					`[HC] An error occurred while processing your last request:\n${$.Localize(reasonLoc)}`,
-					'bad-popup'
-				);
-			}
-		);
-		$.RegisterForUnhandledEvent(
-			'PanoramaComponent_Portal2Workshop_OnRefreshStarted',
-			() => {
-				this.refreshStarted();
-			}
-		);
+		$.RegisterForUnhandledEvent('PanoramaComponent_Portal2Workshop_OnMapsRefreshed', () => {
+			$.Msg('Maps updated');
+			this.rightPane.AddClass('hide');
+			this.rightPane.style.animation = 'Portal2MapsPaneOut 0.01s ease-out 0s 1 normal forwards';
+			$.DispatchEvent('MainMenuHideFeaturedOverlay');
+			this.reloadList();
+		});
+		$.RegisterForUnhandledEvent('PanoramaComponent_Portal2Workshop_OnAsyncActionFailed', (reasonLoc: string) => {
+			UiToolkitAPI.ShowGenericPopup(
+				'[HC] Action Failed',
+				`[HC] An error occurred while processing your last request:\n${$.Localize(reasonLoc)}`,
+				'bad-popup'
+			);
+		});
+		$.RegisterForUnhandledEvent('PanoramaComponent_Portal2Workshop_OnRefreshStarted', () => {
+			this.refreshStarted();
+		});
 		this.refreshPortal2Maps();
 	}
 
@@ -244,8 +205,7 @@ class Portal2MapSelector {
 
 	static populate() {
 		const p = CampaignAPI.FindCampaign('addon:p2ce_p2ws/p2ws_sp');
-		if (!p)
-			return;
+		if (!p) return;
 
 		this.portal2campaign = p;
 		this.portal2mapIndex = 0;
@@ -273,13 +233,10 @@ class Portal2MapSelector {
 		const thumb = meta.get('thumbnail') ?? '';
 		const owner = meta.get('owner') ?? '';
 		let ownerName = FriendsAPI.GetNameForXUID(owner);
-		if (ownerName.length === 0 || ownerName === '[unknown]')
-			ownerName = meta.get('owner_name') ?? '[unknown]';
+		if (ownerName.length === 0 || ownerName === '[unknown]') ownerName = meta.get('owner_name') ?? '[unknown]';
 
-		if (entry.previews[0].length > 0)
-			$.DispatchEvent('MainMenuShowFeaturedOverlay', entry.previews[0]);
-		else
-			$.DispatchEvent('MainMenuShowFeaturedOverlay', thumb);
+		if (entry.previews[0].length > 0) $.DispatchEvent('MainMenuShowFeaturedOverlay', entry.previews[0]);
+		else $.DispatchEvent('MainMenuShowFeaturedOverlay', thumb);
 
 		this.coverImg.SetImage(thumb);
 		this.titleLabel.text = ch.title;
@@ -332,8 +289,7 @@ class Portal2MapSelector {
 				this.actionLabel.text = '[HC] Play';
 				this.actionBtn.ClearPanelEvent('onactivate');
 				this.actionBtn.SetPanelEvent('onactivate', () => {
-					if (Portal2WorkshopAPI.IsRatingMap())
-						Portal2WorkshopAPI.VotingCompleted();
+					if (Portal2WorkshopAPI.IsRatingMap()) Portal2WorkshopAPI.VotingCompleted();
 					$.DispatchEvent('LoadingScreenClearLastMap');
 					CampaignAPI.StartCampaign('addon:p2ce_p2ws/p2ws_sp', entry.startId, 0);
 				});
@@ -341,7 +297,7 @@ class Portal2MapSelector {
 				this.deleteBtn.SetPanelEvent('onactivate', () => {
 					const curMap = GameInterfaceAPI.GetCurrentMap();
 					const selMapData = Portal2WorkshopAPI.GetMapStatus(chapter);
-					if (curMap && selMapData.filename === curMap ) {
+					if (curMap && selMapData.filename === curMap) {
 						UiToolkitAPI.ShowGenericPopup(
 							'[HC] Action Forbidden',
 							'[HC] This test chamber cannot be deleted because you are currently playing on it. Change levels or return to the main menu to do this.',
@@ -376,8 +332,7 @@ class Portal2MapSelector {
 	static setDetailsActionBtn(flash: boolean, text: string) {
 		this.actionBtn.enabled = !flash;
 		this.actionBtn.SetHasClass('workshop__entry__controls__working', flash);
-		if (text.length > 0)
-			this.actionLabel.text = text;
+		if (text.length > 0) this.actionLabel.text = text;
 	}
 
 	static doPortal2PaneAnim() {

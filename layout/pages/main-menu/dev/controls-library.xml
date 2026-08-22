@@ -593,8 +593,13 @@
 
 			<Label class="text-h3 mt-3" text="Movie (WIP)" />
 			<Panel class="row my-3" style="height:360px;width:1080px;">
-				<Movie src="file://{resources}/videos/settings/cl_fov.webm" autoplay="onload" controls="full" style="width:540px;"/>
-				<Movie src="file://{resources}/videos/settings/ss_splitmode.webm" autoplay="onload" controls="minimal" style="width:540px;"/>
+				<Movie src="file://{resources}/videos/settings/cl_fov.webm" autoplay="onload" controls="full" style="width:540px;" />
+				<Movie
+					src="file://{resources}/videos/settings/ss_splitmode.webm"
+					autoplay="onload"
+					controls="minimal"
+					style="width:540px;"
+				/>
 			</Panel>
 
 			<Label class="text-h3 mt-3" text="Context Menus" />

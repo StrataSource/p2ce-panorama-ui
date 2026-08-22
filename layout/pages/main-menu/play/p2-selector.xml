@@ -47,22 +47,17 @@
 			<Panel class="flow-down">
 				<Panel class="workshop__top-bar">
 					<Button class="button mr-1" onactivate="Portal2MapSelector.openPortal2Workshop()">
-						<Image
-							class="button__icon"
-							texturewidth="64"
-							textureheight="64"
-							src="file://{images}/icons/steam.svg"
-						/>
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/steam.svg" />
 					</Button>
 					<Button id="RefreshBtn" class="button mr-1" onactivate="Portal2MapSelector.refreshPortal2Maps()">
-						<Image
-							class="button__icon"
-							texturewidth="64"
-							textureheight="64"
-							src="file://{images}/refresh.svg"
-						/>
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/refresh.svg" />
 					</Button>
-					<TextEntry id="SearchBar" class="textentry workshop__search full-height mr-1" placeholder="#Common_SearchEllipsis" disabled="true" />
+					<TextEntry
+						id="SearchBar"
+						class="textentry workshop__search full-height mr-1"
+						placeholder="#Common_SearchEllipsis"
+						disabled="true"
+					/>
 					<DropDown
 						id="MapFilters"
 						class="dropdown mr-3"
@@ -105,12 +100,7 @@
 					</Panel>
 					<Panel class="full-width flow-right px-3">
 						<Button id="SelectedSteam" class="button mr-1">
-							<Image
-								class="button__icon"
-								texturewidth="64"
-								textureheight="64"
-								src="file://{images}/icons/steam.svg"
-							/>
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/steam.svg" />
 						</Button>
 						<Button id="SelectedFavorite" class="button mr-1" disabled="true">
 							<Image
