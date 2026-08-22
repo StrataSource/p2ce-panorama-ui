@@ -5,10 +5,7 @@ class SaveEntry {
 	panel: Panel;
 	save: GameSave;
 
-	constructor(
-		index: number,
-		save: GameSave
-	) {
+	constructor(index: number, save: GameSave) {
 		this.index = index;
 		this.save = save;
 
@@ -39,7 +36,7 @@ class SaveEntry {
 			if (isSingleWsCampaign(c!)) {
 				const meta = WorkshopAPI.GetAddonMeta(c!.bucket.addon_id);
 				const globalCache = UiToolkitAPI.GetGlobalObject()['UGC_DETAILS'] as Map<bigint, string[]> | undefined;
-				const previews = globalCache ? globalCache.get(meta.workshopid) ?? [ meta.thumb ] : [ meta.thumb ];
+				const previews = globalCache ? (globalCache.get(meta.workshopid) ?? [meta.thumb]) : [meta.thumb];
 				mapName = convertTime(new Date(Number(this.save.fileTime)), false);
 				bg = previews[Math.floor(Math.random() * previews.length)];
 				automapCampaign = true;
@@ -81,7 +78,9 @@ class SaveEntry {
 							$.Localize('#Action_LoadGame_Message'),
 							'warning-popup',
 							$.Localize('#Action_LoadGame'),
-							() => { loadSave(); },
+							() => {
+								loadSave();
+							},
 							$.Localize('#UI_Cancel'),
 							() => {},
 							'blur'
@@ -144,14 +143,10 @@ class SaveEntry {
 						'blur'
 					);
 				}
-			},
+			}
 		];
 
-
-		if (
-			GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU ||
-			CampaignSaves.saveGroup.length === 0
-		) {
+		if (GameInterfaceAPI.GetGameUIState() !== GameUIState.PAUSEMENU || CampaignSaves.saveGroup.length === 0) {
 			btns.splice(1, 1);
 		}
 
@@ -241,12 +236,7 @@ class CampaignSaves {
 
 		for (let i = 0; i < saves.length; ++i) {
 			const s = saves[i];
-			this.saveEntries.push(
-				new SaveEntry(
-					i,
-					s
-				)
-			);
+			this.saveEntries.push(new SaveEntry(i, s));
 		}
 	}
 

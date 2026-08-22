@@ -48,10 +48,9 @@ class AddonFlyout {
 			for (const dep of missingDeps) {
 				this.addDep(`${dep}`, dep, true);
 			}
-			WorkshopAPI.CreateQueryUGCDetailsRequest(missingDeps).then((data: Array<SteamUGCDetails_t|null>) => {
+			WorkshopAPI.CreateQueryUGCDetailsRequest(missingDeps).then((data: Array<SteamUGCDetails_t | null>) => {
 				for (const dep of data) {
-					if(dep === null)
-						continue;
+					if (dep === null) continue;
 					this.setDep(dep.nPublishedFileId, dep.previews[0]);
 				}
 			});

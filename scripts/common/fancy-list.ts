@@ -12,7 +12,7 @@ type FancyListEntryBtn = {
 
 type FancyListEntryBtnProps = {
 	enabled?: boolean;
-	conditionalClasses?: Array<{cls: string, cond: boolean}>;
+	conditionalClasses?: Array<{ cls: string; cond: boolean }>;
 	addClasses?: Array<string>;
 	removeClasses?: Array<string>;
 	icon?: string;
@@ -23,19 +23,19 @@ type FancyListEntry = {
 	id?: string;
 	image?: string;
 	bgImage?: string;
-	title: { text: string, hasVars?: boolean };
-	subtitle?: { text: string, hasVars?: boolean };
-	mini?: { text: string, hasVars?: boolean };
+	title: { text: string; hasVars?: boolean };
+	subtitle?: { text: string; hasVars?: boolean };
+	mini?: { text: string; hasVars?: boolean };
 	// may only show one of each
-	genericIndicator?: { text: string, show: boolean };
-	badIndicator?: { text: string, show: boolean };
+	genericIndicator?: { text: string; show: boolean };
+	badIndicator?: { text: string; show: boolean };
 	buttons?: Array<FancyListEntryBtn>;
 	onactivate?: () => void;
 };
 
 type FancyListEntryProps = {
-	genericIndicator?: { text?: string, show?: boolean };
-	badIndicator?: { text?: string, show?: boolean };
+	genericIndicator?: { text?: string; show?: boolean };
+	badIndicator?: { text?: string; show?: boolean };
 };
 
 function FancyList_CreateEntries(target: Panel, entries: Array<FancyListEntry>) {
@@ -53,34 +53,27 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: 
 	} else {
 		p.SetDialogVariable('title', entry.title.text);
 	}
-	if (entry.subtitle !== undefined && entry.subtitle.text.length > 0)
-	{
+	if (entry.subtitle !== undefined && entry.subtitle.text.length > 0) {
 		if (entry.subtitle.hasVars) {
 			const subtitle = p.FindChildTraverse<Label>('Subtitle')!;
 			subtitle.SetTextWithDialogVariables(entry.subtitle.text);
 		} else {
 			p.SetDialogVariable('subtitle', entry.subtitle.text);
 		}
-	}
-	else
-	{
+	} else {
 		p.FindChildTraverse('Subtitle')!.AddClass('hide');
 	}
-	if (entry.mini !== undefined && entry.mini.text.length > 0)
-	{
+	if (entry.mini !== undefined && entry.mini.text.length > 0) {
 		if (entry.mini.hasVars) {
 			const mini = p.FindChildTraverse<Label>('Mini')!;
 			mini.SetTextWithDialogVariables(entry.mini.text);
 		} else {
 			p.SetDialogVariable('mini', entry.mini.text);
 		}
-	}
-	else
-	{
+	} else {
 		p.FindChildTraverse('Mini')!.AddClass('hide');
 	}
-	if (entry.onactivate)
-		p.SetPanelEvent('onactivate', entry.onactivate);
+	if (entry.onactivate) p.SetPanelEvent('onactivate', entry.onactivate);
 	{
 		const img = p.FindChildTraverse<Image>('Cover')!;
 		installImageFallbackHandler(img);
@@ -93,8 +86,7 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: 
 			img.SetImage(entry.bgImage);
 		}
 	}
-	if (!entry.buttons)
-		return p;
+	if (!entry.buttons) return p;
 	if (entry.badIndicator) {
 		const indP = p.FindChildTraverse('BadIndicator')!;
 		indP.SetHasClass('hide', !entry.badIndicator.show);
@@ -108,7 +100,7 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: 
 	const controls = p.FindChildTraverse('Controls')!;
 	for (let i = 0; i < entry.buttons.length; ++i) {
 		const props = entry.buttons[i];
-		const btn = $.CreatePanel('Button', controls, entry.id ? entry.id + props.id : props.id );
+		const btn = $.CreatePanel('Button', controls, entry.id ? entry.id + props.id : props.id);
 		if (i !== entry.buttons.length - 1) {
 			btn.AddClass('mr-1');
 		}
@@ -127,14 +119,16 @@ function FancyList_CreateEntry(target: Panel, entry: FancyListEntry, entryType: 
 		installImageFallbackHandler(img);
 		if (props.tooltip) {
 			btn.SetPanelEvent('onmouseover', () => {
-				UiToolkitAPI.ShowTextTooltip(entry.id ? entry.id + props.id : props.id, $.Localize(props.tooltip as string));
+				UiToolkitAPI.ShowTextTooltip(
+					entry.id ? entry.id + props.id : props.id,
+					$.Localize(props.tooltip as string)
+				);
 			});
 			btn.SetPanelEvent('onmouseout', () => {
 				UiToolkitAPI.HideTextTooltip();
 			});
 		}
-		if (props.onactivate)
-			btn.SetPanelEvent('onactivate', props.onactivate);
+		if (props.onactivate) btn.SetPanelEvent('onactivate', props.onactivate);
 	}
 	return p;
 }
@@ -148,17 +142,13 @@ function FancyList_SetEntryProps(list: Panel, button: number, props: FancyListEn
 	const p = list.GetChild(button)!;
 	if (props.badIndicator) {
 		const indP = p.FindChildTraverse('BadIndicator')!;
-		if (props.badIndicator.show !== undefined)
-			indP.SetHasClass('hide', !props.badIndicator.show);
-		if (props.badIndicator.text)
-			indP.GetChild<Label>(0)!.text = props.badIndicator.text;
+		if (props.badIndicator.show !== undefined) indP.SetHasClass('hide', !props.badIndicator.show);
+		if (props.badIndicator.text) indP.GetChild<Label>(0)!.text = props.badIndicator.text;
 	}
 	if (props.genericIndicator) {
 		const indP = p.FindChildTraverse('GenericIndicator')!;
-		if (props.genericIndicator.show !== undefined)
-			indP.SetHasClass('hide', !props.genericIndicator.show);
-		if (props.genericIndicator.text)
-			indP.GetChild<Label>(0)!.text = props.genericIndicator.text;
+		if (props.genericIndicator.show !== undefined) indP.SetHasClass('hide', !props.genericIndicator.show);
+		if (props.genericIndicator.text) indP.GetChild<Label>(0)!.text = props.genericIndicator.text;
 	}
 }
 

@@ -3,7 +3,11 @@
 class ContentSelectorSP {
 	static insert = $<Panel>('#Insert')!;
 	static tabs = $<Panel>('#Tabs')!;
-	static pages = ['main-menu/play/campaign-selector', 'main-menu/play/automap-selector', 'main-menu/play/p2-selector'];
+	static pages = [
+		'main-menu/play/campaign-selector',
+		'main-menu/play/automap-selector',
+		'main-menu/play/p2-selector'
+	];
 	static btns = [$<RadioButton>('#CampaignsBtn')!, $<RadioButton>('#MapsBtn')!, $<RadioButton>('#Portal2Btn')!];
 
 	static onLoad() {

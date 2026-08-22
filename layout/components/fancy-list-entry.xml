@@ -24,11 +24,7 @@
 			</Panel>
 		</Panel>
 		<Panel class="full-width full-height">
-			<Image
-				id="BtnBgImg"
-				class="fancy-list__entry__bg-img"
-				scaling="stretch-to-cover-preserve-aspect"
-			/>
+			<Image id="BtnBgImg" class="fancy-list__entry__bg-img" scaling="stretch-to-cover-preserve-aspect" />
 			<Panel class="flow-right vertical-align-center">
 				<Panel class="fancy-list__entry__details">
 					<Panel id="Indicators" class="flow-right">
