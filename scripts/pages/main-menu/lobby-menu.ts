@@ -372,18 +372,11 @@ class LobbyMenu {
 		$.DispatchEvent('ChangeVersionInfoPosition', 2);
 
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
-			$.Msg('OAKHJSOIHASHOIFAIOS');
 			this.stopMusic();
 			LobbyMenu.clientAssetsLoaded = false;
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuModeRequestCleanup', () => {
-			this.stopMusic();
-			LobbyMenu.clientAssetsLoaded = false;
-		});
-
-		$.RegisterForUnhandledEvent('LayoutReloaded', () => {
-			$.Msg('OAKHJSOIHASHOIFAIOS');
 			this.stopMusic();
 			LobbyMenu.clientAssetsLoaded = false;
 		});
