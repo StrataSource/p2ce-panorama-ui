@@ -56,3 +56,4 @@ $.DefineEvent('MainMenuNotifFailLoad', 0);
 $.DefineEvent('MainMenuSetPauseBlur', 1);
 $.DefineEvent('MainMenuFirstButtonFocus', 0);
 $.DefineEvent('ReloadCCSettings', 0);
+$.DefineEvent('ChangeVersionInfoPosition', 1, 'Number representing which corner position to change VersionInfo to. 0 = Bottom Right (Default) 1 = Top Left 2 = Top Right 3 = Bottom Left');

@@ -41,4 +41,5 @@ interface GlobalEventNameMap {
 	MainMenuSetPauseBlur: (doBlur: boolean) => void;
 	MainMenuFirstButtonFocus: () => void;
 	ReloadCCSettings: () => void;
+	ChangeVersionInfoPosition: (position: number) => void;
 }
