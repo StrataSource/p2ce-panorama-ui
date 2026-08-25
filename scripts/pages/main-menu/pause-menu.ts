@@ -134,11 +134,15 @@ class PauseMenu {
 
 	static onLoad() {
 		const c = CampaignAPI.GetActiveCampaign();
+		const defCampaign = GameInterfaceAPI.GetSettingString('campaign_default');
 		for (const btn of this.buttons) {
 			if (btn.id === 'QueueBtn') {
 				if (!c || !isSingleWsCampaign(c)) {
 					continue;
 				}
+			}
+			if (btn.id === 'AddonsBtn' && defCampaign.length > 0 && WorkshopAPI.GetAddonCount() === 0) {
+				continue;
 			}
 			$.DispatchEvent('MainMenuAddButton', btn);
 		}
