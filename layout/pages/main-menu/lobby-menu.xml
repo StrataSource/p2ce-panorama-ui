@@ -77,21 +77,21 @@
 
 		<Panel id="LobbyMenuBaseContent" class="lobby-menu__base-content">
 			<Panel id="PlayerList" class="lobby-menu__base-content__player-list" />
-			<Panel class="fill-width" />
+			<!-- <Panel class="fill-width" /> -->
 			<Panel id="LobbyManPanel" class="lobby-menu__base-content__management-panel">
 				<Label class="text-h4 m-4" text="[HC] Manage Lobby" />
 				<Panel class="flow-right m-2 vertical-align-center horizontal-align-center">
 					<RadioButton class="button radiobutton mr-2" selected="true" onactivate="LobbyManPanel.loadSubMenu('lobby-info')">
 						<Label class="button__text" text="[HC] Lobby Info" />
 					</RadioButton>
-					<RadioButton class="button radiobutton mr-2">
-						<Label class="button__text" text="[HC] Lobby Settings" onactivate="LobbyManPanel.loadSubMenu('lobby-settings')"/>
+					<RadioButton class="button radiobutton mr-2" onactivate="LobbyManPanel.loadSubMenu('lobby-settings')">
+						<Label class="button__text" text="[HC] Lobby Settings" />
 					</RadioButton>
-					<RadioButton class="button radiobutton mr-2">
-						<Label class="button__text" text="[HC] Ban List" onactivate="LobbyManPanel.loadSubMenu('ban-list')"/>
+					<RadioButton class="button radiobutton mr-2" onactivate="LobbyManPanel.loadSubMenu('ban-list')">
+						<Label class="button__text" text="[HC] Ban List" />
 					</RadioButton>
 				</Panel>
-				<Panel id="LobbyManSubMenuInsert" class="lobby-menu__management-panel__section fill-width fill-height" />
+				<Panel id="LobbyManSubMenuInsert" class="fill-height" />
 				<Panel id="LobbyManPageBottom" class="fill-width flow-down m-2">
 					<Panel class="flow-right m-2">
 						<Button
@@ -106,21 +106,14 @@
 						<Button class="button mr-1" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
 							<Label class="button__text" text="[HC] Invite Players" />
 						</Button>
-					</Panel>
-					<Panel class="flow-right mb-2">
-						<Button class="button mr-1" onactivate="LobbyMenu.dumpSlotList()">
-							<Label class="button__text" text="[DEV] Dump Player Entry List" />
-						</Button>
-						<Button class="button mr-1" onactivate="LobbyMenu.dumpBanList()">
-							<Label class="button__text" text="[DEV] Dump Banned Player List" />
-						</Button>
-						<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
-							<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
+						<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Multiplayer', 'main-menu/play/multiplayer/content-selector-mp', undefined)">
+							<Label class="button__text" text="[HC] Change Campaign" />
 						</Button>
 					</Panel>
 				</Panel>
 			</Panel>
 
+			<!-- This could go in the bottom right area -->
 			<Panel id="LobbyChat" class="">
 
 			</Panel>
@@ -132,8 +125,23 @@
 				<Button class="button" onactivate="LobbyMenu.requestExit()">
 					<Label class="button__text" text="[HC] Exit Lobby" />
 				</Button>
+				<Panel class="ml-2" />
+				<Button class="button ml-2" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined)">
+					<Label class="button__text" text="#MainMenu_Navigation_Options" />
+				</Button>
 				<Button id="ClientInviteButton" class="button ml-2 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
 					<Label class="button__text" text="[HC] Invite Players" />
+				</Button>
+
+				<Panel class="ml-2" />
+				<Button class="button mr-1" onactivate="LobbyMenu.dumpSlotList()">
+					<Label class="button__text" text="[DEV] Dump Player Entry List" />
+				</Button>
+				<Button class="button mr-1" onactivate="LobbyMenu.dumpBanList()">
+					<Label class="button__text" text="[DEV] Dump Banned Player List" />
+				</Button>
+				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+					<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 				</Button>
 			</Panel>
 		</Panel>

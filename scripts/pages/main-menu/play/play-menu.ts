@@ -46,7 +46,7 @@ class PlayMenu {
 	static onMultiPlayerBtnPressed() {
 		$.DispatchEvent(
 			'MainMenuOpenNestedPage',
-			'MultiPlayer',
+			'Multiplayer',
 			'main-menu/play/multiplayer/content-selector-mp',
 			undefined
 		);
