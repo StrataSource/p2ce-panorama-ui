@@ -44,7 +44,7 @@
 				hittest="false"
 			/>
 
-			<VersionInfo class="mainmenu__version" />
+			<VersionInfo id="VersionInfo" class="mainmenu__version" />
 
 			<Panel id="MenuMainContent" class="mainmenu__menu" hittest="false" hittestchildren="true">
 				<Panel id="PageBg" class="mainmenu__page-bg" hittest="false" />

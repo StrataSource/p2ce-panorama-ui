@@ -36,6 +36,7 @@ class MenuManager {
 	static pageBlur = $<BaseBlurTarget>('#PageBlur')!;
 	static grids = [$<Image>('#GridTexture1')!, $<Image>('#GridTexture2')!];
 	static featuredOverlayImg = $<Image>('#MainMenuFeaturedOverlay')!;
+	static versionInfo = $<Panel>('#VersionInfo')!;
 
 	static pages: MenuPage[] = [];
 	static isLoaded = false;
@@ -309,6 +310,24 @@ class MenuManager {
 					registerCampaignSwitch();
 				});
 			}
+
+			$.RegisterForUnhandledEvent('ChangeVersionInfoPosition', (position: number) => {
+				switch (position) {
+					case 1:
+						this.versionInfo.style.align = 'left top';
+						break;
+					case 2:
+						this.versionInfo.style.align = 'right top';
+						break;
+					case 3:
+						this.versionInfo.style.align = 'left bottom';
+						break;
+					case 0:
+					default:
+						this.versionInfo.style.align = 'right bottom';
+						break;
+				}
+			});
 
 			MenuAnimation.init();
 
