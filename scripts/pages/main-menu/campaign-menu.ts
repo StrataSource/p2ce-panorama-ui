@@ -190,6 +190,10 @@ class CampaignMenu {
 				if (btn.id === 'ExitCampaignBtn') {
 					continue;
 				}
+				// don't show addons menu if no addons are found for sourcemods
+				if (btn.id === 'AddonsBtn' && WorkshopAPI.GetAddonCount() === 0) {
+					continue;
+				}
 			} else {
 				// do NOT construct exit game button if default is NOT provided
 				// this is for standard gameplay
