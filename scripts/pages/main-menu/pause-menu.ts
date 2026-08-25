@@ -31,7 +31,7 @@ class PauseMenu {
 
 				$.DispatchEvent(
 					'MainMenuOpenNestedPage',
-					'MultiPlayer',
+					'Multiplayer',
 					'main-menu/play/multiplayer/content-selector-mp',
 					undefined
 				);

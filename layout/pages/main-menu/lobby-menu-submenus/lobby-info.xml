@@ -3,18 +3,16 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<!-- <include src="file://{resources}/scripts/pages/main-menu/play/shared.ts" /> -->
-		<include src="file://{resources}/scripts/pages/main-menu/lobby-menu.ts" />
+		<include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-info.ts" />
 	</scripts>
 
 	<snippets>
 	</snippets>
 
-	<Panel class="lobby-menu__management-panel__section" onload="LobbyManPanel.onLoadInfoSubMenu()">
-        <Label class="text-h5" text="[HC] Players {i:curplayers}/{i:maxplayers}" />
-        <Panel class="mt-1 mb-1" />
-        <Label class="text-h5" text="[HC] Required Players To Start {i:curplayers}/{i:requiredplayers}" />
-		<!-- <Panel id="LobbyManInfoPage" class="fill-width full-height flow-down"> -->
-        <!-- </Panel> -->
+	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyInfo.onLoad()">
+		<!-- <Label class="text-h5" text="[HC] Players: {i:curplayers}/{i:maxplayers}" /> -->
+		<!-- <Panel class="mt-1 mb-1" /> -->
+		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
+		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
 	</Panel>
 </root>

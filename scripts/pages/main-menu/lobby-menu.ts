@@ -369,6 +369,7 @@ class LobbyMenu {
 		$.DispatchEvent('MainMenuSwitchReverse', false);
 		$.DispatchEvent('MainMenuHideBackgroundImage', true);
 		$.DispatchEvent('MainMenuHideBackgroundMovie');
+		$.DispatchEvent('ChangeVersionInfoPosition', 2);
 
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
 			$.Msg('OAKHJSOIHASHOIFAIOS');
@@ -751,12 +752,6 @@ class LobbyManPanel {
 			this.subMenuPanel.RemoveAndDeleteChildren();
 			this.subMenuPanel.DeleteAsync(0);
 		}
-	}
-
-	static onLoadInfoSubMenu() {
-		this.lobbyManPanelInsert.SetDialogVariableInt('curplayers', LobbyMenu.numPlayers);
-		this.lobbyManPanelInsert.SetDialogVariableInt('maxplayers', LobbyMenu.lobbySettings.maxPlayers);
-		this.lobbyManPanelInsert.SetDialogVariableInt('requiredplayers', LobbyMenu.lobbySettings.maxPlayers); // TODO: Fix me once required and max players are two separate things.
 	}
 
 	static retrieveBanList(): Array<steamID> {
