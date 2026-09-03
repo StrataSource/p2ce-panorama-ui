@@ -21,7 +21,7 @@
 					</TooltipPanel>
 				</Panel>
 
-				<SettingsEnum
+				<!-- <SettingsEnum
 					text="#Settings_Portals_PlayerFunnel"
 					convar="sv_player_funnel_into_portals"
 					infomessage="#Settings_Portals_PlayerFunnel_info"
@@ -29,7 +29,7 @@
 				>
 					<RadioButton group="sv_player_funnel_into_portals" text="#Common_Off" value="0" />
 					<RadioButton group="sv_player_funnel_into_portals" text="#Common_On" value="1" />
-				</SettingsEnum>
+				</SettingsEnum> -->
 
 				<SettingsEnum
 					text="#Settings_Portals_altcolors"
@@ -37,8 +37,9 @@
 					infomessage="#Settings_Portals_altcolors_info"
 					hasdocspage="false"
 				>
-					<RadioButton group="portal_altcolors" text="#Common_Off" value="0" />
-					<RadioButton group="portal_altcolors" text="#Common_On" value="1" />
+					<RadioButton group="portal_altcolors" text="Settings_Portals_altcolors_off" value="0" />
+					<RadioButton group="portal_altcolors" text="Settings_Portals_altcolors_mixed" value="1" />
+					<RadioButton group="portal_altcolors" text="Settings_Portals_altcolors_always" value="2" />
 				</SettingsEnum>
 
 				<ConVarColorDisplay
