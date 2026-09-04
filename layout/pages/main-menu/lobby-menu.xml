@@ -10,44 +10,43 @@
 	<snippets>
 		<snippet name="PlayerEntry">
 			<Panel class="player-entry">
-				<TooltipPanel tooltip="[HC] View Steam Profile">
-					<Button id="SteamProfileBtn" class="">
-						<AvatarImage id="PlayerAvatar" class="player-entry__avatar" steamid="local" />
-					</Button>
-				</TooltipPanel>
-
-				<Panel class="player-entry__body ml-2">
-					<Panel class="player-entry__body__player">
-						<TooltipPanel tooltip="[HC] Host">
-							<Image id="HostPlayerIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/crown-cropped.svg" />
-						</TooltipPanel>
-						<TooltipPanel tooltip="[HC] Steam Friend">
-							<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
-						</TooltipPanel>
-
-						<Label id="Name" text="{s:name}" class="text-h5 ml-1" />
-					</Panel>
-
-					<TooltipPanel id="MissingAddons" class="player-entry__body__notice fancy-red hide" style="tooltip-position: bottom;" tooltip="[HC] This user is missing required addons needed to play the selected content.">
-						<Label text="[HC] Missing Addons" />
-					</TooltipPanel>
-				</Panel>
-
-				<Panel class="fill-width" />
 				<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" style="tooltip-position: right;" tooltip="{s:teamName}">
 					<Button id="TeamSwitchBtn" enabled="false">
 						<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
 					</Button>
 				</TooltipPanel>
 
-				<Panel class="player-entry__body__buttons mr-1">
+				<Panel class="player-entry__body ml-2">
+					<TooltipPanel tooltip="[HC] View Steam Profile">
+						<Button id="SteamProfileBtn" class="">
+							<AvatarImage id="PlayerAvatar" class="player-entry__avatar" steamid="local" />
+						</Button>
+					</TooltipPanel>
+					<Panel class="player-entry__body__player ml-2">
+						<TooltipPanel class="hide" tooltip="[HC] Host">
+							<Image id="HostPlayerIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/crown-cropped.svg" />
+						</TooltipPanel>
+						<TooltipPanel tooltip="[HC] Steam Friend">
+							<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
+						</TooltipPanel>
+						<Panel class="flow-down">
+							<Label id="Name" text="{s:name}" class="text-h5" />
+							<Label text="{s:teamName}" />
+						</Panel>
+					</Panel>
+				</Panel>
+
+				<Panel class="fill-width" />
+				
+
+				<Panel class="player-entry__body__buttons">
 					<TooltipPanel tooltip="[HC] Kick Player" style="tooltip-position: right;">
-						<Button id="KickBtn" class="button mb-1 hide">
+						<Button id="KickBtn" class="button mb-1">
 							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/cancel.svg" />
 						</Button>
 					</TooltipPanel>
 					<TooltipPanel tooltip="[HC] Ban Player" style="tooltip-position: right;">
-						<Button id="BanBtn" class="button button--red hide">
+						<Button id="BanBtn" class="button button--red">
 							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/alert-octagon.svg" />
 						</Button>
 					</TooltipPanel>
@@ -64,35 +63,44 @@
 	</snippets>
 
 	<Panel class="lobby-menu" hittest="false" onload="LobbyMenu.onLoad()">
-		<Label
-			id="LobbyHeadline"
-			class="mainmenu__page-head"
-			text="[HC] Lobby"
-		/>
-		<Label
-			id="PageTagline"
-			class="mainmenu__page-tagline"
-			text="[HC] Play with your friends!"
-		/>
-
 		<Panel id="LobbyMenuBaseContent" class="lobby-menu__base-content">
+			<Image
+				id="GameLogo"
+				class="lobby-menu__logo"
+				src="file://{images}/logo.svg"
+				scaling="stretch-to-fit-preserve-aspect"
+				hittest="false"
+			/>
 			<Panel id="PlayerList" class="lobby-menu__base-content__player-list" />
-			<!-- <Panel class="fill-width" /> -->
 			<Panel id="LobbyManPanel" class="lobby-menu__base-content__management-panel">
-				<Label class="text-h4 m-4" text="[HC] Manage Lobby" />
-				<Panel class="flow-right m-2 vertical-align-center horizontal-align-center">
-					<RadioButton class="button radiobutton mr-2" selected="true" onactivate="LobbyManPanel.loadSubMenu('lobby-info')">
-						<Label class="button__text" text="[HC] Lobby Info" />
-					</RadioButton>
-					<RadioButton class="button radiobutton mr-2" onactivate="LobbyManPanel.loadSubMenu('lobby-settings')">
-						<Label class="button__text" text="[HC] Lobby Settings" />
-					</RadioButton>
-					<RadioButton class="button radiobutton mr-2" onactivate="LobbyManPanel.loadSubMenu('ban-list')">
-						<Label class="button__text" text="[HC] Ban List" />
-					</RadioButton>
+				<Panel class="flow-down">
+					<Panel class="flow-right mb-1">
+						<RadioButton class="button radiobutton" group="lobbygroup">
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/units.svg" />
+						</RadioButton>
+						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
+					</Panel>
+					<Panel class="flow-right mb-1">
+						<RadioButton class="button radiobutton" group="lobbygroup">
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/units.svg" />
+						</RadioButton>
+						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
+					</Panel>
+					<Panel class="flow-right mb-1">
+						<RadioButton class="button radiobutton" group="lobbygroup">
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/units.svg" />
+						</RadioButton>
+						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
+					</Panel>
+					<Panel class="flow-right mb-1">
+						<RadioButton class="button radiobutton" group="lobbygroup">
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/units.svg" />
+						</RadioButton>
+						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
+					</Panel>
 				</Panel>
-				<Panel id="LobbyManSubMenuInsert" class="fill-height" />
-				<Panel id="LobbyManPageBottom" class="fill-width flow-down m-2">
+				<Panel id="LobbyManSubMenuInsert" class="lobby-menu__base-content__management-panel__inner" />
+				<Panel id="LobbyManPageBottom" class="fill-width flow-down m-2 hide">
 					<Panel class="flow-right m-2">
 						<Button
 							id="StartButton"
@@ -115,32 +123,21 @@
 
 			<!-- This could go in the bottom right area -->
 			<Panel id="LobbyChat" class="">
-
 			</Panel>
 		</Panel>
 
-
 		<Panel id="LobbyMenuBottom" class="vertical-align-bottom flow-down">
 			<Panel class="flow-right">
-				<Button class="button" onactivate="LobbyMenu.requestExit()">
+				<Button class="button mr-1" onactivate="LobbyMenu.requestExit()">
 					<Label class="button__text" text="[HC] Exit Lobby" />
 				</Button>
-				<Panel class="ml-2" />
-				<Button class="button ml-2" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined)">
+				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined)">
 					<Label class="button__text" text="#MainMenu_Navigation_Options" />
 				</Button>
-				<Button id="ClientInviteButton" class="button ml-2 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
+				<Button id="ClientInviteButton" class="button mr-1 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
 					<Label class="button__text" text="[HC] Invite Players" />
 				</Button>
-
-				<Panel class="ml-2" />
-				<Button class="button mr-1" onactivate="LobbyMenu.dumpSlotList()">
-					<Label class="button__text" text="[DEV] Dump Player Entry List" />
-				</Button>
-				<Button class="button mr-1" onactivate="LobbyMenu.dumpBanList()">
-					<Label class="button__text" text="[DEV] Dump Banned Player List" />
-				</Button>
-				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+				<Button class="button" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
 					<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 				</Button>
 			</Panel>

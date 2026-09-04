@@ -20,7 +20,6 @@
 			<Label id="BetaText" html="true" class="VersionInfoText" text="P2CE (BETA) | {s:version}" />
 			<Label id="VersionText" class="VersionInfoText" text="Graphics    | {s:graphics}" />
 			<Label class="VersionInfoText" text="Platform    | {s:platform}" />
-			<Label class="VersionInfoText" text="Branch      | {s:branch}" />
 			<Label class="VersionInfoText" text="Physics     | {s:physics}" id="PhysicsText" />
 		</Panel>
 	</Button>
