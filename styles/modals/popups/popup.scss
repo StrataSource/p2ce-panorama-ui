@@ -143,3 +143,19 @@
 #BlurBackground.Hidden {
 	opacity: 0;
 }
+
+.popup-loader {
+	width: 128px;
+	height: 128px;
+	& > AnimatedImageStrip {
+		width: 100%;
+		height: 100%;
+	}
+	&__image {
+		width: 63px;
+		height: 90px;
+		margin: 25px;
+		horizontal-align: center;
+		vertical-align: center;
+	}
+}

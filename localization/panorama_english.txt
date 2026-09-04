@@ -1404,6 +1404,14 @@ This message will not appear again after you acknowledge the risks, however, you
 		"MainMenu_DisconnectDialog_Reason_Banned"			"You have been banned from this server."
 		"MainMenu_DisconnectDialog_Reason_BannedVote"		"You have been vote-banned from this server."
 
+		"Lobby_JoinFail_DoesntExist"						"The lobby no longer exists"
+		"Lobby_JoinFail_NotAllowed"							"You do not have the permissions required to join this lobby"
+		"Lobby_JoinFail_Full"								"The lobby is full"
+		"Lobby_JoinFail_Error"								"An unexpected error occurred"
+		"Lobby_JoinFail_Limited"							"Joining this lobby is not allowed because you are a limited user"
+		"Lobby_JoinFail_CommunityBan"						"You have a community lock on your account and cannot join"
+		"Lobby_JoinFail_RatelimitExceeded"					"You have tried to join this lobby too many times in a short timespan"
+
 		// Disconnect Notices - ENetworkDisconnectionReason (per matchmaking dll and cross-ref with csgo_english + dota_english)
 		// These need to be shared on here and in panorama_english for DS host reasons
 		"GameUI_Disconnect_User"							"Player disconnected from server."						// NETWORK_DISCONNECT_DISCONNECT_BY_USER

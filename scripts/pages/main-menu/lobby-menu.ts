@@ -358,14 +358,6 @@ class LobbyMenu {
 			}
 		);
 
-		$.RegisterForUnhandledEvent(
-			'PanoramaComponent_P2CELobby_OnClientJoiningGame',
-			() => {
-				// closes out missing addons popup
-				UiToolkitAPI.CloseAllVisiblePopups();
-			}
-		);
-
 		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerJoined', this.playerJoin.bind(this));
 		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerLeft', this.playerLeft.bind(this));
 
@@ -585,12 +577,11 @@ class LobbyMenu {
 		this.updateUIState();
 	}
 
-	static playerLeft(lobbyPlayer: LobbyPlayer) {
+	static playerLeft(player: steamID) {
 		$.Msg('Player left!');
-		$.Msg(`Player Name: ${lobbyPlayer.name}`);
-		$.Msg(`Player SteamID: ${lobbyPlayer.id}`);
-		LobbyMenu.lobbySlots.get(lobbyPlayer.id)?.destruct();
-		LobbyMenu.lobbySlots.delete(lobbyPlayer.id);
+		$.Msg(`Player SteamID: ${player}`);
+		LobbyMenu.lobbySlots.get(player)?.destruct();
+		LobbyMenu.lobbySlots.delete(player);
 
 		this.updateUIState();
 	}
