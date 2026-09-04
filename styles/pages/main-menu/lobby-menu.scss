@@ -1,126 +1,130 @@
 @use '../../config' as *;
 
 .player-entry {
-    flow-children: right;
-    height: fit-children;
-	width: 700px;
-    margin-bottom: 10px;
-    border: 1px solid #555555;
-    background-color: #2a2a2a;
-    background-image: url("file://{images}/menu/menu_grid6.png");
-    background-img-opacity: 0.25;
-    background-size: 55% 50%;
+	flow-children: right;
+	height: fit-children;
+	width: fill-parent-flow(1);
+	margin-bottom: 5px;
+	border: $menu-pane-border;
+	background-color: $base-950;
 
-    &__empty {
-        &__icon {
-            width: 96px;
-            height: 96px;
-        }
+	&__empty {
+		&__icon {
+			width: 96px;
+			height: 96px;
+			border-right: $menu-pane-border;
+		}
 
-        &__text {
-            vertical-align: center;
-            horizontal-align: center;
-            margin: 15px;
-        }
-    }
+		&__text {
+			vertical-align: center;
+			horizontal-align: center;
+		}
+	}
 
-    &__avatar {
-        width: 96px;
-        height: 96px;
-        &:hover {
-            border: 1px solid $white;
-            border-color: $orange;
-            background-color: $button-background-hover;
+	&__avatar {
+		width: 64px;
+		height: 64px;
+		border: $menu-pane-border;
+		&:hover {
+			background-color: $button-background-hover-color;
+			border-color: $primary-color;
+			& > Image {
+				opacity: 0.85;
+			}
+		}
+	}
 
-            & > Image {
-                opacity: 0.85;
-            }
-        }
-    }
+	&__body {
+		vertical-align: center;
+		flow-children: right;
 
-    &__body {
-        flow-children: down;
+		&__player {
+			flow-children: right;
+			vertical-align: center;
+		}
 
-        &__player {
-            flow-children: right;
-            vertical-align: center;
-            margin-top: 10px;
-        }
+		&__notice {
+			margin: 10px 10px 0px 0px;
+		}
 
-        &__notice {
-            margin: 10px 10px 0px 0px;
-        }
+		&__team-icon {
+			vertical-align: center;
+			horizontal-align: center;
+			tooltip-position: right;
+			border-right: $menu-pane-border;
+			width: 96px;
+			height: 96px;
+		}
 
-        &__team-icon {
-            margin: 10px;
-            vertical-align: center;
-            horizontal-align: center;
-            border: $menu-pane-border;
-            tooltip-position: right;
-
-            & > Button {
-                width: 64px;
-                height: 64px;
-            }
-        }
-
-        &__buttons {
-            flow-children: down;
-            vertical-align: center;
-            horizontal-align: right;
-        }
-    }
+		&__buttons {
+			margin-right: 5px;
+			flow-children: down;
+			vertical-align: center;
+			horizontal-align: right;
+		}
+	}
 }
 
 .lobby-menu {
-    flow-children: down;
-    width: 100%;
+	width: 100%;
 	height: 100%;
-    margin: 25px 25px 25px 25px;
+	margin: 30px;
 
-    &__base-content {
-        flow-children: down;
-        width: fill-parent-flow(1);
-        height: 880px;
+	&__logo {
+		width: 270px;
+		height: 80px;
+		margin-bottom: 20px;
+	}
 
-        &__player-list {
-            flow-children: down;
-            height: 400px;
-            margin: 25px 0px 10px 5px;
-            padding-right: 15px;
-            overflow: squish scroll;
-            horizontal-align: left;
-        }
+	&__base-content {
+		flow-children: down;
+		width: 670px;
+		height: 80%;
+		vertical-align: center;
+		margin-left: 25px;
 
-        &__management-panel {
-            flow-children: down;
-            width: 700px;
-            height: 900px;
-            horizontal-align: left;
-            margin: 25px 0px 10px 5px;
-            border: $menu-pane-border;
-            background-color: $base-950;
-            background-image: url('file://{images}/menu/menu_grid6.png');
-            background-img-opacity: 0.05;
+		&__player-list {
+			flow-children: down;
+			overflow: squish scroll;
+		}
 
-            &__section {
-                flow-children: down;
-                width: fill-parent-flow(1);
-	            height: fill-parent-flow(1);
+		&__management-panel {
+			margin-top: 15px;
+			flow-children: right;
+			width: fill-parent-flow(1);
+			height: fill-parent-flow(1);
+			
+			&__inner {
+				width: fill-parent-flow(1);
+				height: 100%;
+				border: 1px solid $primary-color;
+				background-color: $base-950;
+			}
 
-                margin-left: 10px;
-                margin-right: 10px;
+			&__activechunk {
+				width: 5px;
+				height: 100%;
+				background-color: $primary-color;
+			}
 
-                background-color: $base-gradient-subtle;
-                border: $menu-pane-border;
-            }
+			&__section {
+				flow-children: down;
+				width: fill-parent-flow(1);
+				height: fill-parent-flow(1);
 
-        }
-    }
+				margin-left: 10px;
+				margin-right: 10px;
 
-    &__bottom {
-        vertical-align: bottom;
-        flow-children: right;
-    }
+				background-color: $base-gradient-subtle;
+				border: $menu-pane-border;
+			}
+
+		}
+	}
+
+	&__bottom {
+		vertical-align: bottom;
+		flow-children: right;
+	}
 
 }

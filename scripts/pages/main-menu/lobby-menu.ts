@@ -348,6 +348,7 @@ class LobbyMenu {
 		$.RegisterForUnhandledEvent('MainMenuModeRequestCleanup', () => {
 			this.stopMusic();
 			LobbyMenu.clientAssetsLoaded = false;
+			$.DispatchEvent('ChangeVersionInfoPosition', 0);
 		});
 
 		$.RegisterForUnhandledEvent(
@@ -391,6 +392,8 @@ class LobbyMenu {
 				const src = this.campaignPair.campaign.meta.get(metaKey);
 				return src ? `${addBasePath ? basePath : ''}${src}` : undefined; // Don't want to override the value with a blank string, instead default to the default value set in the script.
 			};
+
+			$<Image>('#GameLogo')!.SetImage(getMetaSrc(CampaignMeta.FULL_LOGO) ?? 'file://{images}/logo.svg');
 
 			for (let team = LobbyTeam.SPECTATOR; team < LobbyTeam.COUNT; team++) {
 				const teamMeta = this.teamMeta[team];
