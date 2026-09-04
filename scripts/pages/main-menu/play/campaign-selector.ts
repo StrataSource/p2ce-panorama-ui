@@ -80,7 +80,7 @@ class CampaignEntry {
 					`addon=${this.info.bucket.addon_id}&action=1&campaign=${campaign}`
 				);
 			} else {
-				if (this.info.campaign.multiplayer) {
+				if (this.info.campaign.multiplayer && !P2CELobbyAPI.IsInLobby()) {
 					P2CELobbyAPI.CreateLobby(campaign);
 				} else if (P2CELobbyAPI.IsInLobby()) { // Allows for reusing the selector menu in multiplayer lobbies.
 					P2CELobbyAPI.ChangeCampaign(campaign);
