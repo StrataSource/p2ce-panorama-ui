@@ -277,7 +277,7 @@ class MenuManager {
 				UiToolkitAPI.ShowGenericPopupOk(
 					'[HC] Disconnected from Server',
 					reason,
-					'generic-popup',
+					'bad-popup',
 					() => { }
 				);
 			});
@@ -289,9 +289,36 @@ class MenuManager {
 				}
 			});
 
-			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyStateChanged', () => {
+			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyJoinInProgress', () => {
+				UiToolkitAPI.CloseAllVisiblePopups();
+				this.closePages();
+				UiToolkitAPI.ShowCustomLayoutPopupParameters(
+					'wait',
+					'file://{resources}/layout/modals/popups/wait.xml',
+					'title=[HC] Please wait&desc=[HC] Joining lobby...'
+				);
+			});
+
+			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyJoined', () => {
+				UiToolkitAPI.CloseAllVisiblePopups();
 				this.openMenuMode();
 				this.closePages();
+			});
+
+			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyLeft', () => {
+				UiToolkitAPI.CloseAllVisiblePopups();
+				this.openMenuMode();
+				this.closePages();
+			});
+
+			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyJoinFailed', (lobby: steamID, reason: string) => {
+				UiToolkitAPI.CloseAllVisiblePopups();
+				UiToolkitAPI.ShowGenericPopupOk(
+					'[HC] Failed to join lobby',
+					reason,
+					'bad-popup',
+					() => {}
+				);
 			});
 
 			installImageFallbackHandler(this.logo);
@@ -354,6 +381,8 @@ class MenuManager {
 		$.DispatchEvent('MainMenuSwitchFade', true, true);
 
 		this.openMenuMode();
+
+		UiToolkitAPI.CloseAllVisiblePopups();
 	}
 
 	static updateFocus() {

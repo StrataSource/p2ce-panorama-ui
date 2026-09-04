@@ -1,0 +1,37 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/common/dev.ts" />
+	</scripts>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup"
+		popupbackground="blur"
+		onload="$('#Header').text = $.GetContextPanel().GetAttributeString('title', '[PH] Spinner Title'); $('#Desc').text = $.GetContextPanel().GetAttributeString('desc', '[PH] Spinner Description');"
+	>
+		<Panel class="flow-down full-width">
+			<Label id="Header" class="horizontal-align-center text-h5 mb-1" text="[HC] Please Wait" />
+			<Label id="Desc" class="horizontal-align-center mb-2" text="[HC] Loading..." />
+			<Panel id="Loader" class="popup-loader horizontal-align-center">
+				<AnimatedImageStrip
+					animating="true"
+					defaultframe="0"
+					frametime="100ms"
+					src="file://{images}/menu/p2ce/spinner_strip.tga"
+					scaling="stretch-to-cover-preserve-aspect"
+				/>
+				<Image
+					class="popup-loader__image"
+					src="file://{images}/menu/p2ce/logo_plain.svg"
+					textureheight="180"
+					texturewidth="126"
+					scaling="stretch-to-fit-preserve-aspect"
+					hittest="false"
+				/>
+			</Panel>
+		</Panel>
+	</PopupCustomLayout>
+</root>

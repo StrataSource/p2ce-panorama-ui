@@ -2,6 +2,9 @@
 
 class PopupManager {
 	static onPopupBackgroundClicked() {
+		return;
+		
+		// Don't do this anymore.
 		const ctx = $.GetContextPanel();
 		const topPop = ctx.Children()[ctx.Children().length - 1];
 		// protected

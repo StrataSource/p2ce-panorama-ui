@@ -33,6 +33,13 @@
 			>
 				<Label class="button__text" text="[DEV] Featured Hub" />
 			</Button>
+			<Button
+				class="button mt-2"
+				onactivate="UiToolkitAPI.ShowCustomLayoutPopupParameters('wait', 'file://{resources}/layout/modals/popups/wait.xml', 'title=[HC] Please wait&amp;desc=[HC] Loading...');"
+			>
+				<Label class="button__text" text="[DEV] Wait Popup" />
+			</Button>
+		
 		</Panel>
 	</Panel>
 </root>
