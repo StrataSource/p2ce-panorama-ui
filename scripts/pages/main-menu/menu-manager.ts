@@ -273,6 +273,15 @@ class MenuManager {
 				}
 			});
 
+			$.RegisterForUnhandledEvent('GameDisconnection', (reason: string) => {
+				UiToolkitAPI.ShowGenericPopupOk(
+					'[HC] Disconnected from Server',
+					reason,
+					'generic-popup',
+					() => { }
+				);
+			});
+
 			// will be undone next switch
 			$.RegisterForUnhandledEvent('MainMenuHideNav', (instant: boolean | undefined) => {
 				if (instant) {
