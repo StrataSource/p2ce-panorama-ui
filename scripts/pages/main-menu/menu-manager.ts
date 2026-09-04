@@ -291,6 +291,9 @@ class MenuManager {
 				$.RegisterForUnhandledEvent(
 					'PanoramaComponent_Campaign_OnActiveCampaignChanged',
 					(campaign: string | null) => {
+						if (P2CELobbyAPI.IsInLobby()) {
+							return;
+						}
 						$.Msg(`MENU MANAGER: Campaign switch event recognized, changing to: ${campaign}`);
 						this.closePages();
 						// dont play the fade animation if it's an autogen'd campaign
