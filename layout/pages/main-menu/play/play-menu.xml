@@ -34,24 +34,40 @@
 				<Label class="card__details__header" text="#MainMenu_Campaigns_CType_MP" />
 			</Panel>
 		</Button>
-		<Panel class="play-menu__modelpanel">
-			<ModelPanel
-				id="PlayerModel1"
-				src="models/player.mdl"
-				sequence="nogun_run"
-				antialias="true"
-			/>
-			<!-- <ModelPanel
-				id="PlayerModel2"
-				src="models/player/ballbot/ballbot.mdl"
-				antialias="true"
-			/>
-			<ModelPanel
-				id="PlayerModel3"
-				src="models/player/eggbot/eggbot.mdl"
-				antialias="true"
-				mouse_rotate="true"
-			/> -->
-		</Panel>
+		<Button
+			class="card play-menu_card flow-right"
+			onactivate="PlayMenu.onCosmeticBtnPressed()"
+			tabindex="auto"
+			selectionpos="auto"
+		>
+			<Panel class="play-menu__modelpanel">
+				<ModelPanel
+					id="PlayerModel1"
+					src="models/player.mdl"
+					sequence="nogun_standing_idle"
+					antialias="true"
+				/>
+			</Panel>
+			<Panel class="play-menu__modelpanel">
+				<ModelPanel
+					id="PlayerModel2"
+					src="models/player/ballbot/ballbot.mdl"
+					sequence="taunt_highFive_idle"
+					antialias="true"
+				/>
+			</Panel>
+			<Panel class="play-menu__modelpanel">
+				<ModelPanel
+					id="PlayerModel3"
+					src="models/player/eggbot/eggbot.mdl"
+					sequence="taunt_teamhug_idle"
+					antialias="true"
+				/>
+			</Panel>
+			<Panel class="card__details card__details__no-bg">
+				<Label class="card__details__header" text="[HC] Cosmetic Menu" />
+			</Panel>
+		</Button>
+
 	</Panel>
 </root>

@@ -1,0 +1,31 @@
+@use '../../config' as *;
+@use '../../abstract/function';
+@use '../../abstract/mixin';
+
+.cosmetics-menu {
+	flow-children: down;
+	width: 100%;
+	height: 100%;
+
+	&__main-section {
+		width: 100%;
+		height: 700px;
+		vertical-align: center;
+		flow-children: right;
+
+		background-color: $base-gradient-subtle;
+		border: $menu-pane-border;
+
+		& > ModelPanel {
+			width: 500px;
+			height: 100%;
+		}
+	}
+
+
+	&__bottom-section {
+		vertical-align: center;
+		flow-children: right;
+	}
+
+}

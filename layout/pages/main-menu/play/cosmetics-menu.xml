@@ -1,0 +1,51 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/pages/main-menu/play/cosmetics-menu.ts" />
+	</scripts>
+
+	<Panel class="mainmenu__page flow-down" onload="CosmeticsMenu.onLoad()">
+		<Panel id="MainSection" class="cosmetics-menu__main-section">
+			<!-- <Button class="cosmetics-menu__main-section__modelpanel" onactivate=""> -->
+			<ModelPanel
+				id="PlayerModel1"
+				src="models/player.mdl"
+				sequence="nogun_standing_idle"
+				antialias="true"
+				mouse_rotate="true"
+			/>
+			<!-- </Button> -->
+			<!-- <Button class="cosmetics-menu__main-section__modelpanel"> -->
+			<ModelPanel
+				id="PlayerModel2"
+				src="models/player/ballbot/ballbot.mdl"
+				sequence="taunt_highFive_idle"
+				antialias="true"
+				mouse_rotate="true"
+			/>
+			<!-- </Button> -->
+			<!-- <Button class="cosmetics-menu__main-section__modelpanel"> -->
+			<ModelPanel
+				id="PlayerModel3"
+				src="models/player/eggbot/eggbot.mdl"
+				sequence="taunt_teamhug_idle"
+				antialias="true"
+				mouse_rotate="true"
+			/>
+			<!-- </Button> -->
+		</Panel>
+
+		<Panel id="BottomSection" class="cosmetics-menu__bottom-section">
+
+			<Button class="button">
+				<Label text="[HC] Change Skin" />
+				<Image src="file://{materials}/vgui/upgrade01.vtf" texturewidth="16" textureheight="16" />
+			</Button>
+
+		</Panel>
+
+	</Panel>
+</root>
