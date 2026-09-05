@@ -275,7 +275,7 @@ class MenuManager {
 
 			$.RegisterForUnhandledEvent('GameDisconnection', (reason: string) => {
 				UiToolkitAPI.ShowGenericPopupOk(
-					'[HC] Disconnected from Server',
+					'[HC] Disconnected From Server',
 					reason,
 					'bad-popup',
 					() => { }
