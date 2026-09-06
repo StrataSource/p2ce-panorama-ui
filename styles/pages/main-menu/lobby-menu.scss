@@ -9,12 +9,6 @@
 	background-color: $base-950;
 
 	&__empty {
-		&__icon {
-			width: 96px;
-			height: 96px;
-			border-right: $menu-pane-border;
-		}
-
 		&__text {
 			vertical-align: center;
 			horizontal-align: center;
@@ -56,6 +50,15 @@
 			height: 96px;
 		}
 
+		&__status {
+			margin-left: 5px;
+			width: 24px;
+			height: 24px;
+			tooltip-position: right;
+			vertical-align: center;
+			horizontal-align: center;
+		}
+
 		&__buttons {
 			margin-right: 5px;
 			flow-children: down;
@@ -93,7 +96,7 @@
 			flow-children: right;
 			width: fill-parent-flow(1);
 			height: fill-parent-flow(1);
-			
+
 			&__inner {
 				width: fill-parent-flow(1);
 				height: 100%;

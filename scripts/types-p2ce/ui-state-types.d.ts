@@ -50,9 +50,9 @@ declare const enum CampaignMeta {
 	// TODO: THE BELOW KEYS SHOULD BE MOVED TO 'multiplayer_options` INSTEAD OF BEING A CAMPAIGN META KEY!
 	// TODO: IT'S HERE RIGHT NOW FOR TESTING SINCE 'multiplayer_options` IS HARDCODED INTO THE ENGINE!
 	MAX_NUM_TEAMS = 'max_num_teams',
-	REQUIRED_NUM_TEAM_PLAYERS = 'required_num_team_players',
-	ALLOW_CLIENT_INVITES = 'allow_client_invites',
+	DEFAULT_TEAM = "default_team",
 	CAN_SWITCH_TEAMS = 'can_switch_teams',
+	REQUIRED_NUM_TEAM_PLAYERS = 'required_num_team_players',
 	HAS_SPECTATOR_MODE = 'has_spectator_mode',
 
 	EMPTY_SLOT_AVATAR_IMG = 'empty_slot_avatar_img',
