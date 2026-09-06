@@ -8,56 +8,69 @@
 	</scripts>
 
 	<snippets>
-		<snippet name="PlayerEntry">
-			<Panel class="player-entry">
-				<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" style="tooltip-position: right;" tooltip="{s:teamName}">
-					<Button id="TeamSwitchBtn" enabled="false">
-						<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
-					</Button>
-				</TooltipPanel>
-
-				<Panel class="player-entry__body ml-2">
-					<TooltipPanel tooltip="[HC] View Steam Profile">
-						<Button id="SteamProfileBtn" class="">
-							<AvatarImage id="PlayerAvatar" class="player-entry__avatar" steamid="local" />
+		<snippet name="LobbyEntry">
+			<Panel>
+				<Panel id="PlayerEntry" class="player-entry">
+					<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" style="tooltip-position: right;" tooltip="{s:teamName}">
+						<Button id="TeamSwitchBtn" enabled="false">
+							<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
 						</Button>
 					</TooltipPanel>
-					<Panel class="player-entry__body__player ml-2">
-						<TooltipPanel class="hide" tooltip="[HC] Host">
-							<Image id="HostPlayerIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/crown-cropped.svg" />
+
+					<Panel class="player-entry__body ml-2">
+						<TooltipPanel tooltip="[HC] View Steam Profile">
+							<Button id="SteamProfileBtn" class="">
+								<AvatarImage id="PlayerAvatar" class="player-entry__avatar" steamid="local" />
+							</Button>
 						</TooltipPanel>
-						<TooltipPanel tooltip="[HC] Steam Friend">
-							<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
-						</TooltipPanel>
-						<Panel class="flow-down">
-							<Label id="Name" text="{s:name}" class="text-h5" />
-							<Label text="{s:teamName}" />
+						<Panel class="player-entry__body__player ml-2">
+							<TooltipPanel class="hide" tooltip="[HC] Host">
+								<Image id="HostPlayerIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/crown-cropped.svg" />
+							</TooltipPanel>
+							<TooltipPanel tooltip="[HC] Steam Friend">
+								<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
+							</TooltipPanel>
+							<Panel class="flow-down">
+								<Panel class="flow-right">
+									<Label id="Name" text="{s:name}" class="text-h5" style="text-overflow: shrink"/>
+									<TooltipPanel class="player-entry__body__status" tooltip="[PH] Status">
+										<Image id="PlayerNotReadyStatus" class="" texturewidth="24" textureheight="24" src="file://{images}/close.svg" />
+										<Image id="PlayerReadyStatus" class="hide" texturewidth="24" textureheight="24" src="file://{images}/checkmark.svg" />
+										<AnimatedImageStrip
+											io="PlayerAddonStatus"
+											animating="true"
+											defaultframe="0"
+											frametime="125ms"
+											src="file://{images}/menu/p2ce/spinner_strip.tga"
+											scaling="stretch-to-cover-preserve-aspect"
+											class="hide"
+										/>
+									</TooltipPanel>
+								</Panel>
+								<Label text="Team: {s:teamName}" />
+							</Panel>
 						</Panel>
 					</Panel>
+
+					<Panel class="fill-width" />
+
+					<Panel class="player-entry__body__buttons">
+						<TooltipPanel tooltip="[HC] Kick Player" style="tooltip-position: right;">
+							<Button id="KickBtn" class="button mb-1">
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/cancel.svg" />
+							</Button>
+						</TooltipPanel>
+						<TooltipPanel tooltip="[HC] Ban Player" style="tooltip-position: right;">
+							<Button id="BanBtn" class="button button--red">
+								<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/alert-octagon.svg" />
+							</Button>
+						</TooltipPanel>
+					</Panel>
 				</Panel>
-
-				<Panel class="fill-width" />
-				
-
-				<Panel class="player-entry__body__buttons">
-					<TooltipPanel tooltip="[HC] Kick Player" style="tooltip-position: right;">
-						<Button id="KickBtn" class="button mb-1">
-							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/cancel.svg" />
-						</Button>
-					</TooltipPanel>
-					<TooltipPanel tooltip="[HC] Ban Player" style="tooltip-position: right;">
-						<Button id="BanBtn" class="button button--red">
-							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/alert-octagon.svg" />
-						</Button>
-					</TooltipPanel>
+				<Panel id="EmptyEntry" class="player-entry hide">
+					<Image id="EmptyEntryAvatar" class="player-entry__body__team-icon" />
+					<Label class="player-entry__empty__text text-h5" text="[HC] Waiting for player..." />
 				</Panel>
-			</Panel>
-		</snippet>
-
-		<snippet name="EmptyEntry">
-			<Panel class="player-entry">
-				<Image id="EmptyEntryAvatar" class="player-entry__empty__icon" />
-				<Label class="player-entry__empty__text text-h5" text="[HC] Waiting for player..." />
 			</Panel>
 		</snippet>
 	</snippets>
@@ -76,7 +89,13 @@
 				<Panel class="flow-down">
 					<Panel class="flow-right mb-1">
 						<RadioButton class="button radiobutton" group="lobbygroup">
-							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/units.svg" />
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/news.svg" />
+						</RadioButton>
+						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
+					</Panel>
+					<Panel class="flow-right mb-1">
+						<RadioButton class="button radiobutton" group="lobbygroup">
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/settings.svg" />
 						</RadioButton>
 						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
 					</Panel>
@@ -133,6 +152,9 @@
 				</Button>
 				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined)">
 					<Label class="button__text" text="#MainMenu_Navigation_Options" />
+				</Button>
+				<Button id="ClientReadyButton" class="button button--red mr-1" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
+					<Label id="ClientReadyButtonText" class="button__text" text="[HC] Not Ready" />
 				</Button>
 				<Button id="ClientInviteButton" class="button mr-1 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
 					<Label class="button__text" text="[HC] Invite Players" />
