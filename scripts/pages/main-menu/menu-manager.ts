@@ -298,6 +298,15 @@ class MenuManager {
 					'title=[HC] Please wait&desc=[HC] Joining lobby...'
 				);
 			});
+			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyJoinFailed', (lobby: steamID, reason: string) => {
+				UiToolkitAPI.CloseAllVisiblePopups();
+				UiToolkitAPI.ShowGenericPopupOk(
+					'[HC] Failed To Join Lobby',
+					reason,
+					'bad-popup',
+					() => {}
+				);
+			});
 
 			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyJoined', () => {
 				UiToolkitAPI.CloseAllVisiblePopups();
@@ -309,16 +318,6 @@ class MenuManager {
 				UiToolkitAPI.CloseAllVisiblePopups();
 				this.openMenuMode();
 				this.closePages();
-			});
-
-			$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyJoinFailed', (lobby: steamID, reason: string) => {
-				UiToolkitAPI.CloseAllVisiblePopups();
-				UiToolkitAPI.ShowGenericPopupOk(
-					'[HC] Failed to join lobby',
-					reason,
-					'bad-popup',
-					() => {}
-				);
 			});
 
 			installImageFallbackHandler(this.logo);
