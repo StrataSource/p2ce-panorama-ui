@@ -1,0 +1,47 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/modals/popups/add-mounts.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="MountSnippet">
+			<Button class="add-mount">
+				<Image id="MountCover" class="add-mount__cover" scaling="stretch" defaultsrc="file://{images}/menu/unknown-app-header.png" />
+				<Panel class="mounts__entry__details">
+					<Panel id="MountWarning" class="fancy-red mb-1">
+						<Label class="add-mount__warning" text="[HC] Game installation not found!" />
+					</Panel>
+					<Label id="MountTitle" class="add-mount__title" text="{s:name}" />
+					<Label id="MountSubtag" class="add-mount__subtag" text="{s:tag}" />
+				</Panel>
+			</Button>
+		</snippet>
+	</snippets>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup generic-popup--large"
+		popupbackground="blur"
+		onload="MountAdder.onLoad()"
+	>
+		<Label class="text-h2 mb-1" text="[HC] Add Mount" />
+		<Label class="mb-2" text="[HC] Select the content you wish to mount. Some content may be unavailable due to missing content or incompatibilities." />
+
+		<Panel id="List" class="add-mount__list">
+		</Panel>
+
+		<Panel class="flow-right horizontal-align-right mt-2" tabindex="auto" selectionpos="auto">
+			<Button
+				class="button"
+				onactivate="UiToolkitAPI.CloseAllVisiblePopups()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
+				<Label class="button__text" text="[HC] Close" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>

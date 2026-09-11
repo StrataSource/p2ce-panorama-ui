@@ -163,8 +163,8 @@
 			</Panel>
 			<Panel id="MountsPage" class="mounts" onload="MountManager.init()">
 				<Panel class="addons__action-bar">
-					<Button class="vertical-align-center button">
-						<Label class="button__text" text="[HC] + Mount New Game" />
+					<Button id="AddMountBtn" class="vertical-align-center button" onactivate="MountManager.openAddMount()">
+						<Label class="button__text" text="[HC] Add New Game" />
 					</Button>
 				</Panel>
 				<Panel id="MountContainer" class="mounts__list" />

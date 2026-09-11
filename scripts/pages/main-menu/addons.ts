@@ -490,6 +490,7 @@ class MountEntry {
 			subtag.text = this.subtag;
 		}
 		if (cover) {
+			installImageFallbackHandler(cover);
 			cover.SetImage(this.capsuleUrl);
 		}
 	}
@@ -564,48 +565,7 @@ class MountManager {
 		}
 	}
 
-	static onAppRequestFailed(appId?: number) {
-		$.Warning('ADDONS: Failed to retrieve App ID details.');
-
-		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
-		p.LoadLayoutSnippet('MountEntrySnippet');
-
-		this.mountEntries.push(
-			new MountEntry(
-				p,
-				'Unable to retrieve App Name',
-				'file://{images}/menu/unknown-app-header.png',
-				`${appId ? appId : 'UNKNOWN'}`
-			)
-		);
-		this.mountEntries[this.mountEntries.length - 1].update();
-	}
-
-	static onAppRequestResponse(data) {
-		if (data.statusText !== 'success') {
-			this.onAppRequestFailed();
-			return;
-		}
-
-		// Updated this (same line in news.ts) to be safer.
-		let response;
-		try {
-			response = JSON.parse(data.responseText.trim());
-		} catch (e) {
-			response = JSON.parse(data.responseText.substring(0, data.responseText.length - 1));
-		}
-		const appId = Object.keys(response)[0];
-		const appInfo = response[Object.keys(response)[0]]['data'];
-
-		if (appInfo === undefined) {
-			this.onAppRequestFailed(appId ? Number(appId) : undefined);
-			return;
-		}
-
-		const p = $.CreatePanel('Panel', this.mountsList, `Mount${appId}`);
-		p.LoadLayoutSnippet('MountEntrySnippet');
-
-		this.mountEntries.push(new MountEntry(p, appInfo['name'], appInfo['header_image'], appId));
-		this.mountEntries[this.mountEntries.length - 1].update();
+	static openAddMount() {
+		UiToolkitAPI.ShowCustomLayoutPopup('addmount', 'file://{resources}/layout/modals/popups/add-mounts.xml');
 	}
 }
