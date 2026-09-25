@@ -89,6 +89,7 @@
 		&__player-list {
 			flow-children: down;
 			overflow: squish scroll;
+			max-height: 50%;
 		}
 
 		&__management-panel {
@@ -115,11 +116,7 @@
 				width: fill-parent-flow(1);
 				height: fill-parent-flow(1);
 
-				margin-left: 10px;
-				margin-right: 10px;
-
-				background-color: $base-gradient-subtle;
-				border: $menu-pane-border;
+				margin: 10px;
 			}
 
 		}

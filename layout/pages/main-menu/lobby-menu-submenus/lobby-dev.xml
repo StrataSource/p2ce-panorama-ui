@@ -1,0 +1,22 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-info.ts" />
+	</scripts>
+
+	<snippets>
+	</snippets>
+
+	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
+		<Label class="text-h5" text="[PH] DEV" />
+		<Button class="button" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+			<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
+		</Button>
+		<!-- <Label class="text-h5" text="[HC] Players: {i:curplayers}/{i:maxplayers}" /> -->
+		<!-- <Panel class="mt-1 mb-1" /> -->
+		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
+		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
+	</Panel>
+</root>

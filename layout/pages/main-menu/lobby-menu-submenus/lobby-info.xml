@@ -10,9 +10,13 @@
 	</snippets>
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyInfo.onLoad()">
-		<!-- <Label class="text-h5" text="[HC] Players: {i:curplayers}/{i:maxplayers}" /> -->
-		<!-- <Panel class="mt-1 mb-1" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
+		<Label class="text-h5 mb-2" text="[HC] Lobby Info" />
+
+		<Label class="mb-1" text="[HC] Players: {i:curplayers}/{i:maxplayers}" />
+		<Label class="" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" />
+
+		<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Multiplayer', 'main-menu/play/multiplayer/content-selector-mp', undefined)">
+			<Label class="button__text" text="[HC] Change Campaign" />
+		</Button>
 	</Panel>
 </root>
