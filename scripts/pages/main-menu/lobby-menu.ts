@@ -50,6 +50,11 @@ function isValidTeam(team: LobbyTeam) {
 	}
 }
 
+/**
+ * @brief Get number of players on a specific team.
+ * @param team Team to get number of players on.
+ * @returns Number of players
+ */
 function getNumPlayersOnTeam(team: LobbyTeam): number {
 	if (!isValidTeam(team)) {
 		//! It is intentional that the code must error out completely if a invalid team is set for players. This represents a issue with the Panorama or backend code, and hopefully caused by nothing user facing.
@@ -58,9 +63,7 @@ function getNumPlayersOnTeam(team: LobbyTeam): number {
 
 	let numPlayers = 0;
 	LobbyMenu.lobbySlots.forEach(slot => {
-		if (!slot.playerInfo) {
-			return;
-		}
+		if (!slot.playerInfo) return;
 
 		if (slot.playerInfo.team === team) numPlayers++;
 	});
@@ -68,15 +71,18 @@ function getNumPlayersOnTeam(team: LobbyTeam): number {
 	return numPlayers;
 }
 
+/**
+ * @brief Check if there are enough players to meet the minimum campaign requirement.
+ * @returns True if there are enough players.
+ */
 function enoughPlayersForGame(): boolean {
 	let teamCount = 0;
 	for (let team = LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
 		if (teamCount === LobbyMenu.lobbySettings.maxTeams) break;
 
 		const numTeamPlayers = getNumPlayersOnTeam(team);
-		if (numTeamPlayers < LobbyMenu.lobbySettings.requiredNumTeamPlayers) {
+		if (numTeamPlayers < LobbyMenu.lobbySettings.requiredNumTeamPlayers)
 			return false;
-		}
 
 		teamCount++;
 	}
@@ -84,17 +90,21 @@ function enoughPlayersForGame(): boolean {
 	return true;
 }
 
+/**
+ * @brief Check if all players are in the READY status.
+ * @returns True if all players are ready.
+ */
 function allPlayersReady() : boolean {
-
 	LobbyMenu.lobbySlots.forEach(slot => {
-
+		if (slot.playerInfo?.lobbyPlayer.state !== LobbyMemberReadyState.READY)
+			return false;
 	});
 
 	return true;
 }
 
 /**
- * Panel for the player slot.
+ * Panel for a player slot.
  */
 class PlayerEntry {
 
@@ -122,7 +132,7 @@ class PlayerEntry {
 		this.emptySlotAvatar = this.playerEntryPanel.FindChildTraverse('EmptyEntryAvatar')!;
 		this.emptySlotAvatar.SetImage(LobbyMenu.emptySlotAvatarSrc);
 
-		// Empty entries don't need everything else set up.
+		// Empty entries don't need everything else set up, so exit early.
 		if (!lobbyPlayer) {
 			this.playerEntryPanel.FindChildTraverse('PlayerEntry')!.visible = false;
 			this.playerEntryPanel.FindChildTraverse('EmptyEntry')!.visible = true;
@@ -212,7 +222,7 @@ class PlayerEntry {
 
 	kickPlayer() {
 		$.Msg(`Kicked player: ${this.playerInfo!.lobbyPlayer.name} (${this.playerInfo!.lobbyPlayer.id})`);
-		P2CELobbyAPI.KickPlayer(this.playerInfo!.lobbyPlayer.id);
+		P2CELobbyAPI.KickPlayer(this.playerInfo!.lobbyPlayer.id, '[HC] Kicked by lobby host.');
 	}
 
 	// Currently only "bans" player during the Panels lifetime.
@@ -224,7 +234,7 @@ class PlayerEntry {
 			'warning-popup',
 			() => {
 				$.Msg(`Banned player: ${this.playerInfo!.lobbyPlayer.name} (${this.playerInfo!.lobbyPlayer.id})`);
-				P2CELobbyAPI.BanPlayer(this.playerInfo!.lobbyPlayer.id);
+				P2CELobbyAPI.BanPlayer(this.playerInfo!.lobbyPlayer.id, '[HC] Banned by lobby host.');
 			},
 			() => {}
 		);
@@ -290,7 +300,7 @@ class LobbyMenu {
 	static clientInviteButton: Button = $<Button>('#ClientInviteButton')!;
 
 	static bgMusicID: uuid | undefined = undefined;
-	static campaignPair: CampaignPair; // TODO: Remove when LobbyData can be directly retrieved.
+	static campaignPair: CampaignPair;
 	static lobbyData: LobbyData;
 
 	// Retrieve and store assets that are team specific for future meta asset access.
@@ -633,12 +643,6 @@ class LobbyMenu {
 		);
 	}
 
-	static startGame() {
-		if (!P2CELobbyAPI.IsLobbyOwner()) {
-			return;
-		}
-	}
-
 	static startToolTipShow(show: boolean) {
 		if (!this.startButton.enabled && show) {
 			UiToolkitAPI.ShowTextTooltip('StartButton', $.Localize('[HC] The lobby does not have enough players to start!'));
@@ -657,13 +661,13 @@ class LobbyMenu {
 		// Requirements for the game to start:
 		// 1. Lobby has enough players for the campaign.
 		// 2. Each team has enough players for the campaign, ex. no 2v1 situations.
-		// TODO: Ensure these two below are done.
-		// 3. All players have installed addons.
-		// 4. Players are readied up.
+		// 3. Players are readied up and all players have installed addons.
 
 		if (this.numPlayers < this.lobbySettings.requiredPlayers)
 			return false;
 		else if (!enoughPlayersForGame())
+			return false;
+		else if (!allPlayersReady())
 			return false;
 
 		return true;
@@ -694,7 +698,7 @@ class LobbyMenu {
 	}
 
 	static dumpBanList() {
-		const banList = LobbyManPanel.retrieveBanList();
+		const banList = P2CELobbyAPI.GetBannedPlayers();
 		if (banList.length === 0) {
 			$.Msg('No ban list has been generated!');
 		}
@@ -729,14 +733,5 @@ class LobbyManPanel {
 			this.subMenuPanel.RemoveAndDeleteChildren();
 			this.subMenuPanel.DeleteAsync(0);
 		}
-	}
-
-	static retrieveBanList(): Array<steamID> {
-		const banList = $.LoadKeyValues3File('cfg/lobbybans.kv3') as Record<string, Array<unknown>> as Record<string, Array<steamID>>;
-		if (banList === undefined || banList.bans === undefined || !(banList.bans instanceof Array)) {
-			return [];
-		}
-
-		return banList.bans;
 	}
 }
