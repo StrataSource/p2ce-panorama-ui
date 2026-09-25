@@ -1,0 +1,15 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+	<scripts>
+		<!-- <include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-info.ts" /> -->
+	</scripts>
+
+	<snippets>
+	</snippets>
+
+	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
+		<Label class="text-h5" text="[PH] SETTINGS" />
+	</Panel>
+</root>
