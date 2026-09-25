@@ -84,6 +84,7 @@ class CampaignEntry {
 					P2CELobbyAPI.CreateLobby(campaign);
 				} else if (P2CELobbyAPI.IsInLobby()) { // Allows for reusing the selector menu in multiplayer lobbies.
 					P2CELobbyAPI.ChangeCampaign(campaign);
+					$.DispatchEvent('MainMenuCloseAllPages');
 				} else {
 					$.DispatchEvent('MainMenuAnimatedSwitch', campaign);
 					$.DispatchEvent('MainMenuCloseAllPages');
