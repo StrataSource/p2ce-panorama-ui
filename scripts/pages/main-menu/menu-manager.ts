@@ -274,6 +274,11 @@ class MenuManager {
 			});
 
 			$.RegisterForUnhandledEvent('GameDisconnection', (reason: string) => {
+				$.Msg(`User disconnected with reason: "${reason}"`);
+
+				if (reason.length > 1) return; // Standard self user disconnects. Period is included by default so check for message is more than one character.
+
+				$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 				UiToolkitAPI.ShowGenericPopupOk(
 					'[HC] Disconnected From Server',
 					reason,
