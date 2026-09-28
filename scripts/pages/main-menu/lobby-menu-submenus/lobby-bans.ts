@@ -34,7 +34,7 @@ class BanEntry {
                 'warning-popup',
                 () => {
                     P2CELobbyAPI.UnBanPlayer(this.steamID);
-                    LobbyBans.onLoad();
+                    LobbyBans.reload();
                 },
                 () => {}
             );
@@ -51,13 +51,52 @@ class BanEntry {
 class LobbyBans {
 
     static banListPanel = $<Panel>('#LobbyBans')!;
+    static noBansPanel = $<Panel>('#NoBansEntry')!;
+    static unbanAllButton = $<Button>('#UnbanAllBtn')!;
+
     static banList: BanEntry[] = [];
 
     static onLoad() {
+        this.unbanAllButton.SetPanelEvent('onactivate', () => {
+            $.PlaySoundEvent('UIPanorama.P2CE.MenuError');
+            UiToolkitAPI.ShowGenericPopupYesNo(
+                '[HC] Unban All Players?',
+                '[HC] Are you sure you want to remove all players from the ban list?',
+                'warning-popup',
+                () => {
+                    for (const entry of this.banList) {
+                        P2CELobbyAPI.UnBanPlayer(entry.steamID);
+                    }
+
+                    this.reload();
+                },
+                () => {}
+            );
+        });
+
+        // Capture any bans.
+        $.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerLeft', (playerSteamID: steamID) => {
+            $.Msg("MURDERED!");
+            this.reload();
+        });
+
+        this.reload();
+    }
+
+    static reload() {
         for (const entry of this.banList) {
             entry.destruct();
         }
 
-        this.banList = P2CELobbyAPI.GetBannedPlayers().map(steamID => new BanEntry(steamID));
+        this.unbanAllButton.visible = true;
+        this.noBansPanel.visible = false;
+        const curBanList = P2CELobbyAPI.GetBannedPlayers();
+        if (curBanList.length === 0) {
+            this.unbanAllButton.visible = false;
+            this.noBansPanel.visible = true;
+            return;
+        }
+
+        this.banList = curBanList.map(steamID => new BanEntry(steamID));
     }
 }

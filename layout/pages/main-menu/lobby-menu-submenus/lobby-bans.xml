@@ -30,7 +30,19 @@
 	</snippets>
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyBans.onLoad();">
-		<Label class="text-h5 mb-2" text="[HC] Lobby Bans" />
-		<Panel id="LobbyBans" class="flow-down" style="overflow: squish scroll;" tabindex="auto" selectionpos="auto" />
+		<Panel class="flow-right mb-1">
+			<Label class="text-h5" text="[HC] Lobby Bans" />
+			<Panel class="fill-width" />
+			<Button id="UnbanAllBtn" class="button button--green">
+				<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/account-check.svg" />
+				<Label class="vertical-align-center mr-1" text="[HC] Unban All" />
+			</Button>
+		</Panel>
+		<Panel id="LobbyBans" class="flow-down" style="overflow: squish scroll;" tabindex="auto" selectionpos="auto">
+			<Panel id="NoBansEntry" class="lobby-bans hide">
+				<Image id="EmptyEntryAvatar" class="lobby-bans__avatar" src="file://{images}/menu/missing-cover.png" />
+				<Label class="text-h5 vertical-align-center" text="[HC] No banned players..." />
+			</Panel>
+		</Panel>
 	</Panel>
 </root>
