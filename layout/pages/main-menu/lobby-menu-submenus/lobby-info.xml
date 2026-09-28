@@ -3,6 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
+		<include src="file://{scripts}/pages/main-menu/lobby-menu.ts" />
 		<include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-info.ts" />
 	</scripts>
 
