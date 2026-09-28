@@ -14,9 +14,15 @@
 		<Label class="text-h4 mb-2" text="[HC] Lobby Info" />
 
 		<Label class="mb-1" text="[HC] Players: {i:curplayers}/{i:maxplayers}" />
-		<Label class="" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" />
+		<Label class="mb-1" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" />
+		<Label class="" text="[HC] Players Readied Up: {i:readyplayers}/{i:maxplayers}" />
 
-		<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Multiplayer', 'main-menu/play/multiplayer/content-selector-mp', undefined)">
+		<Panel class="horizontal-separator mt-2 mb-2" />
+
+		<Label class="text-h5 mb-2" text="[HC] Campaign Info" />
+		<Label class="mb-1" text="[HC] Campaign Name: {s:campaignname}" />
+		<Label class="mb-1" text="[HC] Campaign ID: {s:campaignid}" />
+		<Button class="button" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Multiplayer', 'main-menu/play/multiplayer/content-selector-mp', undefined)">
 			<Label class="button__text" text="[HC] Change Campaign" />
 		</Button>
 	</Panel>
