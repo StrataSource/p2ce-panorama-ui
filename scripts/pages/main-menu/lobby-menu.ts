@@ -14,10 +14,10 @@ interface LobbySettings {
 	visibility: LobbyVisibility; // Visibility of the lobby through server browser and Steam API.
 	maxPlayers: number;
 	maxTeams: number;
-	requiredPlayers: number;
-	requiredNumTeamPlayers: number;
-	canSwitchTeams: boolean;
-	hasSpectatorMode: boolean;
+	requiredPlayers: number; // TODO: Replace with CampaignMultiPlayerOptions version.
+	requiredNumTeamPlayers: number; // TODO: Replace with CampaignMultiPlayerOptions version.
+	canSwitchTeams: boolean; // TODO: Replace with CampaignMultiPlayerOptions version.
+	allowSpectators: boolean;
 }
 
 /**
@@ -298,10 +298,11 @@ class PlayerEntry {
 	}
 
 	teamSwitchContextMenu() {
+		$.Msg('BRUH');
 		const items: UiToolkitAPI.SimpleContextMenuItem[] = [];
 
 		let teamCount = 0;
-		for (let team = LobbyMenu.lobbySettings.hasSpectatorMode ? LobbyTeam.SPECTATOR : LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
+		for (let team = LobbyMenu.lobbySettings.allowSpectators ? LobbyTeam.SPECTATOR : LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
 			if (teamCount === LobbyMenu.lobbySettings.maxTeams) break;
 
 			const teamMeta = LobbyMenu.teamMeta[team];
@@ -494,7 +495,7 @@ class LobbyMenu {
 			requiredPlayers: 2,
 			requiredNumTeamPlayers: 1,
 			canSwitchTeams: false,
-			hasSpectatorMode: false,
+			allowSpectators: false,
 		}
 
 		this.lobbyData = {
@@ -560,8 +561,8 @@ class LobbyMenu {
 			}
 
 			this.lobbySettings.canSwitchTeams = (getMetaSrc(CampaignMeta.CAN_SWITCH_TEAMS, false) ?? 'false').toLowerCase() === 'true';
-			this.lobbySettings.hasSpectatorMode = (getMetaSrc(CampaignMeta.HAS_SPECTATOR_MODE, false) ?? 'false').toLowerCase() === 'true';
-			if (this.lobbySettings.hasSpectatorMode) {
+			this.lobbySettings.allowSpectators = (getMetaSrc(CampaignMeta.HAS_SPECTATOR_MODE, false) ?? 'false').toLowerCase() === 'true';
+			if (this.lobbySettings.allowSpectators) {
 				this.lobbySettings.maxTeams++; // Spectator is a team that the game can use.
 			}
 
@@ -575,7 +576,7 @@ class LobbyMenu {
 				$.Msg(`maxTeams: ${this.lobbySettings.maxTeams}`);
 				$.Msg(`requiredNumTeamPlayers: ${this.lobbySettings.requiredNumTeamPlayers}`);
 				$.Msg(`canSwitchTeams: ${this.lobbySettings.canSwitchTeams}`);
-				$.Msg(`hasSpectatorMode: ${this.lobbySettings.hasSpectatorMode}`);
+				$.Msg(`hasSpectatorMode: ${this.lobbySettings.allowSpectators}`);
 				$.Msg(`emptySlotAvatarSrc: ${this.emptySlotAvatarSrc}`);
 				$.Msg('------------------');
 				$.Msg('LobbyTeam Names:');
