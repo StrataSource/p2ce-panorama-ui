@@ -10,7 +10,7 @@
 	</snippets>
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyInfo.onLoad()">
-		<Label class="text-h5 mb-2" text="[HC] Lobby Info" />
+		<Label class="text-h4 mb-2" text="[HC] Lobby Info" />
 
 		<Label class="mb-1" text="[HC] Players: {i:curplayers}/{i:maxplayers}" />
 		<Label class="" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" />

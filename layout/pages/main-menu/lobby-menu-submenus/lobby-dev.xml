@@ -10,7 +10,7 @@
 	</snippets>
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
-		<Label class="text-h5" text="[PH] DEV" />
+		<Label class="text-h4 mb-1" text="[PH] DEV" />
 		<Button class="button" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
 			<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 		</Button>
