@@ -120,10 +120,6 @@
 				</Panel>
 				<Panel id="LobbyManSubMenuInsert" class="lobby-menu__base-content__management-panel__inner" />
 			</Panel>
-
-			<!-- This could go in the bottom right area -->
-			<Panel id="LobbyChat" class="">
-			</Panel>
 		</Panel>
 
 		<Panel id="LobbyMenuBottom" class="vertical-align-bottom flow-down">
@@ -131,13 +127,16 @@
 				<Button class="button mr-1" onactivate="LobbyMenu.requestExit()">
 					<Label class="button__text" text="[HC] Exit Lobby" />
 				</Button>
-				<Button class="button mr-3" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined)">
+				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined);">
 					<Label class="button__text" text="#MainMenu_Navigation_Options" />
 				</Button>
-				<Button id="ClientInviteButton" class="button mr-1 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay()">
+				<Button class="button mr-3" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);">
+					<Label class="button__text" text="#MainMenu_Navigation_Addons" />
+				</Button>
+				<Button id="ClientInviteButton" class="button mr-1 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay();">
 					<Label class="button__text" text="[HC] Invite Players" />
 				</Button>
-				<Button id="ClientReadyButton" class="button button--red" onactivate="LobbyMenu.ToggleReadyState()">
+				<Button id="ClientReadyButton" class="button button--red" onactivate="LobbyMenu.ToggleReadyState();">
 					<Label id="ClientReadyButtonText" class="button__text" text="[HC] Not Ready" />
 				</Button>
 			</Panel>
