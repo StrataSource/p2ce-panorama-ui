@@ -31,7 +31,7 @@
 						<Label class="button__text" text="#MainMenu_Navigation_Play" />
 					</Button>
 					<Button id="CustomizeBtn" class="button ml-1">
-						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/settings.svg" />
 					</Button>
 				</Panel>
 			</Panel>
@@ -64,7 +64,7 @@
 						<Label class="button__text" text="#MainMenu_Navigation_Play" />
 					</Button>
 					<Button id="ListCustomizeBtn" onactivate="CampaignChapters.customizeChapter()" class="button ml-1">
-						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/settings.svg" />
+						<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/settings.svg" />
 					</Button>
 				</Panel>
 			</Panel>
