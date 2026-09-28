@@ -10,10 +10,6 @@
 	</snippets>
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
-		<Label class="text-h5" text="[PH] CHAT" />
-		<!-- <Label class="text-h5" text="[HC] Players: {i:curplayers}/{i:maxplayers}" /> -->
-		<!-- <Panel class="mt-1 mb-1" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
+		<Label class="text-h4" text="[PH] CHAT (REMOVE ME WHEN CHAT IS IMPLEMENTED TO USE FULL SPACE)" />
 	</Panel>
 </root>

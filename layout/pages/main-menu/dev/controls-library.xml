@@ -443,7 +443,6 @@
 
 				<DropDown class="dropdown ml-3" menuclass="dropdown-menu" disabled="true">
 					<Label text="Disabled Dropdown" id="ControllibDrop2Down1" value="1" />
->
 				</DropDown>
 
 				<Panel class="dropdown ml-3">
