@@ -10,6 +10,26 @@
 	</snippets>
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
-		<Label class="text-h4" text="[PH] CHAT (REMOVE ME WHEN CHAT IS IMPLEMENTED TO USE FULL SPACE)" />
+		<Panel id="ChatInsert" class="console__inner" acceptsfocus="true" acceptsinput="true">
+			<!--! The console stuff here is just for testing!  -->
+			<StaticConsoleMessageTarget
+				id="ConsoleMessageTarget"
+				class="console__message-target full-width"
+				keepscrolltobottom="true"
+			>
+				<Label class="color-red" text="System: SomeNerd has been banned." />
+				<Label class="color-blue" text="[Atlas] Orsell: :skull:" />
+				<Label class="color-orange" text="[P-Body] SomeNerd: Nah I won't" />
+				<Label class="color-blue" text="[Atlas] Orsell: Add my AngelScript bindings...." />
+				<Label text="[TEAM] USERNAME: YAPPPING!" />
+				<Label text="Test YAPPPING!" />
+				<Label text="Test YAPPPING!" />
+				<Label text="Test YAPPPING!" />
+				<Label text="Test YAPPPING!" />
+				<Label text="Test YAPPPING!" />
+				<Label text="Test YAPPPING!" />
+			</StaticConsoleMessageTarget>
+			<ConsoleInput id="ConsoleInput" class="textentry console__input full-width" clearaftersubmit="true" />
+		</Panel>
 	</Panel>
 </root>
