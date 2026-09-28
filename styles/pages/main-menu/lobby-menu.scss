@@ -128,3 +128,28 @@
 	}
 
 }
+
+.lobby-bans {
+	flow-children: right;
+	height: fit-children;
+	width: fill-parent-flow(1);
+	margin-bottom: 5px;
+	border: $menu-pane-border;
+	background-color: $base-950;
+	vertical-align: center;
+	horizontal-align: center;
+
+	&__avatar {
+		width: 64px;
+		height: 64px;
+		border: $menu-pane-border;
+		margin-right: 10px;
+	}
+
+	&__buttons {
+		margin-right: 5px;
+		flow-children: right;
+		vertical-align: center;
+		horizontal-align: right;
+	}
+}

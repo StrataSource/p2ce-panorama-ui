@@ -3,17 +3,34 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<!-- <include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-info.ts" /> -->
+		<include src="file://{scripts}/common/dev.ts" />
+		<include src="file://{scripts}/common/fancy-list.ts" />
+		<include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-bans.ts" />
 	</scripts>
 
 	<snippets>
+		<snippet name="BanEntry">
+			<Panel class="lobby-bans">
+				<AvatarImage id="PlayerAvatar" class="lobby-bans__avatar" steamid="local" />
+				<Label class="text-h5 vertical-align-center" text="{s:username}" />
+				<Panel class="lobby-bans__buttons">
+					<TooltipPanel tooltip="[HC] View Steam Profile" style="tooltip-position: right;" class="mr-1">
+						<Button id="SteamProfileBtn" class="button">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/steam.svg" />
+						</Button>
+					</TooltipPanel>
+					<TooltipPanel tooltip="[HC] Unban Player" style="tooltip-position: right;">
+						<Button id="UnbanBtn" class="button button--green">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/icons/account-check.svg" />
+						</Button>
+					</TooltipPanel>
+				</Panel>
+			</Panel>
+		</snippet>
 	</snippets>
 
-	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
-		<Label class="text-h5" text="[PH] BANS" />
-		<!-- <Label class="text-h5" text="[HC] Players: {i:curplayers}/{i:maxplayers}" /> -->
-		<!-- <Panel class="mt-1 mb-1" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
+	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyBans.onLoad();">
+		<Label class="text-h5 mb-2" text="[HC] Lobby Bans" />
+		<Panel id="LobbyBans" class="flow-down" style="overflow: squish scroll;" tabindex="auto" selectionpos="auto" />
 	</Panel>
 </root>
