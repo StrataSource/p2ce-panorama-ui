@@ -95,13 +95,13 @@
 					</Panel>
 					<Panel class="flow-right mb-1">
 						<RadioButton id="LobbySettingsMenuButton" class="button radiobutton hide" group="lobbygroup">
-							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/settings.svg" />
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/icons/settings.svg" />
 						</RadioButton>
 						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
 					</Panel>
 					<Panel class="flow-right mb-1">
 						<RadioButton id="LobbyBanListMenuButton" class="button radiobutton hide" group="lobbygroup">
-							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/account-multiple-remove.svg" />
+							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/icons/account-multiple-remove.svg" />
 						</RadioButton>
 						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
 					</Panel>
