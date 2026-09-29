@@ -38,7 +38,7 @@
 				<Label class="vertical-align-center mr-1" text="[HC] Unban All" />
 			</Button>
 		</Panel>
-		<Panel id="LobbyBans" class="flow-down overflow-vscroll" tabindex="auto" selectionpos="auto">
+		<Panel id="LobbyBans" class="flow-down overflow-vscroll pr-2" tabindex="auto" selectionpos="auto">
 			<Panel id="NoBansEntry" class="lobby-bans hide">
 				<Image id="EmptyEntryAvatar" class="lobby-bans__avatar" src="file://{images}/menu/missing-cover.png" />
 				<Label class="text-h5 vertical-align-center" text="[HC] No banned players..." />
