@@ -27,7 +27,7 @@ class PlayMenu {
 			$.Localize('#MainMenu_Navigation_Play_Modes')
 		);
 
-		this.setupModelPanel(this.model1);
+		//this.setupModelPanel(this.model1);
 		//this.setupModelPanel(this.model2);
 		//this.setupModelPanel(this.model3);
 		//this.model1.AddClass("");

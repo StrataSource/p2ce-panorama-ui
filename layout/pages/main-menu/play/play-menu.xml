@@ -35,12 +35,12 @@
 			</Panel>
 		</Button>
 		<Panel class="play-menu__modelpanel">
-			<ModelPanel
+			<!-- <ModelPanel
 				id="PlayerModel1"
 				src="models/player.mdl"
 				sequence="nogun_run"
 				antialias="true"
-			/>
+			/> -->
 			<!-- <ModelPanel
 				id="PlayerModel2"
 				src="models/player/ballbot/ballbot.mdl"
