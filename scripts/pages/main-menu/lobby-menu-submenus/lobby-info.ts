@@ -11,7 +11,7 @@ class LobbyInfo {
 		this.submenuPanel.SetDialogVariableInt('maxplayers', 2);
 		this.submenuPanel.SetDialogVariableInt('requiredplayers', 2); // TODO: Fix me once required and max players are two separate things.
 		this.submenuPanel.SetDialogVariableInt('readyplayers', 0);
-		this.submenuPanel.SetDialogVariable('campaignname', 'Portal 2 Coop Campaign');
+		this.submenuPanel.SetDialogVariable('campaignname', 'INSERT CAMPAIGN NAME HERE');
 		this.submenuPanel.SetDialogVariable('campaignid', 'INSERT ID HERE');
 
 
@@ -19,9 +19,8 @@ class LobbyInfo {
         // $.Msg(lobbySettings);
         // const numPlayers = LobbyMenu.getLobbyPlayerCount();
 
-        // this.submenuPanel.SetDialogVariableInt('curplayers', numPlayers);
-		// this.submenuPanel.SetDialogVariableInt('maxplayers', lobbySettings.maxPlayers);
-		// this.submenuPanel.SetDialogVariableInt('requiredplayers', lobbySettings.maxPlayers); // TODO: Fix me once required and max players are two separate things.
+        // this.submenuPanel.SetDialogVariableInt('curplayers', LobbyMenu.numPlayers);
+		// this.submenuPanel.SetDialogVariableInt('maxplayers', LobbyMenu.lobbySettings.maxPlayers);
+		// this.submenuPanel.SetDialogVariableInt('requiredplayers', LobbyMenu.lobbySettings.maxPlayers); // TODO: Fix me once required and max players are two separate things.
     }
-
 }
