@@ -241,3 +241,7 @@ function SetSourceIndicatorFromData(indicator: GenericPanel, campaignPair: Campa
 function OpenWorkshopPageFromID(id: bigint | string) {
 	SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${id}`);
 }
+
+function OpenSteamProfilePageFromID(id: steamID) {
+	SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${id}`);
+}

@@ -3,7 +3,7 @@
 class BanEntry {
     panel: Panel;
     avatar: AvatarImage;
-    avatarBtn: Button;
+    profileBtn: Button;
     unbanButton: Button;
 
     steamID: steamID;
@@ -20,10 +20,8 @@ class BanEntry {
         this.avatar = this.panel.FindChildTraverse('PlayerAvatar')!;
         this.avatar.steamid = this.steamID;
 
-        this.avatarBtn = this.panel.FindChildTraverse('SteamProfileBtn')!;
-        this.avatarBtn.SetPanelEvent('onactivate', () => {
-            SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.steamID}`);
-        });
+        this.profileBtn = this.panel.FindChildTraverse('SteamProfileBtn')!;
+        this.profileBtn.SetPanelEvent('onactivate', () => { OpenSteamProfilePageFromID(this.steamID); });
 
         this.unbanButton = this.panel.FindChildTraverse('UnbanBtn')!;
         this.unbanButton.SetPanelEvent('onactivate', () => {

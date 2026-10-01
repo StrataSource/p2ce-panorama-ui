@@ -118,7 +118,7 @@ class PlayerEntry {
 	teamIcon?: Image;
 	teamSwitchBtn?: Button;
 
-	constructor(lobbyPlayer: LobbyPlayer | null) { //}, team: LobbyTeam) {
+	constructor(lobbyPlayer: LobbyPlayer | null) {
 		const id: string = lobbyPlayer ? `playerslot_${lobbyPlayer.id}` : `playerslot_empty${LobbyMenu.numPlayers}`
 		this.playerEntryPanel = $.CreatePanel('Panel', LobbyMenu.playerListPanel, id);
 		this.playerEntryPanel.LoadLayoutSnippet('LobbyEntry');
@@ -138,8 +138,6 @@ class PlayerEntry {
 		this.playerAvatar.steamid = this.lobbyPlayer.id;
 		this.playerEntryPanel.SetDialogVariable('name', this.lobbyPlayer.name);
 
-
-
 		if (!isValidTeam(this.lobbyPlayer.team)) {
 			//! It is intentional that the code must error out completely if a invalid team is set for players. This represents a issue with the Panorama or backend code, and hopefully caused by nothing user facing.
 			throw new Error('Invalid team has been specified for new PlayerEntry! This is not right, please report to P2:CE developers!');
@@ -152,11 +150,11 @@ class PlayerEntry {
 		this.banBtn.SetPanelEvent('onactivate', this.banPlayer.bind(this));
 
 		this.steamProfileBtn = this.playerEntryPanel.FindChildTraverse('SteamProfileBtn')!;
-		this.steamProfileBtn.SetPanelEvent('onactivate', this.openSteamProfile.bind(this));
+		this.steamProfileBtn.SetPanelEvent('onactivate', () => { OpenSteamProfilePageFromID(this.lobbyPlayer!.id) });
 
 		this.pnrStatus = this.playerEntryPanel.FindChildTraverse('PlayerNotReadyStatus')!;
 		this.paStatus = this.playerEntryPanel.FindChildTraverse('PlayerAddonStatus')!;
-		this.prStatus = this.playerEntryPanel.FindChildTraverse('PlayerReadyStatus')!;``
+		this.prStatus = this.playerEntryPanel.FindChildTraverse('PlayerReadyStatus')!;
 		this.paStatus.visible = false;
 		this.prStatus.visible = false;
 		this.setStatusIndicator(this.lobbyPlayer.state);
@@ -164,19 +162,18 @@ class PlayerEntry {
 		this.teamSwitchBtn = this.playerEntryPanel.FindChildTraverse('TeamSwitchBtn')!;
 		this.teamSwitchBtn.SetPanelEvent('onactivate', this.teamSwitchContextMenu.bind(this));
 
-		const isThisClientEntry = this.lobbyPlayer.id === UserAPI.GetXUID();
-
 		this.kickBtn.visible = false;
 		this.banBtn.visible = false;
 		this.playerEntryPanel.SetPanelEvent('onmouseover', () => {
 			if (!this.kickBtn || !this.banBtn) return;
-			if (!P2CELobbyAPI.IsLobbyOwner || isThisClientEntry) return;
+			if (!P2CELobbyAPI.IsLobbyOwner || this.lobbyPlayer!.id === UserAPI.GetXUID()) return;
 
 			this.kickBtn.visible = true;
 			this.banBtn.visible = true;
 		});
 		this.playerEntryPanel.SetPanelEvent('onmouseout', () => {
 			if (!this.kickBtn || !this.banBtn) return;
+			if (!P2CELobbyAPI.IsLobbyOwner()) return;
 
 			this.kickBtn.visible = false;
 			this.banBtn.visible = false;
@@ -192,23 +189,14 @@ class PlayerEntry {
 		this.teamIcon = this.playerEntryPanel.FindChildTraverse('TeamIcon')!;
 
 		if (lobbyPlayer.owner) {
-			$.Msg('IS OWNER!');
 			this.hostIcon.visible = true;
 		}
 
-		this.loadTeamMeta();
-
+		this.updateTeamMeta();
 		// Load team based campaign assets for the client side once.
-		if (isThisClientEntry) {
+		if (this.lobbyPlayer!.id === UserAPI.GetXUID()) {
 			LobbyMenu.loadCampaignMenuAssets(this.lobbyPlayer.team);
 		}
-	}
-
-	private loadTeamMeta() {
-		const teamMeta = LobbyMenu.teamMeta[this.lobbyPlayer!.team];
-		this.playerEntryPanel.SetDialogVariable('teamName', teamMeta.name.src);
-		this.teamIcon!.SetImage(teamMeta.icon.src);
-		this.emptySlotAvatar.SetImage(LobbyMenu.emptySlotAvatarSrc);
 	}
 
 	destruct() {
@@ -235,8 +223,11 @@ class PlayerEntry {
 		);
 	}
 
-	openSteamProfile() {
-		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.lobbyPlayer!.id}`);
+	private updateTeamMeta() {
+		const teamMeta = LobbyMenu.teamMeta[this.lobbyPlayer!.team];
+		this.playerEntryPanel.SetDialogVariable('teamName', teamMeta.name.src);
+		this.teamIcon!.SetImage(teamMeta.icon.src);
+		this.emptySlotAvatar.SetImage(LobbyMenu.emptySlotAvatarSrc);
 	}
 
 	setStatusIndicator(state: LobbyMemberReadyState) {
