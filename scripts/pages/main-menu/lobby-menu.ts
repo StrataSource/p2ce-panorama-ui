@@ -20,14 +20,6 @@ interface LobbySettings {
 	allowSpectators: boolean;
 }
 
-/**
- * Information about the player that is slotted in the UI.
- */
-interface PlayerInfo {
-	lobbyPlayer: LobbyPlayer; // Server information about the player.
-	hasAllAddons: boolean; // Does the player have the required installed addons?
-}
-
 type TeamMetaKey = 'name' | 'icon' | 'bgMusic' | 'bgMovie' | 'bgImage';
 
 type TeamMetaEntry = {
@@ -62,9 +54,9 @@ function getNumPlayersOnTeam(team: LobbyTeam): number {
 
 	let numPlayers = 0;
 	LobbyMenu.lobbySlots.forEach(slot => {
-		if (!slot.playerInfo) return;
+		if (!slot.lobbyPlayer) return;
 
-		if (slot.playerInfo.lobbyPlayer.team === team) numPlayers++;
+		if (slot.lobbyPlayer.team === team) numPlayers++;
 	});
 
 	return numPlayers;
@@ -95,7 +87,7 @@ function enoughPlayersForGame(): boolean {
  */
 function allPlayersReady() : boolean {
 	LobbyMenu.lobbySlots.forEach(slot => {
-		if (slot.playerInfo?.lobbyPlayer.state !== LobbyMemberReadyState.READY)
+		if (slot.lobbyPlayer?.state !== LobbyMemberReadyState.READY)
 			return false;
 	});
 
@@ -111,7 +103,7 @@ class PlayerEntry {
 
 	emptySlotAvatar: Image; // If no player occupies the slot this is used instead of AvatarImage.
 	playerAvatar?: AvatarImage;
-	playerInfo?: PlayerInfo;
+	lobbyPlayer?: LobbyPlayer;
 
 	kickBtn?: Button;
 	banBtn?: Button;
@@ -141,24 +133,17 @@ class PlayerEntry {
 			return;
 		}
 
+		this.lobbyPlayer = lobbyPlayer;
 		this.playerAvatar = this.playerEntryPanel.FindChildTraverse('PlayerAvatar')!;
-		this.playerAvatar.steamid = lobbyPlayer.id;
-		this.playerEntryPanel.SetDialogVariable('name', lobbyPlayer.name);
-
-		this.playerInfo = {
-			lobbyPlayer: lobbyPlayer,
-			hasAllAddons: true, // TODO: Replace with a API function that checks if the user does in fact have needed addons/custom content.
-		};
+		this.playerAvatar.steamid = this.lobbyPlayer.id;
+		this.playerEntryPanel.SetDialogVariable('name', this.lobbyPlayer.name);
 
 
-		if (!isValidTeam(this.playerInfo.lobbyPlayer.team)) {
+
+		if (!isValidTeam(this.lobbyPlayer.team)) {
 			//! It is intentional that the code must error out completely if a invalid team is set for players. This represents a issue with the Panorama or backend code, and hopefully caused by nothing user facing.
 			throw new Error('Invalid team has been specified for new PlayerEntry! This is not right, please report to P2:CE developers!');
 		}
-
-		const teamMeta = LobbyMenu.teamMeta[this.playerInfo.lobbyPlayer.team];
-
-		this.playerEntryPanel.SetDialogVariable('teamName', teamMeta.name.src);
 
 		this.kickBtn = this.playerEntryPanel.FindChildTraverse('KickBtn')!;
 		this.kickBtn.SetPanelEvent('onactivate', this.kickPlayer.bind(this));
@@ -174,12 +159,12 @@ class PlayerEntry {
 		this.prStatus = this.playerEntryPanel.FindChildTraverse('PlayerReadyStatus')!;``
 		this.paStatus.visible = false;
 		this.prStatus.visible = false;
-		this.setStatusIndicator(this.playerInfo.lobbyPlayer.state);
+		this.setStatusIndicator(this.lobbyPlayer.state);
 
 		this.teamSwitchBtn = this.playerEntryPanel.FindChildTraverse('TeamSwitchBtn')!;
 		this.teamSwitchBtn.SetPanelEvent('onactivate', this.teamSwitchContextMenu.bind(this));
 
-		const isThisClientEntry = lobbyPlayer.id === UserAPI.GetXUID();
+		const isThisClientEntry = this.lobbyPlayer.id === UserAPI.GetXUID();
 
 		this.kickBtn.visible = false;
 		this.banBtn.visible = false;
@@ -202,25 +187,28 @@ class PlayerEntry {
 			this.teamSwitchBtn.enabled = true;
 		}
 
-		this.addonMissingNotice = this.playerEntryPanel.FindChildTraverse('MissingAddons')!;
 		this.hostIcon = this.playerEntryPanel.FindChildTraverse('HostPlayerIcon')!;
 		this.steamFriendIcon = this.playerEntryPanel.FindChildTraverse('SteamFriendIcon')!;
 		this.teamIcon = this.playerEntryPanel.FindChildTraverse('TeamIcon')!;
 
-		if (!this.playerInfo.hasAllAddons) {
-			this.addonMissingNotice.visible = true;
-		}
-
 		if (lobbyPlayer.owner) {
+			$.Msg('IS OWNER!');
 			this.hostIcon.visible = true;
 		}
 
-		this.teamIcon.SetImage(teamMeta.icon.src);
+		this.loadTeamMeta();
 
 		// Load team based campaign assets for the client side once.
 		if (isThisClientEntry) {
-			LobbyMenu.loadCampaignMenuAssets(this.playerInfo.lobbyPlayer.team);
+			LobbyMenu.loadCampaignMenuAssets(this.lobbyPlayer.team);
 		}
+	}
+
+	private loadTeamMeta() {
+		const teamMeta = LobbyMenu.teamMeta[this.lobbyPlayer!.team];
+		this.playerEntryPanel.SetDialogVariable('teamName', teamMeta.name.src);
+		this.teamIcon!.SetImage(teamMeta.icon.src);
+		this.emptySlotAvatar.SetImage(LobbyMenu.emptySlotAvatarSrc);
 	}
 
 	destruct() {
@@ -228,27 +216,27 @@ class PlayerEntry {
 		this.playerEntryPanel.DeleteAsync(0);
 	}
 
-	kickPlayer() {
-		$.Msg(`Kicked player: ${this.playerInfo!.lobbyPlayer.name} (${this.playerInfo!.lobbyPlayer.id})`);
-		P2CELobbyAPI.KickPlayer(this.playerInfo!.lobbyPlayer.id, '[HC] Kicked by lobby host.');
+	private kickPlayer() {
+		$.Msg(`Kicked player: ${this.lobbyPlayer!.name} (${this.lobbyPlayer!.id})`);
+		P2CELobbyAPI.KickPlayer(this.lobbyPlayer!.id, '[HC] Kicked by lobby host.');
 	}
 
-	banPlayer() {
+	private banPlayer() {
 		$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 		UiToolkitAPI.ShowGenericPopupYesNo(
 			'[HC] Are you sure?',
-			`[HC] Are you sure you want to ban this user from the current lobby?` + `\nUsername: ${this.playerInfo!.lobbyPlayer.name}\nSteamID: ${this.playerInfo!.lobbyPlayer.id}`,
+			`[HC] Are you sure you want to ban this user from the current lobby?` + `\nUsername: ${this.lobbyPlayer!.name}\nSteamID: ${this.lobbyPlayer!.id}`,
 			'warning-popup',
 			() => {
-				$.Msg(`Banned player: ${this.playerInfo!.lobbyPlayer.name} (${this.playerInfo!.lobbyPlayer.id})`);
-				P2CELobbyAPI.BanPlayer(this.playerInfo!.lobbyPlayer.id, '[HC] Banned by lobby host.');
+				$.Msg(`Banned player: ${this.lobbyPlayer!.name} (${this.lobbyPlayer!.id})`);
+				P2CELobbyAPI.BanPlayer(this.lobbyPlayer!.id, '[HC] Banned by lobby host.');
 			},
 			() => {}
 		);
 	}
 
 	openSteamProfile() {
-		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.playerInfo!.lobbyPlayer.id}`);
+		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.lobbyPlayer!.id}`);
 	}
 
 	setStatusIndicator(state: LobbyMemberReadyState) {
@@ -283,22 +271,21 @@ class PlayerEntry {
 	}
 
 	switchTeam(newTeam: LobbyTeam, notify: boolean = true) {
-		if (!isValidTeam(this.playerInfo!.lobbyPlayer.team)) {
+		if (!isValidTeam(this.lobbyPlayer!.team)) {
 			//! It is intentional that the code must error out completely if a invalid team is set for players. This represents a issue with the Panorama or backend code, and hopefully caused by nothing user facing.
 			throw new Error('Invalid team has been specified for team switch! This is not right, please report to P2:CE developers!');
 		}
 
 		const newTeamMeta = LobbyMenu.teamMeta[newTeam];
 
-		$.Msg(`Switching player team from "${LobbyMenu.teamMeta[this.playerInfo!.lobbyPlayer.team].name.src}" to "${newTeamMeta.name.src}"`);
-		this.playerInfo!.lobbyPlayer.team = newTeam;
+		$.Msg(`Switching player team from "${LobbyMenu.teamMeta[this.lobbyPlayer!.team].name.src}" to "${newTeamMeta.name.src}"`);
+		this.lobbyPlayer!.team = newTeam;
 		this.teamIcon!.SetImage(newTeamMeta.icon.src);
 		this.playerEntryPanel.SetDialogVariable('teamName', newTeamMeta.name.src);
 		if (notify) P2CELobbyAPI.SetTeam(newTeam); // TODO: Break down setting the elements of a player slot into a separate function so this isn't needed.
 	}
 
 	teamSwitchContextMenu() {
-		$.Msg('BRUH');
 		const items: UiToolkitAPI.SimpleContextMenuItem[] = [];
 
 		let teamCount = 0;
@@ -307,7 +294,7 @@ class PlayerEntry {
 
 			const teamMeta = LobbyMenu.teamMeta[team];
 
-			if (team !== this.playerInfo!.lobbyPlayer.team) {
+			if (team !== this.lobbyPlayer!.team) {
 				items.push({
 					label: teamMeta.name.src,
 					jsCallback: () => {
@@ -395,6 +382,7 @@ class LobbyMenu {
 
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
 			this.stopMusic();
+			$.DispatchEvent('ChangeVersionInfoPosition', 0);
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuModeRequestCleanup', () => {
@@ -414,12 +402,13 @@ class LobbyMenu {
 
 			this.campaignPair = CampaignAPI.FindCampaign(this.lobbyData.campaign)!;
 			const pEntry = this.getLocalPlayerEntry();
-			$.Msg(`campaign: ${this.lobbyData.campaign}`);
 			$.Msg(`prev campaign: ${prevCampaign}`);
+			$.Msg(`campaign: ${this.lobbyData.campaign}`);
 
-			if (pEntry && pEntry.playerInfo && this.lobbyData.campaign !== prevCampaign) {
+			if (pEntry && pEntry.lobbyPlayer && this.lobbyData.campaign !== prevCampaign) {
 				$.Msg(`update campaign`);
-				LobbyMenu.loadCampaignMenuAssets(pEntry.playerInfo.lobbyPlayer.team);
+				this.loadTeamMeta();
+				this.loadCampaignMenuAssets(pEntry.lobbyPlayer.team);
 			}
 		});
 
@@ -437,20 +426,20 @@ class LobbyMenu {
 					$.Warning("No valid LobbyPlayer or SteamID was given for PlayerStateChanged.");
 					return;
 				}
-				if (!playerEntry.playerInfo) {
+				if (!playerEntry.lobbyPlayer) {
 					$.Warning("No PlayerInfo int PlayerEntry for PlayerStateChanged! This shouldn't happen unless a EmptyEntry was targeted?");
 					return;
 				}
-				const team = playerEntry.playerInfo.lobbyPlayer.team;
-				playerEntry.playerInfo.lobbyPlayer = lobbyPlayer;
+				const prevTeam = playerEntry.lobbyPlayer.team;
+				playerEntry.lobbyPlayer = lobbyPlayer;
 				this.lobbySlots.set(who, playerEntry);
 
-				if (playerEntry.playerInfo.lobbyPlayer.team != team)
-					playerEntry.switchTeam(playerEntry.playerInfo.lobbyPlayer.team, false);
+				if (playerEntry.lobbyPlayer.team != prevTeam)
+					playerEntry.switchTeam(playerEntry.lobbyPlayer.team, false);
 
-				const state = playerEntry.playerInfo.lobbyPlayer.state;
-				$.Msg(`NEW STATE: ${state}`);
-				if (playerEntry.playerInfo.lobbyPlayer.id === UserAPI.GetXUID())
+				const state = playerEntry.lobbyPlayer.state;
+				$.Msg(`NEW PLAYER STATE: ${state}`);
+				if (playerEntry.lobbyPlayer.id === UserAPI.GetXUID())
 				{
 					this.clientReadyButton.SetHasClass('button--red', state === LobbyMemberReadyState.NOT_READY);
 					this.clientReadyButton.SetHasClass('button--yellow', state === LobbyMemberReadyState.DOWNLOADING_ADDONS);
@@ -505,6 +494,17 @@ class LobbyMenu {
 			map: 0
 		}
 
+		LobbyMenu.loadTeamMeta();
+
+		this.clientInviteButton.visible = true;
+		if (!P2CELobbyAPI.IsLobbyOwner() && this.lobbySettings.allowClientInvites)
+			this.clientInviteButton.visible = true;
+
+		this.updateUIState();
+		LobbyManPanel.onLoad();
+	}
+
+	static loadTeamMeta() {
 		this.campaignPair = CampaignAPI.FindCampaign(P2CELobbyAPI.GetCampaignID())!;
 		if (this.campaignPair) {
 			const basePath = getCampaignAssetPath(this.campaignPair);
@@ -512,8 +512,6 @@ class LobbyMenu {
 				const src = this.campaignPair.campaign.meta.get(metaKey);
 				return src ? `${addBasePath ? basePath : ''}${src}` : undefined; // Don't want to override the value with a blank string, instead default to the default value set in the script.
 			};
-
-			this.gameLogo.SetImage(getMetaSrc(CampaignMeta.FULL_LOGO) ?? getRandomFallbackImage());
 
 			for (let team = LobbyTeam.SPECTATOR; team < LobbyTeam.COUNT; team++) {
 				const teamMeta = this.teamMeta[team];
@@ -599,13 +597,6 @@ class LobbyMenu {
 				$.Msg('------------------');
 			}
 		}
-
-		this.clientInviteButton.visible = true;
-		if (!P2CELobbyAPI.IsLobbyOwner() && this.lobbySettings.allowClientInvites)
-			this.clientInviteButton.visible = true;
-
-		this.updateUIState();
-		LobbyManPanel.onLoad();
 	}
 
 	// Separate from onLoad because some of what is loaded is based on what team the player is on. This function should be run after the player entry for the player is filled.
@@ -625,7 +616,16 @@ class LobbyMenu {
 			let bgMovie = teamMeta.bgMovie.src;
 			let bgImage = teamMeta.bgImage.src;
 
+			const getMetaSrc = (metaKey: CampaignMeta, addBasePath: boolean = true) => {
+				const src = this.campaignPair.campaign.meta.get(metaKey);
+				return src ? `${addBasePath ? basePath : ''}${src}` : undefined; // Don't want to override the value with a blank string, instead default to the default value set in the script.
+			};
+			this.gameLogo.SetImage(getMetaSrc(CampaignMeta.FULL_LOGO) ?? getRandomFallbackImage());
+
 			// TODO-FIXME: This set of if statements is a bit jank, should be cleaned up but works for testing for now.
+			$.DispatchEvent('MainMenuSwitchReverse', false);
+			$.DispatchEvent('MainMenuHideBackgroundImage', true);
+			$.DispatchEvent('MainMenuHideBackgroundMovie');
 			const playMusic = () => {
 				if (bgMusic) this.bgMusicID = $.PlaySoundEvent(bgMusic);
 			};
@@ -748,28 +748,19 @@ class LobbyMenu {
 	}
 
 	static getLocalPlayerEntry(): PlayerEntry | undefined {
-		return this.lobbySlots.get(UserAPI.GetXUID());
+		return ;
 	}
-
-	static getLobbySettings(): LobbySettings {
-		return this.lobbySettings;
-	}
-
-	static getLobbyPlayerCount(): number {
-		return this.numPlayers;
-	}
-
 
 	static ToggleReadyState() {
 
 		const entry = this.getLocalPlayerEntry();
-		if (!entry || !entry.playerInfo)
+		if (!entry || !entry.lobbyPlayer)
 		{
 			$.Warning('No local player entry or player info to toggle the ready state of???');
 			return;
 		}
 
-		const playerState = entry.playerInfo.lobbyPlayer.state;
+		const playerState = entry.lobbyPlayer.state;
 		// $.Msg(`Player State Pre-Update: ${playerState}`);
 
 		if (playerState === LobbyMemberReadyState.NOT_READY)
@@ -786,12 +777,11 @@ class LobbyMenu {
 		let slot = 0;
 		this.lobbySlots.forEach(playerEntry => {
 			$.Msg(`Slot: ${slot}`);
-			if (playerEntry.playerInfo) {
-				$.Msg(`Player Name: ${playerEntry.playerInfo.lobbyPlayer.name}`);
-				$.Msg(`Player SteamID: ${playerEntry.playerInfo.lobbyPlayer.id}`);
-				$.Msg(`Player Is Host?: ${playerEntry.playerInfo.lobbyPlayer.owner}`);
-				$.Msg(`Player Has All Required Addons?: ${playerEntry.playerInfo.hasAllAddons}`);
-				$.Msg(`Player LobbyTeam: ${playerEntry.playerInfo.lobbyPlayer.team}`);
+			if (playerEntry.lobbyPlayer) {
+				$.Msg(`Player Name: ${playerEntry.lobbyPlayer.name}`);
+				$.Msg(`Player SteamID: ${playerEntry.lobbyPlayer.id}`);
+				$.Msg(`Player Is Host?: ${playerEntry.lobbyPlayer.owner}`);
+				$.Msg(`Player LobbyTeam: ${playerEntry.lobbyPlayer.team}`);
 				$.Msg('');
 				slot++;
 				return;
