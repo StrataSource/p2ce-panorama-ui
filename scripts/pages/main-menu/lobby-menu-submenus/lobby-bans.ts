@@ -11,9 +11,9 @@ class BanEntry {
 
     constructor(userSteamID: steamID) {
         this.steamID = userSteamID;
-        this.username = FriendsAPI.GetNameForXUID(userSteamID);
+        this.username = FriendsAPI.GetNameForXUID(this.steamID);
 
-        this.panel = $.CreatePanel('Panel', LobbyBans.banListPanel, `BanEntry_${userSteamID}`);
+        this.panel = $.CreatePanel('Panel', LobbyBans.banListPanel, `BanEntry_${this.steamID}`);
         this.panel.LoadLayoutSnippet('BanEntry');
         this.panel.SetDialogVariable('username', this.username);
 
@@ -74,9 +74,8 @@ class LobbyBans {
             );
         });
 
-        // Capture any bans.
+        // When ever a player leaves, it could be because of a ban removal, so make sure to update the ban list.
         $.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerLeft', (playerSteamID: steamID) => {
-            $.Msg("MURDERED!");
             this.reload();
         });
 
