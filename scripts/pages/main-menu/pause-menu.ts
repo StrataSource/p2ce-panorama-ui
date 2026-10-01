@@ -252,6 +252,6 @@ class PauseMenu {
 	}
 
 	static openSteamProfile() {
-		SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${this.mapAvatar.steamid}`);
+		OpenSteamProfilePageFromID(this.mapAvatar.steamid);
 	}
 }
