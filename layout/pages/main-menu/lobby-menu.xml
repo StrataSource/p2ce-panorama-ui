@@ -11,7 +11,7 @@
 		<snippet name="LobbyEntry">
 			<Panel>
 				<Panel id="PlayerEntry" class="player-entry">
-					<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" style="tooltip-position: right;" tooltip="{s:teamName}">
+					<TooltipPanel id="TeamIconToolt`ip" class="player-entry__body__team-icon" tooltip="{s:teamName}">
 						<Button class="player-entry__body__team-icon" id="TeamSwitchBtn" enabled="false">
 							<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
 						</Button>
@@ -24,31 +24,29 @@
 							</Button>
 						</TooltipPanel>
 						<Panel class="player-entry__body__player ml-2">
-							<TooltipPanel class="hide" tooltip="[HC] Host">
-								<Image id="HostPlayerIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/crown-cropped.svg" />
-							</TooltipPanel>
-							<TooltipPanel tooltip="[HC] Steam Friend">
-								<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
-							</TooltipPanel>
-							<Panel class="flow-down">
-								<Panel class="flow-right">
-									<Label id="Name" text="{s:name}" class="text-h5" style="text-overflow: shrink"/>
-									<TooltipPanel id="PlayerStatus" class="player-entry__body__status" tooltip="{s:status}">
-										<Image id="PlayerNotReadyStatus" class="" texturewidth="24" textureheight="24" src="file://{images}/close.svg" />
-										<AnimatedImageStrip
-											id="PlayerAddonStatus"
-											animating="true"
-											defaultframe="0"
-											frametime="125ms"
-											src="file://{images}/menu/p2ce/spinner_strip.tga"
-											scaling="stretch-to-cover-preserve-aspect"
-											class="hide"
-										/>
-										<Image id="PlayerReadyStatus" class="hide" texturewidth="24" textureheight="24" src="file://{images}/checkmark.svg" />
-									</TooltipPanel>
-								</Panel>
-								<Label text="Team: {s:teamName}" />
+							<Panel class="flow-right">
+								<Label id="Name" text="{s:name}" class="text-h5 mr-1" style="text-overflow: shrink"/>
+								<TooltipPanel id="PlayerStatus" class="player-entry__body__status" tooltip="{s:status}">
+									<Image id="PlayerNotReadyStatus" class="" texturewidth="24" textureheight="24" src="file://{images}/close.svg" />
+									<AnimatedImageStrip
+										id="PlayerAddonStatus"
+										animating="true"
+										defaultframe="0"
+										frametime="125ms"
+										src="file://{images}/menu/p2ce/spinner_strip.tga"
+										scaling="stretch-to-cover-preserve-aspect"
+										class="hide"
+									/>
+									<Image id="PlayerReadyStatus" class="hide" texturewidth="24" textureheight="24" src="file://{images}/checkmark.svg" />
+								</TooltipPanel>
+								<TooltipPanel tooltip="[HC] Host">
+									<Image id="HostPlayerIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/crown-cropped.svg" />
+								</TooltipPanel>
+								<TooltipPanel tooltip="[HC] Steam Friend">
+									<Image id="SteamFriendIcon" class="icon mr-1 hide" texturewidth="24" textureheight="24" src="file://{images}/profile-cropped.svg" />
+								</TooltipPanel>
 							</Panel>
+							<Label text="Team: {s:teamName}" />
 						</Panel>
 					</Panel>
 
@@ -127,12 +125,12 @@
 				<Button class="button mr-1" onactivate="LobbyMenu.requestExit()">
 					<Label class="button__text" text="[HC] Exit Lobby" />
 				</Button>
-				<Button class="button mr-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined);">
+				<Button class="button mr-3" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Settings', 'main-menu/settings/settings', undefined);">
 					<Label class="button__text" text="#MainMenu_Navigation_Options" />
 				</Button>
-				<Button class="button mr-3" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);">
+				<!-- <Button class="button mr-3" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'Content', 'main-menu/addons', undefined);">
 					<Label class="button__text" text="#MainMenu_Navigation_Addons" />
-				</Button>
+				</Button> -->
 				<Button id="ClientInviteButton" class="button mr-1 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay();">
 					<Label class="button__text" text="[HC] Invite Players" />
 				</Button>

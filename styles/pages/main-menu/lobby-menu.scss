@@ -33,7 +33,7 @@
 		flow-children: right;
 
 		&__player {
-			flow-children: right;
+			flow-children: down;
 			vertical-align: center;
 		}
 
@@ -51,7 +51,7 @@
 		}
 
 		&__status {
-			margin-left: 5px;
+			margin-right: 5px;
 			width: 24px;
 			height: 24px;
 			tooltip-position: right;
