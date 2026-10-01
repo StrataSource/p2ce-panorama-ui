@@ -11,7 +11,7 @@
 		<snippet name="LobbyEntry">
 			<Panel>
 				<Panel id="PlayerEntry" class="player-entry">
-					<TooltipPanel id="TeamIconToolt`ip" class="player-entry__body__team-icon" tooltip="{s:teamName}">
+					<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" tooltip="{s:teamName}">
 						<Button class="player-entry__body__team-icon" id="TeamSwitchBtn" enabled="false">
 							<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
 						</Button>
