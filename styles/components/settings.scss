@@ -3,8 +3,10 @@
 @use '../abstract/function';
 @use '../controls/button';
 @use '../controls/radio-button';
+@use '../controls/toggle-button';
 
 .settings-enum,
+.settings-enum-bitfield,
 .settings-enum-dropdown,
 .settings-slider,
 .colordisplay {
@@ -21,6 +23,7 @@
 }
 
 .settings-enum,
+.settings-enum-bitfield,
 .settings-enum-dropdown,
 .settings-slider,
 .settings-keybinder,
@@ -121,6 +124,52 @@
 
 			.SmallScaleMode & {
 				font-size: 20px;
+			}
+		}
+	}
+}
+
+.settings-enum-bitfield {
+	height: fit-children;
+
+	&__flags-container {
+		horizontal-align: right;
+		width: fit-children;
+		height: fit-children;
+		flow-children: down;
+	}
+
+	$row-height: 38px;
+	&__flags {
+		flow-children: left-wrap;
+		horizontal-align: right;
+		width: 600px; // 4 * (button width + padding)
+		min-height: $row-height;
+		vertical-align: center;
+
+		@for $rows from 1 through 4 {
+			&--rows-#{$rows} {
+				height: $rows * $row-height;
+			}
+		}
+
+		> ToggleButton {
+			@extend .checkbox;
+			@extend .checkbox--right;
+
+			height: $row-height;
+			width: 140px;
+			margin-left: 10px;
+			vertical-align: top;
+
+			> .TickBox {
+				vertical-align: center;
+			}
+
+			> Label {
+				@include mixin.font-styles($use-header: true);
+				height: 100%;
+				vertical-align: center;
 			}
 		}
 	}
@@ -243,6 +292,7 @@
 }
 
 ConVarEnabler > .settings-enum,
+ConVarEnabler > .settings-enum-bitfield,
 ConVarEnabler > .settings-enum-dropdown,
 ConVarEnabler > .settings-slider,
 ConVarEnabler > .settings-keybinder,
