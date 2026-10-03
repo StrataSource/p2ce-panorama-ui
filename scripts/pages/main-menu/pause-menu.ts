@@ -102,7 +102,18 @@ class PauseMenu {
 					},
 					$.Localize('#Action_QuitToDesktop'),
 					() => {
-						GameInterfaceAPI.ConsoleCommand('quit');
+						UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
+							$.Localize('#Action_Quit'),
+							$.Localize('#Action_Quit_Message'),
+							'warning-popup',
+							$.Localize('#Action_Quit'),
+							() => {
+								GameInterfaceAPI.ConsoleCommand('quit');
+							},
+							$.Localize('#Common_Return'),
+							() => {},
+							'blur'
+						);
 					},
 					$.Localize('#Common_Return'),
 					() => {},
