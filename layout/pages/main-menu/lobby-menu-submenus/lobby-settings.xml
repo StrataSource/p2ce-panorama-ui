@@ -11,28 +11,40 @@
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
 		<Label class="text-h4 mb-2" text="#Settings_General_Title" />
-		<Panel class="flow-down overflow-vscroll full-width">
+		<Panel class="flow-down overflow-vscroll full-width pr-4">
 			<Panel class="flow-down">
 				<Label class="text-h5 mb-1" text="[HC] Server Settings" />
 
-				<TextEntry id="TEHostName" class="textentry mt-1 mb-1" placeholder="Host Name" />
-				<TextEntry id="TEServerTags" class="textentry mt-1 mb-1" placeholder="Server Tags" />
-				<TextEntry id="TEPassword" class="textentry mt-1 mb-1" placeholder="Password" />
+				<Panel class="flow-right">
+					<Label class="horizontal-align-left vertical-align-center" text="[HC] Server Host Name" />
+					<Panel class="fill-width" />
+					<TextEntry id="TEServerHostName" class="textentry mt-1 mb-1" placeholder="[HC] Server Host Name" />
+				</Panel>
+				<Panel class="flow-right">
+					<Label class="horizontal-align-left vertical-align-center" text="[HC] Server Tags" />
+					<Panel class="fill-width" />
+					<TextEntry id="TEServerTags" class="textentry mt-1 mb-1" placeholder="[HC] Server Tags" />
+				</Panel>
+				<Panel class="flow-right">
+					<Label class="horizontal-align-left vertical-align-center" text="[HC] Password" />
+					<Panel class="fill-width" />
+					<TextEntry id="TEPassword" class="textentry mt-1 mb-1" placeholder="[HC] Password" />
+				</Panel>
 				<SettingsEnum
-					text="[HC] Local Access Network (LAN | sv_lan)"
+					text="[HC] Local Access Network (LAN)"
 					infomessage="[HC] Should the lobby only be accessible over the local network?"
 					convar="sv_lan"
 				>
-					<RadioButton group="lan" text="Disabled" value="0" />
-					<RadioButton group="lan" text="Enabled"  value="1" />
+					<RadioButton group="lan" text="Off" value="0" />
+					<RadioButton group="lan" text="On"  value="1" />
 				</SettingsEnum>
 				<SettingsEnum
-					text="[HC] Server Cheats (sv_cheats)"
+					text="[HC] Server Cheats"
 					infomessage="[HC] Should server cheats be enabled?"
 					convar="sv_cheats"
 				>
-					<RadioButton group="servercheats" text="Disabled" value="0" />
-					<RadioButton group="servercheats" text="Enabled"  value="1" />
+					<RadioButton group="servercheats" text="Off" value="0" />
+					<RadioButton group="servercheats" text="On"  value="1" />
 				</SettingsEnum>
 			</Panel>
 
@@ -40,7 +52,7 @@
 
 			<Panel class="flow-down">
 				<Label class="text-h5" text="[HC] Lobby Settings" />
-				<SettingsEnum
+				<!-- <SettingsEnum
 					text="[HC] Allow Client Invites"
 					infomessage="[HC] Should joined client be allowed to invite other players?"
 					convar="p2ce_lobby_allowclientinvites"
@@ -56,24 +68,32 @@
 					<RadioButton group="lobbyvisibility" text="Private" 	 value="0" />
 					<RadioButton group="lobbyvisibility" text="Friends Only" value="1" />
 					<RadioButton group="lobbyvisibility" text="Public" 		 value="2" />
-				</SettingsEnum>
-				<SettingsSlider
+				</SettingsEnum> -->
+				<Slider
 					text="Max Players"
 					infomessage=""
 					convar="maxplayers"
 					tags=""
 					min="1"
 					max="33"
+					default="2"
 					snaptoincrement="true"
-					increment="0."
+					increment="1"
 					hasdocspage="false"
 					changeoverride=""
+					class="slider slider--horizontal"
+					direction="horizontal"
+					id="SMaxPlayers"
 				/>
+				<!-- <Panel class="flow-right vertical-align-center">
+					<Label text="[HC] Allow Client Invites" class="horizontal-align-left mr-2" />
+					<RadioButton class="button radiobutton horizontal-align-right vertical-align-center mr-2" group="allowclientinvites" text="Disallowed" value="0" />
+					<RadioButton class="button radiobutton horizontal-align-right vertical-align-center mr-2" group="allowclientinvites" text="Allowed"	 value="1" />
+				</Panel>
 				<ToggleButton id="TBAllowSpectators" class="checkbox">
 					<Label text="Allow Spectators" />
-				</ToggleButton>
+				</ToggleButton> -->
 			</Panel>
 		</Panel>
-
 	</Panel>
 </root>

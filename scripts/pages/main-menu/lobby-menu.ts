@@ -143,11 +143,8 @@ class PlayerEntry {
 			throw new Error('Invalid team has been specified for new PlayerEntry! This is not right, please report to P2:CE developers!');
 		}
 
-		this.kickBtn = this.playerEntryPanel.FindChildTraverse('KickBtn')!;
-		this.kickBtn.SetPanelEvent('onactivate', this.kickPlayer.bind(this));
-
-		this.banBtn = this.playerEntryPanel.FindChildTraverse('BanBtn')!;
-		this.banBtn.SetPanelEvent('onactivate', this.banPlayer.bind(this));
+		this.teamSwitchBtn = this.playerEntryPanel.FindChildTraverse('TeamSwitchBtn')!;
+		this.teamSwitchBtn.SetPanelEvent('onactivate', this.teamSwitchContextMenu.bind(this));
 
 		this.steamProfileBtn = this.playerEntryPanel.FindChildTraverse('SteamProfileBtn')!;
 		this.steamProfileBtn.SetPanelEvent('onactivate', () => { OpenSteamProfilePageFromID(this.lobbyPlayer!.id) });
@@ -159,8 +156,11 @@ class PlayerEntry {
 		this.prStatus.visible = false;
 		this.setStatusIndicator(this.lobbyPlayer.state);
 
-		this.teamSwitchBtn = this.playerEntryPanel.FindChildTraverse('TeamSwitchBtn')!;
-		this.teamSwitchBtn.SetPanelEvent('onactivate', this.teamSwitchContextMenu.bind(this));
+		this.kickBtn = this.playerEntryPanel.FindChildTraverse('KickBtn')!;
+		this.kickBtn.SetPanelEvent('onactivate', this.kickPlayer.bind(this));
+
+		this.banBtn = this.playerEntryPanel.FindChildTraverse('BanBtn')!;
+		this.banBtn.SetPanelEvent('onactivate', this.banPlayer.bind(this));
 
 		this.kickBtn.visible = false;
 		this.banBtn.visible = false;
@@ -192,6 +192,7 @@ class PlayerEntry {
 			this.hostIcon.visible = true;
 		}
 
+		// MAKE META UPDATE ELSE WHERE!
 		this.updateTeamMeta();
 		// Load team based campaign assets for the client side once.
 		if (this.lobbyPlayer!.id === UserAPI.GetXUID()) {
@@ -204,12 +205,12 @@ class PlayerEntry {
 		this.playerEntryPanel.DeleteAsync(0);
 	}
 
-	private kickPlayer() {
+	kickPlayer() {
 		$.Msg(`Kicked player: ${this.lobbyPlayer!.name} (${this.lobbyPlayer!.id})`);
 		P2CELobbyAPI.KickPlayer(this.lobbyPlayer!.id, '[HC] Kicked by lobby host.');
 	}
 
-	private banPlayer() {
+	banPlayer() {
 		$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 		UiToolkitAPI.ShowGenericPopupYesNo(
 			'[HC] Are you sure?',
@@ -223,7 +224,7 @@ class PlayerEntry {
 		);
 	}
 
-	private updateTeamMeta() {
+	updateTeamMeta() {
 		const teamMeta = LobbyMenu.teamMeta[this.lobbyPlayer!.team];
 		this.playerEntryPanel.SetDialogVariable('teamName', teamMeta.name.src);
 		this.teamIcon!.SetImage(teamMeta.icon.src);
@@ -372,11 +373,13 @@ class LobbyMenu {
 		$.DispatchEvent('ChangeVersionInfoPosition', 2);
 
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
+			LobbyManPanel.unloadCurSubMenu();
 			this.stopMusic();
 			$.DispatchEvent('ChangeVersionInfoPosition', 0);
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuModeRequestCleanup', () => {
+			LobbyManPanel.unloadCurSubMenu();
 			this.stopMusic();
 			$.DispatchEvent('ChangeVersionInfoPosition', 0);
 		});
@@ -398,8 +401,13 @@ class LobbyMenu {
 
 			if (pEntry && pEntry.lobbyPlayer && this.lobbyData.campaign !== prevCampaign) {
 				$.Msg(`update campaign`);
+				// TODO: These update calls are gross and need to be broken up better for init and changing campaigns.
 				this.loadTeamMeta();
 				this.loadCampaignMenuAssets(pEntry.lobbyPlayer.team);
+				this.lobbySlots.forEach(slot => {
+					if (slot.lobbyPlayer)
+						slot.updateTeamMeta();
+				});
 			}
 		});
 
@@ -667,6 +675,7 @@ class LobbyMenu {
 		this.lobbySlots.clear();
 		this.numPlayers = 0;
 		for (const player of P2CELobbyAPI.GetPlayerList()) {
+			if (!player) continue;
 			this.lobbySlots.set(player.id, new PlayerEntry(player));//, (LobbyMenu.lobbySlots.size % 2 === 0) ? LobbyTeam.BLUE : LobbyTeam.RED)); // TODO-FIXME: This auto placement of teams will need to be rethought as there will be in the future functionality to switch teams.
 		}
 		this.numPlayers = this.lobbySlots.size;
@@ -702,10 +711,12 @@ class LobbyMenu {
 	}
 
 	static requestExit() {
+		const exitText: string = P2CELobbyAPI.IsLobbyOwner() ? '[HC] Are you sure you want to shutdown this lobby? Any connected users will be disconnected!' : '[HC] Are you sure you want to disconnect from the current lobby?';
+
 		$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 		UiToolkitAPI.ShowGenericPopupYesNo(
 			'[HC] Exit Lobby?',
-			'[HC] Are you sure you want to disconnect from the current lobby?',
+			exitText,
 			'warning-popup',
 			() => {
 				if (this.bgMusicID) $.StopSoundEvent(this.bgMusicID);
@@ -739,7 +750,7 @@ class LobbyMenu {
 	}
 
 	static getLocalPlayerEntry(): PlayerEntry | undefined {
-		return ;
+		return this.lobbySlots.get(UserAPI.GetXUID());
 	}
 
 	static ToggleReadyState() {
@@ -769,9 +780,10 @@ class LobbyMenu {
 		this.lobbySlots.forEach(playerEntry => {
 			$.Msg(`Slot: ${slot}`);
 			if (playerEntry.lobbyPlayer) {
-				$.Msg(`Player Name: ${playerEntry.lobbyPlayer.name}`);
 				$.Msg(`Player SteamID: ${playerEntry.lobbyPlayer.id}`);
+				$.Msg(`Player Name: ${playerEntry.lobbyPlayer.name}`);
 				$.Msg(`Player Is Host?: ${playerEntry.lobbyPlayer.owner}`);
+				$.Msg(`Player State: ${playerEntry.lobbyPlayer.state}`);
 				$.Msg(`Player LobbyTeam: ${playerEntry.lobbyPlayer.team}`);
 				$.Msg('');
 				slot++;
