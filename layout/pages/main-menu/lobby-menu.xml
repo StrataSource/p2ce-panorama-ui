@@ -11,15 +11,15 @@
 		<snippet name="LobbyEntry">
 			<Panel>
 				<Panel id="PlayerEntry" class="player-entry">
-					<TooltipPanel id="TeamIconTooltip" class="player-entry__body__team-icon" tooltip="{s:teamName}">
-						<Button class="player-entry__body__team-icon" id="TeamSwitchBtn" enabled="false">
-							<Image id="TeamIcon" texturewidth="24" textureheight="24" class="" />
+					<TooltipPanel id="TeamIconTooltip" tooltip="{s:teamName}">
+						<Button id="TeamSwitchBtn" enabled="false">
+							<Image id="TeamIcon" class="player-entry__body__team-icon" />
 						</Button>
 					</TooltipPanel>
 
 					<Panel class="player-entry__body ml-2">
 						<TooltipPanel tooltip="[HC] View Steam Profile">
-							<Button id="SteamProfileBtn" class="">
+							<Button id="SteamProfileBtn">
 								<AvatarImage id="PlayerAvatar" class="player-entry__avatar" steamid="local" />
 							</Button>
 						</TooltipPanel>
@@ -27,7 +27,7 @@
 							<Panel class="flow-right">
 								<Label id="Name" text="{s:name}" class="text-h5 mr-1" style="text-overflow: shrink"/>
 								<TooltipPanel id="PlayerStatus" class="player-entry__body__status" tooltip="{s:status}">
-									<Image id="PlayerNotReadyStatus" class="" texturewidth="24" textureheight="24" src="file://{images}/close.svg" />
+									<Image id="PlayerNotReadyStatus" texturewidth="24" textureheight="24" src="file://{images}/close.svg" />
 									<AnimatedImageStrip
 										id="PlayerAddonStatus"
 										animating="true"

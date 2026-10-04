@@ -3,7 +3,7 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-info.ts" />
+		<include src="file://{scripts}/pages/main-menu/lobby-menu.ts" />
 	</scripts>
 
 	<snippets>
@@ -14,9 +14,11 @@
 		<Button class="button" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
 			<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 		</Button>
-		<!-- <Label class="text-h5" text="[HC] Players: {i:curplayers}/{i:maxplayers}" /> -->
-		<!-- <Panel class="mt-1 mb-1" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
-		<!-- <Label class="text-h5" text="[HC] Required Players To Start: {i:curplayers}/{i:requiredplayers}" /> -->
+		<Button class="button" onactivate="LobbyMenu.dumpSlotList();">
+			<Label class="button__text" text="[DEV] Dump Player Slot Info" />
+		</Button>
+		<Button class="button" onactivate="LobbyMenu.dumpBanList();">
+			<Label class="button__text" text="[DEV] Dump Ban List" />
+		</Button>
 	</Panel>
 </root>
