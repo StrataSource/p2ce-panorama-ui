@@ -114,6 +114,18 @@
 					</TooltipPanel>
 				</Panel>
 
+				<SettingsEnum
+					id="LaserChannelsOpen"
+					text="#Settings_Misc_LaserChannels"
+					infomessage="#Settings_Misc_LaserChannels_info"
+					hasdocspage="false"
+					tags="laser, channels, discouragement, beam, misc, customization"
+				>
+					<Button class="button horizontal-align-right vertical-align-center" onactivate="SettingsShared.editLaserChannels()">
+						<Label class="button__text" text="#Common_Edit" />
+					</Button>
+				</SettingsEnum>
+
 				<SettingsSlider
 					text="#Settings_Misc_ViewmodelOffset_X"
 					infomessage="#Settings_Misc_ViewmodelOffset_X_info"

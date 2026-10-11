@@ -130,6 +130,13 @@ class SettingsShared {
 		);
 	}
 
+	static editLaserChannels() {
+		UiToolkitAPI.ShowCustomLayoutPopup(
+			'LaserChannelsPopup',
+			'file://{resources}/layout/modals/popups/laser-channels.xml'
+		);
+	}
+
 	// State logic to tracking if there are changes to apply or discard:
 	// Changes in panel controls -> enable both
 	// Reset button pressed -> enable both

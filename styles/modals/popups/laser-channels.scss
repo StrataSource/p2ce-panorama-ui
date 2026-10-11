@@ -1,0 +1,14 @@
+.laser-channels {
+	flow-children: down;
+	max-width: 1300px;
+	width: 1300px;
+
+	.channel-setting {
+		width: 300px;
+		padding: 0;
+
+		.colordisplay_title {
+			width: 100px;
+		}
+	}
+}

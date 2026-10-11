@@ -734,6 +734,10 @@
 		"Settings_Misc_ViewmodelOffset_Z"				"Viewmodel Offset (Z)"
 		"Settings_Misc_ViewmodelOffset_Z_info"			"Offset the position of the Viewmodel in the Z axis by this amount in Hammer Units (HU)"
 
+		"Settings_Misc_LaserChannels"					"Laser Appearance"
+		"Settings_Misc_LaserChannels_info"				"Lasers can be set to use one of 16 \"channels\". The color and appearance of each can be customized."
+		"Settings_LaserChannels_Title"					"Edit Laser Appearance"
+
 		"Settings_Video_PreventThreadSleep"				"Prevent Main Thread Sleep"
 		"Settings_Video_PreventThreadSleep_Info"		"Prevent the main game thread from sleeping when at maximum FPS limit. Enabling this option may result in smoother performance, but causes higher CPU usage."
 

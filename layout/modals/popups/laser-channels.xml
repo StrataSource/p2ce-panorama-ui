@@ -1,0 +1,35 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/modals/popups/laser-channels.ts" />
+	</scripts>
+
+	<snippets>
+		<snippet name="channel">
+			<Panel class="channel-setting settings-enum">
+				<ConVarColorDisplay id="cvar-color" title="Channel A" />
+			</Panel>
+		</snippet>
+	</snippets>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup laser-channels"
+		popupbackground="blur"
+		onload="LaserChannels.onLoad()"
+	>
+
+		<Panel class="settings-group__header">
+			<Label class="settings-group__title" text="#Settings_LaserChannels_Title" />
+		</Panel>
+
+		<Panel class="flow-down full-width" id="ChannelGrid" />
+		<Panel class="flow-right horizontal-align-right mt-3">
+			<Button class="button button--red horizontal-align-right" onactivate="UiToolkitAPI.CloseAllVisiblePopups()">
+				<Label class="button__text" text="#Common_Close" />
+			</Button>
+		</Panel>
+	</PopupCustomLayout>
+</root>
