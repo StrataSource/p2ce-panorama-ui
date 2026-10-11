@@ -12,6 +12,11 @@
 		vertical-align: middle;
 		width: fill-parent-flow(1);
 		margin-right: $colordisplay-title-margin;
+		flow-children: down;
+	}
+
+	&__overrideicon {
+		visibility: collapse;
 	}
 
 	&__display {
@@ -32,5 +37,16 @@
 		width: $colordisplay-hex-width;
 		margin-left: $colordisplay-hex-margin;
 		horizontal-align: right;
+	}
+}
+
+:not(.rangecolordisplay) > .colordisplay.overridden {
+	.colordisplay__overrideicon {
+		width: 24px;
+		height: 24px;
+		wash-color: $colordisplay-override-color;
+		horizontal-align: right;
+		vertical-align: center;
+		visibility: visible;
 	}
 }

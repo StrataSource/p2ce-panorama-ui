@@ -7,8 +7,13 @@
 		width: 300px;
 		padding: 0;
 
-		.colordisplay_title {
-			width: 100px;
+		.colordisplay__title {
+			width: 48px;
+			height: 24px;
+		}
+		.colordisplay__display {
+			width: 24px;
+			height: 24px;
 		}
 	}
 }

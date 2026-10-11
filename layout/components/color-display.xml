@@ -6,7 +6,9 @@
 		<include src="file://{scripts}/components/color-display.js" />
 	</scripts>
 	<Panel class="colordisplay" onload="ColorDisplay.updateDisplayOpacity();">
-		<Label id="Title" class="colordisplay__title" />
+		<Label id="Title" class="colordisplay__title" >
+			<Image id="OverrideIcon" class="colordisplay__overrideicon" src="file://{resources}/images/alert-octagon.svg" />
+		</Label>
 		<Panel id="Display" class="colordisplay__display" onactivate="ColorDisplay.showPopup()" acceptsinput="true" />
 		<TextEntry id="Hex" class="textentry colordisplay__hexentry" textmode="hex" maxchars="8" />
 	</Panel>

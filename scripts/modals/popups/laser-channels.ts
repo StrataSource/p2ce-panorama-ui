@@ -25,6 +25,11 @@ class LaserChannels {
 				colorPan.text = channel;
 				colorPan.convar = `cl_laser_channel_color_${channel.toLowerCase()}`;
 
+				const override = GameStateAPI.GetLaserChannelLegacyColor( channel );
+				if ( override != null ) {
+					colorPan.SetOverride( override.r, override.g, override.b, 255 );
+				}
+
 				this.pan_channels.push({
 					container: channelPan,
 					colorPan

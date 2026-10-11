@@ -10,7 +10,7 @@
 	<snippets>
 		<snippet name="channel">
 			<Panel class="channel-setting settings-enum">
-				<ConVarColorDisplay id="cvar-color" title="Channel A" />
+				<ConVarColorDisplay id="cvar-color" title="A" />
 			</Panel>
 		</snippet>
 	</snippets>
@@ -27,7 +27,7 @@
 
 		<Panel class="flow-down full-width" id="ChannelGrid" />
 		<Panel class="flow-right horizontal-align-right mt-3">
-			<Button class="button button--red horizontal-align-right" onactivate="UiToolkitAPI.CloseAllVisiblePopups()">
+			<Button class="button button--red horizontal-align-right" onactivate="UiToolkitAPI.CloseThisPopup()">
 				<Label class="button__text" text="#Common_Close" />
 			</Button>
 		</Panel>
