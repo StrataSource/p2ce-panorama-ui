@@ -8,11 +8,11 @@ class ColorPickerPopup {
 	}
 
 	static onSaveColor(color) {
-		UiToolkitAPI.CloseAllVisiblePopups();
+		UiToolkitAPI.CloseThisPopup();
 	}
 
 	static onDiscardColor() {
-		UiToolkitAPI.CloseAllVisiblePopups();
+		UiToolkitAPI.CloseThisPopup();
 	}
 
 	static {
