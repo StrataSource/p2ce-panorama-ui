@@ -103,7 +103,7 @@ class SaveEntry {
 							// TODO: Replace this with other save API
 							const savFile: string = this.save.fileName;
 							const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
-							SaveRestoreAPI.SaveGame(nameWithoutExt);
+							GameSavesAPI.CreateSaveGame(nameWithoutExt);
 							CampaignSaves.purgeSaveList();
 							$.Schedule(1, () => {
 								CampaignSaves.populateSaves();
@@ -130,7 +130,7 @@ class SaveEntry {
 							// TODO: Replace this with other save API
 							const savFile: string = this.save.fileName;
 							const nameWithoutExt = savFile.endsWith('.sav') ? savFile.slice(0, -4) : savFile;
-							SaveRestoreAPI.DeleteSave(nameWithoutExt);
+							GameSavesAPI.DeleteSaveGame(nameWithoutExt);
 
 							CampaignSaves.purgeSaveList();
 
@@ -269,7 +269,7 @@ class CampaignSaves {
 			$.Localize('#UI_Yes'),
 			() => {
 				CampaignSaves.purgeSaveList();
-				GameSavesAPI.CreateSaveGame();
+				GameSavesAPI.CreateSaveGame(null);
 
 				const checkSaving = () => {
 					$.Schedule(1, () => {
