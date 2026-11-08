@@ -319,6 +319,33 @@
 					<RadioButton group="portal_ghost" text="#Common_On" value="1" />
 				</SettingsEnum>
 				<SettingsEnum
+					text="#Settings_player_shadows"
+					convar="cl_player_render_in_shadows_view"
+					infomessage="#Settings_player_shadows_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="player_shadow" text="#Common_Off" value="0" />
+					<RadioButton group="player_shadow" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
+					text="#Settings_player_reflect_w"
+					convar="cl_player_render_in_reflection_view"
+					infomessage="#Settings_player_reflect_w_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="player_reflect_w" text="#Common_Off" value="0" />
+					<RadioButton group="player_reflect_w" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
+					text="#Settings_player_reflect_m"
+					convar="cl_player_render_in_reflective_glass"
+					infomessage="#Settings_player_reflect_m_info"
+					hasdocspage="false"
+				>
+					<RadioButton group="player_reflect_m" text="#Common_Off" value="0" />
+					<RadioButton group="player_reflect_m" text="#Common_On" value="1" />
+				</SettingsEnum>
+				<SettingsEnum
 					text="#Settings_Portals_dlight"
 					convar="r_portal_use_dlights"
 					infomessage="#Settings_Portals_dlight_info"

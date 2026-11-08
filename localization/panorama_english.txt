@@ -582,6 +582,13 @@
 		"Settings_Portal_Coop_SS_SplitMode_auto"		"Automatic"
 		"Settings_Portal_Coop_SS_SplitMode_horiz"		"Horizontal"
 		"Settings_Portal_Coop_SS_SplitMode_vert"		"Vertical"
+		
+		"Settings_player_shadows"						"Player Shadows"
+		"Settings_player_shadows_info"					"Allow the player model to cast shadows under dynamic light."
+		"Settings_player_reflect_w"						"Player Water Reflections"
+		"Settings_player_reflect_w_info"				"Allow the player model to appear in water and other dynamic liquid reflections."
+		"Settings_player_reflect_m"						"Player Mirror Reflections"
+		"Settings_player_reflect_m_info"				"Allow the player model to appear in mirrors and other dynamic reflections."
 
 		// Settings - Keyboard/Mouse
 		"Settings_Input_Title"							"Input"
