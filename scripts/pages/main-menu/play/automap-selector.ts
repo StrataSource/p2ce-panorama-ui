@@ -351,21 +351,24 @@ class AutoMapSelector {
 			$.Warning('Cannot find map to start.');
 			return;
 		}
-		if (c.bucket.addon_id !== -1) {
-			const deps = WorkshopAPI.GetAddonDependenciesMissing(c.bucket.addon_id);
-			if (deps !== null && deps.length > 0) {
-				$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
-				UiToolkitAPI.ShowCustomLayoutPopupParameters(
-					'dependencies',
-					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-					`addon=${c.bucket.addon_id}&action=0&campaignId=${id}&chapterId=${c.campaign.chapters[0].id}&map=0`
-				);
-			} else {
-				CampaignAPI.StartCampaign(id, c.campaign.chapters[0].id, 0);
-			}
-		} else {
+
+		// Local addons don't get checked for workshop dependencies.
+		if (c.bucket.addon_id === -1) {
 			CampaignAPI.StartCampaign(id, c.campaign.chapters[0].id, 0);
+			return;
 		}
+
+		const deps = WorkshopAPI.GetAddonDependenciesMissing(c.bucket.addon_id);
+		if (deps !== null && deps.length > 0) {
+			$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'dependencies',
+				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+				`addon=${c.bucket.addon_id}&action=0&campaignId=${id}&chapterId=${c.campaign.chapters[0].id}&map=0`
+			);
+		}
+
+		CampaignAPI.StartCampaign(id, c.campaign.chapters[0].id, 0);
 	}
 
 	static clearDeps() {

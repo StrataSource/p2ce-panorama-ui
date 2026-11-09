@@ -18,9 +18,14 @@ class VersionInfo {
 		cp.SetDialogVariable('physics', physics);
 
 		cp.SetPanelEvent('onactivate', () => {
+			// UiToolkitAPI.ShowCustomLayoutPopupParameters(
+			// 	'',
+			// 	'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
+			// 	'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck&cancelAllowed=false'
+			// );
 			UiToolkitAPI.ShowCustomLayoutPopupParameters(
 				'',
-				'file://{resources}/layout/modals/popups/prerelease-warn-dialog.xml',
+				'file://{resources}/layout/modals/popups/playtest-form.xml',
 				'dosaKey=prereleaseAck&dosaNameToken=Dosa_PrereleaseAck&cancelAllowed=false'
 			);
 		});

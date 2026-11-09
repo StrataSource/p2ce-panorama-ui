@@ -1,0 +1,65 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<!-- <include src="file://{scripts}/playtest/playtest-manager.ts" /> -->
+		<include src="file://{scripts}/modals/popups/playtest-form.ts" />
+	</scripts>
+
+	<snippets>
+
+		<snippet name="FormQuestionBase">
+
+			<Panel class="flow-down mb-2">
+				<Panel class="flow-right">
+					<Label class="mb-2" text="{s:desc}" />
+					<Label id="RequiredMark" class="mb-2 color-error hide" text="*" />
+				</Panel>
+			</Panel>
+
+		</snippet>
+
+		<snippet name="FormQuestionSlider">
+			<Panel class="settings-slider">
+				<Panel class="settings-slider__input-container">
+					<Slider
+						class="slider slider--horizontal settings-slider__slider"
+						showdefault="true"
+						direction="horizontal"
+						id="Slider"
+					/>
+					<TooltipPanel tooltip="#Settings_General_OutOfBounds" class="full-height">
+						<Image class="settings-slider__outofbounds" src="file://{images}/alert-octagon.svg" texturewidth="32" />
+					</TooltipPanel>
+					<TextEntry class="textentry settings-slider__textentry" maxchars="6" textmode="numeric" id="Value" />
+				</Panel>
+			</Panel>
+		</snippet>
+
+	</snippets>
+
+	<PopupCustomLayout class="PopupPanel Hidden generic-popup generic-popup--large" popupbackground="blur" onload="PlaytestForm.onLoad()">
+		<Panel class="flow-down">
+			<Label class="text-h2 mb-2 full-width text-align-center" text="[HC] Playtest Form" />
+			<Label class="mb-2" text="[HC] Please fill out the form to the best of your ability. Questions with red stars are required!" />
+		</Panel>
+
+		<Panel class="horizontal-separator" />
+
+		<Panel id="FormQuestions" class="form__questions" />
+
+		<Panel class="horizontal-separator" />
+
+		<Button
+			id="SubmitBtn"
+			class="button button--red horizontal-align-right vertical-align-bottom"
+			onactivate="PlaytestForm.onClose()"
+			tabindex="auto"
+			selectionpos="auto"
+		>
+			<Label class="button__text" text="[HC] Submit Form" />
+		</Button>
+	</PopupCustomLayout>
+</root>

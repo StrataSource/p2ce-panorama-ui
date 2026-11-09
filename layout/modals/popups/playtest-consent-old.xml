@@ -1,0 +1,54 @@
+<root>
+	<styles>
+		<include src="file://{resources}/styles/main.scss" />
+	</styles>
+
+	<scripts>
+		<include src="file://{scripts}/modals/popups/playtest-consent.js" />
+		<include src="file://{scripts}/util/dosa.ts" />
+	</scripts>
+
+	<PopupCustomLayout
+		class="PopupPanel Hidden generic-popup generic-popup--large"
+		popupbackground="blur"
+		onload="$('#PlayTestConsentCheckbox').SetFocus()"
+	>
+
+		<Panel class="flow-down">
+			<Label class="text-h1 mb-4 full-width text-align-center" text="#MainMenu_PlaytestDOSA_Title" />
+			<Label class="mb-2" text="#MainMenu_PlaytestDOSA_Description" />
+		</Panel>
+
+		<Panel class="flow-down" tabindex="auto" selectionpos="auto">
+
+			<!-- Localization needed  -->
+			<ToggleButton id="PlayTestConsentCheckbox" class="checkbox vertical-align-center">
+				<Label text="#MainMenu_PlaytestDOSA_Consent" />
+			</ToggleButton>
+		</Panel>
+
+		<Panel class="flow-right full-width mt-4" tabindex="auto" selectionpos="auto">
+
+			<Button
+				class="button button--blue vertical-align-left"
+				onactivate="PlaytestConsent.onDOSA()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
+				<Label class="button__text" text="#Common_DontShowAgain" />
+			</Button>
+
+			<Button
+				class="button button--blue horizontal-align-right"
+				onactivate="PlaytestConsent.onConsent()"
+				tabindex="auto"
+				selectionpos="auto"
+			>
+				<Label class="button__text" text="#Common_Close" />
+			</Button>
+
+		</Panel>
+
+	</PopupCustomLayout>
+
+</root>

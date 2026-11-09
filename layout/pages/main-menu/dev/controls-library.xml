@@ -398,18 +398,18 @@
 
 			<Label class="text-h3 mt-3" text="Tabs" />
 			<Panel class="row my-3">
-				<Panel class="flow-right">
-					<RadioButton class="tab" group="tabs">
-						<Label class="tab__text" text="Tab 1" />
+				<Panel class="flow-right tabs">
+					<RadioButton class="tabs__tab" group="tabs">
+						<Label class="tabs__text" text="Tab 1" />
 					</RadioButton>
-					<RadioButton class="tab" group="tabs">
-						<Label class="tab__text" text="Tab 2" />
+					<RadioButton class="tabs__tab" group="tabs">
+						<Label class="tabs__text" text="Tab 2" />
 					</RadioButton>
-					<RadioButton class="tab" group="tabs">
-						<Label class="tab__text" text="Tab 3" />
+					<RadioButton class="tabs__tab" group="tabs">
+						<Label class="tabs__text" text="Tab 3" />
 					</RadioButton>
-					<RadioButton class="tab" group="tabs" disabled="true">
-						<Label class="tab__text" text="Disabled tab" />
+					<RadioButton class="tabs__tab" group="tabs" disabled="true">
+						<Label class="tabs__text" text="Disabled tab" />
 					</RadioButton>
 				</Panel>
 			</Panel>

@@ -1257,6 +1257,19 @@ This message will not appear again after you acknowledge the risks, however, you
 		"MainMenu_PlaytestDOSA_Consent"				"Consent to Playtest Data Collection"
 		"MainMenu_PlaytestDOSA_Revoke"				"Revoke Consent"
 
+		// Playtesting
+		"MainMenu_PlaytestCampaignConsent_Title"       "Campaign Playtest Data Collection"
+		"MainMenu_PlaytestCampaignConsent_Description" "This campaign has been marked as a playtest campaign which will collect data and send it to the creator of this addon.
+
+Data collected from this campaign depends on what the creator has set. This may consist of:
+
+	• Steam Username and ID
+	• Collected Answers From Forms
+	• Campaign and Individual Map Playtime
+	• Campaign and Individual Map Completion
+
+If you do not accept this form of data collection, select 'Decline' below and you'll be returned to campaign selection."
+
 		// Dependency Warning
 		"DependencyWarning_Generic"					"You are missing one or more addons that this relies upon to function properly."
 		"DependencyWarning_Header"					"Missing Dependencies"

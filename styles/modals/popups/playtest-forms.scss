@@ -1,0 +1,15 @@
+@use 'sass:color';
+
+@use '../../config' as *;
+@use '../../abstract/mixin';
+@use '../../controls/button';
+
+.form {
+	&__questions {
+		width: 100%;
+		height: 450px;
+		overflow: squish scroll;
+		flow-children: down;
+	}
+
+}

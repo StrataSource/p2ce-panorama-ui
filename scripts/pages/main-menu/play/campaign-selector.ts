@@ -71,18 +71,7 @@ class CampaignEntry {
 		}
 
 		this.panel.SetPanelEvent('onactivate', () => {
-			const deps = WorkshopAPI.GetAddonDependenciesMissing(this.info.bucket.addon_id);
-			const campaign = `${this.info.bucket.id}/${this.info.campaign.id}`;
-			if (deps && deps.length > 0) {
-				UiToolkitAPI.ShowCustomLayoutPopupParameters(
-					'dependencies',
-					'file://{resources}/layout/modals/popups/addon-dependencies.xml',
-					`addon=${this.info.bucket.addon_id}&action=1&campaign=${campaign}`
-				);
-			} else {
-				$.DispatchEvent('MainMenuAnimatedSwitch', campaign);
-				$.DispatchEvent('MainMenuCloseAllPages');
-			}
+			CampaignSelector.onCampaignSelected(this);
 		});
 		this.panel.SetPanelEvent('onmouseover', () => {
 			CampaignSelector.onCampaignHovered(this);
@@ -291,6 +280,40 @@ class CampaignSelector {
 		doAddButtons(allOtherCampaigns, true);
 
 		stripDevTagsFromLabels(this.campaignList);
+	}
+
+	static onCampaignSelected(e: CampaignEntry) {
+		if (!e) {
+			$.Warning('Dont do that');
+			return;
+		}
+
+		// const playtesting = e.info.campaign.playtesting = Boolean(e.info.campaign.meta.get('playtesting'));
+		// const playtestingConsented = e.info.campaign.playtesting
+
+		// //if (e.info.campaign.playtesting && e.info.bucket.) {
+		// if (playtesting && !playtestingConsented) {
+		// 	UiToolkitAPI.ShowCustomLayoutPopupParameters(
+		// 		'playtesting-data-consent',
+		// 		'file://{resources}/layout/modals/popups/playtest-warning.xml',
+		// 		`campaignEntry=${e}`
+		// 	);
+		// 	return;
+		// }
+
+		const deps = WorkshopAPI.GetAddonDependenciesMissing(e.info.bucket.addon_id);
+		const campaign = `${e.info.bucket.id}/${e.info.campaign.id}`;
+		if (deps && deps.length > 0) {
+			$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
+			UiToolkitAPI.ShowCustomLayoutPopupParameters(
+				'dependencies',
+				'file://{resources}/layout/modals/popups/addon-dependencies.xml',
+				`addon=${e.info.bucket.addon_id}&action=1&campaign=${campaign}`
+			);
+		} else {
+			$.DispatchEvent('MainMenuAnimatedSwitch', campaign);
+			$.DispatchEvent('MainMenuCloseAllPages');
+		}
 	}
 
 	static onCampaignHovered(e: CampaignEntry) {
