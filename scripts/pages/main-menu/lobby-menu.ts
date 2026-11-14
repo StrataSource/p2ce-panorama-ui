@@ -12,12 +12,17 @@ interface LobbySettings {
 
 	allowClientInvites: boolean; // Allowing connected clients to issue lobby invites themselves.
 	visibility: LobbyVisibility; // Visibility of the lobby through server browser and Steam API.
-	maxPlayers: number;
-	maxTeams: number;
-	requiredPlayers: number; // TODO: Replace with CampaignMultiPlayerOptions version.
-	requiredNumTeamPlayers: number; // TODO: Replace with CampaignMultiPlayerOptions version.
-	canSwitchTeams: boolean; // TODO: Replace with CampaignMultiPlayerOptions version.
-	allowSpectators: boolean;
+
+	maxPlayers: number; // Maximum number of players that can be in the lobby.
+	requiredPlayers: number; // Minimum number of players required to start.
+	allowSplitscreen: boolean; // If split-screen should be allowed with this campaign.
+	waitForPlayers: boolean; // Wait for another player to join before the game progresses. Ex. Waiting for coop partner behavior.
+	maxNumTeams: number; // Maximum number of teams that players can be on.
+	defaultTeam: LobbyTeam; // Default team that the first player is set on before next player joining goes to another team.
+	requiredNumTeamPlayers: number; // Minimum number of players on each team required to start.
+	canSwitchTeams: boolean; // If other players than the host can switch teams.
+
+	allowSpectators: boolean; // TODO: Not implemented engine side.
 }
 
 type TeamMetaKey = 'name' | 'icon' | 'bgMusic' | 'bgMovie' | 'bgImage';
@@ -69,7 +74,7 @@ function getNumPlayersOnTeam(team: LobbyTeam): number {
 function enoughPlayersForGame(): boolean {
 	let teamCount = 0;
 	for (let team = LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
-		if (teamCount === LobbyMenu.lobbySettings.maxTeams) break;
+		if (teamCount === LobbyMenu.lobbySettings.maxNumTeams) break;
 
 		const numTeamPlayers = getNumPlayersOnTeam(team);
 		if (numTeamPlayers < LobbyMenu.lobbySettings.requiredNumTeamPlayers)
@@ -282,7 +287,7 @@ class PlayerEntry {
 
 		let teamCount = 0;
 		for (let team = LobbyMenu.lobbySettings.allowSpectators ? LobbyTeam.SPECTATOR : LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
-			if (teamCount === LobbyMenu.lobbySettings.maxTeams) break;
+			if (teamCount === LobbyMenu.lobbySettings.maxNumTeams) break;
 
 			const teamMeta = LobbyMenu.teamMeta[team];
 
@@ -419,7 +424,7 @@ class LobbyMenu {
 					$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
 					return;
 				}
-//
+
 				const playerEntry = this.lobbySlots.get(who);
 				if (!playerEntry) {
 					$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
@@ -468,19 +473,23 @@ class LobbyMenu {
 		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerJoined', this.playerJoin.bind(this));
 		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerLeft', this.playerLeft.bind(this));
 
-
-		// Lobby settings defaults
+		// Lobby settings defaults. Matches Portal 2 Coop KV3 settings.
 		this.lobbySettings = {
 			hostName: FriendsAPI.GetLocalPlayerName(),
 			tags: '',
 			password: '',
 			lan: false,
 			cheats: false,
+
 			allowClientInvites: false,
 			visibility: LobbyVisibility.FRIENDS_ONLY,
+
 			maxPlayers: 2,
-			maxTeams: 2,
 			requiredPlayers: 2,
+			allowSplitscreen: false,
+			waitForPlayers: true,
+			maxNumTeams: 2,
+			defaultTeam: 3,
 			requiredNumTeamPlayers: 1,
 			canSwitchTeams: false,
 			allowSpectators: false,
@@ -505,97 +514,102 @@ class LobbyMenu {
 
 	static loadTeamMeta() {
 		this.campaignPair = CampaignAPI.FindCampaign(P2CELobbyAPI.GetCampaignID())!;
-		if (this.campaignPair) {
-			const basePath = getCampaignAssetPath(this.campaignPair);
-			const getMetaSrc = (metaKey: CampaignMeta, addBasePath: boolean = true) => {
-				const src = this.campaignPair.campaign.meta.get(metaKey);
-				return src ? `${addBasePath ? basePath : ''}${src}` : undefined; // Don't want to override the value with a blank string, instead default to the default value set in the script.
-			};
-
-			for (let team = LobbyTeam.SPECTATOR; team < LobbyTeam.COUNT; team++) {
-				const teamMeta = this.teamMeta[team];
-				if (!teamMeta) continue;
-
-				teamMeta.name.src = getMetaSrc(teamMeta.name.meta!, false) ?? teamMeta.name.src;
-				teamMeta.icon.src = getMetaSrc(teamMeta.icon.meta!) ?? teamMeta.icon.src;
-			};
-
-			// Spectator does not have a specific set of assets, instead uses LobbyTeam Red's assets.
-			// These assets do not have fall backs and will be blank if not specified.
-			for (let team = LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
-				const teamMeta = this.teamMeta[team];
-				if (!teamMeta) continue;
-
-				teamMeta.bgMusic.src = getMetaSrc(teamMeta.bgMusic.meta!, false) ?? teamMeta.bgMusic.src;
-				teamMeta.bgMovie.src = getMetaSrc(teamMeta.bgMovie.meta!, false) ?? teamMeta.bgMovie.src;
-				teamMeta.bgImage.src = getMetaSrc(teamMeta.bgImage.meta!, false) ?? teamMeta.bgImage.src;
-			};
-
-			this.emptySlotAvatarSrc = getMetaSrc(CampaignMeta.EMPTY_SLOT_AVATAR_IMG) ?? this.emptySlotAvatarSrc;
-
-			this.lobbySettings.maxPlayers = this.campaignPair.campaign.multiplayer_options.required_players; // TODO: Replace with proper max players KV3 KV.
-			if (this.lobbySettings.maxPlayers < 2) {
-				$.Warning(`Invalid max players set for "max_players" in campaign script! Defined: "${this.lobbySettings.maxPlayers}" Defaulting to "2"...`);
-				this.lobbySettings.maxPlayers = 2;
-			}
-
-			this.lobbySettings.requiredPlayers = this.campaignPair.campaign.multiplayer_options.required_players;
-			if (this.lobbySettings.requiredPlayers < 2) {
-				$.Warning(`Invalid required player amount set for "required_players" in campaign script! Defined: "${this.lobbySettings.requiredPlayers}" Defaulting to "2"...`);
-				this.lobbySettings.requiredPlayers = 2;
-			}
-
-			this.lobbySettings.maxTeams = parseInt(getMetaSrc(CampaignMeta.MAX_NUM_TEAMS, false) ?? '2');
-			if (this.lobbySettings.maxTeams < 2) {
-				$.Warning(`Invalid max amount of teams set for "max_num_teams" in campaign script! Defined: "${this.lobbySettings.maxTeams}" Defaulting to "2"...`);
-				this.lobbySettings.maxTeams = 2;
-			}
-
-			this.lobbySettings.requiredNumTeamPlayers = parseInt(getMetaSrc(CampaignMeta.REQUIRED_NUM_TEAM_PLAYERS, false) ?? '1');
-			if (this.lobbySettings.requiredNumTeamPlayers < 1) {
-				$.Warning(`Invalid number of players required on each set for "required_num_team_players" in campaign script! Defined: "${this.lobbySettings.requiredNumTeamPlayers}" Defaulting to "1"...`);
-				this.lobbySettings.requiredNumTeamPlayers = 1;
-			}
-
-			this.lobbySettings.canSwitchTeams = (getMetaSrc(CampaignMeta.CAN_SWITCH_TEAMS, false) ?? 'false').toLowerCase() === 'true';
-			this.lobbySettings.allowSpectators = (getMetaSrc(CampaignMeta.HAS_SPECTATOR_MODE, false) ?? 'false').toLowerCase() === 'true';
-			if (this.lobbySettings.allowSpectators) {
-				this.lobbySettings.maxTeams++; // Spectator is a team that the game can use.
-			}
-
-			if (GameInterfaceAPI.GetSettingBool('developer')) {
-				$.Msg('------------------');
-				$.Msg(`basePath: ${basePath}`);
-				$.Msg('');
-				$.Msg('Lobby Settings:');
-				$.Msg(`maxPlayers: ${this.lobbySettings.maxPlayers}`);
-				$.Msg(`requiredPlayers: ${this.lobbySettings.requiredPlayers}`);
-				$.Msg(`maxTeams: ${this.lobbySettings.maxTeams}`);
-				$.Msg(`requiredNumTeamPlayers: ${this.lobbySettings.requiredNumTeamPlayers}`);
-				$.Msg(`canSwitchTeams: ${this.lobbySettings.canSwitchTeams}`);
-				$.Msg(`hasSpectatorMode: ${this.lobbySettings.allowSpectators}`);
-				$.Msg(`emptySlotAvatarSrc: ${this.emptySlotAvatarSrc}`);
-				$.Msg('------------------');
-				$.Msg('LobbyTeam Names:');
-				$.Msg(`${this.teamMeta[LobbyTeam.SPECTATOR].name.src}`);
-				$.Msg(`${this.teamMeta[LobbyTeam.RED].name.src}`);
-				$.Msg(`${this.teamMeta[LobbyTeam.BLUE].name.src}`);
-				$.Msg('LobbyTeam Icon Src:');
-				$.Msg(`${this.teamMeta[LobbyTeam.SPECTATOR].icon.src}`);
-				$.Msg(`${this.teamMeta[LobbyTeam.RED].icon.src}`);
-				$.Msg(`${this.teamMeta[LobbyTeam.BLUE].icon.src}`);
-				$.Msg('LobbyTeam Music Src:');
-				$.Msg(`${this.teamMeta[LobbyTeam.RED].bgMusic.src}`);
-				$.Msg(`${this.teamMeta[LobbyTeam.BLUE].bgMusic.src}`);
-				$.Msg('LobbyTeam Movie Src:');
-				$.Msg(`${this.teamMeta[LobbyTeam.RED].bgMovie.src}`);
-				$.Msg(`${this.teamMeta[LobbyTeam.BLUE].bgMovie.src}`);
-				$.Msg('LobbyTeam Background Image Src:');
-				$.Msg(`${this.teamMeta[LobbyTeam.RED].bgImage.src}`);
-				$.Msg(`${this.teamMeta[LobbyTeam.BLUE].bgImage.src}`);
-				$.Msg('------------------');
-			}
+		if (!this.campaignPair) {
+			$.Warning(`No valid campaign pair could be retrieved with campaign ID ${P2CELobbyAPI.GetCampaignID()}`);
+			return;
 		}
+
+		const basePath = getCampaignAssetPath(this.campaignPair);
+		const getMetaSrc = (metaKey: CampaignMeta, addBasePath: boolean = true) => {
+			const src = this.campaignPair.campaign.meta.get(metaKey);
+			return src ? `${addBasePath ? basePath : ''}${src}` : undefined; // Don't want to override the value with a blank string, instead default to the default value set in the script.
+		};
+
+		for (let team = LobbyTeam.SPECTATOR; team < LobbyTeam.COUNT; team++) {
+			const teamMeta = this.teamMeta[team];
+			if (!teamMeta) continue;
+
+			teamMeta.name.src = getMetaSrc(teamMeta.name.meta!, false) ?? teamMeta.name.src;
+			teamMeta.icon.src = getMetaSrc(teamMeta.icon.meta!) ?? teamMeta.icon.src;
+		};
+
+		// Spectator does not have a specific set of assets, instead uses LobbyTeam Red's assets.
+		// These assets do not have fall backs and will be blank if not specified.
+		for (let team = LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
+			const teamMeta = this.teamMeta[team];
+			if (!teamMeta) continue;
+
+			teamMeta.bgMusic.src = getMetaSrc(teamMeta.bgMusic.meta!, false) ?? teamMeta.bgMusic.src;
+			teamMeta.bgMovie.src = getMetaSrc(teamMeta.bgMovie.meta!, false) ?? teamMeta.bgMovie.src;
+			teamMeta.bgImage.src = getMetaSrc(teamMeta.bgImage.meta!, false) ?? teamMeta.bgImage.src;
+		};
+
+		this.emptySlotAvatarSrc = getMetaSrc(CampaignMeta.EMPTY_SLOT_AVATAR_IMG) ?? this.emptySlotAvatarSrc;
+
+		this.lobbySettings.allowSpectators = (getMetaSrc(CampaignMeta.ALLOW_SPECATORS, false) ?? 'false').toLowerCase() === 'true';
+		if (this.lobbySettings.allowSpectators) {
+			this.lobbySettings.maxNumTeams++; // Spectator is a team that the game can use.
+		}
+
+		this.lobbySettings.maxPlayers = this.campaignPair.campaign.multiplayer_options.max_players;
+		if (this.lobbySettings.maxPlayers < 2) {
+			$.Warning(`Invalid max players set for "max_players" in campaign script! Defined: "${this.lobbySettings.maxPlayers}" Defaulting to "2"...`);
+			this.lobbySettings.maxPlayers = 2;
+		}
+
+		this.lobbySettings.requiredPlayers = this.campaignPair.campaign.multiplayer_options.required_players;
+		if (this.lobbySettings.requiredPlayers < 2) {
+			$.Warning(`Invalid required player amount set for "required_players" in campaign script! Defined: "${this.lobbySettings.requiredPlayers}" Defaulting to "2"...`);
+			this.lobbySettings.requiredPlayers = 2;
+		}
+
+		this.lobbySettings.maxNumTeams = this.campaignPair.campaign.multiplayer_options.max_num_teams;
+		if (this.lobbySettings.maxNumTeams < 2) {
+			$.Warning(`Invalid max amount of teams set for "max_num_teams" in campaign script! Defined: "${this.lobbySettings.maxNumTeams}" Defaulting to "2"...`);
+			this.lobbySettings.maxNumTeams = 2;
+		}
+
+		this.lobbySettings.requiredNumTeamPlayers = this.campaignPair.campaign.multiplayer_options.required_num_team_players;
+		if (this.lobbySettings.requiredNumTeamPlayers < 1) {
+			$.Warning(`Invalid number of players required on each set for "required_num_team_players" in campaign script! Defined: "${this.lobbySettings.requiredNumTeamPlayers}" Defaulting to "1"...`);
+			this.lobbySettings.requiredNumTeamPlayers = 1;
+		}
+
+		this.lobbySettings.canSwitchTeams = this.campaignPair.campaign.multiplayer_options.can_switch_teams;
+
+		if (GameInterfaceAPI.GetSettingBool('developer')) {
+			$.Msg('------------------');
+			$.Msg(`basePath: ${basePath}`);
+			$.Msg(`emptySlotAvatarSrc: ${this.emptySlotAvatarSrc}`);
+			$.Msg('------------------');
+			$.Msg('Lobby Settings:');
+			$.Msg(`maxPlayers: ${this.lobbySettings.maxPlayers}`);
+			$.Msg(`requiredPlayers: ${this.lobbySettings.requiredPlayers}`);
+			$.Msg(`maxTeams: ${this.lobbySettings.maxNumTeams}`);
+			$.Msg(`requiredNumTeamPlayers: ${this.lobbySettings.requiredNumTeamPlayers}`);
+			$.Msg(`canSwitchTeams: ${this.lobbySettings.canSwitchTeams}`);
+			$.Msg(`hasSpectatorMode: ${this.lobbySettings.allowSpectators}`);
+			$.Msg('------------------');
+			$.Msg('LobbyTeam Names:');
+			$.Msg(`${this.teamMeta[LobbyTeam.SPECTATOR].name.src}`);
+			$.Msg(`${this.teamMeta[LobbyTeam.RED].name.src}`);
+			$.Msg(`${this.teamMeta[LobbyTeam.BLUE].name.src}`);
+			$.Msg('LobbyTeam Icon Src:');
+			$.Msg(`${this.teamMeta[LobbyTeam.SPECTATOR].icon.src}`);
+			$.Msg(`${this.teamMeta[LobbyTeam.RED].icon.src}`);
+			$.Msg(`${this.teamMeta[LobbyTeam.BLUE].icon.src}`);
+			$.Msg('LobbyTeam Music Src:');
+			$.Msg(`${this.teamMeta[LobbyTeam.RED].bgMusic.src}`);
+			$.Msg(`${this.teamMeta[LobbyTeam.BLUE].bgMusic.src}`);
+			$.Msg('LobbyTeam Movie Src:');
+			$.Msg(`${this.teamMeta[LobbyTeam.RED].bgMovie.src}`);
+			$.Msg(`${this.teamMeta[LobbyTeam.BLUE].bgMovie.src}`);
+			$.Msg('LobbyTeam Background Image Src:');
+			$.Msg(`${this.teamMeta[LobbyTeam.RED].bgImage.src}`);
+			$.Msg(`${this.teamMeta[LobbyTeam.BLUE].bgImage.src}`);
+			$.Msg('------------------');
+		}
+
 	}
 
 	// Separate from onLoad because some of what is loaded is based on what team the player is on. This function should be run after the player entry for the player is filled.
@@ -705,7 +719,6 @@ class LobbyMenu {
 		LobbyMenu.lobbySlots.delete(player);
 
 		// TODO: Make this replace the player entry with a empty entry so this.updateUIState() isn't used.
-
 
 		this.updateUIState();
 	}
