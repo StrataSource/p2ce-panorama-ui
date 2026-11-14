@@ -214,7 +214,7 @@ class PlayerEntry {
 		$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
 		UiToolkitAPI.ShowGenericPopupYesNo(
 			'[HC] Are you sure?',
-			`[HC] Are you sure you want to ban this user from the current lobby?` + `\nUsername: ${this.lobbyPlayer!.name}\nSteamID: ${this.lobbyPlayer!.id}`,
+			'[HC] Are you sure you want to ban this user from the current lobby?' + `\nUsername: ${this.lobbyPlayer!.name}\nSteamID: ${this.lobbyPlayer!.id}`,
 			'warning-popup',
 			() => {
 				$.Msg(`Banned player: ${this.lobbyPlayer!.name} (${this.lobbyPlayer!.id})`);
@@ -238,21 +238,21 @@ class PlayerEntry {
 				this.pnrStatus!.visible = true;
 				this.paStatus!.visible = false;
 				this.prStatus!.visible = false;
-				this.playerEntryPanel.SetDialogVariable('status', "[HC] Not Ready");
+				this.playerEntryPanel.SetDialogVariable('status', '[HC] Not Ready');
 				break;
 			}
 			case (LobbyMemberReadyState.DOWNLOADING_ADDONS): {
 				this.pnrStatus!.visible = false;
 				this.paStatus!.visible = true;
 				this.prStatus!.visible = false;
-				this.playerEntryPanel.SetDialogVariable('status', "[HC] Downloading Addons");
+				this.playerEntryPanel.SetDialogVariable('status', '[HC] Downloading Addons');
 				break;
 			}
 			case (LobbyMemberReadyState.READY): {
 				this.pnrStatus!.visible = false;
 				this.paStatus!.visible = false;
 				this.prStatus!.visible = true;
-				this.playerEntryPanel.SetDialogVariable('status', "[HC] Ready");
+				this.playerEntryPanel.SetDialogVariable('status', '[HC] Ready');
 				break;
 			}
 			default: {
@@ -274,7 +274,7 @@ class PlayerEntry {
 		this.lobbyPlayer!.team = newTeam;
 		this.teamIcon!.SetImage(newTeamMeta.icon.src);
 		this.playerEntryPanel.SetDialogVariable('teamName', newTeamMeta.name.src);
-		if (notify) P2CELobbyAPI.SetTeam(newTeam); // TODO: Break down setting the elements of a player slot into a separate function so this isn't needed.
+		if (notify) P2CELobbyAPI.SetTeam(this.lobbyPlayer!.id, newTeam); // TODO: Break down setting the elements of a player slot into a separate function so this isn't needed.
 	}
 
 	teamSwitchContextMenu() {
@@ -400,7 +400,7 @@ class LobbyMenu {
 			$.Msg(`campaign: ${this.lobbyData.campaign}`);
 
 			if (pEntry && pEntry.lobbyPlayer && this.lobbyData.campaign !== prevCampaign) {
-				$.Msg(`update campaign`);
+				$.Msg('update campaign');
 				// TODO: These update calls are gross and need to be broken up better for init and changing campaigns.
 				this.loadTeamMeta();
 				this.loadCampaignMenuAssets(pEntry.lobbyPlayer.team);
@@ -414,15 +414,15 @@ class LobbyMenu {
 		$.RegisterForUnhandledEvent(
 			'PanoramaComponent_P2CELobby_PlayerStateChanged',
 			(who: steamID, lobbyPlayer: LobbyPlayer) => {
-				$.Msg(`UPDATE PLAYER STATE`);
+				$.Msg('UPDATE PLAYER STATE');
 				if (!lobbyPlayer || who.length === 0) {
-					$.Warning("No valid LobbyPlayer or SteamID was given for PlayerStateChanged.");
+					$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
 					return;
 				}
-
+//
 				const playerEntry = this.lobbySlots.get(who);
 				if (!playerEntry) {
-					$.Warning("No valid LobbyPlayer or SteamID was given for PlayerStateChanged.");
+					$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
 					return;
 				}
 				if (!playerEntry.lobbyPlayer) {
@@ -433,7 +433,7 @@ class LobbyMenu {
 				playerEntry.lobbyPlayer = lobbyPlayer;
 				this.lobbySlots.set(who, playerEntry);
 
-				if (playerEntry.lobbyPlayer.team != prevTeam)
+				if (playerEntry.lobbyPlayer.team !== prevTeam)
 					playerEntry.switchTeam(playerEntry.lobbyPlayer.team, false);
 
 				const state = playerEntry.lobbyPlayer.state;
@@ -445,15 +445,15 @@ class LobbyMenu {
 					this.clientReadyButton.SetHasClass('button--green', state === LobbyMemberReadyState.READY);
 					switch (state) {
 						case (LobbyMemberReadyState.NOT_READY): {
-							this.clientReadyButtonText.text = "[HC] Not Ready";
+							this.clientReadyButtonText.text = '[HC] Not Ready';
 							break;
 						}
 						case (LobbyMemberReadyState.DOWNLOADING_ADDONS): {
-							this.clientReadyButtonText.text = "[HC] Downloading Addons..."
+							this.clientReadyButtonText.text = '[HC] Downloading Addons...'
 							break;
 						}
 						case (LobbyMemberReadyState.READY): {
-							this.clientReadyButtonText.text = "[HC] Ready"
+							this.clientReadyButtonText.text = '[HC] Ready'
 							break;
 						}
 						default:
@@ -488,8 +488,8 @@ class LobbyMenu {
 
 		this.lobbyData = {
 			state: LobbyState.INVALID,
-			campaign: "",
-			chapter: "",
+			campaign: '',
+			chapter: '',
 			map: 0
 		}
 
@@ -691,7 +691,7 @@ class LobbyMenu {
 		$.Msg('Player joined!');
 		$.Msg(`Player Name: ${lobbyPlayer.name}`);
 		$.Msg(`Player SteamID: ${lobbyPlayer.id}`);
-		this.campaignPair.campaign.meta
+
 		this.lobbySlots.set(lobbyPlayer.id, new PlayerEntry(lobbyPlayer));//, (LobbyMenu.lobbySlots.size % 2 === 0) ? LobbyTeam.BLUE : LobbyTeam.RED)); // TODO-FIXME: This auto placement of teams will need to be rethought as there will be in the future functionality to switch teams.
 		// TODO: Make this find the first empty and entry is can find and replace it so this.updateUIState() isn't used.
 
@@ -838,10 +838,10 @@ class LobbyManPanel {
 		}
 
 		this.infoTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-info') });
-		this.settingsTavButton.SetPanelEvent('onactivate', () => { this.loadSubMenu(`lobby-settings`) });
-		this.banTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu(`lobby-bans`) });
-		this.chatTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu(`lobby-chat`) });
-		this.devTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu(`lobby-dev`) });
+		this.settingsTavButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-settings') });
+		this.banTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-bans') });
+		this.chatTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-chat') });
+		this.devTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-dev') });
 	}
 
 	static loadSubMenu(submenuXML: LobbyManSubMenus) {
