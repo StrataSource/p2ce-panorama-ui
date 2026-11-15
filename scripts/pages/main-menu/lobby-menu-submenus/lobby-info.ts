@@ -1,26 +1,49 @@
 'use strict';
 
-class LobbyInfo {
+class LobbyInfoSubmenu {
 
-    static submenuPanel: Panel
+    static submenuPanel: Panel;
+
+    private static getCurPlayerStats(): { curPlayerCount: number, numReadyPlayers: number } {
+        const playerList = P2CELobbyAPI.GetPlayerList();
+        const playerStats: { curPlayerCount: number, numReadyPlayers: number } = {
+            curPlayerCount: playerList.length, numReadyPlayers: 0
+        };
+        playerList.forEach(player => {
+            if (player.state === LobbyMemberReadyState.READY)
+                playerStats.numReadyPlayers++;
+        });
+
+        return playerStats;
+    }
+
+    private static updateStats() {
+        const lobbyInfo = UiToolkitAPI.GetGlobalObject()[GlobalUiObjects.UI_LOBBYINFO] as LobbyInfo;
+        const playerStats = LobbyInfoSubmenu.getCurPlayerStats();
+
+        const campaignPair = CampaignAPI.FindCampaign(P2CELobbyAPI.GetCampaignID())!;
+        if (!campaignPair) {
+            throw new Error('"campaignPair" is invalid for lobby-info submenu!');
+        }
+
+        this.submenuPanel.SetDialogVariableInt('curplayers', playerStats.curPlayerCount);
+        this.submenuPanel.SetDialogVariableInt('maxplayers', lobbyInfo.lobbySettings.maxPlayers);
+        this.submenuPanel.SetDialogVariableInt('requiredplayers', lobbyInfo.lobbySettings.requiredPlayers);
+        this.submenuPanel.SetDialogVariableInt('readyplayers', playerStats.numReadyPlayers);
+
+    }
 
     static onLoad() {
         this.submenuPanel = $.GetContextPanel();
 
-        this.submenuPanel.SetDialogVariableInt('curplayers', 1);
-		this.submenuPanel.SetDialogVariableInt('maxplayers', 2);
-		this.submenuPanel.SetDialogVariableInt('requiredplayers', 2); // TODO: Fix me once required and max players are two separate things.
-		this.submenuPanel.SetDialogVariableInt('readyplayers', 0);
-		this.submenuPanel.SetDialogVariable('campaignname', 'INSERT CAMPAIGN NAME HERE');
-		this.submenuPanel.SetDialogVariable('campaignid', 'INSERT ID HERE');
+        $.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyStateChanged', (metadata: LobbyData) => {
+            LobbyInfoSubmenu.updateStats();
+        });
 
+        $.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerStateChanged', (who: steamID, lobbyPlayer: LobbyPlayer) => {
+            LobbyInfoSubmenu.updateStats();
+        });
 
-        // const lobbySettings = LobbyMenu.getLobbySettings();
-        // $.Msg(lobbySettings);
-        // const numPlayers = LobbyMenu.getLobbyPlayerCount();
-
-        // this.submenuPanel.SetDialogVariableInt('curplayers', LobbyMenu.numPlayers);
-		// this.submenuPanel.SetDialogVariableInt('maxplayers', LobbyMenu.lobbySettings.maxPlayers);
-		// this.submenuPanel.SetDialogVariableInt('requiredplayers', LobbyMenu.lobbySettings.maxPlayers); // TODO: Fix me once required and max players are two separate things.
+        LobbyInfoSubmenu.updateStats();
     }
 }

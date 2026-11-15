@@ -109,6 +109,7 @@
 						</RadioButton>
 						<Panel class="lobby-menu__base-content__management-panel__activechunk" />
 					</Panel>
+					<Panel class="fill-height" />
 					<Panel class="flow-right mb-1">
 						<RadioButton id="LobbyDevMenuButton" class="button radiobutton hide" group="lobbygroup">
 							<Image class="button__icon" texturewidth="48" textureheight="48" src="file://{images}/xml.svg" />

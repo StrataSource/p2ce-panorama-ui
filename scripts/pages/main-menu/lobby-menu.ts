@@ -25,6 +25,12 @@ interface LobbySettings {
 	allowSpectators: boolean; // TODO: Not implemented engine side.
 }
 
+interface LobbyInfo {
+	lobbySlots: Map<steamID | number, PlayerEntry>;
+	lobbySettings: LobbySettings;
+	lobbyData: LobbyData;
+}
+
 type TeamMetaKey = 'name' | 'icon' | 'bgMusic' | 'bgMovie' | 'bgImage';
 
 type TeamMetaEntry = {
@@ -51,53 +57,53 @@ function isValidTeam(team: LobbyTeam) {
  * @param team Team to get number of players on.
  * @returns Number of players
  */
-function getNumPlayersOnTeam(team: LobbyTeam): number {
-	if (!isValidTeam(team)) {
-		//! It is intentional that the code must error out completely if a invalid team is set for players. This represents a issue with the Panorama or backend code, and hopefully caused by nothing user facing.
-		throw new Error('Invalid team has been specified for getPlayersOnTeam!');
-	}
+// function getNumPlayersOnTeam(team: LobbyTeam): number {
+// 	if (!isValidTeam(team)) {
+// 		//! It is intentional that the code must error out completely if a invalid team is set for players. This represents a issue with the Panorama or backend code, and hopefully caused by nothing user facing.
+// 		throw new Error('Invalid team has been specified for getPlayersOnTeam!');
+// 	}
 
-	let numPlayers = 0;
-	LobbyMenu.lobbySlots.forEach(slot => {
-		if (!slot.lobbyPlayer) return;
+// 	let numPlayers = 0;
+// 	LobbyMenu.lobbyInfo.lobbySlots.forEach(slot => {
+// 		if (!slot.lobbyPlayer) return;
 
-		if (slot.lobbyPlayer.team === team) numPlayers++;
-	});
+// 		if (slot.lobbyPlayer.team === team) numPlayers++;
+// 	});
 
-	return numPlayers;
-}
+// 	return numPlayers;
+// }
 
 /**
  * @brief Check if there are enough players to meet the minimum campaign requirement.
  * @returns True if there are enough players.
  */
-function enoughPlayersForGame(): boolean {
-	let teamCount = 0;
-	for (let team = LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
-		if (teamCount === LobbyMenu.lobbySettings.maxNumTeams) break;
+// function enoughPlayersForGame(): boolean {
+// 	let teamCount = 0;
+// 	for (let team = LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
+// 		if (teamCount === LobbyMenu.lobbyInfo.lobbySettings.maxNumTeams) break;
 
-		const numTeamPlayers = getNumPlayersOnTeam(team);
-		if (numTeamPlayers < LobbyMenu.lobbySettings.requiredNumTeamPlayers)
-			return false;
+// 		const numTeamPlayers = getNumPlayersOnTeam(team);
+// 		if (numTeamPlayers < LobbyMenu.lobbyInfo.lobbySettings.requiredNumTeamPlayers)
+// 			return false;
 
-		teamCount++;
-	}
+// 		teamCount++;
+// 	}
 
-	return true;
-}
+// 	return true;
+// }
 
 /**
  * @brief Check if all players are in the READY status.
  * @returns True if all players are ready.
  */
-function allPlayersReady() : boolean {
-	LobbyMenu.lobbySlots.forEach(slot => {
-		if (slot.lobbyPlayer?.state !== LobbyMemberReadyState.READY)
-			return false;
-	});
+// function allPlayersReady() : boolean {
+// 	LobbyMenu.lobbyInfo.lobbySlots.forEach(slot => {
+// 		if (slot.lobbyPlayer?.state !== LobbyMemberReadyState.READY)
+// 			return false;
+// 	});
 
-	return true;
-}
+// 	return true;
+// }
 
 /**
  * Panel for a player slot.
@@ -124,7 +130,7 @@ class PlayerEntry {
 	teamSwitchBtn?: Button;
 
 	constructor(lobbyPlayer: LobbyPlayer | null) {
-		const id: string = lobbyPlayer ? `playerslot_${lobbyPlayer.id}` : `playerslot_empty${LobbyMenu.numPlayers}`
+		const id: string = lobbyPlayer ? `playerslot_${lobbyPlayer.id}` : `playerslot_empty${LobbyMenu.lobbyInfo.lobbySlots.size}`
 		this.playerEntryPanel = $.CreatePanel('Panel', LobbyMenu.playerListPanel, id);
 		this.playerEntryPanel.LoadLayoutSnippet('LobbyEntry');
 
@@ -171,7 +177,7 @@ class PlayerEntry {
 		this.banBtn.visible = false;
 		this.playerEntryPanel.SetPanelEvent('onmouseover', () => {
 			if (!this.kickBtn || !this.banBtn) return;
-			if (!P2CELobbyAPI.IsLobbyOwner || this.lobbyPlayer!.id === UserAPI.GetXUID()) return;
+			if (!P2CELobbyAPI.IsLobbyOwner() || this.lobbyPlayer!.id === UserAPI.GetXUID()) return;
 
 			this.kickBtn.visible = true;
 			this.banBtn.visible = true;
@@ -185,7 +191,7 @@ class PlayerEntry {
 		});
 
 		this.teamSwitchBtn.enabled = false;
-		if (LobbyMenu.lobbySettings.canSwitchTeams) {
+		if (LobbyMenu.lobbyInfo.lobbySettings.canSwitchTeams) {
 			this.teamSwitchBtn.enabled = true;
 		}
 
@@ -197,26 +203,43 @@ class PlayerEntry {
 			this.hostIcon.visible = true;
 		}
 
-		// MAKE META UPDATE ELSE WHERE!
+		// TODO: MAKE META UPDATE ELSE WHERE!
 		this.updateTeamMeta();
 		// Load team based campaign assets for the client side once.
 		if (this.lobbyPlayer!.id === UserAPI.GetXUID()) {
 			LobbyMenu.loadCampaignMenuAssets(this.lobbyPlayer.team);
 		}
+
+		this.switchTeam((LobbyMenu.lobbyInfo.lobbySlots.size % 2 === 0) ? LobbyTeam.BLUE : LobbyTeam.RED); // TODO-FIXME: This auto placement of teams will need to be rethought as there will be in the future functionality to switch teams.
 	}
 
 	destruct() {
+		// Prevent Panorama errors for the kick and ban buttons lingering around on player entry destruction.
+		this.playerEntryPanel.ClearPanelEvent('onmouseover');
+		this.playerEntryPanel.ClearPanelEvent('onmouseout');
 		this.playerEntryPanel.RemoveAndDeleteChildren();
 		this.playerEntryPanel.DeleteAsync(0);
 	}
 
 	kickPlayer() {
+		if (this.lobbyPlayer!.id === UserAPI.GetXUID() || this.lobbyPlayer!.owner) {
+			$.Warning('Tried to kick self or host, stop that!');
+			return;
+		}
+
 		$.Msg(`Kicked player: ${this.lobbyPlayer!.name} (${this.lobbyPlayer!.id})`);
 		P2CELobbyAPI.KickPlayer(this.lobbyPlayer!.id, '[HC] Kicked by lobby host.');
+		$.DispatchEvent('P2CELobby_PlayerKicked', this.lobbyPlayer!.id);
 	}
 
 	banPlayer() {
+		if (this.lobbyPlayer!.id === UserAPI.GetXUID() || this.lobbyPlayer!.owner) {
+			$.Warning('Tried to ban self or host, stop that!');
+			return;
+		}
+
 		$.PlaySoundEvent('UIPanorama.P2CE.MenuError');
+		// TODO: Allow the host to be able to input a custom ban message.
 		UiToolkitAPI.ShowGenericPopupYesNo(
 			'[HC] Are you sure?',
 			'[HC] Are you sure you want to ban this user from the current lobby?' + `\nUsername: ${this.lobbyPlayer!.name}\nSteamID: ${this.lobbyPlayer!.id}`,
@@ -224,19 +247,25 @@ class PlayerEntry {
 			() => {
 				$.Msg(`Banned player: ${this.lobbyPlayer!.name} (${this.lobbyPlayer!.id})`);
 				P2CELobbyAPI.BanPlayer(this.lobbyPlayer!.id, '[HC] Banned by lobby host.');
+				$.DispatchEvent('P2CELobby_PlayerBanned', this.lobbyPlayer!.id);
 			},
 			() => {}
 		);
 	}
 
 	updateTeamMeta() {
-		const teamMeta = LobbyMenu.teamMeta[this.lobbyPlayer!.team];
-		this.playerEntryPanel.SetDialogVariable('teamName', teamMeta.name.src);
-		this.teamIcon!.SetImage(teamMeta.icon.src);
+		if (this.lobbyPlayer) {
+			const teamMeta = LobbyMenu.teamMeta[this.lobbyPlayer!.team];
+			this.playerEntryPanel.SetDialogVariable('teamName', teamMeta.name.src);
+			this.teamIcon!.SetImage(teamMeta.icon.src);
+		}
+
+
 		this.emptySlotAvatar.SetImage(LobbyMenu.emptySlotAvatarSrc);
 	}
 
 	setStatusIndicator(state: LobbyMemberReadyState) {
+		$.Msg(`State Changed!: ${state}`);
 		// TODO-FIXME: Clean this up!
 		switch (state) {
 			case (LobbyMemberReadyState.NOT_READY): {
@@ -286,8 +315,8 @@ class PlayerEntry {
 		const items: UiToolkitAPI.SimpleContextMenuItem[] = [];
 
 		let teamCount = 0;
-		for (let team = LobbyMenu.lobbySettings.allowSpectators ? LobbyTeam.SPECTATOR : LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
-			if (teamCount === LobbyMenu.lobbySettings.maxNumTeams) break;
+		for (let team = LobbyMenu.lobbyInfo.lobbySettings.allowSpectators ? LobbyTeam.SPECTATOR : LobbyTeam.RED; team < LobbyTeam.COUNT; team++) {
+			if (teamCount === LobbyMenu.lobbyInfo.lobbySettings.maxNumTeams) break;
 
 			const teamMeta = LobbyMenu.teamMeta[team];
 
@@ -304,16 +333,13 @@ class PlayerEntry {
 			teamCount++;
 		}
 
-		UiToolkitAPI.ShowSimpleContextMenu('TeamSwitchBtn', '', items);
+		UiToolkitAPI.ShowSimpleContextMenu('', '', items);
 	}
 }
 
 class LobbyMenu {
-
-	static lobbySettings: LobbySettings;
-
-	static lobbySlots: Map<steamID | number, PlayerEntry> = new Map;
-	static numPlayers: number = 0;
+	static lobbyInfo: LobbyInfo;
+	// static lobbySlots: Map<steamID | number, PlayerEntry> = new Map;
 
 	static playerListPanel = $<Panel>('#PlayerList')!;
 	static lobbyManPanel = $<Panel>('#LobbyManPanel')!;
@@ -325,7 +351,6 @@ class LobbyMenu {
 
 	static bgMusicID: uuid | undefined = undefined;
 	static campaignPair: CampaignPair;
-	static lobbyData: LobbyData;
 
 	// Retrieve and store assets that are team specific for future meta asset access.
 	static teamMeta: Record<LobbyTeam, TeamMeta> = {
@@ -378,103 +403,113 @@ class LobbyMenu {
 		$.DispatchEvent('ChangeVersionInfoPosition', 2);
 
 		$.RegisterForUnhandledEvent('MapUnloaded', () => {
-			LobbyManPanel.unloadCurSubMenu();
-			this.stopMusic();
-			$.DispatchEvent('ChangeVersionInfoPosition', 0);
+			this.onUnload();
 		});
 
 		$.RegisterForUnhandledEvent('MainMenuModeRequestCleanup', () => {
-			LobbyManPanel.unloadCurSubMenu();
-			this.stopMusic();
-			$.DispatchEvent('ChangeVersionInfoPosition', 0);
+			this.onUnload();
 		});
 
 		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_LobbyStateChanged', (metadata: LobbyData) => {
-			const prevCampaign = this.lobbyData.campaign;
-			this.lobbyData = metadata;
+			const prevCampaign = this.lobbyInfo.lobbyData.campaign;
+			this.lobbyInfo.lobbyData = metadata;
 
 			$.Msg('New Lobby State:');
-			$.Msg(`Campaign ID: ${this.lobbyData.campaign}`);
-			$.Msg(`Chapter Name: ${this.lobbyData.chapter}`);
-			$.Msg(`Map Index: ${this.lobbyData.map}`);
-			$.Msg(`Lobby State: ${this.lobbyData.state}`);
+			$.Msg(`Campaign ID: ${this.lobbyInfo.lobbyData.campaign}`);
+			$.Msg(`Chapter Name: ${this.lobbyInfo.lobbyData.chapter}`);
+			$.Msg(`Map Index: ${this.lobbyInfo.lobbyData.map}`);
+			$.Msg(`Lobby State: ${this.lobbyInfo.lobbyData.state}`);
 
-			this.campaignPair = CampaignAPI.FindCampaign(this.lobbyData.campaign)!;
+			this.campaignPair = CampaignAPI.FindCampaign(this.lobbyInfo.lobbyData.campaign)!;
 			const pEntry = this.getLocalPlayerEntry();
 			$.Msg(`prev campaign: ${prevCampaign}`);
-			$.Msg(`campaign: ${this.lobbyData.campaign}`);
+			$.Msg(`campaign: ${this.lobbyInfo.lobbyData.campaign}`);
 
-			if (pEntry && pEntry.lobbyPlayer && this.lobbyData.campaign !== prevCampaign) {
+			// If loading into level, just use the loading indicator for addon download.
+			if (metadata.state === LobbyState.LOADING) {
+				this.lobbyInfo.lobbySlots.forEach(slot => {
+					slot.setStatusIndicator(LobbyMemberReadyState.DOWNLOADING_ADDONS);
+
+				});
+			}
+
+			if (pEntry && pEntry.lobbyPlayer && this.lobbyInfo.lobbyData.campaign !== prevCampaign) {
 				$.Msg('update campaign');
 				// TODO: These update calls are gross and need to be broken up better for init and changing campaigns.
 				this.loadTeamMeta();
 				this.loadCampaignMenuAssets(pEntry.lobbyPlayer.team);
-				this.lobbySlots.forEach(slot => {
-					if (slot.lobbyPlayer)
-						slot.updateTeamMeta();
+				this.lobbyInfo.lobbySlots.forEach(slot => {
+					slot.updateTeamMeta();
 				});
 			}
 		});
 
-		$.RegisterForUnhandledEvent(
-			'PanoramaComponent_P2CELobby_PlayerStateChanged',
-			(who: steamID, lobbyPlayer: LobbyPlayer) => {
-				$.Msg('UPDATE PLAYER STATE');
-				if (!lobbyPlayer || who.length === 0) {
-					$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
-					return;
-				}
-
-				const playerEntry = this.lobbySlots.get(who);
-				if (!playerEntry) {
-					$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
-					return;
-				}
-				if (!playerEntry.lobbyPlayer) {
-					$.Warning("No PlayerInfo int PlayerEntry for PlayerStateChanged! This shouldn't happen unless a EmptyEntry was targeted?");
-					return;
-				}
-				const prevTeam = playerEntry.lobbyPlayer.team;
-				playerEntry.lobbyPlayer = lobbyPlayer;
-				this.lobbySlots.set(who, playerEntry);
-
-				if (playerEntry.lobbyPlayer.team !== prevTeam)
-					playerEntry.switchTeam(playerEntry.lobbyPlayer.team, false);
-
-				const state = playerEntry.lobbyPlayer.state;
-				$.Msg(`NEW PLAYER STATE: ${state}`);
-				if (playerEntry.lobbyPlayer.id === UserAPI.GetXUID())
-				{
-					this.clientReadyButton.SetHasClass('button--red', state === LobbyMemberReadyState.NOT_READY);
-					this.clientReadyButton.SetHasClass('button--yellow', state === LobbyMemberReadyState.DOWNLOADING_ADDONS);
-					this.clientReadyButton.SetHasClass('button--green', state === LobbyMemberReadyState.READY);
-					switch (state) {
-						case (LobbyMemberReadyState.NOT_READY): {
-							this.clientReadyButtonText.text = '[HC] Not Ready';
-							break;
-						}
-						case (LobbyMemberReadyState.DOWNLOADING_ADDONS): {
-							this.clientReadyButtonText.text = '[HC] Downloading Addons...'
-							break;
-						}
-						case (LobbyMemberReadyState.READY): {
-							this.clientReadyButtonText.text = '[HC] Ready'
-							break;
-						}
-						default:
-							break;
-					}
-				}
-
-				playerEntry.setStatusIndicator(state);
+		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerStateChanged', (who: steamID, lobbyPlayer: LobbyPlayer) => {
+			$.Msg('UPDATE PLAYER STATE');
+			if (!lobbyPlayer || who.length === 0) {
+				$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
+				return;
 			}
-		)
+
+			const playerEntry = this.lobbyInfo.lobbySlots.get(who);
+			if (!playerEntry) {
+				$.Warning('No valid LobbyPlayer or SteamID was given for PlayerStateChanged.');
+				return;
+			}
+			if (!playerEntry.lobbyPlayer) {
+				$.Warning("No PlayerInfo int PlayerEntry for PlayerStateChanged! This shouldn't happen unless a EmptyEntry was targeted?");
+				return;
+			}
+			const prevTeam = playerEntry.lobbyPlayer.team;
+			playerEntry.lobbyPlayer = lobbyPlayer;
+			this.lobbyInfo.lobbySlots.set(who, playerEntry);
+
+			if (playerEntry.lobbyPlayer.team !== prevTeam)
+				playerEntry.switchTeam(playerEntry.lobbyPlayer.team, false);
+
+			$.Msg(`NEW PLAYER STATE: ${playerEntry.lobbyPlayer.state}`);
+			if (playerEntry.lobbyPlayer.id === UserAPI.GetXUID())
+			{
+				this.clientReadyButton.SetHasClass('button--red', playerEntry.lobbyPlayer.state === LobbyMemberReadyState.NOT_READY);
+				this.clientReadyButton.SetHasClass('button--yellow', playerEntry.lobbyPlayer.state === LobbyMemberReadyState.DOWNLOADING_ADDONS);
+				this.clientReadyButton.SetHasClass('button--green', playerEntry.lobbyPlayer.state === LobbyMemberReadyState.READY);
+				switch (playerEntry.lobbyPlayer.state) {
+					case (LobbyMemberReadyState.NOT_READY): {
+						this.clientReadyButtonText.text = '[HC] Not Ready';
+						break;
+					}
+					case (LobbyMemberReadyState.DOWNLOADING_ADDONS): {
+						this.clientReadyButtonText.text = '[HC] Downloading Addons...'
+						break;
+					}
+					case (LobbyMemberReadyState.READY): {
+						this.clientReadyButtonText.text = '[HC] Ready'
+						break;
+					}
+					default:
+						break;
+				}
+			}
+
+			playerEntry.setStatusIndicator(playerEntry.lobbyPlayer.state);
+		})
 
 		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerJoined', this.playerJoin.bind(this));
 		$.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerLeft', this.playerLeft.bind(this));
 
+		const globalObj = UiToolkitAPI.GetGlobalObject();
+		if (globalObj[GlobalUiObjects.UI_LOBBYINFO] === undefined) {
+			globalObj[GlobalUiObjects.UI_LOBBYINFO] = {
+				lobbySlots: new Map(),
+				lobbySettings: {} as LobbySettings,
+				lobbyData: {} as LobbyData
+			};
+		}
+
+		this.lobbyInfo = globalObj[GlobalUiObjects.UI_LOBBYINFO] as LobbyInfo;
+
 		// Lobby settings defaults. Matches Portal 2 Coop KV3 settings.
-		this.lobbySettings = {
+		this.lobbyInfo.lobbySettings = {
 			hostName: FriendsAPI.GetLocalPlayerName(),
 			tags: '',
 			password: '',
@@ -489,13 +524,13 @@ class LobbyMenu {
 			allowSplitscreen: false,
 			waitForPlayers: true,
 			maxNumTeams: 2,
-			defaultTeam: 3,
+			defaultTeam: LobbyTeam.BLUE,
 			requiredNumTeamPlayers: 1,
 			canSwitchTeams: false,
 			allowSpectators: false,
 		}
 
-		this.lobbyData = {
+		this.lobbyInfo.lobbyData = {
 			state: LobbyState.INVALID,
 			campaign: '',
 			chapter: '',
@@ -505,11 +540,24 @@ class LobbyMenu {
 		LobbyMenu.loadTeamMeta();
 
 		this.clientInviteButton.visible = true;
-		if (!P2CELobbyAPI.IsLobbyOwner() && this.lobbySettings.allowClientInvites)
+		if (!P2CELobbyAPI.IsLobbyOwner() && this.lobbyInfo.lobbySettings.allowClientInvites)
 			this.clientInviteButton.visible = true;
 
 		this.updateUIState();
-		LobbyManPanel.onLoad();
+		LobbySubmenuManager.onLoad();
+	}
+
+	static onUnload() {
+		const globalObj = UiToolkitAPI.GetGlobalObject();
+		if (globalObj[GlobalUiObjects.UI_LOBBYINFO] !== undefined) {
+			const lobbyInfo = globalObj[GlobalUiObjects.UI_LOBBYINFO] as LobbyInfo;
+			lobbyInfo.lobbySlots.clear()
+			globalObj[GlobalUiObjects.UI_LOBBYINFO] = undefined;
+		}
+
+		LobbySubmenuManager.unloadCurSubMenu();
+		this.stopMusic();
+		$.DispatchEvent('ChangeVersionInfoPosition', 0);
 	}
 
 	static loadTeamMeta() {
@@ -546,36 +594,36 @@ class LobbyMenu {
 
 		this.emptySlotAvatarSrc = getMetaSrc(CampaignMeta.EMPTY_SLOT_AVATAR_IMG) ?? this.emptySlotAvatarSrc;
 
-		this.lobbySettings.allowSpectators = (getMetaSrc(CampaignMeta.ALLOW_SPECATORS, false) ?? 'false').toLowerCase() === 'true';
-		if (this.lobbySettings.allowSpectators) {
-			this.lobbySettings.maxNumTeams++; // Spectator is a team that the game can use.
+		this.lobbyInfo.lobbySettings.allowSpectators = (getMetaSrc(CampaignMeta.ALLOW_SPECATORS, false) ?? 'false').toLowerCase() === 'true';
+		if (this.lobbyInfo.lobbySettings.allowSpectators) {
+			this.lobbyInfo.lobbySettings.maxNumTeams++; // Spectator is a team that the game can use.
 		}
 
-		this.lobbySettings.maxPlayers = this.campaignPair.campaign.multiplayer_options.max_players;
-		if (this.lobbySettings.maxPlayers < 2) {
-			$.Warning(`Invalid max players set for "max_players" in campaign script! Defined: "${this.lobbySettings.maxPlayers}" Defaulting to "2"...`);
-			this.lobbySettings.maxPlayers = 2;
+		this.lobbyInfo.lobbySettings.maxPlayers = this.campaignPair.campaign.multiplayer_options.max_players;
+		if (this.lobbyInfo.lobbySettings.maxPlayers < 2) {
+			$.Warning(`Invalid max players set for "max_players" in campaign script! Defined: "${this.lobbyInfo.lobbySettings.maxPlayers}" Defaulting to "2"...`);
+			this.lobbyInfo.lobbySettings.maxPlayers = 2;
 		}
 
-		this.lobbySettings.requiredPlayers = this.campaignPair.campaign.multiplayer_options.required_players;
-		if (this.lobbySettings.requiredPlayers < 2) {
-			$.Warning(`Invalid required player amount set for "required_players" in campaign script! Defined: "${this.lobbySettings.requiredPlayers}" Defaulting to "2"...`);
-			this.lobbySettings.requiredPlayers = 2;
+		this.lobbyInfo.lobbySettings.requiredPlayers = this.campaignPair.campaign.multiplayer_options.required_players;
+		if (this.lobbyInfo.lobbySettings.requiredPlayers < 2) {
+			$.Warning(`Invalid required player amount set for "required_players" in campaign script! Defined: "${this.lobbyInfo.lobbySettings.requiredPlayers}" Defaulting to "2"...`);
+			this.lobbyInfo.lobbySettings.requiredPlayers = 2;
 		}
 
-		this.lobbySettings.maxNumTeams = this.campaignPair.campaign.multiplayer_options.max_num_teams;
-		if (this.lobbySettings.maxNumTeams < 2) {
-			$.Warning(`Invalid max amount of teams set for "max_num_teams" in campaign script! Defined: "${this.lobbySettings.maxNumTeams}" Defaulting to "2"...`);
-			this.lobbySettings.maxNumTeams = 2;
+		this.lobbyInfo.lobbySettings.maxNumTeams = this.campaignPair.campaign.multiplayer_options.max_num_teams;
+		if (this.lobbyInfo.lobbySettings.maxNumTeams < 2) {
+			$.Warning(`Invalid max amount of teams set for "max_num_teams" in campaign script! Defined: "${this.lobbyInfo.lobbySettings.maxNumTeams}" Defaulting to "2"...`);
+			this.lobbyInfo.lobbySettings.maxNumTeams = 2;
 		}
 
-		this.lobbySettings.requiredNumTeamPlayers = this.campaignPair.campaign.multiplayer_options.required_num_team_players;
-		if (this.lobbySettings.requiredNumTeamPlayers < 1) {
-			$.Warning(`Invalid number of players required on each set for "required_num_team_players" in campaign script! Defined: "${this.lobbySettings.requiredNumTeamPlayers}" Defaulting to "1"...`);
-			this.lobbySettings.requiredNumTeamPlayers = 1;
+		this.lobbyInfo.lobbySettings.requiredNumTeamPlayers = this.campaignPair.campaign.multiplayer_options.required_num_team_players;
+		if (this.lobbyInfo.lobbySettings.requiredNumTeamPlayers < 1) {
+			$.Warning(`Invalid number of players required on each set for "required_num_team_players" in campaign script! Defined: "${this.lobbyInfo.lobbySettings.requiredNumTeamPlayers}" Defaulting to "1"...`);
+			this.lobbyInfo.lobbySettings.requiredNumTeamPlayers = 1;
 		}
 
-		this.lobbySettings.canSwitchTeams = this.campaignPair.campaign.multiplayer_options.can_switch_teams;
+		this.lobbyInfo.lobbySettings.canSwitchTeams = this.campaignPair.campaign.multiplayer_options.can_switch_teams;
 
 		if (GameInterfaceAPI.GetSettingBool('developer')) {
 			$.Msg('------------------');
@@ -583,12 +631,15 @@ class LobbyMenu {
 			$.Msg(`emptySlotAvatarSrc: ${this.emptySlotAvatarSrc}`);
 			$.Msg('------------------');
 			$.Msg('Lobby Settings:');
-			$.Msg(`maxPlayers: ${this.lobbySettings.maxPlayers}`);
-			$.Msg(`requiredPlayers: ${this.lobbySettings.requiredPlayers}`);
-			$.Msg(`maxTeams: ${this.lobbySettings.maxNumTeams}`);
-			$.Msg(`requiredNumTeamPlayers: ${this.lobbySettings.requiredNumTeamPlayers}`);
-			$.Msg(`canSwitchTeams: ${this.lobbySettings.canSwitchTeams}`);
-			$.Msg(`hasSpectatorMode: ${this.lobbySettings.allowSpectators}`);
+			$.Msg(`maxPlayers: ${this.lobbyInfo.lobbySettings.maxPlayers}`);
+			$.Msg(`requiredPlayers: ${this.lobbyInfo.lobbySettings.requiredPlayers}`);
+			$.Msg(`allowSplitscreen: ${this.lobbyInfo.lobbySettings.allowSplitscreen}`);
+			$.Msg(`waitForPlayers: ${this.lobbyInfo.lobbySettings.waitForPlayers}`);
+			$.Msg(`maxNumTeams: ${this.lobbyInfo.lobbySettings.maxNumTeams}`);
+			$.Msg(`defaultTeam: ${this.lobbyInfo.lobbySettings.defaultTeam}`);
+			$.Msg(`requiredNumTeamPlayers: ${this.lobbyInfo.lobbySettings.requiredNumTeamPlayers}`);
+			$.Msg(`canSwitchTeams: ${this.lobbyInfo.lobbySettings.canSwitchTeams}`);
+			$.Msg(`allowSpectators: ${this.lobbyInfo.lobbySettings.allowSpectators}`);
 			$.Msg('------------------');
 			$.Msg('LobbyTeam Names:');
 			$.Msg(`${this.teamMeta[LobbyTeam.SPECTATOR].name.src}`);
@@ -683,20 +734,19 @@ class LobbyMenu {
 
 	// TODO-FIXME: This should be reworked or removed as this entirely breaks having individual player states for teams and such if PlayerEntrys are remade.
 	static updateUIState() {
-		for (const [id, player] of this.lobbySlots) {
+		for (const [id, player] of this.lobbyInfo.lobbySlots) {
 			player.destruct();
 		}
-		this.lobbySlots.clear();
-		this.numPlayers = 0;
+		this.lobbyInfo.lobbySlots.clear();
 		for (const player of P2CELobbyAPI.GetPlayerList()) {
 			if (!player) continue;
-			this.lobbySlots.set(player.id, new PlayerEntry(player));//, (LobbyMenu.lobbySlots.size % 2 === 0) ? LobbyTeam.BLUE : LobbyTeam.RED)); // TODO-FIXME: This auto placement of teams will need to be rethought as there will be in the future functionality to switch teams.
+			this.lobbyInfo.lobbySlots.set(player.id, new PlayerEntry(player));
 		}
-		this.numPlayers = this.lobbySlots.size;
+		const curPlayerCount = this.lobbyInfo.lobbySlots.size;
 
-		if (this.lobbySlots.size < this.lobbySettings.maxPlayers) {
-			for (let slot = this.lobbySlots.size; slot < this.lobbySettings.maxPlayers; slot++) {
-				this.lobbySlots.set(slot, new PlayerEntry(null));//, LobbyTeam.ANY));
+		if (curPlayerCount < this.lobbyInfo.lobbySettings.maxPlayers) {
+			for (let slot = curPlayerCount; slot < this.lobbyInfo.lobbySettings.maxPlayers; slot++) {
+				this.lobbyInfo.lobbySlots.set(slot, new PlayerEntry(null));
 			}
 		}
 	}
@@ -706,7 +756,7 @@ class LobbyMenu {
 		$.Msg(`Player Name: ${lobbyPlayer.name}`);
 		$.Msg(`Player SteamID: ${lobbyPlayer.id}`);
 
-		this.lobbySlots.set(lobbyPlayer.id, new PlayerEntry(lobbyPlayer));//, (LobbyMenu.lobbySlots.size % 2 === 0) ? LobbyTeam.BLUE : LobbyTeam.RED)); // TODO-FIXME: This auto placement of teams will need to be rethought as there will be in the future functionality to switch teams.
+		this.lobbyInfo.lobbySlots.set(lobbyPlayer.id, new PlayerEntry(lobbyPlayer));
 		// TODO: Make this find the first empty and entry is can find and replace it so this.updateUIState() isn't used.
 
 		this.updateUIState();
@@ -715,9 +765,8 @@ class LobbyMenu {
 	static playerLeft(player: steamID) {
 		$.Msg('Player left!');
 		$.Msg(`Player SteamID: ${player}`);
-		LobbyMenu.lobbySlots.get(player)?.destruct();
-		LobbyMenu.lobbySlots.delete(player);
-
+		this.lobbyInfo.lobbySlots.get(player)?.destruct();
+		this.lobbyInfo.lobbySlots.delete(player);
 		// TODO: Make this replace the player entry with a empty entry so this.updateUIState() isn't used.
 
 		this.updateUIState();
@@ -745,25 +794,25 @@ class LobbyMenu {
 		this.bgMusicID = undefined;
 	}
 
-	static canStartGame(): boolean {
+	// static canStartGame(): boolean {
 
-		// Requirements for the game to start:
-		// 1. Lobby has enough players for the campaign.
-		// 2. Each team has enough players for the campaign, ex. no 2v1 situations.
-		// 3. Players are readied up and all players have installed addons.
+	// 	// Requirements for the game to start:
+	// 	// 1. Lobby has enough players for the campaign.
+	// 	// 2. Each team has enough players for the campaign, ex. no 2v1 situations.
+	// 	// 3. Players are readied up and all players have installed addons.
 
-		if (this.numPlayers < this.lobbySettings.requiredPlayers)
-			return false;
-		else if (!enoughPlayersForGame())
-			return false;
-		else if (!allPlayersReady())
-			return false;
+	// 	if (this.numPlayers < this.lobbySettings.requiredPlayers)
+	// 		return false;
+	// 	else if (!enoughPlayersForGame())
+	// 		return false;
+	// 	else if (!allPlayersReady())
+	// 		return false;
 
-		return true;
-	}
+	// 	return true;
+	// }
 
 	static getLocalPlayerEntry(): PlayerEntry | undefined {
-		return this.lobbySlots.get(UserAPI.GetXUID());
+		return this.lobbyInfo.lobbySlots.get(UserAPI.GetXUID());
 	}
 
 	static ToggleReadyState() {
@@ -785,65 +834,29 @@ class LobbyMenu {
 		else if (playerState === LobbyMemberReadyState.DOWNLOADING_ADDONS)
 			return; // Don't do anything if player is currently downloading addons.
 	}
-
-	/// DEBUG ///
-
-	static dumpSlotList() {
-		let slot = 0;
-		this.lobbySlots.forEach(playerEntry => {
-			$.Msg(`Slot: ${slot}`);
-			if (playerEntry.lobbyPlayer) {
-				$.Msg(`Player SteamID: ${playerEntry.lobbyPlayer.id}`);
-				$.Msg(`Player Name: ${playerEntry.lobbyPlayer.name}`);
-				$.Msg(`Player Is Host?: ${playerEntry.lobbyPlayer.owner}`);
-				$.Msg(`Player State: ${playerEntry.lobbyPlayer.state}`);
-				$.Msg(`Player LobbyTeam: ${playerEntry.lobbyPlayer.team}`);
-				$.Msg('');
-				slot++;
-				return;
-			}
-
-			$.Msg('Empty slot...');
-			$.Msg('');
-			slot++;
-		});
-		$.Msg(`Total Players: ${this.numPlayers}`);
-	}
-
-	static dumpBanList() {
-		const banList = P2CELobbyAPI.GetBannedPlayers();
-		if (banList.length === 0) {
-			$.Msg('No ban list has been generated or there are no banned players!');
-		}
-
-		banList.forEach(steamID => {
-			$.Msg(`Player SteamID: ${steamID}`);
-			$.Msg(`Player Name: ${FriendsAPI.GetNameForXUID(String(steamID))}`);
-			$.Msg('');
-		});
-	}
 }
 
 type LobbyManSubMenus = 'lobby-info' | 'lobby-settings' | 'lobby-bans' | 'lobby-chat' | 'lobby-dev';
 
-class LobbyManPanel {
+class LobbySubmenuManager {
 
 	static lobbyManPanelInsert: Panel = $('#LobbyManSubMenuInsert')!;
 	static subMenuPanel: Panel;
 
 	static infoTabButton: RadioButton = $<RadioButton>('#LobbyInfoMenuButton')!;
-	static settingsTavButton: RadioButton = $<RadioButton>('#LobbySettingsMenuButton')!;
+	static settingsTabButton: RadioButton = $<RadioButton>('#LobbySettingsMenuButton')!;
 	static banTabButton: RadioButton = $<RadioButton>('#LobbyBanListMenuButton')!;
 	static chatTabButton: RadioButton = $<RadioButton>('#LobbyChatMenuButton')!;
 	static devTabButton: RadioButton = $<RadioButton>('#LobbyDevMenuButton')!;
 
 	static onLoad() {
 		if (GameInterfaceAPI.GetSettingBool('developer')) this.devTabButton.visible = true;
+
 		if (P2CELobbyAPI.IsLobbyOwner()) {
 			this.infoTabButton.visible = true;
 			this.infoTabButton.SetSelected(true);
 			this.loadSubMenu('lobby-info');
-			this.settingsTavButton.visible = true;
+			this.settingsTabButton.visible = true;
 			this.banTabButton.visible = true;
 		} else {
 			this.chatTabButton.SetSelected(true);
@@ -851,10 +864,14 @@ class LobbyManPanel {
 		}
 
 		this.infoTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-info') });
-		this.settingsTavButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-settings') });
+		this.settingsTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-settings') });
 		this.banTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-bans') });
 		this.chatTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-chat') });
 		this.devTabButton.SetPanelEvent('onactivate', () => { this.loadSubMenu('lobby-dev') });
+
+		//! Disabled for now
+		this.settingsTabButton.visible = false;
+		this.chatTabButton.visible = false;
 	}
 
 	static loadSubMenu(submenuXML: LobbyManSubMenus) {

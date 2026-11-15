@@ -23,7 +23,7 @@
 		<Movie
 			id="BackgroundMovie"
 			class="loadingscreen__movie"
-			controls="full"
+			controls="none"
 			autoplay="onload"
 			repeat="true"
 			hittest="false"

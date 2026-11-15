@@ -57,3 +57,7 @@ $.DefineEvent('MainMenuSetPauseBlur', 1);
 $.DefineEvent('MainMenuFirstButtonFocus', 0);
 $.DefineEvent('ReloadCCSettings', 0);
 $.DefineEvent('ChangeVersionInfoPosition', 1, 'Number representing which corner position to change VersionInfo to. 0 = Bottom Right (Default) 1 = Top Left 2 = Top Right 3 = Bottom Left');
+
+$.DefineEvent('P2CELobby_PlayerBanned', 1, 'SteamID of banned player.');
+$.DefineEvent('P2CELobby_PlayerUnbanned', 1, 'SteamID of unbanned player.');
+$.DefineEvent('P2CELobby_PlayerKicked', 1, 'SteamID of kicked player.');

@@ -3,22 +3,25 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<include src="file://{scripts}/pages/main-menu/lobby-menu.ts" />
+		<include src="file://{scripts}/pages/main-menu/lobby-menu-submenus/lobby-dev.ts" />
 	</scripts>
 
 	<snippets>
 	</snippets>
 
-	<Panel class="lobby-menu__base-content__management-panel__section" onload="">
+	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyDevSubmenu.onLoad()">
 		<Label class="text-h4 mb-1" text="[DEV] DEV MENU" />
-		<Button class="button" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
+		<Button class="button mb-1" onactivate="$.DispatchEvent('MainMenuOpenNestedPage', 'ControlsLibrary', 'main-menu/dev/controls-library', undefined);">
 			<Label class="button__text" text="#MainMenu_Navigation_ControlsLibrary" />
 		</Button>
-		<Button class="button" onactivate="LobbyMenu.dumpSlotList();">
-			<Label class="button__text" text="[DEV] Dump Player Slot Info" />
+		<Label class="mb-1" text="Below Dump Buttons Dump To The Console" />
+		<Button class="button mb-1" onactivate="LobbyDevSubmenu.dumpSlotList();">
+			<Label class="button__text" text="Dump Player Slot Info" />
 		</Button>
-		<Button class="button" onactivate="LobbyMenu.dumpBanList();">
-			<Label class="button__text" text="[DEV] Dump Ban List" />
+		<Button class="button mb-1" onactivate="LobbyDevSubmenu.dumpBanList();">
+			<Label class="button__text" text="Dump Ban List" />
 		</Button>
+		<Panel class="horizontal-separator mt-2 mb-2" />
+		<Label class="mb-1" text="Campaign ID: {s:campaignid}" />
 	</Panel>
 </root>

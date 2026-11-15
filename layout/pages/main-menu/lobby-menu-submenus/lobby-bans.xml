@@ -28,7 +28,7 @@
 		</snippet>
 	</snippets>
 
-	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyBans.onLoad();">
+	<Panel class="lobby-menu__base-content__management-panel__section" onload="LobbyBansSubmenu.onLoad();">
 		<Panel class="flow-right mb-1">
 			<Label class="text-h4" text="[HC] Lobby Bans" />
 			<Panel class="fill-width" />

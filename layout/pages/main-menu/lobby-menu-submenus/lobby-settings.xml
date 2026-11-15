@@ -3,10 +3,19 @@
 		<include src="file://{resources}/styles/main.scss" />
 	</styles>
 	<scripts>
-		<!-- <include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-info.ts" /> -->
+		<!-- <include src="file://{resources}/scripts/pages/main-menu/lobby-menu-submenus/lobby-settings.ts" /> -->
 	</scripts>
 
 	<snippets>
+		<snippet name="SettingsEntry">
+			<TooltipPanel id="" class="flow-right" tooltip="">
+				<Label text="[PH] SETTING TITLE" class="vertical-align-left" />
+				<Panel id="SettingInsert" class="vertical-align-right mr-1" />
+				<Button class="button">
+					<Image class="button__icon" texturewidth="32" textureheight="32" src="file://{images}/reset.svg" />
+				</Button>
+			</TooltipPanel>
+		</snippet>
 	</snippets>
 
 	<Panel class="lobby-menu__base-content__management-panel__section" onload="">

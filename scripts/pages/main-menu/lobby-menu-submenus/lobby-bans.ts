@@ -13,7 +13,7 @@ class BanEntry {
         this.steamID = userSteamID;
         this.username = FriendsAPI.GetNameForXUID(this.steamID);
 
-        this.panel = $.CreatePanel('Panel', LobbyBans.banListPanel, `BanEntry_${this.steamID}`);
+        this.panel = $.CreatePanel('Panel', LobbyBansSubmenu.banListPanel, `BanEntry_${this.steamID}`);
         this.panel.LoadLayoutSnippet('BanEntry');
         this.panel.SetDialogVariable('username', this.username);
 
@@ -32,7 +32,8 @@ class BanEntry {
                 'warning-popup',
                 () => {
                     P2CELobbyAPI.UnBanPlayer(this.steamID);
-                    LobbyBans.reload();
+                    $.DispatchEvent('P2CELobby_PlayerUnbanned', this.steamID);
+                    LobbyBansSubmenu.reload();
                 },
                 () => {}
             );
@@ -46,7 +47,7 @@ class BanEntry {
 
 }
 
-class LobbyBans {
+class LobbyBansSubmenu {
 
     static banListPanel = $<Panel>('#LobbyBans')!;
     static noBansPanel = $<Panel>('#NoBansEntry')!;
@@ -64,6 +65,7 @@ class LobbyBans {
                 () => {
                     for (const entry of this.banList) {
                         P2CELobbyAPI.UnBanPlayer(entry.steamID);
+		                $.DispatchEvent('P2CELobby_PlayerUnbanned', entry.steamID);
                     }
 
                     this.reload();
@@ -72,8 +74,8 @@ class LobbyBans {
             );
         });
 
-        // When ever a player leaves, it could be because of a ban removal, so make sure to update the ban list.
-        $.RegisterForUnhandledEvent('PanoramaComponent_P2CELobby_PlayerLeft', (playerSteamID: steamID) => {
+        // Refresh on bans and unbans.
+        $.RegisterForUnhandledEvent('P2CELobby_PlayerBanned', (playerSteamID: steamID) => {
             this.reload();
         });
 

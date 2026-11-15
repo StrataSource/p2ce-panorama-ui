@@ -210,6 +210,8 @@ class VirtualCampaign implements CampaignInfo {
 	id: string;
 	title: string;
 	chapters: ChapterInfo[];
+	multiplayer: boolean;
+	multiplayer_options: CampaignMultiPlayerOptions;
 
 	meta: Map<string, string>;
 
@@ -217,6 +219,19 @@ class VirtualCampaign implements CampaignInfo {
 		this.id = id;
 		this.title = title;
 		this.chapters = chapters;
+		this.multiplayer = false;
+		this.multiplayer_options = {
+			max_players: 2,
+			required_players: 2,
+			allow_splitscreen: false,
+			wait_for_players: true,
+			max_num_teams: 2,
+			default_team: LobbyTeam.BLUE,
+			required_num_team_players: 1,
+			can_switch_teams: false,
+			allow_spectators: false
+		};
+
 		this.meta = new Map<string, string>();
 	}
 }
@@ -242,6 +257,6 @@ function OpenWorkshopPageFromID(id: bigint | string) {
 	SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/sharedfiles/filedetails/?id=${id}`);
 }
 
-function OpenSteamProfilePageFromID(id: steamID) {
-	SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${id}`);
+function OpenSteamProfilePageFromID(steamID: steamID | number) {
+	SteamOverlayAPI.OpenURLModal(`https://steamcommunity.com/profiles/${steamID}`);
 }
