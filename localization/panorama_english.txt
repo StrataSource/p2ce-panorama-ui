@@ -718,6 +718,12 @@
 		"Settings_Gels_reflection_color_Info"			"The alternate color to use for Reflection Gel (reflect paint)."
 		"Settings_Gels_adhesion_color"					"Adhesion Gel Color (Stick)"
 		"Settings_Gels_adhesion_color_Info"				"The alternate color to use for Adhesion Gel (stick paint)."
+		"Settings_EnergyBalls_Title"					"High Energy Pellets"
+		"Settings_EnergyBalls_color"					"Standard Energy Pellet Light Color"
+		"Settings_EnergyBalls_color_Info"				"The color to use for High Energy Pellet dynamic lights, predominantly seen in Portal."
+		"Settings_EnergyBalls_infinite_color"			"Infinite Energy Pellet Light Color"
+		"Settings_EnergyBalls_infinite_color_Info"		"The light color to use for High Energy Pellets that have infinite lifespans as seen in the final test chamber of Portal."
+		"Settings_EnergyBalls_radius"					"Energy Pellet Light Radius"
 
 		"Settings_Interface_InGame_Title"				"In-Game UI"
 		"Settings_Interface_InGame_Xhair"				"Show Crosshair"

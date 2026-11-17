@@ -103,6 +103,42 @@
 
 			<Panel class="settings-page__spacer" />
 
+			<Panel id="EnergyBallsSubSection" class="settings-group">
+				<Panel class="settings-group__header">
+					<Label class="settings-group__title" text="#Settings_EnergyBalls_Title" tags="energy,pellet,pellets,ball,balls" />
+
+					<TooltipPanel class="settings-group__reset" tooltip="#Settings_General_Reset">
+						<Button class="button settings-group__reset" onactivate="SettingsShared.resetSettings('EnergyBallsSubSection');">
+							<Image class="button__icon" texturewidth="64" textureheight="64" src="file://{images}/reset.svg" />
+						</Button>
+					</TooltipPanel>
+				</Panel>
+
+				<ConVarColorDisplay
+					text="#Settings_EnergyBalls_color"
+					convar="cl_dynamic_light_energy_ball_color"
+					infomessage="#Settings_EnergyBalls_color_Info"
+					hasdocspage="false"
+				/>
+				<ConVarColorDisplay
+					text="#Settings_EnergyBalls_infinite_color"
+					convar="cl_dynamic_light_infinite_energy_ball_color"
+					infomessage="#Settings_EnergyBalls_infinite_color_Info"
+					hasdocspage="false"
+				/>
+				<SettingsSlider
+					text="#Settings_EnergyBalls_radius"
+					min="10"
+					max="50"
+					displayprecision="2"
+					convar="cl_dynamic_light_energy_ball_radius_scale"
+					hasdocspage="false"
+					viewgameduringedit="true"
+				/>
+			</Panel>
+
+			<Panel class="settings-page__spacer" />
+
 			<Panel id="MiscSubSection" class="settings-group">
 				<Panel class="settings-group__header">
 					<Label class="settings-group__title" text="#Settings_Misc_Title" tags="misc, customization" />
