@@ -79,17 +79,23 @@ class PauseMenu {
 			headline: '#MainMenu_Navigation_Disconnect',
 			tagline: '#MainMenu_Navigation_Disconnect_Tagline',
 			activated: () => {
+				let exitDialogue: string = $.Localize('#Action_Quit_InGame_Message');
+				if (P2CELobbyAPI.IsInLobby()) {
+					if (P2CELobbyAPI.IsLobbyOwner())
+						exitDialogue = $.Localize('#Action_Quit_InGame_Message_Multi_Host');
+					else
+						exitDialogue = $.Localize('#Action_Quit_InGame_Message_Multi');
+				}
 				UiToolkitAPI.ShowGenericPopupThreeOptionsBgStyle(
 					$.Localize('#Action_Quit'),
-					$.Localize('#Action_Quit_InGame_Message'),
+					exitDialogue,
 					'quit-popup',
 					$.Localize('#Common_ReturnToMenu'),
 					() => {
 						const c = CampaignAPI.GetActiveCampaign();
 						// No campaign? Not an auto campaign? Not an addon? Local addon? Has been rated?
 						// SKIP AND LEAVE!
-						if (
-							!c ||
+						if (!c ||
 							!c.bucket.id.startsWith('auto_') ||
 							c.bucket.addon_id === -1 ||
 							WorkshopAPI.GetAddonMeta(c.bucket.addon_id).local ||
@@ -102,6 +108,7 @@ class PauseMenu {
 					},
 					$.Localize('#Action_QuitToDesktop'),
 					() => {
+						// Added additional confirmation if trying to quit to desktop from the game.
 						UiToolkitAPI.ShowGenericPopupTwoOptionsBgStyle(
 							$.Localize('#Action_Quit'),
 							$.Localize('#Action_Quit_Message'),

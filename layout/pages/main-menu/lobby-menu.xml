@@ -135,7 +135,7 @@
 				<Button id="ClientInviteButton" class="button mr-1 hide" onactivate="P2CELobbyAPI.OpenInviteOverlay();">
 					<Label class="button__text" text="[HC] Invite Players" />
 				</Button>
-				<Button id="ClientReadyButton" class="button button--red" onactivate="LobbyMenu.ToggleReadyState();">
+				<Button id="ClientReadyButton" class="button button--red" onactivate="LobbyMenu.toggleReadyState();">
 					<Label id="ClientReadyButtonText" class="button__text" text="[HC] Not Ready" />
 				</Button>
 			</Panel>

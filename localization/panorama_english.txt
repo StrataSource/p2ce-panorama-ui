@@ -212,7 +212,7 @@
 
 		"Paint_Instructor_teach_bounce_suppression"				"Hold to prevent bouncing"
 
-		// COOP
+		// Multiplayer / COOP
 		"P2COOP_TrackName_1"						"Team Building"
 		"P2COOP_TrackName_2"						"Mass and Velocity"
 		"P2COOP_TrackName_3"						"Hard-Light Surfaces"
@@ -1212,6 +1212,9 @@ Please install and mount the above games first to access this campaign."
 		"Action_QuitToDesktop"						"Quit to Desktop"
 		"Action_Quit_Message" 						"Are you sure you want to quit?"
 		"Action_Quit_InGame_Message"				"Are you sure you want to quit?\n\nUnsaved progress may be lost."
+		"Action_Quit_Lobby"							"Exit Lobby"
+		"Action_Quit_InGame_Message_Multi"			"Are you sure you want to disconnect from the lobby?"
+		"Action_Quit_InGame_Message_Multi_Host"		"Are you sure you want to end the current game session? You and all players will be sent back to the lobby."
 		// quit_prompt console command
 		"MainMenu_ExitGameConfirmation_Title"		"Quit Game"
 		"MainMenu_ExitGameConfirmation_Message"		"Are you sure you want to quit the game?\n\nUnsaved progress may be lost."
